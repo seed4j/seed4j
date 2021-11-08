@@ -1,20 +1,25 @@
 package tech.jhipster.forge.generator.buildtool.maven.application;
 
 import java.util.List;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import tech.jhipster.forge.generator.buildtool.maven.domain.MavenService;
+import tech.jhipster.forge.generator.project.domain.BuildToolType;
 import tech.jhipster.forge.generator.project.domain.Dependency;
 import tech.jhipster.forge.generator.project.domain.Parent;
 import tech.jhipster.forge.generator.project.domain.Plugin;
 import tech.jhipster.forge.generator.project.domain.Project;
+import tech.jhipster.forge.generator.project.domain.added.BuildToolAdded;
 
 @Service
 public class MavenApplicationService {
 
   private final MavenService mavenService;
+  private final ApplicationEventPublisher publisher;
 
-  public MavenApplicationService(MavenService mavenService) {
+  public MavenApplicationService(MavenService mavenService, ApplicationEventPublisher publisher) {
     this.mavenService = mavenService;
+    this.publisher = publisher;
   }
 
   public void addParent(Project project, Parent parent) {
@@ -38,7 +43,9 @@ public class MavenApplicationService {
   }
 
   public void init(Project project) {
-    mavenService.init(project);
+    BuildToolAdded event = project.addBuildTool(BuildToolType.MAVEN);
+
+    publisher.publishEvent(event);
   }
 
   public void addPomXml(Project project) {

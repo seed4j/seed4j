@@ -10,13 +10,15 @@ import java.util.Map;
 import java.util.Optional;
 import tech.jhipster.forge.common.domain.FileUtils;
 import tech.jhipster.forge.error.domain.Assert;
+import tech.jhipster.forge.error.domain.GeneratorException;
 import tech.jhipster.forge.error.domain.UnauthorizedValueException;
+import tech.jhipster.forge.generator.project.domain.added.BuildToolAdded;
 
 public class Project {
 
   private final String folder;
   private final Optional<Language> language;
-  private final Optional<BuildToolType> buildTool;
+  private Optional<BuildToolType> buildTool;
   private final Optional<Server> server;
   private final Optional<Client> client;
   private final Map<String, Object> config;
@@ -117,6 +119,18 @@ public class Project {
 
   public boolean isGradleProject() {
     return FileUtils.exists(getPath(getFolder(), "build.gradle"));
+  }
+
+  public BuildToolAdded addBuildTool(BuildToolType buildTool) {
+    Assert.notNull("buildTool", buildTool);
+
+    if (this.buildTool.isPresent()) {
+      throw new GeneratorException("already existing build tool");
+    }
+
+    this.buildTool = Optional.of(buildTool);
+
+    return new BuildToolAdded(this, buildTool);
   }
 
   public static class ProjectBuilder {

@@ -18,8 +18,10 @@ import org.junit.jupiter.api.Test;
 import tech.jhipster.forge.TestUtils;
 import tech.jhipster.forge.UnitTest;
 import tech.jhipster.forge.common.domain.FileUtils;
+import tech.jhipster.forge.error.domain.GeneratorException;
 import tech.jhipster.forge.error.domain.MissingMandatoryValueException;
 import tech.jhipster.forge.error.domain.UnauthorizedValueException;
+import tech.jhipster.forge.generator.project.domain.added.BuildToolAdded;
 
 @UnitTest
 class ProjectTest {
@@ -29,11 +31,9 @@ class ProjectTest {
 
     @Test
     void shouldBuildMinimalProject() {
-      String folder = FileUtils.tmpDir();
+      Project project = minimalBuilder().build();
 
-      Project project = Project.builder().folder(folder).build();
-
-      assertThat(project.getFolder()).isEqualTo(folder);
+      assertThat(project.getFolder()).isEqualTo(FileUtils.tmpDir());
 
       assertThat(project.getLanguage()).isEmpty();
       assertThat(project.getBuildTool()).isEmpty();
@@ -53,19 +53,9 @@ class ProjectTest {
 
     @Test
     void shouldBuildFullProject() {
-      String folder = FileUtils.tmpDir();
+      Project project = fullBuilder().build();
 
-      Project project = Project
-        .builder()
-        .folder(folder)
-        .language(JAVA)
-        .buildTool(MAVEN)
-        .server(new Server(ServerFramework.SPRING))
-        .client(new Client(ClientFramework.ANGULAR))
-        .config(Map.of(PROJECT_NAME, "JHipster Forge"))
-        .build();
-
-      assertThat(project.getFolder()).isEqualTo(folder);
+      assertThat(project.getFolder()).isEqualTo(FileUtils.tmpDir());
       assertThat(project.getLanguage()).contains(JAVA);
       assertThat(project.getBuildTool()).contains(MAVEN);
       assertThat(project.getServer()).contains(new Server(ServerFramework.SPRING));
@@ -319,5 +309,46 @@ class ProjectTest {
     Project project = Project.builder().folder(tmpDirForTest()).build();
 
     assertThat(project.isGradleProject()).isFalse();
+  }
+
+  @Nested
+  class AddBuildTool {
+
+    @Test
+    void shouldNotAddBuildToolWithNullBuildTool() {
+      assertThatThrownBy(() -> minimalBuilder().build().addBuildTool(null))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("buildTool");
+    }
+
+    @Test
+    void shouldNotChangeBuildTool() {
+      assertThatThrownBy(() -> fullBuilder().build().addBuildTool(GRADLE))
+        .isExactlyInstanceOf(GeneratorException.class)
+        .hasMessageContaining("already existing build tool");
+    }
+
+    @Test
+    void shouldAddBuildTool() {
+      Project project = minimalBuilder().build();
+
+      BuildToolAdded event = project.addBuildTool(MAVEN);
+
+      assertThat(event).usingRecursiveComparison().isEqualTo(BuildToolAdded.of(project, MAVEN));
+      assertThat(project.getBuildTool()).contains(MAVEN);
+    }
+  }
+
+  private Project.ProjectBuilder fullBuilder() {
+    return minimalBuilder()
+      .language(JAVA)
+      .buildTool(MAVEN)
+      .server(new Server(ServerFramework.SPRING))
+      .client(new Client(ClientFramework.ANGULAR))
+      .config(Map.of(PROJECT_NAME, "JHipster Forge"));
+  }
+
+  private Project.ProjectBuilder minimalBuilder() {
+    return Project.builder().folder(FileUtils.tmpDir());
   }
 }

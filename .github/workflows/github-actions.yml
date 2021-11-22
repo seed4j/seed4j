@@ -42,6 +42,31 @@ jobs:
         run: |
           chmod +x mvnw
           ./mvnw clean verify
+      # - name: codecov
+      #   uses: codecov/codecov-action@v2
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     files: jacoco.xml
+      #     fail_ci_if_error: true
+      #     verbose: true
+      - name: 'Report: JaCoCo'
+        uses: actions/upload-artifact@v2
+        with:
+          name: jacoco
+          path: '${{ github.workspace }}/target/jacoco'
+          retention-days: 1
+  codecov:
+    needs: test
+    name: codecov
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: jacoco
+      - name: 'debug'
+        run: |
+          pwd
+          ls -al
       - name: codecov
         uses: codecov/codecov-action@v2
         with:
@@ -49,28 +74,3 @@ jobs:
           files: jacoco.xml
           fail_ci_if_error: true
           verbose: true
-      # - name: 'Report: JaCoCo'
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: jacoco
-      #     path: '${{ github.workspace }}/target/jacoco'
-      #     retention-days: 1
-  # codecov:
-  #   needs: test
-  #   name: codecov
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/download-artifact@v2
-  #       with:
-  #         name: jacoco
-  #     - name: 'debug'
-  #       run: |
-  #         pwd
-  #         ls -al
-  #     - name: codecov
-  #       uses: codecov/codecov-action@v2
-  #       with:
-  #         token: ${{ secrets.CODECOV_TOKEN }}
-  #         files: jacoco.xml
-  #         fail_ci_if_error: true
-  #         verbose: true

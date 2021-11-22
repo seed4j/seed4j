@@ -8,7 +8,6 @@ jobs:
   test:
     name: test
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v2

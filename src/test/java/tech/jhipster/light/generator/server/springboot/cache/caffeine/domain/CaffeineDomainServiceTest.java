@@ -1,5 +1,7 @@
 package tech.jhipster.light.generator.server.springboot.cache.caffeine.domain;
 
+import static org.mockito.Mockito.*;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,15 +13,13 @@ import tech.jhipster.light.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.light.generator.buildtool.generic.domain.Dependency;
 import tech.jhipster.light.generator.project.domain.Project;
 
-import static org.mockito.Mockito.*;
-
-
 @UnitTest
 @ExtendWith(MockitoExtension.class)
 class CaffeineDomainServiceTest {
 
   @InjectMocks
   CaffeineDomainService cacheDomainService;
+
   @Mock
   BuildToolService buildToolService;
 

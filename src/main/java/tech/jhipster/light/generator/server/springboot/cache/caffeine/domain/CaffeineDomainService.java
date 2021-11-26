@@ -14,10 +14,7 @@ public class CaffeineDomainService implements CaffeineService {
 
   @Override
   public void initCache(Project project) {
-    Dependency cacheDependency = Dependency.builder()
-      .groupId("org.springframework.boot")
-      .artifactId("spring-boot-starter-cache")
-      .build();
+    Dependency cacheDependency = Dependency.builder().groupId("org.springframework.boot").artifactId("spring-boot-starter-cache").build();
     buildToolService.addDependency(project, cacheDependency);
   }
 }

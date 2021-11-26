@@ -16,5 +16,4 @@ public class CaffeineApplicationService {
   public void initCache(Project project) {
     caffeineService.initCache(project);
   }
-
 }

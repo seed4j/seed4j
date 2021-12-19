@@ -37,6 +37,10 @@ public class MavenApplicationService {
     mavenService.addPlugin(project, plugin);
   }
 
+  public void addPluginManagement(Project project, Plugin plugin) {
+    mavenService.addPluginManagement(project, plugin);
+  }
+
   public void addProperty(Project project, String key, String version) {
     mavenService.addProperty(project, key, version);
   }

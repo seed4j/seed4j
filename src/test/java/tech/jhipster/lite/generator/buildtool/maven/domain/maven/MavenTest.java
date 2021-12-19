@@ -1,13 +1,14 @@
 package tech.jhipster.lite.generator.buildtool.maven.domain.maven;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.generator.buildtool.generic.domain.Dependency;
-import tech.jhipster.lite.generator.buildtool.generic.domain.Parent;
-import tech.jhipster.lite.generator.buildtool.generic.domain.Plugin;
+import tech.jhipster.lite.common.domain.FileUtils;
+import tech.jhipster.lite.error.domain.GeneratorException;
+import tech.jhipster.lite.generator.buildtool.generic.domain.*;
 import tech.jhipster.lite.generator.buildtool.maven.domain.Maven;
 
 @UnitTest
@@ -195,6 +196,122 @@ class MavenTest {
     Plugin plugin = fullPluginBuilder().build();
 
     assertThat(Maven.getPlugin(plugin)).isEqualTo(expected);
+  }
+
+  @Test
+  void shouldGetPluginWithExecution() {
+    // @formatter:off
+    String expected =
+      "<plugin>" + System.lineSeparator() +
+        "        <groupId>org.springframework.boot</groupId>" + System.lineSeparator() +
+        "        <artifactId>spring-boot-maven-plugin</artifactId>" + System.lineSeparator() +
+        "        <version>2.6.0</version>" + System.lineSeparator() +
+        "        <executions>" + System.lineSeparator() +
+        "          <execution>" + System.lineSeparator() +
+        "            <id>id1</id>" + System.lineSeparator() +
+        "            <phase>initialize</phase>" + System.lineSeparator() +
+        "            <goals>" + System.lineSeparator() +
+        "              <goal>read-project-properties</goal>" + System.lineSeparator() +
+        "            </goals>" + System.lineSeparator() +
+        "          </execution>" + System.lineSeparator() +
+        "        </executions>" + System.lineSeparator() +
+        "      </plugin>";
+    // @formatter:on
+    PluginExecution execution = PluginExecution.builder().id("id1").phase("initialize").goals(List.of("read-project-properties")).build();
+    Plugin plugin = fullPluginBuilder().execution(execution).build();
+
+    assertThat(Maven.getPlugin(plugin)).isEqualTo(expected);
+  }
+
+  @Test
+  void shouldGetPluginWithConfiguredExecution() {
+    // @formatter:off
+    String expected =
+      "<plugin>" + System.lineSeparator() +
+        "        <groupId>org.springframework.boot</groupId>" + System.lineSeparator() +
+        "        <artifactId>spring-boot-maven-plugin</artifactId>" + System.lineSeparator() +
+        "        <version>2.6.0</version>" + System.lineSeparator() +
+        "        <executions>" + System.lineSeparator() +
+        "          <execution>" + System.lineSeparator() +
+        "            <id>id1</id>" + System.lineSeparator() +
+        "            <phase>initialize</phase>" + System.lineSeparator() +
+        "            <goals>" + System.lineSeparator() +
+        "              <goal>read-project-properties</goal>" + System.lineSeparator() +
+        "            </goals>" + System.lineSeparator() +
+        "            <configuration>" + System.lineSeparator() +
+        "              <files>" + System.lineSeparator() +
+        "                <file>test.properties</file>" + System.lineSeparator() +
+        "                <file>test2.properties</file>" + System.lineSeparator() +
+        "              </files>" + System.lineSeparator() +
+        "              <source.dir>directory</source.dir>" + System.lineSeparator() +
+        "            </configuration>" + System.lineSeparator() +
+        "          </execution>" + System.lineSeparator() +
+        "        </executions>" + System.lineSeparator() +
+        "      </plugin>";
+    // @formatter:on
+    PluginExecution execution = PluginExecution
+      .builder()
+      .id("id1")
+      .phase("initialize")
+      .goals(List.of("read-project-properties"))
+      .configuration(
+        new PluginConfigurationContainer(
+          "files",
+          List.of(new PluginConfigurationValue("file", "test.properties"), new PluginConfigurationValue("file", "test2.properties"))
+        )
+      )
+      .configuration(new PluginConfigurationValue("source.dir", "directory"))
+      .build();
+    Plugin plugin = fullPluginBuilder().execution(execution).build();
+
+    assertThat(Maven.getPlugin(plugin)).isEqualTo(expected);
+  }
+
+  @Test
+  void shouldGetPluginWithConfigurationAndExecution() {
+    // @formatter:off
+    String expected =
+      "<plugin>" + System.lineSeparator() +
+        "        <groupId>org.springframework.boot</groupId>" + System.lineSeparator() +
+        "        <artifactId>spring-boot-maven-plugin</artifactId>" + System.lineSeparator() +
+        "        <version>2.6.0</version>" + System.lineSeparator() +
+        "        <executions>" + System.lineSeparator() +
+        "          <execution>" + System.lineSeparator() +
+        "            <id>id1</id>" + System.lineSeparator() +
+        "            <phase>initialize</phase>" + System.lineSeparator() +
+        "            <goals>" + System.lineSeparator() +
+        "              <goal>read-project-properties</goal>" + System.lineSeparator() +
+        "            </goals>" + System.lineSeparator() +
+        "          </execution>" + System.lineSeparator() +
+        "        </executions>" + System.lineSeparator() +
+        "        <configuration>" + System.lineSeparator() +
+        "          <files>" + System.lineSeparator() +
+        "            <file>test.properties</file>" + System.lineSeparator() +
+        "            <file>test2.properties</file>" + System.lineSeparator() +
+        "          </files>" + System.lineSeparator() +
+        "          <source.dir>directory</source.dir>" + System.lineSeparator() +
+        "        </configuration>" + System.lineSeparator() +
+        "      </plugin>";
+    // @formatter:on
+    PluginExecution execution = PluginExecution.builder().id("id1").phase("initialize").goals(List.of("read-project-properties")).build();
+    Plugin plugin = fullPluginBuilder()
+      .execution(execution)
+      .configuration(
+        new PluginConfigurationContainer(
+          "files",
+          List.of(new PluginConfigurationValue("file", "test.properties"), new PluginConfigurationValue("file", "test2.properties"))
+        )
+      )
+      .configuration(new PluginConfigurationValue("source.dir", "directory"))
+      .build();
+
+    assertThat(Maven.getPlugin(plugin)).isEqualTo(expected);
+  }
+
+  @Test
+  void shouldNotGetConfigurationElement() {
+    assertThatThrownBy(() -> Maven.getConfigurationElement(1, 1, new PluginConfiguration() {}))
+      .isExactlyInstanceOf(UnsupportedOperationException.class);
   }
 
   @Test

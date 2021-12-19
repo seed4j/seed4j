@@ -4,9 +4,7 @@ import static tech.jhipster.lite.common.domain.WordUtils.indent;
 
 import java.util.List;
 import tech.jhipster.lite.common.domain.WordUtils;
-import tech.jhipster.lite.generator.buildtool.generic.domain.Dependency;
-import tech.jhipster.lite.generator.buildtool.generic.domain.Parent;
-import tech.jhipster.lite.generator.buildtool.generic.domain.Plugin;
+import tech.jhipster.lite.generator.buildtool.generic.domain.*;
 
 public class Maven {
 
@@ -14,6 +12,7 @@ public class Maven {
   public static final String NEEDLE_DEPENDENCY = "<!-- jhipster-needle-maven-add-dependency -->";
   public static final String NEEDLE_DEPENDENCY_TEST = "<!-- jhipster-needle-maven-add-dependency-test -->";
   public static final String NEEDLE_PLUGIN = "<!-- jhipster-needle-maven-add-plugin -->";
+  public static final String NEEDLE_PLUGIN_MANAGEMENT = "<!-- jhipster-needle-maven-add-plugin-management -->";
   public static final String NEEDLE_PROPERTIES = "<!-- jhipster-needle-maven-property -->";
 
   public static final String PARENT_BEGIN = "<parent>";
@@ -42,6 +41,18 @@ public class Maven {
 
   public static final String EXCLUSION_BEGIN = "<exclusion>";
   public static final String EXCLUSION_END = "</exclusion>";
+
+  public static final String EXECUTIONS_BEGIN = "<executions>";
+  public static final String EXECUTIONS_END = "</executions>";
+
+  public static final String EXECUTION_BEGIN = "<execution>";
+  public static final String EXECUTION_END = "</execution>";
+
+  public static final String GOALS_START = "<goals>";
+  public static final String GOALS_END = "</goals>";
+
+  public static final String CONFIGURATION_START = "<configuration>";
+  public static final String CONFIGURATION_END = "</configuration>";
 
   private Maven() {}
 
@@ -209,9 +220,93 @@ public class Maven {
         result.append(indent(4, indentation)).append(VERSION_BEGIN).append(version).append(VERSION_END).append(System.lineSeparator())
       );
 
+    List<PluginExecution> pluginExecutions = plugin.getExecutions();
+    if (pluginExecutions != null && !pluginExecutions.isEmpty()) {
+      result.append(indent(4, indentation)).append(EXECUTIONS_BEGIN).append(System.lineSeparator());
+      pluginExecutions.forEach(execution -> result.append(getExecution(execution, indentation)));
+      result.append(indent(4, indentation)).append(EXECUTIONS_END).append(System.lineSeparator());
+    }
+
+    List<PluginConfiguration> pluginConfigurations = plugin.getConfigurations();
+
+    if (pluginConfigurations != null && !pluginConfigurations.isEmpty()) {
+      result.append(getConfiguration(4, indentation, pluginConfigurations));
+    }
+
     result.append(indent(3, indentation)).append(PLUGIN_END);
 
     return result.toString();
+  }
+
+  public static String getConfiguration(int indentTimes, int indentation, List<PluginConfiguration> pluginConfigurations) {
+    StringBuilder result = new StringBuilder();
+
+    result.append(indent(indentTimes, indentation)).append(CONFIGURATION_START).append(System.lineSeparator());
+    pluginConfigurations.forEach(configuration -> result.append(getConfigurationElement(indentTimes + 1, indentation, configuration)));
+    result.append(indent(indentTimes, indentation)).append(CONFIGURATION_END).append(System.lineSeparator());
+
+    return result.toString();
+  }
+
+  public static String getConfigurationElement(int indentTimes, int indentation, PluginConfiguration configuration) {
+    if (configuration instanceof PluginConfigurationValue) {
+      PluginConfigurationValue configurationValue = (PluginConfigurationValue) configuration;
+      return new StringBuilder()
+        .append(indent(indentTimes, indentation))
+        .append(getValueInXmlTag(configurationValue.getName(), configurationValue.getValue()))
+        .append(System.lineSeparator())
+        .toString();
+    } else if (configuration instanceof PluginConfigurationContainer) {
+      PluginConfigurationContainer configurationContainer = (PluginConfigurationContainer) configuration;
+      StringBuilder containerValue = new StringBuilder();
+      configurationContainer
+        .getChildren()
+        .forEach(childConfig -> containerValue.append(getConfigurationElement(indentTimes + 1, indentation, childConfig)));
+      return new StringBuilder()
+        .append(indent(indentTimes, indentation))
+        .append(getStartTag(configurationContainer.getName()))
+        .append(System.lineSeparator())
+        .append(containerValue)
+        .append(indent(indentTimes, indentation))
+        .append(getEndTag(configurationContainer.getName()))
+        .append(System.lineSeparator())
+        .toString();
+    } else {
+      throw new UnsupportedOperationException("PluginConfiguration not implemented");
+    }
+  }
+
+  public static String getExecution(PluginExecution execution, int indentation) {
+    StringBuilder result = new StringBuilder().append(indent(5, indentation)).append(EXECUTION_BEGIN).append(System.lineSeparator());
+    if (execution.getId() != null) {
+      result.append(indent(6, indentation)).append(getValueInXmlTag("id", execution.getId())).append(System.lineSeparator());
+    }
+    if (execution.getPhase() != null) {
+      result.append(indent(6, indentation)).append(getValueInXmlTag("phase", execution.getPhase())).append(System.lineSeparator());
+    }
+    if (execution.getGoals() != null && !execution.getGoals().isEmpty()) {
+      result.append(indent(6, indentation)).append(GOALS_START).append(System.lineSeparator());
+      execution
+        .getGoals()
+        .forEach(goal -> result.append(indent(7, indentation)).append(getValueInXmlTag("goal", goal)).append(System.lineSeparator()));
+      result.append(indent(6, indentation)).append(GOALS_END).append(System.lineSeparator());
+    }
+    if (execution.getConfigurations() != null && !execution.getConfigurations().isEmpty()) {
+      result.append(getConfiguration(6, indentation, execution.getConfigurations()));
+    }
+    return result.append(indent(5, indentation)).append(EXECUTION_END).append(System.lineSeparator()).toString();
+  }
+
+  private static String getStartTag(String tag) {
+    return new StringBuilder().append("<").append(tag).append(">").toString();
+  }
+
+  private static String getEndTag(String tag) {
+    return new StringBuilder().append("</").append(tag).append(">").toString();
+  }
+
+  private static String getValueInXmlTag(String tag, String value) {
+    return new StringBuilder().append("<").append(tag).append(">").append(value).append("</").append(tag).append(">").toString();
   }
 
   public static String getProperty(String key, String version) {

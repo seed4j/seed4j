@@ -102,6 +102,16 @@ class MavenDomainServiceTest {
   }
 
   @Test
+  void shouldAddPluginManagement() {
+    Project project = tmpProjectWithPomXml();
+    Plugin plugin = Plugin.builder().groupId("org.springframework.boot").artifactId("spring-boot-maven-plugin").build();
+
+    mavenDomainService.addPluginManagement(project, plugin);
+
+    verify(projectRepository).replaceText(any(Project.class), anyString(), anyString(), anyString(), anyString());
+  }
+
+  @Test
   void shouldAddProperty() {
     Project project = tmpProjectWithPomXml();
 

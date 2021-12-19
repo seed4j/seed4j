@@ -211,6 +211,26 @@ class MavenApplicationServiceIT {
   }
 
   @Test
+  void shouldAddPluginInPluginManagement() {
+    Project project = tmpProjectWithPomXml();
+
+    Plugin plugin = Plugin.builder().groupId("org.springframework.boot").artifactId("spring-boot-maven-plugin").build();
+    mavenApplicationService.addPluginManagement(project, plugin);
+
+    assertFileContent(
+      project,
+      "pom.xml",
+      List.of(
+        "<plugin>",
+        "<groupId>org.springframework.boot</groupId>",
+        "<artifactId>spring-boot-maven-plugin</artifactId>",
+        "</plugin>",
+        Maven.NEEDLE_PLUGIN_MANAGEMENT
+      )
+    );
+  }
+
+  @Test
   void shouldAddPluginOnlyOneTime() throws Exception {
     Project project = tmpProjectWithPomXml();
 

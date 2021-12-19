@@ -91,6 +91,21 @@ public class MavenDomainService implements MavenService {
   }
 
   @Override
+  public void addPluginManagement(Project project, Plugin plugin) {
+    project.addDefaultConfig(PRETTIER_DEFAULT_INDENT);
+    int indent = (Integer) project.getConfig(PRETTIER_DEFAULT_INDENT).orElse(2);
+
+    String pluginNodeNode = Maven.getPluginHeader(plugin, indent);
+    String pluginRegexp = FileUtils.REGEXP_PREFIX_MULTILINE + pluginNodeNode;
+
+    if (!projectRepository.containsRegexp(project, "", POM_XML, pluginRegexp)) {
+      String pluginWithNeedle = Maven.getPlugin(plugin, indent) + System.lineSeparator() + indent(3, indent) + NEEDLE_PLUGIN_MANAGEMENT;
+
+      projectRepository.replaceText(project, "", POM_XML, NEEDLE_PLUGIN_MANAGEMENT, pluginWithNeedle);
+    }
+  }
+
+  @Override
   public void addProperty(Project project, String key, String version) {
     project.addDefaultConfig(PRETTIER_DEFAULT_INDENT);
     int indent = (Integer) project.getConfig(PRETTIER_DEFAULT_INDENT).orElse(2);

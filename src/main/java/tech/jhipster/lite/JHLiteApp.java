@@ -2,6 +2,7 @@ package tech.jhipster.lite;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -14,6 +15,8 @@ import org.springframework.core.env.Environment;
 public class JHLiteApp {
 
   private static final Logger log = LoggerFactory.getLogger(JHLiteApp.class);
+
+  private static String hello = "hello world";
 
   public static void main(String[] args) {
     SpringApplication app = new SpringApplication(JHLiteApp.class);
@@ -28,7 +31,7 @@ public class JHLiteApp {
     String hostAddress = getHostAddress();
     log.info(
       """
-      
+
       ----------------------------------------------------------
         Application '{}' is running! Access URLs:
         Local: \t{}://localhost:{}{}swagger-ui.html

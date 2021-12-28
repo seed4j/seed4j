@@ -1,0 +1,28 @@
+package {{packageName}}.technical.infrastructure.secondary.cache.ehcache;
+
+import {{packageName}}.technical.infrastructure.secondary.cache.JCacheConfigurer;
+import java.time.Duration;
+import javax.cache.configuration.Configuration;
+import org.ehcache.config.builders.CacheConfigurationBuilder;
+import org.ehcache.config.builders.ExpiryPolicyBuilder;
+import org.ehcache.config.builders.ResourcePoolsBuilder;
+import org.ehcache.jsr107.Eh107Configuration;
+
+public class EhcacheConfigurer implements JCacheConfigurer {
+
+  private final EhcacheProperties properties;
+
+  public EhcacheConfigurer(EhcacheProperties properties) {
+    this.properties = properties;
+  }
+
+  @Override
+  public Configuration<Object, Object> configure() {
+    return Eh107Configuration.fromEhcacheCacheConfiguration(
+      CacheConfigurationBuilder
+        .newCacheConfigurationBuilder(Object.class, Object.class, ResourcePoolsBuilder.heap(properties.getMaxEntries()))
+        .withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(Duration.ofSeconds(properties.getTimeToLiveSeconds())))
+        .build()
+    );
+  }
+}

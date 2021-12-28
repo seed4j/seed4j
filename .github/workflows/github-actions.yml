@@ -62,7 +62,7 @@ jobs:
     strategy:
       matrix:
         app:
-          - tomcat-postgresql
+          - tomcat-postgresql-ehcache
           - undertow-mysql-simplecache
     steps:
       - name: 'Setup: checkout project'

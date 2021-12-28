@@ -19,7 +19,7 @@ callApi() {
     "http://localhost:7471"$api
 }
 
-if [[ $filename == 'tomcat-postgresql' ]]; then
+if [[ $filename == 'tomcat-postgresql-ehcache' ]]; then
   callApi "/api/projects/init"
   callApi "/api/build-tools/maven"
   callApi "/api/servers/java/base"
@@ -35,6 +35,7 @@ if [[ $filename == 'tomcat-postgresql' ]]; then
   callApi "/api/servers/spring-boot/aop/logging"
   callApi "/api/servers/spring-boot/logging/logstash/tcp"
   callApi "/api/servers/spring-boot/async"
+  callApi "/api/servers/spring-boot/cache/ehcache"
   callApi "/api/servers/sonar"
 
 elif [[ $filename == 'undertow-mysql-simplecache' ]]; then

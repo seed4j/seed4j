@@ -54,4 +54,18 @@ class SpringBootJCacheApplicationServiceIT {
 
     assertEnableCaching(project);
   }
+
+  @Test
+  void shouldAddJavaConfig() {
+    Project project = tmpProject();
+    project.addConfig(BASE_NAME, "bar");
+    project.addConfig(PACKAGE_NAME, "tech.jhipster.baz");
+    initApplicationService.init(project);
+    mavenApplicationService.addPomXml(project);
+    springBootApplicationService.init(project);
+
+    springBootJCacheApplicationService.addJavaConfig(project);
+
+    assertJavaConfig(project);
+  }
 }

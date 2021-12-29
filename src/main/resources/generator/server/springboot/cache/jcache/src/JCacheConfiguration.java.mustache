@@ -1,0 +1,22 @@
+package {{packageName}}.technical.infrastructure.secondary.cache;
+
+import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class JCacheConfiguration {
+
+  private final JCacheCreator jCacheCreator;
+
+  public JCacheConfiguration(JCacheCreator jCacheCreator) {
+    this.jCacheCreator = jCacheCreator;
+  }
+
+  @Bean
+  public JCacheManagerCustomizer cacheManagerCustomizer() {
+    return cm -> {
+      // jhipster-needle-jcache-add-entity
+    };
+  }
+}

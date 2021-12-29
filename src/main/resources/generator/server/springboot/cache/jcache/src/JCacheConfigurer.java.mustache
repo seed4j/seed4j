@@ -1,0 +1,8 @@
+package {{packageName}}.technical.infrastructure.secondary.cache;
+
+import javax.cache.configuration.Configuration;
+
+@FunctionalInterface
+public interface JCacheConfigurer {
+  Configuration<Object, Object> configure();
+}

@@ -20,4 +20,8 @@ public class SpringBootJCacheApplicationService {
   public void addEnableCaching(Project project) {
     springBootJCacheService.addEnableCaching(project);
   }
+
+  public void addJavaConfig(Project project) {
+    springBootJCacheService.addJavaConfig(project);
+  }
 }

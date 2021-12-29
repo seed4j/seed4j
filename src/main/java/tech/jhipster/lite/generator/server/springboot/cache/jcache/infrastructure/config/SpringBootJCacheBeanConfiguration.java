@@ -27,6 +27,6 @@ public class SpringBootJCacheBeanConfiguration {
 
   @Bean
   public SpringBootJCacheService springBootJCacheService() {
-    return new SpringBootJCacheDomainService(buildToolService, springBootCacheService);
+    return new SpringBootJCacheDomainService(buildToolService, projectRepository, springBootCacheService);
   }
 }

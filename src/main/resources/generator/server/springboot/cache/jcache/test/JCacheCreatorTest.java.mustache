@@ -1,0 +1,72 @@
+package {{packageName}}.technical.infrastructure.secondary.cache;
+
+import static org.mockito.Mockito.*;
+
+import {{packageName}}.UnitTest;
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.configuration.Configuration;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+@UnitTest
+@ExtendWith(MockitoExtension.class)
+class JCacheCreatorTest {
+
+  private static final Configuration<Object, Object> defaultConfig = new Configuration<>() {
+    @Override
+    public Class<Object> getKeyType() {
+      return null;
+    }
+
+    @Override
+    public Class<Object> getValueType() {
+      return null;
+    }
+
+    @Override
+    public boolean isStoreByValue() {
+      return false;
+    }
+  };
+
+  private static final JCacheConfigurer jCacheConfigurer = () -> defaultConfig;
+
+  private static final JCacheCreator jCacheCreator = new JCacheCreator(jCacheConfigurer);
+
+  @Mock
+  CacheManager cm;
+
+  @Mock
+  Cache<Object, Object> cache;
+
+  @Mock
+  Configuration<Object, Object> customConfig;
+
+  @Test
+  void shouldCreateEntityCache() {
+    jCacheCreator.createEntityCache(cm, "test");
+    verify(cm).createCache("test", defaultConfig);
+  }
+
+  @Test
+  void shouldCreateCustomCache() {
+    jCacheCreator.createCache(cm, "test", customConfig);
+    verify(cm).createCache("test", customConfig);
+  }
+
+  @Test
+  void shouldReplaceExistingCache() {
+    // given an existing cache "test"
+    doReturn(cache).when(cm).getCache("test");
+
+    // when attempting to create a new cache "test"
+    jCacheCreator.createCache(cm, "test", customConfig);
+
+    // then destroy and create cache "test"
+    verify(cm).destroyCache("test");
+    verify(cm).createCache("test", customConfig);
+  }
+}

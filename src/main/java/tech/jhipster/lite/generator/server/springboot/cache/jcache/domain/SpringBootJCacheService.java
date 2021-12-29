@@ -5,4 +5,5 @@ import tech.jhipster.lite.generator.project.domain.Project;
 public interface SpringBootJCacheService {
   void addDependencies(Project project);
   void addEnableCaching(Project project);
+  void addJavaConfig(Project project);
 }

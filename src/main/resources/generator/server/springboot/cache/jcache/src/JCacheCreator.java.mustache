@@ -1,0 +1,41 @@
+package {{packageName}}.technical.infrastructure.secondary.cache;
+
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.configuration.Configuration;
+import org.springframework.stereotype.Component;
+
+@Component
+public class JCacheCreator {
+
+  private final Configuration<Object, Object> entityCacheConfiguration;
+
+  public JCacheCreator(JCacheConfigurer jCacheConfigurer) {
+    entityCacheConfiguration = jCacheConfigurer.configure();
+  }
+
+  /**
+   * Create or replace a cache with the default entity cache configuration
+   *
+   * @param cm        cache manager
+   * @param cacheName cache name
+   */
+  public void createEntityCache(CacheManager cm, String cacheName) {
+    createCache(cm, cacheName, entityCacheConfiguration);
+  }
+
+  /**
+   * Create or replace a cache
+   *
+   * @param cm            cache manager
+   * @param cacheName     cache name
+   * @param configuration cache configuration
+   */
+  public void createCache(CacheManager cm, String cacheName, Configuration<Object, Object> configuration) {
+    Cache<Object, Object> cache = cm.getCache(cacheName);
+    if (cache != null) {
+      cm.destroyCache(cacheName);
+    }
+    cm.createCache(cacheName, configuration);
+  }
+}

@@ -13,19 +13,23 @@ public class EhcacheApplicationService {
     this.ehcacheService = ehcacheService;
   }
 
-  public void init(Project project) {
-    ehcacheService.init(project);
+  public void initJavaConfiguration(Project project) {
+    ehcacheService.initJavaConfiguration(project);
   }
 
   public void addDependencies(Project project) {
     ehcacheService.addDependencies(project);
   }
 
-  public void addJavaFiles(Project project) {
-    ehcacheService.addJavaFiles(project);
+  public void addEnableCaching(Project project) {
+    ehcacheService.addEnableCaching(project);
   }
 
-  public void addProperties(Project project) {
-    ehcacheService.addProperties(project);
+  public void addJavaConfig(Project project) {
+    ehcacheService.addJavaConfig(project);
+  }
+
+  public void addJavaProperties(Project project) {
+    ehcacheService.addJavaProperties(project);
   }
 }

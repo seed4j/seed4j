@@ -13,8 +13,9 @@ import tech.jhipster.lite.generator.server.springboot.cache.jcache.application.S
 
 public class EhcacheAssert {
 
-  public static void assertInit(Project project) {
+  public static void assertInitJavaConfiguration(Project project) {
     assertDependencies(project);
+    assertEnableCaching(project);
     assertJavaFiles(project);
     assertProperties(project);
   }
@@ -29,8 +30,11 @@ public class EhcacheAssert {
     );
   }
 
-  public static void assertJavaFiles(Project project) {
+  public static void assertEnableCaching(Project project) {
     SpringBootJCacheAssert.assertEnableCaching(project);
+  }
+
+  public static void assertJavaFiles(Project project) {
     SpringBootJCacheAssert.assertJavaConfig(project);
 
     String basePackage = project.getPackageName().orElse("com.mycompany.myapp");

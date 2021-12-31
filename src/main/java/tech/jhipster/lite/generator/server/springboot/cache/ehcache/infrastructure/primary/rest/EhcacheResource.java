@@ -24,9 +24,9 @@ class EhcacheResource {
 
   @Operation(summary = "Add Ehcache")
   @ApiResponse(responseCode = "500", description = "An error occurred while adding Ehcache")
-  @PostMapping
-  public void init(@RequestBody ProjectDTO projectDTO) {
+  @PostMapping("java-configuration")
+  public void initJavaConfiguration(@RequestBody ProjectDTO projectDTO) {
     Project project = ProjectDTO.toProject(projectDTO);
-    ehcacheApplicationService.init(project);
+    ehcacheApplicationService.initJavaConfiguration(project);
   }
 }

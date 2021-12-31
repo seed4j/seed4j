@@ -35,10 +35,11 @@ public class EhcacheDomainService implements EhcacheService {
   }
 
   @Override
-  public void init(Project project) {
+  public void initJavaConfiguration(Project project) {
     addDependencies(project);
-    addJavaFiles(project);
-    addProperties(project);
+    addEnableCaching(project);
+    addJavaConfig(project);
+    addJavaProperties(project);
   }
 
   @Override
@@ -48,8 +49,12 @@ public class EhcacheDomainService implements EhcacheService {
   }
 
   @Override
-  public void addJavaFiles(Project project) {
+  public void addEnableCaching(Project project) {
     springBootJCacheService.addEnableCaching(project);
+  }
+
+  @Override
+  public void addJavaConfig(Project project) {
     springBootJCacheService.addJavaConfig(project);
 
     project.addDefaultConfig(PACKAGE_NAME);
@@ -64,7 +69,7 @@ public class EhcacheDomainService implements EhcacheService {
   }
 
   @Override
-  public void addProperties(Project project) {
+  public void addJavaProperties(Project project) {
     springBootPropertiesService.addProperties(project, "application.cache.ehcache.max-entries", 100);
     springBootPropertiesService.addProperties(project, "application.cache.ehcache.time-to-live-seconds", 3600);
   }

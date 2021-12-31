@@ -38,9 +38,9 @@ class EhcacheApplicationServiceIT {
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
-    ehcacheApplicationService.init(project);
+    ehcacheApplicationService.initJavaConfiguration(project);
 
-    assertInit(project);
+    assertInitJavaConfiguration(project);
   }
 
   @Test
@@ -57,7 +57,7 @@ class EhcacheApplicationServiceIT {
   }
 
   @Test
-  void shouldAddJavaFiles() {
+  void shouldEnableCaching() {
     Project project = tmpProject();
     project.addConfig(BASE_NAME, "bar");
     project.addConfig(PACKAGE_NAME, "tech.jhipster.baz");
@@ -65,20 +65,34 @@ class EhcacheApplicationServiceIT {
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
-    ehcacheApplicationService.addJavaFiles(project);
+    ehcacheApplicationService.addEnableCaching(project);
+
+    assertEnableCaching(project);
+  }
+
+  @Test
+  void shouldAddJavaConfig() {
+    Project project = tmpProject();
+    project.addConfig(BASE_NAME, "bar");
+    project.addConfig(PACKAGE_NAME, "tech.jhipster.baz");
+    initApplicationService.init(project);
+    mavenApplicationService.addPomXml(project);
+    springBootApplicationService.init(project);
+
+    ehcacheApplicationService.addJavaConfig(project);
 
     assertJavaFiles(project);
   }
 
   @Test
-  void shouldAddProperties() {
+  void shouldAddJavaProperties() {
     Project project = tmpProject();
     project.addConfig(BASE_NAME, "bar");
     initApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
-    ehcacheApplicationService.addProperties(project);
+    ehcacheApplicationService.addJavaProperties(project);
 
     assertProperties(project);
   }

@@ -2,7 +2,7 @@ package tech.jhipster.lite.generator.server.springboot.cache.ehcache.infrastruct
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static tech.jhipster.lite.generator.server.springboot.cache.ehcache.application.EhcacheAssert.assertInit;
+import static tech.jhipster.lite.generator.server.springboot.cache.ehcache.application.EhcacheAssert.assertInitJavaConfiguration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,12 +49,12 @@ class EhcacheResourceIT {
 
     mockMvc
       .perform(
-        post("/api/servers/spring-boot/cache/ehcache")
+        post("/api/servers/spring-boot/cache/ehcache/java-configuration")
           .contentType(MediaType.APPLICATION_JSON)
           .content(TestUtils.convertObjectToJsonBytes(projectDTO))
       )
       .andExpect(status().isOk());
 
-    assertInit(project);
+    assertInitJavaConfiguration(project);
   }
 }

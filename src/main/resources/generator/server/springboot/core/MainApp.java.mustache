@@ -22,30 +22,44 @@ public class {{mainClass}}App {
   }
 
   private static void logApplicationStartup(Environment env) {
-    String protocol = getProtocol(env.getProperty("server.ssl.key-store"));
     String serverPort = env.getProperty("server.port");
-    String contextPath = getContextPath(env.getProperty("server.servlet.context-path"));
-    String hostAddress = getHostAddress();
-    log.info(
-      """
-      
-      ----------------------------------------------------------
-        Application '{}' is running! Access URLs:
-        Local: \t{}://localhost:{}{}
-        External: \t{}://{}:{}{}
-        Profile(s): \t{}
-      ----------------------------------------------------------
-      """,
-      env.getProperty("spring.application.name"),
-      protocol,
-      serverPort,
-      contextPath,
-      protocol,
-      hostAddress,
-      serverPort,
-      contextPath,
-      env.getActiveProfiles()
-    );
+    if (serverPort != null) {
+      String protocol = getProtocol(env.getProperty("server.ssl.key-store"));
+      String contextPath = getContextPath(env.getProperty("server.servlet.context-path"));
+      String hostAddress = getHostAddress();
+      log.info(
+        """
+
+          ----------------------------------------------------------
+            Application '{}' is listening!
+            Profile:  {}
+            Local:    {}://localhost:{}{}swagger-ui.html
+            External: {}://{}:{}{}swagger-ui.html
+          ----------------------------------------------------------
+          """,
+        env.getProperty("spring.application.name"),
+        env.getActiveProfiles(),
+        protocol,
+        serverPort,
+        contextPath,
+        protocol,
+        hostAddress,
+        serverPort,
+        contextPath
+      );
+    } else {
+      log.info(
+        """
+
+          ----------------------------------------------------------
+            Application '{}' is running!
+            Profile: {}
+          ----------------------------------------------------------
+          """,
+        env.getProperty("spring.application.name"),
+        env.getActiveProfiles()
+      );
+    }
   }
 
   public static String getProtocol(String value) {

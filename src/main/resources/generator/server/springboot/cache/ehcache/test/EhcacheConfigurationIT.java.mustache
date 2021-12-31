@@ -12,11 +12,9 @@ import org.ehcache.config.ResourceType;
 import org.ehcache.jsr107.Eh107Configuration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
-@IntegrationTest
-@SpringBootTest(properties = { "application.cache.ehcache.max-entries=1000", "application.cache.ehcache.time-to-live-seconds=86400" })
+@IntegrationTest(properties = { "application.cache.ehcache.max-entries=1000", "application.cache.ehcache.time-to-live-seconds=86400" })
 class EhcacheConfigurationIT {
 
   @Autowired

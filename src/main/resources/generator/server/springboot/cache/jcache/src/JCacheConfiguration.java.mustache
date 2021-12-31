@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JCacheConfiguration {
 
+  @SuppressWarnings("java:S1068") // Not used without entity
   private final JCacheCreator jCacheCreator;
 
   public JCacheConfiguration(JCacheCreator jCacheCreator) {

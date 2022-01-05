@@ -95,9 +95,9 @@ public class TestUtils {
     return project;
   }
 
-  public static Project tmpProjectWithPackageJsonNoDependencies() {
+  public static Project tmpProjectWithPackageJsonNothing() {
     Project project = tmpProject();
-    copyPackageJsonByName(project, "package-no-dependencies.json");
+    copyPackageJsonByName(project, "package-nothing.json");
     return project;
   }
 

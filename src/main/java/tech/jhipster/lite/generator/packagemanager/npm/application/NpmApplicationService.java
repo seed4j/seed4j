@@ -9,12 +9,16 @@ public class NpmApplicationService {
 
   private final NpmService npmService;
 
+  public NpmApplicationService(NpmService npmService) {
+    this.npmService = npmService;
+  }
+
   public void addDependency(Project project, String dependency, String version) {
     this.npmService.addDependency(project, dependency, version);
   }
 
-  public NpmApplicationService(NpmService npmService) {
-    this.npmService = npmService;
+  public void addScript(Project project, String name, String cmd) {
+    this.npmService.addScript(project, name, cmd);
   }
 
   public void install(Project project) {

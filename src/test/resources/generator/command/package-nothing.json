@@ -1,11 +1,6 @@
 {
   "name": "jhlite",
   "version": "0.0.1",
-  "scripts": {},
-  "dependencies": {},
-  "devDependencies": {
-    "prettier": "2.5.1"
-  },
   "engines": {
     "node": ">=14.18.1"
   },

@@ -10,6 +10,7 @@ import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
 public class NpmDomainService implements NpmService {
 
+  public static final String VERSION = DQ + "version" + DQ;
   public static final String DEPENDENCIES = DQ + "dependencies" + DQ;
   public static final String DEV_DEPENDENCIES = DQ + "devDependencies" + DQ;
   public static final String SCRIPTS = DQ + "scripts" + DQ;
@@ -30,18 +31,11 @@ public class NpmDomainService implements NpmService {
     String needle = DEPENDENCIES + ": " + OB;
     String newText = needle + System.lineSeparator() + indent(2, indent) + DQ + dependency + DQ + ": " + DQ + version + DQ;
 
-    String devDependenciesNeedle = DEV_DEPENDENCIES + ": " + OB;
+    String versionNeedle = VERSION;
     if (!projectRepository.containsRegexp(project, "", PACKAGE_JSON, needle)) {
       newText =
-        newText +
-        System.lineSeparator() +
-        indent(1, indent) +
-        CB +
-        "," +
-        System.lineSeparator() +
-        indent(1, indent) +
-        devDependenciesNeedle;
-      projectRepository.replaceText(project, "", PACKAGE_JSON, devDependenciesNeedle, newText);
+        newText + System.lineSeparator() + indent(1, indent) + CB + "," + System.lineSeparator() + indent(1, indent) + versionNeedle;
+      projectRepository.replaceText(project, "", PACKAGE_JSON, versionNeedle, newText);
     } else if (projectRepository.containsRegexp(project, "", PACKAGE_JSON, needle + CB)) {
       projectRepository.replaceText(project, "", PACKAGE_JSON, needle, newText + System.lineSeparator() + indent(1, indent));
     } else {
@@ -56,7 +50,22 @@ public class NpmDomainService implements NpmService {
 
   @Override
   public void addScript(Project project, String name, String cmd) {
-    // Need to be implemented
+    project.addDefaultConfig(PRETTIER_DEFAULT_INDENT);
+    int indent = (Integer) project.getConfig(PRETTIER_DEFAULT_INDENT).orElse(2);
+
+    String needle = SCRIPTS + ": " + OB;
+    String newText = needle + System.lineSeparator() + indent(2, indent) + DQ + name + DQ + ": " + DQ + cmd + DQ;
+
+    String versionNeedle = VERSION;
+    if (!projectRepository.containsRegexp(project, "", PACKAGE_JSON, needle)) {
+      newText =
+        newText + System.lineSeparator() + indent(1, indent) + CB + "," + System.lineSeparator() + indent(1, indent) + versionNeedle;
+      projectRepository.replaceText(project, "", PACKAGE_JSON, versionNeedle, newText);
+    } else if (projectRepository.containsRegexp(project, "", PACKAGE_JSON, needle + CB)) {
+      projectRepository.replaceText(project, "", PACKAGE_JSON, needle, newText + System.lineSeparator() + indent(1, indent));
+    } else {
+      projectRepository.replaceText(project, "", PACKAGE_JSON, needle, newText + ",");
+    }
   }
 
   @Override

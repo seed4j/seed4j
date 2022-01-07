@@ -30,6 +30,7 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.common.domain.FileUtils;
+import tech.jhipster.lite.common.domain.WordUtils;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.error.domain.MissingMandatoryValueException;
 import tech.jhipster.lite.generator.project.domain.Project;
@@ -191,12 +192,14 @@ class ProjectLocalRepositoryTest {
   @Test
   void shouldReplaceText() {
     Project project = tmpProjectWithPomXml();
-    String oldText = """
+    String oldText =
+      """
       <name>jhipster</name>
-        <description>JHipster Project</description>""";
-    String newText = """
+        <description>JHipster Project</description>""".replace(WordUtils.LF, project.getEndOfLine());
+    String newText =
+      """
       <name>chips</name>
-        <description>Chips Project</description>""";
+        <description>Chips Project</description>""".replace(WordUtils.LF, project.getEndOfLine());
 
     repository.replaceText(project, "", POM_XML, oldText, newText);
 

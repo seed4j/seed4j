@@ -196,12 +196,11 @@ class ProjectLocalRepositoryTest {
         <description>JHipster Project</description>""";
     String newText = """
       <name>chips</name>
-
         <description>Chips Project</description>""";
 
     repository.replaceText(project, "", POM_XML, oldText, newText);
 
-    assertFileContent(project, POM_XML, List.of("<name>chips</name>", "", "<description>Chips Project</description>"));
+    assertFileContent(project, POM_XML, List.of("<name>chips</name>", "<description>Chips Project</description>"));
   }
 
   @Test

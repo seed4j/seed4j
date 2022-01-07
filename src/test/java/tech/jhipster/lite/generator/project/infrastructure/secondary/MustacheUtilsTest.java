@@ -20,7 +20,7 @@ class MustacheUtilsTest {
     Chips chips = new Chips("chips");
     String result = MustacheUtils.template(file, chips);
 
-    assertThat(result).isEqualTo("The apero can start when there is some chips\n");
+    assertThat(result).contains("The apero can start when there is some chips");
   }
 
   @Test
@@ -30,7 +30,7 @@ class MustacheUtilsTest {
     Chips chips = new Chips("chips");
     String result = MustacheUtils.template(file, chips);
 
-    assertThat(result).isEqualTo("The apero can start when there is some chips\n");
+    assertThat(result).contains("The apero can start when there is some chips");
   }
 
   @Test
@@ -40,7 +40,7 @@ class MustacheUtilsTest {
     Map<String, String> chips = Map.of("name", "chips");
     String result = MustacheUtils.template(file, chips);
 
-    assertThat(result).isEqualTo("The apero can start when there is some chips\n");
+    assertThat(result).contains("The apero can start when there is some chips");
   }
 
   @Test

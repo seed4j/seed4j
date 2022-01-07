@@ -493,7 +493,7 @@ class FileUtilsTest {
       String filename = getPath("src/test/resources/generator/utils/example-readme.md");
 
       String lineSeparator = detectEndOfLine(filename).orElse("\0");
-      String regexp = new StringBuilder().append("```").append(LF).append("./mv.?w clean").toString();
+      String regexp = new StringBuilder().append("```").append(lineSeparator).append("./mv.?w clean").toString();
 
       assertEquals(2, FileUtils.countsRegexp(filename, FileUtils.REGEXP_PREFIX_DOTALL + regexp));
     }
@@ -503,7 +503,7 @@ class FileUtilsTest {
       String filename = getPath("src/test/resources/generator/utils/example-readme.md");
 
       String lineSeparator = detectEndOfLine(filename).orElse("\0");
-      String regexp = new StringBuilder().append("```").append(LF).append("np.? ci").toString();
+      String regexp = new StringBuilder().append("```").append(lineSeparator).append("np.? ci").toString();
 
       assertEquals(0, FileUtils.countsRegexp(filename, FileUtils.REGEXP_PREFIX_DOTALL + regexp));
     }

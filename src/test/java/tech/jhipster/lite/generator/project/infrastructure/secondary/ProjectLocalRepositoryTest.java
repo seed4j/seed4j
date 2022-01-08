@@ -191,7 +191,9 @@ class ProjectLocalRepositoryTest {
 
   @Test
   void shouldReplaceText() {
-    Project project = tmpProjectWithPomXml();
+    // need to be improved
+    Project initProject = tmpProjectWithPomXml();
+    Project project = Project.builder().folder(initProject.getFolder()).build();
     String oldText =
       """
       <name>jhipster</name>

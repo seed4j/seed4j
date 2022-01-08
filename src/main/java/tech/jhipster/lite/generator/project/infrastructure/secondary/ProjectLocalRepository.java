@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import tech.jhipster.lite.common.domain.FileUtils;
-import tech.jhipster.lite.common.domain.WordUtils;
 import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.project.domain.Project;
@@ -127,7 +126,7 @@ public class ProjectLocalRepository implements ProjectRepository {
 
     try {
       FileUtils.createFolder(projectDestination);
-      Files.write(getPathOf(projectDestinationFilename), text.replace(WordUtils.LF, project.getEndOfLine()).getBytes());
+      Files.write(getPathOf(projectDestinationFilename), text.getBytes());
     } catch (IOException e) {
       throw new GeneratorException(getErrorWritingMessage(projectDestinationFilename));
     }

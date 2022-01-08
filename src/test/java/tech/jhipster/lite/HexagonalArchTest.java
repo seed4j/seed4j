@@ -47,6 +47,7 @@ class HexagonalArchTest {
         .walk(Paths.get("src/main/java/tech/jhipster/lite"))
         .filter(path -> path.toString().endsWith("package-info.java"))
         .map(toPackageName())
+        .map(path -> path.replaceAll("[\\\\]", "."))
         .map(path -> path.replaceAll("[\\/]", "."))
         .map(path -> path.replace("src.main.java.", ""))
         .map(toPackage())

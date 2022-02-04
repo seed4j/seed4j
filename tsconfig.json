@@ -9,7 +9,9 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+    "types": ["vite/client", "@types/jest"]
   },
-  "include": ["src/main/webapp/**/*.ts", "src/main/webapp/**/*.d.ts", "src/main/webapp/**/*.tsx", "src/main/webapp/**/*.vue"]
+  "include": ["src/main/webapp/**/*.ts", "src/main/webapp/**/*.d.ts", "src/main/webapp/**/*.tsx", "src/main/webapp/**/*.vue"],
+  "exclude": ["./node_modules"]
 }

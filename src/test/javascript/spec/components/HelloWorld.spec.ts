@@ -1,4 +1,3 @@
-// src/components/HelloWorld.spec.ts
 import { mount } from '@vue/test-utils';
 import HelloWorld from '../../../../main/webapp/app/components/HelloWorld.vue';
 

@@ -23,7 +23,9 @@
     "test": "jest src/test/javascript/spec"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-class-component": "^8.0.0-0",
+    "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
     "@prettier/plugin-xml": "1.2.0",

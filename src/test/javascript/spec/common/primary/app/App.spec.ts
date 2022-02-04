@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import AppVue from '../../../main/webapp/app/App.vue';
+import AppVue from '../../../../../../main/webapp/app/common/primary/app/App.vue';
 
 describe('App', () => {
   it('should display header text', () => {

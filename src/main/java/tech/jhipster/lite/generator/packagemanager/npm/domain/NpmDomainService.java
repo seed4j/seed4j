@@ -89,4 +89,9 @@ public class NpmDomainService implements NpmService {
         return null;
       });
   }
+
+  @Override
+  public Optional<String> getVersionInReact(String name) {
+    return getVersion("react", name);
+  }
 }

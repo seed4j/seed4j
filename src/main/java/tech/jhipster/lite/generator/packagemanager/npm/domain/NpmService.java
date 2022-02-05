@@ -15,4 +15,5 @@ public interface NpmService {
   Optional<String> getVersionInCommon(String name);
   Optional<String> getVersionInAngular(String name);
   Optional<String> getVersionInViteReact(String name);
+  Optional<String> getVersionInReact(String name);
 }

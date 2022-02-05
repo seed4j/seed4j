@@ -114,7 +114,7 @@ class NpmDomainServiceTest {
   }
 
   @Nested
-  class GetVersionInReactTest {
+  class GetVersionInViteReactTest {
 
     @Test
     void shouldGetVersion() {
@@ -148,6 +148,44 @@ class NpmDomainServiceTest {
     @Test
     void shouldNotGetVersionForCloseBracket() {
       assertThat(npmDomainService.getVersionInViteReact("}")).isEmpty();
+    }
+  }
+
+  @Nested
+  class GetVersionInReactTest {
+
+    @Test
+    void shouldGetVersion() {
+      assertThat(npmDomainService.getVersionInReact("react-dom")).isNotEmpty();
+    }
+
+    @Test
+    void shouldNotGetVersionForNull() {
+      assertThatThrownBy(() -> npmDomainService.getVersionInReact(null))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("name");
+    }
+
+    @Test
+    void shouldNotGetVersionForBlank() {
+      assertThatThrownBy(() -> npmDomainService.getVersionInReact(" "))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("name");
+    }
+
+    @Test
+    void shouldNotGetVersion() {
+      assertThat(npmDomainService.getVersionInReact("unknown")).isEmpty();
+    }
+
+    @Test
+    void shouldNotGetVersionForDescription() {
+      assertThat(npmDomainService.getVersionInReact("description")).isEmpty();
+    }
+
+    @Test
+    void shouldNotGetVersionForCloseBracket() {
+      assertThat(npmDomainService.getVersionInReact("}")).isEmpty();
     }
   }
 
@@ -186,6 +224,7 @@ class NpmDomainServiceTest {
     @Test
     void shouldNotGetVersionForCloseBracket() {
       assertThat(npmDomainService.getVersionInAngular("}")).isEmpty();
+      assertThat(npmDomainService.getVersionInReact("}")).isEmpty();
     }
   }
 }

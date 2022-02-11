@@ -68,12 +68,12 @@ Depending on your system, you can install Node either from source or as a pre-pa
 
 ```
 $ node -v
-v16.13.2
+v16.14.0
 ```
 
 ```
 $ npm -v
-8.4.1
+8.5.0
 ```
 
 ### Fork the jhipster-lite project

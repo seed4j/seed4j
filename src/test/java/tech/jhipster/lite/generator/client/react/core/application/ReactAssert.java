@@ -38,14 +38,15 @@ public class ReactAssert {
   public static void assertReactFiles(Project project) {
     String pathPublic = "public";
     String pathSrc = "src";
+    String pathWebapp = "src/main/webapp";
 
     assertFileExist(project, getPath(pathPublic, "index.html"));
-    assertFileExist(project, getPath(pathSrc, "App.css"));
-    assertFileExist(project, getPath(pathSrc, "App.test.tsx"));
-    assertFileExist(project, getPath(pathSrc, "App.tsx"));
-    assertFileExist(project, getPath(pathSrc, "index.css"));
+    assertFileExist(project, getPath(pathWebapp, "App.css"));
+    assertFileExist(project, getPath(pathWebapp, "App.test.tsx"));
+    assertFileExist(project, getPath(pathWebapp, "App.tsx"));
+    assertFileExist(project, getPath(pathWebapp, "index.css"));
     assertFileExist(project, getPath(pathSrc, "index.tsx"));
-    assertFileExist(project, getPath(pathSrc, "react-app-env.d.ts"));
+    assertFileExist(project, getPath(pathWebapp, "react-app-env.d.ts"));
     assertFileExist(project, getPath(pathSrc, "setupTests.ts"));
   }
 }

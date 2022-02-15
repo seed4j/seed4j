@@ -28,25 +28,14 @@ public class React {
   }
 
   public static Map<String, String> scripts() {
-    // @formatter:off
-    return Map.of(
-      "start", "react-scripts start",
-      "build", "react-scripts build",
-      "test", "react-scripts test"
-    );
-    // @formatter:on
+    return Map.of("start", "react-scripts start", "build", "react-scripts build", "test", "react-scripts test");
   }
 
   public static List<String> files() {
-    // @formatter:off
-    return List.of(
-      "tsconfig.json"
-    );
-    // @formatter:on
+    return List.of("tsconfig.json");
   }
 
   public static Map<String, String> reactFiles() {
-    // @formatter:offProjectLocalRepository
     return Map.ofEntries(
       Map.entry("index.html", "public"),
       Map.entry("index.css", "src/main/webapp"),
@@ -57,6 +46,5 @@ public class React {
       Map.entry("App.test.tsx", "src/test/javascript/spec/common/primary/app"),
       Map.entry("setupTests.ts", "src")
     );
-    // @formatter:on
   }
 }

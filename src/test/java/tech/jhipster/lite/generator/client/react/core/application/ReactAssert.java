@@ -44,7 +44,7 @@ public class ReactAssert {
 
     assertFileExist(project, getPath(pathPublic, "index.html"));
     assertFileExist(project, getPath(pathWebapp, "index.css"));
-    assertFileExist(project, getPath(pathWebapp, "index.tsx"));
+    assertFileExist(project, getPath(pathSrc, "index.tsx"));
     assertFileExist(project, getPath(pathWebapp, "react-app-env.d.ts"));
     assertFileExist(project, getPath(primaryApp, "App.css"));
     assertFileExist(project, getPath(primaryApp, "App.tsx"));

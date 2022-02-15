@@ -33,6 +33,18 @@ public class ReactDomainService implements ReactService {
             }
           )
       );
+    React
+      .devDependencies()
+      .forEach(devDependency ->
+        npmService
+          .getVersionInReact(devDependency)
+          .ifPresentOrElse(
+            version -> npmService.addDevDependency(project, devDependency, version),
+            () -> {
+              throw new GeneratorException("DevDependency not found: " + devDependency);
+            }
+          )
+      );
     React.scripts().forEach((name, cmd) -> npmService.addScript(project, name, cmd));
     React.files().forEach(file -> projectRepository.add(project, SOURCE, file));
     React.reactFiles().forEach((file, path) -> projectRepository.template(project, SOURCE + "/" + path, file, getPath("/", path)));

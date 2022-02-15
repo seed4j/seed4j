@@ -39,14 +39,16 @@ public class ReactAssert {
     String pathPublic = "public";
     String pathSrc = "src";
     String pathWebapp = "src/main/webapp";
+    String primaryApp = "src/main/webapp/app/common/primary/app";
+    String primaryTestApp = "src/test/javascript/spec/common/primary/app";
 
     assertFileExist(project, getPath(pathPublic, "index.html"));
-    assertFileExist(project, getPath(pathWebapp, "App.css"));
-    assertFileExist(project, getPath(pathWebapp, "App.test.tsx"));
-    assertFileExist(project, getPath(pathWebapp, "App.tsx"));
     assertFileExist(project, getPath(pathWebapp, "index.css"));
-    assertFileExist(project, getPath(pathSrc, "index.tsx"));
+    assertFileExist(project, getPath(pathWebapp, "index.tsx"));
     assertFileExist(project, getPath(pathWebapp, "react-app-env.d.ts"));
+    assertFileExist(project, getPath(primaryApp, "App.css"));
+    assertFileExist(project, getPath(primaryApp, "App.tsx"));
+    assertFileExist(project, getPath(primaryTestApp, "App.test.tsx"));
     assertFileExist(project, getPath(pathSrc, "setupTests.ts"));
   }
 }

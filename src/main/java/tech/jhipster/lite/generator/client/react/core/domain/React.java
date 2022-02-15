@@ -47,12 +47,12 @@ public class React {
     // @formatter:offProjectLocalRepository
     return Map.ofEntries(
       Map.entry("index.html", "public"),
-      Map.entry("App.css", "src/main/webapp"),
-      Map.entry("App.test.tsx", "src/main/webapp"),
-      Map.entry("App.tsx", "src/main/webapp"),
       Map.entry("index.css", "src/main/webapp"),
-      Map.entry("index.tsx", "src"),
+      Map.entry("index.tsx", "src/main/webapp"),
       Map.entry("react-app-env.d.ts", "src/main/webapp"),
+      Map.entry("App.css", "src/main/webapp/app/common/primary/app"),
+      Map.entry("App.tsx", "src/main/webapp/app/common/primary/app"),
+      Map.entry("App.test.tsx", "src/test/javascript/spec/common/primary/app"),
       Map.entry("setupTests.ts", "src")
     );
     // @formatter:on

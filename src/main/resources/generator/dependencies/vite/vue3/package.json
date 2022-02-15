@@ -9,7 +9,7 @@
   "devDependencies": {
     "@rushstack/eslint-patch": "1.1.0",
     "@types/jest": "27.4.0",
-    "@typescript-eslint/parser": "5.12.0",
+    "@typescript-eslint/parser": "5.11.0",
     "@vitejs/plugin-vue": "2.2.0",
     "@vue/eslint-config-typescript": "10.0.0",
     "@vue/test-utils": "2.0.0-rc.18",

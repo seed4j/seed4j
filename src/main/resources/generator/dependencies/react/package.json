@@ -1,5 +1,25 @@
 {
+  "name": "jhlite-dependencies",
+  "version": "0.0.0",
+  "description": "JHipster Lite : used for React dependencies",
+  "license": "Apache-2.0",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
@@ -7,8 +27,6 @@
     "@types/node": "16.11.22",
     "@types/react": "17.0.39",
     "@types/react-dom": "17.0.11",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
     "react-scripts": "5.0.0",
     "typescript": "4.5.5"
   }

@@ -31,4 +31,13 @@ class ViveVueResource {
     Project project = ProjectDTO.toProject(projectDTO);
     viteVueApplicationService.addViteVue(project);
   }
+
+  @Operation(summary = "Add some style to index page")
+  @ApiResponse(responseCode = "500", description = "An error occurred while adding Vite+Vue3")
+  @PostMapping("/styled")
+  @GeneratorStep(id = "vite-vue-styled")
+  public void addStyledViteVue(@RequestBody ProjectDTO projectDTO) {
+    Project project = ProjectDTO.toProject(projectDTO);
+    viteVueApplicationService.addStyledViteVUe(project);
+  }
 }

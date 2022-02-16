@@ -44,4 +44,15 @@ class ViveVueResourceIT {
     assertRootFiles(project);
     assertAppFiles(project);
   }
+
+  @Test
+  void shouldAddStyledViteVue() throws Exception {
+    ProjectDTO projectDTO = readFileToObject("json/chips.json", ProjectDTO.class).folder(tmpDirForTest());
+    Project project = ProjectDTO.toProject(projectDTO);
+    initApplicationService.init(project);
+
+    mockMvc
+      .perform(post("/api/vite/vue/styled").contentType(MediaType.APPLICATION_JSON).content(TestUtils.convertObjectToJsonBytes(projectDTO)))
+      .andExpect(status().isOk());
+  }
 }

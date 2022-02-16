@@ -35,6 +35,18 @@ public class ViteVueDomainService implements ViteVueService {
     addAppFiles(project);
   }
 
+  @Override
+  public void addStyledViteVue(Project project) {
+    addStyledIndex(project);
+  }
+
+  private void addStyledIndex(Project project) {
+    String sourcePrimary = getPath(SOURCE, "webapp/app/common/primary/app");
+    String destinationPrimary = "src/main/webapp/app/common/primary/app";
+
+    projectRepository.template(project, sourcePrimary, "StyledApp.html", destinationPrimary, "App.html");
+  }
+
   public void addDependencies(Project project) {
     ViteVue.dependencies().forEach(dependency -> addDependency(project, dependency));
   }
@@ -94,7 +106,7 @@ public class ViteVueDomainService implements ViteVueService {
       "JHipster-Lite-neon-green.png",
       "src/main/webapp/content/images"
     );
-    projectRepository.add(project, getPath(SOURCE, "webapp/content/images"), "logo.png", "src/main/webapp/content/images");
+    projectRepository.add(project, getPath(SOURCE, "webapp/content/images"), "vuelogo.png", "src/main/webapp/content/images");
   }
 
   public void addAppFiles(Project project) {

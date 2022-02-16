@@ -37,6 +37,7 @@ public class ViteVueDomainService implements ViteVueService {
 
   @Override
   public void addStyledViteVue(Project project) {
+    addViteVue(project);
     addStyledIndex(project);
   }
 

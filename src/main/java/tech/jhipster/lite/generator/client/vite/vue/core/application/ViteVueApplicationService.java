@@ -17,7 +17,7 @@ public class ViteVueApplicationService {
     viteVueService.addViteVue(project);
   }
 
-  public void addStyledViteVUe(Project project) {
+  public void addStyledViteVue(Project project) {
     viteVueService.addStyledViteVue(project);
   }
 }

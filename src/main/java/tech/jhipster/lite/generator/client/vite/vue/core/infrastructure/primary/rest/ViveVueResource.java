@@ -38,6 +38,6 @@ class ViveVueResource {
   @GeneratorStep(id = "vite-vue-styled")
   public void addStyledViteVue(@RequestBody ProjectDTO projectDTO) {
     Project project = ProjectDTO.toProject(projectDTO);
-    viteVueApplicationService.addStyledViteVUe(project);
+    viteVueApplicationService.addStyledViteVue(project);
   }
 }

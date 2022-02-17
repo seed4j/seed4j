@@ -53,4 +53,11 @@ class ReactDomainServiceTest {
 
     assertThatThrownBy(() -> reactDomainService.init(project)).isExactlyInstanceOf(GeneratorException.class);
   }
+
+  @Test
+  void shouldNotInitCauseDevDependencies() {
+    Project project = tmpProjectWithPackageJsonNoDevDependencies();
+
+    assertThatThrownBy(() -> reactDomainService.init(project)).isExactlyInstanceOf(GeneratorException.class);
+  }
 }

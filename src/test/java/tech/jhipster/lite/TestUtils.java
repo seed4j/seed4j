@@ -117,6 +117,12 @@ public class TestUtils {
     return project;
   }
 
+  public static Project tmpProjectWithPackageJsonNoDevDependencies() {
+    Project project = tmpProject();
+    copyPackageJsonByName(project, "package-no-devDependencies.json");
+    return project;
+  }
+
   public static Project tmpProjectWithPackageJsonComplete() {
     Project project = tmpProject();
     copyPackageJsonByName(project, "package-complete.json");

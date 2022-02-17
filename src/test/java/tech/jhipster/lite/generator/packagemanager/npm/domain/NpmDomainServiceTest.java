@@ -151,6 +151,7 @@ class NpmDomainServiceTest {
     }
   }
 
+  @Nested
   class GetVersionInAngularTest {
 
     @Test

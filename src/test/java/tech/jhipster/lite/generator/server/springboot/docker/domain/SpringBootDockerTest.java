@@ -17,9 +17,4 @@ class SpringBootDockerTest {
   void shouldGetDockerPlatformArchitecture() {
     assertThat(SpringBootDocker.getDockerPlatformArchitecture()).isEqualTo("amd64");
   }
-
-  @Test
-  void shouldGetJibPluginVersion() {
-    assertThat(SpringBootDocker.getJibPluginVersion()).isEqualTo("3.1.4");
-  }
 }

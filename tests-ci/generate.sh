@@ -31,7 +31,7 @@ if [[ $filename == 'full-default' ]]; then
   callApi "/api/servers/spring-boot/logging/aop"
   callApi "/api/servers/spring-boot/logging/logstash"
   callApi "/api/servers/spring-boot/banner/jhipster-v7"
-  callApi "/api/servers/sonar"
+  callApi "/api/servers/sonar/java-backend-and-frontend"
   callApi "/api/servers/spring-boot/docker/jib"
 
   callApi "/api/servers/spring-boot/mvc/web/tomcat"
@@ -58,6 +58,8 @@ elif [[ $filename == 'tomcat-mysql-ehcachexml' ]]; then
   callApi "/api/servers/java/jacoco-minimum-coverage"
   callApi "/api/servers/spring-boot"
 
+  callApi "/api/servers/sonar/java-backend"
+
   callApi "/api/servers/spring-boot/mvc/web/tomcat"
   callApi "/api/servers/spring-boot/mvc/springdoc/init"
 
@@ -70,6 +72,9 @@ elif [[ $filename == 'tomcat-mysql-ehcachexml' ]]; then
   callApi "/api/servers/spring-boot/mvc/springdoc/init-with-security-jwt"
 
   callApi "/api/servers/spring-boot/cache/ehcache/xml-configuration"
+
+  callApi "/api/frontend-maven-plugin"
+  callApi "/api/angular"
 
 elif [[ $filename == 'undertow-simplecache' ]]; then
   callApi "/api/projects/init"
@@ -110,6 +115,17 @@ elif [[ $filename == 'undertow-consul' ]]; then
   callApi "/api/servers/spring-boot/mvc/web/undertow"
   callApi "/api/servers/spring-boot/mvc/web/actuator"
   callApi "/api/servers/spring-boot/spring-cloud/consul"
+
+elif [[ $filename == 'tomcat-mongodb' ]]; then
+  callApi "/api/projects/init"
+  callApi "/api/build-tools/maven"
+  callApi "/api/servers/java/base"
+  callApi "/api/servers/java/jacoco-minimum-coverage"
+  callApi "/api/servers/spring-boot"
+
+  callApi "/api/servers/spring-boot/mvc/web/tomcat"
+  callApi "/api/servers/spring-boot/mvc/web/actuator"
+  callApi "/api/servers/spring-boot/databases/mongodb"
 
 else
   echo "*** Unknown configuration..."

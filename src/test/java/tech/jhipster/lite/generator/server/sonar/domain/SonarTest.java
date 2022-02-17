@@ -9,11 +9,6 @@ import tech.jhipster.lite.UnitTest;
 class SonarTest {
 
   @Test
-  void shouldGetMavenPluginVersion() {
-    assertThat(Sonar.getMavenPluginVersion()).isEqualTo("3.9.1.2184");
-  }
-
-  @Test
   void shouldGetSonarqubeDockerVersion() {
     assertThat(Sonar.getSonarqubeDockerImage()).isEqualTo("sonarqube:9.2.4-community");
   }

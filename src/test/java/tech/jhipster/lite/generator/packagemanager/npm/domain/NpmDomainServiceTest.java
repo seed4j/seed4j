@@ -150,4 +150,41 @@ class NpmDomainServiceTest {
       assertThat(npmDomainService.getVersionInReact("}")).isEmpty();
     }
   }
+
+  class GetVersionInAngularTest {
+
+    @Test
+    void shouldGetVersion() {
+      assertThat(npmDomainService.getVersionInAngular("@angular/core")).isNotEmpty();
+    }
+
+    @Test
+    void shouldNotGetVersionForNull() {
+      assertThatThrownBy(() -> npmDomainService.getVersionInAngular(null))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("name");
+    }
+
+    @Test
+    void shouldNotGetVersionForBlank() {
+      assertThatThrownBy(() -> npmDomainService.getVersionInAngular(" "))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("name");
+    }
+
+    @Test
+    void shouldNotGetVersion() {
+      assertThat(npmDomainService.getVersionInAngular("unknown")).isEmpty();
+    }
+
+    @Test
+    void shouldNotGetVersionForDescription() {
+      assertThat(npmDomainService.getVersionInAngular("description")).isEmpty();
+    }
+
+    @Test
+    void shouldNotGetVersionForCloseBracket() {
+      assertThat(npmDomainService.getVersionInAngular("}")).isEmpty();
+    }
+  }
 }

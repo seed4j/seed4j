@@ -40,6 +40,7 @@ public class ViteVueAssert {
 
   public static void assertAppFiles(Project project) {
     assertFileExist(project, "src/main/webapp/app/common/primary/app/App.component.ts");
+    assertFileExist(project, "src/main/webapp/app/common/primary/app/App.html");
     assertFileExist(project, "src/main/webapp/app/common/primary/app/App.vue");
     assertFileExist(project, "src/main/webapp/app/common/primary/app/index.ts");
     assertFileExist(project, "src/test/javascript/spec/common/primary/app/App.spec.ts");

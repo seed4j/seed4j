@@ -8,6 +8,7 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.TreeMap;
+import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
@@ -47,7 +48,14 @@ public class FlywayDomainService implements FlywayService {
 
   @Override
   public void addFlywayDependency(Project project) {
-    buildToolService.addProperty(project, "flyway.version", Flyway.flywayVersion());
+    buildToolService
+      .getVersion(project, "flyway")
+      .ifPresentOrElse(
+        version -> buildToolService.addProperty(project, "flyway.version", version),
+        () -> {
+          throw new GeneratorException("Version not found: flyway");
+        }
+      );
     buildToolService.addDependency(project, Flyway.flywayDependency());
     springBootCommonService
       .getProperty(project, "spring.datasource.url")

@@ -20,7 +20,8 @@ public class FlywayAssert {
   public static final ZoneId DEFAULT_TIMEZONE = ZoneId.of("Europe/Paris");
 
   public static void assertDependencies(Project project) {
-    TestUtils.assertFileContent(project, POM_XML, List.of("<flyway.version>" + Flyway.flywayVersion() + "</flyway.version>"));
+    TestUtils.assertFileContent(project, POM_XML, "<flyway.version>");
+    TestUtils.assertFileContent(project, POM_XML, "</flyway.version>");
     TestUtils.assertFileContent(
       project,
       POM_XML,

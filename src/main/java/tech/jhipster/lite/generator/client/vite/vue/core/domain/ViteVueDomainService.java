@@ -102,6 +102,7 @@ public class ViteVueDomainService implements ViteVueService {
     String destinationPrimary = "src/main/webapp/app/common/primary/app";
 
     projectRepository.template(project, sourcePrimary, "App.component.ts", destinationPrimary);
+    projectRepository.template(project, sourcePrimary, "App.html", destinationPrimary);
     projectRepository.template(project, sourcePrimary, "App.vue", destinationPrimary);
     projectRepository.template(project, sourcePrimary, "index.ts", destinationPrimary);
 

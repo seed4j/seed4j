@@ -4,17 +4,16 @@
   "description": "JHipster Lite : used for Vite+Vue3 dependencies",
   "license": "Apache-2.0",
   "dependencies": {
-    "vue": "3.2.25",
-    "vue-class-component": "^8.0.0-0"
+    "vue": "3.2.31"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "1.1.0",
     "@types/jest": "27.4.0",
-    "@typescript-eslint/parser": "5.11.0",
-    "@vitejs/plugin-vue": "2.0.0",
+    "@typescript-eslint/parser": "5.12.0",
+    "@vitejs/plugin-vue": "2.2.0",
     "@vue/eslint-config-typescript": "10.0.0",
     "@vue/test-utils": "2.0.0-rc.18",
-    "eslint": "8.8.0",
+    "eslint": "8.9.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-vue": "8.4.1",
     "jest": "26.6.3",
@@ -22,8 +21,8 @@
     "jest-transform-stub": "2.0.0",
     "ts-jest": "26.5.6",
     "typescript": "4.5.5",
-    "vite": "^2.7.2",
+    "vite": "2.8.2",
     "vue-jest": "5.0.0-alpha.10",
-    "vue-tsc": "0.29.8"
+    "vue-tsc": "0.31.4"
   }
 }

@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -20,6 +21,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tech.jhipster.lite.UnitTest;
+import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.buildtool.generic.domain.Dependency;
 import tech.jhipster.lite.generator.project.domain.Project;
@@ -50,14 +52,13 @@ class FlywayDomainServiceTest {
     // Given
     Project project = tmpProject();
 
+    when(buildToolService.getVersion(any(Project.class), anyString())).thenReturn(Optional.of("0.0.0"));
     when(springBootCommonService.getProperty(project, "spring.datasource.url")).thenReturn(Optional.empty());
 
     // When
     flywayDomainService.init(project);
 
     // Then
-    verify(buildToolService).addProperty(project, "flyway.version", "8.4.2");
-
     ArgumentCaptor<Dependency> dependencyArgCaptor = ArgumentCaptor.forClass(Dependency.class);
     verify(buildToolService).addDependency(eq(project), dependencyArgCaptor.capture());
     Dependency expectedDependency = Dependency
@@ -83,18 +84,24 @@ class FlywayDomainServiceTest {
   }
 
   @Test
+  void shouldNotAddFlywayDependency() {
+    Project project = tmpProject();
+
+    Assertions.assertThatThrownBy(() -> flywayDomainService.addFlywayDependency(project)).isExactlyInstanceOf(GeneratorException.class);
+  }
+
+  @Test
   void shouldInitWithAdditionalFlywayMysqlDependency() {
     // Given
     Project project = tmpProject();
 
+    when(buildToolService.getVersion(any(Project.class), anyString())).thenReturn(Optional.of("0.0.0"));
     when(springBootCommonService.getProperty(project, "spring.datasource.url")).thenReturn(Optional.of("jdbc:mysql://localhost:3306/myDb"));
 
     // When
     flywayDomainService.init(project);
 
     // Then
-    verify(buildToolService).addProperty(project, "flyway.version", "8.4.2");
-
     ArgumentCaptor<Dependency> dependencyArgCaptor = ArgumentCaptor.forClass(Dependency.class);
     verify(buildToolService, times(2)).addDependency(eq(project), dependencyArgCaptor.capture());
     List<Dependency> dependencies = dependencyArgCaptor.getAllValues();

@@ -7,7 +7,7 @@ public class ViteVue {
   private ViteVue() {}
 
   public static List<String> dependencies() {
-    return List.of("vue", "vue-class-component");
+    return List.of("vue");
   }
 
   public static List<String> devDependencies() {

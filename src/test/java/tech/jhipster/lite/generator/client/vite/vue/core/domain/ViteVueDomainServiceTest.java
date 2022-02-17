@@ -47,7 +47,7 @@ class ViteVueDomainServiceTest {
 
     viteVueDomainService.addDependencies(project);
 
-    verify(npmService, times(2)).addDependency(any(Project.class), anyString(), anyString());
+    verify(npmService, times(1)).addDependency(any(Project.class), anyString(), anyString());
   }
 
   @Test
@@ -108,6 +108,6 @@ class ViteVueDomainServiceTest {
 
     viteVueDomainService.addAppFiles(project);
 
-    verify(projectRepository, times(4)).template(any(Project.class), anyString(), anyString(), anyString());
+    verify(projectRepository, times(5)).template(any(Project.class), anyString(), anyString(), anyString());
   }
 }

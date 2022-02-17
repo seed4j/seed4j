@@ -7,6 +7,7 @@ public class Constants {
   private Constants() {}
 
   public static final String MAIN_JAVA = String.join(File.separator, "src", "main", "java");
+  public static final String MAIN_WEBAPP = String.join(File.separator, "src", "main", "webapp");
   public static final String MAIN_RESOURCES = String.join(File.separator, "src", "main", "resources");
   public static final String TEMPLATE_FOLDER = "generator";
   public static final String DEPENDENCIES_FOLDER = "dependencies";

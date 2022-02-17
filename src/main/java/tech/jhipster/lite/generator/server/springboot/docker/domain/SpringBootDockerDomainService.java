@@ -3,6 +3,7 @@ package tech.jhipster.lite.generator.server.springboot.docker.domain;
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
 
 import tech.jhipster.lite.common.domain.WordUtils;
+import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.buildtool.generic.domain.Plugin;
 import tech.jhipster.lite.generator.project.domain.Project;
@@ -88,7 +89,14 @@ public class SpringBootDockerDomainService implements SpringBootDockerService {
           )
       )
       .build();
-    this.buildToolService.addProperty(project, "jib-maven-plugin.version", SpringBootDocker.getJibPluginVersion());
+    buildToolService
+      .getVersion(project, "jib-maven-plugin")
+      .ifPresentOrElse(
+        version -> buildToolService.addProperty(project, "jib-maven-plugin.version", version),
+        () -> {
+          throw new GeneratorException("Version not found: jib-maven-plugin");
+        }
+      );
     this.buildToolService.addProperty(project, "jib-maven-plugin.image", SpringBootDocker.getDockerBaseImage());
     this.buildToolService.addProperty(project, "jib-maven-plugin.architecture", SpringBootDocker.getDockerPlatformArchitecture());
     this.buildToolService.addPlugin(project, jibPlugin);

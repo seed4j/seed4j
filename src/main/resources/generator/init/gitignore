@@ -151,3 +151,9 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+######################
+# Angular
+######################
+.angular/
+dist/

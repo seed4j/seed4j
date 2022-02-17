@@ -8,7 +8,7 @@
 
   <groupId>tech.jhipster.lite</groupId>
   <artifactId>jhlite</artifactId>
-  <version>0.0.9-SNAPSHOT</version>
+  <version>0.0.10-SNAPSHOT</version>
   <name>jhlite</name>
   <description>JHipster Lite</description>
   <packaging>jar</packaging>
@@ -40,7 +40,7 @@
     <junit-jupiter.version>5.8.2</junit-jupiter.version>
     <assertj.version>3.22.0</assertj.version>
     <mockito.version>4.3.1</mockito.version>
-    <compiler-plugin.version>3.9.0</compiler-plugin.version>
+    <compiler-plugin.version>3.10.0</compiler-plugin.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <jacoco.version>0.8.7</jacoco.version>
     <mustache.version>0.9.10</mustache.version>

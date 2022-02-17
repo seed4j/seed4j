@@ -13,23 +13,11 @@ public class SonarApplicationService {
     this.sonarService = sonarService;
   }
 
-  public void init(Project project) {
-    this.sonarService.init(project);
+  public void addSonarJavaBackend(Project project) {
+    this.sonarService.addSonarJavaBackend(project);
   }
 
-  void addPropertiesPlugin(Project project) {
-    this.sonarService.addPropertiesPlugin(project);
-  }
-
-  void addSonarScannerPluginManagement(Project project) {
-    this.sonarService.addSonarScannerPluginManagement(project);
-  }
-
-  void addPropertiesFile(Project project) {
-    this.sonarService.addPropertiesFile(project);
-  }
-
-  void addDockerCompose(Project project) {
-    this.sonarService.addDockerCompose(project);
+  public void addSonarJavaBackendAndFrontend(Project project) {
+    this.sonarService.addSonarJavaBackendAndFrontend(project);
   }
 }

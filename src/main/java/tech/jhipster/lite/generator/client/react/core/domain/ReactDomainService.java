@@ -21,6 +21,13 @@ public class ReactDomainService implements ReactService {
 
   @Override
   public void init(Project project) {
+    addDependencies(project);
+    addDevDependencies(project);
+    addScripts(project);
+    addReactFiles(project);
+  }
+
+  public void addDependencies(Project project) {
     React
       .dependencies()
       .forEach(dependency ->
@@ -33,6 +40,9 @@ public class ReactDomainService implements ReactService {
             }
           )
       );
+  }
+
+  public void addDevDependencies(Project project) {
     React
       .devDependencies()
       .forEach(devDependency ->
@@ -45,8 +55,14 @@ public class ReactDomainService implements ReactService {
             }
           )
       );
+  }
+
+  private void addScripts(Project project) {
     React.scripts().forEach((name, cmd) -> npmService.addScript(project, name, cmd));
+  }
+
+  private void addReactFiles(Project project) {
     React.files().forEach(file -> projectRepository.add(project, SOURCE, file));
-    React.reactFiles().forEach((file, path) -> projectRepository.template(project, SOURCE + "/" + path, file, getPath("/", path)));
+    React.reactFiles().forEach((file, path) -> projectRepository.template(project, getPath(SOURCE, path), file, path));
   }
 }

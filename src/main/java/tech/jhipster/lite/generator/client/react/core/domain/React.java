@@ -22,29 +22,32 @@ public class React {
       "@types/node",
       "@types/react",
       "@types/react-dom",
+      "jest",
+      "jest-css-modules",
+      "jest-sonar-reporter",
       "react-scripts",
       "typescript"
     );
   }
 
   public static Map<String, String> scripts() {
-    return Map.of("start", "react-scripts start", "build", "react-scripts build", "test", "react-scripts test");
+    return Map.of("start", "react-scripts start", "build", "react-scripts build", "test", "jest");
   }
 
   public static List<String> files() {
-    return List.of("tsconfig.json");
+    return List.of("tsconfig.json", "jest.config.ts");
   }
 
   public static Map<String, String> reactFiles() {
     return Map.ofEntries(
-      Map.entry("index.html", "public"),
+      Map.entry("index.html", "src/main/webapp"),
       Map.entry("index.css", "src/main/webapp"),
-      Map.entry("index.tsx", "src"),
+      Map.entry("index.tsx", "src/main/webapp/app"),
       Map.entry("react-app-env.d.ts", "src/main/webapp"),
       Map.entry("App.css", "src/main/webapp/app/common/primary/app"),
       Map.entry("App.tsx", "src/main/webapp/app/common/primary/app"),
       Map.entry("App.test.tsx", "src/test/javascript/spec/common/primary/app"),
-      Map.entry("setupTests.ts", "src")
+      Map.entry("setupTests.ts", "src/main/webapp/config")
     );
   }
 }

@@ -26,6 +26,25 @@ class ViteVueApplicationServiceIT {
     assertViteConfigFiles(project);
     assertRootFiles(project);
     assertAppFiles(project);
+    assertAppWithoutCss(project);
+
+    assertJestSonar(project);
+  }
+
+  @Test
+  void shouldAddStyledViteVue() {
+    Project project = tmpProjectWithPackageJson();
+
+    viteVueApplicationService.addStyledViteVue(project);
+
+    assertDependency(project);
+    assertScripts(project);
+
+    assertViteConfigFiles(project);
+    assertRootFiles(project);
+    assertAppFiles(project);
+    assertAppWithCss(project);
+    assertLogos(project);
 
     assertJestSonar(project);
   }

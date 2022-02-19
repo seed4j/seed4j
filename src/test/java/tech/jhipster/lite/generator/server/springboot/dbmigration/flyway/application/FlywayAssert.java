@@ -12,7 +12,6 @@ import java.time.ZoneId;
 import java.util.List;
 import tech.jhipster.lite.TestUtils;
 import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.server.springboot.dbmigration.flyway.domain.Flyway;
 
 public class FlywayAssert {
 

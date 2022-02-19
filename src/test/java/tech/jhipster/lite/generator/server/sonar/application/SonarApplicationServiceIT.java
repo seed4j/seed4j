@@ -1,9 +1,7 @@
 package tech.jhipster.lite.generator.server.sonar.application;
 
 import static tech.jhipster.lite.TestUtils.*;
-import static tech.jhipster.lite.generator.project.domain.Constants.POM_XML;
 
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;

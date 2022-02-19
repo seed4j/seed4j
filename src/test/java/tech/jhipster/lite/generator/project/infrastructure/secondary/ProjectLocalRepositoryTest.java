@@ -21,6 +21,7 @@ import java.nio.file.attribute.PosixFilePermission;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import org.eclipse.jgit.api.errors.InvalidConfigurationException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -160,6 +161,27 @@ class ProjectLocalRepositoryTest {
     repository.template(project, "mustache", "README.md.mustache", getPath(MAIN_RESOURCES), "FINAL-README.md");
 
     assertFileExist(project, MAIN_RESOURCES, "FINAL-README.md");
+  }
+
+  @Test
+  void shouldGetComputedTemplate() {
+    Project project = tmpProject();
+
+    String result = repository.getComputedTemplate(project, "mustache", "README.md.mustache");
+
+    assertThat(result.lines().toList()).isEqualTo("The path is: ".lines().collect(Collectors.toList()));
+  }
+
+  @Test
+  void shouldNotGetComputedTemplate() {
+    Project project = tmpProject();
+
+    try (MockedStatic<MustacheUtils> mustacheUtils = Mockito.mockStatic(MustacheUtils.class)) {
+      mustacheUtils.when(() -> MustacheUtils.template(anyString(), any())).thenThrow(new IOException());
+
+      assertThatThrownBy(() -> repository.getComputedTemplate(project, "mustache", "README.md"))
+        .isExactlyInstanceOf(GeneratorException.class);
+    }
   }
 
   @Test

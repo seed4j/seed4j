@@ -2,6 +2,7 @@ package tech.jhipster.lite.generator.client.vite.vue.core.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
 import static tech.jhipster.lite.generator.project.domain.Constants.PACKAGE_JSON;
+import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,8 @@ import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 public class ViteVueDomainService implements ViteVueService {
 
   public static final String SOURCE = "client/vite/vue3";
+  public static final String SOURCE_PRIMARY = getPath(SOURCE, "webapp/app/common/primary/app");
+  public static final String DESTINATION_PRIMARY = "src/main/webapp/app/common/primary/app";
 
   private final ProjectRepository projectRepository;
   private final NpmService npmService;
@@ -24,13 +27,22 @@ public class ViteVueDomainService implements ViteVueService {
 
   @Override
   public void addViteVue(Project project) {
+    addCommonViteVue(project);
+    addAppFilesWithoutCss(project);
+  }
+
+  @Override
+  public void addStyledViteVue(Project project) {
+    addCommonViteVue(project);
+    addAppFilesWithCss(project);
+  }
+
+  private void addCommonViteVue(Project project) {
     addDependencies(project);
     addDevDependencies(project);
     addScripts(project);
     addJestSonar(project);
-
     addViteConfigFiles(project);
-
     addRootFiles(project);
     addAppFiles(project);
   }
@@ -87,24 +99,13 @@ public class ViteVueDomainService implements ViteVueService {
     projectRepository.template(project, getPath(SOURCE, "webapp"), "index.html", "src/main/webapp");
     projectRepository.template(project, getPath(SOURCE, "webapp/app"), "env.d.ts", "src/main/webapp/app");
     projectRepository.template(project, getPath(SOURCE, "webapp/app"), "main.ts", "src/main/webapp/app");
-
-    projectRepository.add(
-      project,
-      getPath(SOURCE, "webapp/content/images"),
-      "JHipster-Lite-neon-green.png",
-      "src/main/webapp/content/images"
-    );
-    projectRepository.add(project, getPath(SOURCE, "webapp/content/images"), "logo.png", "src/main/webapp/content/images");
   }
 
   public void addAppFiles(Project project) {
-    String sourcePrimary = getPath(SOURCE, "webapp/app/common/primary/app");
-    String destinationPrimary = "src/main/webapp/app/common/primary/app";
+    project.addDefaultConfig(BASE_NAME);
 
-    projectRepository.template(project, sourcePrimary, "App.component.ts", destinationPrimary);
-    projectRepository.template(project, sourcePrimary, "App.html", destinationPrimary);
-    projectRepository.template(project, sourcePrimary, "App.vue", destinationPrimary);
-    projectRepository.template(project, sourcePrimary, "index.ts", destinationPrimary);
+    projectRepository.template(project, SOURCE_PRIMARY, "App.component.ts", DESTINATION_PRIMARY);
+    projectRepository.template(project, SOURCE_PRIMARY, "index.ts", DESTINATION_PRIMARY);
 
     projectRepository.template(
       project,
@@ -112,6 +113,28 @@ public class ViteVueDomainService implements ViteVueService {
       "App.spec.ts",
       "src/test/javascript/spec/common/primary/app"
     );
+  }
+
+  public void addAppFilesWithoutCss(Project project) {
+    project.addDefaultConfig(BASE_NAME);
+
+    projectRepository.template(project, SOURCE_PRIMARY, "App.html", DESTINATION_PRIMARY);
+    projectRepository.template(project, SOURCE_PRIMARY, "App.vue", DESTINATION_PRIMARY);
+  }
+
+  public void addAppFilesWithCss(Project project) {
+    project.addDefaultConfig(BASE_NAME);
+
+    projectRepository.template(project, SOURCE_PRIMARY, "StyledApp.html", DESTINATION_PRIMARY, "App.html");
+    projectRepository.template(project, SOURCE_PRIMARY, "StyledApp.vue", DESTINATION_PRIMARY, "App.vue");
+
+    projectRepository.add(
+      project,
+      getPath(SOURCE, "webapp/content/images"),
+      "JHipster-Lite-neon-green.png",
+      "src/main/webapp/content/images"
+    );
+    projectRepository.add(project, getPath(SOURCE, "webapp/content/images"), "VueLogo.png", "src/main/webapp/content/images");
   }
 
   public void addJestSonar(Project project) {

@@ -1,7 +1,6 @@
 package tech.jhipster.lite.generator.client.vite.vue.core.application;
 
-import static tech.jhipster.lite.TestUtils.assertFileContent;
-import static tech.jhipster.lite.TestUtils.assertFileExist;
+import static tech.jhipster.lite.TestUtils.*;
 import static tech.jhipster.lite.common.domain.WordUtils.DQ;
 import static tech.jhipster.lite.generator.project.domain.Constants.PACKAGE_JSON;
 
@@ -44,6 +43,19 @@ public class ViteVueAssert {
     assertFileExist(project, "src/main/webapp/app/common/primary/app/App.vue");
     assertFileExist(project, "src/main/webapp/app/common/primary/app/index.ts");
     assertFileExist(project, "src/test/javascript/spec/common/primary/app/App.spec.ts");
+  }
+
+  public static void assertAppWithoutCss(Project project) {
+    assertFileNoContent(project, "src/main/webapp/app/common/primary/app/App.vue", "<style>");
+  }
+
+  public static void assertAppWithCss(Project project) {
+    assertFileContent(project, "src/main/webapp/app/common/primary/app/App.vue", "<style>");
+  }
+
+  public static void assertLogos(Project project) {
+    assertFileExist(project, "src/main/webapp/content/images/JHipster-Lite-neon-green.png");
+    assertFileExist(project, "src/main/webapp/content/images/VueLogo.png");
   }
 
   public static void assertJestSonar(Project project) {

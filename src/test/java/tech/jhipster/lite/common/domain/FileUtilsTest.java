@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static tech.jhipster.lite.TestUtils.assertFileNotExist;
 import static tech.jhipster.lite.common.domain.FileUtils.*;
+import static tech.jhipster.lite.common.domain.WordUtils.CRLF;
 import static tech.jhipster.lite.common.domain.WordUtils.LF;
 
 import java.io.File;
@@ -656,6 +657,33 @@ class FileUtilsTest {
       String regexp = new StringBuilder().append("```").append(LF).append("np.? ci").toString();
 
       assertEquals(0, FileUtils.countsRegexp(filename, FileUtils.REGEXP_PREFIX_DOTALL + regexp));
+    }
+  }
+
+  @Nested
+  class AppendLinesTest {
+
+    @Test
+    void shouldAppendLinesInFile() throws IOException {
+      // Given
+      Path filePath = Files.createTempFile("append-lines", null);
+      Files.write(filePath, "existing content".getBytes());
+
+      List<String> lines = List.of(CRLF, "new first line", "new second line");
+
+      // When
+      FileUtils.appendLines(filePath.toString(), lines);
+
+      // Then
+      assertThat(FileUtils.read(filePath.toString()).lines().toList())
+        .isEqualTo(List.of("existing content", "", "new first line", "new second line"));
+    }
+
+    @Test
+    void shouldNotAppendLinesWhenFileDoesNotExist() {
+      List<String> lines = List.of("line");
+
+      assertThatThrownBy(() -> FileUtils.appendLines("/unknown/path/file", lines)).isInstanceOf(IOException.class);
     }
   }
 

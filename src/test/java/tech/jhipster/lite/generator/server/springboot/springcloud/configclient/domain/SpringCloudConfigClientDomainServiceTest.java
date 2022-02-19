@@ -18,6 +18,7 @@ import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.buildtool.generic.domain.Dependency;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.server.springboot.springcloud.common.domain.SpringCloudCommonService;
 
 @UnitTest
 @ExtendWith(MockitoExtension.class)
@@ -28,6 +29,9 @@ class SpringCloudConfigClientDomainServiceTest {
 
   @Mock
   BuildToolService buildToolService;
+
+  @Mock
+  SpringCloudCommonService springCloudCommonService;
 
   @InjectMocks
   SpringCloudConfigClientDomainService springCloudConfigClientDomainService;
@@ -43,7 +47,7 @@ class SpringCloudConfigClientDomainServiceTest {
     verify(buildToolService).addDependencyManagement(any(Project.class), any(Dependency.class));
     verify(buildToolService, times(2)).addDependency(any(Project.class), any(Dependency.class));
 
-    verify(projectRepository, times(3)).template(any(Project.class), anyString(), anyString(), anyString());
+    verify(springCloudCommonService, times(3)).addOrMergeBootstrapProperties(any(Project.class), anyString(), anyString(), anyString());
     verify(projectRepository, times(2)).template(any(Project.class), anyString(), anyString(), anyString(), anyString());
   }
 

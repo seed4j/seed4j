@@ -25,12 +25,14 @@
     "test": "jest src/test/javascript/spec"
   },
   "dependencies": {
+    "axios": "0.26.0",
     "vue": "3.2.31"
   },
   "devDependencies": {
     "@prettier/plugin-xml": "1.2.0",
     "@rushstack/eslint-patch": "1.1.0",
     "@types/jest": "27.4.0",
+    "@types/sinon": "10.0.11",
     "@typescript-eslint/parser": "5.12.0",
     "@vitejs/plugin-vue": "2.2.0",
     "@vue/eslint-config-typescript": "10.0.0",
@@ -46,9 +48,10 @@
     "prettier": "2.5.1",
     "prettier-plugin-java": "1.6.1",
     "prettier-plugin-packagejson": "2.2.15",
+    "sinon": "13.0.1",
     "ts-jest": "26.5.6",
     "typescript": "4.5.5",
-    "vite": "2.8.2",
+    "vite": "2.8.4",
     "vue-jest": "5.0.0-alpha.10",
     "vue-tsc": "0.31.4"
   },

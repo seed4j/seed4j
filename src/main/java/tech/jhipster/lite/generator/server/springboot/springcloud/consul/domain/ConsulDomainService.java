@@ -10,6 +10,7 @@ import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.server.springboot.springcloud.common.domain.SpringCloudCommonService;
 
 public class ConsulDomainService implements ConsulService {
 
@@ -17,10 +18,16 @@ public class ConsulDomainService implements ConsulService {
 
   private final BuildToolService buildToolService;
   private final ProjectRepository projectRepository;
+  private final SpringCloudCommonService springCloudCommonService;
 
-  public ConsulDomainService(BuildToolService buildToolService, ProjectRepository projectRepository) {
+  public ConsulDomainService(
+    BuildToolService buildToolService,
+    ProjectRepository projectRepository,
+    SpringCloudCommonService springCloudCommonService
+  ) {
     this.buildToolService = buildToolService;
     this.projectRepository = projectRepository;
+    this.springCloudCommonService = springCloudCommonService;
   }
 
   @Override
@@ -51,9 +58,24 @@ public class ConsulDomainService implements ConsulService {
   public void addProperties(Project project) {
     project.addDefaultConfig(BASE_NAME);
 
-    projectRepository.template(project, getPath(SOURCE, "src"), BOOTSTRAP_PROPERTIES, getPath(MAIN_RESOURCES, CONFIG_FOLDER));
-    projectRepository.template(project, getPath(SOURCE, "src"), BOOTSTRAP_LOCAL_PROPERTIES, getPath(MAIN_RESOURCES, CONFIG_FOLDER));
-    projectRepository.template(project, getPath(SOURCE, "test"), BOOTSTRAP_PROPERTIES, getPath(TEST_RESOURCES, CONFIG_FOLDER));
+    springCloudCommonService.addOrMergeBootstrapProperties(
+      project,
+      getPath(SOURCE, "src"),
+      BOOTSTRAP_PROPERTIES,
+      getPath(MAIN_RESOURCES, CONFIG_FOLDER)
+    );
+    springCloudCommonService.addOrMergeBootstrapProperties(
+      project,
+      getPath(SOURCE, "src"),
+      BOOTSTRAP_LOCAL_PROPERTIES,
+      getPath(MAIN_RESOURCES, CONFIG_FOLDER)
+    );
+    springCloudCommonService.addOrMergeBootstrapProperties(
+      project,
+      getPath(SOURCE, "test"),
+      BOOTSTRAP_PROPERTIES,
+      getPath(TEST_RESOURCES, CONFIG_FOLDER)
+    );
   }
 
   @Override

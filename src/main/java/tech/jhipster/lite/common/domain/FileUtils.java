@@ -5,10 +5,7 @@ import static tech.jhipster.lite.common.domain.WordUtils.LF;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -215,5 +212,9 @@ public class FileUtils {
       return text.replace(CRLF, LF);
     }
     return text.replaceAll("([^\\r])\\n", "$1" + toEndOfLine);
+  }
+
+  public static void appendLines(String filePath, List<String> lines) throws IOException {
+    Files.write(Path.of(filePath), lines, StandardOpenOption.APPEND);
   }
 }

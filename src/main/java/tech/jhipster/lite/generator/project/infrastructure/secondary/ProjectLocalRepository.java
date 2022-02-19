@@ -87,6 +87,17 @@ public class ProjectLocalRepository implements ProjectRepository {
   }
 
   @Override
+  public String getComputedTemplate(Project project, String source, String sourceFilename) {
+    String filename = MustacheUtils.withExt(sourceFilename);
+    String filePath = getPath(TEMPLATE_FOLDER, source, filename);
+    try {
+      return MustacheUtils.template(filePath, project.getConfig());
+    } catch (IOException e) {
+      throw new GeneratorException("The file " + filePath + " can't be read");
+    }
+  }
+
+  @Override
   public boolean containsRegexp(Project project, String source, String sourceFilename, String regexp) {
     try {
       String text = read(getPath(project.getFolder(), source, sourceFilename));

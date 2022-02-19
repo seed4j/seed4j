@@ -19,12 +19,28 @@ callApi() {
     "http://localhost:7471"$api
 }
 
-if [[ $filename == 'full-default' ]]; then
+springboot() {
   callApi "/api/projects/init"
   callApi "/api/build-tools/maven"
   callApi "/api/servers/java/base"
   callApi "/api/servers/java/jacoco-minimum-coverage"
   callApi "/api/servers/spring-boot"
+  callApi "/api/servers/spring-boot/mvc/web/tomcat"
+  callApi "/api/servers/spring-boot/mvc/web/actuator"
+}
+
+springbootUndertow() {
+  callApi "/api/projects/init"
+  callApi "/api/build-tools/maven"
+  callApi "/api/servers/java/base"
+  callApi "/api/servers/java/jacoco-minimum-coverage"
+  callApi "/api/servers/spring-boot"
+  callApi "/api/servers/spring-boot/mvc/web/undertow"
+  callApi "/api/servers/spring-boot/mvc/web/actuator"
+}
+
+if [[ $filename == 'full-default' ]]; then
+  springboot
 
   callApi "/api/servers/spring-boot/async"
   callApi "/api/servers/spring-boot/devtools"
@@ -34,8 +50,6 @@ if [[ $filename == 'full-default' ]]; then
   callApi "/api/servers/sonar/java-backend-and-frontend"
   callApi "/api/servers/spring-boot/docker/jib"
 
-  callApi "/api/servers/spring-boot/mvc/web/tomcat"
-  callApi "/api/servers/spring-boot/mvc/web/actuator"
   callApi "/api/servers/spring-boot/mvc/security/jwt"
   callApi "/api/servers/spring-boot/mvc/security/jwt/basic-auth"
   callApi "/api/servers/spring-boot/mvc/springdoc/init-with-security-jwt"
@@ -51,16 +65,17 @@ if [[ $filename == 'full-default' ]]; then
   callApi "/api/frontend-maven-plugin"
   callApi "/api/vite/vue"
 
+elif [[ $filename == 'springboot' ]]; then
+  springboot
+
+elif [[ $filename == 'vueapp' ]]; then
+  springboot
+  callApi "/api/frontend-maven-plugin"
+  callApi "/api/vite/vue/styled"
+
 elif [[ $filename == 'tomcat-mysql-ehcachexml' ]]; then
-  callApi "/api/projects/init"
-  callApi "/api/build-tools/maven"
-  callApi "/api/servers/java/base"
-  callApi "/api/servers/java/jacoco-minimum-coverage"
-  callApi "/api/servers/spring-boot"
+  springboot
 
-  callApi "/api/servers/sonar/java-backend"
-
-  callApi "/api/servers/spring-boot/mvc/web/tomcat"
   callApi "/api/servers/spring-boot/mvc/springdoc/init"
 
   callApi "/api/servers/spring-boot/databases/mysql"
@@ -77,15 +92,9 @@ elif [[ $filename == 'tomcat-mysql-ehcachexml' ]]; then
   callApi "/api/angular"
 
 elif [[ $filename == 'undertow-simplecache' ]]; then
-  callApi "/api/projects/init"
-  callApi "/api/build-tools/maven"
-  callApi "/api/servers/java/base"
-  callApi "/api/servers/java/jacoco-minimum-coverage"
-  callApi "/api/servers/spring-boot"
+  springbootUndertow
 
   callApi "/api/servers/spring-boot/banner/jhipster-v3"
-
-  callApi "/api/servers/spring-boot/mvc/web/undertow"
   callApi "/api/servers/spring-boot/mvc/dummy"
 
   callApi "/api/servers/spring-boot/databases/mysql"
@@ -95,36 +104,20 @@ elif [[ $filename == 'undertow-simplecache' ]]; then
   callApi "/api/servers/spring-boot/cache/simple"
 
 elif [[ $filename == 'tomcat-configserver' ]]; then
-  callApi "/api/projects/init"
-  callApi "/api/build-tools/maven"
-  callApi "/api/servers/java/base"
-  callApi "/api/servers/java/jacoco-minimum-coverage"
-  callApi "/api/servers/spring-boot"
-
-  callApi "/api/servers/spring-boot/mvc/web/tomcat"
-  callApi "/api/servers/spring-boot/mvc/web/actuator"
+  springboot
   callApi "/api/servers/spring-boot/spring-cloud/config-client"
+  callApi "/api/servers/sonar/java-backend"
+
+elif [[ $filename == 'tomcat-eureka' ]]; then
+  springboot
+  callApi "/api/servers/spring-boot/spring-cloud/eureka-client"
 
 elif [[ $filename == 'undertow-consul' ]]; then
-  callApi "/api/projects/init"
-  callApi "/api/build-tools/maven"
-  callApi "/api/servers/java/base"
-  callApi "/api/servers/java/jacoco-minimum-coverage"
-  callApi "/api/servers/spring-boot"
-
-  callApi "/api/servers/spring-boot/mvc/web/undertow"
-  callApi "/api/servers/spring-boot/mvc/web/actuator"
+  springbootUndertow
   callApi "/api/servers/spring-boot/spring-cloud/consul"
 
 elif [[ $filename == 'tomcat-mongodb' ]]; then
-  callApi "/api/projects/init"
-  callApi "/api/build-tools/maven"
-  callApi "/api/servers/java/base"
-  callApi "/api/servers/java/jacoco-minimum-coverage"
-  callApi "/api/servers/spring-boot"
-
-  callApi "/api/servers/spring-boot/mvc/web/tomcat"
-  callApi "/api/servers/spring-boot/mvc/web/actuator"
+  springboot
   callApi "/api/servers/spring-boot/databases/mongodb"
 
 else

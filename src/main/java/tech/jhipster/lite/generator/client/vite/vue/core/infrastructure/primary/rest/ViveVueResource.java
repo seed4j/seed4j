@@ -31,4 +31,13 @@ class ViveVueResource {
     Project project = ProjectDTO.toProject(projectDTO);
     viteVueApplicationService.addViteVue(project);
   }
+
+  @Operation(summary = "Add Vite+Vue3 with minimal CSS")
+  @ApiResponse(responseCode = "500", description = "An error occurred while adding Vite+Vue3 with minimal CSS")
+  @PostMapping("/styled")
+  @GeneratorStep(id = "vite-vue-styled")
+  public void addStyledViteVue(@RequestBody ProjectDTO projectDTO) {
+    Project project = ProjectDTO.toProject(projectDTO);
+    viteVueApplicationService.addStyledViteVue(project);
+  }
 }

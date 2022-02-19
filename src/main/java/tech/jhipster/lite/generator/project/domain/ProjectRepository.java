@@ -11,6 +11,8 @@ public interface ProjectRepository {
   void template(Project project, String source, String sourceFilename, String destination);
   void template(Project project, String source, String sourceFilename, String destination, String destinationFilename);
 
+  String getComputedTemplate(Project project, String source, String sourceFilename);
+
   boolean containsRegexp(Project project, String source, String sourceFilename, String regexp);
   void replaceText(Project project, String source, String sourceFilename, String oldText, String newText);
   void replaceRegexp(Project project, String source, String sourceFilename, String regexpText, String newText);

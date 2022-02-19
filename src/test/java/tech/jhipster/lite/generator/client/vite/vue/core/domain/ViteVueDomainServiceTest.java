@@ -41,6 +41,28 @@ class ViteVueDomainServiceTest {
   }
 
   @Test
+  void shouldNotAddViteVue() {
+    Project project = tmpProjectWithPackageJson();
+
+    assertThatThrownBy(() -> viteVueDomainService.addViteVue(project)).isExactlyInstanceOf(GeneratorException.class);
+  }
+
+  @Test
+  void shouldAddStyledViteVue() {
+    Project project = tmpProjectWithPackageJson();
+    when(npmService.getVersion(anyString(), anyString())).thenReturn(Optional.of("0.0.0"));
+
+    assertThatCode(() -> viteVueDomainService.addStyledViteVue(project)).doesNotThrowAnyException();
+  }
+
+  @Test
+  void shouldNotAddStyledIndex() {
+    Project project = tmpProjectWithPackageJson();
+
+    assertThatThrownBy(() -> viteVueDomainService.addStyledViteVue(project)).isExactlyInstanceOf(GeneratorException.class);
+  }
+
+  @Test
   void shouldAddDependencies() {
     Project project = tmpProjectWithPackageJson();
     when(npmService.getVersion(anyString(), anyString())).thenReturn(Optional.of("0.0.0"));
@@ -99,7 +121,6 @@ class ViteVueDomainServiceTest {
     viteVueDomainService.addRootFiles(project);
 
     verify(projectRepository, times(3)).template(any(Project.class), anyString(), anyString(), anyString());
-    verify(projectRepository, times(2)).add(any(Project.class), anyString(), anyString(), anyString());
   }
 
   @Test
@@ -108,6 +129,25 @@ class ViteVueDomainServiceTest {
 
     viteVueDomainService.addAppFiles(project);
 
-    verify(projectRepository, times(5)).template(any(Project.class), anyString(), anyString(), anyString());
+    verify(projectRepository, times(3)).template(any(Project.class), anyString(), anyString(), anyString());
+  }
+
+  @Test
+  void shouldAddAppFilesWithoutCss() {
+    Project project = tmpProject();
+
+    viteVueDomainService.addAppFilesWithoutCss(project);
+
+    verify(projectRepository, times(2)).template(any(Project.class), anyString(), anyString(), anyString());
+  }
+
+  @Test
+  void shouldAddAppFilesWithCss() {
+    Project project = tmpProject();
+
+    viteVueDomainService.addAppFilesWithCss(project);
+
+    verify(projectRepository, times(2)).template(any(Project.class), anyString(), anyString(), anyString(), anyString());
+    verify(projectRepository, times(2)).add(any(Project.class), anyString(), anyString(), anyString());
   }
 }

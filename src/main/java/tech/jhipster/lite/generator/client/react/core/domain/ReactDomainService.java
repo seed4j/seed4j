@@ -25,6 +25,7 @@ public class ReactDomainService implements ReactService {
     addDevDependencies(project);
     addScripts(project);
     addReactFiles(project);
+    addJestSonar(project);
   }
 
   public void addDependencies(Project project) {
@@ -64,5 +65,17 @@ public class ReactDomainService implements ReactService {
   private void addReactFiles(Project project) {
     React.files().forEach(file -> projectRepository.add(project, SOURCE, file));
     React.reactFiles().forEach((file, path) -> projectRepository.template(project, getPath(SOURCE, path), file, path));
+  }
+
+  public void addJestSonar(Project project) {
+    String oldText = "\"cacheDirectories\": \\[";
+    String newText =
+      """
+      "jestSonar": \\{
+          "reportPath": "target/test-results/jest",
+          "reportFile": "TESTS-results-sonar.xml"
+        \\},
+        "cacheDirectories": \\[""";
+    projectRepository.replaceText(project, "", "package.json", oldText, newText);
   }
 }

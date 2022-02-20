@@ -39,10 +39,11 @@ class ReactDomainServiceTest {
 
     reactDomainService.init(project);
 
-    verify(npmService, times(11)).addDependency(any(Project.class), anyString(), anyString());
+    verify(npmService, times(3)).addDependency(any(Project.class), anyString(), anyString());
+    verify(npmService, times(14)).addDevDependency(any(Project.class), anyString(), anyString());
     verify(npmService, times(3)).addScript(any(Project.class), anyString(), anyString());
 
-    verify(projectRepository, times(1)).add(any(Project.class), anyString(), anyString());
+    verify(projectRepository, times(2)).add(any(Project.class), anyString(), anyString());
     verify(projectRepository, times(8)).template(any(Project.class), anyString(), anyString(), anyString());
   }
 

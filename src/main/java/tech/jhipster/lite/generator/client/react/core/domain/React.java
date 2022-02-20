@@ -26,6 +26,8 @@ public class React {
       "jest-css-modules",
       "jest-sonar-reporter",
       "react-scripts",
+      "ts-jest",
+      "ts-node",
       "typescript"
     );
   }
@@ -40,9 +42,9 @@ public class React {
 
   public static Map<String, String> reactFiles() {
     return Map.ofEntries(
-      Map.entry("index.html", "src/main/webapp"),
+      Map.entry("index.html", "public"),
       Map.entry("index.css", "src/main/webapp"),
-      Map.entry("index.tsx", "src/main/webapp/app"),
+      Map.entry("index.tsx", "src"),
       Map.entry("react-app-env.d.ts", "src/main/webapp"),
       Map.entry("App.css", "src/main/webapp/app/common/primary/app"),
       Map.entry("App.tsx", "src/main/webapp/app/common/primary/app"),

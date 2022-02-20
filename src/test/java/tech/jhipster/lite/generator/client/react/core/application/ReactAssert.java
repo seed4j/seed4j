@@ -38,6 +38,8 @@ public class ReactAssert {
   public static void assertReactFiles(Project project) {
     String pathPublic = "public";
     String pathSrc = "src";
+    String pathApp = "src/main/webapp/app";
+    String pathConfig = "src/main/webapp/config";
     String pathWebapp = "src/main/webapp";
     String primaryApp = "src/main/webapp/app/common/primary/app";
     String primaryTestApp = "src/test/javascript/spec/common/primary/app";
@@ -49,6 +51,6 @@ public class ReactAssert {
     assertFileExist(project, getPath(primaryApp, "App.css"));
     assertFileExist(project, getPath(primaryApp, "App.tsx"));
     assertFileExist(project, getPath(primaryTestApp, "App.test.tsx"));
-    assertFileExist(project, getPath(pathSrc, "setupTests.ts"));
+    assertFileExist(project, getPath(pathConfig, "setupTests.ts"));
   }
 }

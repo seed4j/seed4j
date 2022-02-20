@@ -99,7 +99,7 @@ public class NpmDomainService implements NpmService {
   public Optional<String> getVersionInAngular(String name) {
     return getVersion("angular", name);
   }
-  
+
   public Optional<String> getVersionInReact(String name) {
     return getVersion("react", name);
   }

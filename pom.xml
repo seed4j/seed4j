@@ -46,7 +46,7 @@
     <mustache.version>0.9.10</mustache.version>
     <guava.version>31.0.1-jre</guava.version>
     <jgit.version>6.0.0.202111291000-r</jgit.version>
-    <archunit-junit5.version>0.22.0</archunit-junit5.version>
+    <archunit-junit5.version>0.23.0</archunit-junit5.version>
     <springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
     <problem-spring.version>0.27.0</problem-spring.version>
     <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>

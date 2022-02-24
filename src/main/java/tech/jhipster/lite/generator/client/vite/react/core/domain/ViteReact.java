@@ -35,6 +35,8 @@ public class ViteReact {
     return Map.of(
       "dev",
       "vite",
+      "start",
+      "vite",
       "build",
       "tsc && vite build --emptyOutDir",
       "preview",

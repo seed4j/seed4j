@@ -83,6 +83,7 @@ public class ViteVueDomainService implements ViteVueService {
       .of(
         "build", "vue-tsc --noEmit && vite build --emptyOutDir",
         "dev", "vite",
+        "test","vite",
         "preview", "vite preview",
         "test", "jest src/test/javascript/spec"
       )

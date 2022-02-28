@@ -1,6 +1,7 @@
 package tech.jhipster.lite.generator.server.springboot.docker.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
+import static tech.jhipster.lite.generator.project.domain.Constants.DOCKER_FILE;
 
 import tech.jhipster.lite.common.domain.WordUtils;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
@@ -10,7 +11,8 @@ import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
 public class SpringBootDockerDomainService implements SpringBootDockerService {
 
-  public static final String SOURCE = "server/springboot/docker/jib";
+  public static final String DOCKER_SOURCE = "server/springboot/docker";
+  public static final String JIB_SOURCE = DOCKER_SOURCE + "/jib";
 
   private final ProjectRepository projectRepository;
   private final BuildToolService buildToolService;
@@ -32,7 +34,7 @@ public class SpringBootDockerDomainService implements SpringBootDockerService {
     String packageName = project.getPackageName().orElse("com.mycompany.myapp");
     String className = WordUtils.upperFirst(baseName);
     project.addConfig("mainClass", packageName + "." + className + "App");
-    projectRepository.template(project, getPath(SOURCE), "entrypoint.sh", getPath("src/main/docker/jib"));
+    projectRepository.template(project, getPath(JIB_SOURCE), "entrypoint.sh", getPath("src/main/docker/jib"));
   }
 
   @Override
@@ -92,5 +94,11 @@ public class SpringBootDockerDomainService implements SpringBootDockerService {
     this.buildToolService.addProperty(project, "jib-maven-plugin.image", SpringBootDocker.getDockerBaseImage());
     this.buildToolService.addProperty(project, "jib-maven-plugin.architecture", SpringBootDocker.getDockerPlatformArchitecture());
     this.buildToolService.addPlugin(project, jibPlugin);
+  }
+
+  @Override
+  public void addDockerFile(Project project) {
+    //    projectRepository.template(project, DOCKER_SOURCE, DOCKER_FILE);
+    projectRepository.add(project, DOCKER_SOURCE, DOCKER_FILE);
   }
 }

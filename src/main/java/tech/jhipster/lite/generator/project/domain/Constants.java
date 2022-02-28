@@ -19,4 +19,5 @@ public class Constants {
   public static final String POM_XML = "pom.xml";
   public static final String LIQUIBASE_MASTER_XML = "master.xml";
   public static final String PACKAGE_JSON = "package.json";
+  public static final String DOCKER_FILE = "Dockerfile";
 }

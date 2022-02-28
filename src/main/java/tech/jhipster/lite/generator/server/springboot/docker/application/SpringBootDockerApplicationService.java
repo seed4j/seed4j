@@ -17,6 +17,10 @@ public class SpringBootDockerApplicationService {
     this.springBootDockerService.addJib(project);
   }
 
+  public void addDockerFile(Project project) {
+    this.springBootDockerService.addDockerFile(project);
+  }
+
   public void addJibPlugin(Project project) {
     this.springBootDockerService.addJibPlugin(project);
   }

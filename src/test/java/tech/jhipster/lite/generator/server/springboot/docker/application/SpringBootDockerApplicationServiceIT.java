@@ -83,6 +83,16 @@ class SpringBootDockerApplicationServiceIT {
     assertFileContent(project, POM_XML, mavenJibPlugin(project));
   }
 
+  @Test
+  void shouldAddDockerFile() {
+    Project project = tmpProject();
+    initApplicationService.init(project);
+
+    springBootDockerApplicationService.addDockerFile(project);
+
+    assertFileExist(project, "Dockerfile");
+  }
+
   private List<String> mavenJibPlugin(Project project) {
     return List.of(
       "<plugin>",

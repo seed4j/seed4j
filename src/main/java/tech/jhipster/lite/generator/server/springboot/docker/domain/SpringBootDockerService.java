@@ -6,4 +6,5 @@ public interface SpringBootDockerService {
   void addJib(Project project);
   void addJibFiles(Project project);
   void addJibPlugin(Project project);
+  void addDockerFile(Project project);
 }

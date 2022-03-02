@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+{{basename}}-cassandra-migration:
+environment:
+- CASSANDRA_CONTACT_POINT={{basename}}-cassandra
+- USER=docker-cassandra-migration
+# - DEBUG_LOG=1 # uncomment to show debug logs during the migration process
+build:
+context: .
+dockerfile: cassandra/Cassandra-Migration.Dockerfile
+volumes:
+- ../resources/config/cql:/cql:ro

@@ -1,0 +1,42 @@
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+version: '3.8'
+services:
+{{basename}}-app:
+image: {{basename}}
+environment:
+- _JAVA_OPTIONS=-Xmx512m -Xms256m
+- SPRING_PROFILES_ACTIVE=prod,api-docs
+- MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+- SPRING_DATA_CASSANDRA_CONTACTPOINTS={{basename}}-cassandra
+- JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+# If you want to expose these ports outside your dev PC,
+# remove the "127.0.0.1:" prefix
+ports:
+- 127.0.0.1:8080:8080
+{{basename}}-cassandra:
+image: cassandra:3.11.12
+# volumes:
+#   - ~/volumes/jhipster/{{basename}}/cassandra/:/var/lib/cassandra/data
+# If you want to expose these ports outside your dev PC,
+# remove the "127.0.0.1:" prefix
+ports:
+- 127.0.0.1:7000:7000
+- 127.0.0.1:7001:7001
+- 127.0.0.1:7199:7199
+- 127.0.0.1:9042:9042
+- 127.0.0.1:9160:9160
+{{basename}}-cassandra-node:
+image: cassandra:3.11.12
+environment:
+- CASSANDRA_SEEDS={{basename}}-cassandra
+{{basename}}-cassandra-migration:
+environment:
+- CASSANDRA_CONTACT_POINT={{basename}}-cassandra
+- USER=docker-cassandra-migration
+# - DEBUG_LOG=1 # uncomment to show debug logs during the migration process
+- CREATE_KEYSPACE_SCRIPT=create-keyspace-prod.cql
+build:
+context: .
+dockerfile: cassandra/Cassandra-Migration.Dockerfile
+volumes:
+- ../resources/config/cql:/cql:ro

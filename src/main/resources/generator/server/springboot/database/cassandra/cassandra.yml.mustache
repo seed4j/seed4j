@@ -1,26 +1,26 @@
 # This configuration is intended for development purpose, it's **your** responsibility to harden it for production
 version: '3.8'
 services:
-{{baseName}}-cassandra:
-image: cassandra:3.11.12
-# volumes:
-#   - ~/volumes/jhipster/{{baseName}}/cassandra/:/var/lib/cassandra/data
-# If you want to expose these ports outside your dev PC,
-# remove the "127.0.0.1:" prefix
-ports:
-- 127.0.0.1:7000:7000
-- 127.0.0.1:7001:7001
-- 127.0.0.1:7199:7199
-- 127.0.0.1:9042:9042
-- 127.0.0.1:9160:9160
-{{baseName}}-cassandra-migration:
-environment:
-- CASSANDRA_CONTACT_POINT={{baseName}}-cassandra
-- USER=docker-cassandra-migration
-# - DEBUG_LOG=1 # uncomment to show debug logs during the migration process
-- CREATE_KEYSPACE_SCRIPT=create-keyspace.cql
-build:
-context: .
-dockerfile: cassandra/Cassandra-Migration.Dockerfile
-volumes:
-- ../resources/config/cql:/cql:ro
+  {{baseName}}-cassandra:
+    image: {{dockerImageName}}
+    # volumes:
+    #   - ~/volumes/jhipster/{{baseName}}/cassandra/:/var/lib/cassandra/data
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
+    ports:
+      - 127.0.0.1:7000:7000
+      - 127.0.0.1:7001:7001
+      - 127.0.0.1:7199:7199
+      - 127.0.0.1:9042:9042
+      - 127.0.0.1:9160:9160
+  {{baseName}}-cassandra-migration:
+    environment:
+    - CASSANDRA_CONTACT_POINT={{baseName}}-cassandra
+    - USER=docker-cassandra-migration
+    # - DEBUG_LOG=1 # uncomment to show debug logs during the migration process
+    - CREATE_KEYSPACE_SCRIPT=create-keyspace.cql
+    build:
+      context: .
+      dockerfile: cassandra/Cassandra-Migration.Dockerfile
+    volumes:
+    - ../resources/config/cql:/cql:ro

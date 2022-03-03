@@ -1,27 +1,27 @@
 package tech.jhipster.lite.generator.server.springboot.database.cassandra.domain;
 
+import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
+import static tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommon.*;
+
 import tech.jhipster.lite.error.domain.Assert;
-import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.buildtool.generic.domain.Dependency;
+import tech.jhipster.lite.generator.project.domain.DatabaseType;
 import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 import tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonService;
 
 public class CassandraDomainService implements CassandraService {
 
   private final BuildToolService buildToolService;
-  private final SpringBootCommonService springBootCommonService;
   private final SQLCommonService sqlCommonService;
+  private final ProjectRepository projectRepository;
 
-  public CassandraDomainService(
-    BuildToolService buildToolService,
-    SpringBootCommonService springBootCommonService,
-    SQLCommonService sqlCommonService
-  ) {
+  public CassandraDomainService(BuildToolService buildToolService, SQLCommonService sqlCommonService, ProjectRepository projectRepository) {
     this.buildToolService = buildToolService;
-    this.springBootCommonService = springBootCommonService;
     this.sqlCommonService = sqlCommonService;
+    this.projectRepository = projectRepository;
   }
 
   @Override
@@ -29,6 +29,51 @@ public class CassandraDomainService implements CassandraService {
     Assert.notNull("project", project);
 
     addSpringDataCassandra(project);
+    addDockerCompose(project);
+    addScripts(project);
+    addYmlFiles(project);
+    addDockerFile(project);
+    addCQL(project);
+  }
+
+  private void addCQL(Project project) {
+    project.addDefaultConfig(BASE_NAME);
+    project.addConfig("dockerImageName", Cassandra.getDockerImageName());
+    projectRepository.template(project, getSource(DatabaseType.CASSANDRA.id()), "create-keyspace.cql", "src/main/resources/config/cql");
+  }
+
+  private void addDockerFile(Project project) {
+    projectRepository.add(project, getSource(DatabaseType.CASSANDRA.id()), "Cassandra-Migration.Dockerfile", "src/main/docker/cassandra");
+  }
+
+  private void addYmlFiles(Project project) {
+    project.addDefaultConfig(BASE_NAME);
+    project.addConfig("dockerImageName", Cassandra.getDockerImageName());
+    Cassandra
+      .getYmlFiles()
+      .forEach(fileName ->
+        projectRepository.template(project, getSource(DatabaseType.CASSANDRA.id()), fileName + ".yml", "src/main/docker", fileName + ".yml")
+      );
+  }
+
+  private void addScripts(Project project) {
+    Cassandra
+      .getScripts()
+      .forEach(fileName ->
+        projectRepository.add(
+          project,
+          getSource(DatabaseType.CASSANDRA.id()),
+          fileName + ".sh",
+          "src/main/docker/cassandra/scripts",
+          fileName + ".sh"
+        )
+      );
+  }
+
+  private void addDockerCompose(Project project) {
+    project.addDefaultConfig(BASE_NAME);
+    project.addConfig("dockerImageName", Cassandra.getDockerImageName());
+    sqlCommonService.addDockerComposeTemplate(project, DatabaseType.CASSANDRA.id());
   }
 
   public void addSpringDataCassandra(Project project) {

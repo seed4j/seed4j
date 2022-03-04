@@ -15,7 +15,7 @@ import tech.jhipster.lite.technical.infrastructure.primary.annotation.GeneratorS
 @RestController
 @RequestMapping("/api/servers/spring-boot/databases/cassandra")
 @Tag(name = "Spring Boot - Database")
-public class CassandraResource {
+class CassandraResource {
 
   public final CassandraApplicationService cassandraApplicationService;
 

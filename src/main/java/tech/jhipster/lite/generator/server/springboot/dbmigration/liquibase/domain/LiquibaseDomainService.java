@@ -110,9 +110,10 @@ public class LiquibaseDomainService implements LiquibaseService {
     addLogger(project, "com.zaxxer.hikari", Level.INFO);
   }
 
-  public void addLogger(Project project, String packageName, Level level) {
+  private void addLogger(Project project, String packageName, Level level) {
     springBootCommonService.addLogger(project, packageName, level);
     springBootCommonService.addLoggerTest(project, packageName, level);
+    springBootCommonService.addPropertiesTestLogging(project, packageName, level);
   }
 
   private void templateToLiquibase(Project project, String source, String type, String sourceFilename, String destination) {

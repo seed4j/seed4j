@@ -85,5 +85,10 @@ public class LiquibaseAssertFiles {
         "<logger name=\"com.zaxxer.hikari\" level=\"INFO\" />"
       )
     );
+    assertFileContent(
+      project,
+      getPath(TEST_RESOURCES, "config", APPLICATION_PROPERTIES),
+      List.of("logging.level.liquibase=WARN", "logging.level.LiquibaseSchemaResolver=INFO", "logging.level.com.zaxxer.hikari=INFO")
+    );
   }
 }

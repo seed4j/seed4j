@@ -233,6 +233,18 @@ class PostgresqlApplicationServiceIT {
         "<logger name=\"org.testcontainers\" level=\"WARN\" />"
       )
     );
+    assertFileContent(
+      project,
+      getPath(TEST_RESOURCES, "config", APPLICATION_PROPERTIES),
+      List.of(
+        "logging.level.org.hibernate=WARN",
+        "logging.level.org.hibernate.ejb.HibernatePersistence=OFF",
+        "logging.level.org.hibernate.validator=WARN",
+        "logging.level.org.postgresql=WARN",
+        "logging.level.com.github.dockerjava=WARN",
+        "logging.level.org.testcontainers=WARN"
+      )
+    );
   }
 
   private List<String> springBootStarterDataJpa() {

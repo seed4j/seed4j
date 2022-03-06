@@ -68,10 +68,11 @@ public class JavaArchUnitDomainService implements JavaArchUnitService {
   }
 
   private void addLoggerInConfiguration(Project project) {
-    addLogger(project, "com.tngtech.archunit", Level.WARN);
+    addLoggerTest(project, "com.tngtech.archunit", Level.WARN);
   }
 
-  private void addLogger(Project project, String packageName, Level level) {
+  private void addLoggerTest(Project project, String packageName, Level level) {
     springBootCommonService.addLoggerTest(project, packageName, level);
+    springBootCommonService.addPropertiesTestLogging(project, packageName, level);
   }
 }

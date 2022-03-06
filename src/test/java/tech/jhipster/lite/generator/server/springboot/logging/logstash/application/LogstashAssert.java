@@ -70,14 +70,6 @@ public class LogstashAssert {
   }
 
   public static void assertLoggerInConfiguration(Project project) {
-    String packageName = project.getPackageName().orElse("com.mycompany.myapp");
-    assertFileContent(
-      project,
-      getPath(TEST_RESOURCES, LOGGING_TEST_CONFIGURATION),
-      List.of(
-        "<logger name=\"" + packageName + ".technical.infrastructure.secondary.logstash\" level=\"WARN\" />",
-        "<logger name=\"org.jboss.logging\" level=\"WARN\" />"
-      )
-    );
+    assertFileContent(project, getPath(TEST_RESOURCES, LOGGING_TEST_CONFIGURATION), "<logger name=\"org.jboss.logging\" level=\"WARN\" />");
   }
 }

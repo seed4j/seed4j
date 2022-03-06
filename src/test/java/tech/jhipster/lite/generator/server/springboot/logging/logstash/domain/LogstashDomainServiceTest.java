@@ -51,7 +51,7 @@ class LogstashDomainServiceTest {
 
     verify(springBootCommonService, times(5)).addProperties(any(Project.class), anyString(), any());
 
-    verify(springBootCommonService, times(2)).addLoggerTest(any(Project.class), anyString(), any(Level.class));
+    verify(springBootCommonService).addLoggerTest(any(Project.class), anyString(), any(Level.class));
   }
 
   @Test
@@ -96,6 +96,6 @@ class LogstashDomainServiceTest {
 
     logstashDomainService.addLoggerInConfiguration(project);
 
-    verify(springBootCommonService, times(2)).addLoggerTest(any(Project.class), anyString(), any(Level.class));
+    verify(springBootCommonService).addLoggerTest(any(Project.class), anyString(), any(Level.class));
   }
 }

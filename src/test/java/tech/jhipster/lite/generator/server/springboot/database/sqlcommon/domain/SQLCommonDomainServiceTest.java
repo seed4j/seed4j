@@ -203,5 +203,6 @@ class SQLCommonDomainServiceTest {
     final int loggersToAddNumber = SQLCommon.loggers().size();
     verify(springBootCommonService, times(loggersToAddNumber)).addLogger(eq(project), any(), any());
     verify(springBootCommonService, times(loggersToAddNumber)).addLoggerTest(eq(project), any(), any());
+    verify(springBootCommonService, times(loggersToAddNumber)).addPropertiesTestLogging(eq(project), any(), any());
   }
 }

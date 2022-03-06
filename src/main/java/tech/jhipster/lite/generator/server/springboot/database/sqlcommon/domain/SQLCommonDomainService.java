@@ -125,5 +125,6 @@ public class SQLCommonDomainService implements SQLCommonService {
   private void addLogger(Project project, String packageName, Level level) {
     springBootCommonService.addLogger(project, packageName, level);
     springBootCommonService.addLoggerTest(project, packageName, level);
+    springBootCommonService.addPropertiesTestLogging(project, packageName, level);
   }
 }

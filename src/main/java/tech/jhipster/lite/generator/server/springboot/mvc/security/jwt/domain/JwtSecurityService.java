@@ -5,5 +5,4 @@ import tech.jhipster.lite.generator.project.domain.Project;
 public interface JwtSecurityService {
   void init(Project project);
   void addBasicAuth(Project project);
-  void addLoggerInConfiguration(Project project);
 }

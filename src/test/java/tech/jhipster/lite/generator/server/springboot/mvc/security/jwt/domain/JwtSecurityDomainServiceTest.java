@@ -60,8 +60,6 @@ class JwtSecurityDomainServiceTest {
     verify(springBootCommonService, times(3)).addProperties(any(Project.class), anyString(), any());
     verify(springBootCommonService, times(3)).addPropertiesTest(any(Project.class), anyString(), any());
 
-    verify(springBootCommonService).addLoggerTest(any(Project.class), anyString(), any(Level.class));
-
     // The 4 replaces, managed by commonSecurityService
     verify(commonSecurityService).updateExceptionTranslator(project);
     verify(commonSecurityService).updateIntegrationTestWithMockUser(project);

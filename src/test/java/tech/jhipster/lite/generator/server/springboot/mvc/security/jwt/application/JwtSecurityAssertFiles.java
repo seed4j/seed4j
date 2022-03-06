@@ -4,7 +4,6 @@ import static tech.jhipster.lite.TestUtils.assertFileContent;
 import static tech.jhipster.lite.TestUtils.assertFileExist;
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
 import static tech.jhipster.lite.generator.project.domain.Constants.*;
-import static tech.jhipster.lite.generator.server.springboot.core.domain.SpringBoot.LOGGING_TEST_CONFIGURATION;
 import static tech.jhipster.lite.generator.server.springboot.mvc.security.jwt.domain.JwtSecurityDomainService.SECURITY_JWT_PATH;
 
 import java.util.List;
@@ -133,14 +132,5 @@ public class JwtSecurityAssertFiles {
 
     assertFileContent(project, getPath(MAIN_RESOURCES, "config/application.properties"), properties);
     assertFileContent(project, getPath(TEST_RESOURCES, "config/application.properties"), properties);
-  }
-
-  public static void assertLoggerInConfiguration(Project project) {
-    String packageName = project.getPackageName().orElse("com.mycompany.myapp");
-    assertFileContent(
-      project,
-      getPath(TEST_RESOURCES, LOGGING_TEST_CONFIGURATION),
-      "<logger name=\"" + packageName + ".security.jwt.infrastructure.config\" level=\"WARN\" />"
-    );
   }
 }

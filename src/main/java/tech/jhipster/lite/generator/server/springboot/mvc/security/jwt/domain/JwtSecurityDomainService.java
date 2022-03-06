@@ -13,7 +13,6 @@ import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
-import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 import tech.jhipster.lite.generator.server.springboot.mvc.security.common.domain.CommonSecurityService;
 
@@ -46,7 +45,6 @@ public class JwtSecurityDomainService implements JwtSecurityService {
     addPropertyAndDependency(project);
     addJavaFiles(project);
     addProperties(project);
-    addLoggerInConfiguration(project);
 
     updateExceptionTranslator(project);
     updateIntegrationTestWithMockUser(project);
@@ -162,16 +160,5 @@ public class JwtSecurityDomainService implements JwtSecurityService {
     result.put("application.security.authentication.jwt.token-validity-in-seconds", "86400");
     result.put("application.security.authentication.jwt.token-validity-in-seconds-for-remember-me", "2592000");
     return result;
-  }
-
-  @Override
-  public void addLoggerInConfiguration(Project project) {
-    project.addDefaultConfig(PACKAGE_NAME);
-    String packageName = project.getPackageName().orElse("com.mycompany.myapp");
-    addLogger(project, packageName + ".security.jwt.infrastructure.config", Level.WARN);
-  }
-
-  public void addLogger(Project project, String packageName, Level level) {
-    springBootCommonService.addLoggerTest(project, packageName, level);
   }
 }

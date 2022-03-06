@@ -70,7 +70,6 @@ class JwtSecurityResourceIT {
     assertPomXmlProperties(project);
     assertJwtSecurityFilesExists(project);
     assertJwtSecurityProperties(project);
-    assertLoggerInConfiguration(project);
   }
 
   @Test

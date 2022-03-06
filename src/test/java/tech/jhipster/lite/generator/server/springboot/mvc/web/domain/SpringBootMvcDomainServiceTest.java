@@ -52,6 +52,7 @@ class SpringBootMvcDomainServiceTest {
     verify(springBootCommonService, times(3)).addPropertiesNewLine(any(Project.class));
     verify(springBootCommonService).addLogger(any(Project.class), anyString(), any(Level.class));
     verify(springBootCommonService).addLoggerTest(any(Project.class), anyString(), any(Level.class));
+    verify(springBootCommonService).addPropertiesTestLogging(any(Project.class), anyString(), any(Level.class));
 
     verify(projectRepository, times(15)).template(any(Project.class), anyString(), anyString(), anyString());
   }
@@ -71,6 +72,7 @@ class SpringBootMvcDomainServiceTest {
     verify(springBootCommonService, times(3)).addPropertiesNewLine(any(Project.class));
     verify(springBootCommonService).addLogger(any(Project.class), anyString(), any(Level.class));
     verify(springBootCommonService).addLoggerTest(any(Project.class), anyString(), any(Level.class));
+    verify(springBootCommonService).addPropertiesTestLogging(any(Project.class), anyString(), any(Level.class));
 
     verify(projectRepository, times(15)).template(any(Project.class), anyString(), anyString(), anyString());
   }

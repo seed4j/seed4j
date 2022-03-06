@@ -85,8 +85,13 @@ public class MySQLDomainService implements MySQLService {
   public void addLoggerInConfiguration(Project project) {
     sqlCommonService.addLoggers(project);
 
-    springBootCommonService.addLoggerTest(project, "com.github.dockerjava", Level.WARN);
-    springBootCommonService.addLoggerTest(project, "org.testcontainers", Level.WARN);
+    addLoggerTest(project, "com.github.dockerjava", Level.WARN);
+    addLoggerTest(project, "org.testcontainers", Level.WARN);
+  }
+
+  private void addLoggerTest(Project project, String packageName, Level level) {
+    springBootCommonService.addLoggerTest(project, packageName, level);
+    springBootCommonService.addPropertiesTestLogging(project, packageName, level);
   }
 
   private void addTestcontainers(Project project) {

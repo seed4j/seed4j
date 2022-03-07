@@ -85,12 +85,17 @@ public class MariaDBDomainService implements MariaDBService {
   public void addLoggerInConfiguration(Project project) {
     sqlCommonService.addLoggers(project);
 
-    springBootCommonService.addLoggerTest(project, "com.github.dockerjava", Level.WARN);
-    springBootCommonService.addLoggerTest(project, "org.testcontainers", Level.WARN);
+    addLoggerTest(project, "com.github.dockerjava", Level.WARN);
+    addLoggerTest(project, "org.testcontainers", Level.WARN);
   }
 
   private void addTestcontainers(Project project) {
     String baseName = project.getBaseName().orElse("jhipster");
     this.sqlCommonService.addTestcontainers(project, DatabaseType.MARIADB.id(), springPropertiesForTest(baseName));
+  }
+
+  private void addLoggerTest(Project project, String packageName, Level level) {
+    springBootCommonService.addLoggerTest(project, packageName, level);
+    springBootCommonService.addPropertiesTestLogging(project, packageName, level);
   }
 }

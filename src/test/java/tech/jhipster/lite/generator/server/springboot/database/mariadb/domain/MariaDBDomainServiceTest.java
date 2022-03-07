@@ -53,6 +53,7 @@ class MariaDBDomainServiceTest {
     verify(buildToolService).addDependency(any(Project.class), any(Dependency.class));
 
     verify(springBootCommonService, times(2)).addLoggerTest(any(Project.class), anyString(), any(Level.class));
+    verify(springBootCommonService, times(2)).addPropertiesTestLogging(any(Project.class), anyString(), any(Level.class));
 
     verify(sqlCommonService).addTestcontainers(any(Project.class), anyString(), anyMap());
     verify(sqlCommonService).addSpringDataJpa(project);

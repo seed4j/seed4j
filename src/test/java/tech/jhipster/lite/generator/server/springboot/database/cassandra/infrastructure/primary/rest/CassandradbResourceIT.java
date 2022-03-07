@@ -24,7 +24,7 @@ import tech.jhipster.lite.generator.server.springboot.core.application.SpringBoo
 
 @IntegrationTest
 @AutoConfigureMockMvc
-public class CassandradbResourceIT {
+class CassandradbResourceIT {
 
   public final String DATABASE_PATH = "src/main/docker/";
 

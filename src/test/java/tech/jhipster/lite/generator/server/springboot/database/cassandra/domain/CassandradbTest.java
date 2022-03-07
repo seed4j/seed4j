@@ -7,20 +7,20 @@ import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
 
 @UnitTest
-public class CassandradbTest {
+class CassandradbTest {
 
   @Test
-  public void shouldGetDockerImage() {
+  void shouldGetDockerImage() {
     assertThat(Cassandra.getDockerImageName()).isEqualTo("cassandra:3.11.12");
   }
 
   @Test
-  public void shouldGetYml() {
+  void shouldGetYml() {
     assertThat(Cassandra.getYmlFiles()).isEqualTo(List.of("app", "cassandra-migration"));
   }
 
   @Test
-  public void shouldGetScripts() {
+  void shouldGetScripts() {
     assertThat(Cassandra.getScripts()).isEqualTo(List.of("autoMigrate", "execute-cql"));
   }
 }

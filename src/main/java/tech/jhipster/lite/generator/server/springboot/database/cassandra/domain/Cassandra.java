@@ -1,15 +1,12 @@
 package tech.jhipster.lite.generator.server.springboot.database.cassandra.domain;
 
 import java.util.List;
-import tech.jhipster.lite.generator.buildtool.generic.domain.Dependency;
 
 public class Cassandra {
 
   public static final String DOCKER_IMAGE_NAME = "cassandra:3.11.12";
 
-  public static Dependency cassandraConnectorJava() {
-    return Dependency.builder().groupId("mysql").artifactId("mysql-connector-java").build();
-  }
+  private Cassandra() {}
 
   public static List<String> getScripts() {
     return List.of("autoMigrate", "execute-cql");

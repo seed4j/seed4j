@@ -16,6 +16,7 @@ public class CassandraDomainService implements CassandraService {
   private final BuildToolService buildToolService;
   private final SQLCommonService sqlCommonService;
   private final ProjectRepository projectRepository;
+  private final String dockerImage = Cassandra.getDockerImageName();
 
   public CassandraDomainService(BuildToolService buildToolService, SQLCommonService sqlCommonService, ProjectRepository projectRepository) {
     this.buildToolService = buildToolService;
@@ -36,8 +37,7 @@ public class CassandraDomainService implements CassandraService {
   }
 
   private void addCQL(Project project) {
-    project.addDefaultConfig(BASE_NAME);
-    project.addConfig("dockerImageName", Cassandra.getDockerImageName());
+    addTemplateVariables(project);
     projectRepository.template(project, getSource(DatabaseType.CASSANDRA.id()), "create-keyspace.cql", "src/main/resources/config/cql");
   }
 
@@ -46,8 +46,7 @@ public class CassandraDomainService implements CassandraService {
   }
 
   private void addYmlFiles(Project project) {
-    project.addDefaultConfig(BASE_NAME);
-    project.addConfig("dockerImageName", Cassandra.getDockerImageName());
+    addTemplateVariables(project);
     Cassandra
       .getYmlFiles()
       .forEach(fileName ->
@@ -70,8 +69,7 @@ public class CassandraDomainService implements CassandraService {
   }
 
   private void addDockerCompose(Project project) {
-    project.addDefaultConfig(BASE_NAME);
-    project.addConfig("dockerImageName", Cassandra.getDockerImageName());
+    addTemplateVariables(project);
     sqlCommonService.addDockerComposeTemplate(project, DatabaseType.CASSANDRA.id());
   }
 
@@ -83,5 +81,10 @@ public class CassandraDomainService implements CassandraService {
       .build();
 
     buildToolService.addDependency(project, dependency);
+  }
+
+  public void addTemplateVariables(Project project) {
+    project.addDefaultConfig(BASE_NAME);
+    project.addConfig("dockerImageName", dockerImage);
   }
 }

@@ -27,7 +27,7 @@ import tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.
 
 @UnitTest
 @ExtendWith(MockitoExtension.class)
-public class CassandraDomainServiceTest {
+class CassandraDomainServiceTest {
 
   @Mock
   ProjectRepository projectRepository;

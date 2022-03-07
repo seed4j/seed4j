@@ -15,7 +15,7 @@ import tech.jhipster.lite.generator.server.springboot.core.application.SpringBoo
 
 @IntegrationTest
 @ExtendWith(MockitoExtension.class)
-public class CassandradbApplicationServiceIT {
+class CassandradbApplicationServiceIT {
 
   public final String DATABASE_PATH = "src/main/docker/";
 

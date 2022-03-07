@@ -10,7 +10,7 @@ import tech.jhipster.lite.generator.server.springboot.database.cassandra.domain.
 import tech.jhipster.lite.generator.server.springboot.database.mongodb.domain.MongodbDomainService;
 
 @IntegrationTest
-public class CassandradbBeanConfigurationIT {
+class CassandradbBeanConfigurationIT {
 
   @Autowired
   ApplicationContext applicationContext;

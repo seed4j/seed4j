@@ -52,6 +52,7 @@ class MongodbDomainServiceTest {
     verify(springBootCommonService).addPropertiesNewLine(any(Project.class));
     verify(springBootCommonService, times(2)).addLogger(any(Project.class), anyString(), any(Level.class));
     verify(springBootCommonService, times(4)).addLoggerTest(any(Project.class), anyString(), any(Level.class));
+    verify(springBootCommonService, times(4)).addPropertiesTestLogging(any(Project.class), anyString(), any(Level.class));
     verify(projectRepository, times(2)).replaceText(any(Project.class), anyString(), anyString(), anyString(), anyString());
 
     verify(sqlCommonService).addDockerComposeTemplate(project, "mongodb");

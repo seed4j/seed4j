@@ -144,5 +144,15 @@ public final class MongodbAssert {
         "<logger name=\"org.testcontainers\" level=\"WARN\" />"
       )
     );
+    assertFileContent(
+      project,
+      getPath(TEST_RESOURCES, "config", APPLICATION_PROPERTIES),
+      List.of(
+        "logging.level.org.reflections=WARN",
+        "logging.level.org.mongodb.driver=WARN",
+        "logging.level.com.github.dockerjava=WARN",
+        "logging.level.org.testcontainers=WARN"
+      )
+    );
   }
 }

@@ -124,13 +124,18 @@ public class MongodbDomainService implements MongodbService {
     addLogger(project, "org.reflections", Level.WARN);
     addLogger(project, "org.mongodb.driver", Level.WARN);
 
-    springBootCommonService.addLoggerTest(project, "com.github.dockerjava", Level.WARN);
-    springBootCommonService.addLoggerTest(project, "org.testcontainers", Level.WARN);
+    addLoggerTest(project, "com.github.dockerjava", Level.WARN);
+    addLoggerTest(project, "org.testcontainers", Level.WARN);
   }
 
   public void addLogger(Project project, String packageName, Level level) {
     springBootCommonService.addLogger(project, packageName, level);
+    addLoggerTest(project, packageName, level);
+  }
+
+  private void addLoggerTest(Project project, String packageName, Level level) {
     springBootCommonService.addLoggerTest(project, packageName, level);
+    springBootCommonService.addPropertiesTestLogging(project, packageName, level);
   }
 
   private void updateIntegrationTestAnnotation(Project project) {

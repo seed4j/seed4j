@@ -9,7 +9,7 @@ import static tech.jhipster.lite.TestUtils.tmpProjectWithPackageJson;
 import static tech.jhipster.lite.TestUtils.tmpProjectWithPackageJsonComplete;
 import static tech.jhipster.lite.TestUtils.tmpProjectWithPackageJsonEmpty;
 import static tech.jhipster.lite.TestUtils.tmpProjectWithPackageJsonNothing;
-import static tech.jhipster.lite.generator.project.domain.Constants.PACKAGE_JSON;
+import static tech.jhipster.lite.generator.tools.domain.Constants.PACKAGE_JSON;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmRepository;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class NpmApplicationServiceIT {

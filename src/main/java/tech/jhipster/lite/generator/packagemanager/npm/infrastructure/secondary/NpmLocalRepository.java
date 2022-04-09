@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.Npm;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmRepository;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Repository
 public class NpmLocalRepository implements NpmRepository {

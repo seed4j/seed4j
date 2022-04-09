@@ -3,7 +3,6 @@ package tech.jhipster.lite.generator.server.springboot.mvc.security.jwt.applicat
 import static tech.jhipster.lite.TestUtils.assertFileContent;
 import static tech.jhipster.lite.TestUtils.tmpProject;
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_JAVA;
 import static tech.jhipster.lite.generator.server.springboot.mvc.security.jwt.application.JwtSecurityAssertFiles.assertBasicAuthJavaFiles;
 import static tech.jhipster.lite.generator.server.springboot.mvc.security.jwt.application.JwtSecurityAssertFiles.assertBasicAuthProperties;
 import static tech.jhipster.lite.generator.server.springboot.mvc.security.jwt.application.JwtSecurityAssertFiles.assertExceptionTranslatorWithSecurity;
@@ -11,17 +10,18 @@ import static tech.jhipster.lite.generator.server.springboot.mvc.security.jwt.ap
 import static tech.jhipster.lite.generator.server.springboot.mvc.security.jwt.application.JwtSecurityAssertFiles.assertJwtSecurityProperties;
 import static tech.jhipster.lite.generator.server.springboot.mvc.security.jwt.application.JwtSecurityAssertFiles.assertLoggerInConfiguration;
 import static tech.jhipster.lite.generator.server.springboot.mvc.security.jwt.application.JwtSecurityAssertFiles.assertPomXmlProperties;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_JAVA;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.generator.buildtool.maven.domain.MavenService;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.infrastructure.secondary.GitUtils;
 import tech.jhipster.lite.generator.server.javatool.base.application.JavaBaseApplicationService;
 import tech.jhipster.lite.generator.server.springboot.core.domain.SpringBootService;
 import tech.jhipster.lite.generator.server.springboot.mvc.web.domain.SpringBootMvcService;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.infrastructure.secondary.GitUtils;
 
 @IntegrationTest
 class JwtSecurityApplicationServiceIT {

@@ -1,7 +1,7 @@
 package tech.jhipster.lite.generator.setup.codespaces.domain;
 
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class CodespacesDomainService implements CodespacesService {
 

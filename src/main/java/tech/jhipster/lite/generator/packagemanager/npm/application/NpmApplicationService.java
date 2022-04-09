@@ -3,7 +3,7 @@ package tech.jhipster.lite.generator.packagemanager.npm.application;
 import org.springframework.stereotype.Service;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmRepository;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Service
 public class NpmApplicationService {

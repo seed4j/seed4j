@@ -1,11 +1,11 @@
 package tech.jhipster.lite.generator.docker.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.DEPENDENCIES_FOLDER;
-import static tech.jhipster.lite.generator.project.domain.Constants.DOCKERFILE;
-import static tech.jhipster.lite.generator.project.domain.Constants.DOCKERFILE_IMAGE_FROM_PREFIX;
-import static tech.jhipster.lite.generator.project.domain.Constants.DOCKER_IMAGE_NAME_VERSION_SEPARATOR;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEMPLATE_FOLDER;
+import static tech.jhipster.lite.generator.tools.domain.Constants.DEPENDENCIES_FOLDER;
+import static tech.jhipster.lite.generator.tools.domain.Constants.DOCKERFILE;
+import static tech.jhipster.lite.generator.tools.domain.Constants.DOCKERFILE_IMAGE_FROM_PREFIX;
+import static tech.jhipster.lite.generator.tools.domain.Constants.DOCKER_IMAGE_NAME_VERSION_SEPARATOR;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEMPLATE_FOLDER;
 
 import java.util.Optional;
 import tech.jhipster.lite.common.domain.FileUtils;

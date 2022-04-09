@@ -1,7 +1,7 @@
 package tech.jhipster.lite.generator.typescript.application;
 
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 import tech.jhipster.lite.generator.typescript.domain.TypescriptService;
 
 @Service

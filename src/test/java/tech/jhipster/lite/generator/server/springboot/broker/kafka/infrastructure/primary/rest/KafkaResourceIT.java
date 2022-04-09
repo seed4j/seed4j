@@ -4,9 +4,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static tech.jhipster.lite.TestUtils.assertFileExist;
 import static tech.jhipster.lite.common.domain.FileUtils.tmpDirForTest;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_DOCKER;
 import static tech.jhipster.lite.generator.server.springboot.broker.kafka.domain.Akhq.AKHQ_DOCKER_COMPOSE_FILE;
 import static tech.jhipster.lite.generator.server.springboot.broker.kafka.domain.Kafka.KAFKA_DOCKER_COMPOSE_FILE;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_DOCKER;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ import tech.jhipster.lite.TestUtils;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.maven.application.MavenApplicationService;
 import tech.jhipster.lite.generator.docker.domain.DockerService;
-import tech.jhipster.lite.generator.init.application.InitApplicationService;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.infrastructure.primary.dto.ProjectDTO;
+import tech.jhipster.lite.generator.project.application.ProjectApplicationService;
 import tech.jhipster.lite.generator.server.springboot.broker.kafka.application.KafkaApplicationService;
 import tech.jhipster.lite.generator.server.springboot.core.application.SpringBootApplicationService;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.infrastructure.primary.dto.ProjectDTO;
 
 @IntegrationTest
 @AutoConfigureMockMvc
 class KafkaResourceIT {
 
   @Autowired
-  InitApplicationService initApplicationService;
+  ProjectApplicationService projectApplicationService;
 
   @Autowired
   MavenApplicationService mavenApplicationService;
@@ -53,7 +53,7 @@ class KafkaResourceIT {
       throw new GeneratorException("Error when reading file");
     }
     Project project = ProjectDTO.toProject(projectDTO);
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.init(project);
     springBootApplicationService.init(project);
 
@@ -76,7 +76,7 @@ class KafkaResourceIT {
       throw new GeneratorException("Error when reading file");
     }
     Project project = ProjectDTO.toProject(projectDTO);
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.init(project);
     springBootApplicationService.init(project);
     kafkaApplicationService.init(project);
@@ -104,7 +104,7 @@ class KafkaResourceIT {
   void shouldAkhq() throws Exception {
     ProjectDTO projectDTO = TestUtils.readFileToObject("json/chips.json", ProjectDTO.class).folder(tmpDirForTest());
     Project project = ProjectDTO.toProject(projectDTO);
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.init(project);
     springBootApplicationService.init(project);
     kafkaApplicationService.init(project);

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import tech.jhipster.lite.generator.client.vue.core.domain.VueDomainService;
 import tech.jhipster.lite.generator.client.vue.core.domain.VueService;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 @Configuration
 public class VueBeanConfiguration {

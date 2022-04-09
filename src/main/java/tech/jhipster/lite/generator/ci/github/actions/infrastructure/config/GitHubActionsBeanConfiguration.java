@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.jhipster.lite.generator.ci.github.actions.domain.GitHubActionsDomainService;
 import tech.jhipster.lite.generator.ci.github.actions.domain.GitHubActionsService;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 @Configuration
 public class GitHubActionsBeanConfiguration {

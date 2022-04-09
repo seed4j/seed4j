@@ -2,13 +2,13 @@ package tech.jhipster.lite.generator.client.common.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
 import static tech.jhipster.lite.common.domain.FileUtils.read;
-import static tech.jhipster.lite.generator.project.domain.Constants.TSCONFIG_JSON;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TSCONFIG_JSON;
 
 import java.io.IOException;
 import tech.jhipster.lite.common.domain.JsonUtils;
 import tech.jhipster.lite.error.domain.GeneratorException;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class ClientCommonDomainService implements ClientCommonService {
 

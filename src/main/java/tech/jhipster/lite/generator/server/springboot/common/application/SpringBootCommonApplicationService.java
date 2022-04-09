@@ -1,9 +1,9 @@
 package tech.jhipster.lite.generator.server.springboot.common.application;
 
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Service
 public class SpringBootCommonApplicationService {

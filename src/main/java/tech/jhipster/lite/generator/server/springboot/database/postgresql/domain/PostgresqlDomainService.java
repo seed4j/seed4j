@@ -1,25 +1,25 @@
 package tech.jhipster.lite.generator.server.springboot.database.postgresql.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_JAVA;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_JAVA;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
 import static tech.jhipster.lite.generator.server.springboot.database.postgresql.domain.Postgresql.SOURCE;
 import static tech.jhipster.lite.generator.server.springboot.database.postgresql.domain.Postgresql.psqlDriver;
 import static tech.jhipster.lite.generator.server.springboot.database.postgresql.domain.Postgresql.springProperties;
 import static tech.jhipster.lite.generator.server.springboot.database.postgresql.domain.Postgresql.springPropertiesForTest;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.BASE_NAME;
 
 import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.docker.domain.DockerService;
-import tech.jhipster.lite.generator.project.domain.DatabaseType;
-import tech.jhipster.lite.generator.project.domain.DefaultConfig;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 import tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonService;
+import tech.jhipster.lite.generator.tools.domain.DatabaseType;
+import tech.jhipster.lite.generator.tools.domain.DefaultConfig;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class PostgresqlDomainService implements PostgresqlService {
 

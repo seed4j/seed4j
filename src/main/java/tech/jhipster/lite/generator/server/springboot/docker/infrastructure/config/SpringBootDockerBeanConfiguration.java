@@ -3,9 +3,9 @@ package tech.jhipster.lite.generator.server.springboot.docker.infrastructure.con
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.docker.domain.SpringBootDockerDomainService;
 import tech.jhipster.lite.generator.server.springboot.docker.domain.SpringBootDockerService;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 @Configuration
 public class SpringBootDockerBeanConfiguration {

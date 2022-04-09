@@ -6,7 +6,7 @@ import tech.jhipster.lite.generator.buildtool.generic.domain.Dependency;
 import tech.jhipster.lite.generator.buildtool.generic.domain.Parent;
 import tech.jhipster.lite.generator.buildtool.generic.domain.Plugin;
 import tech.jhipster.lite.generator.buildtool.generic.domain.Repository;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public interface MavenService {
   void addParent(Project project, Parent parent);

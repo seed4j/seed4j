@@ -3,11 +3,11 @@ package tech.jhipster.lite.generator.server.springboot.springcloud.consul.applic
 import static tech.jhipster.lite.TestUtils.assertFileContent;
 import static tech.jhipster.lite.TestUtils.assertFileExist;
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_RESOURCES;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_RESOURCES;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_RESOURCES;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_RESOURCES;
 
 import java.util.List;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public class ConsulAssert {
 

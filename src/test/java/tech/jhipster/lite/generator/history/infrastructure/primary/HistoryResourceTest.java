@@ -17,7 +17,7 @@ import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.generator.history.application.GeneratorHistoryApplicationService;
 import tech.jhipster.lite.generator.history.domain.GeneratorHistoryValue;
 import tech.jhipster.lite.generator.history.infrastructure.primary.dto.HistoryDTO;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @UnitTest
 @ExtendWith(SpringExtension.class)

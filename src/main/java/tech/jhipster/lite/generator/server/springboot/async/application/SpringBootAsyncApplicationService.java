@@ -1,8 +1,8 @@
 package tech.jhipster.lite.generator.server.springboot.async.application;
 
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.async.domain.SpringBootAsyncService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Service
 public class SpringBootAsyncApplicationService {

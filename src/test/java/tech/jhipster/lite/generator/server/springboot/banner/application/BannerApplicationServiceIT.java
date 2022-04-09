@@ -3,13 +3,13 @@ package tech.jhipster.lite.generator.server.springboot.banner.application;
 import static tech.jhipster.lite.TestUtils.assertFileExist;
 import static tech.jhipster.lite.TestUtils.tmpProject;
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_RESOURCES;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_RESOURCES;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class BannerApplicationServiceIT {

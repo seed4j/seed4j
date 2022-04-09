@@ -1,19 +1,19 @@
 package tech.jhipster.lite.generator.server.springboot.database.mariadb.domain;
 
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
 import static tech.jhipster.lite.generator.server.springboot.database.mariadb.domain.MariaDB.mariadbConnectorJava;
 import static tech.jhipster.lite.generator.server.springboot.database.mariadb.domain.MariaDB.springProperties;
 import static tech.jhipster.lite.generator.server.springboot.database.mariadb.domain.MariaDB.springPropertiesForTest;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.BASE_NAME;
 
 import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.docker.domain.DockerService;
-import tech.jhipster.lite.generator.project.domain.DatabaseType;
-import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 import tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonService;
+import tech.jhipster.lite.generator.tools.domain.DatabaseType;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public class MariaDBDomainService implements MariaDBService {
 

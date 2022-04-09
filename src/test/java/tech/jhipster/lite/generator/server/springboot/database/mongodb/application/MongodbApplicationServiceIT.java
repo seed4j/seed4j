@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.generator.buildtool.maven.application.MavenApplicationService;
-import tech.jhipster.lite.generator.init.application.InitApplicationService;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.project.application.ProjectApplicationService;
 import tech.jhipster.lite.generator.server.springboot.core.application.SpringBootApplicationService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class MongodbApplicationServiceIT {
@@ -24,7 +24,7 @@ class MongodbApplicationServiceIT {
   MongodbApplicationService mongodbApplicationService;
 
   @Autowired
-  InitApplicationService initApplicationService;
+  ProjectApplicationService projectApplicationService;
 
   @Autowired
   MavenApplicationService mavenApplicationService;
@@ -36,7 +36,7 @@ class MongodbApplicationServiceIT {
   @DisplayName("Should init project with default values")
   void shouldInit() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 

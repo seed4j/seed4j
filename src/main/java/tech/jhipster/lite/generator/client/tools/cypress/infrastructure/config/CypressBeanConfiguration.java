@@ -6,7 +6,7 @@ import tech.jhipster.lite.generator.client.common.domain.ClientCommonService;
 import tech.jhipster.lite.generator.client.tools.cypress.domain.CypressDomainService;
 import tech.jhipster.lite.generator.client.tools.cypress.domain.CypressService;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 @Configuration
 public class CypressBeanConfiguration {

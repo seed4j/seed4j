@@ -2,7 +2,7 @@ package tech.jhipster.lite.generator.ci.github.actions.application;
 
 import static tech.jhipster.lite.TestUtils.assertFileExist;
 
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public class GitHubActionsAssertFiles {
 

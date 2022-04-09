@@ -2,10 +2,10 @@ package tech.jhipster.lite.generator.server.sonar.application;
 
 import static tech.jhipster.lite.TestUtils.assertFileContent;
 import static tech.jhipster.lite.TestUtils.assertFileExist;
-import static tech.jhipster.lite.generator.project.domain.Constants.POM_XML;
+import static tech.jhipster.lite.generator.tools.domain.Constants.POM_XML;
 
 import java.util.List;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public class SonarAssert {
 

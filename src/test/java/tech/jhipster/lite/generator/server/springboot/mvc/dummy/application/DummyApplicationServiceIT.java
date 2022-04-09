@@ -1,14 +1,14 @@
 package tech.jhipster.lite.generator.server.springboot.mvc.dummy.application;
 
 import static tech.jhipster.lite.TestUtils.tmpProject;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_NAME;
 import static tech.jhipster.lite.generator.server.springboot.mvc.dummy.application.DummyAssert.assertJavaFiles;
 import static tech.jhipster.lite.generator.server.springboot.mvc.dummy.application.DummyAssert.assertTestFiles;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PACKAGE_NAME;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class DummyApplicationServiceIT {

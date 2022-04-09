@@ -1,12 +1,12 @@
 package tech.jhipster.lite.generator.server.springboot.mvc.security.common.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_JAVA;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_JAVA;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_PATH;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PACKAGE_PATH;
 
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class CommonSecurityDomainService implements CommonSecurityService {
 

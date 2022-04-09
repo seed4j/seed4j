@@ -1,8 +1,8 @@
 package tech.jhipster.lite.generator.server.springboot.banner.application;
 
 import org.springframework.stereotype.Component;
-import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.banner.domain.BannerService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Component
 public class BannerApplicationService {

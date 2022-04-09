@@ -2,7 +2,7 @@ package tech.jhipster.lite.generator.client.react.core.application;
 
 import org.springframework.stereotype.Service;
 import tech.jhipster.lite.generator.client.react.core.domain.ReactService;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Service
 public class ReactApplicationService {

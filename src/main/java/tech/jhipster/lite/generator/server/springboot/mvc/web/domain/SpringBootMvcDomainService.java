@@ -1,10 +1,6 @@
 package tech.jhipster.lite.generator.server.springboot.mvc.web.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_JAVA;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_JAVA;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_NAME;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_PATH;
 import static tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommon.TECHNICAL_INFRASTRUCTURE_PRIMARY_EXCEPTION;
 import static tech.jhipster.lite.generator.server.springboot.mvc.web.domain.SpringBootMvc.CORS;
 import static tech.jhipster.lite.generator.server.springboot.mvc.web.domain.SpringBootMvc.TECHNICAL_INFRASTRUCTURE_PRIMARY_CORS;
@@ -16,15 +12,19 @@ import static tech.jhipster.lite.generator.server.springboot.mvc.web.domain.Spri
 import static tech.jhipster.lite.generator.server.springboot.mvc.web.domain.SpringBootMvc.springBootStarterWebDependency;
 import static tech.jhipster.lite.generator.server.springboot.mvc.web.domain.SpringBootMvc.tomcatDependency;
 import static tech.jhipster.lite.generator.server.springboot.mvc.web.domain.SpringBootMvc.undertowDependency;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PACKAGE_NAME;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PACKAGE_PATH;
 
 import java.util.List;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
-import tech.jhipster.lite.generator.project.domain.DefaultConfig;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
+import tech.jhipster.lite.generator.tools.domain.DefaultConfig;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class SpringBootMvcDomainService implements SpringBootMvcService {
 

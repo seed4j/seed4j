@@ -3,7 +3,7 @@ package tech.jhipster.lite.generator.server.springboot.docker.application;
 import static tech.jhipster.lite.TestUtils.assertFileContent;
 import static tech.jhipster.lite.TestUtils.assertFileExist;
 import static tech.jhipster.lite.TestUtils.tmpProject;
-import static tech.jhipster.lite.generator.project.domain.Constants.POM_XML;
+import static tech.jhipster.lite.generator.tools.domain.Constants.POM_XML;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.common.domain.WordUtils;
 import tech.jhipster.lite.generator.buildtool.maven.application.MavenApplicationService;
-import tech.jhipster.lite.generator.init.application.InitApplicationService;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.project.application.ProjectApplicationService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class SpringBootDockerApplicationServiceIT {
@@ -21,7 +21,7 @@ class SpringBootDockerApplicationServiceIT {
   SpringBootDockerApplicationService springBootDockerApplicationService;
 
   @Autowired
-  InitApplicationService initApplicationService;
+  ProjectApplicationService projectApplicationService;
 
   @Autowired
   MavenApplicationService mavenApplicationService;
@@ -29,7 +29,7 @@ class SpringBootDockerApplicationServiceIT {
   @Test
   void shouldAddJib() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
 
     springBootDockerApplicationService.addJib(project);
@@ -51,7 +51,7 @@ class SpringBootDockerApplicationServiceIT {
   @Test
   void shouldAddJibFiles() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
 
     springBootDockerApplicationService.addJibFiles(project);
@@ -68,7 +68,7 @@ class SpringBootDockerApplicationServiceIT {
   @Test
   void shouldAddJibPlugin() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
 
     springBootDockerApplicationService.addJibPlugin(project);
@@ -88,7 +88,7 @@ class SpringBootDockerApplicationServiceIT {
   @Test
   void shouldAddDockerfile() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
 
     springBootDockerApplicationService.addDockerfile(project);
 
@@ -100,7 +100,7 @@ class SpringBootDockerApplicationServiceIT {
   void shouldAddDockerfileWithDifferentPort() {
     Project project = tmpProject();
     project.addConfig("serverPort", 7419);
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
 
     springBootDockerApplicationService.addDockerfile(project);
 

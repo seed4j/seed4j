@@ -2,7 +2,7 @@ package tech.jhipster.lite.generator.setup.codespaces.application;
 
 import static tech.jhipster.lite.TestUtils.assertFileExist;
 
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public class CodespacesAssertFiles {
 

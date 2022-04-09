@@ -3,7 +3,7 @@ package tech.jhipster.lite.generator.server.springboot.springcloud.common.applic
 import static org.assertj.core.api.Assertions.assertThat;
 import static tech.jhipster.lite.TestUtils.tmpProject;
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.BASE_NAME;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.generator.buildtool.maven.application.MavenApplicationService;
-import tech.jhipster.lite.generator.init.application.InitApplicationService;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.project.application.ProjectApplicationService;
 import tech.jhipster.lite.generator.server.springboot.core.application.SpringBootApplicationService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class SpringCloudCommonApplicationServiceIT {
@@ -24,7 +24,7 @@ class SpringCloudCommonApplicationServiceIT {
   SpringCloudCommonApplicationService springCloudCommonApplicationService;
 
   @Autowired
-  InitApplicationService initApplicationService;
+  ProjectApplicationService projectApplicationService;
 
   @Autowired
   MavenApplicationService mavenApplicationService;
@@ -37,7 +37,7 @@ class SpringCloudCommonApplicationServiceIT {
     // Given
     Project project = tmpProject();
     project.addConfig(BASE_NAME, "foo");
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 

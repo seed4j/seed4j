@@ -2,18 +2,18 @@ package tech.jhipster.lite.generator.client.vue.core.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
 import static tech.jhipster.lite.common.domain.WordUtils.LF;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_TYPESCRIPT;
-import static tech.jhipster.lite.generator.project.domain.Constants.PACKAGE_JSON;
-import static tech.jhipster.lite.generator.project.domain.Constants.ROUTER_TYPESCRIPT;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_TYPESCRIPT;
+import static tech.jhipster.lite.generator.tools.domain.Constants.PACKAGE_JSON;
+import static tech.jhipster.lite.generator.tools.domain.Constants.ROUTER_TYPESCRIPT;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.BASE_NAME;
 
 import java.util.List;
 import java.util.Map;
 import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class VueDomainService implements VueService {
 

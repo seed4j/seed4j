@@ -1,8 +1,8 @@
 package tech.jhipster.lite.generator.server.springboot.springcloud.consul.application;
 
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.springcloud.consul.domain.ConsulService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Service
 public class ConsulApplicationService {

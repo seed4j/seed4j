@@ -1,13 +1,13 @@
 package tech.jhipster.lite.generator.buildtool.generic.domain;
 
-import static tech.jhipster.lite.generator.project.domain.BuildToolType.MAVEN;
+import static tech.jhipster.lite.generator.tools.domain.BuildToolType.MAVEN;
 
 import java.util.List;
 import java.util.Optional;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.maven.domain.MavenService;
-import tech.jhipster.lite.generator.project.domain.BuildToolType;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.BuildToolType;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public class BuildToolDomainService implements BuildToolService {
 

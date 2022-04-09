@@ -10,15 +10,15 @@ import static tech.jhipster.lite.TestUtils.tmpProject;
 import static tech.jhipster.lite.TestUtils.tmpProjectBuilder;
 import static tech.jhipster.lite.TestUtils.tmpProjectWithLiquibaseMasterXml;
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_RESOURCES;
-import static tech.jhipster.lite.generator.project.domain.Constants.POM_XML;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_NAME;
 import static tech.jhipster.lite.generator.server.springboot.dbmigration.liquibase.application.LiquibaseAssertFiles.assertFilesLiquibaseChangelogMasterXml;
 import static tech.jhipster.lite.generator.server.springboot.dbmigration.liquibase.application.LiquibaseAssertFiles.assertFilesLiquibaseJava;
 import static tech.jhipster.lite.generator.server.springboot.dbmigration.liquibase.application.LiquibaseAssertFiles.assertFilesLiquibaseSqlUser;
 import static tech.jhipster.lite.generator.server.springboot.dbmigration.liquibase.application.LiquibaseAssertFiles.assertLoggerInConfig;
 import static tech.jhipster.lite.generator.server.springboot.dbmigration.liquibase.application.LiquibaseAssertFiles.initClock;
 import static tech.jhipster.lite.generator.server.springboot.dbmigration.liquibase.domain.Liquibase.NEEDLE_LIQUIBASE;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_RESOURCES;
+import static tech.jhipster.lite.generator.tools.domain.Constants.POM_XML;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PACKAGE_NAME;
 
 import java.time.Clock;
 import java.util.List;
@@ -32,13 +32,13 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
-import tech.jhipster.lite.generator.project.domain.BuildToolType;
-import tech.jhipster.lite.generator.project.domain.DatabaseType;
-import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.core.domain.SpringBootService;
 import tech.jhipster.lite.generator.server.springboot.database.mariadb.domain.MariaDBService;
 import tech.jhipster.lite.generator.server.springboot.database.mysql.domain.MySQLService;
 import tech.jhipster.lite.generator.server.springboot.database.postgresql.domain.PostgresqlService;
+import tech.jhipster.lite.generator.tools.domain.BuildToolType;
+import tech.jhipster.lite.generator.tools.domain.DatabaseType;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class LiquibaseApplicationServiceIT {

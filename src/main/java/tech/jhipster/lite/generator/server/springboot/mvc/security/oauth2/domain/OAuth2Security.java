@@ -1,12 +1,12 @@
 package tech.jhipster.lite.generator.server.springboot.mvc.security.oauth2.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.APPLICATION;
-import static tech.jhipster.lite.generator.project.domain.Constants.DOMAIN;
-import static tech.jhipster.lite.generator.project.domain.Constants.INFRASTRUCTURE;
-import static tech.jhipster.lite.generator.project.domain.Constants.INFRASTRUCTURE_CONFIG;
-import static tech.jhipster.lite.generator.project.domain.Constants.INFRASTRUCTURE_PRIMARY;
-import static tech.jhipster.lite.generator.project.domain.Constants.TECHNICAL_INFRASTRUCTURE_PRIMARY;
+import static tech.jhipster.lite.generator.tools.domain.Constants.APPLICATION;
+import static tech.jhipster.lite.generator.tools.domain.Constants.DOMAIN;
+import static tech.jhipster.lite.generator.tools.domain.Constants.INFRASTRUCTURE;
+import static tech.jhipster.lite.generator.tools.domain.Constants.INFRASTRUCTURE_CONFIG;
+import static tech.jhipster.lite.generator.tools.domain.Constants.INFRASTRUCTURE_PRIMARY;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TECHNICAL_INFRASTRUCTURE_PRIMARY;
 
 import java.util.HashMap;
 import java.util.Map;

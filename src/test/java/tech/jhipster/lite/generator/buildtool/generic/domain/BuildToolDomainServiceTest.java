@@ -16,8 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.maven.domain.MavenService;
-import tech.jhipster.lite.generator.project.domain.BuildToolType;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.BuildToolType;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @UnitTest
 @ExtendWith(MockitoExtension.class)

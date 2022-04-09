@@ -1,7 +1,7 @@
 package tech.jhipster.lite.generator.server.springboot.cache.simple.domain;
 
-import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.cache.common.domain.SpringBootCacheService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public class SpringBootCacheSimpleDomainService implements SpringBootCacheSimpleService {
 

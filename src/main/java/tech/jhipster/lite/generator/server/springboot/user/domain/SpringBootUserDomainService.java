@@ -1,16 +1,16 @@
 package tech.jhipster.lite.generator.server.springboot.user.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.DOMAIN;
-import static tech.jhipster.lite.generator.project.domain.Constants.INFRASTRUCTURE_SECONDARY;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_JAVA;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_JAVA;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_NAME;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_PATH;
+import static tech.jhipster.lite.generator.tools.domain.Constants.DOMAIN;
+import static tech.jhipster.lite.generator.tools.domain.Constants.INFRASTRUCTURE_SECONDARY;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PACKAGE_NAME;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PACKAGE_PATH;
 
-import tech.jhipster.lite.generator.project.domain.DatabaseType;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.DatabaseType;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class SpringBootUserDomainService implements SpringBootUserService {
 

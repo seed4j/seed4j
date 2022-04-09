@@ -3,10 +3,10 @@ package tech.jhipster.lite.generator.server.springboot.mvc.web.infrastructure.co
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 import tech.jhipster.lite.generator.server.springboot.mvc.web.domain.SpringBootMvcDomainService;
 import tech.jhipster.lite.generator.server.springboot.mvc.web.domain.SpringBootMvcService;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 @Configuration
 public class SpringBootMvcBeanConfiguration {

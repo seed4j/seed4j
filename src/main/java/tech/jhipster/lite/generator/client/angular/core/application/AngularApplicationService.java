@@ -2,7 +2,7 @@ package tech.jhipster.lite.generator.client.angular.core.application;
 
 import org.springframework.stereotype.Service;
 import tech.jhipster.lite.generator.client.angular.core.domain.AngularService;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Service
 public class AngularApplicationService {

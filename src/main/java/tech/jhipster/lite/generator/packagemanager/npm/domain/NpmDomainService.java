@@ -6,16 +6,16 @@ import static tech.jhipster.lite.common.domain.WordUtils.DQ;
 import static tech.jhipster.lite.common.domain.WordUtils.LF;
 import static tech.jhipster.lite.common.domain.WordUtils.OB;
 import static tech.jhipster.lite.common.domain.WordUtils.indent;
-import static tech.jhipster.lite.generator.project.domain.Constants.DEPENDENCIES_FOLDER;
-import static tech.jhipster.lite.generator.project.domain.Constants.PACKAGE_JSON;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEMPLATE_FOLDER;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PRETTIER_DEFAULT_INDENT;
+import static tech.jhipster.lite.generator.tools.domain.Constants.DEPENDENCIES_FOLDER;
+import static tech.jhipster.lite.generator.tools.domain.Constants.PACKAGE_JSON;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEMPLATE_FOLDER;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PRETTIER_DEFAULT_INDENT;
 
 import java.util.Optional;
 import tech.jhipster.lite.common.domain.FileUtils;
 import tech.jhipster.lite.error.domain.Assert;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class NpmDomainService implements NpmService {
 

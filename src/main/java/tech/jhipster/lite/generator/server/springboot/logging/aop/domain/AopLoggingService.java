@@ -1,6 +1,6 @@
 package tech.jhipster.lite.generator.server.springboot.logging.aop.domain;
 
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public interface AopLoggingService {
   void init(Project project);

@@ -4,12 +4,6 @@ import static tech.jhipster.lite.TestUtils.assertFileContent;
 import static tech.jhipster.lite.TestUtils.assertFileExist;
 import static tech.jhipster.lite.TestUtils.tmpProject;
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_JAVA;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_RESOURCES;
-import static tech.jhipster.lite.generator.project.domain.Constants.POM_XML;
-import static tech.jhipster.lite.generator.project.domain.Constants.TECHNICAL_INFRASTRUCTURE_PRIMARY;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_JAVA;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_RESOURCES;
 import static tech.jhipster.lite.generator.server.springboot.core.domain.SpringBoot.APPLICATION_PROPERTIES;
 import static tech.jhipster.lite.generator.server.springboot.mvc.web.application.SpringBootMvcAssertFiles.assertCorsFiles;
 import static tech.jhipster.lite.generator.server.springboot.mvc.web.application.SpringBootMvcAssertFiles.assertCorsProperties;
@@ -19,22 +13,28 @@ import static tech.jhipster.lite.generator.server.springboot.mvc.web.application
 import static tech.jhipster.lite.generator.server.springboot.mvc.web.application.SpringBootMvcAssertFiles.springBootStarterWebDependency;
 import static tech.jhipster.lite.generator.server.springboot.mvc.web.application.SpringBootMvcAssertFiles.springBootStarterWebWithoutTomcat;
 import static tech.jhipster.lite.generator.server.springboot.mvc.web.application.SpringBootMvcAssertFiles.zalandoProblemDependency;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_RESOURCES;
+import static tech.jhipster.lite.generator.tools.domain.Constants.POM_XML;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TECHNICAL_INFRASTRUCTURE_PRIMARY;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_RESOURCES;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.generator.buildtool.maven.application.MavenApplicationService;
-import tech.jhipster.lite.generator.init.application.InitApplicationService;
-import tech.jhipster.lite.generator.project.domain.DefaultConfig;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.project.application.ProjectApplicationService;
 import tech.jhipster.lite.generator.server.springboot.core.application.SpringBootApplicationService;
+import tech.jhipster.lite.generator.tools.domain.DefaultConfig;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class SpringBootMvcApplicationServiceIT {
 
   @Autowired
-  InitApplicationService initApplicationService;
+  ProjectApplicationService projectApplicationService;
 
   @Autowired
   MavenApplicationService mavenApplicationService;
@@ -48,7 +48,7 @@ class SpringBootMvcApplicationServiceIT {
   @Test
   void shouldInit() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
@@ -68,7 +68,7 @@ class SpringBootMvcApplicationServiceIT {
   @Test
   void shouldAddSpringBootMvc() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
@@ -89,7 +89,7 @@ class SpringBootMvcApplicationServiceIT {
   void shouldAddSpringBootMvcWithServerPort() {
     Project project = tmpProject();
     project.addConfig("serverPort", 7419);
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
@@ -110,7 +110,7 @@ class SpringBootMvcApplicationServiceIT {
   void shouldAddSpringBootMvcWithInvalidServerPort() {
     Project project = tmpProject();
     project.addConfig("serverPort", "chips");
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
@@ -130,7 +130,7 @@ class SpringBootMvcApplicationServiceIT {
   @Test
   void shouldAddSpringBootUndertow() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
@@ -151,7 +151,7 @@ class SpringBootMvcApplicationServiceIT {
   void shouldAddSpringBootUndertowWithServerPort() {
     Project project = tmpProject();
     project.addConfig("serverPort", 1664);
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
@@ -171,7 +171,7 @@ class SpringBootMvcApplicationServiceIT {
   @Test
   void shouldAddSpringBootActuator() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
@@ -201,7 +201,7 @@ class SpringBootMvcApplicationServiceIT {
   @Test
   void shouldAddExceptionHandler() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 

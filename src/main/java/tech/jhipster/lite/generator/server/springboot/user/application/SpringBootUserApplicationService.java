@@ -1,9 +1,9 @@
 package tech.jhipster.lite.generator.server.springboot.user.application;
 
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.generator.project.domain.DatabaseType;
-import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.user.domain.SpringBootUserService;
+import tech.jhipster.lite.generator.tools.domain.DatabaseType;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Service
 public class SpringBootUserApplicationService {

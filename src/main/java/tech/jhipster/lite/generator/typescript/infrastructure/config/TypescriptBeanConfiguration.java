@@ -3,7 +3,7 @@ package tech.jhipster.lite.generator.typescript.infrastructure.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 import tech.jhipster.lite.generator.typescript.domain.TypescriptDomainService;
 import tech.jhipster.lite.generator.typescript.domain.TypescriptService;
 

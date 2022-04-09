@@ -4,16 +4,16 @@ import static tech.jhipster.lite.TestUtils.assertFileContent;
 import static tech.jhipster.lite.TestUtils.assertFileExist;
 import static tech.jhipster.lite.TestUtils.tmpProject;
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_JAVA;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_RESOURCES;
-import static tech.jhipster.lite.generator.project.domain.Constants.POM_XML;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_JAVA;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_RESOURCES;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_NAME;
 import static tech.jhipster.lite.generator.server.springboot.core.domain.SpringBoot.APPLICATION_PROPERTIES;
 import static tech.jhipster.lite.generator.server.springboot.core.domain.SpringBoot.LOGGING_CONFIGURATION;
 import static tech.jhipster.lite.generator.server.springboot.core.domain.SpringBoot.LOGGING_TEST_CONFIGURATION;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_RESOURCES;
+import static tech.jhipster.lite.generator.tools.domain.Constants.POM_XML;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_RESOURCES;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.BASE_NAME;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PACKAGE_NAME;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -21,9 +21,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.generator.buildtool.maven.application.MavenApplicationService;
-import tech.jhipster.lite.generator.init.application.InitApplicationService;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.project.application.ProjectApplicationService;
 import tech.jhipster.lite.generator.server.springboot.core.application.SpringBootApplicationService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class PostgresqlApplicationServiceIT {
@@ -32,7 +32,7 @@ class PostgresqlApplicationServiceIT {
   PostgresqlApplicationService postgresqlApplicationService;
 
   @Autowired
-  InitApplicationService initApplicationService;
+  ProjectApplicationService projectApplicationService;
 
   @Autowired
   MavenApplicationService mavenApplicationService;
@@ -43,7 +43,7 @@ class PostgresqlApplicationServiceIT {
   @Test
   void shouldInit() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
@@ -85,7 +85,7 @@ class PostgresqlApplicationServiceIT {
   @Test
   void shouldAddSpringDataJpa() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
 
     postgresqlApplicationService.addSpringDataJpa(project);
@@ -97,7 +97,7 @@ class PostgresqlApplicationServiceIT {
   @DisplayName("should add postgresql driver")
   void shouldAddPostgreSQLDriver() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
 
     postgresqlApplicationService.addPostgreSQLDriver(project);
@@ -108,7 +108,7 @@ class PostgresqlApplicationServiceIT {
   @Test
   void shouldAddHikari() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
 
     postgresqlApplicationService.addHikari(project);
@@ -119,7 +119,7 @@ class PostgresqlApplicationServiceIT {
   @Test
   void shouldAddHibernateCore() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
 
     postgresqlApplicationService.addHibernateCore(project);
@@ -173,7 +173,7 @@ class PostgresqlApplicationServiceIT {
     Project project = tmpProject();
     project.addConfig(PACKAGE_NAME, "tech.jhipster.chips");
     project.addConfig(BASE_NAME, "chips");
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
@@ -205,7 +205,7 @@ class PostgresqlApplicationServiceIT {
     Project project = tmpProject();
     project.addConfig(PACKAGE_NAME, "tech.jhipster.chips");
     project.addConfig(BASE_NAME, "chips");
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 

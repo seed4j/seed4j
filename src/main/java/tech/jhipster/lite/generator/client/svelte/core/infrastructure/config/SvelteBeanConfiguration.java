@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import tech.jhipster.lite.generator.client.svelte.core.domain.SvelteDomainService;
 import tech.jhipster.lite.generator.client.svelte.core.domain.SvelteService;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 @Configuration
 public class SvelteBeanConfiguration {

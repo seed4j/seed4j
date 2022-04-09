@@ -2,9 +2,9 @@ package tech.jhipster.lite.generator.server.springboot.mvc.security.common.infra
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.mvc.security.common.domain.CommonSecurityDomainService;
 import tech.jhipster.lite.generator.server.springboot.mvc.security.common.domain.CommonSecurityService;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 @Configuration
 public class CommonSecurityBeanConfiguration {

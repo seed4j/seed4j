@@ -2,8 +2,8 @@ package tech.jhipster.lite.generator.buildtool.generic.domain;
 
 import java.util.List;
 import java.util.Optional;
-import tech.jhipster.lite.generator.project.domain.BuildToolType;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.BuildToolType;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public interface BuildToolService {
   void addParent(Project project, Parent parent);

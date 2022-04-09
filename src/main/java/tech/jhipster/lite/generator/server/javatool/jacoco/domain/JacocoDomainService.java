@@ -1,8 +1,8 @@
 package tech.jhipster.lite.generator.server.javatool.jacoco.domain;
 
 import tech.jhipster.lite.common.domain.FileUtils;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class JacocoDomainService implements JacocoService {
 

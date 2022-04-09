@@ -5,14 +5,14 @@ import static tech.jhipster.lite.generator.client.angular.core.domain.Angular.AP
 import static tech.jhipster.lite.generator.client.angular.core.domain.Angular.APP_COMPONENT_HTML;
 import static tech.jhipster.lite.generator.client.angular.core.domain.Angular.APP_COMPONENT_SPEC;
 import static tech.jhipster.lite.generator.client.angular.core.domain.Angular.APP_MODULE;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_WEBAPP;
-import static tech.jhipster.lite.generator.project.domain.Constants.PACKAGE_JSON;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_WEBAPP;
+import static tech.jhipster.lite.generator.tools.domain.Constants.PACKAGE_JSON;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.BASE_NAME;
 
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class AngularDomainService implements AngularService {
 

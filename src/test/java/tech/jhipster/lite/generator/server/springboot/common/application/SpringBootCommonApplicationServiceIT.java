@@ -9,11 +9,11 @@ import static tech.jhipster.lite.TestUtils.tmpProjectWithSpringBootLoggingConfig
 import static tech.jhipster.lite.TestUtils.tmpProjectWithSpringBootProperties;
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
 import static tech.jhipster.lite.common.domain.WordUtils.LF;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_RESOURCES;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_JAVA;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_RESOURCES;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_NAME;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_RESOURCES;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_RESOURCES;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.BASE_NAME;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PACKAGE_NAME;
 
 import java.io.IOException;
 import org.junit.jupiter.api.Nested;
@@ -22,11 +22,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.maven.application.MavenApplicationService;
-import tech.jhipster.lite.generator.init.application.InitApplicationService;
-import tech.jhipster.lite.generator.project.domain.DefaultConfig;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.project.application.ProjectApplicationService;
 import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.core.application.SpringBootApplicationService;
+import tech.jhipster.lite.generator.tools.domain.DefaultConfig;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class SpringBootCommonApplicationServiceIT {
@@ -35,7 +35,7 @@ class SpringBootCommonApplicationServiceIT {
   SpringBootCommonApplicationService springBootCommonApplicationService;
 
   @Autowired
-  InitApplicationService initApplicationService;
+  ProjectApplicationService projectApplicationService;
 
   @Autowired
   MavenApplicationService mavenApplicationService;
@@ -48,7 +48,7 @@ class SpringBootCommonApplicationServiceIT {
     Project project = tmpProject();
     project.addConfig(BASE_NAME, "foo");
     project.addConfig(PACKAGE_NAME, "tech.jhipster.bar");
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
@@ -489,7 +489,7 @@ class SpringBootCommonApplicationServiceIT {
   @Test
   void shouldUpdateIntegrationTestAnnotation() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 

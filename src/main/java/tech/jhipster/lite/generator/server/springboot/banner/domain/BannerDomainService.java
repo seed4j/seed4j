@@ -1,9 +1,9 @@
 package tech.jhipster.lite.generator.server.springboot.banner.domain;
 
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_RESOURCES;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_RESOURCES;
 
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class BannerDomainService implements BannerService {
 

@@ -1,8 +1,8 @@
 package tech.jhipster.lite.generator.server.springboot.database.mongodb.application;
 
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.database.mongodb.domain.MongodbService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Service
 public class MongodbApplicationService {

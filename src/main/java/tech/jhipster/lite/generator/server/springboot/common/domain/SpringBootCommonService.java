@@ -1,7 +1,7 @@
 package tech.jhipster.lite.generator.server.springboot.common.domain;
 
 import java.util.Optional;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public interface SpringBootCommonService {
   void addTestLogbackRecorder(Project project);

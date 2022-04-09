@@ -14,10 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.generator.buildtool.maven.domain.MavenService;
-import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.javatool.base.application.JavaBaseApplicationService;
 import tech.jhipster.lite.generator.server.springboot.core.domain.SpringBootService;
 import tech.jhipster.lite.generator.server.springboot.mvc.web.domain.SpringBootMvcService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class OAuth2SecurityApplicationServiceIT {

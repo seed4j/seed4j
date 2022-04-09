@@ -2,9 +2,9 @@ package tech.jhipster.lite.generator.server.javatool.base.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.javatool.base.domain.JavaBaseDomainService;
 import tech.jhipster.lite.generator.server.javatool.base.domain.JavaBaseService;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 @Configuration
 public class JavaBaseBeanConfiguration {

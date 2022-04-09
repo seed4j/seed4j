@@ -1,7 +1,7 @@
 package tech.jhipster.lite.generator.packagemanager.npm.domain;
 
 import java.util.Optional;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public interface NpmService {
   void addDependency(Project project, String dependency, String version);

@@ -6,8 +6,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.context.annotation.Configuration;
 import tech.jhipster.lite.generator.history.application.GeneratorHistoryApplicationService;
 import tech.jhipster.lite.generator.history.domain.GeneratorHistoryValue;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.infrastructure.primary.dto.ProjectDTO;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.infrastructure.primary.dto.ProjectDTO;
 import tech.jhipster.lite.technical.infrastructure.primary.annotation.GeneratorStep;
 
 @Aspect

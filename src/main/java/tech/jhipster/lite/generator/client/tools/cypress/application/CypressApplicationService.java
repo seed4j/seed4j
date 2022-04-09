@@ -2,7 +2,7 @@ package tech.jhipster.lite.generator.client.tools.cypress.application;
 
 import org.springframework.stereotype.Service;
 import tech.jhipster.lite.generator.client.tools.cypress.domain.CypressService;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Service
 public class CypressApplicationService {

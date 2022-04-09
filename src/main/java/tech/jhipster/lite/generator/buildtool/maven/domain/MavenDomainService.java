@@ -18,13 +18,13 @@ import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.NEEDLE_R
 import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.PLUGIN_BEGIN;
 import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.PLUGIN_MANAGEMENT_BEGIN;
 import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.PLUGIN_MANAGEMENT_END;
-import static tech.jhipster.lite.generator.project.domain.Constants.DEPENDENCIES_FOLDER;
-import static tech.jhipster.lite.generator.project.domain.Constants.POM_XML;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEMPLATE_FOLDER;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_NAME;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PRETTIER_DEFAULT_INDENT;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PROJECT_NAME;
+import static tech.jhipster.lite.generator.tools.domain.Constants.DEPENDENCIES_FOLDER;
+import static tech.jhipster.lite.generator.tools.domain.Constants.POM_XML;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEMPLATE_FOLDER;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.BASE_NAME;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PACKAGE_NAME;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PRETTIER_DEFAULT_INDENT;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PROJECT_NAME;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,8 +37,8 @@ import tech.jhipster.lite.generator.buildtool.generic.domain.Dependency;
 import tech.jhipster.lite.generator.buildtool.generic.domain.Parent;
 import tech.jhipster.lite.generator.buildtool.generic.domain.Plugin;
 import tech.jhipster.lite.generator.buildtool.generic.domain.Repository;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class MavenDomainService implements MavenService {
 

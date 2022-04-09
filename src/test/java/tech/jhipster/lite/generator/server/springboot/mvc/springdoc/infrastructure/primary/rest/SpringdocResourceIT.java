@@ -2,7 +2,6 @@ package tech.jhipster.lite.generator.server.springboot.mvc.springdoc.infrastruct
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.application.SpringdocAssert.SPRINGDOC_CONFIGURATION_JAVA;
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.application.SpringdocAssert.assertDependencies;
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.application.SpringdocAssert.assertFileContent;
@@ -15,6 +14,7 @@ import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.domai
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.domain.SpringdocConstants.DEFAULT_EXT_DOC_URL;
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.domain.SpringdocConstants.DEFAULT_LICENSE_NAME;
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.domain.SpringdocConstants.DEFAULT_LICENSE_URL;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.BASE_NAME;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +25,17 @@ import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.TestUtils;
 import tech.jhipster.lite.common.domain.FileUtils;
 import tech.jhipster.lite.generator.buildtool.maven.application.MavenApplicationService;
-import tech.jhipster.lite.generator.init.application.InitApplicationService;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.infrastructure.primary.dto.ProjectDTO;
+import tech.jhipster.lite.generator.project.application.ProjectApplicationService;
 import tech.jhipster.lite.generator.server.springboot.core.application.SpringBootApplicationService;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.infrastructure.primary.dto.ProjectDTO;
 
 @IntegrationTest
 @AutoConfigureMockMvc
 class SpringdocResourceIT {
 
   @Autowired
-  InitApplicationService initApplicationService;
+  ProjectApplicationService projectApplicationService;
 
   @Autowired
   MavenApplicationService mavenApplicationService;
@@ -53,7 +53,7 @@ class SpringdocResourceIT {
 
     Project project = ProjectDTO.toProject(projectDTO);
 
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.init(project);
     springBootApplicationService.init(project);
 
@@ -84,7 +84,7 @@ class SpringdocResourceIT {
     projectDTO.folder(FileUtils.tmpDirForTest());
     Project project = ProjectDTO.toProject(projectDTO);
 
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.init(project);
     springBootApplicationService.init(project);
 

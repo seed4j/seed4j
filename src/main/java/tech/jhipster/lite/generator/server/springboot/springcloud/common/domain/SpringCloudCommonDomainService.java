@@ -1,12 +1,12 @@
 package tech.jhipster.lite.generator.server.springboot.springcloud.common.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
-import static tech.jhipster.lite.generator.project.domain.Constants.COMMENT_PROPERTIES_PREFIX;
-import static tech.jhipster.lite.generator.project.domain.Constants.KEY_VALUE_PROPERTIES_SEPARATOR;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
 import static tech.jhipster.lite.generator.server.springboot.springcloud.common.domain.SpringCloudCommon.JHIPSTER_REGISTRY_DOCKER_IMAGE_NAME;
 import static tech.jhipster.lite.generator.server.springboot.springcloud.common.domain.SpringCloudCommon.springCloudDependencyManagement;
 import static tech.jhipster.lite.generator.server.springboot.springcloud.common.domain.SpringCloudCommon.springCloudStarterBootstrap;
+import static tech.jhipster.lite.generator.tools.domain.Constants.COMMENT_PROPERTIES_PREFIX;
+import static tech.jhipster.lite.generator.tools.domain.Constants.KEY_VALUE_PROPERTIES_SEPARATOR;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.BASE_NAME;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,8 +15,8 @@ import tech.jhipster.lite.common.domain.FileUtils;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.docker.domain.DockerService;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class SpringCloudCommonDomainService implements SpringCloudCommonService {
 

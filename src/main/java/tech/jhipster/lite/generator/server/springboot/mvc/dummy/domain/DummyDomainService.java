@@ -1,10 +1,10 @@
 package tech.jhipster.lite.generator.server.springboot.mvc.dummy.domain;
 
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_NAME;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.PACKAGE_NAME;
 
 import tech.jhipster.lite.common.domain.FileUtils;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 public class DummyDomainService implements DummyService {
 

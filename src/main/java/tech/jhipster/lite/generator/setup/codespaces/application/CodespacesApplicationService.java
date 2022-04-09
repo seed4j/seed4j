@@ -1,8 +1,8 @@
 package tech.jhipster.lite.generator.setup.codespaces.application;
 
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.setup.codespaces.domain.CodespacesService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @Service
 public class CodespacesApplicationService {

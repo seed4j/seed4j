@@ -2,9 +2,9 @@ package tech.jhipster.lite.generator.server.springboot.mvc.dummy.infrastructure.
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.mvc.dummy.domain.DummyDomainService;
 import tech.jhipster.lite.generator.server.springboot.mvc.dummy.domain.DummyService;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 @Configuration
 public class DummyBeanConfiguration {

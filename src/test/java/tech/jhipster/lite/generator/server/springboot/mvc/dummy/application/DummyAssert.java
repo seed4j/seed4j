@@ -1,11 +1,11 @@
 package tech.jhipster.lite.generator.server.springboot.mvc.dummy.application;
 
 import static tech.jhipster.lite.TestUtils.assertFileContent;
-import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_JAVA;
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.Constants.MAIN_JAVA;
+import static tech.jhipster.lite.generator.tools.domain.Constants.TEST_JAVA;
 
 import tech.jhipster.lite.common.domain.FileUtils;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 public class DummyAssert {
 

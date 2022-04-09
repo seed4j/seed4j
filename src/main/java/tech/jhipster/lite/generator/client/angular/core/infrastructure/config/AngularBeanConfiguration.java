@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import tech.jhipster.lite.generator.client.angular.core.domain.AngularDomainService;
 import tech.jhipster.lite.generator.client.angular.core.domain.AngularService;
 import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
-import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.tools.domain.ProjectRepository;
 
 @Configuration
 public class AngularBeanConfiguration {

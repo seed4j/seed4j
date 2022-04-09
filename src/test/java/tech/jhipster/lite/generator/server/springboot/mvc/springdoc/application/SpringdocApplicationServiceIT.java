@@ -1,7 +1,6 @@
 package tech.jhipster.lite.generator.server.springboot.mvc.springdoc.application;
 
 import static tech.jhipster.lite.TestUtils.tmpProject;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.application.SpringdocAssert.SPRINGDOC_CONFIGURATION_JAVA;
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.application.SpringdocAssert.assertDependencies;
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.application.SpringdocAssert.assertFileContent;
@@ -14,6 +13,7 @@ import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.domai
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.domain.SpringdocConstants.API_LICENSE_NAME_CONFIG_KEY;
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.domain.SpringdocConstants.API_LICENSE_URL_CONFIG_KEY;
 import static tech.jhipster.lite.generator.server.springboot.mvc.springdoc.domain.SpringdocConstants.API_TITLE_CONFIG_KEY;
+import static tech.jhipster.lite.generator.tools.domain.DefaultConfig.BASE_NAME;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,9 +22,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.generator.buildtool.maven.application.MavenApplicationService;
-import tech.jhipster.lite.generator.init.application.InitApplicationService;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.project.application.ProjectApplicationService;
 import tech.jhipster.lite.generator.server.springboot.core.application.SpringBootApplicationService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class SpringdocApplicationServiceIT {
@@ -40,7 +40,7 @@ class SpringdocApplicationServiceIT {
   SpringdocApplicationService springdocApplicationService;
 
   @Autowired
-  InitApplicationService initApplicationService;
+  ProjectApplicationService projectApplicationService;
 
   @Autowired
   MavenApplicationService mavenApplicationService;
@@ -63,7 +63,7 @@ class SpringdocApplicationServiceIT {
     projectConfig.put(API_EXT_DOC_URL_CONFIG_KEY, CUSTOM_EXT_DOC_URL);
     project.getConfig().putAll(projectConfig);
 
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 
@@ -91,7 +91,7 @@ class SpringdocApplicationServiceIT {
     Project project = tmpProject();
     project.addConfig(BASE_NAME, "foo");
 
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
     springBootApplicationService.init(project);
 

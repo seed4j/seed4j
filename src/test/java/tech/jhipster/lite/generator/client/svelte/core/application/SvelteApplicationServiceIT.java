@@ -13,7 +13,7 @@ import static tech.jhipster.lite.generator.client.svelte.core.application.Svelte
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class SvelteApplicationServiceIT {

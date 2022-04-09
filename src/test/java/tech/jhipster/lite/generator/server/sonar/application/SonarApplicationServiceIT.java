@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.generator.buildtool.maven.application.MavenApplicationService;
-import tech.jhipster.lite.generator.init.application.InitApplicationService;
-import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.project.application.ProjectApplicationService;
+import tech.jhipster.lite.generator.tools.domain.Project;
 
 @IntegrationTest
 class SonarApplicationServiceIT {
@@ -16,7 +16,7 @@ class SonarApplicationServiceIT {
   SonarApplicationService sonarApplicationService;
 
   @Autowired
-  InitApplicationService initApplicationService;
+  ProjectApplicationService projectApplicationService;
 
   @Autowired
   MavenApplicationService mavenApplicationService;
@@ -24,7 +24,7 @@ class SonarApplicationServiceIT {
   @Test
   void shouldAddSonarJavaBackend() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
 
     sonarApplicationService.addSonarJavaBackend(project);
@@ -36,7 +36,7 @@ class SonarApplicationServiceIT {
   @Test
   void shouldAddSonarJavaBackendAndFrontend() {
     Project project = tmpProject();
-    initApplicationService.init(project);
+    projectApplicationService.init(project);
     mavenApplicationService.addPomXml(project);
 
     sonarApplicationService.addSonarJavaBackendAndFrontend(project);

@@ -6,7 +6,7 @@
   "dependencies": {
     "pinia": "2.0.13",
     "pinia-plugin-persist": "1.0.0",
-    "vue": "3.2.31",
+    "vue": "3.2.32",
     "vue-router": "4.0.14"
   },
   "devDependencies": {

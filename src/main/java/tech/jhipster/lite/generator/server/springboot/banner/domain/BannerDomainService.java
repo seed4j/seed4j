@@ -5,15 +5,8 @@ import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_RESOURC
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class BannerDomainService implements BannerService {
-
+public record BannerDomainService(ProjectRepository projectRepository) implements BannerService {
   public static final String SOURCE = "server/springboot/banner";
-
-  private final ProjectRepository projectRepository;
-
-  public BannerDomainService(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void addBannerJHipsterV7(Project project) {

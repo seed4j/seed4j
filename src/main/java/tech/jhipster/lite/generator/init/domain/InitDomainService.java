@@ -15,18 +15,9 @@ import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class InitDomainService implements InitService {
-
+public record InitDomainService(NpmService npmService, ProjectRepository projectRepository) implements InitService {
   public static final String SOURCE = "init";
   public static final String HUSKY_FOLDER = ".husky";
-
-  private final NpmService npmService;
-  private final ProjectRepository projectRepository;
-
-  public InitDomainService(NpmService npmService, ProjectRepository projectRepository) {
-    this.npmService = npmService;
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void init(Project project) {

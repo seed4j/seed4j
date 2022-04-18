@@ -11,15 +11,10 @@ import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAM
 import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_NAME;
 import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PROJECT_NAME;
 
-public class GradleDomainService implements GradleService {
+public record GradleDomainService(
+  ProjectRepository projectRepository) implements GradleService {
 
   public static final String SOURCE = "buildtool/gradle";
-
-  private final ProjectRepository projectRepository;
-
-  public GradleDomainService(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void initJava(Project project) {

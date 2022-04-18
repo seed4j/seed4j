@@ -10,14 +10,7 @@ import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class ClientCommonDomainService implements ClientCommonService {
-
-  private final ProjectRepository projectRepository;
-
-  public ClientCommonDomainService(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
-  }
-
+public record ClientCommonDomainService(ProjectRepository projectRepository) implements ClientCommonService {
   @Override
   public void excludeInTsconfigJson(Project project, String value) {
     String tsConfigFilePath = getPath(project.getFolder(), TSCONFIG_JSON);

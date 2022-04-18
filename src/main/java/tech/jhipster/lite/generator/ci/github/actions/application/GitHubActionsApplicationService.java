@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.ci.github.actions.domain.GitHubActionsServic
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @Service
-public class GitHubActionsApplicationService {
-
-  private final GitHubActionsService gitHubActionsService;
-
-  public GitHubActionsApplicationService(GitHubActionsService gitHubActionsService) {
-    this.gitHubActionsService = gitHubActionsService;
-  }
-
+public record GitHubActionsApplicationService(GitHubActionsService gitHubActionsService) {
   public void addGitHubActions(Project project) {
     gitHubActionsService.addGitHubActions(project);
   }

@@ -9,19 +9,9 @@ import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class CypressDomainService implements CypressService {
-
+public record CypressDomainService(ProjectRepository projectRepository, NpmService npmService, ClientCommonService clientCommonService)
+  implements CypressService {
   public static final String SOURCE = "client/common/cypress";
-
-  private final ProjectRepository projectRepository;
-  private final NpmService npmService;
-  private final ClientCommonService clientCommonService;
-
-  public CypressDomainService(ProjectRepository projectRepository, NpmService npmService, ClientCommonService clientCommonService) {
-    this.projectRepository = projectRepository;
-    this.npmService = npmService;
-    this.clientCommonService = clientCommonService;
-  }
 
   @Override
   public void init(Project project) {

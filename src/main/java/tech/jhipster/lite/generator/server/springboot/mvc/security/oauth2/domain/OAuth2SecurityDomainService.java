@@ -31,30 +31,16 @@ import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 import tech.jhipster.lite.generator.server.springboot.mvc.security.common.domain.CommonSecurityService;
 
-public class OAuth2SecurityDomainService implements OAuth2SecurityService {
-
+public record OAuth2SecurityDomainService(
+  ProjectRepository projectRepository,
+  BuildToolService buildToolService,
+  SpringBootCommonService springBootCommonService,
+  CommonSecurityService commonSecurityService,
+  DockerService dockerService
+)
+  implements OAuth2SecurityService {
   public static final String SOURCE = "server/springboot/mvc/security/oauth2";
   public static final String SECURITY_OAUTH2_PATH = "security/oauth2";
-
-  private final ProjectRepository projectRepository;
-  private final BuildToolService buildToolService;
-  private final SpringBootCommonService springBootCommonService;
-  private final CommonSecurityService commonSecurityService;
-  private final DockerService dockerService;
-
-  public OAuth2SecurityDomainService(
-    ProjectRepository projectRepository,
-    BuildToolService buildToolService,
-    SpringBootCommonService springBootCommonService,
-    CommonSecurityService commonSecurityService,
-    DockerService dockerService
-  ) {
-    this.projectRepository = projectRepository;
-    this.buildToolService = buildToolService;
-    this.springBootCommonService = springBootCommonService;
-    this.commonSecurityService = commonSecurityService;
-    this.dockerService = dockerService;
-  }
 
   @Override
   public void addOAuth2(Project project) {
@@ -160,8 +146,8 @@ public class OAuth2SecurityDomainService implements OAuth2SecurityService {
     String oldImport = "import org.zalando.problem.violations.ConstraintViolationProblem;";
     String newImport = String.format(
       """
-      import org.zalando.problem.violations.ConstraintViolationProblem;
-      import %s.error.domain.AccountException;""",
+        import org.zalando.problem.violations.ConstraintViolationProblem;
+        import %s.error.domain.AccountException;""",
       packageName
     );
     projectRepository.replaceText(project, exceptionTranslatorPath, exceptionTranslatorFile, oldImport, newImport);
@@ -169,13 +155,13 @@ public class OAuth2SecurityDomainService implements OAuth2SecurityService {
     String oldNeedle = "// jhipster-needle-exception-translator";
     String newNeedle =
       """
-      @ExceptionHandler
-        public ResponseEntity<Problem> handleAccountException(AccountException ex, NativeWebRequest request) {
-          Problem problem = Problem.builder().withStatus(Status.UNAUTHORIZED).withTitle(ex.getMessage()).build();
-          return create(ex, problem, request);
-        }
+        @ExceptionHandler
+          public ResponseEntity<Problem> handleAccountException(AccountException ex, NativeWebRequest request) {
+            Problem problem = Problem.builder().withStatus(Status.UNAUTHORIZED).withTitle(ex.getMessage()).build();
+            return create(ex, problem, request);
+          }
 
-        // jhipster-needle-exception-translator""";
+          // jhipster-needle-exception-translator""";
     projectRepository.replaceText(project, exceptionTranslatorPath, exceptionTranslatorFile, oldNeedle, newNeedle);
   }
 
@@ -188,8 +174,8 @@ public class OAuth2SecurityDomainService implements OAuth2SecurityService {
     String oldImport = "import org.springframework.http.converter.HttpMessageConversionException;";
     String newImport = String.format(
       """
-      import org.springframework.http.converter.HttpMessageConversionException;
-      import %s.error.domain.AccountException;""",
+        import org.springframework.http.converter.HttpMessageConversionException;
+        import %s.error.domain.AccountException;""",
       packageName
     );
     projectRepository.replaceText(project, exceptionTranslatorPath, fileToReplace, oldImport, newImport);
@@ -197,12 +183,12 @@ public class OAuth2SecurityDomainService implements OAuth2SecurityService {
     String oldNeedle = "// jhipster-needle-exception-translator-test-controller";
     String newNeedle =
       """
-      @GetMapping("/account-exception")
-        public void accountException() {
-          throw new AccountException("beer");
-        }
+        @GetMapping("/account-exception")
+          public void accountException() {
+            throw new AccountException("beer");
+          }
 
-        // jhipster-needle-exception-translator-test-controller""";
+          // jhipster-needle-exception-translator-test-controller""";
     projectRepository.replaceText(project, exceptionTranslatorPath, fileToReplace, oldNeedle, newNeedle);
   }
 

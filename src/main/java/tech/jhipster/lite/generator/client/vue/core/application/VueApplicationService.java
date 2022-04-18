@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.client.vue.core.domain.VueService;
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @Service
-public class VueApplicationService {
-
-  private final VueService vueService;
-
-  public VueApplicationService(VueService vueService) {
-    this.vueService = vueService;
-  }
-
+public record VueApplicationService(VueService vueService) {
   public void addVue(Project project) {
     vueService.addVue(project);
   }

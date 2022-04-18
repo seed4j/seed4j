@@ -21,31 +21,19 @@ import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
-public class LiquibaseDomainService implements LiquibaseService {
-
+public record LiquibaseDomainService(
+  ProjectRepository projectRepository,
+  BuildToolService buildToolService,
+  SpringBootCommonService springBootCommonService,
+  Clock clock
+)
+  implements LiquibaseService {
   public static final String SOURCE = "server/springboot/dbmigration/liquibase";
   public static final String LIQUIBASE_PATH = "technical/infrastructure/secondary/liquibase";
   public static final String CONFIG_LIQUIBASE = "config/liquibase";
   public static final String CHANGELOG = CONFIG_LIQUIBASE + "/changelog";
   public static final String DATA = CONFIG_LIQUIBASE + "/data";
   private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-
-  private final ProjectRepository projectRepository;
-  private final BuildToolService buildToolService;
-  private final SpringBootCommonService springBootCommonService;
-  private final Clock clock;
-
-  public LiquibaseDomainService(
-    ProjectRepository projectRepository,
-    BuildToolService buildToolService,
-    SpringBootCommonService springBootCommonService,
-    Clock clock
-  ) {
-    this.projectRepository = projectRepository;
-    this.buildToolService = buildToolService;
-    this.springBootCommonService = springBootCommonService;
-    this.clock = clock;
-  }
 
   @Override
   public void init(Project project) {

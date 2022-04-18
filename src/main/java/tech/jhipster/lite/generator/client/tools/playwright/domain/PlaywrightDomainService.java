@@ -8,17 +8,8 @@ import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class PlaywrightDomainService implements PlaywrightService {
-
+public record PlaywrightDomainService(ProjectRepository projectRepository, NpmService npmService) implements PlaywrightService {
   public static final String SOURCE = "client/common/playwright";
-
-  private final ProjectRepository projectRepository;
-  private final NpmService npmService;
-
-  public PlaywrightDomainService(ProjectRepository projectRepository, NpmService npmService) {
-    this.projectRepository = projectRepository;
-    this.npmService = npmService;
-  }
 
   @Override
   public void init(Project project) {

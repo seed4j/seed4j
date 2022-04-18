@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.database.mongodb.domain.MongodbService;
 
 @Service
-public class MongodbApplicationService {
-
-  private final MongodbService mongodbService;
-
-  public MongodbApplicationService(MongodbService mongodbService) {
-    this.mongodbService = mongodbService;
-  }
-
+public record MongodbApplicationService(MongodbService mongodbService) {
   public void init(Project project) {
     mongodbService.init(project);
   }

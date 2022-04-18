@@ -10,19 +10,9 @@ import tech.jhipster.lite.generator.docker.domain.DockerService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class SonarDomainService implements SonarService {
-
+public record SonarDomainService(ProjectRepository projectRepository, BuildToolService buildToolService, DockerService dockerService)
+  implements SonarService {
   public static final String SOURCE = "server/sonar";
-
-  private final ProjectRepository projectRepository;
-  private final BuildToolService buildToolService;
-  private final DockerService dockerService;
-
-  public SonarDomainService(ProjectRepository projectRepository, BuildToolService buildToolService, DockerService dockerService) {
-    this.projectRepository = projectRepository;
-    this.buildToolService = buildToolService;
-    this.dockerService = dockerService;
-  }
 
   @Override
   public void addSonarJavaBackend(Project project) {
@@ -48,19 +38,19 @@ public class SonarDomainService implements SonarService {
       .version("\\${properties-maven-plugin.version}")
       .additionalElements(
         """
-        <executions>
-          <execution>
-            <phase>initialize</phase>
-            <goals>
-              <goal>read-project-properties</goal>
-            </goals>
-            <configuration>
-              <files>
-                <file>sonar-project.properties</file>
-              </files>
-            </configuration>
-          </execution>
-        </executions>"""
+          <executions>
+            <execution>
+              <phase>initialize</phase>
+              <goals>
+                <goal>read-project-properties</goal>
+              </goals>
+              <configuration>
+                <files>
+                  <file>sonar-project.properties</file>
+                </files>
+              </configuration>
+            </execution>
+          </executions>"""
       )
       .build();
     buildToolService

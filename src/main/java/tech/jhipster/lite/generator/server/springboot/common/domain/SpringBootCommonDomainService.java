@@ -27,16 +27,9 @@ import tech.jhipster.lite.generator.project.domain.DatabaseType;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class SpringBootCommonDomainService implements SpringBootCommonService {
-
+public record SpringBootCommonDomainService(ProjectRepository projectRepository) implements SpringBootCommonService {
   public static final String SOURCE = "server/springboot/common";
   private static final String PROJECT_FIELD_ASSERT_NAME = "project";
-
-  private final ProjectRepository projectRepository;
-
-  public SpringBootCommonDomainService(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void addTestLogbackRecorder(Project project) {

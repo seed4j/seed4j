@@ -10,19 +10,10 @@ import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class SvelteDomainService implements SvelteService {
-
+public record SvelteDomainService(ProjectRepository projectRepository, NpmService npmService) implements SvelteService {
   public static final String SOURCE = "client/svelte";
   public static final String DESTINATION_PRIMARY = "src/main/webapp/app/common/primary/app";
   public static final String SOURCE_PRIMARY = getPath(SOURCE, DESTINATION_PRIMARY);
-
-  private final ProjectRepository projectRepository;
-  private final NpmService npmService;
-
-  public SvelteDomainService(ProjectRepository projectRepository, NpmService npmService) {
-    this.projectRepository = projectRepository;
-    this.npmService = npmService;
-  }
 
   @Override
   public void addSvelte(Project project) {
@@ -146,11 +137,11 @@ public class SvelteDomainService implements SvelteService {
     String oldText = "\"cacheDirectories\": \\[";
     String newText =
       """
-      "jestSonar": \\{
-          "reportPath": "target/test-results/jest",
-          "reportFile": "TESTS-results-sonar.xml"
-        \\},
-        "cacheDirectories": \\[""";
+        "jestSonar": \\{
+            "reportPath": "target/test-results/jest",
+            "reportFile": "TESTS-results-sonar.xml"
+          \\},
+          "cacheDirectories": \\[""";
     projectRepository.replaceText(project, "", PACKAGE_JSON, oldText, newText);
   }
 

@@ -6,16 +6,7 @@ import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @Service
-public class NpmApplicationService {
-
-  private final NpmService npmService;
-  private final NpmRepository npmRepository;
-
-  public NpmApplicationService(NpmService npmService, NpmRepository npmRepository) {
-    this.npmService = npmService;
-    this.npmRepository = npmRepository;
-  }
-
+public record NpmApplicationService(NpmService npmService, NpmRepository npmRepository) {
   public void addDependency(Project project, String dependency, String version) {
     this.npmService.addDependency(project, dependency, version);
   }

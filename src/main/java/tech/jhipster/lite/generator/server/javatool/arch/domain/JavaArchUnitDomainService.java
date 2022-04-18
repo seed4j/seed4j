@@ -16,23 +16,13 @@ import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
-public class JavaArchUnitDomainService implements JavaArchUnitService {
-
+public record JavaArchUnitDomainService(
+  ProjectRepository projectRepository,
+  BuildToolService buildToolService,
+  SpringBootCommonService springBootCommonService
+)
+  implements JavaArchUnitService {
   public static final String SOURCE = "server/javatool/arch";
-
-  private final ProjectRepository projectRepository;
-  private final BuildToolService buildToolService;
-  private final SpringBootCommonService springBootCommonService;
-
-  public JavaArchUnitDomainService(
-    ProjectRepository projectRepository,
-    BuildToolService buildToolService,
-    SpringBootCommonService springBootCommonService
-  ) {
-    this.projectRepository = projectRepository;
-    this.buildToolService = buildToolService;
-    this.springBootCommonService = springBootCommonService;
-  }
 
   @Override
   public void init(Project project) {

@@ -8,18 +8,9 @@ import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class ReactDomainService implements ReactService {
-
+public record ReactDomainService(ProjectRepository projectRepository, NpmService npmService) implements ReactService {
   public static final String SOURCE = "client/react";
   public static final String SOURCE_APP = "src/main/webapp/app/common/primary/app";
-
-  private final ProjectRepository projectRepository;
-  private final NpmService npmService;
-
-  public ReactDomainService(ProjectRepository projectRepository, NpmService npmService) {
-    this.projectRepository = projectRepository;
-    this.npmService = npmService;
-  }
 
   @Override
   public void addReact(Project project) {
@@ -102,11 +93,11 @@ public class ReactDomainService implements ReactService {
     String oldText = "\"cacheDirectories\": \\[";
     String newText =
       """
-      "jestSonar": \\{
-          "reportPath": "target/test-results/jest",
-          "reportFile": "TESTS-results-sonar.xml"
-        \\},
-        "cacheDirectories": \\[""";
+        "jestSonar": \\{
+            "reportPath": "target/test-results/jest",
+            "reportFile": "TESTS-results-sonar.xml"
+          \\},
+          "cacheDirectories": \\[""";
     projectRepository.replaceText(project, "", "package.json", oldText, newText);
   }
 }

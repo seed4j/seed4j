@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.dbmigration.liquibase.domain.LiquibaseService;
 
 @Service
-public class LiquibaseApplicationService {
-
-  private final LiquibaseService liquibaseService;
-
-  public LiquibaseApplicationService(LiquibaseService liquibaseService) {
-    this.liquibaseService = liquibaseService;
-  }
-
+public record LiquibaseApplicationService(LiquibaseService liquibaseService) {
   public void init(Project project) {
     liquibaseService.init(project);
   }

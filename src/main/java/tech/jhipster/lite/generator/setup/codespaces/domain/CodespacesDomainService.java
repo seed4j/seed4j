@@ -3,16 +3,9 @@ package tech.jhipster.lite.generator.setup.codespaces.domain;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class CodespacesDomainService implements CodespacesService {
-
+public record CodespacesDomainService(ProjectRepository projectRepository) implements CodespacesService {
   public static final String SOURCE = "setup/codespaces";
   public static final String DEVCONTAINER_DEST = ".devcontainer";
-
-  private final ProjectRepository projectRepository;
-
-  public CodespacesDomainService(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void init(Project project) {

@@ -18,24 +18,14 @@ import tech.jhipster.lite.generator.docker.domain.DockerService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class SpringCloudCommonDomainService implements SpringCloudCommonService {
-
+public record SpringCloudCommonDomainService(
+  ProjectRepository projectRepository,
+  BuildToolService buildToolService,
+  DockerService dockerService
+)
+  implements SpringCloudCommonService {
   public static final String SPRING_CLOUD_SOURCE = "server/springboot/springcloud/configclient";
   public static final String JHIPSTER_REGISTRY_YML_FILE_NAME = "jhipster-registry.yml";
-
-  private final ProjectRepository projectRepository;
-  private final BuildToolService buildToolService;
-  private final DockerService dockerService;
-
-  public SpringCloudCommonDomainService(
-    ProjectRepository projectRepository,
-    BuildToolService buildToolService,
-    DockerService dockerService
-  ) {
-    this.projectRepository = projectRepository;
-    this.buildToolService = buildToolService;
-    this.dockerService = dockerService;
-  }
 
   @Override
   public void addSpringCloudCommonDependencies(Project project) {

@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.logging.logstash.domain.LogstashService;
 
 @Service
-public class LogstashApplicationService {
-
-  private final LogstashService logstashService;
-
-  public LogstashApplicationService(LogstashService logstashService) {
-    this.logstashService = logstashService;
-  }
-
+public record LogstashApplicationService(LogstashService logstashService) {
   public void init(Project project) {
     logstashService.init(project);
   }

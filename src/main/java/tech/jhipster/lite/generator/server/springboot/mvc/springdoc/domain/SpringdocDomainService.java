@@ -29,24 +29,14 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
-public class SpringdocDomainService implements SpringdocService {
-
+public record SpringdocDomainService(
+  BuildToolService buildToolService,
+  ProjectRepository projectRepository,
+  SpringBootCommonService springBootCommonService
+)
+  implements SpringdocService {
   private static final String SOURCE = "server/springboot/mvc/springdoc";
   private static final String DESTINATION = "technical/infrastructure/primary/springdoc";
-
-  private final BuildToolService buildToolService;
-  private final ProjectRepository projectRepository;
-  private final SpringBootCommonService springBootCommonService;
-
-  public SpringdocDomainService(
-    BuildToolService buildToolService,
-    ProjectRepository projectRepository,
-    SpringBootCommonService springBootCommonService
-  ) {
-    this.buildToolService = buildToolService;
-    this.projectRepository = projectRepository;
-    this.springBootCommonService = springBootCommonService;
-  }
 
   @Override
   public void init(Project project) {

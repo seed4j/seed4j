@@ -9,16 +9,9 @@ import tech.jhipster.lite.generator.project.domain.DefaultConfig;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class JavaBaseDomainService implements JavaBaseService {
-
+public record JavaBaseDomainService(ProjectRepository projectRepository) implements JavaBaseService {
   public static final String SOURCE = "server/javatool/base";
   public static final String ERROR_DOMAIN_PATH = "error/domain";
-
-  private final ProjectRepository projectRepository;
-
-  public JavaBaseDomainService(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void addJavaBase(Project project) {

@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.banner.domain.BannerService;
 
 @Component
-public class BannerApplicationService {
-
-  private final BannerService bannerService;
-
-  public BannerApplicationService(BannerService bannerService) {
-    this.bannerService = bannerService;
-  }
-
+public record BannerApplicationService(BannerService bannerService) {
   public void addBannerJHipsterV7(Project project) {
     bannerService.addBannerJHipsterV7(project);
   }

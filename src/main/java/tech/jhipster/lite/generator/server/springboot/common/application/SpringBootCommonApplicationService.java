@@ -6,14 +6,7 @@ import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
 @Service
-public class SpringBootCommonApplicationService {
-
-  private final SpringBootCommonService springBootCommonService;
-
-  public SpringBootCommonApplicationService(SpringBootCommonService springBootCommonService) {
-    this.springBootCommonService = springBootCommonService;
-  }
-
+public record SpringBootCommonApplicationService(SpringBootCommonService springBootCommonService) {
   public void addTestLogbackRecorder(Project project) {
     springBootCommonService.addTestLogbackRecorder(project);
   }

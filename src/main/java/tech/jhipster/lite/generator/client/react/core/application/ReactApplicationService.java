@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.client.react.core.domain.ReactService;
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @Service
-public class ReactApplicationService {
-
-  private final ReactService reactService;
-
-  public ReactApplicationService(ReactService reactService) {
-    this.reactService = reactService;
-  }
-
+public record ReactApplicationService(ReactService reactService) {
   public void addReact(Project project) {
     reactService.addReact(project);
   }

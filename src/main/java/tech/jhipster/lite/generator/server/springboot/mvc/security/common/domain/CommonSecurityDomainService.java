@@ -8,14 +8,7 @@ import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class CommonSecurityDomainService implements CommonSecurityService {
-
-  private final ProjectRepository projectRepository;
-
-  public CommonSecurityDomainService(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
-  }
-
+public record CommonSecurityDomainService(ProjectRepository projectRepository) implements CommonSecurityService {
   @Override
   public void updateExceptionTranslator(Project project) {
     String packageNamePath = project.getPackageNamePath().orElse(getPath(PACKAGE_PATH));
@@ -25,8 +18,8 @@ public class CommonSecurityDomainService implements CommonSecurityService {
     String oldImport = "import org.zalando.problem.spring.web.advice.ProblemHandling;";
     String newImport =
       """
-      import org.zalando.problem.spring.web.advice.ProblemHandling;
-      import org.zalando.problem.spring.web.advice.security.SecurityAdviceTrait;""";
+        import org.zalando.problem.spring.web.advice.ProblemHandling;
+        import org.zalando.problem.spring.web.advice.security.SecurityAdviceTrait;""";
     projectRepository.replaceText(project, exceptionTranslatorPath, exceptionTranslatorFile, oldImport, newImport);
 
     String oldImplements = "public class ExceptionTranslator implements ProblemHandling \\{";
@@ -42,8 +35,8 @@ public class CommonSecurityDomainService implements CommonSecurityService {
     String oldImport = "import org.springframework.boot.test.context.SpringBootTest;";
     String newImport =
       """
-      import org.springframework.boot.test.context.SpringBootTest;
-      import org.springframework.security.test.context.support.WithMockUser;""";
+        import org.springframework.boot.test.context.SpringBootTest;
+        import org.springframework.security.test.context.support.WithMockUser;""";
     projectRepository.replaceText(project, integrationTestPath, "IntegrationTest.java", oldImport, newImport);
 
     String oldAnnotation = "public @interface";

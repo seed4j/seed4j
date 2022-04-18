@@ -15,8 +15,7 @@ import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class VueDomainService implements VueService {
-
+public record VueDomainService(ProjectRepository projectRepository, NpmService npmService) implements VueService {
   public static final String SOURCE = "client/vue";
   public static final String NEEDLE_IMPORT = "// jhipster-needle-main-ts-import";
   public static final String NEEDLE_PROVIDER = "// jhipster-needle-main-ts-provider";
@@ -29,14 +28,6 @@ public class VueDomainService implements VueService {
   public static final String DESTINATION_PRIMARY_ROUTER = DESTINATION_PRIMARY + "/app";
   public static final String DESTINATION_APP = "src/main/webapp/app";
   public static final String DESTINATION_ROUTER = DESTINATION_APP + "/router";
-
-  private final ProjectRepository projectRepository;
-  private final NpmService npmService;
-
-  public VueDomainService(ProjectRepository projectRepository, NpmService npmService) {
-    this.projectRepository = projectRepository;
-    this.npmService = npmService;
-  }
 
   @Override
   public void addVue(Project project) {
@@ -203,11 +194,11 @@ public class VueDomainService implements VueService {
     String oldText = "\"cacheDirectories\": \\[";
     String newText =
       """
-      "jestSonar": \\{
-          "reportPath": "target/test-results/jest",
-          "reportFile": "TESTS-results-sonar.xml"
-        \\},
-        "cacheDirectories": \\[""";
+        "jestSonar": \\{
+            "reportPath": "target/test-results/jest",
+            "reportFile": "TESTS-results-sonar.xml"
+          \\},
+          "cacheDirectories": \\[""";
     projectRepository.replaceText(project, "", PACKAGE_JSON, oldText, newText);
   }
 }

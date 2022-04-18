@@ -16,30 +16,18 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
-public class FlywayDomainService implements FlywayService {
-
+public record FlywayDomainService(
+  BuildToolService buildToolService,
+  ProjectRepository projectRepository,
+  SpringBootCommonService springBootCommonService,
+  Clock clock
+)
+  implements FlywayService {
   private static final String SQL_INIT_FILE_SOURCE = "server/springboot/dbmigration/flyway";
   private static final String SQL_INIT_FILE_NAME = "V%s__init.sql";
   private static final String SQL_USER_AUTHORITY_FILE_NAME = "V%s__create_user_authority_tables.sql";
 
   private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-
-  private final BuildToolService buildToolService;
-  private final ProjectRepository projectRepository;
-  private final SpringBootCommonService springBootCommonService;
-  private final Clock clock;
-
-  public FlywayDomainService(
-    BuildToolService buildToolService,
-    ProjectRepository projectRepository,
-    SpringBootCommonService springBootCommonService,
-    Clock clock
-  ) {
-    this.buildToolService = buildToolService;
-    this.projectRepository = projectRepository;
-    this.springBootCommonService = springBootCommonService;
-    this.clock = clock;
-  }
 
   @Override
   public void init(Project project) {

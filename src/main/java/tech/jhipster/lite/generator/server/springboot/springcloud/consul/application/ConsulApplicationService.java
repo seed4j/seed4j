@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.springcloud.consul.domain.ConsulService;
 
 @Service
-public class ConsulApplicationService {
-
-  private final ConsulService consulService;
-
-  public ConsulApplicationService(ConsulService consulService) {
-    this.consulService = consulService;
-  }
-
+public record ConsulApplicationService(ConsulService consulService) {
   public void init(Project project) {
     consulService.init(project);
   }

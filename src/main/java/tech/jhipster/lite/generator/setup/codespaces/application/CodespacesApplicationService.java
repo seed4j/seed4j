@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.setup.codespaces.domain.CodespacesService;
 
 @Service
-public class CodespacesApplicationService {
-
-  private final CodespacesService codespacesService;
-
-  public CodespacesApplicationService(CodespacesService codespacesService) {
-    this.codespacesService = codespacesService;
-  }
-
+public record CodespacesApplicationService(CodespacesService codespacesService) {
   public void init(Project project) {
     codespacesService.init(project);
   }

@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.mvc.security.oauth2.domain.OAuth2SecurityService;
 
 @Service
-public class OAuth2SecurityApplicationService {
-
-  private final OAuth2SecurityService oauth2SecurityService;
-
-  public OAuth2SecurityApplicationService(OAuth2SecurityService oauth2SecurityService) {
-    this.oauth2SecurityService = oauth2SecurityService;
-  }
-
+public record OAuth2SecurityApplicationService(OAuth2SecurityService oauth2SecurityService) {
   public void addOAuth2(Project project) {
     oauth2SecurityService.addOAuth2(project);
   }

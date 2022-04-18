@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.init.domain.InitService;
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @Service
-public class InitApplicationService {
-
-  private final InitService initService;
-
-  public InitApplicationService(InitService initService) {
-    this.initService = initService;
-  }
-
+public record InitApplicationService(InitService initService) {
   public void init(Project project) {
     initService.init(project);
   }

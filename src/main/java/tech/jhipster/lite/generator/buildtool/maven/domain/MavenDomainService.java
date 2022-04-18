@@ -40,15 +40,8 @@ import tech.jhipster.lite.generator.buildtool.generic.domain.Repository;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class MavenDomainService implements MavenService {
-
+public record MavenDomainService(ProjectRepository projectRepository) implements MavenService {
   public static final String SOURCE = "buildtool/maven";
-
-  private final ProjectRepository projectRepository;
-
-  public MavenDomainService(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void addParent(Project project, Parent parent) {

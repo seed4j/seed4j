@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.cache.ehcache.domain.EhcacheService;
 
 @Service
-public class EhcacheApplicationService {
-
-  private final EhcacheService ehcacheService;
-
-  public EhcacheApplicationService(EhcacheService ehcacheService) {
-    this.ehcacheService = ehcacheService;
-  }
-
+public record EhcacheApplicationService(EhcacheService ehcacheService) {
   public void initXmlConfiguration(Project project) {
     ehcacheService.initXmlConfiguration(project);
   }

@@ -9,18 +9,10 @@ import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class SpringBootCacheDomainService implements SpringBootCacheService {
-
+public record SpringBootCacheDomainService(BuildToolService buildToolService, ProjectRepository projectRepository)
+  implements SpringBootCacheService {
   public static final String SOURCE = "server/springboot/cache/common";
   public static final String DESTINATION = "technical/infrastructure/secondary/cache";
-
-  private final BuildToolService buildToolService;
-  private final ProjectRepository projectRepository;
-
-  public SpringBootCacheDomainService(BuildToolService buildToolService, ProjectRepository projectRepository) {
-    this.buildToolService = buildToolService;
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void addDependencies(Project project) {

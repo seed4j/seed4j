@@ -12,17 +12,9 @@ import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.springcloud.common.domain.SpringCloudCommonService;
 
-public class SpringCloudConfigClientDomainService implements SpringCloudConfigClientService {
-
+public record SpringCloudConfigClientDomainService(BuildToolService buildToolService, SpringCloudCommonService springCloudCommonService)
+  implements SpringCloudConfigClientService {
   private static final String SOURCE = "server/springboot/springcloud/configclient";
-
-  private final BuildToolService buildToolService;
-  private final SpringCloudCommonService springCloudCommonService;
-
-  public SpringCloudConfigClientDomainService(BuildToolService buildToolService, SpringCloudCommonService springCloudCommonService) {
-    this.buildToolService = buildToolService;
-    this.springCloudCommonService = springCloudCommonService;
-  }
 
   @Override
   public void init(Project project) {

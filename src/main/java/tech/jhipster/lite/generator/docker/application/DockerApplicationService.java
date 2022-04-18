@@ -5,14 +5,7 @@ import org.springframework.stereotype.Service;
 import tech.jhipster.lite.generator.docker.domain.DockerService;
 
 @Service
-public class DockerApplicationService {
-
-  private final DockerService dockerService;
-
-  public DockerApplicationService(DockerService dockerService) {
-    this.dockerService = dockerService;
-  }
-
+public record DockerApplicationService(DockerService dockerService) {
   public Optional<String> getImageNameWithVersion(String imageName) {
     return dockerService.getImageNameWithVersion(imageName);
   }

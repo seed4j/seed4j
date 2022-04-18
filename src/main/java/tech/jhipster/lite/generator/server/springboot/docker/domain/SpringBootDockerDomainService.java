@@ -11,18 +11,10 @@ import tech.jhipster.lite.generator.project.domain.DefaultConfig;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class SpringBootDockerDomainService implements SpringBootDockerService {
-
+public record SpringBootDockerDomainService(ProjectRepository projectRepository, BuildToolService buildToolService)
+  implements SpringBootDockerService {
   public static final String DOCKER_SOURCE = "server/springboot/docker";
   public static final String JIB_SOURCE = DOCKER_SOURCE + "/jib";
-
-  private final ProjectRepository projectRepository;
-  private final BuildToolService buildToolService;
-
-  public SpringBootDockerDomainService(ProjectRepository projectRepository, BuildToolService buildToolService) {
-    this.projectRepository = projectRepository;
-    this.buildToolService = buildToolService;
-  }
 
   @Override
   public void addJib(Project project) {

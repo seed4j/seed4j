@@ -15,25 +15,13 @@ import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 import tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonService;
 
-public class MySQLDomainService implements MySQLService {
-
-  private final BuildToolService buildToolService;
-  private final SpringBootCommonService springBootCommonService;
-  private final SQLCommonService sqlCommonService;
-  private final DockerService dockerService;
-
-  public MySQLDomainService(
-    BuildToolService buildToolService,
-    SpringBootCommonService springBootCommonService,
-    SQLCommonService sqlCommonService,
-    DockerService dockerService
-  ) {
-    this.buildToolService = buildToolService;
-    this.springBootCommonService = springBootCommonService;
-    this.sqlCommonService = sqlCommonService;
-    this.dockerService = dockerService;
-  }
-
+public record MySQLDomainService(
+  BuildToolService buildToolService,
+  SpringBootCommonService springBootCommonService,
+  SQLCommonService sqlCommonService,
+  DockerService dockerService
+)
+  implements MySQLService {
   @Override
   public void init(Project project) {
     Assert.notNull("project", project);

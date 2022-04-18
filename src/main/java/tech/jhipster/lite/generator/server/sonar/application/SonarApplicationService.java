@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.sonar.domain.SonarService;
 
 @Component
-public class SonarApplicationService {
-
-  private final SonarService sonarService;
-
-  public SonarApplicationService(SonarService sonarService) {
-    this.sonarService = sonarService;
-  }
-
+public record SonarApplicationService(SonarService sonarService) {
   public void addSonarJavaBackend(Project project) {
     this.sonarService.addSonarJavaBackend(project);
   }

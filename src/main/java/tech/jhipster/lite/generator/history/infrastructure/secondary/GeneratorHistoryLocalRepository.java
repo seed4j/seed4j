@@ -13,17 +13,10 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
 @Repository
-public class GeneratorHistoryLocalRepository implements GeneratorHistoryRepository {
-
+public record GeneratorHistoryLocalRepository(ProjectRepository projectRepository) implements GeneratorHistoryRepository {
   private static final String HISTORY_FILE_NAME = "history.json";
   private static final String HISTORY_FILE_FOLDER_SOURCE = "history";
   private static final String HISTORY_FOLDER_PATH_DEST = ".jhipster";
-
-  private final ProjectRepository projectRepository;
-
-  public GeneratorHistoryLocalRepository(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public GeneratorHistoryData getHistoryData(Project project) {

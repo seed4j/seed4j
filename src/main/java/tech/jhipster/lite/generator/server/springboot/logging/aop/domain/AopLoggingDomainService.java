@@ -12,25 +12,15 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
-public class AopLoggingDomainService implements AopLoggingService {
-
+public record AopLoggingDomainService(
+  ProjectRepository projectRepository,
+  BuildToolService buildToolService,
+  SpringBootCommonService springBootCommonService
+)
+  implements AopLoggingService {
   public static final String SOURCE = "server/springboot/logging/aop";
   private static final String LOGGING_PROPERTY_FIELD = "application.aop.logging";
   private static final String COMMENT_AOP_LOGGING = "AOP Logging Configuration";
-
-  private final ProjectRepository projectRepository;
-  private final BuildToolService buildToolService;
-  private final SpringBootCommonService springBootCommonService;
-
-  public AopLoggingDomainService(
-    ProjectRepository projectRepository,
-    BuildToolService buildToolService,
-    SpringBootCommonService springBootCommonService
-  ) {
-    this.projectRepository = projectRepository;
-    this.buildToolService = buildToolService;
-    this.springBootCommonService = springBootCommonService;
-  }
 
   @Override
   public void init(Project project) {

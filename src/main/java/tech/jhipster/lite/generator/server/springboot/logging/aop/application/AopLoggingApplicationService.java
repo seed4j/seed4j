@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.logging.aop.domain.AopLoggingService;
 
 @Service
-public class AopLoggingApplicationService {
-
-  private final AopLoggingService aopLoggingService;
-
-  public AopLoggingApplicationService(AopLoggingService aopLoggingService) {
-    this.aopLoggingService = aopLoggingService;
-  }
-
+public record AopLoggingApplicationService(AopLoggingService aopLoggingService) {
   public void init(Project project) {
     aopLoggingService.init(project);
   }

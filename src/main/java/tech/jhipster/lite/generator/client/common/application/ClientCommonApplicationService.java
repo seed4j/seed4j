@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.client.common.domain.ClientCommonService;
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @Service
-public class ClientCommonApplicationService {
-
-  private final ClientCommonService clientCommonService;
-
-  public ClientCommonApplicationService(ClientCommonService clientCommonService) {
-    this.clientCommonService = clientCommonService;
-  }
-
+public record ClientCommonApplicationService(ClientCommonService clientCommonService) {
   public void excludeInTsconfigJson(Project project, String value) {
     clientCommonService.excludeInTsconfigJson(project, value);
   }

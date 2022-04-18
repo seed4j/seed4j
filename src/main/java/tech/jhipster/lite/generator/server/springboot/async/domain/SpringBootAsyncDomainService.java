@@ -11,19 +11,11 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
-public class SpringBootAsyncDomainService implements SpringBootAsyncService {
-
+public record SpringBootAsyncDomainService(ProjectRepository projectRepository, SpringBootCommonService springBootCommonService)
+  implements SpringBootAsyncService {
   public static final String SOURCE = "server/springboot/async";
 
   public static final String ASYNC_PATH = "technical/infrastructure/secondary/async";
-
-  private final ProjectRepository projectRepository;
-  private final SpringBootCommonService springBootCommonService;
-
-  public SpringBootAsyncDomainService(ProjectRepository projectRepository, SpringBootCommonService springBootCommonService) {
-    this.projectRepository = projectRepository;
-    this.springBootCommonService = springBootCommonService;
-  }
 
   @Override
   public void init(Project project) {

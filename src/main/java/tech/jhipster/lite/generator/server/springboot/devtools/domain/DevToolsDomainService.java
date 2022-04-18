@@ -7,17 +7,9 @@ import tech.jhipster.lite.generator.buildtool.generic.domain.Dependency;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
-public class DevToolsDomainService implements DevToolsService {
-
+public record DevToolsDomainService(BuildToolService buildToolService, SpringBootCommonService springBootCommonService)
+  implements DevToolsService {
   public static final String SOURCE = "server/springboot/devtools";
-
-  private final BuildToolService buildToolService;
-  private final SpringBootCommonService springBootCommonService;
-
-  public DevToolsDomainService(BuildToolService buildToolService, SpringBootCommonService springBootCommonService) {
-    this.buildToolService = buildToolService;
-    this.springBootCommonService = springBootCommonService;
-  }
 
   @Override
   public void init(Project project) {

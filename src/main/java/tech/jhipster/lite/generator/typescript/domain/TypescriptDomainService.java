@@ -5,17 +5,8 @@ import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class TypescriptDomainService implements TypescriptService {
-
+public record TypescriptDomainService(ProjectRepository projectRepository, NpmService npmService) implements TypescriptService {
   public static final String SOURCE = "typescript";
-
-  private final ProjectRepository projectRepository;
-  private final NpmService npmService;
-
-  public TypescriptDomainService(ProjectRepository projectRepository, NpmService npmService) {
-    this.projectRepository = projectRepository;
-    this.npmService = npmService;
-  }
 
   @Override
   public void init(Project project) {

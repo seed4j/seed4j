@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.docker.domain.SpringBootDockerService;
 
 @Service
-public class SpringBootDockerApplicationService {
-
-  private final SpringBootDockerService springBootDockerService;
-
-  public SpringBootDockerApplicationService(SpringBootDockerService springBootDockerService) {
-    this.springBootDockerService = springBootDockerService;
-  }
-
+public record SpringBootDockerApplicationService(SpringBootDockerService springBootDockerService) {
   public void addJib(Project project) {
     this.springBootDockerService.addJib(project);
   }

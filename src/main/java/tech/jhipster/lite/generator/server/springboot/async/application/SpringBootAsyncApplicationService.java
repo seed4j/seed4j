@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.async.domain.SpringBootAsyncService;
 
 @Service
-public class SpringBootAsyncApplicationService {
-
-  private final SpringBootAsyncService springBootAsyncService;
-
-  public SpringBootAsyncApplicationService(SpringBootAsyncService springBootAsyncService) {
-    this.springBootAsyncService = springBootAsyncService;
-  }
-
+public record SpringBootAsyncApplicationService(SpringBootAsyncService springBootAsyncService) {
   public void init(Project project) {
     springBootAsyncService.init(project);
   }

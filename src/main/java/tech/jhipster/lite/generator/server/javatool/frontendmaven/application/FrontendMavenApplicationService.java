@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.javatool.frontendmaven.domain.FrontendMavenService;
 
 @Service
-public class FrontendMavenApplicationService {
-
-  private final FrontendMavenService frontendMavenService;
-
-  public FrontendMavenApplicationService(FrontendMavenService frontendMavenService) {
-    this.frontendMavenService = frontendMavenService;
-  }
-
+public record FrontendMavenApplicationService(FrontendMavenService frontendMavenService) {
   public void addFrontendMavenPlugin(Project project) {
     frontendMavenService.addFrontendMavenPlugin(project);
   }

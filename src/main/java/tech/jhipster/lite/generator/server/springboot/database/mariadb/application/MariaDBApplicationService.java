@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.database.mariadb.domain.MariaDBService;
 
 @Service
-public class MariaDBApplicationService {
-
-  private final MariaDBService mariaDBService;
-
-  public MariaDBApplicationService(MariaDBService mariaDBService) {
-    this.mariaDBService = mariaDBService;
-  }
-
+public record MariaDBApplicationService(MariaDBService mariaDBService) {
   public void init(Project project) {
     mariaDBService.init(project);
   }

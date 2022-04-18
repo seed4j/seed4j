@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.javatool.base.domain.JavaBaseService;
 
 @Service
-public class JavaBaseApplicationService {
-
-  private final JavaBaseService javaBaseService;
-
-  public JavaBaseApplicationService(JavaBaseService javaBaseService) {
-    this.javaBaseService = javaBaseService;
-  }
-
+public record JavaBaseApplicationService(JavaBaseService javaBaseService) {
   public void addJavaBase(Project project) {
     javaBaseService.addJavaBase(project);
   }

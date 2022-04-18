@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.client.tools.playwright.domain.PlaywrightSer
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @Service
-public class PlaywrightApplicationService {
-
-  private final PlaywrightService playwrightService;
-
-  public PlaywrightApplicationService(PlaywrightService playwrightService) {
-    this.playwrightService = playwrightService;
-  }
-
+public record PlaywrightApplicationService(PlaywrightService playwrightService) {
   public void init(Project project) {
     playwrightService.init(project);
   }

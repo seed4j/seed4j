@@ -24,27 +24,15 @@ import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 import tech.jhipster.lite.generator.server.springboot.mvc.security.common.domain.CommonSecurityService;
 
-public class JwtSecurityDomainService implements JwtSecurityService {
-
+public record JwtSecurityDomainService(
+  ProjectRepository projectRepository,
+  BuildToolService buildToolService,
+  SpringBootCommonService springBootCommonService,
+  CommonSecurityService commonSecurityService
+)
+  implements JwtSecurityService {
   public static final String SOURCE = "server/springboot/mvc/security/jwt";
   public static final String SECURITY_JWT_PATH = "security/jwt";
-
-  private final ProjectRepository projectRepository;
-  private final BuildToolService buildToolService;
-  private final SpringBootCommonService springBootCommonService;
-  private final CommonSecurityService commonSecurityService;
-
-  public JwtSecurityDomainService(
-    ProjectRepository projectRepository,
-    BuildToolService buildToolService,
-    SpringBootCommonService springBootCommonService,
-    CommonSecurityService commonSecurityService
-  ) {
-    this.projectRepository = projectRepository;
-    this.buildToolService = buildToolService;
-    this.springBootCommonService = springBootCommonService;
-    this.commonSecurityService = commonSecurityService;
-  }
 
   @Override
   public void init(Project project) {

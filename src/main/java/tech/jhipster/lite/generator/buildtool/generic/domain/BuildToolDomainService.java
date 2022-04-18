@@ -9,14 +9,8 @@ import tech.jhipster.lite.generator.buildtool.maven.domain.MavenService;
 import tech.jhipster.lite.generator.project.domain.BuildToolType;
 import tech.jhipster.lite.generator.project.domain.Project;
 
-public class BuildToolDomainService implements BuildToolService {
-
+public record BuildToolDomainService(MavenService mavenService) implements BuildToolService {
   public static final String EXCEPTION_NO_BUILD_TOOL = "No build tool";
-  private final MavenService mavenService;
-
-  public BuildToolDomainService(MavenService mavenService) {
-    this.mavenService = mavenService;
-  }
 
   @Override
   public void addParent(Project project, Parent parent) {

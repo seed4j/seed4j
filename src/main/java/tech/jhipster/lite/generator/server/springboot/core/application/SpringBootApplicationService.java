@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.core.domain.SpringBootService;
 
 @Service
-public class SpringBootApplicationService {
-
-  private final SpringBootService springBootService;
-
-  public SpringBootApplicationService(SpringBootService springBootService) {
-    this.springBootService = springBootService;
-  }
-
+public record SpringBootApplicationService(SpringBootService springBootService) {
   public void init(Project project) {
     springBootService.init(project);
   }

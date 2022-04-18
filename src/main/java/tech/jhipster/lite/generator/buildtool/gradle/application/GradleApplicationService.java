@@ -5,13 +5,8 @@ import tech.jhipster.lite.generator.buildtool.gradle.domain.GradleService;
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @Service
-public class GradleApplicationService {
-
-  private final GradleService gradleService;
-
-  public GradleApplicationService(GradleService gradleService) {
-    this.gradleService = gradleService;
-  }
+public record GradleApplicationService(
+  GradleService gradleService) {
 
   public void init(Project project) {
     gradleService.initJava(project);

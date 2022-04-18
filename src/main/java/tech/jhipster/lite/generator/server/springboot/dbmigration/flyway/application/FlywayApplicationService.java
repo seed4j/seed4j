@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.dbmigration.flyway.domain.FlywayService;
 
 @Service
-public class FlywayApplicationService {
-
-  private final FlywayService flywayService;
-
-  public FlywayApplicationService(FlywayService flywayService) {
-    this.flywayService = flywayService;
-  }
-
+public record FlywayApplicationService(FlywayService flywayService) {
   public void init(Project project) {
     flywayService.init(project);
   }

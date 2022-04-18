@@ -12,19 +12,12 @@ import tech.jhipster.lite.generator.project.domain.DatabaseType;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class SpringBootUserDomainService implements SpringBootUserService {
-
+public record SpringBootUserDomainService(ProjectRepository projectRepository) implements SpringBootUserService {
   private static final String SOURCE = "server/springboot/user/sqldatabase";
   private static final String USER_CONTEXT = "user";
   private static final String USER_INFRASTRUCTURE_SECONDARY = getPath(USER_CONTEXT, INFRASTRUCTURE_SECONDARY);
   private static final String USER_DOMAIN = getPath(USER_CONTEXT, DOMAIN);
   private static final String USER_DATABASE_KEY = "sqlDatabaseName";
-
-  private final ProjectRepository projectRepository;
-
-  public SpringBootUserDomainService(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void addUserAndAuthorityEntities(Project project, DatabaseType sqlDatabase) {

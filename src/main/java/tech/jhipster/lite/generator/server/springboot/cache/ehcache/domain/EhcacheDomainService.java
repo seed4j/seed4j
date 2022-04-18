@@ -13,27 +13,15 @@ import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.cache.common.domain.SpringBootCacheService;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
-public class EhcacheDomainService implements EhcacheService {
-
+public record EhcacheDomainService(
+  BuildToolService buildToolService,
+  ProjectRepository projectRepository,
+  SpringBootCacheService springBootCacheService,
+  SpringBootCommonService springBootCommonService
+)
+  implements EhcacheService {
   public static final String SOURCE = "server/springboot/cache/ehcache";
   public static final String DESTINATION = "technical/infrastructure/secondary/cache";
-
-  private final BuildToolService buildToolService;
-  private final ProjectRepository projectRepository;
-  private final SpringBootCacheService springBootCacheService;
-  private final SpringBootCommonService springBootCommonService;
-
-  public EhcacheDomainService(
-    BuildToolService buildToolService,
-    ProjectRepository projectRepository,
-    SpringBootCacheService springBootCacheService,
-    SpringBootCommonService springBootCommonService
-  ) {
-    this.buildToolService = buildToolService;
-    this.projectRepository = projectRepository;
-    this.springBootCacheService = springBootCacheService;
-    this.springBootCommonService = springBootCommonService;
-  }
 
   @Override
   public void initJavaConfiguration(Project project) {

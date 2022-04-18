@@ -24,31 +24,16 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
-public class KafkaDomainService implements KafkaService {
-
+public record KafkaDomainService(
+  BuildToolService buildToolService,
+  ProjectRepository projectRepository,
+  SpringBootCommonService springBootCommonService,
+  DockerService dockerService
+)
+  implements KafkaService {
   private static final String SOURCE = "server/springboot/broker/kafka";
   private static final String DUMMY_TOPIC_NAME = "kafka.topic.dummy";
   private static final String DUMMY_PRODUCER_PATH = "dummy/infrastructure/secondary/kafka/producer";
-
-  private final BuildToolService buildToolService;
-
-  private final ProjectRepository projectRepository;
-
-  private final SpringBootCommonService springBootCommonService;
-
-  private final DockerService dockerService;
-
-  public KafkaDomainService(
-    final BuildToolService buildToolService,
-    final ProjectRepository projectRepository,
-    final SpringBootCommonService springBootCommonService,
-    DockerService dockerService
-  ) {
-    this.buildToolService = buildToolService;
-    this.projectRepository = projectRepository;
-    this.springBootCommonService = springBootCommonService;
-    this.dockerService = dockerService;
-  }
 
   @Override
   public void init(final Project project) {

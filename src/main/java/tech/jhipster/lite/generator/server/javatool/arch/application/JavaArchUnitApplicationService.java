@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.javatool.arch.domain.JavaArchUnitService;
 
 @Service
-public class JavaArchUnitApplicationService {
-
-  private final JavaArchUnitService javaArchUnitService;
-
-  public JavaArchUnitApplicationService(JavaArchUnitService javaArchUnitService) {
-    this.javaArchUnitService = javaArchUnitService;
-  }
-
+public record JavaArchUnitApplicationService(JavaArchUnitService javaArchUnitService) {
   public void init(Project project) {
     javaArchUnitService.init(project);
   }

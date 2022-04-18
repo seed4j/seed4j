@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.database.postgresql.domain.PostgresqlService;
 
 @Service
-public class PostgresqlApplicationService {
-
-  private final PostgresqlService postgresqlService;
-
-  public PostgresqlApplicationService(PostgresqlService postgresqlService) {
-    this.postgresqlService = postgresqlService;
-  }
-
+public record PostgresqlApplicationService(PostgresqlService postgresqlService) {
   public void init(Project project) {
     postgresqlService.init(project);
   }

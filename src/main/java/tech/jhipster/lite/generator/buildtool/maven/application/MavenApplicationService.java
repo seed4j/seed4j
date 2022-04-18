@@ -10,14 +10,7 @@ import tech.jhipster.lite.generator.buildtool.maven.domain.MavenService;
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @Service
-public class MavenApplicationService {
-
-  private final MavenService mavenService;
-
-  public MavenApplicationService(MavenService mavenService) {
-    this.mavenService = mavenService;
-  }
-
+public record MavenApplicationService(MavenService mavenService) {
   public void addParent(Project project, Parent parent) {
     mavenService.addParent(project, parent);
   }

@@ -12,19 +12,11 @@ import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.springcloud.common.domain.SpringCloudCommonService;
 
-public class EurekaDomainService implements EurekaService {
-
+public record EurekaDomainService(BuildToolService buildToolService, SpringCloudCommonService springCloudCommonService)
+  implements EurekaService {
   public static final String SOURCE = "server/springboot/springcloud/eureka";
 
   public static final String BOOTSTRAP_PROPERTIES_FILE_NAME = "bootstrap.properties";
-
-  private final BuildToolService buildToolService;
-  private final SpringCloudCommonService springCloudCommonService;
-
-  public EurekaDomainService(BuildToolService buildToolService, SpringCloudCommonService springCloudCommonService) {
-    this.buildToolService = buildToolService;
-    this.springCloudCommonService = springCloudCommonService;
-  }
 
   @Override
   public void init(Project project) {

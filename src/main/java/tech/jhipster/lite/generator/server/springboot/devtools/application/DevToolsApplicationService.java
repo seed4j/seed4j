@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.devtools.domain.DevToolsService;
 
 @Service
-public class DevToolsApplicationService {
-
-  private final DevToolsService devToolsService;
-
-  public DevToolsApplicationService(DevToolsService devToolsService) {
-    this.devToolsService = devToolsService;
-  }
-
+public record DevToolsApplicationService(DevToolsService devToolsService) {
   public void init(Project project) {
     devToolsService.init(project);
   }

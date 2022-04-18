@@ -21,29 +21,15 @@ import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 import tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonService;
 
-public class MongodbDomainService implements MongodbService {
-
+public record MongodbDomainService(
+  ProjectRepository projectRepository,
+  BuildToolService buildToolService,
+  SpringBootCommonService springBootCommonService,
+  SQLCommonService sqlCommonService,
+  DockerService dockerService
+)
+  implements MongodbService {
   public static final String SOURCE = "server/springboot/database/mongodb";
-
-  private final ProjectRepository projectRepository;
-  private final BuildToolService buildToolService;
-  private final SpringBootCommonService springBootCommonService;
-  private final SQLCommonService sqlCommonService;
-  private final DockerService dockerService;
-
-  public MongodbDomainService(
-    ProjectRepository projectRepository,
-    BuildToolService buildToolService,
-    SpringBootCommonService springBootCommonService,
-    SQLCommonService sqlCommonService,
-    DockerService dockerService
-  ) {
-    this.projectRepository = projectRepository;
-    this.buildToolService = buildToolService;
-    this.springBootCommonService = springBootCommonService;
-    this.sqlCommonService = sqlCommonService;
-    this.dockerService = dockerService;
-  }
 
   @Override
   public void init(Project project) {

@@ -17,20 +17,11 @@ import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class NpmDomainService implements NpmService {
-
+public record NpmDomainService(NpmRepository npmRepository, ProjectRepository projectRepository) implements NpmService {
   public static final String VERSION = DQ + "version" + DQ;
   public static final String DEPENDENCIES = DQ + "dependencies" + DQ;
   public static final String DEV_DEPENDENCIES = DQ + "devDependencies" + DQ;
   public static final String SCRIPTS = DQ + "scripts" + DQ;
-
-  private final NpmRepository npmRepository;
-  private final ProjectRepository projectRepository;
-
-  public NpmDomainService(NpmRepository npmRepository, ProjectRepository projectRepository) {
-    this.npmRepository = npmRepository;
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void addDependency(Project project, String dependency, String version) {

@@ -19,18 +19,9 @@ import tech.jhipster.lite.generator.buildtool.generic.domain.Plugin;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class SpringBootDomainService implements SpringBootService {
-
+public record SpringBootDomainService(ProjectRepository projectRepository, BuildToolService buildToolService) implements SpringBootService {
   public static final String SOURCE = "server/springboot/core";
   public static final String SPRINGBOOT_PACKAGE = "org.springframework.boot";
-
-  private final ProjectRepository projectRepository;
-  private final BuildToolService buildToolService;
-
-  public SpringBootDomainService(ProjectRepository projectRepository, BuildToolService buildToolService) {
-    this.projectRepository = projectRepository;
-    this.buildToolService = buildToolService;
-  }
 
   @Override
   public void init(Project project) {

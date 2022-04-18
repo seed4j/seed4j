@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.client.tools.cypress.domain.CypressService;
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @Service
-public class CypressApplicationService {
-
-  private final CypressService cypressService;
-
-  public CypressApplicationService(CypressService cypressService) {
-    this.cypressService = cypressService;
-  }
-
+public record CypressApplicationService(CypressService cypressService) {
   public void init(Project project) {
     cypressService.init(project);
   }

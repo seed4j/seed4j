@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.webflux.web.domain.SpringBootWebfluxService;
 
 @Service
-public class SpringBootWebfluxApplicationService {
-
-  private final SpringBootWebfluxService springBootWebfluxService;
-
-  public SpringBootWebfluxApplicationService(SpringBootWebfluxService springBootWebfluxService) {
-    this.springBootWebfluxService = springBootWebfluxService;
-  }
-
+public record SpringBootWebfluxApplicationService(SpringBootWebfluxService springBootWebfluxService) {
   public void addSpringBootWebflux(Project project) {
     this.springBootWebfluxService.addSpringBootWebflux(project);
   }

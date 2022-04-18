@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.client.svelte.core.domain.SvelteService;
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @Service
-public class SvelteApplicationService {
-
-  private final SvelteService svelteService;
-
-  public SvelteApplicationService(SvelteService svelteService) {
-    this.svelteService = svelteService;
-  }
-
+public record SvelteApplicationService(SvelteService svelteService) {
   public void addSvelte(Project project) {
     svelteService.addSvelte(project);
   }

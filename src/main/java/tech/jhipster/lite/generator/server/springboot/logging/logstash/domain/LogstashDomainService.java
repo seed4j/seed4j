@@ -16,24 +16,14 @@ import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
-public class LogstashDomainService implements LogstashService {
-
+public record LogstashDomainService(
+  BuildToolService buildToolService,
+  ProjectRepository projectRepository,
+  SpringBootCommonService springBootCommonService
+)
+  implements LogstashService {
   public static final String SOURCE = "server/springboot/logging/logstash";
   public static final String DESTINATION = "technical/infrastructure/secondary/logstash";
-
-  private final BuildToolService buildToolService;
-  private final ProjectRepository projectRepository;
-  private final SpringBootCommonService springBootCommonService;
-
-  public LogstashDomainService(
-    BuildToolService buildToolService,
-    ProjectRepository projectRepository,
-    SpringBootCommonService springBootCommonService
-  ) {
-    this.buildToolService = buildToolService;
-    this.projectRepository = projectRepository;
-    this.springBootCommonService = springBootCommonService;
-  }
 
   @Override
   public void init(Project project) {

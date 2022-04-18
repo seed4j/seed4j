@@ -14,21 +14,12 @@ import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class AngularDomainService implements AngularService {
-
+public record AngularDomainService(ProjectRepository projectRepository, NpmService npmService) implements AngularService {
   public static final String SOURCE = "client/angular";
   public static final String SOURCE_WEBAPP = "client/angular/src/main/webapp";
   private static final String APP = "src/main/webapp/app/common/primary/app";
   public static final String SOURCE_PRIMARY = getPath(SOURCE, APP);
   public static final String DESTINATION_PRIMARY = APP;
-
-  private final ProjectRepository projectRepository;
-  private final NpmService npmService;
-
-  public AngularDomainService(ProjectRepository projectRepository, NpmService npmService) {
-    this.projectRepository = projectRepository;
-    this.npmService = npmService;
-  }
 
   @Override
   public void addAngular(Project project) {
@@ -145,23 +136,23 @@ public class AngularDomainService implements AngularService {
     oldHtml = "appName = '';";
     newHtml =
       """
-      appName = '';
+        appName = '';
 
-        private readonly destroy\\$ = new Subject<void>();
+          private readonly destroy\\$ = new Subject<void>();
 
-        account: Account | null = null;
+          account: Account | null = null;
 
-        loginForm = this.fb.group({
-          username: [null, [Validators.required]],
-          password: [null, [Validators.required]]
-        });
+          loginForm = this.fb.group({
+            username: [null, [Validators.required]],
+            password: [null, [Validators.required]]
+          });
 
-        constructor(
-          private accountService: AccountService,
-          private loginService: LoginService,
-          private fb: FormBuilder
-        ) {}
-      """;
+          constructor(
+            private accountService: AccountService,
+            private loginService: LoginService,
+            private fb: FormBuilder
+          ) {}
+        """;
     projectRepository.replaceText(project, APP, APP_COMPONENT, oldHtml, newHtml);
 
     oldHtml = """
@@ -170,30 +161,30 @@ public class AngularDomainService implements AngularService {
       """;
     newHtml =
       """
-          this.accountService
-            .getAuthenticationState()
-            .pipe(takeUntil(this.destroy\\$))
-            .subscribe(account => this.account = account);
-        }
+            this.accountService
+              .getAuthenticationState()
+              .pipe(takeUntil(this.destroy\\$))
+              .subscribe(account => this.account = account);
+          }
 
-        ngOnDestroy(): void {
-          this.destroy\\$.next();
-          this.destroy\\$.complete();
-        }
+          ngOnDestroy(): void {
+            this.destroy\\$.next();
+            this.destroy\\$.complete();
+          }
 
-        login(): void {
-          this.loginService
-            .login({
-              username: this.loginForm.get('username')!.value,
-              password: this.loginForm.get('password')!.value,
-            })
-            .subscribe();
-        }
+          login(): void {
+            this.loginService
+              .login({
+                username: this.loginForm.get('username')!.value,
+                password: this.loginForm.get('password')!.value,
+              })
+              .subscribe();
+          }
 
-        logout(): void {
-          this.loginService.logout();
-        }
-      }""";
+          logout(): void {
+            this.loginService.logout();
+          }
+        }""";
     projectRepository.replaceText(project, APP, APP_COMPONENT, oldHtml, newHtml);
 
     oldHtml = "import \\{ NgModule \\} from '@angular/core';";
@@ -232,36 +223,36 @@ public class AngularDomainService implements AngularService {
 
     oldHtml =
       """
-      import \\{ ComponentFixture, TestBed, waitForAsync \\} from '@angular/core/testing';
+        import \\{ ComponentFixture, TestBed, waitForAsync \\} from '@angular/core/testing';
 
-      import \\{ AppComponent \\} from './app.component';
+        import \\{ AppComponent \\} from './app.component';
 
-      describe\\('App Component', \\(\\) => \\{
-        let comp: AppComponent;
-        let fixture: ComponentFixture<AppComponent>;
+        describe\\('App Component', \\(\\) => \\{
+          let comp: AppComponent;
+          let fixture: ComponentFixture<AppComponent>;
 
-        beforeEach\\(
-          waitForAsync\\(\\(\\) => \\{
-            TestBed.configureTestingModule\\(\\{
-              declarations: \\[AppComponent\\],
+          beforeEach\\(
+            waitForAsync\\(\\(\\) => \\{
+              TestBed.configureTestingModule\\(\\{
+                declarations: \\[AppComponent\\],
+              \\}\\)
+                .overrideTemplate\\(AppComponent, ''\\)
+                .compileComponents\\(\\);
             \\}\\)
-              .overrideTemplate\\(AppComponent, ''\\)
-              .compileComponents\\(\\);
-          \\}\\)
-        \\);
+          \\);
 
-        beforeEach\\(\\(\\) => \\{
-          fixture = TestBed.createComponent\\(AppComponent\\);
-          comp = fixture.componentInstance;
-        \\}\\);
+          beforeEach\\(\\(\\) => \\{
+            fixture = TestBed.createComponent\\(AppComponent\\);
+            comp = fixture.componentInstance;
+          \\}\\);
 
-        describe\\('ngOnInit', \\(\\) => \\{
-          it\\('should have appName', \\(\\) => \\{
-            // WHEN
-            comp.ngOnInit\\(\\);
+          describe\\('ngOnInit', \\(\\) => \\{
+            it\\('should have appName', \\(\\) => \\{
+              // WHEN
+              comp.ngOnInit\\(\\);
 
-            // THEN
-            expect\\(comp.appName\\).toEqual\\('""";
+              // THEN
+              expect\\(comp.appName\\).toEqual\\('""";
     newHtml =
       """
         import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
@@ -395,8 +386,8 @@ public class AngularDomainService implements AngularService {
 
     oldHtml = "9000";
     newHtml = """
-        9000,
-                    "proxyConfig": "proxy.conf.json" """;
+      9000,
+                  "proxyConfig": "proxy.conf.json" """;
     projectRepository.replaceText(project, "", "angular.json", oldHtml, newHtml);
   }
 
@@ -463,11 +454,11 @@ public class AngularDomainService implements AngularService {
     String oldText = "\"cacheDirectories\": \\[";
     String newText =
       """
-      "jestSonar": \\{
-          "reportPath": "target/test-results/jest",
-          "reportFile": "TESTS-results-sonar.xml"
-        \\},
-        "cacheDirectories": \\[""";
+        "jestSonar": \\{
+            "reportPath": "target/test-results/jest",
+            "reportFile": "TESTS-results-sonar.xml"
+          \\},
+          "cacheDirectories": \\[""";
     projectRepository.replaceText(project, "", PACKAGE_JSON, oldText, newText);
   }
 }

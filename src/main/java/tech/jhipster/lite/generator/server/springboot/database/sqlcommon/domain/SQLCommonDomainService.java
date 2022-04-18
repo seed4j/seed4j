@@ -19,22 +19,13 @@ import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 
-public class SQLCommonDomainService implements SQLCommonService {
-
+public record SQLCommonDomainService(
+  BuildToolService buildToolService,
+  SpringBootCommonService springBootCommonService,
+  ProjectRepository projectRepository
+)
+  implements SQLCommonService {
   public static final String PROJECT = "project";
-  private final BuildToolService buildToolService;
-  private final SpringBootCommonService springBootCommonService;
-  private final ProjectRepository projectRepository;
-
-  public SQLCommonDomainService(
-    BuildToolService buildToolService,
-    SpringBootCommonService springBootCommonService,
-    ProjectRepository projectRepository
-  ) {
-    this.buildToolService = buildToolService;
-    this.springBootCommonService = springBootCommonService;
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void addTestcontainers(Project project, String database, Map<String, Object> properties) {

@@ -6,16 +6,9 @@ import tech.jhipster.lite.common.domain.FileUtils;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
-public class DummyDomainService implements DummyService {
-
+public record DummyDomainService(ProjectRepository projectRepository) implements DummyService {
   public static final String SOURCE = "server/springboot/mvc/dummy";
   public static final String PATCH = "dummy.patch";
-
-  private final ProjectRepository projectRepository;
-
-  public DummyDomainService(ProjectRepository projectRepository) {
-    this.projectRepository = projectRepository;
-  }
 
   @Override
   public void applyDummyGitPatch(Project project) {

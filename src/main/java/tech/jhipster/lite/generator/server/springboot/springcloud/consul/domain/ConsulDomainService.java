@@ -20,26 +20,14 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.springcloud.common.domain.SpringCloudCommonService;
 
-public class ConsulDomainService implements ConsulService {
-
+public record ConsulDomainService(
+  BuildToolService buildToolService,
+  ProjectRepository projectRepository,
+  SpringCloudCommonService springCloudCommonService,
+  DockerService dockerService
+)
+  implements ConsulService {
   public static final String SOURCE = "server/springboot/springcloud/consul";
-
-  private final BuildToolService buildToolService;
-  private final ProjectRepository projectRepository;
-  private final SpringCloudCommonService springCloudCommonService;
-  private final DockerService dockerService;
-
-  public ConsulDomainService(
-    BuildToolService buildToolService,
-    ProjectRepository projectRepository,
-    SpringCloudCommonService springCloudCommonService,
-    DockerService dockerService
-  ) {
-    this.buildToolService = buildToolService;
-    this.projectRepository = projectRepository;
-    this.springCloudCommonService = springCloudCommonService;
-    this.dockerService = dockerService;
-  }
 
   @Override
   public void init(Project project) {

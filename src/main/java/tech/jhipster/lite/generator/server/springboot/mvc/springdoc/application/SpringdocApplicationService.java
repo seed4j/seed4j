@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.mvc.springdoc.domain.SpringdocService;
 
 @Service
-public class SpringdocApplicationService {
-
-  private final SpringdocService springdocService;
-
-  public SpringdocApplicationService(SpringdocService springdocService) {
-    this.springdocService = springdocService;
-  }
-
+public record SpringdocApplicationService(SpringdocService springdocService) {
   public void init(Project project) {
     springdocService.init(project);
   }

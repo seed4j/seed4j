@@ -5,14 +5,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.database.mysql.domain.MySQLService;
 
 @Service
-public class MySQLApplicationService {
-
-  private final MySQLService mysqlService;
-
-  public MySQLApplicationService(MySQLService mysqlService) {
-    this.mysqlService = mysqlService;
-  }
-
+public record MySQLApplicationService(MySQLService mysqlService) {
   public void init(Project project) {
     mysqlService.init(project);
   }

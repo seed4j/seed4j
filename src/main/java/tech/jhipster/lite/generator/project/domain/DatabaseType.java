@@ -13,7 +13,7 @@ public enum DatabaseType {
 
   private final String id;
 
-  private DatabaseType(String id) {
+  DatabaseType(String id) {
     this.id = id;
   }
 

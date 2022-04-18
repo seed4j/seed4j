@@ -44,7 +44,7 @@ public class ExceptionTranslator implements ProblemHandling {
   private boolean exceptionWithDetails;
 
   @Value("${application.exception.package}")
-  private List<String> packages = List.of();
+  private final List<String> packages = List.of();
 
   /**
    * Post-process the Problem payload to add the message key for the front-end if needed.

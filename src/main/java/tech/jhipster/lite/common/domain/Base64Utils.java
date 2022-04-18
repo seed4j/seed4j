@@ -5,7 +5,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 
 public class Base64Utils {
 
-  private static SecureRandom random = new SecureRandom();
+  private static final SecureRandom random = new SecureRandom();
 
   private Base64Utils() {}
 

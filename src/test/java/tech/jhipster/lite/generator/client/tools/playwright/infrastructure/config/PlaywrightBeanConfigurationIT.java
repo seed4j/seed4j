@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import tech.jhipster.lite.IntegrationTest;
-import tech.jhipster.lite.generator.client.tools.cypress.domain.CypressDomainService;
 import tech.jhipster.lite.generator.client.tools.playwright.domain.PlaywrightDomainService;
 
 @IntegrationTest

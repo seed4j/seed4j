@@ -12,5 +12,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = { JHLiteApp.class })
 @Target(ElementType.TYPE)
 public @interface IntegrationTest {
-  public String[] properties() default {};
+  String[] properties() default {};
 }

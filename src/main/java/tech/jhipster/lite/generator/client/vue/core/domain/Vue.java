@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Vue {
 
-  public static final String ROUTER_IMPORT = "import router from \'./router/router\';";
+  public static final String ROUTER_IMPORT = "import router from './router/router';";
   public static final String ROUTER_PROVIDER = "app.use(router);";
   public static final Collection<String> PINIA_IMPORTS = List.of(
     "import {createPinia} from 'pinia';",

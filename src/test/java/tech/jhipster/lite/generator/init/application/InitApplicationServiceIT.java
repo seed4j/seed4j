@@ -5,6 +5,8 @@ import static tech.jhipster.lite.TestUtils.assertFileContent;
 import static tech.jhipster.lite.TestUtils.tmpProject;
 import static tech.jhipster.lite.TestUtils.tmpProjectBuilder;
 import static tech.jhipster.lite.TestUtils.tmpProjectWithPomXml;
+import static tech.jhipster.lite.common.domain.FileUtils.getPath;
+import static tech.jhipster.lite.common.domain.FileUtils.getPathOf;
 import static tech.jhipster.lite.common.domain.WordUtils.CRLF;
 import static tech.jhipster.lite.generator.init.application.InitAssertFiles.assertFileGitInit;
 import static tech.jhipster.lite.generator.init.application.InitAssertFiles.assertFilesEditorConfiguration;
@@ -14,17 +16,23 @@ import static tech.jhipster.lite.generator.init.application.InitAssertFiles.asse
 import static tech.jhipster.lite.generator.init.application.InitAssertFiles.assertFilesPackageJson;
 import static tech.jhipster.lite.generator.init.application.InitAssertFiles.assertFilesPrettier;
 import static tech.jhipster.lite.generator.init.application.InitAssertFiles.assertFilesReadme;
+import static tech.jhipster.lite.generator.project.domain.Constants.HISTORY_JSON;
+import static tech.jhipster.lite.generator.project.domain.Constants.JHIPSTER_FOLDER;
 import static tech.jhipster.lite.generator.project.domain.Constants.PACKAGE_JSON;
 import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
 import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PRETTIER_DEFAULT_INDENT;
 import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PROJECT_NAME;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
+import tech.jhipster.lite.common.domain.FileUtils;
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @IntegrationTest
@@ -179,8 +187,12 @@ class InitApplicationServiceIT {
   }
 
   @Test
-  void shouldDownloadProject() {
+  void shouldDownloadProject() throws IOException {
     Project project = tmpProjectWithPomXml();
+
+    FileUtils.createFolder(getPath(project.getFolder(), JHIPSTER_FOLDER));
+    Path path = Files.createFile(getPathOf(project.getFolder(), JHIPSTER_FOLDER, HISTORY_JSON));
+    Files.write(path, "{}".getBytes());
 
     assertThat(initApplicationService.download(project)).isNotNull();
   }

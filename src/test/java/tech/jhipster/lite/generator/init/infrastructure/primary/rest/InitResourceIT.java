@@ -7,10 +7,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static tech.jhipster.lite.TestUtils.assertFileContent;
 import static tech.jhipster.lite.TestUtils.convertObjectToJsonBytes;
 import static tech.jhipster.lite.TestUtils.readFileToObject;
+import static tech.jhipster.lite.common.domain.FileUtils.getPath;
+import static tech.jhipster.lite.common.domain.FileUtils.getPathOf;
 import static tech.jhipster.lite.generator.init.application.InitAssertFiles.assertFilesInit;
 import static tech.jhipster.lite.generator.init.application.InitAssertFiles.assertFilesInitMinimal;
+import static tech.jhipster.lite.generator.project.domain.Constants.HISTORY_JSON;
+import static tech.jhipster.lite.generator.project.domain.Constants.JHIPSTER_FOLDER;
 import static tech.jhipster.lite.generator.project.domain.Constants.PACKAGE_JSON;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -64,6 +70,10 @@ class InitResourceIT {
   void shouldDownload() throws Exception {
     ProjectDTO projectDTO = readFileToObject("json/chips.json", ProjectDTO.class).folder(FileUtils.tmpDirForTest());
     Project project = ProjectDTO.toProject(projectDTO);
+
+    FileUtils.createFolder(getPath(project.getFolder(), JHIPSTER_FOLDER));
+    Path path = Files.createFile(getPathOf(project.getFolder(), JHIPSTER_FOLDER, HISTORY_JSON));
+    Files.write(path, "{}".getBytes());
 
     initApplicationService.init(project);
 

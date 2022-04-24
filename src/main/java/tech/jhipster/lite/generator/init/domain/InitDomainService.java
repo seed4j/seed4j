@@ -129,6 +129,9 @@ public class InitDomainService implements InitService {
 
   @Override
   public byte[] download(Project project) {
-    return projectRepository.download(project);
+    if (projectRepository.isJHipsterLiteProject(project.getFolder())) {
+      return projectRepository.download(project);
+    }
+    throw new GeneratorException("This project is not a JHipster Lite project");
   }
 }

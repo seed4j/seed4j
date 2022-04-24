@@ -113,6 +113,8 @@ class InitDomainServiceTest {
   void shouldDownload() {
     Project project = tmpProjectWithPomXml();
 
+    when(projectRepository.isJHipsterLiteProject(anyString())).thenReturn(true);
+
     assertThatCode(() -> initDomainService.download(project)).doesNotThrowAnyException();
   }
 }

@@ -17,6 +17,9 @@
 	"extensions": [
 		"vscjava.vscode-java-pack"
 	],
+	"features": {
+		"docker-in-docker": "latest"
+	},
 	"forwardPorts": [ 7471 ],
 	"remoteUser": "vscode"
 }

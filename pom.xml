@@ -531,6 +531,11 @@
           <optional>true</optional>
         </dependency>
         <dependency>
+          <groupId>org.springdoc</groupId>
+          <artifactId>springdoc-openapi-native</artifactId>
+          <version>${springdoc-openapi-ui.version}</version>
+        </dependency>
+        <dependency>
           <groupId>org.junit.platform</groupId>
           <artifactId>junit-platform-launcher</artifactId>
           <scope>test</scope>

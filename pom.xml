@@ -498,7 +498,7 @@
     <profile>
       <id>native</id>
       <properties>
-        <spring-native.version>0.11.2</spring-native.version>
+        <spring-native.version>0.11.4</spring-native.version>
       </properties>
       <dependencies>
         <dependency>

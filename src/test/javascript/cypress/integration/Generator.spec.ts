@@ -1,6 +1,7 @@
 import { composeSelector, dataSelector } from '../support/selector';
 
 const generatorSelector = (name: string) => dataSelector(composeSelector('generator', name));
+const angularGeneratorSelector = (name: string) => dataSelector(composeSelector('angular-generator', name));
 
 describe('Generator', () => {
   beforeEach(() => {
@@ -45,7 +46,7 @@ describe('Generator', () => {
 
   it('should display angular', () => {
     cy.get(generatorSelector('option-angular')).check();
-    cy.get(generatorSelector('add-angular-button')).contains('Angular');
+    cy.get(angularGeneratorSelector('add-angular-button')).contains('Angular');
   });
 
   it('should display react', () => {

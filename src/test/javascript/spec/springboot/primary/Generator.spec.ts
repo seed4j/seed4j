@@ -1,11 +1,9 @@
 import { ProjectService } from '@/springboot/domain/ProjectService';
 import { GeneratorVue } from '@/springboot/primary';
-import { mount, VueWrapper } from '@vue/test-utils';
+import { shallowMount, VueWrapper } from '@vue/test-utils';
 import { stubProjectService } from '../domain/ProjectService.fixture';
 import { ProjectToUpdate } from '@/springboot/primary/ProjectToUpdate';
 import { createProjectToUpdate } from './ProjectToUpdate.fixture';
-import { AngularService } from '@/springboot/domain/client/AngularService';
-import { stubAngularService } from '../domain/client/AngularService.fixture';
 import { stubReactService } from '../domain/client/ReactService.fixture';
 import { ReactService } from '@/springboot/domain/client/ReactService';
 import { stubSpringBootService } from '../domain/SpringBootService.fixture';
@@ -18,7 +16,6 @@ import { Logger } from '@/common/domain/Logger';
 let wrapper: VueWrapper;
 
 interface WrapperOptions {
-  angularService: AngularService;
   logger: Logger;
   projectService: ProjectService;
   reactService: ReactService;
@@ -27,8 +24,7 @@ interface WrapperOptions {
 }
 
 const wrap = (wrapperOptions?: Partial<WrapperOptions>) => {
-  const { angularService, logger, projectService, reactService, springBootService, vueService }: WrapperOptions = {
-    angularService: stubAngularService(),
+  const { logger, projectService, reactService, springBootService, vueService }: WrapperOptions = {
     logger: stubLogger(),
     projectService: stubProjectService(),
     reactService: stubReactService(),
@@ -36,10 +32,9 @@ const wrap = (wrapperOptions?: Partial<WrapperOptions>) => {
     vueService: stubVueService(),
     ...wrapperOptions,
   };
-  wrapper = mount(GeneratorVue, {
+  wrapper = shallowMount(GeneratorVue, {
     global: {
       provide: {
-        angularService,
         logger,
         projectService,
         reactService,
@@ -1057,108 +1052,6 @@ describe('Generator', () => {
       const [message] = logger.error.getCall(0).args;
       expect(message).toBe('Adding SpringBoot Database MongoDB to project failed');
     });
-  });
-
-  it('should not add Angular when project path is not filled', async () => {
-    const angularService = stubAngularService();
-    angularService.add.resolves({});
-    await wrap({ angularService });
-    await selectSection('angular');
-
-    const button = wrapper.find('#angular');
-    await button.trigger('click');
-
-    expect(angularService.add.called).toBe(false);
-  });
-
-  it('should add Angular when project path is filled', async () => {
-    const angularService = stubAngularService();
-    angularService.add.resolves({});
-    await wrap({ angularService });
-    const projectToUpdate: ProjectToUpdate = createProjectToUpdate({
-      folder: 'project/path',
-      baseName: 'beer',
-      projectName: 'Beer Project',
-      packageName: 'tech.jhipster.beer',
-      serverPort: '8080',
-    });
-    await fillFullForm(projectToUpdate);
-    await selectSection('angular');
-
-    const button = wrapper.find('#angular');
-    await button.trigger('click');
-
-    const args = angularService.add.getCall(0).args[0];
-    expect(args).toEqual({
-      baseName: 'beer',
-      folder: 'project/path',
-      projectName: 'Beer Project',
-      packageName: 'tech.jhipster.beer',
-      serverPort: 8080,
-    });
-  });
-
-  it('should add Angular with Style when checkbox is checked', async () => {
-    const angularService = stubAngularService();
-    angularService.addWithStyle.resolves({});
-    await wrap({ angularService });
-    const projectToUpdate: ProjectToUpdate = createProjectToUpdate({
-      folder: 'project/path',
-      baseName: 'beer',
-      projectName: 'Beer Project',
-      packageName: 'tech.jhipster.beer',
-      serverPort: '8080',
-    });
-    await fillFullForm(projectToUpdate);
-    await selectSection('angular');
-
-    const checkbox = wrapper.find('#angular-with-style');
-    await checkbox.setValue(true);
-    const button = wrapper.find('#angular');
-    await button.trigger('click');
-
-    const args = angularService.addWithStyle.getCall(0).args[0];
-    expect(args).toEqual({
-      baseName: 'beer',
-      folder: 'project/path',
-      projectName: 'Beer Project',
-      packageName: 'tech.jhipster.beer',
-      serverPort: 8080,
-    });
-  });
-
-  it('should handle error on adding Angular failure', async () => {
-    const logger = stubLogger();
-    const angularService = stubAngularService();
-    angularService.add.rejects({});
-    await wrap({ angularService, logger });
-    const projectToUpdate: ProjectToUpdate = createProjectToUpdate();
-    await fillFullForm(projectToUpdate);
-    await selectSection('angular');
-
-    const initButton = wrapper.find('#angular');
-    await initButton.trigger('click');
-
-    const [message] = logger.error.getCall(0).args;
-    expect(message).toBe('Adding Angular to project failed');
-  });
-
-  it('should handle error on adding Angular with style failure', async () => {
-    const logger = stubLogger();
-    const angularService = stubAngularService();
-    angularService.addWithStyle.rejects({});
-    await wrap({ angularService, logger });
-    const projectToUpdate: ProjectToUpdate = createProjectToUpdate();
-    await fillFullForm(projectToUpdate);
-    await selectSection('angular');
-
-    const checkbox = wrapper.find('#angular-with-style');
-    await checkbox.setValue(true);
-    const initButton = wrapper.find('#angular');
-    await initButton.trigger('click');
-
-    const [message] = logger.error.getCall(0).args;
-    expect(message).toBe('Adding Angular with style to project failed');
   });
 
   it('should not add React when project path is not filled', async () => {

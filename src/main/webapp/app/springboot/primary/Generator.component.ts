@@ -1,17 +1,18 @@
 import { ProjectService } from '@/springboot/domain/ProjectService';
 import { defineComponent, inject, ref } from 'vue';
 import { ProjectToUpdate, toProject } from '@/springboot/primary/ProjectToUpdate';
-import { AngularService } from '@/springboot/domain/client/AngularService';
 import { ReactService } from '@/springboot/domain/client/ReactService';
 import { VueService } from '@/springboot/domain/client/VueService';
 import { SpringBootService } from '@/springboot/domain/SpringBootService';
 import { Logger } from '@/common/domain/Logger';
+import { AngularGeneratorVue } from '@/springboot/primary/angular-generator';
 
 export default defineComponent({
   name: 'GeneratorComponent',
-  components: {},
+  components: {
+    AngularGeneratorVue,
+  },
   setup() {
-    const angularService = inject('angularService') as AngularService;
     const logger = inject('logger') as Logger;
     const projectService = inject('projectService') as ProjectService;
     const reactService = inject('reactService') as ReactService;
@@ -23,7 +24,6 @@ export default defineComponent({
     const project = ref<ProjectToUpdate>({
       folder: '',
     });
-    const isAngularWithStyle = ref<boolean>(false);
     const isReactWithStyle = ref<boolean>(false);
     const isVueWithStyle = ref<boolean>(false);
     const isSvelteWithStyle = ref<boolean>(false);
@@ -170,18 +170,6 @@ export default defineComponent({
       }
     };
 
-    const addAngular = async (): Promise<void> => {
-      if (project.value.folder !== '') {
-        if (isAngularWithStyle.value) {
-          await angularService
-            .addWithStyle(toProject(project.value))
-            .catch(error => logger.error('Adding Angular with style to project failed', error));
-        } else {
-          await angularService.add(toProject(project.value)).catch(error => logger.error('Adding Angular to project failed', error));
-        }
-      }
-    };
-
     const addReact = async (): Promise<void> => {
       if (project.value.folder !== '') {
         if (isReactWithStyle.value) {
@@ -231,7 +219,6 @@ export default defineComponent({
 
     return {
       project,
-      isAngularWithStyle,
       isReactWithStyle,
       isVueWithStyle,
       isSvelteWithStyle,
@@ -259,7 +246,6 @@ export default defineComponent({
       addMySQL,
       addMariaDB,
       addMongoDB,
-      addAngular,
       addReact,
       addVue,
       addFrontendMavenPlugin,

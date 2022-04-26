@@ -98,8 +98,8 @@ jobs:
   #--------------------------------------------------
   # Build native Linux image using GraalVM
   #--------------------------------------------------
-  build-native:
-    name: Build and publish a native (Linux) Docker image
+  build-native-image:
+    name: build-native-image
     runs-on: ubuntu-latest
     env:
       DOCKER_IMAGE_NAME: 'ghcr.io/jhipster/jhipster-lite/jhipster-native'

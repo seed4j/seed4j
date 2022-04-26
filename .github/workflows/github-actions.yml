@@ -96,6 +96,31 @@ jobs:
           path: '${{ github.workspace }}/target/*.jar'
           retention-days: 1
   #--------------------------------------------------
+  # Build native Linux image using GraalVM
+  #--------------------------------------------------
+  build-native:
+    name: Build and publish a native (Linux) Docker image
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_IMAGE_NAME: 'ghcr.io/jhipster/jhipster-lite/jhipster-native'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Login to GitHub Packages
+        run: docker login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          check-latest: false
+          cache: 'maven'
+      - name: Build the Docker image
+        run: mvn -Pnative spring-boot:build-image -Dspring-boot.build-image.imageName=${{ env.DOCKER_IMAGE_NAME }}:main -DskipTests
+      - name: Push to GitHub Packages
+        run: docker push ${{ env.DOCKER_IMAGE_NAME }}:main
+        if: ${{ github.repository == 'jhipster/jhipster-lite' && github.event_name != 'pull_request' }}
+  #--------------------------------------------------
   # Cypress
   #--------------------------------------------------
   cypress:

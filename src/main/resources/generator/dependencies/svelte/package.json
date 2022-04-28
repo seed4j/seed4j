@@ -14,7 +14,7 @@
     "@types/jest": "27.4.1",
     "@typescript-eslint/eslint-plugin": "5.21.0",
     "@typescript-eslint/parser": "5.21.0",
-    "babel-jest": "27.5.1",
+    "babel-jest": "28.0.2",
     "babel-plugin-transform-vite-meta-env": "1.0.3",
     "eslint": "8.14.0",
     "eslint-config-prettier": "8.5.0",

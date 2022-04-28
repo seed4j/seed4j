@@ -15,6 +15,7 @@ import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 public class SpringBootUserDomainService implements SpringBootUserService {
 
   private static final String SOURCE = "server/springboot/user/sqldatabase";
+  private static final String NO_SQL_SOURCE = "server/springboot/user/nosqldatabase";
   private static final String USER_CONTEXT = "user";
   private static final String USER_INFRASTRUCTURE_SECONDARY = getPath(USER_CONTEXT, INFRASTRUCTURE_SECONDARY);
   private static final String USER_DOMAIN = getPath(USER_CONTEXT, DOMAIN);
@@ -37,7 +38,7 @@ public class SpringBootUserDomainService implements SpringBootUserService {
     project.addDefaultConfig(PACKAGE_NAME);
     String packageNamePath = project.getPackageNamePath().orElse(getPath(PACKAGE_PATH));
     project.addConfig(USER_DATABASE_KEY, sqlDatabase.id());
-
+    String dynamicSource = getSource(sqlDatabase);
     if (isDatabaseWhichNoNeedsSequenceStrategy(sqlDatabase)) {
       projectRepository.template(
         project,
@@ -47,32 +48,34 @@ public class SpringBootUserDomainService implements SpringBootUserService {
         "UserEntity.java"
       );
     } else {
-      projectRepository.template(project, SOURCE, "UserEntity.java", getSqlJavaPath(packageNamePath, sqlDatabase));
+      projectRepository.template(project, dynamicSource, "UserEntity.java", getSqlJavaPath(packageNamePath, sqlDatabase));
     }
-    projectRepository.template(project, SOURCE, "UserJpaRepository.java", getSqlJavaPath(packageNamePath, sqlDatabase));
+    projectRepository.template(project, dynamicSource, "UserJpaRepository.java", getSqlJavaPath(packageNamePath, sqlDatabase));
     projectRepository.template(project, SOURCE, "UserConstants.java", getSqlDomainJavaPath(packageNamePath));
 
-    projectRepository.template(project, SOURCE, "UserEntityTest.java", getSqlJavaTestPath(packageNamePath, sqlDatabase));
-    projectRepository.template(project, SOURCE, "UserJpaRepositoryIT.java", getSqlJavaTestPath(packageNamePath, sqlDatabase));
+    projectRepository.template(project, dynamicSource, "UserEntityTest.java", getSqlJavaTestPath(packageNamePath, sqlDatabase));
+    projectRepository.template(project, dynamicSource, "UserJpaRepositoryIT.java", getSqlJavaTestPath(packageNamePath, sqlDatabase));
   }
 
   private void addAuthorityEntity(Project project, DatabaseType sqlDatabase) {
     project.addDefaultConfig(PACKAGE_NAME);
     String packageNamePath = project.getPackageNamePath().orElse(getPath(PACKAGE_PATH));
     project.addConfig(USER_DATABASE_KEY, sqlDatabase.id());
+    String dynamicSource = getSource(sqlDatabase);
 
-    projectRepository.template(project, SOURCE, "AuthorityEntity.java", getSqlJavaPath(packageNamePath, sqlDatabase));
-    projectRepository.template(project, SOURCE, "AuthorityJpaRepository.java", getSqlJavaPath(packageNamePath, sqlDatabase));
+    projectRepository.template(project, dynamicSource, "AuthorityEntity.java", getSqlJavaPath(packageNamePath, sqlDatabase));
+    projectRepository.template(project, dynamicSource, "AuthorityJpaRepository.java", getSqlJavaPath(packageNamePath, sqlDatabase));
 
-    projectRepository.template(project, SOURCE, "AuthorityEntityTest.java", getSqlJavaTestPath(packageNamePath, sqlDatabase));
+    projectRepository.template(project, dynamicSource, "AuthorityEntityTest.java", getSqlJavaTestPath(packageNamePath, sqlDatabase));
   }
 
   private void addAbstractAuditingEntity(Project project, DatabaseType sqlDatabase) {
     project.addDefaultConfig(PACKAGE_NAME);
     String packageNamePath = project.getPackageNamePath().orElse(getPath(PACKAGE_PATH));
     project.addConfig(USER_DATABASE_KEY, sqlDatabase.id());
+    String dynamicSource = getSource(sqlDatabase);
 
-    projectRepository.template(project, SOURCE, "AbstractAuditingEntity.java", getSqlJavaPath(packageNamePath, sqlDatabase));
+    projectRepository.template(project, dynamicSource, "AbstractAuditingEntity.java", getSqlJavaPath(packageNamePath, sqlDatabase));
   }
 
   private String getSqlJavaPath(String packageNamePath, DatabaseType sqlDatabase) {
@@ -95,7 +98,19 @@ public class SpringBootUserDomainService implements SpringBootUserService {
     return databaseType.equals(DatabaseType.MARIADB);
   }
 
+  private boolean isMongoDBDatabase(DatabaseType databaseType) {
+    return DatabaseType.MONGODB.equals(databaseType);
+  }
+
   private boolean isDatabaseWhichNoNeedsSequenceStrategy(DatabaseType databaseType) {
     return isMySQLDatabase(databaseType) || isMariaDBDatabase(databaseType);
+  }
+
+  private boolean isNoSQLDatabase(DatabaseType databaseType) {
+    return isMongoDBDatabase(databaseType);
+  }
+
+  private String getSource(DatabaseType databaseType) {
+    return isNoSQLDatabase(databaseType) ? NO_SQL_SOURCE + "/" + databaseType.id() : SOURCE;
   }
 }

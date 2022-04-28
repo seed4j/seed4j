@@ -1,0 +1,8 @@
+package {{packageName}}.user.infrastructure.secondary.{{sqlDatabaseName}};
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+/**
+ * Spring Data JPA repository for the {@link AuthorityEntity} entity.
+ */
+public interface AuthorityJpaRepository extends MongoRepository<AuthorityEntity, String> {}

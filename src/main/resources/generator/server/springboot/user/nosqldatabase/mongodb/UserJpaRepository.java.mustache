@@ -1,0 +1,27 @@
+package {{packageName}}.user.infrastructure.secondary.{{sqlDatabaseName}};
+
+import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+/**
+ * Spring Data JPA repository for the {@link UserEntity} entity.
+ */
+@Repository
+public interface UserJpaRepository extends MongoRepository<UserEntity, String> {
+  Optional<UserEntity> findOneByActivationKey(String activationKey);
+
+  List<UserEntity> findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(Instant dateTime);
+
+  Optional<UserEntity> findOneByResetKey(String resetKey);
+
+  Optional<UserEntity> findOneByEmailIgnoreCase(String email);
+
+  Optional<UserEntity> findOneByLogin(String login);
+
+  Page<UserEntity> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
+}

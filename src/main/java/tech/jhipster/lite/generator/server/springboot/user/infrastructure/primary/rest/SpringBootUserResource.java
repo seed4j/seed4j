@@ -1,6 +1,7 @@
 package tech.jhipster.lite.generator.server.springboot.user.infrastructure.primary.rest;
 
 import static tech.jhipster.lite.generator.project.domain.DatabaseType.MARIADB;
+import static tech.jhipster.lite.generator.project.domain.DatabaseType.MONGODB;
 import static tech.jhipster.lite.generator.project.domain.DatabaseType.MYSQL;
 import static tech.jhipster.lite.generator.project.domain.DatabaseType.POSTGRESQL;
 
@@ -60,6 +61,18 @@ class SpringBootUserResource {
   public void addUserAndAuthorityEntitiesForMariaDB(@RequestBody ProjectDTO projectDTO) {
     Project project = ProjectDTO.toProject(projectDTO);
     addUserAndAuthorityEntities(project, MARIADB);
+  }
+
+  @Operation(summary = "Add UserEntity, AuthorityEntity and JpaRepository for MongoDB")
+  @PostMapping("/mongodb")
+  @ApiResponse(
+    responseCode = "500",
+    description = "An error occurred while adding UserEntity, AuthorityEntity and JpaRepository for MongoDB"
+  )
+  @GeneratorStep(id = GeneratorAction.USER_AND_AUTHORITY_ENTITIES_MARIADB)
+  public void addUserAndAuthorityEntitiesForMongoDB(@RequestBody ProjectDTO projectDTO) {
+    Project project = ProjectDTO.toProject(projectDTO);
+    addUserAndAuthorityEntities(project, MONGODB);
   }
 
   private void addUserAndAuthorityEntities(Project project, DatabaseType sqlDatabase) {

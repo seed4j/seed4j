@@ -3,6 +3,7 @@ package tech.jhipster.lite.generator.server.springboot.user.infrastructure.prima
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static tech.jhipster.lite.generator.project.domain.DatabaseType.MARIADB;
+import static tech.jhipster.lite.generator.project.domain.DatabaseType.MONGODB;
 import static tech.jhipster.lite.generator.project.domain.DatabaseType.MYSQL;
 import static tech.jhipster.lite.generator.project.domain.DatabaseType.POSTGRESQL;
 import static tech.jhipster.lite.generator.server.springboot.user.application.SpringBootUserAssertFiles.assertFilesSqlJavaAuditEntity;
@@ -114,5 +115,28 @@ class SpringBootUserResourceIT {
     assertFilesSqlJavaAuditEntity(project, MARIADB);
 
     checkSequence(project, MARIADB);
+  }
+
+  @Test
+  @DisplayName("should add user and authority entities for MongoDB")
+  void shouldAddUserAndAuthorityEntitiesForMongoDB() throws Exception {
+    ProjectDTO projectDTO = TestUtils.readFileToObject("json/chips.json", ProjectDTO.class).folder(FileUtils.tmpDirForTest());
+    Project project = ProjectDTO.toProject(projectDTO);
+
+    mavenApplicationService.init(project);
+    springBootApplicationService.init(project);
+    mariaDbApplicationService.init(project);
+
+    mockMvc
+      .perform(
+        post("/api/servers/spring-boot/features/user/mongodb")
+          .contentType(MediaType.APPLICATION_JSON)
+          .content(TestUtils.convertObjectToJsonBytes(projectDTO))
+      )
+      .andExpect(status().isOk());
+
+    assertFilesSqlJavaUser(project, MONGODB);
+    assertFilesSqlJavaUserAuthority(project, MONGODB);
+    assertFilesSqlJavaAuditEntity(project, MONGODB);
   }
 }

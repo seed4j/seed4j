@@ -50,21 +50,6 @@ class AngularDomainServiceTest {
   }
 
   @Test
-  void shouldAddStyledAngular() {
-    Project project = tmpProjectWithPackageJson();
-    when(npmService.getVersion(anyString(), anyString())).thenReturn(Optional.of("0.0.0"));
-
-    assertThatCode(() -> angularDomainService.addStyledAngular(project)).doesNotThrowAnyException();
-  }
-
-  @Test
-  void shouldNotAddStyledAngular() {
-    Project project = tmpProjectWithPackageJson();
-
-    assertThatThrownBy(() -> angularDomainService.addStyledAngular(project)).isExactlyInstanceOf(GeneratorException.class);
-  }
-
-  @Test
   void shouldAddJwtAngular() {
     Project project = tmpProjectWithPackageJson();
     when(npmService.getVersion(anyString(), anyString())).thenReturn(Optional.of("0.0.0"));
@@ -163,7 +148,7 @@ class AngularDomainServiceTest {
 
     angularDomainService.addAngularFiles(project);
 
-    verify(projectRepository, times(14)).template(any(Project.class), anyString(), anyString(), anyString());
+    verify(projectRepository, times(15)).template(any(Project.class), anyString(), anyString(), anyString());
   }
 
   @Test

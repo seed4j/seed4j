@@ -1,7 +1,12 @@
 import { defineComponent, ref } from 'vue';
+import { DefaultButtonVue } from '@/common/primary/default-button';
 
 export default defineComponent({
   name: 'SvelteGeneratorComponent',
+
+  components: {
+    DefaultButtonVue,
+  },
 
   props: {
     project: {

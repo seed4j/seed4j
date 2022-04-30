@@ -1,116 +1,5 @@
 <template>
-  <header class="navbar navbar-expand-md bg-primary-dark bd-navbar shadow mb-3">
-    <nav class="container-fluid flex-wrap flex-md-nowrap align-text-center" aria-label="Main navigation">
-      <div class="navbar-brand text-decoration-none d-flex align-items-center gap-4">
-        <img src="../../../content/JHipster-Lite-neon-blue.png" alt="" width="48" />
-        <span class="fs-3 text-decoration-none text-white title" :data-selector="selectorPrefix + '.title'">JHipster lite</span>
-      </div>
-      <button
-        class="navbar-toggler text-primary"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#bdNavbar"
-        aria-controls="bdNavbar"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        width="36"
-        height="36"
-        fill-rule="evenodd"
-      >
-        <svg class="bi" viewBox="0 0 16 16" width="24" height="24" fill="#4ba8f8" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-          ></path>
-        </svg>
-      </button>
-
-      <div id="bdNavbar" class="collapse navbar-collapse fs-4">
-        <hr class="d-md-none text-white-50" />
-
-        <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
-          <li class="nav-item col-6 col-md-auto">
-            <a class="nav-link p-2" href="./swagger-ui.html" target="_blank" rel="noopener">
-              <em class="bi bi-book-half" role="img" aria-label="API"></em>
-              <small class="d-md-none ms-2">API</small>
-            </a>
-          </li>
-          <hr class="separator--vertical mx-2" />
-          <li class="nav-item col-6 col-md-auto">
-            <a class="nav-link p-2" href="https://www.jhipster.tech/" target="_blank" rel="noopener">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="36"
-                fill="currentColor"
-                fill-rule="evenodd"
-                class="navbar-nav-svg d-inline-block"
-                viewBox="0 0 120 60"
-                role="img"
-                aria-label="JHipster"
-              >
-                <g id="a" />
-                <g id="b">
-                  <g id="c">
-                    <g id="d">
-                      <path
-                        fill-opacity=".4"
-                        id="e"
-                        class="g"
-                        d="M69.88,20.11S10.53-14.33,5.4,7.08C.27,28.5-5.5,44.79,10.31,47.8c15.81,3.01,59.57-27.69,59.57-27.69Z"
-                      />
-                      <path
-                        id="f"
-                        class="h"
-                        d="M59.62,14.93c17.04-8.81,50.67-23.88,54.52-7.92,5.18,21.49,10.98,37.84-4.78,40.91-11.08,2.16-35.99-12.37-49.82-21.2-.01-10.44,.1-1.51,.09-11.79Z"
-                      />
-                    </g>
-                  </g>
-                </g>
-              </svg>
-              <small class="d-md-none ms-2">JHipster</small>
-            </a>
-          </li>
-          <li class="nav-item col-6 col-md-auto">
-            <a class="nav-link p-2" href="https://github.com/jhipster/jhipster-lite" target="_blank" rel="noopener">
-              <em class="bi bi-github" role="img" aria-label="GitHub"></em>
-              <small class="d-md-none ms-2">GitHub</small>
-            </a>
-          </li>
-          <li class="nav-item col-6 col-md-auto">
-            <a class="nav-link p-2" href="https://twitter.com/jhipster" target="_blank" rel="noopener">
-              <em class="bi bi-twitter" role="img" aria-label="twitter"></em>
-              <small class="d-md-none ms-2">Twitter</small>
-            </a>
-          </li>
-
-          <li class="nav-item col-6 col-md-auto">
-            <a class="nav-link p-2" href="https://opencollective.com/generator-jhipster" target="_blank" rel="noopener">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="36"
-                height="36"
-                fill="currentColor"
-                fill-rule="evenodd"
-                class="navbar-nav-svg d-inline-block"
-                viewBox="0 0 52 52"
-                role="img"
-                aria-label="Open collective"
-              >
-                <title>Open Collective</title>
-                <path
-                  fill-opacity=".4"
-                  d="M32.8 21c0 2.4-.8 4.9-2 6.9l5.1 5.1c2.5-3.4 4.1-7.6 4.1-12 0-4.6-1.6-8.8-4-12.2L30.7 14c1.2 2 2 4.3 2 7z"
-                ></path>
-                <path d="M20 33.7a12.8 12.8 0 0 1 0-25.6c2.6 0 5 .7 7 2.1L32 5a20 20 0 1 0 .1 31.9l-5-5.2a13 13 0 0 1-7 2z"></path>
-              </svg>
-              <small class="d-md-none">Open Collective</small>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-
+  <HeaderVue />
   <main class="container-fluid py-4">
     <div class="row">
       <div class="col-12 col-md-4 p-4 shadow-primary bg-light">
@@ -143,7 +32,10 @@
         <div class="row row-cols-1 row-cols-md-2 g-4">
           <div class="col">
             <div class="card h-100 text-white bg-dark bg-gradient shadow">
-              <h3 class="card-header h5 d-flex gap-3"><em class="bi bi-journal-code" aria-hidden="true"></em>Language</h3>
+              <h3 class="card-header h5 d-flex gap-3">
+                <IconVue :name="'journal-code'" :aria-hidden="true" />
+                Language
+              </h3>
               <div class="card-body">
                 <ul class="list-group--inline">
                   <li class="list-group-item align-items-center gap-3 py-2" aria-current="true">
@@ -160,7 +52,10 @@
 
           <div class="col">
             <div class="card h-100 text-white bg-primary bg-gradient shadow">
-              <h3 class="card-header h5 d-flex gap-3"><em class="bi bi-tools" aria-hidden="true"></em>Build tool</h3>
+              <h3 class="card-header h5 d-flex gap-3">
+                <IconVue :name="'tools'" :aria-hidden="true" />
+                Build tool
+              </h3>
               <div class="card-body">
                 <ul class="list-group--inline">
                   <li class="list-group-item align-items-center gap-3 py-2" aria-current="true">
@@ -199,7 +94,10 @@
 
           <div class="col">
             <div class="card h-100 text-white bg-secondary bg-gradient shadow">
-              <h3 class="card-header h5 d-flex gap-3"><em class="bi bi-gear" aria-hidden="true"></em>Server</h3>
+              <h3 class="card-header h5 d-flex gap-3">
+                <IconVue :name="'gear'" :aria-hidden="true" />
+                Server
+              </h3>
               <div class="card-body">
                 <ul class="list-group--inline">
                   <li class="list-group-item align-items-center gap-3 py-2" aria-current="true">
@@ -244,7 +142,10 @@
           </div>
           <div class="col">
             <div class="card h-100 text-dark bg-light shadow">
-              <h3 class="card-header h5 d-flex gap-3"><em class="bi bi-image-fill" aria-hidden="true"></em>Client</h3>
+              <h3 class="card-header h5 d-flex gap-3">
+                <IconVue :name="'image-fill'" :aria-hidden="true" />
+                Client
+              </h3>
               <div class="card-body">
                 <ul class="list-group--inline">
                   <li class="list-group-item align-items-center gap-3 py-2" aria-current="true">
@@ -336,7 +237,7 @@
         </div>
       </div>
     </div>
-    <div class="row my-4 d-flex align-items-start shadow">
+    <div class="row mt-4 d-flex align-items-start shadow">
       <div class="col-12 col-md-4 col-lg-4 px-0">
         <ul id="v-pills-tab" class="nav nav-pills flex-column nav-fill" role="tablist" aria-orientation="vertical">
           <li class="nav-item">
@@ -350,7 +251,7 @@
               aria-controls="v-pills-init"
               aria-selected="true"
             >
-              <em class="bi bi-code-slash" aria-hidden="true"></em>
+              <IconVue :name="'code-slash'" :aria-hidden="true" />
               INITIALIZATION
             </button>
           </li>
@@ -411,8 +312,7 @@
                   />
                   <path
                     fill="#FFFFFF"
-                    d="M125,52.1L66.8,182.6h0h21.7h0l11.7-29.2h49.4l11.7,29.2h0h21.7h0L125,52.1L125,52.1L125,52.1L125,52.1
-		L125,52.1z M142,135.4H108l17-40.9L142,135.4z"
+                    d="M125,52.1L66.8,182.6h0h21.7h0l11.7-29.2h49.4l11.7,29.2h0h21.7h0L125,52.1L125,52.1L125,52.1L125,52.1L125,52.1z M142,135.4H108l17-40.9L142,135.4z"
                   />
                 </g>
               </svg>
@@ -485,78 +385,63 @@
       <div class="col py-2">
         <div id="v-pills-tab" class="tab-content">
           <div id="v-pills-init" class="tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-home-tab">
-            <button id="init" class="btn btn-outline-primary" :data-selector="selectorPrefix + '.init-button'" @click.prevent="initProject">
-              Init
-            </button>
-            <br />
-            <br />
-            <button
-              v-if="buildTool === 'maven'"
-              id="maven"
-              class="btn btn-outline-primary"
-              :data-selector="selectorPrefix + '.add-maven-button'"
-              @click.prevent="addMaven"
-            >
-              Maven
-            </button>
-
-            <button
-              id="jacoco"
-              class="btn btn-outline-primary"
-              :data-selector="selectorPrefix + '.add-jacoco-button'"
-              @click.prevent="addJaCoCo"
-            >
-              JaCoCo
-            </button>
-
-            <button
-              id="sonar-backend"
-              class="btn btn-outline-primary"
-              :data-selector="selectorPrefix + '.add-sonar-backend-button'"
-              @click.prevent="addSonarBackend"
-            >
-              Sonar Backend
-            </button>
-
-            <button
-              id="sonar-backend-frontend"
-              class="btn btn-outline-primary"
-              :data-selector="selectorPrefix + '.add-sonar-backend-frontend-button'"
-              @click.prevent="addSonarBackendFrontend"
-            >
-              Sonar Backend+Frontend
-            </button>
-            <br />
-            <br />
-            <button
-              id="javabase"
-              class="btn btn-outline-primary"
-              :data-selector="selectorPrefix + '.add-java-base-button'"
-              @click.prevent="addJavaBase"
-            >
-              Java Base
-            </button>
-            <br />
-            <br />
-            <button
-              id="frontend-maven-plugin"
-              class="btn btn-outline-primary"
-              :data-selector="selectorPrefix + '.add-frontend-maven-plugin-button'"
-              @click.prevent="addFrontendMavenPlugin"
-            >
-              Frontend Maven Plugin
-            </button>
-            <br />
-            <br />
-            <button
-              v-if="project.folder !== ''"
-              id="download"
-              class="btn btn-outline-primary"
-              :data-selector="selectorPrefix + '.download-button'"
-              @click.prevent="download"
-            >
-              Download
-            </button>
+            <div class="d-flex flex-column gap-3">
+              <div>
+                <DefaultButtonVue id="init" :label="'Init'" :data-selector="selectorPrefix + '.init-button'" @click.prevent="initProject" />
+              </div>
+              <div>
+                <DefaultButtonVue
+                  v-if="buildTool === 'maven'"
+                  id="maven"
+                  :label="'Maven'"
+                  :data-selector="selectorPrefix + '.add-maven-button'"
+                  @click.prevent="addMaven"
+                />
+                <DefaultButtonVue
+                  id="jacoco"
+                  :label="'JaCoCo'"
+                  :data-selector="selectorPrefix + '.add-jacoco-button'"
+                  @click.prevent="addJaCoCo"
+                />
+                <DefaultButtonVue
+                  id="sonar-backend"
+                  :label="'Sonar Backend'"
+                  :data-selector="selectorPrefix + '.add-sonar-backend-button'"
+                  @click.prevent="addSonarBackend"
+                />
+                <DefaultButtonVue
+                  id="sonar-backend-frontend"
+                  :label="'Sonar Backend+Frontend'"
+                  :data-selector="selectorPrefix + '.add-sonar-backend-frontend-button'"
+                  @click.prevent="addSonarBackendFrontend"
+                />
+              </div>
+              <div>
+                <DefaultButtonVue
+                  id="javabase"
+                  :label="'Java Base'"
+                  :data-selector="selectorPrefix + '.add-java-base-button'"
+                  @click.prevent="addJavaBase"
+                />
+              </div>
+              <div>
+                <DefaultButtonVue
+                  id="frontend-maven-plugin"
+                  :label="'Frontend Maven Plugin'"
+                  :data-selector="selectorPrefix + '.add-frontend-maven-plugin-button'"
+                  @click.prevent="addFrontendMavenPlugin"
+                />
+              </div>
+              <div>
+                <DefaultButtonVue
+                  v-if="project.folder !== ''"
+                  id="download"
+                  :label="'Download'"
+                  :data-selector="selectorPrefix + '.download-button'"
+                  @click.prevent="download"
+                />
+              </div>
+            </div>
           </div>
           <SpringBootGeneratorVue v-if="server === 'springboot'" :project="project" />
           <AngularGeneratorVue v-if="client === 'angular'" :project="project" />

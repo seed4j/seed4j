@@ -71,26 +71,6 @@ describe('AngularGenerator', () => {
     });
   });
 
-  it('should add Angular with Style when checkbox is checked', async () => {
-    const angularService = stubAngularService();
-    angularService.addWithStyle.resolves({});
-    await wrap({ angularService, project: createProjectToUpdate({ folder: 'project/path' }) });
-
-    const checkbox = wrapper.find('#angular-with-style');
-    await checkbox.setValue(true);
-    const button = wrapper.find('#angular');
-    await button.trigger('click');
-
-    const args = angularService.addWithStyle.getCall(0).args[0];
-    expect(args).toEqual({
-      baseName: 'beer',
-      folder: 'project/path',
-      projectName: 'Beer Project',
-      packageName: 'tech.jhipster.beer',
-      serverPort: 8080,
-    });
-  });
-
   it('should handle error on adding Angular failure', async () => {
     const logger = stubLogger();
     const angularService = stubAngularService();
@@ -102,20 +82,5 @@ describe('AngularGenerator', () => {
 
     const [message] = logger.error.getCall(0).args;
     expect(message).toBe('Adding Angular to project failed');
-  });
-
-  it('should handle error on adding Angular with style failure', async () => {
-    const logger = stubLogger();
-    const angularService = stubAngularService();
-    angularService.addWithStyle.rejects({});
-    await wrap({ angularService, logger, project: createProjectToUpdate({ folder: 'path' }) });
-
-    const checkbox = wrapper.find('#angular-with-style');
-    await checkbox.setValue(true);
-    const initButton = wrapper.find('#angular');
-    await initButton.trigger('click');
-
-    const [message] = logger.error.getCall(0).args;
-    expect(message).toBe('Adding Angular with style to project failed');
   });
 });

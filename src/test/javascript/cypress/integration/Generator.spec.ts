@@ -1,6 +1,7 @@
 import { composeSelector, dataSelector } from '../support/selector';
 
 const generatorSelector = (name: string) => dataSelector(composeSelector('generator', name));
+const headerSelector = (name: string) => dataSelector(composeSelector('header', name));
 const springBootGeneratorSelector = (name: string) => dataSelector(composeSelector('spring-boot-generator', name));
 const angularGeneratorSelector = (name: string) => dataSelector(composeSelector('angular-generator', name));
 const reactGeneratorSelector = (name: string) => dataSelector(composeSelector('react-generator', name));
@@ -17,7 +18,7 @@ describe('Generator', () => {
   });
 
   it('should display generator page', () => {
-    cy.get(generatorSelector('title')).contains('JHipster lite');
+    cy.get(headerSelector('title')).contains('JHipster lite');
 
     cy.get(generatorSelector('init-button')).contains('Init');
     cy.get(generatorSelector('add-maven-button')).contains('Maven');

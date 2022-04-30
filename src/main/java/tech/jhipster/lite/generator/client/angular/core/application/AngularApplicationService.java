@@ -17,10 +17,6 @@ public class AngularApplicationService {
     angularService.addAngular(project);
   }
 
-  public void addStyledAngular(Project project) {
-    angularService.addStyledAngular(project);
-  }
-
   public void addJwtAngular(Project project) {
     angularService.addJwtAngular(project);
   }

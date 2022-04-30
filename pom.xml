@@ -32,7 +32,7 @@
     <java.version>17</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <node.version>v16.14.2</node.version>
+    <node.version>v16.15.0</node.version>
     <npm.version>8.5.0</npm.version>
 
     <maven.version>3.8.5</maven.version>

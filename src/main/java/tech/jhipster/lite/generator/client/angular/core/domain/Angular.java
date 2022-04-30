@@ -9,6 +9,7 @@ public class Angular {
   public static final String APP_COMPONENT = "app.component.ts";
   public static final String APP_COMPONENT_SPEC = "app.component.spec.ts";
   public static final String APP_COMPONENT_HTML = "app.component.html";
+  public static final String APP_COMPONENT_CSS = "app.component.css";
 
   private Angular() {}
 
@@ -79,6 +80,7 @@ public class Angular {
       Map.entry(APP_MODULE, primaryApp),
       Map.entry(APP_COMPONENT, primaryApp),
       Map.entry(APP_COMPONENT_HTML, primaryApp),
+      Map.entry(APP_COMPONENT_CSS, primaryApp),
       Map.entry("app-routing.module.ts", primaryApp),
       Map.entry("app-routing.module.spec.ts", primaryApp),
       Map.entry(APP_COMPONENT_SPEC, primaryApp),

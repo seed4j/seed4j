@@ -15,9 +15,7 @@
         </span>
       </label>
     </div>
-    <button id="vue" class="btn btn-outline-primary" :data-selector="selectorPrefix + '.add-vue-button'" @click.prevent="addVue">
-      Generate Vue.js
-    </button>
+    <DefaultButtonVue id="vue" :label="'Generate Vue.js'" :data-selector="selectorPrefix + '.add-vue-button'" @click.prevent="addVue" />
   </div>
 </template>
 

@@ -15,9 +15,12 @@
         </span>
       </label>
     </div>
-    <button id="react" class="btn btn-outline-primary" :data-selector="selectorPrefix + '.add-react-button'" @click.prevent="addReact">
-      Generate React
-    </button>
+    <DefaultButtonVue
+      id="react"
+      :label="'Generate React'"
+      :data-selector="selectorPrefix + '.add-react-button'"
+      @click.prevent="addReact"
+    />
   </div>
 </template>
 

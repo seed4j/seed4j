@@ -1,115 +1,87 @@
 <template>
   <div id="v-pills-springboot" class="tab-pane fade" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-    <button
-      id="springboot"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-button'"
-      @click.prevent="addSpringBoot"
-    >
-      Spring Boot
-    </button>
-
-    <button
-      id="springbootmvctomcat"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-mvc-tomcat-button'"
-      @click.prevent="addSpringBootMvcTomcat"
-    >
-      Spring MVC Tomcat
-    </button>
-
-    <button
-      id="springbootwebfluxnetty"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-webflux-netty-button'"
-      @click.prevent="addSpringBootWebfluxNetty"
-    >
-      Spring Webflux Netty
-    </button>
-
-    <button
-      id="springboot-actuator"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-actuator-button'"
-      @click.prevent="addSpringBootActuator"
-    >
-      Spring Boot Actuator
-    </button>
-    <br />
-    <br />
-    <button
-      id="springboot-aop"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-aop-button'"
-      @click.prevent="addSpringBootAopLogging"
-    >
-      AOP Logging
-    </button>
-
-    <button
-      id="springboot-logstash"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-logstash-button'"
-      @click.prevent="addSpringBootLogstash"
-    >
-      Logstash
-    </button>
-    <br />
-    <br />
-    <button
-      id="springboot-jwt"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-jwt-button'"
-      @click.prevent="addSpringBootSecurityJWT"
-    >
-      Security JWT
-    </button>
-
-    <button
-      id="springboot-jwt-basic-auth"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-jwt-basic-auth-button'"
-      @click.prevent="addSpringBootSecurityJWTBasicAuth"
-    >
-      Security JWT Basic Auth
-    </button>
-    <br />
-    <br />
-    <button
-      id="springboot-database-postgresql"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-database-postgresql-button'"
-      @click.prevent="addPostgreSQL"
-    >
-      PostgreSQL
-    </button>
-
-    <button
-      id="springboot-database-mysql"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-database-mysql-button'"
-      @click.prevent="addMySQL"
-    >
-      MySQL
-    </button>
-
-    <button
-      id="springboot-database-mariadb"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-database-mariadb-button'"
-      @click.prevent="addMariaDB"
-    >
-      MariaDB
-    </button>
-
-    <button
-      id="springboot-database-mongodb"
-      class="btn btn-outline-primary"
-      :data-selector="selectorPrefix + '.add-spring-boot-database-mongodb-button'"
-      @click.prevent="addMongoDB"
-    >
-      MongoDB
-    </button>
+    <div class="d-flex flex-column gap-3">
+      <div>
+        <DefaultButtonVue
+          id="springboot"
+          :label="'Spring Boot'"
+          :data-selector="selectorPrefix + '.add-spring-boot-button'"
+          @click.prevent="addSpringBoot"
+        />
+        <DefaultButtonVue
+          id="springbootmvctomcat"
+          :label="'Spring MVC Tomcat'"
+          :data-selector="selectorPrefix + '.add-spring-boot-mvc-tomcat-button'"
+          @click.prevent="addSpringBootMvcTomcat"
+        />
+        <DefaultButtonVue
+          id="springbootwebfluxnetty"
+          :label="'Spring Webflux Netty'"
+          :data-selector="selectorPrefix + '.add-spring-boot-webflux-netty-button'"
+          @click.prevent="addSpringBootWebfluxNetty"
+        />
+        <DefaultButtonVue
+          id="springboot-actuator"
+          :label="'Spring Boot Actuator'"
+          :data-selector="selectorPrefix + '.add-spring-boot-actuator-button'"
+          @click.prevent="addSpringBootActuator"
+        />
+      </div>
+      <div>
+        <DefaultButtonVue
+          id="springboot-aop"
+          :label="'AOP Logging'"
+          :data-selector="selectorPrefix + '.add-spring-boot-aop-button'"
+          @click.prevent="addSpringBootAopLogging"
+        />
+        <DefaultButtonVue
+          id="springboot-logstash"
+          :label="'Logstash'"
+          :data-selector="selectorPrefix + '.add-spring-boot-logstash-button'"
+          @click.prevent="addSpringBootLogstash"
+        />
+      </div>
+      <div>
+        <DefaultButtonVue
+          id="springboot-jwt"
+          :label="'Security JWT'"
+          :data-selector="selectorPrefix + '.add-spring-boot-jwt-button'"
+          @click.prevent="addSpringBootSecurityJWT"
+        />
+        <DefaultButtonVue
+          id="springboot-jwt-basic-auth"
+          :label="'Security JWT Basic Auth'"
+          :data-selector="selectorPrefix + '.add-spring-boot-jwt-basic-auth-button'"
+          @click.prevent="addSpringBootSecurityJWTBasicAuth"
+        />
+      </div>
+      <div>
+        <DefaultButtonVue
+          id="springboot-database-postgresql"
+          :label="'PostgreSQL'"
+          :data-selector="selectorPrefix + '.add-spring-boot-database-postgresql-button'"
+          @click.prevent="addPostgreSQL"
+        />
+        <DefaultButtonVue
+          id="springboot-database-mysql"
+          :label="'MySQL'"
+          :data-selector="selectorPrefix + '.add-spring-boot-database-mysql-button'"
+          @click.prevent="addMySQL"
+        />
+        <DefaultButtonVue
+          id="springboot-database-mariadb"
+          :label="'MariaDB'"
+          :data-selector="selectorPrefix + '.add-spring-boot-database-mariadb-button'"
+          @click.prevent="addMariaDB"
+        />
+        <DefaultButtonVue
+          id="springboot-database-mongodb"
+          :label="'MongoDB'"
+          :data-selector="selectorPrefix + '.add-spring-boot-database-mongodb-button'"
+          @click.prevent="addMongoDB"
+        />
+      </div>
+    </div>
   </div>
 </template>
 

@@ -33,13 +33,7 @@ public class AngularDomainService implements AngularService {
   @Override
   public void addAngular(Project project) {
     addCommonAngular(project);
-    addAppFilesWithoutCss(project);
-  }
-
-  @Override
-  public void addStyledAngular(Project project) {
-    addCommonAngular(project);
-    addAppFilesWithCss(project);
+    addAppFiles(project);
   }
 
   @Override
@@ -56,25 +50,12 @@ public class AngularDomainService implements AngularService {
     addAngularFiles(project);
   }
 
-  public void addAppFilesWithoutCss(Project project) {
+  public void addAppFiles(Project project) {
     project.addDefaultConfig(BASE_NAME);
 
     projectRepository.template(project, SOURCE_PRIMARY, APP_COMPONENT_HTML, DESTINATION_PRIMARY);
     projectRepository.template(project, SOURCE_PRIMARY, APP_COMPONENT, DESTINATION_PRIMARY);
-  }
 
-  public void addAppFilesWithCss(Project project) {
-    project.addDefaultConfig(BASE_NAME);
-
-    projectRepository.template(project, SOURCE_PRIMARY, "styledApp.component.html", DESTINATION_PRIMARY, APP_COMPONENT_HTML);
-    projectRepository.template(project, SOURCE_PRIMARY, "styledApp.component.ts", DESTINATION_PRIMARY, APP_COMPONENT);
-
-    projectRepository.template(
-      project,
-      getPath(SOURCE_WEBAPP, "app/common/primary/app"),
-      "app.component.css",
-      getPath(MAIN_WEBAPP, "app/common/primary/app")
-    );
     addImages(project);
   }
 

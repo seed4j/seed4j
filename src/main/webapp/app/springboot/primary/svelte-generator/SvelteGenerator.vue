@@ -15,9 +15,12 @@
         </span>
       </label>
     </div>
-    <button id="svelte" class="btn btn-outline-primary" :data-selector="selectorPrefix + '.add-svelte-button'" @click.prevent="">
-      Generate Svelte (not implemented)
-    </button>
+    <DefaultButtonVue
+      id="svelte"
+      :label="'Generate Svelte (not implemented)'"
+      :data-selector="selectorPrefix + '.add-svelte-button'"
+      @click.prevent=""
+    />
   </div>
 </template>
 

@@ -5,6 +5,6 @@ export interface ProjectHistoryServiceFixture extends ProjectHistoryService {
   get: SinonStub;
 }
 
-export const stubProjectService = (): ProjectHistoryServiceFixture => ({
+export const stubProjectHistoryService = (): ProjectHistoryServiceFixture => ({
   get: sinon.stub(),
 });

@@ -13,15 +13,15 @@
   <packaging>pom</packaging>
 
   <properties>
-    <jjwt.version>0.11.3</jjwt.version>
+    <jjwt.version>0.11.5</jjwt.version>
     <logstash-logback-encoder.version>7.1.1</logstash-logback-encoder.version>
     <problem-spring.version>0.27.0</problem-spring.version>
     <spring-boot.version>2.6.7</spring-boot.version>
     <spring-cloud.version>2021.0.0</spring-cloud.version>
-    <spring-cloud-netflix-eureka-client.version>3.1.1</spring-cloud-netflix-eureka-client.version>
+    <spring-cloud-netflix-eureka-client.version>3.1.2</spring-cloud-netflix-eureka-client.version>
     <springdoc-openapi.version>1.6.8</springdoc-openapi.version>
     <testcontainers.version>1.16.2</testcontainers.version>
-    <node.version>v16.14.2</node.version>
+    <node.version>v16.15.0</node.version>
     <npm.version>8.5.0</npm.version>
     <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
     <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
@@ -29,7 +29,7 @@
     <properties-maven-plugin.version>1.1.0</properties-maven-plugin.version>
     <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
     <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
-    <flyway.version>8.5.9</flyway.version>
+    <flyway.version>8.5.10</flyway.version>
     <mongock.version>5.0.41</mongock.version>
     <archunit-junit5.version>0.23.1</archunit-junit5.version>
   </properties>

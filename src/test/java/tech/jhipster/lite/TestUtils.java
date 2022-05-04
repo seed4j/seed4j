@@ -137,6 +137,19 @@ public class TestUtils {
     return project;
   }
 
+  public static Project tmpProjectWithPackageJsonPinia() {
+    Project project = tmpProject();
+    copyPackageJsonByName(project, "package-pinia.json");
+    return project;
+  }
+
+  public static Project tmpProjectWithPiniaAndAppContext() {
+    Project project = tmpProject();
+    copyPackageJsonByName(project, "package-pinia.json");
+    copyVueAppFiles(project);
+    return project;
+  }
+
   public static Project tmpProjectWithBuildGradle() {
     Project project = tmpProject();
     copyBuildGradle(project);
@@ -253,6 +266,27 @@ public class TestUtils {
       Files.copy(
         getPathOf("src/test/resources/generator/server/springboot/liquibase/master.test.xml"),
         getPathOf(project.getFolder(), "src/main/resources/config/liquibase", LIQUIBASE_MASTER_XML)
+      );
+    } catch (IOException e) {
+      throw new AssertionError(e);
+    }
+  }
+
+  private static void copyVueAppFiles(Project project) {
+    try {
+      FileUtils.createFolder(getPath(project.getFolder(), "src/main/webapp/app/common/primary/app"));
+      FileUtils.createFolder(getPath(project.getFolder(), "src/main/webapp/app/router"));
+      Files.copy(
+        getPathOf("src/main/resources/generator/client/vue/webapp/app/common/primary/app/App.html.mustache"),
+        getPathOf(project.getFolder(), "src/main/webapp/app/common/primary/app", "App.html")
+      );
+      Files.copy(
+        getPathOf("src/main/resources/generator/client/vue/webapp/app/common/primary/app/App.component.ts.mustache"),
+        getPathOf(project.getFolder(), "src/main/webapp/app/common/primary/app", "App.component.ts")
+      );
+      Files.copy(
+        getPathOf("src/main/resources/generator/client/vue/webapp/app/router/router.ts.mustache"),
+        getPathOf(project.getFolder(), "src/main/webapp/app/router", "router.ts")
       );
     } catch (IOException e) {
       throw new AssertionError(e);

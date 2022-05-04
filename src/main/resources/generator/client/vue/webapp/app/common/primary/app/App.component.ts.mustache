@@ -1,8 +1,16 @@
-export default {
+import { defineComponent } from "vue";
+// needle-jhipster-import
+
+export default defineComponent({
   name: 'App',
-  data: () => {
+  components: {},
+  setup() {
+    const appName='Jhipster-lite';
+    // needle-jhipster-setup
+
     return {
-      appName: '{{baseName}}',
+      appName,
+      // needle-jhipster-return
     };
   },
-};
+});

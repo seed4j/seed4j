@@ -1,0 +1,26 @@
+package {{packageName}}.account.infrastructure.primary.rest;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import {{packageName}}.UnitTest;
+import org.junit.jupiter.api.Test;
+
+@UnitTest
+class restLoginTest {
+
+  @Test
+  void shouldBuild() {
+    restLogin restLogin = new restLogin();
+    restLogin.setUsername("admin");
+    restLogin.setPassword("password");
+    restLogin.setRememberMe(true);
+
+    assertThat(restLogin.getUsername()).isEqualTo("admin");
+    assertThat(restLogin.getPassword()).isEqualTo("password");
+    assertThat(restLogin.isRememberMe()).isTrue();
+
+    assertThat(restLogin.toString()).contains("admin");
+    assertThat(restLogin.toString()).doesNotContain("password");
+  }
+}

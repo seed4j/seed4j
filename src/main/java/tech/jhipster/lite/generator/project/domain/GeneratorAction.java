@@ -125,6 +125,7 @@ public class GeneratorAction {
 
   public static final String VUE = "vue";
   public static final String VUE_PINIA = "vue-pinia";
+  public static final String VUE_JWT = "vue-jwt";
 
   public static final String JIB = "jib";
   public static final String DOCKERFILE = "dockerfile";

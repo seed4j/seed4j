@@ -1,0 +1,13 @@
+import { Login } from '@/common/domain/Login';
+
+export interface restLogin {
+  username: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+export const torestLogin = (login: Login): restLogin => ({
+  username: login.username,
+  password: login.password,
+  rememberMe: login.rememberMe,
+});

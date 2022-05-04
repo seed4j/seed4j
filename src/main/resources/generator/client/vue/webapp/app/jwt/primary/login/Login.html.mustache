@@ -1,0 +1,11 @@
+<div id="login">
+  <form @submit.prevent="onSubmit">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" v-model="form.username" />
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" v-model="form.password" />
+    <label for="remember">Remember Me</label>
+    <input type="checkbox" id="remember" name="rememberMe" v-model="form.rememberMe" />
+    <input type="submit" id="submit" value="Submit" class="btn btn-block" />
+  </form>
+</div>

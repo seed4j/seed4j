@@ -137,6 +137,12 @@ public class TestUtils {
     return project;
   }
 
+  public static Project tmpProjectWithPackageJsonPinia() {
+    Project project = tmpProject();
+    copyPackageJsonByName(project, "package-pinia.json");
+    return project;
+  }
+
   public static Project tmpProjectWithBuildGradle() {
     Project project = tmpProject();
     copyBuildGradle(project);
@@ -186,6 +192,15 @@ public class TestUtils {
     try {
       FileUtils.createFolder(project.getFolder());
       Files.copy(getPathOf("src/test/resources/generator/command/package-test.json"), getPathOf(project.getFolder(), PACKAGE_JSON));
+    } catch (IOException e) {
+      throw new AssertionError(e);
+    }
+  }
+
+  public static void copyPackageJsonWithPinia(Project project) {
+    try {
+      FileUtils.createFolder(project.getFolder());
+      Files.copy(getPathOf("src/test/resources/generator/command/package-test-pinia.json"), getPathOf(project.getFolder(), PACKAGE_JSON));
     } catch (IOException e) {
       throw new AssertionError(e);
     }

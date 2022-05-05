@@ -8,7 +8,7 @@ import tech.jhipster.lite.generator.init.application.InitApplicationService;
 
 @IntegrationTest
 @AutoConfigureMockMvc
-class JWTResourceIT {
+class VueJwtResourceIT {
 
   @Autowired
   MockMvc mockMvc;

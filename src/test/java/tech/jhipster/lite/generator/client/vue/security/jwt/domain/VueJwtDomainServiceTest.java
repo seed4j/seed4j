@@ -13,36 +13,35 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.error.domain.MissingMandatoryValueException;
-import tech.jhipster.lite.generator.packagemanager.npm.domain.NpmService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
 @UnitTest
 @ExtendWith(MockitoExtension.class)
-class JWTDomainServiceTest {
+class VueJwtDomainServiceTest {
 
   @Mock
   ProjectRepository projectRepository;
 
   @InjectMocks
-  private JWTDomainService jwtDomainService;
+  private VueJwtDomainService jwtDomainService;
 
   @Test
-  void shouldAddJWT() {
+  void shouldAddVueJwt() {
     Project project = tmpProjectWithPackageJsonPinia();
 
     assertThatCode(() -> jwtDomainService.addJWT(project)).doesNotThrowAnyException();
   }
 
   @Test
-  void shouldNotAddJWT() {
+  void shouldNotAddVueJwt() {
     Project project = tmpProjectWithPackageJson();
 
     assertThatThrownBy(() -> jwtDomainService.addJWT(project)).isExactlyInstanceOf(GeneratorException.class);
   }
 
   @Test
-  void shouldNotaddJWTWhenNoProject() {
+  void shouldNotaddVueJwtWhenNoProject() {
     assertThatThrownBy(() -> jwtDomainService.addJWT(null))
       .isExactlyInstanceOf(MissingMandatoryValueException.class)
       .hasMessageContaining("project");

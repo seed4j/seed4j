@@ -2,21 +2,21 @@ package tech.jhipster.lite.generator.client.vue.security.jwt.infrastructure.conf
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import tech.jhipster.lite.generator.client.vue.security.jwt.domain.JWTDomainService;
-import tech.jhipster.lite.generator.client.vue.security.jwt.domain.JWTService;
+import tech.jhipster.lite.generator.client.vue.security.jwt.domain.VueJwtDomainService;
+import tech.jhipster.lite.generator.client.vue.security.jwt.domain.VueJwtService;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 
 @Configuration
-public class JWTBeanConfiguration {
+public class VueJwtBeanConfiguration {
 
   private final ProjectRepository projectRepository;
 
-  public JWTBeanConfiguration(ProjectRepository projectRepository) {
+  public VueJwtBeanConfiguration(ProjectRepository projectRepository) {
     this.projectRepository = projectRepository;
   }
 
   @Bean
-  public JWTService jwtService() {
-    return new JWTDomainService(projectRepository);
+  public VueJwtService jwtService() {
+    return new VueJwtDomainService(projectRepository);
   }
 }

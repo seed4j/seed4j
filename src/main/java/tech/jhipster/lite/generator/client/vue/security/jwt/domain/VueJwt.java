@@ -6,9 +6,9 @@ import java.util.List;
 import tech.jhipster.lite.common.domain.FileUtils;
 import tech.jhipster.lite.generator.project.domain.Project;
 
-public class JWT {
+public class VueJwt {
 
-  private JWT() {}
+  private VueJwt() {}
 
   public static final String PACKAGE_JSON = "package.json";
 

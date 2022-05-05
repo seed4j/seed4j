@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import tech.jhipster.lite.IntegrationTest;
-import tech.jhipster.lite.generator.client.vue.core.domain.VueDomainService;
-import tech.jhipster.lite.generator.client.vue.security.jwt.domain.JWTDomainService;
+import tech.jhipster.lite.generator.client.vue.security.jwt.domain.VueJwtDomainService;
 
 @IntegrationTest
 class JWTBeanConfigurationIT {
@@ -17,6 +16,6 @@ class JWTBeanConfigurationIT {
 
   @Test
   void shouldGetBean() {
-    assertThat(applicationContext.getBean("jwtService")).isNotNull().isInstanceOf(JWTDomainService.class);
+    assertThat(applicationContext.getBean("jwtService")).isNotNull().isInstanceOf(VueJwtDomainService.class);
   }
 }

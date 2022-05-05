@@ -8,16 +8,16 @@ import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.generator.project.domain.Project;
 
 @IntegrationTest
-class JWTApplicationServiceIT {
+class VueJwtApplicationServiceIT {
 
   @Autowired
-  JWTApplicationService jwtApplicationService;
+  VueJwtApplicationService vueJwtApplicationService;
 
   @Test
-  void shouldAddJWT() {
+  void shouldAddVueJwt() {
     Project project = tmpProjectWithPackageJsonPinia();
 
-    jwtApplicationService.addJWT(project);
+    vueJwtApplicationService.addJWT(project);
     assertFileExist(project, "src/main/webapp/app/common/domain/Login.ts");
     assertFileExist(project, "src/main/webapp/app/common/primary/login/index.ts");
     assertFileExist(project, "src/main/webapp/app/common/primary/login/Login.component.ts");

@@ -72,7 +72,7 @@ public final class MongodbAssert {
       FileUtils.getPath(MAIN_JAVA, mongodbPath, "MongodbDatabaseConfiguration.java"),
       "package " + packageName + ".technical.infrastructure.secondary.mongodb;"
     );
-
+    assertFileExist(project, getPath(MAIN_JAVA, packageNamePath + "/security", "SpringSecurityAuditorAware.java"));
     assertFileExist(project, getPath(MAIN_JAVA, mongodbPath, "JSR310DateConverters.java"));
     assertFileContent(
       project,

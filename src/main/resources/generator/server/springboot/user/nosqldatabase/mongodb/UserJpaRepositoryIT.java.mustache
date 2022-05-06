@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.filter;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +45,7 @@ class UserJpaRepositoryIT {
   @Test
   void shouldFindAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore() {
     List<UserEntity> userEntityList = userJpaRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(
-      Instant.parse("2022-02-22T10:11:12.000Z")
+      Instant.now().plus(1, ChronoUnit.DAYS)
     );
     assertThat(userEntityList).isNotEmpty();
     assertThat(filter(userEntityList).with("login").equalsTo(LOGIN).get()).isNotEmpty();

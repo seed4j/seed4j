@@ -69,7 +69,7 @@ class SpringBootUserResource {
     responseCode = "500",
     description = "An error occurred while adding UserEntity, AuthorityEntity and JpaRepository for MongoDB"
   )
-  @GeneratorStep(id = GeneratorAction.USER_AND_AUTHORITY_ENTITIES_MARIADB)
+  @GeneratorStep(id = GeneratorAction.USER_AND_AUTHORITY_ENTITIES_MONGODB)
   public void addUserAndAuthorityEntitiesForMongoDB(@RequestBody ProjectDTO projectDTO) {
     Project project = ProjectDTO.toProject(projectDTO);
     addUserAndAuthorityEntities(project, MONGODB);

@@ -59,7 +59,7 @@ class MongodbDomainServiceTest {
 
     verify(buildToolService, times(2)).addDependency(any(Project.class), any(Dependency.class));
 
-    verify(projectRepository, times(6)).template(any(Project.class), anyString(), anyString(), anyString());
+    verify(projectRepository, times(7)).template(any(Project.class), anyString(), anyString(), anyString());
 
     verify(springBootCommonService).addPropertiesComment(any(Project.class), anyString());
     verify(springBootCommonService, times(2)).addProperties(any(Project.class), anyString(), any());

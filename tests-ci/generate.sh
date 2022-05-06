@@ -184,6 +184,7 @@ elif [[ $application == 'mongodbapp' ]]; then
   sonar_back
 
   callApi "/api/servers/spring-boot/databases/mongodb"
+  callApi "/api/servers/spring-boot/features/user/mongodb"
   callApi "/api/servers/spring-boot/database-migration-tools/mongock"
 
 elif [[ $application == 'gradleapp' ]]; then

@@ -1,5 +1,6 @@
 package {{packageName}}.technical.infrastructure.secondary.mongodb;
 
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import {{packageName}}.technical.infrastructure.secondary.mongodb.JSR310DateConverters.DateToZonedDateTimeConverter;
@@ -16,6 +17,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @Configuration
 @EnableMongoRepositories({ "{{packageName}}" })
+@EnableMongoAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @Import(value = MongoAutoConfiguration.class)
 public class MongodbDatabaseConfiguration {
 

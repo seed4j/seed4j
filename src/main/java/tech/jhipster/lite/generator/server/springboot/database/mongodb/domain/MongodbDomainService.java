@@ -99,6 +99,7 @@ public class MongodbDomainService implements MongodbService {
     projectRepository.template(project, SOURCE, "JSR310DateConvertersTest.java", getPath(TEST_JAVA, packageNamePath, mongodbPath));
     projectRepository.template(project, SOURCE, "MongodbTestContainerExtension.java", getPath(TEST_JAVA, packageNamePath));
     projectRepository.template(project, SOURCE, "TestContainersSpringContextCustomizerFactory.java", getPath(TEST_JAVA, packageNamePath));
+    projectRepository.template(project, SOURCE, "SpringSecurityAuditorAware.java", getPath(MAIN_JAVA, packageNamePath, "security"));
   }
 
   @Override

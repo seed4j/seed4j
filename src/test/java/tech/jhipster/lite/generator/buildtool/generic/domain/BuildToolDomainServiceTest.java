@@ -148,6 +148,15 @@ class BuildToolDomainServiceTest {
 
       verify(mavenService).getVersion("spring-boot");
     }
+
+    @Test
+    void shouldCheckIfDependencyExist() {
+      Project project = tmpProjectWithPomXml();
+      Dependency dependency = getDependency();
+      buildToolDomainService.isDependencyExist(project, dependency);
+
+      verify(mavenService).isDependencyExist(project, dependency);
+    }
   }
 
   @Nested
@@ -257,6 +266,13 @@ class BuildToolDomainServiceTest {
       Project project = tmpProject();
 
       assertThatThrownBy(() -> buildToolDomainService.getVersion(project, "spring-boot")).isExactlyInstanceOf(GeneratorException.class);
+    }
+
+    @Test
+    void shouldNotCheckDependency() {
+      Project project = tmpProject();
+      Dependency dependency = getDependency();
+      assertThatThrownBy(() -> buildToolDomainService.isDependencyExist(project, dependency)).isExactlyInstanceOf(GeneratorException.class);
     }
   }
 

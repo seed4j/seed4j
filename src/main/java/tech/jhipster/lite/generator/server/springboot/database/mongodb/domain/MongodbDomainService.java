@@ -24,6 +24,7 @@ import tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.
 public class MongodbDomainService implements MongodbService {
 
   public static final String SOURCE = "server/springboot/database/mongodb";
+  public static final String SECURITY_SOURCE = "server/springboot/mvc/security/";
 
   private final ProjectRepository projectRepository;
   private final BuildToolService buildToolService;
@@ -93,13 +94,29 @@ public class MongodbDomainService implements MongodbService {
     String packageNamePath = project.getPackageNamePath().orElse(getPath("com/mycompany/myapp"));
     String mongodbPath = "technical/infrastructure/secondary/mongodb";
 
-    projectRepository.template(project, SOURCE, "MongodbDatabaseConfiguration.java", getPath(MAIN_JAVA, packageNamePath, mongodbPath));
+    if (isSpringSecurityDependencyAdded(project)) {
+      projectRepository.template(
+        project,
+        SOURCE,
+        "MongodbDatabaseConfiguration_with_mongo_auditing.java",
+        getPath(MAIN_JAVA, packageNamePath, mongodbPath),
+        "MongodbDatabaseConfiguration.java"
+      );
+      projectRepository.template(
+        project,
+        SECURITY_SOURCE,
+        "SpringSecurityAuditorAware.java",
+        getPath(MAIN_JAVA, packageNamePath, "security")
+      );
+    } else {
+      projectRepository.template(project, SOURCE, "MongodbDatabaseConfiguration.java", getPath(MAIN_JAVA, packageNamePath, mongodbPath));
+    }
+
     projectRepository.template(project, SOURCE, "JSR310DateConverters.java", getPath(MAIN_JAVA, packageNamePath, mongodbPath));
 
     projectRepository.template(project, SOURCE, "JSR310DateConvertersTest.java", getPath(TEST_JAVA, packageNamePath, mongodbPath));
     projectRepository.template(project, SOURCE, "MongodbTestContainerExtension.java", getPath(TEST_JAVA, packageNamePath));
     projectRepository.template(project, SOURCE, "TestContainersSpringContextCustomizerFactory.java", getPath(TEST_JAVA, packageNamePath));
-    projectRepository.template(project, SOURCE, "SpringSecurityAuditorAware.java", getPath(MAIN_JAVA, packageNamePath, "security"));
   }
 
   @Override
@@ -148,5 +165,15 @@ public class MongodbDomainService implements MongodbService {
 
   private void updateIntegrationTestAnnotation(Project project) {
     springBootCommonService.updateIntegrationTestAnnotation(project, "MongodbTestContainerExtension");
+  }
+
+  private boolean isSpringSecurityDependencyAdded(Project project) {
+    Dependency springSecurityTestDependency = Dependency
+      .builder()
+      .groupId("org.springframework.security")
+      .artifactId("spring-security-test")
+      .scope("test")
+      .build();
+    return buildToolService.isDependencyExist(project, springSecurityTestDependency);
   }
 }

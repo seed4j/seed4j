@@ -27,4 +27,5 @@ public interface MavenService {
   void addMavenWrapper(Project project);
 
   Optional<String> getVersion(String name);
+  boolean isDependencyExist(Project project, Dependency dependency);
 }

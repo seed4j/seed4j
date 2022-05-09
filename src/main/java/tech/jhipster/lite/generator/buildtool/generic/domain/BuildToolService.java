@@ -19,4 +19,5 @@ public interface BuildToolService {
   void init(Project project, BuildToolType buildTool);
 
   Optional<String> getVersion(Project project, String name);
+  boolean isDependencyExist(Project project, Dependency dependency);
 }

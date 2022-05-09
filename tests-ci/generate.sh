@@ -187,6 +187,16 @@ elif [[ $application == 'mongodbapp' ]]; then
   callApi "/api/servers/spring-boot/features/user/mongodb"
   callApi "/api/servers/spring-boot/database-migration-tools/mongock"
 
+elif [[ $application == 'mongodbapp_with_oauth' ]]; then
+  springboot_mvc
+  sonar_back
+
+  callApi "/api/servers/spring-boot/security-systems/oauth2"
+  callApi "/api/servers/spring-boot/security-systems/oauth2/account"
+  callApi "/api/servers/spring-boot/databases/mongodb"
+  callApi "/api/servers/spring-boot/features/user/mongodb"
+  callApi "/api/servers/spring-boot/database-migration-tools/mongock"
+
 elif [[ $application == 'gradleapp' ]]; then
   callApi "/api/inits/full"
   callApi "/api/build-tools/gradle"

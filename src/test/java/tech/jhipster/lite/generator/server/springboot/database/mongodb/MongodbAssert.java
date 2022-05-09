@@ -61,7 +61,7 @@ public final class MongodbAssert {
     assertFileContent(project, "src/main/docker/mongodb.yml", "- 127.0.0.1:27017:27017");
   }
 
-  public static void assertJavaFiles(Project project) {
+  public static void assertJavaFiles(Project project, boolean isSecurityDependencyAdded) {
     String packageNamePath = project.getPackageNamePath().orElse(DefaultConfig.PACKAGE_PATH);
     String packageName = project.getPackageName().orElse(DefaultConfig.DEFAULT_PACKAGE_NAME);
 
@@ -72,7 +72,14 @@ public final class MongodbAssert {
       FileUtils.getPath(MAIN_JAVA, mongodbPath, "MongodbDatabaseConfiguration.java"),
       "package " + packageName + ".technical.infrastructure.secondary.mongodb;"
     );
-    assertFileExist(project, getPath(MAIN_JAVA, packageNamePath + "/security", "SpringSecurityAuditorAware.java"));
+    if (isSecurityDependencyAdded) {
+      assertFileContent(
+        project,
+        FileUtils.getPath(MAIN_JAVA, mongodbPath, "MongodbDatabaseConfiguration.java"),
+        "@EnableMongoAuditing(auditorAwareRef = \"springSecurityAuditorAware\")"
+      );
+      assertFileExist(project, getPath(MAIN_JAVA, packageNamePath + "/security", "SpringSecurityAuditorAware.java"));
+    }
     assertFileExist(project, getPath(MAIN_JAVA, mongodbPath, "JSR310DateConverters.java"));
     assertFileContent(
       project,

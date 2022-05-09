@@ -2,6 +2,8 @@ package tech.jhipster.lite.generator.buildtool.maven.domain.maven;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
@@ -186,6 +188,33 @@ class MavenDomainServiceTest {
 
     verify(projectRepository, times(2)).add(any(Project.class), anyString(), anyString(), anyString());
     verify(projectRepository, times(2)).setExecutable(any(Project.class), anyString(), anyString());
+  }
+
+  @Test
+  void shouldCheckIfDependencyExistAndeReturnFalseForMissingDependency() {
+    Project project = tmpProjectWithPomXml();
+    Dependency dependency = Dependency
+      .builder()
+      .groupId("org.springframework.boot")
+      .artifactId("spring-security-test")
+      .scope("test")
+      .build();
+
+    assertFalse(mavenDomainService.isDependencyExist(project, dependency));
+  }
+
+  @Test
+  void shouldCheckIfDependencyExistAndeReturnTrueForExistingDependency() {
+    Project project = tmpProjectWithPomXml();
+    Dependency dependency = Dependency
+      .builder()
+      .groupId("org.junit.jupiter")
+      .artifactId("junit-jupiter-engine")
+      .version("${junit-jupiter.version}")
+      .scope("test")
+      .build();
+
+    assertTrue(mavenDomainService.isDependencyExist(project, dependency));
   }
 
   @Nested

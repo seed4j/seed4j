@@ -139,6 +139,7 @@ jobs:
           - eurekaapp
           - consulapp
           - mongodbapp
+          - mongodbapp_with_oauth
           - gradleapp
           - angularapp
           - reactapp

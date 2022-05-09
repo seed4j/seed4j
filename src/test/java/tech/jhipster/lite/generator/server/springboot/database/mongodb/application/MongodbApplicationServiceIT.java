@@ -16,6 +16,8 @@ import tech.jhipster.lite.generator.buildtool.maven.application.MavenApplication
 import tech.jhipster.lite.generator.init.application.InitApplicationService;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.server.springboot.core.application.SpringBootApplicationService;
+import tech.jhipster.lite.generator.server.springboot.mvc.security.oauth2.application.OAuth2SecurityApplicationService;
+import tech.jhipster.lite.generator.server.springboot.mvc.web.application.SpringBootMvcApplicationService;
 
 @IntegrationTest
 class MongodbApplicationServiceIT {
@@ -30,7 +32,13 @@ class MongodbApplicationServiceIT {
   MavenApplicationService mavenApplicationService;
 
   @Autowired
+  OAuth2SecurityApplicationService oAuth2SecurityApplicationService;
+
+  @Autowired
   SpringBootApplicationService springBootApplicationService;
+
+  @Autowired
+  SpringBootMvcApplicationService springBootMvcApplicationService;
 
   @Test
   @DisplayName("Should init project with default values")
@@ -44,7 +52,28 @@ class MongodbApplicationServiceIT {
 
     assertDependencies(project);
     assertDockerMongodb(project);
-    assertJavaFiles(project);
+    assertJavaFiles(project, false);
+    assertTestFiles(project);
+    assertConfigFiles(project);
+    assertLoggerInConfig(project);
+  }
+
+  @Test
+  @DisplayName("Should init project with default values when spring security is added")
+  void shouldInitWithSpringSecurity() {
+    Project project = tmpProject();
+    initApplicationService.init(project);
+    mavenApplicationService.addPomXml(project);
+    springBootApplicationService.init(project);
+    springBootMvcApplicationService.addExceptionHandler(project);
+    oAuth2SecurityApplicationService.addOAuth2(project);
+    oAuth2SecurityApplicationService.addAccountContext(project);
+
+    mongodbApplicationService.init(project);
+
+    assertDependencies(project);
+    assertDockerMongodb(project);
+    assertJavaFiles(project, true);
     assertTestFiles(project);
     assertConfigFiles(project);
     assertLoggerInConfig(project);

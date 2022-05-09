@@ -115,4 +115,12 @@ public class BuildToolDomainService implements BuildToolService {
     }
     throw new GeneratorException(EXCEPTION_NO_BUILD_TOOL);
   }
+
+  @Override
+  public boolean isDependencyExist(Project project, Dependency dependency) {
+    if (project.isMavenProject()) {
+      return mavenService.isDependencyExist(project, dependency);
+    }
+    throw new GeneratorException(EXCEPTION_NO_BUILD_TOOL);
+  }
 }

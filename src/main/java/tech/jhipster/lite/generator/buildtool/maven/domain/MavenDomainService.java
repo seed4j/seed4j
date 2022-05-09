@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import tech.jhipster.lite.common.domain.FileUtils;
 import tech.jhipster.lite.common.domain.WordUtils;
 import tech.jhipster.lite.error.domain.Assert;
@@ -274,5 +275,14 @@ public class MavenDomainService implements MavenService {
         }
         return null;
       });
+  }
+
+  @Override
+  public boolean isDependencyExist(Project project, Dependency dependency) {
+    int indent = (Integer) project.getConfig(PRETTIER_DEFAULT_INDENT).orElse(DEFAULT_INDENTATION);
+
+    String dependencyNode = Maven.getDependency(dependency, indent).indent(2 * indent);
+    List<String> dependencyNodeLines = Stream.of(dependencyNode.split("\n")).map(String::trim).toList();
+    return FileUtils.containsLines(getPath(project.getFolder(), POM_XML), dependencyNodeLines);
   }
 }

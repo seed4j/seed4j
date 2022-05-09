@@ -78,7 +78,7 @@ public final class MongodbAssert {
         FileUtils.getPath(MAIN_JAVA, mongodbPath, "MongodbDatabaseConfiguration.java"),
         "@EnableMongoAuditing(auditorAwareRef = \"springSecurityAuditorAware\")"
       );
-      assertFileExist(project, getPath(MAIN_JAVA, packageNamePath + "/security", "SpringSecurityAuditorAware.java"));
+      assertFileExist(project, getPath(MAIN_JAVA, packageNamePath, "security", "SpringSecurityAuditorAware.java"));
     }
     assertFileExist(project, getPath(MAIN_JAVA, mongodbPath, "JSR310DateConverters.java"));
     assertFileContent(

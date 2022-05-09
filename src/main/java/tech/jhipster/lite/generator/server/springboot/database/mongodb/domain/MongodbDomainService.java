@@ -9,6 +9,7 @@ import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_
 import static tech.jhipster.lite.generator.server.springboot.database.mongodb.domain.Mongodb.mongodbDriver;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
@@ -17,6 +18,7 @@ import tech.jhipster.lite.generator.docker.domain.DockerService;
 import tech.jhipster.lite.generator.project.domain.DatabaseType;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
+import tech.jhipster.lite.generator.project.domain.SecurityType;
 import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 import tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonService;
@@ -93,8 +95,11 @@ public class MongodbDomainService implements MongodbService {
     project.addDefaultConfig(BASE_NAME);
     String packageNamePath = project.getPackageNamePath().orElse(getPath("com/mycompany/myapp"));
     String mongodbPath = "technical/infrastructure/secondary/mongodb";
+    String securityPath = "security";
 
-    if (isSpringSecurityDependencyAdded(project)) {
+    Optional<SecurityType> securityTypeOptional = getAddedSecurityType(project);
+    if (securityTypeOptional.isPresent()) {
+      project.addConfig(securityTypeOptional.get().name(), true);
       projectRepository.template(
         project,
         SOURCE,
@@ -106,7 +111,7 @@ public class MongodbDomainService implements MongodbService {
         project,
         SECURITY_SOURCE,
         "SpringSecurityAuditorAware.java",
-        getPath(MAIN_JAVA, packageNamePath, "security")
+        getPath(MAIN_JAVA, packageNamePath, securityPath)
       );
     } else {
       projectRepository.template(project, SOURCE, "MongodbDatabaseConfiguration.java", getPath(MAIN_JAVA, packageNamePath, mongodbPath));
@@ -167,13 +172,26 @@ public class MongodbDomainService implements MongodbService {
     springBootCommonService.updateIntegrationTestAnnotation(project, "MongodbTestContainerExtension");
   }
 
-  private boolean isSpringSecurityDependencyAdded(Project project) {
-    Dependency springSecurityTestDependency = Dependency
+  private Optional<SecurityType> getAddedSecurityType(Project project) {
+    if (isOAuth2DependencyAdded(project)) {
+      return Optional.of(SecurityType.OAUTH2);
+    } else if (isJWTDependencyAdded(project)) {
+      return Optional.of(SecurityType.JWT);
+    }
+    return Optional.empty();
+  }
+
+  private boolean isOAuth2DependencyAdded(Project project) {
+    Dependency dependency = Dependency
       .builder()
-      .groupId("org.springframework.security")
-      .artifactId("spring-security-test")
-      .scope("test")
+      .groupId("org.springframework.boot")
+      .artifactId("spring-boot-starter-oauth2-client")
       .build();
-    return buildToolService.isDependencyExist(project, springSecurityTestDependency);
+    return buildToolService.isDependencyExist(project, dependency);
+  }
+
+  private boolean isJWTDependencyAdded(Project project) {
+    Dependency dependency = Dependency.builder().groupId("io.jsonwebtoken").artifactId("jjwt-api").version("\\${jjwt.version}").build();
+    return buildToolService.isDependencyExist(project, dependency);
   }
 }

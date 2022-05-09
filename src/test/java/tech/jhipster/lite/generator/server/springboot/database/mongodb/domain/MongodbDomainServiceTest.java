@@ -58,7 +58,7 @@ class MongodbDomainServiceTest {
     mongodbDomainService.init(project);
 
     verify(buildToolService, times(2)).addDependency(any(Project.class), any(Dependency.class));
-    verify(buildToolService).isDependencyExist(any(Project.class), any(Dependency.class));
+    verify(buildToolService, times(2)).isDependencyExist(any(Project.class), any(Dependency.class));
 
     verify(projectRepository, times(6)).template(any(Project.class), anyString(), anyString(), anyString());
 

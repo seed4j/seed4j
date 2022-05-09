@@ -1,0 +1,26 @@
+package {{packageName}}.security;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.security.core.context.SecurityContextHolder;
+import {{packageName}}.UnitTest;
+
+@UnitTest
+class SpringSecurityAuditorAwareTest {
+
+  public final SpringSecurityAuditorAware auditorAware = new SpringSecurityAuditorAware();
+
+  @BeforeEach
+  @AfterEach
+  void cleanup() {
+      SecurityContextHolder.clearContext();
+  }
+
+  @Test
+  void shouldGetAuditorAsSystem() {
+    assertThat(auditorAware.getCurrentAuditor().get()).hasToString("system");
+  }
+}

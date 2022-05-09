@@ -1,0 +1,8 @@
+{
+  "folder": "/tmp/jhlite/mongodbapp-oauth2",
+  "generator-jhipster": {
+    "projectName": "MongoDB App Project",
+    "baseName": "mongodbapp",
+    "packageName": "tech.jhipster.mongodbapp"
+  }
+}

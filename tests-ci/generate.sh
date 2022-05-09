@@ -187,7 +187,7 @@ elif [[ $application == 'mongodbapp' ]]; then
   callApi "/api/servers/spring-boot/features/user/mongodb"
   callApi "/api/servers/spring-boot/database-migration-tools/mongock"
 
-elif [[ $application == 'mongodbapp_with_oauth' ]]; then
+elif [[ $application == 'mongodbapp-oauth2' ]]; then
   springboot_mvc
   sonar_back
 

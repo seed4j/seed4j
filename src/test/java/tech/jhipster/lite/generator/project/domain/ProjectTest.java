@@ -10,9 +10,7 @@ import static tech.jhipster.lite.common.domain.FileUtils.getPath;
 import static tech.jhipster.lite.common.domain.FileUtils.tmpDirForTest;
 import static tech.jhipster.lite.common.domain.WordUtils.CRLF;
 import static tech.jhipster.lite.common.domain.WordUtils.LF;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_NAME;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PROJECT_NAME;
+import static tech.jhipster.lite.generator.project.domain.DefaultConfig.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -278,6 +276,15 @@ class ProjectTest {
       project.addConfig(PACKAGE_NAME, "tech.jhipster.lite");
 
       assertThat(project.getPackageNamePath()).contains(getPath("tech/jhipster/lite"));
+    }
+
+    @Test
+    void shouldGetRemoteUrl() {
+      Project project = tmpProject();
+
+      project.addConfig(REMOTE_URL, "https://github.com/jhipster/jhipster-lite");
+
+      assertThat(project.getRemotePath()).contains(getPath("https://github.com/jhipster/jhipster-lite"));
     }
 
     @Test

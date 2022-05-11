@@ -21,7 +21,8 @@ public class ProjectDTO {
         "baseName": "jhipster",
         "projectName": "jhipster project",
         "packageName": "com.mycompany.myapp",
-        "serverPort": 8080
+        "serverPort": 8080,
+        "remoteUrl": "https://github.com/jhipster/jhipster-lite"
       }
     """,
     required = true

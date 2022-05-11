@@ -3,8 +3,7 @@ package tech.jhipster.lite.generator.project.domain;
 import static tech.jhipster.lite.common.domain.FileUtils.detectEndOfLine;
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
 import static tech.jhipster.lite.generator.project.domain.Constants.POM_XML;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
-import static tech.jhipster.lite.generator.project.domain.DefaultConfig.PACKAGE_NAME;
+import static tech.jhipster.lite.generator.project.domain.DefaultConfig.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -124,6 +123,10 @@ public class Project {
 
   public Optional<String> getPackageNamePath() {
     return getPackageName().map(packageName -> packageName.replace(".", "/"));
+  }
+
+  public Optional<String> getRemotePath() {
+    return getStringConfig(REMOTE_URL);
   }
 
   public Optional<String> getStringConfig(String key) {

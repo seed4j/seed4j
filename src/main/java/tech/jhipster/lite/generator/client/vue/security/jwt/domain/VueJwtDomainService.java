@@ -1,6 +1,7 @@
 package tech.jhipster.lite.generator.client.vue.security.jwt.domain;
 
 import static tech.jhipster.lite.common.domain.FileUtils.getPath;
+import static tech.jhipster.lite.generator.project.domain.Constants.*;
 
 import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.error.domain.GeneratorException;
@@ -11,14 +12,17 @@ public class VueJwtDomainService implements VueJwtService {
 
   public static final String SOURCE = "client/vue";
 
-  public static final String DESTINATION_PRIMARY = "src/main/webapp/app/common/primary/";
-  public static final String SOURCE_PRIMARY = "webapp/app/jwt/primary/";
+  public static final String SOURCE_JWT = "webapp/app/jwt/";
 
-  public static final String DESTINATION_DOMAIN = "src/main/webapp/app/common/domain/";
-  public static final String SOURCE_DOMAIN = "webapp/app/jwt/domain/";
+  public static final String COMMON = "/app/common/";
+  public static final String DESTINATION_PRIMARY = MAIN_WEBAPP + COMMON + PRIMARY;
+  public static final String SOURCE_PRIMARY = SOURCE_JWT + PRIMARY;
 
-  public static final String DESTINATION_SECONDARY = "src/main/webapp/app/common/secondary/";
-  public static final String SOURCE_SECONDARY = "webapp/app/jwt/secondary/";
+  public static final String DESTINATION_DOMAIN = MAIN_WEBAPP + COMMON + DOMAIN;
+  public static final String SOURCE_DOMAIN = SOURCE_JWT + DOMAIN;
+
+  public static final String DESTINATION_SECONDARY = MAIN_WEBAPP + COMMON + SECONDARY;
+  public static final String SOURCE_SECONDARY = SOURCE_JWT + SECONDARY;
 
   private final ProjectRepository projectRepository;
 
@@ -28,19 +32,23 @@ public class VueJwtDomainService implements VueJwtService {
 
   @Override
   public void addJWT(Project project) {
-    Assert.notNull("project", project);
-    if (!VueJwt.checkIfPinia(project)) throw new GeneratorException("Pinia has not been added");
+    checkIfProjectNotNull(project);
+    if (VueJwt.isPiniaNotImplemented(project)) throw new GeneratorException("Pinia has not been added");
     addLoginContext(project);
+  }
+
+  private void checkIfProjectNotNull(Project project) {
+    Assert.notNull("project", project);
   }
 
   public void addLoginContext(Project project) {
     String destinationPrimaryLoginContext = DESTINATION_PRIMARY + "/login";
     String sourcePrimaryLoginContext = SOURCE_PRIMARY + "/login";
     projectRepository.template(project, getPath(SOURCE, SOURCE_DOMAIN), "Login.ts", DESTINATION_DOMAIN);
-    projectRepository.template(project, getPath(SOURCE, sourcePrimaryLoginContext), "index.ts", destinationPrimaryLoginContext);
-    projectRepository.template(project, getPath(SOURCE, sourcePrimaryLoginContext), "Login.component.ts", destinationPrimaryLoginContext);
-    projectRepository.template(project, getPath(SOURCE, sourcePrimaryLoginContext), "Login.html", destinationPrimaryLoginContext);
-    projectRepository.template(project, getPath(SOURCE, sourcePrimaryLoginContext), "Login.vue", destinationPrimaryLoginContext);
+    VueJwt
+      .primaryLoginFiles()
+      .forEach(file -> projectRepository.template(project, getPath(SOURCE, sourcePrimaryLoginContext), file, destinationPrimaryLoginContext)
+      );
     projectRepository.template(project, getPath(SOURCE, SOURCE_SECONDARY), "LoginDTO.ts", DESTINATION_SECONDARY);
   }
 }

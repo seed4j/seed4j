@@ -12,7 +12,11 @@ public class VueJwt {
 
   public static final String PACKAGE_JSON = "package.json";
 
-  public static boolean checkIfPinia(Project project) {
-    return FileUtils.containsLines(getPath(project.getFolder(), PACKAGE_JSON), List.of("\"pinia\":"));
+  public static boolean isPiniaNotImplemented(Project project) {
+    return !FileUtils.containsLines(getPath(project.getFolder(), PACKAGE_JSON), List.of("\"pinia\":"));
+  }
+
+  public static List<String> primaryLoginFiles() {
+    return List.of("index.ts", "Login.component.ts", "Login.html", "Login.vue");
   }
 }

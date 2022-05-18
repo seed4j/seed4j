@@ -24,6 +24,7 @@ public class Project {
   private final String folder;
   private final String endOfLine;
   private final Map<String, Object> config;
+  private final Optional<String> remoteUrl;
   private final Optional<LanguageType> language;
   private final Optional<BuildToolType> buildTool;
   private final Optional<ServerFrameworkType> server;
@@ -40,6 +41,7 @@ public class Project {
     this.folder = builder.folder;
     this.endOfLine = Optional.ofNullable(builder.endOfLine).orElseGet(this::detectEndOfLineOrDefault);
     this.config = builder.config;
+    this.remoteUrl = Optional.ofNullable(builder.remoteUrl);
     this.language = Optional.ofNullable(builder.language);
     this.buildTool = Optional.ofNullable(builder.buildTool);
     this.server = Optional.ofNullable(builder.server);
@@ -66,6 +68,10 @@ public class Project {
 
   public Map<String, Object> getConfig() {
     return config;
+  }
+
+  public Optional<String> getRemoteUrl() {
+    return remoteUrl;
   }
 
   public Optional<LanguageType> getLanguage() {
@@ -123,10 +129,6 @@ public class Project {
 
   public Optional<String> getPackageNamePath() {
     return getPackageName().map(packageName -> packageName.replace(".", "/"));
-  }
-
-  public Optional<String> getRemotePath() {
-    return getStringConfig(REMOTE_URL);
   }
 
   public Optional<String> getStringConfig(String key) {
@@ -216,6 +218,7 @@ public class Project {
     private String folder;
     private String endOfLine;
     private Map<String, Object> config = new HashMap<>();
+    private String remoteUrl;
     private LanguageType language;
     private BuildToolType buildTool;
     private ServerFrameworkType server;
@@ -243,6 +246,11 @@ public class Project {
       if (config != null) {
         this.config = config;
       }
+      return this;
+    }
+
+    public ProjectBuilder remoteUrl(String remoteUrl) {
+      this.remoteUrl = remoteUrl;
       return this;
     }
 

@@ -19,6 +19,7 @@ class ProjectDTOTest {
 
     assertThat(projectDTO.getFolder()).isEqualTo("/tmp/chips");
     assertThat(projectDTO.getGeneratorJhipster()).containsEntry(BASE_NAME, "chips");
+    assertThat(projectDTO.getRemoteUrl()).isEqualTo("https://github.com/jhipster/jhipster-lite");
   }
 
   @Test
@@ -49,6 +50,9 @@ class ProjectDTOTest {
   }
 
   private ProjectDTO buildProjectDTO() {
-    return new ProjectDTO().folder("/tmp/chips").generatorJhipster(Map.of(BASE_NAME, "chips"));
+    return new ProjectDTO()
+      .folder("/tmp/chips")
+      .generatorJhipster(Map.of(BASE_NAME, "chips"))
+      .remoteUrl("https://github.com/jhipster/jhipster-lite");
   }
 }

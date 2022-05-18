@@ -43,6 +43,7 @@ class ProjectTest {
       assertThat(project.getEndOfLine()).isEqualTo(LF);
       assertThat(project.getConfig()).isEmpty();
 
+      assertThat(project.getRemoteUrl()).isEmpty();
       assertThat(project.getLanguage()).isEmpty();
       assertThat(project.getBuildTool()).isEmpty();
       assertThat(project.getServer()).isEmpty();
@@ -73,6 +74,7 @@ class ProjectTest {
       assertThat(project.getEndOfLine()).isEqualTo(LF);
       assertThat(project.getConfig()).isEqualTo(Map.of(PROJECT_NAME, "JHipster Lite"));
 
+      assertThat(project.getRemoteUrl()).contains("https://github.com/jhipster/jhipster-lite");
       assertThat(project.getLanguage()).contains(LanguageType.JAVA);
       assertThat(project.getBuildTool()).contains(BuildToolType.MAVEN);
       assertThat(project.getServer()).contains(ServerFrameworkType.SPRING);
@@ -279,15 +281,6 @@ class ProjectTest {
     }
 
     @Test
-    void shouldGetRemoteUrl() {
-      Project project = tmpProject();
-
-      project.addConfig(REMOTE_URL, "https://github.com/jhipster/jhipster-lite");
-
-      assertThat(project.getRemotePath()).contains(getPath("https://github.com/jhipster/jhipster-lite"));
-    }
-
-    @Test
     void shouldNotGetPackageNamePathForDefault() {
       Project project = tmpProject();
 
@@ -451,6 +444,7 @@ class ProjectTest {
 
   private Project.ProjectBuilder fullBuilder(String tmpFolder) {
     return minimalBuilder(tmpFolder)
+      .remoteUrl("https://github.com/jhipster/jhipster-lite")
       .language(LanguageType.JAVA)
       .buildTool(BuildToolType.MAVEN)
       .server(ServerFrameworkType.SPRING)

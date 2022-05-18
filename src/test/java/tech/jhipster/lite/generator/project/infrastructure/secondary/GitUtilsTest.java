@@ -7,9 +7,12 @@ import static tech.jhipster.lite.generator.project.domain.Constants.TEST_TEMPLAT
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.TransportException;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.common.domain.FileUtils;
+import tech.jhipster.lite.generator.buildtool.generic.domain.Repository;
 
 @UnitTest
 class GitUtilsTest {
@@ -58,5 +61,14 @@ class GitUtilsTest {
 
     assertThatThrownBy(() -> GitUtils.apply(dir, getPath(TEST_TEMPLATE_RESOURCES, "utils", "unknown.patch")))
       .isExactlyInstanceOf(FileNotFoundException.class);
+  }
+
+  @Test
+  void shouldPush() throws GitAPIException {
+    String dir = FileUtils.tmpDirForTest();
+
+    GitUtils.init(dir);
+
+    assertThatThrownBy(() -> GitUtils.push(dir, "123456")).isExactlyInstanceOf(TransportException.class);
   }
 }

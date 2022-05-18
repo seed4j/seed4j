@@ -1,14 +1,19 @@
 package tech.jhipster.lite.generator.buildtool.gradle.domain;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
-import static tech.jhipster.lite.TestUtils.*;
-import static tech.jhipster.lite.common.domain.FileUtils.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static tech.jhipster.lite.TestUtils.tmpProject;
+import static tech.jhipster.lite.TestUtils.tmpProjectWithBuildGradle;
+import static tech.jhipster.lite.common.domain.FileUtils.REGEXP_SPACE_STAR;
+import static tech.jhipster.lite.common.domain.FileUtils.getPath;
 import static tech.jhipster.lite.common.domain.WordUtils.DQ;
-import static tech.jhipster.lite.generator.buildtool.gradle.domain.Gradle.*;
+import static tech.jhipster.lite.generator.buildtool.gradle.domain.Gradle.GRADLE_NEEDLE_DEPENDENCY;
+import static tech.jhipster.lite.generator.buildtool.gradle.domain.Gradle.GRADLE_NEEDLE_REPOSITORY;
 import static tech.jhipster.lite.generator.project.domain.Constants.BUILD_GRADLE_KTS;
-import static tech.jhipster.lite.generator.project.domain.ProjectFilesAsserter.*;
+import static tech.jhipster.lite.generator.project.domain.ProjectFilesAsserter.filesCountArgument;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

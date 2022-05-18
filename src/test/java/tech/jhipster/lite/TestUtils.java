@@ -100,6 +100,10 @@ public class TestUtils {
     return tmpProjectBuilder().build();
   }
 
+  public static Project tmpProjectWithRemote() {
+    return tmpProjectBuilder().remoteUrl("https://github.com/matthieuRioual/jhipster-lite").build();
+  }
+
   public static Project tmpProjectWithPomXml() {
     Project project = tmpProject();
     copyPomXml(project);

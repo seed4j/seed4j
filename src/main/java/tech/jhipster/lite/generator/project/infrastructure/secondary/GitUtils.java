@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.transport.CredentialsProvider;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 public class GitUtils {
 
@@ -40,5 +42,11 @@ public class GitUtils {
 
   public static Git getGit(String dir) throws IOException {
     return Git.open(new File(dir));
+  }
+
+  public static void push(String dir, String token) throws GitAPIException, IOException {
+    Git git = getGit(dir);
+    CredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider(token, "");
+    git.push().setCredentialsProvider(credentialsProvider).call();
   }
 }

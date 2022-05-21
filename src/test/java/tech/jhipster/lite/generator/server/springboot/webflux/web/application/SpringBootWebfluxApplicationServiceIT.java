@@ -2,6 +2,8 @@ package tech.jhipster.lite.generator.server.springboot.webflux.web.application;
 
 import static tech.jhipster.lite.TestUtils.tmpProject;
 import static tech.jhipster.lite.generator.project.domain.DefaultConfig.BASE_NAME;
+import static tech.jhipster.lite.generator.server.springboot.webflux.web.application.SpringbootWebfluxAssert.assertActuatorDependencies;
+import static tech.jhipster.lite.generator.server.springboot.webflux.web.application.SpringbootWebfluxAssert.assertActuatorProperties;
 import static tech.jhipster.lite.generator.server.springboot.webflux.web.application.SpringbootWebfluxAssert.assertDependencies;
 import static tech.jhipster.lite.generator.server.springboot.webflux.web.application.SpringbootWebfluxAssert.assertExceptionHandlerDependencies;
 import static tech.jhipster.lite.generator.server.springboot.webflux.web.application.SpringbootWebfluxAssert.assertExceptionHandlerFiles;
@@ -46,6 +48,8 @@ class SpringBootWebfluxApplicationServiceIT {
     assertExceptionHandlerDependencies(project);
     assertExceptionHandlerProperties(project);
     assertExceptionHandlerFiles(project);
+    assertActuatorDependencies(project);
+    assertActuatorProperties(project);
   }
 
   @Test

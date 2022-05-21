@@ -3,6 +3,8 @@ package tech.jhipster.lite.generator.server.springboot.webflux.web.infrastructur
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static tech.jhipster.lite.common.domain.FileUtils.tmpDirForTest;
+import static tech.jhipster.lite.generator.server.springboot.webflux.web.application.SpringbootWebfluxAssert.assertActuatorDependencies;
+import static tech.jhipster.lite.generator.server.springboot.webflux.web.application.SpringbootWebfluxAssert.assertActuatorProperties;
 import static tech.jhipster.lite.generator.server.springboot.webflux.web.application.SpringbootWebfluxAssert.assertDependencies;
 import static tech.jhipster.lite.generator.server.springboot.webflux.web.application.SpringbootWebfluxAssert.assertExceptionHandlerDependencies;
 import static tech.jhipster.lite.generator.server.springboot.webflux.web.application.SpringbootWebfluxAssert.assertExceptionHandlerFiles;
@@ -61,5 +63,7 @@ class SpringBootWebfluxResourceIT {
     assertExceptionHandlerDependencies(project);
     assertExceptionHandlerProperties(project);
     assertExceptionHandlerFiles(project);
+    assertActuatorDependencies(project);
+    assertActuatorProperties(project);
   }
 }

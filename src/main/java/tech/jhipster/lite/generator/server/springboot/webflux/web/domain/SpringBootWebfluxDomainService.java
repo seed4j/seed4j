@@ -40,6 +40,7 @@ public class SpringBootWebfluxDomainService implements SpringBootWebfluxService 
   public void init(Project project) {
     addSpringBootWebflux(project);
     addExceptionHandler(project);
+    addSpringBootActuator(project);
   }
 
   @Override
@@ -84,17 +85,33 @@ public class SpringBootWebfluxDomainService implements SpringBootWebfluxService 
     );
   }
 
+  @Override
+  public void addSpringBootActuator(Project project) {
+    buildToolService.addDependency(project, springBootActuatorDependency());
+
+    springBootCommonService.addPropertiesComment(project, "Spring Boot Actuator");
+    springBootCommonService.addProperties(project, "management.endpoints.web.base-path", "/management");
+    springBootCommonService.addProperties(
+      project,
+      "management.endpoints.web.exposure.include",
+      "configprops, env, health, info, logfile, loggers, threaddump"
+    );
+    springBootCommonService.addProperties(project, "management.endpoint.health.probes.enabled", "true");
+    springBootCommonService.addPropertiesNewLine(project);
+  }
+
   private void addProperties(Project project) {
     springBootCommonService.addPropertiesComment(project, "Spring Boot Webflux");
     springBootCommonService.addProperties(project, "server.port", project.getServerPort());
-    springBootCommonService.addPropertiesTest(project, "server.port", 0);
     springBootCommonService.addPropertiesNewLine(project);
+    springBootCommonService.addPropertiesTest(project, "server.port", 0);
   }
 
   private void addExceptionHandlerProperties(Project project) {
     String packageName = project.getPackageName().orElse(DefaultConfig.DEFAULT_PACKAGE_NAME);
     springBootCommonService.addProperties(project, "application.exception.details", "false");
     springBootCommonService.addProperties(project, "application.exception.package", "org.,java.,net.,javax.,com.,io.,de.," + packageName);
+    springBootCommonService.addPropertiesNewLine(project);
     springBootCommonService.addPropertiesTest(project, "application.exception.package", "org.,java.");
   }
 

@@ -54,6 +54,7 @@ class SpringBootWebfluxDomainServiceTest {
 
     verify(springBootWebfluxDomainService).addSpringBootWebflux(project);
     verify(springBootWebfluxDomainService).addExceptionHandler(project);
+    verify(springBootWebfluxDomainService).addSpringBootActuator(project);
   }
 
   @Test
@@ -128,6 +129,34 @@ class SpringBootWebfluxDomainServiceTest {
       assertThatThrownBy(() -> springBootWebfluxDomainService.addExceptionHandler(project))
         .isInstanceOf(GeneratorException.class)
         .hasMessageContaining("Problem Spring version not found");
+    }
+  }
+
+  @Nested
+  class AddSpringBootActuatorTest {
+
+    @Test
+    void shouldAddActuator() {
+      Map<String, Object> config = new HashMap<>(Map.of("packageName", "beer"));
+      Project project = Project.builder().folder("/folder").config(config).build();
+
+      springBootWebfluxDomainService.addSpringBootActuator(project);
+
+      ArgumentCaptor<Dependency> dependencyArgCaptor = ArgumentCaptor.forClass(Dependency.class);
+      verify(buildToolService).addDependency(eq(project), dependencyArgCaptor.capture());
+      assertThat(dependencyArgCaptor.getValue())
+        .extracting(Dependency::getGroupId, Dependency::getArtifactId)
+        .containsExactly("org.springframework.boot", "spring-boot-starter-actuator");
+
+      verify(springBootCommonService, times(3)).addProperties(any(Project.class), anyString(), anyString());
+      verify(springBootCommonService).addProperties(project, "management.endpoints.web.base-path", "/management");
+      verify(springBootCommonService)
+        .addProperties(
+          project,
+          "management.endpoints.web.exposure.include",
+          "configprops, env, health, info, logfile, loggers, threaddump"
+        );
+      verify(springBootCommonService).addProperties(project, "management.endpoint.health.probes.enabled", "true");
     }
   }
 }

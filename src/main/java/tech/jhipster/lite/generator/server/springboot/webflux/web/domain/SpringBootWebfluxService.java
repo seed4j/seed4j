@@ -7,5 +7,7 @@ public interface SpringBootWebfluxService {
 
   void addSpringBootWebflux(Project project);
 
+  void addSpringBootActuator(Project project);
+
   void addExceptionHandler(Project project);
 }

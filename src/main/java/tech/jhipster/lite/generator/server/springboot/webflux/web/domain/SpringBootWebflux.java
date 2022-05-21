@@ -26,6 +26,10 @@ public class SpringBootWebflux {
     return Dependency.builder().groupId(SPRINGBOOT_PACKAGE).artifactId("spring-boot-starter-validation").build();
   }
 
+  public static Dependency springBootActuatorDependency() {
+    return Dependency.builder().groupId(SPRINGBOOT_PACKAGE).artifactId("spring-boot-starter-actuator").build();
+  }
+
   public static Dependency reactorTestDependency() {
     return Dependency.builder().groupId("io.projectreactor").artifactId("reactor-test").scope("test").build();
   }

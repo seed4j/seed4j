@@ -80,7 +80,8 @@ public class SpringbootWebfluxAssert {
       getPath(MAIN_RESOURCES, "/config/application.properties"),
       List.of(
         "application.exception.details=false",
-        "application.exception.package=org.,java.,net.,javax.,com.,io.,de.," + project.getPackageName().orElseThrow()
+        "application.exception.package=org.,java.,net.,javax.,com.,io.,de.," + project.getPackageName().orElseThrow(),
+        ""
       )
     );
     assertFileContent(project, getPath(TEST_RESOURCES, "/config/application.properties"), "application.exception.package=org.,java.");
@@ -117,5 +118,32 @@ public class SpringbootWebfluxAssert {
     listTestClass.forEach(testClass -> assertFileExist(project, getPath(TEST_JAVA, packagePath), testClass));
 
     assertFileExist(project, getPath(TEST_JAVA, project.getPackageNamePath().orElse(DefaultConfig.PACKAGE_PATH)), "TestUtil.java");
+  }
+
+  public static void assertActuatorDependencies(Project project) {
+    assertFileContent(
+      project,
+      POM_XML,
+      List.of(
+        "<dependency>",
+        "<groupId>org.springframework.boot</groupId>",
+        "<artifactId>spring-boot-starter-actuator</artifactId>",
+        "</dependency>"
+      )
+    );
+  }
+
+  public static void assertActuatorProperties(Project project) {
+    assertFileContent(
+      project,
+      getPath(MAIN_RESOURCES, "/config/application.properties"),
+      List.of(
+        "Spring Boot Actuator",
+        "management.endpoints.web.base-path=/management",
+        "management.endpoints.web.exposure.include=configprops, env, health, info, logfile, loggers, threaddump",
+        "management.endpoint.health.probes.enabled=true",
+        ""
+      )
+    );
   }
 }

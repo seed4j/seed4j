@@ -29,7 +29,7 @@ public class ProjectDTO {
   private Map<String, Object> generatorJhipster;
 
   @JsonProperty("remoteUrl")
-  @Schema(description = "remoteUrl", example = "https://github.com/jhipster/jhipster-lite", required = true)
+  @Schema(description = "remoteUrl", example = "https://github.com/jhipster/jhipster-lite", required = false)
   private String remoteUrl;
 
   public String getFolder() {

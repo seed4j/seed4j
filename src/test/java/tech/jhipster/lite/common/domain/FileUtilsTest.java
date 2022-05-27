@@ -709,6 +709,68 @@ class FileUtilsTest {
   }
 
   @Nested
+  class GetValuesBetweenTest {
+
+    @Test
+    void shouldGetValue() throws IOException {
+      Path filePath = Files.createTempFile("values-between", null);
+      Files.write(filePath, """
+        <name>jhipster</name>
+        "version":"0.0.1"
+        """.getBytes());
+
+      assertThat(FileUtils.getValueBetween(filePath.toString(), "<name>", "</name>")).contains("jhipster");
+      assertThat(FileUtils.getValueBetween(filePath.toString(), "\"version\":\"", "\"")).contains("0.0.1");
+    }
+
+    @Test
+    void shouldNotGetValue() throws IOException {
+      Path filePath = Files.createTempFile("values-between", null);
+      Files.write(filePath, """
+        <name>jhipster</name>
+        "version":"0.0.1"
+        """.getBytes());
+
+      assertThat(FileUtils.getValueBetween(filePath.toString(), "<version>", "</version>")).isEmpty();
+    }
+
+    @Test
+    void shouldNotGetValueForPartialPrefixMatch() throws IOException {
+      Path filePath = Files.createTempFile("values-between", null);
+      Files.write(filePath, """
+        <name>jhipster
+        """.getBytes());
+
+      assertThat(FileUtils.getValueBetween(filePath.toString(), "<name>", "</name>")).isEmpty();
+    }
+
+    @Test
+    void shouldGetFirstOccuringValue() throws IOException {
+      Path filePath = Files.createTempFile("values-between", null);
+      Files.write(filePath, """
+        <name>jhipster</name>
+         <name>jhipster2</name>
+        """.getBytes());
+
+      assertThat(FileUtils.getValueBetween(filePath.toString(), "<name>", "</name>")).contains("jhipster");
+    }
+
+    @Test
+    void shouldNotGetValueForNull() {
+      assertThatThrownBy(() -> FileUtils.getValueBetween(null, "<name>", "</name>"))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("filename");
+    }
+
+    @Test
+    void shouldNotGetValueForBlank() {
+      assertThatThrownBy(() -> FileUtils.getValueBetween(" ", "<name>", "</name>"))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("filename");
+    }
+  }
+
+  @Nested
   class FileSystemTest {
 
     @Test

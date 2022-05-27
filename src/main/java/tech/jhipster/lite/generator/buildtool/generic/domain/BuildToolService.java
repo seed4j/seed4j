@@ -20,4 +20,8 @@ public interface BuildToolService {
   void init(Project project, BuildToolType buildTool);
 
   Optional<String> getVersion(Project project, String name);
+
+  Optional<String> getGroup(Project project);
+
+  Optional<String> getName(Project project);
 }

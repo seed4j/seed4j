@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.UUID;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class FileUtils {
   public static final String REGEXP_PREFIX_DOTALL = "(?s)";
   public static final String REGEXP_DOT_STAR = ".*";
   public static final String REGEXP_SPACE_STAR = "[ \t]*";
+  public static final String REGEXP_DOT_PLUS_MIN = "(.+?)";
 
   public static final String FILENAME = "filename";
 
@@ -78,6 +80,21 @@ public class FileUtils {
 
   public static void write(String filename, String text, String eol) throws IOException {
     Files.write(getPathOf(filename), transformEndOfLine(text, eol).getBytes());
+  }
+
+  public static Optional<String> getValueBetween(String filename, String prefix, String suffix) {
+    Assert.notBlank(FILENAME, filename);
+    Optional<String> matchingLine = readLine(filename, prefix);
+    return matchingLine.map(line -> getValueFromLine(prefix, suffix, line)).orElse(Optional.empty());
+  }
+
+  public static Optional<String> getValueFromLine(String prefix, String suffix, String line) {
+    Pattern pattern = Pattern.compile(prefix + REGEXP_DOT_PLUS_MIN + suffix, Pattern.DOTALL);
+    Matcher matcher = pattern.matcher(line);
+    if (matcher.find()) {
+      return Optional.of(matcher.group(1));
+    }
+    return Optional.empty();
   }
 
   public static int getLine(String filename, String value) throws IOException {

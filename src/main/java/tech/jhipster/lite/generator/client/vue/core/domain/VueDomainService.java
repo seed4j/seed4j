@@ -18,9 +18,13 @@ public class VueDomainService implements VueService {
   public static final String NEEDLE_IMPORT = "// jhipster-needle-main-ts-import";
   public static final String NEEDLE_PROVIDER = "// jhipster-needle-main-ts-provider";
   public static final String SOURCE_PRIMARY = getPath(SOURCE, "webapp/app/common/primary");
+  public static final String SOURCE_DOMAIN = getPath(SOURCE, "webapp/app/common/domain");
+  public static final String SOURCE_SECONDARY = getPath(SOURCE, "webapp/app/common/secondary");
   public static final String SOURCE_TEST_PRIMARY = getPath(SOURCE, "test/spec/common/primary");
   public static final String SOURCE_PRIMARY_APP = getPath(SOURCE_PRIMARY, "app");
   public static final String DESTINATION_PRIMARY = "src/main/webapp/app/common/primary";
+  public static final String DESTINATION_DOMAIN = "src/main/webapp/app/common/domain";
+  public static final String DESTINATION_SECONDARY = "src/main/webapp/app/common/secondary";
   public static final String DESTINATION_PRIMARY_APP = DESTINATION_PRIMARY + "/app";
   public static final String DESTINATION_PRIMARY_TEST = "src/test/javascript/spec/common/primary";
   public static final String DESTINATION_PRIMARY_ROUTER = DESTINATION_PRIMARY + "/app";
@@ -60,6 +64,7 @@ public class VueDomainService implements VueService {
     addRootFiles(project);
     addAppFiles(project);
     addRouter(project);
+    addLogger(project);
   }
 
   public void addDependencies(Project project) {
@@ -117,6 +122,38 @@ public class VueDomainService implements VueService {
         .forProject(project)
         .withSource(getPath(SOURCE, "webapp/app/http"), "AxiosHttp.ts")
         .withDestinationFolder("src/main/webapp/app/http")
+    );
+  }
+
+  public void addLogger(Project project) {
+    addLoggerFiles(project);
+    addLoggerTestFiles(project);
+  }
+
+  private void addLoggerFiles(Project project) {
+    projectRepository.template(
+      ProjectFile.forProject(project).withSource(SOURCE_DOMAIN, "Logger.ts").withDestinationFolder(DESTINATION_DOMAIN)
+    );
+    projectRepository.template(
+      ProjectFile.forProject(project).withSource(SOURCE_DOMAIN, "Message.ts").withDestinationFolder(DESTINATION_DOMAIN)
+    );
+    projectRepository.template(
+      ProjectFile.forProject(project).withSource(SOURCE_SECONDARY, "ConsoleLogger.ts").withDestinationFolder(DESTINATION_SECONDARY)
+    );
+  }
+
+  private void addLoggerTestFiles(Project project) {
+    projectRepository.template(
+      ProjectFile
+        .forProject(project)
+        .withSource(getPath(SOURCE, "test/spec/common/domain"), "Logger.fixture.ts")
+        .withDestinationFolder("src/test/javascript/spec/common/domain")
+    );
+    projectRepository.template(
+      ProjectFile
+        .forProject(project)
+        .withSource(getPath(SOURCE, "test/spec/common/secondary"), "ConsoleLogger.spec.ts")
+        .withDestinationFolder("src/test/javascript/spec/common/secondary")
     );
   }
 

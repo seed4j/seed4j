@@ -1,19 +1,26 @@
 package tech.jhipster.lite.generator.server.javatool.base.application;
 
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.server.javatool.base.domain.JavaBaseService;
+import tech.jhipster.lite.generator.module.domain.JHipsterModule;
+import tech.jhipster.lite.generator.module.domain.JHipsterModulesRepository;
+import tech.jhipster.lite.generator.server.javatool.base.domain.JavaBaseModuleFactory;
+import tech.jhipster.lite.generator.server.javatool.base.domain.JavaBaseModuleProperties;
 
 @Service
 public class JavaBaseApplicationService {
 
-  private final JavaBaseService javaBaseService;
+  private final JHipsterModulesRepository modules;
+  private final JavaBaseModuleFactory factory;
 
-  public JavaBaseApplicationService(JavaBaseService javaBaseService) {
-    this.javaBaseService = javaBaseService;
+  public JavaBaseApplicationService(JHipsterModulesRepository modules) {
+    this.modules = modules;
+
+    factory = new JavaBaseModuleFactory();
   }
 
-  public void addJavaBase(Project project) {
-    javaBaseService.addJavaBase(project);
+  public void addJavaBase(JavaBaseModuleProperties properties) {
+    JHipsterModule module = factory.buildModule(properties);
+
+    modules.apply(module);
   }
 }

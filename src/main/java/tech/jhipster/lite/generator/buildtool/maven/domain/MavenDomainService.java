@@ -6,18 +6,8 @@ import static tech.jhipster.lite.common.domain.FileUtils.getPath;
 import static tech.jhipster.lite.common.domain.WordUtils.DEFAULT_INDENTATION;
 import static tech.jhipster.lite.common.domain.WordUtils.LF;
 import static tech.jhipster.lite.common.domain.WordUtils.indent;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.NEEDLE_DEPENDENCY;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.NEEDLE_DEPENDENCY_MANAGEMENT;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.NEEDLE_DEPENDENCY_TEST;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.NEEDLE_PARENT;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.NEEDLE_PLUGIN;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.NEEDLE_PLUGIN_MANAGEMENT;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.NEEDLE_PLUGIN_REPOSITORY;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.NEEDLE_PROPERTIES;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.NEEDLE_REPOSITORY;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.PLUGIN_BEGIN;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.PLUGIN_MANAGEMENT_BEGIN;
-import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.PLUGIN_MANAGEMENT_END;
+import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.*;
+import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.GROUP_ID_END;
 import static tech.jhipster.lite.generator.project.domain.Constants.DEPENDENCIES_FOLDER;
 import static tech.jhipster.lite.generator.project.domain.Constants.POM_XML;
 import static tech.jhipster.lite.generator.project.domain.Constants.TEMPLATE_FOLDER;
@@ -280,5 +270,19 @@ public class MavenDomainService implements MavenService {
         }
         return null;
       });
+  }
+
+  @Override
+  public Optional<String> getGroupId(String folder) {
+    Assert.notBlank("folder", folder);
+
+    return FileUtils.getValueBetween(getPath(folder, POM_XML), GROUP_ID_BEGIN, GROUP_ID_END);
+  }
+
+  @Override
+  public Optional<String> getName(String folder) {
+    Assert.notBlank("folder", folder);
+
+    return FileUtils.getValueBetween(getPath(folder, POM_XML), NAME_BEGIN, NAME_END);
   }
 }

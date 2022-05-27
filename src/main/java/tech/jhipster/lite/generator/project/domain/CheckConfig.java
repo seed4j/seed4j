@@ -6,8 +6,8 @@ import tech.jhipster.lite.error.domain.UnauthorizedValueException;
 
 public class CheckConfig {
 
-  public static final Pattern PATTERN_BASENAME = Pattern.compile("^[a-zA-Z0-9_]+$");
-  public static final Pattern PATTERN_PACKAGENAME = Pattern.compile("^([a-z_]{1}[a-z0-9_]*(\\.[a-z_]{1}[a-z0-9_]*+)*+)$");
+  public static final Pattern PATTERN_BASENAME = Pattern.compile("^[a-zA-Z0-9]+$");
+  public static final Pattern PATTERN_PACKAGENAME = Pattern.compile("^([a-z_][a-z0-9_]*(\\.[a-z_]{1}[a-z0-9_]*+)*+)$");
 
   private CheckConfig() {}
 

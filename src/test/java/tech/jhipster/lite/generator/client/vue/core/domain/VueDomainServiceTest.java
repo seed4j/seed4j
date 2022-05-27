@@ -210,4 +210,13 @@ class VueDomainServiceTest {
 
     verify(projectRepository, times(4)).template(any(ProjectFile.class));
   }
+
+  @Test
+  void shouldAddLoggerFiles() {
+    Project project = tmpProjectWithPackageJson();
+
+    vueDomainService.addLogger(project);
+
+    verify(projectRepository, times(5)).template(any(ProjectFile.class));
+  }
 }

@@ -133,4 +133,22 @@ public class BuildToolDomainService implements BuildToolService {
     }
     throw new GeneratorException(EXCEPTION_NO_BUILD_TOOL);
   }
+
+  @Override
+  public Optional<String> getGroup(Project project) {
+    if (project.isMavenProject()) {
+      return mavenService.getGroupId(project.getFolder());
+    } else if (project.isGradleProject()) {
+      return gradleService.getGroup(project.getFolder());
+    }
+    throw new GeneratorException(EXCEPTION_NO_BUILD_TOOL);
+  }
+
+  @Override
+  public Optional<String> getName(Project project) {
+    if (project.isMavenProject()) {
+      return mavenService.getName(project.getFolder());
+    }
+    throw new GeneratorException(EXCEPTION_NO_BUILD_TOOL);
+  }
 }

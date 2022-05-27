@@ -1,6 +1,7 @@
 package tech.jhipster.lite.generator.project.infrastructure.primary.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.core.io.ByteArrayResource;
@@ -8,10 +9,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.jhipster.lite.generator.project.application.ProjectApplicationService;
 import tech.jhipster.lite.generator.project.domain.GeneratorAction;
 import tech.jhipster.lite.generator.project.domain.Project;
@@ -44,6 +42,16 @@ class ProjectResource {
       .contentLength(out.length)
       .header("X-Suggested-Filename", getZipFilename(project))
       .body(resource);
+  }
+
+  @Operation(summary = "Get project details")
+  @ApiResponse(responseCode = "500", description = "An error occurred while fetching project details")
+  @GetMapping("details")
+  public ResponseEntity<ProjectDTO> getProjectDetails(
+    @Parameter(description = "Project path to get details") @RequestParam(value = "folder") String folder
+  ) {
+    ProjectDTO projectDTO = ProjectDTO.fromProject(this.projectApplicationService.getProjectDetails(folder));
+    return ResponseEntity.ok(projectDTO);
   }
 
   private String getZipFilename(Project project) {

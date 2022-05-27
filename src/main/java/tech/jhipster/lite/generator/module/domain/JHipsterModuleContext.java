@@ -36,12 +36,18 @@ public class JHipsterModuleContext {
     private Map<String, Object> initContext() {
       HashMap<String, Object> init = new HashMap<>();
 
-      init.put("baseName", "jhipster");
+      init.put("baseName", JHipsterProjectBaseName.DEFAULT_PROJECT_NAME);
       init.put("projectName", "JHipster Project");
-      init.put("packageName", "com.mycompany.myapp");
+      init.put("packageName", JHipsterBasePackage.DEFAULT_BASE_PACKAGE);
       init.put("prettierDefaultIndent", 2);
 
       return init;
+    }
+
+    public JHipsterModuleContextBuilder packageName(JHipsterBasePackage basePackage) {
+      Assert.notNull("basePackage", basePackage);
+
+      return put("packageName", basePackage.get());
     }
 
     public JHipsterModuleContextBuilder put(String key, Object value) {

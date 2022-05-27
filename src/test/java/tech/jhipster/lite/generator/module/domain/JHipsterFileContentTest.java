@@ -12,7 +12,7 @@ import tech.jhipster.lite.error.domain.GeneratorException;
 class JHipsterFileContentTest {
 
   @Test
-  void shouldHandleFileReadingException() {
+  void shouldNotReadUnknownFile() {
     JHipsterFileContent content = new JHipsterFileContent(Paths.get("dummy"));
 
     assertThatThrownBy(() -> content.read(context())).isExactlyInstanceOf(GeneratorException.class).hasMessageContaining("dummy");
@@ -20,14 +20,14 @@ class JHipsterFileContentTest {
 
   @Test
   void shouldReadNotTemplatedContent() {
-    JHipsterFileContent content = new JHipsterFileContent(Paths.get("src/test/resources/generator/content/no-template.txt"));
+    JHipsterFileContent content = new JHipsterFileContent(Paths.get("/generator/content/no-template.txt"));
 
     assertThat(content.read(context())).isEqualTo("This is my content");
   }
 
   @Test
   void shouldReadTemplatedContent() {
-    JHipsterFileContent content = new JHipsterFileContent(Paths.get("src/test/resources/generator/content/template.txt.mustache"));
+    JHipsterFileContent content = new JHipsterFileContent(Paths.get("/generator/content/template.txt.mustache"));
 
     assertThat(content.read(context())).isEqualTo("This is com.test.myapp");
   }

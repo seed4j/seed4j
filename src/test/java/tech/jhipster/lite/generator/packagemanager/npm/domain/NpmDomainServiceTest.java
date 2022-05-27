@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
-import static tech.jhipster.lite.TestUtils.tmpProject;
+import static tech.jhipster.lite.TestUtils.*;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -150,6 +150,68 @@ class NpmDomainServiceTest {
     @Test
     void shouldNotGetVersionForCloseBracket() {
       assertThat(npmDomainService.getVersionInReact("}")).isEmpty();
+    }
+  }
+
+  @Nested
+  class GetNameTest {
+
+    @Test
+    void shouldGetName() {
+      Project project = tmpProjectWithPackageJson();
+      assertThat(npmDomainService.getName(project.getFolder())).isNotEmpty();
+      assertThat(npmDomainService.getName(project.getFolder())).contains("jhlitetest");
+    }
+
+    @Test
+    void shouldGetNameForEmptyProject() {
+      Project project = tmpProject();
+      assertThat(npmDomainService.getName(project.getFolder())).isEmpty();
+    }
+
+    @Test
+    void shouldNotGetNameForBlank() {
+      assertThatThrownBy(() -> npmDomainService.getName(" "))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("folder");
+    }
+
+    @Test
+    void shouldNotGetNameForNull() {
+      assertThatThrownBy(() -> npmDomainService.getName(null))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("folder");
+    }
+  }
+
+  @Nested
+  class GetDescriptionTest {
+
+    @Test
+    void shouldGetName() {
+      Project project = tmpProjectWithPackageJsonComplete();
+      assertThat(npmDomainService.getDescription(project.getFolder())).isNotEmpty();
+      assertThat(npmDomainService.getDescription(project.getFolder())).contains("Jhipster lite");
+    }
+
+    @Test
+    void shouldGetNameForEmptyProject() {
+      Project project = tmpProject();
+      assertThat(npmDomainService.getDescription(project.getFolder())).isEmpty();
+    }
+
+    @Test
+    void shouldNotGetNameForBlank() {
+      assertThatThrownBy(() -> npmDomainService.getDescription(" "))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("folder");
+    }
+
+    @Test
+    void shouldNotGetNameForNull() {
+      assertThatThrownBy(() -> npmDomainService.getDescription(null))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("folder");
     }
   }
 }

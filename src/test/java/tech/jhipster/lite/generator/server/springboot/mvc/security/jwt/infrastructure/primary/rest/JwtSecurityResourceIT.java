@@ -22,6 +22,7 @@ import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.infrastructure.primary.dto.ProjectDTO;
 import tech.jhipster.lite.generator.project.infrastructure.secondary.GitUtils;
 import tech.jhipster.lite.generator.server.javatool.base.application.JavaBaseApplicationService;
+import tech.jhipster.lite.generator.server.javatool.base.domain.JavaBaseModuleProperties;
 import tech.jhipster.lite.generator.server.springboot.core.application.SpringBootApplicationService;
 import tech.jhipster.lite.generator.server.springboot.mvc.security.jwt.application.JwtSecurityApplicationService;
 import tech.jhipster.lite.generator.server.springboot.mvc.web.application.SpringBootMvcApplicationService;
@@ -59,7 +60,7 @@ class JwtSecurityResourceIT {
     GitUtils.init(project.getFolder());
     initApplicationService.init(project);
     mavenApplicationService.init(project);
-    javaBaseApplicationService.addJavaBase(project);
+    javaBaseApplicationService.addJavaBase(JavaBaseModuleProperties.from(project));
     springBootApplicationService.init(project);
     springBootMvcApplicationService.init(project);
 
@@ -84,7 +85,7 @@ class JwtSecurityResourceIT {
     GitUtils.init(project.getFolder());
     initApplicationService.init(project);
     mavenApplicationService.init(project);
-    javaBaseApplicationService.addJavaBase(project);
+    javaBaseApplicationService.addJavaBase(JavaBaseModuleProperties.from(project));
     springBootApplicationService.init(project);
     springBootMvcApplicationService.init(project);
     jwtSecurityApplicationService.init(project);

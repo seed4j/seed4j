@@ -2,7 +2,6 @@ package tech.jhipster.lite.generator.client.vue.core.application;
 
 import static tech.jhipster.lite.TestUtils.assertFileContent;
 import static tech.jhipster.lite.TestUtils.assertFileExist;
-import static tech.jhipster.lite.TestUtils.assertFileNoContent;
 import static tech.jhipster.lite.common.domain.WordUtils.DQ;
 import static tech.jhipster.lite.generator.project.domain.Constants.MAIN_WEBAPP;
 import static tech.jhipster.lite.generator.project.domain.Constants.PACKAGE_JSON;
@@ -86,5 +85,13 @@ public class VueAssert {
     assertFileExist(project, "src/test/javascript/spec/http/AxiosHttp.spec.ts");
     assertFileExist(project, "src/test/javascript/spec/http/AxiosHttpStub.ts");
     assertFileExist(project, "src/test/javascript/spec/http/AxiosStub.ts");
+  }
+
+  public static void assertLogger(Project project) {
+    assertFileExist(project, "src/main/webapp/app/common/domain/Logger.ts");
+    assertFileExist(project, "src/main/webapp/app/common/domain/Message.ts");
+    assertFileExist(project, "src/main/webapp/app/common/secondary/ConsoleLogger.ts");
+    assertFileExist(project, "src/test/javascript/spec/common/domain/Logger.fixture.ts");
+    assertFileExist(project, "src/test/javascript/spec/common/secondary/ConsoleLogger.spec.ts");
   }
 }

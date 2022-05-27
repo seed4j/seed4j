@@ -26,11 +26,19 @@ public class JHipsterModule {
   public static JHipsterSource from(String source) {
     Assert.notBlank("source", source);
 
-    return new JHipsterSource(Paths.get("src/main/resources/generator", source));
+    return new JHipsterSource(Paths.get("/generator", source));
   }
 
   public static JHipsterDestination to(String destination) {
     return new JHipsterDestination(destination);
+  }
+
+  public static JHipsterDestination toSrcMainJava() {
+    return JHipsterDestination.SRC_MAIN_JAVA;
+  }
+
+  public static JHipsterDestination toSrcTestJava() {
+    return JHipsterDestination.SRC_TEST_JAVA;
   }
 
   public Collection<JHipsterModuleFile> files() {

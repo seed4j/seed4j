@@ -1,9 +1,15 @@
 package tech.jhipster.lite.generator.buildtool.maven.domain.maven;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static tech.jhipster.lite.TestUtils.*;
+import static tech.jhipster.lite.common.domain.FileUtils.getPath;
+import static tech.jhipster.lite.generator.buildtool.maven.domain.Maven.*;
+import static tech.jhipster.lite.generator.project.domain.Constants.POM_XML;
 
 import java.util.List;
 import java.util.Optional;
@@ -183,6 +189,57 @@ class MavenDomainServiceTest {
 
     verify(projectRepository, times(4)).add(any(ProjectFile.class));
     verify(projectRepository, times(2)).setExecutable(any(Project.class), anyString(), anyString());
+  }
+
+  @Nested
+  class GetGroupIdTest {
+
+    @Test
+    void shouldGetGroupId() {
+      Project project = tmpProjectWithPomXml();
+
+      try (MockedStatic<FileUtils> fileUtilsMock = Mockito.mockStatic(FileUtils.class)) {
+        mavenDomainService.getGroupId(project.getFolder());
+        fileUtilsMock.verify(
+          () -> FileUtils.getValueBetween(getPath(project.getFolder(), POM_XML), GROUP_ID_BEGIN, GROUP_ID_END),
+          times(1)
+        );
+      }
+    }
+
+    @Test
+    void shouldNotGetGroupIdForNullAndBlank() {
+      assertThatThrownBy(() -> mavenDomainService.getGroupId(null))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("folder");
+      assertThatThrownBy(() -> mavenDomainService.getGroupId(" "))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("folder");
+    }
+  }
+
+  @Nested
+  class GetNameTest {
+
+    @Test
+    void shouldGetName() {
+      Project project = tmpProjectWithPomXml();
+
+      try (MockedStatic<FileUtils> fileUtilsMock = Mockito.mockStatic(FileUtils.class)) {
+        mavenDomainService.getName(project.getFolder());
+        fileUtilsMock.verify(() -> FileUtils.getValueBetween(getPath(project.getFolder(), POM_XML), NAME_BEGIN, NAME_END), times(1));
+      }
+    }
+
+    @Test
+    void shouldNotGetNameForNullAndBlank() {
+      assertThatThrownBy(() -> mavenDomainService.getName(null))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("folder");
+      assertThatThrownBy(() -> mavenDomainService.getName(" "))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining("folder");
+    }
   }
 
   @Nested

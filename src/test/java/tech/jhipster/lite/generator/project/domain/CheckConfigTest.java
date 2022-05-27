@@ -15,7 +15,6 @@ class CheckConfigTest {
   void shouldValidBaseName() {
     assertThatCode(() -> CheckConfig.validBaseName("jhipster")).doesNotThrowAnyException();
     assertThatCode(() -> CheckConfig.validBaseName("JHipster")).doesNotThrowAnyException();
-    assertThatCode(() -> CheckConfig.validBaseName("jhipster_project")).doesNotThrowAnyException();
     assertThatCode(() -> CheckConfig.validBaseName("JHipster1664")).doesNotThrowAnyException();
     assertThatCode(() -> CheckConfig.validBaseName("1664")).doesNotThrowAnyException();
   }
@@ -23,6 +22,11 @@ class CheckConfigTest {
   @Test
   void shouldNotValidBaseNameWithSpace() {
     assertThatThrownBy(() -> CheckConfig.validBaseName("jhipster app")).isExactlyInstanceOf(UnauthorizedValueException.class);
+  }
+
+  @Test
+  void shouldNotValidBaseNameWithUnderscore() {
+    assertThatThrownBy(() -> CheckConfig.validBaseName("jhipster_app")).isExactlyInstanceOf(UnauthorizedValueException.class);
   }
 
   @Test

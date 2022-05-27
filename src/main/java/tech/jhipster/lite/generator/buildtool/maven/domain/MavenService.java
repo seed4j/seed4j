@@ -27,4 +27,8 @@ public interface MavenService {
   void addMavenWrapper(Project project);
 
   Optional<String> getVersion(String name);
+
+  Optional<String> getGroupId(String folder);
+
+  Optional<String> getName(String folder);
 }

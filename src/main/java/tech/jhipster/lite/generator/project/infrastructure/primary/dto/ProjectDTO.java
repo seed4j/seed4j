@@ -55,6 +55,13 @@ public class ProjectDTO {
       .build();
   }
 
+  public static ProjectDTO fromProject(Project project) {
+    ProjectDTO projectDTO = new ProjectDTO();
+    projectDTO.folder(project.getFolder());
+    projectDTO.generatorJhipster(project.getConfig());
+    return projectDTO;
+  }
+
   public ProjectDTO folder(String path) {
     this.folder = path;
     return this;

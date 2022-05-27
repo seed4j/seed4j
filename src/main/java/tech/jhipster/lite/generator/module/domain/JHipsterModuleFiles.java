@@ -64,7 +64,7 @@ public class JHipsterModuleFiles {
     }
 
     public JHipsterModuleFileBatchBuilder add(String file) {
-      files.add(source.forFile(file), destination.forFile(file));
+      files.add(source.template(file), destination.append(file));
 
       return this;
     }

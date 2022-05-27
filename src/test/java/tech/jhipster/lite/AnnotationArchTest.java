@@ -32,7 +32,11 @@ class AnnotationArchTest {
       .should()
       .beAnnotatedWith(UnitTest.class)
       .orShould()
-      .beAnnotatedWith(Nested.class);
+      .beAnnotatedWith(ComponentTest.class)
+      .orShould()
+      .beAnnotatedWith(Nested.class)
+      .orShould()
+      .beInterfaces();
 
     rule.check(importedClasses);
   }

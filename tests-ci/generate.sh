@@ -238,6 +238,7 @@ elif [[ $application == 'vueapp' ]]; then
   callApi "/api/developer-tools/frontend-maven-plugin"
   callApi "/api/clients/vue"
   callApi "/api/clients/vue/stores/pinia"
+  callApi "/api/clients/vue/jwt"
   callApi "/api/clients/cypress"
 
 elif [[ $application == 'svelteapp' ]]; then

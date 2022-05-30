@@ -20,7 +20,7 @@ class VueJwtApplicationServiceIT {
 
   @Test
   void shouldAddVueJwt() {
-    Project project = tmpProjectWithPackageJsonPinia();
+    Project project = tmpProjectWithPackageJson();
     vueApplicationService.addVue(project);
     vueApplicationService.addPinia(project);
     vueJwtApplicationService.addJWT(project);
@@ -30,7 +30,7 @@ class VueJwtApplicationServiceIT {
     assertFileExist(project, COMMON + "/primary/login/Login.component.ts");
     assertFileExist(project, COMMON + "/primary/login/Login.html");
     assertFileExist(project, COMMON + "/primary/login/Login.vue");
-    assertFileExist(project, COMMON + "/secondary/restLogin.ts");
+    assertFileExist(project, COMMON + "/secondary/RestLogin.ts");
     assertFileExist(project, COMMON + "/domain/AuthenticationService.ts");
     assertFileExist(project, COMMON + "/domain/JWTStoreService.ts");
   }

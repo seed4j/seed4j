@@ -37,9 +37,9 @@ public class VueJwtDomainService implements VueJwtService {
   public static final String NEEDLE_MAIN_PROVIDER = "// jhipster-needle-main-ts-provider";
   private static final String NEEDLE_MAIN_INSTANCIATION = "// jhipster-needle-main-ts-instanciation";
 
-  public static final String NEEDLE_ROUTER_IMPORT = "// jhipster-needle-router-import";
+  public static final String NEEDLE_ROUTER = "// jhipster-needle-router";
 
-  public static final String NEEDLE_ROUTER_ROUTES = "// jhipster-needle-router-routes";
+  public static final String NEEDLE_APP = "// jhipster-needle-app";
 
   public static final String LOGIN = "/login";
 
@@ -82,7 +82,7 @@ public class VueJwtDomainService implements VueJwtService {
     VueJwt
       .appComponent()
       .forEach((line, needle) ->
-        addNewNeedleLineToFile(project, line, destinationAppComponent, "App.component.ts", "// needle-jhipster-" + needle)
+        addNewNeedleLineToFile(project, line, destinationAppComponent, "App.component.ts", NEEDLE_APP + "-" + needle)
       );
   }
 
@@ -106,7 +106,7 @@ public class VueJwtDomainService implements VueJwtService {
     projectRepository.template(
       ProjectFile
         .forProject(project)
-        .withSource(getPath(SOURCE, SOURCE_SECONDARY), "restLogin.ts")
+        .withSource(getPath(SOURCE, SOURCE_SECONDARY), "RestLogin.ts")
         .withDestinationFolder(DESTINATION_SECONDARY)
     );
   }
@@ -153,10 +153,10 @@ public class VueJwtDomainService implements VueJwtService {
       "redirect: { name: 'Homepage' }"
     );
     VueJwt.ROUTER_IMPORTS.forEach(providerLine ->
-      addNewNeedleLineToFile(project, providerLine, routerPath, ROUTER_TYPESCRIPT, NEEDLE_ROUTER_IMPORT)
+      addNewNeedleLineToFile(project, providerLine, routerPath, ROUTER_TYPESCRIPT, NEEDLE_ROUTER + "-imports")
     );
     VueJwt.LOGIN_ROUTES.forEach(providerLine ->
-      addNewNeedleLineToFile(project, providerLine, routerPath, ROUTER_TYPESCRIPT, NEEDLE_ROUTER_ROUTES)
+      addNewNeedleLineToFile(project, providerLine, routerPath, ROUTER_TYPESCRIPT, NEEDLE_ROUTER + "-routes")
     );
   }
 
@@ -186,12 +186,11 @@ public class VueJwtDomainService implements VueJwtService {
       )
       .toList();
     projectRepository.template(testDomainFiles);
-    projectRepository.template(
-      ProjectFile
-        .forProject(project)
-        .withSource(getPath(SOURCE, SOURCE_TEST + PRIMARY + "/app"), "App.spec.ts")
-        .withDestinationFolder(testPrimaryPath + "/app")
-    );
+    VueJwt
+      .appTest()
+      .forEach((line, needle) ->
+        addNewNeedleLineToFile(project, line, "src/test/javascript/spec/common/primary/app", "App.spec.ts", NEEDLE_APP + "-" + needle)
+      );
     projectRepository.template(
       ProjectFile
         .forProject(project)
@@ -214,12 +213,12 @@ public class VueJwtDomainService implements VueJwtService {
       .toList();
 
     projectRepository.template(testSecondaryFiles);
-    projectRepository.template(
-      ProjectFile
-        .forProject(project)
-        .withSource(getPath(SOURCE, SOURCE_TEST), "Router.spec.ts")
-        .withDestinationFolder(TEST_JAVASCRIPT + "/router")
-    );
+
+    VueJwt
+      .routerspec()
+      .forEach((line, needle) ->
+        addNewNeedleLineToFile(project, line, getPath("src/test/javascript/spec/router"), "Router.spec.ts", NEEDLE_ROUTER + "-" + needle)
+      );
   }
 
   private void addNewNeedleLineToFile(Project project, String importLine, String folder, String file, String needle) {

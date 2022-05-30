@@ -1,5 +1,5 @@
 import { Login } from '@/common/domain/Login';
-import { restLogin } from '@/common/secondary/restLogin';
+import { RestLogin } from '@/common/secondary/RestLogin';
 import { User } from '@/common/domain/User';
 import AuthenticationRepository from '@/common/secondary/AuthenticationRepository';
 import { AxiosHttpStub, stubAxiosHttp } from '../../http/AxiosHttpStub';
@@ -33,7 +33,7 @@ describe('AuthenticationRepository', () => {
 
     const [uri, payload] = axiosHttpStub.post.getCall(0).args;
     expect(uri).toBe('/api/authenticate');
-    expect(payload).toEqual<restLogin>({ username: 'admin', password: 'admin', rememberMe: true });
+    expect(payload).toEqual<RestLogin>({ username: 'admin', password: 'admin', rememberMe: true });
     // @ts-ignore
     expect(store.token).toEqual(AUTH_TOKEN);
   });
@@ -47,7 +47,7 @@ describe('AuthenticationRepository', () => {
 
     const [uri, payload] = axiosHttpStub.post.getCall(0).args;
     expect(uri).toBe('/api/authenticate');
-    expect(payload).toEqual<restLogin>({ username: 'admin', password: 'wrong_password', rememberMe: true });
+    expect(payload).toEqual<RestLogin>({ username: 'admin', password: 'wrong_password', rememberMe: true });
     // @ts-ignore
     expect(store.token).toEqual('');
   });

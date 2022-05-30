@@ -37,7 +37,7 @@ class VueJwtDomainServiceTest {
 
     assertThatCode(() -> jwtDomainService.addJWT(project)).doesNotThrowAnyException();
 
-    verify(projectRepository, times(6)).template(any(ProjectFile.class));
+    verify(projectRepository, times(4)).template(any(ProjectFile.class));
   }
 
   @Test

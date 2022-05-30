@@ -40,16 +40,16 @@ public class VueJwt {
   }
 
   public static final Collection<String> LOGIN_ROUTES = List.of(
-    "\t{",
-    "\tpath: '/login',",
-    "\tname: 'Login',",
-    "\tcomponent: LoginVue,",
-    "\t},",
-    "\t{",
-    "\tpath: '/',",
-    "\tname: 'Homepage',",
-    "\tcomponent: AppVue,",
-    "\t},"
+    "  {",
+    "  path: '/login',",
+    "  name: 'Login',",
+    "  component: LoginVue,",
+    "  },",
+    "  {",
+    "  path: '/',",
+    "  name: 'Homepage',",
+    "  component: AppVue,",
+    "  },"
   );
 
   public static final Collection<String> ROUTER_IMPORTS = List.of("import { LoginVue } from '@/common/primary/login';");
@@ -71,71 +71,217 @@ public class VueJwt {
   }
 
   public static Collection<String> testSecondaryFiles() {
-    return List.of("AuthenticationRepository.spec.ts", "restLogin.spec.ts", "UserDTO.spec.ts");
+    return List.of("AuthenticationRepository.spec.ts", "RestLogin.spec.ts", "UserDTO.spec.ts");
   }
 
   public static Map<String, String> appComponent() {
     return Map.of(
-      "import { AuthenticationService } from '@/common/domain/AuthenticationService';\n".concat(
-          "import { Logger } from '@/common/domain/Logger';\n"
-        )
-        .concat("import { User } from '@/common/domain/User';\n")
-        .concat("import { Router } from 'vue-router';\n")
-        .concat("import { jwtStore } from '@/common/domain/JWTStoreService';\n")
-        .concat("import { inject, ref } from \"vue\";"),
+      """
+      import { AuthenticationService } from '@/common/domain/AuthenticationService';
+      import { Logger } from '@/common/domain/Logger';
+      import { User } from '@/common/domain/User';
+      import { Router } from 'vue-router';
+      import { jwtStore } from '@/common/domain/JWTStoreService';
+      import { inject, ref } from "vue";
+      """,
       "import",
-      "const authenticationService = inject('authenticationService') as AuthenticationService;\n".concat(
-          "\tconst logger = inject('logger') as Logger;\n"
-        )
-        .concat("\tconst router = inject('router') as Router;\n")
-        .concat("\n")
-        .concat("\tlet store = jwtStore();\n")
-        .concat("\tlet isAuthenticated:boolean = store.isAuth;\n")
-        .concat("\tlet user = ref<User>({\n")
-        .concat("\t\tusername: '',\n")
-        .concat("\t\tauthorities: [''],\n")
-        .concat("\t});\n")
-        .concat("\n")
-        .concat("\tconst onConnect = async (): Promise<void> => {\n")
-        .concat("\t\tawait authenticationService\n")
-        .concat("\t\t.authenticate()\n")
-        .concat("\t\t.then(response => {\n")
-        .concat("\t\t\tuser.value = response;\n")
-        .concat("\t\t})\n")
-        .concat("\t\t.catch(error => {\n")
-        .concat("\t\t\tlogger.error('The token provided is not know by our service', error);\n")
-        .concat("\t\t});\n")
-        .concat("\t}\n")
-        .concat("\n")
-        .concat("\tconst onLogout = async (): Promise<void> => {\n")
-        .concat("\t\tawait authenticationService\n")
-        .concat("\t\t.logout();\n")
-        .concat("\t\trouter.push(\"/login\");\n")
-        .concat("\t};\n"),
+      """
+      const authenticationService = inject('authenticationService') as AuthenticationService;
+      const logger = inject('logger') as Logger;
+      const router = inject('router') as Router;
+
+      let store = jwtStore();
+      let isAuthenticated:boolean = store.isAuth;
+      let user = ref<User>({
+        username: '',
+        authorities: [''],
+      });
+
+      const onConnect = async (): Promise<void> => {
+        await authenticationService
+        .authenticate()
+        .then(response => {
+          user.value = response;
+        })
+        .catch(error => {
+          logger.error('The token provided is not know by our service', error);
+        });
+      }
+
+      const onLogout = async (): Promise<void> => {
+        authenticationService
+        .logout();
+        router.push("/login");
+      };
+      """,
       "setup",
-      "user,\n".concat("\tisAuthenticated,\n").concat("\tonConnect,\n").concat("\tonLogout,\n"),
+      """
+        user,
+        isAuthenticated,
+        onConnect,
+        onLogout,
+      """,
       "return"
+    );
+  }
+
+  public static Map<String, String> appTest() {
+    return Map.of(
+      """
+        import { createTestingPinia } from '@pinia/testing';
+        import { AuthenticationService } from '@/common/domain/AuthenticationService';
+        import { stubAuthenticationService } from '../../domain/AuthenticationService.fixture';
+        import { stubLogger } from '../../domain/Logger.fixture';
+        import { Logger } from '@/common/domain/Logger';
+        import sinon from 'sinon';
+        """,
+      "test-import",
+      """
+        const \\$route = { path: {} };
+        const router = { push: sinon.stub() };
+        """,
+      "test-variables",
+      """
+          authenticationService: AuthenticationService;
+          logger: Logger;
+      """,
+      "test-wrapper-options",
+      """
+          const { authenticationService, logger }: WrapperOptions = {
+          authenticationService: stubAuthenticationService(),
+          logger: stubLogger(),
+          ...wrapperOptions,
+          };
+      """,
+      "test-wrapper-variable",
+      """
+        global: {
+          stubs: ['router-link'],
+          provide: {
+            authenticationService,
+            logger,
+            router,
+          },
+          plugins: [createTestingPinia({
+             initialState: {
+                JWTStore: {token: '123456789'},
+             },
+          })],
+        },
+      """,
+      "test-wrapper-mount",
+      """
+        it('should authenticate', async () => {
+          const authenticationService = stubAuthenticationService();
+          const logger = stubLogger();
+          authenticationService.authenticate.resolves({ username: 'username', authorities: ['admin'] });
+          await wrap({ authenticationService, logger });
+
+          const clickButton = wrapper.find('#identify');
+          await clickButton.trigger('click');
+
+        // @ts-ignore
+        expect(wrapper.vm.user).toStrictEqual({ username: 'username', authorities: ['admin'] });
+        });
+
+        it('Should log an error when authentication fails', async () => {
+          const authenticationService = stubAuthenticationService();
+          const logger = stubLogger();
+          authenticationService.authenticate.rejects({});
+          await wrap({ authenticationService, logger });
+
+          const clickButton = wrapper.find('#identify');
+          await clickButton.trigger('click');
+
+            const [message] = logger.error.getCall(0).args;
+            expect(message).toBe('The token provided is not know by our service');
+        });
+
+          it('Should log out', async () => {
+            const authenticationService = stubAuthenticationService();
+            const logger = stubLogger();
+            authenticationService.authenticate.resolves({ username: 'username', authorities: ['admin'] });
+            await wrap({ authenticationService, logger });
+
+
+            const clickButton = wrapper.find('#identify');
+            await clickButton.trigger('click');
+            const logoutButton = wrapper.find('#logout');
+            await logoutButton.trigger('click');
+
+            sinon.assert.calledOnce(authenticationService.logout);
+          });
+          """,
+      "test-routes"
     );
   }
 
   public static List<String> appHTML() {
     return List.of(
       "<div id=\"jwt-authentication\">",
-      "\t<div v-if=\"isAuthenticated\">",
-      "\t\t<p>You are connected as </p>",
-      "\t\t<div v-if=\"user.username == ''\">",
-      "\t\t\t<button id=\"identify\" @click.prevent=\"onConnect\">click to see</button>",
-      "\t\t</div>",
-      "\t\t<div v-else>",
-      "\t\t\t<p>{{user.username}}</p>",
-      "\t\t\t<button id=\"logout\" @click.prevent=\"onLogout\">click to logout</button>",
-      "\t\t</div>",
-      "\t</div>",
-      "\t<div v-else>",
-      "\t\t<p>You are not connected</p>",
-      "\t\t<router-link to=\"/login\">Login</router-link>",
-      "\t</div>",
+      "  <div v-if=\"isAuthenticated\">",
+      "    <p>You are connected as </p>",
+      "    <div v-if=\"user.username == ''\">",
+      "      <button id=\"identify\" @click.prevent=\"onConnect\">click to see</button>",
+      "    </div>",
+      "    <div v-else>",
+      "      <p>{{user.username}}</p>",
+      "      <button id=\"logout\" @click.prevent=\"onLogout\">click to logout</button>",
+      "    </div>",
+      "  </div>",
+      "  <div v-else>",
+      "    <p>You are not connected</p>",
+      "    <router-link to=\"/login\">Login</router-link>",
+      "  </div>",
       "</div>"
+    );
+  }
+
+  public static Map<String, String> routerspec() {
+    return Map.of(
+      """
+      import { LoginVue } from '@/common/primary/login';
+      import { createTestingPinia } from '@pinia/testing';
+      import { AuthenticationService } from '@/common/domain/AuthenticationService';
+      import { stubAuthenticationService } from '../common/domain/AuthenticationService.fixture';
+      import { stubLogger } from '../common/domain/Logger.fixture';
+      import { Logger } from '@/common/domain/Logger';
+      """,
+      "test-import",
+      """
+      authenticationService: AuthenticationService;
+      logger: Logger;
+      """,
+      "test-wrapper-options",
+      """
+      const { authenticationService, logger }: WrapperOptions = {
+          authenticationService: stubAuthenticationService(),
+          logger: stubLogger(),
+          ...wrapperOptions,
+      };
+      """,
+      "test-wrapper-variable",
+      """
+        global: {
+          stubs: ['router-link'],
+          provide: {
+            authenticationService,
+            logger,
+            router,
+          },
+          plugins: [createTestingPinia()],
+        },
+        """,
+      "test-wrapper-mount",
+      """
+        it('Should go to LoginVue', async () => {
+          router.push('/Login');
+          await wrapper.vm.\\$nextTick();
+          expect(wrapper.findComponent(LoginVue)).toBeTruthy();
+        });
+        afterAll(async () => new Promise(resolve => window.setTimeout(resolve, 0)));
+        """,
+      "test-routes"
     );
   }
 }

@@ -1,15 +1,24 @@
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import { AppVue } from '@/common/primary/app';
+// jhipster-needle-router-test-imports
 
 import router from '@/router/router';
 
 let wrapper: VueWrapper;
 
-const wrap = () => {
-  wrapper = shallowMount(AppVue,{
-    router
-  });
+interface WrapperOptions {
+  // jhipster-needle-router-test-wrapper-options
+}
+
+const wrap = (wrapperOptions?: Partial<WrapperOptions>) => {
+  // jhipster-needle-router-test-wrapper-variable
+
+   wrapper = shallowMount(AppVue,{
+      // jhipster-needle-router-test-wrapper-mount
+      router
+    });
 };
+
 
 describe('Router', () => {
   it('Should redirect to App by default', async () => {
@@ -27,4 +36,7 @@ describe('Router', () => {
 
     expect(wrapper.findComponent(AppVue)).toBeTruthy()
   })
+
+  // jhipster-needle-router-test-routes
+
 })

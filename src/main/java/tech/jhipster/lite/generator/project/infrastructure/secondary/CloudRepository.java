@@ -29,7 +29,6 @@ public class CloudRepository implements Cloud {
   @Override
   public void clone(Project project, String token) {
     Assert.notNull(REMOTE_URL, project.getRemoteUrl());
-    String githubToken = "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"; //GET IT FROM DB
     String remoteUrl = project.getRemoteUrl().orElseThrow();
     String path = project.getFolder();
     if (!exists(path)) {
@@ -40,7 +39,7 @@ public class CloudRepository implements Cloud {
       }
       File localPath = new File(path);
 
-      CredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider(githubToken, "");
+      CredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider(token, "");
 
       try {
         Git git = Git.cloneRepository().setURI(remoteUrl).setDirectory(localPath).setCredentialsProvider(credentialsProvider).call();

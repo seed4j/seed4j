@@ -36,6 +36,13 @@ public class ProjectDTO {
     return folder;
   }
 
+  public static ProjectDTO fromProject(Project project) {
+    ProjectDTO projectDTO = new ProjectDTO();
+    projectDTO.folder(project.getFolder());
+    projectDTO.generatorJhipster(project.getConfig());
+    return projectDTO;
+  }
+
   public Map<String, Object> getGeneratorJhipster() {
     return generatorJhipster;
   }

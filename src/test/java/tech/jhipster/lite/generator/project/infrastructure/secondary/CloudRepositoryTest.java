@@ -17,6 +17,7 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.transport.CredentialsProvider;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kohsuke.github.GitHub;
@@ -33,8 +34,15 @@ import tech.jhipster.lite.generator.project.domain.Project;
 @ExtendWith(SpringExtension.class)
 class CloudRepositoryTest {
 
+  String token;
+
   @InjectMocks
   CloudRepository repository;
+
+  @BeforeEach
+  void createFakes() {
+    token = "FakeToken";
+  }
 
   @Test
   void shouldClone() throws IOException {
@@ -42,7 +50,7 @@ class CloudRepositoryTest {
     File tmpTest = new File("/tmp/jhipster-lite");
     deleteDirectory(tmpTest);
 
-    assertDoesNotThrow(() -> repository.clone(project));
+    assertDoesNotThrow(() -> repository.clone(project, token));
 
     assertFileExist(project.getFolder());
   }
@@ -51,8 +59,8 @@ class CloudRepositoryTest {
   void shouldNotCloneWhenAlreadyCloned() throws IOException {
     Project project = tmpProjectWithRemote();
 
-    repository.clone(project);
-    assertDoesNotThrow(() -> repository.clone(project));
+    repository.clone(project, token);
+    assertDoesNotThrow(() -> repository.clone(project, token));
     assertFileExist(project.getFolder());
   }
 
@@ -62,7 +70,7 @@ class CloudRepositoryTest {
 
     try (MockedStatic<FileUtils> fileUtilsMock = Mockito.mockStatic(FileUtils.class);) {
       fileUtilsMock.when(() -> FileUtils.createFolder(any(String.class))).thenThrow(new IOException("error"));
-      assertThatThrownBy(() -> repository.clone(project)).isExactlyInstanceOf(GeneratorException.class);
+      assertThatThrownBy(() -> repository.clone(project, token)).isExactlyInstanceOf(GeneratorException.class);
     }
   }
 
@@ -81,7 +89,7 @@ class CloudRepositoryTest {
             .call()
         )
         .thenThrow(new InvalidRemoteException("Non existing repo"));
-      assertThatThrownBy(() -> repository.clone(project)).isExactlyInstanceOf(GeneratorException.class);
+      assertThatThrownBy(() -> repository.clone(project, token)).isExactlyInstanceOf(GeneratorException.class);
     }
   }
 
@@ -89,31 +97,36 @@ class CloudRepositoryTest {
   void shouldNotCloneWhenNoRemote() {
     Project project = tmpProject();
 
-    assertThatThrownBy(() -> repository.clone(project)).isExactlyInstanceOf(NoSuchElementException.class);
+    assertThatThrownBy(() -> repository.clone(project, token)).isExactlyInstanceOf(NoSuchElementException.class);
   }
 
   @Test
   void shouldCreatePullRequest() {
     Project project = tmpProjectWithRemote();
 
-    repository.clone(project);
-    assertThatThrownBy(() -> repository.pullRequest(project))
-      .isExactlyInstanceOf(GeneratorException.class)
-      .hasMessage("A pull request is already opened, make sure to accept or close it before doing another one.");
+    //TODO
+    try (MockedStatic<GitUtils> gitUtilsMock = Mockito.mockStatic(GitUtils.class)) {
+      gitUtilsMock.when(() -> GitUtils.connectionWithOauth(anyString())).then();
+      gitUtilsMock.when(() -> GitUtils.addAndCommit(anyString(), anyString())).then();
+      gitUtilsMock.when(() -> GitUtils.push(anyString(), anyString())).then();
+      gitUtilsMock.when(() -> GitUtils.createPR(any(GitHub.class), anyString(), anyString(), anyString(), anyString(), anyString())).then();
+
+      repository.pullRequest(project, token);
+    }
   }
 
   @Test
   void shouldNotCreatePullRequestIfNoRemoteURL() {
     Project project = tmpProject();
 
-    assertThatThrownBy(() -> repository.pullRequest(project)).isExactlyInstanceOf(NoSuchElementException.class);
+    assertThatThrownBy(() -> repository.pullRequest(project, token)).isExactlyInstanceOf(NoSuchElementException.class);
   }
 
   @Test
   void shouldNotCreatePullRequestIfWrongFolder() {
     Project project = tmpProjectWithRemote();
 
-    assertThatThrownBy(() -> repository.pullRequest(project))
+    assertThatThrownBy(() -> repository.pullRequest(project, token))
       .isExactlyInstanceOf(GeneratorException.class)
       .hasMessage("This folder is not a git repository. Please provide the same position than your cloned project");
   }
@@ -121,10 +134,10 @@ class CloudRepositoryTest {
   @Test
   void shouldNotCreatePullRequestIfWrongCredentials() {
     Project project = tmpProjectWithRemote();
-    repository.clone(project);
+    repository.clone(project, token);
     try (MockedStatic<GitHub> gitHubMock = Mockito.mockStatic(GitHub.class)) {
       gitHubMock.when(() -> GitHub.connectUsingOAuth(anyString())).thenThrow(new IOException());
-      assertThatThrownBy(() -> repository.pullRequest(project))
+      assertThatThrownBy(() -> repository.pullRequest(project, token))
         .isExactlyInstanceOf(GeneratorException.class)
         .hasMessage("Error when connecting with Oauth Token");
     }

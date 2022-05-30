@@ -27,7 +27,7 @@ public class CloudRepository implements Cloud {
   private final Logger log = LoggerFactory.getLogger(CloudRepository.class);
 
   @Override
-  public void clone(Project project) {
+  public void clone(Project project, String token) {
     Assert.notNull(REMOTE_URL, project.getRemoteUrl());
     String githubToken = "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"; //GET IT FROM DB
     String remoteUrl = project.getRemoteUrl().orElseThrow();
@@ -58,27 +58,36 @@ public class CloudRepository implements Cloud {
   }
 
   @Override
-  public void pullRequest(Project project) {
+  public void pullRequest(Project project, String token) {
     Assert.notNull(REMOTE_URL, project.getRemoteUrl().isPresent());
-    String githubToken = "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";
+    //step 1 connect
     GitHub gitHub;
     try {
-      gitHub = GitHub.connectUsingOAuth(githubToken);
+      gitHub = GitUtils.connectionWithOauth(token);
     } catch (IOException e) {
       throw new GeneratorException("Error when connecting with Oauth Token", e);
     }
-    GHRepository repository;
-    String[] ownerRepo = project.getRemoteUrl().orElseThrow().split("/");
+
+    //step 2 add and commit
     try {
       GitUtils.addAndCommit(project.getFolder(), "Jhipster-lite Commit");
-      GitUtils.push(project.getFolder(), githubToken);
-      repository = gitHub.getRepository(String.join("/", ownerRepo[ownerRepo.length - 2], ownerRepo[ownerRepo.length - 1]));
     } catch (Exception e) {
       throw new GeneratorException("This folder is not a git repository. Please provide the same position than your cloned project", e);
     }
 
+    //step 3 push
+    String[] ownerRepo = project.getRemoteUrl().orElseThrow().split("/");
     try {
-      repository.createPullRequest(
+      GitUtils.push(project.getFolder(), token);
+    } catch (Exception e) {
+      throw new GeneratorException("An error occured when trying to push your code on remote", e);
+    }
+
+    //step 4 create pull request
+    try {
+      GitUtils.createPR(
+        gitHub,
+        String.join("/", ownerRepo[ownerRepo.length - 2], ownerRepo[ownerRepo.length - 1]),
         "Jhipster-lite",
         "test",
         "main",

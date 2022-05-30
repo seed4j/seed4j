@@ -7,9 +7,11 @@ import static tech.jhipster.lite.generator.project.domain.Constants.TEST_TEMPLAT
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.junit.jupiter.api.Test;
+import org.kohsuke.github.GitHub;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.common.domain.FileUtils;
 import tech.jhipster.lite.generator.buildtool.generic.domain.Repository;
@@ -68,7 +70,28 @@ class GitUtilsTest {
     String dir = FileUtils.tmpDirForTest();
 
     GitUtils.init(dir);
+    String token = "FakeToken";
 
-    assertThatThrownBy(() -> GitUtils.push(dir, "123456")).isExactlyInstanceOf(TransportException.class);
+    assertThatThrownBy(() -> GitUtils.push(dir, token)).isExactlyInstanceOf(TransportException.class);
+  }
+
+  @Test
+  void shouldConnection() throws IOException {
+    String token = "FakeToken";
+
+    GitUtils.connectionWithOauth(token);
+  }
+
+  @Test
+  void shouldCreatePR() throws IOException {
+    String token = "FakeToken";
+    GitHub gitHub = GitUtils.connectionWithOauth(token);
+    String path = "FakePath";
+    String title = "FakeTitle";
+    String head = "FakeHead";
+    String base = "FakeBase";
+    String body = "FakeBody";
+
+    GitUtils.createPR(gitHub, path, title, head, base, body);
   }
 }

@@ -7,6 +7,8 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
+import org.kohsuke.github.GHRepository;
+import org.kohsuke.github.GitHub;
 
 public class GitUtils {
 
@@ -48,5 +50,15 @@ public class GitUtils {
     Git git = getGit(dir);
     CredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider(token, "");
     git.push().setCredentialsProvider(credentialsProvider).call();
+  }
+
+  public static GitHub connectionWithOauth(String token) throws IOException {
+    return GitHub.connectUsingOAuth(token);
+  }
+
+  public static void createPR(GitHub gitHub, String path, String title, String head, String base, String body) throws IOException {
+    GHRepository ghRepository = gitHub.getRepository(path);
+
+    ghRepository.createPullRequest(title, head, base, body);
   }
 }

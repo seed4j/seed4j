@@ -144,7 +144,6 @@
       <artifactId>joox</artifactId>
       <version>${joox.version}</version>
     </dependency>
-
     <!-- jhipster-needle-maven-add-dependency -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>

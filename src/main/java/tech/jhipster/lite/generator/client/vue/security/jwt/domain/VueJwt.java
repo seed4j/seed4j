@@ -82,7 +82,6 @@ public class VueJwt {
       import { User } from '@/common/domain/User';
       import { Router } from 'vue-router';
       import { jwtStore } from '@/common/domain/JWTStoreService';
-      import { inject, ref } from "vue";
       """,
       "import",
       """

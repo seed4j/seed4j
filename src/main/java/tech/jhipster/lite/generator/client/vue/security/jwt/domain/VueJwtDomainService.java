@@ -84,6 +84,13 @@ public class VueJwtDomainService implements VueJwtService {
       .forEach((line, needle) ->
         addNewNeedleLineToFile(project, line, destinationAppComponent, "App.component.ts", NEEDLE_APP + "-" + needle)
       );
+    projectRepository.replaceText(
+      project,
+      destinationAppComponent,
+      "App.component.ts",
+      "import \\{ defineComponent \\} from \"vue\";",
+      "import { defineComponent, inject, ref } from \"vue\";"
+    );
   }
 
   public void addLoginContext(Project project) {

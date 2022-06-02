@@ -21,10 +21,12 @@ public abstract class ModulesSteps {
   @Autowired
   private TestRestTemplate rest;
 
-  protected void applyModuleForDefaultProject(String moduleUrl) {
+  protected void applyModuleForDefaultProject(String... moduleUrl) {
     ProjectDTO project = newDefaultProjectDto();
 
-    post(moduleUrl, JsonHelper.writeAsString(project));
+    for (String url : moduleUrl) {
+      post(url, JsonHelper.writeAsString(project));
+    }
   }
 
   protected void applyModuleForDefaultProjectWithMavenFile(String moduleUrl) {
@@ -36,6 +38,22 @@ public abstract class ModulesSteps {
   }
 
   private static void addPomToproject(String folder) {
+    Path folderPath = Paths.get(folder);
+    try {
+      Files.createDirectories(folderPath);
+    } catch (IOException e) {
+      throw new AssertionError(e);
+    }
+
+    Path pomPath = folderPath.resolve("pom.xml");
+    try {
+      Files.copy(Paths.get("src/test/resources/projects/maven/pom.xml"), pomPath);
+    } catch (IOException e) {
+      throw new AssertionError(e);
+    }
+  }
+
+  private static void addPackageToproject(String folder) {
     Path folderPath = Paths.get(folder);
     try {
       Files.createDirectories(folderPath);

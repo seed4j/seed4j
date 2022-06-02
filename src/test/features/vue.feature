@@ -22,8 +22,6 @@ Feature: Vue
       | App.vue                   |
       | index.ts                  |
 
-
-
   Scenario: Should add jwt authentication to Vue application
     When I add jwt to vue application
     Then I should have files in "src/main/webapp/app/common/domain"
@@ -31,7 +29,6 @@ Feature: Vue
       | JWTStoreService.ts         |
       | Login.ts                   |
       | User.ts                    |
-      | README.md                  |
     And I should have files in "src/main/webapp/app/common/primary/homepage"
       | Homepage.component.ts      |
       | Homepage.html              |
@@ -42,7 +39,8 @@ Feature: Vue
       | Login.html                 |
       | Login.vue                  |
       | index.ts                   |
-    And I should not have files in "src/main/webapp/app/common/secondary"
-      | AuthenticationRepository.ts|
-      | RestLogin.ts               |
-      | UserDTO.ts                 |
+    And I should have files in "src/main/webapp/app/common/secondary"
+      | AuthenticationRepository.ts |
+      | ConsoleLogger.ts |
+      | RestLogin.ts                |
+      | UserDTO.ts                  |

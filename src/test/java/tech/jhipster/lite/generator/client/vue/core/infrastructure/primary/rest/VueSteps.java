@@ -7,11 +7,11 @@ public class VueSteps extends ModulesSteps {
 
   @When("I generate vue application")
   public void addVue() {
-    applyModuleForDefaultProject("/api/clients/vue");
+    applyModuleForDefaultProject("/api/inits/full", "/api/clients/vue");
   }
 
   @When("I add jwt to vue application")
   public void addVueJwt() {
-    applyModuleForDefaultProject("/api/clients/vue/jwt");
+    applyModuleForDefaultProject("/api/inits/full", "/api/clients/vue", "/api/clients/vue/stores/pinia", "/api/clients/vue/jwt");
   }
 }

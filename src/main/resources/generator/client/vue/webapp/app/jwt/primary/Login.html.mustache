@@ -1,0 +1,22 @@
+<div id="login">
+  <form @submit.prevent="onSubmit">
+    <h1 class="a11y-hidden">Login Form</h1>
+    <div>
+      <label class="label-email">
+        <input id="username" type="text" class="text" name="username" placeholder="username" tabindex="1" v-model="form.username" required />
+        <span class="required">Username</span>
+      </label>
+    </div>
+    <input type="checkbox" name="show-password" class="show-password a11y-hidden" id="show-password" tabindex="3" />
+    <label class="label-show-password" for="show-password">
+      <span>Show Password</span>
+    </label>
+    <div>
+      <label class="label-password">
+        <input id="password" type="text" class="text" name="password" placeholder="Password" tabindex="2" v-model="form.password" required />
+        <span class="required">Password</span>
+      </label>
+    </div>
+    <input id="submit" type="submit" value="Log In" />
+  </form>
+</div>

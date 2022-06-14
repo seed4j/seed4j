@@ -137,6 +137,12 @@ public class TestUtils {
     return project;
   }
 
+  public static Project tmpProjectWithPackageJsonPinia() {
+    Project project = tmpProject();
+    copyPackageJsonByName(project, "package-pinia.json");
+    return project;
+  }
+
   public static Project tmpProjectWithBuildGradle() {
     Project project = tmpProject();
     copyBuildGradle(project);

@@ -1,4 +1,4 @@
-#!/bin/bash
+  #!/bin/bash
 
 show_syntax() {
   echo "Usage: $0 <application>" >&2
@@ -112,6 +112,8 @@ elif [[ $application == 'fullapp' ]]; then
 
   callApi "/api/developer-tools/frontend-maven-plugin"
   callApi "/api/clients/vue"
+  callApi "/api/clients/vue/pinia"
+  callApi "/api/clients/vue/jwt"
 
 elif [[ $application == 'oauth2app' ]]; then
   springboot_mvc

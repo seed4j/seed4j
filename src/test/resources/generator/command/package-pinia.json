@@ -1,0 +1,19 @@
+{
+  "name": "jhlitetest",
+  "version": "0.0.1",
+  "scripts": {
+    "prettier:check": "prettier --check \"{,src/**/}*.{md,json,yml,html,js,ts,tsx,css,scss,vue,java,xml}\"",
+    "prettier:format": "prettier --write \"{,src/**/}*.{md,json,yml,html,js,ts,tsx,css,scss,vue,java,xml}\""
+  },
+  "devDependencies": {
+    "prettier-plugin-java": "1.6.1"
+  },
+  "dependencies": {
+    "axios": "0.26.1",
+    "pinia": "2.0.13"
+  },
+  "engines": {
+    "node": ">=14.18.1"
+  },
+  "cacheDirectories": ["node_modules"]
+}

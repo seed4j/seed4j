@@ -22,6 +22,8 @@ public interface ProjectRepository {
 
   void write(Project project, String text, String destination, String destinationFilename);
 
+  void writeAtTop(Project project, String text, String destination, String destinationFilename);
+
   void setExecutable(Project project, String source, String sourceFilename);
 
   void gitInit(Project project);

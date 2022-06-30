@@ -167,6 +167,19 @@ public class ProjectLocalRepository implements ProjectRepository {
   }
 
   @Override
+  public void writeAtTop(Project project, String text, String destination, String destinationFilename) {
+    Assert.notNull("text", text);
+
+    try {
+      String currentText = read(getPath(project.getFolder(), destination, destinationFilename));
+      String updatedText = String.join("", text, currentText);
+      write(project, updatedText, destination, destinationFilename);
+    } catch (IOException e) {
+      throw new GeneratorException(getErrorWritingMessage(destinationFilename));
+    }
+  }
+
+  @Override
   public void setExecutable(Project project, String source, String sourceFilename) {
     if (!FileUtils.isPosix()) {
       return;

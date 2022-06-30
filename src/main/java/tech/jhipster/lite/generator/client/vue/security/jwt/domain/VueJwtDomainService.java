@@ -68,6 +68,12 @@ public class VueJwtDomainService implements VueJwtService {
   public void addLoginContext(Project project) {
     String destinationPrimaryLoginContext = DESTINATION_PRIMARY + LOGIN;
     String sourcePrimaryLoginContext = SOURCE_PRIMARY;
+    projectRepository.writeAtTop(
+      project,
+      "<router-link to=\"/login\">click to Login</router-link>\n<br>",
+      "src/main/webapp/app/common/primary/app",
+      "App.html"
+    );
     projectRepository.template(
       ProjectFile.forProject(project).withSource(getPath(SOURCE, SOURCE_DOMAIN), "Login.ts").withDestinationFolder(DESTINATION_DOMAIN)
     );

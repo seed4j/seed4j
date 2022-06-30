@@ -22,8 +22,13 @@ export default defineComponent({
     const onSubmit = async (): Promise<void> => {
       await authenticationService
       .login(form.value)
-      .then(() => {
-        router.push('/');
+      .then(async () => {
+        await authenticationService
+        .authenticate()
+        .then(user => {
+          alert(JSON.stringify(user,null,4));
+          router.push('/');
+        });
       })
       .catch(error => {
         loginError = true;

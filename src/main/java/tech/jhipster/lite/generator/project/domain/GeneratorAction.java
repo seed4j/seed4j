@@ -37,8 +37,6 @@ public class GeneratorAction {
 
   public static final String GITHUB_ACTIONS = "github-actions";
 
-  public static final String MSSQL = "mssql";
-
   public static final String FLYWAY = "flyway";
   public static final String FLYWAY_USER_AND_AUTHORITY_CHANGELOGS = "flyway-user-and-authority-changelogs";
 

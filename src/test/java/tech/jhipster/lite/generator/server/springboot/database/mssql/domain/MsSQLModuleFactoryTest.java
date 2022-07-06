@@ -1,8 +1,6 @@
 package tech.jhipster.lite.generator.server.springboot.database.mssql.domain;
 
 import static org.mockito.Mockito.when;
-import static tech.jhipster.lite.module.domain.JHipsterModule.propertyKey;
-import static tech.jhipster.lite.module.domain.JHipsterModule.propertyValue;
 import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleOnProjectWithDefaultPom;
 
 import org.junit.jupiter.api.Test;
@@ -10,8 +8,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import tech.jhipster.lite.TestFileUtils;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.common.domain.FileUtils;
 import tech.jhipster.lite.docker.domain.DockerImage;
 import tech.jhipster.lite.docker.domain.DockerImages;
 import tech.jhipster.lite.module.domain.JHipsterModule;
@@ -31,7 +29,7 @@ class MsSQLModuleFactoryTest {
   @Test
   void shouldCreateModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture
-      .propertiesBuilder(FileUtils.tmpDirForTest())
+      .propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.jhipster.test")
       .projectBaseName("myapp")
       .build();

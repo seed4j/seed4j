@@ -1,4 +1,4 @@
-package {{packageName}};
+package {{packageName}}.technical.infrastructure.secondary.mssql;
 
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -7,11 +7,11 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class MssqlTestContainerExtension implements BeforeAllCallback {
+public class MsSQLTestContainerExtension implements BeforeAllCallback {
 
   private static AtomicBoolean started = new AtomicBoolean(false);
 
-  private static MSSQLServerContainer<?> container =  new MSSQLServerContainer<>(DockerImageName.parse("mcr.microsoft.com/mssql/server:latest").asCompatibleSubstituteFor("mcr.microsoft.com/mssql/server"))
+  private static MSSQLServerContainer<?> container =  new MSSQLServerContainer<>(DockerImageName.parse({{mssqlDockerImageWithVersion}}).asCompatibleSubstituteFor("mcr.microsoft.com/mssql/server"))
     .withUrlParam("trustServerCertificate","true")
     .acceptLicense();
 

@@ -11,6 +11,7 @@ import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.module.domain.DocumentationTitle;
 import tech.jhipster.lite.module.domain.JHipsterDestination;
 import tech.jhipster.lite.module.domain.JHipsterSource;
+import tech.jhipster.lite.module.domain.javabuild.ArtifactId;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependency;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyScope;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
@@ -29,7 +30,8 @@ public class SQLCommonModuleBuilder {
     JHipsterModuleProperties properties,
     DatabaseType databaseType,
     DockerImage dockerImage,
-    DocumentationTitle documentationTitle
+    DocumentationTitle documentationTitle,
+    ArtifactId testContainerArtifactId
   ) {
     Assert.notNull("properties", properties);
     Assert.notNull("databaseType", databaseType);
@@ -59,7 +61,7 @@ public class SQLCommonModuleBuilder {
         .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-starter-data-jpa"))
         .addDependency(groupId("com.zaxxer"), artifactId("HikariCP"))
         .addDependency(groupId(ORG_HIBERNATE), artifactId("hibernate-core"))
-        .addDependency(testContainer(databaseId))
+        .addDependency(testContainer(testContainerArtifactId))
         .and()
       .springMainProperties()
         .set(propertyKey("spring.datasource.password"), propertyValue(""))
@@ -114,10 +116,10 @@ public class SQLCommonModuleBuilder {
     //@formatter:on
   }
 
-  private static JavaDependency testContainer(String databaseId) {
+  private static JavaDependency testContainer(ArtifactId testContainerArtifactId) {
     return javaDependency()
       .groupId("org.testcontainers")
-      .artifactId(databaseId)
+      .artifactId(testContainerArtifactId)
       .versionSlug("testcontainers")
       .scope(JavaDependencyScope.TEST)
       .build();

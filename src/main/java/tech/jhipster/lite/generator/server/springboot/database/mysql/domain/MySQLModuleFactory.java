@@ -22,7 +22,13 @@ public class MySQLModuleFactory {
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
-    return sqlCommonModuleBuilder(properties, DatabaseType.MYSQL, dockerImages.get("mysql"), documentationTitle("MySQL"))
+    return sqlCommonModuleBuilder(
+      properties,
+      DatabaseType.MYSQL,
+      dockerImages.get("mysql"),
+      documentationTitle("MySQL"),
+      artifactId("mysql")
+    )
       .javaDependencies()
       .addDependency(groupId("mysql"), artifactId("mysql-connector-java"))
       .and()

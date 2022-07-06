@@ -22,7 +22,13 @@ public class MariaDBModuleFactory {
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
-    return sqlCommonModuleBuilder(properties, DatabaseType.MARIADB, dockerImages.get("mariadb"), documentationTitle("MariaDB"))
+    return sqlCommonModuleBuilder(
+      properties,
+      DatabaseType.MARIADB,
+      dockerImages.get("mariadb"),
+      documentationTitle("MariaDB"),
+      artifactId("mariadb")
+    )
       .javaDependencies()
       .addDependency(groupId("org.mariadb.jdbc"), artifactId("mariadb-java-client"))
       .and()

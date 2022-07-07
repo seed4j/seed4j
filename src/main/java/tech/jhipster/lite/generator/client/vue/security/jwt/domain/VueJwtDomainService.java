@@ -71,8 +71,8 @@ public class VueJwtDomainService implements VueJwtService {
     projectRepository.writeAtTop(
       project,
       "<router-link to=\"/login\">click to Login</router-link>\n<br>",
-      "src/main/webapp/app/common/primary/app",
-      "App.html"
+      "src/main/webapp/app/common/primary/homepage",
+      "Homepage.html"
     );
     projectRepository.template(
       ProjectFile.forProject(project).withSource(getPath(SOURCE, SOURCE_DOMAIN), "Login.ts").withDestinationFolder(DESTINATION_DOMAIN)

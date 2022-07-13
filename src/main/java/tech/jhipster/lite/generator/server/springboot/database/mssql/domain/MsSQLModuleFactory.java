@@ -1,6 +1,6 @@
 package tech.jhipster.lite.generator.server.springboot.database.mssql.domain;
 
-import static tech.jhipster.lite.generator.server.springboot.core.domain.SpringBoot.NEEDLE_LOGBACK_LOGGER;
+import static tech.jhipster.lite.generator.server.springboot.common.domain.SpringBoot.NEEDLE_LOGBACK_LOGGER;
 import static tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonModuleBuilder.logger;
 import static tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonModuleBuilder.sqlCommonModuleBuilder;
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
@@ -41,7 +41,7 @@ public class MsSQLModuleFactory {
       )
       .and()
       .javaDependencies()
-      .dependency(groupId("com.microsoft.sqlserver"), artifactId("mssql-jdbc"))
+      .addDependency(groupId("com.microsoft.sqlserver"), artifactId("mssql-jdbc"))
       .and()
       .springMainProperties()
       .set(

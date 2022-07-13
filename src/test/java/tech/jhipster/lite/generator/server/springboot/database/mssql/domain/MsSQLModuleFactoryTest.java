@@ -1,7 +1,7 @@
 package tech.jhipster.lite.generator.server.springboot.database.mssql.domain;
 
 import static org.mockito.Mockito.when;
-import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleOnProjectWithDefaultPom;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,7 +38,7 @@ class MsSQLModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModuleOnProjectWithDefaultPom(module)
+    assertThatModuleWithFiles(module, pomFile())
       .createFile("src/main/java/com/jhipster/test/technical/infrastructure/secondary/mssql/DatabaseConfiguration.java")
       .and()
       .createFile("documentation/mssql.md")

@@ -20,6 +20,6 @@ class GitpodModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModule(module).createFiles(".gitpod.yml", ".gitpod.Dockerfile");
+    assertThatModule(module).hasFiles(".gitpod.yml", ".gitpod.Dockerfile");
   }
 }

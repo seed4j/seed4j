@@ -25,7 +25,7 @@ class AopLoggingModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .createFile("pom.xml")
+      .hasFile("pom.xml")
       .containing(
         """
             <dependency>
@@ -35,19 +35,19 @@ class AopLoggingModuleFactoryTest {
         """
       )
       .and()
-      .createPrefixedFiles(
+      .hasPrefixedFiles(
         "src/main/java/com/jhipster/test/technical/infrastructure/secondary/aop/logging",
         "LoggingAspectConfiguration.java",
         "LoggingAspect.java"
       )
-      .createFiles("src/test/java/com/jhipster/test/technical/infrastructure/secondary/aop/logging/LoggingAspectTest.java")
-      .createFile("src/main/resources/config/application.properties")
+      .hasFiles("src/test/java/com/jhipster/test/technical/infrastructure/secondary/aop/logging/LoggingAspectTest.java")
+      .hasFile("src/main/resources/config/application.properties")
       .containing("application.aop.logging=false")
       .and()
-      .createFile("src/main/resources/config/application-local.properties")
+      .hasFile("src/main/resources/config/application-local.properties")
       .containing("application.aop.logging=true")
       .and()
-      .createFile("src/test/resources/config/application.properties")
+      .hasFile("src/test/resources/config/application.properties")
       .containing("application.aop.logging=true")
       .and();
   }

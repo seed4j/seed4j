@@ -38,7 +38,7 @@ class SpringCloudConfigModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .createFile("pom.xml")
+      .hasFile("pom.xml")
       .containing("<spring-cloud.version>")
       .containing(
         """
@@ -68,7 +68,7 @@ class SpringCloudConfigModuleFactoryTest {
             """
       )
       .and()
-      .createFile("src/main/resources/config/bootstrap.properties")
+      .hasFile("src/main/resources/config/bootstrap.properties")
       .containing("spring.application.name=myApp")
       .containing("jhipster.registry.password=admin")
       .containing("spring.cloud.compatibility-verifier.enabled=false")
@@ -80,7 +80,7 @@ class SpringCloudConfigModuleFactoryTest {
       .containing("spring.cloud.config.uri=http://admin:${jhipster.registry.password}@localhost:8761/config")
       .containing("spring.cloud.config.fail-fast=true")
       .and()
-      .createFile("src/main/resources/config/bootstrap-local.properties")
+      .hasFile("src/main/resources/config/bootstrap-local.properties")
       .containing("spring.application.name=myApp")
       .containing("jhipster.registry.password=admin")
       .containing("spring.cloud.compatibility-verifier.enabled=false")
@@ -92,13 +92,10 @@ class SpringCloudConfigModuleFactoryTest {
       .containing("spring.cloud.config.uri=http://admin:${jhipster.registry.password}@localhost:8761/config")
       .containing("spring.cloud.config.fail-fast=false")
       .and()
-      .createFile("src/test/resources/config/bootstrap.properties")
+      .hasFile("src/test/resources/config/bootstrap.properties")
       .containing("spring.application.name=myApp")
       .containing("spring.cloud.config.enabled=false")
       .and()
-      .createFiles(
-        "src/main/docker/jhipster-registry.yml",
-        "src/main/docker/central-server-config/localhost-config/application.properties"
-      );
+      .hasFiles("src/main/docker/jhipster-registry.yml", "src/main/docker/central-server-config/localhost-config/application.properties");
   }
 }

@@ -25,7 +25,7 @@ class GatewayModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), propertiesFile())
-      .createFile("pom.xml")
+      .hasFile("pom.xml")
       .containing("<spring-cloud.version>")
       .containing(
         """
@@ -55,7 +55,7 @@ class GatewayModuleFactoryTest {
             """
       )
       .and()
-      .createFile("src/main/resources/config/bootstrap.properties")
+      .hasFile("src/main/resources/config/bootstrap.properties")
       .containing("spring.application.name=myApp")
       .containing("spring.cloud.gateway.discovery.locator.enabled=true")
       .containing("spring.cloud.gateway.discovery.locator.lower-case-service-id=true")
@@ -67,14 +67,14 @@ class GatewayModuleFactoryTest {
       )
       .containing("spring.cloud.gateway.discovery.locator.filters[0].args[replacement]='/${remaining}'")
       .and()
-      .createFile("src/test/resources/config/bootstrap.properties")
+      .hasFile("src/test/resources/config/bootstrap.properties")
       .containing("spring.application.name=myApp")
       .containing("spring.cloud.gateway.discovery.locator.enabled=false")
       .and()
-      .createJavaSources(
+      .hasJavaSources(
         "com/jhipster/test/technical/infrastructure/primary/rest/GatewayResource.java",
         "com/jhipster/test/technical/infrastructure/primary/rest/vm/RouteVM.java"
       )
-      .createJavaTests("com/jhipster/test/technical/infrastructure/primary/rest/GatewayResourceIT.java");
+      .hasJavaTests("com/jhipster/test/technical/infrastructure/primary/rest/GatewayResourceIT.java");
   }
 }

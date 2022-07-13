@@ -25,28 +25,22 @@ class Oauth2AccountModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModule(module)
-      .createPrefixedFiles("src/main/java/com/jhipster/test/account/domain", "Account.java", "AccountsRepository.java")
-      .createFile("src/main/java/com/jhipster/test/account/application/AccountsApplicationService.java")
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/account/domain", "Account.java", "AccountsRepository.java")
+      .hasFile("src/main/java/com/jhipster/test/account/application/AccountsApplicationService.java")
       .and()
-      .createPrefixedFiles("src/main/java/com/jhipster/test/account/infrastructure/primary", "RestAccount.java", "AccountsResource.java")
-      .createPrefixedFiles(
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/account/infrastructure/primary", "RestAccount.java", "AccountsResource.java")
+      .hasPrefixedFiles(
         "src/main/java/com/jhipster/test/account/infrastructure/secondary",
         "OAuth2AccountsRepository.java",
         "OAuth2AuthenticationReader.java",
         "UnknownAuthenticationSchemeException.java"
       )
-      .createFile("src/main/java/com/jhipster/test/account/package-info.java")
+      .hasFile("src/main/java/com/jhipster/test/account/package-info.java")
       .and()
-      .createPrefixedFiles(
-        "src/main/java/com/jhipster/test/useridentity/domain",
-        "Email.java",
-        "Firstname.java",
-        "Lastname.java",
-        "Name.java"
-      )
-      .createFile("src/main/java/com/jhipster/test/useridentity/package-info.java")
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/useridentity/domain", "Email.java", "Firstname.java", "Lastname.java", "Name.java")
+      .hasFile("src/main/java/com/jhipster/test/useridentity/package-info.java")
       .and()
-      .createPrefixedFiles(
+      .hasPrefixedFiles(
         "src/test/java/com/jhipster/test/useridentity/domain",
         "EmailTest.java",
         "FirstnameTest.java",
@@ -54,16 +48,16 @@ class Oauth2AccountModuleFactoryTest {
         "NameTest.java",
         "UsersIdentitiesFixture.java"
       )
-      .createFile("src/test/java/com/jhipster/test/account/domain/AccountsFixture.java")
+      .hasFile("src/test/java/com/jhipster/test/account/domain/AccountsFixture.java")
       .and()
-      .createPrefixedFiles(
+      .hasPrefixedFiles(
         "src/test/java/com/jhipster/test/account/infrastructure/primary",
         "RestAccountTest.java",
         "AccountsResourceIntTest.java",
         "AccountsResourceTest.java"
       )
-      .createFile("src/test/java/com/jhipster/test/account/infrastructure/secondary/OAuth2AuthenticationReaderTest.java")
+      .hasFile("src/test/java/com/jhipster/test/account/infrastructure/secondary/OAuth2AuthenticationReaderTest.java")
       .and()
-      .createFile("src/test/java/com/jhipster/test/account/infrastructure/OAuth2TokenFixture.java");
+      .hasFile("src/test/java/com/jhipster/test/account/infrastructure/OAuth2TokenFixture.java");
   }
 }

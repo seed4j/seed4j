@@ -23,6 +23,6 @@ class LogsSpyModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModule(module).createFiles("documentation/logs-spy.md").createJavaTests("com/jhipster/test/LogsSpy.java");
+    assertThatModule(module).hasFiles("documentation/logs-spy.md").hasJavaTests("com/jhipster/test/LogsSpy.java");
   }
 }

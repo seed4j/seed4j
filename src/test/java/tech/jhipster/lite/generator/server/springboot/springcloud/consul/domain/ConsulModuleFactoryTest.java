@@ -41,13 +41,13 @@ class ConsulModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .createFile(MAIN_DOCKER + "/consul.yml")
+      .hasFile(MAIN_DOCKER + "/consul.yml")
       .containing("consul:1.12.2")
       .containing("jhipster/consul-config-loader:v0.4.1")
       .and()
-      .createFile(MAIN_DOCKER + "/central-server-config/application.yml")
+      .hasFile(MAIN_DOCKER + "/central-server-config/application.yml")
       .and()
-      .createFile("pom.xml")
+      .hasFile("pom.xml")
       .containing(
         """
               <dependency>
@@ -84,7 +84,7 @@ class ConsulModuleFactoryTest {
         """
       )
       .and()
-      .createFile(MAIN_RESOURCES + "/config/bootstrap.properties")
+      .hasFile(MAIN_RESOURCES + "/config/bootstrap.properties")
       .containing("spring.cloud.consul.discovery.health-check-path=${server.servlet.context-path:}/management/health")
       .containing("spring.cloud.consul.discovery.tags[0]=version=@project.version@")
       .containing("spring.cloud.consul.discovery.tags[1]=context-path=${server.servlet.context-path:}")
@@ -93,7 +93,7 @@ class ConsulModuleFactoryTest {
       .containing("spring.cloud.consul.discovery.tags[4]=git-commit=${git.commit.id.abbrev:}")
       .containing("spring.cloud.consul.discovery.tags[5]=git-branch=${git.branch:}")
       .and()
-      .createFile(TEST_RESOURCES + "/config/bootstrap.properties")
+      .hasFile(TEST_RESOURCES + "/config/bootstrap.properties")
       .containing("spring.cloud.consul.enabled=false")
       .containing("spring.cloud.compatibility-verifier.enabled=false");
   }

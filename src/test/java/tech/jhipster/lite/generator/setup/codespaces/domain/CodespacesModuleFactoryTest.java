@@ -23,6 +23,6 @@ class CodespacesModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModule(module).createFiles(".devcontainer/Dockerfile").createFile(".devcontainer/devcontainer.json").containing("8080");
+    assertThatModule(module).hasFiles(".devcontainer/Dockerfile").hasFile(".devcontainer/devcontainer.json").containing("8080");
   }
 }

@@ -43,8 +43,8 @@ class OAuth2ModuleFactoryTest {
       pomFile(),
       file("src/test/resources/projects/files/IntegrationTest.java", "src/test/java/com/jhipster/test/IntegrationTest.java")
     )
-      .createPrefixedFiles("src/main/java/com/jhipster/test/authentication/domain", "Role.java", "Roles.java", "Username.java")
-      .createPrefixedFiles(
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/authentication/domain", "Role.java", "Roles.java", "Username.java")
+      .hasPrefixedFiles(
         "src/main/java/com/jhipster/test/authentication/infrastructure/primary",
         "ApplicationSecurityProperties.java",
         "AudienceValidator.java",
@@ -59,8 +59,8 @@ class OAuth2ModuleFactoryTest {
         "SecurityConfiguration.java",
         "UnknownAuthenticationException.java"
       )
-      .createPrefixedFiles("src/test/java/com/jhipster/test/authentication/domain", "RolesTest.java", "RoleTest.java", "UsernameTest.java")
-      .createPrefixedFiles(
+      .hasPrefixedFiles("src/test/java/com/jhipster/test/authentication/domain", "RolesTest.java", "RoleTest.java", "UsernameTest.java")
+      .hasPrefixedFiles(
         "src/test/java/com/jhipster/test/authentication/infrastructure/primary",
         "AccountExceptionResource.java",
         "ApplicationSecurityPropertiesTest.java",
@@ -76,34 +76,34 @@ class OAuth2ModuleFactoryTest {
         "TestSecurityConfiguration.java",
         "WithUnauthenticatedMockUser.java"
       )
-      .createFile("src/main/docker/keycloak.yml")
+      .hasFile("src/main/docker/keycloak.yml")
       .containing("jboss/keycloak:1.1.1")
       .and()
-      .createFile("src/main/docker/keycloak-realm-config/jhipster-realm.json")
+      .hasFile("src/main/docker/keycloak-realm-config/jhipster-realm.json")
       .containing("1.1.1")
       .and()
-      .createFile("src/main/docker/keycloak-realm-config/jhipster-users-0.json")
+      .hasFile("src/main/docker/keycloak-realm-config/jhipster-users-0.json")
       .and()
-      .createFile("src/main/java/com/jhipster/test/authentication/package-info.java")
+      .hasFile("src/main/java/com/jhipster/test/authentication/package-info.java")
       .and()
-      .createFile("pom.xml")
+      .hasFile("pom.xml")
       .containing("spring-boot-starter-security")
       .containing("spring-boot-starter-oauth2-client")
       .containing("spring-security-test")
       .containing("spring-boot-starter-oauth2-resource-server")
       .and()
-      .createFile("src/main/resources/config/application.properties")
+      .hasFile("src/main/resources/config/application.properties")
       .containing("spring.security.oauth2.client.provider.oidc.issuer-uri=http://localhost:9080/auth/realms/jhipster")
       .containing("spring.security.oauth2.client.registration.oidc.client-id=web_app")
       .containing("spring.security.oauth2.client.registration.oidc.client-secret=web_app")
       .containing("spring.security.oauth2.client.registration.oidc.scope=openid,profile,email")
       .containing("application.security.oauth2.audience=account,api://default")
       .and()
-      .createFile("src/test/resources/config/application.properties")
+      .hasFile("src/test/resources/config/application.properties")
       .containing("spring.main.allow-bean-definition-overriding=true")
       .containing("spring.security.oauth2.client.provider.oidc.issuer-uri=http://DO_NOT_CALL:9080/auth/realms/jhipster")
       .and()
-      .createFile("src/test/java/com/jhipster/test/IntegrationTest.java")
+      .hasFile("src/test/java/com/jhipster/test/IntegrationTest.java")
       .containing("@SpringBootTest(classes = { MyappApp.class, TestSecurityConfiguration.class })")
       .containing("@WithMockUser")
       .containing("import org.springframework.security.test.context.support.WithMockUser;")

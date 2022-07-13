@@ -25,7 +25,7 @@ class SpringBootCoreModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .createFile("pom.xml")
+      .hasFile("pom.xml")
       .containing(
         """
               <dependency>
@@ -139,15 +139,15 @@ class SpringBootCoreModuleFactoryTest {
        """
       )
       .and()
-      .createFile("src/main/java/com/jhipster/test/MyappApp.java")
+      .hasFile("src/main/java/com/jhipster/test/MyappApp.java")
       .containing("class MyappApp")
       .and()
-      .createFiles("src/test/java/com/jhipster/test/MyappAppTest.java", "src/test/java/com/jhipster/test/IntegrationTest.java")
-      .createFiles(
+      .hasFiles("src/test/java/com/jhipster/test/MyappAppTest.java", "src/test/java/com/jhipster/test/IntegrationTest.java")
+      .hasFiles(
         "src/main/resources/config/application.properties",
         "src/main/resources/config/application-local.properties",
         "src/test/resources/config/application.properties"
       )
-      .createFiles("src/test/resources/logback.xml", "src/main/resources/logback-spring.xml");
+      .hasFiles("src/test/resources/logback.xml", "src/main/resources/logback-spring.xml");
   }
 }

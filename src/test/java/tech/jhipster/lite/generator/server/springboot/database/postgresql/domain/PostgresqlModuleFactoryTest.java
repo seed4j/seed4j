@@ -39,16 +39,16 @@ class PostgresqlModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .createPrefixedFiles(
+      .hasPrefixedFiles(
         "src/main/java/com/jhipster/test/technical/infrastructure/secondary/postgresql",
         "DatabaseConfiguration.java",
         "FixedPostgreSQL10Dialect.java"
       )
-      .createFile("documentation/postgresql.md")
+      .hasFile("documentation/postgresql.md")
       .and()
-      .createFile("src/test/java/com/jhipster/test/technical/infrastructure/secondary/postgresql/FixedPostgreSQL10DialectTest.java")
+      .hasFile("src/test/java/com/jhipster/test/technical/infrastructure/secondary/postgresql/FixedPostgreSQL10DialectTest.java")
       .and()
-      .createFile("pom.xml")
+      .hasFile("pom.xml")
       .containing("<groupId>org.postgresql</groupId>")
       .containing("<artifactId>postgresql</artifactId>")
       .containing("<groupId>com.zaxxer</groupId>")
@@ -58,7 +58,7 @@ class PostgresqlModuleFactoryTest {
       .containing("<groupId>org.testcontainers</groupId>")
       .containing("<artifactId>postgresql</artifactId>")
       .and()
-      .createFile("src/main/resources/config/application.properties")
+      .hasFile("src/main/resources/config/application.properties")
       .containing("spring.datasource.url=jdbc:postgresql://localhost:5432/myapp")
       .containing("spring.datasource.username=myapp")
       .containing("spring.datasource.password=")
@@ -81,7 +81,7 @@ class PostgresqlModuleFactoryTest {
       .containing("spring.jpa.properties.hibernate.query.fail_on_pagination_over_collection_fetch=true")
       .containing("spring.jpa.properties.hibernate.query.in_clause_parameter_padding=true")
       .and()
-      .createFile("src/test/resources/config/application.properties")
+      .hasFile("src/test/resources/config/application.properties")
       .containing("spring.datasource.url=jdbc:tc:postgresql")
       .containing("spring.datasource.username=myapp")
       .containing("spring.datasource.password=")

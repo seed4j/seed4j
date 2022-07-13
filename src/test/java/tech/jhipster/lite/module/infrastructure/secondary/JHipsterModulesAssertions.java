@@ -86,23 +86,23 @@ public final class JHipsterModulesAssertions {
       projectFolder = module.projectFolder();
     }
 
-    public ModuleAsserter createJavaSources(String... files) {
-      return createPrefixedFiles("src/main/java", files);
+    public ModuleAsserter hasJavaSources(String... files) {
+      return hasPrefixedFiles("src/main/java", files);
     }
 
-    public ModuleAsserter createJavaTests(String... files) {
-      return createPrefixedFiles("src/test/java", files);
+    public ModuleAsserter hasJavaTests(String... files) {
+      return hasPrefixedFiles("src/test/java", files);
     }
 
-    public ModuleAsserter createPrefixedFiles(String prefix, String... files) {
+    public ModuleAsserter hasPrefixedFiles(String prefix, String... files) {
       assertThat(files).as("Can't check null files for a module").isNotNull();
 
       String[] sourceFiles = Stream.of(files).map(file -> prefix + SLASH + file).toArray(String[]::new);
 
-      return createFiles(sourceFiles);
+      return hasFiles(sourceFiles);
     }
 
-    public ModuleAsserter createFiles(String... files) {
+    public ModuleAsserter hasFiles(String... files) {
       assertThat(files).as("Can't check null files for a module").isNotNull();
 
       SoftAssertions assertions = new SoftAssertions();
@@ -116,7 +116,7 @@ public final class JHipsterModulesAssertions {
       return path -> assertions.assertThat(Files.exists(path)).as(fileNotFoundMessage(path, projectFolder)).isTrue();
     }
 
-    public ModuleAsserter createExecutableFiles(String... files) {
+    public ModuleAsserter hasExecutableFiles(String... files) {
       assertThat(files).as("Can't check null files for a module").isNotNull();
 
       SoftAssertions assertions = new SoftAssertions();
@@ -134,7 +134,7 @@ public final class JHipsterModulesAssertions {
           .isTrue();
     }
 
-    public ModuleAsserter doNotCreateFiles(String... files) {
+    public ModuleAsserter doNotHaveFiles(String... files) {
       assertThat(files).as("Can't check null files as not created for a module").isNotNull();
 
       SoftAssertions assertions = new SoftAssertions();
@@ -148,7 +148,7 @@ public final class JHipsterModulesAssertions {
       return path -> assertions.assertThat(Files.notExists(path)).as(fileFoundMessage(path, projectFolder)).isTrue();
     }
 
-    public ModuleFileAsserter createFile(String file) {
+    public ModuleFileAsserter hasFile(String file) {
       return new ModuleFileAsserter(this, file);
     }
   }

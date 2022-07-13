@@ -33,9 +33,9 @@ class InitModuleFactoryTest {
     JHipsterModule module = factory.buildFullModule(properties);
 
     assertMinimalModule(folder, module)
-      .createFiles(".lintstagedrc.js", ".prettierignore", ".prettierrc")
-      .createExecutableFiles(".husky/pre-commit")
-      .createFile("package.json")
+      .hasFiles(".lintstagedrc.js", ".prettierignore", ".prettierrc")
+      .hasExecutableFiles(".husky/pre-commit")
+      .hasFile("package.json")
       .containing("test-project")
       .containing(nodeDependency("@prettier/plugin-xml"))
       .containing(nodeDependency("husky"))
@@ -75,15 +75,15 @@ class InitModuleFactoryTest {
 
   private ModuleAsserter assertMinimalModule(String folder, JHipsterModule module) {
     ModuleAsserter asserter = assertThatModule(module)
-      .createFile("README.md")
+      .hasFile("README.md")
       .containing("# Test Project")
       .and()
-      .createFiles(".gitignore", ".gitattributes")
-      .createFile(".editorconfig")
+      .hasFiles(".gitignore", ".gitattributes")
+      .hasFile(".editorconfig")
       .containing("end_of_line = lf")
       .containing("indent_size = 2")
       .and()
-      .createFiles(".eslintignore");
+      .hasFiles(".eslintignore");
 
     verify(git).init(new JHipsterProjectFolder(folder));
 

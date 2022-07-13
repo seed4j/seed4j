@@ -19,7 +19,7 @@ class BannerModuleFactoryTest {
   void shouldCreateModuleJHipsterBannerV7() {
     JHipsterModule module = factory.buildModuleBannerJHipsterV7(testModuleProperties());
 
-    assertThatModule(module).createFiles(BANNER_TXT);
+    assertThatModule(module).hasFiles(BANNER_TXT);
   }
 
   @Test
@@ -27,7 +27,7 @@ class BannerModuleFactoryTest {
   void shouldCreateModuleJHipsterBannerV7React() {
     JHipsterModule module = factory.buildModuleBannerJHipsterV7React(testModuleProperties());
 
-    assertThatModule(module).createFiles(BANNER_TXT);
+    assertThatModule(module).hasFiles(BANNER_TXT);
   }
 
   @Test
@@ -35,7 +35,7 @@ class BannerModuleFactoryTest {
   void shouldCreateModuleJHipsterBannerV7Vue() {
     JHipsterModule module = factory.buildModuleBannerJHipsterV7Vue(testModuleProperties());
 
-    assertThatModule(module).createFiles(BANNER_TXT);
+    assertThatModule(module).hasFiles(BANNER_TXT);
   }
 
   @Test
@@ -43,7 +43,7 @@ class BannerModuleFactoryTest {
   void shouldCreateModuleJHipsterBannerV2() {
     JHipsterModule module = factory.buildModuleBannerJHipsterV2(testModuleProperties());
 
-    assertThatModule(module).createFiles(BANNER_TXT);
+    assertThatModule(module).hasFiles(BANNER_TXT);
   }
 
   @Test
@@ -51,7 +51,7 @@ class BannerModuleFactoryTest {
   void shouldCreateModuleJHipsterBannerV3() {
     JHipsterModule module = factory.buildModuleBannerJHipsterV3(testModuleProperties());
 
-    assertThatModule(module).createFiles(BANNER_TXT);
+    assertThatModule(module).hasFiles(BANNER_TXT);
   }
 
   @Test
@@ -59,6 +59,6 @@ class BannerModuleFactoryTest {
   void shouldCreateModuleIpponBanner() {
     JHipsterModule module = factory.buildModuleBannerIppon(testModuleProperties());
 
-    assertThatModule(module).createFiles(BANNER_TXT);
+    assertThatModule(module).hasFiles(BANNER_TXT);
   }
 }

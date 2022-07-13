@@ -25,13 +25,13 @@ class GradleModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModule(module)
-      .createFile("build.gradle.kts")
+      .hasFile("build.gradle.kts")
       .containing("group = \"com.jhipster.test\"")
       .and()
-      .createFile("settings.gradle.kts")
+      .hasFile("settings.gradle.kts")
       .containing("my-app")
       .and()
-      .createExecutableFiles("gradlew", "gradlew.bat")
-      .createPrefixedFiles("gradle/wrapper", "gradle-wrapper.jar", "gradle-wrapper.properties");
+      .hasExecutableFiles("gradlew", "gradlew.bat")
+      .hasPrefixedFiles("gradle/wrapper", "gradle-wrapper.jar", "gradle-wrapper.properties");
   }
 }

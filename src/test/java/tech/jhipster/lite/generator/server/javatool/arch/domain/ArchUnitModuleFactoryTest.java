@@ -24,14 +24,14 @@ class ArchUnitModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), testLockbackFile())
-      .createFiles("src/test/resources/archunit.properties")
-      .createFile("src/test/java/com/jhipster/test/HexagonalArchTest.java")
+      .hasFiles("src/test/resources/archunit.properties")
+      .hasFile("src/test/java/com/jhipster/test/HexagonalArchTest.java")
       .containing("\"src\", \"main\", \"java\", \"com\", \"jhipster\", \"test\"")
       .and()
-      .createFile("pom.xml")
+      .hasFile("pom.xml")
       .containing("<artifactId>archunit-junit5-api</artifactId>")
       .and()
-      .createFile("src/test/resources/logback.xml")
+      .hasFile("src/test/resources/logback.xml")
       .containing("<logger name=\"com.tngtech.archunit\" level=\"WARN\" />");
   }
 }

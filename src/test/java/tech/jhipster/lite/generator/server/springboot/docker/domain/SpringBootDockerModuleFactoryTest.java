@@ -26,7 +26,7 @@ class SpringBootDockerModuleFactoryTest {
     JHipsterModule module = factory.buildJibModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .createFile("pom.xml")
+      .hasFile("pom.xml")
       .containing(
         """
               <plugin>
@@ -76,7 +76,7 @@ class SpringBootDockerModuleFactoryTest {
         """
       )
       .and()
-      .createFile("src/main/docker/jib/entrypoint.sh")
+      .hasFile("src/main/docker/jib/entrypoint.sh")
       .containing("\"com.jhipster.test.MyappApp\"");
   }
 
@@ -89,6 +89,6 @@ class SpringBootDockerModuleFactoryTest {
 
     JHipsterModule module = factory.buildDockerFileModule(properties);
 
-    assertThatModule(module).createFile("Dockerfile").containing("EXPOSE 9000");
+    assertThatModule(module).hasFile("Dockerfile").containing("EXPOSE 9000");
   }
 }

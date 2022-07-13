@@ -25,7 +25,7 @@ class CucumberModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .createPrefixedFiles(
+      .hasPrefixedFiles(
         "src/test/java/com/jhipster/test/cucumber",
         "AsyncElementAsserter.java",
         "AsyncHeaderAsserter.java",
@@ -46,9 +46,9 @@ class CucumberModuleFactoryTest {
         "SyncHeaderAsserter.java",
         "SyncResponseAsserter.java"
       )
-      .createFiles("documentation/cucumber.md")
-      .createFiles("src/test/features/.gitkeep")
-      .createFile("pom.xml")
+      .hasFiles("documentation/cucumber.md")
+      .hasFiles("src/test/features/.gitkeep")
+      .hasFile("pom.xml")
       .containing("<artifactId>cucumber-junit</artifactId>")
       .containing("<artifactId>cucumber-java</artifactId>")
       .containing("<artifactId>cucumber-spring</artifactId>")
@@ -57,7 +57,7 @@ class CucumberModuleFactoryTest {
       .containing("<artifactId>awaitility</artifactId>")
       .containing("<version>${cucumber.version}</version>")
       .and()
-      .doNotCreateFiles("src/test/java/com/jhipster/test/cucumber/CucumberJpaReset.java");
+      .doNotHaveFiles("src/test/java/com/jhipster/test/cucumber/CucumberJpaReset.java");
   }
 
   @Test
@@ -71,6 +71,6 @@ class CucumberModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile()).createFiles("src/test/java/com/jhipster/test/cucumber/CucumberJpaReset.java");
+    assertThatModuleWithFiles(module, pomFile()).hasFiles("src/test/java/com/jhipster/test/cucumber/CucumberJpaReset.java");
   }
 }

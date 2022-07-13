@@ -49,13 +49,13 @@ class KafkaModuleFactoryTest {
       ),
       readmeFile()
     )
-      .createFile("pom.xml")
+      .hasFile("pom.xml")
       .containing("<artifactId>kafka-clients</artifactId>")
       .containing("<artifactId>kafka</artifactId>")
       .and()
-      .createFile(MAIN_DOCKER + "/kafka.yml")
+      .hasFile(MAIN_DOCKER + "/kafka.yml")
       .and()
-      .createFile(MAIN_RESOURCES + "/config/application.properties")
+      .hasFile(MAIN_RESOURCES + "/config/application.properties")
       .containing("kafka.bootstrap-servers=localhost:9092")
       .containing("kafka.consumer.'[key.deserializer]'=org.apache.kafka.common.serialization.StringDeserializer")
       .containing("kafka.consumer.'[value.deserializer]'=org.apache.kafka.common.serialization.StringDeserializer")
@@ -65,7 +65,7 @@ class KafkaModuleFactoryTest {
       .containing("kafka.producer.'[value.serializer]'=org.apache.kafka.common.serialization.StringSerializer")
       .containing("kafka.polling.timeout=10000")
       .and()
-      .createFile(TEST_RESOURCES + "/config/application.properties")
+      .hasFile(TEST_RESOURCES + "/config/application.properties")
       .containing("kafka.bootstrap-servers=localhost:9092")
       .containing("kafka.consumer.'[key.deserializer]'=org.apache.kafka.common.serialization.StringDeserializer")
       .containing("kafka.consumer.'[value.deserializer]'=org.apache.kafka.common.serialization.StringDeserializer")
@@ -75,23 +75,21 @@ class KafkaModuleFactoryTest {
       .containing("kafka.producer.'[value.serializer]'=org.apache.kafka.common.serialization.StringSerializer")
       .containing("kafka.polling.timeout=10000")
       .and()
-      .createFile(TEST_JAVA + "/" + properties.basePackage().path() + "/KafkaTestContainerExtension.java")
+      .hasFile(TEST_JAVA + "/" + properties.basePackage().path() + "/KafkaTestContainerExtension.java")
       .and()
-      .createFile(TEST_JAVA + "/" + properties.basePackage().path() + "/IntegrationTest.java")
+      .hasFile(TEST_JAVA + "/" + properties.basePackage().path() + "/IntegrationTest.java")
       .containing("@ExtendWith(KafkaTestContainerExtension.class)")
       .and()
-      .createFile(MAIN_JAVA + "/" + properties.basePackage().path() + "/" + TECHNICAL_INFRASTRUCTURE_CONFIG + "/kafka/KafkaProperties.java")
+      .hasFile(MAIN_JAVA + "/" + properties.basePackage().path() + "/" + TECHNICAL_INFRASTRUCTURE_CONFIG + "/kafka/KafkaProperties.java")
       .and()
-      .createFile(
+      .hasFile(
         TEST_JAVA + "/" + properties.basePackage().path() + "/" + TECHNICAL_INFRASTRUCTURE_CONFIG + "/kafka/KafkaPropertiesTest.java"
       )
       .and()
-      .createFile(
-        MAIN_JAVA + "/" + properties.basePackage().path() + "/" + TECHNICAL_INFRASTRUCTURE_CONFIG + "/kafka/KafkaConfiguration.java"
-      )
+      .hasFile(MAIN_JAVA + "/" + properties.basePackage().path() + "/" + TECHNICAL_INFRASTRUCTURE_CONFIG + "/kafka/KafkaConfiguration.java")
       .and()
-      .createPrefixedFiles("documentation", "apache-kafka.md")
-      .createFile("README.md")
+      .hasPrefixedFiles("documentation", "apache-kafka.md")
+      .hasFile("README.md")
       .containing("[Apache Kafka](documentation/apache-kafka.md)")
       .and();
   }
@@ -110,18 +108,18 @@ class KafkaModuleFactoryTest {
     var dummyConsumerPath = "dummy/infrastructure/primary/kafka/consumer";
 
     assertThatModuleWithFiles(module, pomFile())
-      .createFile(MAIN_RESOURCES + "/config/application.properties")
+      .hasFile(MAIN_RESOURCES + "/config/application.properties")
       .containing("kafka.topic.dummy=queue.myapp.dummy")
       .and()
-      .createFile(TEST_RESOURCES + "/config/application.properties")
+      .hasFile(TEST_RESOURCES + "/config/application.properties")
       .containing("kafka.topic.dummy=queue.myapp.dummy")
       .and()
-      .createFiles(
+      .hasFiles(
         MAIN_JAVA + "/" + properties.basePackage().path() + "/" + dummyProducerPath + "/DummyProducer.java",
         MAIN_JAVA + "/" + properties.basePackage().path() + "/" + dummyConsumerPath + "/AbstractConsumer.java",
         MAIN_JAVA + "/" + properties.basePackage().path() + "/" + dummyConsumerPath + "/DummyConsumer.java"
       )
-      .createFiles(
+      .hasFiles(
         TEST_JAVA + "/" + properties.basePackage().path() + "/" + dummyProducerPath + "/DummyProducerTest.java",
         TEST_JAVA + "/" + properties.basePackage().path() + "/" + dummyProducerPath + "/DummyProducerIT.java",
         TEST_JAVA + "/" + properties.basePackage().path() + "/" + dummyConsumerPath + "/DummyConsumerTest.java",
@@ -141,6 +139,6 @@ class KafkaModuleFactoryTest {
 
     JHipsterModule module = factory.buildModuleAkhq(properties);
 
-    assertThatModuleWithFiles(module, pomFile()).createFile(MAIN_DOCKER + "/akhq.yml").and();
+    assertThatModuleWithFiles(module, pomFile()).hasFile(MAIN_DOCKER + "/akhq.yml").and();
   }
 }

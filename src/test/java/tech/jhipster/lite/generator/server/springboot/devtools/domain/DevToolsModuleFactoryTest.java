@@ -30,15 +30,15 @@ class DevToolsModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .createPrefixedFiles("documentation", "dev-tools.md")
-      .createFile("pom.xml")
+      .hasPrefixedFiles("documentation", "dev-tools.md")
+      .hasFile("pom.xml")
       .containing("spring-boot-devtools")
       .and()
-      .createFile("src/main/resources/config/application.properties")
+      .hasFile("src/main/resources/config/application.properties")
       .containing("spring.devtools.livereload.enabled=false")
       .containing("spring.devtools.restart.enabled=false")
       .and()
-      .createFile("src/main/resources/config/application-local.properties")
+      .hasFile("src/main/resources/config/application-local.properties")
       .containing("spring.devtools.livereload.enabled=true")
       .containing("spring.devtools.restart.enabled=true");
   }

@@ -25,8 +25,8 @@ class JavaBaseModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, readmeFile())
-      .createPrefixedFiles("src/main/java/com/jhipster/test", "BusinessContext.java", "SharedKernel.java")
-      .createPrefixedFiles(
+      .hasPrefixedFiles("src/main/java/com/jhipster/test", "BusinessContext.java", "SharedKernel.java")
+      .hasPrefixedFiles(
         "src/main/java/com/jhipster/test/error/domain",
         "Assert.java",
         "MissingMandatoryValueException.java",
@@ -40,7 +40,7 @@ class JavaBaseModuleFactoryTest {
         "StringTooShortException.java",
         "TooManyElementsException.java"
       )
-      .createJavaTests(
+      .hasJavaTests(
         "com/jhipster/test/error/domain/AssertTest.java",
         "com/jhipster/test/error/domain/MissingMandatoryValueExceptionTest.java",
         "com/jhipster/test/common/domain/MyappCollectionsTest.java",
@@ -48,17 +48,17 @@ class JavaBaseModuleFactoryTest {
         "com/jhipster/test/ComponentTest.java",
         "com/jhipster/test/ReplaceCamelCase.java"
       )
-      .createFiles(
+      .hasFiles(
         "src/main/java/com/jhipster/test/error/package-info.java",
         "src/main/java/com/jhipster/test/common/package-info.java",
         "src/main/java/com/jhipster/test/common/domain/Generated.java"
       )
-      .createFile("src/main/java/com/jhipster/test/common/domain/MyappCollections.java")
+      .hasFile("src/main/java/com/jhipster/test/common/domain/MyappCollections.java")
       .containing("class MyappCollections")
       .and()
-      .createPrefixedFiles("documentation", "package-types.md")
-      .createPrefixedFiles("documentation", "assertions.md")
-      .createFile("README.md")
+      .hasPrefixedFiles("documentation", "package-types.md")
+      .hasPrefixedFiles("documentation", "assertions.md")
+      .hasFile("README.md")
       .containing("[Package types](documentation/package-types.md)")
       .containing("[Assertions](documentation/assertions.md)");
   }

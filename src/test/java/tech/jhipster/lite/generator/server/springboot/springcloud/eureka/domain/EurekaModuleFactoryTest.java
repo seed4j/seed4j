@@ -38,7 +38,7 @@ class EurekaModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), propertiesFile())
-      .createFile("pom.xml")
+      .hasFile("pom.xml")
       .containing("<spring-cloud.version>")
       .containing("<spring-cloud-netflix-eureka-client.version>")
       .containing(
@@ -70,7 +70,7 @@ class EurekaModuleFactoryTest {
         """
       )
       .and()
-      .createFile("src/main/resources/config/bootstrap.properties")
+      .hasFile("src/main/resources/config/bootstrap.properties")
       .containing("spring.application.name=myApp")
       .containing("spring.cloud.compatibility-verifier.enabled=false")
       .containing("eureka.client.service-url.defaultZone=http://admin:admin@localhost:8761/eureka")
@@ -87,14 +87,14 @@ class EurekaModuleFactoryTest {
       .containing("eureka.instance.status-page-url-path=${management.endpoints.web.base-path}/info")
       .containing("eureka.instance.health-check-url-path=${management.endpoints.web.base-path}/health")
       .and()
-      .createFile("src/test/resources/config/bootstrap.properties")
+      .hasFile("src/test/resources/config/bootstrap.properties")
       .containing("spring.application.name=myApp")
       .containing("spring.cloud.compatibility-verifier.enabled=false")
       .containing("eureka.client.enabled=false")
       .and()
-      .createFile("src/main/docker/jhipster-registry.yml")
+      .hasFile("src/main/docker/jhipster-registry.yml")
       .containing("jhipster/jhipster-registry:1.1.1")
       .and()
-      .createFile("src/main/docker/central-server-config/localhost-config/application.properties");
+      .hasFile("src/main/docker/central-server-config/localhost-config/application.properties");
   }
 }

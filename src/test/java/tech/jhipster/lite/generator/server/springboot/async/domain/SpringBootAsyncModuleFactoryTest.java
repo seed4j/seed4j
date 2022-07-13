@@ -25,8 +25,8 @@ class SpringBootAsyncModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModule(module)
-      .createJavaSources("com/jhipster/test/technical/infrastructure/secondary/async/AsyncConfiguration.java")
-      .createFile("src/main/resources/config/application.properties")
+      .hasJavaSources("com/jhipster/test/technical/infrastructure/secondary/async/AsyncConfiguration.java")
+      .hasFile("src/main/resources/config/application.properties")
       .containing("spring.task.execution.pool.keep-alive=10s")
       .containing("spring.task.execution.pool.max-size=16")
       .containing("spring.task.execution.pool.queue-capacity=100")

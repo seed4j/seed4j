@@ -21,8 +21,8 @@ class HexagonalDocumentationModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, readmeFile())
-      .createPrefixedFiles("documentation", "hexagonal-architecture.md", "hexagonal-flow.png", "hexagonal-global-schema.png")
-      .createFile("README.md")
+      .hasPrefixedFiles("documentation", "hexagonal-architecture.md", "hexagonal-flow.png", "hexagonal-global-schema.png")
+      .hasFile("README.md")
       .containing("[Hexagonal architecture](documentation/hexagonal-architecture.md)");
   }
 }

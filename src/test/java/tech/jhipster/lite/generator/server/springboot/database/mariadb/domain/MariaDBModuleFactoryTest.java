@@ -68,6 +68,8 @@ class MariaDBModuleFactoryTest {
       .containing("spring.jpa.hibernate.naming.implicit-strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy")
       .containing("spring.jpa.hibernate.naming.physical-strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy")
       .containing("spring.jpa.open-in-view=false")
+      .containing("spring.jpa.properties.hibernate.cache.use_second_level_cache=false")
+      .containing("spring.jpa.properties.hibernate.cache.use_query_cache=false")
       .containing("spring.jpa.properties.hibernate.connection.provider_disables_autocommit=true")
       .containing("spring.jpa.properties.hibernate.generate_statistics=false")
       .containing("spring.jpa.properties.hibernate.id.new_generator_mappings=true")

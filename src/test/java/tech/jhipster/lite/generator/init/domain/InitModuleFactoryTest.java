@@ -73,8 +73,8 @@ class InitModuleFactoryTest {
       .build();
   }
 
-  private ModuleAsserter assertMinimalModule(String folder, JHipsterModule module) {
-    ModuleAsserter asserter = assertThatModule(module)
+  private JHipsterModuleAsserter assertMinimalModule(String folder, JHipsterModule module) {
+    JHipsterModuleAsserter asserter = assertThatModule(module)
       .hasFile("README.md")
       .containing("# Test Project")
       .and()

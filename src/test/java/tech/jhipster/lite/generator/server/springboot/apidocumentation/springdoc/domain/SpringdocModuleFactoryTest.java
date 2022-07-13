@@ -26,7 +26,7 @@ class SpringdocModuleFactoryTest {
 
     JHipsterModule module = springdocModuleFactory.buildModuleForMvc(moduleProperties);
 
-    ModuleAsserter moduleAsserter = assertThatModuleWithFiles(module, pomFile())
+    JHipsterModuleAsserter JHipsterModuleAsserter = assertThatModuleWithFiles(module, pomFile())
       .hasFile("src/main/java/com/jhipster/test/technical/infrastructure/primary/springdoc/SpringdocConfiguration.java")
       .notContaining("JWT")
       .and()
@@ -34,7 +34,7 @@ class SpringdocModuleFactoryTest {
       .containing("<artifactId>springdoc-openapi-ui</artifactId>")
       .notContaining("<artifactId>springdoc-openapi-webflux-ui</artifactId>")
       .and();
-    assertAddedProperties(moduleAsserter);
+    assertAddedProperties(JHipsterModuleAsserter);
   }
 
   @Test
@@ -46,14 +46,14 @@ class SpringdocModuleFactoryTest {
 
     JHipsterModule module = springdocModuleFactory.buildModuleForWebflux(moduleProperties);
 
-    ModuleAsserter moduleAsserter = assertThatModuleWithFiles(module, pomFile())
+    JHipsterModuleAsserter JHipsterModuleAsserter = assertThatModuleWithFiles(module, pomFile())
       .hasFile("src/main/java/com/jhipster/test/technical/infrastructure/primary/springdoc/SpringdocConfiguration.java")
       .notContaining("JWT")
       .and()
       .hasFile("pom.xml")
       .containing("<artifactId>springdoc-openapi-webflux-ui</artifactId>")
       .and();
-    assertAddedProperties(moduleAsserter);
+    assertAddedProperties(JHipsterModuleAsserter);
   }
 
   @Test
@@ -66,7 +66,7 @@ class SpringdocModuleFactoryTest {
 
     JHipsterModule module = springdocModuleFactory.buildModuleWithSecurityJwtForMvc(moduleProperties);
 
-    ModuleAsserter moduleAsserter = assertThatModuleWithFiles(module, pomFile())
+    JHipsterModuleAsserter JHipsterModuleAsserter = assertThatModuleWithFiles(module, pomFile())
       .hasFile("src/main/java/com/jhipster/test/technical/infrastructure/primary/springdoc/SpringdocConfiguration.java")
       .containing("JWT")
       .and()
@@ -75,7 +75,7 @@ class SpringdocModuleFactoryTest {
       .notContaining("<artifactId>springdoc-openapi-webflux-ui</artifactId>")
       .and();
 
-    assertAddedProperties(moduleAsserter);
+    assertAddedProperties(JHipsterModuleAsserter);
   }
 
   @Test
@@ -87,7 +87,7 @@ class SpringdocModuleFactoryTest {
 
     JHipsterModule module = springdocModuleFactory.buildModuleWithSecurityJwtForWebflux(moduleProperties);
 
-    ModuleAsserter moduleAsserter = assertThatModuleWithFiles(module, pomFile())
+    JHipsterModuleAsserter JHipsterModuleAsserter = assertThatModuleWithFiles(module, pomFile())
       .hasFile("src/main/java/com/jhipster/test/technical/infrastructure/primary/springdoc/SpringdocConfiguration.java")
       .containing("JWT")
       .and()
@@ -95,10 +95,10 @@ class SpringdocModuleFactoryTest {
       .containing("<artifactId>springdoc-openapi-webflux-ui</artifactId>")
       .and();
 
-    assertAddedProperties(moduleAsserter);
+    assertAddedProperties(JHipsterModuleAsserter);
   }
 
-  private void assertAddedProperties(ModuleAsserter moduleFileAsserter) {
+  private void assertAddedProperties(JHipsterModuleAsserter moduleFileAsserter) {
     moduleFileAsserter
       .hasFile("src/main/resources/config/application.properties")
       .containing("springdoc.swagger-ui.operationsSorter=alpha")

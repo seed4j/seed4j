@@ -8,7 +8,7 @@ import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.JHipsterModulesFixture;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
-import tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.ModuleAsserter;
+import tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.JHipsterModuleAsserter;
 
 @UnitTest
 class ReactCoreModulesFactoryTest {
@@ -38,7 +38,7 @@ class ReactCoreModulesFactoryTest {
     return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("jhipster").build();
   }
 
-  private ModuleAsserter assertCommonReactModule(JHipsterModule module) {
+  private JHipsterModuleAsserter assertCommonReactModule(JHipsterModule module) {
     return assertThatModuleWithFiles(module, packageJsonFile())
       .hasFile("package.json")
       .containing(nodeDependency("@testing-library/jest-dom"))

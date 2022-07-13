@@ -67,7 +67,7 @@ class SonarModulesFactoryTest {
     return properties;
   }
 
-  private ModuleAsserter assertCommonModule(JHipsterModule module) {
+  private JHipsterModuleAsserter assertCommonModule(JHipsterModule module) {
     return assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
       .containing(

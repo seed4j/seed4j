@@ -62,7 +62,7 @@ class MsSQLApplicationServiceIT {
     assertFileContent(
       project,
       getPath(TEST_RESOURCES, "config/application.properties"),
-      "spring.datasource.url=jdbc:tc:sqlserver:latest://;database=jhipster;trustServerCertificate=true?TC_TMPFS=/testtmpfs:rw"
+      "spring.datasource.url=jdbc:tc:sqlserver://;database=jhipster;trustServerCertificate=true?TC_TMPFS=/testtmpfs:rw"
     );
     assertFileExist(project, TEST_RESOURCES + "/" + MsSQL.LICENSE_TEST_CONTAINER_FILE);
   }

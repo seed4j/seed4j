@@ -55,7 +55,7 @@ class MsSQLDomainServiceUnitTest {
   void shouldInit() {
     Project project = tmpProjectWithPomXml();
 
-    when(dockerImages.get("mcr.microsoft.com/mssql/server")).thenReturn(new DockerImage("mssql", "0.0.0"));
+    when(dockerImages.get(MsSQL.MSSQL_DOCKER_IMAGE_NAME)).thenReturn(new DockerImage("mssql", "0.0.0"));
 
     msSQLDomainService.init(project);
 
@@ -67,13 +67,10 @@ class MsSQLDomainServiceUnitTest {
     verify(sqlCommonService).addHibernateCore(project);
     verify(sqlCommonService).addDockerComposeTemplate(project, "mssql");
     verify(sqlCommonService).addJavaFiles(project, "mssql");
-    verify(projectRepository).add(any(ProjectFile.class));
     verify(springBootCommonService, times(7)).addProperties(eq(project), any(), any());
     verify(springBootCommonService, times(2)).addLogger(eq(project), any(), any());
     verify(sqlCommonService).addLoggers(project);
-    verify(projectRepository).template(any(ProjectFile.class));
+    verify(projectRepository, times(2)).template(any(ProjectFile.class));
     verify(springBootCommonService).updateIntegrationTestAnnotation(project, "MsSQLTestContainerExtension");
-    verify(projectRepository).template(any(ProjectFile.class));
-    verify(projectRepository).add(any(ProjectFile.class));
   }
 }

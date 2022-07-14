@@ -38,7 +38,7 @@ public class MsSQL {
     result.put("spring.datasource.driver-class-name", "org.testcontainers.jdbc.ContainerDatabaseDriver");
     result.put(
       "spring.datasource.url",
-      "jdbc:tc:sqlserver:latest://;database=" + baseName + ";trustServerCertificate=true?TC_TMPFS=/testtmpfs:rw"
+      "jdbc:tc:sqlserver://;database=" + baseName + ";trustServerCertificate=true?TC_TMPFS=/testtmpfs:rw"
     );
     result.put("spring.datasource.username", "SA");
     result.put("spring.datasource.password", "yourStrong(!)Password");

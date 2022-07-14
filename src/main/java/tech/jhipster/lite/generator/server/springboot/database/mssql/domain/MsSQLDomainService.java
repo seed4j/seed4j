@@ -93,7 +93,7 @@ public class MsSQLDomainService implements MsSQLService {
     String packageNamePath = project.getPackageNamePath().orElse(getPath(PACKAGE_PATH));
     String integrationTestPath = getPath(TEST_JAVA, packageNamePath);
     sqlCommonService.addTestcontainers(project, "mssqlserver", MsSQL.springPropertiesForTest(project.getBaseName().orElse("jhipster")));
-    projectRepository.add(
+    projectRepository.template(
       ProjectFile.forProject(project).withSource(SOURCE, MsSQL.LICENSE_TEST_CONTAINER_FILE).withDestinationFolder(TEST_RESOURCES)
     );
     projectRepository.template(

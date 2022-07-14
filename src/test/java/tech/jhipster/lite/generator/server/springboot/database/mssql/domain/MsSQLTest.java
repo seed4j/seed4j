@@ -11,7 +11,7 @@ class MsSQLTest {
 
   @Test
   void shouldGetDockerImageName() {
-    assertThat(MsSQL.getDockerImageName()).isEqualTo("mcr.microsoft.com/mssql/server");
+    assertThat(MsSQL.getDockerImageName()).isEqualTo(MsSQL.MSSQL_DOCKER_IMAGE_NAME);
   }
 
   @Test

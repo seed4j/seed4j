@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.jhipster.lite.generator.project.domain.GeneratorAction;
 import tech.jhipster.lite.generator.project.domain.Project;
 import tech.jhipster.lite.generator.project.infrastructure.primary.dto.ProjectDTO;
-import tech.jhipster.lite.generator.server.springboot.database.mssql.application.MssqlApplicationService;
+import tech.jhipster.lite.generator.server.springboot.database.mssql.application.MsSQLApplicationService;
 import tech.jhipster.lite.technical.infrastructure.primary.annotation.GeneratorStep;
 
 @RestController
 @RequestMapping("/api/servers/spring-boot/databases/mssql")
 @Tag(name = "Spring Boot - Database")
-class MssqlResource {
+class MsSQLResource {
 
-  private final MssqlApplicationService mongodbApplicationService;
+  private final MsSQLApplicationService mongodbApplicationService;
 
-  public MssqlResource(MssqlApplicationService mongodbApplicationService) {
+  public MsSQLResource(MsSQLApplicationService mongodbApplicationService) {
     this.mongodbApplicationService = mongodbApplicationService;
   }
 

@@ -6,12 +6,12 @@ import tech.jhipster.lite.docker.domain.DockerImages;
 import tech.jhipster.lite.generator.buildtool.generic.domain.BuildToolService;
 import tech.jhipster.lite.generator.project.domain.ProjectRepository;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
-import tech.jhipster.lite.generator.server.springboot.database.mssql.domain.MssqlDomainService;
-import tech.jhipster.lite.generator.server.springboot.database.mssql.domain.MssqlService;
+import tech.jhipster.lite.generator.server.springboot.database.mssql.domain.MsSQLDomainService;
+import tech.jhipster.lite.generator.server.springboot.database.mssql.domain.MsSQLService;
 import tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonService;
 
 @Configuration
-public class MssqlBeanConfiguration {
+public class MsSQLBeanConfiguration {
 
   private final BuildToolService buildToolService;
   private final SpringBootCommonService springBootCommonService;
@@ -19,7 +19,7 @@ public class MssqlBeanConfiguration {
   private final DockerImages dockerImages;
   private final ProjectRepository projectRepository;
 
-  public MssqlBeanConfiguration(
+  public MsSQLBeanConfiguration(
     BuildToolService buildToolService,
     SpringBootCommonService springBootCommonService,
     SQLCommonService sqlCommonService,
@@ -34,7 +34,7 @@ public class MssqlBeanConfiguration {
   }
 
   @Bean
-  public MssqlService mssqlService() {
-    return new MssqlDomainService(buildToolService, springBootCommonService, sqlCommonService, dockerImages, projectRepository);
+  public MsSQLService msSQLService() {
+    return new MsSQLDomainService(buildToolService, springBootCommonService, sqlCommonService, dockerImages, projectRepository);
   }
 }

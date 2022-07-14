@@ -10,13 +10,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.jhipster.lite.IntegrationTest;
 import tech.jhipster.lite.generator.project.domain.Project;
+import tech.jhipster.lite.generator.server.springboot.database.mssql.domain.MsSQL;
 import tech.jhipster.lite.module.infrastructure.secondary.TestJHipsterModules;
 
 @IntegrationTest
-class MssqlApplicationServiceIT {
+class MsSQLApplicationServiceIT {
 
   @Autowired
-  private MssqlApplicationService mssqlApplicationService;
+  private MsSQLApplicationService msSQLApplicationService;
 
   @Test
   void shouldInit() {
@@ -25,18 +26,18 @@ class MssqlApplicationServiceIT {
     TestJHipsterModules.applyMaven(project);
     TestJHipsterModules.applySpringBootCore(project);
 
-    mssqlApplicationService.init(project);
+    msSQLApplicationService.init(project);
 
     assertFileContent(project, POM_XML, springBootStarterDataJpa());
-    assertFileContent(project, POM_XML, mssqlDriver());
+    assertFileContent(project, POM_XML, msSQLDriver());
     assertFileContent(project, POM_XML, hibernateCore());
     assertFileContent(project, POM_XML, hikari());
 
-    assertFileExist(project, "src/main/docker/mssqlserver.yml");
-    assertFileContent(project, "src/main/docker/mssqlserver.yml", "MSSQL_DATABASE=jhipster");
+    assertFileExist(project, "src/main/docker/mssql.yml");
+    assertFileContent(project, "src/main/docker/mssql.yml", "MSSQL_DATABASE=jhipster");
 
-    String mariadbPath = getPath("com/mycompany/myapp/technical/infrastructure/secondary/mssqlserver");
-    assertFileExist(project, getPath(MAIN_JAVA, mariadbPath, "DatabaseConfiguration.java"));
+    String mssqlPath = getPath("com/mycompany/myapp/technical/infrastructure/secondary/mssql");
+    assertFileExist(project, getPath(MAIN_JAVA, mssqlPath, "DatabaseConfiguration.java"));
 
     assertFileContent(
       project,
@@ -63,13 +64,13 @@ class MssqlApplicationServiceIT {
       getPath(TEST_RESOURCES, "config/application.properties"),
       "spring.datasource.url=jdbc:tc:sqlserver:latest://;database=jhipster;trustServerCertificate=true?TC_TMPFS=/testtmpfs:rw"
     );
-    assertFileExist(project, "src/test/resources/container-license-acceptance.txt");
+    assertFileExist(project, TEST_RESOURCES + "/" + MsSQL.LICENSE_TEST_CONTAINER_FILE);
   }
 
   private void assertExtensionForDatabaseContainerWasAdded(Project project) {
     final String projectTestPath = "src/test/java/com/mycompany/myapp";
-    assertFileExist(project, projectTestPath + "/MssqlTestContainerExtension.java");
-    assertFileContent(project, getPath(projectTestPath, "IntegrationTest.java"), "@ExtendWith(MssqlTestContainerExtension.class)");
+    assertFileExist(project, projectTestPath + "/MsSQLTestContainerExtension.java");
+    assertFileContent(project, getPath(projectTestPath, "IntegrationTest.java"), "@ExtendWith(MsSQLTestContainerExtension.class)");
     assertFileContent(project, getPath(projectTestPath, "IntegrationTest.java"), "import org.junit.jupiter.api.extension.ExtendWith;");
   }
 
@@ -94,7 +95,7 @@ class MssqlApplicationServiceIT {
     );
   }
 
-  private List<String> mssqlDriver() {
+  private List<String> msSQLDriver() {
     return List.of("<dependency>", "<groupId>com.microsoft.sqlserver</groupId>", "<artifactId>mssql-jdbc</artifactId>", "</dependency>");
   }
 

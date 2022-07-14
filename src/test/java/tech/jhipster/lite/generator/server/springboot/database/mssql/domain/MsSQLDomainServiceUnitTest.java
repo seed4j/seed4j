@@ -24,7 +24,7 @@ import tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.
 
 @UnitTest
 @ExtendWith(MockitoExtension.class)
-class MssqlDomainServiceUnitTest {
+class MsSQLDomainServiceUnitTest {
 
   @Mock
   BuildToolService buildToolService;
@@ -42,11 +42,11 @@ class MssqlDomainServiceUnitTest {
   DockerImages dockerImages;
 
   @InjectMocks
-  MssqlDomainService mssqlDomainService;
+  MsSQLDomainService msSQLDomainService;
 
   @Test
   void shouldNotInitWithoutProject() {
-    assertThatThrownBy(() -> mssqlDomainService.init(null))
+    assertThatThrownBy(() -> msSQLDomainService.init(null))
       .isExactlyInstanceOf(MissingMandatoryValueException.class)
       .hasMessageContaining("project");
   }
@@ -57,7 +57,7 @@ class MssqlDomainServiceUnitTest {
 
     when(dockerImages.get("mcr.microsoft.com/mssql/server")).thenReturn(new DockerImage("mssql", "0.0.0"));
 
-    mssqlDomainService.init(project);
+    msSQLDomainService.init(project);
 
     verify(buildToolService).addDependency(any(Project.class), any(Dependency.class));
 
@@ -65,14 +65,14 @@ class MssqlDomainServiceUnitTest {
 
     verify(sqlCommonService).addSpringDataJpa(project);
     verify(sqlCommonService).addHibernateCore(project);
-    verify(sqlCommonService).addDockerComposeTemplate(project, "mssqlserver");
-    verify(sqlCommonService).addJavaFiles(project, "mssqlserver");
+    verify(sqlCommonService).addDockerComposeTemplate(project, "mssql");
+    verify(sqlCommonService).addJavaFiles(project, "mssql");
     verify(projectRepository).add(any(ProjectFile.class));
     verify(springBootCommonService, times(7)).addProperties(eq(project), any(), any());
     verify(springBootCommonService, times(2)).addLogger(eq(project), any(), any());
     verify(sqlCommonService).addLoggers(project);
     verify(projectRepository).template(any(ProjectFile.class));
-    verify(springBootCommonService).updateIntegrationTestAnnotation(project, "MssqlTestContainerExtension");
+    verify(springBootCommonService).updateIntegrationTestAnnotation(project, "MsSQLTestContainerExtension");
     verify(projectRepository).template(any(ProjectFile.class));
     verify(projectRepository).add(any(ProjectFile.class));
   }

@@ -18,7 +18,7 @@ import tech.jhipster.lite.module.infrastructure.secondary.TestJHipsterModules;
 
 @IntegrationTest
 @AutoConfigureMockMvc
-class MssqlResourceIT {
+class MsSQLResourceIT {
 
   @Autowired
   private MockMvc mockMvc;
@@ -41,6 +41,6 @@ class MssqlResourceIT {
 
     String projectPath = projectDTO.getFolder();
 
-    assertFileExist(projectPath, "src/main/docker/mssqlserver.yml");
+    assertFileExist(projectPath, "src/main/docker/mssql.yml");
   }
 }

@@ -15,11 +15,10 @@ import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.generator.server.springboot.common.domain.SpringBootCommonService;
 import tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonService;
 
-public class MssqlDomainService implements MssqlService {
+public class MsSQLDomainService implements MsSQLService {
 
-  public static final String SOURCE = "server/sql";
-  public static final String EXTENSION_TEST_CONTAINER = "server/springboot/core";
-  public static final String EXTENSION_INTEGRATION_TEST_CLASS = "MssqlTestContainerExtension";
+  public static final String SOURCE = "server/springboot/database/mssql";
+  public static final String EXTENSION_INTEGRATION_TEST_CLASS = "MsSQLTestContainerExtension";
 
   private final BuildToolService buildToolService;
   private final SpringBootCommonService springBootCommonService;
@@ -27,7 +26,7 @@ public class MssqlDomainService implements MssqlService {
   private final DockerImages dockerImages;
   private final ProjectRepository projectRepository;
 
-  public MssqlDomainService(
+  public MsSQLDomainService(
     BuildToolService buildToolService,
     SpringBootCommonService springBootCommonService,
     SQLCommonService sqlCommonService,
@@ -61,13 +60,13 @@ public class MssqlDomainService implements MssqlService {
   }
 
   private void addDriver(Project project) {
-    buildToolService.addDependency(project, Mssql.driver());
+    buildToolService.addDependency(project, MsSQL.driver());
   }
 
   private void addDockerCompose(Project project) {
     project.addDefaultConfig(BASE_NAME);
 
-    String dockerImage = dockerImages.get(Mssql.getDockerImageName()).fullName();
+    String dockerImage = dockerImages.get(MsSQL.getDockerImageName()).fullName();
     project.addConfig("dockerImageName", dockerImage);
 
     sqlCommonService.addDockerComposeTemplate(project, DatabaseType.MSSQL.id());
@@ -84,7 +83,7 @@ public class MssqlDomainService implements MssqlService {
   private void addProperties(Project project) {
     springBootCommonService.addPropertiesComment(project, "Database Configuration");
 
-    Mssql
+    MsSQL
       .springProperties(project.getBaseName().orElse("jhipster"))
       .forEach((k, v) -> springBootCommonService.addProperties(project, k, v));
     springBootCommonService.addPropertiesNewLine(project);
@@ -93,18 +92,14 @@ public class MssqlDomainService implements MssqlService {
   private void addTestcontainers(Project project) {
     String packageNamePath = project.getPackageNamePath().orElse(getPath(PACKAGE_PATH));
     String integrationTestPath = getPath(TEST_JAVA, packageNamePath);
-    sqlCommonService.addTestcontainers(
-      project,
-      DatabaseType.MSSQL.id(),
-      Mssql.springPropertiesForTest(project.getBaseName().orElse("jhipster"))
-    );
+    sqlCommonService.addTestcontainers(project, "mssqlserver", MsSQL.springPropertiesForTest(project.getBaseName().orElse("jhipster")));
     projectRepository.add(
-      ProjectFile.forProject(project).withSource(SOURCE, Mssql.LICENSE_TEST_CONTAINER_FILE).withDestinationFolder(TEST_RESOURCES)
+      ProjectFile.forProject(project).withSource(SOURCE, MsSQL.LICENSE_TEST_CONTAINER_FILE).withDestinationFolder(TEST_RESOURCES)
     );
     projectRepository.template(
       ProjectFile
         .forProject(project)
-        .withSource(EXTENSION_TEST_CONTAINER, Mssql.MSSQL_TEST_CONTAINER_EXTENSION_FILE)
+        .withSource(SOURCE, MsSQL.MSSQL_TEST_CONTAINER_EXTENSION_FILE)
         .withDestinationFolder(getPath(integrationTestPath))
     );
     springBootCommonService.updateIntegrationTestAnnotation(project, EXTENSION_INTEGRATION_TEST_CLASS);
@@ -117,7 +112,7 @@ public class MssqlDomainService implements MssqlService {
   private void addLoggerInConfiguration(Project project) {
     sqlCommonService.addLoggers(project);
     addLogger(project, "org.reflections", Level.WARN);
-    addLogger(project, Mssql.driver().getGroupId(), Level.WARN);
+    addLogger(project, MsSQL.driver().getGroupId(), Level.WARN);
 
     springBootCommonService.addLoggerTest(project, "com.github.dockerjava", Level.WARN);
     springBootCommonService.addLoggerTest(project, "org.testcontainers", Level.WARN);

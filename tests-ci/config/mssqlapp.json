@@ -1,7 +1,7 @@
 {
   "folder": "/tmp/jhlite/mssqlapp",
   "generator-jhipster": {
-    "projectName": "Mssql Project",
+    "projectName": "MsSQL Project",
     "baseName": "mssqlapp",
     "packageName": "tech.jhipster.mssqlapp"
   }

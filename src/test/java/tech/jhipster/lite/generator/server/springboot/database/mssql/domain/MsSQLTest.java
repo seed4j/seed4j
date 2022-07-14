@@ -7,16 +7,16 @@ import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
 
 @UnitTest
-class MssqlTest {
+class MsSQLTest {
 
   @Test
   void shouldGetDockerImageName() {
-    assertThat(Mssql.getDockerImageName()).isEqualTo("mcr.microsoft.com/mssql/server");
+    assertThat(MsSQL.getDockerImageName()).isEqualTo("mcr.microsoft.com/mssql/server");
   }
 
   @Test
   void shouldGetSpringProperties() {
-    Map<String, Object> springProperties = Mssql.springProperties("baseName");
+    Map<String, Object> springProperties = MsSQL.springProperties("baseName");
 
     assertThat(springProperties)
       .containsEntry("spring.datasource.url", "jdbc:sqlserver://localhost:1433;database=baseName;trustServerCertificate=true")

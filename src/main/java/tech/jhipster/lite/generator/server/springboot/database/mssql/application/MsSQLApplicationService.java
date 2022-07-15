@@ -1,19 +1,21 @@
 package tech.jhipster.lite.generator.server.springboot.database.mssql.application;
 
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.generator.project.domain.Project;
-import tech.jhipster.lite.generator.server.springboot.database.mssql.domain.MsSQLService;
+import tech.jhipster.lite.docker.domain.DockerImages;
+import tech.jhipster.lite.generator.server.springboot.database.mssql.domain.MsSQLModuleFactory;
+import tech.jhipster.lite.module.domain.JHipsterModule;
+import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 
 @Service
 public class MsSQLApplicationService {
 
-  private final MsSQLService msSQLService;
+  private final MsSQLModuleFactory factory;
 
-  public MsSQLApplicationService(MsSQLService msSQLService) {
-    this.msSQLService = msSQLService;
+  public MsSQLApplicationService(DockerImages dockerImages) {
+    factory = new MsSQLModuleFactory(dockerImages);
   }
 
-  public void init(Project project) {
-    msSQLService.init(project);
+  public JHipsterModule build(JHipsterModuleProperties properties) {
+    return factory.buildModule(properties);
   }
 }

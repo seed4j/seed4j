@@ -20,6 +20,7 @@ class SpringdocModuleConfiguration {
       .slug("springdoc-openapi")
       .propertiesDefinition(buildPropertiesDefinition())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - API Documentation", "Add springdoc-openapi"))
+      .tags("server", "spring", "spring-boot", "documentation")
       .factory(springdocApplicationService::buildSpringdocModule);
   }
 
@@ -31,6 +32,7 @@ class SpringdocModuleConfiguration {
       .slug("springdoc-openapi-with-security-jwt")
       .propertiesDefinition(buildPropertiesDefinition())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - API Documentation - Security", "Add springdoc-openapi with Security JWT"))
+      .tags("server", "spring", "spring-boot", "documentation")
       .factory(springdocApplicationService::buildSpringdocModuleWithSecurityJWT);
   }
 

@@ -18,6 +18,7 @@ class ZalandoProblemsModuleConfiguration {
       .slug("zalando-problems")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - MVC", "Zalando problems and error handler"))
+      .tags("server", "spring", "spring-boot", "mvc", "problem")
       .factory(zalandoProblems::buildModule);
   }
 }

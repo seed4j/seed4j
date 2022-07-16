@@ -18,6 +18,7 @@ class LogsSpyModuleConfiguration {
       .slug("logs-spy")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot", "Add a JUnit extension to test logs"))
+      .tags("server", "test")
       .factory(logsSpys::build);
   }
 }

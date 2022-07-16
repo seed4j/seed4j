@@ -27,6 +27,7 @@ class CucumberModuleConfiguration {
           .build()
       )
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - Component Tests", "Add cucumber integration to project"))
+      .tags("server", "spring", "spring-boot", "test")
       .factory(cucumber::build);
   }
 

@@ -18,6 +18,7 @@ class MavenModuleConfiguration {
       .slug("maven-java")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addProjectName().build())
       .apiDoc(new JHipsterModuleApiDoc("Build Tool", "Init Maven project with pom.xml and wrapper"))
+      .tags("buildtool", "test")
       .factory(maven::buildInitModule);
   }
 }

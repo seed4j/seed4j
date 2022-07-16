@@ -18,6 +18,7 @@ class SpringBootAsyncConfiguration {
       .slug("springboot-async")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - Tools", "Add asynchronous execution and scheduling configuration"))
+      .tags("server", "spring", "spring-boot", "async")
       .factory(springBootAsync::buildModule);
   }
 }

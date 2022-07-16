@@ -1,6 +1,5 @@
 package tech.jhipster.lite.generator.server.springboot.broker.kafka.domain;
 
-import static tech.jhipster.lite.generator.project.domain.Constants.TEST_JAVA;
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 
 import tech.jhipster.lite.docker.domain.DockerImages;
@@ -42,12 +41,7 @@ public class KafkaModuleFactory {
         .add(SOURCE.template("KafkaProperties.java"), toSrcMainJava().append(properties.basePackage().path() + "/" + TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA + "/KafkaProperties.java"))
         .add(SOURCE.template("KafkaConfiguration.java"), toSrcMainJava().append(properties.basePackage().path() + "/" + TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA + "/KafkaConfiguration.java"))
         .and()
-      .mandatoryReplacements()
-        .in(TEST_JAVA + "/" + properties.basePackage().path() + "/IntegrationTest.java")
-          .add(lineBeforeText("import org.springframework.boot.test.context.SpringBootTest;"), "import org.junit.jupiter.api.extension.ExtendWith;")
-          .add(lineBeforeText("public @interface"), "@ExtendWith(KafkaTestContainerExtension.class)")
-          .and()
-        .and()
+      .integrationTestExtension("KafkaTestContainerExtension")
       .springMainProperties()
         .set(propertyKey("kafka.bootstrap-servers"), propertyValue("localhost:9092"))
         .set(propertyKey("kafka.consumer.'[key.deserializer]'"), propertyValue(STRING_DESERIALIZER))

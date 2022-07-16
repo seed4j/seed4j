@@ -18,6 +18,7 @@ class CucumberAuthenticationModuleConfiguration {
       .slug("cucumber-authentication")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - Component Tests", "Add authentication steps for cucumber"))
+      .tags("server", "spring", "spring-boot", "test")
       .factory(cucumberAuthentications::buildModule);
   }
 }

@@ -22,14 +22,17 @@ class RestJHipsterModulesTest {
         "modules":[\
         {"slug":"yet-another-module",\
         "description":"Another operation",\
-        {MODULE_PROPERTIES}\
+        {MODULE_PROPERTIES},\
+        "tags":["tag3"]}\
         ]},\
         {"name":"tag","modules":[\
         {"slug":"another-module",\
         "description":"operation",\
-        {MODULE_PROPERTIES}\
+        {MODULE_PROPERTIES},\
+        "tags":["tag2"]}\
         ,{"slug":"slug","description":"operation",\
-        {MODULE_PROPERTIES}\
+        {MODULE_PROPERTIES},\
+        "tags":["tag1"]}\
         ]}]}\
         """.replace(
         "{MODULE_PROPERTIES}",
@@ -48,7 +51,7 @@ class RestJHipsterModulesTest {
         {"type":"INTEGER","mandatory":true,"key":"mandatoryInteger"},\
         {"type":"BOOLEAN","mandatory":false,"key":"optionalBoolean"},\
         {"type":"STRING","mandatory":false,"key":"optionalString"},\
-        {"type":"INTEGER","mandatory":false,"key":"prettierDefaultIndent","description":"Number of spaces in indentation","example":"2"}]}}\
+        {"type":"INTEGER","mandatory":false,"key":"prettierDefaultIndent","description":"Number of spaces in indentation","example":"2"}]}\
         """;
   }
 }

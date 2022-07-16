@@ -56,12 +56,7 @@ public class PulsarModuleFactory {
         .set(propertyKey("pulsar.consumer.topic-names[0]"), propertyValue("test-topic"))
         .set(propertyKey("pulsar.consumer.subscription-name"), propertyValue("test-subscription"))
         .and()
-      .mandatoryReplacements()
-        .in("src/test/java/" + packagePath + "/IntegrationTest.java")
-          .add(lineBeforeText("import org.springframework.boot.test.context.SpringBootTest;"), "import org.junit.jupiter.api.extension.ExtendWith;")
-          .add(lineBeforeText("public @interface"), "@ExtendWith(PulsarTestContainerExtension.class)")
-          .and()
-        .and()
+      .integrationTestExtension("PulsarTestContainerExtension")
       .build();
     //@formatter:on
   }

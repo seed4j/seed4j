@@ -10,6 +10,10 @@ import tech.jhipster.lite.module.infrastructure.primary.JHipsterModuleResource;
 class BannerModuleConfiguration {
 
   private static final String TAG = "Spring Boot";
+  public static final String SERVER = "server";
+  public static final String SPRING = "spring";
+  public static final String SPRING_BOOT = "spring-boot";
+  public static final String BANNER = "banner";
 
   @Bean
   JHipsterModuleResource jhipsterV7BannerResource(BannerApplicationService banners) {
@@ -19,6 +23,7 @@ class BannerModuleConfiguration {
       .slug("banner-jhipster-v7")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc(TAG, "Add banner JHipster v7 for Angular"))
+      .tags(SERVER, SPRING, SPRING_BOOT, BANNER)
       .factory(banners::buildJHipsterV7Banner);
   }
 
@@ -30,6 +35,7 @@ class BannerModuleConfiguration {
       .slug("banner-jhipster-v7-react")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc(TAG, "Add banner JHipster v7 for React"))
+      .tags(SERVER, SPRING, SPRING_BOOT, BANNER)
       .factory(banners::buildJHipsterV7ReactBanner);
   }
 
@@ -41,6 +47,7 @@ class BannerModuleConfiguration {
       .slug("banner-jhipster-v7-vue")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc(TAG, "Add banner JHipster v7 for Vue"))
+      .tags(SERVER, SPRING, SPRING_BOOT, BANNER)
       .factory(banners::buildJHipsterV7VueBanner);
   }
 
@@ -52,6 +59,7 @@ class BannerModuleConfiguration {
       .slug("banner-jhipster-v2")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc(TAG, "Add banner JHipster v2"))
+      .tags(SERVER, SPRING, SPRING_BOOT, BANNER)
       .factory(banners::buildJHipsterV2Banner);
   }
 
@@ -63,6 +71,7 @@ class BannerModuleConfiguration {
       .slug("banner-jhipster-v3")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc(TAG, "Add banner JHipster v3"))
+      .tags(SERVER, SPRING, SPRING_BOOT, BANNER)
       .factory(banners::buildJHipsterV3Banner);
   }
 
@@ -74,6 +83,7 @@ class BannerModuleConfiguration {
       .slug("banner-ippon")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc(TAG, "Add banner for Ippon applications"))
+      .tags(SERVER, SPRING, SPRING_BOOT, BANNER)
       .factory(banners::buildIpponBanner);
   }
 }

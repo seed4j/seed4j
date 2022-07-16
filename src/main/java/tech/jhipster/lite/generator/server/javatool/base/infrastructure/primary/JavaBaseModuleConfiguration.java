@@ -18,6 +18,7 @@ class JavaBaseModuleConfiguration {
       .slug("java-base")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().build())
       .apiDoc(new JHipsterModuleApiDoc("Java", "Add Base classes and Error domain to project"))
+      .tags("server")
       .factory(javaBase::build);
   }
 }

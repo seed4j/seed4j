@@ -20,6 +20,7 @@ class MySQLModuleConfiguration {
       .slug("mysql")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().addProjectBaseName().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - Database", "Add MySQL to project"))
+      .tags("server", "spring", "spring-boot", "database")
       .factory(applicationService::build);
   }
 }

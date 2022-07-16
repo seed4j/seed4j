@@ -6,12 +6,12 @@ import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.JHipsterModule.JHipsterModuleBuilder;
 import tech.jhipster.lite.module.domain.JHipsterSource;
+import tech.jhipster.lite.module.domain.LogLevel;
 import tech.jhipster.lite.module.domain.javabuild.ArtifactId;
 import tech.jhipster.lite.module.domain.javabuild.GroupId;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependency;
 import tech.jhipster.lite.module.domain.javaproperties.PropertyKey;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
-import tech.jhipster.lite.module.domain.replacement.TextNeedleBeforeReplacer;
 
 public class SpringBootMvcsModulesFactory {
 
@@ -24,17 +24,11 @@ public class SpringBootMvcsModulesFactory {
 
   private static final String CORS_PRIMARY = "technical/infrastructure/primary/cors";
 
-  private static final TextNeedleBeforeReplacer LOGS_NEEDLE = lineBeforeText("<!-- jhipster-needle-logback-add-log -->");
-  private static final String SPRING_MVC_LOGGER = "<logger name=\"org.springframework.web\" level=\"ERROR\" />";
-  private static final String UNDERTOW_LOGGER = "<logger name=\"io.undertow\" level=\"WARN\" />";
-
   public JHipsterModule buildTomcatModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
-    String packagePath = properties.basePackage().path();
-
     //@formatter:off
-    return springMvcBuilder(properties, packagePath, SPRING_MVC_LOGGER)
+    return springMvcBuilder(properties, "org.springframework.web", LogLevel.ERROR)
       .javaDependencies()
         .addDependency(SPRING_BOOT_GROUP, STARTER_WEB_ARTIFACT_ID)
         .and()
@@ -45,10 +39,8 @@ public class SpringBootMvcsModulesFactory {
   public JHipsterModule buildUntertowModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
-    String packagePath = properties.basePackage().path();
-
     //@formatter:off
-    return springMvcBuilder(properties, packagePath, UNDERTOW_LOGGER)
+    return springMvcBuilder(properties, "io.undertow", LogLevel.WARN)
       .javaDependencies()
         .addDependency(springBootWebWithoutTomcatDependency())
         .addDependency(SPRING_BOOT_GROUP, artifactId("spring-boot-starter-undertow"))
@@ -65,7 +57,9 @@ public class SpringBootMvcsModulesFactory {
       .build();
   }
 
-  private JHipsterModuleBuilder springMvcBuilder(JHipsterModuleProperties properties, String packagePath, String logger) {
+  private JHipsterModuleBuilder springMvcBuilder(JHipsterModuleProperties properties, String loggerName, LogLevel logLevel) {
+    String packagePath = properties.basePackage().path();
+
     //@formatter:off
     return moduleBuilder(properties)
       .documentation(documentationTitle("CORS configuration"), SOURCE.file("cors-configuration.md"))
@@ -89,14 +83,8 @@ public class SpringBootMvcsModulesFactory {
         )
         .add(SOURCE.append("test").template("JsonHelper.java"), toSrcTestJava().append(packagePath).append("JsonHelper.java"))
         .and()
-      .optionalReplacements()
-        .in("src/main/resources/logback-spring.xml")
-          .add(LOGS_NEEDLE, properties.indentation().spaces() + logger)
-          .and()
-        .in("src/test/resources/logback.xml")
-          .add(LOGS_NEEDLE, properties.indentation().spaces() + logger)
-          .and()
-        .and();
+      .springTestLogger(loggerName, logLevel)
+      .springMainLogger(loggerName, logLevel);
     //@formatter:on
   }
 }

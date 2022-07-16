@@ -18,6 +18,7 @@ class VueModuleConfiguration {
       .slug("vue")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addIndentation().build())
       .apiDoc(new JHipsterModuleApiDoc("Vue", "Add Vue+Vite"))
+      .tags("client", "init", "vue")
       .factory(vue::buildVueModule);
   }
 
@@ -29,6 +30,7 @@ class VueModuleConfiguration {
       .slug("vue-pinia")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc("Vue", "Add pinia for state management"))
+      .tags("client", "vue", "store")
       .factory(vue::buildPiniaModule);
   }
 }

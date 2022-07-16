@@ -1,6 +1,5 @@
 package tech.jhipster.lite.generator.server.springboot.database.postgresql.domain;
 
-import static tech.jhipster.lite.generator.server.springboot.common.domain.SpringBoot.*;
 import static tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonModuleBuilder.*;
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 
@@ -8,10 +7,10 @@ import tech.jhipster.lite.docker.domain.DockerImage;
 import tech.jhipster.lite.docker.domain.DockerImages;
 import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.generator.project.domain.DatabaseType;
-import tech.jhipster.lite.generator.server.springboot.common.domain.Level;
 import tech.jhipster.lite.module.domain.JHipsterDestination;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.JHipsterSource;
+import tech.jhipster.lite.module.domain.LogLevel;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 
 public class PostgresqlModuleFactory {
@@ -66,15 +65,9 @@ public class PostgresqlModuleFactory {
         )
       )
       .and()
-      .optionalReplacements()
-      .in("src/main/resources/logback-spring.xml")
-      .add(text(NEEDLE_LOGBACK_LOGGER), logger(ORG_POSTGRESQL, Level.WARN))
-      .and()
-      .in("src/test/resources/logback.xml")
-      .add(text(NEEDLE_LOGBACK_LOGGER), logger(ORG_POSTGRESQL, Level.WARN))
-      .add(text(NEEDLE_LOGBACK_LOGGER), logger("org.jboss.logging", Level.WARN))
-      .and()
-      .and()
+      .springMainLogger(ORG_POSTGRESQL, LogLevel.WARN)
+      .springTestLogger(ORG_POSTGRESQL, LogLevel.WARN)
+      .springTestLogger("org.jboss.logging", LogLevel.WARN)
       .build();
   }
 }

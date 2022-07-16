@@ -1,7 +1,10 @@
 package tech.jhipster.lite.module.infrastructure.primary;
 
+import static tech.jhipster.lite.module.domain.JHipsterModuleTags.*;
+
 import java.util.List;
 import tech.jhipster.lite.module.domain.JHipsterModuleFactory;
+import tech.jhipster.lite.module.domain.JHipsterModuleTags;
 import tech.jhipster.lite.module.domain.JHipsterModulesFixture;
 
 final class JHipsterModulesResourceFixture {
@@ -12,8 +15,13 @@ final class JHipsterModulesResourceFixture {
     return new JHipsterModulesResources(
       List.of(
         defaultModuleResource(),
-        defaultModuleResourceBuilder().slug("another-module").build(),
-        defaultModuleResourceBuilder().slug("yet-another-module").tag("Another tag").operation("Another operation").build()
+        defaultModuleResourceBuilder().slug("another-module").tags(new JHipsterModuleTagsBuilder().add("tag2").build()).build(),
+        defaultModuleResourceBuilder()
+          .slug("yet-another-module")
+          .tag("Another tag")
+          .operation("Another operation")
+          .tags(new JHipsterModuleTagsBuilder().add("tag3").build())
+          .build()
       )
     );
   }
@@ -23,7 +31,12 @@ final class JHipsterModulesResourceFixture {
   }
 
   static JHipsterTestModuleResourceBuilder defaultModuleResourceBuilder() {
-    return new JHipsterTestModuleResourceBuilder().legacyUrl("/api/legacy").slug("slug").operation("operation").factory(properties -> null);
+    return new JHipsterTestModuleResourceBuilder()
+      .legacyUrl("/api/legacy")
+      .slug("slug")
+      .operation("operation")
+      .tags(new JHipsterModuleTagsBuilder().add("tag1").build())
+      .factory(properties -> null);
   }
 
   static class JHipsterTestModuleResourceBuilder {
@@ -33,6 +46,8 @@ final class JHipsterModulesResourceFixture {
     private String tag = "tag";
     private String operation;
     private JHipsterModuleFactory factory;
+
+    private JHipsterModuleTags tags;
 
     private JHipsterTestModuleResourceBuilder() {}
 
@@ -66,6 +81,12 @@ final class JHipsterModulesResourceFixture {
       return this;
     }
 
+    public JHipsterTestModuleResourceBuilder tags(JHipsterModuleTags tags) {
+      this.tags = tags;
+
+      return this;
+    }
+
     public JHipsterModuleResource build() {
       return JHipsterModuleResource
         .builder()
@@ -73,6 +94,7 @@ final class JHipsterModulesResourceFixture {
         .slug(slug)
         .propertiesDefinition(JHipsterModulesFixture.propertiesDefinition())
         .apiDoc(new JHipsterModuleApiDoc(tag, operation))
+        .tags(tags)
         .factory(factory);
     }
   }

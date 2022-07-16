@@ -18,6 +18,7 @@ class AOPLoggingModuleConfiguration {
       .slug("aop-logging")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectName().addIndentation().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - Logging", "Add AOP logging"))
+      .tags("server", "spring", "spring-boot", "log")
       .factory(aopLogging::buildModule);
   }
 }

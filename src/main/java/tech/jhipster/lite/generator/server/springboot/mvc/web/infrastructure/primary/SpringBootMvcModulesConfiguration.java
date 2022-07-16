@@ -18,6 +18,7 @@ class SpringBootMvcModulesConfiguration {
       .slug("springboot-tomcat")
       .propertiesDefinition(properties())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - MVC", "Add Spring Boot MVC with Tomcat"))
+      .tags("server", "spring", "spring-boot", "mvc", "web", "tomcat")
       .factory(springBootMvc::buildTomcatModule);
   }
 
@@ -29,6 +30,7 @@ class SpringBootMvcModulesConfiguration {
       .slug("springboot-undertow")
       .propertiesDefinition(properties())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - MVC", "Add Spring Boot MVC with Undertow"))
+      .tags("server", "spring", "spring-boot", "mvc", "web", "undertow")
       .factory(springBootMvc::buildUndertowModule);
   }
 

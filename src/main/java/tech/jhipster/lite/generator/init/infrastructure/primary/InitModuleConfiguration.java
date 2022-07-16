@@ -19,6 +19,7 @@ class InitModuleConfiguration {
       .slug("init")
       .propertiesDefinition(initPropertiesDefinition())
       .apiDoc(new JHipsterModuleApiDoc("Init", "Init project"))
+      .tags("server", "init")
       .factory(inits::buildFullInitModule);
   }
 
@@ -30,6 +31,7 @@ class InitModuleConfiguration {
       .slug("init-minimal")
       .propertiesDefinition(initPropertiesDefinition())
       .apiDoc(new JHipsterModuleApiDoc("Init", "Init minimal project"))
+      .tags("server", "init")
       .factory(inits::buildMinimalInitModule);
   }
 

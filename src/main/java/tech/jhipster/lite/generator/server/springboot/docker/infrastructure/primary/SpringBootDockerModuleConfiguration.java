@@ -18,6 +18,7 @@ class SpringBootDockerModuleConfiguration {
       .slug("jib")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addServerPort().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - Tools", "Add Docker image building with Jib"))
+      .tags("server", "spring", "spring-boot", "jib")
       .factory(springBootDocker::buildJibModule);
   }
 
@@ -29,6 +30,7 @@ class SpringBootDockerModuleConfiguration {
       .slug("dockerfile")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addServerPort().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - Tools", "Add Dockerfile"))
+      .tags("server", "spring", "spring-boot", "docker")
       .factory(springBootDocker::buildDockerFileModule);
   }
 }

@@ -18,6 +18,7 @@ class SpringBootCoreModuleConfiguration {
       .slug("springboot")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot", "Init Spring Boot project with dependencies, App, and properties"))
+      .tags("server", "spring", "spring-boot")
       .factory(springBoot::buildModule);
   }
 }

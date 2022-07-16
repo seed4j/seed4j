@@ -17,6 +17,7 @@ class GitHubActionsModuleConfiguration {
       .slug("github-actions")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc("Continuous Integration", "Add GitHub Actions for Maven Build"))
+      .tags("ci", "github")
       .factory(gitHubActions::buildModule);
   }
 }

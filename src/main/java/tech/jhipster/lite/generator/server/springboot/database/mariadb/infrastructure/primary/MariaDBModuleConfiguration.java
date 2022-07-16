@@ -20,6 +20,7 @@ class MariaDBModuleConfiguration {
       .slug("mariadb")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().addProjectBaseName().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - Database", "Add MariaDB to project"))
+      .tags("server", "spring", "spring-boot", "database")
       .factory(applicationService::build);
   }
 }

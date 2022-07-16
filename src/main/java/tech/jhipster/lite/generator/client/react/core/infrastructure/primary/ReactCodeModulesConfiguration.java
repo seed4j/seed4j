@@ -10,14 +10,17 @@ import tech.jhipster.lite.module.infrastructure.primary.JHipsterModuleResource;
 @Configuration
 class ReactCodeModulesConfiguration {
 
+  public static final String REACT = "react";
+
   @Bean
   JHipsterModuleResource notStyledReactCoreModule(ReactCoreApplicationService react) {
     return JHipsterModuleResource
       .builder()
       .legacyUrl("/api/clients/react")
-      .slug("react")
+      .slug(REACT)
       .propertiesDefinition(properties())
       .apiDoc(new JHipsterModuleApiDoc("React", "Init React+Vite"))
+      .tags("client", REACT)
       .factory(react::buildModuleWithoutStyle);
   }
 
@@ -29,6 +32,7 @@ class ReactCodeModulesConfiguration {
       .slug("react-styled")
       .propertiesDefinition(properties())
       .apiDoc(new JHipsterModuleApiDoc("React", "Add React+Vite with minimal CSS"))
+      .tags("client", REACT)
       .factory(react::buildModuleWithStyle);
   }
 

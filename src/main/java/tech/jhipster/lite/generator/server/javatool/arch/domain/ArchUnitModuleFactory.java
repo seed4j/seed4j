@@ -8,6 +8,7 @@ import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterDestination;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.JHipsterSource;
+import tech.jhipster.lite.module.domain.LogLevel;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependency;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyScope;
 import tech.jhipster.lite.module.domain.properties.JHipsterBasePackage;
@@ -35,11 +36,7 @@ public class ArchUnitModuleFactory {
       .javaDependencies()
         .addDependency(archUnitDependency())
         .and()
-      .optionalReplacements()
-        .in("src/test/resources/logback.xml")
-          .add(lineBeforeText("<!-- jhipster-needle-logback-add-log -->"), "<logger name=\"com.tngtech.archunit\" level=\"WARN\" />")
-          .and()
-        .and()
+      .springTestLogger("com.tngtech.archunit", LogLevel.WARN)
       .build();
     //@formatter:on
   }

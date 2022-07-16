@@ -10,6 +10,10 @@ import tech.jhipster.lite.module.infrastructure.primary.JHipsterModuleResource;
 class KafkaModuleConfiguration {
 
   private static final String TAG = "Spring Boot - Broker";
+  public static final String BROKER = "broker";
+  public static final String SPRING_BOOT = "spring-boot";
+  public static final String SPRING = "spring";
+  public static final String SERVER = "server";
 
   @Bean
   JHipsterModuleResource kafkaResourceInit(final KafkaApplicationService kafkaApplicationService) {
@@ -19,6 +23,7 @@ class KafkaModuleConfiguration {
       .slug("springboot-kafka")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc(TAG, "Add Kafka dependencies, with testcontainers"))
+      .tags(SERVER, SPRING, SPRING_BOOT, BROKER)
       .factory(kafkaApplicationService::init);
   }
 
@@ -30,6 +35,7 @@ class KafkaModuleConfiguration {
       .slug("springboot-kafka-dummy-producer-consumer")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc(TAG, "Add dummy Kafka producer and consumer"))
+      .tags(SERVER, SPRING, SPRING_BOOT, BROKER)
       .factory(kafkaApplicationService::addDummyProducerConsumer);
   }
 
@@ -41,6 +47,7 @@ class KafkaModuleConfiguration {
       .slug("springboot-kafka-akhq")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc(TAG, "Add AKHQ"))
+      .tags(SERVER, SPRING, SPRING_BOOT, BROKER)
       .factory(kafkaApplicationService::addAkhq);
   }
 }

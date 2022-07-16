@@ -18,6 +18,7 @@ class PulsarModuleConfiguration {
       .slug("springboot-pulsar")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - Broker", "Add Pulsar dependencies, with testcontainers"))
+      .tags("server", "spring", "spring-boot", "broker")
       .factory(pulsar::buildModule);
   }
 }

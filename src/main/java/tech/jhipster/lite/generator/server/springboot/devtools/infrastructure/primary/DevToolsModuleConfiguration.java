@@ -18,6 +18,7 @@ class DevToolsModuleConfiguration {
       .slug("springboot-devtools")
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot - Tools", "Add spring boot tools."))
+      .tags("server", "spring", "spring-boot", "devtools")
       .factory(devtools::buildModule);
   }
 }

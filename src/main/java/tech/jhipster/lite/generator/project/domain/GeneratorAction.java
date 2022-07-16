@@ -32,8 +32,6 @@ public class GeneratorAction {
 
   public static final String MONGOCK = "mongock";
 
-  public static final String MONGODB = "mongodb";
-
   public static final String LOGSTASH = "logstash";
 
   public static final String DUMMY_FEATURE = "dummy-feature";

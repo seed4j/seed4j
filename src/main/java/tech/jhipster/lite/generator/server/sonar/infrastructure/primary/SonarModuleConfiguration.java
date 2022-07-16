@@ -18,6 +18,7 @@ class SonarModuleConfiguration {
       .slug("sonar-java-backend")
       .propertiesDefinition(propertiesDefinition())
       .apiDoc(new JHipsterModuleApiDoc("Sonar", "Add Sonar configuration for Java Backend to inspect code quality"))
+      .tags("server", "sonar")
       .factory(sonar::buildBackendModule);
   }
 
@@ -29,6 +30,7 @@ class SonarModuleConfiguration {
       .slug("sonar-java-backend-and-frontend")
       .propertiesDefinition(propertiesDefinition())
       .apiDoc(new JHipsterModuleApiDoc("Sonar", "Add Sonar configuration for Java Backend and Frontend to inspect code quality"))
+      .tags("server", "sonar")
       .factory(sonar::buildBackendFrontendModule);
   }
 

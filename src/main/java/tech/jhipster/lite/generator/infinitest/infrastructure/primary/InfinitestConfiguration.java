@@ -17,6 +17,7 @@ class InfinitestConfiguration {
       .slug("infinitest-filters")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc("Base", "Add filter for infinitest"))
+      .tags("server", "init", "test")
       .factory(infinitest::build);
   }
 }

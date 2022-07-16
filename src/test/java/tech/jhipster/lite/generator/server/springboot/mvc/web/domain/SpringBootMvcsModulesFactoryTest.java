@@ -30,7 +30,7 @@ class SpringBootMvcsModulesFactoryTest {
       .containing("  <logger name=\"org.springframework.web\" level=\"ERROR\" />")
       .and()
       .createFile("src/test/resources/logback.xml")
-      .containing(" <logger name=\"org.springframework.web\" level=\"ERROR\" />")
+      .containing("  <logger name=\"org.springframework.web\" level=\"ERROR\" />")
       .and()
       .createFile("pom.xml")
       .containing(

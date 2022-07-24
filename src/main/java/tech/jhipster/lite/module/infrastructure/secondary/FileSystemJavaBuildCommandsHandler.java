@@ -41,7 +41,7 @@ class FileSystemJavaBuildCommandsHandler {
   }
 
   @Generated(reason = "Jacoco thinks there is a missed branch")
-  private void handle(MavenCommandHandler handler, JavaBuildCommand command) {
+  private void handle(JavaDependenciesCommandHandler handler, JavaBuildCommand command) {
     switch (command.type()) {
       case SET_VERSION -> handler.handle((SetVersion) command);
       case REMOVE_DEPENDENCY_MANAGEMENT -> handler.handle((RemoveJavaDependencyManagement) command);

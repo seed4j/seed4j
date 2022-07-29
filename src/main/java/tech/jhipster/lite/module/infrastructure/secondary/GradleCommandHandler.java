@@ -11,11 +11,9 @@ import tech.jhipster.lite.module.domain.javabuild.command.RemoveDirectJavaDepend
 import tech.jhipster.lite.module.domain.javabuild.command.RemoveJavaDependencyManagement;
 import tech.jhipster.lite.module.domain.javabuild.command.SetVersion;
 
-public class GradleCommandHandler extends JavaDependenciesCommandHandler {
+class GradleCommandHandler implements JavaDependenciesCommandHandler {
 
-  GradleCommandHandler(Indentation indentation, Path buildGradlePath) {
-    super(indentation, buildGradlePath);
-  }
+  GradleCommandHandler(Indentation indentation, Path buildGradlePath) {}
 
   @Override
   public void handle(SetVersion command) {}

@@ -19,29 +19,7 @@ import tech.jhipster.lite.module.domain.javabuild.command.RemoveDirectJavaDepend
 import tech.jhipster.lite.module.domain.javabuild.command.RemoveJavaDependencyManagement;
 import tech.jhipster.lite.module.domain.javabuild.command.SetVersion;
 
-abstract class JavaDependenciesCommandHandler {
-
-  protected final Indentation indentation;
-  protected final Path buildFilePath;
-  protected final Match document;
-
-  public JavaDependenciesCommandHandler(Indentation indentation, Path buildFilePath) {
-    Assert.notNull("indentation", indentation);
-    Assert.notNull("buildFilePath", buildFilePath);
-
-    this.indentation = indentation;
-    this.buildFilePath = buildFilePath;
-    document = readDocument(buildFilePath);
-  }
-
-  private Match readDocument(Path buildFilePath) {
-    try (InputStream input = Files.newInputStream(buildFilePath)) {
-      return $(input);
-    } catch (IOException | SAXException e) {
-      throw new GeneratorException("Error reading buildFile content: " + e.getMessage(), e);
-    }
-  }
-
+public interface JavaDependenciesCommandHandler {
   public abstract void handle(SetVersion command);
 
   public abstract void handle(AddDirectJavaDependency command);

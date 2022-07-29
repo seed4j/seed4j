@@ -44,7 +44,7 @@ import tech.jhipster.lite.module.domain.javabuildplugin.JavaBuildPluginAdditiona
 import tech.jhipster.lite.module.domain.javadependency.DependencyId;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyScope;
 
-class MavenCommandHandler extends JavaDependenciesCommandHandler {
+class MavenCommandHandler implements JavaDependenciesCommandHandler {
 
   private static final String FORMATTED_LINE_END = "> *" + LINE_BREAK;
   private static final String RESULTING_LINE_END = ">" + LINE_BREAK;
@@ -89,8 +89,25 @@ class MavenCommandHandler extends JavaDependenciesCommandHandler {
     ARTIFACT_ID,
   };
 
-  MavenCommandHandler(Indentation indentation, Path pomPath) {
-    super(indentation, pomPath);
+  private final Indentation indentation;
+  private final Path pomPath;
+  private final Match document;
+
+  public MavenCommandHandler(Indentation indentation, Path pomPath) {
+    Assert.notNull("indentation", indentation);
+    Assert.notNull("pomPath", pomPath);
+
+    this.indentation = indentation;
+    this.pomPath = pomPath;
+    document = readDocument(pomPath);
+  }
+
+  private Match readDocument(Path buildFilePath) {
+    try (InputStream input = Files.newInputStream(buildFilePath)) {
+      return $(input);
+    } catch (IOException | SAXException e) {
+      throw new GeneratorException("Error reading buildFile content: " + e.getMessage(), e);
+    }
   }
 
   @Override
@@ -516,7 +533,7 @@ class MavenCommandHandler extends JavaDependenciesCommandHandler {
 
   @Generated(reason = "The exception handling is hard to test and an implementation detail")
   private void writePom() {
-    try (Writer writer = Files.newBufferedWriter(buildFilePath, StandardCharsets.UTF_8)) {
+    try (Writer writer = Files.newBufferedWriter(pomPath, StandardCharsets.UTF_8)) {
       writer.write(HEADER);
 
       for (Element e : document) {

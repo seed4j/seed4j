@@ -29,7 +29,7 @@
     <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
     <maven-enforcer-plugin.version>3.1.0</maven-enforcer-plugin.version>
     <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
-    <flyway.version>8.5.13</flyway.version>
+    <flyway.version>9.0.4</flyway.version>
     <mongock.version>5.0.41</mongock.version>
     <archunit-junit5.version>0.23.1</archunit-junit5.version>
     <cucumber.version>7.5.0</cucumber.version>

@@ -1,0 +1,5 @@
+{
+  "documentation": "tikui",
+  "dist": "target/style",
+  "src": "src/main/style"
+}

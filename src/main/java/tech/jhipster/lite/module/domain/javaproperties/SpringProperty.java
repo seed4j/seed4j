@@ -7,6 +7,7 @@ public class SpringProperty {
   private final SpringPropertyType type;
   private final PropertyKey key;
   private final PropertyValue value;
+  private final PropertyComment comment;
   private final SpringProfile profile;
 
   private SpringProperty(SpringPropertyBuilder builder) {
@@ -16,6 +17,7 @@ public class SpringProperty {
     type = builder.type;
     key = builder.key;
     value = builder.value;
+    comment = builder.comment;
     profile = buildProfile(builder.profile);
   }
 
@@ -43,6 +45,10 @@ public class SpringProperty {
     return value;
   }
 
+  public PropertyComment comment() {
+    return comment;
+  }
+
   public String filename() {
     if (profile.isDefault()) {
       return type.filePrefix();
@@ -51,11 +57,13 @@ public class SpringProperty {
     return type.filePrefix() + "-" + profile.get();
   }
 
-  public static class SpringPropertyBuilder implements SpringPropertyKeyBuilder, SpringPropertyValueBuilder, SpringPropertyProfileBuilder {
+  public static class SpringPropertyBuilder
+    implements SpringPropertyKeyBuilder, SpringPropertyValueBuilder, SpringPropertyCommentBuilder, SpringPropertyProfileBuilder {
 
     private final SpringPropertyType type;
     private PropertyKey key;
     private PropertyValue value;
+    private PropertyComment comment;
     private SpringProfile profile;
 
     private SpringPropertyBuilder(SpringPropertyType type) {
@@ -79,6 +87,13 @@ public class SpringProperty {
     }
 
     @Override
+    public SpringPropertyCommentBuilder comment(PropertyComment comment) {
+      this.comment = comment;
+
+      return this;
+    }
+
+    @Override
     public SpringPropertyProfileBuilder profile(SpringProfile profile) {
       this.profile = profile;
 
@@ -97,6 +112,10 @@ public class SpringProperty {
 
   public interface SpringPropertyValueBuilder {
     SpringPropertyProfileBuilder value(PropertyValue value);
+  }
+
+  public interface SpringPropertyCommentBuilder {
+    SpringPropertyCommentBuilder comment(PropertyComment comment);
   }
 
   public interface SpringPropertyProfileBuilder {

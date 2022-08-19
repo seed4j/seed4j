@@ -84,14 +84,14 @@ public class SvelteModuleFactory {
       .addTemplate("jest-setup.ts")
       .and()
       .and()
-      .files() // APP FILES
+      .files()
       .add(SOURCE.append("src/main/webapp/routes").template("index.svelte"), to("src/main/webapp/routes/index.svelte"))
       .add(
         SOURCE.append("src/test/spec/common/primary/app").template("App.spec.ts"),
         to("src/test/javascript/spec/common/primary/app/App.spec.ts")
       )
       .and()
-      .files() // HOME STYLES
+      .files()
       .add(
         SOURCE.append("src/main/webapp/app/common/primary/app").template("StyledApp.svelte"),
         to("src/main/webapp/app/common/primary/app/App.svelte")
@@ -101,7 +101,7 @@ public class SvelteModuleFactory {
       .addFile("svelte-logo.png")
       .and()
       .and()
-      .files() // RENAME FILE
+      .files()
       .add(INIT.file(".lintstagedrc.js"), to(".lintstagedrc.cjs"))
       .and()
       .build();

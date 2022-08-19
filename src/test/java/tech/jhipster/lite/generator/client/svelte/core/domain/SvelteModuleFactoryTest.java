@@ -24,9 +24,7 @@ class SvelteModuleFactoryTest {
 
     assertThatModuleWithFiles(module, packageJsonFile())
       .createFile("package.json")
-      // dependency
       .containing(nodeDependency("svelte-navigator"))
-      // dev dependency
       .containing(nodeDependency("@babel/preset-env"))
       .containing(nodeDependency("@sveltejs/adapter-static"))
       .containing(nodeDependency("@sveltejs/kit"))
@@ -54,7 +52,6 @@ class SvelteModuleFactoryTest {
       .containing(nodeDependency("ts-jest"))
       .containing(nodeDependency("typescript"))
       .containing(nodeDependency("vite"))
-      // script
       .containing("\"dev\": \"vite dev --port 9000\"")
       .containing("\"start\": \"vite dev --port 9000\"")
       .containing("\"build\": \"vite build\"")
@@ -65,25 +62,18 @@ class SvelteModuleFactoryTest {
       .containing("\"lint\": \"prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .\"")
       .containing("\"format\": \"prettier --ignore-path .gitignore --write --plugin-search-dir=. .\"")
       .containing("\"test\": \"jest\"")
-      // jest sonar .. checker les espaces
       .containing(
         "  \"jestSonar\": {\n    \"reportPath\": \"target/test-results/jest\",\n    \"reportFile\": \"TESTS-results-sonar.xml\"\n  },"
       )
-      // type .. checker les espaces
       .containing("\"type\": \"module\"")
       .and()
-      // config files
       .createPrefixedFiles("", ".eslintrc.cjs", "tsconfig.json", "svelte.config.js", "jest.config.cjs", "vite.config.js")
-      // root files
       .createPrefixedFiles("src/main/webapp", "app.html", "app.d.ts", "jest-setup.ts")
-      // app files
       .createPrefixedFiles("src/main/webapp/routes", "index.svelte")
       .createPrefixedFiles("src/test/javascript/spec/common/primary/app", "App.spec.ts")
-      // home style
       .createPrefixedFiles("src/main/webapp/app/common/primary/app", "App.svelte")
       .createPrefixedFiles("src/main/webapp/assets", "JHipster-Lite-neon-orange.png")
       .createPrefixedFiles("src/main/webapp/assets", "svelte-logo.png")
-      // rename file
       .createPrefixedFiles("", ".lintstagedrc.cjs");
   }
 }

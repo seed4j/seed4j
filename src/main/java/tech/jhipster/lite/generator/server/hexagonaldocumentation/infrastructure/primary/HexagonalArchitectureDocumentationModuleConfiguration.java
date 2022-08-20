@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.jhipster.lite.generator.server.hexagonaldocumentation.application.HexagonalArchitectureDocumentationApplicationService;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleApiDoc;
+import tech.jhipster.lite.module.domain.resource.JHipsterModuleOrganization;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 
 @Configuration
@@ -19,7 +20,7 @@ class HexagonalArchitectureDocumentationModuleConfiguration {
       .slug("application-service-hexagonal-architecture-documentation")
       .withoutProperties()
       .apiDoc(new JHipsterModuleApiDoc("Spring Boot", "Add documentation for hexagonal architecture"))
-      .standalone()
+      .organization(JHipsterModuleOrganization.builder().addModuleDependency("git-init").build())
       .tags("server", "documentation")
       .factory(hexagonalArchitectureDocumentations::buildModule);
   }

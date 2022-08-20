@@ -55,6 +55,6 @@ class InitModuleConfiguration {
   }
 
   private JHipsterModuleOrganization organization() {
-    return JHipsterModuleOrganization.builder().feature("startup").build();
+    return JHipsterModuleOrganization.builder().feature("startup").addModuleDependency("git-init").build();
   }
 }

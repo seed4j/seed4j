@@ -4,9 +4,9 @@ import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 import static tech.jhipster.lite.module.domain.packagejson.VersionSource.*;
 
 import tech.jhipster.lite.error.domain.Assert;
-import tech.jhipster.lite.git.domain.GitRepository;
 import tech.jhipster.lite.module.domain.JHipsterDestination;
 import tech.jhipster.lite.module.domain.JHipsterModule;
+import tech.jhipster.lite.module.domain.JHipsterModule.JHipsterModuleBuilder;
 import tech.jhipster.lite.module.domain.JHipsterSource;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.npm.domain.NpmVersionSource;
@@ -17,13 +17,11 @@ public class InitModuleFactory {
   private static final JHipsterSource SOURCE = from("init");
   private static final JHipsterDestination DESTINATION = to(".");
 
-  private final GitRepository git;
   private final NpmVersions npmVersions;
 
-  public InitModuleFactory(GitRepository git, NpmVersions npmVersions) {
-    Assert.notNull("git", git);
+  public InitModuleFactory(NpmVersions npmVersions) {
+    Assert.notNull("npmVersions", npmVersions);
 
-    this.git = git;
     this.npmVersions = npmVersions;
   }
 
@@ -76,10 +74,7 @@ public class InitModuleFactory {
           .and()
         .add(SOURCE.file("gitignore"), to(".gitignore"))
         .add(SOURCE.file("gitattributes"), to(".gitattributes"))
-      .and()
-      .postActions()
-        .add(() -> git.init(properties.projectFolder()))
-        .and();
+      .and();
     //@formatter:on
   }
 

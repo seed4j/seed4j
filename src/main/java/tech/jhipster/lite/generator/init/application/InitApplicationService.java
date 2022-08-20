@@ -2,7 +2,6 @@ package tech.jhipster.lite.generator.init.application;
 
 import org.springframework.stereotype.Service;
 import tech.jhipster.lite.generator.init.domain.InitModuleFactory;
-import tech.jhipster.lite.git.domain.GitRepository;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.npm.domain.NpmVersions;
@@ -12,8 +11,8 @@ public class InitApplicationService {
 
   private final InitModuleFactory factory;
 
-  public InitApplicationService(GitRepository git, NpmVersions npmVersions) {
-    factory = new InitModuleFactory(git, npmVersions);
+  public InitApplicationService(NpmVersions npmVersions) {
+    factory = new InitModuleFactory(npmVersions);
   }
 
   public JHipsterModule buildFullInitModule(JHipsterModuleProperties properties) {

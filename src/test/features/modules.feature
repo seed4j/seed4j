@@ -13,12 +13,12 @@ Feature: Modules
   Scenario: Should get modules list
     When I get modules list
     Then I should have category "Spring Boot - Component Tests" with module
-      | Slug        | spring-boot-cucumber                 |
+      | Slug        | spring-boot-cucumber                |
       | Description | Add cucumber integration to project |
 
   Scenario: Should get modules landscape
     When I get modules landscape
-    Then I should have landscape level 0 with elements
+    Then I should have landscape level 1 with elements
       | Type    | Slug               |
       | MODULE  | infinitest-filters |
       | FEATURE | startup            |

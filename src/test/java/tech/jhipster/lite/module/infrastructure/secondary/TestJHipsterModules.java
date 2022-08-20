@@ -21,7 +21,7 @@ import tech.jhipster.lite.projectfile.infrastructure.secondary.FileSystemProject
 
 public final class TestJHipsterModules {
 
-  private static final InitModuleFactory initModules = new InitModuleFactory(mock(GitRepository.class), mockedNpmVersion());
+  private static final InitModuleFactory initModules = new InitModuleFactory(mockedNpmVersion());
 
   private TestJHipsterModules() {}
 
@@ -41,7 +41,7 @@ public final class TestJHipsterModules {
     return new JHipsterModuleProperties(project.getFolder(), false, project.getConfig());
   }
 
-  static void apply(JHipsterModule module) {
+  public static void apply(JHipsterModule module) {
     applyer().module(module).properties(JHipsterModuleProperties.defaultProperties(module.projectFolder())).slug("test-module").apply();
   }
 

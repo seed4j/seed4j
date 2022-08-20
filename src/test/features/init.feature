@@ -17,9 +17,6 @@ Feature: Init
       | README.md                     |
     And I should have files in ".husky"
       | pre-commit                    |
-    And I should have files in ".git"
-      | config                        |
-      | HEAD                          |
 
   Scenario: Should init minimal from module
     When I apply "init-minimal" module to default project
@@ -32,9 +29,6 @@ Feature: Init
       | .editorconfig                 |
       | .eslintignore                 |
       | README.md                     |
-    And I should have files in ".git"
-      | config                        |
-      | HEAD                          |
     And I should not have files in ""
       | .lintstagedrc.js              |
       | .prettierignore               |

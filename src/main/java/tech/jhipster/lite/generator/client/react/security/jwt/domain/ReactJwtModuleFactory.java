@@ -33,7 +33,7 @@ public class ReactJwtModuleFactory {
     return moduleBuilder(properties)
       .packageJson()
         .addDependency(packageName("react-hook-form"), REACT)
-        .addDependency(packageName("axios"), REACT)
+        .addDependency(packageName("axios"), COMMON)
         .addDependency(packageName("@nextui-org/react"), REACT)
         .addDevDependency(packageName("sass"), REACT)
         .and()

@@ -34,7 +34,7 @@
     <cucumber.version>7.7.0</cucumber.version>
     <testng.version>7.6.1</testng.version>
     <pulsar.version>2.10.0</pulsar.version>
-    <liquibase.version>4.15.0</liquibase.version>
+    <liquibase.version>4.16.0</liquibase.version>
     <compiler-plugin.version>3.10.1</compiler-plugin.version>
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
     <failsafe-plugin.version>3.0.0-M5</failsafe-plugin.version>

@@ -23,7 +23,7 @@ public class CustomJHLiteModuleFactory {
 
     //@formatter:off
     return moduleBuilder(properties)
-      .documentation(documentationTitle("Module creation"), SOURCE.template("module-creation.md"))
+      .documentation(documentationTitle("Module creation"), SOURCE.file("module-creation.md"))
       .javaDependencies()
         .addDependency(jhipsterLiteDependency())
       .and()

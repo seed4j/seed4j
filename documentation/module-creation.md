@@ -27,6 +27,7 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 
 @UnitTest
 class MyModuleFactoryTest {
+
   private static final MyModuleFactory factory = new MyModuleFactory();
 
   @Test
@@ -38,8 +39,10 @@ class MyModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModule(module).
-      .createPrefixedFiles("src/test/java/com/jhipster/test/my_package", "Dummy.java");
+    //@formatter:off
+    assertThatModule(module)
+      .hasJavaSources("com/jhipster/test/my_package/Dummy.java");
+    //@formatter:on
   }
 }
 ```
@@ -76,7 +79,7 @@ This implementation will take a file from `src/main/resources/generator/my-modul
 The file is a template named `Dummy.java.mustache` and can contains some mustache placeholders: 
 
 ```java
-package {{packageName}}.my_package;
+package tech.jhipster.lite.generator.my_package;
 
 public class Dummy {
 

@@ -8,7 +8,7 @@
   "devDependencies": {
     "@babel/preset-env": "7.19.3",
     "@sveltejs/adapter-static": "1.0.0-next.44",
-    "@sveltejs/kit": "1.0.0-next.509",
+    "@sveltejs/kit": "1.0.0-next.510",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/svelte": "3.2.1",
     "@types/jest": "29.1.1",

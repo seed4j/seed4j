@@ -23,7 +23,7 @@
     "@angular-eslint/eslint-plugin-template": "14.1.2",
     "@angular-eslint/schematics": "14.1.2",
     "@angular-eslint/template-parser": "14.1.2",
-    "@angular/cli": "14.2.4",
+    "@angular/cli": "14.2.5",
     "@angular/compiler-cli": "14.2.4",
     "@types/jest": "29.1.1",
     "@types/node": "18.8.2",

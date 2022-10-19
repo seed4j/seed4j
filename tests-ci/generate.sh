@@ -121,7 +121,8 @@ elif [[ $application == 'fullapp' ]]; then
   "gitpod" \
   "java-memoizers" \
   "spring-boot-cache" \
-  "caffeine-cache"
+  "caffeine-cache" \
+  "java-enums"
 
   cucumber_with_jwt
 

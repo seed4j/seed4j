@@ -40,6 +40,7 @@ public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
   JACOCO_CHECK_MIN_COVERAGE("jacoco-check-min-coverage"),
   JAVA_ARCHUNIT("java-archunit"),
   JAVA_BASE("java-base"),
+  JAVA_ENUMS("java-enums"),
   JAVA_MEMOIZERS("java-memoizers"),
   JIB("jib"),
   JPA_PAGINATION("jpa-pagination"),

@@ -150,18 +150,6 @@ $jhipster-landscape-padding: 20px;
   }
 }
 
-.jhipster-landscape-element {
-  list-style-type: none;
-
-  &.-compacted {
-    margin-bottom: 5px;
-  }
-
-  &.-extended {
-    margin-bottom: 15px;
-  }
-}
-
 .modules-application-button {
   margin-bottom: 15px;
   width: 100%;

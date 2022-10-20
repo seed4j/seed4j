@@ -26,7 +26,7 @@
   <div class="jhipster-landscape-map jhlite-menu-content-template--content" ref="landscapeContainer">
     <div class="jhipster-landscape-levels">
       <ul class="jhipster-landscape-levels--level" :class="modeClass()" v-for="level in levels.value()">
-        <li class="jhipster-landscape-element" v-for="element in level.elements" :class="modeClass()">
+        <li class="jhlite-landscape-element" v-for="element in level.elements" :class="modeClass()">
           <div
             class="jhipster-landscape-feature"
             :class="elementFlavor(element.slug())"

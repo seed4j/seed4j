@@ -5,4 +5,4 @@ Feature: Webflux module
       | packageName | tech.jhipster.chips |
       | serverPort  | 9000                |
     Then I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/primary/exception/"
-      | ProblemConfiguration.java |
+      | GlobalErrorWebExceptionHandler.java |

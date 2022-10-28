@@ -33,7 +33,6 @@ public class SpringBootWebfluxModuleFactory {
         .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-webflux"))
         .addDependency(reactorTestDependency())
         .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-validation"))
-        .addDependency(webfluxProblemDependency())
         .and()
       .springMainProperties()
         .set(SERVER_PORT, propertyValue(properties.serverPort().stringValue()))
@@ -46,19 +45,12 @@ public class SpringBootWebfluxModuleFactory {
         .and()
       .files()
         .batch(SOURCE.append("main"), toSrcMainJava().append(packagePath).append(EXCEPTION_PRIMARY))
-          .addTemplate("BadRequestAlertException.java")
-          .addTemplate("ErrorConstants.java")
-          .addTemplate("ExceptionTranslator.java")
-          .addTemplate("FieldErrorDTO.java")
-          .addTemplate("HeaderUtil.java")
-          .addTemplate("ProblemConfiguration.java")
+          .addTemplate("GlobalErrorWebExceptionHandler.java")
+          .addTemplate("ErrorDTO.java")
           .and()
         .batch(SOURCE.append("test"), toSrcTestJava().append(packagePath).append(EXCEPTION_PRIMARY))
-          .addTemplate("HeaderUtilTest.java")
-          .addTemplate("BadRequestAlertExceptionTest.java")
-          .addTemplate("ExceptionTranslatorIT.java")
-          .addTemplate("ExceptionTranslatorTestController.java")
-          .addTemplate("FieldErrorDTOTest.java")
+          .addTemplate("GlobalErrorWebExceptionHandlerIT.java")
+          .addTemplate("GlobalErrorWebExceptionHandlerTestController.java")
           .and()
         .add(SOURCE.template("test/TestUtil.java"), toSrcTestJava().append(packagePath).append("TestUtil.java"))
         .and()
@@ -68,9 +60,5 @@ public class SpringBootWebfluxModuleFactory {
 
   private JavaDependency reactorTestDependency() {
     return javaDependency().groupId("io.projectreactor").artifactId("reactor-test").scope(JavaDependencyScope.TEST).build();
-  }
-
-  private JavaDependency webfluxProblemDependency() {
-    return javaDependency().groupId("org.zalando").artifactId("problem-spring-webflux").versionSlug("problem-spring").build();
   }
 }

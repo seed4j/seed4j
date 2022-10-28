@@ -51,15 +51,6 @@ class SpringBootWebfluxModuleFactoryTest {
             </dependency>
         """
       )
-      .containing(
-        """
-            <dependency>
-              <groupId>org.zalando</groupId>
-              <artifactId>problem-spring-webflux</artifactId>
-              <version>${problem-spring.version}</version>
-            </dependency>
-        """
-      )
       .and()
       .hasFile("src/main/resources/config/application.properties")
       .containing("server.port=9000")
@@ -72,20 +63,13 @@ class SpringBootWebfluxModuleFactoryTest {
       .and()
       .hasPrefixedFiles(
         "src/main/java/com/jhipster/test/technical/infrastructure/primary/exception/",
-        "ProblemConfiguration.java",
-        "HeaderUtil.java",
-        "BadRequestAlertException.java",
-        "ErrorConstants.java",
-        "ExceptionTranslator.java",
-        "FieldErrorDTO.java"
+        "ErrorDTO.java",
+        "GlobalErrorWebExceptionHandler.java"
       )
       .hasPrefixedFiles(
         "src/test/java/com/jhipster/test/technical/infrastructure/primary/exception/",
-        "HeaderUtilTest.java",
-        "BadRequestAlertExceptionTest.java",
-        "ExceptionTranslatorIT.java",
-        "ExceptionTranslatorTestController.java",
-        "FieldErrorDTOTest.java"
+        "GlobalErrorWebExceptionHandlerIT.java",
+        "GlobalErrorWebExceptionHandlerTestController.java"
       )
       .hasFiles("src/test/java/com/jhipster/test/TestUtil.java");
   }

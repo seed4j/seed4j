@@ -6,7 +6,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -44,7 +43,7 @@ public class SecurityConfiguration {
 
   public SecurityConfiguration(
     CorsFilter corsFilter,
-    ApplicationSecurityProperties applicationSecurityProperties,
+    ApplicationSecurityProperties applicationSecurityProperties
   ) {
     this.corsFilter = corsFilter;
     this.applicationSecurityProperties = applicationSecurityProperties;
@@ -72,7 +71,6 @@ public class SecurityConfiguration {
       .csrf()
       .disable()
       .addFilterBefore(corsFilter, CsrfFilter.class)
-    .and()
       .headers()
       .contentSecurityPolicy(applicationSecurityProperties.getContentSecurityPolicy())
     .and()

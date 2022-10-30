@@ -48,7 +48,7 @@ spring_boot_mvc() {
   spring_boot
 
   applyModules \
-  "spring-boot-tomcat" \
+  "spring-boot-tomcat"
 }
 
 spring_boot_undertow() {

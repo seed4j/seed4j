@@ -79,7 +79,7 @@ class JwtAuthenticationModuleFactoryTest {
         "src/main/java/com/jhipster/test/authentication/infrastructure/primary",
         "AuthenticatedUser.java",
         "AuthenticationException.java",
-        "AuthenticationExceptionAdvice.java",
+        "AuthenticationExceptionHandler.java",
         "AuthenticationTokenReader.java",
         "JwtAuthenticationProperties.java",
         "JWTConfigurer.java",
@@ -94,7 +94,7 @@ class JwtAuthenticationModuleFactoryTest {
       .hasPrefixedFiles(
         "src/test/java/com/jhipster/test/authentication/infrastructure/primary",
         "AuthenticatedUserTest.java",
-        "AuthenticationExceptionAdviceIT.java",
+        "AuthenticationExceptionHandlerIT.java",
         "JWTFilterTest.java",
         "JwtReaderTest.java",
         "AccountExceptionResource.java"

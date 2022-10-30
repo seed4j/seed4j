@@ -30,12 +30,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
 import org.springframework.web.filter.CorsFilter;
-import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 import {{packageName}}.common.domain.Generated;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-@Import(SecurityProblemSupport.class)
 public class SecurityConfiguration {
 
   private final ApplicationSecurityProperties applicationSecurityProperties;
@@ -44,15 +42,11 @@ public class SecurityConfiguration {
   @Value("${spring.security.oauth2.client.provider.oidc.issuer-uri}")
   private String issuerUri;
 
-  private final SecurityProblemSupport problemSupport;
-
   public SecurityConfiguration(
     CorsFilter corsFilter,
     ApplicationSecurityProperties applicationSecurityProperties,
-    SecurityProblemSupport problemSupport
   ) {
     this.corsFilter = corsFilter;
-    this.problemSupport = problemSupport;
     this.applicationSecurityProperties = applicationSecurityProperties;
   }
 
@@ -78,9 +72,6 @@ public class SecurityConfiguration {
       .csrf()
       .disable()
       .addFilterBefore(corsFilter, CsrfFilter.class)
-      .exceptionHandling()
-        .authenticationEntryPoint(problemSupport)
-        .accessDeniedHandler(problemSupport)
     .and()
       .headers()
       .contentSecurityPolicy(applicationSecurityProperties.getContentSecurityPolicy())

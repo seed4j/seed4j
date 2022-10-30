@@ -98,7 +98,6 @@ class FileSystemJHipsterModulesRepositoryTest {
         .containing("<spring-boot.version>")
         .containing("</spring-boot.version>")
         .containing("<artifactId>spring-boot-starter</artifactId>")
-        .containing("<artifactId>problem-spring-web</artifactId>")
         .notContaining(
           """
               <dependency>

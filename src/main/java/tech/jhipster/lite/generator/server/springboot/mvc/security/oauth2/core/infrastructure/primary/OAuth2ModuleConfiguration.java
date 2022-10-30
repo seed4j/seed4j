@@ -26,13 +26,7 @@ class OAuth2ModuleConfiguration {
         "Add a Spring Security: OAuth 2.0 / OIDC Authentication (stateful, works with Keycloak and Okta)"
       )
       .organization(
-        JHipsterModuleOrganization
-          .builder()
-          .feature(AUTHENTICATION)
-          .addDependency(JAVA_BASE)
-          .addDependency(WEB_ERROR_MANAGEMENT)
-          .addDependency(SPRING_SERVER)
-          .build()
+        JHipsterModuleOrganization.builder().feature(AUTHENTICATION).addDependency(JAVA_BASE).addDependency(SPRING_SERVER).build()
       )
       .tags("server", "spring", "spring-boot", AUTHENTICATION_TAG)
       .factory(oAuth2::buildOAuth2Module);

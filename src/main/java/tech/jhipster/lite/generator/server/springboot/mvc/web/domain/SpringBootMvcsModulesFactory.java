@@ -16,6 +16,7 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 public class SpringBootMvcsModulesFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/mvc/web");
+  public static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
 
   private static final GroupId SPRING_BOOT_GROUP = groupId("org.springframework.boot");
   private static final ArtifactId STARTER_WEB_ARTIFACT_ID = artifactId("spring-boot-starter-web");
@@ -23,6 +24,8 @@ public class SpringBootMvcsModulesFactory {
   private static final PropertyKey SERVER_PORT = propertyKey("server.port");
 
   private static final String CORS_PRIMARY = "security/infrastructure/primary";
+
+  private static final String EXCEPTION_PATH = "technical/infrastructure/primary/exception";
 
   public JHipsterModule buildTomcatModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
@@ -75,6 +78,14 @@ public class SpringBootMvcsModulesFactory {
         .set(SERVER_PORT, propertyValue("0"))
         .and()
       .files()
+        .batch(SOURCE.append("main"), toSrcMainJava().append(packagePath).append(EXCEPTION_PATH))
+          .addTemplate("ErrorDTO.java")
+          .addTemplate("GlobalExceptionHandler.java")
+        .and()
+        .batch(TEST_SOURCE, toSrcTestJava().append(packagePath).append(EXCEPTION_PATH))
+          .addTemplate("GlobalExceptionHandlerIT.java")
+          .addTemplate("GlobalExceptionHandlerTestController.java")
+        .and()
         .add(SOURCE.file("resources/404.html"), to("src/main/resources/public/error/404.html"))
         .batch(SOURCE.append("src/cors"), toSrcMainJava().append(packagePath).append(CORS_PRIMARY))
           .addTemplate("CorsFilterConfiguration.java")
@@ -84,8 +95,8 @@ public class SpringBootMvcsModulesFactory {
           SOURCE.append("test/cors").template("CorsFilterConfigurationIT.java"),
           toSrcTestJava().append(packagePath).append(CORS_PRIMARY).append("CorsFilterConfigurationIT.java")
         )
-        .add(SOURCE.append("test").template("JsonHelper.java"), toSrcTestJava().append(packagePath).append("JsonHelper.java"))
-        .batch(SOURCE.append("test"), toSrcTestJava().append(properties.packagePath()))
+        .add(TEST_SOURCE.template("JsonHelper.java"), toSrcTestJava().append(packagePath).append("JsonHelper.java"))
+        .batch(TEST_SOURCE, toSrcTestJava().append(properties.packagePath()))
           .addTemplate("BeanValidationAssertions.java")
           .addTemplate("BeanValidationTest.java")
         .and()

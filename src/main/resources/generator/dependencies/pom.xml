@@ -83,11 +83,6 @@
         <version>${testcontainers.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.zalando</groupId>
-        <artifactId>problem-spring-web</artifactId>
-        <version>${problem-spring.version}</version>
-      </dependency>
-      <dependency>
         <groupId>net.nicoulaj.maven.plugins</groupId>
         <artifactId>checksum-maven-plugin</artifactId>
         <version>${checksum-maven-plugin.version}</version>

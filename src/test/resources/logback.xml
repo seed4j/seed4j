@@ -17,8 +17,6 @@
   <logger name="org.hibernate.validator" level="WARN" />
   <logger name="com.jackson" level="WARN" />
   <logger name="com.jayway" level="WARN" />
-  <logger name="org.zalando" level="OFF" />
-  <logger name="org.zalando.problem.spring.common.AdviceTraits" level="OFF" />
   <logger name="com.tngtech.archunit.ArchConfiguration" level="WARN" />
   <logger name="com.github.dockerjava" level="OFF" />
   <logger name="org.testcontainers" level="OFF" />

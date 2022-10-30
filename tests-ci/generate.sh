@@ -49,7 +49,6 @@ spring_boot_mvc() {
 
   applyModules \
   "spring-boot-tomcat" \
-  "zalando-problems"
 }
 
 spring_boot_undertow() {
@@ -61,7 +60,6 @@ spring_boot_undertow() {
   "jacoco-check-min-coverage" \
   "spring-boot" \
   "spring-boot-undertow" \
-  "zalando-problems" \
   "spring-boot-actuator"
 }
 

@@ -97,8 +97,7 @@ public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
   SVELTE_CORE("svelte-core"),
   TYPESCRIPT("typescript"),
   VUE_CORE("vue-core"),
-  VUE_PINIA("vue-pinia"),
-  ZALANDO_PROBLEMS("zalando-problems");
+  VUE_PINIA("vue-pinia");
 
   private final String slug;
 

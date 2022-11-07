@@ -1,6 +1,7 @@
 package tech.jhipster.lite.generator.server.springboot.cache.caffeine.domain;
 
-import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
 
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.TestFileUtils;
@@ -29,7 +30,15 @@ class CaffeineCacheModuleFactoryTest {
         """
             <dependency>
               <groupId>com.github.ben-manes.caffeine</groupId>
-              <artifactId>caffeine</artifactId>
+              <artifactId>jcache</artifactId>
+            </dependency>
+        """
+      )
+      .containing(
+        """
+            <dependency>
+              <groupId>javax.cache</groupId>
+              <artifactId>cache-api</artifactId>
             </dependency>
         """
       )

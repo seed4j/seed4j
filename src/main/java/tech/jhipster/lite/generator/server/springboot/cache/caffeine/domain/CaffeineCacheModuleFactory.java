@@ -18,7 +18,8 @@ public class CaffeineCacheModuleFactory {
     return moduleBuilder(properties)
       .documentation(documentationTitle("Caffeine"), SOURCE.template("caffeine.md"))
       .javaDependencies()
-        .addDependency(groupId("com.github.ben-manes.caffeine"), artifactId("caffeine"))
+        .addDependency(groupId("com.github.ben-manes.caffeine"), artifactId("jcache"))
+        .addDependency(groupId("javax.cache"), artifactId("cache-api"))
         .and()
       .build();
     //@formatter:on

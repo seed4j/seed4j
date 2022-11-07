@@ -6,7 +6,7 @@ public enum JHLiteFeatureSlug implements JHipsterFeatureSlugFactory {
   ANGULAR_AUTHENTICATION("angular-authentication"),
   AUTHENTICATION("authentication"),
   BANNER("banner"),
-  CACHE("cache"),
+  JCACHE("jcache"),
   CLIENT_CORE("client-core"),
   CUCUMBER_AUTHENTICATION("cucumber-authentication"),
   DATABASE_MIGRATION("database-migration"),

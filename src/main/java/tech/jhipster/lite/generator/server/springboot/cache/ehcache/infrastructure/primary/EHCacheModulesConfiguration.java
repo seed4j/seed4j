@@ -1,6 +1,6 @@
 package tech.jhipster.lite.generator.server.springboot.cache.ehcache.infrastructure.primary;
 
-import static tech.jhipster.lite.generator.JHLiteFeatureSlug.*;
+import static tech.jhipster.lite.generator.JHLiteFeatureSlug.JCACHE;
 import static tech.jhipster.lite.generator.JHLiteModuleSlug.*;
 
 import org.springframework.context.annotation.Bean;
@@ -45,6 +45,6 @@ class EHCacheModulesConfiguration {
   }
 
   private JHipsterModuleOrganization organization() {
-    return JHipsterModuleOrganization.builder().feature(CACHE).addDependency(SPRING_BOOT).build();
+    return JHipsterModuleOrganization.builder().feature(JCACHE).addDependency(SPRING_BOOT).build();
   }
 }

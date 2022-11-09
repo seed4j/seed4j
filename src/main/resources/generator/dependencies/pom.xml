@@ -42,7 +42,7 @@
     <jacoco.version>0.8.8</jacoco.version>
     <reflections.version>0.10.2</reflections.version>
     <json-web-token.version>0.11.5</json-web-token.version>
-    <jhlite.version>0.21.0</jhlite.version>
+    <jhlite.version>0.22.0</jhlite.version>
   </properties>
 
   <dependencyManagement>

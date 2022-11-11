@@ -19,10 +19,8 @@ class SpringdocJWTConfiguration {
 
   @Bean
   GlobalOpenApiCustomizer jwtOpenApi() {
-    return openApi -> openApi
-        .addSecurityItem(new SecurityRequirement()
-            .addList(securitySchemeName))
-        .components(jwtComponents(openApi.getComponents()));
+    return openApi ->
+      openApi.addSecurityItem(new SecurityRequirement().addList(securitySchemeName)).components(jwtComponents(openApi.getComponents()));
   }
 
   private Components jwtComponents(Components existingComponents) {

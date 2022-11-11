@@ -14,9 +14,14 @@ import {{packageName}}.common.domain.Generated;
 @Generated(reason = "Not called by integration tests")
 class SpringdocJWTConfiguration {
 
+  private final String securitySchemeName = "bearerAuth";
+
   @Bean
   GlobalOpenApiCustomizer jwtOpenApi() {
-    return openApi -> openApi.components(jwtComponents(openApi.getComponents()));
+    return openApi -> openApi
+        .addSecurityItem(new SecurityRequirement()
+            .addList(securitySchemeName))
+        .components(jwtComponents(openApi.getComponents()));
   }
 
   private Components jwtComponents(Components existingComponents) {
@@ -27,7 +32,7 @@ class SpringdocJWTConfiguration {
         .scheme("Bearer")
         .bearerFormat("JWT")
         .in(SecurityScheme.In.HEADER)
-        .name("bearerAuth")
+        .name(securitySchemeName")
     );
   }
 }

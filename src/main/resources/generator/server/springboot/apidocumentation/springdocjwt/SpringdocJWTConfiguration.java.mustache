@@ -2,6 +2,7 @@ package {{packageName}}.technical.infrastructure.primary.springdoc;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
 import org.springdoc.core.customizers.GlobalOpenApiCustomizer;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +33,7 @@ class SpringdocJWTConfiguration {
         .scheme("Bearer")
         .bearerFormat("JWT")
         .in(SecurityScheme.In.HEADER)
-        .name(securitySchemeName")
+        .name(securitySchemeName)
     );
   }
 }

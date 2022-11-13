@@ -321,6 +321,9 @@ public class ModulesSteps {
 
   @Then("I should have unknown slug {string} error message")
   public void shouldHaveUnknownSlugErrorMessage(String slugName) {
-    assertThatLastResponse().hasHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+    assertThatLastResponse()
+      .hasHttpStatus(HttpStatus.BAD_REQUEST)
+      .hasElement("$.title")
+      .withValue("Module " + slugName + " does not exist");
   }
 }

@@ -21,7 +21,7 @@
     "@angular-eslint/builder": "14.1.2",
     "@angular-eslint/eslint-plugin": "14.2.0",
     "@angular-eslint/eslint-plugin-template": "14.1.2",
-    "@angular-eslint/schematics": "14.1.2",
+    "@angular-eslint/schematics": "14.2.0",
     "@angular-eslint/template-parser": "14.2.0",
     "@angular/cli": "14.2.9",
     "@angular/compiler-cli": "14.2.10",

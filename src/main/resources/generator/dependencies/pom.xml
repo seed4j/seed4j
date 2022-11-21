@@ -19,7 +19,7 @@
     <spring-boot.version>2.7.5</spring-boot.version>
     <spring-cloud.version>2021.0.0</spring-cloud.version>
     <spring-cloud-netflix-eureka-client.version>3.1.4</spring-cloud-netflix-eureka-client.version>
-    <springdoc-openapi.version>1.6.12</springdoc-openapi.version>
+    <springdoc-openapi.version>1.6.13</springdoc-openapi.version>
     <testcontainers.version>1.17.3</testcontainers.version>
     <kafka-clients.version>3.2.0</kafka-clients.version>
     <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>

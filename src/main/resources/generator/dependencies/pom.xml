@@ -16,7 +16,7 @@
     <jjwt.version>0.11.5</jjwt.version>
     <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
     <problem-spring.version>0.27.0</problem-spring.version>
-    <spring-boot.version>2.7.5</spring-boot.version>
+    <spring-boot.version>3.0.0</spring-boot.version>
     <spring-cloud.version>2021.0.0</spring-cloud.version>
     <spring-cloud-netflix-eureka-client.version>3.1.4</spring-cloud-netflix-eureka-client.version>
     <springdoc-openapi.version>1.6.12</springdoc-openapi.version>

@@ -1,3 +1,21 @@
+# Usage
+
+## installation
+
+For generate the grammar and lexer code you need to execute
+
+```bash
+./mvnw antlr4:antlr4
+```
+
+For the moment only the creation of an object representing the generated application is created.
+
+To see what is done you can run the test `shouldCreateAValidDslApp` in `FileSytemDslRepositoryTest.class`
+`
+
+Example of file:
+
+```dsl
 config {
 baseName=Override
 basePackageName=Override
@@ -46,3 +64,6 @@ context ctx2 {
     domain {
     }
 }
+```
+
+

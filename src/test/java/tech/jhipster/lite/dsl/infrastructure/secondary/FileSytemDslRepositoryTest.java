@@ -79,6 +79,12 @@ class FileSytemDslRepositoryTest {
   }
 
   private static void displayDslClass(DslClass dslClass, StringBuilder sb) {
+    sb.append("\nClass name : ").append(dslClass.getName().get());
+    sb.append("\nClass type : ").append(dslClass.getType().key());
+    if (dslClass.getComment().isPresent()) {
+      sb.append("\nClass Comment : ").append(dslClass.getComment().get().get()).append("\n");
+    }
+    sb.append("\nClass field : \n");
     sb.append(dslClass.getType().key()).append(" ").append(dslClass.getName().get()).append(" :\n");
     dslClass.getFields().stream().forEach(ctx -> sb.append(ctx).append("\n"));
   }

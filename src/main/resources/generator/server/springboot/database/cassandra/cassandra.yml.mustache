@@ -1,0 +1,32 @@
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+# cassandra-load-keyspace creates required keyspace at startup of container.
+# This approach is not recommended for production, but is fine for a standalone mode.
+# For more details see:
+# - https://github.com/docker-library/cassandra/issues/31
+# - https://github.com/Netflix/osstracker/blob/master/docker-compose.yml#L60
+version: '3.8'
+services:
+  cassandra:
+    image: {{cassandraDockerImage}}
+    container_name: cassandra
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
+    ports:
+      - "127.0.0.1:9042:9042"  # cql native port
+    #volumes:
+    #  - /custom/cassandra/data/dir:/var/lib/cassandra
+
+  cassandra-load-keyspace:
+    container_name: cassandra-load-keyspace
+    image: {{cassandraDockerImage}}
+    depends_on:
+      - cassandra
+    volumes:
+      - ./cassandra-init/keyspace.cql:/keyspace.cql
+    command: /bin/bash -c "sleep 60 && echo loading cassandra keyspace && cqlsh cassandra -f /keyspace.cql"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s

@@ -39,7 +39,7 @@ class MyModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModule(module)
-      .hasPrefixedFiles("src/test/java/com/jhipster/test/my_package", "Dummy.java");
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/my_package", "Dummy.java");
   }
 }
 ```
@@ -113,7 +113,9 @@ And this is it for this part of the documentation... Of course you can do a lot 
 
 ## Creating JHipsterModuleResource
 
-As the main goal of a `JHipsterModuleResource` is to expose a WebService let's start by creating a gherkin scenario for that. So in `src/test/features/my-module.feature` we'll do:
+As the main goal of a `JHipsterModuleResource` is to expose a WebService.
+
+Let's start by creating a gherkin scenario for that. So in `src/test/features/my-module.feature` we'll do:
 
 ```
 Feature: My module
@@ -151,7 +153,8 @@ class MyModuleModuleConfiguration {
 }
 ```
 
-In fact, you don't really have choices here, the `JHipsterModuleResource.builder()` is fluent and will only let you go to the next possible step. The most confusing one may be the last one `.factory(myModules::buildModule)` which is, in fact, a method called to build the module.
+In fact, you don't really have choices here, the `JHipsterModuleResource.builder()` is fluent and will only let you go to the next possible step. 
+The most confusing one may be the last one `.factory(myModules::buildModule)` which is, in fact, a method called to build the module.
 
 For this to work, we'll need to add a simple orchestration class in `tech.jhipster.lite.generator.my_module.application`:
 

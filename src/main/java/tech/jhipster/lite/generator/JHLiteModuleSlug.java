@@ -15,6 +15,7 @@ public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
   BANNER_JHIPSTER_V7_VUE("banner-jhipster-v7-vue"),
   CAFFEINE_CACHE("caffeine-cache"),
   CONSUL("consul"),
+  CASSANDRA("cassandra"),
   CUSTOM_JHLITE("custom-jhlite"),
   CYPRESS("cypress"),
   DOCKERFILE("dockerfile"),

@@ -51,13 +51,11 @@ class CassandraModuleFactoryTest {
       .hasFile("documentation/cassandra.md")
       .and()
       .hasFile("README.md")
-      .containing(
-        """
+      .containing("""
             ```bash
-            docker compose -f src/main/docker/cassandra.yml.mustache up -d
+            docker compose -f src/main/docker/cassandra.yml up -d
             ```
-            """
-      )
+            """)
       .and()
       .hasFile("src/main/docker/cassandra.yml")
       .containing("cassandra:4.0.7")

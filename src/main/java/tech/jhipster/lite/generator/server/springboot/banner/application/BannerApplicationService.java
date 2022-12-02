@@ -14,23 +14,7 @@ public class BannerApplicationService {
     this.factory = new BannerModuleFactory();
   }
 
-  public JHipsterModule buildJHipsterV7Banner(JHipsterModuleProperties properties) {
-    return factory.buildModuleBannerJHipsterV7(properties);
-  }
-
-  public JHipsterModule buildJHipsterV7ReactBanner(JHipsterModuleProperties properties) {
-    return factory.buildModuleBannerJHipsterV7React(properties);
-  }
-
-  public JHipsterModule buildJHipsterV7VueBanner(JHipsterModuleProperties properties) {
-    return factory.buildModuleBannerJHipsterV7Vue(properties);
-  }
-
-  public JHipsterModule buildJHipsterV2Banner(JHipsterModuleProperties properties) {
-    return factory.buildModuleBannerJHipsterV2(properties);
-  }
-
-  public JHipsterModule buildJHipsterV3Banner(JHipsterModuleProperties properties) {
-    return factory.buildModuleBannerJHipsterV3(properties);
+  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+    return factory.buildModule(properties);
   }
 }

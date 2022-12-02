@@ -1,10 +1,10 @@
 package tech.jhipster.lite.generator.server.springboot.banner.domain;
 
-import static tech.jhipster.lite.module.domain.JHipsterModule.*;
+import static tech.jhipster.lite.module.domain.JHipsterModule.from;
+import static tech.jhipster.lite.module.domain.JHipsterModule.to;
 
 import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModule;
-import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 
@@ -13,37 +13,19 @@ public class BannerModuleFactory {
   private static final String SOURCE_FOLDER = "server/springboot/banner";
   private static final String PROPERTIES = "properties";
 
-  public JHipsterModule buildModuleBannerJHipsterV7(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
-    return buildModuleBanner(properties, "banner-jhipster-v7.txt");
-  }
 
-  public JHipsterModule buildModuleBannerJHipsterV7React(JHipsterModuleProperties properties) {
-    Assert.notNull(PROPERTIES, properties);
-    return buildModuleBanner(properties, "banner-jhipster-v7-react.txt");
-  }
+    String projectName = properties.projectName().get();
 
-  public JHipsterModule buildModuleBannerJHipsterV7Vue(JHipsterModuleProperties properties) {
-    Assert.notNull(PROPERTIES, properties);
-    return buildModuleBanner(properties, "banner-jhipster-v7-vue.txt");
-  }
-
-  public JHipsterModule buildModuleBannerJHipsterV2(JHipsterModuleProperties properties) {
-    Assert.notNull(PROPERTIES, properties);
-    return buildModuleBanner(properties, "banner-jhipster-v2.txt");
-  }
-
-  public JHipsterModule buildModuleBannerJHipsterV3(JHipsterModuleProperties properties) {
-    Assert.notNull(PROPERTIES, properties);
-    return buildModuleBanner(properties, "banner-jhipster-v3.txt");
-  }
-
-  private JHipsterModule buildModuleBanner(JHipsterModuleProperties properties, String file) {
     // @formatter:off
     return JHipsterModule
       .moduleBuilder(properties)
+      .context()
+        .put("banner", AsciiArtGenerator.from(projectName))
+        .and()
       .files()
-        .add(source().file(file), destination())
+        .add(source().template("banner.txt"), to("src/main/resources/banner.txt"))
         .and()
       .build();
     // @formatter:on
@@ -51,9 +33,5 @@ public class BannerModuleFactory {
 
   private JHipsterSource source() {
     return from(SOURCE_FOLDER);
-  }
-
-  private JHipsterDestination destination() {
-    return new JHipsterDestination("src/main/resources").append("banner.txt");
   }
 }

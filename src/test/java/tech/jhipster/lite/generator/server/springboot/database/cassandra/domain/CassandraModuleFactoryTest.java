@@ -40,23 +40,22 @@ class CassandraModuleFactoryTest {
     assertThatModuleWithFiles(module, pomFile(), readmeFile())
       .hasFile("pom.xml")
       .containing(
-            """
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-data-cassandra</artifactId>
-                </dependency>
-            """
+        """
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-data-cassandra</artifactId>
+            </dependency>
+        """
       )
       .and()
       .hasFile("documentation/cassandra.md")
       .and()
       .hasFile("README.md")
-      .containing(
-            """
-            ```bash
-            docker compose -f src/main/docker/cassandra.yml up -d
-            ```
-            """)
+      .containing("""
+        ```bash
+        docker compose -f src/main/docker/cassandra.yml up -d
+        ```
+        """)
       .and()
       .hasFile("src/main/docker/cassandra.yml")
       .containing("cassandra:4.0.7")

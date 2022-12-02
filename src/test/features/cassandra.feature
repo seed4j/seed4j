@@ -4,5 +4,5 @@ Feature: Cassandra module
     When I apply "cassandra" module to default project with maven file
       | packageName | tech.jhipster.chips |
       | baseName    | jhipster            |
-    Then I should have files in ""
-      | pom.xml |
+    Then I should have files in "documentation"
+      | cassandra.md |

@@ -116,6 +116,16 @@ describe('Optional', () => {
     });
   });
 
+  describe('Of nullable', () => {
+    it('Should get empty optional from null value', () => {
+      expect(Optional.ofNullable(null).isEmpty()).toBe(true);
+    });
+
+    it('Should get valuated optional from actual value', () => {
+      expect(Optional.ofNullable('toto').isEmpty()).toBe(false);
+    });
+  });
+
   describe('Flat map', () => {
     it('Should flat map empty optional to empty', () => {
       expect(Optional.empty().flatMap(Optional.empty).isEmpty()).toBe(true);

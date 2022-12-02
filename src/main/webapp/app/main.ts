@@ -10,10 +10,10 @@ import mitt from 'mitt';
 import '../content/css/custom.css';
 import { MittAlertListener } from '@/common/secondary/alert/MittAlertListener';
 import { RestModulesRepository } from './module/secondary/RestModulesRepository';
-import { RestProjectFoldersRepository } from '@/module/secondary/RestProjectFoldersRepository';
 import { RestStatisticsRepository } from './common/secondary/RestStatisticsRepository';
 import { WindowApplicationListener } from './common/primary/applicationlistener/WindowApplicationListener';
 import { Timeout } from '@/common/primary/timeout/Timeout';
+import { RestStoreProjectFolderRepository } from '@/module/secondary/RestStoreProjectFolderRepository';
 
 const app = createApp(App);
 
@@ -23,7 +23,7 @@ const alertListener = new MittAlertListener(emitter);
 const axiosHttp = new AxiosHttp(axios.create({ baseURL: '' }));
 const consoleLogger = new ConsoleLogger(console);
 const modulesRepository = new RestModulesRepository(axiosHttp);
-const projectFoldersRepository = new RestProjectFoldersRepository(axiosHttp);
+const projectFoldersRepository = new RestStoreProjectFolderRepository(localStorage, axiosHttp);
 const statisticsRepository = new RestStatisticsRepository(axiosHttp);
 const applicationListener = new WindowApplicationListener(window);
 const timeout = () => new Timeout();

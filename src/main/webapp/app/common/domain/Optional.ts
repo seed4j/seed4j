@@ -15,6 +15,13 @@ export abstract class Optional<Value> {
     return Optional.of(value);
   }
 
+  static ofNullable<Value>(value: Value | null): Optional<Value> {
+    if (value === null) {
+      return Optional.empty();
+    }
+    return Optional.of(value);
+  }
+
   abstract map<Output>(mapper: (value: Value) => Output): Optional<Output>;
   abstract flatMap<Output>(mapper: (feature: Value) => Optional<Output>): Optional<Output>;
   abstract or(factory: () => Optional<Value>): Optional<Value>;

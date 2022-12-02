@@ -1,8 +1,7 @@
 import { AxiosHttp } from '@/http/AxiosHttp';
 import { ProjectFolder } from '../domain/ProjectFolder';
-import { ProjectFoldersRepository } from '@/module/domain/ProjectFoldersRepository';
 
-export class RestProjectFoldersRepository implements ProjectFoldersRepository {
+export class RestProjectFolders {
   constructor(private axiosInstance: AxiosHttp) {}
 
   get(): Promise<ProjectFolder> {

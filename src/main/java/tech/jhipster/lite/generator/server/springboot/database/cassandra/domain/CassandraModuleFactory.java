@@ -12,6 +12,7 @@ public class CassandraModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/database/cassandra");
   private static final String DOCKER_COMPOSE_COMMAND = "docker compose -f src/main/docker/cassandra.yml up -d";
+  private static final String DC = "datacenter1";
   private final DockerImages dockerImages;
 
   public CassandraModuleFactory(DockerImages dockerImages) {
@@ -30,17 +31,16 @@ public class CassandraModuleFactory {
       .startupCommand(DOCKER_COMPOSE_COMMAND)
       .context()
         .put("cassandraDockerImage", dockerImages.get("cassandra").fullName())
+        .put("DC", DC)
         .and()
       .files()
         .add(SOURCE.template("cassandra.yml"), toSrcMainDocker().append("cassandra.yml"))
-        .add(SOURCE.template("keyspace.cql"), toSrcMainDocker().append("cassandra-init").append("keyspace.cql"))
         .and()
       .springMainProperties()
-        .set(propertyKey("spring.data.cassandra.keyspace-name"), propertyValue(properties.projectBaseName().get()))
         .set(propertyKey("spring.data.cassandra.contact-points"), propertyValue("127.0.0.1"))
         .set(propertyKey("spring.data.cassandra.port"), propertyValue("9042"))
-        .set(propertyKey("spring.data.cassandra.local-datacenter"), propertyValue("datacenter1"))
-        .set(propertyKey("spring.data.cassandra.schema-action"), propertyValue("CREATE_IF_NOT_EXISTS"))
+        .set(propertyKey("spring.data.cassandra.local-datacenter"), propertyValue(DC))
+        .set(propertyKey("spring.data.cassandra.schema-action"), propertyValue("none"))
         .and()
       .build();
     //@formatter:on

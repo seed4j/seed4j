@@ -20,6 +20,8 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @ExtendWith(MockitoExtension.class)
 class CassandraModuleFactoryTest {
 
+  private static final String DC = "datacenter1";
+
   @Mock
   private DockerImages dockerImages;
 
@@ -59,15 +61,12 @@ class CassandraModuleFactoryTest {
       .and()
       .hasFile("src/main/docker/cassandra.yml")
       .containing("cassandra:4.0.7")
-      .and()
-      .hasFile("src/main/docker/cassandra-init/keyspace.cql")
-      .containing("jhipster")
+      .containing("CASSANDRA_DC=" + DC)
       .and()
       .hasFile("src/main/resources/config/application.properties")
-      .containing("spring.data.cassandra.keyspace-name=jhipster")
       .containing("spring.data.cassandra.contact-points=127.0.0.1")
       .containing("spring.data.cassandra.port=9042")
-      .containing("spring.data.cassandra.local-datacenter=datacenter1")
-      .containing("spring.data.cassandra.schema-action=CREATE_IF_NOT_EXISTS");
+      .containing("spring.data.cassandra.local-datacenter=" + DC)
+      .containing("spring.data.cassandra.schema-action=none");
   }
 }

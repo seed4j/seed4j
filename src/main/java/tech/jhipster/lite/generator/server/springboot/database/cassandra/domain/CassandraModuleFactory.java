@@ -25,15 +25,15 @@ public class CassandraModuleFactory {
     return moduleBuilder(properties)
       .javaDependencies()
         .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-starter-data-cassandra"))
-      .and()
+        .and()
       .documentation(documentationTitle("Cassandra"), SOURCE.template("cassandra.md"))
-      .startupCommand(startupCommand())
+      .startupCommand(DOCKER_COMPOSE_COMMAND)
       .context()
         .put("cassandraDockerImage", dockerImages.get("cassandra").fullName())
         .and()
       .files()
-        .add(SOURCE.template("cassandra.yml.mustache"), toSrcMainDocker().append("cassandra.yml"))
-        .add(SOURCE.template("keyspace.cql.mustache"), toSrcMainDocker().append("cassandra-init").append("keyspace.cql"))
+        .add(SOURCE.template("cassandra.yml"), toSrcMainDocker().append("cassandra.yml"))
+        .add(SOURCE.template("keyspace.cql"), toSrcMainDocker().append("cassandra-init").append("keyspace.cql"))
         .and()
       .springMainProperties()
         .set(propertyKey("spring.data.cassandra.keyspace-name"), propertyValue(properties.projectBaseName().get()))
@@ -44,9 +44,5 @@ public class CassandraModuleFactory {
         .and()
       .build();
     //@formatter:on
-  }
-
-  private String startupCommand() {
-    return DOCKER_COMPOSE_COMMAND;
   }
 }

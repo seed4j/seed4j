@@ -6,7 +6,3 @@ Feature: Cassandra module
       | baseName    | jhipster            |
     Then I should have files in ""
       | pom.xml |
-    And I should have files in "documentation"
-      | cassandra.md |
-    And I should have files in "src/main/docker"
-      | cassandra.yml |

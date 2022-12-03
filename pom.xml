@@ -84,6 +84,7 @@
 
     <antlr.version>4.11.1</antlr.version>
     <mojo.version>3.3.0</mojo.version>
+    <version.roaster>2.28.0.Final</version.roaster>
   </properties>
 
   <dependencyManagement>
@@ -259,6 +260,17 @@
       <groupId>org.antlr</groupId>
       <artifactId>antlr4-runtime</artifactId>
       <version>${antlr.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.forge.roaster</groupId>
+      <artifactId>roaster-api</artifactId>
+      <version>${version.roaster}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.forge.roaster</groupId>
+      <artifactId>roaster-jdt</artifactId>
+      <version>${version.roaster}</version>
+      <!--      <scope>runtime</scope>-->
     </dependency>
   </dependencies>
 

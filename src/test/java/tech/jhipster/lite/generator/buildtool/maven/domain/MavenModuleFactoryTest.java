@@ -56,6 +56,7 @@ class MavenModuleFactoryTest {
                   <excludes>
                     <exclude>**/*IT*</exclude>
                     <exclude>**/*IntTest*</exclude>
+                    <exclude>**/*CucumberTest*</exclude>
                   </excludes>
                 </configuration>
               </plugin>
@@ -85,6 +86,7 @@ class MavenModuleFactoryTest {
                   <includes>
                     <include>**/*IT*</include>
                     <include>**/*IntTest*</include>
+                    <include>**/*CucumberTest*</include>
                   </includes>
                 </configuration>
                 <executions>

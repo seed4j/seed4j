@@ -19,7 +19,7 @@
     "@vitest/coverage-istanbul": "0.25.3",
     "@vue/eslint-config-prettier": "7.0.0",
     "@vue/eslint-config-typescript": "11.0.2",
-    "@vue/test-utils": "2.2.4",
+    "@vue/test-utils": "2.2.5",
     "eslint": "8.28.0",
     "eslint-plugin-vue": "9.8.0",
     "jsdom": "20.0.3",

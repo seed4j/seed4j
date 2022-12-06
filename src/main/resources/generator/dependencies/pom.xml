@@ -23,7 +23,7 @@
     <spring-cloud-netflix-eureka-client.version>4.0.0</spring-cloud-netflix-eureka-client.version>
     <springdoc-openapi-starter-webmvc.version>2.0.2</springdoc-openapi-starter-webmvc.version>
     <springdoc-openapi-starter-webflux.version>2.0.2</springdoc-openapi-starter-webflux.version>
-    <testcontainers.version>1.17.3</testcontainers.version>
+    <testcontainers.version>1.17.6</testcontainers.version>
     <kafka-clients.version>3.2.0</kafka-clients.version>
     <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
     <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>

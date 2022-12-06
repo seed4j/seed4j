@@ -6,6 +6,8 @@ import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.docker.DockerImages;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
+import tech.jhipster.lite.module.domain.javadependency.JavaDependency;
+import tech.jhipster.lite.module.domain.javadependency.JavaDependencyScope;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 
 public class CassandraModuleFactory {
@@ -22,10 +24,13 @@ public class CassandraModuleFactory {
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
+    String packagePath = properties.packagePath();
+
     //@formatter:off
     return moduleBuilder(properties)
       .javaDependencies()
         .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-starter-data-cassandra"))
+        .addDependency(testContainerDependency())
         .and()
       .documentation(documentationTitle("Cassandra"), SOURCE.template("cassandra.md"))
       .startupCommand(DOCKER_COMPOSE_COMMAND)
@@ -35,14 +40,34 @@ public class CassandraModuleFactory {
         .and()
       .files()
         .add(SOURCE.template("cassandra.yml"), toSrcMainDocker().append("cassandra.yml"))
+        .add(SOURCE.template("TestCassandraManager.java"), toSrcTestJava().append(packagePath).append("TestCassandraManager.java"))
+        .add(SOURCE.template("CassandraKeyspaceIT.java"), toSrcTestJava().append(packagePath).append("CassandraKeyspaceIT.java"))
+        .add(SOURCE.template("spring.factories"), to("src/test/resources/META-INF/spring.factories"))
         .and()
       .springMainProperties()
         .set(propertyKey("spring.data.cassandra.contact-points"), propertyValue("127.0.0.1"))
         .set(propertyKey("spring.data.cassandra.port"), propertyValue("9042"))
         .set(propertyKey("spring.data.cassandra.local-datacenter"), propertyValue(DC))
         .set(propertyKey("spring.data.cassandra.schema-action"), propertyValue("none"))
+        // TODO: set a commented property :spring.data.cassandra.keyspace-name
+        .and()
+      .springTestProperties()
+        .set(propertyKey("spring.data.cassandra.port"), propertyValue("${TEST_CASSANDRA_PORT}"))
+        .set(propertyKey("spring.data.cassandra.contact-points"), propertyValue("${TEST_CASSANDRA_CONTACT_POINT}"))
+        .set(propertyKey("spring.data.cassandra.local-datacenter"), propertyValue("${TEST_CASSANDRA_DC}"))
+        .set(propertyKey("spring.data.cassandra.keyspace-name"), propertyValue("${TEST_CASSANDRA_KEYSPACE}"))
+        .set(propertyKey("spring.data.cassandra.schema-action"), propertyValue("create_if_not_exists"))
         .and()
       .build();
     //@formatter:on
+  }
+
+  private JavaDependency testContainerDependency() {
+    return javaDependency()
+      .groupId("org.testcontainers")
+      .artifactId("cassandra")
+      .versionSlug("testcontainers")
+      .scope(JavaDependencyScope.TEST)
+      .build();
   }
 }

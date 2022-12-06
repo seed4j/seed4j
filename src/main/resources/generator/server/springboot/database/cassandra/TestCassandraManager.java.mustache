@@ -1,0 +1,63 @@
+package {{ packageName }};
+
+import com.datastax.oss.driver.api.core.CqlSession;
+import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
+import org.springframework.context.ApplicationListener;
+import org.testcontainers.containers.CassandraContainer;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
+public class TestCassandraManager implements ApplicationListener<ApplicationEnvironmentPreparedEvent>  {
+
+  private static final String KEYSPACE = "testKeyspace";
+  private static CassandraContainer cassandraContainer;
+  private static final Integer CONTAINER_STARTUP_TIMEOUT_MINUTES = 10;
+
+  @Override
+  public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
+    if (cassandraContainer != null) {
+      return;
+    }
+
+    createCassandraContainer();
+
+    if(cassandraContainer.isRunning()){
+      return;
+    }
+
+    cassandraContainer.start();
+    createTestKeyspace();
+    registerEnvironmentVariables();
+
+    Runtime.getRuntime()
+      .addShutdownHook(new Thread(stopContainer()));
+  }
+
+  private static void registerEnvironmentVariables() {
+    System.setProperty("TEST_CASSANDRA_PORT", String.valueOf(cassandraContainer.getMappedPort(CassandraContainer.CQL_PORT)));
+    System.setProperty("TEST_CASSANDRA_CONTACT_POINT", cassandraContainer.getHost());
+    System.setProperty("TEST_CASSANDRA_DC", cassandraContainer.getLocalDatacenter());
+    System.setProperty("TEST_CASSANDRA_KEYSPACE", KEYSPACE);
+  }
+
+  private static void createTestKeyspace() {
+    CqlSession session = CqlSession
+      .builder()
+      .addContactPoint(cassandraContainer.getContactPoint())
+      .withLocalDatacenter(cassandraContainer.getLocalDatacenter())
+      .build();
+
+    String createQuery = "CREATE KEYSPACE " + KEYSPACE + " WITH replication={'class' : 'SimpleStrategy', 'replication_factor':1}";
+    session.execute(createQuery);
+  }
+
+  private static void createCassandraContainer() {
+    cassandraContainer = (CassandraContainer) new CassandraContainer("{{ cassandraDockerImage }}")
+      .withStartupTimeout(Duration.of(CONTAINER_STARTUP_TIMEOUT_MINUTES, ChronoUnit.MINUTES))
+      .withExposedPorts(CassandraContainer.CQL_PORT);
+  }
+
+  private Runnable stopContainer() {
+    return cassandraContainer::stop;
+  }
+}

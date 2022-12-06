@@ -49,6 +49,16 @@ class CassandraModuleFactoryTest {
             </dependency>
         """
       )
+      .containing(
+        """
+            <dependency>
+              <groupId>org.testcontainers</groupId>
+              <artifactId>cassandra</artifactId>
+              <version>${testcontainers.version}</version>
+              <scope>test</scope>
+            </dependency>
+        """
+      )
       .and()
       .hasFile("documentation/cassandra.md")
       .and()
@@ -67,6 +77,20 @@ class CassandraModuleFactoryTest {
       .containing("spring.data.cassandra.contact-points=127.0.0.1")
       .containing("spring.data.cassandra.port=9042")
       .containing("spring.data.cassandra.local-datacenter=" + DC)
-      .containing("spring.data.cassandra.schema-action=none");
+      .containing("spring.data.cassandra.schema-action=none")
+      .and()
+      .hasFiles("src/test/java/com/jhipster/test/CassandraKeyspaceIT.java")
+      .hasFile("src/test/java/com/jhipster/test/TestCassandraManager.java")
+      .containing("cassandra:4.0.7")
+      .and()
+      .hasFile("src/test/resources/config/application.properties")
+      .containing("spring.data.cassandra.port=${TEST_CASSANDRA_PORT}")
+      .containing("spring.data.cassandra.contact-points=${TEST_CASSANDRA_CONTACT_POINT}")
+      .containing("spring.data.cassandra.local-datacenter=${TEST_CASSANDRA_DC}")
+      .containing("spring.data.cassandra.keyspace-name=${TEST_CASSANDRA_KEYSPACE}")
+      .containing("spring.data.cassandra.schema-action=create_if_not_exists")
+      .and()
+      .hasFile("src/test/resources/META-INF/spring.factories")
+      .containing("org.springframework.context.ApplicationListener=com.jhipster.test");
   }
 }

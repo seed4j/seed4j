@@ -49,7 +49,6 @@ public class CassandraModuleFactory {
         .set(propertyKey("spring.data.cassandra.port"), propertyValue("9042"))
         .set(propertyKey("spring.data.cassandra.local-datacenter"), propertyValue(DC))
         .set(propertyKey("spring.data.cassandra.schema-action"), propertyValue("none"))
-        // TODO: set a commented property :spring.data.cassandra.keyspace-name
         .and()
       .springTestProperties()
         .set(propertyKey("spring.data.cassandra.port"), propertyValue("${TEST_CASSANDRA_PORT}"))

@@ -32,6 +32,7 @@ public class DslConfigVisitor {
           configVisitorInternal.visitPackageInfrastructureSecondaryName(ctx.configbody().packageInfrastructureSecondaryName())
         )
         .projectFolder(configVisitorInternal.visitProjectFolder(ctx.configbody().projectFolder()))
+        .useAssertAsValidation(configVisitorInternal.visitUseAssertAsValidation(ctx.configbody().useAssertAsValidation()))
         .build();
     }
   }
@@ -57,7 +58,7 @@ public class DslConfigVisitor {
       if (ctx == null || ctx.isEmpty()) {
         return "";
       }
-      return ctx.get(ctx.size() - 1).getChild(ctx.get(ctx.size() - 1).getChildCount() - 1).getText();
+      return ctx.get(ctx.size() - 1).getChild(2).getText();
     }
 
     public String visitPackageDomainName(List<DslParser.PackageDomainNameContext> ctx) {
@@ -93,6 +94,13 @@ public class DslConfigVisitor {
         return "";
       }
       return ctx.get(ctx.size() - 1).directoryPath().getText();
+    }
+
+    public String visitUseAssertAsValidation(List<DslParser.UseAssertAsValidationContext> ctx) {
+      if (ctx == null || ctx.isEmpty()) {
+        return "";
+      }
+      return ctx.get(ctx.size() - 1).getChild(ctx.get(ctx.size() - 1).getChildCount() - 1).getText();
     }
   }
 }

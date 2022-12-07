@@ -1,11 +1,7 @@
-package tech.jhipster.lite.dsl.generator.clazz.infrastructure.secondary;
+package tech.jhipster.lite.dsl.generator.clazz.infrastructure.secondary.roaster;
 
 import org.jboss.forge.roaster.Roaster;
-import org.jboss.forge.roaster.model.impl.ImportImpl;
-import org.jboss.forge.roaster.model.source.Import;
-import org.jboss.forge.roaster.model.source.Importer;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
-import org.springframework.stereotype.Repository;
 import tech.jhipster.lite.dsl.generator.clazz.domain.ClassToGenerate;
 
 public class RoasterClassGenerator {

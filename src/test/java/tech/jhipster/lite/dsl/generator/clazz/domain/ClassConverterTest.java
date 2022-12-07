@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.dsl.DslClassUtils;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslContextName;
+import tech.jhipster.lite.dsl.parser.domain.config.ConfigApp;
 
 @UnitTest
 class ClassConverterTest {
@@ -15,11 +16,12 @@ class ClassConverterTest {
 
   @Test
   void shouldBuildClassFromDslWithFolder() {
-    FieldConverter fieldConverter = new FieldConverter();
-    ClassConverter converter = new ClassConverter(fieldConverter);
+    ConfigApp config = DslClassUtils.createDefaultConfig();
+    AnnotationConverter annotationConverter = new AnnotationConverter(config);
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter, config);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter, config);
     ClassToGenerate classToGenerate = converter.convertDslClassToGenerate(
       DslClassUtils.createSimpleClass("class2"),
-      DslClassUtils.createDefaultConfig(),
       new DslContextName("mycontext")
     );
 

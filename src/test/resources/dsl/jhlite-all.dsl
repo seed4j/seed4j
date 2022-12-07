@@ -13,7 +13,6 @@ context ctx1 {
 
     domain {
 
-        @test
         class Ship {
           @notBlank
           shipId UUID

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import tech.jhipster.lite.dsl.common.domain.clazz.*;
+import tech.jhipster.lite.dsl.generator.clazz.domain.annotation.Annotation;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.error.domain.Assert;
 
@@ -26,6 +27,12 @@ public class ClassToGenerate {
   private List<FieldToGenerate> fields;
   private List<Annotation> annotations;
   private ClassComment comment;
+
+  private boolean generateFluent;
+
+  public boolean isGenerateFluent() {
+    return generateFluent;
+  }
 
   public Path getFolder() {
     return folder;
@@ -96,6 +103,7 @@ public class ClassToGenerate {
     private Path file;
     private ClassType type = ClassType.CLASS;
     private ClassPackage packag = ClassPackage.EMPTY;
+    private boolean generateFluent = false;
 
     private final List<ClassImport> imports = new ArrayList<>();
     private final List<FieldToGenerate> fields = new ArrayList<>();
@@ -109,7 +117,7 @@ public class ClassToGenerate {
       this.name = dslClass.getName();
       this.type = dslClass.getType();
       //            this.fields.addAll(dslClass.getFields());
-      this.annotations.addAll(AnnotationConverter.convertAnnotation(dslClass.getAnnotations()));
+      //      this.annotations.addAll(AnnotationConverter.convertAnnotation(dslClass.getAnnotations()));
       this.comment = dslClass.getComment().orElse(null);
       this.packag = dslClass.getPackage();
       return this;
@@ -118,6 +126,11 @@ public class ClassToGenerate {
     public ClassToGenerateBuilder name(ClassName name) {
       Assert.notNull("name", name);
       this.name = name;
+      return this;
+    }
+
+    public ClassToGenerateBuilder generateFluent(boolean fluent) {
+      this.generateFluent = fluent;
       return this;
     }
 
@@ -183,7 +196,7 @@ public class ClassToGenerate {
       classToGenerate.comment = this.comment;
       classToGenerate.imports = this.imports.stream().distinct().toList();
       classToGenerate.file = this.file;
-
+      classToGenerate.generateFluent = this.generateFluent;
       classToGenerate.fields = this.fields;
       classToGenerate.packag = this.packag;
       classToGenerate.annotations = this.annotations;

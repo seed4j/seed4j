@@ -1,18 +1,35 @@
 package tech.jhipster.lite.dsl.generator.clazz.domain;
 
+import jakarta.validation.constraints.Past;
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import tech.jhipster.lite.dsl.generator.clazz.domain.annotation.Annotation;
 import tech.jhipster.lite.dsl.generator.clazz.domain.field.FieldType;
 import tech.jhipster.lite.dsl.generator.clazz.domain.field.FieldTypeImpl;
+import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.ClassField;
+import tech.jhipster.lite.dsl.parser.domain.clazz.field.FieldValidator;
+import tech.jhipster.lite.dsl.parser.domain.config.ConfigApp;
 import tech.jhipster.lite.error.domain.Assert;
 
 public class FieldConverter {
 
   private List<FieldType> fieldTypes = new LinkedList<>();
 
-  public FieldConverter() {
+  private AnnotationConverter annotationConverter;
+  private ConfigApp config;
+
+  public FieldConverter(AnnotationConverter annotationConverter, ConfigApp config) {
+    this();
+    Assert.notNull("annotationConverter", annotationConverter);
+    Assert.notNull("config", config);
+    this.annotationConverter = annotationConverter;
+    this.config = config;
+  }
+
+  private FieldConverter() {
     fieldTypes.add(FieldTypeImpl.fieldDouble);
     fieldTypes.add(FieldTypeImpl.fieldBigDecimal);
     fieldTypes.add(FieldTypeImpl.fieldLong);
@@ -42,8 +59,8 @@ public class FieldConverter {
     return fieldTypes.stream().filter(s -> s.name().equals(typeName)).findFirst().orElseThrow();
   }
 
-  public FieldToGenerate convertFieldToGenerate(ClassField classField) {
-    FieldToGenerate.FieldToGenerateBuilder builderField = FieldToGenerate.fieldToGenerateBuilderenerateBuilder();
+  public FieldToGenerate convertFieldToGenerate(ClassField classField, ConfigApp config) {
+    FieldToGenerate.FieldToGenerateBuilder builderField = FieldToGenerate.fieldToGenerateBuilder();
     builderField.fromClassField(classField);
     if (isKnowType(classField.getType().get())) {
       builderField.type(getType(classField.getType().get()));
@@ -52,8 +69,29 @@ public class FieldConverter {
       // TODO manage type existing class (for import)
       builderField.type(new FieldTypeImpl(classField.getType().get(), Optional.empty()));
     }
+    List<Annotation> commonAnnotationAndValidator = new LinkedList<>();
 
-    //        builderField.addAnnotation():
+    List<DslAnnotation> knowAnnotation = classField
+      .getAnnotation()
+      .stream()
+      .filter(s -> annotationConverter.isKnowAnnotation(s.name()))
+      .toList();
+    knowAnnotation.forEach(ano -> commonAnnotationAndValidator.add(annotationConverter.convertAnnotation(ano)));
+
+    if (config.getUseAssertAsValidation().get()) {
+      List<FieldValidator> knowValidator = classField
+        .getValidators()
+        .stream()
+        .filter(s -> annotationConverter.isKnowAnnotation(s.name()))
+        .toList();
+      //si annotation est compatible avec le assert
+      //alors add un assert puis supprime annotation
+      //builderField.addAssertValidation();
+    }
+    //    builderField.addAnnotation():
+
+    // supprime les doublons éventuels entre les validator et les annotations
+    commonAnnotationAndValidator.stream().distinct().forEach(builderField::addAnnotation);
 
     return builderField.build();
   }

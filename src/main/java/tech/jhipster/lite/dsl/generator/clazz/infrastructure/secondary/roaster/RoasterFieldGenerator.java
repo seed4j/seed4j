@@ -1,4 +1,4 @@
-package tech.jhipster.lite.dsl.generator.clazz.infrastructure.secondary;
+package tech.jhipster.lite.dsl.generator.clazz.infrastructure.secondary.roaster;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jboss.forge.roaster.model.source.JavaClassSource;

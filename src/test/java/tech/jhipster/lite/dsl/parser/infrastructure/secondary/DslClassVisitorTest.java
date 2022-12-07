@@ -27,48 +27,11 @@ class DslClassVisitorTest {
   }
 
   @Test
-  void shouldBeforeClassAcceptSimpleAnnotation() {
-    DslClass.DslClassBuilder classBuilder = getBeforeClass("@MyAnnot class Ship {}");
-    DslClass dslClass = classBuilder.name(new ClassName("test")).build();
-    assertEquals(1, dslClass.getAnnotations().size());
-    assertEquals("MyAnnot", dslClass.getAnnotations().get(0).name());
-    assertTrue(dslClass.getAnnotations().get(0).value().isEmpty());
-  }
-
-  @Test
-  void shouldBeforeClassAcceptAnnotationWithSimpleValue() {
-    DslClass.DslClassBuilder classBuilder = getBeforeClass("@MyAnnot(testOverride) class Ship {}");
-    DslClass dslClass = classBuilder.name(new ClassName("test")).build();
-    assertEquals(1, dslClass.getAnnotations().size());
-    assertEquals("MyAnnot", dslClass.getAnnotations().get(0).name());
-    assertTrue(dslClass.getAnnotations().get(0).value().isPresent());
-    assertEquals("testOverride", dslClass.getAnnotations().get(0).value().get());
-  }
-
-  @Test
-  void shouldBeforeClassAcceptAnnotationWithComplexValue() {
-    DslClass.DslClassBuilder classBuilder = getBeforeClass("@myAnnot(test.override) class Ship {}");
-    DslClass dslClass = classBuilder.name(new ClassName("test")).build();
-    assertEquals(1, dslClass.getAnnotations().size());
-    assertEquals("myAnnot", dslClass.getAnnotations().get(0).name());
-    assertTrue(dslClass.getAnnotations().get(0).value().isPresent());
-    assertEquals("test.override", dslClass.getAnnotations().get(0).value().get());
-  }
-
-  @Test
   void shouldAddPackageToClassIfAnnotationPackage() {
     DslClass.DslClassBuilder classBuilder = getBeforeClass("@package(test.override) class Ship {}");
     DslClass dslClass = classBuilder.name(new ClassName("test")).build();
-    assertEquals(0, dslClass.getAnnotations().size());
-    assertEquals("test.override", dslClass.getPackage().get());
-  }
-
-  @Test
-  void shouldAddPackageToClassIfAnnotationPackageNoCaseSensitive() {
-    DslClass.DslClassBuilder classBuilder = getBeforeClass("@pAckage(test.override) class Ship {}");
-    DslClass dslClass = classBuilder.name(new ClassName("test")).build();
-    assertEquals(0, dslClass.getAnnotations().size());
-    assertEquals("test.override", dslClass.getPackage().get());
+    assertEquals(1, dslClass.getAnnotations().size());
+    assertEquals("test.override", dslClass.getAnnotations().get(0).value().get());
   }
 
   @Test

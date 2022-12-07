@@ -1,9 +1,11 @@
 package tech.jhipster.lite.dsl.parser.infrastructure.secondary;
 
+import java.util.Optional;
 import tech.jhipster.lite.dsl.DslBaseVisitor;
 import tech.jhipster.lite.dsl.DslParser;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldName;
+import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.*;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.FieldType;
 
@@ -36,6 +38,22 @@ public class DslClassFieldVisitor {
     private static void buildBeforeField(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {
       //TODO manage annotation / modifiers / comment
 
+      if (ctx.beforeClassField().comment() != null && !ctx.beforeClassField().comment().isEmpty()) {
+        fieldBuilder.comment(new FieldComment(ctx.beforeClassField().comment().getText()));
+      }
+
+      ctx
+        .beforeClassField()
+        .annotation()
+        .forEach(annot -> {
+          //todo in annotation visitor?
+          if (annot.getChildCount() > 4 && ")".equals(annot.getChild(3).getText())) {
+            fieldBuilder.addAnnotation(new DslAnnotation(annot.getChild(0).getText(), Optional.of(annot.getChild(2).getText())));
+          }
+          if ((annot.getChildCount() - annot.SEPARATOR_JHIPSTER().size()) == 1) {
+            fieldBuilder.addAnnotation(new DslAnnotation(annot.getChild(0).getText(), Optional.empty()));
+          }
+        });
     }
 
     private static void buildValidation(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {

@@ -14,25 +14,6 @@ import tech.jhipster.lite.dsl.parser.domain.config.*;
 class DslConfigVisitorTest {
 
   @Test
-  void shouldHaveRightNumberToken() {
-    List<Token> token = AntlrUtils.getTokensFromText(
-      """
-                        config {
-                            useFluentMethod=no
-                            baseName=Override
-                            basePackageName=Override
-                            packageInfrastructureName=infrastructureOverride
-                            packageInfrastructurePrimaryName=primaryOverride
-                            packageInfrastructureSecondaryName=secondaryOverride
-                            packageDomainName=domainOverride
-                            projectFolder=/tmp/test
-                        }
-                        """
-    ); //include EOF
-    assertEquals(31, token.size());
-  }
-
-  @Test
   void shouldBuildConfigApp() {
     DslParser.File_Context fileCtx = AntlrUtils.getFileContextFromText(
       """
@@ -77,20 +58,20 @@ class DslConfigVisitorTest {
 
     ConfigApp configApp = configVisitor.visitConfig(fileCtx.config());
     assertNotNull(configVisitor.visitConfig(fileCtx.config()));
-    assertEquals(configApp.getFluentMethod(), ConfigFluentMethodBuilder.builderFluentMethod().fluentMethod("false").build());
-    assertEquals(configApp.getBaseName(), new ConfigBaseName("baseNameOverride"));
-    assertEquals(configApp.getBasePackage(), new ConfigBasePackage("basePackageNameOverride"));
-    assertEquals(configApp.getPackageInfrastructureName(), new ConfigPackageInfrastructureName("packageInfrastructureNameOverride"));
+    assertEquals(ConfigFluentMethodBuilder.builderFluentMethod().fluentMethod("false").build(), configApp.getFluentMethod());
+    assertEquals(new ConfigBaseName("baseNameOverride"), configApp.getBaseName());
+    assertEquals(new ConfigBasePackage("basePackageNameOverride"), configApp.getBasePackage());
+    assertEquals(new ConfigPackageInfrastructureName("packageInfrastructureNameOverride"), configApp.getPackageInfrastructureName());
     assertEquals(
-      configApp.getPackageInfrastructurePrimaryName(),
-      new ConfigPackageInfrastructurePrimaryName("packageInfrastructurePrimaryNameOverride")
+      new ConfigPackageInfrastructurePrimaryName("packageInfrastructurePrimaryNameOverride"),
+      configApp.getPackageInfrastructurePrimaryName()
     );
     assertEquals(
-      configApp.getPackageInfrastructureSecondaryName(),
-      new ConfigPackageInfrastructureSecondaryName("packageInfrastructureSecondaryNameOverride")
+      new ConfigPackageInfrastructureSecondaryName("packageInfrastructureSecondaryNameOverride"),
+      configApp.getPackageInfrastructureSecondaryName()
     );
-    assertEquals(configApp.getPackageDomainName(), new ConfigPackageDomainName("packageDomainNameOverride"));
-    assertEquals(configApp.getProjectFolder(), new ConfigProjectFolder("/tmp/test"));
+    assertEquals(new ConfigPackageDomainName("packageDomainNameOverride"), configApp.getPackageDomainName());
+    assertEquals(new ConfigProjectFolder("/tmp/test"), configApp.getProjectFolder());
   }
 
   @Test
@@ -151,6 +132,7 @@ class DslConfigVisitorTest {
     assertEquals(ConfigPackageInfrastructureName.DEFAULT, configApp.getPackageInfrastructureName());
     assertEquals(ConfigPackageInfrastructurePrimaryName.DEFAULT, configApp.getPackageInfrastructurePrimaryName());
     assertEquals(ConfigPackageInfrastructureSecondaryName.DEFAULT, configApp.getPackageInfrastructureSecondaryName());
+    assertEquals(ConfigUseAssertAsValidationBuilder.DEFAULT, configApp.getUseAssertAsValidation());
     assertTrue(configApp.getProjectFolder().get().contains("/tmp"));
   }
 

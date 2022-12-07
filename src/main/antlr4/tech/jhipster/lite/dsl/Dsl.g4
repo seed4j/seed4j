@@ -14,45 +14,49 @@ context
    ;
 
 useFluentMethod
-   : 'useFluentMethod' EGAL bool COMMA
+   : 'useFluentMethod' EGAL bool SEPARATOR_JHIPSTER*
    | 'useFluentMethod' EGAL bool
    ;
 baseName
-   : 'baseName' EGAL label
-   | 'baseName' EGAL label COMMA
+   : 'baseName' EGAL label SEPARATOR_JHIPSTER*
+   | 'baseName' EGAL label
    ;
 
 basePackageName
-   : 'basePackageName' EGAL qualifiedName COMMA
+   : 'basePackageName' EGAL qualifiedName SEPARATOR_JHIPSTER*
    | 'basePackageName' EGAL qualifiedName
    ;
 
 packageInfrastructureName
-   : 'packageInfrastructureName' EGAL packageFormat COMMA
+   : 'packageInfrastructureName' EGAL packageFormat SEPARATOR_JHIPSTER*
    | 'packageInfrastructureName' EGAL packageFormat
    ;
 
 packageInfrastructurePrimaryName
-   : 'packageInfrastructurePrimaryName' EGAL packageFormat COMMA
+   : 'packageInfrastructurePrimaryName' EGAL packageFormat SEPARATOR_JHIPSTER*
    | 'packageInfrastructurePrimaryName' EGAL packageFormat
    ;
 
 packageInfrastructureSecondaryName
-   : 'packageInfrastructureSecondaryName' EGAL packageFormat COMMA
+   : 'packageInfrastructureSecondaryName' EGAL packageFormat SEPARATOR_JHIPSTER*
    | 'packageInfrastructureSecondaryName' EGAL packageFormat
    ;
 
 packageDomainName
-   : 'packageDomainName' EGAL packageFormat COMMA
+   : 'packageDomainName' EGAL packageFormat SEPARATOR_JHIPSTER*
    | 'packageDomainName' EGAL packageFormat
    ;
 
 
 projectFolder
-   : 'projectFolder' EGAL directoryPath COMMA
+   : 'projectFolder' EGAL directoryPath SEPARATOR_JHIPSTER*
    | 'projectFolder' EGAL directoryPath
    ;
 
+useAssertAsValidation
+   : 'useAssertAsValidation' EGAL bool SEPARATOR_JHIPSTER*
+   | 'useAssertAsValidation' EGAL bool
+   ;
 label
    : STRING
    | IDENTIFIER
@@ -70,17 +74,12 @@ domainBody
     :LCURL (class)* RCURL
     ;
 
-annotation
-    : '@' label
-    | '@' label LPAREN IDENTIFIER RPAREN
-    | '@' label LPAREN packageFormat RPAREN
-    ;
 
 beforeClass
     : classType
-    | (annotation)* classType
-    | comment (annotation)* classType
-    | (annotation)* comment classType
+    | (annotationClass)* classType
+    | comment (annotationClass)* classType
+    | (annotationClass)* comment classType
     ;
 
 classType
@@ -90,50 +89,72 @@ classType
 
 class
     : beforeClass IDENTIFIER classBody
-    | beforeClass IDENTIFIER entityTableName classBody
     ;
 
 classBody
     : LCURL (classField)*  RCURL
     ;
 
+annotationClass
+    : ('@package' | '@Package') LPAREN packageFormat RPAREN SEPARATOR_JHIPSTER*
+    ;
+
+annotation
+    : ('@min' | '@Min') LPAREN NATURAL_NUMBER RPAREN SEPARATOR_JHIPSTER*
+    | ('@max' | '@Max') LPAREN NATURAL_NUMBER RPAREN SEPARATOR_JHIPSTER*
+    | ('@decimalmin' | '@Decimalmin' | '@decimalMin' | '@DecimalMin') LPAREN FLOAT RPAREN SEPARATOR_JHIPSTER*
+    | ('@decimalmax' | '@Decimalmax'| '@decimalMax' | '@DecimalMax') LPAREN FLOAT RPAREN SEPARATOR_JHIPSTER*
+    | ('@before' | '@Before') SEPARATOR_JHIPSTER*
+    | ('@past' | '@Past')SEPARATOR_JHIPSTER*
+    | ('@future' | '@Future')SEPARATOR_JHIPSTER*
+    | ('@futureOrPresent' | '@FutureOrPresent')SEPARATOR_JHIPSTER*
+    | ('@PastOrPresent' | '@PastOrPresent')SEPARATOR_JHIPSTER*
+    | ('@notEmpty' | '@NotEmpty')SEPARATOR_JHIPSTER*
+    | ('@negative' | '@Negative')SEPARATOR_JHIPSTER*
+    | ('@positive' | '@Positive')SEPARATOR_JHIPSTER*
+    | ('@assertFalse' | '@AssertFalse')SEPARATOR_JHIPSTER*
+    | ('@assertTrue' | '@AssertTrue')SEPARATOR_JHIPSTER*
+    | ('@notBlank' | '@NotBlank' | '@notblank')SEPARATOR_JHIPSTER*
+    | ('@nullable' | '@Nullable' | '@Null' | '@null')SEPARATOR_JHIPSTER*
+    | ('@notNull' | '@NotNull' | '@notnull' | '@Notnull')SEPARATOR_JHIPSTER*
+    ;
+
+classField
+    : beforeClassField IDENTIFIER FIELD_TYPE_NUMBER comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (minMaxNumberValidator)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (validation)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (validation)* (minMaxNumberValidator)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (minMaxNumberValidator)* (validation)* comment? SEPARATOR_JHIPSTER*
+
+    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (minMaxByteValidator)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (validation)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (validation)* (minMaxByteValidator)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (minMaxByteValidator)* (validation)* comment? SEPARATOR_JHIPSTER*
+//
+    | beforeClassField IDENTIFIER FIELD_TYPE_STRING comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (minMaxStringValidator)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (validation | validatorPattern)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (validation | validatorPattern)* (minMaxStringValidator)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (minMaxStringValidator)* (validation | validatorPattern)* comment? SEPARATOR_JHIPSTER*
+
+    | beforeClassField IDENTIFIER FIELD_TYPE_TIME comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_TIME (validation)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_OTHER comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_OTHER (validation)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER IDENTIFIER comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER IDENTIFIER (validation)* comment? SEPARATOR_JHIPSTER*
+    ;
 beforeClassField
-    : comment?
+    : (annotation)*
+    | comment?
     | comment? (annotation)*
     | comment? (modifiers)*
     | comment? (annotation)* (modifiers)*
     | (annotation)* comment?
+
     ;
 
-classField
-    : beforeClassField IDENTIFIER FIELD_TYPE_NUMBER comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (minMaxNumberValidator)* comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (validation)* comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (validation)* (minMaxNumberValidator)* comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (minMaxNumberValidator)* (validation)* comment? COMMA?
-//    : comment? IDENTIFIER FIELD_TYPE_NUMBER (minMaxNumberValidator)*
-//    | comment? IDENTIFIER FIELD_TYPE_NUMBER (validation)*
-//    | comment? IDENTIFIER FIELD_TYPE_NUMBER (validation)* (minMaxNumberValidator)*
-//    | comment? IDENTIFIER FIELD_TYPE_NUMBER (minMaxNumberValidator)* (validation)*
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (minMaxByteValidator)* comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (validation)* comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (validation)* (minMaxByteValidator)* comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (minMaxByteValidator)* (validation)* comment? COMMA?
-
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (minMaxStringValidator)* comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (validation | validatorPattern)* comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (validation | validatorPattern)* (minMaxStringValidator)* comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (minMaxStringValidator)* (validation | validatorPattern)* comment? COMMA?
-
-    | beforeClassField IDENTIFIER FIELD_TYPE_TIME comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_TIME (validation)* comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_OTHER comment? COMMA?
-    | beforeClassField IDENTIFIER FIELD_TYPE_OTHER (validation)* comment? COMMA?
-    | beforeClassField IDENTIFIER IDENTIFIER comment? COMMA?
-    | beforeClassField IDENTIFIER IDENTIFIER (validation)* comment? COMMA?
-    ;
 
 validatorPattern
     : 'pattern' LPAREN STRING_LITERAL* RPAREN
@@ -183,6 +204,7 @@ configbody
    | packageInfrastructureSecondaryName
    | packageDomainName
    | projectFolder
+   | useAssertAsValidation
    )* RCURL
    ;
 
@@ -239,7 +261,7 @@ number
    ;
 
 comment
-    : BLOCKCOMMENT
+    : BLOCKCOMMENT SEPARATOR_JHIPSTER*
     ;
 
 modifiers
@@ -251,6 +273,10 @@ modifiers
     | 'final'
     | 'transient'
     ;
+
+SEPARATOR_JHIPSTER
+ : (COMMA| NEWLINE)
+ ;
 
 EGAL
     : '='
@@ -320,16 +346,19 @@ COMMA
     : ','
     ;
 
+
 IDENTIFIER
     : Letter LetterOrDigit*
     ;
 
 LCURL
    : '{'
+   | '{'NEWLINE*
    ;
 
 RCURL
    : '}'
+   | '}'NEWLINE*
    ;
 LSQUARE
     : '['
@@ -357,6 +386,9 @@ NATURAL_NUMBER
    : Digits+
    ;
 
+FLOAT   : Digits+ '.' Digits*
+        | '.' Digits+
+        ;
 BOOL
    : 'true'
    | 'false'
@@ -387,11 +419,14 @@ BLOCKCOMMENT
   : '/*' .*? '*/'
   ;
 
-WS
-   : [ \r\n\t]+ -> skip
-   ;
-
-NEWLINE :   '\r'? '\n' ;
+//WS
+//   : [ \r\n\t]+ -> skip
+//   ;
+//WS
+//  : (' ' | '\t')+-> skip
+//  ;
+WS : (' ' | '\t')+ -> channel(HIDDEN);
+NEWLINE :  WS* '\r'? '\n' ;
 
 
 fragment RESTOFLINE
@@ -409,6 +444,7 @@ fragment Digits
     : [0-9] ([0-9_]* [0-9])?
     ;
 
+
 fragment LetterOrDigit
     : Letter
     | [0-9]
@@ -416,6 +452,6 @@ fragment LetterOrDigit
 
 fragment Letter
     : [a-zA-Z$_] // these are the "java letters" below 0x7F
-    | ~[\u0000-\u007F\uD800-\uDBFF] // covers all characters above 0x7F which are not a surrogate
-    | [\uD800-\uDBFF] [\uDC00-\uDFFF] // covers UTF-16 surrogate pairs encodings for U+10000 to U+10FFFF
+//    | ~[\u0000-\u007F\uD800-\uDBFF] // covers all characters above 0x7F which are not a surrogate
+//    | [\uD800-\uDBFF] [\uDC00-\uDFFF] // covers UTF-16 surrogate pairs encodings for U+10000 to U+10FFFF
     ;

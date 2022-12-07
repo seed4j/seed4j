@@ -1,0 +1,6 @@
+package {{classPackage}};
+
+{{>import}}
+{{classComment}}
+public record {{className}}({{#decoratedFields}}{{value.type}} {{value.name}}{{^last}}, {{/last}}{{/decoratedFields}}) {
+}

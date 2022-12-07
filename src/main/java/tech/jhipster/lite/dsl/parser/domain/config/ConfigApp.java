@@ -18,6 +18,7 @@ public class ConfigApp {
   private ConfigPackageInfrastructurePrimaryName packageInfrastructurePrimaryName;
   private ConfigPackageInfrastructureSecondaryName packageInfrastructureSecondaryName;
   private ConfigProjectFolder projectFolder;
+  private ConfigUseAssertAsValidation useAssertAsValidation;
 
   public ConfigBaseName getBaseName() {
     return baseName;
@@ -51,6 +52,10 @@ public class ConfigApp {
     return projectFolder;
   }
 
+  public ConfigUseAssertAsValidation getUseAssertAsValidation() {
+    return useAssertAsValidation;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -64,7 +69,8 @@ public class ConfigApp {
       packageInfrastructureName.equals(configApp.packageInfrastructureName) &&
       packageInfrastructurePrimaryName.equals(configApp.packageInfrastructurePrimaryName) &&
       packageInfrastructureSecondaryName.equals(configApp.packageInfrastructureSecondaryName) &&
-      projectFolder.equals(configApp.projectFolder)
+      projectFolder.equals(configApp.projectFolder) &&
+      useAssertAsValidation.equals(configApp.useAssertAsValidation)
     );
   }
 
@@ -78,7 +84,8 @@ public class ConfigApp {
       packageInfrastructureName,
       packageInfrastructurePrimaryName,
       packageInfrastructureSecondaryName,
-      projectFolder
+      projectFolder,
+      useAssertAsValidation
     );
   }
 
@@ -102,6 +109,8 @@ public class ConfigApp {
       packageInfrastructureSecondaryName +
       ", projectFolder=" +
       projectFolder +
+      ", useAssertAsValidation=" +
+      useAssertAsValidation +
       '}'
     );
   }
@@ -117,8 +126,14 @@ public class ConfigApp {
     private ConfigPackageInfrastructurePrimaryName packageInfrastructurePrimaryName = ConfigPackageInfrastructurePrimaryName.DEFAULT;
     private ConfigPackageInfrastructureSecondaryName packageInfrastructureSecondaryName = ConfigPackageInfrastructureSecondaryName.DEFAULT;
     private ConfigProjectFolder projectFolder = ConfigProjectFolder.newConfigProjectFolder();
+    private ConfigUseAssertAsValidation useAssertAsValidation = ConfigUseAssertAsValidation.DEFAULT;
 
     private ConfigAppBuilder() {}
+
+    public ConfigAppBuilder useAssertAsValidation(String useAssert) {
+      this.useAssertAsValidation = ConfigUseAssertAsValidationBuilder.builderAssertAsValidation().useAssertAsValidation(useAssert).build();
+      return this;
+    }
 
     public ConfigAppBuilder baseName(String baseName) {
       this.baseName = new ConfigBaseName(baseName);
@@ -171,6 +186,7 @@ public class ConfigApp {
       configApp.packageInfrastructurePrimaryName = this.packageInfrastructurePrimaryName;
       configApp.packageInfrastructureSecondaryName = this.packageInfrastructureSecondaryName;
       configApp.projectFolder = this.projectFolder;
+      configApp.useAssertAsValidation = this.useAssertAsValidation;
 
       return configApp;
     }

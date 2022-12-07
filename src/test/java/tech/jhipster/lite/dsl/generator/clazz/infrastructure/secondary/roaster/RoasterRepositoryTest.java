@@ -1,12 +1,9 @@
-package tech.jhipster.lite.dsl.generator.clazz.infrastructure.secondary;
-
-import static org.junit.jupiter.api.Assertions.*;
+package tech.jhipster.lite.dsl.generator.clazz.infrastructure.secondary.roaster;
 
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.dsl.DslClassUtils;
-import tech.jhipster.lite.dsl.generator.clazz.domain.ClassToGenerate;
-import tech.jhipster.lite.error.domain.MissingMandatoryValueException;
+import tech.jhipster.lite.dsl.generator.clazz.infrastructure.secondary.roaster.RoasterRepository;
 
 @UnitTest
 class RoasterRepositoryTest {
@@ -19,6 +16,6 @@ class RoasterRepositoryTest {
 
   @Test
   void shouldGenerateClass() {
-    roasterRepository.generate(DslClassUtils.createClassToGenerate());
+    roasterRepository.generate(DslClassUtils.createClassToGenerate(DslClassUtils.createDefaultConfig()));
   }
 }

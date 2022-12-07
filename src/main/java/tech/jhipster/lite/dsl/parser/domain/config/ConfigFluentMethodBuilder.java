@@ -27,14 +27,13 @@ public class ConfigFluentMethodBuilder {
       if (fluentMethodStr == null) {
         fluentMethodStr = "";
       }
-      fluentMethod(
+      return fluentMethod(
         switch (fluentMethodStr.toLowerCase()) {
           case "yes", "true" -> true;
           case "no", "false" -> false;
-          default -> true;
+          default -> ConfigFluentMethod.DEFAULT_VALUE;
         }
       );
-      return this;
     }
   }
 }

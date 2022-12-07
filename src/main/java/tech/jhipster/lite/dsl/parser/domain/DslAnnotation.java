@@ -13,6 +13,6 @@ public record DslAnnotation(String name, Optional<String> value) {
   }
 
   private String buildAnnotation(String annotation) {
-    return annotation.replace("@", "");
+    return annotation.replace("@", "").toLowerCase();
   }
 }

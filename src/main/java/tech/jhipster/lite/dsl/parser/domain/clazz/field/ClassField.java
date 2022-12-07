@@ -1,11 +1,10 @@
 package tech.jhipster.lite.dsl.parser.domain.clazz.field;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import javax.lang.model.element.Modifier;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldName;
+import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
 import tech.jhipster.lite.error.domain.Assert;
 
 public class ClassField {
@@ -22,7 +21,7 @@ public class ClassField {
   private FieldType type;
   private List<FieldValidation> validations;
   private List<FieldValidator> validators;
-
+  private List<DslAnnotation> annotation;
   private boolean isRequired;
   private boolean hasValidator;
   private boolean hasValidation;
@@ -56,11 +55,15 @@ public class ClassField {
   }
 
   public List<FieldValidation> getValidations() {
-    return validations;
+    return Collections.unmodifiableList(validations);
   }
 
   public List<FieldValidator> getValidators() {
-    return validators;
+    return Collections.unmodifiableList(validators);
+  }
+
+  public List<DslAnnotation> getAnnotation() {
+    return Collections.unmodifiableList(annotation);
   }
 
   @Override
@@ -93,10 +96,11 @@ public class ClassField {
 
     private FieldName name;
     private FieldType type;
-    private final List<Modifier> modifiers = new ArrayList<>();
+    private final List<Modifier> modifiers = new LinkedList<>();
     private FieldComment comment;
-    private final List<FieldValidation> validations = new ArrayList<>();
-    private final List<FieldValidator> validators = new ArrayList<>();
+    private final List<FieldValidation> validations = new LinkedList<>();
+    private final List<FieldValidator> validators = new LinkedList<>();
+    private final List<DslAnnotation> annotation = new LinkedList<>();
 
     private FieldBuilder() {}
 
@@ -109,6 +113,12 @@ public class ClassField {
     public FieldBuilder addModifiers(Modifier modifiers) {
       Assert.notNull("modifiers", modifiers);
       this.modifiers.add(modifiers);
+      return this;
+    }
+
+    public FieldBuilder addAnnotation(DslAnnotation annotation) {
+      Assert.notNull("annotation", annotation);
+      this.annotation.add(annotation);
       return this;
     }
 
@@ -147,12 +157,14 @@ public class ClassField {
       classField.hasValidation = !this.validations.isEmpty();
       classField.isRequired = this.validations.stream().anyMatch(f -> f.equals(FieldValidation.REQUIRED));
       classField.comment = this.comment;
+
       classField.type = this.type;
       if (this.modifiers.isEmpty()) {
         this.modifiers.add(Modifier.PRIVATE);
       }
       classField.modifiers = this.modifiers;
       classField.validations = this.validations;
+      classField.annotation = this.annotation;
       return classField;
     }
   }

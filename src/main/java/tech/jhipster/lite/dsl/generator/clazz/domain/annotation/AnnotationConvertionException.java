@@ -1,4 +1,4 @@
-package tech.jhipster.lite.dsl.generator.clazz.domain;
+package tech.jhipster.lite.dsl.generator.clazz.domain.annotation;
 
 public class AnnotationConvertionException extends RuntimeException {
 

@@ -7,14 +7,14 @@ import java.util.Optional;
 import javax.lang.model.element.Modifier;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldName;
+import tech.jhipster.lite.dsl.generator.clazz.domain.annotation.Annotation;
 import tech.jhipster.lite.dsl.generator.clazz.domain.field.FieldType;
-import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.ClassField;
 import tech.jhipster.lite.error.domain.Assert;
 
 public class FieldToGenerate {
 
-  public static FieldToGenerateBuilder fieldToGenerateBuilderenerateBuilder() {
+  public static FieldToGenerateBuilder fieldToGenerateBuilder() {
     return new FieldToGenerateBuilder();
   }
 
@@ -44,6 +44,21 @@ public class FieldToGenerate {
 
   public List<Annotation> getAnnotations() {
     return Collections.unmodifiableList(annotations);
+  }
+
+  public String getterName() {
+    if ("boolean".equals(type.name()) || "Boolean".equals(type.name())) {
+      return "is" + capitalizeName();
+    }
+    return "get" + capitalizeName();
+  }
+
+  public String setterName() {
+    return "set" + capitalizeName();
+  }
+
+  private String capitalizeName() {
+    return name.get().substring(0, 1).toUpperCase() + name.get().substring(1);
   }
 
   @Override

@@ -47,16 +47,16 @@ public class DslClassVisitor {
         this.dslClassBuilder.comment(new ClassComment(ctx.comment().getText()));
       }
       ctx
-        .annotation()
+        .annotationClass()
         .forEach(annotationContext -> {
           Optional<String> value;
           if (annotationContext.getChildCount() > 2) {
-            value = Optional.of(annotationContext.getChild(3).getText());
+            value = Optional.of(annotationContext.getChild(2).getText());
           } else {
             value = Optional.empty();
           }
 
-          this.dslClassBuilder.addAnnotation(new DslAnnotation(annotationContext.label().getText(), value));
+          this.dslClassBuilder.addAnnotation(new DslAnnotation(annotationContext.getText(), value));
         });
 
       this.dslClassBuilder.type(ClassType.from(ctx.classType().getText()));

@@ -4,13 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import tech.jhipster.lite.UnitTest;
+import tech.jhipster.lite.common.domain.Generated;
 import tech.jhipster.lite.dsl.DslParser;
+import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.ClassField;
 
 @UnitTest
@@ -142,12 +145,18 @@ class DslClassFieldVisitorTest {
 
   @Test
   void shouldReturnFieldWithComment() {
-    ClassField field = getClassField("""
-        myProperty MyNewProperty /** comment for myProperty*/
-        """);
+    ClassField field = getClassField(
+      """
+                /* comment for my field
+                                multiline */
+                myProperty MyNewProperty
+                """
+    );
     assertEquals("MyNewProperty", field.getType().get());
     assertTrue(field.getComment().isPresent());
-    assertEquals("comment for myProperty", field.getComment().get().get());
+    assertEquals("""
+                comment for my field
+                                multiline""", field.getComment().get().get());
   }
 
   @ParameterizedTest
@@ -174,5 +183,25 @@ class DslClassFieldVisitorTest {
     //        assertEquals("pattern", field.getValidations().get(0).name());
     //        assertTrue(field.getValidations().get(0) instanceof FieldValidationPattern);
     //        assertEquals("/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/", ((FieldValidationPattern)field.getValidations().get(0)).pattern());
+  }
+
+  @Test
+  void shouldReturnFieldWithAnnotation() {
+    ClassField field = getClassField(
+      """
+                      @min(0)
+                      @Max(100)
+                      @Notnull
+                      
+                      
+                      
+                      myProperty MyNewProperty 
+                      """
+    );
+    assertEquals("MyNewProperty", field.getType().get());
+    assertEquals(3, field.getAnnotation().size());
+    assertTrue(field.getAnnotation().contains(new DslAnnotation("min", Optional.of("0"))));
+    assertTrue(field.getAnnotation().contains(new DslAnnotation("max", Optional.of("100"))));
+    assertTrue(field.getAnnotation().contains(new DslAnnotation("notnull", Optional.empty())));
   }
 }

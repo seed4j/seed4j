@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.lang.model.element.Modifier;
 import tech.jhipster.lite.dsl.generator.clazz.domain.FieldToGenerate;
+import tech.jhipster.lite.dsl.generator.clazz.domain.assertion.Assertion;
 import tech.jhipster.lite.error.domain.Assert;
 
 public class FieldsMustache {
@@ -16,6 +17,8 @@ public class FieldsMustache {
   private List<String> modifiers;
   private List<AnnotationSimple> annotationsSimple;
   private List<AnnotationValue> annotationsValue;
+
+  private Assertion assertion;
   private String comment;
   private String type;
 
@@ -55,10 +58,17 @@ public class FieldsMustache {
     return annotationsValue;
   }
 
+  public Assertion getAssertion() {
+    return assertion;
+  }
+
   public static final class FieldsMustacheBuilder {
 
     private List<AnnotationSimple> annotationsSimple = new LinkedList<>();
     private List<AnnotationValue> annotationsValue = new LinkedList<>();
+
+    private Assertion assertion;
+
     private String comment;
     private String getterName;
     private List<String> modifiers = new LinkedList<>();
@@ -79,6 +89,7 @@ public class FieldsMustache {
       this.modifiers = field.getModifiers().stream().map(Modifier::toString).toList();
       this.annotationsSimple = annotationBuilder.getAnnotationSimpleFrom(field.getAnnotations());
       this.annotationsValue = annotationBuilder.getAnnotationWithValueFrom(field.getAnnotations());
+      this.assertion = field.getAssertion();
       return this;
     }
 
@@ -92,6 +103,7 @@ public class FieldsMustache {
       fieldsMustache.annotationsValue = this.annotationsValue;
       fieldsMustache.type = this.type;
       fieldsMustache.setterName = this.setterName;
+      fieldsMustache.assertion = this.assertion;
       return fieldsMustache;
     }
   }

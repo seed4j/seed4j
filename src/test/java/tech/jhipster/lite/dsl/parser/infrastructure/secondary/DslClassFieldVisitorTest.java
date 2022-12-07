@@ -47,11 +47,11 @@ class DslClassFieldVisitorTest {
 
   private static Stream<Arguments> provideStringsForFieldWithValidator() {
     return Stream.of(
-      Arguments.of("myProperty String minlength(10)", "String", "minlength", 10),
-      Arguments.of("myProperty String maxlength(20)", "String", "maxlength", 20),
-      Arguments.of("myProperty Integer min(1)", "Integer", "min", 1),
-      Arguments.of("myProperty Blob minbytes(8)", "Blob", "minbytes", 8),
-      Arguments.of("myProperty ImageBlob maxbytes(12)", "ImageBlob", "maxbytes", 12)
+      Arguments.of("myProperty String minlength(10)", "String", "minlength", "10"),
+      Arguments.of("myProperty String maxlength(20)", "String", "maxlength", "20"),
+      Arguments.of("myProperty Integer min(1)", "Integer", "min", "1"),
+      Arguments.of("myProperty Blob minbytes(8)", "Blob", "minbytes", "8"),
+      Arguments.of("myProperty ImageBlob maxbytes(12)", "ImageBlob", "maxbytes", "12")
     );
   }
 
@@ -86,61 +86,62 @@ class DslClassFieldVisitorTest {
 
   @ParameterizedTest
   @MethodSource("provideStringsForFieldWithValidator")
-  void shouldReturnFieldWithValidator(String input, String type, String validator, int valueValidator) {
+  void shouldReturnFieldWithValidator(String input, String type, String validator, String valueValidator) {
     ClassField field = getClassField(input);
     assertEquals(type, field.getType().get());
-    assertEquals(1, field.getValidators().size());
-    assertEquals(validator, field.getValidators().get(0).name());
-    assertEquals(valueValidator, field.getValidators().get(0).value());
+    assertEquals(1, field.getConstraints().size());
+    assertEquals(validator, field.getConstraints().get(0).name());
+    assertEquals(valueValidator, field.getConstraints().get(0).value().get());
   }
 
   @Test
   void shouldReturnFieldWithMultipleStringValidator() {
     ClassField field = getClassField("myProperty String minlength(10) maxlength(20)");
     assertEquals("String", field.getType().get());
-    assertEquals(2, field.getValidators().size());
-    assertEquals("minlength", field.getValidators().get(0).name());
-    assertEquals("maxlength", field.getValidators().get(1).name());
-    assertEquals(10, field.getValidators().get(0).value());
-    assertEquals(20, field.getValidators().get(1).value());
+    assertEquals(2, field.getConstraints().size());
+    assertEquals("minlength", field.getConstraints().get(0).name());
+    assertEquals("maxlength", field.getConstraints().get(1).name());
+    assertEquals("10", field.getConstraints().get(0).value().get());
+    assertEquals("20", field.getConstraints().get(1).value().get());
   }
 
   @Test
   void shouldReturnFieldWithMultipleIntegerValidator() {
     ClassField field = getClassField("myProperty Integer min(10) max(20)");
     assertEquals("Integer", field.getType().get());
-    assertEquals(2, field.getValidators().size());
-    assertEquals("min", field.getValidators().get(0).name());
-    assertEquals("max", field.getValidators().get(1).name());
-    assertEquals(10, field.getValidators().get(0).value());
-    assertEquals(20, field.getValidators().get(1).value());
+    assertEquals(2, field.getConstraints().size());
+    assertEquals("min", field.getConstraints().get(0).name());
+    assertEquals("max", field.getConstraints().get(1).name());
+    assertEquals("10", field.getConstraints().get(0).value().get());
+    assertEquals("20", field.getConstraints().get(1).value().get());
   }
 
   @Test
   void shouldReturnFieldWithMultipleByteValidator() {
     ClassField field = getClassField("myProperty Blob minbytes(10) maxbytes(20)");
     assertEquals("Blob", field.getType().get());
-    assertEquals(2, field.getValidators().size());
-    assertEquals("minbytes", field.getValidators().get(0).name());
-    assertEquals("maxbytes", field.getValidators().get(1).name());
-    assertEquals(10, field.getValidators().get(0).value());
-    assertEquals(20, field.getValidators().get(1).value());
+    assertEquals(2, field.getConstraints().size());
+    assertEquals("minbytes", field.getConstraints().get(0).name());
+    assertEquals("maxbytes", field.getConstraints().get(1).name());
+    assertEquals("10", field.getConstraints().get(0).value().get());
+    assertEquals("20", field.getConstraints().get(1).value().get());
   }
 
+  //
   @Test
   void shouldNoReturnFieldWithInvalidValidator() {
     ClassField field = getClassField("myProperty Integer minlength(10) maxlength(20)");
-    assertEquals(0, field.getValidators().size(), "Integer with (min/max)length");
+    assertEquals(0, field.getConstraints().size(), "Integer with (min/max)length");
     field = getClassField("myProperty Blob minlength(10) maxlength(20)");
-    assertEquals(0, field.getValidators().size(), "Blob with (min/max)length");
+    assertEquals(0, field.getConstraints().size(), "Blob with (min/max)length");
     field = getClassField("myProperty String min(10) max(20)");
-    assertEquals(0, field.getValidators().size(), "String with min/max");
+    assertEquals(0, field.getConstraints().size(), "String with min/max");
     field = getClassField("myProperty Blob min(10) max(20)");
-    assertEquals(0, field.getValidators().size(), "Blob with min/max");
+    assertEquals(0, field.getConstraints().size(), "Blob with min/max");
     field = getClassField("myProperty Integer minbytes(10) maxbytes(20)");
-    assertEquals(0, field.getValidators().size(), "Integer with (min/max)bytes");
+    assertEquals(0, field.getConstraints().size(), "Integer with (min/max)bytes");
     field = getClassField("myProperty String minbytes(10) maxbytes(20)");
-    assertEquals(0, field.getValidators().size(), "String with (min/max)bytes");
+    assertEquals(0, field.getConstraints().size(), "String with (min/max)bytes");
   }
 
   @Test
@@ -165,24 +166,24 @@ class DslClassFieldVisitorTest {
     ClassField field = getClassField(input);
     String[] validation = type.split(",");
     int numberValidation = validation.length;
-    assertEquals(numberValidation, field.getValidations().size());
+    assertEquals(numberValidation, field.getConstraints().size());
     field
-      .getValidations()
-      .forEach(s -> assertTrue(Arrays.stream(validation).toList().contains(s.get()), s.get() + " not found for " + input));
+      .getConstraints()
+      .forEach(s -> assertTrue(Arrays.stream(validation).toList().contains(s.name()), s.name() + " not found for " + input));
   }
 
   @Test
   void shouldReturnFieldWithValidatorPattern() {
-    //TODO not functionnal
-    //        ClassField field = getClassField("""
-    //                    email String pattern(/^[^@\s]+@[^@\s]+\\.[^@\s]+$/)
-    //                """
-    //        );
-    //        assertEquals("String", field.getType().get());
-    //        assertEquals(1, field.getValidations().size());
-    //        assertEquals("pattern", field.getValidations().get(0).name());
-    //        assertTrue(field.getValidations().get(0) instanceof FieldValidationPattern);
-    //        assertEquals("/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/", ((FieldValidationPattern)field.getValidations().get(0)).pattern());
+    ClassField field = getClassField(
+      """
+                        email String pattern("/^[^@\s]+@[^@\s]+\\.[^@\s]+$/")
+                    """
+    );
+    assertEquals("String", field.getType().get());
+    assertEquals(1, field.getConstraints().size());
+    assertEquals("pattern", field.getConstraints().get(0).name());
+    assertTrue(field.getConstraints().get(0).value().isPresent());
+    assertEquals("/^[^@\s]+@[^@\s]+\\.[^@\s]+$/", field.getConstraints().get(0).value().get());
   }
 
   @Test

@@ -7,7 +7,7 @@ import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldName;
 import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.*;
-import tech.jhipster.lite.dsl.parser.domain.clazz.field.FieldType;
+import tech.jhipster.lite.error.domain.Assert;
 
 public class DslClassFieldVisitor {
 
@@ -58,26 +58,34 @@ public class DslClassFieldVisitor {
 
     private static void buildValidation(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {
       ctx
-        .validation()
-        .forEach(validationContext -> fieldBuilder.addValidation(new FieldValidationVisitor().visitValidation(validationContext)));
+        .constraintCommon()
+        .forEach(validationContext -> fieldBuilder.addConstraints(new FieldConstraintVisitor().visitConstraintCommon(validationContext)));
 
       ctx
-        .validatorPattern()
-        .forEach(validationContext -> fieldBuilder.addValidation(new FieldValidationVisitor().visitValidatorPattern(validationContext)));
+        .constraintByte()
+        .forEach(validationContext -> fieldBuilder.addConstraints(new FieldConstraintVisitor().visitConstraintByte(validationContext)));
+
+      ctx
+        .constraintNumber()
+        .forEach(validationContext -> fieldBuilder.addConstraints(new FieldConstraintVisitor().visitConstraintNumber(validationContext)));
+
+      ctx
+        .constraintString()
+        .forEach(validationContext -> fieldBuilder.addConstraints(new FieldConstraintVisitor().visitConstraintString(validationContext)));
     }
 
     private static void buildValidator(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {
-      ctx
-        .minMaxByteValidator()
-        .forEach(minmaxContext -> fieldBuilder.addValidator(new FieldValidatorVisitor().visitMinMaxByteValidator(minmaxContext)));
-
-      ctx
-        .minMaxNumberValidator()
-        .forEach(minmaxContext -> fieldBuilder.addValidator(new FieldValidatorVisitor().visitMinMaxNumberValidator(minmaxContext)));
-
-      ctx
-        .minMaxStringValidator()
-        .forEach(minmaxContext -> fieldBuilder.addValidator(new FieldValidatorVisitor().visitMinMaxStringValidator(minmaxContext)));
+      //            ctx
+      //                    .minMaxByteValidator()
+      //                    .forEach(minmaxContext -> fieldBuilder.addConstraints(new FieldValidatorVisitor().visitMinMaxByteValidator(minmaxContext)));
+      //
+      //            ctx
+      //                    .minMaxNumberValidator()
+      //                    .forEach(minmaxContext -> fieldBuilder.addConstraints(new FieldValidatorVisitor().visitMinMaxNumberValidator(minmaxContext)));
+      //
+      //            ctx
+      //                    .minMaxStringValidator()
+      //                    .forEach(minmaxContext -> fieldBuilder.addConstraints(new FieldValidatorVisitor().visitMinMaxStringValidator(minmaxContext)));
     }
 
     private static void buildType(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {
@@ -97,35 +105,63 @@ public class DslClassFieldVisitor {
     }
   }
 
-  private static class FieldValidatorVisitor extends DslBaseVisitor<FieldValidator> {
+  private static class FieldConstraintVisitor extends DslBaseVisitor<Constraint> {
 
     @Override
-    public FieldValidator visitMinMaxByteValidator(DslParser.MinMaxByteValidatorContext ctx) {
+    public Constraint visitConstraintCommon(DslParser.ConstraintCommonContext ctx) {
       String name = ctx.getChild(0).getText();
-      String value = ctx.NATURAL_NUMBER().getText();
-      return new FieldValidator(name, Integer.parseInt(value));
+      return new ConstraintSimple(name);
     }
 
     @Override
-    public FieldValidator visitMinMaxNumberValidator(DslParser.MinMaxNumberValidatorContext ctx) {
-      String name = ctx.getChild(0).getText();
-      String value = ctx.NATURAL_NUMBER().getText();
-      return new FieldValidator(name, Integer.parseInt(value));
+    public Constraint visitConstraintNumber(DslParser.ConstraintNumberContext ctx) {
+      return visitChildren(ctx);
     }
 
     @Override
-    public FieldValidator visitMinMaxStringValidator(DslParser.MinMaxStringValidatorContext ctx) {
-      String name = ctx.getChild(0).getText();
-      String value = ctx.NATURAL_NUMBER().getText();
-      return new FieldValidator(name, Integer.parseInt(value));
+    public Constraint visitConstraintString(DslParser.ConstraintStringContext ctx) {
+      return visitChildren(ctx);
     }
-  }
-
-  private static class FieldValidationVisitor extends DslBaseVisitor<FieldValidation> {
 
     @Override
-    public FieldValidation visitValidation(DslParser.ValidationContext ctx) {
-      return new FieldValidation(ctx.getText());
+    public Constraint visitConstraintByte(DslParser.ConstraintByteContext ctx) {
+      return visitChildren(ctx);
+    }
+
+    @Override
+    public Constraint visitConstraintPattern(DslParser.ConstraintPatternContext ctx) {
+      String name = ctx.getChild(0).getText();
+      String value = ctx.STRING().getText();
+
+      value = removeFirstAndLastChar(value);
+      return new ConstraintWithValue(name, Optional.of(value));
+    }
+
+    @Override
+    public Constraint visitMinMaxNumberValidator(DslParser.MinMaxNumberValidatorContext ctx) {
+      String name = ctx.getChild(0).getText();
+      String value = ctx.NATURAL_NUMBER().getText();
+
+      return new ConstraintWithValue(name, Optional.of(value));
+    }
+
+    @Override
+    public Constraint visitMinMaxStringValidator(DslParser.MinMaxStringValidatorContext ctx) {
+      String name = ctx.getChild(0).getText();
+      String value = ctx.NATURAL_NUMBER().getText();
+      return new ConstraintWithValue(name, Optional.of(value));
+    }
+
+    @Override
+    public Constraint visitMinMaxByteValidator(DslParser.MinMaxByteValidatorContext ctx) {
+      String name = ctx.getChild(0).getText();
+      String value = ctx.NATURAL_NUMBER().getText();
+      return new ConstraintWithValue(name, Optional.of(value));
+    }
+
+    private String removeFirstAndLastChar(String value) {
+      Assert.field("value", value).notBlank();
+      return value.substring(1, value.length() - 1);
     }
   }
 }

@@ -1,16 +1,15 @@
 package tech.jhipster.lite.dsl.generator.clazz.domain;
 
-import jakarta.validation.constraints.Past;
-import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import tech.jhipster.lite.dsl.generator.clazz.domain.annotation.Annotation;
+import tech.jhipster.lite.dsl.generator.clazz.domain.assertion.Assertion;
 import tech.jhipster.lite.dsl.generator.clazz.domain.field.FieldType;
 import tech.jhipster.lite.dsl.generator.clazz.domain.field.FieldTypeImpl;
 import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.ClassField;
-import tech.jhipster.lite.dsl.parser.domain.clazz.field.FieldValidator;
+import tech.jhipster.lite.dsl.parser.domain.clazz.field.Constraint;
 import tech.jhipster.lite.dsl.parser.domain.config.ConfigApp;
 import tech.jhipster.lite.error.domain.Assert;
 
@@ -78,20 +77,25 @@ public class FieldConverter {
       .toList();
     knowAnnotation.forEach(ano -> commonAnnotationAndValidator.add(annotationConverter.convertAnnotation(ano)));
 
+    List<Constraint> knowConstraint = classField
+      .getConstraints()
+      .stream()
+      .filter(s -> annotationConverter.isKnowAnnotation(s.name()))
+      .toList();
+    knowConstraint.forEach(val -> commonAnnotationAndValidator.add(annotationConverter.convertFromConstrain(val)));
+
     if (config.getUseAssertAsValidation().get()) {
-      List<FieldValidator> knowValidator = classField
-        .getValidators()
-        .stream()
-        .filter(s -> annotationConverter.isKnowAnnotation(s.name()))
-        .toList();
+      Assertion.AssertionBuilder assertionBuilder = Assertion.builder();
+      Assertion assertion = assertionBuilder.from(commonAnnotationAndValidator.stream().distinct().toList(), classField).build();
+      builderField.assertion(assertion);
+      System.out.println(assertion);
       //si annotation est compatible avec le assert
       //alors add un assert puis supprime annotation
       //builderField.addAssertValidation();
+    } else {
+      // supprime les doublons éventuels entre les constraints et les annotations
+      commonAnnotationAndValidator.stream().distinct().forEach(builderField::addAnnotation);
     }
-    //    builderField.addAnnotation():
-
-    // supprime les doublons éventuels entre les validator et les annotations
-    commonAnnotationAndValidator.stream().distinct().forEach(builderField::addAnnotation);
 
     return builderField.build();
   }

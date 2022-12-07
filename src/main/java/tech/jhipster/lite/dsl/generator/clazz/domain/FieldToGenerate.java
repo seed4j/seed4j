@@ -8,6 +8,7 @@ import javax.lang.model.element.Modifier;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldName;
 import tech.jhipster.lite.dsl.generator.clazz.domain.annotation.Annotation;
+import tech.jhipster.lite.dsl.generator.clazz.domain.assertion.Assertion;
 import tech.jhipster.lite.dsl.generator.clazz.domain.field.FieldType;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.ClassField;
 import tech.jhipster.lite.error.domain.Assert;
@@ -25,6 +26,7 @@ public class FieldToGenerate {
   private FieldComment comment;
   private FieldType type;
   private List<Annotation> annotations;
+  private Assertion assertion;
 
   public FieldName getName() {
     return name;
@@ -44,6 +46,10 @@ public class FieldToGenerate {
 
   public List<Annotation> getAnnotations() {
     return Collections.unmodifiableList(annotations);
+  }
+
+  public Assertion getAssertion() {
+    return assertion;
   }
 
   public String getterName() {
@@ -86,6 +92,7 @@ public class FieldToGenerate {
     private final List<Modifier> modifiers = new ArrayList<>();
     private FieldComment comment;
     private final List<Annotation> annotations = new ArrayList<>();
+    private Assertion assertion = Assertion.builder().build();
 
     private FieldToGenerateBuilder() {}
 
@@ -94,6 +101,12 @@ public class FieldToGenerate {
       this.name = classField.getName();
       this.comment = classField.getComment().orElse(null);
 
+      return this;
+    }
+
+    public FieldToGenerateBuilder assertion(Assertion assertion) {
+      Assert.notNull("assertion", assertion);
+      this.assertion = assertion;
       return this;
     }
 
@@ -137,6 +150,7 @@ public class FieldToGenerate {
       fieldToGenerate.annotations = this.annotations;
       fieldToGenerate.comment = this.comment;
       fieldToGenerate.type = this.type;
+      fieldToGenerate.assertion = this.assertion;
       if (this.modifiers.isEmpty()) {
         this.modifiers.add(Modifier.PRIVATE);
       }

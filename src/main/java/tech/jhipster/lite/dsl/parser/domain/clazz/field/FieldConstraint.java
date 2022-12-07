@@ -3,14 +3,14 @@ package tech.jhipster.lite.dsl.parser.domain.clazz.field;
 import java.util.Objects;
 import tech.jhipster.lite.error.domain.Assert;
 
-public class FieldValidation {
+public class FieldConstraint {
 
-  public static final FieldValidation REQUIRED = new FieldValidation("required");
-  public static final FieldValidation UNIQUE = new FieldValidation("unique");
+  public static final FieldConstraint REQUIRED = new FieldConstraint("required");
+  public static final FieldConstraint UNIQUE = new FieldConstraint("unique");
 
   private String name;
 
-  public FieldValidation(String name) {
+  public FieldConstraint(String name) {
     Assert.field("name", name).notBlank();
     this.name = name;
   }
@@ -26,8 +26,8 @@ public class FieldValidation {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof FieldValidation)) return false;
-    FieldValidation that = (FieldValidation) o;
+    if (!(o instanceof FieldConstraint)) return false;
+    FieldConstraint that = (FieldConstraint) o;
     return Objects.equals(name, that.name);
   }
 

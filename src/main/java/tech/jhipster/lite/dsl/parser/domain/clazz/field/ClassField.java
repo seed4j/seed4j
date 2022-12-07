@@ -1,6 +1,9 @@
 package tech.jhipster.lite.dsl.parser.domain.clazz.field;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 import javax.lang.model.element.Modifier;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldName;
@@ -19,24 +22,10 @@ public class ClassField {
   private List<Modifier> modifiers;
   private FieldComment comment;
   private FieldType type;
-  private List<FieldValidation> validations;
-  private List<FieldValidator> validators;
+
+  private List<Constraint> constraints;
+
   private List<DslAnnotation> annotation;
-  private boolean isRequired;
-  private boolean hasValidator;
-  private boolean hasValidation;
-
-  public boolean isRequired() {
-    return isRequired;
-  }
-
-  public boolean hasValidator() {
-    return hasValidator;
-  }
-
-  public boolean hasValidation() {
-    return hasValidation;
-  }
 
   public FieldName getName() {
     return name;
@@ -54,12 +43,8 @@ public class ClassField {
     return type;
   }
 
-  public List<FieldValidation> getValidations() {
-    return Collections.unmodifiableList(validations);
-  }
-
-  public List<FieldValidator> getValidators() {
-    return Collections.unmodifiableList(validators);
+  public List<Constraint> getConstraints() {
+    return Collections.unmodifiableList(constraints);
   }
 
   public List<DslAnnotation> getAnnotation() {
@@ -69,7 +54,7 @@ public class ClassField {
   @Override
   public String toString() {
     return (
-      "EntityField{" +
+      "ClassField{" +
       "name=" +
       name +
       ", modifiers=" +
@@ -78,16 +63,10 @@ public class ClassField {
       comment +
       ", type=" +
       type +
-      ", validations=" +
-      validations +
-      ", validators=" +
-      validators +
-      ", isRequired=" +
-      isRequired +
-      ", hasValidator=" +
-      hasValidator +
-      ", hasValidation=" +
-      hasValidation +
+      ", constraints=" +
+      constraints +
+      ", annotation=" +
+      annotation +
       '}'
     );
   }
@@ -98,8 +77,8 @@ public class ClassField {
     private FieldType type;
     private final List<Modifier> modifiers = new LinkedList<>();
     private FieldComment comment;
-    private final List<FieldValidation> validations = new LinkedList<>();
-    private final List<FieldValidator> validators = new LinkedList<>();
+
+    private final List<Constraint> constraints = new LinkedList<>();
     private final List<DslAnnotation> annotation = new LinkedList<>();
 
     private FieldBuilder() {}
@@ -134,15 +113,9 @@ public class ClassField {
       return this;
     }
 
-    public FieldBuilder addValidation(FieldValidation validation) {
-      Assert.notNull("validation", validation);
-      this.validations.add(validation);
-      return this;
-    }
-
-    public FieldBuilder addValidator(FieldValidator validator) {
-      Assert.notNull("validator", validator);
-      this.validators.add(validator);
+    public FieldBuilder addConstraints(Constraint constraint) {
+      Assert.notNull("constraint", constraint);
+      this.constraints.add(constraint);
       return this;
     }
 
@@ -152,10 +125,6 @@ public class ClassField {
       ClassField classField = new ClassField();
 
       classField.name = this.name;
-      classField.validators = this.validators;
-      classField.hasValidator = !this.validators.isEmpty();
-      classField.hasValidation = !this.validations.isEmpty();
-      classField.isRequired = this.validations.stream().anyMatch(f -> f.equals(FieldValidation.REQUIRED));
       classField.comment = this.comment;
 
       classField.type = this.type;
@@ -163,7 +132,8 @@ public class ClassField {
         this.modifiers.add(Modifier.PRIVATE);
       }
       classField.modifiers = this.modifiers;
-      classField.validations = this.validations;
+
+      classField.constraints = this.constraints;
       classField.annotation = this.annotation;
       return classField;
     }

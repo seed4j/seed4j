@@ -1,0 +1,14 @@
+Assert
+{{#assertion.isField}}
+.field("{{name}}",{{name}})
+{{/assertion.isField}}
+{{^assertion.isField}}
+    {{#assertion.notNull}}
+    .notNull("{{name}}",{{name}})
+    {{/assertion.notNull}}
+    {{#assertion.notBlank}}
+        .notBlank("{{name}}",{{name}})
+    {{/assertion.notBlank}}
+{{/assertion.isField}}
+
+;

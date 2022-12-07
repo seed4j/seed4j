@@ -1,4 +1,4 @@
 {{#fields}}
-    public {{type}} {{getterName}}(){return this.{{name}};}
-    public void {{setterName}}({{type}} {{name}}){this.{{name}}={{name}};}
+{{>getter}}
+{{>setter}}
 {{/fields}}

@@ -6,57 +6,60 @@ file_
    ;
 
 config
-   : 'config' configbody
+   : CONFIG configbody
    ;
 
 context
-   : 'context' IDENTIFIER contextBody
+   : CONTEXT IDENTIFIER contextBody
    ;
 
 useFluentMethod
-   : 'useFluentMethod' EGAL bool SEPARATOR_JHIPSTER*
-   | 'useFluentMethod' EGAL bool
-   ;
-baseName
-   : 'baseName' EGAL label SEPARATOR_JHIPSTER*
-   | 'baseName' EGAL label
+   : CONFIG_USE_FLUENT_METHOD EGAL bool SEPARATOR_JHIPSTER*
+   |CONFIG_USE_FLUENT_METHOD EGAL bool
    ;
 
+baseName
+   : CONFIG_BASENAME EGAL label SEPARATOR_JHIPSTER*
+   | CONFIG_BASENAME EGAL label
+   ;
+
+
 basePackageName
-   : 'basePackageName' EGAL qualifiedName SEPARATOR_JHIPSTER*
-   | 'basePackageName' EGAL qualifiedName
+   : CONFIG_BASE_PACKAGE_NAME EGAL qualifiedName SEPARATOR_JHIPSTER*
+   | CONFIG_BASE_PACKAGE_NAME EGAL qualifiedName
    ;
 
 packageInfrastructureName
-   : 'packageInfrastructureName' EGAL packageFormat SEPARATOR_JHIPSTER*
-   | 'packageInfrastructureName' EGAL packageFormat
+   : CONFIG_PACKAGE_INFRASTRUCTURE_NAME EGAL packageFormat SEPARATOR_JHIPSTER*
+   | CONFIG_PACKAGE_INFRASTRUCTURE_NAME EGAL packageFormat
    ;
 
 packageInfrastructurePrimaryName
-   : 'packageInfrastructurePrimaryName' EGAL packageFormat SEPARATOR_JHIPSTER*
-   | 'packageInfrastructurePrimaryName' EGAL packageFormat
+   : CONFIG_PACKAGE_INFRASTRUCTURE_PRIMARY_NAME EGAL packageFormat SEPARATOR_JHIPSTER*
+   | CONFIG_PACKAGE_INFRASTRUCTURE_PRIMARY_NAME EGAL packageFormat
    ;
 
 packageInfrastructureSecondaryName
-   : 'packageInfrastructureSecondaryName' EGAL packageFormat SEPARATOR_JHIPSTER*
-   | 'packageInfrastructureSecondaryName' EGAL packageFormat
+   : CONFIG_PACKAGE_INFRASTRUCTURE_SECONDARY_NAME EGAL packageFormat SEPARATOR_JHIPSTER*
+   | CONFIG_PACKAGE_INFRASTRUCTURE_SECONDARY_NAME EGAL packageFormat
    ;
 
 packageDomainName
-   : 'packageDomainName' EGAL packageFormat SEPARATOR_JHIPSTER*
-   | 'packageDomainName' EGAL packageFormat
+   : CONFIG_PACKAGE_DOMAIN EGAL packageFormat SEPARATOR_JHIPSTER*
+   | CONFIG_PACKAGE_DOMAIN EGAL packageFormat
    ;
-
 
 projectFolder
-   : 'projectFolder' EGAL directoryPath SEPARATOR_JHIPSTER*
-   | 'projectFolder' EGAL directoryPath
+   : CONFIG_PROJECT_FOLDER EGAL directoryPath SEPARATOR_JHIPSTER*
+   | CONFIG_PROJECT_FOLDER EGAL directoryPath
    ;
 
+
 useAssertAsValidation
-   : 'useAssertAsValidation' EGAL bool SEPARATOR_JHIPSTER*
-   | 'useAssertAsValidation' EGAL bool
+   : CONFIG_USE_ASSERT_VALIDATION EGAL bool SEPARATOR_JHIPSTER*
+   | CONFIG_USE_ASSERT_VALIDATION EGAL bool
    ;
+
 label
    : STRING
    | IDENTIFIER
@@ -67,8 +70,9 @@ contextBody
    ;
 
 domain
-   : 'domain' domainBody
+   : DOMAIN domainBody
    ;
+
 
 domainBody
     :LCURL (class)* RCURL
@@ -83,8 +87,7 @@ beforeClass
     ;
 
 classType
-    : ('class'
-    | 'record')+
+    : (CLASS_TYPE | RECORD_TYPE)+
     ;
 
 class
@@ -120,31 +123,25 @@ annotation
     ;
 
 classField
-    : beforeClassField IDENTIFIER FIELD_TYPE_NUMBER comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (minMaxNumberValidator)* comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (validation)* comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (validation)* (minMaxNumberValidator)* comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (minMaxNumberValidator)* (validation)* comment? SEPARATOR_JHIPSTER*
+    : beforeClassField IDENTIFIER FIELD_TYPE_NUMBER comment? (constraintNumber)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (constraintNumber)* comment? SEPARATOR_JHIPSTER*
 
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (minMaxByteValidator)* comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (validation)* comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (validation)* (minMaxByteValidator)* comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (minMaxByteValidator)* (validation)* comment? SEPARATOR_JHIPSTER*
-//
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (minMaxStringValidator)* comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (validation | validatorPattern)* comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (validation | validatorPattern)* (minMaxStringValidator)* comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (minMaxStringValidator)* (validation | validatorPattern)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB comment? (constraintByte)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (constraintByte)* comment? SEPARATOR_JHIPSTER*
 
-    | beforeClassField IDENTIFIER FIELD_TYPE_TIME comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_TIME (validation)* comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_OTHER comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_OTHER (validation)* comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER IDENTIFIER comment? SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER IDENTIFIER (validation)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_STRING comment? (constraintString)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (constraintString)* comment? SEPARATOR_JHIPSTER*
+
+    | beforeClassField IDENTIFIER FIELD_TYPE_TIME comment? (constraintCommon)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_TIME (constraintCommon)* comment? SEPARATOR_JHIPSTER*
+
+    | beforeClassField IDENTIFIER FIELD_TYPE_OTHER comment? (constraintCommon)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER FIELD_TYPE_OTHER (constraintCommon)* comment? SEPARATOR_JHIPSTER*
+
+    | beforeClassField IDENTIFIER IDENTIFIER comment? (constraintCommon)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER IDENTIFIER (constraintCommon)* comment? SEPARATOR_JHIPSTER*
     ;
+
 beforeClassField
     : (annotation)*
     | comment?
@@ -152,18 +149,33 @@ beforeClassField
     | comment? (modifiers)*
     | comment? (annotation)* (modifiers)*
     | (annotation)* comment?
-
     ;
 
+constraintCommon
+  : REQUIRED
+  | UNIQUE
+  ;
 
-validatorPattern
-    : 'pattern' LPAREN STRING_LITERAL* RPAREN
+constraintNumber
+    : constraintCommon
+    | minMaxNumberValidator
     ;
 
-validation
-    : REQUIRED
-    | 'unique'
+constraintString
+    : constraintCommon
+    | constraintPattern
+    | minMaxStringValidator
     ;
+
+constraintByte
+    : constraintCommon
+    | minMaxByteValidator
+    ;
+
+constraintPattern
+    : 'pattern' LPAREN STRING RPAREN
+    ;
+
 minMaxNumberValidator
     : 'min' LPAREN NATURAL_NUMBER RPAREN
     | 'max' LPAREN NATURAL_NUMBER RPAREN
@@ -208,38 +220,6 @@ configbody
    )* RCURL
    ;
 
-entityTableName
-    : LPAREN IDENTIFIER RPAREN
-    ;
-
-string
-   : STRING
-   | MULTILINESTRING
-   ;
-
-operator_
-   : '/'
-   | STAR
-   | '%'
-   | '+'
-   | '-'
-   | '>'
-   | '>='
-   | '<'
-   | '<='
-   | '=='
-   | '!='
-   | '&&'
-   | '||'
-   ;
-
-bool
-   : 'true'
-   | 'false'
-   | 'yes'
-   | 'no'
-   ;
-
 qualifiedName
     : identifier ('.' identifier)*
 ;
@@ -256,6 +236,11 @@ identifier
     : IDENTIFIER
     ;
 
+bool
+    : BOOL_FALSE
+    | BOOL_TRUE
+    ;
+
 number
    : NATURAL_NUMBER (DOT NATURAL_NUMBER)?
    ;
@@ -265,6 +250,66 @@ comment
     ;
 
 modifiers
+    : MODIFIERS
+    ;
+
+CONFIG
+    : 'config'
+    ;
+
+CONTEXT
+    : 'context'
+    ;
+
+DOMAIN
+    : 'domain'
+    ;
+
+CONFIG_USE_FLUENT_METHOD
+    : 'useFluentMethod'
+    ;
+
+CONFIG_BASENAME
+    : 'baseName'
+    ;
+
+CONFIG_BASE_PACKAGE_NAME
+    : 'basePackageName'
+    ;
+
+CONFIG_PACKAGE_INFRASTRUCTURE_NAME
+    : 'packageInfrastructureName'
+    ;
+
+CONFIG_PACKAGE_INFRASTRUCTURE_PRIMARY_NAME
+    : 'packageInfrastructurePrimaryName'
+    ;
+
+CONFIG_PACKAGE_INFRASTRUCTURE_SECONDARY_NAME
+    : 'packageInfrastructureSecondaryName'
+    ;
+
+CONFIG_PACKAGE_DOMAIN
+    : 'packageDomainName'
+    ;
+
+CONFIG_PROJECT_FOLDER
+    : 'projectFolder'
+    ;
+
+CONFIG_USE_ASSERT_VALIDATION
+    : 'useAssertAsValidation'
+    ;
+
+CLASS_TYPE
+    : 'class'
+    ;
+
+RECORD_TYPE
+    : 'record'
+    ;
+
+MODIFIERS
     : 'private'
     | 'public'
     | 'protected'
@@ -282,8 +327,13 @@ EGAL
     : '='
     ;
 
+
 REQUIRED
     : 'required'
+    ;
+
+UNIQUE
+    : 'unique'
     ;
 
 FIELD_TYPE_OTHER
@@ -346,6 +396,19 @@ COMMA
     : ','
     ;
 
+BOOL_FALSE
+    : ('no'
+    | 'NO'
+    | 'false'
+    | 'FALSE')
+    ;
+
+BOOL_TRUE
+    : ('yes'
+    | 'YES'
+    | 'true'
+    | 'TRUE')
+    ;
 
 IDENTIFIER
     : Letter LetterOrDigit*
@@ -389,12 +452,6 @@ NATURAL_NUMBER
 FLOAT   : Digits+ '.' Digits*
         | '.' Digits+
         ;
-BOOL
-   : 'true'
-   | 'false'
-   | 'yes'
-   | 'no'
-   ;
 
 DESCRIPTION
    : '<<DESCRIPTION' .*? 'DESCRIPTION'
@@ -411,6 +468,7 @@ STRING
 
 STRING_LITERAL: 'a'..'z' | 'A'..'Z' | '0'..'9' | ':' | DOT | '&' | LPAREN | RPAREN | LSQUARE | RSQUARE| '$' | '@' | '/' | '\\' | ';' | '^';
 
+
 COMMENT
   : ('#' | '//') ~ [\r\n]* -> channel(HIDDEN)
   ;
@@ -422,12 +480,9 @@ BLOCKCOMMENT
 //WS
 //   : [ \r\n\t]+ -> skip
 //   ;
-//WS
-//  : (' ' | '\t')+-> skip
-//  ;
+
 WS : (' ' | '\t')+ -> channel(HIDDEN);
 NEWLINE :  WS* '\r'? '\n' ;
-
 
 fragment RESTOFLINE
         :   ~('\r'|'\n')*;

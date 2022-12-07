@@ -4,8 +4,8 @@ import java.util.Optional;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassImport;
 import tech.jhipster.lite.error.domain.Assert;
 
-public record AnnotationWithValueImpl(String name, Optional<String> value, Optional<ClassImport> import_) implements Annotation {
-  public AnnotationWithValueImpl {
+public record AnnotationWithValue(String name, Optional<String> value, Optional<ClassImport> import_) implements Annotation {
+  public AnnotationWithValue {
     Assert.field("name", name).noWhitespace();
     Assert.notNull("value", name);
     Assert.notNull("import_", import_);

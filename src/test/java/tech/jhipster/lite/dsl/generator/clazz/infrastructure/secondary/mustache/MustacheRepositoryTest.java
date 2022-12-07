@@ -25,6 +25,6 @@ class MustacheRepositoryTest {
 
   @Test
   void shouldGenerateComplexeClass() {
-    mustacheRepository.generate(DslClassUtils.createClassComplexeToGenerate(DslClassUtils.createDefaultConfig()));
+    mustacheRepository.generate(DslClassUtils.createClassComplexeToGenerate(DslClassUtils.createDefaultConfigWithAssert()));
   }
 }

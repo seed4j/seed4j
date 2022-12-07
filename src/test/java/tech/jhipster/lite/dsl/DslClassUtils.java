@@ -17,8 +17,8 @@ import tech.jhipster.lite.dsl.parser.domain.DslDomain;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslContextName;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.ClassField;
+import tech.jhipster.lite.dsl.parser.domain.clazz.field.ConstraintWithValue;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.FieldType;
-import tech.jhipster.lite.dsl.parser.domain.clazz.field.FieldValidator;
 import tech.jhipster.lite.dsl.parser.domain.config.ConfigApp;
 import tech.jhipster.lite.error.domain.Assert;
 
@@ -61,6 +61,10 @@ public class DslClassUtils {
 
   public static ConfigApp createDefaultConfig() {
     return ConfigApp.configBuilder().build();
+  }
+
+  public static ConfigApp createDefaultConfigWithAssert() {
+    return ConfigApp.configBuilder().useAssertAsValidation("yes").build();
   }
 
   public static DslContext createSimpleContext(String name) {
@@ -136,11 +140,22 @@ public class DslClassUtils {
       .definePackage(ClassPackage.EMPTY)
       .addField(createCompleteField("Integer"))
       .addField(createCompleteField("String"))
+      .addField(createCompleteFieldObject("MyObject"))
       .build();
   }
 
   public static ClassField createSimpleField(String type) {
     return ClassField.fieldBuilder().type(new FieldType(type)).name(new FieldName("prop" + type)).build();
+  }
+
+  public static ClassField createCompleteFieldObject(String type) {
+    return ClassField
+      .fieldBuilder()
+      .type(new FieldType(type))
+      .name(new FieldName("propComp" + type))
+      .comment(new FieldComment("comment for my prop " + type))
+      .addAnnotation(new DslAnnotation("NotNull", Optional.empty()))
+      .build();
   }
 
   public static ClassField createCompleteField(String type) {
@@ -151,9 +166,9 @@ public class DslClassUtils {
       .comment(new FieldComment("comment for my prop " + type))
       .addAnnotation(new DslAnnotation("NotNull", Optional.empty()))
       .addAnnotation(new DslAnnotation("min", Optional.of("0")))
-      .addAnnotation(new DslAnnotation("max", Optional.of("1000")))
-      .addValidator(new FieldValidator("min", 0))
-      .addValidator(new FieldValidator("max", 100))
+      .addAnnotation(new DslAnnotation("max", Optional.of("100")))
+      .addConstraints(new ConstraintWithValue("min", Optional.of("0")))
+      .addConstraints(new ConstraintWithValue("max", Optional.of("100")))
       .build();
   }
 }

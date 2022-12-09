@@ -6,7 +6,7 @@
     "@angular/compiler": "14.2.10",
     "@angular/core": "14.2.10",
     "@angular/forms": "14.2.10",
-    "@angular/material": "14.2.7",
+    "@angular/material": "15.0.2",
     "@angular/platform-browser": "14.2.10",
     "@angular/platform-browser-dynamic": "14.2.10",
     "@angular/router": "14.2.10",

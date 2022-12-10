@@ -1,14 +1,35 @@
+{{#assertion}}
 Assert
 {{#assertion.isField}}
 .field("{{name}}",{{name}})
+{{#assertion.notNull}}.notNull(){{/assertion.notNull}}
+{{#assertion.notBlank}}.notBlank(){{/assertion.notBlank}}
+{{#assertion.isPositive}}.positive(){{/assertion.isPositive}}
+
+{{#assertion.isStringMin}}.minLength({{assertion.min}}){{/assertion.isStringMin}}
+{{#assertion.isStringMin}}.maxLength({{assertion.max}}){{/assertion.isStringMin}}
+
+{{#assertion.isIntegerMin}}.min({{assertion.min}}){{/assertion.isIntegerMin}}
+{{#assertion.isIntegerMax}}.max({{assertion.max}}){{/assertion.isIntegerMax}}
+
+{{#assertion.isLongMin}}.min({{assertion.min}}){{/assertion.isLongMin}}
+{{#assertion.isLongMax}}.max({{assertion.max}}){{/assertion.isLongMax}}
+
+{{#assertion.isFloatMin}}.min({{assertion.min}}){{/assertion.isFloatMin}}
+{{#assertion.isFloatMax}}.max({{assertion.max}}){{/assertion.isFloatMax}}
+
+{{#assertion.isDoubleMin}}.min({{assertion.min}}){{/assertion.isDoubleMin}}
+{{#assertion.isDoubleMax}}.max({{assertion.max}}){{/assertion.isDoubleMax}}
+
+{{#assertion.isBigDecimalMin}}.min({{assertion.min}}){{/assertion.isBigDecimalMin}}
+{{#assertion.isBigDecimalMax}}.max({{assertion.max}}){{/assertion.isBigDecimalMax}}
+
+{{#assertion.isCollectionMaxSize}}.maxSize({{assertion.max}}){{/assertion.isCollectionMaxSize}}
+
 {{/assertion.isField}}
 {{^assertion.isField}}
-    {{#assertion.notNull}}
-    .notNull("{{name}}",{{name}})
-    {{/assertion.notNull}}
-    {{#assertion.notBlank}}
-        .notBlank("{{name}}",{{name}})
-    {{/assertion.notBlank}}
+    {{#assertion.notNull}}.notNull("{{name}}",{{name}}){{/assertion.notNull}}
+    {{#assertion.notBlank}}.notBlank("{{name}}",{{name}}){{/assertion.notBlank}}
 {{/assertion.isField}}
-
 ;
+{{/assertion}}

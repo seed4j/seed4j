@@ -7,6 +7,7 @@ packageInfrastructureSecondaryName=secondaryOverride
 packageDomainName=domainOverride
 useFluentMethod=false
 projectFolder=/tmp/myApp
+useAssertAsValidation=yes
 }
 
 context ctx1 {
@@ -15,7 +16,7 @@ context ctx1 {
 
         class Ship {
           @notBlank
-          shipId UUID
+          shipId VO UUID
 
           @notBlank
           name String

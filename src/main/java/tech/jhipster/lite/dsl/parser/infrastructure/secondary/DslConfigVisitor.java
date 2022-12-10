@@ -100,7 +100,7 @@ public class DslConfigVisitor {
       if (ctx == null || ctx.isEmpty()) {
         return "";
       }
-      return ctx.get(ctx.size() - 1).getChild(ctx.get(ctx.size() - 1).getChildCount() - 1).getText();
+      return ctx.get(ctx.size() - 1).getChild(2).getText();
     }
   }
 }

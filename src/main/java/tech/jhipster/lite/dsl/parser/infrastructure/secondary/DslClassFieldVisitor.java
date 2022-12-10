@@ -28,9 +28,9 @@ public class DslClassFieldVisitor {
 
       buildType(ctx, fieldBuilder);
 
-      buildValidator(ctx, fieldBuilder);
+      idValueObject(ctx, fieldBuilder);
 
-      buildValidation(ctx, fieldBuilder);
+      buildConstraint(ctx, fieldBuilder);
 
       return fieldBuilder.build();
     }
@@ -56,7 +56,7 @@ public class DslClassFieldVisitor {
         });
     }
 
-    private static void buildValidation(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {
+    private static void buildConstraint(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {
       ctx
         .constraintCommon()
         .forEach(validationContext -> fieldBuilder.addConstraints(new FieldConstraintVisitor().visitConstraintCommon(validationContext)));
@@ -72,20 +72,6 @@ public class DslClassFieldVisitor {
       ctx
         .constraintString()
         .forEach(validationContext -> fieldBuilder.addConstraints(new FieldConstraintVisitor().visitConstraintString(validationContext)));
-    }
-
-    private static void buildValidator(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {
-      //            ctx
-      //                    .minMaxByteValidator()
-      //                    .forEach(minmaxContext -> fieldBuilder.addConstraints(new FieldValidatorVisitor().visitMinMaxByteValidator(minmaxContext)));
-      //
-      //            ctx
-      //                    .minMaxNumberValidator()
-      //                    .forEach(minmaxContext -> fieldBuilder.addConstraints(new FieldValidatorVisitor().visitMinMaxNumberValidator(minmaxContext)));
-      //
-      //            ctx
-      //                    .minMaxStringValidator()
-      //                    .forEach(minmaxContext -> fieldBuilder.addConstraints(new FieldValidatorVisitor().visitMinMaxStringValidator(minmaxContext)));
     }
 
     private static void buildType(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {
@@ -105,27 +91,18 @@ public class DslClassFieldVisitor {
     }
   }
 
+  private static void idValueObject(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {
+    if (ctx.VO() != null) {
+      // VO -> record un attribut du type +les eventuels constraints
+    }
+  }
+
   private static class FieldConstraintVisitor extends DslBaseVisitor<Constraint> {
 
     @Override
     public Constraint visitConstraintCommon(DslParser.ConstraintCommonContext ctx) {
       String name = ctx.getChild(0).getText();
       return new ConstraintSimple(name);
-    }
-
-    @Override
-    public Constraint visitConstraintNumber(DslParser.ConstraintNumberContext ctx) {
-      return visitChildren(ctx);
-    }
-
-    @Override
-    public Constraint visitConstraintString(DslParser.ConstraintStringContext ctx) {
-      return visitChildren(ctx);
-    }
-
-    @Override
-    public Constraint visitConstraintByte(DslParser.ConstraintByteContext ctx) {
-      return visitChildren(ctx);
     }
 
     @Override

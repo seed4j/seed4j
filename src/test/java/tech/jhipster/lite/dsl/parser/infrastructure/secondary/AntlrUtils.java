@@ -41,6 +41,10 @@ public class AntlrUtils {
     return getParser(txt).class_();
   }
 
+  public static DslParser.EnumTypeContext getEnumTypeContextFromText(String txt) {
+    return getParser(txt).enumType();
+  }
+
   public static DslParser.DomainContext getDomainContextFromText(String txt) {
     return getParser(txt).domain();
   }

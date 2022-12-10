@@ -1,5 +1,6 @@
 {{#fields}}
     public {{className}} {{name}}({{type}} {{name}}){
+        {{>assertion}}
         this.{{name}}={{name}};
         return this;
     }

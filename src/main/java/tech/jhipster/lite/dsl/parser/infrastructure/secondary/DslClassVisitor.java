@@ -37,7 +37,7 @@ public class DslClassVisitor {
     private final DslClass.DslClassBuilder dslClassBuilder;
 
     public BeforeClassVisitor(DslClass.DslClassBuilder dslClassBuilder) {
-      Assert.notNull("entityBuilder", dslClassBuilder);
+      Assert.notNull("dslClassBuilder", dslClassBuilder);
       this.dslClassBuilder = dslClassBuilder;
     }
 
@@ -56,7 +56,7 @@ public class DslClassVisitor {
             value = Optional.empty();
           }
 
-          this.dslClassBuilder.addAnnotation(new DslAnnotation(annotationContext.getText(), value));
+          this.dslClassBuilder.addAnnotation(new DslAnnotation(annotationContext.getChild(0).getText(), value));
         });
 
       this.dslClassBuilder.type(ClassType.from(ctx.classType().getText()));

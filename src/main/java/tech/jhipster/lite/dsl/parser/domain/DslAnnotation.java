@@ -6,7 +6,7 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public record DslAnnotation(String name, Optional<String> value) {
   public DslAnnotation(String name, Optional<String> value) {
-    Assert.field("name", name).notBlank();
+    Assert.field("key", name).notBlank();
     Assert.notNull("value", value);
     this.name = buildAnnotation(name);
     this.value = value;

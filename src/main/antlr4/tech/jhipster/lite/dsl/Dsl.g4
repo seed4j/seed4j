@@ -75,7 +75,7 @@ domain
 
 
 domainBody
-    :LCURL (class)* RCURL
+    :LCURL (class | enumType)* RCURL
     ;
 
 
@@ -123,23 +123,24 @@ annotation
     ;
 
 classField
-    : beforeClassField IDENTIFIER FIELD_TYPE_NUMBER comment? (constraintNumber)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_NUMBER (constraintNumber)* comment? SEPARATOR_JHIPSTER*
+    : beforeClassField IDENTIFIER VO? FIELD_TYPE_NUMBER comment? (constraintNumber)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER VO? FIELD_TYPE_NUMBER (constraintNumber)* comment? SEPARATOR_JHIPSTER*
 
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB comment? (constraintByte)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_BLOB (constraintByte)* comment? SEPARATOR_JHIPSTER*
 
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING comment? (constraintString)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_STRING (constraintString)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER VO? FIELD_TYPE_BLOB comment? (constraintByte)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER VO? FIELD_TYPE_BLOB (constraintByte)* comment? SEPARATOR_JHIPSTER*
 
-    | beforeClassField IDENTIFIER FIELD_TYPE_TIME comment? (constraintCommon)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_TIME (constraintCommon)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER VO? FIELD_TYPE_STRING comment? (constraintString)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER VO? FIELD_TYPE_STRING (constraintString)* comment? SEPARATOR_JHIPSTER*
 
-    | beforeClassField IDENTIFIER FIELD_TYPE_OTHER comment? (constraintCommon)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER FIELD_TYPE_OTHER (constraintCommon)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER VO? FIELD_TYPE_TIME comment? (constraintCommon)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER VO? FIELD_TYPE_TIME (constraintCommon)* comment? SEPARATOR_JHIPSTER*
 
-    | beforeClassField IDENTIFIER IDENTIFIER comment? (constraintCommon)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER IDENTIFIER (constraintCommon)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER VO? FIELD_TYPE_OTHER comment? (constraintCommon)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER VO? FIELD_TYPE_OTHER (constraintCommon)* comment? SEPARATOR_JHIPSTER*
+
+    | beforeClassField IDENTIFIER VO? IDENTIFIER comment? (constraintCommon)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER VO? IDENTIFIER (constraintCommon)* comment? SEPARATOR_JHIPSTER*
     ;
 
 beforeClassField
@@ -253,6 +254,45 @@ modifiers
     : MODIFIERS
     ;
 
+enumType
+    : beforeEnum IDENTIFIER enumBody
+    ;
+
+beforeEnum
+    : ENUM
+    | (annotationClass)* ENUM
+    | comment (annotationClass)* ENUM
+    | (annotationClass)* comment ENUM
+    ;
+enumBody
+    : LCURL (enumKeyValue SEPARATOR_JHIPSTER*)*  RCURL SEPARATOR_JHIPSTER*
+    ;
+//enumBody
+//    : LCURL enumKeyValue (COMMA enumKeyValue)*  RCURL SEPARATOR_JHIPSTER*
+//    | LCURL (enumKeyValue COMMA?)* RCURL SEPARATOR_JHIPSTER*
+//    | LCURL enumKeyValue* SEPARATOR_JHIPSTER* RCURL SEPARATOR_JHIPSTER*
+//    | LCURL (enumKeyValue SEPARATOR_JHIPSTER)*  RCURL SEPARATOR_JHIPSTER*
+//    ;
+
+enumKeyValue
+    : beforeEnumKeyValue IDENTIFIER_UPPER
+    | beforeEnumKeyValue IDENTIFIER_UPPER LPAREN STRING RPAREN
+    ;
+
+beforeEnumKeyValue
+    : comment?
+    ;
+
+ENUM
+    : 'enum'
+    ;
+
+VO
+    : 'VO'
+    | 'vo'
+    | 'ValueObject'
+    ;
+
 CONFIG
     : 'config'
     ;
@@ -326,7 +366,6 @@ SEPARATOR_JHIPSTER
 EGAL
     : '='
     ;
-
 
 REQUIRED
     : 'required'
@@ -408,6 +447,11 @@ BOOL_TRUE
     | 'YES'
     | 'true'
     | 'TRUE')
+    ;
+
+IDENTIFIER_UPPER
+    : [A-Z]
+    | [A-Z][A-Z_]*
     ;
 
 IDENTIFIER

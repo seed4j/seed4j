@@ -4,7 +4,7 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public record ClassName(String name) {
   public ClassName {
-    Assert.field("name", name).noWhitespace().maxLength(50);
+    Assert.field("key", name).noWhitespace().maxLength(50);
     name = capitalize(name);
   }
 

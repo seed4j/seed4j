@@ -1,6 +1,7 @@
 package tech.jhipster.lite.dsl.parser.domain.clazz;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassComment;
@@ -42,7 +43,7 @@ public class DslClass {
   }
 
   public List<DslAnnotation> getAnnotations() {
-    return annotations;
+    return Collections.unmodifiableList(annotations);
   }
 
   public ClassType getType() {
@@ -52,7 +53,7 @@ public class DslClass {
   @Override
   public String toString() {
     return (
-      "DslClass{" + "name=" + name + ", type" + type + ", package=" + packag + ", fields=" + classFields + ", comment=" + comment + '}'
+      "DslClass{" + "key=" + name + ", type" + type + ", package=" + packag + ", fields=" + classFields + ", comment=" + comment + '}'
     );
   }
 
@@ -69,7 +70,7 @@ public class DslClass {
     private DslClassBuilder() {}
 
     public DslClassBuilder name(ClassName name) {
-      Assert.notNull("name", name);
+      Assert.notNull("key", name);
       this.name = name;
       return this;
     }
@@ -88,12 +89,7 @@ public class DslClass {
 
     public DslClassBuilder addAnnotation(DslAnnotation annotation) {
       Assert.notNull("annotation", annotation);
-
-      if ("package".equalsIgnoreCase(annotation.name())) {
-        annotation.value().ifPresent(s -> this.definePackage(new ClassPackage(s)));
-      } else {
-        this.annotations.add(annotation);
-      }
+      this.annotations.add(annotation);
       return this;
     }
 
@@ -110,7 +106,7 @@ public class DslClass {
     }
 
     public DslClass build() {
-      Assert.notNull("name", this.name);
+      Assert.notNull("key", this.name);
       DslClass dslClass = new DslClass();
 
       dslClass.name = this.name;

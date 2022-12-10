@@ -11,7 +11,7 @@ public class FieldConstraint {
   private String name;
 
   public FieldConstraint(String name) {
-    Assert.field("name", name).notBlank();
+    Assert.field("key", name).notBlank();
     this.name = name;
   }
 

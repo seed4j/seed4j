@@ -55,7 +55,7 @@ public class ClassField {
   public String toString() {
     return (
       "ClassField{" +
-      "name=" +
+      "key=" +
       name +
       ", modifiers=" +
       modifiers +
@@ -84,7 +84,7 @@ public class ClassField {
     private FieldBuilder() {}
 
     public FieldBuilder name(FieldName name) {
-      Assert.notNull("name", name);
+      Assert.notNull("key", name);
       this.name = name;
       return this;
     }
@@ -120,7 +120,7 @@ public class ClassField {
     }
 
     public ClassField build() {
-      Assert.notNull("name", name);
+      Assert.notNull("key", name);
       Assert.notNull("type", type);
       ClassField classField = new ClassField();
 

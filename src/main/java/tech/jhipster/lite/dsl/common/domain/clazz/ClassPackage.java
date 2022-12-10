@@ -19,4 +19,8 @@ public record ClassPackage(String packag) {
   public String path() {
     return packag().replace('.', '/');
   }
+
+  public boolean isEmpty() {
+    return packag().isEmpty();
+  }
 }

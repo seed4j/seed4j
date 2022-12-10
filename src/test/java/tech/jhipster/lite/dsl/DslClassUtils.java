@@ -4,18 +4,23 @@ import java.util.Optional;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassName;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassPackage;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassType;
+import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumComment;
+import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumKey;
+import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumKeyValue;
+import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumValue;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldName;
-import tech.jhipster.lite.dsl.generator.clazz.domain.AnnotationConverter;
-import tech.jhipster.lite.dsl.generator.clazz.domain.ClassConverter;
-import tech.jhipster.lite.dsl.generator.clazz.domain.ClassToGenerate;
-import tech.jhipster.lite.dsl.generator.clazz.domain.FieldConverter;
+import tech.jhipster.lite.dsl.generator.java.clazz.domain.*;
+import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.AnnotationConverter;
+import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.ClassConverter;
+import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.FieldConverter;
 import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
 import tech.jhipster.lite.dsl.parser.domain.DslApplication;
 import tech.jhipster.lite.dsl.parser.domain.DslContext;
 import tech.jhipster.lite.dsl.parser.domain.DslDomain;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslContextName;
+import tech.jhipster.lite.dsl.parser.domain.clazz.DslEnum;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.ClassField;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.ConstraintWithValue;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.FieldType;
@@ -28,26 +33,50 @@ public class DslClassUtils {
 
   public static ClassToGenerate createClassToGenerate(ConfigApp config) {
     Assert.notNull("config", config);
-    AnnotationConverter annotationConverter = new AnnotationConverter(config);
-    FieldConverter fieldConverter = new FieldConverter(annotationConverter, config);
-    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter, config);
-    return converter.convertDslClassToGenerate(createSimpleClass("plane"), new DslContextName("airport"));
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    return converter.convertDslClassToGenerate(createSimpleClass("plane"), new DslContextName("airport"), config);
+  }
+
+  public static EnumToGenerate createEnumValueToGenerate(ConfigApp config) {
+    Assert.notNull("config", config);
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    return converter.convertDslEnumToGenerate(createEnumValue("plane"), new DslContextName("airport"), config);
+  }
+
+  public static EnumToGenerate createEnumSimpleToGenerate(ConfigApp config) {
+    Assert.notNull("config", config);
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    return converter.convertDslEnumToGenerate(createEnumSimple("plane"), new DslContextName("airport"), config);
   }
 
   public static ClassToGenerate createClassComplexeToGenerate(ConfigApp config) {
     Assert.notNull("config", config);
-    AnnotationConverter annotationConverter = new AnnotationConverter(config);
-    FieldConverter fieldConverter = new FieldConverter(annotationConverter, config);
-    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter, config);
-    return converter.convertDslClassToGenerate(createComplexeClass("plane"), new DslContextName("airport"));
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    return converter.convertDslClassToGenerate(createComplexeClass("plane"), new DslContextName("airport"), config);
   }
 
   public static ClassToGenerate createRecordToGenerate(ConfigApp config) {
     Assert.notNull("config", config);
-    AnnotationConverter annotationConverter = new AnnotationConverter(config);
-    FieldConverter fieldConverter = new FieldConverter(annotationConverter, config);
-    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter, config);
-    return converter.convertDslClassToGenerate(createSimpleRecord("plane"), new DslContextName("airport"));
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    return converter.convertDslClassToGenerate(createSimpleRecord("plane"), new DslContextName("airport"), config);
+  }
+
+  public static ClassToGenerate createRecordComplexeToGenerate(ConfigApp config) {
+    Assert.notNull("config", config);
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    return converter.convertDslClassToGenerate(createComplexeRecord("plane"), new DslContextName("airport"), config);
   }
 
   public static DslApplication createSimpleApplication() {
@@ -132,6 +161,28 @@ public class DslClassUtils {
       .build();
   }
 
+  public static DslEnum createEnumSimple(String name) {
+    return DslEnum
+      .dslEnumBuilder()
+      .name(new ClassName(name))
+      .definePackage(ClassPackage.EMPTY)
+      .addEnumKeyValue(createEnumKvSimple("MY_KEY1"))
+      .addEnumKeyValue(createEnumKvSimple("MY_KEY2"))
+      .addEnumKeyValue(createEnumKvSimple("MY_KEY3"))
+      .build();
+  }
+
+  public static DslEnum createEnumValue(String name) {
+    return DslEnum
+      .dslEnumBuilder()
+      .name(new ClassName(name))
+      .definePackage(ClassPackage.EMPTY)
+      .addEnumKeyValue(createEnumKvWithValueString("MY_KEY1"))
+      .addEnumKeyValue(createEnumKvWithValueString("MY_KEY2"))
+      .addEnumKeyValue(createEnumKvWithValueString("MY_KEY3"))
+      .build();
+  }
+
   public static DslClass createComplexeClass(String name) {
     return DslClass
       .dslClassBuilder()
@@ -141,6 +192,34 @@ public class DslClassUtils {
       .addField(createCompleteField("Integer"))
       .addField(createCompleteField("String"))
       .addField(createCompleteFieldObject("MyObject"))
+      .addField(createCompleteFieldObject("Instant"))
+      .build();
+  }
+
+  public static DslClass createClassWithAnnotationPackage(String name) {
+    return DslClass
+      .dslClassBuilder()
+      .name(new ClassName(name))
+      .type(ClassType.CLASS)
+      .addAnnotation(new DslAnnotation("package", Optional.of("test")))
+      .definePackage(ClassPackage.EMPTY)
+      .addField(createCompleteField("Integer"))
+      .addField(createCompleteField("String"))
+      .addField(createCompleteFieldObject("MyObject"))
+      .addField(createCompleteFieldObject("Instant"))
+      .build();
+  }
+
+  public static DslClass createComplexeRecord(String name) {
+    return DslClass
+      .dslClassBuilder()
+      .name(new ClassName(name))
+      .type(ClassType.RECORD)
+      .definePackage(ClassPackage.EMPTY)
+      .addField(createCompleteField("Integer"))
+      .addField(createCompleteField("String"))
+      .addField(createCompleteFieldObject("MyObject"))
+      .addField(createCompleteFieldObject("Instant"))
       .build();
   }
 
@@ -149,13 +228,34 @@ public class DslClassUtils {
   }
 
   public static ClassField createCompleteFieldObject(String type) {
-    return ClassField
+    ClassField.FieldBuilder builder = ClassField
       .fieldBuilder()
       .type(new FieldType(type))
       .name(new FieldName("propComp" + type))
       .comment(new FieldComment("comment for my prop " + type))
-      .addAnnotation(new DslAnnotation("NotNull", Optional.empty()))
-      .build();
+      .addAnnotation(new DslAnnotation("NotNull", Optional.empty()));
+    if ("Instant".equalsIgnoreCase(type)) {
+      builder.addAnnotation(new DslAnnotation("PastOrPresent", Optional.empty()));
+    }
+
+    return builder.build();
+  }
+
+  public static EnumKeyValue createEnumKvSimple(String name) {
+    EnumKeyValue.EnumKeyValueBuilder builder = EnumKeyValue
+      .builder()
+      .enumKey(new EnumKey("KEY_" + name))
+      .comment(new EnumComment("/** comment for key " + name + "*/"));
+    return builder.build();
+  }
+
+  public static EnumKeyValue createEnumKvWithValueString(String name) {
+    EnumKeyValue.EnumKeyValueBuilder builder = EnumKeyValue
+      .builder()
+      .enumKey(new EnumKey("KEY_" + name))
+      .enumValue(new EnumValue("VALUE_" + name))
+      .comment(new EnumComment("/** comment for key " + name + "*/"));
+    return builder.build();
   }
 
   public static ClassField createCompleteField(String type) {

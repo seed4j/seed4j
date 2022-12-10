@@ -1,0 +1,41 @@
+package {{classPackage}};
+
+{{#hasImport}}
+import java.util.Arrays;
+{{/hasImport}}
+
+{{comment}}
+public enum {{className}} {
+
+{{#elementSimple}}
+    {{>enumComment}}
+
+    {{value.key}}{{^last}}, {{/last}}
+{{/elementSimple}}
+
+{{#elementValue}}
+    {{>enumComment}}
+
+    {{value.key}}("{{value.value}}"){{^last}}, {{/last}}{{#last}}; {{/last}}
+{{/elementValue}}
+
+{{#createConstructor}}
+private String value;
+
+{{className}}(String value) {
+    this.value = value;
+}
+
+public String getValue() {
+    return this.value;
+}
+
+
+public static {{className}} from(String value) throws IllegalArgumentException {
+    return Arrays.stream({{className}}.values())
+    .filter(val -> val.name().equals(value))
+    .findFirst()
+    .orElseThrow(() -> new IllegalArgumentException(String.format("Unable to found %s in enum  %s",value,"{{className}}" )));
+}
+{{/createConstructor}}
+}

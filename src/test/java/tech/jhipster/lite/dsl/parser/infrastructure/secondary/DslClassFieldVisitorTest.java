@@ -148,8 +148,10 @@ class DslClassFieldVisitorTest {
   void shouldReturnFieldWithComment() {
     ClassField field = getClassField(
       """
-                /* comment for my field
-                                multiline */
+                /*
+                comment for my field
+                multiline
+                */
                 myProperty MyNewProperty
                 """
     );
@@ -157,7 +159,7 @@ class DslClassFieldVisitorTest {
     assertTrue(field.getComment().isPresent());
     assertEquals("""
                 comment for my field
-                                multiline""", field.getComment().get().get());
+                multiline""", field.getComment().get().get());
   }
 
   @ParameterizedTest

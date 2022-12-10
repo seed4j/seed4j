@@ -4,7 +4,7 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public record DslContextName(String name) {
   public DslContextName {
-    Assert.field("name", name).noWhitespace().maxLength(50);
+    Assert.field("key", name).noWhitespace().maxLength(50);
     name = lowercase(name);
   }
 

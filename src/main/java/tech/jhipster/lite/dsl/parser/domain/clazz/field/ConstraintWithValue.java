@@ -5,7 +5,7 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public record ConstraintWithValue(String name, Optional<String> value) implements Constraint {
   public ConstraintWithValue {
-    Assert.field("name", name).noWhitespace();
+    Assert.field("key", name).noWhitespace();
     Assert.notNull("value", name);
     value.ifPresent(s -> Assert.field("value", s).notNull());
   }

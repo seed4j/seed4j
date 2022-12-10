@@ -1,41 +1,46 @@
-
 config {
-    useFluentMethod=no
-    baseName=Override
-    basePackageName=Override
-    packageInfrastructureName=infrastructureOverride
-    packageInfrastructurePrimaryName=primaryOverride
-    packageInfrastructureSecondaryName=secondaryOverride
-    packageDomainName=domainOverride
+baseName=Override
+basePackageName=Override
+packageInfrastructureName=infrastructureOverride
+packageInfrastructurePrimaryName=primaryOverride
+packageInfrastructureSecondaryName=secondaryOverride
+packageDomainName=domainOverride
+useFluentMethod=false
+projectFolder=/tmp/myApp
+useAssertAsValidation=yes
 }
 
-
-context MyContext {
+context ctx1 {
 
     domain {
 
-        @test
         class Ship {
-          @notBlank
-          shipId UUID
+          @min(10)
+          @max(20)
+          shipId Integer
 
-          @notBlank
+          @notNull
           name String
 
-          @nullable
-          port Port
         }
 
+       /**
+       * comment
+       */
        @package(test)
        record test {
-          @notBlank
-          shipId UUID
+          @min(10)
+          @max(20)
+          shipId Integer
 
           @notBlank
           name String
 
-          @nullable
-          port Port
         }
+    }
+}
+
+context ctx2 {
+    domain {
     }
 }

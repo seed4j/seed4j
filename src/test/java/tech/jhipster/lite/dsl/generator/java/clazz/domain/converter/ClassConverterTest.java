@@ -1,4 +1,4 @@
-package tech.jhipster.lite.dsl.generator.java.clazz.domain;
+package tech.jhipster.lite.dsl.generator.java.clazz.domain.converter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.dsl.DslClassUtils;
+import tech.jhipster.lite.dsl.generator.java.clazz.domain.ClassToGenerate;
+import tech.jhipster.lite.dsl.generator.java.clazz.domain.EnumToGenerate;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.AnnotationConverter;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.ClassConverter;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.FieldConverter;
@@ -67,5 +69,40 @@ class ClassConverterTest {
     assertNotNull(classToGenerate);
     assertTrue(classToGenerate.getPathFile().toString().contains("com/mycompany/myapp/test/Class2.java"));
     assertEquals("com.mycompany.myapp.test", classToGenerate.getPackage().get());
+  }
+
+  @Test
+  void shouldBuildEnumFromDslWithFolder() {
+    ConfigApp config = DslClassUtils.createDefaultConfig();
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    EnumToGenerate enumToGenerate = converter.convertDslEnumToGenerate(
+      DslClassUtils.createEnumSimple("class2"),
+      new DslContextName("mycontext"),
+      config
+    );
+    assertNotNull(enumToGenerate);
+    var test = UUID_REGEX.matcher(enumToGenerate.getFolder().toString()).find();
+    assertTrue(UUID_REGEX.matcher(enumToGenerate.getFolder().toString()).find());
+    assertTrue(UUID_REGEX.matcher(enumToGenerate.getPathFile().toString()).find());
+    assertTrue(enumToGenerate.getPathFile().toString().contains("com/mycompany/myapp/mycontext/domain/Class2.java"));
+    assertEquals("com.mycompany.myapp.mycontext.domain", enumToGenerate.getPackage().get());
+  }
+
+  @Test
+  void shouldRemoveAnnotationUseByDslForEnum() {
+    ConfigApp config = DslClassUtils.createDefaultConfig();
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    EnumToGenerate enumToGenerate = converter.convertDslEnumToGenerate(
+      DslClassUtils.createEnumWithAnnotationPackage("class2"),
+      new DslContextName("mycontext"),
+      config
+    );
+
+    assertNotNull(enumToGenerate);
+    //    assertEquals(0, enumToGenerate.getAnnotations().size());
   }
 }

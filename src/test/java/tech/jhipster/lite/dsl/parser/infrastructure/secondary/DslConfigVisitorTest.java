@@ -157,6 +157,7 @@ class DslConfigVisitorTest {
     assertEquals("", configVisitorInternal.visitPackageInfrastructurePrimaryName(ctx.packageInfrastructurePrimaryName()));
     assertEquals("", configVisitorInternal.visitPackageInfrastructureSecondaryName(ctx.packageInfrastructureSecondaryName()));
     assertEquals("", configVisitorInternal.visitProjectFolder(ctx.projectFolder()));
+    assertEquals("", configVisitorInternal.visitUseAssertAsValidation(ctx.useAssertAsValidation()));
   }
 
   @Test
@@ -178,5 +179,6 @@ class DslConfigVisitorTest {
       configVisitorInternal.visitPackageInfrastructureSecondaryName((List<DslParser.PackageInfrastructureSecondaryNameContext>) null)
     );
     assertEquals("", configVisitorInternal.visitProjectFolder((List<DslParser.ProjectFolderContext>) null));
+    assertEquals("", configVisitorInternal.visitUseAssertAsValidation((List<DslParser.UseAssertAsValidationContext>) null));
   }
 }

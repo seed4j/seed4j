@@ -7,7 +7,10 @@ import java.util.Optional;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassName;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassPackage;
+import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumKeyValue;
+import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumName;
+import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumValue;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.enums.EnumElementSimple;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.enums.EnumElementValue;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslEnum;
@@ -22,7 +25,7 @@ public class EnumToGenerate implements FileInfoForGenerate {
   private Path folder;
 
   private Path file;
-  private ClassName name;
+  private EnumName name;
   private ClassPackage packag;
 
   private List<EnumElementSimple> elementSimple;
@@ -38,7 +41,7 @@ public class EnumToGenerate implements FileInfoForGenerate {
     return file;
   }
 
-  public ClassName getName() {
+  public EnumName getName() {
     return name;
   }
 
@@ -89,7 +92,7 @@ public class EnumToGenerate implements FileInfoForGenerate {
     private Path folder;
 
     private Path file;
-    private ClassName name;
+    private EnumName name;
     private ClassPackage packag;
 
     private final List<EnumElementSimple> elementSimple = new LinkedList<>();
@@ -106,7 +109,7 @@ public class EnumToGenerate implements FileInfoForGenerate {
       return this;
     }
 
-    public EnumToGenerateBuilder name(ClassName name) {
+    public EnumToGenerateBuilder name(EnumName name) {
       Assert.notNull("key", name);
       this.name = name;
       return this;
@@ -126,16 +129,16 @@ public class EnumToGenerate implements FileInfoForGenerate {
 
     public EnumToGenerateBuilder addEnumKeyValue(EnumKeyValue enumKeyValue) {
       Assert.notNull("enumKeyValue", enumKeyValue);
-      String comment = null;
-      if (enumKeyValue.getComment().isPresent()) {
-        comment = enumKeyValue.getComment().get().comment();
+      String commentary = null;
+      Optional<EnumComment> optComment = enumKeyValue.getComment();
+      if (optComment.isPresent()) {
+        commentary = optComment.get().comment();
       }
-      if (enumKeyValue.getValue().isPresent()) {
-        this.elementValue.add(
-            new EnumElementValue(enumKeyValue.getKey().key()).value(enumKeyValue.getValue().get().value()).comment(comment)
-          );
+      Optional<EnumValue> optValue = enumKeyValue.getValue();
+      if (optValue.isPresent()) {
+        this.elementValue.add(new EnumElementValue(enumKeyValue.getKey().key()).value(optValue.get().value()).comment(commentary));
       } else {
-        this.elementSimple.add(new EnumElementSimple(enumKeyValue.getKey().key()).comment(comment));
+        this.elementSimple.add(new EnumElementSimple(enumKeyValue.getKey().key()).comment(commentary));
       }
       return this;
     }

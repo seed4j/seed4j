@@ -2,7 +2,9 @@ package tech.jhipster.lite.dsl.parser.infrastructure.secondary;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.IntervalSet;
+import tech.jhipster.lite.common.domain.Generated;
 
+@Generated
 public class ExceptionErrorStrategy extends DefaultErrorStrategy {
 
   @Override

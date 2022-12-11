@@ -44,8 +44,8 @@ class DslClassVisitorTest {
                   @notBlank
                   shipId UUID
                         
-                  @notBlank
-                  name String
+                  @min(10)
+                  name Integer
                         
                   @nullable
                   port Port

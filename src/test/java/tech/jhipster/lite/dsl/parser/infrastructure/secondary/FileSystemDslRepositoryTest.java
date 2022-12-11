@@ -5,10 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.dsl.parser.domain.DslApplication;
-import tech.jhipster.lite.dsl.parser.domain.DslContext;
-import tech.jhipster.lite.dsl.parser.domain.DslDomain;
-import tech.jhipster.lite.dsl.parser.domain.JhipsterDslFileIdentifiant;
+import tech.jhipster.lite.dsl.common.domain.DslProperties;
+import tech.jhipster.lite.dsl.parser.domain.*;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.error.domain.Assert;
 
@@ -18,11 +16,25 @@ class FileSystemDslRepositoryTest {
   @Test
   void shouldCreateAValidDslApp() {
     FileSystemDslRepository fileSytemDslRepository = new FileSystemDslRepository();
-    DslApplication dslApp = fileSytemDslRepository.parseDsl(new JhipsterDslFileIdentifiant("dsl/jhlite-all.dsl"));
+    DslProperties properties = new DslProperties("/tmp/jhipster", false);
+    DslApplication dslApp = fileSytemDslRepository.parseDsl(new JhipsterDslFileIdentifiant("dsl/jhlite-all.dsl"), properties);
 
     assertNotNull(dslApp);
     assertNotNull(dslApp.getConfig());
     assertNotNull(dslApp.getLstDslContext());
+    //displayDslApp(dslApp);
+  }
+
+  @Test
+  void shouldGenerateDslApp() {
+    FileSystemDslRepository fileSytemDslRepository = new FileSystemDslRepository();
+
+    JhipsterDslFileToSave fileToSave = new JhipsterDslFileToSave(
+      JhipsterDslFileToImport.builder().originalFilename("test").bytes(new byte[] {}).name("test").build()
+    );
+    JhipsterDslFileIdentifiant fileID = fileSytemDslRepository.createDslFile(fileToSave);
+
+    assertNotNull(fileID);
     //displayDslApp(dslApp);
   }
 

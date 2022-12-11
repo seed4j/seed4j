@@ -145,7 +145,7 @@ class DslClassFieldVisitorTest {
   }
 
   @Test
-  void shouldReturnFieldWithComment() {
+  void shouldReturnFieldWithCommentBefore() {
     ClassField field = getClassField(
       """
                 /*
@@ -154,6 +154,23 @@ class DslClassFieldVisitorTest {
                 */
                 myProperty MyNewProperty
                 """
+    );
+    assertEquals("MyNewProperty", field.getType().get());
+    assertTrue(field.getComment().isPresent());
+    assertEquals("""
+                comment for my field
+                multiline""", field.getComment().get().get());
+  }
+
+  @Test
+  void shouldReturnFieldWithCommentAfter() {
+    ClassField field = getClassField(
+      """
+                      myProperty MyNewProperty /*
+                      comment for my field
+                      multiline
+                      */,
+                      """
     );
     assertEquals("MyNewProperty", field.getType().get());
     assertTrue(field.getComment().isPresent());

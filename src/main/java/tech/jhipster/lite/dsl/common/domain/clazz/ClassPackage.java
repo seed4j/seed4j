@@ -1,6 +1,5 @@
 package tech.jhipster.lite.dsl.common.domain.clazz;
 
-import org.apache.commons.lang3.StringUtils;
 import tech.jhipster.lite.error.domain.Assert;
 
 public record ClassPackage(String packag) {

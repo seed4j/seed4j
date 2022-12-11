@@ -5,6 +5,6 @@ import tech.jhipster.lite.dsl.common.domain.clazz.ClassImport;
 
 public interface Annotation {
   String name();
-  Optional<ClassImport> import_();
+  Optional<ClassImport> getImport();
   Optional<String> value();
 }

@@ -26,7 +26,8 @@ class DslFileVisitorTest {
                 } 
                 """
     );
-    DslApplication dslApp = classVisitor.visitFile_(ctx);
+    DslApplication.DslApplicationBuilder builder = classVisitor.visitFile_(ctx);
+    DslApplication dslApp = builder.build();
     assertEquals(2, dslApp.getLstDslContext().size());
     assertNotNull(dslApp.getConfig());
   }

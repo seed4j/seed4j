@@ -49,11 +49,9 @@ public class DslClassVisitor {
       ctx
         .annotationClass()
         .forEach(annotationContext -> {
-          Optional<String> value;
+          Optional<String> value = Optional.empty();
           if (annotationContext.getChildCount() > 2) {
             value = Optional.of(annotationContext.getChild(2).getText());
-          } else {
-            value = Optional.empty();
           }
 
           this.dslClassBuilder.addAnnotation(new DslAnnotation(annotationContext.getChild(0).getText(), value));

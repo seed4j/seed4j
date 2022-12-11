@@ -175,6 +175,20 @@ public class ConfigApp {
       return this;
     }
 
+    public ConfigAppBuilder from(ConfigApp configSrc) {
+      this.baseName = configSrc.baseName;
+      this.basePackage = configSrc.basePackage;
+      this.fluentMethod = configSrc.fluentMethod;
+      this.packageDomainName = configSrc.packageDomainName;
+      this.packageInfrastructureName = configSrc.packageInfrastructureName;
+      this.packageInfrastructurePrimaryName = configSrc.packageInfrastructurePrimaryName;
+      this.packageInfrastructureSecondaryName = configSrc.packageInfrastructureSecondaryName;
+      this.projectFolder = configSrc.projectFolder;
+      this.useAssertAsValidation = configSrc.useAssertAsValidation;
+
+      return this;
+    }
+
     public ConfigApp build() {
       ConfigApp configApp = new ConfigApp();
 

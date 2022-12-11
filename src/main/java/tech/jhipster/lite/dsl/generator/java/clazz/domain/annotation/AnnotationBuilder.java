@@ -7,6 +7,9 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public class AnnotationBuilder {
 
+  public static final String OPT_MAX = "optMax";
+  public static final String OPT_MIN = "optMin";
+
   private AnnotationBuilder() {}
 
   public static final Annotation annotationPast = new AnnotationSimple(
@@ -59,33 +62,22 @@ public class AnnotationBuilder {
   }
 
   public static Annotation buildMax(Optional<String> optMax) {
-    Assert.notNull("optMax", optMax);
+    Assert.notNull(OPT_MAX, optMax);
     return new AnnotationWithValue("Max", optMax, Optional.of(new ClassImport("jakarta.validation.constraints.Max", false)));
   }
 
   public static Annotation buildDecimalMax(Optional<String> optMax) {
-    Assert.notNull("optMax", optMax);
+    Assert.notNull(OPT_MAX, optMax);
     return new AnnotationWithValue("DecimalMax", optMax, Optional.of(new ClassImport("jakarta.validation.constraints.DecimalMax", false)));
   }
 
   public static Annotation buildMin(Optional<String> optMin) {
-    Assert.notNull("optMin", optMin);
+    Assert.notNull(OPT_MIN, optMin);
     return new AnnotationWithValue("Min", optMin, Optional.of(new ClassImport("jakarta.validation.constraints.Min", false)));
   }
 
   public static Annotation buildDecimalMin(Optional<String> optMin) {
-    Assert.notNull("optMin", optMin);
+    Assert.notNull(OPT_MIN, optMin);
     return new AnnotationWithValue("DecimalMin", optMin, Optional.of(new ClassImport("jakarta.validation.constraints.DecimalMin", false)));
-  }
-
-  public static Annotation buildSize(Optional<String> optMin, Optional<String> optMax) {
-    Assert.notNull("optMin", optMin);
-    Assert.notNull("optMax", optMax);
-    return new AnnotationWithDoubleValue(
-      "Size",
-      optMin,
-      optMax,
-      Optional.of(new ClassImport("jakarta.validation.constraints.Size", false))
-    );
   }
 }

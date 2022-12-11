@@ -7,8 +7,6 @@ import tech.jhipster.lite.dsl.common.domain.clazz.ClassPackage;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.ClassToGenerate;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.EnumToGenerate;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.FieldToGenerate;
-import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.AnnotationConverter;
-import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.FieldConverter;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslContextName;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslEnum;
@@ -58,13 +56,13 @@ public class ClassConverter {
         }
       });
 
-    dslClass
-      .getAnnotations()
-      .forEach(annotation -> {
-        if (!annotationConverter.isAnnotationUseByDsl(annotation)) {
-          builder.addAnnotation(annotationConverter.convertAnnotation(annotation));
-        }
-      });
+    //    dslClass
+    //      .getAnnotations()
+    //      .forEach(annotation -> {
+    //        if (!annotationConverter.isAnnotationUseByDsl(annotation)) {
+    //          builder.addAnnotation(annotationConverter.convertAnnotation(annotation));
+    //        }
+    //      });
     return builder.definePackage(new ClassPackage(packageClass.toString())).folder(folderClass).file(file).build();
   }
 

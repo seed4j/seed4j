@@ -3,6 +3,8 @@ package tech.jhipster.lite.dsl.generator.java.clazz.domain.assertion;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.annotation.Annotation;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.ClassField;
 import tech.jhipster.lite.error.domain.Assert;
@@ -12,6 +14,8 @@ public class CodeAssertion {
   public static AssertionBuilder builder() {
     return new AssertionBuilder();
   }
+
+  private static final Logger log = LoggerFactory.getLogger(CodeAssertion.class);
 
   private boolean notNull;
   private boolean isField;
@@ -300,6 +304,34 @@ public class CodeAssertion {
       return this;
     }
 
+    private boolean isMinAnnotation(Annotation annotation) {
+      if ("min".equalsIgnoreCase(annotation.name())) {
+        annotation.value().ifPresent(val -> min = Integer.valueOf(val));
+        return true;
+      }
+      return false;
+    }
+
+    private boolean isMaxAnnotation(Annotation annotation) {
+      if ("max".equalsIgnoreCase(annotation.name())) {
+        annotation.value().ifPresent(val -> max = Integer.valueOf(val));
+        return true;
+      }
+      return false;
+    }
+
+    private boolean isNotNullAnnotation(Annotation annotation) {
+      return "notNull".equalsIgnoreCase(annotation.name());
+    }
+
+    private boolean isNotBlankAnnotation(Annotation annotation) {
+      return "notBlank".equalsIgnoreCase(annotation.name());
+    }
+
+    private boolean isPositiveAnnotation(Annotation annotation) {
+      return "positive".equalsIgnoreCase(annotation.name());
+    }
+
     public AssertionBuilder from(List<Annotation> lstAnnotation, ClassField field) {
       Assert.field("lstAnnotation", lstAnnotation).noNullElement();
 
@@ -311,66 +343,31 @@ public class CodeAssertion {
         .forEach(annotation -> {
           switch (field.getType().get()) {
             case "Integer" -> {
-              if ("min".equalsIgnoreCase(annotation.name())) {
-                isIntegerMin = true;
-                annotation.value().ifPresent(val -> min = Integer.valueOf(val));
-              } else if ("max".equalsIgnoreCase(annotation.name())) {
-                isIntegerMax = true;
-                annotation.value().ifPresent(val -> max = Integer.valueOf(val));
-              }
+              isIntegerMin = isMinAnnotation(annotation);
+              isIntegerMax = isMaxAnnotation(annotation);
             }
             case "String" -> {
-              if ("min".equalsIgnoreCase(annotation.name())) {
-                isStringMin = true;
-                annotation.value().ifPresent(val -> min = Integer.valueOf(val));
-              } else if ("max".equalsIgnoreCase(annotation.name())) {
-                isStringMax = true;
-                annotation.value().ifPresent(val -> max = Integer.valueOf(val));
-              }
+              isStringMin = isMinAnnotation(annotation);
+              isStringMax = isMaxAnnotation(annotation);
             }
             case "Long" -> {
-              if ("min".equalsIgnoreCase(annotation.name())) {
-                isLongMin = true;
-                annotation.value().ifPresent(val -> min = Integer.valueOf(val));
-              } else if ("max".equalsIgnoreCase(annotation.name())) {
-                isLongMax = true;
-                annotation.value().ifPresent(val -> max = Integer.valueOf(val));
-              }
+              isLongMin = isMinAnnotation(annotation);
+              isLongMax = isMaxAnnotation(annotation);
             }
             case "Double" -> {
-              if ("min".equalsIgnoreCase(annotation.name())) {
-                isDoubleMin = true;
-                annotation.value().ifPresent(val -> min = Integer.valueOf(val));
-              } else if ("max".equalsIgnoreCase(annotation.name())) {
-                isDoubleMax = true;
-                annotation.value().ifPresent(val -> max = Integer.valueOf(val));
-              }
+              isDoubleMin = isMinAnnotation(annotation);
+              isDoubleMax = isMaxAnnotation(annotation);
             }
             case "Float" -> {
-              if ("min".equalsIgnoreCase(annotation.name())) {
-                isFloatMin = true;
-                annotation.value().ifPresent(val -> min = Integer.valueOf(val));
-              } else if ("max".equalsIgnoreCase(annotation.name())) {
-                isFloatMax = true;
-                annotation.value().ifPresent(val -> max = Integer.valueOf(val));
-              }
+              isFloatMin = isMinAnnotation(annotation);
+              isFloatMax = isMaxAnnotation(annotation);
             }
             case "BigDecimal" -> {
-              if ("min".equalsIgnoreCase(annotation.name())) {
-                isBigDecimalMin = true;
-                annotation.value().ifPresent(val -> min = Integer.valueOf(val));
-              } else if ("max".equalsIgnoreCase(annotation.name())) {
-                isBigDecimalMax = true;
-                annotation.value().ifPresent(val -> max = Integer.valueOf(val));
-              }
+              isBigDecimalMin = isMinAnnotation(annotation);
+              isBigDecimalMax = isMaxAnnotation(annotation);
             }
-            case "Collection" -> {
-              if ("max".equalsIgnoreCase(annotation.name())) {
-                isCollectionMaxSize = true;
-                annotation.value().ifPresent(val -> max = Integer.valueOf(val));
-              }
-            }
-            default -> System.out.println("default switch for " + field.getType().get());
+            case "Collection" -> isCollectionMaxSize = isMaxAnnotation(annotation);
+            default -> log.warn("default switch for {}", field.getType().get());
           }
         });
 
@@ -378,13 +375,9 @@ public class CodeAssertion {
         .stream()
         .filter(annot -> annot.value().isEmpty())
         .forEach(annotation -> {
-          if ("notNull".equalsIgnoreCase(annotation.name())) {
-            notNull = true;
-          } else if ("notBlank".equalsIgnoreCase(annotation.name())) {
-            notBlank = true;
-          } else if ("positive".equalsIgnoreCase(annotation.name())) {
-            isPositive = true;
-          }
+          notNull = isNotNullAnnotation(annotation);
+          notBlank = isNotBlankAnnotation(annotation);
+          isPositive = isPositiveAnnotation(annotation);
         });
 
       return this;

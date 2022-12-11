@@ -1,7 +1,6 @@
 package tech.jhipster.lite.dsl.parser.domain;
 
 import java.util.Optional;
-import org.apache.commons.lang3.StringUtils;
 import tech.jhipster.lite.error.domain.Assert;
 
 public record DslAnnotation(String name, Optional<String> value) {

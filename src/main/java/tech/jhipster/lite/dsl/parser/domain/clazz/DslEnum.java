@@ -5,6 +5,7 @@ import tech.jhipster.lite.dsl.common.domain.clazz.ClassComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassName;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassPackage;
 import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumKeyValue;
+import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumName;
 import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
 import tech.jhipster.lite.error.domain.Assert;
 
@@ -14,14 +15,14 @@ public class DslEnum {
     return new DslEnumBuilder();
   }
 
-  private ClassName name;
+  private EnumName name;
   private ClassPackage packag;
   private ClassComment comment;
   private List<EnumKeyValue> enumKeyValues;
 
   private List<DslAnnotation> annotations;
 
-  public ClassName getName() {
+  public EnumName getName() {
     return name;
   }
 
@@ -48,7 +49,7 @@ public class DslEnum {
 
   public static final class DslEnumBuilder {
 
-    private ClassName name;
+    private EnumName name;
 
     private ClassPackage packag = ClassPackage.EMPTY;
     private ClassComment comment;
@@ -57,7 +58,7 @@ public class DslEnum {
 
     private DslEnumBuilder() {}
 
-    public DslEnumBuilder name(ClassName name) {
+    public DslEnumBuilder name(EnumName name) {
       Assert.notNull("key", name);
       this.name = name;
       return this;

@@ -19,8 +19,10 @@ public class DslGenerator {
     this.dslJavaGenerator = dslJavaGenerator;
   }
 
-  public void importAndGenerate(JhipsterDslFileToImport dslToImport) {
-    DslApplication dslApplication = this.dslParser.importDsl(dslToImport);
+  public void importAndGenerate(JhipsterDslFileToImport dslToImport, DslProperties properties) {
+    Assert.notNull("dslToImport", dslToImport);
+    Assert.notNull("properties", properties);
+    DslApplication dslApplication = this.dslParser.importDsl(dslToImport, properties);
 
     this.dslJavaGenerator.generate(dslApplication);
   }

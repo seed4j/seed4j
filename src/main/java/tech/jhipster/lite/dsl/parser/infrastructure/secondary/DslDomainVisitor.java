@@ -13,6 +13,7 @@ public class DslDomainVisitor {
 
   public static class DomainVisitor extends DslBaseVisitor<DslDomain> {
 
+    @Override
     public DslDomain visitDomain(DslParser.DomainContext ctx) {
       Assert.notNull("ctx", ctx);
       DslDomain.DslDomainBuilder domainBuilder = DslDomain.dslDomainBuilder();

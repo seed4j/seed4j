@@ -1,8 +1,6 @@
 package tech.jhipster.lite.dsl.generator.java.clazz.infrastructure.secondary;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +27,7 @@ class DslNpmInstallationReader {
 
   private static boolean has(String... commands) {
     try {
-      Process process = new ProcessBuilder(commands).redirectOutput(new File("/tmp/output")).start();
+      Process process = new ProcessBuilder(commands).start();
 
       if (process.waitFor(5, TimeUnit.SECONDS)) {
         return true;

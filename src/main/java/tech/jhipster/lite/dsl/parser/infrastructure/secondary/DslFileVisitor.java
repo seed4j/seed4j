@@ -9,10 +9,10 @@ public class DslFileVisitor {
 
   private DslFileVisitor() {}
 
-  public static class FileVisitor extends DslBaseVisitor<DslApplication> {
+  public static class FileVisitor extends DslBaseVisitor<DslApplication.DslApplicationBuilder> {
 
     @Override
-    public DslApplication visitFile_(DslParser.File_Context fileCtx) {
+    public DslApplication.DslApplicationBuilder visitFile_(DslParser.File_Context fileCtx) {
       Assert.notNull("fileCtx", fileCtx);
       DslApplication.DslApplicationBuilder builder = DslApplication.dslApplilcationBuilder();
       builder.config(new DslConfigVisitor.ConfigVisitor().visitConfig(fileCtx.config()));
@@ -22,7 +22,7 @@ public class DslFileVisitor {
         builder.addDslContext(contextVisitor.visitContext(ctx));
       }
 
-      return builder.build();
+      return builder;
     }
   }
 }

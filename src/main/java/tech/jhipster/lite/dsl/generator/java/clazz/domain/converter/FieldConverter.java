@@ -3,6 +3,8 @@ package tech.jhipster.lite.dsl.generator.java.clazz.domain.converter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.FieldToGenerate;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.annotation.Annotation;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.assertion.CodeAssertion;
@@ -17,18 +19,14 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public class FieldConverter {
 
-  private List<FieldType> fieldTypes = new LinkedList<>();
-
+  private final List<FieldType> fieldTypes = new LinkedList<>();
+  private static final Logger log = LoggerFactory.getLogger(FieldConverter.class);
   private AnnotationConverter annotationConverter;
 
-  //  private ConfigApp config;
-
-  public FieldConverter(AnnotationConverter annotationConverter/*, ConfigApp config*/) {
+  public FieldConverter(AnnotationConverter annotationConverter) {
     this();
     Assert.notNull("annotationConverter", annotationConverter);
-    //    Assert.notNull("config", config);
     this.annotationConverter = annotationConverter;
-    //    this.config = config;
   }
 
   private FieldConverter() {
@@ -67,8 +65,7 @@ public class FieldConverter {
     if (isKnowType(classField.getType().get())) {
       builderField.type(getType(classField.getType().get()));
     } else {
-      System.out.println("Unknown type :" + classField.getType().get());
-      // TODO manage type existing class (for import)
+      log.warn("Unknown type :{}", classField.getType().get());
       builderField.type(new FieldTypeImpl(classField.getType().get(), Optional.empty()));
     }
     List<Annotation> commonAnnotationAndValidator = new LinkedList<>();

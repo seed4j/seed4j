@@ -28,4 +28,9 @@ public record FieldTypeImpl(String name, Optional<ClassImport> import_) implemen
     Assert.field("key", name).noWhitespace();
     Assert.notNull("import_", import_);
   }
+
+  @Override
+  public Optional<ClassImport> getImport() {
+    return import_();
+  }
 }

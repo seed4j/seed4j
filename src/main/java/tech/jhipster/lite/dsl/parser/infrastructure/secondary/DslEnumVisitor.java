@@ -3,14 +3,9 @@ package tech.jhipster.lite.dsl.parser.infrastructure.secondary;
 import java.util.Optional;
 import tech.jhipster.lite.dsl.DslBaseVisitor;
 import tech.jhipster.lite.dsl.DslParser;
-import tech.jhipster.lite.dsl.common.domain.clazz.ClassComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassName;
-import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumComment;
-import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumKey;
-import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumKeyValue;
-import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumValue;
+import tech.jhipster.lite.dsl.common.domain.clazz.enums.*;
 import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
-import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslEnum;
 import tech.jhipster.lite.error.domain.Assert;
 
@@ -25,7 +20,7 @@ public class DslEnumVisitor {
       Assert.notNull("ctx", ctx);
 
       DslEnum.DslEnumBuilder dslEnumBuilder = DslEnum.dslEnumBuilder();
-      dslEnumBuilder.name(new ClassName(ctx.IDENTIFIER().getText()));
+      dslEnumBuilder.name(new EnumName(ctx.IDENTIFIER().getText()));
 
       BeforeEnumKeyVisitor beforeEnumVisitor = new BeforeEnumKeyVisitor(dslEnumBuilder);
 

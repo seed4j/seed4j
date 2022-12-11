@@ -184,3 +184,4 @@ dist/
 # Svelte
 ######################
 .svelte-kit/
+.run/*.xml

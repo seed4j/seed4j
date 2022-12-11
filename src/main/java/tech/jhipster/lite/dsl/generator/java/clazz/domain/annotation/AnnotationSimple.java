@@ -14,4 +14,8 @@ public record AnnotationSimple(String name, Optional<ClassImport> import_) imple
   public Optional<String> value() {
     return Optional.empty();
   }
+  @Override
+  public Optional<ClassImport> getImport() {
+    return import_();
+  }
 }

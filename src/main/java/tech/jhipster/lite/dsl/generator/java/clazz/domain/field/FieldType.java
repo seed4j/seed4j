@@ -5,5 +5,5 @@ import tech.jhipster.lite.dsl.common.domain.clazz.ClassImport;
 
 public interface FieldType {
   String name();
-  Optional<ClassImport> import_();
+  Optional<ClassImport> getImport();
 }

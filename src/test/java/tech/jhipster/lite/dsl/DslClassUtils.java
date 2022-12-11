@@ -4,10 +4,7 @@ import java.util.Optional;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassName;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassPackage;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassType;
-import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumComment;
-import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumKey;
-import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumKeyValue;
-import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumValue;
+import tech.jhipster.lite.dsl.common.domain.clazz.enums.*;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldName;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.*;
@@ -161,10 +158,22 @@ public class DslClassUtils {
       .build();
   }
 
+  public static DslEnum createEnumWithAnnotationPackage(String name) {
+    return DslEnum
+      .dslEnumBuilder()
+      .name(new EnumName(name))
+      .addAnnotation(new DslAnnotation("package", Optional.of("test")))
+      .definePackage(ClassPackage.EMPTY)
+      .addEnumKeyValue(createEnumKvSimple("MY_KEY1"))
+      .addEnumKeyValue(createEnumKvSimple("MY_KEY2"))
+      .addEnumKeyValue(createEnumKvSimple("MY_KEY3"))
+      .build();
+  }
+
   public static DslEnum createEnumSimple(String name) {
     return DslEnum
       .dslEnumBuilder()
-      .name(new ClassName(name))
+      .name(new EnumName(name))
       .definePackage(ClassPackage.EMPTY)
       .addEnumKeyValue(createEnumKvSimple("MY_KEY1"))
       .addEnumKeyValue(createEnumKvSimple("MY_KEY2"))
@@ -175,7 +184,7 @@ public class DslClassUtils {
   public static DslEnum createEnumValue(String name) {
     return DslEnum
       .dslEnumBuilder()
-      .name(new ClassName(name))
+      .name(new EnumName(name))
       .definePackage(ClassPackage.EMPTY)
       .addEnumKeyValue(createEnumKvWithValueString("MY_KEY1"))
       .addEnumKeyValue(createEnumKvWithValueString("MY_KEY2"))

@@ -161,7 +161,7 @@ public class ClassToGenerate implements FileInfoForGenerate {
     public ClassToGenerateBuilder addField(FieldToGenerate fieldToGenerate) {
       Assert.notNull("fieldToGenerate", fieldToGenerate);
       this.fields.add(fieldToGenerate);
-      fieldToGenerate.getType().import_().ifPresent(this.imports::add);
+      fieldToGenerate.getType().getImport().ifPresent(this.imports::add);
 
       return this;
     }

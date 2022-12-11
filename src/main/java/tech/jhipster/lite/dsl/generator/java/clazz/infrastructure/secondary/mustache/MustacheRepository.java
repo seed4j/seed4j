@@ -12,7 +12,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import tech.jhipster.lite.common.domain.Generated;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassImport;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.ClassToGenerate;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.EnumToGenerate;
@@ -25,6 +28,7 @@ import tech.jhipster.lite.project.domain.ProjectPath;
 @Repository
 public class MustacheRepository implements GeneratorJavaRepository {
 
+  private static final Logger log = LoggerFactory.getLogger(MustacheRepository.class);
   public static final String MUSTACHE_JAVA_TEMPLATE_DIR = "dsl/java/";
 
   private final DslProjectFormatter formatter;
@@ -39,6 +43,7 @@ public class MustacheRepository implements GeneratorJavaRepository {
   }
 
   @Override
+  @Generated(reason = "The error handling is an hard to test")
   public void generate(ClassToGenerate classToGenerate) {
     Assert.notNull("classToGenerate", classToGenerate);
     try {
@@ -52,11 +57,12 @@ public class MustacheRepository implements GeneratorJavaRepository {
       m.execute(writer, context).flush();
       writeFile(classToGenerate, writer);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new MustacheIoException("Error Io for generate a class", e);
     }
   }
 
   @Override
+  @Generated(reason = "The error handling is an hard to test")
   public void generate(EnumToGenerate enumToGenerate) {
     Assert.notNull("classToGenerate", enumToGenerate);
     try {
@@ -70,7 +76,7 @@ public class MustacheRepository implements GeneratorJavaRepository {
       m.execute(writer, context).flush();
       writeFile(enumToGenerate, writer);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new MustacheIoException("Error Io for generate a enum", e);
     }
   }
 
@@ -78,13 +84,12 @@ public class MustacheRepository implements GeneratorJavaRepository {
     Assert.notNull("fileToGenerate", fileToGenerate);
     Assert.notNull("writer", writer);
     String content = writer.toString();
-    System.out.println(content);
 
     Path pathFolder = fileToGenerate.getFolder();
     File fileClass = new File(fileToGenerate.getPathFile().toString());
 
     Files.createDirectories(pathFolder);
-    System.out.println("generate class to " + fileClass.toString());
+    log.debug("generate class to {}", fileClass);
     FileUtils.write(fileClass, content, StandardCharsets.UTF_8);
   }
 
@@ -95,8 +100,8 @@ public class MustacheRepository implements GeneratorJavaRepository {
     context.put("createConstructor", !enumToGenerate.getElementValue().isEmpty());
     context.put("enumToGenerate", enumToGenerate);
 
-    context.put("elementSimple", new DecoratedCollection(enumToGenerate.getElementSimple()));
-    context.put("elementValue", new DecoratedCollection(enumToGenerate.getElementValue()));
+    context.put("elementSimple", new DecoratedCollection<>(enumToGenerate.getElementSimple()));
+    context.put("elementValue", new DecoratedCollection<>(enumToGenerate.getElementValue()));
     enumToGenerate.getComment().ifPresent(comment -> context.put("classComment", comment));
   }
 
@@ -114,9 +119,7 @@ public class MustacheRepository implements GeneratorJavaRepository {
     List<FieldsMustache> fields = new LinkedList<>();
     classToGenerate.getFields().forEach(field -> fields.add(FieldsMustache.builder().from(field).build()));
 
-    Collection<FieldsMustache> decoratedFields = new DecoratedCollection(fields);
-
     context.put("fields", fields);
-    context.put("decoratedFields", decoratedFields);
+    context.put("decoratedFields", new DecoratedCollection<>(fields));
   }
 }

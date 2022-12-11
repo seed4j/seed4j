@@ -15,13 +15,13 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public class AnnotationConverter {
 
-  private final List<Annotation> annotations = new LinkedList<>();
-
+  public static final String DSL_ANNOTATION = "dslAnnotation";
   private static final String DSL_ANNOTATION_PACKAGE = "package";
   private static final String DSL_ANNOTATION_BUILDER = "builder";
-  private final List<String> DSL_ANNOTATIONS = Stream.of(DSL_ANNOTATION_PACKAGE, DSL_ANNOTATION_BUILDER).toList();
+  private static final List<String> DSL_ANNOTATIONS = Stream.of(DSL_ANNOTATION_PACKAGE, DSL_ANNOTATION_BUILDER).toList();
+  private static final List<String> KNOW_ANNOTATION_WITH_VALUE = Stream.of("min", "max", "size", "decimalMin", "decimalMax").toList();
 
-  private final List<String> knowAnnotationWithValue = Stream.of("min", "max", "size", "decimalMin", "decimalMax").toList();
+  private final List<Annotation> annotations = new LinkedList<>();
 
   public AnnotationConverter() {
     annotations.add(AnnotationBuilder.annotationFuture);
@@ -46,7 +46,7 @@ public class AnnotationConverter {
   public boolean isKnowAnnotation(String annotation) {
     boolean isSimpleAnnotation = annotations.stream().anyMatch(s -> s.name().equalsIgnoreCase(annotation));
     if (!isSimpleAnnotation) {
-      isSimpleAnnotation = knowAnnotationWithValue.stream().anyMatch(s -> s.equalsIgnoreCase(annotation));
+      isSimpleAnnotation = KNOW_ANNOTATION_WITH_VALUE.stream().anyMatch(s -> s.equalsIgnoreCase(annotation));
     }
     return isSimpleAnnotation;
   }
@@ -56,7 +56,7 @@ public class AnnotationConverter {
   }
 
   public boolean isAnnotationUseByDsl(DslAnnotation dslAnnotation) {
-    Assert.notNull("dslAnnotation", dslAnnotation);
+    Assert.notNull(DSL_ANNOTATION, dslAnnotation);
     return DSL_ANNOTATIONS.stream().anyMatch(annot -> annot.equalsIgnoreCase(dslAnnotation.name()));
   }
 
@@ -73,18 +73,20 @@ public class AnnotationConverter {
   }
 
   public Annotation convertAnnotation(DslAnnotation dslAnnotation) {
-    Assert.notNull("dslAnnotation", dslAnnotation);
-    if (dslAnnotation.value().isPresent()) {
-      return createAnnotationWithValue(dslAnnotation.name(), dslAnnotation.value().get());
+    Assert.notNull(DSL_ANNOTATION, dslAnnotation);
+    Optional<String> optValue = dslAnnotation.value();
+    if (optValue.isPresent()) {
+      return createAnnotationWithValue(dslAnnotation.name(), optValue.get());
     } else {
       return createSimpleAnnotation(dslAnnotation.name());
     }
   }
 
-  public Annotation convertAnnotation(Constraint constraint) {
+  public Annotation convertConstraint(Constraint constraint) {
     Assert.notNull("constraint", constraint);
-    if (constraint.value().isPresent()) {
-      return createAnnotationWithValue(constraint.name(), constraint.value().get());
+    Optional<String> optValue = constraint.value();
+    if (optValue.isPresent()) {
+      return createAnnotationWithValue(constraint.name(), optValue.get());
     } else {
       return createSimpleAnnotation(constraint.name());
     }
@@ -103,17 +105,12 @@ public class AnnotationConverter {
       case "max" -> AnnotationBuilder.buildMax(Optional.of(value));
       case "decimalmax" -> AnnotationBuilder.buildDecimalMax(Optional.of(value));
       case "decimalmin" -> AnnotationBuilder.buildDecimalMin(Optional.of(value));
-      default -> throw new AnnotationConvertionException(String.format("Annotation with value %s not recognized", name));
+      default -> throw new AnnotationConvertionException(String.format("Annotation with value '%s' not recognized", name));
     };
-  }
-
-  public List<Annotation> convertAnnotation(List<DslAnnotation> dslAnnotation) {
-    Assert.field("dslAnnotation", dslAnnotation).noNullElement();
-    return dslAnnotation.stream().map(this::convertAnnotation).toList();
   }
 
   public Annotation convertFromConstrain(Constraint constraint) {
     Assert.notNull("constraint", constraint);
-    return convertAnnotation(constraint);
+    return convertConstraint(constraint);
   }
 }

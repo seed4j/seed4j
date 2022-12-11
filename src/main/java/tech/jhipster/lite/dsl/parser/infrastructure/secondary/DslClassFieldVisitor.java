@@ -21,14 +21,12 @@ public class DslClassFieldVisitor {
 
       fieldBuilder.name(new FieldName(ctx.IDENTIFIER(0).getText()));
       if (ctx.comment() != null) {
-        String comment = ctx.comment().getText();
+        String comment = ctx.comment().getChild(0).getText();
         fieldBuilder.comment(new FieldComment(comment));
       }
       buildBeforeField(ctx, fieldBuilder);
 
       buildType(ctx, fieldBuilder);
-
-      idValueObject(ctx, fieldBuilder);
 
       buildConstraint(ctx, fieldBuilder);
 
@@ -36,9 +34,7 @@ public class DslClassFieldVisitor {
     }
 
     private static void buildBeforeField(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {
-      //TODO manage annotation / modifiers / comment
-
-      if (ctx.beforeClassField().comment() != null && !ctx.beforeClassField().comment().isEmpty()) {
+      if (ctx.beforeClassField().comment() != null) {
         fieldBuilder.comment(new FieldComment(ctx.beforeClassField().comment().getText()));
       }
 
@@ -46,7 +42,6 @@ public class DslClassFieldVisitor {
         .beforeClassField()
         .annotation()
         .forEach(annot -> {
-          //todo in annotation visitor?
           if (annot.getChildCount() > 4 && ")".equals(annot.getChild(3).getText())) {
             fieldBuilder.addAnnotation(new DslAnnotation(annot.getChild(0).getText(), Optional.of(annot.getChild(2).getText())));
           }
@@ -88,12 +83,6 @@ public class DslClassFieldVisitor {
       } else {
         fieldBuilder.type(new FieldType(ctx.IDENTIFIER(1).getText()));
       }
-    }
-  }
-
-  private static void idValueObject(DslParser.ClassFieldContext ctx, ClassField.FieldBuilder fieldBuilder) {
-    if (ctx.VO() != null) {
-      // VO -> record un attribut du type +les eventuels constraints
     }
   }
 

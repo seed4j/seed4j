@@ -83,7 +83,7 @@ public class FieldsMustache {
       Assert.notNull("field", field);
       AnnotationBuilder annotationBuilder = new AnnotationBuilder();
       field.getComment().ifPresent(fieldComment -> this.comment = fieldComment.get());
-      field.getAssertion().ifPresent(assertion -> this.assertion = assertion);
+      field.getAssertion().ifPresent(asser -> this.assertion = asser);
       this.name = field.getName().get();
       this.type = field.getType().name();
       this.getterName = field.getterName();

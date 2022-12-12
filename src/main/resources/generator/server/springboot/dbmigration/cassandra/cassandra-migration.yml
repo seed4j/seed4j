@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  cassandra-migration:
+    container_name: cassandra-migration
+    environment:
+      - CASSANDRA_CONTACT_POINT=cassandra
+      - USER=docker-cassandra-migration
+      - CREATE_MIGRATION_KEYSPACE_SCRIPT=create-migration-keyspace.cql
+      #- DEBUG_LOG=1 # uncomment to show debug logs during the migration process
+    build:
+      context: .
+      dockerfile: cassandra/Cassandra-Migration.Dockerfile
+    volumes:
+      - ../resources/config/cql:/cql:ro

@@ -1,0 +1,57 @@
+package tech.jhipster.lite.generator.server.springboot.dbmigration.cassandra.domain;
+
+import static org.mockito.Mockito.when;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import tech.jhipster.lite.TestFileUtils;
+import tech.jhipster.lite.UnitTest;
+import tech.jhipster.lite.module.domain.JHipsterModule;
+import tech.jhipster.lite.module.domain.JHipsterModulesFixture;
+import tech.jhipster.lite.module.domain.docker.DockerImageVersion;
+import tech.jhipster.lite.module.domain.docker.DockerImages;
+import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
+
+@UnitTest
+@ExtendWith(MockitoExtension.class)
+class CassandraMigrationModuleFactoryTest {
+
+  @Mock
+  private DockerImages dockerImages;
+
+  @InjectMocks
+  private CassandraMigrationModuleFactory factory;
+
+  @Test
+  void shouldBuildModule() {
+    when(dockerImages.get("cassandra")).thenReturn(new DockerImageVersion("cassandra", "4.0.7"));
+
+    JHipsterModuleProperties properties = JHipsterModulesFixture
+      .propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .basePackage("com.jhipster.test")
+      .build();
+
+    JHipsterModule module = factory.buildModule(properties);
+
+    assertThatModuleWithFiles(module, readmeFile())
+      .hasFiles("src/main/docker/cassandra-migration.yml")
+      .hasFiles("src/main/resources/config/cql/create-migration-keyspace.cql")
+      .hasFiles("src/main/resources/config/cql/changelog/README.md")
+      .hasFiles("documentation/cassandra-migration.md")
+      .hasPrefixedFiles("src/main/docker/cassandra/scripts", "autoMigrate.sh", "execute-cql.sh")
+      .hasFile("README.md")
+      .containing("""
+        ```bash
+        docker compose -f src/main/docker/cassandra-migration.yml up -d
+        ```
+        """)
+      .and()
+      .hasFile("src/main/docker/cassandra/Cassandra-Migration.Dockerfile")
+      .containing("cassandra:4.0.7");
+  }
+}

@@ -59,16 +59,9 @@ import tech.jhipster.lite.module.domain.postaction.JHipsterModulePostActions;
 import tech.jhipster.lite.module.domain.postaction.JHipsterModulePostActions.JHipsterModulePostActionsBuilder;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
-import tech.jhipster.lite.module.domain.replacement.FileStartReplacer;
-import tech.jhipster.lite.module.domain.replacement.JHipsterModuleMandatoryReplacements;
+import tech.jhipster.lite.module.domain.replacement.*;
 import tech.jhipster.lite.module.domain.replacement.JHipsterModuleMandatoryReplacements.JHipsterModuleMandatoryReplacementsBuilder;
-import tech.jhipster.lite.module.domain.replacement.JHipsterModuleOptionalReplacements;
 import tech.jhipster.lite.module.domain.replacement.JHipsterModuleOptionalReplacements.JHipsterModuleOptionalReplacementsBuilder;
-import tech.jhipster.lite.module.domain.replacement.RegexNeedleAfterReplacer;
-import tech.jhipster.lite.module.domain.replacement.RegexNeedleBeforeReplacer;
-import tech.jhipster.lite.module.domain.replacement.RegexReplacer;
-import tech.jhipster.lite.module.domain.replacement.TextNeedleBeforeReplacer;
-import tech.jhipster.lite.module.domain.replacement.TextReplacer;
 
 public class JHipsterModule {
 
@@ -204,6 +197,10 @@ public class JHipsterModule {
 
   public static JHipsterDestination toSrcMainJava() {
     return JHipsterDestination.SRC_MAIN_JAVA;
+  }
+
+  public static JHipsterDestination toSrcMainResources() {
+    return JHipsterDestination.SRC_MAIN_RESOURCES;
   }
 
   public static JHipsterDestination toSrcMainDocker() {

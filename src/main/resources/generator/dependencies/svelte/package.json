@@ -8,7 +8,7 @@
   "devDependencies": {
     "@babel/preset-env": "7.20.2",
     "@sveltejs/adapter-static": "1.0.0-next.48",
-    "@sveltejs/kit": "1.0.0-next.575",
+    "@sveltejs/kit": "1.0.0-next.578",
     "@testing-library/svelte": "3.2.2",
     "@typescript-eslint/eslint-plugin": "5.46.0",
     "@typescript-eslint/parser": "5.46.0",

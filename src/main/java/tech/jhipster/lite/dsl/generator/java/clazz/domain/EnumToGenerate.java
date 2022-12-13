@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassComment;
-import tech.jhipster.lite.dsl.common.domain.clazz.ClassName;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassPackage;
 import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumComment;
 import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumKeyValue;
@@ -16,16 +15,17 @@ import tech.jhipster.lite.dsl.generator.java.clazz.domain.enums.EnumElementValue
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslEnum;
 import tech.jhipster.lite.error.domain.Assert;
 
-public class EnumToGenerate implements FileInfoForGenerate {
+public class EnumToGenerate implements IsImportable, FileInfoForGenerate {
 
   public static EnumToGenerateBuilder enumToGenerateBuilder() {
     return new EnumToGenerateBuilder();
   }
 
+  private boolean ignore;
   private Path folder;
 
   private Path file;
-  private EnumName name;
+  private EnumName key;
   private ClassPackage packag;
 
   private List<EnumElementSimple> elementSimple;
@@ -37,12 +37,22 @@ public class EnumToGenerate implements FileInfoForGenerate {
   }
 
   @Override
+  public String getNameForThisObject() {
+    return key.get();
+  }
+
+  @Override
+  public String getImportForThisObject() {
+    return getPackage().get() + "." + getName().get();
+  }
+
+  @Override
   public Path getPathFile() {
     return file;
   }
 
   public EnumName getName() {
-    return name;
+    return key;
   }
 
   public ClassPackage getPackage() {
@@ -61,8 +71,12 @@ public class EnumToGenerate implements FileInfoForGenerate {
     return elementValue;
   }
 
-  public boolean asImport() {
+  public boolean hasImport() {
     return !elementValue.isEmpty();
+  }
+
+  public boolean isIgnore() {
+    return ignore;
   }
 
   @Override
@@ -74,7 +88,7 @@ public class EnumToGenerate implements FileInfoForGenerate {
       ", file=" +
       file +
       ", name=" +
-      name +
+      key +
       ", packag=" +
       packag +
       ", elementSimple=" +
@@ -92,26 +106,32 @@ public class EnumToGenerate implements FileInfoForGenerate {
     private Path folder;
 
     private Path file;
-    private EnumName name;
+    private EnumName key;
     private ClassPackage packag;
 
     private final List<EnumElementSimple> elementSimple = new LinkedList<>();
     private final List<EnumElementValue> elementValue = new LinkedList<>();
     private ClassComment comment;
+    private boolean ignore = false;
 
     private EnumToGenerateBuilder() {}
 
     public EnumToGenerateBuilder fromDslEnum(DslEnum dslEnum) {
       Assert.notNull("dslEnum", dslEnum);
-      this.name = dslEnum.getName();
+      this.key = dslEnum.getName();
       this.comment = dslEnum.getComment().orElse(null);
       this.packag = dslEnum.getPackage();
       return this;
     }
 
+    public EnumToGenerateBuilder ignore(boolean ignore) {
+      this.ignore = ignore;
+      return this;
+    }
+
     public EnumToGenerateBuilder name(EnumName name) {
       Assert.notNull("key", name);
-      this.name = name;
+      this.key = name;
       return this;
     }
 
@@ -136,9 +156,9 @@ public class EnumToGenerate implements FileInfoForGenerate {
       }
       Optional<EnumValue> optValue = enumKeyValue.getValue();
       if (optValue.isPresent()) {
-        this.elementValue.add(new EnumElementValue(enumKeyValue.getKey().key()).value(optValue.get().value()).comment(commentary));
+        this.elementValue.add(new EnumElementValue().key(enumKeyValue.getKey().key()).value(optValue.get().value()).comment(commentary));
       } else {
-        this.elementSimple.add(new EnumElementSimple(enumKeyValue.getKey().key()).comment(commentary));
+        this.elementSimple.add(new EnumElementSimple().key(enumKeyValue.getKey().key()).comment(commentary));
       }
       return this;
     }
@@ -156,12 +176,13 @@ public class EnumToGenerate implements FileInfoForGenerate {
     }
 
     public EnumToGenerate build() {
-      Assert.notNull("key", this.name);
+      Assert.notNull("key", this.key);
       Assert.notNull("folder", this.folder);
       Assert.notNull("file", this.file);
       EnumToGenerate enumToGenerate = new EnumToGenerate();
       enumToGenerate.folder = this.folder;
-      enumToGenerate.name = this.name;
+      enumToGenerate.ignore = this.ignore;
+      enumToGenerate.key = this.key;
       enumToGenerate.comment = this.comment;
       enumToGenerate.file = this.file;
       enumToGenerate.elementSimple = this.elementSimple;

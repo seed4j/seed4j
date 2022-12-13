@@ -1,22 +1,19 @@
 package tech.jhipster.lite.dsl.common.domain;
 
-import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.error.domain.Assert;
 
 public class DslProperties {
 
-  private final JHipsterProjectFolder projectFolder;
+  private final String projectFolder;
   private final boolean commitModule;
 
   public DslProperties(String projectFolder, boolean commitModule) {
-    this.projectFolder = new JHipsterProjectFolder(projectFolder);
+    Assert.notNull("projectFolder", projectFolder);
+    this.projectFolder = projectFolder;
     this.commitModule = commitModule;
   }
 
-  public JHipsterProjectFolder projectFolder() {
+  public String projectFolder() {
     return projectFolder;
-  }
-
-  public boolean commitNeeded() {
-    return commitModule;
   }
 }

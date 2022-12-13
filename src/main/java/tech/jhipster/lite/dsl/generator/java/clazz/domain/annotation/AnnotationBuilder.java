@@ -2,7 +2,6 @@ package tech.jhipster.lite.dsl.generator.java.clazz.domain.annotation;
 
 import java.util.Optional;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassImport;
-import tech.jhipster.lite.dsl.parser.domain.config.ConfigFluentMethodBuilder;
 import tech.jhipster.lite.error.domain.Assert;
 
 public class AnnotationBuilder {
@@ -56,10 +55,6 @@ public class AnnotationBuilder {
     "AssertTrue",
     Optional.of(new ClassImport("jakarta.validation.constraints.AssertTrue", false))
   );
-
-  public static ConfigFluentMethodBuilder.Builder builderFluentMethod() {
-    return new ConfigFluentMethodBuilder.Builder();
-  }
 
   public static Annotation buildMax(Optional<String> optMax) {
     Assert.notNull(OPT_MAX, optMax);

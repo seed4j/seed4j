@@ -4,7 +4,7 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public record EnumName(String name) {
   public EnumName {
-    Assert.field("name", name).noWhitespace().maxLength(50);
+    Assert.field("name", name).noWhitespace();
     name = capitalize(name);
   }
 

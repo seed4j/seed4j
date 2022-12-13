@@ -30,4 +30,13 @@ class DslApplicationTest {
     assertNotNull(dslApp);
     assertEquals("/tmp/override", dslApp.getConfig().getProjectFolder().get());
   }
+
+  @Test
+  void shouldBuildApplicationWithFolderPriorityIfNoConfig() {
+    DslApplication.DslApplicationBuilder builder = DslApplication.dslApplilcationBuilder();
+    ConfigApp.ConfigAppBuilder configBuilder = ConfigApp.configBuilder();
+    DslApplication dslApp = builder.overrideProjectFolder(new JHipsterProjectFolder("/tmp/override")).build();
+    assertNotNull(dslApp);
+    assertEquals("/tmp/override", dslApp.getConfig().getProjectFolder().get());
+  }
 }

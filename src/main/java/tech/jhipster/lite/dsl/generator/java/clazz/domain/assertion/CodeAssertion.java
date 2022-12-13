@@ -137,52 +137,6 @@ public class CodeAssertion {
     return result;
   }
 
-  @Override
-  public String toString() {
-    return (
-      "Assertion{" +
-      "notNull=" +
-      notNull +
-      ", isField=" +
-      isField +
-      ", notBlank=" +
-      notBlank +
-      ", isStringMin=" +
-      isStringMin +
-      ", isStringMax=" +
-      isStringMax +
-      ", isIntegerMin=" +
-      isIntegerMin +
-      ", isIntegerMax=" +
-      isIntegerMax +
-      ", isLongMin=" +
-      isLongMin +
-      ", isLongMax=" +
-      isLongMax +
-      ", isFloatMin=" +
-      isFloatMin +
-      ", isFloatMax=" +
-      isFloatMax +
-      ", isDoubleMin=" +
-      isDoubleMin +
-      ", isDoubleMax=" +
-      isDoubleMax +
-      ", isBigDecimalMin=" +
-      isBigDecimalMin +
-      ", isBigDecimalMax=" +
-      isBigDecimalMax +
-      ", isBigCollectionMaxSize=" +
-      isBigCollectionMaxSize +
-      ", min=" +
-      min +
-      ", max=" +
-      max +
-      ", isPositive=" +
-      isPositive +
-      '}'
-    );
-  }
-
   public static final class AssertionBuilder {
 
     private Stream<String> managedType = Stream.of("Integer", "Long", "BigDecimal", "Double", "Float", "String");

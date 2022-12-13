@@ -100,6 +100,7 @@ classBody
 
 annotationClass
     : ('@package' | '@Package') LPAREN packageFormat RPAREN SEPARATOR_JHIPSTER*
+    | ('@ignore' | '@Ignore') SEPARATOR_JHIPSTER*
     ;
 
 annotation
@@ -378,6 +379,7 @@ UNIQUE
 FIELD_TYPE_OTHER
     : 'UUID'
     | 'Enum'
+    | 'Boolean'
     ;
 
 FIELD_TYPE_STRING

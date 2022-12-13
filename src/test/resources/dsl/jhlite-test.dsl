@@ -1,6 +1,6 @@
 config {
-baseName=Override
-basePackageName=Override
+baseName=baseNameOverride
+basePackageName=basePackageNameOverride
 packageInfrastructureName=infrastructureOverride
 packageInfrastructurePrimaryName=primaryOverride
 packageInfrastructureSecondaryName=secondaryOverride
@@ -20,7 +20,7 @@ context ctx1 {
           shipId Integer
 
           @notNull
-          name String
+          name Test
 
         }
 
@@ -33,8 +33,8 @@ context ctx1 {
           @max(20)
           shipId Integer
 
-          @notBlank
-          name String
+          @notNull
+          myEnum MyEnum
 
         }
     }
@@ -42,5 +42,19 @@ context ctx1 {
 
 context ctx2 {
     domain {
+            enum MyEnum {
+                AAA,BB,CCC
+            }
+           record MyClass {
+
+              shipId test
+
+              @notNull
+              ship Ship
+
+              @notNull
+              myEnum MyEnum
+
+            }
     }
 }

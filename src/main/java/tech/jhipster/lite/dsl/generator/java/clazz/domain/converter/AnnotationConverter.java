@@ -15,10 +15,13 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public class AnnotationConverter {
 
-  public static final String DSL_ANNOTATION = "dslAnnotation";
-  private static final String DSL_ANNOTATION_PACKAGE = "package";
-  private static final String DSL_ANNOTATION_BUILDER = "builder";
-  private static final List<String> DSL_ANNOTATIONS = Stream.of(DSL_ANNOTATION_PACKAGE, DSL_ANNOTATION_BUILDER).toList();
+  private static final String DSL_ANNOTATION = "dslAnnotation";
+  public static final String DSL_ANNOTATION_PACKAGE = "package";
+  public static final String DSL_ANNOTATION_BUILDER = "builder";
+  public static final String DSL_ANNOTATION_IGNORE = "ignore";
+  public static final List<String> DSL_ANNOTATIONS = Stream
+    .of(DSL_ANNOTATION_PACKAGE, DSL_ANNOTATION_IGNORE, DSL_ANNOTATION_BUILDER)
+    .toList();
   private static final List<String> KNOW_ANNOTATION_WITH_VALUE = Stream.of("min", "max", "size", "decimalMin", "decimalMax").toList();
 
   private final List<Annotation> annotations = new LinkedList<>();
@@ -55,9 +58,9 @@ public class AnnotationConverter {
     return annotations.stream().filter(s -> s.name().equalsIgnoreCase(annotation)).findFirst();
   }
 
-  public boolean isAnnotationUseByDsl(DslAnnotation dslAnnotation) {
+  public List<DslAnnotation> getAnnotationUseByDsl(List<DslAnnotation> dslAnnotation) {
     Assert.notNull(DSL_ANNOTATION, dslAnnotation);
-    return DSL_ANNOTATIONS.stream().anyMatch(annot -> annot.equalsIgnoreCase(dslAnnotation.name()));
+    return dslAnnotation.stream().filter(annot -> DSL_ANNOTATIONS.stream().anyMatch(val -> val.equalsIgnoreCase(annot.name()))).toList();
   }
 
   public ClassPackage getPackageAnnotation(List<DslAnnotation> dslAnnotations) {

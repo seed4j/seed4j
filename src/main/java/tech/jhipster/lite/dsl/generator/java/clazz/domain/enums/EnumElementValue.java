@@ -9,17 +9,13 @@ public class EnumElementValue {
   private String value;
   private String comment;
 
-  public EnumElementValue(String key) {
-    Assert.field("key", key).noWhitespace();
-    this.key = key;
-  }
-
   public EnumElementValue comment(String comment) {
     this.comment = comment;
     return this;
   }
 
   public EnumElementValue key(String key) {
+    Assert.field("key", key).noWhitespace();
     this.key = key;
     return this;
   }

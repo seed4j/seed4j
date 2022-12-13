@@ -79,4 +79,20 @@ class DslClassVisitorTest {
     assertEquals("record", dslClass.getType().key());
     System.out.println(dslClass);
   }
+
+  @Test
+  void shouldAddIgnoreAnnotation() {
+    DslClass dslClass = getDslClass(
+      """
+                     @ignore
+                     record test {
+                                        }
+                      """
+    );
+
+    assertNotNull(dslClass);
+    assertEquals(1, dslClass.getAnnotations().size());
+    assertEquals("ignore", dslClass.getAnnotations().get(0).name());
+    System.out.println(dslClass);
+  }
 }

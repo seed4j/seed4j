@@ -21,6 +21,10 @@ public class DslDomainVisitor {
       for (DslParser.ClassContext classContext : ctx.domainBody().class_()) {
         domainBuilder.addDslClass(classVisitor.visitClass(classContext));
       }
+      DslEnumVisitor.EnumVisitor enumVisitor = new DslEnumVisitor.EnumVisitor();
+      for (DslParser.EnumTypeContext enumTypeContext : ctx.domainBody().enumType()) {
+        domainBuilder.addDslEnum(enumVisitor.visitEnumType(enumTypeContext));
+      }
 
       return domainBuilder.build();
     }

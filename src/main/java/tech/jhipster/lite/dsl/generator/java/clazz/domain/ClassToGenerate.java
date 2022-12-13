@@ -10,11 +10,13 @@ import tech.jhipster.lite.dsl.generator.java.clazz.domain.annotation.Annotation;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.error.domain.Assert;
 
-public class ClassToGenerate implements FileInfoForGenerate {
+public class ClassToGenerate implements IsImportable, FileInfoForGenerate {
 
   public static ClassToGenerateBuilder classToGenerateBuilder() {
     return new ClassToGenerateBuilder();
   }
+
+  private boolean ignore;
 
   private Path folder;
 
@@ -22,13 +24,22 @@ public class ClassToGenerate implements FileInfoForGenerate {
   private ClassName name;
   private ClassType type;
   private ClassPackage packag;
-
   private List<ClassImport> imports;
   private List<FieldToGenerate> fields;
   private List<Annotation> annotations;
   private ClassComment comment;
 
   private boolean generateFluent;
+
+  @Override
+  public String getNameForThisObject() {
+    return name.get();
+  }
+
+  @Override
+  public String getImportForThisObject() {
+    return getPackage().get() + "." + getName().get();
+  }
 
   public boolean isGenerateFluent() {
     return generateFluent;
@@ -72,30 +83,8 @@ public class ClassToGenerate implements FileInfoForGenerate {
     return type;
   }
 
-  @Override
-  public String toString() {
-    return (
-      "ClassToGenerate{" +
-      "folder=" +
-      folder +
-      ", file=" +
-      file +
-      ", key=" +
-      name +
-      ", type=" +
-      type +
-      ", packag=" +
-      packag +
-      ", imports=" +
-      imports +
-      ", fields=" +
-      fields +
-      ", annotations=" +
-      annotations +
-      ", comment=" +
-      comment +
-      '}'
-    );
+  public boolean isIgnore() {
+    return ignore;
   }
 
   public static final class ClassToGenerateBuilder {
@@ -106,6 +95,7 @@ public class ClassToGenerate implements FileInfoForGenerate {
     private ClassType type = ClassType.CLASS;
     private ClassPackage packag = ClassPackage.EMPTY;
     private boolean generateFluent = false;
+    private boolean ignore = false;
 
     private final List<ClassImport> imports = new ArrayList<>();
     private final List<FieldToGenerate> fields = new ArrayList<>();
@@ -120,6 +110,11 @@ public class ClassToGenerate implements FileInfoForGenerate {
       this.type = dslClass.getType();
       this.comment = dslClass.getComment().orElse(null);
       this.packag = dslClass.getPackage();
+      return this;
+    }
+
+    public ClassToGenerateBuilder ignore(boolean ignore) {
+      this.ignore = ignore;
       return this;
     }
 
@@ -161,8 +156,6 @@ public class ClassToGenerate implements FileInfoForGenerate {
     public ClassToGenerateBuilder addField(FieldToGenerate fieldToGenerate) {
       Assert.notNull("fieldToGenerate", fieldToGenerate);
       this.fields.add(fieldToGenerate);
-      fieldToGenerate.getType().getImport().ifPresent(this.imports::add);
-
       return this;
     }
 
@@ -191,6 +184,7 @@ public class ClassToGenerate implements FileInfoForGenerate {
       Assert.notNull("file", this.file);
       ClassToGenerate classToGenerate = new ClassToGenerate();
       classToGenerate.folder = this.folder;
+      classToGenerate.ignore = this.ignore;
       classToGenerate.name = this.name;
       classToGenerate.type = this.type;
       classToGenerate.comment = this.comment;

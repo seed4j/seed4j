@@ -3,9 +3,9 @@ package tech.jhipster.lite.dsl.generator.java.clazz.domain.converter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import tech.jhipster.lite.dsl.common.domain.clazz.ClassImport;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.FieldToGenerate;
+import tech.jhipster.lite.dsl.generator.java.clazz.domain.ReferenceManager;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.annotation.Annotation;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.assertion.CodeAssertion;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.field.FieldType;
@@ -19,8 +19,9 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public class FieldConverter {
 
+  public static final ClassImport ASSERT_IMPORT = new ClassImport("tech.jhipster.lite.error.domain.Assert", false);
+
   private final List<FieldType> fieldTypes = new LinkedList<>();
-  private static final Logger log = LoggerFactory.getLogger(FieldConverter.class);
   private AnnotationConverter annotationConverter;
 
   public FieldConverter(AnnotationConverter annotationConverter) {
@@ -44,6 +45,7 @@ public class FieldConverter {
     fieldTypes.add(FieldTypeImpl.fieldPeriod);
     fieldTypes.add(FieldTypeImpl.fieldLocalDate);
     fieldTypes.add(FieldTypeImpl.fieldZonedDateTime);
+    fieldTypes.add(FieldTypeImpl.fieldBoolean);
   }
 
   public void addType(FieldType fieldType) {
@@ -59,13 +61,20 @@ public class FieldConverter {
     return fieldTypes.stream().filter(s -> s.name().equals(typeName)).findFirst().orElseThrow();
   }
 
-  public FieldToGenerate convertFieldToGenerate(ClassField classField, DslClass dslClass, ConfigApp config) {
-    FieldToGenerate.FieldToGenerateBuilder builderField = FieldToGenerate.fieldToGenerateBuilder();
+  public FieldToGenerate convertFieldToGenerate(
+    ClassField classField,
+    DslClass dslClass,
+    ConfigApp config,
+    ReferenceManager referenceManager
+  ) {
+    FieldToGenerate.FieldToGenerateBuilder builderField = FieldToGenerate.builder();
     builderField.fromClassField(classField);
     if (isKnowType(classField.getType().get())) {
-      builderField.type(getType(classField.getType().get()));
+      FieldType fieldType = getType(classField.getType().get());
+      builderField.type(fieldType);
+      fieldType.getImport().ifPresent(val -> referenceManager.addImportToClass(dslClass.getName().name(), val));
     } else {
-      log.warn("Unknown type :{}", classField.getType().get());
+      referenceManager.addUnknownPropertyTypeInClass(dslClass.getName().get(), classField.getType().get());
       builderField.type(new FieldTypeImpl(classField.getType().get(), Optional.empty()));
     }
     List<Annotation> commonAnnotationAndValidator = new LinkedList<>();
@@ -91,8 +100,17 @@ public class FieldConverter {
       commonAnnotationAndValidator.removeIf(item ->
         assertion.getAnnotationManaged().stream().anyMatch(an -> an.equalsIgnoreCase(item.name()))
       );
+      referenceManager.addImportToClass(dslClass.getName().name(), ASSERT_IMPORT);
     }
-    commonAnnotationAndValidator.stream().distinct().forEach(builderField::addAnnotation);
+
+    commonAnnotationAndValidator
+      .stream()
+      .distinct()
+      .forEach(annotation -> {
+        builderField.addAnnotation(annotation);
+        annotation.getImport().ifPresent(imp -> referenceManager.addImportToClass(dslClass.getName().name(), imp));
+      });
+
     return builderField.build();
   }
 }

@@ -3,7 +3,6 @@ package tech.jhipster.lite.dsl.parser.infrastructure.secondary;
 import java.util.Optional;
 import tech.jhipster.lite.dsl.DslBaseVisitor;
 import tech.jhipster.lite.dsl.DslParser;
-import tech.jhipster.lite.dsl.common.domain.clazz.ClassName;
 import tech.jhipster.lite.dsl.common.domain.clazz.enums.*;
 import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslEnum;

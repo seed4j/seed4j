@@ -10,7 +10,10 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,7 +99,7 @@ public class MustacheRepository implements GeneratorJavaRepository {
   private static void addEnumToContext(EnumToGenerate enumToGenerate, Map<String, Object> context) {
     context.put("className", enumToGenerate.getName().get());
     context.put("classPackage", enumToGenerate.getPackage().get());
-    context.put("hasImport", enumToGenerate.asImport());
+    context.put("hasImport", enumToGenerate.hasImport());
     context.put("createConstructor", !enumToGenerate.getElementValue().isEmpty());
     context.put("enumToGenerate", enumToGenerate);
 

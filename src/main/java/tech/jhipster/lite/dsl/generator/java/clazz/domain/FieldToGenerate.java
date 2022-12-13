@@ -15,7 +15,7 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public class FieldToGenerate {
 
-  public static FieldToGenerateBuilder fieldToGenerateBuilder() {
+  public static FieldToGenerateBuilder builder() {
     return new FieldToGenerateBuilder();
   }
 
@@ -53,7 +53,7 @@ public class FieldToGenerate {
   }
 
   public String getterName() {
-    if ("boolean".equals(type.name()) || "Boolean".equals(type.name())) {
+    if ("boolean".equalsIgnoreCase(type.name())) {
       return "is" + capitalizeName();
     }
     return "get" + capitalizeName();
@@ -65,24 +65,6 @@ public class FieldToGenerate {
 
   private String capitalizeName() {
     return name.get().substring(0, 1).toUpperCase() + name.get().substring(1);
-  }
-
-  @Override
-  public String toString() {
-    return (
-      "FieldToGenerate{" +
-      "key=" +
-      name +
-      ", modifiers=" +
-      modifiers +
-      ", comment=" +
-      comment +
-      ", type=" +
-      type +
-      ", annotations=" +
-      annotations +
-      '}'
-    );
   }
 
   public static final class FieldToGenerateBuilder {

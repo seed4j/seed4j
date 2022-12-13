@@ -23,6 +23,7 @@ public record FieldTypeImpl(String name, Optional<ClassImport> import_) implemen
   );
   public static FieldTypeImpl fieldDuration = new FieldTypeImpl("Duration", Optional.of(new ClassImport("java.time.Duration", false)));
   public static FieldTypeImpl fieldPeriod = new FieldTypeImpl("Period", Optional.of(new ClassImport("java.time.Period", false)));
+  public static FieldTypeImpl fieldBoolean = new FieldTypeImpl("Boolean", Optional.empty());
 
   public FieldTypeImpl {
     Assert.field("key", name).noWhitespace();

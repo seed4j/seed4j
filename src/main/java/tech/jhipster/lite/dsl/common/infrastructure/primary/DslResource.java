@@ -34,7 +34,6 @@ class DslResource {
 
       JhipsterDslFileToImport importDslFile = builder
         .originalFilename(StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename())))
-        .contentType(file.getContentType())
         .name(file.getName())
         .bytes(file.getBytes())
         .build();

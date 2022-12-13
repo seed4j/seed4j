@@ -112,4 +112,64 @@ class DslEnumVisitorTest {
     assertEquals("Italy", dslEnum.getEnumKeyValues().get(2).getValue().get().get());
     assertEquals("from france", dslEnum.getEnumKeyValues().get(1).getComment().get().get());
   }
+
+  @Test
+  void shouldBuildEnumWithCommentBefore() {
+    DslEnum dslEnum = getDslEnum(
+      """
+                 /**
+                 * it's my comment
+                 */
+                 enum Country {
+                    BELGIUM("Belgium"),
+                       /**
+                       * from france
+                       */
+                    FRANCE("France"),
+                    ITALY("Italy")
+                  }
+                  """
+    );
+
+    assertEquals("it's my comment", dslEnum.getComment().get().get());
+  }
+
+  @Test
+  void shouldBuildEnumWithPackageAnnotation() {
+    DslEnum dslEnum = getDslEnum(
+      """
+@package(tests.mypackage)
+                 enum Country {
+                    BELGIUM("Belgium"),
+                       /**
+                       * from france
+                       */
+                    FRANCE("France"),
+                    ITALY("Italy")
+                  }
+                  """
+    );
+    assertEquals(1, dslEnum.getAnnotations().size());
+    assertEquals("package", dslEnum.getAnnotations().get(0).name());
+    assertEquals("tests.mypackage", dslEnum.getAnnotations().get(0).value().get());
+  }
+
+  @Test
+  void shouldBuildEnumWithIgnore() {
+    DslEnum dslEnum = getDslEnum(
+      """
+@ignore
+                 enum Country {
+                    BELGIUM("Belgium"),
+                       /**
+                       * from france
+                       */
+                    FRANCE("France"),
+                    ITALY("Italy")
+                  }
+                  """
+    );
+    assertEquals(1, dslEnum.getAnnotations().size());
+    assertEquals("ignore", dslEnum.getAnnotations().get(0).name());
+  }
 }

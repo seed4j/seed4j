@@ -3,6 +3,8 @@ package tech.jhipster.lite.dsl.generator.java.clazz.domain.converter;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
@@ -64,5 +66,35 @@ class AnnotationConverterTest {
     Annotation annot = annotationConverter.convertConstraint(new ConstraintWithValue("decimalmax", Optional.of("100")));
 
     assertEquals("DecimalMax", annot.name());
+  }
+
+  @Test
+  void shouldReturnAnnotationUseByDsl() {
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+
+    List<DslAnnotation> dslAnnotations = new LinkedList<>();
+    dslAnnotations.add(new DslAnnotation("ignore", Optional.empty()));
+    dslAnnotations.add(new DslAnnotation("min", Optional.of("10")));
+    dslAnnotations.add(new DslAnnotation("max", Optional.of("20")));
+    dslAnnotations.add(new DslAnnotation("packAge", Optional.of("test.tt")));
+
+    List<DslAnnotation> result = annotationConverter.getAnnotationUseByDsl(dslAnnotations);
+
+    assertEquals(2, result.size());
+    assertEquals("ignore", result.get(0).name());
+    assertEquals("package", result.get(1).name());
+  }
+
+  @Test
+  void shouldReturnNoAnnotationUseByDsl() {
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+
+    List<DslAnnotation> dslAnnotations = new LinkedList<>();
+    dslAnnotations.add(new DslAnnotation("min", Optional.of("10")));
+    dslAnnotations.add(new DslAnnotation("max", Optional.of("20")));
+
+    List<DslAnnotation> result = annotationConverter.getAnnotationUseByDsl(dslAnnotations);
+
+    assertEquals(0, result.size());
   }
 }

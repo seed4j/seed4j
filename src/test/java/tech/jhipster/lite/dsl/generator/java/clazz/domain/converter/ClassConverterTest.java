@@ -8,9 +8,7 @@ import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.dsl.DslClassUtils;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.ClassToGenerate;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.EnumToGenerate;
-import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.AnnotationConverter;
-import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.ClassConverter;
-import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.FieldConverter;
+import tech.jhipster.lite.dsl.generator.java.clazz.domain.ReferenceManager;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslContextName;
 import tech.jhipster.lite.dsl.parser.domain.config.ConfigApp;
 
@@ -25,10 +23,12 @@ class ClassConverterTest {
     AnnotationConverter annotationConverter = new AnnotationConverter();
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    ReferenceManager referenceManager = new ReferenceManager();
     ClassToGenerate classToGenerate = converter.convertDslClassToGenerate(
       DslClassUtils.createSimpleClass("class2"),
       new DslContextName("mycontext"),
-      config
+      config,
+      referenceManager
     );
     assertNotNull(classToGenerate);
     var test = UUID_REGEX.matcher(classToGenerate.getFolder().toString()).find();
@@ -44,10 +44,12 @@ class ClassConverterTest {
     AnnotationConverter annotationConverter = new AnnotationConverter();
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    ReferenceManager referenceManager = new ReferenceManager();
     ClassToGenerate classToGenerate = converter.convertDslClassToGenerate(
       DslClassUtils.createClassWithAnnotationPackage("class2"),
       new DslContextName("mycontext"),
-      config
+      config,
+      referenceManager
     );
 
     assertNotNull(classToGenerate);
@@ -60,10 +62,12 @@ class ClassConverterTest {
     AnnotationConverter annotationConverter = new AnnotationConverter();
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    ReferenceManager referenceManager = new ReferenceManager();
     ClassToGenerate classToGenerate = converter.convertDslClassToGenerate(
       DslClassUtils.createClassWithAnnotationPackage("class2"),
       new DslContextName("mycontext"),
-      config
+      config,
+      referenceManager
     );
 
     assertNotNull(classToGenerate);
@@ -77,10 +81,12 @@ class ClassConverterTest {
     AnnotationConverter annotationConverter = new AnnotationConverter();
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    ReferenceManager referenceManager = new ReferenceManager();
     EnumToGenerate enumToGenerate = converter.convertDslEnumToGenerate(
       DslClassUtils.createEnumSimple("class2"),
       new DslContextName("mycontext"),
-      config
+      config,
+      referenceManager
     );
     assertNotNull(enumToGenerate);
     var test = UUID_REGEX.matcher(enumToGenerate.getFolder().toString()).find();
@@ -96,13 +102,33 @@ class ClassConverterTest {
     AnnotationConverter annotationConverter = new AnnotationConverter();
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    ReferenceManager referenceManager = new ReferenceManager();
     EnumToGenerate enumToGenerate = converter.convertDslEnumToGenerate(
       DslClassUtils.createEnumWithAnnotationPackage("class2"),
       new DslContextName("mycontext"),
-      config
+      config,
+      referenceManager
     );
 
     assertNotNull(enumToGenerate);
+  }
+
+  @Test
+  void shouldIgnoreEnumIfAnnotationIsPresent() {
+    ConfigApp config = DslClassUtils.createDefaultConfig();
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    ReferenceManager referenceManager = new ReferenceManager();
+    EnumToGenerate enumToGenerate = converter.convertDslEnumToGenerate(
+      DslClassUtils.createEnumWithAnnotationIgnore("class2"),
+      new DslContextName("mycontext"),
+      config,
+      referenceManager
+    );
+
+    assertNotNull(enumToGenerate);
+    assertTrue(enumToGenerate.isIgnore());
     //    assertEquals(0, enumToGenerate.getAnnotations().size());
   }
 }

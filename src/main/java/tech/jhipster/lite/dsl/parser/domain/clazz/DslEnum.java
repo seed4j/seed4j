@@ -2,7 +2,6 @@ package tech.jhipster.lite.dsl.parser.domain.clazz;
 
 import java.util.*;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassComment;
-import tech.jhipster.lite.dsl.common.domain.clazz.ClassName;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassPackage;
 import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumKeyValue;
 import tech.jhipster.lite.dsl.common.domain.clazz.enums.EnumName;
@@ -40,11 +39,6 @@ public class DslEnum {
 
   public List<DslAnnotation> getAnnotations() {
     return Collections.unmodifiableList(annotations);
-  }
-
-  @Override
-  public String toString() {
-    return ("DslClass{" + "key=" + name + ", package=" + packag + ", comment=" + comment + '}');
   }
 
   public static final class DslEnumBuilder {

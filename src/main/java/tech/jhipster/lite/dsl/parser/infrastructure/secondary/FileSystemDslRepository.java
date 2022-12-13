@@ -14,6 +14,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.commons.lang3.SystemUtils;
 import org.springframework.stereotype.Repository;
+import tech.jhipster.lite.common.domain.Generated;
 import tech.jhipster.lite.dsl.DslLexer;
 import tech.jhipster.lite.dsl.DslParser;
 import tech.jhipster.lite.dsl.common.domain.DslProperties;
@@ -22,12 +23,14 @@ import tech.jhipster.lite.dsl.parser.domain.DslRepository;
 import tech.jhipster.lite.dsl.parser.domain.JhipsterDslFileIdentifiant;
 import tech.jhipster.lite.dsl.parser.domain.JhipsterDslFileToSave;
 import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
 
 @Repository
 public class FileSystemDslRepository implements DslRepository {
 
   private static final String SLASH = "/";
 
+  @Generated(reason = "only test on linux")
   public JhipsterDslFileIdentifiant createDslFile(JhipsterDslFileToSave file) {
     Assert.notNull("file", file);
     try {
@@ -71,8 +74,8 @@ public class FileSystemDslRepository implements DslRepository {
       DslFileVisitor.FileVisitor fileVisitor = new DslFileVisitor.FileVisitor();
       DslApplication.DslApplicationBuilder builder = fileVisitor.visitFile_(parser.file_());
 
-      if (!properties.projectFolder().get().isBlank()) {
-        builder.overrideProjectFolder(properties.projectFolder());
+      if (!properties.projectFolder().isBlank()) {
+        builder.overrideProjectFolder(new JHipsterProjectFolder(properties.projectFolder()));
       }
       return builder.build();
     } catch (IOException e) {

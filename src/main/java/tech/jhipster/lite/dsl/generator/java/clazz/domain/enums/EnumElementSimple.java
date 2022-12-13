@@ -8,12 +8,8 @@ public class EnumElementSimple {
   private String key;
   private String comment;
 
-  public EnumElementSimple(String key) {
-    Assert.field("key", key).noWhitespace();
-    this.key = key;
-  }
-
   public EnumElementSimple key(String key) {
+    Assert.field("key", key).noWhitespace();
     this.key = key;
     return this;
   }

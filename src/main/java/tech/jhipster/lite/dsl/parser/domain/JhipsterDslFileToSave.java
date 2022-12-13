@@ -16,11 +16,6 @@ public class JhipsterDslFileToSave {
     return bytes;
   }
 
-  @Override
-  public String toString() {
-    return "DslFileImport{" + "name='" + name + '\'' + ", bytes=" + Arrays.toString(bytes) + '}';
-  }
-
   public JhipsterDslFileToSave(JhipsterDslFileToImport from) {
     Assert.notNull("from", from);
     this.name = from.getOriginalFilename();

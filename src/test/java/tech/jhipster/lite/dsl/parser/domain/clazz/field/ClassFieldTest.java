@@ -2,6 +2,7 @@ package tech.jhipster.lite.dsl.parser.domain.clazz.field;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import javax.lang.model.element.Modifier;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.dsl.common.domain.clazz.field.FieldName;
@@ -45,5 +46,19 @@ class ClassFieldTest {
     assertNotNull(classField);
     assertNotNull(classField.getComment());
     assertTrue(classField.getComment().isEmpty());
+  }
+
+  @Test
+  void mustCreateFieldWithModifier() {
+    ClassField classField = ClassField
+      .fieldBuilder()
+      .name(new FieldName("test"))
+      .type(new FieldType("test"))
+      .addModifiers(Modifier.ABSTRACT)
+      .addModifiers(Modifier.FINAL)
+      .addModifiers(Modifier.PUBLIC)
+      .build();
+    assertNotNull(classField);
+    assertEquals(3, classField.getModifiers().size());
   }
 }

@@ -1,7 +1,6 @@
 package tech.jhipster.lite.dsl.parser.infrastructure.secondary;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
@@ -15,27 +14,59 @@ class FileSystemDslRepositoryTest {
 
   @Test
   void shouldCreateAValidDslApp() {
-    FileSystemDslRepository fileSytemDslRepository = new FileSystemDslRepository();
+    FileSystemDslRepository fileSystemDslRepository = new FileSystemDslRepository();
     DslProperties properties = new DslProperties("/tmp/jhipster", false);
-    DslApplication dslApp = fileSytemDslRepository.parseDsl(new JhipsterDslFileIdentifiant("dsl/jhlite-all.dsl"), properties);
+    DslApplication dslApp = fileSystemDslRepository.parseDsl(new JhipsterDslFileIdentifiant("dsl/jhlite-all.dsl"), properties);
 
     assertNotNull(dslApp);
     assertNotNull(dslApp.getConfig());
     assertNotNull(dslApp.getLstDslContext());
+    assertEquals("/tmp/jhipster", dslApp.getConfig().getProjectFolder().get());
     //displayDslApp(dslApp);
   }
 
   @Test
-  void shouldGenerateDslApp() {
+  void shouldSaveADslFile() {
+    FileSystemDslRepository fileSystemDslRepository = new FileSystemDslRepository();
+
+    JhipsterDslFileToSave fileToSave = new JhipsterDslFileToSave(
+      JhipsterDslFileToImport.builder().originalFilename("test").bytes(new byte[] {}).name("test").build()
+    );
+    JhipsterDslFileIdentifiant fileID = fileSystemDslRepository.createDslFile(fileToSave);
+
+    assertNotNull(fileID);
+  }
+
+  @Test
+  void shouldUpdateProjectFolderIfNotEmpty() {
     FileSystemDslRepository fileSytemDslRepository = new FileSystemDslRepository();
 
     JhipsterDslFileToSave fileToSave = new JhipsterDslFileToSave(
       JhipsterDslFileToImport.builder().originalFilename("test").bytes(new byte[] {}).name("test").build()
     );
-    JhipsterDslFileIdentifiant fileID = fileSytemDslRepository.createDslFile(fileToSave);
+    JhipsterDslFileIdentifiant file = new JhipsterDslFileIdentifiant("dsl/jhlite-all.dsl");
+    DslProperties prop = new DslProperties("", false);
+    DslApplication dslApp = fileSytemDslRepository.parseDsl(file, prop);
+    assertNotNull(dslApp);
+    assertEquals("/tmp/myApp", dslApp.getConfig().getProjectFolder().get());
+  }
 
-    assertNotNull(fileID);
-    //displayDslApp(dslApp);
+  @Test
+  void shouldThrowExceptionIfDslFileNotExist() {
+    FileSystemDslRepository fileSytemDslRepository = new FileSystemDslRepository();
+
+    JhipsterDslFileToSave fileToSave = new JhipsterDslFileToSave(
+      JhipsterDslFileToImport.builder().originalFilename("test").bytes(new byte[] {}).name("test").build()
+    );
+    JhipsterDslFileIdentifiant file = new JhipsterDslFileIdentifiant("/doesntexist-file.dsl");
+    DslProperties prop = new DslProperties("/tmp-that-doesnt-exist", false);
+    assertThrows(
+      DslFileIOException.class,
+      () -> {
+        fileSytemDslRepository.parseDsl(file, prop);
+      },
+      "MissingMandatoryValueException was expected"
+    );
   }
 
   private void displayDslApp(DslApplication dslApp) {

@@ -1,6 +1,7 @@
 package tech.jhipster.lite.dsl.parser.domain.config;
 
 import java.util.Objects;
+import tech.jhipster.lite.common.domain.Generated;
 
 public class ConfigApp {
 
@@ -57,6 +58,7 @@ public class ConfigApp {
   }
 
   @Override
+  @Generated
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -75,6 +77,7 @@ public class ConfigApp {
   }
 
   @Override
+  @Generated
   public int hashCode() {
     return Objects.hash(
       baseName,

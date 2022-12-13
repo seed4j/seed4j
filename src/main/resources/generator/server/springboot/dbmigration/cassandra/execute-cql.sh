@@ -22,7 +22,8 @@ function exitWithError() {
 # load already executed scripts in the `scripts` global variable: dictionary[scriptName->checksum]
 function loadExecutedScripts {
     local rows
-    mapfile rows < <(cqlsh -k $MIGRATION_KEYSPACE_NAME -e "select * from schema_version" "$CASSANDRA_CONTACT_POINT" | tail -n+4 | sed '$d' |sed '$d')
+    # after SELECT, removes blank lines, then column names, then the query summary at the last line
+    mapfile -t rows < <(cqlsh -k $MIGRATION_KEYSPACE_NAME -e "select * from schema_version" "$CASSANDRA_CONTACT_POINT" | grep "\S" | tail -n +3 | sed '$d')
     for r in "${rows[@]}"
     do
         local scriptName

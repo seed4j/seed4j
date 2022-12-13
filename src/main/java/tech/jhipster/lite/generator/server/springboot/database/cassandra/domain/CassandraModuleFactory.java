@@ -32,7 +32,7 @@ public class CassandraModuleFactory {
         .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-starter-data-cassandra"))
         .addDependency(testContainerDependency())
         .and()
-      .documentation(documentationTitle("Cassandra"), SOURCE.template("cassandra.md"))
+      .documentation(documentationTitle("Cassandra"), SOURCE.file("cassandra.md"))
       .startupCommand(DOCKER_COMPOSE_COMMAND)
       .context()
         .put("cassandraDockerImage", dockerImages.get("cassandra").fullName())

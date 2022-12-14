@@ -7,7 +7,7 @@ import tech.jhipster.lite.error.domain.GeneratorException;
 
 @Generated
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-class InvalidDslFileException extends GeneratorException {
+class InvalidDslFileException extends RuntimeException {
 
   public InvalidDslFileException(String message) {
     super(message);

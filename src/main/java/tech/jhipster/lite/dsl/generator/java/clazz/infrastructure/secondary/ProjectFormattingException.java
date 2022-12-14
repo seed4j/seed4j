@@ -4,7 +4,7 @@ import tech.jhipster.lite.common.domain.Generated;
 import tech.jhipster.lite.error.domain.GeneratorException;
 
 @Generated
-public class ProjectFormattingException extends GeneratorException {
+public class ProjectFormattingException extends RuntimeException {
 
   public ProjectFormattingException(String message) {
     super(message);

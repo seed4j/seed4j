@@ -4,7 +4,7 @@ import tech.jhipster.lite.common.domain.Generated;
 import tech.jhipster.lite.error.domain.GeneratorException;
 
 @Generated
-public class MustacheIoException extends GeneratorException {
+public class MustacheIoException extends RuntimeException {
 
   public MustacheIoException(String message) {
     super(message);

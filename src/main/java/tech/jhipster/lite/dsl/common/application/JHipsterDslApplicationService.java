@@ -3,6 +3,7 @@ package tech.jhipster.lite.dsl.common.application;
 import org.springframework.stereotype.Service;
 import tech.jhipster.lite.dsl.common.domain.DslGenerator;
 import tech.jhipster.lite.dsl.common.domain.DslProperties;
+import tech.jhipster.lite.dsl.common.domain.git.GitRepository;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.DslJavaGenerator;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.GeneratorJavaRepository;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.ClassConverter;
@@ -19,13 +20,15 @@ public class JHipsterDslApplicationService {
   public JHipsterDslApplicationService(
     DslRepository dslRepository,
     GeneratorJavaRepository generatorJavaRepository,
-    ClassConverter classConverter
+    ClassConverter classConverter,
+    GitRepository git
   ) {
     Assert.notNull("dslSaveRepository", dslRepository);
     Assert.notNull("generatorJavaRepository", generatorJavaRepository);
     Assert.notNull("classConverter", classConverter);
+    Assert.notNull("git", git);
 
-    this.dslGenerator = new DslGenerator(new DslParser(dslRepository), new DslJavaGenerator(generatorJavaRepository, classConverter));
+    this.dslGenerator = new DslGenerator(new DslParser(dslRepository), new DslJavaGenerator(generatorJavaRepository, classConverter, git));
   }
 
   public void importAndGenerate(JhipsterDslFileToImport dslToImport, DslProperties properties) {

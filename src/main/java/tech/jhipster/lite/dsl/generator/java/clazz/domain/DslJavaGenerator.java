@@ -3,6 +3,7 @@ package tech.jhipster.lite.dsl.generator.java.clazz.domain;
 import java.util.LinkedList;
 import java.util.List;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassImport;
+import tech.jhipster.lite.dsl.common.domain.git.GitRepository;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.ClassConverter;
 import tech.jhipster.lite.dsl.parser.domain.DslApplication;
 import tech.jhipster.lite.dsl.parser.domain.config.ConfigApp;
@@ -14,12 +15,16 @@ public class DslJavaGenerator {
   private final GeneratorJavaRepository generatorJavaRepository;
   private final ClassConverter classConverter;
 
-  public DslJavaGenerator(GeneratorJavaRepository generatorJavaRepository, ClassConverter classConverter) {
+  private final GitRepository git;
+
+  public DslJavaGenerator(GeneratorJavaRepository generatorJavaRepository, ClassConverter classConverter, GitRepository git) {
     Assert.notNull("generatorJavaRepository", generatorJavaRepository);
     Assert.notNull("converter", classConverter);
+    Assert.notNull("git", git);
 
     this.generatorJavaRepository = generatorJavaRepository;
     this.classConverter = classConverter;
+    this.git = git;
   }
 
   protected void prepareGenerate(DslApplication dslApplication, ReferenceManager refManager) {
@@ -75,8 +80,10 @@ public class DslJavaGenerator {
             }
           });
       });
+    ProjectPath projectPath = new ProjectPath(configApp.getProjectFolder().get());
+    git.init(projectPath);
 
-    generatorJavaRepository.format(new ProjectPath(configApp.getProjectFolder().get()));
+    generatorJavaRepository.format(projectPath);
     // generate
   }
 

@@ -1,10 +1,15 @@
 package tech.jhipster.lite.dsl.generator.java.clazz.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.dsl.DslClassUtils;
+import tech.jhipster.lite.dsl.common.domain.git.GitRepository;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.AnnotationConverter;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.ClassConverter;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.converter.FieldConverter;
@@ -22,14 +27,16 @@ class DslJavaGeneratorTest {
     AnnotationConverter annotationConverter = new AnnotationConverter();
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
-    DslJavaGenerator dslJavaGenerator = new DslJavaGenerator(new MustacheRepository(new TraceProjectFormatter()), converter);
+    GitRepository mockGit = mock(GitRepository.class);
+    doNothing().when(mockGit).init(any());
+    DslJavaGenerator dslJavaGenerator = new DslJavaGenerator(new MustacheRepository(new TraceProjectFormatter()), converter, mockGit);
 
     DslApplication dslApp = DslClassUtils.createApplicationForTestImport();
     ReferenceManager refMgr = new ReferenceManager();
     dslJavaGenerator.prepareGenerate(dslApp, refMgr);
 
     assertEquals(4, refMgr.getImportsForClass("MyObject1").size());
-    assertEquals(3, refMgr.getImportsForClass("MyObject2").size());
+    assertEquals(2, refMgr.getImportsForClass("MyObject2").size());
     assertEquals(0, refMgr.getUnknownTypeForClass("MyObject2").size());
     assertEquals(0, refMgr.getUnknownTypeForClass("myObject1").size());
   }

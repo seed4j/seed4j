@@ -297,28 +297,28 @@ public class CodeAssertion {
         .forEach(annotation -> {
           switch (field.getType().get()) {
             case "Integer" -> {
-              isIntegerMin = isMinAnnotation(annotation);
-              isIntegerMax = isMaxAnnotation(annotation);
+              isIntegerMin = isIntegerMin || isMinAnnotation(annotation);
+              isIntegerMax = isIntegerMax || isMaxAnnotation(annotation);
             }
             case "String" -> {
-              isStringMin = isMinAnnotation(annotation);
+              isStringMin = isIntegerMin || isMinAnnotation(annotation);
               isStringMax = isMaxAnnotation(annotation);
             }
             case "Long" -> {
-              isLongMin = isMinAnnotation(annotation);
-              isLongMax = isMaxAnnotation(annotation);
+              isLongMin = isIntegerMin || isMinAnnotation(annotation);
+              isLongMax = isIntegerMax || isMaxAnnotation(annotation);
             }
             case "Double" -> {
-              isDoubleMin = isMinAnnotation(annotation);
-              isDoubleMax = isMaxAnnotation(annotation);
+              isDoubleMin = isIntegerMin || isMinAnnotation(annotation);
+              isDoubleMax = isIntegerMax || isMaxAnnotation(annotation);
             }
             case "Float" -> {
-              isFloatMin = isMinAnnotation(annotation);
-              isFloatMax = isMaxAnnotation(annotation);
+              isFloatMin = isIntegerMin || isMinAnnotation(annotation);
+              isFloatMax = isIntegerMax || isMaxAnnotation(annotation);
             }
             case "BigDecimal" -> {
-              isBigDecimalMin = isMinAnnotation(annotation);
-              isBigDecimalMax = isMaxAnnotation(annotation);
+              isBigDecimalMin = isBigDecimalMin || isMinAnnotation(annotation);
+              isBigDecimalMax = isBigDecimalMax || isMaxAnnotation(annotation);
             }
             case "Collection" -> isCollectionMaxSize = isMaxAnnotation(annotation);
             default -> log.warn("default switch for {}", field.getType().get());
@@ -342,25 +342,28 @@ public class CodeAssertion {
 
       assertion.min = this.min;
       assertion.max = this.max;
+      assertion.isPositive = this.isPositive;
+      assertion.notNull = this.notNull;
+      assertion.notBlank = this.notBlank;
+      assertion.isField = this.isField;
 
+      assertion.isStringMin = this.isStringMin;
       assertion.isStringMax = this.isStringMax;
 
-      assertion.isFloatMax = this.isFloatMax;
-      assertion.isField = this.isField;
-      assertion.isStringMin = this.isStringMin;
-      assertion.isBigDecimalMax = this.isBigDecimalMax;
       assertion.isIntegerMin = this.isIntegerMin;
-      assertion.isPositive = this.isPositive;
+      assertion.isIntegerMax = this.isIntegerMax;
+
       assertion.isFloatMin = this.isFloatMin;
+      assertion.isFloatMax = this.isFloatMax;
+
       assertion.isLongMax = this.isLongMax;
       assertion.isLongMin = this.isLongMin;
       assertion.isDoubleMax = this.isDoubleMax;
-
       assertion.isDoubleMin = this.isDoubleMin;
+
       assertion.isBigDecimalMin = this.isBigDecimalMin;
-      assertion.isIntegerMax = this.isIntegerMax;
-      assertion.notNull = this.notNull;
-      assertion.notBlank = this.notBlank;
+      assertion.isBigDecimalMax = this.isBigDecimalMax;
+
       assertion.isBigCollectionMaxSize = this.isCollectionMaxSize;
 
       return assertion;

@@ -1,21 +1,25 @@
 grammar Dsl;
 
 file_
-   : (config? context*) EOF
-   | (context* config? ) EOF
+   : newLine* ( config? context*)  EOF
+   | newLine* ( context* config? )  EOF
    ;
 
+newLine
+    : NEWLINE
+    ;
+
 config
-   : CONFIG configbody
+   : commentdsl? CONFIG configbody
    ;
 
 context
-   : CONTEXT IDENTIFIER contextBody
+   : commentdsl? CONTEXT IDENTIFIER contextBody
    ;
 
 useFluentMethod
    : CONFIG_USE_FLUENT_METHOD EGAL bool SEPARATOR_JHIPSTER*
-   |CONFIG_USE_FLUENT_METHOD EGAL bool
+   | CONFIG_USE_FLUENT_METHOD EGAL bool
    ;
 
 baseName
@@ -66,7 +70,7 @@ label
    ;
 
 contextBody
-   : LCURL (domain)* RCURL
+   : LCURL (domain | commentdsl)* RCURL
    ;
 
 domain
@@ -75,7 +79,7 @@ domain
 
 
 domainBody
-    :LCURL (class | enumType)* RCURL
+    :LCURL (class | enumType | commentdsl)* RCURL
     ;
 
 
@@ -95,7 +99,7 @@ class
     ;
 
 classBody
-    : LCURL (classField)*  RCURL
+    : LCURL (commentdsl | classField)*  RCURL
     ;
 
 annotationClass
@@ -219,6 +223,7 @@ configbody
    | packageDomainName
    | projectFolder
    | useAssertAsValidation
+   | commentdsl
    )* RCURL
    ;
 
@@ -247,6 +252,10 @@ number
    : NATURAL_NUMBER (DOT NATURAL_NUMBER)?
    ;
 
+commentdsl
+    : LINE_COMMENT SEPARATOR_JHIPSTER*
+    ;
+
 comment
     : BLOCKCOMMENT SEPARATOR_JHIPSTER*
     ;
@@ -266,7 +275,7 @@ beforeEnum
     | (annotationClass)* comment ENUM
     ;
 enumBody
-    : LCURL (enumKeyValue SEPARATOR_JHIPSTER*)*  RCURL SEPARATOR_JHIPSTER*
+    : LCURL (commentdsl? enumKeyValue SEPARATOR_JHIPSTER*)*  RCURL SEPARATOR_JHIPSTER*
     ;
 //enumBody
 //    : LCURL enumKeyValue (COMMA enumKeyValue)*  RCURL SEPARATOR_JHIPSTER*
@@ -283,6 +292,7 @@ enumKeyValue
 beforeEnumKeyValue
     : comment?
     ;
+
 
 ENUM
     : 'enum'
@@ -512,22 +522,18 @@ STRING
    | '\'' ( '\\\'' | ~["\r\n] )* '\''
    ;
 
+LINE_COMMENT
+    : '//' (WS | STRING_LITERAL)*
+    ;
+
 STRING_LITERAL: 'a'..'z' | 'A'..'Z' | '0'..'9' | ':' | DOT | '&' | LPAREN | RPAREN | LSQUARE | RSQUARE| '$' | '@' | '/' | '\\' | ';' | '^';
-
-
-COMMENT
-  : ('#' | '//') ~ [\r\n]* -> channel(HIDDEN)
-  ;
 
 BLOCKCOMMENT
   : '/*' .*? '*/'
   ;
 
-//WS
-//   : [ \r\n\t]+ -> skip
-//   ;
+WS : (' ' | '\t' )+ -> skip;
 
-WS : (' ' | '\t')+ -> channel(HIDDEN);
 NEWLINE :  WS* '\r'? '\n' ;
 
 fragment RESTOFLINE

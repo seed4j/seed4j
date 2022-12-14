@@ -1,8 +1,6 @@
 package tech.jhipster.lite.dsl.generator.java.clazz.domain.converter;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassImport;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.FieldToGenerate;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.ReferenceManager;
@@ -77,7 +75,7 @@ public class FieldConverter {
       referenceManager.addUnknownPropertyTypeInClass(dslClass.getName().get(), classField.getType().get());
       builderField.type(new FieldTypeImpl(classField.getType().get(), Optional.empty()));
     }
-    List<Annotation> commonAnnotationAndValidator = new LinkedList<>();
+    Set<Annotation> commonAnnotationAndValidator = new LinkedHashSet<>();
 
     List<DslAnnotation> knowAnnotation = classField
       .getAnnotation()
@@ -93,9 +91,12 @@ public class FieldConverter {
       .toList();
     knowConstraint.forEach(val -> commonAnnotationAndValidator.add(annotationConverter.convertFromConstrain(val)));
 
-    if (config.getUseAssertAsValidation().get() || "record".equalsIgnoreCase(dslClass.getType().key())) {
+    if (
+      !commonAnnotationAndValidator.isEmpty() &&
+      (config.getUseAssertAsValidation().get() || "record".equalsIgnoreCase(dslClass.getType().key()))
+    ) {
       CodeAssertion.AssertionBuilder assertionBuilder = CodeAssertion.builder();
-      CodeAssertion assertion = assertionBuilder.from(commonAnnotationAndValidator.stream().distinct().toList(), classField).build();
+      CodeAssertion assertion = assertionBuilder.from(new ArrayList<>(commonAnnotationAndValidator), classField).build();
       builderField.assertion(assertion);
       commonAnnotationAndValidator.removeIf(item ->
         assertion.getAnnotationManaged().stream().anyMatch(an -> an.equalsIgnoreCase(item.name()))
@@ -103,13 +104,10 @@ public class FieldConverter {
       referenceManager.addImportToClass(dslClass.getName().name(), ASSERT_IMPORT);
     }
 
-    commonAnnotationAndValidator
-      .stream()
-      .distinct()
-      .forEach(annotation -> {
-        builderField.addAnnotation(annotation);
-        annotation.getImport().ifPresent(imp -> referenceManager.addImportToClass(dslClass.getName().name(), imp));
-      });
+    commonAnnotationAndValidator.forEach(annotation -> {
+      builderField.addAnnotation(annotation);
+      annotation.getImport().ifPresent(imp -> referenceManager.addImportToClass(dslClass.getName().name(), imp));
+    });
 
     return builderField.build();
   }

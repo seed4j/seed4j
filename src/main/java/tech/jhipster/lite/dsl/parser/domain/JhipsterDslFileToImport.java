@@ -1,7 +1,5 @@
 package tech.jhipster.lite.dsl.parser.domain;
 
-import java.util.Arrays;
-
 public class JhipsterDslFileToImport {
 
   public static DslFileImportBuilder builder() {

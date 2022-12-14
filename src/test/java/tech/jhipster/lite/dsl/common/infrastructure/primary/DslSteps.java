@@ -31,6 +31,9 @@ public class DslSteps {
   public void applyDslToADirectory() {
     String projectFolder = newTestFolder();
 
+    //    addPackageJsonToProject(projectFolder);
+    addPomToProject(projectFolder);
+
     post("/api/apply-dsl", projectFolder);
   }
 
@@ -61,5 +64,29 @@ public class DslSteps {
     headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
     return headers;
+  }
+
+  private static void addPackageJsonToProject(String folder) {
+    addFileToProject(folder, "src/test/resources/projects/empty-node/package.json", "package.json");
+  }
+
+  private static void addPomToProject(String folder) {
+    addFileToProject(folder, "src/test/resources/projects/init-maven/pom.xml", "pom.xml");
+  }
+
+  private static void addFileToProject(String folder, String source, String destination) {
+    Path folderPath = Paths.get(folder);
+    try {
+      Files.createDirectories(folderPath);
+    } catch (IOException e) {
+      throw new AssertionError(e);
+    }
+
+    Path filePath = folderPath.resolve(destination);
+    try {
+      Files.copy(Paths.get(source), filePath);
+    } catch (IOException e) {
+      throw new AssertionError(e);
+    }
   }
 }

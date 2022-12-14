@@ -8,12 +8,13 @@ For generate the grammar and lexer code you need to execute
 ./mvnw antlr4:antlr4
 ```
 
-For the moment only the creation of an object representing the generated application is created.
+Start jhipster lite
+```
+./mvnw
+```
 
-To see what is done you can run the test `shouldCreateAValidDslApp` in `FileSytemDslRepositoryTest.class`
-`
 
-Example of file:
+Create a DSL file (example):
 
 ```dsl
 config {
@@ -30,8 +31,7 @@ context ctx1 {
     domain {
 
         class Ship {
-          @min(10)
-          @max(20)
+          @min(10) @max(20)
           shipId Integer
 
           @notNull
@@ -60,6 +60,7 @@ context ctx2 {
             enum MyEnum {
                 AAA,BB,CCC
             }
+            
            record MyClass {
 
               shipId test
@@ -74,5 +75,23 @@ context ctx2 {
     }
 }
 ```
+- Edit the `PATH_TO_FILE` variable to match the path of the previously created file.
+- Edit the `TARGET_FOLDER` variable to match the target folder
 
+WARNING!! 
+
+For now, the generator need module `init` and `prettier` in the target folder `TARGET_FOLDER`.
+
+```bash
+export PATH_TO_FILE=/projet/antarus/jhipster-lite/src/test/resources/dsl/jhlite-test.dsl
+export TARGET_FOLDER=/tmp/test
+curl --request POST \
+--url http://localhost:7471/api/apply-dsl \
+--header 'Content-Type: multipart/form-data' \
+--form file=@$PATH_TO_FILE \
+--form "properties={
+\"projectFolder\":\"$TARGET_FOLDER\",
+\"commit\":false
+}"
+```
 

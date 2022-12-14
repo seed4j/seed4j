@@ -1,4 +1,4 @@
-package tech.jhipster.lite.module.domain.git;
+package tech.jhipster.lite.dsl.common.domain.git;
 
 import tech.jhipster.lite.error.domain.Assert;
 

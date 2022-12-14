@@ -1,5 +1,27 @@
 # Usage
 
+## Syntax
+
+The Class declaration is done as follows:
+```
+[<class javadoc>]
+[<class annotation>*]
+[class | record] <class name> {
+  [<field javadoc>]
+  [<field annotation>*]
+  <field name> <field type> [<validation>*]
+}
+```
+
+- `<class name>` the name of the class or record,
+- `<field name>` the name of one field of the entity,
+- `<field type>` the JHipster supported type of the field,
+- and as an option:
+    - `<class javadoc>` the documentation of the entity,
+    - `<class annotation>` the options for the entity (see [Options][] for a complete list of available options),
+    - `<field javadoc>` the documentation of the field,
+    - `<field annotation>` the options for the field,
+    - `<validation>` the validations for the field.
 
 ### Field types and validations
 (From jhipster only pattern is not managed yet)

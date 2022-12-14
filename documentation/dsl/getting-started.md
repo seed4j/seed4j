@@ -17,30 +17,26 @@ Example of file:
 
 ```dsl
 config {
-baseName=Override
-basePackageName=Override
-packageInfrastructureName=infrastructureOverride
-packageInfrastructurePrimaryName=primaryOverride
-packageInfrastructureSecondaryName=secondaryOverride
+baseName=baseNameOverride
+basePackageName=basePackageNameOverride
 packageDomainName=domainOverride
 useFluentMethod=false
 projectFolder=/tmp/myApp
+useAssertAsValidation=yes
 }
 
 context ctx1 {
 
     domain {
 
-        @test
         class Ship {
-          @notBlank
-          shipId UUID
+          @min(10)
+          @max(20)
+          shipId Integer
 
-          @notBlank
-          name String
+          @notNull
+          name Test
 
-          @nullable
-          port Port
         }
 
        /**
@@ -48,20 +44,33 @@ context ctx1 {
        */
        @package(test)
        record test {
-          @notBlank
-          shipId UUID
+          @min(10)
+          @max(20)
+          shipId Integer
 
-          @notBlank
-          name String
+          @notNull
+          myEnum MyEnum
 
-          @nullable
-          port Port
         }
     }
 }
 
 context ctx2 {
     domain {
+            enum MyEnum {
+                AAA,BB,CCC
+            }
+           record MyClass {
+
+              shipId test
+
+              @notNull
+              ship Ship
+
+              @notNull
+              myEnum MyEnum
+
+            }
     }
 }
 ```

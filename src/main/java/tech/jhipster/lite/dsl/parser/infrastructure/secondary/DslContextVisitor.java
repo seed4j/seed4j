@@ -8,6 +8,7 @@ import tech.jhipster.lite.dsl.DslBaseVisitor;
 import tech.jhipster.lite.dsl.DslParser;
 import tech.jhipster.lite.dsl.parser.domain.DslContext;
 import tech.jhipster.lite.dsl.parser.domain.DslException;
+import tech.jhipster.lite.dsl.parser.domain.DslSecondary;
 import tech.jhipster.lite.error.domain.Assert;
 
 public class DslContextVisitor {
@@ -30,19 +31,21 @@ public class DslContextVisitor {
       }
       contextBuilder.addDomain(domainVisitor.visitDomain(ctx.contextBody().domain().get(0)));
       if (ctx.contextBody().primary() != null) {
+        DslPrimaryVisitor.PrimaryVisitor primaryVisitor = new DslPrimaryVisitor.PrimaryVisitor();
         ctx
           .contextBody()
           .primary()
           .forEach(primary -> {
-            log.info("primary detect : {}", primary.IDENTIFIER().getText());
+            contextBuilder.addPrimary(primaryVisitor.visitPrimary(primary));
           });
       }
       if (ctx.contextBody().primary() != null) {
+        DslSecondaryVisitor.SecondaryVisitor secondaryVisitor = new DslSecondaryVisitor.SecondaryVisitor();
         ctx
           .contextBody()
           .secondary()
           .forEach(sec -> {
-            log.info("secondary detect : {}", sec.IDENTIFIER().getText());
+            contextBuilder.addSecondary(secondaryVisitor.visitSecondary(sec));
           });
       }
 

@@ -117,7 +117,7 @@ public class DslClassUtils {
 
   public static DslDomain createSimpleDomain() {
     return DslDomain
-      .dslDomainBuilder()
+      .builder()
       .addDslClass(createSimpleClass("class1"))
       .addDslClass(createSimpleClass("class2"))
       .addDslClass(createSimpleClass("class3"))
@@ -126,7 +126,7 @@ public class DslClassUtils {
 
   public static DslDomain createDomain() {
     return DslDomain
-      .dslDomainBuilder()
+      .builder()
       .addDslClass(createComplexeClass("MyObject1", "MyObject2"))
       .addDslClass(createComplexeRecord("MyObject2", "myenum"))
       .addDslEnum(createEnumSimple("MyEnum"))
@@ -135,7 +135,7 @@ public class DslClassUtils {
 
   public static DslDomain createDomainFull(String ctx) {
     return DslDomain
-      .dslDomainBuilder()
+      .builder()
       .addDslClass(createComplexeClass(ctx + "_class1"))
       .addDslClass(createComplexeRecord(ctx + "_class2"))
       .addDslClass(createSimpleClass(ctx + "_class3"))

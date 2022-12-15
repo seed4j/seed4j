@@ -26,13 +26,18 @@ class DslDomainVisitorTest {
 
   @Test
   void shouldAcceptDomainWithMultipleClass() {
-    DslDomain dslDomain = getDslDomain("""
+    DslDomain dslDomain = getDslDomain(
+      """
         domain {
             class class1 {}
             class class2 {}
+            enum enum1 {}
+            record record1 {}
         }
-        """);
+        """
+    );
     assertNotNull(dslDomain);
-    assertEquals(2, dslDomain.getDslClasses().size());
+    assertEquals(3, dslDomain.getDslClasses().size());
+    assertEquals(1, dslDomain.getDslEnum().size());
   }
 }

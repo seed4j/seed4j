@@ -49,6 +49,14 @@ public class AntlrUtils {
     return getParser(txt).domain();
   }
 
+  public static DslParser.PrimaryContext getPrimaryContextFromText(String txt) {
+    return getParser(txt).primary();
+  }
+
+  public static DslParser.SecondaryContext getSecondaryContextFromText(String txt) {
+    return getParser(txt).secondary();
+  }
+
   public static DslParser.File_Context getFileContextFromText(String txt) {
     return getParser(txt).file_();
   }

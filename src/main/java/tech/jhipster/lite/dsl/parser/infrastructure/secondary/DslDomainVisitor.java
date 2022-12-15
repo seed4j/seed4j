@@ -2,8 +2,10 @@ package tech.jhipster.lite.dsl.parser.infrastructure.secondary;
 
 import static tech.jhipster.lite.dsl.parser.infrastructure.secondary.DslClassVisitor.ClassVisitor;
 
+import java.util.List;
 import tech.jhipster.lite.dsl.DslBaseVisitor;
 import tech.jhipster.lite.dsl.DslParser;
+import tech.jhipster.lite.dsl.parser.domain.ContainsClassBuilder;
 import tech.jhipster.lite.dsl.parser.domain.DslDomain;
 import tech.jhipster.lite.error.domain.Assert;
 
@@ -16,15 +18,8 @@ public class DslDomainVisitor {
     @Override
     public DslDomain visitDomain(DslParser.DomainContext ctx) {
       Assert.notNull("ctx", ctx);
-      DslDomain.DslDomainBuilder domainBuilder = DslDomain.dslDomainBuilder();
-      ClassVisitor classVisitor = new ClassVisitor();
-      for (DslParser.ClassContext classContext : ctx.domainBody().class_()) {
-        domainBuilder.addDslClass(classVisitor.visitClass(classContext));
-      }
-      DslEnumVisitor.EnumVisitor enumVisitor = new DslEnumVisitor.EnumVisitor();
-      for (DslParser.EnumTypeContext enumTypeContext : ctx.domainBody().enumType()) {
-        domainBuilder.addDslEnum(enumVisitor.visitEnumType(enumTypeContext));
-      }
+      DslDomain.DslDomainBuilder domainBuilder = DslDomain.builder();
+      VisitorUtils.getClassAndEnum(ctx.domainBody().class_(), ctx.domainBody().enumType(), domainBuilder);
 
       return domainBuilder.build();
     }

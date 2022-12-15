@@ -81,11 +81,11 @@ domain
    ;
 
 primary
-   : PRIMARY IDENTIFIER primaryBody
+   : PRIMARY primaryBody
    ;
 
 secondary
-   : SECONDARY IDENTIFIER secondaryBody
+   : SECONDARY secondaryBody
    ;
 
 domainBody

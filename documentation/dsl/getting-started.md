@@ -80,13 +80,43 @@ context ctx2 {
             }
     }
 
-    primary name { //   only in grammar for now
+
+    primary {
              // from MyCl  only in grammar for now
              //  fromDomain only in grammar for now
+
+            class MyPrimaryClass {
+
+               shipId test
+
+               @notNull
+               ship Ship
+
+               @notNull
+               myEnum MyEnum
+
+             }
+               enum MyPrimaryEnum {
+             DD,EE,FF
+         }
     }
-    secondary name{//   only in grammar for now
+    secondary {
              // from MyCl  only in grammar for now
              //  fromDomain only in grammar for now
+           class MySecondaryClass {
+
+                shipId test
+
+                @notNull
+                ship Ship
+
+                @notNull
+                myEnum MyEnum
+
+              }
+                enum MySecondaryEnum {
+                   GG,HH,JJ
+               }
     }
 
 }

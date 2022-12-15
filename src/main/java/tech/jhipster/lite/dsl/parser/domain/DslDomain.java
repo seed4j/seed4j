@@ -8,7 +8,7 @@ import tech.jhipster.lite.error.domain.Assert;
 
 public class DslDomain {
 
-  public static DslDomainBuilder dslDomainBuilder() {
+  public static DslDomainBuilder builder() {
     return new DslDomainBuilder();
   }
 
@@ -25,19 +25,21 @@ public class DslDomain {
     return dslEnum;
   }
 
-  public static final class DslDomainBuilder {
+  public static final class DslDomainBuilder implements ContainsClassBuilder {
 
     private final Collection<DslClass> dslClasses = new LinkedList<>();
     private final Collection<DslEnum> dslEnum = new LinkedList<>();
 
     private DslDomainBuilder() {}
 
+    @Override
     public DslDomainBuilder addDslClass(DslClass dslClass) {
       Assert.notNull("dslClass", dslClass);
       this.dslClasses.add(dslClass);
       return this;
     }
 
+    @Override
     public DslDomainBuilder addDslEnum(DslEnum dslEnum) {
       Assert.notNull("dslClass", dslEnum);
       this.dslEnum.add(dslEnum);

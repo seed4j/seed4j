@@ -50,9 +50,9 @@ class DslContextVisitorTest {
       """
                       context ctx1 {
                       domain {}
-                      primary primary1  {}
-                      secondary secondary1  {}
-                      primary primary2  {}
+                      primary {}
+                      secondary  {}
+                      primary  {}
                       }
                       """
     );

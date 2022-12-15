@@ -6,13 +6,13 @@ import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslEnum;
 import tech.jhipster.lite.error.domain.Assert;
 
-public class DslDomain {
+public class DslPrimary {
 
-  public static DslDomainBuilder dslDomainBuilder() {
-    return new DslDomainBuilder();
+  public static DslPrimaryBuilder builder() {
+    return new DslPrimaryBuilder();
   }
 
-  private DslDomain() {}
+  private DslPrimary() {}
 
   private Collection<DslClass> dslClasses;
   private Collection<DslEnum> dslEnum;
@@ -25,27 +25,27 @@ public class DslDomain {
     return dslEnum;
   }
 
-  public static final class DslDomainBuilder {
+  public static final class DslPrimaryBuilder {
 
     private final Collection<DslClass> dslClasses = new LinkedList<>();
     private final Collection<DslEnum> dslEnum = new LinkedList<>();
 
-    private DslDomainBuilder() {}
+    private DslPrimaryBuilder() {}
 
-    public DslDomainBuilder addDslClass(DslClass dslClass) {
+    public DslPrimaryBuilder addDslClass(DslClass dslClass) {
       Assert.notNull("dslClass", dslClass);
       this.dslClasses.add(dslClass);
       return this;
     }
 
-    public DslDomainBuilder addDslEnum(DslEnum dslEnum) {
+    public DslPrimaryBuilder addDslEnum(DslEnum dslEnum) {
       Assert.notNull("dslClass", dslEnum);
       this.dslEnum.add(dslEnum);
       return this;
     }
 
-    public DslDomain build() {
-      DslDomain dslDomain = new DslDomain();
+    public DslPrimary build() {
+      DslPrimary dslDomain = new DslPrimary();
       dslDomain.dslClasses = this.dslClasses;
       dslDomain.dslEnum = this.dslEnum;
       return dslDomain;

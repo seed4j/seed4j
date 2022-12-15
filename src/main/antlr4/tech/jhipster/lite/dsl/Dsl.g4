@@ -1,8 +1,7 @@
 grammar Dsl;
 
 file_
-   : newLine* ( config? context*)  EOF
-   | newLine* ( context* config? )  EOF
+   : newLine* ( config? commentdsl* modules? commentdsl* context*)  EOF
    ;
 
 newLine
@@ -11,6 +10,10 @@ newLine
 
 config
    : commentdsl? CONFIG configbody
+   ;
+
+modules
+   : commentdsl? MODULES modulesbody
    ;
 
 context
@@ -70,13 +73,20 @@ label
    ;
 
 contextBody
-   : LCURL (domain | commentdsl)* RCURL
+   : LCURL (domain | primary | secondary | commentdsl)* RCURL
    ;
 
 domain
    : DOMAIN domainBody
    ;
 
+primary
+   : PRIMARY IDENTIFIER primaryBody
+   ;
+
+secondary
+   : SECONDARY IDENTIFIER secondaryBody
+   ;
 
 domainBody
     :LCURL (class | enumType | commentdsl)* RCURL
@@ -95,7 +105,11 @@ classType
     ;
 
 class
-    : beforeClass IDENTIFIER classBody
+    : beforeClass IDENTIFIER extend?  classBody //extends class?
+    ;
+
+extend
+    : LPAREN IDENTIFIER RPAREN
     ;
 
 classBody
@@ -105,6 +119,16 @@ classBody
 annotationClass
     : ('@package' | '@Package') LPAREN packageFormat RPAREN SEPARATOR_JHIPSTER*
     | ('@ignore' | '@Ignore') SEPARATOR_JHIPSTER*
+    | ('@create' | '@Create') SEPARATOR_JHIPSTER*
+    | ('@create' | '@Create') LPAREN IDENTIFIER RPAREN SEPARATOR_JHIPSTER*
+    | ('@read' | '@Read') SEPARATOR_JHIPSTER*
+    | ('@read' | '@Read') LPAREN IDENTIFIER RPAREN SEPARATOR_JHIPSTER*
+    | ('@update' | '@Update') SEPARATOR_JHIPSTER*
+    | ('@update' | '@Update') LPAREN IDENTIFIER RPAREN SEPARATOR_JHIPSTER*
+    | ('@delete' | '@Delete') SEPARATOR_JHIPSTER*
+    | ('@delete' | '@Delete') LPAREN IDENTIFIER RPAREN SEPARATOR_JHIPSTER*
+    | ('@crud' | '@Crud') SEPARATOR_JHIPSTER*
+    | ('@crud' | '@Crud') LPAREN IDENTIFIER RPAREN SEPARATOR_JHIPSTER*
     ;
 
 annotation
@@ -128,24 +152,28 @@ annotation
     ;
 
 classField
-    : beforeClassField IDENTIFIER VO? FIELD_TYPE_NUMBER comment? (constraintNumber)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER VO? FIELD_TYPE_NUMBER (constraintNumber)* comment? SEPARATOR_JHIPSTER*
+    : beforeClassField IDENTIFIER list? VO? FIELD_TYPE_NUMBER comment? (constraintNumber)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER list? VO? FIELD_TYPE_NUMBER (constraintNumber)* comment? SEPARATOR_JHIPSTER*
 
 
-    | beforeClassField IDENTIFIER VO? FIELD_TYPE_BLOB comment? (constraintByte)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER VO? FIELD_TYPE_BLOB (constraintByte)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER list? VO? FIELD_TYPE_BLOB comment? (constraintByte)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER list? VO? FIELD_TYPE_BLOB (constraintByte)* comment? SEPARATOR_JHIPSTER*
 
-    | beforeClassField IDENTIFIER VO? FIELD_TYPE_STRING comment? (constraintString)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER VO? FIELD_TYPE_STRING (constraintString)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER list? VO? FIELD_TYPE_STRING comment? (constraintString)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER list? VO? FIELD_TYPE_STRING (constraintString)* comment? SEPARATOR_JHIPSTER*
 
-    | beforeClassField IDENTIFIER VO? FIELD_TYPE_TIME comment? (constraintCommon)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER VO? FIELD_TYPE_TIME (constraintCommon)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER list? VO? FIELD_TYPE_TIME comment? (constraintCommon)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER list? VO? FIELD_TYPE_TIME (constraintCommon)* comment? SEPARATOR_JHIPSTER*
 
-    | beforeClassField IDENTIFIER VO? FIELD_TYPE_OTHER comment? (constraintCommon)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER VO? FIELD_TYPE_OTHER (constraintCommon)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER list? VO? FIELD_TYPE_OTHER comment? (constraintCommon)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER list? VO? FIELD_TYPE_OTHER (constraintCommon)* comment? SEPARATOR_JHIPSTER*
 
-    | beforeClassField IDENTIFIER VO? IDENTIFIER comment? (constraintCommon)* SEPARATOR_JHIPSTER*
-    | beforeClassField IDENTIFIER VO? IDENTIFIER (constraintCommon)* comment? SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER list? VO? IDENTIFIER comment? (constraintCommon)* SEPARATOR_JHIPSTER*
+    | beforeClassField IDENTIFIER list? VO? IDENTIFIER (constraintCommon)* comment? SEPARATOR_JHIPSTER*
+    ;
+
+list
+    : '[]'
     ;
 
 beforeClassField
@@ -197,21 +225,25 @@ minMaxByteValidator
     | 'maxbytes' LPAREN NATURAL_NUMBER RPAREN
     ;
 
-primary
-   : 'primary' IDENTIFIER primaryBody
-   ;
-
-secondary
-   : 'secondary' IDENTIFIER secondaryBody
-   ;
-
 primaryBody
-     :LCURL (STRING)* RCURL
-     ;
+    : LCURL (from | fromDomain | class | enumType | commentdsl)* RCURL
+    ;
 
 secondaryBody
-    :LCURL (STRING)* RCURL
+    : LCURL (from | fromDomain | class | enumType | commentdsl)* RCURL
     ;
+
+from
+   : 'from' IDENTIFIER SEPARATOR_JHIPSTER*
+   ;
+
+fromDomain
+   : 'fromDomain' SEPARATOR_JHIPSTER*
+   ;
+
+modulesbody
+   : LCURL ( commentdsl )* RCURL
+   ;
 
 configbody
    : LCURL (baseName
@@ -224,7 +256,7 @@ configbody
    | projectFolder
    | useAssertAsValidation
    | commentdsl
-   )* RCURL
+   )* RCURL SEPARATOR_JHIPSTER*
    ;
 
 qualifiedName
@@ -308,12 +340,24 @@ CONFIG
     : 'config'
     ;
 
+MODULES
+    : 'modules'
+    ;
+
 CONTEXT
     : 'context'
     ;
 
 DOMAIN
     : 'domain'
+    ;
+
+PRIMARY
+    : 'primary'
+    ;
+
+SECONDARY
+    : 'secondary'
     ;
 
 CONFIG_USE_FLUENT_METHOD

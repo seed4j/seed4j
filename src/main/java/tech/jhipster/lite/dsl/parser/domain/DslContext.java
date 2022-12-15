@@ -1,5 +1,7 @@
 package tech.jhipster.lite.dsl.parser.domain;
 
+import java.util.LinkedList;
+import java.util.List;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslContextName;
 import tech.jhipster.lite.error.domain.Assert;
 
@@ -13,6 +15,7 @@ public class DslContext {
 
   private DslContextName name;
   private DslDomain domain;
+  private List<DslPrimary> primaries;
 
   public DslContextName getName() {
     return name;
@@ -22,10 +25,15 @@ public class DslContext {
     return domain;
   }
 
+  public List<DslPrimary> getPrimaries() {
+    return primaries;
+  }
+
   public static final class DslContextBuilder {
 
     private DslContextName name;
     private DslDomain domain;
+    private final List<DslPrimary> primaries = new LinkedList<>();
 
     private DslContextBuilder() {}
 
@@ -40,11 +48,18 @@ public class DslContext {
       return this;
     }
 
+    public DslContextBuilder addPrimary(DslPrimary dslPrimary) {
+      Assert.notNull("dslPrimary", dslPrimary);
+      this.primaries.add(dslPrimary);
+      return this;
+    }
+
     public DslContext build() {
       Assert.notNull("domain", this.domain);
       DslContext dslContext = new DslContext();
       dslContext.name = this.name;
       dslContext.domain = this.domain;
+      dslContext.primaries = this.primaries;
       return dslContext;
     }
   }

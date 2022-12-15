@@ -21,7 +21,6 @@ public class DslClassVisitor {
       Assert.notNull("ctx", ctx);
       DslClass.DslClassBuilder dslClassBuilder = DslClass.dslClassBuilder();
       dslClassBuilder.name(new ClassName(ctx.IDENTIFIER().getText()));
-
       BeforeClassVisitor beforeClassVisitor = new BeforeClassVisitor(dslClassBuilder);
       beforeClassVisitor.visitBeforeClass(ctx.beforeClass());
 

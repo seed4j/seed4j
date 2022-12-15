@@ -43,4 +43,19 @@ class DslContextVisitorTest {
       "DslException was expected"
     );
   }
+
+  @Test
+  void shouldDetectPrimaryAndSecondary() {
+    DslParser.ContextContext ctx = AntlrUtils.getContextFromText(
+      """
+                      context ctx1 {
+                      domain {}
+                      primary primary1  {}
+                      secondary secondary1  {}
+                      primary primary2  {}
+                      }
+                      """
+    );
+    DslContext dslContext = contextVisitor.visitContext(ctx);
+  }
 }

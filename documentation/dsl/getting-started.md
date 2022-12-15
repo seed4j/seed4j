@@ -26,12 +26,18 @@ projectFolder=/tmp/myApp
 useAssertAsValidation=yes
 }
 
+// list of modules to installe not implemented yet
+//modules {
+// list of module to install
+//}
+
 context ctx1 {
 
     domain {
 
-        class Ship {
-          @min(10) @max(20)
+        class Ship(parentClass) {  // (parentClass) only in grammar for now
+          @min(10)
+          @max(20)
           shipId Integer
 
           @notNull
@@ -42,6 +48,7 @@ context ctx1 {
        /**
        * comment
        */
+
        @package(test)
        record test {
           @min(10)
@@ -60,8 +67,7 @@ context ctx2 {
             enum MyEnum {
                 AAA,BB,CCC
             }
-            
-           record MyClass {
+           class MyClass {// @crud @create @read @update @delete only in grammar for now
 
               shipId test
 
@@ -73,6 +79,16 @@ context ctx2 {
 
             }
     }
+
+    primary name { //   only in grammar for now
+             // from MyCl  only in grammar for now
+             //  fromDomain only in grammar for now
+    }
+    secondary name{//   only in grammar for now
+             // from MyCl  only in grammar for now
+             //  fromDomain only in grammar for now
+    }
+
 }
 ```
 - Edit the `PATH_TO_FILE` variable to match the path of the previously created file.

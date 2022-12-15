@@ -8,6 +8,7 @@ newLine
     : NEWLINE
     ;
 
+
 config
    : commentdsl? CONFIG configbody
    ;
@@ -235,6 +236,7 @@ secondaryBody
 
 from
    : 'from' IDENTIFIER SEPARATOR_JHIPSTER*
+   | 'from' LCURL identifier (SEPARATOR_JHIPSTER identifier )* SEPARATOR_JHIPSTER* RCURL
    ;
 
 fromDomain

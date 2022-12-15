@@ -64,7 +64,11 @@ context ctx2 {
     }
 
     primary {
-             // from MyCl  only in grammar for now
+        from MyClass
+
+            from {
+                     MyAnotherClass, ddd,dd
+                   }
              //  fromDomain only in grammar for now
 
             class MyPrimaryClass {
@@ -81,11 +85,15 @@ context ctx2 {
                enum MyPrimaryEnum {
              DD,EE,FF
          }
+
+
     }
     secondary {
+        from MyClass
              // from MyCl  only in grammar for now
              //  fromDomain only in grammar for now
            class MySecondaryClass {
+
 
                 shipId test
 

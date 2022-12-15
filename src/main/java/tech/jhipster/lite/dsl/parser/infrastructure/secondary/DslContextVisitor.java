@@ -8,7 +8,6 @@ import tech.jhipster.lite.dsl.DslBaseVisitor;
 import tech.jhipster.lite.dsl.DslParser;
 import tech.jhipster.lite.dsl.parser.domain.DslContext;
 import tech.jhipster.lite.dsl.parser.domain.DslException;
-import tech.jhipster.lite.dsl.parser.domain.DslSecondary;
 import tech.jhipster.lite.error.domain.Assert;
 
 public class DslContextVisitor {

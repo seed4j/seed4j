@@ -17,6 +17,8 @@ public class DslPrimary {
   private Collection<DslClass> dslClasses;
   private Collection<DslEnum> dslEnum;
 
+  private Collection<DslFrom> dslFroms;
+
   public Collection<DslClass> getDslClasses() {
     return dslClasses;
   }
@@ -25,10 +27,15 @@ public class DslPrimary {
     return dslEnum;
   }
 
+  public Collection<DslFrom> getDslFroms() {
+    return dslFroms;
+  }
+
   public static final class DslPrimaryBuilder implements ContainsClassBuilder {
 
     private final Collection<DslClass> dslClasses = new LinkedList<>();
     private final Collection<DslEnum> dslEnum = new LinkedList<>();
+    private final Collection<DslFrom> dslFroms = new LinkedList<>();
 
     private DslPrimaryBuilder() {}
 
@@ -44,11 +51,18 @@ public class DslPrimary {
       return this;
     }
 
+    public DslPrimaryBuilder addDslFrom(DslFrom dslFrom) {
+      Assert.notNull("dslFrom", dslFrom);
+      this.dslFroms.add(dslFrom);
+      return this;
+    }
+
     public DslPrimary build() {
-      DslPrimary dslDomain = new DslPrimary();
-      dslDomain.dslClasses = this.dslClasses;
-      dslDomain.dslEnum = this.dslEnum;
-      return dslDomain;
+      DslPrimary dslPrimary = new DslPrimary();
+      dslPrimary.dslClasses = this.dslClasses;
+      dslPrimary.dslEnum = this.dslEnum;
+      dslPrimary.dslFroms = this.dslFroms;
+      return dslPrimary;
     }
   }
 }

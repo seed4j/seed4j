@@ -1,11 +1,7 @@
 package tech.jhipster.lite.dsl.parser.infrastructure.secondary;
 
-import static tech.jhipster.lite.dsl.parser.infrastructure.secondary.DslClassVisitor.ClassVisitor;
-
-import java.util.List;
 import tech.jhipster.lite.dsl.DslBaseVisitor;
 import tech.jhipster.lite.dsl.DslParser;
-import tech.jhipster.lite.dsl.parser.domain.ContainsClassBuilder;
 import tech.jhipster.lite.dsl.parser.domain.DslDomain;
 import tech.jhipster.lite.error.domain.Assert;
 

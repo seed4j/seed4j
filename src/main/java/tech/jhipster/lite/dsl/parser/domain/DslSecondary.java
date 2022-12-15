@@ -16,6 +16,7 @@ public class DslSecondary {
 
   private Collection<DslClass> dslClasses;
   private Collection<DslEnum> dslEnum;
+  private Collection<DslFrom> dslFroms;
 
   public Collection<DslClass> getDslClasses() {
     return dslClasses;
@@ -25,10 +26,15 @@ public class DslSecondary {
     return dslEnum;
   }
 
+  public Collection<DslFrom> getDslFroms() {
+    return dslFroms;
+  }
+
   public static final class DslSecondaryBuilder implements ContainsClassBuilder {
 
     private final Collection<DslClass> dslClasses = new LinkedList<>();
     private final Collection<DslEnum> dslEnum = new LinkedList<>();
+    private final Collection<DslFrom> dslFroms = new LinkedList<>();
 
     private DslSecondaryBuilder() {}
 
@@ -44,11 +50,18 @@ public class DslSecondary {
       return this;
     }
 
+    public DslSecondaryBuilder addDslFrom(DslFrom dslFrom) {
+      Assert.notNull("dslFrom", dslFrom);
+      this.dslFroms.add(dslFrom);
+      return this;
+    }
+
     public DslSecondary build() {
-      DslSecondary dslDomain = new DslSecondary();
-      dslDomain.dslClasses = this.dslClasses;
-      dslDomain.dslEnum = this.dslEnum;
-      return dslDomain;
+      DslSecondary dslSecondary = new DslSecondary();
+      dslSecondary.dslClasses = this.dslClasses;
+      dslSecondary.dslEnum = this.dslEnum;
+      dslSecondary.dslFroms = this.dslFroms;
+      return dslSecondary;
     }
   }
 }

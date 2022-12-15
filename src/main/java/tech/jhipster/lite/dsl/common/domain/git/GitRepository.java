@@ -1,6 +1,5 @@
 package tech.jhipster.lite.dsl.common.domain.git;
 
-import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
 import tech.jhipster.lite.project.domain.ProjectPath;
 
 public interface GitRepository {

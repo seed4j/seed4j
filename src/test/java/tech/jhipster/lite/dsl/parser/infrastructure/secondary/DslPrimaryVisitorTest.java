@@ -25,7 +25,7 @@ class DslPrimaryVisitorTest {
   }
 
   @Test
-  void shouldAcceptDomainWithMultipleClass() {
+  void shouldAcceptPrimaryWithMultipleClass() {
     DslPrimary dslPrimary = getDslPrimary(
       """
                 primary {
@@ -39,5 +39,47 @@ class DslPrimaryVisitorTest {
     assertNotNull(dslPrimary);
     assertEquals(3, dslPrimary.getDslClasses().size());
     assertEquals(1, dslPrimary.getDslEnum().size());
+  }
+
+  @Test
+  void shouldAcceptPrimaryWithSimpleFrom() {
+    DslPrimary dslPrimary = getDslPrimary(
+      """
+                      primary {
+                       from MyClass
+                      }
+                      """
+    );
+    assertNotNull(dslPrimary);
+    assertEquals(1, dslPrimary.getDslFroms().size());
+  }
+
+  @Test
+  void shouldAcceptPrimaryWithFromMultiple() {
+    DslPrimary dslPrimary = getDslPrimary(
+      """
+                     primary {
+                    from {
+                      MyAnotherClass, ddd,dd
+                    }
+                     }
+                     """
+    );
+    assertNotNull(dslPrimary);
+    assertEquals(3, dslPrimary.getDslFroms().size());
+  }
+
+  @Test
+  void shouldAcceptPrimaryWithMixFrom() {
+    DslPrimary dslPrimary = getDslPrimary(
+      """
+                     primary {
+                    from {MyAnotherClass, ddd,dd}
+                      from MyClass
+                     }
+                     """
+    );
+    assertNotNull(dslPrimary);
+    assertEquals(4, dslPrimary.getDslFroms().size());
   }
 }

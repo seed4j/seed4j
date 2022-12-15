@@ -1,6 +1,5 @@
 package tech.jhipster.lite.dsl.parser.domain;
 
-import java.util.Arrays;
 import tech.jhipster.lite.error.domain.Assert;
 
 public class JhipsterDslFileToSave {

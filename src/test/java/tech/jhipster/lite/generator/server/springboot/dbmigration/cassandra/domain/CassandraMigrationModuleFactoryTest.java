@@ -38,12 +38,28 @@ class CassandraMigrationModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, readmeFile())
+    assertThatModuleWithFiles(module, pomFile(), readmeFile(), testCassandraManager())
+      .hasFile("pom.xml")
+      .containing(
+        """
+            <dependency>
+              <groupId>org.cassandraunit</groupId>
+              <artifactId>cassandra-unit</artifactId>
+              <version>${cassandraunit.version}</version>
+              <scope>test</scope>
+            </dependency>
+        """
+      )
+      .and()
       .hasFiles("src/main/docker/cassandra-migration.yml")
       .hasFiles("src/main/resources/config/cql/create-migration-keyspace.cql")
       .hasFiles("src/main/resources/config/cql/changelog/README.md")
       .hasFiles("documentation/cassandra-migration.md")
       .hasPrefixedFiles("src/main/docker/cassandra/scripts", "autoMigrate.sh", "execute-cql.sh")
+      .hasFiles("src/test/java/com/jhipster/test/TestCassandraMigrationLoader.java")
+      .hasFile("src/test/java/com/jhipster/test/TestCassandraManager.java")
+      .containing("TestCassandraMigrationLoader.loadMigrationScripts(session);")
+      .and()
       .hasFile("README.md")
       .containing("""
         ```bash
@@ -53,5 +69,12 @@ class CassandraMigrationModuleFactoryTest {
       .and()
       .hasFile("src/main/docker/cassandra/Cassandra-Migration.Dockerfile")
       .containing("cassandra:4.0.7");
+  }
+
+  private ModuleFile testCassandraManager() {
+    return file(
+      "src/test/resources/projects/cassandra/TestCassandraManager.java",
+      "src/test/java/com/jhipster/test/TestCassandraManager.java"
+    );
   }
 }

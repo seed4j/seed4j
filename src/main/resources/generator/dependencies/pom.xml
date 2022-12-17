@@ -48,6 +48,7 @@
     <jhlite.version>0.25.0</jhlite.version>
     <commons-lang3.version>3.12.0</commons-lang3.version>
     <ehcache.version>3.10.8</ehcache.version>
+    <cassandraunit.version>4.3.1.0</cassandraunit.version>
   </properties>
 
   <dependencyManagement>

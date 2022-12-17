@@ -1,13 +1,14 @@
-package {{ packageName }};
+package com.jhipster.test;
 
 import com.datastax.oss.driver.api.core.CqlSession;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.context.ApplicationListener;
 import org.testcontainers.containers.CassandraContainer;
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 
-class TestCassandraManager implements ApplicationListener<ApplicationEnvironmentPreparedEvent>  {
+class TestCassandraManager implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
+
   private static final String KEYSPACE = "testKeyspace";
   private CassandraContainer cassandraContainer;
   private static final Integer CONTAINER_STARTUP_TIMEOUT_MINUTES = 10;
@@ -19,7 +20,7 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
     }
     createCassandraContainer();
 
-    if(cassandraContainer.isRunning()){
+    if (cassandraContainer.isRunning()) {
       return;
     }
     cassandraContainer.start();
@@ -28,8 +29,7 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
     createTestKeyspace(session);
     registerEnvironmentVariables();
 
-    Runtime.getRuntime()
-      .addShutdownHook(new Thread(stopContainer()));
+    Runtime.getRuntime().addShutdownHook(new Thread(stopContainer()));
   }
 
   private void registerEnvironmentVariables() {
@@ -53,9 +53,10 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
   }
 
   private void createCassandraContainer() {
-    cassandraContainer = (CassandraContainer) new CassandraContainer("{{ cassandraDockerImage }}")
-      .withStartupTimeout(Duration.of(CONTAINER_STARTUP_TIMEOUT_MINUTES, ChronoUnit.MINUTES))
-      .withExposedPorts(CassandraContainer.CQL_PORT);
+    cassandraContainer =
+      (CassandraContainer) new CassandraContainer("4.0.7")
+        .withStartupTimeout(Duration.of(CONTAINER_STARTUP_TIMEOUT_MINUTES, ChronoUnit.MINUTES))
+        .withExposedPorts(CassandraContainer.CQL_PORT);
   }
 
   private Runnable stopContainer() {

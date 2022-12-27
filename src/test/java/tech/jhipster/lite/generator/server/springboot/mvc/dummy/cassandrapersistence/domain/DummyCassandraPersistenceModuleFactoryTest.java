@@ -12,7 +12,7 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions;
 
 @UnitTest
-public class DummyCassandraPersistenceModuleFactoryTest {
+class DummyCassandraPersistenceModuleFactoryTest {
 
   private static final String BASE_NAME = "jhipster";
   private static final DummyCassandraPersistenceModuleFactory factory = new DummyCassandraPersistenceModuleFactory();

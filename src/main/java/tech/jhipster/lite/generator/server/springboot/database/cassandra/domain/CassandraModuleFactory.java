@@ -55,7 +55,7 @@ public class CassandraModuleFactory {
         .set(propertyKey("spring.cassandra.contact-points"), propertyValue("${TEST_CASSANDRA_CONTACT_POINT}"))
         .set(propertyKey("spring.cassandra.local-datacenter"), propertyValue("${TEST_CASSANDRA_DC}"))
         .set(propertyKey("spring.cassandra.keyspace-name"), propertyValue("${TEST_CASSANDRA_KEYSPACE}"))
-        .set(propertyKey("spring.cassandra.schema-action"), propertyValue("create_if_not_exists"))
+        .set(propertyKey("spring.cassandra.schema-action"), propertyValue("none"))
         .and()
       .build();
     //@formatter:on

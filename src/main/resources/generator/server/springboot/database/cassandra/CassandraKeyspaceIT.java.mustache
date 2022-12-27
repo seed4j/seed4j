@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @IntegrationTest
 class CassandraKeyspaceIT {
 
-  private static final String KEYSPACE = "testKeyspace";
+  private static final String KEYSPACE = "{{ baseName }}";
   @Autowired
   private CqlSession session;
 

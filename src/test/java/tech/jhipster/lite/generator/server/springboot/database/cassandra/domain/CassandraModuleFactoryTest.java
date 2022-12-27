@@ -88,7 +88,7 @@ class CassandraModuleFactoryTest {
       .containing("spring.cassandra.contact-points=${TEST_CASSANDRA_CONTACT_POINT}")
       .containing("spring.cassandra.local-datacenter=${TEST_CASSANDRA_DC}")
       .containing("spring.cassandra.keyspace-name=${TEST_CASSANDRA_KEYSPACE}")
-      .containing("spring.cassandra.schema-action=create_if_not_exists")
+      .containing("spring.cassandra.schema-action=none")
       .and()
       .hasFile("src/test/resources/META-INF/spring.factories")
       .containing("org.springframework.context.ApplicationListener=com.jhipster.test");

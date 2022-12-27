@@ -8,7 +8,8 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
 class TestCassandraManager implements ApplicationListener<ApplicationEnvironmentPreparedEvent>  {
-  private static final String KEYSPACE = "testKeyspace";
+
+  private static final String KEYSPACE = "{{ baseName }}";
   private CassandraContainer cassandraContainer;
   private static final Integer CONTAINER_STARTUP_TIMEOUT_MINUTES = 10;
 

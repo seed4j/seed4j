@@ -1,0 +1,16 @@
+package {{ packageName }}.dummy.infrastructure.secondary;
+
+import {{ packageName }}.UnitTest;
+import org.junit.jupiter.api.Test;
+
+import static {{ packageName }}.dummy.domain.beer.BeersFixture.beer;
+import static org.assertj.core.api.Assertions.assertThat;
+
+@UnitTest
+class BeerTableTest {
+
+  @Test
+  void shouldConvertFromAndToDomain() {
+    assertThat(BeerTable.from(beer()).toDomain()).usingRecursiveComparison().isEqualTo(beer());
+  }
+}

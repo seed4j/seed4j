@@ -1,0 +1,52 @@
+package {{ packageName }}.dummy.infrastructure.secondary;
+
+import {{ packageName }}.dummy.domain.BeerId;
+import {{ packageName }}.dummy.domain.beer.Beer;
+import {{ packageName }}.dummy.domain.beer.Beers;
+import {{ packageName }}.dummy.domain.beer.BeersRepository;
+import {{ packageName }}.error.domain.Assert;
+import org.springframework.data.cassandra.core.CassandraBatchOperations;
+import org.springframework.data.cassandra.core.CassandraOperations;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+class SpringDataBeersRepository implements BeersRepository {
+
+  private final CassandraOperations cassandraTemplate;
+  private final CassandraBeerRepository beers;
+  private final CassandraBeerCatalogRepository beersCatalog;
+
+  public SpringDataBeersRepository(CassandraOperations cassandraTemplate, CassandraBeerRepository beers, CassandraBeerCatalogRepository beersCatalog) {
+    this.cassandraTemplate = cassandraTemplate;
+    this.beers = beers;
+    this.beersCatalog = beersCatalog;
+  }
+
+  @Override
+  public void save(Beer beer) {
+    Assert.notNull("beer", beer);
+    CassandraBatchOperations batchOps = cassandraTemplate.batchOps();
+
+    batchOps.insert(BeerTable.from(beer));
+    switch (beer.sellingState()){
+      case NOT_SOLD -> batchOps.delete(BeerCatalogTable.from(beer));
+      case SOLD -> batchOps.insert(BeerCatalogTable.from(beer));
+    }
+
+    batchOps.execute();
+  }
+
+  @Override
+  public Beers catalog() {
+    return new Beers(beersCatalog.findAll().stream().map(BeerCatalogTable::toDomain).toList());
+  }
+
+  @Override
+  public Optional<Beer> get(BeerId beer) {
+    Assert.notNull("beer", beer);
+
+    return beers.findById(beer.get()).map(BeerTable::toDomain);
+  }
+}

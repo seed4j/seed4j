@@ -20,6 +20,7 @@ public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
   CUSTOM_JHLITE("custom-jhlite"),
   CYPRESS("cypress"),
   DOCKERFILE("dockerfile"),
+  DUMMY_CASSANDRA_PERSISTENCE("dummy-cassandra-persistence"),
   DUMMY_FEATURE("dummy-feature"),
   DUMMY_JPA_PERSISTENCE("dummy-jpa-persistence"),
   DUMMY_LIQUIBASE_CHANGELOG("dummy-liquibase-changelog"),

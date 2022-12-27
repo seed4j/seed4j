@@ -1,0 +1,91 @@
+package {{ packageName }}.dummy.infrastructure.secondary;
+
+import {{ packageName }}.common.domain.Generated;
+import {{ packageName }}.dummy.domain.BeerId;
+import {{ packageName }}.dummy.domain.beer.Beer;
+import {{ packageName }}.dummy.domain.beer.BeerSellingState;
+import {{ packageName }}.error.domain.Assert;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+
+import java.math.BigDecimal;
+import java.util.UUID;
+
+@Table("beer")
+class BeerTable {
+
+  @PrimaryKey("id")
+  private UUID id;
+
+  @Column("name")
+  private String name;
+
+  @Column("unit_price")
+  private BigDecimal unitPrice;
+
+  @Column("selling_state")
+  private BeerSellingState sellingState;
+
+  public static BeerTable from(Beer beer) {
+    Assert.notNull("beer", beer);
+
+    return new BeerTable()
+      .id(beer.id().get())
+      .name(beer.name().get())
+      .unitPrice(beer.unitPrice().get())
+      .sellingState(beer.sellingState());
+  }
+
+  private BeerTable id(UUID id) {
+    this.id = id;
+
+    return this;
+  }
+
+  private BeerTable name(String name) {
+    this.name = name;
+
+    return this;
+  }
+
+  private BeerTable unitPrice(BigDecimal unitPrice) {
+    this.unitPrice = unitPrice;
+
+    return this;
+  }
+
+  private BeerTable sellingState(BeerSellingState sellingState) {
+    this.sellingState = sellingState;
+
+    return this;
+  }
+
+  public Beer toDomain() {
+    return Beer.builder().id(new BeerId(id)).name(name).unitPrice(unitPrice).sellingState(sellingState).build();
+  }
+
+  @Override
+  @Generated
+  public int hashCode() {
+    return new HashCodeBuilder().append(id).hashCode();
+  }
+
+  @Override
+  @Generated
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+
+    BeerTable other = (BeerTable) obj;
+
+    return new EqualsBuilder().append(id, other.id).isEquals();
+  }
+}

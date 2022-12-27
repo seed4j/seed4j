@@ -1,0 +1,19 @@
+package {{ packageName }}.dummy.infrastructure.secondary;
+
+import io.cucumber.java.Before;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class CassandraBeersResetter {
+
+  @Autowired
+  private CassandraBeerRepository beers;
+
+  @Autowired
+  private CassandraBeerCatalogRepository beerCatalog;
+
+  @Before
+  public void resetBeers() {
+    beers.deleteAll();
+    beerCatalog.deleteAll();
+  }
+}

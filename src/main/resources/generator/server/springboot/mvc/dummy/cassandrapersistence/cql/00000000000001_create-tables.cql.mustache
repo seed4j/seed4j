@@ -1,0 +1,16 @@
+USE {{ baseName }};
+
+CREATE TABLE IF NOT EXISTS beer (
+    id uuid,
+    name text,
+    unit_price decimal,
+    selling_state text,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS beer_catalog (
+    id uuid,
+    name text,
+    unit_price decimal,
+    PRIMARY KEY(id)
+);

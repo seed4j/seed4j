@@ -1,0 +1,37 @@
+package {{ packageName }}.dummy.infrastructure.secondary;
+
+import {{ packageName }}.IntegrationTest;
+import com.datastax.oss.driver.api.core.CqlSession;
+import com.datastax.oss.driver.api.core.cql.BoundStatement;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import static {{ packageName }}.dummy.domain.BeersIdentityFixture.cloackOfFeathersId;
+import static {{ packageName }}.dummy.domain.beer.BeersFixture.beer;
+import static org.assertj.core.api.Assertions.assertThat;
+
+@IntegrationTest
+class SpringDataRepositoryIntTest {
+
+  @Autowired
+  private SpringDataBeersRepository repository;
+
+  @Autowired
+  private CqlSession cqlSession;
+
+  private static final String FIND_BEER = "select writetime(name) from beer where id=:id";
+  private static final String FIND_CATALOG = "select writetime(name) from beer_catalog where id=:id";
+
+  @Test
+  void shouldSaveInBatch() {
+    repository.save(beer());
+
+    BoundStatement findBeerStmt = cqlSession.prepare(FIND_BEER).bind().setUuid("id", cloackOfFeathersId().get());
+    BoundStatement findCatalogStmt = cqlSession.prepare(FIND_CATALOG).bind().setUuid("id", cloackOfFeathersId().get());
+
+    long beerInsertionTime = cqlSession.execute(findBeerStmt).one().getLong("writetime(name)");
+    long catalogInsertionTime = cqlSession.execute(findCatalogStmt).one().getLong("writetime(name)");
+
+    assertThat(beerInsertionTime).isEqualTo(catalogInsertionTime);
+  }
+}

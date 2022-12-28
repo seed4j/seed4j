@@ -10,7 +10,7 @@ import org.testcontainers.containers.CassandraContainer;
 class TestCassandraManager implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
 
   private static final String KEYSPACE = "testKeyspace";
-  private CassandraContainer cassandraContainer;
+  private static CassandraContainer cassandraContainer;
   private static final Integer CONTAINER_STARTUP_TIMEOUT_MINUTES = 10;
 
   @Override

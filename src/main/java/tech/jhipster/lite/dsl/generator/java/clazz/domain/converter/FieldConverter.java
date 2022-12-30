@@ -10,6 +10,7 @@ import tech.jhipster.lite.dsl.generator.java.clazz.domain.field.FieldType;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.field.FieldTypeImpl;
 import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
+import tech.jhipster.lite.dsl.parser.domain.clazz.DslContextName;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.ClassField;
 import tech.jhipster.lite.dsl.parser.domain.clazz.field.Constraint;
 import tech.jhipster.lite.dsl.parser.domain.config.ConfigApp;
@@ -62,17 +63,28 @@ public class FieldConverter {
   public FieldToGenerate convertFieldToGenerate(
     ClassField classField,
     DslClass dslClass,
+    DslContextName contextName,
     ConfigApp config,
     ReferenceManager referenceManager
   ) {
+    Assert.notNull("classField", classField);
+    Assert.notNull("dslClass", dslClass);
+    Assert.notNull("contextName", contextName);
+    Assert.notNull("config", config);
+    Assert.notNull("referenceManager", referenceManager);
+
     FieldToGenerate.FieldToGenerateBuilder builderField = FieldToGenerate.builder();
     builderField.fromClassField(classField);
     if (isKnowType(classField.getType().get())) {
       FieldType fieldType = getType(classField.getType().get());
       builderField.type(fieldType);
-      fieldType.getImport().ifPresent(val -> referenceManager.addImportToClass(dslClass.getName().name(), val));
+      fieldType
+        .getImport()
+        .ifPresent(val -> {
+          referenceManager.addImportToClass(contextName.get(), dslClass.getName().name(), val);
+        });
     } else {
-      referenceManager.addUnknownPropertyTypeInClass(dslClass.getName().get(), classField.getType().get());
+      referenceManager.addUnknownPropertyTypeInClass(contextName.get(), dslClass.getName().get(), classField.getType().get());
       builderField.type(new FieldTypeImpl(classField.getType().get(), Optional.empty()));
     }
     Set<Annotation> commonAnnotationAndValidator = new LinkedHashSet<>();
@@ -101,12 +113,16 @@ public class FieldConverter {
       commonAnnotationAndValidator.removeIf(item ->
         assertion.getAnnotationManaged().stream().anyMatch(an -> an.equalsIgnoreCase(item.name()))
       );
-      referenceManager.addImportToClass(dslClass.getName().name(), ASSERT_IMPORT);
+      referenceManager.addImportToClass(contextName.get(), dslClass.getName().name(), ASSERT_IMPORT);
     }
 
     commonAnnotationAndValidator.forEach(annotation -> {
       builderField.addAnnotation(annotation);
-      annotation.getImport().ifPresent(imp -> referenceManager.addImportToClass(dslClass.getName().name(), imp));
+      annotation
+        .getImport()
+        .ifPresent(imp -> {
+          referenceManager.addImportToClass(contextName.get(), dslClass.getName().name(), imp);
+        });
     });
 
     return builderField.build();

@@ -10,32 +10,32 @@ import tech.jhipster.lite.dsl.common.domain.clazz.ClassImport;
 class ReferenceManagerTest {
 
   @Test
-  void shouldAddImportIfNotExistYet() {
+  void shouldAddImportIfNotExistYetWithContext() {
     ReferenceManager refManager = new ReferenceManager();
-    refManager.addImportToClass("test", new ClassImport("my.domain", false));
-    assertEquals(1, refManager.getImportsForClass("test").size());
+    refManager.addImportToClass("ctx", "test", new ClassImport("my.domain", false));
+    assertEquals(1, refManager.getImportsForClass("ctx", "test").size());
   }
 
   @Test
-  void shouldAddImportIfMultipleCall() {
+  void shouldAddImportIfMultipleCallWithContext() {
     ReferenceManager refManager = new ReferenceManager();
-    refManager.addImportToClass("test", new ClassImport("my.domain", false));
-    refManager.addImportToClass("test", new ClassImport("my.domain2", false));
-    assertEquals(2, refManager.getImportsForClass("test").size());
+    refManager.addImportToClass("ctx", "test", new ClassImport("my.domain", false));
+    refManager.addImportToClass("ctx", "test", new ClassImport("my.domain2", false));
+    assertEquals(2, refManager.getImportsForClass("ctx", "test").size());
   }
 
   @Test
-  void shouldRemoveDuplicateImport() {
+  void shouldRemoveDuplicateImportWithContext() {
     ReferenceManager refManager = new ReferenceManager();
-    refManager.addImportToClass("test", new ClassImport("my.domain", false));
-    refManager.addImportToClass("test", new ClassImport("my.domain", false));
-    assertEquals(1, refManager.getImportsForClass("test").size());
+    refManager.addImportToClass("ctx", "test", new ClassImport("my.domain", false));
+    refManager.addImportToClass("ctx", "test", new ClassImport("my.domain", false));
+    assertEquals(1, refManager.getImportsForClass("ctx", "test").size());
   }
 
   @Test
-  void shouldBeCaseInsensitive() {
+  void shouldBeCaseInsensitiveWithContext() {
     ReferenceManager refManager = new ReferenceManager();
-    refManager.addImportToClass("TeSt", new ClassImport("my.domain", false));
-    assertEquals(1, refManager.getImportsForClass("tesT").size());
+    refManager.addImportToClass("ctx", "TeSt", new ClassImport("my.domain", false));
+    assertEquals(1, refManager.getImportsForClass("ctx", "tesT").size());
   }
 }

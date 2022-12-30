@@ -105,6 +105,19 @@ public class DslClass {
       return this;
     }
 
+    public DslClassBuilder from(DslClass dslClass) {
+      Assert.notNull("dslClass", dslClass);
+
+      this.name = dslClass.name;
+      this.type = dslClass.type;
+      this.comment = dslClass.comment;
+
+      this.classFields.addAll(dslClass.classFields);
+      this.packag = dslClass.packag;
+      this.annotations.addAll(dslClass.annotations);
+      return this;
+    }
+
     public DslClass build() {
       Assert.notNull("key", this.name);
       DslClass dslClass = new DslClass();

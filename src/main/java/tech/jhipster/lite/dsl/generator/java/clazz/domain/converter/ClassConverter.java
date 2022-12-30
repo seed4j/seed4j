@@ -6,11 +6,9 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import tech.jhipster.lite.dsl.common.domain.clazz.ClassPackage;
-import tech.jhipster.lite.dsl.generator.java.clazz.domain.ClassToGenerate;
-import tech.jhipster.lite.dsl.generator.java.clazz.domain.EnumToGenerate;
-import tech.jhipster.lite.dsl.generator.java.clazz.domain.FieldToGenerate;
-import tech.jhipster.lite.dsl.generator.java.clazz.domain.ReferenceManager;
+import tech.jhipster.lite.dsl.generator.java.clazz.domain.*;
 import tech.jhipster.lite.dsl.parser.domain.DslAnnotation;
+import tech.jhipster.lite.dsl.parser.domain.DslFrom;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslContextName;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslEnum;
@@ -35,15 +33,15 @@ public class ClassConverter {
     DslClass dslClass,
     DslContextName contextName,
     ConfigApp config,
-    ReferenceManager refManager
+    ReferenceManager refManager,
+    TypePackage typePackage
   ) {
     Assert.notNull("dslClass", dslClass);
     Assert.notNull("contextName", contextName);
     Assert.notNull("refManager", refManager);
+    Assert.notNull("typePackage", typePackage);
 
-    AtomicReference<Path> packageClass = new AtomicReference<>(
-      Paths.get(config.getBasePackage().path(), contextName.get(), config.getPackageDomainName().path())
-    );
+    AtomicReference<Path> packageClass = getPackageClass(contextName, config, typePackage);
     AtomicBoolean isIgnore = new AtomicBoolean(false);
     manageAnnotationUseByDsl(contextName, config, dslClass.getAnnotations(), packageClass, isIgnore);
 
@@ -61,11 +59,10 @@ public class ClassConverter {
     dslClass
       .getFields()
       .forEach(field -> {
-        FieldToGenerate fieldToGenerate = this.fieldConverter.convertFieldToGenerate(field, dslClass, config, refManager);
+        FieldToGenerate fieldToGenerate = this.fieldConverter.convertFieldToGenerate(field, dslClass, contextName, config, refManager);
         builder.addField(fieldToGenerate);
       });
-
-    refManager.getImportsForClass(dslClass.getName().name()).forEach(builder::addImport);
+    refManager.getImportsForClass(contextName.get(), dslClass.getName().name()).forEach(builder::addImport);
     return builder.build();
   }
 
@@ -73,15 +70,15 @@ public class ClassConverter {
     DslEnum dslEnum,
     DslContextName contextName,
     ConfigApp config,
-    ReferenceManager refManager
+    ReferenceManager refManager,
+    TypePackage typePackage
   ) {
     Assert.notNull("dslEnum", dslEnum);
     Assert.notNull("contextName", contextName);
     Assert.notNull("refManager", refManager);
+    Assert.notNull("typePackage", typePackage);
 
-    AtomicReference<Path> packageClass = new AtomicReference<>(
-      Paths.get(config.getBasePackage().path(), contextName.get(), config.getPackageDomainName().path())
-    );
+    AtomicReference<Path> packageClass = getPackageClass(contextName, config, typePackage);
     AtomicBoolean isIgnore = new AtomicBoolean(false);
     manageAnnotationUseByDsl(contextName, config, dslEnum.getAnnotations(), packageClass, isIgnore);
     Path folderClass = Paths.get(config.getProjectFolder().get(), SOURCE_MAIN_JAVA.toString(), packageClass.get().toString());
@@ -100,6 +97,32 @@ public class ClassConverter {
     dslEnum.getEnumKeyValues().forEach(builder::addEnumKeyValue);
 
     return builder.build();
+  }
+
+  private AtomicReference<Path> getPackageClass(DslContextName contextName, ConfigApp config, TypePackage typePackage) {
+    Assert.notNull("contextName", contextName);
+    Assert.notNull("config", config);
+    Assert.notNull("typePackage", typePackage);
+    Path result;
+    result = Paths.get(config.getBasePackage().path(), contextName.get(), config.getPackageDomainName().path());
+    if (typePackage.equals(TypePackage.PRIMARY)) {
+      result =
+        Paths.get(
+          config.getBasePackage().path(),
+          contextName.get(),
+          config.getPackageInfrastructureName().path(),
+          config.getPackageInfrastructurePrimaryName().path()
+        );
+    } else if (typePackage.equals(TypePackage.SECONDARY)) {
+      result =
+        Paths.get(
+          config.getBasePackage().path(),
+          contextName.get(),
+          config.getPackageInfrastructureName().path(),
+          config.getPackageInfrastructureSecondaryName().path()
+        );
+    }
+    return new AtomicReference<>(result);
   }
 
   private void manageAnnotationUseByDsl(

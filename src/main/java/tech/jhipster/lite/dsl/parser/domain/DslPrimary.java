@@ -6,7 +6,7 @@ import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslEnum;
 import tech.jhipster.lite.error.domain.Assert;
 
-public class DslPrimary {
+public class DslPrimary implements HasClassAndEnum {
 
   public static DslPrimaryBuilder builder() {
     return new DslPrimaryBuilder();
@@ -19,10 +19,12 @@ public class DslPrimary {
 
   private Collection<DslFrom> dslFroms;
 
+  @Override
   public Collection<DslClass> getDslClasses() {
     return dslClasses;
   }
 
+  @Override
   public Collection<DslEnum> getDslEnum() {
     return dslEnum;
   }

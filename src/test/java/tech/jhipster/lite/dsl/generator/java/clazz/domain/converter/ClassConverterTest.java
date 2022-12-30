@@ -9,6 +9,7 @@ import tech.jhipster.lite.dsl.DslClassUtils;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.ClassToGenerate;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.EnumToGenerate;
 import tech.jhipster.lite.dsl.generator.java.clazz.domain.ReferenceManager;
+import tech.jhipster.lite.dsl.generator.java.clazz.domain.TypePackage;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslContextName;
 import tech.jhipster.lite.dsl.parser.domain.config.ConfigApp;
 
@@ -28,7 +29,8 @@ class ClassConverterTest {
       DslClassUtils.createSimpleClass("class2"),
       new DslContextName("mycontext"),
       config,
-      referenceManager
+      referenceManager,
+      TypePackage.DOMAIN
     );
     assertNotNull(classToGenerate);
     var test = UUID_REGEX.matcher(classToGenerate.getFolder().toString()).find();
@@ -49,7 +51,8 @@ class ClassConverterTest {
       DslClassUtils.createClassWithAnnotationPackage("class2"),
       new DslContextName("mycontext"),
       config,
-      referenceManager
+      referenceManager,
+      TypePackage.DOMAIN
     );
 
     assertNotNull(classToGenerate);
@@ -67,7 +70,8 @@ class ClassConverterTest {
       DslClassUtils.createClassWithAnnotationPackage("class2"),
       new DslContextName("mycontext"),
       config,
-      referenceManager
+      referenceManager,
+      TypePackage.DOMAIN
     );
 
     assertNotNull(classToGenerate);
@@ -86,7 +90,8 @@ class ClassConverterTest {
       DslClassUtils.createEnumSimple("class2"),
       new DslContextName("mycontext"),
       config,
-      referenceManager
+      referenceManager,
+      TypePackage.DOMAIN
     );
     assertNotNull(enumToGenerate);
     var test = UUID_REGEX.matcher(enumToGenerate.getFolder().toString()).find();
@@ -107,7 +112,8 @@ class ClassConverterTest {
       DslClassUtils.createEnumWithAnnotationPackage("class2"),
       new DslContextName("mycontext"),
       config,
-      referenceManager
+      referenceManager,
+      TypePackage.DOMAIN
     );
 
     assertNotNull(enumToGenerate);
@@ -124,11 +130,78 @@ class ClassConverterTest {
       DslClassUtils.createEnumWithAnnotationIgnore("class2"),
       new DslContextName("mycontext"),
       config,
-      referenceManager
+      referenceManager,
+      TypePackage.DOMAIN
     );
 
     assertNotNull(enumToGenerate);
     assertTrue(enumToGenerate.isIgnore());
     //    assertEquals(0, enumToGenerate.getAnnotations().size());
+  }
+
+  @Test
+  void shouldBuildClassInDomain() {
+    ConfigApp config = DslClassUtils.createDefaultConfig();
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    ReferenceManager referenceManager = new ReferenceManager();
+    ClassToGenerate classToGenerate = converter.convertDslClassToGenerate(
+      DslClassUtils.createSimpleClass("class2"),
+      new DslContextName("mycontext"),
+      config,
+      referenceManager,
+      TypePackage.DOMAIN
+    );
+    assertNotNull(classToGenerate);
+    var test = UUID_REGEX.matcher(classToGenerate.getFolder().toString()).find();
+    assertTrue(UUID_REGEX.matcher(classToGenerate.getFolder().toString()).find());
+    assertTrue(UUID_REGEX.matcher(classToGenerate.getPathFile().toString()).find());
+    assertTrue(classToGenerate.getPathFile().toString().contains("com/mycompany/myapp/mycontext/domain/Class2.java"));
+    assertEquals("com.mycompany.myapp.mycontext.domain", classToGenerate.getPackage().get());
+  }
+
+  @Test
+  void shouldBuildClassInPrimary() {
+    ConfigApp config = DslClassUtils.createDefaultConfig();
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    ReferenceManager referenceManager = new ReferenceManager();
+    ClassToGenerate classToGenerate = converter.convertDslClassToGenerate(
+      DslClassUtils.createSimpleClass("class2"),
+      new DslContextName("mycontext"),
+      config,
+      referenceManager,
+      TypePackage.PRIMARY
+    );
+    assertNotNull(classToGenerate);
+    var test = UUID_REGEX.matcher(classToGenerate.getFolder().toString()).find();
+    assertTrue(UUID_REGEX.matcher(classToGenerate.getFolder().toString()).find());
+    assertTrue(UUID_REGEX.matcher(classToGenerate.getPathFile().toString()).find());
+    assertTrue(classToGenerate.getPathFile().toString().contains("com/mycompany/myapp/mycontext/infrastructure/primary/Class2.java"));
+    assertEquals("com.mycompany.myapp.mycontext.infrastructure.primary", classToGenerate.getPackage().get());
+  }
+
+  @Test
+  void shouldBuildClassInSecondary() {
+    ConfigApp config = DslClassUtils.createDefaultConfig();
+    AnnotationConverter annotationConverter = new AnnotationConverter();
+    FieldConverter fieldConverter = new FieldConverter(annotationConverter);
+    ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
+    ReferenceManager referenceManager = new ReferenceManager();
+    ClassToGenerate classToGenerate = converter.convertDslClassToGenerate(
+      DslClassUtils.createSimpleClass("class2"),
+      new DslContextName("mycontext"),
+      config,
+      referenceManager,
+      TypePackage.SECONDARY
+    );
+    assertNotNull(classToGenerate);
+    var test = UUID_REGEX.matcher(classToGenerate.getFolder().toString()).find();
+    assertTrue(UUID_REGEX.matcher(classToGenerate.getFolder().toString()).find());
+    assertTrue(UUID_REGEX.matcher(classToGenerate.getPathFile().toString()).find());
+    assertTrue(classToGenerate.getPathFile().toString().contains("com/mycompany/myapp/mycontext/infrastructure/secondary/Class2.java"));
+    assertEquals("com.mycompany.myapp.mycontext.infrastructure.secondary", classToGenerate.getPackage().get());
   }
 }

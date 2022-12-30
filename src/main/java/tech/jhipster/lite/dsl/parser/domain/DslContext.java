@@ -30,6 +30,10 @@ public class DslContext {
     return primaries;
   }
 
+  public List<DslSecondary> getSecondaries() {
+    return secondaries;
+  }
+
   public static final class DslContextBuilder {
 
     private DslContextName name;

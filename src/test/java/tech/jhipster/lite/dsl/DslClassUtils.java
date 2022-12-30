@@ -34,7 +34,13 @@ public class DslClassUtils {
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
     ReferenceManager referenceManager = new ReferenceManager();
-    return converter.convertDslClassToGenerate(createSimpleClass("plane"), new DslContextName("airport"), config, referenceManager);
+    return converter.convertDslClassToGenerate(
+      createSimpleClass("plane"),
+      new DslContextName("airport"),
+      config,
+      referenceManager,
+      TypePackage.DOMAIN
+    );
   }
 
   public static EnumToGenerate createEnumValueToGenerate(ConfigApp config) {
@@ -43,7 +49,13 @@ public class DslClassUtils {
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
     ReferenceManager referenceManager = new ReferenceManager();
-    return converter.convertDslEnumToGenerate(createEnumValue("plane"), new DslContextName("airport"), config, referenceManager);
+    return converter.convertDslEnumToGenerate(
+      createEnumValue("plane"),
+      new DslContextName("airport"),
+      config,
+      referenceManager,
+      TypePackage.DOMAIN
+    );
   }
 
   public static EnumToGenerate createEnumSimpleToGenerate(ConfigApp config) {
@@ -52,7 +64,13 @@ public class DslClassUtils {
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
     ReferenceManager referenceManager = new ReferenceManager();
-    return converter.convertDslEnumToGenerate(createEnumSimple("plane"), new DslContextName("airport"), config, referenceManager);
+    return converter.convertDslEnumToGenerate(
+      createEnumSimple("plane"),
+      new DslContextName("airport"),
+      config,
+      referenceManager,
+      TypePackage.DOMAIN
+    );
   }
 
   public static ClassToGenerate createClassComplexeToGenerate(ConfigApp config) {
@@ -61,7 +79,13 @@ public class DslClassUtils {
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
     ReferenceManager referenceManager = new ReferenceManager();
-    return converter.convertDslClassToGenerate(createComplexeClass("plane"), new DslContextName("airport"), config, referenceManager);
+    return converter.convertDslClassToGenerate(
+      createComplexeClass("plane"),
+      new DslContextName("airport"),
+      config,
+      referenceManager,
+      TypePackage.DOMAIN
+    );
   }
 
   public static ClassToGenerate createRecordToGenerate(ConfigApp config) {
@@ -70,7 +94,13 @@ public class DslClassUtils {
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
     ReferenceManager referenceManager = new ReferenceManager();
-    return converter.convertDslClassToGenerate(createSimpleRecord("plane"), new DslContextName("airport"), config, referenceManager);
+    return converter.convertDslClassToGenerate(
+      createSimpleRecord("plane"),
+      new DslContextName("airport"),
+      config,
+      referenceManager,
+      TypePackage.DOMAIN
+    );
   }
 
   public static ClassToGenerate createRecordComplexeToGenerate(ConfigApp config) {
@@ -79,7 +109,13 @@ public class DslClassUtils {
     FieldConverter fieldConverter = new FieldConverter(annotationConverter);
     ClassConverter converter = new ClassConverter(fieldConverter, annotationConverter);
     ReferenceManager referenceManager = new ReferenceManager();
-    return converter.convertDslClassToGenerate(createComplexeRecord("plane"), new DslContextName("airport"), config, referenceManager);
+    return converter.convertDslClassToGenerate(
+      createComplexeRecord("plane"),
+      new DslContextName("airport"),
+      config,
+      referenceManager,
+      TypePackage.DOMAIN
+    );
   }
 
   public static DslApplication createSimpleApplication() {

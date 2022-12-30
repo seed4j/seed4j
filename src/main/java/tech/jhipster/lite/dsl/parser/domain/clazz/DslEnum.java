@@ -84,6 +84,17 @@ public class DslEnum {
       return this;
     }
 
+    public DslEnumBuilder from(DslEnum dslEnum) {
+      Assert.notNull("dslEnum", dslEnum);
+
+      this.name = dslEnum.name;
+      this.comment = dslEnum.comment;
+      this.enumKeyValues.addAll(dslEnum.enumKeyValues);
+      this.packag = dslEnum.packag;
+      this.annotations.addAll(dslEnum.annotations);
+      return this;
+    }
+
     public DslEnum build() {
       Assert.notNull("key", this.name);
       DslEnum dslEnum = new DslEnum();

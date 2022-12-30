@@ -6,7 +6,7 @@ import tech.jhipster.lite.dsl.parser.domain.clazz.DslClass;
 import tech.jhipster.lite.dsl.parser.domain.clazz.DslEnum;
 import tech.jhipster.lite.error.domain.Assert;
 
-public class DslSecondary {
+public class DslSecondary implements HasClassAndEnum {
 
   public static DslSecondaryBuilder builder() {
     return new DslSecondaryBuilder();

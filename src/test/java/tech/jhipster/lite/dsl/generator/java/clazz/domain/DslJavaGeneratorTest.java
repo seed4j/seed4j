@@ -35,9 +35,9 @@ class DslJavaGeneratorTest {
     ReferenceManager refMgr = new ReferenceManager();
     dslJavaGenerator.prepareGenerate(dslApp, refMgr);
 
-    assertEquals(4, refMgr.getImportsForClass("MyObject1").size());
-    assertEquals(2, refMgr.getImportsForClass("MyObject2").size());
-    assertEquals(0, refMgr.getUnknownTypeForClass("MyObject2").size());
-    assertEquals(0, refMgr.getUnknownTypeForClass("myObject1").size());
+    assertEquals(4, refMgr.getImportsForClass("MyContext", "MyObject1").size());
+    assertEquals(2, refMgr.getImportsForClass("MyContext", "MyObject2").size());
+    assertEquals(0, refMgr.getUnknownTypeForClass("MyContext", "MyObject2").size());
+    assertEquals(0, refMgr.getUnknownTypeForClass("MyContext", "myObject1").size());
   }
 }

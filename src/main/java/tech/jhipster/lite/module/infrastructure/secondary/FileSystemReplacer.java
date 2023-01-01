@@ -12,7 +12,7 @@ import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
 import tech.jhipster.lite.module.domain.replacement.ContentReplacer;
 import tech.jhipster.lite.module.domain.replacement.ContentReplacers;
 
-class FileSystemReplacer {
+public class FileSystemReplacer {
 
   public void handle(JHipsterProjectFolder projectFolder, ContentReplacers replacers) {
     Assert.notNull("projectFolder", projectFolder);

@@ -133,6 +133,7 @@ public final class JHipsterModulesFixture {
     return javaDependency()
       .groupId("org.springframework.boot")
       .artifactId("spring-boot-starter-web")
+      .dependencySlug("spring-boot-starter-web")
       .addExclusion(groupId("org.springframework.boot"), artifactId("spring-boot-starter-tomcat"))
       .build();
   }

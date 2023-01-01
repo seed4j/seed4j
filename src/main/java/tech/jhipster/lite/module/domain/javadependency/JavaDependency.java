@@ -11,6 +11,7 @@ import tech.jhipster.lite.common.domain.Generated;
 import tech.jhipster.lite.common.domain.JHipsterCollections;
 import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.javabuild.ArtifactId;
+import tech.jhipster.lite.module.domain.javabuild.DependencySlug;
 import tech.jhipster.lite.module.domain.javabuild.GroupId;
 import tech.jhipster.lite.module.domain.javabuild.VersionSlug;
 import tech.jhipster.lite.module.domain.javabuild.command.JavaBuildCommand;
@@ -19,6 +20,7 @@ import tech.jhipster.lite.module.domain.javabuild.command.SetVersion;
 public class JavaDependency {
 
   private final DependencyId id;
+  private final Optional<DependencySlug> dependencySlug;
   private final Optional<VersionSlug> versionSlug;
   private final JavaDependencyScope scope;
   private final boolean optional;
@@ -27,6 +29,7 @@ public class JavaDependency {
   private JavaDependency(JavaDependencyBuilder builder) {
     id = buildId(builder);
     versionSlug = Optional.ofNullable(builder.versionSlug);
+    dependencySlug = Optional.ofNullable(builder.dependencySlug);
     scope = JavaDependencyScope.from(builder.scope);
     optional = builder.optional;
     exclusions = JHipsterCollections.immutable(builder.exclusions);
@@ -97,11 +100,16 @@ public class JavaDependency {
       .groupId(groupId())
       .artifactId(artifactId())
       .versionSlug(mergeVersionsSlugs(other))
+      .dependencySlug(mergeDependencySlugs(other))
       .classifier(classifier().orElse(null))
       .scope(mergeScopes(other))
       .optional(mergeOptionalFlag(other))
       .type(type().orElse(null))
       .build();
+  }
+
+  private DependencySlug mergeDependencySlugs(JavaDependency other) {
+    return dependencySlug.orElseGet(() -> other.dependencySlug.orElse(null));
   }
 
   private VersionSlug mergeVersionsSlugs(JavaDependency other) {
@@ -122,6 +130,10 @@ public class JavaDependency {
 
   public Optional<VersionSlug> version() {
     return versionSlug;
+  }
+
+  public Optional<DependencySlug> slug() {
+    return dependencySlug;
   }
 
   public Optional<JavaDependencyClassifier> classifier() {
@@ -173,6 +185,7 @@ public class JavaDependency {
 
     return new EqualsBuilder()
       .append(id, other.id)
+      .append(dependencySlug, other.dependencySlug)
       .append(versionSlug, other.versionSlug)
       .append(scope, other.scope)
       .append(optional, other.optional)
@@ -184,6 +197,7 @@ public class JavaDependency {
 
     private GroupId groupId;
     private ArtifactId artifactId;
+    private DependencySlug dependencySlug;
     private VersionSlug versionSlug;
     private JavaDependencyClassifier classifier;
     private JavaDependencyScope scope;
@@ -210,6 +224,13 @@ public class JavaDependency {
     @Override
     public JavaDependencyOptionalValueBuilder versionSlug(VersionSlug versionSlug) {
       this.versionSlug = versionSlug;
+
+      return this;
+    }
+
+    @Override
+    public JavaDependencyOptionalValueBuilder dependencySlug(DependencySlug dependencySlug) {
+      this.dependencySlug = dependencySlug;
 
       return this;
     }
@@ -276,6 +297,8 @@ public class JavaDependency {
   public interface JavaDependencyOptionalValueBuilder {
     JavaDependencyOptionalValueBuilder versionSlug(VersionSlug versionSlug);
 
+    JavaDependencyOptionalValueBuilder dependencySlug(DependencySlug dependencySlug);
+
     JavaDependencyOptionalValueBuilder classifier(JavaDependencyClassifier classifier);
 
     JavaDependencyOptionalValueBuilder scope(JavaDependencyScope scope);
@@ -287,6 +310,10 @@ public class JavaDependency {
     JavaDependencyOptionalValueBuilder addExclusion(DependencyId dependency);
 
     JavaDependency build();
+
+    default JavaDependencyOptionalValueBuilder dependencySlug(String dependencySlug) {
+      return dependencySlug(DependencySlug.of(dependencySlug).orElse(null));
+    }
 
     default JavaDependencyOptionalValueBuilder versionSlug(String versionSlug) {
       return versionSlug(VersionSlug.of(versionSlug).orElse(null));

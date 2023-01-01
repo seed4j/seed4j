@@ -1011,6 +1011,107 @@ class AssertTest {
   }
 
   @Nested
+  @DisplayName("Array")
+  class ArrayAssertTest {
+
+    @Test
+    void shouldNotValidateNullAsNotNull() {
+      assertThatThrownBy(() -> Assert.field(FIELD_NAME, (Object[]) null).notNull())
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining(FIELD_NAME)
+        .hasMessageContaining("(null)");
+    }
+
+    @Test
+    void shouldValidateActualCollectionAsNotNull() {
+      assertThatCode(() -> Assert.field(FIELD_NAME, List.of()).notNull()).doesNotThrowAnyException();
+    }
+
+    @Test
+    void shouldNotValidateNullAsNotEmpty() {
+      assertThatThrownBy(() -> Assert.field(FIELD_NAME, (Object[]) null).notEmpty())
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining(FIELD_NAME)
+        .hasMessageContaining("(null)");
+    }
+
+    @Test
+    void shouldNotValidateEmptyCollectionAsNotEmpty() {
+      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new String[] {}).notEmpty())
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining(FIELD_NAME)
+        .hasMessageContaining("(empty)");
+    }
+
+    @Test
+    void shouldValidateCollectionWithElementAsNotEmpty() {
+      assertThatCode(() -> Assert.field(FIELD_NAME, new String[] { "value" }).notEmpty()).doesNotThrowAnyException();
+    }
+
+    @Test
+    void shouldNotValidateNullCollectionAsMaxSizeOverZero() {
+      assertThatThrownBy(() -> Assert.field(FIELD_NAME, (Object[]) null).maxSize(1))
+        .isExactlyInstanceOf(MissingMandatoryValueException.class)
+        .hasMessageContaining(FIELD_NAME)
+        .hasMessageContaining("(null)");
+    }
+
+    @Test
+    void shouldNotValidateNotNullCollectionAsNegativeMaxSize() {
+      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new String[] { "value1", "value2", "value3" }).maxSize(-1))
+        .isExactlyInstanceOf(TooManyElementsException.class)
+        .hasMessageContaining(FIELD_NAME)
+        .hasMessageContaining("-1")
+        .hasMessageContaining("3");
+    }
+
+    @Test
+    void shouldNotValidateCollectionWithTooManyElements() {
+      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new String[] { "value1", "value2", "value3" }).maxSize(2))
+        .isExactlyInstanceOf(TooManyElementsException.class)
+        .hasMessageContaining(FIELD_NAME)
+        .hasMessageContaining("2")
+        .hasMessageContaining("3");
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { -1, 0 })
+    void shouldValidateNullAsMaxSizeZeroOrNegative(int maxSize) {
+      assertThatCode(() -> Assert.field(FIELD_NAME, (Object[]) null).maxSize(maxSize)).doesNotThrowAnyException();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 3, 4 })
+    void shouldValidateCollectionWithSizeUnderMaxSize(int maxSize) {
+      assertThatCode(() -> Assert.field(FIELD_NAME, new String[] { "value1", "value2", "value3" }).maxSize(maxSize))
+        .doesNotThrowAnyException();
+    }
+
+    @Test
+    void shouldValidateNullAsNegativeMaxSize() {
+      assertThatCode(() -> Assert.field(FIELD_NAME, (Object[]) null).maxSize(-1)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void shouldNotValidateCollectionWithNullElementAsNoNullElement() {
+      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new String[] { "value1", null }).noNullElement())
+        .isExactlyInstanceOf(NullElementInCollectionException.class)
+        .hasMessageContaining(FIELD_NAME)
+        .hasMessageContaining("null element");
+    }
+
+    @Test
+    void shouldValidateNullCollectionAsNoNullElement() {
+      assertThatCode(() -> Assert.field(FIELD_NAME, (Object[]) null).noNullElement()).doesNotThrowAnyException();
+    }
+
+    @Test
+    void shouldValidateCollectionWithNoNullElementAsNoNullElement() {
+      assertThatCode(() -> Assert.field(FIELD_NAME, new String[] { "value1", "value2" }).noNullElement()).doesNotThrowAnyException();
+    }
+  }
+
+  @Nested
   @DisplayName("Instant")
   class AssertInstantTest {
 

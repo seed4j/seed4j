@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * This class provides utilities for input assertions.
@@ -255,6 +256,31 @@ public class Assert {
    */
   public static <T> CollectionAsserter<T> field(String field, Collection<T> input) {
     return new CollectionAsserter<>(field, input);
+  }
+
+  /**
+   * Create a fluent asserter for an array
+   *
+   * <p>
+   * Usage:
+   * </p>
+   *
+   * <pre>
+   * <code>
+   * Assert.field("name", name)
+   *  .notEmpty()
+   *  .maxSize(150);
+   * </code>
+   * </pre>
+   *
+   * @param field
+   *          name of the field to check (will be displayed in exception message)
+   * @param input
+   *          array to check
+   * @return A {@link ArrayAsserter} for this field and value
+   */
+  public static <T> ArrayAsserter<T> field(String field, T[] input) {
+    return new ArrayAsserter<>(field, input);
   }
 
   /**
@@ -1084,6 +1110,94 @@ public class Assert {
       }
 
       if (value.stream().anyMatch(Objects::isNull)) {
+        throw new NullElementInCollectionException(field);
+      }
+
+      return this;
+    }
+  }
+
+  /**
+   * Asserter dedicated to arrays assertions
+   */
+  public static class ArrayAsserter<T> {
+
+    private final String field;
+    private final T[] value;
+
+    private ArrayAsserter(String field, T[] value) {
+      this.field = field;
+      this.value = value;
+    }
+
+    /**
+     * Ensure that the value is not null
+     *
+     * @return The current asserter
+     * @throws MissingMandatoryValueException
+     *           if the value is null
+     */
+    public ArrayAsserter<T> notNull() {
+      Assert.notNull(field, value);
+
+      return this;
+    }
+
+    /**
+     * Ensure that the value is not empty (null or empty)
+     *
+     * @return The current asserter
+     * @throws MissingMandatoryValueException
+     *           if the value is null or empty
+     */
+    public ArrayAsserter<T> notEmpty() {
+      notNull();
+
+      if (value.length == 0) {
+        throw MissingMandatoryValueException.forEmptyValue(field);
+      }
+
+      return this;
+    }
+
+    /**
+     * Ensure that the size of the given input value is not over the given size
+     *
+     * @param maxSize
+     *          inclusive max size of the array
+     * @return The current asserter
+     * @throws MissingMandatoryValueException
+     *           if the expected size is strictly positive and the value is null
+     * @throws TooManyElementsException
+     *           if the size of value is over the max size
+     */
+    public ArrayAsserter<T> maxSize(int maxSize) {
+      if (maxSize <= 0 && value == null) {
+        return this;
+      }
+
+      notNull();
+
+      if (value.length > maxSize) {
+        throw TooManyElementsException.builder().field(field).maxSize(maxSize).size(value.length).build();
+      }
+
+      return this;
+    }
+
+    /**
+     * Ensure that no element in this array is null
+     *
+     * @return The current asserter
+     * @throws NullElementInCollectionException
+     *           if an element is null
+     */
+    public ArrayAsserter<T> noNullElement() {
+      if (value == null) {
+        return this;
+      }
+
+      if (Stream.of(value).anyMatch(Objects::isNull)) {
         throw new NullElementInCollectionException(field);
       }
 

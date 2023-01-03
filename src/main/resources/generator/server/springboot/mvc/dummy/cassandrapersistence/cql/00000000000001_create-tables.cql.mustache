@@ -1,6 +1,4 @@
-USE {{ baseName }};
-
-CREATE TABLE IF NOT EXISTS beer (
+CREATE TABLE IF NOT EXISTS {{ baseName }}.beer (
     id uuid,
     name text,
     unit_price decimal,
@@ -8,7 +6,7 @@ CREATE TABLE IF NOT EXISTS beer (
     PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS beer_catalog (
+CREATE TABLE IF NOT EXISTS {{ baseName }}.beer_catalog (
     id uuid,
     name text,
     unit_price decimal,

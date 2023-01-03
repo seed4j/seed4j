@@ -11,3 +11,6 @@ Changelog scripts MUST tell explicitly which keyspace is used :
 
 - by using `USE myKeyspace;` directive at the beginning of a script
 - or by prepending each table with the keyspace it belongs to : `CREATE TABLE IF NOT EXISTS myKeyspace.myTable`
+
+Second approach is recommended : it allows to not switch keyspace at runtime if there's many of them.
+See [warn-if-set-keyspace section](https://docs.datastax.com/en/developer/java-driver/latest/manual/core/configuration/reference/) for more info.

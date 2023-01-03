@@ -14,7 +14,7 @@ import tech.jhipster.lite.module.domain.replacement.TextNeedleBeforeReplacer;
 
 public class CassandraMigrationModuleFactory {
 
-  private static final TextNeedleBeforeReplacer CASSANDRA_MANAGER_NEEDLE = lineBeforeText("registerEnvironmentVariables();");
+  private static final TextNeedleBeforeReplacer CASSANDRA_MANAGER_NEEDLE = lineBeforeText("session.close();");
   private static final String LOAD_MIGRATION_SCRIPTS = "TestCassandraMigrationLoader.loadMigrationScripts(session);";
   private static final JHipsterSource SOURCE = from("server/springboot/dbmigration/cassandra");
   private static final String DOCKER_COMPOSE_COMMAND = "docker compose -f src/main/docker/cassandra-migration.yml up -d";

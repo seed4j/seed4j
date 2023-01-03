@@ -29,6 +29,7 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
 
     CqlSession session = getCqlSession();
     createTestKeyspace(session);
+    session.close();
     registerEnvironmentVariables();
 
     Runtime.getRuntime().addShutdownHook(new Thread(stopContainer()));

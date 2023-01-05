@@ -1,7 +1,6 @@
 package tech.jhipster.lite.generator.server.springboot.mvc.dummy.cassandrapersistence.domain;
 
-import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.file;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
 
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.TestFileUtils;
@@ -27,7 +26,7 @@ class DummyCassandraPersistenceModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, dummyInMemoryRepository(), inMemoryBeersReseter())
+    assertThatModuleWithFiles(module, dummyInMemoryRepository(), inMemoryBeersReseter(), customPropertiesFile())
       .hasPrefixedFiles(
         "src/main/java/com/jhipster/test/dummy/infrastructure/secondary",
         "BeerCatalogTable.java",
@@ -53,6 +52,10 @@ class DummyCassandraPersistenceModuleFactoryTest {
         "src/main/java/com/jhipster/test/dummy/infrastructure/secondary/InMemoryBeersRepository.java",
         "src/test/java/com/jhipster/test/dummy/infrastructure/secondary/InMemoryBeersReseter.java"
       );
+  }
+
+  private ModuleFile customPropertiesFile() {
+    return file("src/test/resources/projects/cassandra/application.properties", "src/main/resources/config/application.properties");
   }
 
   private JHipsterModulesAssertions.ModuleFile dummyInMemoryRepository() {

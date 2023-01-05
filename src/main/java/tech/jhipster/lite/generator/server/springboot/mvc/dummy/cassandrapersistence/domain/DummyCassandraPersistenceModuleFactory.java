@@ -3,14 +3,20 @@ package tech.jhipster.lite.generator.server.springboot.mvc.dummy.cassandrapersis
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 import static tech.jhipster.lite.module.domain.JHipsterModule.path;
 
+import java.util.regex.Pattern;
 import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
+import tech.jhipster.lite.module.domain.replacement.ElementReplacer;
+import tech.jhipster.lite.module.domain.replacement.RegexReplacer;
+import tech.jhipster.lite.module.domain.replacement.ReplacementCondition;
 
 public class DummyCassandraPersistenceModuleFactory {
 
+  private static final Pattern KEYSPACE_PATTERN = Pattern.compile(".*spring\\.cassandra\\.keyspace-name=.*");
+  private static final ElementReplacer EXISTING_KEYSPACE_NEEDLE = new RegexReplacer(ReplacementCondition.always(), KEYSPACE_PATTERN);
   private static final JHipsterSource SOURCE = from("server/springboot/mvc/dummy/cassandrapersistence");
   private static final String SECONDARY = "infrastructure/secondary";
   private static final String SECONDARY_DESTINATION = "dummy/" + SECONDARY;
@@ -46,8 +52,10 @@ public class DummyCassandraPersistenceModuleFactory {
         .delete(path("src/main/java").append(packagePath).append(SECONDARY_DESTINATION).append("InMemoryBeersRepository.java"))
         .delete(path("src/test/java").append(packagePath).append(SECONDARY_DESTINATION).append("InMemoryBeersReseter.java"))
         .and()
-      .springMainProperties()
-        .set(propertyKey("spring.cassandra.keyspace-name"), propertyValue(baseName))
+      .mandatoryReplacements()
+        .in(path("src/main/resources/config/application.properties"))
+          .add(EXISTING_KEYSPACE_NEEDLE, "spring.cassandra.keyspace-name=" + baseName)
+          .and()
         .and()
       .build();
     //@formatter:on

@@ -32,6 +32,7 @@ Feature: Dummy feature module
   Scenario: Should Apply dummy cassandra module
     When I apply modules to default project
       | maven-java                  |
+      | cassandra                   |
       | dummy-feature               |
       | dummy-cassandra-persistence |
     Then I should have files in "src/main/java/tech/jhipster/chips/dummy/infrastructure/secondary"

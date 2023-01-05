@@ -75,6 +75,7 @@ class CassandraModuleFactoryTest {
       .and()
       .hasFile("src/main/resources/config/application.properties")
       .containing("spring.cassandra.contact-points=127.0.0.1")
+      .containing("#spring.cassandra.keyspace-name=yourKeyspace")
       .containing("spring.cassandra.port=9042")
       .containing("spring.cassandra.local-datacenter=" + DC)
       .containing("spring.cassandra.schema-action=none")

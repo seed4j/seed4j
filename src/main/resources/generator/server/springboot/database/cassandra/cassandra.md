@@ -1,3 +1,7 @@
+# Setting up your Keyspace
+
+In `src/main/resources/config/application.properties`, uncomment `spring.cassandra.keyspace-name` and set the right keyspace.
+
 # Usage
 
 You can start a Cassandra instance by running

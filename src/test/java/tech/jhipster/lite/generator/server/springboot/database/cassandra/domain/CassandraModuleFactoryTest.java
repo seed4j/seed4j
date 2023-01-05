@@ -39,7 +39,7 @@ class CassandraModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile(), readmeFile())
+    assertThatModuleWithFiles(module, pomFile(), readmeFile(), lockbackFile(), testLockbackFile())
       .hasFile("pom.xml")
       .containing(
         """
@@ -92,6 +92,13 @@ class CassandraModuleFactoryTest {
       .containing("spring.cassandra.schema-action=none")
       .and()
       .hasFile("src/test/resources/META-INF/spring.factories")
-      .containing("org.springframework.context.ApplicationListener=com.jhipster.test");
+      .containing("org.springframework.context.ApplicationListener=com.jhipster.test")
+      .and()
+      .hasFile("src/main/resources/logback-spring.xml")
+      .containing("<logger name=\"com.datastax\" level=\"WARN\" />")
+      .and()
+      .hasFile("src/test/resources/logback.xml")
+      .containing("<logger name=\"com.datastax\" level=\"WARN\" />")
+      .containing("<logger name=\"org.testcontainers\" level=\"WARN\" />");
   }
 }

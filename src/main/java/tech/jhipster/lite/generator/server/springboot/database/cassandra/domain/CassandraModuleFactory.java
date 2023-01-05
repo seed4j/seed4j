@@ -4,6 +4,7 @@ import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 
 import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModule;
+import tech.jhipster.lite.module.domain.LogLevel;
 import tech.jhipster.lite.module.domain.docker.DockerImages;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependency;
@@ -58,6 +59,9 @@ public class CassandraModuleFactory {
         .set(propertyKey("spring.cassandra.keyspace-name"), propertyValue("${TEST_CASSANDRA_KEYSPACE}"))
         .set(propertyKey("spring.cassandra.schema-action"), propertyValue("none"))
         .and()
+      .springMainLogger("com.datastax", LogLevel.WARN)
+      .springTestLogger("com.datastax", LogLevel.WARN)
+      .springTestLogger("org.testcontainers", LogLevel.WARN)
       .build();
     //@formatter:on
   }

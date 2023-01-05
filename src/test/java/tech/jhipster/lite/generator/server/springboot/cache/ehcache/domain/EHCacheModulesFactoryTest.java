@@ -47,7 +47,7 @@ class EHCacheModulesFactoryTest {
   }
 
   private JHipsterModuleAsserter commonEHCacheModuleAsserter(JHipsterModule module) {
-    return assertThatModuleWithFiles(module, pomFile(), lockbackFile(), testLockbackFile())
+    return assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile())
       .hasFile("pom.xml")
       .containing(
         """

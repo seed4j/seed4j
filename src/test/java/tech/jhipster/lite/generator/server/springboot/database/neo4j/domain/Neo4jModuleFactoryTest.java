@@ -2,10 +2,10 @@ package tech.jhipster.lite.generator.server.springboot.database.neo4j.domain;
 
 import static org.mockito.Mockito.when;
 import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.lockbackFile;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.logbackFile;
 import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
 import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.readmeFile;
-import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.testLockbackFile;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.testLogbackFile;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,7 +41,7 @@ class Neo4jModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile(), lockbackFile(), testLockbackFile(), readmeFile())
+    assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile(), readmeFile())
       .hasFiles("documentation/neo4j-db.md")
       .hasFile("README.md")
       .containing("""

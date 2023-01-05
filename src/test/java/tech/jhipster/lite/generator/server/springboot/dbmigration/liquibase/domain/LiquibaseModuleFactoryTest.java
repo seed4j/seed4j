@@ -23,7 +23,7 @@ class LiquibaseModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile(), lockbackFile(), testLockbackFile())
+    assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile())
       .hasFile("pom.xml")
       .containing(
         """

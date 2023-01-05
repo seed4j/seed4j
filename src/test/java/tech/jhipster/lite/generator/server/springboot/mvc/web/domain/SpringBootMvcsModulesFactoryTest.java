@@ -95,7 +95,7 @@ class SpringBootMvcsModulesFactoryTest {
   }
 
   private JHipsterModuleAsserter assertMvcModule(JHipsterModule module) {
-    return assertThatModuleWithFiles(module, pomFile(), lockbackFile(), testLockbackFile(), readmeFile())
+    return assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile(), readmeFile())
       .hasFile("README.md")
       .containing("- [Local server](http://localhost:9000)")
       .and()

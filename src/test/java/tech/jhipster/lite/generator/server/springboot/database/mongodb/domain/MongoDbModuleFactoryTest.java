@@ -37,7 +37,7 @@ class MongoDbModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile(), lockbackFile(), testLockbackFile(), readmeFile())
+    assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile(), readmeFile())
       .hasFiles("documentation/mongo-db.md")
       .hasFile("README.md")
       .containing("""

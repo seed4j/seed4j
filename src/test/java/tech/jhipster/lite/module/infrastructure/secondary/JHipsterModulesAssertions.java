@@ -31,11 +31,11 @@ public final class JHipsterModulesAssertions {
     return file("src/test/resources/projects/files/application.properties", "src/main/resources/application.properties");
   }
 
-  public static ModuleFile lockbackFile() {
+  public static ModuleFile logbackFile() {
     return file("src/test/resources/projects/logback/logback.xml", "src/main/resources/logback-spring.xml");
   }
 
-  public static ModuleFile testLockbackFile() {
+  public static ModuleFile testLogbackFile() {
     return file("src/test/resources/projects/logback/logback.xml", "src/test/resources/logback.xml");
   }
 

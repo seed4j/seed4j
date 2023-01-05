@@ -23,7 +23,7 @@ class LogstashModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile(), testLockbackFile())
+    assertThatModuleWithFiles(module, pomFile(), testLogbackFile())
       .hasFile("pom.xml")
       .containing(
         """

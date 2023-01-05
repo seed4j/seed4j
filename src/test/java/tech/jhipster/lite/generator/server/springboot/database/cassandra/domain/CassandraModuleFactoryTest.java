@@ -39,7 +39,7 @@ class CassandraModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile(), readmeFile(), lockbackFile(), testLockbackFile())
+    assertThatModuleWithFiles(module, pomFile(), readmeFile(), logbackFile(), testLogbackFile())
       .hasFile("pom.xml")
       .containing(
         """

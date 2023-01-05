@@ -24,7 +24,7 @@ class JwtAuthenticationModuleFactoryTest {
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile(), integrationTestFile(), lockbackFile(), testLockbackFile())
+    assertThatModuleWithFiles(module, pomFile(), integrationTestFile(), logbackFile(), testLogbackFile())
       .hasFile("pom.xml")
       .containing(
         """

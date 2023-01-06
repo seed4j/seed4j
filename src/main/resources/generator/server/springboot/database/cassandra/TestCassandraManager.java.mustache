@@ -23,14 +23,14 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
     }
     createCassandraContainer();
 
-    if(cassandraContainer.isRunning()){
+    if (cassandraContainer.isRunning()) {
       return;
     }
     cassandraContainer.start();
 
-    CqlSession session = getCqlSession();
-    createTestKeyspace(session);
-    session.close();
+    try (CqlSession session = getCqlSession()) {
+      createTestKeyspace(session);
+    }
     registerEnvironmentVariables();
 
     Runtime.getRuntime()

@@ -58,7 +58,12 @@ class CassandraMigrationModuleFactoryTest {
       .hasPrefixedFiles("src/main/docker/cassandra/scripts", "autoMigrate.sh", "execute-cql.sh")
       .hasFiles("src/test/java/com/jhipster/test/TestCassandraMigrationLoader.java")
       .hasFile("src/test/java/com/jhipster/test/TestCassandraManager.java")
-      .containing("TestCassandraMigrationLoader.loadMigrationScripts(session);")
+      .containing(
+        """
+              createTestKeyspace(session);
+              TestCassandraMigrationLoader.loadMigrationScripts(session);
+        """
+      )
       .and()
       .hasFile("README.md")
       .containing("""

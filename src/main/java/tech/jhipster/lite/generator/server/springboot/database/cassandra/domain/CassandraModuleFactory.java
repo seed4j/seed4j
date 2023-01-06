@@ -14,6 +14,7 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 public class CassandraModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/database/cassandra");
+  private static final String CASSANDRA_SECONDARY = "technical/infrastructure/secondary/cassandra";
   private static final String DOCKER_COMPOSE_COMMAND = "docker compose -f src/main/docker/cassandra.yml up -d";
   private static final String DC = "datacenter1";
   private final DockerImages dockerImages;
@@ -40,6 +41,14 @@ public class CassandraModuleFactory {
         .put("DC", DC)
         .and()
       .files()
+        .batch(SOURCE, toSrcMainJava().append(packagePath).append(CASSANDRA_SECONDARY))
+          .addTemplate("CassandraDatabaseConfiguration.java")
+          .addTemplate("CassandraJSR310DateConverters.java")
+          .and()
+        .add(
+          SOURCE.template("CassandraJSR310DateConvertersTest.java"),
+          toSrcTestJava().append(packagePath).append(CASSANDRA_SECONDARY).append("CassandraJSR310DateConvertersTest.java")
+        )
         .add(SOURCE.template("cassandra.yml"), toSrcMainDocker().append("cassandra.yml"))
         .add(SOURCE.template("TestCassandraManager.java"), toSrcTestJava().append(packagePath).append("TestCassandraManager.java"))
         .add(SOURCE.template("CassandraKeyspaceIT.java"), toSrcTestJava().append(packagePath).append("CassandraKeyspaceIT.java"))

@@ -84,6 +84,12 @@ class CassandraModuleFactoryTest {
       .hasFile("src/test/java/com/jhipster/test/TestCassandraManager.java")
       .containing("cassandra:4.0.7")
       .and()
+      .hasPrefixedFiles(
+        "src/main/java/com/jhipster/test/technical/infrastructure/secondary/cassandra",
+        "CassandraDatabaseConfiguration.java",
+        "CassandraJSR310DateConverters.java"
+      )
+      .hasFiles("src/test/java/com/jhipster/test/technical/infrastructure/secondary/cassandra/CassandraJSR310DateConvertersTest.java")
       .hasFile("src/test/resources/config/application.properties")
       .containing("spring.cassandra.port=${TEST_CASSANDRA_PORT}")
       .containing("spring.cassandra.contact-points=${TEST_CASSANDRA_CONTACT_POINT}")

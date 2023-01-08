@@ -3,8 +3,6 @@ package com.mycompany.myapp;
 import com.datastax.oss.driver.api.core.CqlSession;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.context.ApplicationListener;
 import org.testcontainers.containers.CassandraContainer;
@@ -13,7 +11,6 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
 
   private static final String KEYSPACE = "jhipsterSampleApplication";
   private static CassandraContainer<?> cassandraContainer;
-  private static final Integer CONTAINER_STARTUP_TIMEOUT_MINUTES = 10;
 
   @Override
   public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
@@ -21,10 +18,6 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
       return;
     }
     createCassandraContainer();
-
-    if (cassandraContainer.isRunning()) {
-      return;
-    }
     cassandraContainer.start();
 
     try (CqlSession session = getCqlSession()) {
@@ -71,10 +64,7 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
   }
 
   private void createCassandraContainer() {
-    cassandraContainer =
-      new CassandraContainer<>("cassandra:4.0.7")
-        .withStartupTimeout(Duration.of(CONTAINER_STARTUP_TIMEOUT_MINUTES, ChronoUnit.MINUTES))
-        .withExposedPorts(CassandraContainer.CQL_PORT);
+    cassandraContainer = new CassandraContainer<>("cassandra:4.0.7");
   }
 
   private Runnable stopContainer() {

@@ -7,14 +7,11 @@ import org.testcontainers.containers.CassandraContainer;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 
 class TestCassandraManager implements ApplicationListener<ApplicationEnvironmentPreparedEvent>  {
 
   private static final String KEYSPACE = "{{ baseName }}";
   private static CassandraContainer<?> cassandraContainer;
-  private static final Integer CONTAINER_STARTUP_TIMEOUT_MINUTES = 10;
 
   @Override
   public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
@@ -22,10 +19,6 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
       return;
     }
     createCassandraContainer();
-
-    if (cassandraContainer.isRunning()) {
-      return;
-    }
     cassandraContainer.start();
 
     try (CqlSession session = getCqlSession()) {
@@ -73,9 +66,7 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
   }
 
   private void createCassandraContainer() {
-    cassandraContainer = new CassandraContainer<>("{{ cassandraDockerImage }}")
-      .withStartupTimeout(Duration.of(CONTAINER_STARTUP_TIMEOUT_MINUTES, ChronoUnit.MINUTES))
-      .withExposedPorts(CassandraContainer.CQL_PORT);
+    cassandraContainer = new CassandraContainer<>("{{ cassandraDockerImage }}");
   }
 
   private Runnable stopContainer() {

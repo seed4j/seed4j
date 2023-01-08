@@ -145,6 +145,7 @@ jobs:
           - consulapp
           - gatewayapp
           - mongodbapp
+          - cassandraapp
           - neo4japp
           - angularapp
           - reactapp

@@ -265,6 +265,12 @@ elif [[ $application == 'mongodbapp' ]]; then
   "dummy-feature" \
   "dummy-mongodb-persistence"
 
+elif [[ $application == 'cassandraapp' ]]; then
+  spring_boot_mvc
+  sonar_back
+
+  applyModules "cassandra"
+
 elif [[ $application == 'neo4japp' ]]; then
   spring_boot_mvc
   sonar_back

@@ -68,7 +68,7 @@
     "jsdom": "20.0.3",
     "lint-staged": "13.1.0",
     "postcss-scss": "4.0.6",
-    "prettier": "2.8.1",
+    "prettier": "2.8.2",
     "prettier-plugin-java": "2.0.0",
     "prettier-plugin-packagejson": "2.3.0",
     "pug-lint": "2.6.0",

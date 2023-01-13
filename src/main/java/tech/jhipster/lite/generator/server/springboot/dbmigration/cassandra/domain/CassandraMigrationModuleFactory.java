@@ -10,11 +10,11 @@ import tech.jhipster.lite.module.domain.file.*;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependency;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyScope;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
-import tech.jhipster.lite.module.domain.replacement.RegexNeedleAfterReplacer;
+import tech.jhipster.lite.module.domain.replacement.ElementReplacer;
 
 public class CassandraMigrationModuleFactory {
 
-  private static final RegexNeedleAfterReplacer CASSANDRA_MANAGER_NEEDLE = lineAfterRegex("createTestKeyspace\\(session\\);");
+  private static final ElementReplacer CREATION_KEYSPACE_NEEDLE = lineAfterText("createTestKeyspace(session);");
   private static final String LOAD_MIGRATION_SCRIPTS = "TestCassandraMigrationLoader.loadMigrationScripts(session);";
   private static final JHipsterSource SOURCE = from("server/springboot/dbmigration/cassandra");
   private static final String DOCKER_COMPOSE_COMMAND = "docker compose -f src/main/docker/cassandra-migration.yml up -d";
@@ -52,7 +52,7 @@ public class CassandraMigrationModuleFactory {
         .and()
       .mandatoryReplacements()
         .in(path("src/test/java/" + packagePath + "/TestCassandraManager.java"))
-          .add(CASSANDRA_MANAGER_NEEDLE, LOAD_MIGRATION_SCRIPTS.indent(3 * indentation.spacesCount()))
+          .add(CREATION_KEYSPACE_NEEDLE, indent(LOAD_MIGRATION_SCRIPTS, 3 * indentation.spacesCount()))
           .and()
         .and()
       .build();
@@ -74,5 +74,9 @@ public class CassandraMigrationModuleFactory {
 
   private JHipsterDestination toSrcMainDockerScripts() {
     return toSrcMainDocker().append(CASSANDRA).append("scripts");
+  }
+
+  private String indent(String singleLine, int n) {
+    return " ".repeat(n) + singleLine;
   }
 }

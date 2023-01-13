@@ -62,6 +62,7 @@ class CassandraMigrationModuleFactoryTest {
         """
               createTestKeyspace(session);
               TestCassandraMigrationLoader.loadMigrationScripts(session);
+            }
         """
       )
       .and()

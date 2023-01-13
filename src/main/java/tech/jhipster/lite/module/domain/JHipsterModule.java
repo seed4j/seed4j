@@ -239,6 +239,10 @@ public class JHipsterModule {
     return new TextNeedleBeforeReplacer(notContainingReplacement(), needle);
   }
 
+  public static TextNeedleAfterReplacer lineAfterText(String needle) {
+    return new TextNeedleAfterReplacer(notContainingReplacement(), needle);
+  }
+
   public static RegexNeedleBeforeReplacer lineBeforeRegex(String regex) {
     return new RegexNeedleBeforeReplacer(notContainingReplacement(), Pattern.compile(regex, Pattern.MULTILINE));
   }

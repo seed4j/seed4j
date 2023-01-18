@@ -4,7 +4,7 @@
   "description": "JHipster Lite : used for Vite+Vue3 dependencies",
   "license": "Apache-2.0",
   "dependencies": {
-    "axios": "1.2.2",
+    "axios": "1.2.3",
     "pinia": "2.0.29",
     "pinia-plugin-persist": "1.0.0",
     "vue": "3.2.45",

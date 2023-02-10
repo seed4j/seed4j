@@ -1,7 +1,7 @@
 package tech.jhipster.lite.module.infrastructure.secondary;
 
 import static org.mockito.Mockito.mock;
-import static tech.jhipster.lite.module.domain.resource.JHipsterModulesResourceFixture.defaultModuleResourceBuilder;
+import static tech.jhipster.lite.module.domain.resource.JHipsterModulesResourceFixture.*;
 
 import java.util.List;
 import tech.jhipster.lite.module.application.JHipsterModulesApplicationService;
@@ -47,7 +47,10 @@ public final class TestJHipsterModules {
         filesReader,
         NpmVersionsFixture.npmVersions(filesReader),
         mock(JavaProjects.class),
-        new JHipsterModulesResources(List.of(defaultModuleResourceBuilder().slug("test-module").factory(properties -> module).build()))
+        new JHipsterModulesResources(
+          List.of(defaultModuleResourceBuilder().slug("test-module").factory(properties -> module).build()),
+          emptyHiddenModules()
+        )
       );
 
       return new JHipsterModulesApplicationService(

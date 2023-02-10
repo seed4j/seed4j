@@ -16,7 +16,7 @@ public final class JHipsterLandscapeFixture {
   private JHipsterLandscapeFixture() {}
 
   public static JHipsterModulesResources moduleResources(JHipsterModuleResource... resources) {
-    return new JHipsterModulesResources(List.of(resources));
+    return new JHipsterModulesResources(List.of(resources), emptyHiddenModules());
   }
 
   public static JHipsterLandscapeModule noDependencyLandscapeModule(String slug) {

@@ -1,6 +1,6 @@
 # Creating a JHLite module
 
-So you want to create a JHLite module? Great!  
+So you want to create a JHLite module? Great!
 
 For that you'll need to provide 2 main parts:
 
@@ -13,7 +13,7 @@ You can start by the element you prefer but to create a `JHipsterModuleResource`
 
 In fact, you don't just need to create one `JHipsterModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
 
-So, as this is the business of JHLite you probably want to create a `{{packageName}}.my_module.domain` package. And you can start with a simple test: 
+So, as this is the business of JHLite you probably want to create a `{{packageName}}.my_module.domain` package. And you can start with a simple test:
 
 ```java
 import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
@@ -44,13 +44,13 @@ class MyModuleFactoryTest {
 }
 ```
 
-A few things to note here: 
+A few things to note here:
 
 * We are expecting to have a `buildModule(...)` method in `MyModuleFactory`;
 * The `JHipsterModulesAssertions.assertThatModule(...)` will really apply the module to a project and give you a fluent API to ensure some operations;
 * Even if the feedback loops are not perfect on that they should be short enough to allow a decent TDD implementation of the factory (on eclipse with [infinitest](https://infinitest.github.io/) feedbacks are under a second).
 
-So, now that we have a first test we can do a simple implementation: 
+So, now that we have a first test we can do a simple implementation:
 
 ```java
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
@@ -73,7 +73,7 @@ public class MyModuleFactory {
 
 This implementation will take a file from `src/main/resources/generator/my-module` and put it in the generated project.
 
-The file is a template named `Dummy.java.mustache` and can contains some mustache placeholders: 
+The file is a template named `Dummy.java.mustache` and can contains some mustache placeholders:
 
 ```java
 package {{packageName}}.my_package;
@@ -155,12 +155,12 @@ In your `JHipsterModuleResource` you can define additional properties and an org
 
 You can hide modules from your custom instance in project configuration with:
 
-* `jhlite-hidden-resources.slugs`: To disable by slugs
+* `jhlite-hidden-resources.slugs`: To disable including its dependencies by slugs
 * `jhlite-hidden-resources.tags`: To disable by tags
 
 ## Docker versions
 
-To define custom docker versions you'll need to define a `DockerImagesReader` spring bean, example: 
+To define custom docker versions you'll need to define a `DockerImagesReader` spring bean, example:
 
 ```java
 @Repository
@@ -194,7 +194,7 @@ Of course you can add any version resolution logic you want in the implementatio
 
 ## Npm versions
 
-To define custom npm dependencies you'll need to define a `NpmVersionsReader` spring bean, example: 
+To define custom npm dependencies you'll need to define a `NpmVersionsReader` spring bean, example:
 
 ```java
 @Repository

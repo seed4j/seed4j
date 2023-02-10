@@ -15,7 +15,8 @@ class JHipsterModulesResourcesTest {
   @Test
   void shouldNotGetModuleForUnknownSlug() {
     JHipsterModulesResources jHipsterModulesResources = new JHipsterModulesResources(
-      List.of(defaultModuleResourceBuilder().slug("dummy").build())
+      List.of(defaultModuleResourceBuilder().slug("dummy").build()),
+      emptyHiddenModules()
     );
 
     assertThatThrownBy(() -> jHipsterModulesResources.get(new JHipsterModuleSlug("dummy-2")))
@@ -25,7 +26,7 @@ class JHipsterModulesResourcesTest {
 
   @Test
   void shouldNotBuildWithoutResources() {
-    assertThatThrownBy(() -> new JHipsterModulesResources(List.of()))
+    assertThatThrownBy(() -> new JHipsterModulesResources(List.of(), emptyHiddenModules()))
       .isExactlyInstanceOf(MissingMandatoryValueException.class)
       .hasMessageContaining("modulesResources");
   }
@@ -34,6 +35,7 @@ class JHipsterModulesResourcesTest {
   void shouldNotBuildWithDuplicatedSlug() {
     JHipsterModuleResource resource = defaultModuleResourceBuilder().slug("dummy").build();
 
-    assertThatThrownBy(() -> new JHipsterModulesResources(List.of(resource, resource))).isExactlyInstanceOf(DuplicatedSlugException.class);
+    assertThatThrownBy(() -> new JHipsterModulesResources(List.of(resource, resource), emptyHiddenModules()))
+      .isExactlyInstanceOf(DuplicatedSlugException.class);
   }
 }

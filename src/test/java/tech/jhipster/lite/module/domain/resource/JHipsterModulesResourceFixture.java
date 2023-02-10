@@ -14,7 +14,7 @@ public final class JHipsterModulesResourceFixture {
   private JHipsterModulesResourceFixture() {}
 
   public static JHipsterModulesResources moduleResources() {
-    return new JHipsterModulesResources(moduleResourcesCollection());
+    return new JHipsterModulesResources(moduleResourcesCollection(), emptyHiddenModules());
   }
 
   public static Collection<JHipsterModuleResource> moduleResourcesCollection() {
@@ -30,6 +30,15 @@ public final class JHipsterModulesResourceFixture {
     );
   }
 
+  public static Collection<JHipsterModuleResource> moduleNestedResourcesCollection() {
+    return List.of(
+      defaultModuleResource(),
+      defaultModuleResourceBuilder().slug("module-a").build(),
+      defaultModuleResourceBuilder().slug("module-b").moduleDependency("module-a").build(),
+      defaultModuleResourceBuilder().slug("module-c").moduleDependency("module-b").build()
+    );
+  }
+
   public static JHipsterModuleResource defaultModuleResource() {
     return defaultModuleResourceBuilder().build();
   }
@@ -40,6 +49,10 @@ public final class JHipsterModulesResourceFixture {
       .operation("operation")
       .tags(JHipsterModuleTags.builder().add("tag1").build())
       .factory(properties -> null);
+  }
+
+  public static JHipsterHiddenModules emptyHiddenModules() {
+    return new JHipsterHiddenModules(null, null);
   }
 
   public static JHipsterModulePropertiesDefinition propertiesDefinition() {

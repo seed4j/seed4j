@@ -1,4 +1,4 @@
-package tech.jhipster.lite.module.infrastructure.secondary.javadependency;
+package tech.jhipster.lite.module.infrastructure.secondary.javadependency.maven;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +28,7 @@ import tech.jhipster.lite.module.domain.javadependency.ProjectJavaDependenciesVe
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
 
 @Repository
-class FileSystemProjectJavaDependenciesRepository implements ProjectJavaDependenciesRepository {
+public class FileSystemProjectJavaDependenciesRepository implements ProjectJavaDependenciesRepository {
 
   private static final String POM_XML = "pom.xml";
 

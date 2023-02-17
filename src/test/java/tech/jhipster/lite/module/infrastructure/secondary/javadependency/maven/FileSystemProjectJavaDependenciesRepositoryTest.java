@@ -1,4 +1,4 @@
-package tech.jhipster.lite.module.infrastructure.secondary.javadependency;
+package tech.jhipster.lite.module.infrastructure.secondary.javadependency.maven;
 
 import static org.assertj.core.api.Assertions.*;
 import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.*;
@@ -19,6 +19,7 @@ import tech.jhipster.lite.module.domain.javadependency.JavaDependencyVersion;
 import tech.jhipster.lite.module.domain.javadependency.ProjectJavaDependencies;
 import tech.jhipster.lite.module.domain.javadependency.ProjectJavaDependenciesVersions;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.module.infrastructure.secondary.javadependency.maven.FileSystemProjectJavaDependenciesRepository;
 
 @UnitTest
 class FileSystemProjectJavaDependenciesRepositoryTest {

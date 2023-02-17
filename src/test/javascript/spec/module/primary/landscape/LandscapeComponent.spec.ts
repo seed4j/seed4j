@@ -752,8 +752,8 @@ describe('Landscape', () => {
       const wrapper = wrap({ modules, cursorUpdater, landscapeScroller });
       await flushPromises();
       const mouseEventStart = {
-        pageX: 30,
-        pageY: 30,
+        clientX: 30,
+        clientY: 30,
       };
       const mouseEventGrabbed = {
         clientX: 10,

@@ -39,7 +39,7 @@ describe('HealthComponent', () => {
       // THEN
       expect(service.checkHealth).toHaveBeenCalled();
       expect(service.checkHealth().subscribe({
-        next: health => expect(comp.datasource).toEqual([{"details": {"mailDetail": "mail"}, "key": "mail", "status": "UP"}]),
+        next: () => expect(comp.datasource).toEqual([{"details": {"mailDetail": "mail"}, "key": "mail", "status": "UP"}]),
       }));
     });
 

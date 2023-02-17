@@ -1,5 +1,6 @@
 package {{packageName}}.authentication.infrastructure.primary;
 
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,6 +39,8 @@ import {{packageName}}.common.domain.Generated;
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfiguration {
+
+  private static final int TIMEOUT = 2000;
 
   private final ApplicationSecurityProperties applicationSecurityProperties;
   private final CorsFilter corsFilter;
@@ -148,7 +151,10 @@ public class SecurityConfiguration {
 
     jwtDecoder.setJwtValidator(withAudience);
     jwtDecoder.setClaimSetConverter(
-      new CustomClaimConverter(clientRegistrationRepository.findByRegistrationId("oidc"), restTemplateBuilder.build())
+      new CustomClaimConverter(
+        clientRegistrationRepository.findByRegistrationId("oidc"),
+        restTemplateBuilder.setConnectTimeout(Duration.ofMillis(TIMEOUT)).setReadTimeout(Duration.ofMillis(TIMEOUT)).build()
+      )
     );
 
     return jwtDecoder;

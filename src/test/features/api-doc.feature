@@ -6,4 +6,4 @@ Feature: Api documentation
 
   Scenario: Should get Cucumber module schema
     When I get api documentation
-    Then I should have schema for "spring-boot-cucumber-schema"
+    Then I should have schema for "spring-boot-cucumber-mvc-schema"

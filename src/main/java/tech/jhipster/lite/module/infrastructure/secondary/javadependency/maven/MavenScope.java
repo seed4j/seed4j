@@ -1,4 +1,4 @@
-package tech.jhipster.lite.module.infrastructure.secondary.javadependency;
+package tech.jhipster.lite.module.infrastructure.secondary.javadependency.maven;
 
 import java.util.Map;
 import java.util.function.Function;

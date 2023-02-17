@@ -7,6 +7,7 @@ import static org.mockito.Mockito.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.net.SocketTimeoutException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -71,6 +73,18 @@ class CustomClaimConverterTest {
 
     assertThat(convertedClaims).containsExactly(entry("sub", "123"));
     assertNoRestClaimCall();
+  }
+
+  @Test
+  void shouldNotGetClaimFromInputClaimWithTimeoutResquest() {
+    mockRestTimeout();
+    loadRequestAttributes();
+
+    Throwable thrown = catchThrowable(() -> {
+      converter.convert(simpleClaim());
+    });
+
+    assertThat(thrown).isInstanceOf(ResourceAccessException.class).hasCauseInstanceOf(SocketTimeoutException.class);
   }
 
   private ResponseEntity<ObjectNode> assertNoRestClaimCall() {
@@ -174,6 +188,37 @@ class CustomClaimConverterTest {
       .containsEntry("family_name", "Doe Sr.");
   }
 
+  @Test
+  void shouldGetUserFromMemoryCache() {
+    user().username("bob").name("John Doe Sr.").mock();
+    loadRequestAttributes();
+    converter.convert(simpleClaim());
+
+    Map<String, Object> convertedClaims = converter.convert(simpleClaim());
+
+    assertThat(convertedClaims)
+      .containsEntry("sub", "123")
+      .containsEntry("preferred_username", "bob")
+      .containsEntry("given_name", "John")
+      .containsEntry("family_name", "Doe Sr.");
+  }
+
+  @Test
+  void shouldGetFirstUserFromMemoryCache() {
+    loadRequestAttributes();
+    user().username("bob").name("John Doe Sr.").mock();
+    converter.convert(simpleClaim());
+    converter.convert(anotherSimpleClaim());
+
+    Map<String, Object> convertedClaims = converter.convert(simpleClaim());
+
+    assertThat(convertedClaims)
+      .containsEntry("sub", "123")
+      .containsEntry("preferred_username", "bob")
+      .containsEntry("given_name", "John")
+      .containsEntry("family_name", "Doe Sr.");
+  }
+
   private void loadRequestAttributes() {
     ServletRequestAttributes attributes = new ServletRequestAttributes(new MockHttpServletRequest());
 
@@ -182,6 +227,10 @@ class CustomClaimConverterTest {
 
   private static Map<String, Object> simpleClaim() {
     return Map.of("sub", "123");
+  }
+
+  private static Map<String, Object> anotherSimpleClaim() {
+    return Map.of("sub", "456");
   }
 
   private UserBuilder user() {
@@ -259,5 +308,10 @@ class CustomClaimConverterTest {
   private void mockUser(ObjectNode user) {
     when(rest.exchange(eq("http://jhipster.test"), eq(HttpMethod.GET), any(HttpEntity.class), ArgumentMatchers.<Class<ObjectNode>>any()))
       .thenReturn(ResponseEntity.ok(user));
+  }
+
+  private void mockRestTimeout() {
+    when(rest.exchange(eq("http://jhipster.test"), eq(HttpMethod.GET), any(HttpEntity.class), ArgumentMatchers.<Class<ObjectNode>>any()))
+      .thenThrow(new ResourceAccessException(null, new SocketTimeoutException()));
   }
 }

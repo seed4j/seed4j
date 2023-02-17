@@ -31,6 +31,9 @@ class GradleModuleFactoryTest {
       .hasFile("settings.gradle.kts")
       .containing("my-app")
       .and()
+      .hasFile("gradle/libs.versions.toml")
+      .containing("junit-engine = { group = \"org.junit.jupiter\", name = \"junit-jupiter-engine\", version.ref = \"junit\" }")
+      .and()
       .hasExecutableFiles("gradlew", "gradlew.bat")
       .hasPrefixedFiles("gradle/wrapper", "gradle-wrapper.jar", "gradle-wrapper.properties");
   }
@@ -43,6 +46,7 @@ class GradleModuleFactoryTest {
 
     assertThatModuleWithFiles(module)
       .hasExecutableFiles("gradlew", "gradlew.bat")
-      .hasPrefixedFiles("gradle/wrapper", "gradle-wrapper.jar", "gradle-wrapper.properties");
+      .hasPrefixedFiles("gradle/wrapper", "gradle-wrapper.jar", "gradle-wrapper.properties")
+      .doNotHaveFiles("build.gradle.kts", "settings.gradle.kts", "gradle/libs.versions.toml");
   }
 }

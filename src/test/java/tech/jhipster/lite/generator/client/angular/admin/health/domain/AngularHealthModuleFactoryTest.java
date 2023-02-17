@@ -43,10 +43,10 @@ class AngularHealthModuleFactoryTest {
       .hasFile("src/main/webapp/app/app.route.ts")
       .containing(
         """
-        {
-          path: 'admin',
-          loadChildren: () => import('./admin/admin-routing.module'),
-        },
+          {
+            path: 'admin',
+            loadChildren: () => import('./admin/admin-routing.module'),
+          },
         """
       )
       .and()

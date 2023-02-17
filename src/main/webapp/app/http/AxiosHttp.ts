@@ -5,7 +5,7 @@ export type AxiosHttpResponse<T> = AxiosResponse<T>;
 export class AxiosHttp {
   constructor(private axiosInstance: AxiosInstance) {}
 
-  async get<Result>(uri: string, config: AxiosRequestConfig = {}): Promise<AxiosResponse<Result>> {
+  async get<Result>(uri: string, config = {}): Promise<AxiosResponse<Result>> {
     return this.axiosInstance.get<Result>(uri, config);
   }
 

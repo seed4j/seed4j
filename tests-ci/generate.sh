@@ -92,7 +92,7 @@ cucumber_with_jwt() {
   "spring-boot-jwt-basic-auth" \
   "springdoc-mvc-openapi" \
   "springdoc-jwt" \
-  "spring-boot-cucumber" \
+  "spring-boot-cucumber-mvc" \
   "spring-boot-cucumber-jwt-authentication"
 }
 
@@ -115,6 +115,7 @@ elif [[ $application == 'fullapp' ]]; then
   sonar_back_front
 
   applyModules \
+  "prettier" \
   "infinitest-filters" \
   "pagination-domain" \
   "rest-pagination" \
@@ -125,6 +126,7 @@ elif [[ $application == 'fullapp' ]]; then
   "jib" \
   "dockerfile" \
   "java-archunit" \
+  "git-information" \
   "github-codespaces" \
   "gitpod" \
   "java-memoizers" \
@@ -154,13 +156,16 @@ elif [[ $application == 'oauth2app' ]]; then
   sonar_back
 
   applyModules \
+  "java-memoizers" \
+
+  applyModules \
   "spring-boot-oauth2" \
   "spring-boot-oauth2-account" \
   "springdoc-mvc-openapi" \
   "springdoc-oauth2"
 
   applyModules \
-  "spring-boot-cucumber" \
+  "spring-boot-cucumber-mvc" \
   "spring-boot-cucumber-oauth2-authentication" \
   "dummy-feature"
 
@@ -269,7 +274,7 @@ elif [[ $application == 'cassandraapp' ]]; then
   spring_boot_mvc
   sonar_back
 
-  applyModules "cassandra"
+  applyModules "cassandra" "cassandra-migration"
 
 elif [[ $application == 'neo4japp' ]]; then
   spring_boot_mvc
@@ -294,6 +299,9 @@ elif [[ $application == 'angularapp' ]]; then
 elif [[ $application == 'angularoauth2app' ]]; then
   spring_boot_mvc
   sonar_back_front
+
+  applyModules \
+  "java-memoizers" \
 
   applyModules \
   "frontend-maven-plugin" \

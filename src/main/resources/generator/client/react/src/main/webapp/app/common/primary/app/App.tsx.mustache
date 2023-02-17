@@ -1,12 +1,15 @@
 import './App.css';
 
+import JHipsterLiteNeonBlue from '@assets/JHipster-Lite-neon-blue.png';
+import ReactLogo from '@assets/ReactLogo.png';
+
 function App() {
   return (
     <div className="App">
       <div id="app">
-        <img alt="React logo" src="/content/images/ReactLogo.png" />
+        <img alt="React logo" src={ReactLogo} />
         <br />
-        <img alt="JHipster logo" src="/content/images/JHipster-Lite-neon-blue.png" />
+        <img alt="JHipster logo" src={JHipsterLiteNeonBlue} />
         <h1>React + TypeScript + Vite</h1>
         <p>
           Recommended IDE setup:&nbsp;

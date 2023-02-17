@@ -20,7 +20,7 @@ public class ReactCoreModulesFactory {
   private static final JHipsterDestination APP_DESTINATION = WEBAPP_DESTINATION.append("app");
 
   private static final String PRIMARY_APP = "common/primary/app";
-  private static final String CONTENT_IMAGES = "content/images";
+  private static final String ASSETS = "assets";
 
   private static final JHipsterSource PRIMARY_APP_SOURCE = APP_SOURCE.append(PRIMARY_APP);
   private static final JHipsterDestination PRIMARY_APP_DESTINATION = APP_DESTINATION.append(PRIMARY_APP);
@@ -69,7 +69,7 @@ public class ReactCoreModulesFactory {
         .add(SOURCE.append(TEST_PRIMARY).template("App.spec.tsx"), to(TEST_PRIMARY).append("App.spec.tsx"))
         .add(PRIMARY_APP_SOURCE.template("App.tsx"), PRIMARY_APP_DESTINATION.append("App.tsx"))
         .add(PRIMARY_APP_SOURCE.template("App.css"), PRIMARY_APP_DESTINATION.append("App.css"))
-        .batch(WEBAPP_SOURCE.append(CONTENT_IMAGES), WEBAPP_DESTINATION.append(CONTENT_IMAGES))
+        .batch(WEBAPP_SOURCE.append(ASSETS), WEBAPP_DESTINATION.append(ASSETS))
           .addFile("JHipster-Lite-neon-blue.png")
           .addFile("ReactLogo.png")
           .and()

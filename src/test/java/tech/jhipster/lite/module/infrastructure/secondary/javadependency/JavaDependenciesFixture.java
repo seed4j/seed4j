@@ -4,6 +4,7 @@ import java.util.List;
 import tech.jhipster.lite.module.domain.ProjectFilesReader;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependenciesVersionsRepository;
 import tech.jhipster.lite.module.domain.javadependency.ProjectJavaDependenciesRepository;
+import tech.jhipster.lite.module.infrastructure.secondary.javadependency.maven.FileSystemProjectJavaDependenciesRepository;
 
 public final class JavaDependenciesFixture {
 

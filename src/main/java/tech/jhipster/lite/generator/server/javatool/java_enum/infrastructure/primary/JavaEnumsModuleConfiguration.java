@@ -17,7 +17,7 @@ class JavaEnumsModuleConfiguration {
       .builder()
       .slug(JHLiteModuleSlug.JAVA_ENUMS)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().build())
-      .apiDoc("java", "Add simple enums mapper")
+      .apiDoc("Java", "Add simple enums mapper")
       .organization(JHipsterModuleOrganization.builder().addDependency(JHLiteModuleSlug.JAVA_BASE).build())
       .tags("server")
       .factory(javaEnums::buildModule);

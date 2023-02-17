@@ -2,13 +2,13 @@
 version: '3.8'
 services:
   sonar:
-    image: sonarqube:9.8.0-community
+    image: sonarqube:9.9.0-community
     container_name: sonar
     platform: linux/x86_64
     # Authentication is turned off for out of the box experience while trying out SonarQube
     # For real use cases delete sonar.forceAuthentication variable or set sonar.forceAuthentication=true
     environment:
-      - sonar.forceAuthentication=false
+      - SONAR_FORCEAUTHENTICATION=false
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:

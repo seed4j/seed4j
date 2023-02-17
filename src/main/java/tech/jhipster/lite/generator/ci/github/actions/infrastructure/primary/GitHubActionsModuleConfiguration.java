@@ -12,7 +12,7 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 class GitHubActionsModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource gutHubActionsModule(GitHubActionsApplicationService gitHubActions) {
+  JHipsterModuleResource gitHubActionsModule(GitHubActionsApplicationService gitHubActions) {
     return JHipsterModuleResource
       .builder()
       .slug(GITHUB_ACTIONS)

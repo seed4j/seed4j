@@ -32,21 +32,21 @@ public final class CassandraJSR310DateConverters {
     }
   }
 
-    @WritingConverter
-    public static class ZonedDateTimeToTupleConverter implements Converter<ZonedDateTime, TupleValue> {
+  @WritingConverter
+  public static class ZonedDateTimeToTupleConverter implements Converter<ZonedDateTime, TupleValue> {
 
-      private final TupleType type = DataTypes.tupleOf(DataTypes.TIMESTAMP, DataTypes.TEXT);
+    private final TupleType type = DataTypes.tupleOf(DataTypes.TIMESTAMP, DataTypes.TEXT);
 
-      public static final ZonedDateTimeToTupleConverter INSTANCE = new ZonedDateTimeToTupleConverter();
+    public static final ZonedDateTimeToTupleConverter INSTANCE = new ZonedDateTimeToTupleConverter();
 
-      private ZonedDateTimeToTupleConverter() {}
+    private ZonedDateTimeToTupleConverter() {}
 
-      @Override
-      public TupleValue convert(@Nonnull ZonedDateTime source) {
-        TupleValue tupleValue = type.newValue();
-        tupleValue.setInstant(0, source.toInstant());
-        tupleValue.setString(1, source.getZone().toString());
-        return tupleValue;
-      }
+    @Override
+    public TupleValue convert(@Nonnull ZonedDateTime source) {
+      TupleValue tupleValue = type.newValue();
+      tupleValue.setInstant(0, source.toInstant());
+      tupleValue.setString(1, source.getZone().toString());
+      return tupleValue;
     }
+  }
 }

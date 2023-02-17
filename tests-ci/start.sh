@@ -19,7 +19,7 @@ elif test -f "gradlew"; then
 fi
 
 echo "*** Removing other jar files..."
-rm *-javadoc.jar *-sources.jar
+rm *-javadoc.jar *-sources.jar *-tests.jar
 
 echo "*** Starting application..."
 java \

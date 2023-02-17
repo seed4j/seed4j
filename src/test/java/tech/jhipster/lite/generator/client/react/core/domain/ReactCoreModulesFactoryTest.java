@@ -63,7 +63,7 @@ class ReactCoreModulesFactoryTest {
       .containing("import './App.css';")
       .and()
       .hasFiles("src/main/webapp/app/common/primary/app/App.css")
-      .hasPrefixedFiles("src/main/webapp/content/images", "ReactLogo.png", "JHipster-Lite-neon-blue.png");
+      .hasPrefixedFiles("src/main/webapp/assets", "ReactLogo.png", "JHipster-Lite-neon-blue.png");
   }
 
   private String nodeScript(String key, String value) {

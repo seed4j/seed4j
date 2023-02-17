@@ -1,6 +1,8 @@
 package {{ packageName }};
 
 import com.datastax.oss.driver.api.core.CqlSession;
+import org.springframework.boot.SpringApplication;
+import org.springframework.core.Ordered;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.context.ApplicationListener;
 import org.testcontainers.containers.CassandraContainer;
@@ -8,10 +10,15 @@ import org.testcontainers.containers.CassandraContainer;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-class TestCassandraManager implements ApplicationListener<ApplicationEnvironmentPreparedEvent>  {
+class TestCassandraManager implements ApplicationListener<ApplicationEnvironmentPreparedEvent>, Ordered  {
 
   private static final String KEYSPACE = "{{ baseName }}";
   private static CassandraContainer<?> cassandraContainer;
+
+  @Override
+  public int getOrder() {
+    return 0;
+  }
 
   @Override
   public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
@@ -26,8 +33,8 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
     }
     registerEnvironmentVariables();
 
-    Runtime.getRuntime()
-      .addShutdownHook(new Thread(stopContainer()));
+    SpringApplication.getShutdownHandlers()
+      .add(new Thread(stopContainer()));
   }
 
   private void registerEnvironmentVariables() {

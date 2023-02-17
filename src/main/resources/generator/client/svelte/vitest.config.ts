@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [svelte()],
   resolve: {
     alias: [
-      { find: '@webapp', replacement: path.resolve(__dirname, 'src/main/webapp') },
+      { find: '@', replacement: path.resolve(__dirname, 'src/main/webapp/app') },
       { find: '@assets', replacement: path.resolve(__dirname, 'src/main/webapp/assets') },
     ],
   },

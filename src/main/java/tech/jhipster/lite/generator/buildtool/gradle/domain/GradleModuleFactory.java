@@ -22,6 +22,9 @@ public class GradleModuleFactory {
           .addTemplate("build.gradle.kts")
           .addTemplate("settings.gradle.kts")
           .and()
+        .batch(SOURCE.append("gradle"), to("gradle"))
+          .addFile("libs.versions.toml")
+          .and()
         .and()
       .build();
     //@formatter:on
@@ -37,10 +40,6 @@ public class GradleModuleFactory {
     //@formatter:off
     return moduleBuilder(properties)
       .files()
-        .batch(SOURCE, to("."))
-          .addTemplate("build.gradle.kts")
-          .addTemplate("settings.gradle.kts")
-          .and()
         .batch(SOURCE.append("gradle/wrapper"), to("gradle/wrapper"))
           .addFile("gradle-wrapper.properties")
           .addFile("gradle-wrapper.jar")

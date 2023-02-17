@@ -32,6 +32,17 @@ if [ -a src/main/docker/mongodb.yml ]; then
 fi
 if [ -a src/main/docker/cassandra.yml ]; then
   docker compose -f src/main/docker/cassandra.yml up -d
+  echo "*** wait until cassandra instance is UP"
+  retryCount=0
+  maxRetry=20
+  while ! docker exec cassandra cqlsh &>/dev/null && [ "$retryCount" -ne "$maxRetry" ]; do
+      echo " Cassandra not reachable yet. sleep and retry. retryCount =" $retryCount
+      sleep 5
+      ((retryCount+=1))
+  done
+fi
+if [ -a src/main/docker/cassandra-migration.yml ]; then
+  docker compose -f src/main/docker/cassandra-migration.yml up -d
 fi
 if [ -a src/main/docker/mysql.yml ]; then
   docker compose -f src/main/docker/mysql.yml up -d

@@ -29,8 +29,8 @@ public class AngularJwtModuleFactory {
         path: '',
         loadComponent: () => import('./login/login.component'),
         title: 'Login',
-      },
-      """;
+      },\
+    """;
 
   private static final String AUTH_INTERCEPTOR_IMPORT = """
       import { AuthInterceptor } from './app/auth/auth.interceptor';
@@ -70,11 +70,11 @@ public class AngularJwtModuleFactory {
         .and()
       .mandatoryReplacements()
         .in(path("src/main/webapp/main.ts"))
-          .add(EXISTING_PROVIDERS_NEEDLE, "providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },")
+          .add(EXISTING_PROVIDERS_NEEDLE, "providers: [\n    provideHttpClient(withInterceptors([AuthInterceptor])),")
           .add(fileStart(), AUTH_INTERCEPTOR_IMPORT)
           .and()
         .in(path("src/main/webapp/app/app.route.ts"))
-          .add(ROUTE_NEEDLE, LOGIN_MODULE_ROUTE.indent(indentation.spacesCount()))
+          .add(ROUTE_NEEDLE, LOGIN_MODULE_ROUTE)
           .and()
         .and()
       .build();

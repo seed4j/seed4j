@@ -19,7 +19,8 @@
     "baseUrl": "src",
     "types": ["vitest/globals"],
     "paths": {
-      "@/*": ["main/webapp/app/*"]
+      "@/*": ["main/webapp/app/*"],
+      "@assets/*": ["main/webapp/assets/*"]
     }
   },
   "include": ["vite.config.ts", "src"],

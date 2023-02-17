@@ -12,47 +12,47 @@
 }
 
 .jhlite-icon-book {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe800;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe800;&nbsp;');
 }
 .jhlite-icon-ccw {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe801;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe801;&nbsp;');
 }
 .jhlite-icon-play {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe802;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe802;&nbsp;');
 }
 .jhlite-icon-open-collective {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe803;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe803;&nbsp;');
 }
 .jhlite-icon-jhipster {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe804;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe804;&nbsp;');
 }
 .jhlite-icon-download {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe805;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe805;&nbsp;');
 }
 .jhlite-icon-cancel {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe806;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe806;&nbsp;');
 }
 .jhlite-icon-ok {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xe807;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe807;&nbsp;');
 }
 .jhlite-icon-twitter {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xf099;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf099;&nbsp;');
 }
 .jhlite-icon-github-circled {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xf09b;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf09b;&nbsp;');
 }
 .jhlite-icon-code {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xf121;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf121;&nbsp;');
 }
 .jhlite-icon-puzzle {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xf12e;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf12e;&nbsp;');
 }
 .jhlite-icon-play-circled {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xf144;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf144;&nbsp;');
 }
 .jhlite-icon-binoculars {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xf1e5;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf1e5;&nbsp;');
 }
 .jhlite-icon-map {
-  *zoom: expression(this.runtimeStyle[ 'zoom' ] = '1', this.innerHTML = '&#xf279;&nbsp;');
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf279;&nbsp;');
 }

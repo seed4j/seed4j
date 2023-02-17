@@ -10,6 +10,7 @@ public class JHipsterDestination {
   public static final JHipsterDestination SRC_MAIN_RESOURCES = new JHipsterDestination("src/main/resources");
   public static final JHipsterDestination SRC_TEST_JAVA = new JHipsterDestination("src/test/java");
   public static final JHipsterDestination SRC_MAIN_DOCKER = new JHipsterDestination("src/main/docker");
+  public static final JHipsterDestination SRC_MAIN_RESOURCES = new JHipsterDestination("src/main/resources");
 
   private static final String MUSTACHE_EXTENSION = ".mustache";
 

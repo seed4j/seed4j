@@ -11,7 +11,7 @@ java {
 }
 
 jacoco {
-  toolVersion = "0.8.8"
+  toolVersion = libs.versions.jacoco.get()
 }
 
 repositories {
@@ -23,18 +23,15 @@ group = "{{packageName}}"
 version = "0.0.1-SNAPSHOT"
 
 ext {
-  set("junit-jupiter.version", "5.8.2")
-  set("assertj.version", "3.22.0")
-  set("mockito.version", "4.2.0")
   // jhipster-needle-gradle-property
 }
 
 dependencies {
   // jhipster-needle-gradle-add-dependency
-  testImplementation("org.junit.jupiter:junit-jupiter-engine:${property("junit-jupiter.version")}")
-  testImplementation("org.junit.jupiter:junit-jupiter-params:${property("junit-jupiter.version")}")
-  testImplementation("org.assertj:assertj-core:${property("assertj.version")}")
-  testImplementation("org.mockito:mockito-junit-jupiter:${property("mockito.version")}")
+  testImplementation(libs.junit.engine)
+  testImplementation(libs.junit.params)
+  testImplementation(libs.assertj)
+  testImplementation(libs.mockito)
   // jhipster-needle-gradle-add-dependency-test
 }
 

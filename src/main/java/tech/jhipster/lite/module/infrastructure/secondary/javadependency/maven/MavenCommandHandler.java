@@ -1,4 +1,4 @@
-package tech.jhipster.lite.module.infrastructure.secondary.javadependency;
+package tech.jhipster.lite.module.infrastructure.secondary.javadependency.maven;
 
 import static org.joox.JOOX.*;
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
@@ -44,8 +44,9 @@ import tech.jhipster.lite.module.domain.javabuildplugin.JavaBuildPluginAdditiona
 import tech.jhipster.lite.module.domain.javadependency.DependencyId;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyClassifier;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyScope;
+import tech.jhipster.lite.module.infrastructure.secondary.javadependency.JavaDependenciesCommandHandler;
 
-class MavenCommandHandler {
+public class MavenCommandHandler implements JavaDependenciesCommandHandler {
 
   private static final String FORMATTED_LINE_END = "> *" + LINE_BREAK;
   private static final String RESULTING_LINE_END = ">" + LINE_BREAK;
@@ -95,7 +96,7 @@ class MavenCommandHandler {
   private final Path pomPath;
   private final Match document;
 
-  MavenCommandHandler(Indentation indentation, Path pomPath) {
+  public MavenCommandHandler(Indentation indentation, Path pomPath) {
     Assert.notNull("indentation", indentation);
     Assert.notNull("pomPath", pomPath);
 
@@ -112,6 +113,7 @@ class MavenCommandHandler {
     }
   }
 
+  @Override
   public void handle(SetVersion command) {
     Assert.notNull(COMMAND, command);
 
@@ -149,12 +151,14 @@ class MavenCommandHandler {
     }
   }
 
+  @Override
   public void handle(RemoveJavaDependencyManagement command) {
     Assert.notNull(COMMAND, command);
 
     removeDependency("project > dependencyManagement > dependencies > dependency", command.dependency());
   }
 
+  @Override
   public void handle(RemoveDirectJavaDependency command) {
     Assert.notNull(COMMAND, command);
 
@@ -167,6 +171,7 @@ class MavenCommandHandler {
     writePom();
   }
 
+  @Override
   public void handle(AddJavaDependencyManagement command) {
     Assert.notNull(COMMAND, command);
 
@@ -204,6 +209,7 @@ class MavenCommandHandler {
     appendNotTestDependency(command, dependencies, 3);
   }
 
+  @Override
   public void handle(AddDirectJavaDependency command) {
     Assert.notNull(COMMAND, command);
 
@@ -354,6 +360,7 @@ class MavenCommandHandler {
     return exclusionNode -> exclusionsNode.append(LINE_BREAK).append(indentation.times(level + 2)).append(exclusionNode);
   }
 
+  @Override
   public void handle(AddBuildPluginManagement command) {
     Assert.notNull(COMMAND, command);
 
@@ -363,13 +370,13 @@ class MavenCommandHandler {
     if (buildNode.isEmpty()) {
       appendBuildNode(pluginManagementNode(pluginNode));
     } else {
-      appendPluginMangementInBuildNode(pluginNode, buildNode);
+      appendPluginManagementInBuildNode(pluginNode, buildNode);
     }
 
     writePom();
   }
 
-  private void appendPluginMangementInBuildNode(Match pluginNode, Match buildNode) {
+  private void appendPluginManagementInBuildNode(Match pluginNode, Match buildNode) {
     Match pluginManagementNode = buildNode.child("pluginManagement");
 
     if (pluginManagementNode.isEmpty()) {
@@ -402,6 +409,7 @@ class MavenCommandHandler {
       .append(indentation.times(2));
   }
 
+  @Override
   public void handle(AddDirectJavaBuildPlugin command) {
     Assert.notNull(COMMAND, command);
 
@@ -533,7 +541,7 @@ class MavenCommandHandler {
     return format;
   }
 
-  @ExcludeFromGeneratedCodeCoverage(reason = "The exception hanlding is hard to test and an implementation detail")
+  @ExcludeFromGeneratedCodeCoverage(reason = "The exception handling is hard to test and an implementation detail")
   private void writePom() {
     try (Writer writer = Files.newBufferedWriter(pomPath, StandardCharsets.UTF_8)) {
       writer.write(HEADER);

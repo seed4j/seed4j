@@ -211,6 +211,10 @@ public class JHipsterModule {
     return JHipsterDestination.SRC_TEST_JAVA;
   }
 
+  public static JHipsterDestination toSrcMainResources() {
+    return JHipsterDestination.SRC_MAIN_RESOURCES;
+  }
+
   public static GroupId groupId(String groupId) {
     return new GroupId(groupId);
   }

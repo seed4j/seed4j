@@ -1,5 +1,5 @@
 import { AxiosHttp } from '@/http/AxiosHttp';
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosResponse, RawAxiosRequestConfig } from 'axios';
 import { Modules } from '../domain/Modules';
 import { ModulesRepository } from '../domain/ModulesRepository';
 import { ModuleToApply } from '../domain/ModuleToApply';
@@ -44,7 +44,7 @@ export class RestModulesRepository implements ModulesRepository {
   }
 
   download(folder: ProjectFolder): Promise<Project> {
-    const config: AxiosRequestConfig = {
+    const config: RawAxiosRequestConfig = {
       responseType: 'blob',
       headers: {
         Accept: 'application/octet-stream',

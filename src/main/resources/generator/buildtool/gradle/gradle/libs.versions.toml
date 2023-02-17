@@ -1,0 +1,15 @@
+[versions]
+junit = "5.9.1"
+assertj = "3.24.0"
+mockito = "4.11.0"
+jacoco = "0.8.8"
+
+[libraries]
+junit-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit" }
+junit-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit" }
+assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
+mockito = { group = "org.mockito", name = "mockito-junit-jupiter", version.ref = "mockito" }
+
+[bundles]
+
+[plugins]

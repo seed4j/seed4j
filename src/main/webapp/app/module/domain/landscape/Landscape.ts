@@ -107,9 +107,10 @@ export class Landscape {
     return this.state.selectedModules.some(selectedModule =>
       this.projections
         .getStandaloneModule(selectedModule)
-        .orElseThrow()
-        .dependencies()
-        .some(dependency => dependency.get() === selectedFeatureModule.slug().get())
+        .map(standaloneModule =>
+          standaloneModule.dependencies().some(dependency => dependency.get() === selectedFeatureModule.slug().get())
+        )
+        .orElse(false)
     );
   }
 
@@ -126,11 +127,7 @@ export class Landscape {
   private hasNoIncompatibleSelectedModule(dependency: ModuleSlug): unknown {
     return this.projections
       .getModuleFeature(dependency)
-      .map(feature =>
-        this.getSelectedModule(feature)
-          .map(selectedModule => dependency.get() === selectedModule.slugString())
-          .orElse(true)
-      )
+      .flatMap(feature => this.getSelectedModule(feature).map(selectedModule => dependency.get() === selectedModule.slugString()))
       .orElse(true);
   }
 
@@ -167,14 +164,15 @@ export class Landscape {
   }
 
   private getSelectableModuleInFeature(featureSlug: LandscapeFeatureSlug): Optional<LandscapeModule> {
-    const feature = this.projections.getFeature(featureSlug).orElseThrow();
-    const featureModules = feature.modules;
+    return this.projections.getFeature(featureSlug).flatMap(feature => {
+      const featureModules = feature.modules;
 
-    if (featureModules.length === 1) {
-      return Optional.of(featureModules[0]);
-    }
+      if (featureModules.length === 1) {
+        return Optional.of(featureModules[0]);
+      }
 
-    return this.getSelectedModule(feature);
+      return this.getSelectedModule(feature);
+    });
   }
 
   private buildFeatureSelection(dependency: LandscapeElementId, featureModule: LandscapeModule): LandscapeSelectionElement[] {
@@ -194,10 +192,13 @@ export class Landscape {
   private nestedDependencySelectionElements(dependency: ModuleSlug): LandscapeSelectionElement[] {
     return this.projections
       .getStandaloneModule(dependency.get())
-      .orElseThrow()
-      .allModules()
-      .flatMap(dependencyModules => dependencyModules.dependencies())
-      .flatMap(moduleDependency => this.toSelectionElements(moduleDependency));
+      .map(standaloneModule =>
+        standaloneModule
+          .allModules()
+          .flatMap(dependencyModules => dependencyModules.dependencies())
+          .flatMap(moduleDependency => this.toSelectionElements(moduleDependency))
+      )
+      .orElse([]);
   }
 
   private notSelectableDependency(dependency: LandscapeElementId): LandscapeSelectionElement[] {

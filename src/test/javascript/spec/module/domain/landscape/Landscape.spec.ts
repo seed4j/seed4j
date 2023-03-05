@@ -7,7 +7,12 @@ import { describe, it, expect } from 'vitest';
 describe('Landscape', () => {
   describe('Reset applied modules', () => {
     it('Should ignore unknown modules', () => {
-      expect(() => defaultLandscape().resetAppliedModules([moduleSlug('unknown')])).not.toThrowError();
+      const landscape = defaultLandscape().resetAppliedModules([moduleSlug('init'), moduleSlug('unknown')]);
+
+      expect(landscape.isSelected(moduleSlug('init'))).toBe(true);
+      expect(landscape.isApplied(moduleSlug('init'))).toBe(true);
+      expect(landscape.isSelected(moduleSlug('unknown'))).toBe(false);
+      expect(landscape.isApplied(moduleSlug('unknown'))).toBe(false);
     });
 
     it('Should be applied for newly applied module', () => {
@@ -35,7 +40,9 @@ describe('Landscape', () => {
 
   describe('Apply modules', () => {
     it('Should ignore unknown modules', () => {
-      expect(() => defaultLandscape().appliedModules([moduleSlug('unknown')])).not.toThrowError();
+      const landscape = defaultLandscape().appliedModules([moduleSlug('unknown')]);
+
+      expect(landscape.isApplied(moduleSlug('unknown'))).toBe(false);
     });
 
     it('Should mark applied modules as applied', () => {

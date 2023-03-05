@@ -53,6 +53,7 @@ class EmptyOptional<Value> extends Optional<Value> {
     if (throwable === undefined) {
       throw new Error("Can't get value from an empty optional");
     }
+
     throw throwable();
   }
 

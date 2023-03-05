@@ -1,0 +1,11 @@
+package {{packageName}}.kipe.application;
+
+import org.springframework.security.core.Authentication;
+
+public interface AccessContext<T> {
+  Authentication authentication();
+
+  String action();
+
+  T element();
+}

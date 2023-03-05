@@ -133,7 +133,8 @@ elif [[ $application == 'fullapp' ]]; then
   "java-enums" \
   "internationalized-errors" \
   "spring-boot-cache" \
-  "caffeine-cache"
+  "caffeine-cache" \
+  "kipe-expression"
 
   cucumber_with_jwt
 

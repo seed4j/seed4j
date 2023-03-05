@@ -50,6 +50,7 @@ public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
   JAVA_MEMOIZERS("java-memoizers"),
   JIB("jib"),
   JPA_PAGINATION("jpa-pagination"),
+  KIPE_EXPRESSION("kipe-expression"),
   LIQUIBASE("liquibase"),
   LOGSTASH("logstash"),
   MARIADB("mariadb"),

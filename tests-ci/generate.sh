@@ -91,7 +91,6 @@ cucumber_with_jwt() {
   "spring-boot-jwt" \
   "spring-boot-jwt-basic-auth" \
   "springdoc-mvc-openapi" \
-  "springdoc-jwt" \
   "spring-boot-cucumber-mvc" \
   "spring-boot-cucumber-jwt-authentication"
 }

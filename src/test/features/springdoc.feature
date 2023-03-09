@@ -69,12 +69,3 @@ Feature: Springdoc modules
       | SpringdocOAuth2Configuration.java |
     And I should have files in "src/main/resources/config"
       | application-auth0.properties |
-
-  Scenario: Should apply springdoc jwt module
-    When I apply modules to default project
-      | maven-java            |
-      | spring-boot           |
-      | springdoc-mvc-openapi |
-      | springdoc-jwt         |
-    Then I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/primary/springdoc/"
-      | SpringdocJWTConfiguration.java |

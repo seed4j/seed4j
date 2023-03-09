@@ -1,4 +1,9 @@
 # JWT basic auth
 
-The basic auth just allows you to authenticate one user configured in `application.properties`. Before going to production you probably want to update the user password using a BCrypt tool like [https://bcrypt-generator.com](https://bcrypt-generator.com)
-  
+The basic auth just allows you to authenticate one user configured in `application.properties`. Before going to production you probably want to update the user password (which is admin by default) using a BCrypt tool like [https://bcrypt-generator.com](https://bcrypt-generator.com).
+
+## How it works
+
+- Access the swagger url: [http://localhost:8080/swagger-ui/index.html#](http://localhost:8080/swagger-ui/index.html#)
+- Try to execute the `/api/account` endpoint and an authorization modal window will popup
+- Enter the user and password to log in and authorize the request

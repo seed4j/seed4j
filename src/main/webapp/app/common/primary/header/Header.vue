@@ -10,16 +10,6 @@
     <div class="jhlite-header--slot">
       <nav aria-label="Main navigation">
         <ul class="jhlite-nav">
-          <li v-if="!statistics.isLoading()" class="jhlite-nav--item" data-selector="statistics">
-            <div class="jhlite-nav-item">
-              <span class="jhlite-icon-text">
-                <span class="jhlite-icon-text--icon">
-                  {{ appliedModulesCount() }}
-                </span>
-                <span class="jhlite-icon-text--text">Applied Modules</span>
-              </span>
-            </div>
-          </li>
           <li class="jhlite-nav--item">
             <router-link class="jhlite-nav-item" to="/landscape">
               <span class="jhlite-icon-text">

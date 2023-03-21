@@ -4,8 +4,10 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
+import {{packageName}}.authentication.application.AuthenticatedUser;
 import {{packageName}}.authentication.domain.Role;
 import {{packageName}}.authentication.domain.Roles;
+import {{packageName}}.authentication.domain.Username;
 import {{packageName}}.kipe.domain.Action;
 import {{packageName}}.kipe.domain.Resource;
 import {{packageName}}.kipe.domain.RolesAccesses;
@@ -28,6 +30,10 @@ public class {{ baseName }}Authorizations {
     }
 
     return accesses.allAuthorized(roles(authentication), action(action), resource);
+  }
+
+  public Username getUsername(Authentication authentication) {
+    return new Username(AuthenticatedUser.readPrincipal(authentication));
   }
 
   public boolean specificAuthorized(Authentication authentication, String action, Resource resource) {

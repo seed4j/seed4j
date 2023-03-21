@@ -1,16 +1,25 @@
 package {{packageName}}.kipe.application;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
 import static {{packageName}}.kipe.application.TestAuthentications.*;
 import static {{packageName}}.kipe.domain.RolesAccessesFixture.*;
 
 import java.util.List;
+import java.util.stream.Stream;
 import {{packageName}}.UnitTest;
+import {{packageName}}.authentication.application.UnknownAuthenticationException;
 import {{packageName}}.authentication.domain.Username;
+import {{packageName}}.error.domain.MissingMandatoryValueException;
 import {{packageName}}.kipe.domain.RolesAccessesFixture.TestResource;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @UnitTest
 class {{ baseName }}AuthorizationsTest {
@@ -49,6 +58,48 @@ class {{ baseName }}AuthorizationsTest {
     @Test
     void shouldBeAuthorizedForAuthorizedAction() {
       assertThat(authorizations.allAuthorized(admin(), "read", TestResource.USERS)).isTrue();
+    }
+  }
+
+  @Nested
+  @DisplayName("Get username")
+  class GetUsernameTest {
+
+    @Test
+    void shouldNotGetNotAuthenticatedUserUsername() {
+      assertThatThrownBy(() -> authorizations.getUsername(null)).isExactlyInstanceOf(MissingMandatoryValueException.class);
+    }
+
+    @ParameterizedTest
+    @MethodSource("allValidAuthentications")
+    void shouldGetAuthenticatedUserUsername(Authentication authentication) {
+      assertThat(authorizations.getUsername(authentication)).isEqualTo(new Username("admin"));
+    }
+
+    @Test
+    void shouldNotGetAuthenticatedUserUsernameForUnknownAuthentication() {
+      assertThatThrownBy(() -> authorizations.getUsername(TestAuthentications.user(null))).isExactlyInstanceOf(UnknownAuthenticationException.class);
+    }
+
+    private static Stream<Arguments> allValidAuthentications() {
+      return Stream.of(
+      Arguments.of(createDummyAuthenticationWithPrincipalDetails("admin")),
+      Arguments.of(TestAuthentications.admin())
+      );
+    }
+
+    private static Authentication createDummyAuthenticationWithPrincipalDetails(String username) {
+      UserDetails principalDetails = createUserDetailsWithUsername(username);
+      Authentication authentication = mock(Authentication.class);
+      when(authentication.getPrincipal()).thenReturn(principalDetails);
+      when(authentication.toString()).thenReturn("Authentication with userDetails, username="+username);
+      return authentication;
+    }
+
+    private static UserDetails createUserDetailsWithUsername(String username) {
+      UserDetails adminUserDetails = mock(UserDetails.class);
+      when(adminUserDetails.getUsername()).thenReturn(username);
+      return adminUserDetails;
     }
   }
 

@@ -89,12 +89,9 @@ cucumber_with_jwt() {
 }
 
 if [[ $application == 'spring-boot' ]]; then
-  spring_boot_mvc
-  sonar_back
 
 elif [[ $application == 'fullstack' ]]; then
   spring_boot_mvc
-  sonar_back_front
 
 elif [[ $application == 'gradleapp' ]]; then
   applyModules \
@@ -104,7 +101,6 @@ elif [[ $application == 'gradleapp' ]]; then
 
 elif [[ $application == 'fullapp' ]]; then
   spring_boot_mvc
-  sonar_back_front
 
   applyModules \
   "prettier" \
@@ -149,7 +145,6 @@ elif [[ $application == 'fullapp' ]]; then
 
 elif [[ $application == 'oauth2app' ]]; then
   spring_boot_mvc
-  sonar_back
 
   applyModules \
   "java-memoizers" \
@@ -169,7 +164,6 @@ elif [[ $application == 'oauth2app' ]]; then
 
 elif [[ $application == 'mysqlapp' ]]; then
   spring_boot_mvc
-  sonar_back
 
   applyModules "mysql" "liquibase"
 
@@ -188,7 +182,6 @@ elif [[ $application == 'mysqlapp' ]]; then
 
 elif [[ $application == 'mariadbapp' ]]; then
   spring_boot_mvc
-  sonar_back
 
   applyModules "springdoc-mvc-openapi"
   applyModules "mariadb" "liquibase"
@@ -196,14 +189,12 @@ elif [[ $application == 'mariadbapp' ]]; then
 
 elif [[ $application == 'mssqlapp' ]]; then
   spring_boot_mvc
-  sonar_back
 
   applyModules "springdoc-mvc-openapi"
   applyModules "mssql"
 
 elif [[ $application == 'flywayapp' ]]; then
   spring_boot_mvc
-  sonar_back
 
   applyModules "postgresql" "flyway"
 
@@ -220,7 +211,6 @@ elif [[ $application == 'flywayapp' ]]; then
 
 elif [[ $application == 'undertowapp' ]]; then
   spring_boot_undertow
-  sonar_back
 
   applyModules \
   "mysql" \
@@ -241,7 +231,6 @@ elif [[ $application == 'undertowapp' ]]; then
 
 elif [[ $application == 'eurekaapp' ]]; then
   spring_boot_mvc
-  sonar_back
 
   applyModules \
   "eureka-client" \
@@ -249,13 +238,11 @@ elif [[ $application == 'eurekaapp' ]]; then
 
 elif [[ $application == 'consulapp' ]]; then
   spring_boot_undertow
-  sonar_back
 
   applyModules "consul"
 
 elif [[ $application == 'gatewayapp' ]]; then
   spring_boot_webflux
-  sonar_back
 
   applyModules \
   "eureka-client" \
@@ -264,7 +251,6 @@ elif [[ $application == 'gatewayapp' ]]; then
 
 elif [[ $application == 'mongodbapp' ]]; then
   spring_boot_mvc
-  sonar_back
 
   applyModules "mongodb" "mongock"
 
@@ -278,7 +264,6 @@ elif [[ $application == 'mongodbapp' ]]; then
 
 elif [[ $application == 'redisapp' ]]; then
   spring_boot_mvc
-  sonar_back
 
   applyModules "redis"
 
@@ -286,7 +271,6 @@ elif [[ $application == 'redisapp' ]]; then
 
 elif [[ $application == 'cassandraapp' ]]; then
   spring_boot_mvc
-  sonar_back
 
   applyModules
   "cassandra" \
@@ -302,7 +286,6 @@ elif [[ $application == 'cassandraapp' ]]; then
 
 elif [[ $application == 'neo4japp' ]]; then
   spring_boot_mvc
-  sonar_back
 
   applyModules "neo4j" "neo4j-migrations"
 
@@ -310,7 +293,6 @@ elif [[ $application == 'neo4japp' ]]; then
 
 elif [[ $application == 'angularapp' ]]; then
   spring_boot_mvc
-  sonar_back_front
 
   applyModules \
   "frontend-maven-plugin" \
@@ -322,7 +304,6 @@ elif [[ $application == 'angularapp' ]]; then
 
 elif [[ $application == 'angularoauth2app' ]]; then
   spring_boot_mvc
-  sonar_back_front
 
   applyModules \
   "java-memoizers" \
@@ -342,7 +323,6 @@ elif [[ $application == 'angularoauth2app' ]]; then
 
 elif [[ $application == 'reactapp' ]]; then
   spring_boot_mvc
-  sonar_back_front
 
   applyModules \
   "frontend-maven-plugin" \
@@ -355,7 +335,6 @@ elif [[ $application == 'reactapp' ]]; then
 
 elif [[ $application == 'vueapp' ]]; then
   spring_boot_mvc
-  sonar_back_front
 
   applyModules \
   "frontend-maven-plugin" \
@@ -365,7 +344,6 @@ elif [[ $application == 'vueapp' ]]; then
 
 elif [[ $application == 'svelteapp' ]]; then
   spring_boot_mvc
-  sonar_back_front
 
   applyModules \
   "frontend-maven-plugin" \
@@ -374,26 +352,21 @@ elif [[ $application == 'svelteapp' ]]; then
 
 elif [[ $application == 'kafkaapp' ]]; then
   spring_boot_mvc
-  sonar_back
 
    applyModules "spring-boot-kafka" "spring-boot-kafka-akhq"
 
 elif [[ $application == 'pulsarapp' ]]; then
   spring_boot_mvc
-  sonar_back
 
   applyModules "spring-boot-pulsar"
 
 elif [[ $application == 'reactiveapp' ]]; then
   spring_boot_webflux
-  sonar_back
 
   applyModules \
   "springdoc-webflux-openapi"
 
 elif [[ $application == 'customjhlite' ]]; then
-  spring_boot
-  sonar_back
 
   applyModules "custom-jhlite"
 

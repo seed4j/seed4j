@@ -68,7 +68,7 @@ jobs:
       - name: 'Test: run backend tests'
         run: |
           chmod +x mvnw
-          ./mvnw clean verify sonar:sonar
+          ./mvnw clean verify
       - name: 'Artifact: upload JaCoCo report'
         uses: actions/upload-artifact@v3
         with:

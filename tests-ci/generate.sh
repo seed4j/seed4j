@@ -367,6 +367,7 @@ elif [[ $application == 'reactiveapp' ]]; then
   "springdoc-webflux-openapi"
 
 elif [[ $application == 'customjhlite' ]]; then
+  spring_boot
 
   applyModules "custom-jhlite"
 

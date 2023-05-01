@@ -74,8 +74,6 @@ public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
   REACT_CORE("react-core"),
   REACT_JWT("react-jwt"),
   REST_PAGINATION("rest-pagination"),
-  SONAR_QUBE_JAVA_BACKEND("sonar-qube-java-backend"),
-  SONAR_QUBE_JAVA_BACKEND_AND_FRONTEND("sonar-qube-java-backend-and-frontend"),
   SPRING_BOOT("spring-boot"),
   SPRING_BOOT_ACTUATOR("spring-boot-actuator"),
   SPRING_BOOT_ASYNC("spring-boot-async"),

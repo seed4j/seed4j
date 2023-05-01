@@ -78,14 +78,6 @@ spring_boot_webflux() {
   "spring-boot-actuator"
 }
 
-sonar_back() {
-  applyModules "sonar-qube-java-backend"
-}
-
-sonar_back_front() {
-  applyModules "sonar-qube-java-backend-and-frontend"
-}
-
 cucumber_with_jwt() {
   applyModules \
   "spring-boot-jwt" \
@@ -296,13 +288,13 @@ elif [[ $application == 'cassandraapp' ]]; then
   spring_boot_mvc
   sonar_back
 
-  applyModules 
+  applyModules
   "cassandra" \
   "cassandra-migration"
 
   cucumber_with_jwt
 
-  applyModules   
+  applyModules
   "kipe-expression" \
   "kipe-authorization" \
   "dummy-feature" \

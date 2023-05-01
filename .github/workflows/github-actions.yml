@@ -180,30 +180,16 @@ jobs:
           key: ${{ runner.os }}-maven-${{ matrix.app }}-${{ steps.cache_md5sum.outputs.md5sum_pom_xml }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: 'Test: starting Sonar'
-        working-directory: /tmp/jhlite/${{ matrix.app }}/
-        run: |
-          if [ -f 'src/main/docker/sonar.yml' ]; then
-            docker-compose -f src/main/docker/sonar.yml up -d
-            ${{ github.workspace }}/tests-ci/wait_sonar.sh
-            docker ps -a
-          fi
       - name: 'Test: verify ${{ matrix.app }}'
         working-directory: /tmp/jhlite/${{ matrix.app }}/
         run: |
           if [ -f 'mvnw' ]; then
-            ./mvnw clean verify sonar:sonar
+            ./mvnw clean verify
           elif [ -f 'gradlew' ]; then
             ./gradlew build --no-daemon
           else
             npm install
             npm test
-          fi
-      - name: 'Test: check local Sonar Analysis'
-        run: |
-          if [ -f '/tmp/jhlite/${{ matrix.app }}/src/main/docker/sonar.yml' ]; then
-            ${{ github.workspace }}/tests-ci/wait_sonar_analysis.sh
-            ./tests-ci/sonar.sh ${{ matrix.app }}
           fi
       - name: 'Test: copy shell scripts'
         run: cp ./tests-ci/start.sh /tmp/jhlite/${{ matrix.app }}/

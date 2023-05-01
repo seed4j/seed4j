@@ -28,7 +28,6 @@
     <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
     <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
     <properties-maven-plugin.version>1.1.0</properties-maven-plugin.version>
-    <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
     <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
     <jib-maven-plugin.version>3.3.1</jib-maven-plugin.version>
     <mongock.version>5.2.2</mongock.version>
@@ -141,11 +140,6 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>properties-maven-plugin</artifactId>
         <version>${properties-maven-plugin.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.sonarsource.scanner.maven</groupId>
-        <artifactId>sonar-maven-plugin</artifactId>
-        <version>${sonar-maven-plugin.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>

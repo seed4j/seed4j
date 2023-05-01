@@ -69,16 +69,6 @@ jobs:
         run: |
           chmod +x mvnw
           ./mvnw clean verify sonar:sonar
-      - name: 'Analysis: local Sonar'
-        run: |
-          ./tests-ci/wait_sonar_analysis.sh
-          ./tests-ci/sonar.sh
-      - name: 'Analysis: SonarCloud'
-        if: github.repository == 'jhipster/jhipster-lite' && github.ref == 'refs/heads/main'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=jhipster_jhipster-lite -Dsonar.organization=jhipster -Dsonar.login= -Dsonar.password=
       - name: 'Artifact: upload JaCoCo report'
         uses: actions/upload-artifact@v3
         with:

@@ -89,6 +89,7 @@ cucumber_with_jwt() {
 }
 
 if [[ $application == 'spring-boot' ]]; then
+  spring_boot_mvc
 
 elif [[ $application == 'fullstack' ]]; then
   spring_boot_mvc

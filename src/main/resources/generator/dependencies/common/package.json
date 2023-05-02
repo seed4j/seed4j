@@ -20,7 +20,7 @@
     "jasmine-core": "4.6.0",
     "jest": "29.5.0",
     "lint-staged": "13.2.2",
-    "node": "18.16.0",
+    "node": "20.0.0",
     "npm": "9.6.5",
     "prettier": "2.8.8",
     "prettier-plugin-java": "2.1.0",

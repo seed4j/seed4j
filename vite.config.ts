@@ -46,7 +46,10 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "@/assets/global.scss"; @import "@/assets/side-form.scss";',
+        additionalData: `
+          @import "@/assets/global.scss";
+          @import "@/assets/side-form.scss";
+          @import "${path.resolve('node_modules/placeholder-loading/dist/css/placeholder-loading.min.css')}";`,
       },
     },
   },

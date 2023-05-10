@@ -3,6 +3,7 @@ import { Loader } from '@/loader/primary/Loader';
 import { ModulesRepository } from '@/module/domain/ModulesRepository';
 import { defineComponent, inject, nextTick, onBeforeUnmount, onMounted, Ref, ref } from 'vue';
 import { LandscapeModuleVue } from '../landscape-module';
+import { LandscapeLoaderVue } from '../landscape-loader';
 import { buildConnector, LandscapeConnector } from './LandscapeConnector';
 import { DisplayMode } from './DisplayMode';
 import { emptyLandscapeSize, LandscapeConnectorsSize } from './LandscapeConnectorsSize';
@@ -30,7 +31,7 @@ import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepo
 
 export default defineComponent({
   name: 'LandscapeVue',
-  components: { LandscapeModuleVue, ModulePropertiesFormVue, ProjectActionsVue, IconVue },
+  components: { LandscapeModuleVue, ModulePropertiesFormVue, ProjectActionsVue, IconVue, LandscapeLoaderVue },
   setup() {
     const applicationListener = inject('applicationListener') as ApplicationListener;
     const alertBus = inject('alertBus') as AlertBus;

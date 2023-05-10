@@ -17,10 +17,11 @@ import { ModuleParameter } from '@/module/domain/ModuleParameter';
 import { ModuleParametersVue } from '../module-parameters';
 import { castValue } from '../PropertyValue';
 import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
+import { ModulesPatchLoaderVue } from '../modules-patch-loader';
 
 export default defineComponent({
   name: 'ModulesPatchVue',
-  components: { ModuleParametersVue, IconVue, TagFilterVue, ModulePropertiesFormVue, ProjectActionsVue },
+  components: { ModuleParametersVue, IconVue, TagFilterVue, ModulePropertiesFormVue, ProjectActionsVue, ModulesPatchLoaderVue },
   setup() {
     const alertBus = inject('alertBus') as AlertBus;
     const modules = inject('modules') as ModulesRepository;

@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import tech.jhipster.lite.shared.error.domain.Assert;
@@ -13,6 +15,7 @@ import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCover
 import tech.jhipster.lite.statistic.domain.AppliedModule;
 
 @Document(collection = "applied_module")
+@CompoundIndexes(@CompoundIndex(name = "date_moduleSlug", def = "{'date': 1, 'moduleSlug': 1}"))
 class AppliedModuleDocument {
 
   @Id

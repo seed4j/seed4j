@@ -34,10 +34,10 @@ export default defineComponent({
 
     const selectedTag = ref(undefined as string | undefined);
     const operationInProgress = ref(false);
-    const folderPath = ref('');
     const selectedModule = ref<ComponentModule>();
     const moduleParameters = inject('moduleParameters') as ModuleParametersRepository;
-    const moduleParametersValues = ref(moduleParameters.get());
+    const folderPath = ref(moduleParameters.getCurrentFolderPath());
+    const moduleParametersValues = ref(moduleParameters.get(folderPath.value));
     const commitModule = ref(true);
     const appliedModules = ref([] as string[]);
     let searchedText = '';
@@ -50,11 +50,20 @@ export default defineComponent({
           applicationModules.displayed.loaded(ComponentModules.fromModules(response));
         })
         .catch(error => console.error(error));
-      projectFolders
-        .get()
-        .then(projectFolder => (folderPath.value = projectFolder))
-        .catch(error => console.error(error));
+      loadProjectFolders();
     });
+
+    const loadProjectFolders = (): void => {
+      if (folderPath.value.length === 0) {
+        projectFolders
+          .get()
+          .then(projectFolder => {
+            folderPath.value = projectFolder;
+            moduleParametersValues.value = moduleParameters.get(folderPath.value);
+          })
+          .catch(error => console.error(error));
+      }
+    };
 
     const operationStarted = (): void => {
       operationInProgress.value = true;
@@ -132,16 +141,17 @@ export default defineComponent({
 
     const updateFolderPath = (path: string): void => {
       folderPath.value = path;
+      moduleParametersValues.value = moduleParameters.get(folderPath.value);
     };
 
     const updateProperty = (property: ModuleParameter): void => {
       moduleParametersValues.value.set(property.key, property.value);
-      moduleParameters.store(moduleParametersValues.value);
+      moduleParameters.store(folderPath.value, moduleParametersValues.value);
     };
 
     const deleteProperty = (key: ModulePropertyKey): void => {
       moduleParametersValues.value.delete(key);
-      moduleParameters.store(moduleParametersValues.value);
+      moduleParameters.store(folderPath.value, moduleParametersValues.value);
     };
 
     const mandatoryProperties = (module: string): ModulePropertyDefinition[] => {
@@ -256,7 +266,7 @@ export default defineComponent({
           moduleParametersValues.value.set(property.key, property.value);
         }
       });
-      moduleParameters.store(moduleParametersValues.value);
+      moduleParameters.store(folderPath.value, moduleParametersValues.value);
     };
 
     const unknownProperty = (key: string) => {

@@ -13,13 +13,12 @@ import { wrappedElement } from '../../../WrappedElement';
 import { stubAlertBus } from '../../../common/domain/AlertBus.fixture';
 import { ProjectFoldersRepository } from '@/module/domain/ProjectFoldersRepository';
 import { ProjectFoldersRepositoryStub, stubProjectFoldersRepository } from '../../domain/ProjectFolders.fixture';
+import { ModuleParametersRepositoryStub, stubModuleParametersRepository } from '../../domain/ModuleParameters.fixture';
 import { stubWindow } from '../GlobalWindow.fixture';
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { Modules } from '@/module/domain/Modules';
 import { Module } from '@/module/domain/Module';
 import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
-import { LocalStorageModuleParametersRepository } from '@/module/secondary/LocalStorageModuleParametersRepository';
-import sinon from 'sinon';
 
 interface WrapperOptions {
   modules: ModulesRepository;
@@ -141,6 +140,17 @@ describe('Modules', () => {
 
       const pathField = wrapper.find(wrappedElement('folder-path-field')).element as HTMLInputElement;
       expect(pathField.value).toBe('/tmp/jhlite/1234');
+    });
+
+    it('Should load folder path from local storage', async () => {
+      const moduleParameters = repositoryWithModuleParameters();
+      moduleParameters.getCurrentFolderPath.returns('/tmp/jhlite/5678');
+
+      const wrapper = wrap({ moduleParameters });
+      await flushPromises();
+
+      const pathField = wrapper.find(wrappedElement('folder-path-field')).element as HTMLInputElement;
+      expect(pathField.value).toBe('/tmp/jhlite/5678');
     });
   });
 
@@ -755,17 +765,12 @@ const repositoryWithProjectFoldersError = (): ProjectFoldersRepositoryStub => {
   return projectFolders;
 };
 
-const repositoryWithModuleParameters = (): LocalStorageModuleParametersRepository => {
-  const stubLocalStorage = {
-    getItem: sinon.stub(),
-    setItem: sinon.stub(),
-    removeItem: sinon.stub(),
-    clear: sinon.stub(),
-    length: 0,
-    key: sinon.stub(),
-  };
-  const moduleParameters = new LocalStorageModuleParametersRepository(stubLocalStorage);
-
+const repositoryWithModuleParameters = (): ModuleParametersRepositoryStub => {
+  const moduleParameters = stubModuleParametersRepository();
+  moduleParameters.store.resolves(undefined);
+  moduleParameters.storeCurrentFolderPath.resolves('');
+  moduleParameters.getCurrentFolderPath.returns('');
+  moduleParameters.get.returns(new Map());
   return moduleParameters;
 };
 

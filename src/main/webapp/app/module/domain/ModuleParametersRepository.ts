@@ -1,6 +1,7 @@
 import { ModuleParameterType } from '@/module/domain/ModuleParameters';
 
 export interface ModuleParametersRepository {
-  store(map: Map<string, ModuleParameterType>): void;
-  get(): Map<string, ModuleParameterType>;
+  store(folderPath: string, map: Map<string, ModuleParameterType>): void;
+  get(folderPath: string): Map<string, ModuleParameterType>;
+  getCurrentFolderPath(): string;
 }

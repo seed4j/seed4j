@@ -52,10 +52,9 @@ export default defineComponent({
 
     const emphasizedModule = ref<ModuleSlug>();
 
-    const folderPath = ref('');
-
     const moduleParameters = inject('moduleParameters') as ModuleParametersRepository;
-    const moduleParametersValues = ref(moduleParameters.get());
+    const folderPath = ref(moduleParameters.getCurrentFolderPath());
+    const moduleParametersValues = ref(moduleParameters.get(folderPath.value));
 
     let commitModule = true;
 
@@ -72,11 +71,20 @@ export default defineComponent({
         .landscape()
         .then(response => loadLandscape(response))
         .catch(error => console.error(error));
-      projectFolders
-        .get()
-        .then(projectFolder => (folderPath.value = projectFolder))
-        .catch(error => console.error(error));
+      loadProjectFolders();
     });
+
+    const loadProjectFolders = (): void => {
+      if (folderPath.value.length === 0) {
+        projectFolders
+          .get()
+          .then(projectFolder => {
+            folderPath.value = projectFolder;
+            moduleParametersValues.value = moduleParameters.get(folderPath.value);
+          })
+          .catch(error => console.error(error));
+      }
+    };
 
     const startGrabbing = (mouseEvent: MouseEvent): void => {
       if (mouseEvent.preventDefault) {
@@ -339,6 +347,7 @@ export default defineComponent({
 
     const updateFolderPath = (path: string): void => {
       folderPath.value = path;
+      moduleParametersValues.value = moduleParameters.get(folderPath.value);
     };
 
     const projectFolderUpdated = (): void => {
@@ -358,7 +367,7 @@ export default defineComponent({
           moduleParametersValues.value.set(property.key, property.value);
         }
       });
-      moduleParameters.store(moduleParametersValues.value);
+      moduleParameters.store(folderPath.value, moduleParametersValues.value);
     };
 
     const unknownProperty = (key: string) => {
@@ -367,12 +376,12 @@ export default defineComponent({
 
     const updateProperty = (property: ModuleParameter): void => {
       moduleParametersValues.value.set(property.key, property.value);
-      moduleParameters.store(moduleParametersValues.value);
+      moduleParameters.store(folderPath.value, moduleParametersValues.value);
     };
 
     const deleteProperty = (key: string): void => {
       moduleParametersValues.value.delete(key);
-      moduleParameters.store(moduleParametersValues.value);
+      moduleParameters.store(folderPath.value, moduleParametersValues.value);
     };
 
     const applyNewModules = (): void => {

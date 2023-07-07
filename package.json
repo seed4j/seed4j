@@ -76,7 +76,7 @@
     "rimraf": "5.0.1",
     "sass": "1.63.6",
     "sinon": "15.2.0",
-    "stylelint": "14.16.1",
+    "stylelint": "15.10.1",
     "stylelint-config-concentric-order": "5.1.0",
     "stylelint-config-standard": "29.0.0",
     "stylelint-config-standard-scss": "6.1.0",

@@ -56,7 +56,9 @@
   height: calc(var(--jhlite-element-size) * 0.4);
   width: calc(var(--jhlite-element-size) * 0.4);
   transform: translateX(0);
-  transition: transform 0.3s ease, background-color 0.5s ease;
+  transition:
+    transform 0.3s ease,
+    background-color 0.5s ease;
 }
 
 .jhlite-theme-switch_toggle-checked {

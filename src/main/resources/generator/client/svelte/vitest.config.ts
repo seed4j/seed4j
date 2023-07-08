@@ -1,7 +1,7 @@
 /// <reference types="vitest" />
 
 import { defineConfig } from 'vitest/config';
-import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 import path from 'path';
 
 export default defineConfig({

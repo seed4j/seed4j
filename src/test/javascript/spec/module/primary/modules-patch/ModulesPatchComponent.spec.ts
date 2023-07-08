@@ -584,7 +584,7 @@ describe('Modules', () => {
             name: 'Three filters',
             modules: tags.map(makeTaggedModule),
           },
-        ])
+        ]),
       );
       const wrapper = wrap({ modules: repository });
       await flushForm(wrapper);

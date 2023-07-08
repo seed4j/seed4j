@@ -8,4 +8,4 @@ export interface ProjectFoldersRepositoryStub extends ProjectFoldersRepository {
 export const stubProjectFoldersRepository = (): ProjectFoldersRepositoryStub =>
   ({
     get: sinon.stub(),
-  } as ProjectFoldersRepositoryStub);
+  }) as ProjectFoldersRepositoryStub;

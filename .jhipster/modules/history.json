@@ -1,7 +1,9 @@
 {
-  "actions" : [ {
-    "module" : "application-service-hexagonal-architecture-documentation",
-    "date" : "2022-07-29T05:45:39.864617462Z",
-    "properties" : { }
-  } ]
+  "actions": [
+    {
+      "module": "application-service-hexagonal-architecture-documentation",
+      "date": "2022-07-29T05:45:39.864617462Z",
+      "properties": {}
+    }
+  ]
 }

@@ -11,5 +11,5 @@ jobs:
       - name: initial labeling
         uses: andymckay/labeler@master
         with:
-          add-labels: "area: triage"
+          add-labels: 'area: triage'
           ignore-if-labeled: true

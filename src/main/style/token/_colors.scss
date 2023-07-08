@@ -15,21 +15,9 @@ $jhlite-global-color-text-dark: $jhlite-color-neutral-800;
 $jhlite-global-color-text-light: #fff !default;
 
 /** Other */
-$jhlite-global-color-fill-disabled-dark: color.change(
-  $jhlite-global-color-primary,
-  $saturation: 25%,
-  $lightness: 40%
-) !default;
-$jhlite-global-color-fill-disabled-light: color.change(
-  $jhlite-global-color-primary,
-  $saturation: 20%,
-  $lightness: 75%
-) !default;
-$jhlite-global-color-text-disabled: color.change(
-  $jhlite-global-color-primary,
-  $saturation: 25%,
-  $lightness: 60%
-) !default;
+$jhlite-global-color-fill-disabled-dark: color.change($jhlite-global-color-primary, $saturation: 25%, $lightness: 40%) !default;
+$jhlite-global-color-fill-disabled-light: color.change($jhlite-global-color-primary, $saturation: 20%, $lightness: 75%) !default;
+$jhlite-global-color-text-disabled: color.change($jhlite-global-color-primary, $saturation: 25%, $lightness: 60%) !default;
 $jhlite-global-color-fill-secondary: $jhlite-color-neutral-900 !default; // @deprecated
 $jhlite-global-color-link-light: $jhlite-global-color-text-light !default; // @deprecated
 $jhlite-global-color-link-light-hover: $jhlite-color-brand-200 !default; // @deprecated

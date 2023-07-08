@@ -8,7 +8,7 @@ interface HTMLElementStub extends HTMLElement {
 const stubHtmlElement = (): HTMLElementStub =>
   ({
     scroll: sinon.stub(),
-  } as HTMLElementStub);
+  }) as HTMLElementStub;
 
 describe('LandscapeScroller', () => {
   it('should scroll', () => {

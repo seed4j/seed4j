@@ -4,4 +4,3 @@ describe('Home', () => {
     cy.title().should('include', 'JHipster');
   });
 });
-

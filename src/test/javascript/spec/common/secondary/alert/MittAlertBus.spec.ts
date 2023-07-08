@@ -11,7 +11,7 @@ interface EmitterStub extends Emitter<any> {
 const stubEmitter = (): EmitterStub =>
   ({
     emit: sinon.stub(),
-  } as EmitterStub);
+  }) as EmitterStub;
 
 describe('MittAlertBus', () => {
   it('should emit success', () => {

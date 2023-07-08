@@ -29,7 +29,7 @@ export const defaultLandscape = (): Landscape =>
             mandatoryBooleanPropertyDefinitionWithoutDefault(),
             mandatoryBooleanPropertyDefinitionWithDefault(),
           ],
-          []
+          [],
         ),
         initialModule('prettier', 'Add prettier', [applicationBaseNamePropertyDefinition()], []),
       ],
@@ -84,7 +84,7 @@ const initialModule = (
   slug: string,
   operation: string,
   properties: ModulePropertyDefinition[],
-  dependencies: LandscapeElementId[]
+  dependencies: LandscapeElementId[],
 ): LandscapeModule =>
   LandscapeModule.initialState({
     slug: moduleSlug(slug),

@@ -2,12 +2,15 @@ import { Modules } from '@/module/domain/Modules';
 import { ComponentModuleCategory } from './ComponentModulePatchCategory';
 
 export class ComponentModules {
-  private constructor(public readonly categories: ComponentModuleCategory[], public readonly modulesCount: number) {}
+  private constructor(
+    public readonly categories: ComponentModuleCategory[],
+    public readonly modulesCount: number,
+  ) {}
 
   static fromModules(modules: Modules): ComponentModules {
     return new ComponentModules(
       modules.categories.map(category => ComponentModuleCategory.from(category)),
-      modules.modulesCount()
+      modules.modulesCount(),
     );
   }
 

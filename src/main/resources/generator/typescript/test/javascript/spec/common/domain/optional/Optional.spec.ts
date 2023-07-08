@@ -26,7 +26,7 @@ describe('Optional', () => {
       expect(
         Optional.empty()
           .map(dummy => dummy)
-          .isEmpty()
+          .isEmpty(),
       ).toBe(true);
     });
 
@@ -34,7 +34,7 @@ describe('Optional', () => {
       expect(
         Optional.of('value')
           .map(value => 'beer ' + value)
-          .orElse('dummy')
+          .orElse('dummy'),
       ).toBe('beer value');
     });
   });
@@ -44,7 +44,7 @@ describe('Optional', () => {
       expect(
         Optional.empty()
           .filter(() => true)
-          .isEmpty()
+          .isEmpty(),
       ).toBe(true);
     });
 
@@ -52,7 +52,7 @@ describe('Optional', () => {
       expect(
         Optional.of('value')
           .filter(value => value.indexOf('v') !== -1)
-          .orElse('dummy')
+          .orElse('dummy'),
       ).toBe('value');
     });
 
@@ -60,7 +60,7 @@ describe('Optional', () => {
       expect(
         Optional.of('value')
           .filter(() => false)
-          .orElse('other')
+          .orElse('other'),
       ).toBe('other');
     });
   });
@@ -128,7 +128,7 @@ describe('Optional', () => {
       expect(
         Optional.of('beer')
           .flatMap(value => Optional.of('my ' + value))
-          .orElse('dummy')
+          .orElse('dummy'),
       ).toBe('my beer');
     });
   });

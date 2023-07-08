@@ -28,7 +28,7 @@ export const stubModulesRepository = (): ModulesRepositoryStub =>
     history: sinon.stub(),
     format: sinon.stub(),
     download: sinon.stub(),
-  } as ModulesRepositoryStub);
+  }) as ModulesRepositoryStub;
 
 export const applicationBaseNamePropertyDefinition = (): ModulePropertyDefinition => ({
   type: 'STRING',

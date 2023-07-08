@@ -57,7 +57,7 @@ export class RestModulesRepository implements ModulesRepository {
 
 const mapToProject = (response: AxiosResponse<ArrayBuffer>): Project => ({
   filename: Optional.ofUndefinable(response.headers['x-suggested-filename']).orElseThrow(
-    () => new Error('Impossible to download file without filename')
+    () => new Error('Impossible to download file without filename'),
   ),
   content: response.data,
 });

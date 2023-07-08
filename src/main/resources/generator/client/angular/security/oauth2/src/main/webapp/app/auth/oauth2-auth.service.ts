@@ -35,7 +35,7 @@ export class Oauth2AuthService {
       }),
       tap(() => {
         this.initUpdateTokenRefresh();
-      })
+      }),
     );
   }
 

@@ -145,18 +145,18 @@ export default defineComponent({
           dependantElementSlug: module.slug(),
           dependencyElement: landscapeElements.value.get(dependency.get())!,
           dependencyElementSlug: dependency,
-        })
+        }),
       );
     };
 
     const buildConnectorsSize = (): LandscapeConnectorsSize => ({
       width: Math.max.apply(
         null,
-        landscapeConnectors.value.flatMap(connector => connector.positions).map(position => position.x)
+        landscapeConnectors.value.flatMap(connector => connector.positions).map(position => position.x),
       ),
       height: Math.max.apply(
         null,
-        landscapeConnectors.value.flatMap(connector => connector.positions).map(position => position.y)
+        landscapeConnectors.value.flatMap(connector => connector.positions).map(position => position.y),
       ),
     });
 
@@ -333,7 +333,7 @@ export default defineComponent({
 
     const missingMandatoryProperty = () => {
       return selectedModulesProperties().some(
-        property => property.mandatory && empty(moduleParametersValues.value.get(property.key)) && empty(property.defaultValue)
+        property => property.mandatory && empty(moduleParametersValues.value.get(property.key)) && empty(property.defaultValue),
       );
     };
 

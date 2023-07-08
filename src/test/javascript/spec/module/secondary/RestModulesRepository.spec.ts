@@ -215,7 +215,7 @@ const landscapeModule = (
   slug: string,
   operation: string,
   properties: RestModulePropertiesDefinitions,
-  dependencies?: RestLandscapeDependency[]
+  dependencies?: RestLandscapeDependency[],
 ): RestLandscapeModule => ({
   type: 'MODULE',
   slug,

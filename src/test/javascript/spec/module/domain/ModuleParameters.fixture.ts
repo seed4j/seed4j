@@ -14,4 +14,4 @@ export const stubModuleParametersRepository = (): ModuleParametersRepositoryStub
     storeCurrentFolderPath: sinon.stub(),
     get: sinon.stub(),
     getCurrentFolderPath: sinon.stub(),
-  } as ModuleParametersRepositoryStub);
+  }) as ModuleParametersRepositoryStub;

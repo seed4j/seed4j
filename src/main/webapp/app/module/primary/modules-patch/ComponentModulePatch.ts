@@ -7,7 +7,7 @@ export class ComponentModule {
     public readonly description: string,
     public readonly properties: ModulePropertyDefinition[],
     public readonly tags: string[],
-    public readonly normalizedContent: string
+    public readonly normalizedContent: string,
   ) {}
 
   static from(module: Module): ComponentModule {

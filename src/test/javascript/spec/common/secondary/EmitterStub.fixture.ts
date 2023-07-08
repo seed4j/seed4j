@@ -8,4 +8,4 @@ interface EmitterStub extends Emitter<any> {
 export const stubEmitter = (): EmitterStub =>
   ({
     emit: sinon.stub(),
-  } as EmitterStub);
+  }) as EmitterStub;

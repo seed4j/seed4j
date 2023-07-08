@@ -238,7 +238,8 @@ input[type='radio'] {
 }
 .shadow-primary {
   --bs-bg-opacity: 0.2;
-  box-shadow: 0.2em -0.2em rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)),
+  box-shadow:
+    0.2em -0.2em rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)),
     0.1em 0.1em 0.3em 0.1em rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 

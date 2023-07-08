@@ -13,7 +13,7 @@ export class LandscapeConnector {
   constructor(
     public readonly positions: LandscapeConnectorPosition[],
     public readonly startingElement: LandscapeElementId,
-    public readonly endingElement: LandscapeElementId
+    public readonly endingElement: LandscapeElementId,
   ) {
     this.points = this.buildPoints();
     this.path = this.buildCurvedPath();
@@ -106,6 +106,6 @@ export const buildConnector = (parameters: BuildConnectorsParameters): Landscape
   return new LandscapeConnector(
     [dependencyStartingPoint, dependencySpacer, dependantSpacer, dependantStartingPoint],
     parameters.dependantElementSlug,
-    parameters.dependencyElementSlug
+    parameters.dependencyElementSlug,
   );
 };

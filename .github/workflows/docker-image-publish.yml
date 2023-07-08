@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
   push:
     # Avoid building on main branch - see https://github.com/jhipster/jhipster-lite/issues/5341
-#    branches:
-#      - main
+    #    branches:
+    #      - main
     # Publish semver tags as releases.
     tags:
       - 'v*.*.*'

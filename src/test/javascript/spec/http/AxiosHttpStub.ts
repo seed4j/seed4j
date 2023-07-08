@@ -14,9 +14,9 @@ export const stubAxiosHttp = (): AxiosHttpStub =>
     post: sinon.stub(),
     delete: sinon.stub(),
     put: sinon.stub(),
-  } as AxiosHttpStub);
+  }) as AxiosHttpStub;
 
 export const dataBackendResponse = <T>(data: T): AxiosHttpResponse<T> =>
   ({
     data,
-  } as AxiosHttpResponse<T>);
+  }) as AxiosHttpResponse<T>;

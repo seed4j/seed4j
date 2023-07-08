@@ -14,9 +14,9 @@ export const stubAxiosInstance = (): AxiosStubInstance =>
     put: sinon.stub(),
     post: sinon.stub(),
     delete: sinon.stub(),
-  } as AxiosStubInstance);
+  }) as AxiosStubInstance;
 
 export const dataAxiosResponse = <T>(data: T): AxiosResponse<T> =>
   ({
     data,
-  } as AxiosResponse<T>);
+  }) as AxiosResponse<T>;

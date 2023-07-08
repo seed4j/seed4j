@@ -18,7 +18,10 @@ export class Landscape {
   private readonly properties: ModulePropertyDefinition[];
   private readonly memoizedSelectionElements = new Memoizer<string, LandscapeSelectionElement[]>();
 
-  private constructor(private readonly state: LandscapeState, private readonly projections: LevelsProjections) {
+  private constructor(
+    private readonly state: LandscapeState,
+    private readonly projections: LevelsProjections,
+  ) {
     this.modules = this.buildModules();
     this.properties = this.buildProperties();
   }
@@ -40,7 +43,7 @@ export class Landscape {
 
   private buildSelectionTree(module: LandscapeModule): LandscapeSelectionTree {
     const dependenciesSelection = new LandscapeSelectionTree(
-      module.dependencies().flatMap(dependency => this.toSelectionElements(dependency))
+      module.dependencies().flatMap(dependency => this.toSelectionElements(dependency)),
     );
 
     return new LandscapeSelectionTree([this.moduleSelection(module, dependenciesSelection), ...dependenciesSelection.elements]);
@@ -108,9 +111,9 @@ export class Landscape {
       this.projections
         .getStandaloneModule(selectedModule)
         .map(standaloneModule =>
-          standaloneModule.dependencies().some(dependency => dependency.get() === selectedFeatureModule.slug().get())
+          standaloneModule.dependencies().some(dependency => dependency.get() === selectedFeatureModule.slug().get()),
         )
-        .orElse(false)
+        .orElse(false),
     );
   }
 
@@ -133,7 +136,7 @@ export class Landscape {
 
   private toFeatureSelectionWithIncompatibleModule(
     dependency: ModuleSlug,
-    incompatibleModule: LandscapeModule
+    incompatibleModule: LandscapeModule,
   ): LandscapeSelectionElement[] {
     const notSelectableDependencySelection: LandscapeSelectionElement = {
       slug: dependency,
@@ -196,7 +199,7 @@ export class Landscape {
         standaloneModule
           .allModules()
           .flatMap(dependencyModules => dependencyModules.dependencies())
-          .flatMap(moduleDependency => this.toSelectionElements(moduleDependency))
+          .flatMap(moduleDependency => this.toSelectionElements(moduleDependency)),
       )
       .orElse([]);
   }
@@ -245,7 +248,7 @@ export class Landscape {
 
   private nestedSelectedDependantElements(element: LandscapeElementId): LandscapeElementId[] {
     const selectedDependantElements = this.getAllDependantModules(element).filter(dependantElement =>
-      this.isSelectedModuleOrFeature(dependantElement)
+      this.isSelectedModuleOrFeature(dependantElement),
     );
 
     return [
@@ -283,8 +286,8 @@ export class Landscape {
   private buildProperties(): ModulePropertyDefinition[] {
     const deduplicatedProperties = Array.from(
       new Map(
-        this.state.selectedModules.flatMap(module => this.toPropertiesDefinitions(module)).map(property => [property.key, property])
-      ).values()
+        this.state.selectedModules.flatMap(module => this.toPropertiesDefinitions(module)).map(property => [property.key, property]),
+      ).values(),
     );
 
     return deduplicatedProperties.sort((first, second) => first.order - second.order);
@@ -404,7 +407,10 @@ export class Landscape {
 }
 
 class LandscapeState {
-  constructor(public readonly appliedModules: ModuleId[], public readonly selectedModules: ModuleId[]) {}
+  constructor(
+    public readonly appliedModules: ModuleId[],
+    public readonly selectedModules: ModuleId[],
+  ) {}
 
   public isApplied(module: ModuleId): boolean {
     return this.isModuleIn(module, this.appliedModules);
@@ -486,13 +492,13 @@ class LevelsProjections {
         .flatMap(level => level.elements)
         .filter(element => element instanceof LandscapeFeature)
         .map(feature => feature as LandscapeFeature)
-        .map(feature => [feature.slugString(), feature])
+        .map(feature => [feature.slugString(), feature]),
     );
   }
 
   private buildModuleFeatures(): Map<string, LandscapeFeature> {
     return new Map(
-      Array.from(this.features.values()).flatMap(feature => feature.allModules().map(module => [module.slugString(), feature]))
+      Array.from(this.features.values()).flatMap(feature => feature.allModules().map(module => [module.slugString(), feature])),
     );
   }
 
@@ -501,7 +507,7 @@ class LevelsProjections {
       levels
         .flatMap(level => level.elements)
         .flatMap(landscapeElement => landscapeElement.allModules())
-        .map(module => [module.slugString(), module])
+        .map(module => [module.slugString(), module]),
     );
   }
 
@@ -509,7 +515,7 @@ class LevelsProjections {
     return this.memoizedDependantModules.get(element.get(), () =>
       Array.from(this.standaloneModules.values())
         .filter(standaloneModule => standaloneModule.dependencies().some(dependency => dependency.get() === element.get()))
-        .map(module => module.slug())
+        .map(module => module.slug()),
     );
   }
 

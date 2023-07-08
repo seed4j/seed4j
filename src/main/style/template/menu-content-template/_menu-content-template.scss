@@ -12,7 +12,8 @@ $jhlite-menu-content-template-color-divider: $jhlite-global-color-fill-secondary
     height: inherit;
   }
 
-  &--content, &--menu {
+  &--content,
+  &--menu {
     box-sizing: border-box;
     flex-basis: 0;
     flex-grow: 1;
@@ -37,7 +38,8 @@ $jhlite-menu-content-template-color-divider: $jhlite-global-color-fill-secondary
       width: $jhlite-menu-content-template-menu-medium-width;
     }
 
-    &--content, &--menu {
+    &--content,
+    &--menu {
       border-right: 1px solid $jhlite-menu-content-template-color-divider;
       border-bottom: 0;
 

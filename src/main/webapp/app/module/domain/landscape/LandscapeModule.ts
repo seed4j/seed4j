@@ -28,7 +28,10 @@ const INITIAL_CONTEXT: LandscapeModuleContext = {
 };
 
 export class LandscapeModule implements LandscapeElement {
-  private constructor(private readonly information: LandscapeModuleInformation, private readonly context: LandscapeModuleContext) {}
+  private constructor(
+    private readonly information: LandscapeModuleInformation,
+    private readonly context: LandscapeModuleContext,
+  ) {}
 
   public static initialState(information: LandscapeModuleInformation): LandscapeModule {
     return new LandscapeModule(information, INITIAL_CONTEXT);

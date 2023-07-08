@@ -30,7 +30,7 @@ const stubBodyCursorUpdater = (): BodyCursorUpdaterStub =>
   ({
     set: sinon.stub(),
     reset: sinon.stub(),
-  } as BodyCursorUpdaterStub);
+  }) as BodyCursorUpdaterStub;
 
 const stubApplicationListener = (): ApplicationListenerStub => ({
   addEventListener: sinon.stub(),
@@ -924,7 +924,7 @@ const assertConnectorsCount = (wrapper: VueWrapper, cssClass: string, count: num
     wrapper
       .find(wrappedElement('landscape-connectors'))
       .findAll('path')
-      .filter(line => line.classes().includes(cssClass)).length
+      .filter(line => line.classes().includes(cssClass)).length,
   ).toBe(count);
 };
 

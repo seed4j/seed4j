@@ -41,7 +41,7 @@ public class SvelteModuleFactory {
         .addDevDependency(packageName("babel-plugin-transform-vite-meta-env"), SVELTE)
         .addDevDependency(packageName("eslint"), SVELTE)
         .addDevDependency(packageName("eslint-config-prettier"), SVELTE)
-        .addDevDependency(packageName("eslint-plugin-svelte3"), SVELTE)
+        .addDevDependency(packageName("eslint-plugin-svelte"), SVELTE)
         .addDevDependency(packageName("jsdom"), SVELTE)
         .addDevDependency(packageName("prettier"), SVELTE)
         .addDevDependency(packageName("prettier-plugin-svelte"), SVELTE)

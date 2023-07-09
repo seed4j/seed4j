@@ -33,7 +33,7 @@ class SvelteModuleFactoryTest {
       .containing(nodeDependency("babel-plugin-transform-vite-meta-env"))
       .containing(nodeDependency("eslint"))
       .containing(nodeDependency("eslint-config-prettier"))
-      .containing(nodeDependency("eslint-plugin-svelte3"))
+      .containing(nodeDependency("eslint-plugin-svelte"))
       .containing(nodeDependency("jsdom"))
       .containing(nodeDependency("prettier"))
       .containing(nodeDependency("prettier-plugin-svelte"))

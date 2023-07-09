@@ -28,6 +28,7 @@ import { LandscapeFeatureSlug } from '@/module/domain/landscape/LandscapeFeature
 import { BodyCursorUpdater } from '@/common/primary/cursor/BodyCursorUpdater';
 import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller';
 import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
+import { LandscapeNavigation } from './LandscapeNavigation';
 
 export default defineComponent({
   name: 'LandscapeVue',
@@ -49,6 +50,7 @@ export default defineComponent({
     const landscapeConnectors = ref<LandscapeConnector[]>([]);
     const landscapeSize = ref<LandscapeConnectorsSize>(emptyLandscapeSize());
     const landscapeElements = ref(new Map<string, HTMLElement>());
+    const landscapeNavigation = ref<LandscapeNavigation>();
 
     const emphasizedModule = ref<ModuleSlug>();
 
@@ -72,6 +74,8 @@ export default defineComponent({
         .then(response => loadLandscape(response))
         .catch(error => console.error(error));
       loadProjectFolders();
+
+      applicationListener.addEventListener('keydown', handle_keyboard);
     });
 
     const loadProjectFolders = (): void => {
@@ -119,7 +123,36 @@ export default defineComponent({
 
       await nextTick().then(updateConnectors);
 
+      landscapeNavigation.value = new LandscapeNavigation(landscapeElements.value, levels.value.value());
       applicationListener.addEventListener('resize', updateConnectors);
+    };
+
+    const handle_keyboard = (event: Event): void => {
+      const keyboard_event = event as KeyboardEvent;
+      const ArrowUp = keyboard_event.key == 'ArrowUp';
+      const ArrowDown = keyboard_event.key == 'ArrowDown';
+      const ArrowLeft = keyboard_event.key == 'ArrowLeft';
+      const ArrowRight = keyboard_event.key == 'ArrowRight';
+      const EnterKey = keyboard_event.key == 'Enter';
+
+      if (EnterKey && emphasizedModule.value != undefined) {
+        toggleModule(emphasizedModule.value);
+        return;
+      }
+
+      if (ArrowDown && keyboard_event.ctrlKey == false) landscapeNavigation.value?.goDown();
+
+      if (ArrowLeft && keyboard_event.ctrlKey == false) landscapeNavigation.value?.goLeft();
+
+      if (ArrowRight && keyboard_event.ctrlKey == false) landscapeNavigation.value?.goRight();
+
+      if (ArrowUp && keyboard_event.ctrlKey == false) landscapeNavigation.value?.goUp();
+
+      if (ArrowLeft && keyboard_event.ctrlKey == true) landscapeNavigation.value?.goToDependencie();
+
+      if (ArrowRight && keyboard_event.ctrlKey == true) landscapeNavigation.value?.goToDependent();
+
+      if (landscapeNavigation.value) emphasizeModule(landscapeNavigation.value.getSlug());
     };
 
     onBeforeUnmount(() => {

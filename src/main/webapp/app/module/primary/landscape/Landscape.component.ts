@@ -75,7 +75,7 @@ export default defineComponent({
         .catch(error => console.error(error));
       loadProjectFolders();
 
-      applicationListener.addEventListener('keydown', handle_keyboard);
+      document.addEventListener('keydown', handle_keyboard);
     });
 
     const loadProjectFolders = (): void => {
@@ -127,37 +127,37 @@ export default defineComponent({
       applicationListener.addEventListener('resize', updateConnectors);
     };
 
+    const isKey = (code: string, key: string, ctrl: boolean): boolean => code == key && !ctrl;
+
+    const isKeyWithCTRL = (code: string, key: string, ctrl: boolean): boolean => code == key && ctrl;
+
+    const handleNavigationKeys = (code: string, ctrlKey: boolean) => {
+      if (isKey(code, 'Space', ctrlKey) && landscapeNavigation.value) toggleModule(landscapeNavigation.value.getSlug());
+
+      if (isKey(code, 'ArrowUp', ctrlKey)) landscapeNavigation.value?.goUp();
+
+      if (isKey(code, 'ArrowDown', ctrlKey)) landscapeNavigation.value?.goDown();
+
+      if (isKey(code, 'ArrowLeft', ctrlKey)) landscapeNavigation.value?.goLeft();
+
+      if (isKey(code, 'ArrowRight', ctrlKey)) landscapeNavigation.value?.goRight();
+
+      if (isKeyWithCTRL(code, 'ArrowLeft', ctrlKey)) landscapeNavigation.value?.goToDependencie();
+
+      if (isKeyWithCTRL(code, 'ArrowRight', ctrlKey)) landscapeNavigation.value?.goToDependent();
+    };
+
     const handle_keyboard = (event: Event): void => {
       const keyboard_event = event as KeyboardEvent;
-      const ArrowUp = keyboard_event.code == 'ArrowUp';
-      const ArrowDown = keyboard_event.code == 'ArrowDown';
-      const ArrowLeft = keyboard_event.code == 'ArrowLeft';
-      const ArrowRight = keyboard_event.code == 'ArrowRight';
-      const EnterKey = keyboard_event.code == 'Space';
 
-      if (EnterKey && emphasizedModule.value != undefined) {
-        toggleModule(emphasizedModule.value);
-        return;
-      }
-
-      if (ArrowDown && keyboard_event.ctrlKey == false) landscapeNavigation.value?.goDown();
-
-      if (ArrowLeft && keyboard_event.ctrlKey == false) landscapeNavigation.value?.goLeft();
-
-      if (ArrowRight && keyboard_event.ctrlKey == false) landscapeNavigation.value?.goRight();
-
-      if (ArrowUp && keyboard_event.ctrlKey == false) landscapeNavigation.value?.goUp();
-
-      if (ArrowLeft && keyboard_event.ctrlKey == true) landscapeNavigation.value?.goToDependencie();
-
-      if (ArrowRight && keyboard_event.ctrlKey == true) landscapeNavigation.value?.goToDependent();
+      handleNavigationKeys(keyboard_event.code, keyboard_event.ctrlKey);
 
       if (landscapeNavigation.value) emphasizeModule(landscapeNavigation.value.getSlug());
     };
 
     onBeforeUnmount(() => {
       applicationListener.removeEventListener('resize', updateConnectors);
-      applicationListener.removeEventListener('keydown', handle_keyboard);
+      document.removeEventListener('keydown', handle_keyboard);
     });
 
     const updateConnectors = (): void => {

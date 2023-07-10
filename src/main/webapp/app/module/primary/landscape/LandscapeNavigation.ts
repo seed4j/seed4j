@@ -1,3 +1,4 @@
+import { ModuleSlug } from '@/module/domain/ModuleSlug';
 import { LandscapeLevel } from '@/module/domain/landscape/LandscapeLevel';
 
 export class LandscapeNavigation {
@@ -36,50 +37,17 @@ export class LandscapeNavigation {
   }
 
   public goLeft() {
-    const current_module_html = this.landscapeElements.get(this.module().slug().get());
+    const current_module = this.module().slug();
     this.currentLevel = this.decrease(this.currentLevel);
 
-    let smallest_distance = Infinity;
-    // Iterate throw Element and Modules until you get the smallest one.
-    this.level().elements.forEach((element, element_index) => {
-      element.allModules().forEach((module, index) => {
-        const module_html_element = this.landscapeElements.get(module.slug().get());
-        // Compare the distance from the currentModule to That Module.
-        if (module_html_element && current_module_html) {
-          const distance = Math.abs(module_html_element.getBoundingClientRect().y - current_module_html.getBoundingClientRect().y);
-          if (distance < smallest_distance) {
-            smallest_distance = distance;
-            this.currentElement = element_index;
-            this.currentModule = index;
-          }
-        }
-      });
-    });
+    this.calculateDistanceAndUpdate(current_module);
   }
 
   public goRight() {
-    const current_module_html = this.landscapeElements.get(this.module().slug().get());
+    const current_module = this.module().slug();
 
-    const total_levels = this.levels.length;
-    this.currentLevel = this.increase(this.currentLevel, total_levels - 1);
-
-    // Set smallest distence to Infinity.
-    let smallest_distance = Infinity;
-    // Iterate throw Element and Modules until you get the smallest one.
-    this.level().elements.forEach((element, element_index) => {
-      element.allModules().forEach((module, index) => {
-        const module_html_element = this.landscapeElements.get(module.slug().get());
-        // Compare the distance from the currentModule to That Module.
-        if (module_html_element && current_module_html) {
-          const distance = Math.abs(module_html_element.getBoundingClientRect().y - current_module_html.getBoundingClientRect().y);
-          if (distance < smallest_distance) {
-            smallest_distance = distance;
-            this.currentElement = element_index;
-            this.currentModule = index;
-          }
-        }
-      });
-    });
+    this.currentLevel = this.increase(this.currentLevel, this.levels.length - 1);
+    this.calculateDistanceAndUpdate(current_module);
   }
 
   public goToDependencie() {
@@ -88,9 +56,7 @@ export class LandscapeNavigation {
     const element_index = this.levels[this.currentLevel - 1].elements.findIndex(
       e => e.slug().get() == this.module().dependencies()[0].get()
     );
-    this.currentLevel -= 1;
-    this.currentElement = element_index >= 0 ? element_index : 0;
-    this.currentModule = 0;
+    this.updateCursor(this.currentLevel - 1, element_index, 0);
   }
 
   public goToDependent() {
@@ -109,18 +75,36 @@ export class LandscapeNavigation {
 
     if (element_index == -1) return;
 
-    this.currentLevel += 1;
-    this.currentElement = element_index >= 0 ? element_index : 0;
-    this.currentModule = 0;
+    this.updateCursor(this.currentLevel + 1, element_index, 0);
   }
 
   public getSlug() {
     return this.module().slug();
   }
 
+  private calculateDistanceAndUpdate(current_module: ModuleSlug) {
+    const current_module_html = this.landscapeElements.get(current_module.get()) as HTMLElement;
+
+    // calculateDistanceAndUpdate
+    let smallest_distance = Infinity;
+    // Iterate throw Element and Modules until you get the smallest one.
+    this.level().elements.forEach((element, element_index) => {
+      element.allModules().forEach((module, index) => {
+        const module_html_element = this.landscapeElements.get(module.slug().get()) as HTMLElement;
+        // Compare the distance from the currentModule to That Module.
+        const distance = Math.abs(module_html_element.getBoundingClientRect().y - current_module_html.getBoundingClientRect().y);
+        if (distance < smallest_distance) {
+          smallest_distance = distance;
+          this.updateCursor(this.currentLevel, element_index, index);
+        }
+      });
+    });
+  }
+
   private increase(value: number, max: number) {
     return value < max ? value + 1 : max;
   }
+
   private decrease(value: number) {
     return value > 0 ? value - 1 : 0;
   }
@@ -143,5 +127,11 @@ export class LandscapeNavigation {
       this.currentElement = this.increase(this.currentElement, this.level().elements.length - 1);
       this.currentModule = 0;
     }
+  }
+
+  private updateCursor(currentLevel: number, currentElement: number, currentModule: number) {
+    this.currentLevel = currentLevel;
+    this.currentElement = currentElement;
+    this.currentModule = currentModule;
   }
 }

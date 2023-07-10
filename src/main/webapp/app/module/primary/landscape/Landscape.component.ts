@@ -157,6 +157,7 @@ export default defineComponent({
 
     onBeforeUnmount(() => {
       applicationListener.removeEventListener('resize', updateConnectors);
+      applicationListener.removeEventListener('keydown', handle_keyboard);
     });
 
     const updateConnectors = (): void => {

@@ -209,7 +209,7 @@ describe('Landscape', () => {
       expect(wrapper.find(wrappedElement('landscape-loader')).exists()).toBe(false);
       expect(wrapper.find(wrappedElement('landscape')).exists()).toBe(true);
       expect(wrapper.find(wrappedElement('landscape-connectors')).findAll('path').length).toBe(17);
-      expect(applicationListener.addEventListener.calledOnce).toBe(true);
+      expect(applicationListener.addEventListener.calledTwice).toBe(true);
 
       const pathField = wrapper.find(wrappedElement('folder-path-field')).element as HTMLInputElement;
       expect(pathField.value).toBe('/tmp/jhlite/1234');
@@ -221,7 +221,7 @@ describe('Landscape', () => {
 
       wrapper.unmount();
 
-      expect(applicationListener.removeEventListener.calledOnce).toBe(true);
+      expect(applicationListener.removeEventListener.calledTwice).toBe(true);
     });
 
     it('Should load folder path from local storage', async () => {

@@ -129,11 +129,11 @@ export default defineComponent({
 
     const handle_keyboard = (event: Event): void => {
       const keyboard_event = event as KeyboardEvent;
-      const ArrowUp = keyboard_event.key == 'ArrowUp';
-      const ArrowDown = keyboard_event.key == 'ArrowDown';
-      const ArrowLeft = keyboard_event.key == 'ArrowLeft';
-      const ArrowRight = keyboard_event.key == 'ArrowRight';
-      const EnterKey = keyboard_event.key == 'Enter';
+      const ArrowUp = keyboard_event.code == 'ArrowUp';
+      const ArrowDown = keyboard_event.code == 'ArrowDown';
+      const ArrowLeft = keyboard_event.code == 'ArrowLeft';
+      const ArrowRight = keyboard_event.code == 'ArrowRight';
+      const EnterKey = keyboard_event.code == 'Space';
 
       if (EnterKey && emphasizedModule.value != undefined) {
         toggleModule(emphasizedModule.value);

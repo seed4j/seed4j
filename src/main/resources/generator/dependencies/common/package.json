@@ -6,11 +6,11 @@
   "devDependencies": {
     "@playwright/test": "1.35.1",
     "@prettier/plugin-xml": "2.2.0",
-    "@types/jest": "29.5.2",
+    "@types/jest": "29.5.3",
     "@types/node": "20.4.1",
     "@typescript-eslint/eslint-plugin": "6.0.0",
-    "@typescript-eslint/parser": "5.61.0",
-    "cypress": "12.17.0",
+    "@typescript-eslint/parser": "5.62.0",
+    "cypress": "12.17.1",
     "eslint": "8.44.0",
     "eslint-import-resolver-typescript": "3.5.5",
     "eslint-plugin-cypress": "2.13.3",
@@ -24,7 +24,7 @@
     "npm": "9.8.0",
     "prettier": "2.8.8",
     "prettier-plugin-java": "2.2.0",
-    "prettier-plugin-packagejson": "2.4.4",
+    "prettier-plugin-packagejson": "2.4.5",
     "ts-jest": "29.1.1",
     "typescript": "5.1.6"
   }

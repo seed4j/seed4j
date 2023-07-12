@@ -10,7 +10,7 @@
     "@sveltejs/adapter-static": "2.0.2",
     "@sveltejs/kit": "1.22.2",
     "@testing-library/svelte": "4.0.3",
-    "@typescript-eslint/eslint-plugin": "5.61.0",
+    "@typescript-eslint/eslint-plugin": "6.0.0",
     "@typescript-eslint/parser": "5.62.0",
     "@vitest/coverage-istanbul": "0.33.0",
     "babel-plugin-transform-vite-meta-env": "1.0.3",

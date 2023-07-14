@@ -132,19 +132,33 @@ export default defineComponent({
     const isKeyWithCTRL = (code: string, key: string, ctrl: boolean): boolean => code == key && ctrl;
 
     const handleNavigationKeys = (code: string, ctrlKey: boolean) => {
-      if (isKey(code, 'Space', ctrlKey) && landscapeNavigation.value) toggleModule(landscapeNavigation.value.getSlug());
+      if (isKey(code, 'Space', ctrlKey) && landscapeNavigation.value) {
+        toggleModule(landscapeNavigation.value.getSlug());
+      }
 
-      if (isKey(code, 'ArrowUp', ctrlKey)) landscapeNavigation.value?.goUp();
+      if (isKey(code, 'ArrowUp', ctrlKey)) {
+        landscapeNavigation.value?.goUp();
+      }
 
-      if (isKey(code, 'ArrowDown', ctrlKey)) landscapeNavigation.value?.goDown();
+      if (isKey(code, 'ArrowDown', ctrlKey)) {
+        landscapeNavigation.value?.goDown();
+      }
 
-      if (isKey(code, 'ArrowLeft', ctrlKey)) landscapeNavigation.value?.goLeft();
+      if (isKey(code, 'ArrowLeft', ctrlKey)) {
+        landscapeNavigation.value?.goLeft();
+      }
 
-      if (isKey(code, 'ArrowRight', ctrlKey)) landscapeNavigation.value?.goRight();
+      if (isKey(code, 'ArrowRight', ctrlKey)) {
+        landscapeNavigation.value?.goRight();
+      }
 
-      if (isKeyWithCTRL(code, 'ArrowLeft', ctrlKey)) landscapeNavigation.value?.goToDependencie();
+      if (isKeyWithCTRL(code, 'ArrowLeft', ctrlKey)) {
+        landscapeNavigation.value?.goToDependencie();
+      }
 
-      if (isKeyWithCTRL(code, 'ArrowRight', ctrlKey)) landscapeNavigation.value?.goToDependent();
+      if (isKeyWithCTRL(code, 'ArrowRight', ctrlKey)) {
+        landscapeNavigation.value?.goToDependent();
+      }
     };
 
     const handleKeyboard = (event: Event): void => {
@@ -152,7 +166,9 @@ export default defineComponent({
 
       handleNavigationKeys(keyboard_event.code, keyboard_event.ctrlKey);
 
-      if (landscapeNavigation.value) emphasizeModule(landscapeNavigation.value.getSlug());
+      if (landscapeNavigation.value) {
+        emphasizeModule(landscapeNavigation.value.getSlug());
+      }
     };
 
     onBeforeUnmount(() => {

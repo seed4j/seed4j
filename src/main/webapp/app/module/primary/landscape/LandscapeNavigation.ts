@@ -51,7 +51,9 @@ export class LandscapeNavigation {
   }
 
   public goToDependencie() {
-    if (this.module().dependencies().length == 0) return;
+    if (this.module().dependencies().length == 0) {
+      return;
+    }
 
     const element_index = this.levels[this.currentLevel - 1].elements.findIndex(
       e => e.slug().get() == this.module().dependencies()[0].get()
@@ -73,7 +75,9 @@ export class LandscapeNavigation {
       );
     });
 
-    if (element_index == -1) return;
+    if (element_index == -1) {
+      return;
+    }
 
     this.updateCursor(this.currentLevel + 1, element_index, 0);
   }
@@ -111,14 +115,19 @@ export class LandscapeNavigation {
 
   private nextModule(ArrowUp: boolean) {
     const old_value = this.currentModule;
-    if (ArrowUp) this.currentModule = this.decrease(this.currentModule);
-    else this.currentModule = this.increase(this.currentModule, this.element().allModules().length - 1);
+    if (ArrowUp) {
+      this.currentModule = this.decrease(this.currentModule);
+    } else {
+      this.currentModule = this.increase(this.currentModule, this.element().allModules().length - 1);
+    }
 
     return this.currentModule != old_value;
   }
 
   private nextElement(ArrowUp: boolean) {
-    if (this.nextModule(ArrowUp)) return;
+    if (this.nextModule(ArrowUp)) {
+      return;
+    }
 
     if (ArrowUp) {
       this.currentElement = this.decrease(this.currentElement);

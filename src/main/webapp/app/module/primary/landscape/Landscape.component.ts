@@ -75,7 +75,7 @@ export default defineComponent({
         .catch(error => console.error(error));
       loadProjectFolders();
 
-      document.addEventListener('keydown', handle_keyboard);
+      document.addEventListener('keydown', handleKeyboard);
     });
 
     const loadProjectFolders = (): void => {
@@ -147,7 +147,7 @@ export default defineComponent({
       if (isKeyWithCTRL(code, 'ArrowRight', ctrlKey)) landscapeNavigation.value?.goToDependent();
     };
 
-    const handle_keyboard = (event: Event): void => {
+    const handleKeyboard = (event: Event): void => {
       const keyboard_event = event as KeyboardEvent;
 
       handleNavigationKeys(keyboard_event.code, keyboard_event.ctrlKey);
@@ -157,7 +157,7 @@ export default defineComponent({
 
     onBeforeUnmount(() => {
       applicationListener.removeEventListener('resize', updateConnectors);
-      document.removeEventListener('keydown', handle_keyboard);
+      document.removeEventListener('keydown', handleKeyboard);
     });
 
     const updateConnectors = (): void => {

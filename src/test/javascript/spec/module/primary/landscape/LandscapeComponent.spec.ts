@@ -997,8 +997,12 @@ describe('Landscape', () => {
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight' }));
       await wrapper.vm.$nextTick();
 
+      expect(wrapper.find(wrappedElement('vue-module')).classes()).toContain('-selectable-highlighted');
+
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft' }));
       await wrapper.vm.$nextTick();
+
+      expect(wrapper.find(wrappedElement('infinitest-module')).classes()).toContain('-selectable-highlighted');
     });
   });
 });

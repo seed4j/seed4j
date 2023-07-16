@@ -989,6 +989,11 @@ describe('Landscape', () => {
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('react-module')).classes()).toContain('-selectable-highlighted');
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowUp' }));
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.find(wrappedElement('vue-module')).classes()).toContain('-selectable-highlighted');
     });
 
     it('should navigate to right then goback to left', async () => {
@@ -1003,6 +1008,29 @@ describe('Landscape', () => {
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('infinitest-module')).classes()).toContain('-selectable-highlighted');
+    });
+
+    it('should not navigate if current module is the top or the bottom', async () => {
+      const wrapper = await componentWithLandscape();
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowUp' }));
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.find(wrappedElement('infinitest-module')).classes()).toContain('-selectable-highlighted');
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown' }));
+      await wrapper.vm.$nextTick();
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown' }));
+      await wrapper.vm.$nextTick();
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown' }));
+      await wrapper.vm.$nextTick();
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown' }));
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.find(wrappedElement('prettier-module')).classes()).toContain('-selectable-highlighted');
     });
   });
 });

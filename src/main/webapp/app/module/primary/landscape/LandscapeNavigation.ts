@@ -75,12 +75,12 @@ export class LandscapeNavigation {
     this.updateCursor(this.currentLevel, elementIndex, moduleIndex);
   }
 
-  public goToDependencie(): void {
+  public goToDependency(): void {
     if (this.module().dependencies().length == 0) {
       return;
     }
 
-    const [levelIndex, elementIndex, moduleIndex] = this.findDependenciePosition();
+    const [levelIndex, elementIndex, moduleIndex] = this.findDependencyPosition();
 
     this.updateCursor(levelIndex, elementIndex, moduleIndex);
   }
@@ -112,7 +112,7 @@ export class LandscapeNavigation {
     return modules.findIndex(module => this.isInDependencies(module.slug().get()));
   }
 
-  private findDependencieElementPosition(elements: LandscapeElement[]): [number, number] {
+  private findDependencyElementPosition(elements: LandscapeElement[]): [number, number] {
     let moduleIndex = 0;
     const elementIndex = elements.findIndex(element => {
       if (this.isInDependencies(element.slug().get())) {
@@ -127,11 +127,11 @@ export class LandscapeNavigation {
     return [elementIndex, moduleIndex];
   }
 
-  private findDependenciePosition(): [number, number, number] {
+  private findDependencyPosition(): [number, number, number] {
     let [levelIndex, elementIndex, moduleIndex] = this.setValues(this.currentLevel, 0, 0);
 
     levelIndex -= 1;
-    [elementIndex, moduleIndex] = this.findDependencieElementPosition(this.getLevelByIndex(levelIndex).elements);
+    [elementIndex, moduleIndex] = this.findDependencyElementPosition(this.getLevelByIndex(levelIndex).elements);
 
     return [levelIndex, elementIndex, moduleIndex];
   }

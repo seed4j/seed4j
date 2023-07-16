@@ -140,7 +140,7 @@ export default defineComponent({
       return {
         ArrowUp: 'goUp',
         ArrowDown: 'goDown',
-        ArrowLeft: ctrl ? 'goToDependencie' : 'goLeft',
+        ArrowLeft: ctrl ? 'goToDependency' : 'goLeft',
         ArrowRight: ctrl ? 'goToDependent' : 'goRight',
         Space: 'getSlug',
       };

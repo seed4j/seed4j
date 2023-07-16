@@ -127,46 +127,43 @@ export default defineComponent({
       applicationListener.addEventListener('resize', updateConnectors);
     };
 
-    const isKey = (code: string, key: string, ctrl: boolean): boolean => code == key && !ctrl;
+    type Navigation = 'ArrowLeft' | 'ArrowRight' | 'ArrowUp' | 'ArrowDown' | 'Space';
+    type NavigationAction = {
+      [key in Navigation]: keyof LandscapeNavigation;
+    };
 
-    const isKeyWithCTRL = (code: string, key: string, ctrl: boolean): boolean => code == key && ctrl;
+    const isNavigation = (code: string): code is Navigation => {
+      return ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Space'].includes(code);
+    };
 
-    const handleNavigationKeys = (code: string, ctrlKey: boolean) => {
-      if (isKey(code, 'Space', ctrlKey) && landscapeNavigation.value) {
-        toggleModule(landscapeNavigation.value.getSlug());
+    const prepareNavigationActions = (ctrl: boolean): NavigationAction => {
+      return {
+        ArrowUp: 'goUp',
+        ArrowDown: 'goDown',
+        ArrowLeft: ctrl ? 'goToDependencie' : 'goLeft',
+        ArrowRight: ctrl ? 'goToDependent' : 'goRight',
+        Space: 'getSlug',
+      };
+    };
+
+    const handleNavigation = (code: Navigation, ctrl: boolean): void => {
+      if (!landscapeNavigation.value) {
+        return;
       }
 
-      if (isKey(code, 'ArrowUp', ctrlKey)) {
-        landscapeNavigation.value?.goUp();
-      }
+      const navigationActions = prepareNavigationActions(ctrl);
 
-      if (isKey(code, 'ArrowDown', ctrlKey)) {
-        landscapeNavigation.value?.goDown();
-      }
-
-      if (isKey(code, 'ArrowLeft', ctrlKey)) {
-        landscapeNavigation.value?.goLeft();
-      }
-
-      if (isKey(code, 'ArrowRight', ctrlKey)) {
-        landscapeNavigation.value?.goRight();
-      }
-
-      if (isKeyWithCTRL(code, 'ArrowLeft', ctrlKey)) {
-        landscapeNavigation.value?.goToDependencie();
-      }
-
-      if (isKeyWithCTRL(code, 'ArrowRight', ctrlKey)) {
-        landscapeNavigation.value?.goToDependent();
+      const module = landscapeNavigation.value[navigationActions[code]]();
+      if (module) {
+        toggleModule(module);
       }
     };
 
     const handleKeyboard = (event: Event): void => {
-      const keyboard_event = event as KeyboardEvent;
+      const keyboardEvent = event as KeyboardEvent;
 
-      handleNavigationKeys(keyboard_event.code, keyboard_event.ctrlKey);
-
-      if (landscapeNavigation.value) {
+      if (isNavigation(keyboardEvent.code) && landscapeNavigation.value) {
+        handleNavigation(keyboardEvent.code, keyboardEvent.ctrlKey);
         emphasizeModule(landscapeNavigation.value.getSlug());
       }
     };

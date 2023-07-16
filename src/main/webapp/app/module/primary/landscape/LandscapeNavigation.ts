@@ -12,15 +12,17 @@ export class LandscapeNavigation {
   private levels: LandscapeLevel[];
 
   constructor(landscapeElements: Map<string, HTMLElement>, levels: LandscapeLevel[]) {
-    this.currentModule = 0;
-    this.currentElement = 0;
-    this.currentLevel = 0;
+    [this.currentLevel, this.currentElement, this.currentModule] = this.setValues(0, 0, 0);
     this.landscapeElements = landscapeElements;
     this.levels = levels;
   }
 
   private level(): LandscapeLevel {
     return this.levels[this.currentLevel];
+  }
+
+  private getLevelByIndex(index: number): LandscapeLevel {
+    return this.levels[index];
   }
 
   private element(): LandscapeElement {
@@ -31,26 +33,46 @@ export class LandscapeNavigation {
     return this.element().allModules()[this.currentModule];
   }
 
+  public getSlug(): ModuleSlug {
+    return this.module().slug();
+  }
+
   public goUp(): void {
-    this.nextElement(true);
+    if (this.currentModule == 0) {
+      this.currentElement = this.decrease(this.currentElement);
+      this.currentModule = this.element().allModules().length - 1;
+    } else {
+      this.currentModule = this.decrease(this.currentModule);
+    }
   }
 
   public goDown(): void {
-    this.nextElement(false);
+    if (this.currentModule == this.element().allModules().length - 1) {
+      this.currentElement = this.increase(this.currentElement, this.level().elements.length - 1);
+      this.currentModule = 0;
+    } else {
+      this.currentModule = this.increase(this.currentModule, this.element().allModules().length - 1);
+    }
   }
 
   public goLeft(): void {
     const current_module = this.module().slug();
+
     this.currentLevel = this.decrease(this.currentLevel);
 
-    this.calculateDistanceAndUpdate(current_module);
+    const [elementIndex, moduleIndex] = this.calculatePosition(current_module);
+
+    this.updateCursor(this.currentLevel, elementIndex, moduleIndex);
   }
 
   public goRight(): void {
     const current_module = this.module().slug();
 
     this.currentLevel = this.increase(this.currentLevel, this.levels.length - 1);
-    this.calculateDistanceAndUpdate(current_module);
+
+    const [elementIndex, moduleIndex] = this.calculatePosition(current_module);
+
+    this.updateCursor(this.currentLevel, elementIndex, moduleIndex);
   }
 
   public goToDependencie(): void {
@@ -58,91 +80,139 @@ export class LandscapeNavigation {
       return;
     }
 
-    const element_index = this.levels[this.currentLevel - 1].elements.findIndex(
-      e => e.slug().get() == this.module().dependencies()[0].get()
-    );
-    this.updateCursor(this.currentLevel - 1, element_index, 0);
-  }
+    const [levelIndex, elementIndex, moduleIndex] = this.findDependenciePosition();
 
-  public findDependency(dependencies: LandscapeElementId[]): number {
-    return dependencies.findIndex(module => module.get() === this.module().slug().get());
-  }
-
-  public findDependentModuleIndex(modules: LandscapeModule[]): number {
-    return modules.findIndex(module => this.findDependency(module.dependencies()) >= 0);
-  }
-
-  public findElementIndexOfDependentModule(elements: LandscapeElement[]): number {
-    return elements.findIndex(element => this.findDependentModuleIndex(element.allModules()) >= 0);
+    this.updateCursor(levelIndex, elementIndex, moduleIndex);
   }
 
   public goToDependent(): void {
-    const next_level = this.levels[this.currentLevel + 1];
-
-    const element_index = this.findElementIndexOfDependentModule(next_level.elements);
-    if (element_index == -1) {
-      return;
-    }
-
-    this.updateCursor(this.currentLevel + 1, element_index, 0);
+    const [levelIndex, elementIndex, moduleIndex] = this.findDependentPostion();
+    this.updateCursor(levelIndex, elementIndex, moduleIndex);
   }
 
-  public getSlug(): ModuleSlug {
-    return this.module().slug();
+  private isInModuleDependencies(dependencies: LandscapeElementId[]): boolean {
+    return dependencies.findIndex(depenecie => depenecie.get() == this.module().slug().get()) >= 0;
   }
 
-  private calculateDistanceAndUpdate(current_module: ModuleSlug): void {
-    const current_module_html = this.landscapeElements.get(current_module.get()) as HTMLElement;
-
-    let smallest_distance = Infinity;
-    this.level().elements.forEach((element, element_index) => {
-      element.allModules().forEach((module, index) => {
-        const module_html_element = this.landscapeElements.get(module.slug().get()) as HTMLElement;
-        const distance = Math.abs(module_html_element.getBoundingClientRect().y - current_module_html.getBoundingClientRect().y);
-        if (distance < smallest_distance) {
-          smallest_distance = distance;
-          this.updateCursor(this.currentLevel, element_index, index);
-        }
-      });
+  private findModuleIndexInDependencies(modules: LandscapeModule[]): number {
+    return modules.findIndex(module => {
+      return this.isInModuleDependencies(module.dependencies());
     });
   }
 
+  private isInDependencies(slug: string): boolean {
+    return this.module()
+      .dependencies()
+      .findIndex(dependecy => dependecy.get() == slug) >= 0
+      ? true
+      : false;
+  }
+
+  private findModuleIndexWithSlug(modules: LandscapeModule[]): number {
+    return modules.findIndex(module => this.isInDependencies(module.slug().get()));
+  }
+
+  private findDependencieElementPosition(elements: LandscapeElement[]): [number, number] {
+    let moduleIndex = 0;
+    const elementIndex = elements.findIndex(element => {
+      if (this.isInDependencies(element.slug().get())) {
+        moduleIndex = 0;
+        return true;
+      } else {
+        moduleIndex = this.findModuleIndexWithSlug(element.allModules());
+        return moduleIndex >= 0;
+      }
+    });
+
+    return [elementIndex, moduleIndex];
+  }
+
+  private findDependenciePosition(): [number, number, number] {
+    let [levelIndex, elementIndex, moduleIndex] = this.setValues(this.currentLevel, 0, 0);
+
+    levelIndex -= 1;
+    [elementIndex, moduleIndex] = this.findDependencieElementPosition(this.getLevelByIndex(levelIndex).elements);
+
+    return [levelIndex, elementIndex, moduleIndex];
+  }
+
+  private findDependentElementPosition(elements: LandscapeElement[]): [number, number] {
+    let moduleIndex = 0;
+    const elementIndex = elements.findIndex(element => {
+      moduleIndex = this.findModuleIndexInDependencies(element.allModules());
+      return moduleIndex >= 0;
+    });
+
+    return [elementIndex, moduleIndex];
+  }
+
+  private findDependentPostion(): [number, number, number] {
+    let [levelIndex, elementIndex, moduleIndex] = this.setValues(this.currentLevel, this.currentElement, this.currentModule);
+
+    while (levelIndex < this.levels.length - 1) {
+      levelIndex += 1;
+
+      [elementIndex, moduleIndex] = this.findDependentElementPosition(this.getLevelByIndex(levelIndex).elements);
+      if (elementIndex >= 0) {
+        break;
+      }
+    }
+
+    if (elementIndex == -1) {
+      return [this.currentLevel, this.currentElement, this.currentModule];
+    }
+
+    return [levelIndex, elementIndex, moduleIndex];
+  }
+
+  private getHtmlElement(moduleSlug: string): HTMLElement {
+    return this.landscapeElements.get(moduleSlug) as HTMLElement;
+  }
+
+  private calculateDistance(moduleHtmlElement: HTMLElement, currentModuleHtml: HTMLElement) {
+    return Math.abs(moduleHtmlElement.getBoundingClientRect().y - currentModuleHtml.getBoundingClientRect().y);
+  }
+
+  private calculatePosition(current_module: ModuleSlug): [number, number] {
+    const currentModuleHtml = this.getHtmlElement(current_module.get());
+    let [elementIndex, moduleIndex, smallestDistance] = this.setValues(0, 0, Infinity);
+
+    this.level().elements.findIndex((element, element_index) => {
+      element.allModules().forEach((module, module_index) => {
+        const moduleHtmlElement = this.getHtmlElement(module.slug().get());
+        const distance = this.calculateDistance(moduleHtmlElement, currentModuleHtml);
+        if (distance < smallestDistance) {
+          [smallestDistance, elementIndex, moduleIndex] = this.setValues(distance, element_index, module_index);
+        }
+      });
+    });
+
+    return [elementIndex, moduleIndex];
+  }
+
+  private setValues(i1: number, i2: number, i3: number): [number, number, number] {
+    return [i1, i2, i3];
+  }
+
   private increase(value: number, max: number): number {
-    return value < max ? value + 1 : max;
+    if (value < max) {
+      return value + 1;
+    } else {
+      return max;
+    }
+    // return value < max ? value + 1 : max;
   }
 
   private decrease(value: number): number {
-    return value > 0 ? value - 1 : 0;
-  }
-
-  private nextModule(ArrowUp: boolean): boolean {
-    const old_value = this.currentModule;
-    if (ArrowUp) {
-      this.currentModule = this.decrease(this.currentModule);
+    if (value > 0) {
+      return value - 1;
     } else {
-      this.currentModule = this.increase(this.currentModule, this.element().allModules().length - 1);
+      return 0;
     }
-
-    return this.currentModule != old_value;
-  }
-
-  private nextElement(ArrowUp: boolean): void {
-    if (this.nextModule(ArrowUp)) {
-      return;
-    }
-
-    if (ArrowUp) {
-      this.currentElement = this.decrease(this.currentElement);
-      this.currentModule = this.element().allModules().length - 1;
-    } else {
-      this.currentElement = this.increase(this.currentElement, this.level().elements.length - 1);
-      this.currentModule = 0;
-    }
+    // return value > 0 ? value - 1 : 0;
   }
 
   private updateCursor(currentLevel: number, currentElement: number, currentModule: number): void {
-    this.currentLevel = currentLevel;
-    this.currentElement = currentElement;
-    this.currentModule = currentModule;
+    [this.currentLevel, this.currentElement, this.currentModule] = this.setValues(currentLevel, currentElement, currentModule);
   }
 }

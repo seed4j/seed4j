@@ -1032,6 +1032,15 @@ describe('Landscape', () => {
 
       expect(wrapper.find(wrappedElement('prettier-module')).classes()).toContain('-selectable-highlighted');
     });
+
+    it('should not respond to a non navigation key', async () => {
+      const wrapper = await componentWithLandscape();
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyNotExist' }));
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.find(wrappedElement('landscape-container')).classes()).not.toContain('has-emphasized-module');
+    });
   });
 });
 

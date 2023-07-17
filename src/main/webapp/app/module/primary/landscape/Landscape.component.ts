@@ -50,7 +50,7 @@ export default defineComponent({
     const landscapeConnectors = ref<LandscapeConnector[]>([]);
     const landscapeSize = ref<LandscapeConnectorsSize>(emptyLandscapeSize());
     const landscapeElements = ref(new Map<string, HTMLElement>());
-    const landscapeNavigation = ref<LandscapeNavigation>();
+    const landscapeNavigation = ref(Loader.loading<LandscapeNavigation>());
 
     const emphasizedModule = ref<ModuleSlug>();
 
@@ -74,8 +74,6 @@ export default defineComponent({
         .then(response => loadLandscape(response))
         .catch(error => console.error(error));
       loadProjectFolders();
-
-      document.addEventListener('keydown', handleKeyboard);
     });
 
     const loadProjectFolders = (): void => {
@@ -117,13 +115,17 @@ export default defineComponent({
       landscapeScroller.scroll(landscapeContainer.value, scrollX, scrollY);
     };
 
+    const landscapeNavigationValue = (): LandscapeNavigation => {
+      return landscapeNavigation.value.value();
+    };
+
     const loadLandscape = async (response: Landscape): Promise<void> => {
       landscape.value.loaded(response);
       levels.value.loaded(response.standaloneLevels());
 
       await nextTick().then(updateConnectors);
-
-      landscapeNavigation.value = new LandscapeNavigation(landscapeElements.value, levels.value.value());
+      landscapeNavigation.value.loaded(new LandscapeNavigation(landscapeElements.value, levels.value.value()));
+      document.addEventListener('keydown', handleKeyboard);
       applicationListener.addEventListener('resize', updateConnectors);
     };
 
@@ -147,13 +149,9 @@ export default defineComponent({
     };
 
     const handleNavigation = (code: Navigation, ctrl: boolean): void => {
-      if (!landscapeNavigation.value) {
-        return;
-      }
-
       const navigationActions = prepareNavigationActions(ctrl);
 
-      const module = landscapeNavigation.value[navigationActions[code]]();
+      const module = landscapeNavigationValue()[navigationActions[code]]();
       if (module) {
         toggleModule(module);
       }
@@ -162,9 +160,9 @@ export default defineComponent({
     const handleKeyboard = (event: Event): void => {
       const keyboardEvent = event as KeyboardEvent;
 
-      if (isNavigation(keyboardEvent.code) && landscapeNavigation.value) {
+      if (isNavigation(keyboardEvent.code)) {
         handleNavigation(keyboardEvent.code, keyboardEvent.ctrlKey);
-        emphasizeModule(landscapeNavigation.value.getSlug());
+        emphasizeModule(landscapeNavigationValue().getSlug());
       }
     };
 

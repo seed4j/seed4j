@@ -17,7 +17,7 @@
     <assertj.version>3.24.2</assertj.version>
     <mockito.version>5.4.0</mockito.version>
     <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
-    <spring-boot.version>3.1.1</spring-boot.version>
+    <spring-boot.version>3.1.2</spring-boot.version>
     <spring-cloud.version>2022.0.0</spring-cloud.version>
     <spring-cloud-netflix-eureka-client.version>4.0.2</spring-cloud-netflix-eureka-client.version>
     <springdoc-openapi-starter-webmvc.version>2.1.0</springdoc-openapi-starter-webmvc.version>

@@ -128,10 +128,8 @@ export class LandscapeNavigation {
   }
 
   private findDependencyPosition(): [number, number, number] {
-    let [levelIndex, elementIndex, moduleIndex] = this.setValues(this.currentLevel, 0, 0);
-
-    levelIndex -= 1;
-    [elementIndex, moduleIndex] = this.findDependencyElementPosition(this.getLevelByIndex(levelIndex).elements);
+    const levelIndex = this.currentLevel - 1;
+    const [elementIndex, moduleIndex] = this.findDependencyElementPosition(this.getLevelByIndex(levelIndex).elements);
 
     return [levelIndex, elementIndex, moduleIndex];
   }
@@ -177,7 +175,7 @@ export class LandscapeNavigation {
     const currentModuleHtml = this.getHtmlElement(current_module.get());
     let [elementIndex, moduleIndex, smallestDistance] = this.setValues(0, 0, Infinity);
 
-    this.level().elements.findIndex((element, element_index) => {
+    this.level().elements.forEach((element, element_index) => {
       element.allModules().forEach((module, module_index) => {
         const moduleHtmlElement = this.getHtmlElement(module.slug().get());
         const distance = this.calculateDistance(moduleHtmlElement, currentModuleHtml);
@@ -200,7 +198,6 @@ export class LandscapeNavigation {
     } else {
       return max;
     }
-    // return value < max ? value + 1 : max;
   }
 
   private decrease(value: number): number {
@@ -209,7 +206,6 @@ export class LandscapeNavigation {
     } else {
       return 0;
     }
-    // return value > 0 ? value - 1 : 0;
   }
 
   private updateCursor(currentLevel: number, currentElement: number, currentModule: number): void {

@@ -52,7 +52,7 @@ class SpringdocModuleFactoryTest {
   }
 
   private static JHipsterModuleAsserter assertThatSpringDocModule(JHipsterModule module) {
-    return assertThatModuleWithFiles(module, pomFile(), readmeFile())
+    return assertThatModuleWithFiles(module, pomFile(), readmeFile(), logbackFile(), testLogbackFile())
       .hasFile("src/main/resources/config/application.properties")
       .containing("springdoc.swagger-ui.operationsSorter=alpha")
       .containing("springdoc.swagger-ui.tagsSorter=alpha")
@@ -61,6 +61,12 @@ class SpringdocModuleFactoryTest {
       .and()
       .hasFile("README.md")
       .containing("- [Local API doc](http://localhost:8080/swagger-ui.html)")
+      .and()
+      .hasFile("src/main/resources/logback-spring.xml")
+      .containing("<logger name=\"io.swagger.v3.core.converter.ModelConverterContextImpl\" level=\"WARN\" />")
+      .and()
+      .hasFile("src/test/resources/logback.xml")
+      .containing("<logger name=\"io.swagger.v3.core.converter.ModelConverterContextImpl\" level=\"WARN\" />")
       .and();
   }
 }

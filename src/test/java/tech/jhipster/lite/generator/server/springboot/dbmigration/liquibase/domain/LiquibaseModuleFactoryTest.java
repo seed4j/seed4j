@@ -27,21 +27,21 @@ class LiquibaseModuleFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-              <dependency>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-core</artifactId>
-                <version>${liquibase.version}</version>
-              </dependency>
-          """
+            <dependency>
+              <groupId>org.liquibase</groupId>
+              <artifactId>liquibase-core</artifactId>
+              <version>${liquibase.version}</version>
+            </dependency>
+        """
       )
       .containing(
         """
-              <dependency>
-                <groupId>com.h2database</groupId>
-                <artifactId>h2</artifactId>
-                <scope>test</scope>
-              </dependency>
-          """
+            <dependency>
+              <groupId>com.h2database</groupId>
+              <artifactId>h2</artifactId>
+              <scope>test</scope>
+            </dependency>
+        """
       )
       .and()
       .hasPrefixedFiles("src/main/resources/config/liquibase", "master.xml", "changelog/0000000000_example.xml")

@@ -8,19 +8,25 @@ public class NotAfterTimeException extends AssertionException {
     super(field, message);
   }
 
-  public static NotAfterTimeException notStrictlyAfter(String fieldName, Instant other) {
-    return new NotAfterTimeException(fieldName, message(fieldName, "must be strictly after", other));
+  public static NotAfterTimeException notStrictlyAfter(String fieldName, Instant actual, Instant other) {
+    return new NotAfterTimeException(fieldName, message(fieldName, actual, "must be strictly after", other));
   }
 
-  public static NotAfterTimeException notAfter(String fieldName, Instant other) {
-    return new NotAfterTimeException(fieldName, message(fieldName, "must be after", other));
+  public static NotAfterTimeException notAfter(String fieldName, Instant actual, Instant other) {
+    return new NotAfterTimeException(fieldName, message(fieldName, actual, "must be after", other));
   }
 
-  private static String message(String fieldName, String hint, Instant other) {
+  private static String message(String fieldName, Instant actual, String hint, Instant other) {
     return new StringBuilder()
       .append("Time in \"")
       .append(fieldName)
       .append("\" ")
+      .append("having value")
+      .append(' ')
+      .append(':')
+      .append(' ')
+      .append(actual)
+      .append(' ')
       .append(hint)
       .append(" ")
       .append(other)

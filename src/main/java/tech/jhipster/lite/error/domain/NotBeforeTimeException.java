@@ -8,19 +8,25 @@ public class NotBeforeTimeException extends AssertionException {
     super(field, message);
   }
 
-  public static NotBeforeTimeException notStrictlyBefore(String fieldName, Instant other) {
-    return new NotBeforeTimeException(fieldName, message(fieldName, "must be strictly before", other));
+  public static NotBeforeTimeException notStrictlyBefore(String fieldName, Instant actual, Instant other) {
+    return new NotBeforeTimeException(fieldName, message(fieldName, actual, "must be strictly before", other));
   }
 
-  public static NotBeforeTimeException notBefore(String fieldName, Instant other) {
-    return new NotBeforeTimeException(fieldName, message(fieldName, "must be before", other));
+  public static NotBeforeTimeException notBefore(String fieldName, Instant actual, Instant other) {
+    return new NotBeforeTimeException(fieldName, message(fieldName, actual, "must be before", other));
   }
 
-  private static String message(String fieldName, String hint, Instant other) {
+  private static String message(String fieldName, Instant actual, String hint, Instant other) {
     return new StringBuilder()
       .append("Time in \"")
       .append(fieldName)
       .append("\" ")
+      .append("having value")
+      .append(' ')
+      .append(':')
+      .append(' ')
+      .append(actual)
+      .append(' ')
       .append(hint)
       .append(" ")
       .append(other)

@@ -94,7 +94,7 @@ class {{ baseName }}CollectionsTest {
   class {{ baseName }}CollectionsMapTest {
 
     @Test
-    void shouldGetEmptyImmutableCollectionFromNullCollection() {
+    void shouldGetEmptyImmutableCollectionFromNullMap() {
       Map<Object, Object> input = null;
       Map<Object, Object> map = {{ baseName }}Collections.immutable(input);
 
@@ -103,7 +103,7 @@ class {{ baseName }}CollectionsTest {
     }
 
     @Test
-    void shouldGetImmutableCollectionFromMutableCollection() {
+    void shouldGetImmutableCollectionFromMutableMap() {
       Map<String, String> input = new HashMap<>();
       input.put("key", "value");
       Map<String, String> map = {{ baseName }}Collections.immutable(input);

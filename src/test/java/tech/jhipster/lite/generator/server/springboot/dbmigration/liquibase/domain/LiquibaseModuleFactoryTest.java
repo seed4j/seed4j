@@ -27,21 +27,21 @@ class LiquibaseModuleFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-            <dependency>
-              <groupId>org.liquibase</groupId>
-              <artifactId>liquibase-core</artifactId>
-              <version>${liquibase.version}</version>
-            </dependency>
-        """
+              <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>${liquibase.version}</version>
+              </dependency>
+          """
       )
       .containing(
         """
-            <dependency>
-              <groupId>com.h2database</groupId>
-              <artifactId>h2</artifactId>
-              <scope>test</scope>
-            </dependency>
-        """
+              <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <scope>test</scope>
+              </dependency>
+          """
       )
       .and()
       .hasPrefixedFiles("src/main/resources/config/liquibase", "master.xml", "changelog/0000000000_example.xml")
@@ -65,6 +65,12 @@ class LiquibaseModuleFactoryTest {
       .hasFile("src/main/resources/logback-spring.xml")
       .containing("<logger name=\"liquibase\" level=\"WARN\" />")
       .containing("<logger name=\"LiquibaseSchemaResolver\" level=\"INFO\" />")
-      .containing("<logger name=\"com.zaxxer.hikari\" level=\"WARN\" />");
+      .containing("<logger name=\"com.zaxxer.hikari\" level=\"WARN\" />")
+      .and()
+      .hasFile("src/main/resources/config/application.properties")
+      .containing("spring.liquibase.change-log=classpath:config/liquibase/master.xml")
+      .and()
+      .hasFile("src/test/resources/config/application.properties")
+      .containing("spring.liquibase.change-log=classpath:config/liquibase/master.xml");
   }
 }

@@ -12,7 +12,7 @@ import { ModulesRepositoryStub, projectHistoryWithInit, stubModulesRepository } 
 import { ProjectFoldersRepositoryStub, stubProjectFoldersRepository } from '../../domain/ProjectFolders.fixture';
 import { ModuleParametersRepositoryStub, stubModuleParametersRepository } from '../../domain/ModuleParameters.fixture';
 import { stubWindow } from '../GlobalWindow.fixture';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { BodyCursorUpdater } from '@/common/primary/cursor/BodyCursorUpdater';
 import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller';
 import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
@@ -903,6 +903,10 @@ describe('Landscape', () => {
   });
 
   describe('Keyboard navigation', () => {
+    beforeEach(() => {
+      Object.defineProperty(document, 'activeElement', { value: document.body, configurable: true });
+    });
+
     it('should navigate down and then up.', async () => {
       const wrapper = await componentWithLandscape();
 
@@ -947,6 +951,36 @@ describe('Landscape', () => {
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('infinitest-module')).classes()).toContain('-selectable-highlighted');
+    });
+
+    it('should call blur if input field has focus and click on a module', async () => {
+      const wrapper = await componentWithLandscape();
+      vi.spyOn(wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement, 'blur').mockImplementation(() => {});
+
+      Object.defineProperty(document, 'activeElement', {
+        value: wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement,
+        configurable: true,
+      });
+
+      await clickModule('init-props', wrapper);
+      await flushPromises();
+      await wrapper.vm.$nextTick();
+
+      expect((wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement).blur).toHaveBeenCalled();
+    });
+
+    it('should not navigate when an input field has focus', async () => {
+      const wrapper = await componentWithLandscape();
+
+      Object.defineProperty(document, 'activeElement', {
+        value: wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement,
+        configurable: true,
+      });
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', ctrlKey: true }));
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.find(wrappedElement('prettier-module')).classes()).not.toContain('-selectable-highlighted');
     });
 
     it('should navigate to the first dependency of a module', async () => {

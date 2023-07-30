@@ -158,6 +158,11 @@ export default defineComponent({
     };
 
     const handleKeyboard = (event: Event): void => {
+      // Disable arrows action in input field
+      if (isInputActiveElement()) {
+        return;
+      }
+
       const keyboardEvent = event as KeyboardEvent;
 
       if (isNavigation(keyboardEvent.code)) {
@@ -333,6 +338,10 @@ export default defineComponent({
     };
 
     const toggleModule = (module: ModuleSlug): void => {
+      // Remove the focus on input field
+      if (isInputActiveElement()) {
+        (document?.activeElement as HTMLElement).blur();
+      }
       landscape.value.loaded(landscapeValue().toggle(module));
     };
 
@@ -480,6 +489,10 @@ export default defineComponent({
 
     const isApplied = (moduleId: string): boolean => {
       return landscapeValue().isApplied(new ModuleSlug(moduleId));
+    };
+
+    const isInputActiveElement = (): boolean => {
+      return document?.activeElement?.tagName === 'INPUT';
     };
 
     return {

@@ -13,7 +13,7 @@ public class NotBeforeTimeException extends AssertionException {
   }
 
   public record NotBeforeTimeExceptionBuilder(String fieldName, Instant value) {
-    public NotBeforeTimeException notStrictlyBefore(Instant other) {
+    public NotBeforeTimeException strictlyNotBefore(Instant other) {
       return build("must be strictly before", other);
     }
 

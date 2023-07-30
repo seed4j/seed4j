@@ -1249,7 +1249,7 @@ public class Assert {
       Assert.notNull(OTHER_FIELD_NAME, other);
 
       if (value.compareTo(other) <= 0) {
-        throw NotAfterTimeException.field(field, value).notStrictlyAfter(other);
+        throw NotAfterTimeException.field(field, value).strictlyNotAfter(other);
       }
 
       return this;
@@ -1306,7 +1306,7 @@ public class Assert {
       Assert.notNull(OTHER_FIELD_NAME, other);
 
       if (value.compareTo(other) >= 0) {
-        throw NotBeforeTimeException.field(field, value).notStrictlyBefore(other);
+        throw NotBeforeTimeException.field(field, value).strictlyNotBefore(other);
       }
 
       return this;

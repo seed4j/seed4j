@@ -8,21 +8,20 @@ public class NotBeforeTimeException extends AssertionException {
     super(field, message);
   }
 
-  public static NotBeforeTimeException.NotBeforeTimeExceptionBuilder field(String fieldName, Instant value){
+  public static NotBeforeTimeException.NotBeforeTimeExceptionBuilder field(String fieldName, Instant value) {
     return new NotBeforeTimeException.NotBeforeTimeExceptionBuilder(fieldName, value);
   }
 
   public record NotBeforeTimeExceptionBuilder(String fieldName, Instant value) {
-
-    public NotBeforeTimeException notStrictlyBefore(Instant other) {
+    public NotBeforeTimeException strictlyNotBefore(Instant other) {
       return build("must be strictly before", other);
     }
 
     public NotBeforeTimeException notBefore(Instant other) {
-      return build( "must be before", other);
+      return build("must be before", other);
     }
 
-    private NotBeforeTimeException build(String hint,Instant other){
+    private NotBeforeTimeException build(String hint, Instant other) {
       return new NotBeforeTimeException(fieldName, message(fieldName, value, hint, other));
     }
 

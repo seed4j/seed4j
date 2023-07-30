@@ -8,30 +8,40 @@ public class NotBeforeTimeException extends AssertionException {
     super(field, message);
   }
 
-  public static NotBeforeTimeException notStrictlyBefore(String fieldName, Instant actual, Instant other) {
-    return new NotBeforeTimeException(fieldName, message(fieldName, actual, "must be strictly before", other));
+  public static NotBeforeTimeException.NotBeforeTimeExceptionBuilder field(String fieldName, Instant value) {
+    return new NotBeforeTimeException.NotBeforeTimeExceptionBuilder(fieldName, value);
   }
 
-  public static NotBeforeTimeException notBefore(String fieldName, Instant actual, Instant other) {
-    return new NotBeforeTimeException(fieldName, message(fieldName, actual, "must be before", other));
-  }
+  public record NotBeforeTimeExceptionBuilder(String fieldName, Instant value) {
+    public NotBeforeTimeException notStrictlyBefore(Instant other) {
+      return build("must be strictly before", other);
+    }
 
-  private static String message(String fieldName, Instant actual, String hint, Instant other) {
-    return new StringBuilder()
-      .append("Time in \"")
-      .append(fieldName)
-      .append("\" ")
-      .append("having value")
-      .append(' ')
-      .append(':')
-      .append(' ')
-      .append(actual)
-      .append(' ')
-      .append(hint)
-      .append(" ")
-      .append(other)
-      .append(" but wasn't")
-      .toString();
+    public NotBeforeTimeException notBefore(Instant other) {
+      return build("must be before", other);
+    }
+
+    private NotBeforeTimeException build(String hint, Instant other) {
+      return new NotBeforeTimeException(fieldName, message(fieldName, value, hint, other));
+    }
+
+    private static String message(String fieldName, Instant actual, String hint, Instant other) {
+      return new StringBuilder()
+        .append("Time in \"")
+        .append(fieldName)
+        .append("\" ")
+        .append("having value")
+        .append(' ')
+        .append(':')
+        .append(' ')
+        .append(actual)
+        .append(' ')
+        .append(hint)
+        .append(" ")
+        .append(other)
+        .append(" but wasn't")
+        .toString();
+    }
   }
 
   @Override

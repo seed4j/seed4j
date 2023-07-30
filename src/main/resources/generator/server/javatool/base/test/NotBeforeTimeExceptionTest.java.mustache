@@ -13,7 +13,7 @@ class NotBeforeTimeExceptionTest {
 
   @Test
   void shouldGetNotBeforeExceptionInformation() {
-    NotBeforeTimeException exception = NotBeforeTimeException.notBefore(FIELD, Instant.ofEpochSecond(1337), Instant.ofEpochSecond(1338));
+    NotBeforeTimeException exception = NotBeforeTimeException.field(FIELD, Instant.ofEpochSecond(1337)).notBefore(Instant.ofEpochSecond(1338));
 
     assertDefaultInformation(exception);
     assertThat(exception.getMessage()).isEqualTo("Time in \"myField\" having value : 1970-01-01T00:22:17Z must be before 1970-01-01T00:22:18Z but wasn't");
@@ -21,7 +21,7 @@ class NotBeforeTimeExceptionTest {
 
   @Test
   void shouldGetNotStrictlyBeforeExceptionInformation() {
-    NotBeforeTimeException exception = NotBeforeTimeException.notStrictlyBefore(FIELD, Instant.ofEpochSecond(1337),Instant.ofEpochSecond(1337));
+    NotBeforeTimeException exception = NotBeforeTimeException.field(FIELD, Instant.ofEpochSecond(1337)).notStrictlyBefore(Instant.ofEpochSecond(1337));
 
     assertDefaultInformation(exception);
     assertThat(exception.getMessage()).isEqualTo("Time in \"myField\" having value : 1970-01-01T00:22:17Z must be strictly before 1970-01-01T00:22:17Z but wasn't");

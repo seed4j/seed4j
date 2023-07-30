@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
 
 /**
  * Null safe utility class to manage collections
@@ -61,5 +62,19 @@ public final class {{ baseName }}Collections {
     }
 
     return Collections.unmodifiableList(list);
+  }
+
+  /**
+   * Get an immutable map from the given set
+   *
+   * @param <K> Key type of this map
+   * @param <V> value type of this map
+   * @return An immutable map
+   */
+  public static <K, V> Map<K, V> immutable(Map<K, V> map) {
+    if (map == null) {
+      return Map.of();
+    }
+    return Collections.unmodifiableMap(map);
   }
 }

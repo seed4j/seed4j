@@ -30,10 +30,11 @@ public class Rest{{baseName}}Page<T> {
     hasNext = builder.hasNext;
   }
 
-  public static <S, T> Rest{{baseName}}Page<T> from({{baseName}}Page<S> source, Function<S, T> mapper) {
-    Assert.notNull("source", source);
-    Assert.notNull("mapper", mapper);
-      return new Rest{{baseName}}PageBuilder<>(source.content().stream().map(mapper).toList())
+public static <S, T> Rest{{baseName}}Page<T> from({{baseName}}Page<S> source, Function<S, T> mapper) {
+  Assert.notNull("source", source);
+  Assert.notNull("mapper", mapper);
+
+  return new Rest{{baseName}}PageBuilder<>(source.content().stream().map(mapper).toList())
       .currentPage(source.currentPage())
       .pageSize(source.pageSize())
       .totalElementsCount(source.totalElementsCount())
@@ -41,7 +42,7 @@ public class Rest{{baseName}}Page<T> {
       .hasPrevious(source.hasPrevious())
       .hasNext(source.hasNext())
       .build();
-  }
+}
 
   @Schema(description = "Page content")
   public List<T> getContent() {

@@ -14,10 +14,12 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 import tech.jhipster.lite.JHLiteApp;
 import tech.jhipster.lite.project.infrastructure.secondary.MockedProjectFormatterConfiguration;
 
+@ActiveProfiles("test")
 @CucumberContextConfiguration
 @SpringBootTest(classes = { JHLiteApp.class, MockedProjectFormatterConfiguration.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class CucumberConfiguration {

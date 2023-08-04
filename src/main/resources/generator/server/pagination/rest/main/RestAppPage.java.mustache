@@ -31,9 +31,10 @@ public class Rest{{baseName}}Page<T> {
   }
 
 public static <S, T> Rest{{baseName}}Page<T> from({{baseName}}Page<S> source, Function<S, T> mapper) {
+
   Assert.notNull("source", source);
   Assert.notNull("mapper", mapper);
-
+  
   return new Rest{{baseName}}PageBuilder<>(source.content().stream().map(mapper).toList())
       .currentPage(source.currentPage())
       .pageSize(source.pageSize())

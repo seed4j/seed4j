@@ -11,20 +11,20 @@ const mockPost = () => {
 };
 
 const login = async () => {
-  const { getByText, getByLabelText, getByTestId } = render(<LoginForm/>);
+  const { getByText, getByPlaceholderText, getByTestId } = render(<LoginForm/>);
   const loginButton = getByText('Log in');
     fireEvent.click(loginButton);
     await act(async () => {
-      fireEvent.change(getByLabelText("Nom d'utilisateur"), {
+      fireEvent.change(getByPlaceholderText("Nom d'utilisateur"), {
         target: {value: 'admin'},
       });
-      fireEvent.change(getByLabelText('Mot de passe'), {
+      fireEvent.change(getByPlaceholderText('Mot de passe'), {
         target: {value: 'admin'},
       });
       const submitButton = getByTestId('submit-button');
       fireEvent.click(submitButton);
   });
-  return { getByText, getByLabelText, getByTestId };
+  return { getByText, getByPlaceholderText, getByTestId };
 };
 
 describe('loginForm', () => {

@@ -12,6 +12,7 @@ public class JHipsterModulePackageJson {
   private final PackageJsonDependencies dependenciesToRemove;
   private final PackageJsonDependencies devDependencies;
   private final PackageJsonDependencies devDependenciesToRemove;
+  private final PackageJsonType type;
 
   private JHipsterModulePackageJson(JHipsterModulePackageJsonBuilder builder) {
     scripts = new Scripts(builder.scripts);
@@ -19,6 +20,7 @@ public class JHipsterModulePackageJson {
     dependenciesToRemove = new PackageJsonDependencies(builder.dependenciesToRemove);
     devDependencies = new PackageJsonDependencies(builder.devDependencies);
     devDependenciesToRemove = new PackageJsonDependencies(builder.devDependenciesToRemove);
+    type = new PackageJsonType(builder.type);
   }
 
   public static JHipsterModulePackageJsonBuilder builder(JHipsterModuleBuilder module) {
@@ -55,6 +57,10 @@ public class JHipsterModulePackageJson {
     return dependenciesToRemove;
   }
 
+  public PackageJsonType type() {
+    return type;
+  }
+
   public static class JHipsterModulePackageJsonBuilder {
 
     private final JHipsterModuleBuilder module;
@@ -63,6 +69,7 @@ public class JHipsterModulePackageJson {
     private final Collection<PackageJsonDependency> devDependencies = new ArrayList<>();
     private final Collection<PackageJsonDependency> dependenciesToRemove = new ArrayList<>();
     private final Collection<PackageJsonDependency> devDependenciesToRemove = new ArrayList<>();
+    private String type;
 
     private JHipsterModulePackageJsonBuilder(JHipsterModuleBuilder module) {
       Assert.notNull("module", module);
@@ -95,6 +102,12 @@ public class JHipsterModulePackageJson {
 
     public JHipsterModulePackageJsonBuilder removeDevDependency(PackageName packageName, VersionSource versionSource) {
       devDependenciesToRemove.add(new PackageJsonDependency(packageName, versionSource));
+      return this;
+    }
+
+    public JHipsterModulePackageJsonBuilder addType(String t) {
+      type = t;
+
       return this;
     }
 

@@ -20,7 +20,7 @@ class ReactJwtModuleFactoryTest {
   void shouldBuildModule() {
     JHipsterModule module = factory.buildModule(properties());
 
-    JHipsterModuleAsserter asserter = assertThatModuleWithFiles(module, packageJsonFile(), app(), appCss());
+    JHipsterModuleAsserter asserter = assertThatModuleWithFiles(module, packageJsonFile(), app(), appCss(), indexTsx(), indexCss());
 
     assertReactApp(asserter);
     asserter
@@ -44,6 +44,14 @@ class ReactJwtModuleFactoryTest {
     return file("src/test/resources/projects/react-app/App.css", "src/main/webapp/app/common/primary/app/App.css");
   }
 
+  private ModuleFile indexTsx() {
+    return file("src/test/resources/projects/react-app/index.tsx", "src/main/webapp/app/index.tsx");
+  }
+
+  private ModuleFile indexCss() {
+    return file("src/test/resources/projects/react-app/index.css", "src/main/webapp/app/index.css");
+  }
+
   private JHipsterModuleProperties properties() {
     return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
   }
@@ -51,6 +59,10 @@ class ReactJwtModuleFactoryTest {
   private void assertReactApp(JHipsterModuleAsserter asserter) {
     asserter
       .hasFile("package.json")
+      .containing(nodeDependency("autoprefixer"))
+      .containing(nodeDependency("postcss"))
+      .containing(nodeDependency("tailwindcss"))
+      .containing(nodeDependency("framer-motion"))
       .containing(nodeDependency("react-hook-form"))
       .containing(nodeDependency("axios"))
       .containing(nodeDependency("@nextui-org/react"))
@@ -63,7 +75,14 @@ class ReactJwtModuleFactoryTest {
         "app/login/primary/loginModal/index.tsx",
         "app/login/services/login.ts"
       )
-      .hasPrefixedFiles("src/main/webapp/app/login/primary/loginModal", "index.tsx", "interface.d.ts", "LoginModal.scss")
+      .hasPrefixedFiles(
+        "src/main/webapp/app/login/primary/loginModal",
+        "EyeSlashFilledIcon.tsx",
+        "EyeFilledIcon.tsx",
+        "index.tsx",
+        "interface.d.ts",
+        "LoginModal.scss"
+      )
       .hasPrefixedFiles(
         "src/test/javascript/spec",
         "login/services/login.test.ts",

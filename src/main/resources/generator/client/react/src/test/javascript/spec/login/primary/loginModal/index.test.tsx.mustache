@@ -36,9 +36,13 @@ describe('test login modal', () => {
     expect(username).toBeTruthy();
   });
 
-  it('should contain password input', () => {
-    const { getByPlaceholderText } = LoginModalRender(true);
+  it('should contain password input', async () => {
+    const { getByPlaceholderText, getByTestId } = LoginModalRender(true);
     const username = getByPlaceholderText('Mot de passe');
+    await act(() => {
+      const displayPasswordButton = getByTestId('display-password');
+      fireEvent.click(displayPasswordButton);
+    });
     expect(username).toBeTruthy();
   });
 
@@ -49,20 +53,37 @@ describe('test login modal', () => {
   });
 
   it('render the modal on login button click and close the modal on submit button click', async () => {
-    const { getByLabelText, getByTestId } = LoginModalRender(true);
+    const { getByPlaceholderText, getByTestId } = LoginModalRender(true);
     const spy = vi.spyOn(axios, 'post');
     spy.mockImplementationOnce(() => Promise.resolve({ data: {} }));
     await act(() => {
-      fireEvent.change(getByLabelText("Nom d'utilisateur"), {
+      fireEvent.change(getByPlaceholderText("Nom d'utilisateur"), {
         target: { value: 'admin' },
       });
-      fireEvent.change(getByLabelText('Mot de passe'), {
+      fireEvent.change(getByPlaceholderText('Mot de passe'), {
         target: { value: 'admin' },
       });
       const submitButton = getByTestId('submit-button');
       fireEvent.click(submitButton);
     });
     expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('render the modal on login button click and close the modal on close button', async () => {
+    const { getByPlaceholderText, getByRole } = LoginModalRender(true);
+    const spy = vi.spyOn(axios, 'post');
+    spy.mockImplementationOnce(() => Promise.resolve({ data: {} }));
+    await act(() => {
+      fireEvent.change(getByPlaceholderText("Nom d'utilisateur"), {
+        target: { value: 'admin' },
+      });
+      fireEvent.change(getByPlaceholderText('Mot de passe'), {
+        target: { value: 'admin' },
+      });
+      const submitButton = getByRole('button', { name: 'Close' });
+      fireEvent.click(submitButton);
+    });
+    expect(spy).toHaveBeenCalledTimes(0);
   });
 
   it('should contain error message when submit button is clicked with empty value', async () => {

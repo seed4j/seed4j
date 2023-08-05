@@ -1,6 +1,9 @@
 import { useCallback, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Input, Modal, Spacer, Text } from '@nextui-org/react';
+import { Button, Input, Modal, ModalBody, ModalContent, ModalHeader, Spacer } from '@nextui-org/react';
+
+import { EyeSlashFilledIcon } from './EyeSlashFilledIcon';
+import { EyeFilledIcon } from './EyeFilledIcon';
 
 import { login } from '@/login/services/login';
 import { UserInfoContext } from '@/login/primary/loginForm';
@@ -10,7 +13,12 @@ import './LoginModal.scss';
 const LoginModal = ({ open, onClose }: LoginModalType) => {
   const { register, handleSubmit } = useForm<LoginFunctionType>();
   const [error, setError] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [usernameForm, setUsernameForm] = useState<string | undefined>("");
+  const [passwordForm, setPasswordForm] = useState<string | undefined>("");
   const { setUsername, setToken } = useContext(UserInfoContext);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
 
   const onSubmit = (loginData: LoginFunctionType) => {
     if (loginData.username && loginData.password) {
@@ -26,56 +34,64 @@ const LoginModal = ({ open, onClose }: LoginModalType) => {
   }, []);
 
   return (
-    <Modal blur open={open} onClose={handleClose} aria-labelledby="modal-login">
-      <Modal.Header>
-        <Text size={18}>
-          Connect
-          <Text b>
-            {' '}
-            JHipster Lite
-          </Text>
-        </Text>
-      </Modal.Header>
-      <Modal.Body>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            clearable
-            bordered
-            fullWidth
-            aria-label="modal-login-username"
-            data-testid="modal-login-username"
-            color="primary"
-            size="lg"
-            placeholder="Nom d'utilisateur"
-            {...register('username')}
-          />
-          <Spacer y={0.3} />
-          <Input.Password
-            clearable
-            bordered
-            fullWidth
-            aria-label="modal-login-password"
-            data-testid="modal-login-password"
-            color="primary"
-            size="lg"
-            placeholder="Mot de passe"
-            {...register('password')}
-          />
-          <Spacer y={0.3} />
-          {error && (
-            <Text data-testid="error-message" size={13} color="error">
-              Please complete fields above
-            </Text>
-          )}
-          <Spacer y={1} />
-          <input type="checkbox" {...register('rememberMe')} />
-          <label>Remember me</label>
-          <Spacer y={1} />
-          <Button data-testid="submit-button" className="submit-button" type="submit" shadow auto>
-            Log in
-          </Button>
-        </form>
-      </Modal.Body>
+    <Modal backdrop='blur' isOpen={open} onClose={handleClose} aria-labelledby="modal-login">
+      <ModalContent>
+        <ModalHeader>
+          <span>Connect</span><span> JHipster Lite</span>
+        </ModalHeader>
+        <ModalBody>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              isClearable
+              fullWidth
+              aria-label="modal-login-username"
+              data-testid="modal-login-username"
+              color="primary"
+              size="lg"
+              placeholder="Nom d'utilisateur"
+              type="text"
+              value={usernameForm}
+              onValueChange={setUsernameForm}
+              {...register('username')}
+            />
+            <Spacer y={1} />
+            <Input
+              fullWidth
+              aria-label="modal-login-password"
+              data-testid="modal-login-password"
+              color="primary"
+              size="lg"
+              placeholder="Mot de passe"
+              type={isVisible ? "text" : "password"}
+              value={passwordForm}
+              onValueChange={setPasswordForm}
+              endContent={
+                <button data-testid="display-password" className="focus:outline-none" type="button" onClick={toggleVisibility}>
+                  {isVisible ? (
+                    <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                  ) : (
+                    <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                  )}
+                </button>
+              }
+              {...register('password')}
+            />
+            <Spacer y={1} />
+            {error && (
+              <p data-testid="error-message" color="error">
+                Please complete fields above
+              </p>
+            )}
+            <Spacer y={1} />
+            <input type="checkbox" {...register('rememberMe')} />
+            <label>Remember me</label>
+            <Spacer y={1} />
+            <Button data-testid="submit-button" className="submit-button" type="submit" variant="shadow">
+              Log in
+            </Button>
+          </form>
+        </ModalBody>
+      </ModalContent>
     </Modal>
   );
 };

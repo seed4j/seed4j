@@ -28,7 +28,7 @@ const LoginForm = () => {
     <div>
       {!token ?
         (
-          <Button data-testid="login-button" css={{ backgroundColor: '$blue700' }} auto shadow onPress={onPressLoginButton}>
+          <Button data-testid="login-button" variant="shadow" onPress={onPressLoginButton}>
             Log in
           </Button>
         )
@@ -38,7 +38,7 @@ const LoginForm = () => {
             <p>
               Welcome <strong>{username}</strong>!
             </p>
-            <Button css={{ backgroundColor: '$blue700' }} size="sm" shadow onPress={onPressLogoutButton}>
+            <Button variant="shadow" onPress={onPressLogoutButton}>
               Log out
             </Button>
           </>

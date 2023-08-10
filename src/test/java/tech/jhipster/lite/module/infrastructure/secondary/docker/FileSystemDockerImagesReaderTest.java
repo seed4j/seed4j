@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.module.domain.ProjectFiles;
 import tech.jhipster.lite.module.domain.docker.DockerImageName;
@@ -14,7 +12,6 @@ import tech.jhipster.lite.module.domain.docker.DockerVersion;
 import tech.jhipster.lite.module.domain.docker.UnknownDockerImageException;
 
 @UnitTest
-@ExtendWith(MockitoExtension.class)
 class FileSystemDockerImagesReaderTest {
 
   @Test

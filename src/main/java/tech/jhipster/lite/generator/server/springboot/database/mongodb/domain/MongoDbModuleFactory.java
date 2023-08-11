@@ -14,6 +14,8 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 public class MongoDbModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/database/mongodb");
+  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
+  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
 
   private static final String MONGO_SECONDARY = "technical/infrastructure/secondary/mongodb";
   private static final String DOCKER_COMPOSE_COMMAND = "docker compose -f src/main/docker/mongodb.yml up -d";
@@ -45,15 +47,15 @@ public class MongoDbModuleFactory {
         .and()
       .files()
         .add(SOURCE.template("mongodb.yml"), toSrcMainDocker().append("mongodb.yml"))
-        .batch(SOURCE, toSrcMainJava().append(packagePath).append(MONGO_SECONDARY))
+        .batch(MAIN_SOURCE, toSrcMainJava().append(packagePath).append(MONGO_SECONDARY))
           .addTemplate("MongodbDatabaseConfiguration.java")
           .addTemplate("JSR310DateConverters.java")
           .and()
         .add(
-              SOURCE.template("JSR310DateConvertersTest.java"),
+              TEST_SOURCE.template("JSR310DateConvertersTest.java"),
               toSrcTestJava().append(packagePath).append(MONGO_SECONDARY).append("JSR310DateConvertersTest.java")
             )
-        .add(SOURCE.template("TestMongoDBManager.java"), toSrcTestJava().append(packagePath).append("TestMongoDBManager.java"))
+        .add(TEST_SOURCE.template("TestMongoDBManager.java"), toSrcTestJava().append(packagePath).append("TestMongoDBManager.java"))
         .and()
       .springMainProperties()
         .set(propertyKey("spring.data.mongodb.database"), propertyValue(properties.projectBaseName().get()))

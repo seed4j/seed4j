@@ -11,6 +11,10 @@ public class JavaMemoizersModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/javatool/memoizers");
 
+  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
+
+  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
+
   private static final String COMMON_DOMAIN = "common/domain";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
@@ -21,8 +25,8 @@ public class JavaMemoizersModuleFactory {
     //@formatter:off
     return moduleBuilder(properties)
       .files()
-        .add(SOURCE.template("Memoizers.java"), toSrcMainJava().append(packagePath).append(COMMON_DOMAIN).append("Memoizers.java"))
-        .add(SOURCE.template("MemoizersTest.java"), toSrcTestJava().append(packagePath).append(COMMON_DOMAIN).append("MemoizersTest.java"))
+        .add(MAIN_SOURCE.template("Memoizers.java"), toSrcMainJava().append(packagePath).append(COMMON_DOMAIN).append("Memoizers.java"))
+        .add(TEST_SOURCE.template("MemoizersTest.java"), toSrcTestJava().append(packagePath).append(COMMON_DOMAIN).append("MemoizersTest.java"))
         .and()
       .build();
     //@formatter:on

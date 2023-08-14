@@ -24,7 +24,8 @@ class JavaMemoizersModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModule(module)
-      .hasFiles("src/main/java/com/jhipster/test/common/domain/Memoizers.java")
-      .hasFiles("src/test/java/com/jhipster/test/common/domain/MemoizersTest.java");
+      .hasFiles("src/main/java/com/jhipster/test/shared/memoizer/package-info.java")
+      .hasFiles("src/main/java/com/jhipster/test/shared/memoizer/domain/Memoizers.java")
+      .hasFiles("src/test/java/com/jhipster/test/shared/memoizer/domain/MemoizersTest.java");
   }
 }

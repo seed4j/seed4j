@@ -24,7 +24,8 @@ class JavaEnumsModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModule(module)
-      .hasPrefixedFiles("src/main/java/com/jhipster/test/common/domain/", "Enums.java", "UnmappableEnumException.java")
-      .hasFiles("src/test/java/com/jhipster/test/common/domain/EnumsTest.java");
+      .hasFiles("src/main/java/com/jhipster/test/shared/enumeration/package-info.java")
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/shared/enumeration/domain/", "Enums.java", "UnmappableEnumException.java")
+      .hasFiles("src/test/java/com/jhipster/test/shared/enumeration/domain/EnumsTest.java");
   }
 }

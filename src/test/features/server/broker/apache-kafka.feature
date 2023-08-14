@@ -9,9 +9,9 @@ Feature: Apache Kafka
       | kafka.yml |
     Then I should have files in "src/test/java/tech/jhipster/chips"
       | KafkaTestContainerExtension.java |
-    Then I should have files in "src/test/java/tech/jhipster/chips/technical/infrastructure/config/kafka"
+    Then I should have files in "src/test/java/tech/jhipster/chips/wire/kafka/infrastructure/config"
       | KafkaPropertiesTest.java |
-    Then I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/config/kafka"
+    Then I should have files in "src/main/java/tech/jhipster/chips/wire/kafka/infrastructure/config"
       | KafkaProperties.java |
       | KafkaConfiguration.java |
 

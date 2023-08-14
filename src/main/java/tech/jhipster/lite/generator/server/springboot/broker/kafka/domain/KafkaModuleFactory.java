@@ -10,7 +10,7 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 public class KafkaModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/broker/kafka");
-  private static final String TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA = "/technical/infrastructure/config/kafka";
+  private static final String TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA = "/wire/kafka/infrastructure/config";
   private static final String DUMMY_INFRASTRUCTURE_SECONDARY_KAFKA_PRODUCER = "dummy/infrastructure/secondary/kafka/producer";
   private static final String DUMMY_INFRASTRUCTURE_PRIMARY_KAFKA_CONSUMER = "dummy/infrastructure/primary/kafka/consumer";
   private static final String STRING_DESERIALIZER = "org.apache.kafka.common.serialization.StringDeserializer";

@@ -39,16 +39,16 @@ class OAuth2ModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), integrationTestFile(), readmeFile())
-      .hasPrefixedFiles("src/main/java/com/jhipster/test/authentication/domain", "Role.java", "Roles.java", "Username.java")
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/shared/authentication/domain", "Role.java", "Roles.java", "Username.java")
       .hasPrefixedFiles(
-        "src/main/java/com/jhipster/test/authentication/application",
+        "src/main/java/com/jhipster/test/shared/authentication/application",
         "AuthenticatedUser.java",
         "NotAuthenticatedUserException.java",
         "AuthenticationException.java",
         "UnknownAuthenticationException.java"
       )
       .hasPrefixedFiles(
-        "src/main/java/com/jhipster/test/authentication/infrastructure/primary",
+        "src/main/java/com/jhipster/test/shared/authentication/infrastructure/primary",
         "ApplicationSecurityProperties.java",
         "AudienceValidator.java",
         "AuthenticationExceptionAdvice.java",
@@ -58,10 +58,15 @@ class OAuth2ModuleFactoryTest {
         "OAuth2Configuration.java",
         "SecurityConfiguration.java"
       )
-      .hasPrefixedFiles("src/test/java/com/jhipster/test/authentication/domain", "RolesTest.java", "RoleTest.java", "UsernameTest.java")
-      .hasFiles("src/test/java/com/jhipster/test/authentication/application/AuthenticatedUserTest.java")
       .hasPrefixedFiles(
-        "src/test/java/com/jhipster/test/authentication/infrastructure/primary",
+        "src/test/java/com/jhipster/test/shared/authentication/domain",
+        "RolesTest.java",
+        "RoleTest.java",
+        "UsernameTest.java"
+      )
+      .hasFiles("src/test/java/com/jhipster/test/shared/authentication/application/AuthenticatedUserTest.java")
+      .hasPrefixedFiles(
+        "src/test/java/com/jhipster/test/shared/authentication/infrastructure/primary",
         "AccountExceptionResource.java",
         "ApplicationSecurityPropertiesTest.java",
         "AudienceValidatorTest.java",
@@ -80,7 +85,7 @@ class OAuth2ModuleFactoryTest {
       .hasFile("src/main/docker/keycloak-realm-config/jhipster-realm.json")
       .containing("1.1.1")
       .and()
-      .hasFile("src/main/java/com/jhipster/test/authentication/package-info.java")
+      .hasFile("src/main/java/com/jhipster/test/shared/authentication/package-info.java")
       .and()
       .hasFile("pom.xml")
       .containing("spring-boot-starter-security")
@@ -101,7 +106,7 @@ class OAuth2ModuleFactoryTest {
       .and()
       .hasFile("src/test/java/com/jhipster/test/IntegrationTest.java")
       .containing("@SpringBootTest(classes = { MyappApp.class, TestSecurityConfiguration.class })")
-      .containing("import com.jhipster.test.authentication.infrastructure.primary.TestSecurityConfiguration;")
+      .containing("import com.jhipster.test.shared.authentication.infrastructure.primary.TestSecurityConfiguration;")
       .containing("@WithMockUser")
       .containing("import org.springframework.security.test.context.support.WithMockUser;")
       .and()

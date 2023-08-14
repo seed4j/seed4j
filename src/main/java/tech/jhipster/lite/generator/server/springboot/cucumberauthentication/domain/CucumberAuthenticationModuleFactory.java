@@ -20,7 +20,7 @@ public class CucumberAuthenticationModuleFactory {
   private static final GroupId JSON_WEBTOKEN_GROUP = groupId("io.jsonwebtoken");
   private static final VersionSlug JSON_WEBTOKEN_VERSION = versionSlug("json-web-token");
 
-  private static final String AUTHENTICATION_STEP = "authentication/infrastructure/primary/AuthenticationSteps.java";
+  private static final String AUTHENTICATION_STEP = "shared/authentication/infrastructure/primary/AuthenticationSteps.java";
 
   public JHipsterModule buildOauth2Module(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
@@ -63,7 +63,7 @@ public class CucumberAuthenticationModuleFactory {
   }
 
   private String securityConfigurationImport(JHipsterModuleProperties properties) {
-    return "import " + properties.basePackage().get() + ".authentication.infrastructure.primary.TestSecurityConfiguration;";
+    return "import " + properties.basePackage().get() + ".shared.authentication.infrastructure.primary.TestSecurityConfiguration;";
   }
 
   private JavaDependency jsonWebTokenDependency(String artifactId) {

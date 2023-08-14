@@ -13,6 +13,8 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 
 public final class AuthenticationModulesFactory {
 
+  private static final String AUTHENTICATION_DESTINATION = "shared/authentication";
+
   private static final JHipsterSource SOURCE = from("server/springboot/mvc/security/common");
 
   private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
@@ -35,8 +37,8 @@ public final class AuthenticationModulesFactory {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.basePackage().path();
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append("authentication");
-    JHipsterDestination testDestination = toSrcTestJava().append(packagePath).append("authentication");
+    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
+    JHipsterDestination testDestination = toSrcTestJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
 
     //@formatter:off
     return moduleBuilder(properties)

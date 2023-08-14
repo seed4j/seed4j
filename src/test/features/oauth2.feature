@@ -5,7 +5,7 @@ Feature: OAuth2 modules
       | maven-java         |
       | spring-boot        |
       | spring-boot-oauth2 |
-    Then I should have files in "src/test/java/tech/jhipster/chips/authentication/infrastructure/primary"
+    Then I should have files in "src/test/java/tech/jhipster/chips/shared/authentication/infrastructure/primary"
       | ClaimsTest.java |
 
   Scenario: Should add OAuth2 account

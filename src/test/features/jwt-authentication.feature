@@ -5,7 +5,7 @@ Feature: JWT modules
       | maven-java     |
       | spring-boot     |
       | spring-boot-jwt |
-    Then I should have files in "src/main/java/tech/jhipster/chips/authentication/infrastructure/primary"
+    Then I should have files in "src/main/java/tech/jhipster/chips/shared/authentication/infrastructure/primary"
       | JWTConfigurer.java |
 
 

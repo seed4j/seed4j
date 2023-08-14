@@ -27,6 +27,7 @@ public class JwtAuthenticationModuleFactory {
 
   private static final String APPLICATION = "application";
   private static final String PRIMARY = "infrastructure/primary";
+  private static final String AUTHENTICATION_DESTINATION = "shared/authentication";
 
   private static final PropertyKey BASE_SECRET_64_PROPERTY_KEY = propertyKey("application.security.jwt-base64-secret");
   private static final String JWT_BASE_64_SECRET = "jwtBase64Secret";
@@ -41,8 +42,8 @@ public class JwtAuthenticationModuleFactory {
     String mainJwtBase64secret = properties.getOrDefaultString(JWT_BASE_64_SECRET, Base64Utils.getBase64Secret());
     String testJwtBase64secret = properties.getOrDefaultString(JWT_BASE_64_SECRET, Base64Utils.getBase64Secret());
 
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append("authentication");
-    JHipsterDestination testDestination = toSrcTestJava().append(packagePath).append("authentication");
+    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
+    JHipsterDestination testDestination = toSrcTestJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
 
     //@formatter:off
     return authenticationModuleBuilder(properties)

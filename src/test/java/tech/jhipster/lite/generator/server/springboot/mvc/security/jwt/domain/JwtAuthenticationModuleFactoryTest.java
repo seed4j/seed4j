@@ -28,62 +28,62 @@ class JwtAuthenticationModuleFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-security</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-security</artifactId>
+            </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>io.jsonwebtoken</groupId>
-                  <artifactId>jjwt-api</artifactId>
-                  <version>${json-web-token.version}</version>
-                </dependency>
-            """
+            <dependency>
+              <groupId>io.jsonwebtoken</groupId>
+              <artifactId>jjwt-api</artifactId>
+              <version>${json-web-token.version}</version>
+            </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>io.jsonwebtoken</groupId>
-                  <artifactId>jjwt-impl</artifactId>
-                  <version>${json-web-token.version}</version>
-                  <scope>runtime</scope>
-                </dependency>
-            """
+            <dependency>
+              <groupId>io.jsonwebtoken</groupId>
+              <artifactId>jjwt-impl</artifactId>
+              <version>${json-web-token.version}</version>
+              <scope>runtime</scope>
+            </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>io.jsonwebtoken</groupId>
-                  <artifactId>jjwt-jackson</artifactId>
-                  <version>${json-web-token.version}</version>
-                  <scope>runtime</scope>
-                </dependency>
-            """
+            <dependency>
+              <groupId>io.jsonwebtoken</groupId>
+              <artifactId>jjwt-jackson</artifactId>
+              <version>${json-web-token.version}</version>
+              <scope>runtime</scope>
+            </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.security</groupId>
-                  <artifactId>spring-security-test</artifactId>
-                  <scope>test</scope>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.security</groupId>
+              <artifactId>spring-security-test</artifactId>
+              <scope>test</scope>
+            </dependency>
+        """
       )
       .and()
-      .hasFiles("src/main/java/com/jhipster/test/authentication/package-info.java")
-      .hasPrefixedFiles("src/main/java/com/jhipster/test/authentication/domain", "Role.java", "Roles.java", "Username.java")
+      .hasFiles("src/main/java/com/jhipster/test/shared/authentication/package-info.java")
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/shared/authentication/domain", "Role.java", "Roles.java", "Username.java")
       .hasPrefixedFiles(
-        "src/main/java/com/jhipster/test/authentication/application",
+        "src/main/java/com/jhipster/test/shared/authentication/application",
         "AuthenticatedUser.java",
         "NotAuthenticatedUserException.java",
         "AuthenticationException.java",
         "UnknownAuthenticationException.java"
       )
       .hasPrefixedFiles(
-        "src/main/java/com/jhipster/test/authentication/infrastructure/primary",
+        "src/main/java/com/jhipster/test/shared/authentication/infrastructure/primary",
         "AuthenticationExceptionAdvice.java",
         "AuthenticationTokenReader.java",
         "JwtAuthenticationProperties.java",
@@ -92,10 +92,15 @@ class JwtAuthenticationModuleFactoryTest {
         "JwtReader.java",
         "SecurityConfiguration.java"
       )
-      .hasPrefixedFiles("src/test/java/com/jhipster/test/authentication/domain", "RolesTest.java", "RoleTest.java", "UsernameTest.java")
-      .hasFiles("src/test/java/com/jhipster/test/authentication/application/AuthenticatedUserTest.java")
       .hasPrefixedFiles(
-        "src/test/java/com/jhipster/test/authentication/infrastructure/primary",
+        "src/test/java/com/jhipster/test/shared/authentication/domain",
+        "RolesTest.java",
+        "RoleTest.java",
+        "UsernameTest.java"
+      )
+      .hasFiles("src/test/java/com/jhipster/test/shared/authentication/application/AuthenticatedUserTest.java")
+      .hasPrefixedFiles(
+        "src/test/java/com/jhipster/test/shared/authentication/infrastructure/primary",
         "AuthenticationExceptionAdviceIT.java",
         "JWTFilterTest.java",
         "JwtReaderTest.java",

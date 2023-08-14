@@ -1,4 +1,4 @@
-package {{packageName}}.authentication.infrastructure.primary;
+package {{packageName}}.shared.authentication.infrastructure.primary;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.*;
 
@@ -37,7 +37,7 @@ import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
-import {{packageName}}.authentication.domain.Role;
+import {{packageName}}.shared.authentication.domain.Role;
 import {{packageName}}.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 import static org.springframework.security.config.Customizer.withDefaults;

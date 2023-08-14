@@ -21,7 +21,7 @@ public class SpringdocJwtModuleFactory {
           SOURCE.template("SpringdocJWTConfiguration.java"),
           toSrcMainJava()
             .append(properties.packagePath())
-            .append("technical/infrastructure/primary/springdoc")
+            .append("wire/springdoc/infrastructure/primary")
             .append("SpringdocJWTConfiguration.java")
         )
         .and()

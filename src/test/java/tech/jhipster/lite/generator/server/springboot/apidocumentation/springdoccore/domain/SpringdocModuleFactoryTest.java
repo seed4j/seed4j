@@ -19,7 +19,7 @@ class SpringdocModuleFactoryTest {
     JHipsterModule module = springdocModuleFactory.buildModuleForMvc(properties());
 
     assertThatSpringDocModule(module)
-      .hasFile("src/main/java/com/jhipster/test/technical/infrastructure/primary/springdoc/SpringdocConfiguration.java")
+      .hasFile("src/main/java/com/jhipster/test/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java")
       .notContaining("JWT")
       .and()
       .hasFile("pom.xml")
@@ -34,7 +34,7 @@ class SpringdocModuleFactoryTest {
     JHipsterModule module = springdocModuleFactory.buildModuleForWebflux(properties());
 
     assertThatSpringDocModule(module)
-      .hasFile("src/main/java/com/jhipster/test/technical/infrastructure/primary/springdoc/SpringdocConfiguration.java")
+      .hasFile("src/main/java/com/jhipster/test/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java")
       .notContaining("JWT")
       .and()
       .hasFile("pom.xml")

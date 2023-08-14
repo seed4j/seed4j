@@ -14,7 +14,7 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 public class SpringdocModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/apidocumentation/springdoccore");
-  private static final String DESTINATION = "technical/infrastructure/primary/springdoc";
+  private static final String DESTINATION = "wire/springdoc/infrastructure/primary";
 
   private static final PropertyValue ALPHA = propertyValue("alpha");
   private static final PropertyValue TRUE = propertyValue("true");

@@ -6,9 +6,9 @@ Feature: Springdoc modules
       | spring-boot           |
       | springdoc-mvc-openapi |
     Then I should have "springdoc-openapi-starter-webmvc-ui" in "pom.xml"
-    And I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/primary/springdoc"
+    And I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary"
       | SpringdocConfiguration.java |
-    And I should not have "jwt" in "src/main/java/tech/jhipster/chips/technical/infrastructure/primary/springdoc/SpringdocConfiguration.java"
+    And I should not have "jwt" in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java"
     And I should have files in "src/main/resources/config"
       | application.properties |
     And I should have files in "src/test/resources/config"
@@ -21,9 +21,9 @@ Feature: Springdoc modules
       | spring-boot-webflux-netty |
       | springdoc-webflux-openapi |
     Then I should have "springdoc-openapi-starter-webflux-ui" in "pom.xml"
-    And I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/primary/springdoc"
+    And I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary"
       | SpringdocConfiguration.java |
-    And I should not have "jwt" in "src/main/java/tech/jhipster/chips/technical/infrastructure/primary/springdoc/SpringdocConfiguration.java"
+    And I should not have "jwt" in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java"
     And I should have files in "src/main/resources/config"
       | application.properties |
     And I should have files in "src/test/resources/config"
@@ -35,7 +35,7 @@ Feature: Springdoc modules
       | spring-boot           |
       | springdoc-mvc-openapi |
       | springdoc-oauth2      |
-    Then I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/primary/springdoc/"
+    Then I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary/"
       | SpringdocOAuth2Configuration.java |
 
   Scenario: Should apply springdoc okta module
@@ -49,7 +49,7 @@ Feature: Springdoc modules
       | baseName     | jhipster            |
       | oktaDomain   | dev-123456.okta.com |
       | oktaClientId | my-client-id        |
-    Then I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/primary/springdoc/"
+    Then I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary/"
       | SpringdocOAuth2Configuration.java |
     And I should have files in "src/main/resources/config"
       | application-okta.properties |
@@ -65,7 +65,7 @@ Feature: Springdoc modules
       | baseName      | jhipster                |
       | auth0Domain   | dev-123456.us.auth0.com |
       | auth0ClientId | my-client-id            |
-    Then I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/primary/springdoc/"
+    Then I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary/"
       | SpringdocOAuth2Configuration.java |
     And I should have files in "src/main/resources/config"
       | application-auth0.properties |
@@ -76,5 +76,5 @@ Feature: Springdoc modules
       | spring-boot           |
       | springdoc-mvc-openapi |
       | springdoc-jwt         |
-    Then I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/primary/springdoc/"
+    Then I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary"
       | SpringdocJWTConfiguration.java |

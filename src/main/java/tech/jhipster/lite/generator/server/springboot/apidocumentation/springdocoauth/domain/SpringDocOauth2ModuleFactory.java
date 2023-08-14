@@ -21,7 +21,7 @@ public class SpringDocOauth2ModuleFactory {
           SOURCE.template("SpringdocOAuth2Configuration.java"),
           toSrcMainJava()
             .append(properties.packagePath())
-            .append("technical/infrastructure/primary/springdoc/SpringdocOAuth2Configuration.java")
+            .append("wire/springdoc/infrastructure/primary/SpringdocOAuth2Configuration.java")
         )
         .and()
       .springMainProperties()

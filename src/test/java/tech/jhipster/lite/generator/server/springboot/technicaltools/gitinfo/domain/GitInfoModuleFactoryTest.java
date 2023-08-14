@@ -42,7 +42,7 @@ class GitInfoModuleFactoryTest {
         .containing("management.info.git.enabled=true")
         .containing("management.info.env.enabled=true")
         .and()
-      .hasFile("src/main/java/tech/jhipster/myapp/technical/infrastructure/primary/gitinfo/GitInfoConfiguration.java");
+      .hasPrefixedFiles("src/main/java/tech/jhipster/myapp/wire/gitinfo", "infrastructure/primary/GitInfoConfiguration.java", "package-info.java");
     //@formatter:on
   }
 }

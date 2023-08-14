@@ -3,6 +3,7 @@ package tech.jhipster.lite.generator.server.springboot.technicaltools.gitinfo.do
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 
 import tech.jhipster.lite.module.domain.JHipsterModule;
+import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
 import tech.jhipster.lite.module.domain.javabuildplugin.JavaBuildPlugin;
 import tech.jhipster.lite.module.domain.javaproperties.Comment;
@@ -11,22 +12,26 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class GitInfoModuleFactory {
 
+  private static final String PACKAGE_INFO = "package-info.java";
+
   private static final JHipsterSource SOURCE = from("server/springboot/technicaltools/gitinfo");
   private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final String GIT_INFO_PRIMARY = "technical/infrastructure/primary/gitinfo";
+  private static final String PRIMARY = "/infrastructure/primary";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
+    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append("wire/gitinfo");
 
     //@formatter:off
     return moduleBuilder(properties)
       .files()
         .add(
           MAIN_SOURCE.template("GitInfoConfiguration.java"),
-          toSrcMainJava().append(packagePath).append(GIT_INFO_PRIMARY).append("GitInfoConfiguration.java")
+          mainDestination.append(PRIMARY).append("GitInfoConfiguration.java")
         )
+        .add(MAIN_SOURCE.template(PACKAGE_INFO), mainDestination.append(PACKAGE_INFO))
         .and()
       .springMainProperties()
         .comment(propertyKey("management.info.git.mode"), new Comment("Git Information"))

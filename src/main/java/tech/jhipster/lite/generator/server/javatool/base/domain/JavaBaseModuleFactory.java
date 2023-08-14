@@ -14,15 +14,22 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class JavaBaseModuleFactory {
 
+  private static final String PACKAGE_INFO = "package-info.java";
+
   private static final String ERROR = "error";
+  private static final String GENERATION = "generation";
+  private static final String COLLECTION = "collection";
 
   private static final JHipsterSource SOURCE = from("server/javatool/base");
   private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
+  private static final JHipsterSource MAIN_GENERATION_SOURCE = MAIN_SOURCE.append(GENERATION);
   private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
 
   private enum Destination {
-    COMMON("common"),
-    COMMON_DOMAIN("common/domain"),
+    COLLECTION("shared/collection"),
+    COLLECTION_DOMAIN("shared/collection/domain"),
+    GENERATION("shared/generation"),
+    GENERATION_DOMAIN("shared/generation/domain"),
     ERROR("shared/error"),
     ERROR_DOMAIN("shared/error/domain");
 
@@ -91,25 +98,26 @@ public class JavaBaseModuleFactory {
           .addTemplate("ComponentTest.java")
           .addTemplate("ReplaceCamelCase.java")
           .and()
-        .add(MAIN_SOURCE.append(ERROR).template("package-info.java"), packageInfoDestination(mainDestination, Destination.ERROR))
-        .add(MAIN_SOURCE.template("package-info-common.java"), packageInfoDestination(mainDestination,  Destination.COMMON))
-        .add(MAIN_SOURCE.template("ExcludeFromGeneratedCodeCoverage.java"), mainDestination.append(Destination.COMMON_DOMAIN.path).append("ExcludeFromGeneratedCodeCoverage.java"))
-        .add(MAIN_SOURCE.template("ProjectCollections.java"), collectionsDestination(baseName, mainDestination))
-        .add(TEST_SOURCE.template("ProjectCollectionsTest.java"), collectionsTestDestination(baseName, testDestination))
+        .add(MAIN_SOURCE.append(ERROR).template(PACKAGE_INFO), packageInfoDestination(mainDestination, Destination.ERROR))
+        .add(MAIN_GENERATION_SOURCE.template("ExcludeFromGeneratedCodeCoverage.java"), mainDestination.append(Destination.GENERATION_DOMAIN.path).append("ExcludeFromGeneratedCodeCoverage.java"))
+        .add(MAIN_GENERATION_SOURCE.template(PACKAGE_INFO), mainDestination.append(Destination.GENERATION.path).append(PACKAGE_INFO))
+        .add(MAIN_SOURCE.append(COLLECTION).template("ProjectCollections.java"), collectionsDestination(baseName, mainDestination))
+        .add(MAIN_SOURCE.append(COLLECTION).template(PACKAGE_INFO), mainDestination.append(Destination.COLLECTION.path).append(PACKAGE_INFO))
+        .add(TEST_SOURCE.append(COLLECTION).template("ProjectCollectionsTest.java"), collectionsTestDestination(baseName, testDestination))
         .and()
       .build();
     //@formatter:on
   }
 
   private JHipsterDestination packageInfoDestination(JHipsterDestination mainDestination, Destination destination) {
-    return mainDestination.append(destination.path()).append("package-info.java");
+    return mainDestination.append(destination.path()).append(PACKAGE_INFO);
   }
 
   private JHipsterDestination collectionsDestination(String className, JHipsterDestination mainDestination) {
-    return mainDestination.append(Destination.COMMON_DOMAIN.path()).append(className + "Collections.java");
+    return mainDestination.append(Destination.COLLECTION_DOMAIN.path()).append(className + "Collections.java");
   }
 
   private JHipsterDestination collectionsTestDestination(String className, JHipsterDestination testDestination) {
-    return testDestination.append(Destination.COMMON_DOMAIN.path()).append(className + "CollectionsTest.java");
+    return testDestination.append(Destination.COLLECTION_DOMAIN.path()).append(className + "CollectionsTest.java");
   }
 }

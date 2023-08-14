@@ -7,5 +7,5 @@ Feature: Webflux module
       | spring-boot-webflux-empty  |
       | spring-boot-webflux-netty  |
     Then I should have "<artifactId>spring-boot-starter-webflux</artifactId>" in "pom.xml"
-    Then I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/primary/exception/"
+    Then I should have files in "src/main/java/tech/jhipster/chips/shared/error/infrastructure/primary"
       | FieldErrorDTO.java |

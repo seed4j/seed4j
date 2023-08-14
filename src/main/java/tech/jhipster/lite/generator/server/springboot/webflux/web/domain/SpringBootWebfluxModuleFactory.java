@@ -20,7 +20,7 @@ public class SpringBootWebfluxModuleFactory {
 
   private static final GroupId SPRING_GROUP = groupId("org.springframework.boot");
 
-  private static final String EXCEPTION_PRIMARY = "technical/infrastructure/primary/exception";
+  private static final String EXCEPTION_PRIMARY = "shared/error/infrastructure/primary";
 
   public JHipsterModule buildEmptyModule(JHipsterModuleProperties properties) {
     return moduleBuilder(properties).build();

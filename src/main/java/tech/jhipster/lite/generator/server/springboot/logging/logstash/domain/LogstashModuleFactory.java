@@ -12,7 +12,7 @@ public class LogstashModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/logging/logstash");
 
-  private static final String LOGSTASH_SECONDARY = "technical/infrastructure/secondary/logstash";
+  private static final String LOGSTASH_SECONDARY = "wire/logstash/infrastructure/secondary";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

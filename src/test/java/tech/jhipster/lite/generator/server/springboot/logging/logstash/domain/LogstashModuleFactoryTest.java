@@ -27,22 +27,22 @@ class LogstashModuleFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-                <dependency>
-                  <groupId>net.logstash.logback</groupId>
-                  <artifactId>logstash-logback-encoder</artifactId>
-                  <version>${logstash-logback-encoder.version}</version>
-                </dependency>
-            """
+            <dependency>
+              <groupId>net.logstash.logback</groupId>
+              <artifactId>logstash-logback-encoder</artifactId>
+              <version>${logstash-logback-encoder.version}</version>
+            </dependency>
+        """
       )
       .and()
       .hasPrefixedFiles(
-        "src/main/java/com/jhipster/test/technical/infrastructure/secondary/logstash",
+        "src/main/java/com/jhipster/test/wire/logstash/infrastructure/secondary",
         "LogstashTcpConfiguration.java",
         "LogstashTcpLifeCycle.java",
         "LogstashTcpProperties.java"
       )
       .hasPrefixedFiles(
-        "src/test/java/com/jhipster/test/technical/infrastructure/secondary/logstash",
+        "src/test/java/com/jhipster/test/wire/logstash/infrastructure/secondary",
         "LogstashTcpConfigurationIT.java",
         "LogstashTcpConfigurationTest.java",
         "LogstashTcpLifeCycleTest.java",

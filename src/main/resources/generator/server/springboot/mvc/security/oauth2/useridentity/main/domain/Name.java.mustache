@@ -2,7 +2,7 @@ package {{packageName}}.useridentity.domain;
 
 import java.util.Comparator;
 
-import {{packageName}}.error.domain.Assert;
+import {{packageName}}.shared.error.domain.Assert;
 
 public record Name(Firstname firstname, Lastname lastname) implements Comparable<Name> {
   private static final Comparator<Name> COMPARATOR = Comparator.comparing(Name::firstname).thenComparing(Name::lastname);

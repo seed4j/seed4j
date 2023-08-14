@@ -25,10 +25,12 @@ class FileSystemJHipsterModulesRepositoryTest {
     JHipsterModule module = module();
 
     // @formatter:off
-    assertThatModuleWithFiles(module,
-        file("src/test/resources/projects/maven/pom.xml", "pom.xml"),
-        packageJsonFile(),
-        file("src/test/resources/projects/files/dummy.txt", "dummy.txt"))
+    assertThatModuleWithFiles(
+      module,
+      file("src/test/resources/projects/maven/pom.xml", "pom.xml"),
+      packageJsonFile(),
+      file("src/test/resources/projects/files/dummy.txt", "dummy.txt")
+    )
       .hasFiles(
         "src/main/java/com/company/myapp/MyApp.java",
         "src/main/java/com/company/myapp/errors/Assert.java",
@@ -38,34 +40,39 @@ class FileSystemJHipsterModulesRepositoryTest {
       )
       .hasExecutableFiles(".husky/pre-commit")
       .hasFile("src/main/java/com/company/myapp/MyApp.java")
-        .containing("com.test.myapp")
-        .and()
+      .containing("com.test.myapp")
+      .and()
       .hasFile("pom.xml")
       .containing("<dummy-dependency.version>4.5.8</dummy-dependency.version>")
-      .notContaining("""
+      .notContaining(
+        """
               <dependency>
                 <groupId>net.logstash.logback</groupId>
                 <artifactId>logstash-logback-encoder</artifactId>
               </dependency>
-          """)
-      .notContaining("""
+          """
+      )
+      .notContaining(
+        """
                 <dependency>
                   <groupId>org.springdoc</groupId>
                   <artifactId>springdoc-openapi-ui</artifactId>
                   <version>${springdoc-openapi.version}</version>
                 </dependency>
-          """)
-      .containing(
           """
+      )
+      .containing(
+        """
                 <dependency>
                   <groupId>org.springframework.boot</groupId>
                   <artifactId>spring-boot-dependencies</artifactId>
                   <version>${spring-boot.version}</version>
                   <scope>import</scope>
                 </dependency>
-          """)
-      .containing(
           """
+      )
+      .containing(
+        """
               <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
@@ -76,9 +83,10 @@ class FileSystemJHipsterModulesRepositoryTest {
                   </exclusion>
                 </exclusions>
               </dependency>
-          """)
-        .containing(
           """
+      )
+      .containing(
+        """
                 <dependency>
                   <groupId>org.springframework.boot</groupId>
                   <artifactId>spring-boot-dependencies</artifactId>
@@ -87,9 +95,9 @@ class FileSystemJHipsterModulesRepositoryTest {
                   <type>pom</type>
                 </dependency>
           """
-        )
-        .containing(
-          """
+      )
+      .containing(
+        """
               <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
@@ -99,12 +107,12 @@ class FileSystemJHipsterModulesRepositoryTest {
                 <optional>true</optional>
               </dependency>
           """
-        )
-        .containing("<spring-boot.version>")
-        .containing("</spring-boot.version>")
-        .containing("<artifactId>spring-boot-starter</artifactId>")
-        .notContaining(
-          """
+      )
+      .containing("<spring-boot.version>")
+      .containing("</spring-boot.version>")
+      .containing("<artifactId>spring-boot-starter</artifactId>")
+      .notContaining(
+        """
               <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
@@ -112,10 +120,10 @@ class FileSystemJHipsterModulesRepositoryTest {
                 <scope>test</scope>
               </dependency>
           """
-        )
-        .containing("<maven-enforcer-plugin.version>")
-        .containing(
-            """
+      )
+      .containing("<maven-enforcer-plugin.version>")
+      .containing(
+        """
               <build>
                 <plugins>
                   <plugin>
@@ -185,66 +193,69 @@ class FileSystemJHipsterModulesRepositoryTest {
                 </pluginManagement>
               </build>
             """
-          )
-        .and()
+      )
+      .and()
       .hasFile("package.json")
-        .containing("\"scripts\": {\n    \"serve\": \"tikui-core serve\"")
-        .containing("\"dependencies\": {\n    \"@angular/animations\": \"")
-        .containing("\"devDependencies\": {\n    \"@playwright/test\": \"")
-        .and()
+      .containing("\"scripts\": {\n    \"serve\": \"tikui-core serve\"")
+      .containing("\"dependencies\": {\n    \"@angular/animations\": \"")
+      .containing("\"devDependencies\": {\n    \"@playwright/test\": \"")
+      .and()
       .hasFile("src/main/java/com/company/myapp/errors/Assert.java")
-        .containing("Dummy replacement")
-        .containing("Another dummy replacement")
-        .containing("Dummy collection replacement")
-        .containing("Another dummy collection replacement")
-        .containing("// Dummy comment\n  public static class IntegerAsserter {")
-        .notContaining("""
+      .containing("Dummy replacement")
+      .containing("Another dummy replacement")
+      .containing("Dummy collection replacement")
+      .containing("Another dummy collection replacement")
+      .containing("// Dummy comment\n  public static class IntegerAsserter {")
+      .notContaining("""
             import java.math.BigDecimal;
             import java.math.BigDecimal;
             """)
-        .notContaining("""
+      .notContaining("""
             import java.util.Collection;
             import java.util.Collection;
             """)
-        .and()
+      .and()
       .hasFile("src/main/resources/config/application.properties")
-        .containing("""
+      .containing("""
             # This is a comment
             springdoc.swagger-ui.operationsSorter""")
-        .containing("springdoc.swagger-ui.operationsSorter=alpha")
-        .and()
+      .containing("springdoc.swagger-ui.operationsSorter=alpha")
+      .and()
       .hasFile("src/main/resources/config/application-local.properties")
-        .containing("""
+      .containing("""
             # This is a comment
             springdoc.swagger-ui.tryItOutEnabled""")
-        .containing("springdoc.swagger-ui.tryItOutEnabled=false")
-        .and()
+      .containing("springdoc.swagger-ui.tryItOutEnabled=false")
+      .and()
       .hasFile("src/test/resources/config/application.properties")
-        .containing("""
+      .containing("""
             # This is a comment
             springdoc.swagger-ui.operationsSorter""")
-        .containing("springdoc.swagger-ui.operationsSorter=test")
-        .and()
+      .containing("springdoc.swagger-ui.operationsSorter=test")
+      .and()
       .hasFile("src/test/resources/config/application-local.properties")
-        .containing("""
+      .containing(
+        """
             ## Swagger properties
             springdoc.swagger-ui.operationsSorter=test
             springdoc.swagger-ui.tagsSorter=test
             # This is a comment
-            springdoc.swagger-ui.tryItOutEnabled=test""")
-        .and()
+            springdoc.swagger-ui.tryItOutEnabled=test"""
+      )
+      .and()
       .hasFile("src/test/resources/META-INF/spring.factories")
-        .containing("o.s.c.ApplicationListener=c.m.m.MyListener1,c.m.m.MyListener2")
-        .and()
+      .containing("o.s.c.ApplicationListener=c.m.m.MyListener1,c.m.m.MyListener2")
+      .and()
       .hasFile("README.md")
-        .containing(
-            """
+      .containing(
+        """
            - [Cucumber integration](documentation/cucumber-integration.md)
            - [Another cucumber integration](documentation/another-cucumber-integration.md)
 
            <!-- jhipster-needle-documentation -->
-           """)
-        .containing("This is a startup section")
+           """
+      )
+      .containing("This is a startup section")
       .and()
       .hasPrefixedFiles(".git", "config", "HEAD")
       .doNotHaveFiles("dummy.txt")

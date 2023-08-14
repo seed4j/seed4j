@@ -5,7 +5,7 @@ import com.jhipster.test.dummy.domain.beer.Beer;
 import com.jhipster.test.dummy.domain.beer.BeerSellingState;
 import com.jhipster.test.dummy.domain.beer.Beers;
 import com.jhipster.test.dummy.domain.beer.BeersRepository;
-import com.jhipster.test.error.domain.Assert;
+import com.jhipster.test.shared.error.domain.Assert;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;

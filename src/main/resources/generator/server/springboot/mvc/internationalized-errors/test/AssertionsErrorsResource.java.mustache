@@ -1,4 +1,4 @@
-package {{ packageName }}.error_generator.infrastructure.primary;
+package {{ packageName }}.shared.error_generator.infrastructure.primary;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import {{ packageName }}.error.domain.Assert;
-import {{ packageName }}.error_generator.domain.NullElementInCollectionExceptionFactory;
+import {{ packageName }}.shared.error.domain.Assert;
+import {{ packageName }}.shared.error_generator.domain.NullElementInCollectionExceptionFactory;
 
 @RestController
 @RequestMapping("/api/assertion-errors")

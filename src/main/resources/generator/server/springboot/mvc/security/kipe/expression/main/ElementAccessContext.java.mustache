@@ -1,6 +1,6 @@
 package {{packageName}}.kipe.application;
 
-import {{packageName}}.error.domain.Assert;
+import {{packageName}}.shared.error.domain.Assert;
 import org.springframework.security.core.Authentication;
 
 public record ElementAccessContext<T>(Authentication authentication, String action, T element) implements AccessContext<T> {

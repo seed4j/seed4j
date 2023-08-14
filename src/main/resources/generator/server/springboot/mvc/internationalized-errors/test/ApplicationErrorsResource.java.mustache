@@ -1,10 +1,10 @@
-package {{ packageName }}.error_generator.infrastructure.primary;
+package {{ packageName }}.shared.error_generator.infrastructure.primary;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import {{ packageName }}.error.domain.{{ baseName }}Exception;
-import {{ packageName }}.error.domain.StandardErrorKey;
+import {{ packageName }}.shared.error.domain.{{ baseName }}Exception;
+import {{ packageName }}.shared.error.domain.StandardErrorKey;
 
 @RestController
 @RequestMapping("/api/errors")

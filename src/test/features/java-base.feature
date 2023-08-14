@@ -11,5 +11,5 @@ Feature: Java base
     When I apply "java-base" module to default project
       | packageName | tech.jhipster.chips |
       | baseName    | jhipster            |
-    Then I should have files in "src/main/java/tech/jhipster/chips/error/domain"
+    Then I should have files in "src/main/java/tech/jhipster/chips/shared/error/domain"
       | Assert.java |

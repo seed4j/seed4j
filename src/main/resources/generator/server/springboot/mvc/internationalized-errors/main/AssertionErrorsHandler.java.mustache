@@ -1,4 +1,4 @@
-package {{ packageName }}.error.infrastructure.primary;
+package {{ packageName }}.shared.error.infrastructure.primary;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -16,8 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import {{ packageName }}.error.domain.AssertionErrorType;
-import {{ packageName }}.error.domain.AssertionException;
+import {{ packageName }}.shared.error.domain.AssertionErrorType;
+import {{ packageName }}.shared.error.domain.AssertionException;
 
 @ControllerAdvice
 @Order(Ordered.LOWEST_PRECEDENCE - 1000)
@@ -64,7 +64,7 @@ class AssertionErrorsHandler {
   }
 
   private Predicate<String> notInErrorDomain() {
-    return className -> !className.startsWith("{{ packageName }}.error.domain");
+    return className -> !className.startsWith("{{ packageName }}.shared.error.domain");
   }
 
   private Predicate<String> primaryClass() {

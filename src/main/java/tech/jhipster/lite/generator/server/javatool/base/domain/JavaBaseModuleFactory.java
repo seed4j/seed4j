@@ -14,6 +14,8 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class JavaBaseModuleFactory {
 
+  private static final String ERROR = "error";
+
   private static final JHipsterSource SOURCE = from("server/javatool/base");
   private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
   private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
@@ -21,8 +23,8 @@ public class JavaBaseModuleFactory {
   private enum Destination {
     COMMON("common"),
     COMMON_DOMAIN("common/domain"),
-    ERROR("error"),
-    ERROR_DOMAIN("error/domain");
+    ERROR("shared/error"),
+    ERROR_DOMAIN("shared/error/domain");
 
     private final String path;
 
@@ -58,7 +60,7 @@ public class JavaBaseModuleFactory {
           .addTemplate("BusinessContext.java")
           .addTemplate("SharedKernel.java")
           .and()
-        .batch(MAIN_SOURCE, mainDestination.append(Destination.ERROR_DOMAIN.path()))
+        .batch(MAIN_SOURCE.append(ERROR), mainDestination.append(Destination.ERROR_DOMAIN.path()))
           .addTemplate("Assert.java")
           .addTemplate("AssertionErrorType.java")
           .addTemplate("MissingMandatoryValueException.java")
@@ -72,7 +74,7 @@ public class JavaBaseModuleFactory {
           .addTemplate("StringTooShortException.java")
           .addTemplate("TooManyElementsException.java")
           .and()
-        .batch(TEST_SOURCE, testDestination.append(Destination.ERROR_DOMAIN.path()))
+        .batch(TEST_SOURCE.append(ERROR), testDestination.append(Destination.ERROR_DOMAIN.path()))
           .addTemplate("AssertTest.java")
           .addTemplate("MissingMandatoryValueExceptionTest.java")
           .addTemplate("NotAfterTimeExceptionTest.java")
@@ -89,7 +91,7 @@ public class JavaBaseModuleFactory {
           .addTemplate("ComponentTest.java")
           .addTemplate("ReplaceCamelCase.java")
           .and()
-        .add(MAIN_SOURCE.template("package-info-error.java"), packageInfoDestination(mainDestination, Destination.ERROR))
+        .add(MAIN_SOURCE.append(ERROR).template("package-info.java"), packageInfoDestination(mainDestination, Destination.ERROR))
         .add(MAIN_SOURCE.template("package-info-common.java"), packageInfoDestination(mainDestination,  Destination.COMMON))
         .add(MAIN_SOURCE.template("ExcludeFromGeneratedCodeCoverage.java"), mainDestination.append(Destination.COMMON_DOMAIN.path).append("ExcludeFromGeneratedCodeCoverage.java"))
         .add(MAIN_SOURCE.template("ProjectCollections.java"), collectionsDestination(baseName, mainDestination))

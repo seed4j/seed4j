@@ -14,7 +14,7 @@ public class LiquibaseModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/dbmigration/liquibase");
 
-  private static final String LIQUIBASE_SECONDARY = "technical/infrastructure/secondary/liquibase";
+  private static final String LIQUIBASE_SECONDARY = "wire/liquibase/infrastructure/secondary";
 
   private static final String LIQUIBASE = "liquibase";
 

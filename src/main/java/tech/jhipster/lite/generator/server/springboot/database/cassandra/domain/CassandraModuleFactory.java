@@ -14,7 +14,7 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 public class CassandraModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/database/cassandra");
-  private static final String CASSANDRA_SECONDARY = "technical/infrastructure/secondary/cassandra";
+  private static final String CASSANDRA_SECONDARY = "wire/cassandra/infrastructure/secondary";
   private static final String DOCKER_COMPOSE_COMMAND = "docker compose -f src/main/docker/cassandra.yml up -d";
   private static final String DC = "datacenter1";
   private final DockerImages dockerImages;

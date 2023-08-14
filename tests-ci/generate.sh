@@ -295,14 +295,11 @@ elif [[ $application == 'redisapp' ]]; then
 elif [[ $application == 'cassandraapp' ]]; then
   spring_boot_mvc
   sonar_back
-
-  applyModules 
-  "cassandra" \
-  "cassandra-migration"
-
   cucumber_with_jwt
 
-  applyModules   
+  applyModules \
+  "cassandra" \
+  "cassandra-migration" \
   "kipe-expression" \
   "kipe-authorization" \
   "dummy-feature" \

@@ -49,21 +49,21 @@ class MongoDbModuleFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-data-mongodb</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>org.testcontainers</groupId>
-                  <artifactId>mongodb</artifactId>
-                  <version>${testcontainers.version}</version>
-                  <scope>test</scope>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.testcontainers</groupId>
+              <artifactId>mongodb</artifactId>
+              <version>${testcontainers.version}</version>
+              <scope>test</scope>
+            </dependency>
+        """
       )
       .containing(
         """
@@ -79,11 +79,11 @@ class MongoDbModuleFactoryTest {
       .containing("mongo:1.1.1")
       .and()
       .hasPrefixedFiles(
-        "src/main/java/com/jhipster/test/technical/infrastructure/secondary/mongodb",
+        "src/main/java/com/jhipster/test/wire/mongodb/infrastructure/secondary",
         "MongodbDatabaseConfiguration.java",
         "JSR310DateConverters.java"
       )
-      .hasFiles("src/test/java/com/jhipster/test/technical/infrastructure/secondary/mongodb/JSR310DateConvertersTest.java")
+      .hasFiles("src/test/java/com/jhipster/test/wire/mongodb/infrastructure/secondary/JSR310DateConvertersTest.java")
       .hasFiles("src/test/java/com/jhipster/test/TestMongoDBManager.java")
       .hasFile("src/test/resources/META-INF/spring.factories")
       .containing("org.springframework.context.ApplicationListener=com.jhipster.test")

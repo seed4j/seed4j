@@ -17,7 +17,7 @@ public class MongoDbModuleFactory {
   private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
   private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
 
-  private static final String MONGO_SECONDARY = "technical/infrastructure/secondary/mongodb";
+  private static final String MONGO_SECONDARY = "wire/mongodb/infrastructure/secondary";
   private static final String DOCKER_COMPOSE_COMMAND = "docker compose -f src/main/docker/mongodb.yml up -d";
   private static final String REFLECTIONS_GROUP = "org.reflections";
 

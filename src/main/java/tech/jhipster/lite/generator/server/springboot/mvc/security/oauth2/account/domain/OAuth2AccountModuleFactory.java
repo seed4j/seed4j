@@ -15,6 +15,7 @@ public class OAuth2AccountModuleFactory {
   private static final String INFRASTRUCTURE = "infrastructure";
   private static final String PRIMARY = INFRASTRUCTURE + "/primary";
   private static final String SECONDARY = INFRASTRUCTURE + "/secondary";
+  private static final String USERIDENTITY_DESTINTION = "shared/useridentity";
 
   private static final JHipsterSource ACCOUNT_SOURCE = from("server/springboot/mvc/security/oauth2/account");
   private static final JHipsterSource ACCOUNT_MAIN_SOURCE = ACCOUNT_SOURCE.append("main");
@@ -29,8 +30,8 @@ public class OAuth2AccountModuleFactory {
     JHipsterDestination accountMainDestination = toSrcMainJava().append(packagePath).append("account");
     JHipsterDestination accountTestDestination = toSrcTestJava().append(packagePath).append("account");
 
-    JHipsterDestination userIdentityMainDestination = toSrcMainJava().append(packagePath).append("useridentity");
-    JHipsterDestination userIdentityTestDestination = toSrcTestJava().append(packagePath).append("useridentity");
+    JHipsterDestination userIdentityMainDestination = toSrcMainJava().append(packagePath).append(USERIDENTITY_DESTINTION);
+    JHipsterDestination userIdentityTestDestination = toSrcTestJava().append(packagePath).append(USERIDENTITY_DESTINTION);
 
     //@formatter:off
     return moduleBuilder(properties)

@@ -37,11 +37,17 @@ class Oauth2AccountModuleFactoryTest {
       )
       .hasFile("src/main/java/com/jhipster/test/account/package-info.java")
       .and()
-      .hasPrefixedFiles("src/main/java/com/jhipster/test/useridentity/domain", "Email.java", "Firstname.java", "Lastname.java", "Name.java")
-      .hasFile("src/main/java/com/jhipster/test/useridentity/package-info.java")
+      .hasPrefixedFiles(
+        "src/main/java/com/jhipster/test/shared/useridentity/domain",
+        "Email.java",
+        "Firstname.java",
+        "Lastname.java",
+        "Name.java"
+      )
+      .hasFile("src/main/java/com/jhipster/test/shared/useridentity/package-info.java")
       .and()
       .hasPrefixedFiles(
-        "src/test/java/com/jhipster/test/useridentity/domain",
+        "src/test/java/com/jhipster/test/shared/useridentity/domain",
         "EmailTest.java",
         "FirstnameTest.java",
         "LastnameTest.java",

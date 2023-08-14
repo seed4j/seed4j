@@ -18,7 +18,7 @@ public class EHCacheModulesFactory {
 
   private static final String EHCACHE_GROUP = "org.ehcache";
 
-  private static final String CACHE_SECONDARY = "technical/infrastructure/secondary/cache";
+  private static final String CACHE_SECONDARY = "wire/cache/infrastructure/secondary";
 
   public JHipsterModule buildJavaConfigurationModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

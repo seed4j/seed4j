@@ -27,13 +27,13 @@ class SimpleCacheModuleFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-             <dependency>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-starter-cache</artifactId>
-             </dependency>
-         """
+                <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-cache</artifactId>
+                </dependency>
+            """
       )
       .and()
-      .hasJavaSources("com/jhipster/test/technical/infrastructure/secondary/cache/CacheConfiguration.java");
+      .hasJavaSources("com/jhipster/test/wire/cache/infrastructure/secondary/CacheConfiguration.java");
   }
 }

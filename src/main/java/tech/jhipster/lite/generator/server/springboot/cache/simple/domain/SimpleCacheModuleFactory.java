@@ -11,7 +11,7 @@ public class SimpleCacheModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/cache/simple/src/");
 
-  private static final String CACHE_SECONDARY = "technical/infrastructure/secondary/cache";
+  private static final String CACHE_SECONDARY = "wire/cache/infrastructure/secondary";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

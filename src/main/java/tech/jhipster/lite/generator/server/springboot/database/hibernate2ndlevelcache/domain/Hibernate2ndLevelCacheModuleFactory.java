@@ -11,7 +11,7 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class Hibernate2ndLevelCacheModuleFactory {
 
-  private static final String DEST_SECONDARY = "technical/infrastructure/secondary/cache";
+  private static final String DEST_SECONDARY = "wire/cache/infrastructure/secondary";
 
   private static final JHipsterSource SOURCE = from("server/springboot/database/hibernate2ndlevelcache");
 

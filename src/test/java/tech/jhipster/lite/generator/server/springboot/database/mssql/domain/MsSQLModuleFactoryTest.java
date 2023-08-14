@@ -39,7 +39,7 @@ class MsSQLModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), integrationTestAnnotation())
-      .hasFile("src/main/java/com/jhipster/test/technical/infrastructure/secondary/mssql/DatabaseConfiguration.java")
+      .hasFile("src/main/java/com/jhipster/test/wire/mssql/infrastructure/secondary/DatabaseConfiguration.java")
       .and()
       .hasFile("documentation/mssql.md")
       .and()

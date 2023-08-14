@@ -11,7 +11,7 @@ Feature: mssql module
       | mssql.md |
     And I should have files in "src/main/docker"
       | mssql.yml |
-    And I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/secondary/mssql"
+    And I should have files in "src/main/java/tech/jhipster/chips/wire/mssql/infrastructure/secondary"
       | DatabaseConfiguration.java |
     And I should have files in "src/test/java/tech/jhipster/chips"
       | MsSQLTestContainerExtension.java |

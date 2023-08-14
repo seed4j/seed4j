@@ -41,7 +41,7 @@ class MariaDBModuleFactoryTest {
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("documentation/mariadb.md")
       .and()
-      .hasPrefixedFiles("src/main/java/com/jhipster/test/technical/infrastructure/secondary/mariadb", "DatabaseConfiguration.java")
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/wire/mariadb/infrastructure/secondary", "DatabaseConfiguration.java")
       .hasPrefixedFiles("src/main/docker", "mariadb.yml")
       .hasFile("pom.xml")
       .containing("<groupId>org.springframework.boot</groupId>")

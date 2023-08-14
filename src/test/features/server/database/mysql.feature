@@ -11,7 +11,7 @@ Feature: MySQL module
       | mysql.md |
     And I should have files in "src/main/docker"
       | mysql.yml |
-    And I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/secondary/mysql"
+    And I should have files in "src/main/java/tech/jhipster/chips/wire/mysql/infrastructure/secondary"
       | DatabaseConfiguration.java |
     And I should have files in "src/main/resources/config"
       | application.properties |
@@ -36,7 +36,7 @@ Feature: MySQL module
       | mysql.md |
     And I should have files in "src/main/docker"
       | mysql.yml |
-    And I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/secondary/mysql"
+    And I should have files in "src/main/java/tech/jhipster/chips/wire/mysql/infrastructure/secondary"
       | DatabaseConfiguration.java |
     And I should have files in "src/main/resources/config"
       | application.properties |

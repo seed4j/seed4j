@@ -11,7 +11,7 @@ Feature: postgreSQL module
       | postgresql.md |
     And I should have files in "src/main/docker"
       | postgresql.yml |
-    And I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/secondary/postgresql"
+    And I should have files in "src/main/java/tech/jhipster/chips/wire/postgresql/infrastructure/secondary"
       | DatabaseConfiguration.java |
     And I should have files in "src/main/resources/config"
       | application.properties |
@@ -36,7 +36,7 @@ Feature: postgreSQL module
       | postgresql.md |
     And I should have files in "src/main/docker"
       | postgresql.yml |
-    And I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/secondary/postgresql"
+    And I should have files in "src/main/java/tech/jhipster/chips/wire/postgresql/infrastructure/secondary"
       | DatabaseConfiguration.java |
     And I should have files in "src/main/resources/config"
       | application.properties |

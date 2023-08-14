@@ -41,7 +41,7 @@ class MySQLModuleFactoryTest {
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("documentation/mysql.md")
       .and()
-      .hasPrefixedFiles("src/main/java/com/jhipster/test/technical/infrastructure/secondary/mysql", "DatabaseConfiguration.java")
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/wire/mysql/infrastructure/secondary", "DatabaseConfiguration.java")
       .hasPrefixedFiles("src/main/docker", "mysql.yml")
       .hasFile("pom.xml")
       .containing("<groupId>org.springframework.boot</groupId>")

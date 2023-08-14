@@ -11,7 +11,7 @@ Feature: MariaDB module
       | mariadb.md |
     And I should have files in "src/main/docker"
       | mariadb.yml |
-    And I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/secondary/mariadb"
+    And I should have files in "src/main/java/tech/jhipster/chips/wire/mariadb/infrastructure/secondary"
       | DatabaseConfiguration.java |
     And I should have files in "src/main/resources/config"
       | application.properties |
@@ -36,7 +36,7 @@ Feature: MariaDB module
       | mariadb.md |
     And I should have files in "src/main/docker"
       | mariadb.yml |
-    And I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/secondary/mariadb"
+    And I should have files in "src/main/java/tech/jhipster/chips/wire/mariadb/infrastructure/secondary"
       | DatabaseConfiguration.java |
     And I should have files in "src/main/resources/config"
       | application.properties |

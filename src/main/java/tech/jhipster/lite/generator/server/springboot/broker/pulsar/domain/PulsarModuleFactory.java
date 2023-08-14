@@ -15,7 +15,7 @@ public class PulsarModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/broker/pulsar");
 
-  private static final String PULSAR_CONFIG = "technical/infrastructure/config/pulsar";
+  private static final String PULSAR_CONFIG = "wire/pulsar/infrastructure/config";
 
   private static final String DOCKER_COMPOSE_COMMAND = "docker compose -f src/main/docker/pulsar.yml up -d";
 

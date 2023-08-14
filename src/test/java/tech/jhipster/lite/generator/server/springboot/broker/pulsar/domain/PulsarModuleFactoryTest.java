@@ -77,11 +77,11 @@ class PulsarModuleFactoryTest {
       .containing("@ExtendWith(PulsarTestContainerExtension.class)")
       .and()
       .hasPrefixedFiles(
-        "src/main/java/com/jhipster/test/technical/infrastructure/config/pulsar",
+        "src/main/java/com/jhipster/test/wire/pulsar/infrastructure/config",
         "PulsarProperties.java",
         "PulsarConfiguration.java"
       )
-      .hasFiles("src/test/java/com/jhipster/test/technical/infrastructure/config/pulsar/PulsarConfigurationIT.java")
+      .hasFiles("src/test/java/com/jhipster/test/wire/pulsar/infrastructure/config/PulsarConfigurationIT.java")
       .hasFile("README.md")
       .containing("""
           ```bash

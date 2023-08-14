@@ -26,18 +26,22 @@ class KipeAuthorizationModuleFactoryTest {
 
     assertThatModule(module)
       .hasFiles("documentation/kipe-authorization.md")
-      .hasFiles("src/main/java/com/jhipster/test/kipe/package-info.java")
-      .hasFiles("src/main/java/com/jhipster/test/kipe/application/MyappAuthorizations.java")
+      .hasFiles("src/main/java/com/jhipster/test/shared/kipe/package-info.java")
+      .hasFiles("src/main/java/com/jhipster/test/shared/kipe/application/MyappAuthorizations.java")
       .hasPrefixedFiles(
-        "src/main/java/com/jhipster/test/kipe/domain",
+        "src/main/java/com/jhipster/test/shared/kipe/domain",
         "Accesses.java",
         "Action.java",
         "Resource.java",
         "RolesAccesses.java"
       )
-      .hasPrefixedFiles("src/test/java/com/jhipster/test/kipe/application", "MyappAuthorizationsTest.java", "TestAuthentications.java")
       .hasPrefixedFiles(
-        "src/test/java/com/jhipster/test/kipe/domain",
+        "src/test/java/com/jhipster/test/shared/kipe/application",
+        "MyappAuthorizationsTest.java",
+        "TestAuthentications.java"
+      )
+      .hasPrefixedFiles(
+        "src/test/java/com/jhipster/test/shared/kipe/domain",
         "RolesAccessesFixture.java",
         "RolesAccessesTest.java",
         "ActionTest.java"

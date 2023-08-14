@@ -1,9 +1,9 @@
-package {{packageName}}.kipe.application;
+package {{packageName}}.shared.kipe.application;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static {{packageName}}.kipe.application.TestAuthentications.*;
-import static {{packageName}}.kipe.domain.RolesAccessesFixture.*;
+import static {{packageName}}.shared.kipe.application.TestAuthentications.*;
+import static {{packageName}}.shared.kipe.domain.RolesAccessesFixture.*;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -11,7 +11,7 @@ import {{packageName}}.UnitTest;
 import {{packageName}}.shared.authentication.application.UnknownAuthenticationException;
 import {{packageName}}.shared.authentication.domain.Username;
 import {{packageName}}.shared.error.domain.MissingMandatoryValueException;
-import {{packageName}}.kipe.domain.RolesAccessesFixture.TestResource;
+import {{packageName}}.shared.kipe.domain.RolesAccessesFixture.TestResource;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

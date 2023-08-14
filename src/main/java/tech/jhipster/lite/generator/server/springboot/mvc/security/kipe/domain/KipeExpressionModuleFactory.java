@@ -14,11 +14,13 @@ public class KipeExpressionModuleFactory {
   private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
   private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
 
+  private static final String KIPE_DESTINATION = "shared/kipe";
+
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
-    JHipsterDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append("kipe");
-    JHipsterDestination testDestination = toSrcTestJava().append(properties.packagePath()).append("kipe");
+    JHipsterDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(KIPE_DESTINATION);
+    JHipsterDestination testDestination = toSrcTestJava().append(properties.packagePath()).append(KIPE_DESTINATION);
 
     //@formatter:off
     return moduleBuilder(properties)

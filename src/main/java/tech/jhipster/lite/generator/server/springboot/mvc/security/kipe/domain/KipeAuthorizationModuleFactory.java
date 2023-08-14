@@ -15,13 +15,14 @@ public class KipeAuthorizationModuleFactory {
   private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
 
   private static final String APPLICATION = "application";
+  private static final String KIPE_DESTINATION = "shared/kipe";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();
-    JHipsterDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append("kipe");
-    JHipsterDestination testDestination = toSrcTestJava().append(properties.packagePath()).append("kipe");
+    JHipsterDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(KIPE_DESTINATION);
+    JHipsterDestination testDestination = toSrcTestJava().append(properties.packagePath()).append(KIPE_DESTINATION);
 
     //@formatter:off
     return moduleBuilder(properties)

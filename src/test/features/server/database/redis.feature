@@ -5,5 +5,5 @@ Feature: Redis module
       | maven-java |
       | spring-boot |
       | redis    |
-    Then I should have files in "src/main/java/tech/jhipster/chips/technical/infrastructure/secondary/redis"
+    Then I should have files in "src/main/java/tech/jhipster/chips/wire/redis/infrastructure/secondary"
       | RedisDatabaseConfiguration.java |

@@ -49,21 +49,21 @@ class RedisModuleFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-data-redis</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-data-redis</artifactId>
+            </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>org.testcontainers</groupId>
-                  <artifactId>testcontainers</artifactId>
-                  <version>${testcontainers.version}</version>
-                  <scope>test</scope>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.testcontainers</groupId>
+              <artifactId>testcontainers</artifactId>
+              <version>${testcontainers.version}</version>
+              <scope>test</scope>
+            </dependency>
+        """
       )
       .containing(
         """
@@ -79,11 +79,11 @@ class RedisModuleFactoryTest {
       .containing("redis:1.1.1")
       .and()
       .hasPrefixedFiles(
-        "src/main/java/com/jhipster/test/technical/infrastructure/secondary/redis",
+        "src/main/java/com/jhipster/test/wire/redis/infrastructure/secondary",
         "RedisDatabaseConfiguration.java",
         "JSR310DateConverters.java"
       )
-      .hasFiles("src/test/java/com/jhipster/test/technical/infrastructure/secondary/redis/JSR310DateConvertersTest.java")
+      .hasFiles("src/test/java/com/jhipster/test/wire/redis/infrastructure/secondary/JSR310DateConvertersTest.java")
       .hasFiles("src/test/java/com/jhipster/test/TestRedisManager.java")
       .hasFile("src/test/resources/META-INF/spring.factories")
       .containing("org.springframework.context.ApplicationListener=com.jhipster.test")

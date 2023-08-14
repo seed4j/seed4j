@@ -15,7 +15,7 @@ public class RedisModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/database/redis");
 
-  private static final String REDIS_SECONDARY = "technical/infrastructure/secondary/redis";
+  private static final String REDIS_SECONDARY = "wire/redis/infrastructure/secondary";
   private static final String DOCKER_COMPOSE_COMMAND = "docker compose -f src/main/docker/redis.yml up -d";
   private static final String REFLECTIONS_GROUP = "org.reflections";
 

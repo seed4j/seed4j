@@ -17,7 +17,7 @@ public class MongockModuleFactory {
 
   private static final GroupId MONGOCK_GROUP = groupId("io.mongock");
 
-  private static final String MONGOCK_SECONDARY = "technical/infrastructure/secondary/mongock";
+  private static final String MONGOCK_SECONDARY = "wire/mongock/infrastructure/secondary";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

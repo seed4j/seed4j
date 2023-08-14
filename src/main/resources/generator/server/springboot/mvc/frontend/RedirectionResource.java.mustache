@@ -1,12 +1,12 @@
-package {{packageName}}.technical.infrastructure.primary.redirection;
+package {{packageName}}.wire.frontend.infrastructure.primary;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import {{packageName}}.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
-@ExcludeFromGeneratedCodeCoverage
 @Controller
+@ExcludeFromGeneratedCodeCoverage
 class RedirectionResource {
 
   @GetMapping(value = "/{path:[^\\.]*}")

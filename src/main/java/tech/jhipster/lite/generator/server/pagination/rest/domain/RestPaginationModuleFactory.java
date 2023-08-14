@@ -14,7 +14,7 @@ public class RestPaginationModuleFactory {
   private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
   private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
 
-  private static final String PRIMARY_DESTINATION = "pagination/infrastructure/primary";
+  private static final String PRIMARY_DESTINATION = "shared/pagination/infrastructure/primary";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

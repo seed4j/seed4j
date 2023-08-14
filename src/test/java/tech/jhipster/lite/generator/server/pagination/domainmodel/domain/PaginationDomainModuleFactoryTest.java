@@ -36,10 +36,10 @@ class PaginationDomainModuleFactoryTest {
         """
       )
       .and()
-      .hasFiles("src/main/java/com/jhipster/test/pagination/package-info.java")
-      .hasPrefixedFiles("src/main/java/com/jhipster/test/pagination/domain", "MyAppPage.java", "MyAppPageable.java")
+      .hasFiles("src/main/java/com/jhipster/test/shared/pagination/package-info.java")
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/shared/pagination/domain", "MyAppPage.java", "MyAppPageable.java")
       .hasPrefixedFiles(
-        "src/test/java/com/jhipster/test/pagination/domain",
+        "src/test/java/com/jhipster/test/shared/pagination/domain",
         "MyAppPageTest.java",
         "MyAppPageableTest.java",
         "MyAppPagesFixture.java"

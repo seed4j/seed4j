@@ -14,7 +14,7 @@ public class JpaPaginationModuleFactory {
   private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
   private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
 
-  private static final String SECONDARY_DESTINATION = "pagination/infrastructure/secondary";
+  private static final String SECONDARY_DESTINATION = "shared/pagination/infrastructure/secondary";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

@@ -28,9 +28,13 @@ class RestPaginationModuleFactoryTest {
       .hasFile("documentation/rest-pagination.md")
       .containing("MyAppPage<")
       .and()
-      .hasPrefixedFiles("src/main/java/com/jhipster/test/pagination/infrastructure/primary", "RestMyAppPage.java", "RestMyAppPageable.java")
       .hasPrefixedFiles(
-        "src/test/java/com/jhipster/test/pagination/infrastructure/primary",
+        "src/main/java/com/jhipster/test/shared/pagination/infrastructure/primary",
+        "RestMyAppPage.java",
+        "RestMyAppPageable.java"
+      )
+      .hasPrefixedFiles(
+        "src/test/java/com/jhipster/test/shared/pagination/infrastructure/primary",
         "RestMyAppPageTest.java",
         "RestMyAppPageableTest.java"
       );

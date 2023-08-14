@@ -26,7 +26,7 @@ class JpaPaginationModuleFactoryTest {
 
     assertThatModule(module)
       .hasFiles("documentation/jpa-pages.md")
-      .hasFiles("src/main/java/com/jhipster/test/pagination/infrastructure/secondary/MyAppPages.java")
-      .hasFiles("src/test/java/com/jhipster/test/pagination/infrastructure/secondary/MyAppPagesTest.java");
+      .hasFiles("src/main/java/com/jhipster/test/shared/pagination/infrastructure/secondary/MyAppPages.java")
+      .hasFiles("src/test/java/com/jhipster/test/shared/pagination/infrastructure/secondary/MyAppPagesTest.java");
   }
 }

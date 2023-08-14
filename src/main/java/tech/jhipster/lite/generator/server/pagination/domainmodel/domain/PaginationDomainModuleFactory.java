@@ -19,10 +19,10 @@ public class PaginationDomainModuleFactory {
 
     String packagePath = properties.packagePath();
 
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append("pagination");
+    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append("shared/pagination");
     JHipsterDestination mainDomainDestination = mainDestination.append("domain");
 
-    JHipsterDestination testDomainDestination = toSrcTestJava().append(packagePath).append("pagination/domain");
+    JHipsterDestination testDomainDestination = toSrcTestJava().append(packagePath).append("shared/pagination/domain");
 
     String baseName = properties.projectBaseName().capitalized();
 

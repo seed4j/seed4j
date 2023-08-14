@@ -8,8 +8,6 @@ import com.electronwill.nightconfig.core.Config;
 import com.electronwill.nightconfig.core.file.FileConfig;
 import com.electronwill.nightconfig.core.io.ParsingException;
 
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.Indentation;
 import tech.jhipster.lite.module.domain.JHipsterProjectFilePath;
 import tech.jhipster.lite.module.domain.javabuild.DependencySlug;
@@ -29,6 +27,8 @@ import tech.jhipster.lite.module.domain.replacement.MandatoryReplacer;
 import tech.jhipster.lite.module.domain.replacement.TextNeedleBeforeReplacer;
 import tech.jhipster.lite.module.infrastructure.secondary.FileSystemReplacer;
 import tech.jhipster.lite.module.infrastructure.secondary.javadependency.JavaDependenciesCommandHandler;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 public class GradleCommandHandler implements JavaDependenciesCommandHandler {
 

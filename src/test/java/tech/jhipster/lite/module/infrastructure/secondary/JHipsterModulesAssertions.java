@@ -15,10 +15,10 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.assertj.core.api.SoftAssertions;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.JHipsterModuleUpgrade;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public final class JHipsterModulesAssertions {
 

@@ -8,12 +8,12 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.javaproperties.SpringProperties;
 import tech.jhipster.lite.module.domain.javaproperties.SpringProperty;
 import tech.jhipster.lite.module.domain.javaproperties.SpringPropertyType;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @Service
 class FileSystemSpringPropertiesCommandsHandler {

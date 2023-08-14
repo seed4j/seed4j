@@ -1,10 +1,10 @@
 package tech.jhipster.lite.project.domain.download;
 
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.project.domain.ProjectPath;
 import tech.jhipster.lite.project.domain.ProjectsRepository;
 import tech.jhipster.lite.project.domain.UnknownProjectException;
-import tech.jhipster.lite.projectfolder.domain.ProjectFolder;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.projectfolder.domain.ProjectFolder;
 
 public class ProjectsDownloader {
 

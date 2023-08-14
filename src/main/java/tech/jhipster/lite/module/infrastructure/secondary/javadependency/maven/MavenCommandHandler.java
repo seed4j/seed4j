@@ -25,10 +25,6 @@ import org.joox.JOOX;
 import org.joox.Match;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
-import tech.jhipster.lite.common.domain.Enums;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
-import tech.jhipster.lite.error.domain.Assert;
-import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.module.domain.Indentation;
 import tech.jhipster.lite.module.domain.javabuild.VersionSlug;
 import tech.jhipster.lite.module.domain.javabuild.command.AddBuildPluginManagement;
@@ -45,6 +41,10 @@ import tech.jhipster.lite.module.domain.javadependency.DependencyId;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyClassifier;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyScope;
 import tech.jhipster.lite.module.infrastructure.secondary.javadependency.JavaDependenciesCommandHandler;
+import tech.jhipster.lite.shared.enumeration.domain.Enums;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 public class MavenCommandHandler implements JavaDependenciesCommandHandler {
 

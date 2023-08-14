@@ -2,9 +2,9 @@ package tech.jhipster.lite.module.infrastructure.secondary;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModuleApplied;
 import tech.jhipster.lite.module.domain.JHipsterModuleEvents;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 @Component
 class SpringJHipsterModuleEvents implements JHipsterModuleEvents {

@@ -5,7 +5,7 @@ import static tech.jhipster.lite.module.domain.replacement.ReplacementCondition.
 
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 @UnitTest
 class RegexReplacerTest {

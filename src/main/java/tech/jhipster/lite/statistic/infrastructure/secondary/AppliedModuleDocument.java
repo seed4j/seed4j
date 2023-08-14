@@ -8,8 +8,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import tech.jhipster.lite.common.domain.Generated;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.generation.domain.Generated;
 import tech.jhipster.lite.statistic.domain.AppliedModule;
 
 @Document(collection = "applied_module")

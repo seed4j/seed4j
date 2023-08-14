@@ -3,13 +3,13 @@ package tech.jhipster.lite.generator.server.springboot.mvc.dummy.jpapersistence.
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 
 import java.util.regex.Pattern;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.module.domain.replacement.RegexNeedleBeforeReplacer;
 import tech.jhipster.lite.module.domain.replacement.ReplacementCondition;
 import tech.jhipster.lite.module.domain.replacement.TextNeedleBeforeReplacer;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class DummyJpaPersistenceModuleFactory {
 

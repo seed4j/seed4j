@@ -1,6 +1,6 @@
 package tech.jhipster.lite.module.infrastructure.secondary;
 
-import tech.jhipster.lite.error.domain.ErrorKey;
+import tech.jhipster.lite.shared.error.domain.ErrorKey;
 
 enum ModuleSecondaryErrorKey implements ErrorKey {
   MISSING_PACKAGE_JSON("missing-package-json"),

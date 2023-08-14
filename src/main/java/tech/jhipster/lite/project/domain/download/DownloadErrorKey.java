@@ -1,6 +1,6 @@
 package tech.jhipster.lite.project.domain.download;
 
-import tech.jhipster.lite.error.domain.ErrorKey;
+import tech.jhipster.lite.shared.error.domain.ErrorKey;
 
 enum DownloadErrorKey implements ErrorKey {
   INVALID_DOWNLOAD("invalid-download-folder");

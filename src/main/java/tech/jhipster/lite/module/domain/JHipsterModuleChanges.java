@@ -1,6 +1,5 @@
 package tech.jhipster.lite.module.domain;
 
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.file.JHipsterFilesToDelete;
 import tech.jhipster.lite.module.domain.file.JHipsterFilesToMove;
 import tech.jhipster.lite.module.domain.file.JHipsterTemplatedFiles;
@@ -13,6 +12,7 @@ import tech.jhipster.lite.module.domain.packagejson.JHipsterModulePackageJson;
 import tech.jhipster.lite.module.domain.postaction.JHipsterModulePostActions;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
 import tech.jhipster.lite.module.domain.replacement.ContentReplacers;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 @SuppressWarnings("java:S6539")
 public class JHipsterModuleChanges {

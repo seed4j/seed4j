@@ -12,8 +12,6 @@ import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
-import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.module.domain.JHipsterProjectFilePath;
 import tech.jhipster.lite.module.domain.ProjectFiles;
 import tech.jhipster.lite.module.domain.file.JHipsterFileToMove;
@@ -22,6 +20,8 @@ import tech.jhipster.lite.module.domain.file.JHipsterFilesToMove;
 import tech.jhipster.lite.module.domain.file.JHipsterTemplatedFile;
 import tech.jhipster.lite.module.domain.file.JHipsterTemplatedFiles;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @Repository
 class FileSystemJHipsterModuleFiles {

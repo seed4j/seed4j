@@ -3,9 +3,9 @@ package tech.jhipster.lite.module.infrastructure.secondary.docker;
 import java.util.Collection;
 import java.util.function.Supplier;
 import org.springframework.stereotype.Repository;
-import tech.jhipster.lite.common.domain.Memoizers;
 import tech.jhipster.lite.module.domain.docker.DockerImageVersions;
 import tech.jhipster.lite.module.domain.docker.DockerImages;
+import tech.jhipster.lite.shared.memoizer.domain.Memoizers;
 
 @Repository
 class JHipsterDockerImages implements DockerImages {

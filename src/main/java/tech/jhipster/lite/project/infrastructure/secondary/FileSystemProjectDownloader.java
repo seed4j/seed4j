@@ -14,11 +14,11 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.project.domain.ProjectPath;
 import tech.jhipster.lite.project.domain.download.Project;
 import tech.jhipster.lite.project.domain.download.ProjectName;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 class FileSystemProjectDownloader {
 

@@ -1,6 +1,6 @@
 package tech.jhipster.lite.module.infrastructure.secondary.git;
 
-import tech.jhipster.lite.error.domain.ErrorKey;
+import tech.jhipster.lite.shared.error.domain.ErrorKey;
 
 enum GitErrorKey implements ErrorKey {
   COMMIT_ERROR("git-commit-error"),

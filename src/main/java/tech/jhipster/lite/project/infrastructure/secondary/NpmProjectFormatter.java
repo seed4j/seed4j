@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.project.domain.ProjectPath;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @ExcludeFromGeneratedCodeCoverage(reason = "Error cases are hard to test and not worth the efforts")
 record NpmProjectFormatter(String command) implements ProjectFormatter {

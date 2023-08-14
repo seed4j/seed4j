@@ -1,6 +1,6 @@
 package tech.jhipster.lite.project.infrastructure.secondary;
 
-import tech.jhipster.lite.error.domain.ErrorKey;
+import tech.jhipster.lite.shared.error.domain.ErrorKey;
 
 enum ProjectErrorKey implements ErrorKey {
   FORMATTING_ERROR("project-formatting-error"),

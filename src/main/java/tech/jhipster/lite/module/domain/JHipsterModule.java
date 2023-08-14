@@ -9,7 +9,6 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModuleContext.JHipsterModuleContextBuilder;
 import tech.jhipster.lite.module.domain.JHipsterModulePreActions.JHipsterModulePreActionsBuilder;
 import tech.jhipster.lite.module.domain.file.*;
@@ -43,6 +42,7 @@ import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
 import tech.jhipster.lite.module.domain.replacement.*;
 import tech.jhipster.lite.module.domain.replacement.JHipsterModuleMandatoryReplacementsFactory.JHipsterModuleMandatoryReplacementsFactoryBuilder;
 import tech.jhipster.lite.module.domain.replacement.JHipsterModuleOptionalReplacementsFactory.JHipsterModuleOptionalReplacementsFactoryBuilder;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 @SuppressWarnings("java:S6539")
 public class JHipsterModule {

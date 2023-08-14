@@ -1,6 +1,6 @@
 package tech.jhipster.lite.module.domain.docker;
 
-import tech.jhipster.lite.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 public class UnknownDockerImageException extends GeneratorException {
 

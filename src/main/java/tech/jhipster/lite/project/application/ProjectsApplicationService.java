@@ -8,7 +8,7 @@ import tech.jhipster.lite.project.domain.download.ProjectsDownloader;
 import tech.jhipster.lite.project.domain.history.ProjectActionToAppend;
 import tech.jhipster.lite.project.domain.history.ProjectActionsAppender;
 import tech.jhipster.lite.project.domain.history.ProjectHistory;
-import tech.jhipster.lite.projectfolder.domain.ProjectFolder;
+import tech.jhipster.lite.shared.projectfolder.domain.ProjectFolder;
 
 @Service
 public class ProjectsApplicationService {

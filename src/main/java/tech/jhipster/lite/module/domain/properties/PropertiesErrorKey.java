@@ -1,6 +1,6 @@
 package tech.jhipster.lite.module.domain.properties;
 
-import tech.jhipster.lite.error.domain.ErrorKey;
+import tech.jhipster.lite.shared.error.domain.ErrorKey;
 
 enum PropertiesErrorKey implements ErrorKey {
   INVALID_BASE_NAME("invalid-project-base-name"),

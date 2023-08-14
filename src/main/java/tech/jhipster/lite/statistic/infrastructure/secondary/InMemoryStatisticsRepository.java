@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Repository;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.Assert;
 import tech.jhipster.lite.statistic.domain.AppliedModule;
 import tech.jhipster.lite.statistic.domain.Statistics;
 import tech.jhipster.lite.statistic.domain.StatisticsRepository;

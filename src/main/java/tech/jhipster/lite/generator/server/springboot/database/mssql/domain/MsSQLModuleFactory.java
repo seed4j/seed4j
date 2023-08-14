@@ -3,7 +3,6 @@ package tech.jhipster.lite.generator.server.springboot.database.mssql.domain;
 import static tech.jhipster.lite.generator.server.springboot.database.sqlcommon.domain.SQLCommonModuleBuilder.*;
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.generator.server.springboot.database.common.domain.DatabaseType;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.LogLevel;
@@ -12,6 +11,7 @@ import tech.jhipster.lite.module.domain.docker.DockerImages;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyScope;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class MsSQLModuleFactory {
 

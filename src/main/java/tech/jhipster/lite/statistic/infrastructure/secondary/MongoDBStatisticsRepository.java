@@ -1,7 +1,7 @@
 package tech.jhipster.lite.statistic.infrastructure.secondary;
 
 import org.springframework.stereotype.Repository;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.Assert;
 import tech.jhipster.lite.statistic.domain.AppliedModule;
 import tech.jhipster.lite.statistic.domain.Statistics;
 import tech.jhipster.lite.statistic.domain.StatisticsRepository;

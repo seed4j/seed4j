@@ -1,6 +1,6 @@
 package tech.jhipster.lite.project.infrastructure.secondary;
 
-import tech.jhipster.lite.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 class ProjectZippingException extends GeneratorException {
 

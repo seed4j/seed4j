@@ -8,7 +8,7 @@ import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.*;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.JsonHelper;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.projectfolder.domain.ProjectFolder;
+import tech.jhipster.lite.shared.projectfolder.domain.ProjectFolder;
 
 @UnitTest
 class RestJHipsterModulePropertiesTest {

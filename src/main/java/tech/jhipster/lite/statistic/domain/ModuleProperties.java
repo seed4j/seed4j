@@ -1,7 +1,7 @@
 package tech.jhipster.lite.statistic.domain;
 
 import java.util.Map;
-import tech.jhipster.lite.common.domain.JHipsterCollections;
+import tech.jhipster.lite.shared.collection.domain.JHipsterCollections;
 
 public record ModuleProperties(Map<String, Object> properties) {
   public ModuleProperties(Map<String, Object> properties) {

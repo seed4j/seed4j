@@ -1,7 +1,7 @@
 package tech.jhipster.lite.statistic.domain;
 
 import java.util.UUID;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public record AppliedModuleId(UUID id) {
   public AppliedModuleId {

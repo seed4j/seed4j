@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.javaproperties.SpringComment;
 import tech.jhipster.lite.module.domain.javaproperties.SpringComments;
 import tech.jhipster.lite.module.domain.javaproperties.SpringPropertiesBlockComment;
@@ -16,6 +15,7 @@ import tech.jhipster.lite.module.domain.javaproperties.SpringPropertiesBlockComm
 import tech.jhipster.lite.module.domain.javaproperties.SpringPropertyType;
 import tech.jhipster.lite.module.domain.javaproperties.SpringPropertyTypeFileName;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 @Service
 class FileSystemSpringCommentsCommandsHandler {

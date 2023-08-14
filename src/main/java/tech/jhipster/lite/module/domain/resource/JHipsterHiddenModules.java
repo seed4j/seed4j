@@ -1,7 +1,7 @@
 package tech.jhipster.lite.module.domain.resource;
 
 import java.util.Collection;
-import tech.jhipster.lite.common.domain.JHipsterCollections;
+import tech.jhipster.lite.shared.collection.domain.JHipsterCollections;
 
 public record JHipsterHiddenModules(Collection<String> slugs, Collection<JHipsterModuleTag> tags) {
   public JHipsterHiddenModules(Collection<String> slugs, Collection<JHipsterModuleTag> tags) {

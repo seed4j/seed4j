@@ -5,8 +5,8 @@ import static org.assertj.core.api.Assertions.entry;
 
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.error.domain.ErrorStatus;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.shared.error.domain.ErrorStatus;
 
 @UnitTest
 class MissingJavaBuildConfigurationExceptionTest {

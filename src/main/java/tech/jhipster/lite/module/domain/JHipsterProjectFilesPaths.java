@@ -2,7 +2,7 @@ package tech.jhipster.lite.module.domain;
 
 import java.util.Collection;
 import java.util.stream.Stream;
-import tech.jhipster.lite.common.domain.JHipsterCollections;
+import tech.jhipster.lite.shared.collection.domain.JHipsterCollections;
 
 public record JHipsterProjectFilesPaths(Collection<JHipsterProjectFilePath> paths) {
   public JHipsterProjectFilesPaths(Collection<JHipsterProjectFilePath> paths) {

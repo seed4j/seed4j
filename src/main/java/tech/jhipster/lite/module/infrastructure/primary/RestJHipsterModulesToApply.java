@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Collection;
 import tech.jhipster.lite.module.domain.JHipsterModuleSlug;
 import tech.jhipster.lite.module.domain.JHipsterModulesToApply;
-import tech.jhipster.lite.projectfolder.domain.ProjectFolder;
+import tech.jhipster.lite.shared.projectfolder.domain.ProjectFolder;
 
 @Schema(name = "JHipsterModulesToApply", description = "Information to apply multiple modules")
 class RestJHipsterModulesToApply {

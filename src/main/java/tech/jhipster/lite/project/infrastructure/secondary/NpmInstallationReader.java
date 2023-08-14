@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @Service
 @ExcludeFromGeneratedCodeCoverage(reason = "Cases can only be tested by using different computers")

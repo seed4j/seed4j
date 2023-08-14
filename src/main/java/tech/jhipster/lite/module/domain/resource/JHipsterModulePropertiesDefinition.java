@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class JHipsterModulePropertiesDefinition {
 

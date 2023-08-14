@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.error.domain.MissingMandatoryValueException;
-import tech.jhipster.lite.error.domain.StringTooLongException;
-import tech.jhipster.lite.error.domain.StringWithWitespacesException;
+import tech.jhipster.lite.shared.error.domain.MissingMandatoryValueException;
+import tech.jhipster.lite.shared.error.domain.StringTooLongException;
+import tech.jhipster.lite.shared.error.domain.StringWithWitespacesException;
 
 @UnitTest
 class JHipsterModuleTagTest {

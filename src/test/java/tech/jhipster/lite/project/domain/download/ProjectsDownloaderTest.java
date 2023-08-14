@@ -13,7 +13,7 @@ import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.project.domain.ProjectPath;
 import tech.jhipster.lite.project.domain.ProjectsRepository;
 import tech.jhipster.lite.project.domain.UnknownProjectException;
-import tech.jhipster.lite.projectfolder.domain.ProjectFolder;
+import tech.jhipster.lite.shared.projectfolder.domain.ProjectFolder;
 
 @UnitTest
 @ExtendWith(MockitoExtension.class)

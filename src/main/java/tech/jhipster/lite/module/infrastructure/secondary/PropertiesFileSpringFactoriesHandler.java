@@ -3,11 +3,11 @@ package tech.jhipster.lite.module.infrastructure.secondary;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
-import tech.jhipster.lite.error.domain.Assert;
-import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.module.domain.javaproperties.PropertyKey;
 import tech.jhipster.lite.module.domain.javaproperties.PropertyValue;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 public class PropertiesFileSpringFactoriesHandler {
 

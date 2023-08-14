@@ -3,9 +3,9 @@ package tech.jhipster.lite.module.infrastructure.secondary.npm;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.ProjectFiles;
 import tech.jhipster.lite.module.domain.npm.NpmVersions;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public final class NpmVersionsFixture {
 

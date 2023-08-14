@@ -7,15 +7,15 @@ import java.util.Optional;
 import java.util.function.Function;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import tech.jhipster.lite.common.domain.Generated;
-import tech.jhipster.lite.common.domain.JHipsterCollections;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.javabuild.ArtifactId;
 import tech.jhipster.lite.module.domain.javabuild.DependencySlug;
 import tech.jhipster.lite.module.domain.javabuild.GroupId;
 import tech.jhipster.lite.module.domain.javabuild.VersionSlug;
 import tech.jhipster.lite.module.domain.javabuild.command.JavaBuildCommand;
 import tech.jhipster.lite.module.domain.javabuild.command.SetVersion;
+import tech.jhipster.lite.shared.collection.domain.JHipsterCollections;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.generation.domain.Generated;
 
 public class JavaDependency {
 

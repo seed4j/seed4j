@@ -3,8 +3,6 @@ package tech.jhipster.lite.module.infrastructure.secondary.javadependency;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.Indentation;
 import tech.jhipster.lite.module.domain.javabuild.command.AddBuildPluginManagement;
 import tech.jhipster.lite.module.domain.javabuild.command.AddDirectJavaBuildPlugin;
@@ -18,6 +16,8 @@ import tech.jhipster.lite.module.domain.javabuild.command.SetVersion;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
 import tech.jhipster.lite.module.infrastructure.secondary.javadependency.gradle.GradleCommandHandler;
 import tech.jhipster.lite.module.infrastructure.secondary.javadependency.maven.MavenCommandHandler;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @Service
 public class FileSystemJavaBuildCommandsHandler {

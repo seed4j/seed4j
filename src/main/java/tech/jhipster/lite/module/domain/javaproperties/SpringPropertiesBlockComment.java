@@ -1,7 +1,7 @@
 package tech.jhipster.lite.module.domain.javaproperties;
 
 import java.util.Map;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class SpringPropertiesBlockComment implements SpringPropertyTypeFileName {
 

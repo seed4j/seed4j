@@ -26,11 +26,11 @@ import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.JsonHelper;
 import tech.jhipster.lite.TestFileUtils;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.project.domain.ProjectPath;
 import tech.jhipster.lite.project.domain.download.Project;
 import tech.jhipster.lite.project.domain.download.ProjectName;
 import tech.jhipster.lite.project.domain.history.ProjectHistory;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 @UnitTest
 class FileSystemProjectsRepositoryTest {

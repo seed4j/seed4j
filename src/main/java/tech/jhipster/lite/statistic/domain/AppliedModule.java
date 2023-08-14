@@ -3,7 +3,7 @@ package tech.jhipster.lite.statistic.domain;
 import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class AppliedModule {
 

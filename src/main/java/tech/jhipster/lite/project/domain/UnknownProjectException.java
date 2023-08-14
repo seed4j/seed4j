@@ -1,6 +1,6 @@
 package tech.jhipster.lite.project.domain;
 
-import tech.jhipster.lite.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 public class UnknownProjectException extends GeneratorException {
 

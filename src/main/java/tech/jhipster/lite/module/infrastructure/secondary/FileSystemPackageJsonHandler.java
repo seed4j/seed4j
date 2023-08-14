@@ -13,10 +13,6 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import tech.jhipster.lite.common.domain.Enums;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
-import tech.jhipster.lite.error.domain.Assert;
-import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.module.domain.Indentation;
 import tech.jhipster.lite.module.domain.npm.NpmVersionSource;
 import tech.jhipster.lite.module.domain.npm.NpmVersions;
@@ -26,6 +22,10 @@ import tech.jhipster.lite.module.domain.packagejson.PackageJsonDependency;
 import tech.jhipster.lite.module.domain.packagejson.PackageJsonType;
 import tech.jhipster.lite.module.domain.packagejson.Scripts;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.shared.enumeration.domain.Enums;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 class FileSystemPackageJsonHandler {
 

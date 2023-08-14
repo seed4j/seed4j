@@ -15,7 +15,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import tech.jhipster.lite.LogsSpy;
 import tech.jhipster.lite.TestFileUtils;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.JHipsterModulesFixture;
 import tech.jhipster.lite.module.domain.JHipsterProjectFilePath;
@@ -23,6 +22,7 @@ import tech.jhipster.lite.module.domain.file.JHipsterFileToMove;
 import tech.jhipster.lite.module.domain.file.JHipsterFilesToDelete;
 import tech.jhipster.lite.module.domain.file.JHipsterFilesToMove;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 @UnitTest
 @ExtendWith(LogsSpy.class)

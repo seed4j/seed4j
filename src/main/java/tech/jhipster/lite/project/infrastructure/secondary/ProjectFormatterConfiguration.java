@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportRuntimeHints;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @Configuration
 @ImportRuntimeHints(NativeHints.class)

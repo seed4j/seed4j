@@ -2,12 +2,12 @@ package tech.jhipster.lite.module.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterDestinations;
 import tech.jhipster.lite.module.domain.replacement.ElementReplacer;
 import tech.jhipster.lite.module.domain.replacement.JHipsterUpgradeFilesReplacement;
 import tech.jhipster.lite.module.domain.replacement.JHipsterUpgradeFilesReplacements;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class JHipsterModuleUpgrade {
 

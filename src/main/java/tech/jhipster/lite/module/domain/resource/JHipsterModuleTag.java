@@ -1,7 +1,7 @@
 package tech.jhipster.lite.module.domain.resource;
 
 import java.util.regex.Pattern;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public record JHipsterModuleTag(String tag) {
   private static final Pattern TAG_FORMAT = Pattern.compile("^[a-z0-9-]+$");

@@ -2,9 +2,9 @@ package tech.jhipster.lite.module.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
 import tech.jhipster.lite.module.domain.replacement.TextNeedleBeforeReplacer;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 final class JHipsterModuleShortcuts {
 

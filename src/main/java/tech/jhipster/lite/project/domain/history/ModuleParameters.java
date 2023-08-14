@@ -2,8 +2,8 @@ package tech.jhipster.lite.project.domain.history;
 
 import java.util.HashMap;
 import java.util.Map;
-import tech.jhipster.lite.common.domain.JHipsterCollections;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.collection.domain.JHipsterCollections;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public record ModuleParameters(Map<String, Object> parameters) {
   public static final ModuleParameters EMPTY = new ModuleParameters(Map.of());

@@ -6,8 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.module.domain.ProjectFiles;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 @UnitTest
 class FileSystemProjectFilesTest {

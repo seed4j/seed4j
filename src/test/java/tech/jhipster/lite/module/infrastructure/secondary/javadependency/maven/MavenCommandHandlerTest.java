@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.TestFileUtils;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.module.domain.Indentation;
 import tech.jhipster.lite.module.domain.javabuild.command.AddBuildPluginManagement;
 import tech.jhipster.lite.module.domain.javabuild.command.AddDirectJavaBuildPlugin;
@@ -34,6 +33,7 @@ import tech.jhipster.lite.module.domain.javabuild.command.RemoveDirectJavaDepend
 import tech.jhipster.lite.module.domain.javabuild.command.RemoveJavaDependencyManagement;
 import tech.jhipster.lite.module.domain.javabuild.command.SetVersion;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyVersion;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 @UnitTest
 class MavenCommandHandlerTest {

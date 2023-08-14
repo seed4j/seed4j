@@ -2,7 +2,7 @@ package tech.jhipster.lite.module.domain.packagejson;
 
 import java.util.Collection;
 import java.util.stream.Stream;
-import tech.jhipster.lite.common.domain.JHipsterCollections;
+import tech.jhipster.lite.shared.collection.domain.JHipsterCollections;
 
 public record Scripts(Collection<Script> scripts) {
   public Scripts(Collection<Script> scripts) {

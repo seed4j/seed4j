@@ -1,6 +1,6 @@
 package tech.jhipster.lite.module.domain.npm;
 
-import tech.jhipster.lite.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 public class UnknownNpmPackageException extends GeneratorException {
 

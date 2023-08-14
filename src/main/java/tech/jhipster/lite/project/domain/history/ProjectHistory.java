@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
-import tech.jhipster.lite.common.domain.JHipsterCollections;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.project.domain.ProjectPath;
+import tech.jhipster.lite.shared.collection.domain.JHipsterCollections;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class ProjectHistory {
 

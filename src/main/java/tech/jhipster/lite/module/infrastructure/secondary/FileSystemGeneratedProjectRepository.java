@@ -6,13 +6,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 import org.springframework.stereotype.Repository;
-import tech.jhipster.lite.error.domain.Assert;
-import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.module.domain.GeneratedProjectRepository;
 import tech.jhipster.lite.module.domain.JHipsterFileMatcher;
 import tech.jhipster.lite.module.domain.JHipsterProjectFilePath;
 import tech.jhipster.lite.module.domain.JHipsterProjectFilesPaths;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 @Repository
 class FileSystemGeneratedProjectRepository implements GeneratedProjectRepository {

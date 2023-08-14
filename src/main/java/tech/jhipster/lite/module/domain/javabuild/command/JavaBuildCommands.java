@@ -3,8 +3,8 @@ package tech.jhipster.lite.module.domain.javabuild.command;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import tech.jhipster.lite.common.domain.JHipsterCollections;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.collection.domain.JHipsterCollections;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public record JavaBuildCommands(Collection<JavaBuildCommand> commands) {
   public static final JavaBuildCommands EMPTY = new JavaBuildCommands(List.of());

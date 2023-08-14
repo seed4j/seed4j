@@ -2,7 +2,7 @@ package tech.jhipster.lite.module.domain.javabuild;
 
 import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public record VersionSlug(String slug) {
   public static final String SUFFIX = ".version";

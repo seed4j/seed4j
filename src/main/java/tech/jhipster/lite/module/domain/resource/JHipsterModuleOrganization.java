@@ -3,12 +3,12 @@ package tech.jhipster.lite.module.domain.resource;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.generator.JHLiteModuleSlug;
 import tech.jhipster.lite.module.domain.JHipsterFeatureSlug;
 import tech.jhipster.lite.module.domain.landscape.JHipsterFeatureDependency;
 import tech.jhipster.lite.module.domain.landscape.JHipsterLandscapeDependency;
 import tech.jhipster.lite.module.domain.landscape.JHipsterModuleDependency;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class JHipsterModuleOrganization {
 

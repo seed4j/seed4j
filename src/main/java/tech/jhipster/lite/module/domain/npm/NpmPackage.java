@@ -1,6 +1,6 @@
 package tech.jhipster.lite.module.domain.npm;
 
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public record NpmPackage(NpmPackageName name, NpmPackageVersion version) {
   public NpmPackage(String name, String version) {

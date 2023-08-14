@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.git.GitRepository;
 import tech.jhipster.lite.module.domain.javabuild.command.JavaBuildCommands;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependenciesVersionsRepository;
@@ -13,6 +12,7 @@ import tech.jhipster.lite.module.domain.javadependency.ProjectJavaDependenciesRe
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
 import tech.jhipster.lite.module.domain.replacement.ContentReplacer;
 import tech.jhipster.lite.module.domain.replacement.ContentReplacers;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class JHipsterModulesApplyer {
 

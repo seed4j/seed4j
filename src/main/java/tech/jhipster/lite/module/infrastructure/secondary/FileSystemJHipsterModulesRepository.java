@@ -3,7 +3,6 @@ package tech.jhipster.lite.module.infrastructure.secondary;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModuleApplied;
 import tech.jhipster.lite.module.domain.JHipsterModuleChanges;
 import tech.jhipster.lite.module.domain.JHipsterModulesRepository;
@@ -15,6 +14,7 @@ import tech.jhipster.lite.module.domain.postaction.JHipsterModuleExecutionContex
 import tech.jhipster.lite.module.domain.resource.JHipsterModulesResources;
 import tech.jhipster.lite.module.infrastructure.secondary.javadependency.FileSystemJavaBuildCommandsHandler;
 import tech.jhipster.lite.project.infrastructure.primary.JavaProjects;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 @Repository
 class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {

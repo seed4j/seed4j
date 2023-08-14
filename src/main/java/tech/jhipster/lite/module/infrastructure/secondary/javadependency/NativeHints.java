@@ -7,7 +7,7 @@ import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.aot.hint.TypeReference;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @ExcludeFromGeneratedCodeCoverage(reason = "Not testing native runtime hints")
 class NativeHints implements RuntimeHintsRegistrar {

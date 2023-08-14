@@ -3,7 +3,7 @@ package tech.jhipster.lite.module.domain.landscape;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Stream;
-import tech.jhipster.lite.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public record JHipsterLandscapeDependencies(Collection<JHipsterLandscapeDependency> dependencies) {
   public JHipsterLandscapeDependencies {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 import java.util.stream.Stream;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModule.JHipsterModuleBuilder;
 import tech.jhipster.lite.module.domain.javabuild.command.AddBuildPluginManagement;
 import tech.jhipster.lite.module.domain.javabuild.command.AddDirectJavaBuildPlugin;
@@ -12,6 +11,7 @@ import tech.jhipster.lite.module.domain.javabuild.command.JavaBuildCommand;
 import tech.jhipster.lite.module.domain.javabuild.command.JavaBuildCommands;
 import tech.jhipster.lite.module.domain.javabuild.command.SetVersion;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependenciesVersions;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class JHipsterModuleJavaBuildPlugin {
 

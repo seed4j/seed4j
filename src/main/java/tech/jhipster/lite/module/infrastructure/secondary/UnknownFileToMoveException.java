@@ -1,6 +1,6 @@
 package tech.jhipster.lite.module.infrastructure.secondary;
 
-import tech.jhipster.lite.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 class UnknownFileToMoveException extends GeneratorException {
 

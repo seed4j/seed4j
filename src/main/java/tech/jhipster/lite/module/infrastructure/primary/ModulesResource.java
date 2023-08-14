@@ -16,7 +16,7 @@ import tech.jhipster.lite.module.domain.JHipsterModuleSlug;
 import tech.jhipster.lite.module.domain.JHipsterModuleToApply;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
-import tech.jhipster.lite.projectfolder.domain.ProjectFolder;
+import tech.jhipster.lite.shared.projectfolder.domain.ProjectFolder;
 
 @RestController
 @Tag(name = "Modules")

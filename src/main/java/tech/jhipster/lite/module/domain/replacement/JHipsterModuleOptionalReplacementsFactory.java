@@ -3,11 +3,11 @@ package tech.jhipster.lite.module.domain.replacement;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Stream;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.GeneratedProjectRepository;
 import tech.jhipster.lite.module.domain.JHipsterModule.JHipsterModuleBuilder;
 import tech.jhipster.lite.module.domain.JHipsterProjectFilePath;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class JHipsterModuleOptionalReplacementsFactory extends JHipsterModuleReplacementsFactory {
 

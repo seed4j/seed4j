@@ -1,7 +1,7 @@
 package tech.jhipster.lite.project.infrastructure.secondary;
 
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
-import tech.jhipster.lite.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @ExcludeFromGeneratedCodeCoverage
 class ProjectFormattingException extends GeneratorException {

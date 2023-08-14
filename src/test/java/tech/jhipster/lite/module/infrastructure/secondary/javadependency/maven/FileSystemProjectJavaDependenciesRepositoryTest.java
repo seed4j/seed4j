@@ -5,7 +5,6 @@ import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.*;
 
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.error.domain.GeneratorException;
 import tech.jhipster.lite.module.domain.javabuild.ArtifactId;
 import tech.jhipster.lite.module.domain.javabuild.GroupId;
 import tech.jhipster.lite.module.domain.javabuild.VersionSlug;
@@ -18,6 +17,7 @@ import tech.jhipster.lite.module.domain.javadependency.JavaDependencyVersion;
 import tech.jhipster.lite.module.domain.javadependency.ProjectJavaDependencies;
 import tech.jhipster.lite.module.domain.javadependency.ProjectJavaDependenciesVersions;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 @UnitTest
 class FileSystemProjectJavaDependenciesRepositoryTest {

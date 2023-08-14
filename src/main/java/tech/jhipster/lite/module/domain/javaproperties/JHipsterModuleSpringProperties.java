@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import tech.jhipster.lite.common.domain.JHipsterCollections;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import tech.jhipster.lite.shared.collection.domain.JHipsterCollections;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class JHipsterModuleSpringProperties {
 

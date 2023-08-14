@@ -3,8 +3,8 @@ package tech.jhipster.lite.module.domain.replacement;
 import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-import tech.jhipster.lite.error.domain.Assert;
-import tech.jhipster.lite.error.domain.GeneratorException;
+import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 public record RegexReplacer(ReplacementCondition condition, Pattern pattern) implements ElementReplacer {
   public RegexReplacer(ReplacementCondition condition, String regex) {

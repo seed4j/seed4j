@@ -1,10 +1,10 @@
 package tech.jhipster.lite.module.domain.file;
 
 import java.nio.file.Path;
-import tech.jhipster.lite.error.domain.Assert;
 import tech.jhipster.lite.module.domain.JHipsterModuleContext;
 import tech.jhipster.lite.module.domain.ProjectFiles;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class JHipsterTemplatedFile {
 

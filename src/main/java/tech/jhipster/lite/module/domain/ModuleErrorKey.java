@@ -1,6 +1,6 @@
 package tech.jhipster.lite.module.domain;
 
-import tech.jhipster.lite.error.domain.ErrorKey;
+import tech.jhipster.lite.shared.error.domain.ErrorKey;
 
 enum ModuleErrorKey implements ErrorKey {
   INVALID_SLUG("invalid-slug");

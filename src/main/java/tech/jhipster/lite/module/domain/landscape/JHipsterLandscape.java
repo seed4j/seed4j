@@ -8,11 +8,11 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-import tech.jhipster.lite.common.domain.ExcludeFromGeneratedCodeCoverage;
 import tech.jhipster.lite.module.domain.JHipsterFeatureSlug;
 import tech.jhipster.lite.module.domain.JHipsterModuleSlug;
 import tech.jhipster.lite.module.domain.JHipsterSlug;
 import tech.jhipster.lite.module.domain.resource.JHipsterModulesResources;
+import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 public class JHipsterLandscape {
 

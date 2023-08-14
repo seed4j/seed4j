@@ -4,6 +4,7 @@ import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.LogLevel;
+import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
 import tech.jhipster.lite.module.domain.javabuild.ArtifactId;
 import tech.jhipster.lite.module.domain.javabuild.GroupId;
@@ -15,6 +16,9 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class SpringBootMvcsModulesFactory {
 
+  private static final String PACKAGE_INFO = "package-info.java";
+  private static final String CORS = "cors";
+
   private static final JHipsterSource SOURCE = from("server/springboot/mvc/web");
   private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
   private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
@@ -24,7 +28,8 @@ public class SpringBootMvcsModulesFactory {
 
   private static final PropertyKey SERVER_PORT = propertyKey("server.port");
 
-  private static final String CORS_PRIMARY = "security/infrastructure/primary";
+  private static final String CORS_DESTINATION = "wire/security";
+  private static final String CORS_PRIMARY = CORS_DESTINATION + "/infrastructure/primary";
 
   public JHipsterModule buildEmptyModule(JHipsterModuleProperties properties) {
     return moduleBuilder(properties).build();
@@ -66,6 +71,9 @@ public class SpringBootMvcsModulesFactory {
   private JHipsterModuleBuilder springMvcBuilder(JHipsterModuleProperties properties, String loggerName, LogLevel logLevel) {
     String packagePath = properties.packagePath();
 
+    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath);
+    JHipsterDestination testDestination = toSrcTestJava().append(packagePath);
+
     //@formatter:off
     return moduleBuilder(properties)
       .documentation(documentationTitle("CORS configuration"), SOURCE.file("cors-configuration.md"))
@@ -82,25 +90,26 @@ public class SpringBootMvcsModulesFactory {
         .and()
       .files()
         .add(SOURCE.file("resources/404.html"), to("src/main/resources/public/error/404.html"))
-        .batch(MAIN_SOURCE.append("cors"), toSrcMainJava().append(packagePath).append(CORS_PRIMARY))
+        .batch(MAIN_SOURCE.append(CORS), mainDestination.append(CORS_PRIMARY))
           .addTemplate("CorsFilterConfiguration.java")
           .addTemplate("CorsProperties.java")
           .and()
+        .add(MAIN_SOURCE.append(CORS).template(PACKAGE_INFO), mainDestination.append(CORS_DESTINATION).append(PACKAGE_INFO))
         .add(
-          TEST_SOURCE.append("cors").template("CorsFilterConfigurationIT.java"),
-          toSrcTestJava().append(packagePath).append(CORS_PRIMARY).append("CorsFilterConfigurationIT.java")
+          TEST_SOURCE.append(CORS).template("CorsFilterConfigurationIT.java"),
+          testDestination.append(CORS_PRIMARY).append("CorsFilterConfigurationIT.java")
         )
-        .add(TEST_SOURCE.template("JsonHelper.java"), toSrcTestJava().append(packagePath).append("JsonHelper.java"))
+        .add(TEST_SOURCE.template("JsonHelper.java"), testDestination.append("JsonHelper.java"))
         .batch(TEST_SOURCE, toSrcTestJava().append(properties.packagePath()))
           .addTemplate("BeanValidationAssertions.java")
           .addTemplate("BeanValidationTest.java")
         .and()
-        .add(MAIN_SOURCE.template("BeanValidationErrorsHandler.java"), toSrcMainJava().append(packagePath).append("shared/error/infrastructure/primary/BeanValidationErrorsHandler.java"))
-        .batch(TEST_SOURCE, toSrcTestJava().append(packagePath).append("shared/error/infrastructure/primary"))
+        .add(MAIN_SOURCE.template("BeanValidationErrorsHandler.java"), mainDestination.append("shared/error/infrastructure/primary/BeanValidationErrorsHandler.java"))
+        .batch(TEST_SOURCE, testDestination.append("shared/error/infrastructure/primary"))
           .addTemplate("BeanValidationErrorsHandlerIntTest.java")
           .addTemplate("BeanValidationErrorsHandlerTest.java")
           .and()
-        .batch(TEST_SOURCE, toSrcTestJava().append(packagePath).append("shared/error_generator/infrastructure/primary"))
+        .batch(TEST_SOURCE, testDestination.append("shared/error_generator/infrastructure/primary"))
           .addTemplate("BeanValidationErrorsResource.java")
           .addTemplate("RestMandatoryParameter.java")
           .and()

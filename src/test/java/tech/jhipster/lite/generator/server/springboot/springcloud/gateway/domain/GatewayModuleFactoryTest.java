@@ -29,30 +29,30 @@ class GatewayModuleFactoryTest {
       .containing("<spring-cloud.version>")
       .containing(
         """
-                  <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-dependencies</artifactId>
-                    <version>${spring-cloud.version}</version>
-                    <scope>import</scope>
-                    <type>pom</type>
-                  </dependency>
-            """
+              <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+              </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.cloud</groupId>
-                  <artifactId>spring-cloud-starter-bootstrap</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.cloud</groupId>
-                  <artifactId>spring-cloud-starter-gateway</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-gateway</artifactId>
+            </dependency>
+        """
       )
       .and()
       .hasFile("src/main/resources/config/bootstrap.properties")
@@ -72,9 +72,9 @@ class GatewayModuleFactoryTest {
       .containing("spring.cloud.gateway.discovery.locator.enabled=false")
       .and()
       .hasJavaSources(
-        "com/jhipster/test/technical/infrastructure/primary/rest/GatewayResource.java",
-        "com/jhipster/test/technical/infrastructure/primary/rest/vm/RouteVM.java"
+        "com/jhipster/test/wire/gateway/infrastructure/primary/GatewayResource.java",
+        "com/jhipster/test/wire/gateway/infrastructure/primary/vm/RouteVM.java"
       )
-      .hasJavaTests("com/jhipster/test/technical/infrastructure/primary/rest/GatewayResourceIT.java");
+      .hasJavaTests("com/jhipster/test/wire/gateway/infrastructure/primary/GatewayResourceIT.java");
   }
 }

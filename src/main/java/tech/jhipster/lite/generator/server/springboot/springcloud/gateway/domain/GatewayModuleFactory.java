@@ -12,7 +12,7 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class GatewayModuleFactory {
 
-  private static final String GATEWAY_PACKAGE = "technical/infrastructure/primary/rest";
+  private static final String GATEWAY_PACKAGE = "wire/gateway/infrastructure/primary";
   private static final JHipsterSource SOURCE = from("server/springboot/springcloud/gateway/java");
   private static final PropertyValue TRUE_VALUE = propertyValue("true");
 

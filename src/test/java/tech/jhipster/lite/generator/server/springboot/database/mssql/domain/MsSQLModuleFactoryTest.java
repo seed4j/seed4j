@@ -50,12 +50,12 @@ class MsSQLModuleFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-              <dependency>
-                <groupId>com.microsoft.sqlserver</groupId>
-                <artifactId>mssql-jdbc</artifactId>
-                <scope>runtime</scope>
-              </dependency>
-          """
+            <dependency>
+              <groupId>com.microsoft.sqlserver</groupId>
+              <artifactId>mssql-jdbc</artifactId>
+              <scope>runtime</scope>
+            </dependency>
+        """
       )
       .containing("<groupId>com.zaxxer</groupId>")
       .containing("<artifactId>HikariCP</artifactId>")
@@ -67,7 +67,7 @@ class MsSQLModuleFactoryTest {
       .hasFile("src/main/resources/config/application.properties")
       .containing("spring.datasource.url=jdbc:sqlserver://localhost:1433;database=myapp;trustServerCertificate=true")
       .containing("spring.datasource.username=SA")
-      .containing("spring.datasource.password=yourStrong(!)Password")
+      .containing("spring.datasource.password=")
       .containing("spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver")
       .containing("spring.datasource.type=com.zaxxer.hikari.HikariDataSource")
       .containing("spring.datasource.hikari.poolName=Hikari")
@@ -91,7 +91,7 @@ class MsSQLModuleFactoryTest {
       .hasFile("src/test/resources/config/application.properties")
       .containing("spring.datasource.url=jdbc:tc:sqlserver")
       .containing("spring.datasource.username=SA")
-      .containing("spring.datasource.password=yourStrong(!)Password")
+      .containing("spring.datasource.password=")
       .containing("spring.datasource.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver")
       .containing("spring.datasource.hikari.maximum-pool-size=2")
       .containing("spring.jpa.open-in-view=false")

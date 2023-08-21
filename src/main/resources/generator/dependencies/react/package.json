@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "type": "module",
   "dependencies": {
-    "@nextui-org/react": "2.0.22",
+    "@nextui-org/react": "2.0.24",
     "axios": "1.4.0",
     "framer-motion": "10.16.0",
     "react": "18.2.0",
@@ -15,7 +15,7 @@
   "devDependencies": {
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
-    "@types/node": "20.5.0",
+    "@types/node": "20.5.1",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "@types/ws": "8.5.5",
@@ -28,7 +28,7 @@
     "jsdom": "22.1.0",
     "postcss": "8.4.28",
     "react-scripts": "5.0.1",
-    "sass": "1.66.0",
+    "sass": "1.66.1",
     "tailwindcss": "3.3.3",
     "ts-node": "10.9.1",
     "typescript": "5.1.6",

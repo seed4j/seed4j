@@ -2,7 +2,6 @@ package tech.jhipster.lite.generator.server.springboot.dbmigration.flyway.domain
 
 import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
 
-import java.time.Instant;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.TestFileUtils;
 import tech.jhipster.lite.UnitTest;

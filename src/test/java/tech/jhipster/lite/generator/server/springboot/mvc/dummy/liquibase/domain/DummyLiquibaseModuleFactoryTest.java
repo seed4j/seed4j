@@ -2,7 +2,6 @@ package tech.jhipster.lite.generator.server.springboot.mvc.dummy.liquibase.domai
 
 import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
 
-import java.time.Instant;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.TestFileUtils;
 import tech.jhipster.lite.UnitTest;

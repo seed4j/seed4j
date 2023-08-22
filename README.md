@@ -274,7 +274,7 @@ Support this project by becoming a sponsor! [Become a sponsor](https://opencolle
 <table>
   <tbody>
     <tr>
-     <td align="center" valign="middle">
+      <td align="center" valign="middle">
         <a href="https://dev.entando.org/jhipster" target="_blank">
           <img width="200em" src="https://www.jhipster.tech/images/open-collective/entandoe.png">
         </a>

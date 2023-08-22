@@ -268,7 +268,6 @@ Support this project by becoming a sponsor! [Become a sponsor](https://opencolle
 
 **Thank you to our sponsors!**
 
-
 ### Gold Sponsors
 
 <table>

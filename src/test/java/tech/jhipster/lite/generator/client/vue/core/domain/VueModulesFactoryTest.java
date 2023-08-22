@@ -121,10 +121,10 @@ class VueModulesFactoryTest {
       .containing("import piniaPersist from 'pinia-plugin-persist';")
       .containing(
         """
-                const pinia = createPinia();
-                pinia.use(piniaPersist);
-                app.use(pinia);
-                """
+        const pinia = createPinia();
+        pinia.use(piniaPersist);
+        app.use(pinia);
+        """
       );
   }
 }

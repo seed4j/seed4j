@@ -31,9 +31,10 @@ public class AngularJwtModuleFactory {
       },\
     """;
 
-  private static final String AUTH_INTERCEPTOR_IMPORT = """
-      import { AuthInterceptor } from './app/auth/auth.interceptor';
-      """;
+  private static final String AUTH_INTERCEPTOR_IMPORT =
+    """
+    import { AuthInterceptor } from './app/auth/auth.interceptor';
+    """;
 
   private static final JHipsterSource SOURCE = from("client/angular/security/jwt/src/main/webapp/app");
 

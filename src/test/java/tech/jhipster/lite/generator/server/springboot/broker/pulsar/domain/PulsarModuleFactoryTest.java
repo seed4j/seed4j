@@ -83,11 +83,13 @@ class PulsarModuleFactoryTest {
       )
       .hasFiles("src/test/java/com/jhipster/test/wire/pulsar/infrastructure/config/PulsarConfigurationIT.java")
       .hasFile("README.md")
-      .containing("""
-          ```bash
-          docker compose -f src/main/docker/pulsar.yml up -d
-          ```
-          """);
+      .containing(
+        """
+        ```bash
+        docker compose -f src/main/docker/pulsar.yml up -d
+        ```
+        """
+      );
   }
 
   private ModuleFile integrationTestAnnotation() {

@@ -88,11 +88,13 @@ class KafkaModuleFactoryTest {
       .hasPrefixedFiles("documentation", "apache-kafka.md")
       .hasFile("README.md")
       .containing("[Apache Kafka](documentation/apache-kafka.md)")
-      .containing("""
+      .containing(
+        """
         ```bash
         docker compose -f src/main/docker/kafka.yml up -d
         ```
-        """)
+        """
+      )
       .and();
   }
 
@@ -147,10 +149,12 @@ class KafkaModuleFactoryTest {
       .hasFile("src/main/docker/akhq.yml")
       .and()
       .hasFile("README.md")
-      .containing("""
+      .containing(
+        """
         ```bash
         docker compose -f src/main/docker/akhq.yml up -d
         ```
-        """);
+        """
+      );
   }
 }

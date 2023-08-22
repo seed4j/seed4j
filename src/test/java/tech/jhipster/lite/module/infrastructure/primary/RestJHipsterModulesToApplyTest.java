@@ -25,20 +25,20 @@ class RestJHipsterModulesToApplyTest {
 
   private static String json() {
     return """
-          {
-          "modules": ["maven-java", "init"],
-          "properties":
-            {
-              "projectFolder": "/dummy",
-              "parameters": {
-                "projectName": "Chips Project",
-                "baseName": "chips",
-                "packageName": "tech.jhipster.chips",
-                "serverPort": 8080
-              }
-            }
+      {
+      "modules": ["maven-java", "init"],
+      "properties":
+        {
+          "projectFolder": "/dummy",
+          "parameters": {
+            "projectName": "Chips Project",
+            "baseName": "chips",
+            "packageName": "tech.jhipster.chips",
+            "serverPort": 8080
+          }
         }
-        """;
+    }
+    """;
   }
 
   @Test

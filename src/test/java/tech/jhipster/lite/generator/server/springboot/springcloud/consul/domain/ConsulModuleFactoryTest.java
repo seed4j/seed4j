@@ -96,11 +96,13 @@ class ConsulModuleFactoryTest {
       .containing("spring.cloud.compatibility-verifier.enabled=false")
       .and()
       .hasFile("README.md")
-      .containing("""
+      .containing(
+        """
         ```bash
         docker compose -f src/main/docker/consul.yml up -d
         ```
-        """)
+        """
+      )
       .and()
       .hasFile("src/main/resources/logback-spring.xml")
       .containing("  <logger name=\"org.apache\" level=\"ERROR\" />")

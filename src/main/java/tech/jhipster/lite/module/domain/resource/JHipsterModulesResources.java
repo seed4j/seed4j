@@ -28,10 +28,10 @@ public class JHipsterModulesResources {
     assertUniqueSlugs(modulesResources);
 
     resources =
-      Collections.unmodifiableMap(
-        removeHiddenModules(modulesResources, hiddenModules)
-          .collect(Collectors.toMap(JHipsterModuleResource::slug, Function.identity(), (x, y) -> y, LinkedHashMap::new))
-      );
+    Collections.unmodifiableMap(
+      removeHiddenModules(modulesResources, hiddenModules)
+        .collect(Collectors.toMap(JHipsterModuleResource::slug, Function.identity(), (x, y) -> y, LinkedHashMap::new))
+    );
   }
 
   private Stream<JHipsterModuleResource> removeHiddenModules(

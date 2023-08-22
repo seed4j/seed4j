@@ -34,21 +34,21 @@ class SpringBootMvcsModulesFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-web</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>org.reflections</groupId>
-                  <artifactId>reflections</artifactId>
-                  <version>${reflections.version}</version>
-                  <scope>test</scope>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.reflections</groupId>
+              <artifactId>reflections</artifactId>
+              <version>${reflections.version}</version>
+              <scope>test</scope>
+            </dependency>
+        """
       );
   }
 
@@ -72,25 +72,25 @@ class SpringBootMvcsModulesFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-                <dependency>
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-web</artifactId>
+              <exclusions>
+                <exclusion>
                   <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-web</artifactId>
-                  <exclusions>
-                    <exclusion>
-                      <groupId>org.springframework.boot</groupId>
-                      <artifactId>spring-boot-starter-tomcat</artifactId>
-                    </exclusion>
-                  </exclusions>
-                </dependency>
-            """
+                  <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+              </exclusions>
+            </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-undertow</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-undertow</artifactId>
+            </dependency>
+        """
       );
   }
 
@@ -131,11 +131,11 @@ class SpringBootMvcsModulesFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-validation</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-validation</artifactId>
+            </dependency>
+        """
       )
       .and();
   }

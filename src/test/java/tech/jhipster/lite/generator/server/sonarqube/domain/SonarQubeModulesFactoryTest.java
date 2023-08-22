@@ -71,34 +71,34 @@ class SonarQubeModulesFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-                  <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>properties-maven-plugin</artifactId>
-                    <version>${properties-maven-plugin.version}</version>
-                    <executions>
-                      <execution>
-                        <phase>initialize</phase>
-                        <goals>
-                          <goal>read-project-properties</goal>
-                        </goals>
-                        <configuration>
-                          <files>
-                            <file>sonar-project.properties</file>
-                          </files>
-                        </configuration>
-                      </execution>
-                    </executions>
-                  </plugin>
-            """
+              <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>${properties-maven-plugin.version}</version>
+                <executions>
+                  <execution>
+                    <phase>initialize</phase>
+                    <goals>
+                      <goal>read-project-properties</goal>
+                    </goals>
+                    <configuration>
+                      <files>
+                        <file>sonar-project.properties</file>
+                      </files>
+                    </configuration>
+                  </execution>
+                </executions>
+              </plugin>
+        """
       )
       .containing(
         """
-                    <plugin>
-                      <groupId>org.sonarsource.scanner.maven</groupId>
-                      <artifactId>sonar-maven-plugin</artifactId>
-                      <version>${sonar-maven-plugin.version}</version>
-                    </plugin>
-            """
+                <plugin>
+                  <groupId>org.sonarsource.scanner.maven</groupId>
+                  <artifactId>sonar-maven-plugin</artifactId>
+                  <version>${sonar-maven-plugin.version}</version>
+                </plugin>
+        """
       )
       .and()
       .hasFile("src/main/docker/sonar.yml")

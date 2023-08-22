@@ -21,7 +21,8 @@ final class JHipsterModuleShortcuts {
   private static final JHipsterProjectFilePath SPRING_TEST_LOG_FILE = path("src/test/resources/logback.xml");
   private static final TextNeedleBeforeReplacer JHIPSTER_LOGGER_NEEDLE = lineBeforeText("<!-- jhipster-needle-logback-add-log -->");
 
-  private static final String BASH_TEMPLATE = """
+  private static final String BASH_TEMPLATE =
+    """
     ```bash
     {{command}}
     ```

@@ -32,14 +32,22 @@ class TextNeedleBeforeReplacerTest {
   void shouldInsertTextLineBeforeFirstLineNeedle() {
     TextNeedleBeforeReplacer replacer = new TextNeedleBeforeReplacer(always(), "<!-- needle !-->");
 
-    String updatedContent = replacer.replacement().apply("""
-            <!-- needle !-->
-            """, "<element />");
+    String updatedContent = replacer
+      .replacement()
+      .apply(
+        """
+        <!-- needle !-->
+        """,
+        "<element />"
+      );
 
-    assertThat(updatedContent).isEqualTo("""
+    assertThat(updatedContent)
+      .isEqualTo(
+        """
         <element />
         <!-- needle !-->
-        """);
+        """
+      );
   }
 
   @Test
@@ -48,18 +56,24 @@ class TextNeedleBeforeReplacerTest {
 
     String updatedContent = replacer
       .replacement()
-      .apply("""
-            <root>
-            <!-- needle !-->
-            </root>
-            """, "<element />");
+      .apply(
+        """
+        <root>
+        <!-- needle !-->
+        </root>
+        """,
+        "<element />"
+      );
 
-    assertThat(updatedContent).isEqualTo("""
+    assertThat(updatedContent)
+      .isEqualTo(
+        """
         <root>
         <element />
         <!-- needle !-->
         </root>
-        """);
+        """
+      );
   }
 
   @Test
@@ -68,20 +82,26 @@ class TextNeedleBeforeReplacerTest {
 
     String updatedContent = replacer
       .replacement()
-      .apply("""
-            <root>
-              <!-- needle !-->
+      .apply(
+        """
+        <root>
+          <!-- needle !-->
 
-            </root>
-            """, "<element />");
+        </root>
+        """,
+        "<element />"
+      );
 
-    assertThat(updatedContent).isEqualTo("""
+    assertThat(updatedContent)
+      .isEqualTo(
+        """
         <root>
         <element />
           <!-- needle !-->
 
         </root>
-        """);
+        """
+      );
   }
 
   @Test
@@ -92,14 +112,14 @@ class TextNeedleBeforeReplacerTest {
       .replacement()
       .apply(
         """
-            <root>
-              <!-- needle !-->
+        <root>
+          <!-- needle !-->
 
 
-              <!-- needle !-->
-              <!-- needle !--> with trailling text
-            </root>
-            """,
+          <!-- needle !-->
+          <!-- needle !--> with trailling text
+        </root>
+        """,
         "<element />"
       );
 

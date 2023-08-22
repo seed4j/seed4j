@@ -17,12 +17,12 @@ class RestProjectHistoryTest {
 
   private String json() {
     return """
-        {"modules":\
-        [\
-        {"slug":"test-module"}\
-        ],\
-        "properties":{"key":"value"}\
-        }\
-        """;
+    {"modules":\
+    [\
+    {"slug":"test-module"}\
+    ],\
+    "properties":{"key":"value"}\
+    }\
+    """;
   }
 }

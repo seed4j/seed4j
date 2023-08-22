@@ -126,13 +126,13 @@ class SpringBootCoreModuleFactoryTest {
       )
       .notContaining(
         """
-           <dependency>
-             <groupId>org.mockito</groupId>
-             <artifactId>mockito-junit-jupiter</artifactId>
-             <version>${mockito.version}</version>
-             <scope>test</scope>
-           </dependency>
-       """
+            <dependency>
+              <groupId>org.mockito</groupId>
+              <artifactId>mockito-junit-jupiter</artifactId>
+              <version>${mockito.version}</version>
+              <scope>test</scope>
+            </dependency>
+        """
       )
       .containing("    <defaultGoal>spring-boot:run</defaultGoal>")
       .and()

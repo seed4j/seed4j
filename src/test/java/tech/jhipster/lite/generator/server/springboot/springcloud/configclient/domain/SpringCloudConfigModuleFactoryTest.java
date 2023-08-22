@@ -42,30 +42,30 @@ class SpringCloudConfigModuleFactoryTest {
       .containing("<spring-cloud.version>")
       .containing(
         """
-                  <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-dependencies</artifactId>
-                    <version>${spring-cloud.version}</version>
-                    <scope>import</scope>
-                    <type>pom</type>
-                  </dependency>
-            """
+              <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+              </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.cloud</groupId>
-                  <artifactId>spring-cloud-starter-bootstrap</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.cloud</groupId>
-                  <artifactId>spring-cloud-starter-config</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-config</artifactId>
+            </dependency>
+        """
       )
       .and()
       .hasFile("src/main/resources/config/bootstrap.properties")

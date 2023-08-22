@@ -19,33 +19,33 @@ public class JacocoThresholdModuleFactory {
           "<outputDirectory>target\\/jacoco\\/<\\/outputDirectory>[\n\r]*\\s*<\\/configuration>[\n\r]*\\s*<\\/execution>\\s*$"
         ),
         """
-                        <execution>
-                          <id>check</id>
-                          <goals>
-                            <goal>check</goal>
-                          </goals>
-                          <configuration>
-                            <dataFile>target/jacoco/allTest.exec</dataFile>
-                            <rules>
-                              <rule>
-                                <element>CLASS</element>
-                                <limits>
-                                  <limit>
-                                    <counter>LINE</counter>
-                                    <value>COVEREDRATIO</value>
-                                    <minimum>1.00</minimum>
-                                  </limit>
-                                  <limit>
-                                    <counter>BRANCH</counter>
-                                    <value>COVEREDRATIO</value>
-                                    <minimum>1.00</minimum>
-                                  </limit>
-                                </limits>
-                              </rule>
-                            </rules>
-                          </configuration>
-                        </execution>\
-            """
+                    <execution>
+                      <id>check</id>
+                      <goals>
+                        <goal>check</goal>
+                      </goals>
+                      <configuration>
+                        <dataFile>target/jacoco/allTest.exec</dataFile>
+                        <rules>
+                          <rule>
+                            <element>CLASS</element>
+                            <limits>
+                              <limit>
+                                <counter>LINE</counter>
+                                <value>COVEREDRATIO</value>
+                                <minimum>1.00</minimum>
+                              </limit>
+                              <limit>
+                                <counter>BRANCH</counter>
+                                <value>COVEREDRATIO</value>
+                                <minimum>1.00</minimum>
+                              </limit>
+                            </limits>
+                          </rule>
+                        </rules>
+                      </configuration>
+                    </execution>\
+        """
       )
       .and()
       .and()

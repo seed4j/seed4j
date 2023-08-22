@@ -45,10 +45,12 @@ public class SonarQubeModulesFactory {
       .put("sonarqubeDockerImage", dockerImages.get("sonarqube").fullName())
       .and()
       .documentation(documentationTitle("sonar"), SOURCE.template("sonar.md"))
-      .startupCommand("""
+      .startupCommand(
+        """
         docker compose -f src/main/docker/sonar.yml up -d
         ./mvnw clean verify sonar:sonar\
-        """)
+        """
+      )
       .javaBuildPlugins()
       .plugin(propertiesPlugin())
       .pluginManagement(sonarPlugin())
@@ -66,20 +68,20 @@ public class SonarQubeModulesFactory {
       .versionSlug("properties-maven-plugin")
       .additionalElements(
         """
-             <executions>
-              <execution>
-                <phase>initialize</phase>
-                <goals>
-                  <goal>read-project-properties</goal>
-                </goals>
-                <configuration>
-                  <files>
-                    <file>sonar-project.properties</file>
-                  </files>
-                </configuration>
-              </execution>
-            </executions>
-            """
+         <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>read-project-properties</goal>
+            </goals>
+            <configuration>
+              <files>
+                <file>sonar-project.properties</file>
+              </files>
+            </configuration>
+          </execution>
+        </executions>
+        """
       )
       .build();
   }

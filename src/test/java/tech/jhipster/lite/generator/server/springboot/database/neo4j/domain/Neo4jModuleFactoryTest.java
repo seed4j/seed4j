@@ -44,30 +44,32 @@ class Neo4jModuleFactoryTest {
     assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile(), readmeFile())
       .hasFiles("documentation/neo4j-db.md")
       .hasFile("README.md")
-      .containing("""
-            ```bash
-            docker compose -f src/main/docker/neo4j.yml up -d
-            ```
-            """)
+      .containing(
+        """
+        ```bash
+        docker compose -f src/main/docker/neo4j.yml up -d
+        ```
+        """
+      )
       .and()
       .hasFile("pom.xml")
       .containing(
         """
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-data-neo4j</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-data-neo4j</artifactId>
+            </dependency>
+        """
       )
       .containing(
         """
-                <dependency>
-                  <groupId>org.testcontainers</groupId>
-                  <artifactId>neo4j</artifactId>
-                  <version>${testcontainers.version}</version>
-                  <scope>test</scope>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.testcontainers</groupId>
+              <artifactId>neo4j</artifactId>
+              <version>${testcontainers.version}</version>
+              <scope>test</scope>
+            </dependency>
+        """
       )
       .and()
       .hasFile("src/main/docker/neo4j.yml")

@@ -155,18 +155,18 @@ class FileSystemProjectsRepositoryTest {
       assertThat(Files.readString(Paths.get(path.get(), ".jhipster/modules", "history.json")))
         .isEqualToIgnoringWhitespace(
           """
+          {
+            "actions" : [
               {
-                "actions" : [
-                  {
-                    "module" : "test-module",
-                    "date" : "2021-12-03T10:15:30Z",
-                    "properties" : {
-                      "key" : "value"
-                    }
-                  }
-                ]
+                "module" : "test-module",
+                "date" : "2021-12-03T10:15:30Z",
+                "properties" : {
+                  "key" : "value"
+                }
               }
-              """
+            ]
+          }
+          """
         );
     }
   }

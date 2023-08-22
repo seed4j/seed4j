@@ -37,10 +37,12 @@ class DummyJpaPersistenceModuleFactoryTest {
       )
       .hasFile("src/main/java/com/jhipster/test/dummy/application/BeersApplicationService.java")
       .containing("import org.springframework.transaction.annotation.Transactional;")
-      .containing("""
-            @Transactional(readOnly = true)
-            public Beers catalog() {
-          """)
+      .containing(
+        """
+          @Transactional(readOnly = true)
+          public Beers catalog() {
+        """
+      )
       .containing(
         """
           @Transactional

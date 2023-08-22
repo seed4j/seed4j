@@ -53,11 +53,11 @@ class FlywayModuleFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-                <dependency>
-                  <groupId>org.flywaydb</groupId>
-                  <artifactId>flyway-mysql</artifactId>
-                </dependency>
-            """
+            <dependency>
+              <groupId>org.flywaydb</groupId>
+              <artifactId>flyway-mysql</artifactId>
+            </dependency>
+        """
       );
   }
 }

@@ -58,23 +58,23 @@ class AngularOauth2ModuleFactoryTest {
       .hasFile("src/main/webapp/environments/environment.ts")
       .containing(
         """
-                  keycloak: {
-                    url: 'http://localhost:9080',
-                    realm: 'jhipster',
-                    client_id: 'web_app'
-                  },
-                """
+          keycloak: {
+            url: 'http://localhost:9080',
+            realm: 'jhipster',
+            client_id: 'web_app'
+          },
+        """
       )
       .and()
       .hasFile("src/main/webapp/environments/environment.prod.ts")
       .containing(
         """
-                  keycloak: {
-                    url: 'http://localhost:9080',
-                    realm: 'jhipster',
-                    client_id: 'web_app'
-                  },
-                """
+          keycloak: {
+            url: 'http://localhost:9080',
+            realm: 'jhipster',
+            client_id: 'web_app'
+          },
+        """
       )
       .and()
       .hasFile("src/main/webapp/app/app.component.html")

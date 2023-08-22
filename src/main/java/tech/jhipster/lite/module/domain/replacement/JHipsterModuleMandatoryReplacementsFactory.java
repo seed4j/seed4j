@@ -19,7 +19,10 @@ public class JHipsterModuleMandatoryReplacementsFactory extends JHipsterModuleRe
   }
 
   public static class JHipsterModuleMandatoryReplacementsFactoryBuilder
-    extends JHipsterModuleReplacementsFactoryBuilder<JHipsterModuleMandatoryReplacementsFactory, JHipsterModuleFileMandatoryReplacementsFactoryBuilder> {
+    extends JHipsterModuleReplacementsFactoryBuilder<
+      JHipsterModuleMandatoryReplacementsFactory,
+      JHipsterModuleFileMandatoryReplacementsFactoryBuilder
+    > {
 
     private JHipsterModuleMandatoryReplacementsFactoryBuilder(JHipsterModuleBuilder module) {
       super(module);
@@ -37,7 +40,10 @@ public class JHipsterModuleMandatoryReplacementsFactory extends JHipsterModuleRe
   }
 
   public static class JHipsterModuleFileMandatoryReplacementsFactoryBuilder
-    extends JHipsterModuleFileReplacementsBuilder<JHipsterModuleMandatoryReplacementsFactoryBuilder, JHipsterModuleFileMandatoryReplacementsFactoryBuilder> {
+    extends JHipsterModuleFileReplacementsBuilder<
+      JHipsterModuleMandatoryReplacementsFactoryBuilder,
+      JHipsterModuleFileMandatoryReplacementsFactoryBuilder
+    > {
 
     private JHipsterModuleFileMandatoryReplacementsFactoryBuilder(
       JHipsterModuleMandatoryReplacementsFactoryBuilder replacements,

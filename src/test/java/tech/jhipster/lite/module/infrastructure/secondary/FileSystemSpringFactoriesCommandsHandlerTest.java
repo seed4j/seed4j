@@ -28,9 +28,11 @@ class FileSystemSpringFactoriesCommandsHandlerTest {
     handler.handle(new JHipsterProjectFolder(folder), properties(springTestFactory()));
 
     assertThat(contentNormalizingNewLines(Paths.get(folder, "src/test/resources/META-INF/spring.factories")))
-      .contains("""
+      .contains(
+        """
         o.s.c.ApplicationListener=c.m.m.MyListener1,c.m.m.MyListener2
-        """);
+        """
+      );
   }
 
   @Test
@@ -42,9 +44,11 @@ class FileSystemSpringFactoriesCommandsHandlerTest {
     handler.handle(new JHipsterProjectFolder(folder), properties(springTestFactory()));
 
     assertThat(contentNormalizingNewLines(propertiesFile))
-      .contains("""
+      .contains(
+        """
         o.s.c.ApplicationListener=c.m.m.MyListener1,c.m.m.MyListener2
-        """);
+        """
+      );
   }
 
   private SpringFactories properties(SpringFactory factory) {

@@ -147,7 +147,10 @@ public class JHipsterModule {
     );
   }
 
-  private Function<Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder>, Stream<SpringPropertiesBlockComment>> toSpringPropertiesBlockComments() {
+  private Function<
+    Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder>,
+    Stream<SpringPropertiesBlockComment>
+  > toSpringPropertiesBlockComments() {
     return inputProperties ->
       inputProperties.getValue().build().propertiesBlockComments().stream().map(toSpringPropertiesBlockComment(inputProperties));
   }

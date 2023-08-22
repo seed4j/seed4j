@@ -32,16 +32,13 @@ class RestJHipsterLandscapeTest {
 
   private String json() {
     return """
-        {\
-        "levels":[\
-        {"elements":[{"type":"MODULE","slug":"first","operation":"operation","properties":{PROPERTIES_DEFINITION}}]},\
-        {"elements":[{"type":"FEATURE","slug":"my-feature","modules":\
-        [{"type":"MODULE","slug":"second","operation":"operation","properties":{PROPERTIES_DEFINITION},"dependencies":[{"type":"MODULE","slug":"first"}]}]}]}\
-        ]\
-        }\
-        """.replace(
-        "{PROPERTIES_DEFINITION}",
-        RestJHipsterModulePropertiesDefinitionTest.json()
-      );
+    {\
+    "levels":[\
+    {"elements":[{"type":"MODULE","slug":"first","operation":"operation","properties":{PROPERTIES_DEFINITION}}]},\
+    {"elements":[{"type":"FEATURE","slug":"my-feature","modules":\
+    [{"type":"MODULE","slug":"second","operation":"operation","properties":{PROPERTIES_DEFINITION},"dependencies":[{"type":"MODULE","slug":"first"}]}]}]}\
+    ]\
+    }\
+    """.replace("{PROPERTIES_DEFINITION}", RestJHipsterModulePropertiesDefinitionTest.json());
   }
 }

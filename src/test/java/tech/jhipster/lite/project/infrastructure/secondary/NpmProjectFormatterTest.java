@@ -26,9 +26,12 @@ class NpmProjectFormatterTest {
 
     formatter.format(new ProjectPath(directory));
 
-    assertThat(Files.readString(jsonFile)).isEqualTo("""
+    assertThat(Files.readString(jsonFile))
+      .isEqualTo(
+        """
         { "key": "value" }
-        """);
+        """
+      );
   }
 
   private static Path simpleNpmProject(String directory) throws IOException {
@@ -38,9 +41,12 @@ class NpmProjectFormatterTest {
     Files.copy(Paths.get("src/test/resources/projects/files/package.json"), path.resolve("package.json"));
 
     Path jsonFile = path.resolve("file.json");
-    Files.write(jsonFile, """
-        {"key":"value"}
-        """.getBytes(StandardCharsets.UTF_8));
+    Files.write(
+      jsonFile,
+      """
+      {"key":"value"}
+      """.getBytes(StandardCharsets.UTF_8)
+    );
 
     return jsonFile;
   }

@@ -48,9 +48,12 @@ class FileSystemSpringCommentsCommandsHandlerTest {
 
     handler.handle(folder(path), commentOnMain("spring.application.name"), emptySpringPropertiesBlockComments());
 
-    assertThat(content(propetiesFile)).contains("""
-		# This is a comment
-		spring.application.name""");
+    assertThat(content(propetiesFile))
+      .contains(
+        """
+        # This is a comment
+        spring.application.name"""
+      );
   }
 
   @ParameterizedTest
@@ -62,9 +65,12 @@ class FileSystemSpringCommentsCommandsHandlerTest {
 
     handler.handle(folder(path), commentOnMainBootstrap("spring.application.name"), emptySpringPropertiesBlockComments());
 
-    assertThat(content(propetiesFile)).contains("""
-		# This is a comment
-		spring.application.name""");
+    assertThat(content(propetiesFile))
+      .contains(
+        """
+        # This is a comment
+        spring.application.name"""
+      );
   }
 
   @ParameterizedTest
@@ -76,9 +82,12 @@ class FileSystemSpringCommentsCommandsHandlerTest {
 
     handler.handle(folder(path), commentOnTest("logging.level.tech.jhipster.lite"), emptySpringPropertiesBlockComments());
 
-    assertThat(content(propetiesFile)).contains("""
-		# This is a comment
-		logging.level.tech.jhipster.lite""");
+    assertThat(content(propetiesFile))
+      .contains(
+        """
+        # This is a comment
+        logging.level.tech.jhipster.lite"""
+      );
   }
 
   @ParameterizedTest
@@ -90,9 +99,12 @@ class FileSystemSpringCommentsCommandsHandlerTest {
 
     handler.handle(folder(path), commentOnTestBootstrap("logging.level.tech.jhipster.lite"), emptySpringPropertiesBlockComments());
 
-    assertThat(content(propetiesFile)).contains("""
-		# This is a comment
-		logging.level.tech.jhipster.lite""");
+    assertThat(content(propetiesFile))
+      .contains(
+        """
+        # This is a comment
+        logging.level.tech.jhipster.lite"""
+      );
   }
 
   @Test
@@ -115,9 +127,12 @@ class FileSystemSpringCommentsCommandsHandlerTest {
 
     handler.handle(folder(path), commentOnMain("springdoc.swagger-ui.operationsSorter"), emptySpringPropertiesBlockComments());
 
-    assertThat(content(propetiesFile)).doesNotContain("""
-		# This is a comment
-		springdoc.swagger-ui.operationsSorter""");
+    assertThat(content(propetiesFile))
+      .doesNotContain(
+        """
+        # This is a comment
+        springdoc.swagger-ui.operationsSorter"""
+      );
   }
 
   @ParameterizedTest
@@ -130,13 +145,21 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     handler.handle(folder(path), commentOnMain(propertyKey), emptySpringPropertiesBlockComments());
     handler.handle(folder(path), commentOnMain(propertyKey), emptySpringPropertiesBlockComments());
 
-    assertThat(content(propetiesFile)).doesNotContain("""
-      # This is a comment
-      # This is a comment
-      """ + propertyKey);
-    assertThat(content(propetiesFile)).contains("""
-		# This is a comment
-		""" + propertyKey);
+    assertThat(content(propetiesFile))
+      .doesNotContain(
+        """
+        # This is a comment
+        # This is a comment
+        """ +
+        propertyKey
+      );
+    assertThat(content(propetiesFile))
+      .contains(
+        """
+        # This is a comment
+        """ +
+        propertyKey
+      );
   }
 
   @ParameterizedTest
@@ -146,11 +169,11 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     Path propetiesFile = Paths.get(path, propertiesPath);
     String properties =
       """
-			spring.application.name=JHLite
-			springdoc.swagger-ui.tryItOutEnabled=alpha
-			logging.level.tech.jhipster.lite=INFO
-			springdoc.swagger-ui.tagsSorter=alpha
-			springdoc.swagger-ui.operationsSorter=alpha""";
+      spring.application.name=JHLite
+      springdoc.swagger-ui.tryItOutEnabled=alpha
+      logging.level.tech.jhipster.lite=INFO
+      springdoc.swagger-ui.tagsSorter=alpha
+      springdoc.swagger-ui.operationsSorter=alpha""";
     createPropertiesFile(propetiesFile, properties);
 
     handler.handle(folder(path), emptySpringComments(), springPropertiesBlockCommentsOnPropertyType(SpringPropertyType.MAIN_PROPERTIES));
@@ -158,12 +181,12 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     assertThat(content(propetiesFile))
       .contains(
         """
-		spring.application.name=JHLite
-		logging.level.tech.jhipster.lite=INFO
-		## Swagger properties
-		springdoc.swagger-ui.operationsSorter=alpha
-		springdoc.swagger-ui.tagsSorter=alpha
-		springdoc.swagger-ui.tryItOutEnabled=alpha"""
+        spring.application.name=JHLite
+        logging.level.tech.jhipster.lite=INFO
+        ## Swagger properties
+        springdoc.swagger-ui.operationsSorter=alpha
+        springdoc.swagger-ui.tagsSorter=alpha
+        springdoc.swagger-ui.tryItOutEnabled=alpha"""
       );
   }
 
@@ -174,13 +197,13 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     Path propetiesFile = Paths.get(path, propertiesPath);
     String properties =
       """
-        spring.application.name=JHLite
-        # This is a comment
-        springdoc.swagger-ui.tryItOutEnabled=alpha
-        logging.level.tech.jhipster.lite=INFO
-        # This is a comment
-        springdoc.swagger-ui.tagsSorter=alpha
-        springdoc.swagger-ui.operationsSorter=alpha""";
+      spring.application.name=JHLite
+      # This is a comment
+      springdoc.swagger-ui.tryItOutEnabled=alpha
+      logging.level.tech.jhipster.lite=INFO
+      # This is a comment
+      springdoc.swagger-ui.tagsSorter=alpha
+      springdoc.swagger-ui.operationsSorter=alpha""";
     createPropertiesFile(propetiesFile, properties);
 
     handler.handle(folder(path), emptySpringComments(), springPropertiesBlockCommentsOnPropertyType(SpringPropertyType.TEST_PROPERTIES));
@@ -188,14 +211,14 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     assertThat(content(propetiesFile))
       .contains(
         """
-          spring.application.name=JHLite
-          logging.level.tech.jhipster.lite=INFO
-          ## Swagger properties
-          springdoc.swagger-ui.operationsSorter=alpha
-          # This is a comment
-          springdoc.swagger-ui.tagsSorter=alpha
-          # This is a comment
-          springdoc.swagger-ui.tryItOutEnabled=alpha"""
+        spring.application.name=JHLite
+        logging.level.tech.jhipster.lite=INFO
+        ## Swagger properties
+        springdoc.swagger-ui.operationsSorter=alpha
+        # This is a comment
+        springdoc.swagger-ui.tagsSorter=alpha
+        # This is a comment
+        springdoc.swagger-ui.tryItOutEnabled=alpha"""
       );
   }
 
@@ -206,12 +229,12 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     Path propetiesFile = Paths.get(path, propertiesPath);
     String properties =
       """
-        spring.application.name=JHLite
-        logging.level.tech.jhipster.lite=INFO
-        ## Swagger properties
-        springdoc.swagger-ui.operationsSorter=alpha
-        springdoc.swagger-ui.tagsSorter=alpha
-        springdoc.swagger-ui.tryItOutEnabled=alpha""";
+      spring.application.name=JHLite
+      logging.level.tech.jhipster.lite=INFO
+      ## Swagger properties
+      springdoc.swagger-ui.operationsSorter=alpha
+      springdoc.swagger-ui.tagsSorter=alpha
+      springdoc.swagger-ui.tryItOutEnabled=alpha""";
     createPropertiesFile(propetiesFile, properties);
 
     handler.handle(
@@ -223,13 +246,13 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     assertThat(content(propetiesFile))
       .doesNotContain(
         """
-          spring.application.name=JHLite
-          logging.level.tech.jhipster.lite=INFO
-          ## Swagger properties
-          ## Swagger properties
-          springdoc.swagger-ui.operationsSorter=alpha
-          springdoc.swagger-ui.tagsSorter=alpha
-          springdoc.swagger-ui.tryItOutEnabled=alpha"""
+        spring.application.name=JHLite
+        logging.level.tech.jhipster.lite=INFO
+        ## Swagger properties
+        ## Swagger properties
+        springdoc.swagger-ui.operationsSorter=alpha
+        springdoc.swagger-ui.tagsSorter=alpha
+        springdoc.swagger-ui.tryItOutEnabled=alpha"""
       );
   }
 

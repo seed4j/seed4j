@@ -24,12 +24,12 @@ public class AngularOauth2ModuleFactory {
   private static final ElementReplacer ENVIRONMENT_NEEDLE = lineAfterRegex("export const environment *= *\\{");
   private static final String KEYCLOAK_ENVIRONMENT =
     """
-      keycloak: {
-        url: 'http://localhost:9080',
-        realm: 'jhipster',
-        client_id: 'web_app'
-      },
-      """;
+    keycloak: {
+      url: 'http://localhost:9080',
+      realm: 'jhipster',
+      client_id: 'web_app'
+    },
+    """;
 
   private static final Pattern EMPTY_ALLOWED_COMMON_DEPENDENCIES_PATTERN = Pattern.compile(
     "(\"allowedCommonJsDependencies\": *\\[\\s*)\\]"
@@ -57,34 +57,38 @@ public class AngularOauth2ModuleFactory {
 
   private static final String TEST_IMPORTS =
     """
-      import { By } from '@angular/platform-browser';
-      import { Oauth2AuthService } from "./auth/oauth2-auth.service";
-      import LoginComponent from './login/login.component';
-      """;
+    import { By } from '@angular/platform-browser';
+    import { Oauth2AuthService } from "./auth/oauth2-auth.service";
+    import LoginComponent from './login/login.component';
+    """;
   private static final ElementReplacer TEST_NEEDLE = lineAfterRegex("^\\s+it\\('should have appName',[^}]+\\}\\);");
 
-  private static final String LOGIN_IMPORT = """
-      import LoginComponent from './login/login.component';
-      """;
+  private static final String LOGIN_IMPORT =
+    """
+    import LoginComponent from './login/login.component';
+    """;
 
   private static final String OAUTH2_AUTH_SERVICE_IMPORT =
     """
-      import { Oauth2AuthService } from './auth/oauth2-auth.service';
-      """;
+    import { Oauth2AuthService } from './auth/oauth2-auth.service';
+    """;
 
   private static final ElementReplacer APPNAME_NEEDLE = lineAfterRegex("appName = '';");
 
-  private static final String INJECT_OAUTH2_AUTH_SERVICE = """
-        private oauth2AuthService = inject(Oauth2AuthService);\
-      """;
+  private static final String INJECT_OAUTH2_AUTH_SERVICE =
+    """
+      private oauth2AuthService = inject(Oauth2AuthService);\
+    """;
 
-  private static final String INIT_AUTHENTICATION = """
-          this.oauth2AuthService.initAuthentication();\
-      """;
+  private static final String INIT_AUTHENTICATION =
+    """
+        this.oauth2AuthService.initAuthentication();\
+    """;
 
-  private static final String INJECT_IMPORT = """
-      import { Component, inject, OnInit } from '@angular/core';
-      """;
+  private static final String INJECT_IMPORT =
+    """
+    import { Component, inject, OnInit } from '@angular/core';
+    """;
 
   private static final ElementReplacer INJECT_NEEDLE = text("import { Component, OnInit } from '@angular/core';");
 
@@ -92,29 +96,30 @@ public class AngularOauth2ModuleFactory {
 
   private static final String TESTBED_INJECT_OAUTH2_AUTH_SERVICE =
     """
-          oauth2AuthService = TestBed.inject(Oauth2AuthService);\
-      """;
+        oauth2AuthService = TestBed.inject(Oauth2AuthService);\
+    """;
 
   private static final ElementReplacer TEST_APP_COMPONENT = lineAfterRegex("let comp: AppComponent;");
 
-  private static final String DECLARE_INJECT_OAUTH2_AUTH_SERVICE = """
-        let oauth2AuthService: Oauth2AuthService;\
-      """;
+  private static final String DECLARE_INJECT_OAUTH2_AUTH_SERVICE =
+    """
+      let oauth2AuthService: Oauth2AuthService;\
+    """;
 
   private static final String LOGIN_COMPONENT_TEST =
     """
 
-      it('should display login component', () => {
-        fixture.detectChanges();
+    it('should display login component', () => {
+      fixture.detectChanges();
 
-        expect(fixture.debugElement.query(By.directive(LoginComponent))).toBeTruthy();
-      });
-      """;
+      expect(fixture.debugElement.query(By.directive(LoginComponent))).toBeTruthy();
+    });
+    """;
 
   private static final String HTTP_AUTH_INTERCEPTOR_IMPORT =
     """
-      import { HttpAuthInterceptor } from './app/auth/http-auth.interceptor';
-      """;
+    import { HttpAuthInterceptor } from './app/auth/http-auth.interceptor';
+    """;
 
   private static final JHipsterSource SOURCE = from("client/angular/security/oauth2/src/main/webapp/app");
 

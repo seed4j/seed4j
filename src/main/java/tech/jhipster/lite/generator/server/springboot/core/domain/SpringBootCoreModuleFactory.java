@@ -128,9 +128,7 @@ public class SpringBootCoreModuleFactory {
         <configuration>
           <mainClass>%s</mainClass>
         </configuration>
-        """.formatted(
-            fullyQualifiedMainClass
-          )
+        """.formatted(fullyQualifiedMainClass)
       )
       .build();
   }

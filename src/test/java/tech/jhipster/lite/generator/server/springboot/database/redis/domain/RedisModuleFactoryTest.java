@@ -40,11 +40,13 @@ class RedisModuleFactoryTest {
     assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile(), readmeFile())
       .hasFiles("documentation/redis.md")
       .hasFile("README.md")
-      .containing("""
-            ```bash
-            docker compose -f src/main/docker/redis.yml up -d
-            ```
-            """)
+      .containing(
+        """
+        ```bash
+        docker compose -f src/main/docker/redis.yml up -d
+        ```
+        """
+      )
       .and()
       .hasFile("pom.xml")
       .containing(

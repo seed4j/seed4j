@@ -84,18 +84,21 @@ class FileSystemPackageJsonHandlerTest {
     assertPackageJsonContent(
       folder,
       """
-          "scripts": {
-            "@prettier/plugin-xml": "test",
-            "build": "vue-tsc -p tsconfig-build.json --noEmit && vite build --emptyOutDir"
-          },
-        """
+        "scripts": {
+          "@prettier/plugin-xml": "test",
+          "build": "vue-tsc -p tsconfig-build.json --noEmit && vite build --emptyOutDir"
+        },
+      """
     );
 
-    assertPackageJsonContent(folder, """
-          "devDependencies": {
-            "@prettier/plugin-xml": "2.1.0"
-          },
-        """);
+    assertPackageJsonContent(
+      folder,
+      """
+        "devDependencies": {
+          "@prettier/plugin-xml": "2.1.0"
+        },
+      """
+    );
   }
 
   @Nested
@@ -108,12 +111,15 @@ class FileSystemPackageJsonHandlerTest {
 
       packageJson.handle(Indentation.DEFAULT, folder, emptyBuilder().addScript(scriptKey("key"), scriptCommand("value")).build());
 
-      assertPackageJsonContent(folder, """
-            "scripts": {
-              "key": "value"
-            }
+      assertPackageJsonContent(
+        folder,
+        """
+          "scripts": {
+            "key": "value"
           }
-          """);
+        }
+        """
+      );
     }
 
     @Test
@@ -129,11 +135,11 @@ class FileSystemPackageJsonHandlerTest {
       assertPackageJsonContent(
         folder,
         """
-            "scripts": {
-              "key": "value",
-              "key2": "value2",
-              "build": "vue-tsc -p tsconfig-build.json --noEmit && vite build --emptyOutDir"
-          """
+          "scripts": {
+            "key": "value",
+            "key2": "value2",
+            "build": "vue-tsc -p tsconfig-build.json --noEmit && vite build --emptyOutDir"
+        """
       );
     }
 
@@ -143,11 +149,14 @@ class FileSystemPackageJsonHandlerTest {
 
       packageJson.handle(Indentation.DEFAULT, folder, emptyBuilder().addScript(scriptKey("key"), scriptCommand("value")).build());
 
-      assertPackageJsonContent(folder, """
-            "scripts": {
-              "key": "value"
-            },
-          """);
+      assertPackageJsonContent(
+        folder,
+        """
+          "scripts": {
+            "key": "value"
+          },
+        """
+      );
     }
 
     @Test
@@ -159,11 +168,13 @@ class FileSystemPackageJsonHandlerTest {
       String result = packageJsonContent(folder);
       assertThat(result)
         .as(() -> "Can't find " + displayLineBreaks(result) + " in result " + displayLineBreaks(result))
-        .contains("""
-                "scripts": {
-                  "build": "test"
-                },
-              """);
+        .contains(
+          """
+            "scripts": {
+              "build": "test"
+            },
+          """
+        );
     }
 
     @Test
@@ -175,10 +186,10 @@ class FileSystemPackageJsonHandlerTest {
       assertPackageJsonContent(
         folder,
         """
-            "scripts": {
-              "build": "test",
-              "serve": "vue-tsc -p tsconfig-build.json --noEmit && vite build --emptyOutDir"
-          """
+          "scripts": {
+            "build": "test",
+            "serve": "vue-tsc -p tsconfig-build.json --noEmit && vite build --emptyOutDir"
+        """
       );
     }
   }
@@ -202,11 +213,11 @@ class FileSystemPackageJsonHandlerTest {
       assertPackageJsonContent(
         folder,
         """
-            "devDependencies": {
-              "@prettier/plugin-xmll": "1.1.1"
-            }
+          "devDependencies": {
+            "@prettier/plugin-xmll": "1.1.1"
           }
-          """
+        }
+        """
       );
     }
 
@@ -225,10 +236,10 @@ class FileSystemPackageJsonHandlerTest {
       assertPackageJsonContent(
         folder,
         """
-            "devDependencies": {
-              "@prettier/plugin-xmll": "1.1.1",
-              "@prettier/plugin-xml": "2.1.0"
-          """
+          "devDependencies": {
+            "@prettier/plugin-xmll": "1.1.1",
+            "@prettier/plugin-xml": "2.1.0"
+        """
       );
     }
 
@@ -247,10 +258,10 @@ class FileSystemPackageJsonHandlerTest {
       assertPackageJsonContent(
         folder,
         """
-            "devDependencies": {
-              "@prettier/plugin-xml": "1.1.1"
-            },
-          """
+          "devDependencies": {
+            "@prettier/plugin-xml": "1.1.1"
+          },
+        """
       );
     }
 
@@ -266,10 +277,13 @@ class FileSystemPackageJsonHandlerTest {
         emptyBuilder().removeDevDependency(packageName("@prettier/plugin-xml"), VersionSource.COMMON).build()
       );
 
-      assertPackageJsonContent(folder, """
-            "devDependencies": {
-                },
-          """);
+      assertPackageJsonContent(
+        folder,
+        """
+          "devDependencies": {
+              },
+        """
+      );
     }
 
     private void mockDevVersion() {
@@ -296,11 +310,11 @@ class FileSystemPackageJsonHandlerTest {
       assertPackageJsonContent(
         folder,
         """
-            "dependencies": {
-              "@fortawesome/fontawesome-svg-core": "1.1.1"
-            }
+          "dependencies": {
+            "@fortawesome/fontawesome-svg-core": "1.1.1"
           }
-          """
+        }
+        """
       );
     }
 
@@ -319,10 +333,10 @@ class FileSystemPackageJsonHandlerTest {
       assertPackageJsonContent(
         folder,
         """
-            "dependencies": {
-              "@fortawesome/fontawesome-svg-coree": "1.1.1",
-              "@fortawesome/fontawesome-svg-core": "^6.1.1"
-          """
+          "dependencies": {
+            "@fortawesome/fontawesome-svg-coree": "1.1.1",
+            "@fortawesome/fontawesome-svg-core": "^6.1.1"
+        """
       );
     }
 
@@ -341,10 +355,10 @@ class FileSystemPackageJsonHandlerTest {
       assertPackageJsonContent(
         folder,
         """
-            "dependencies": {
-              "@fortawesome/fontawesome-svg-core": "1.1.1"
-            },
-          """
+          "dependencies": {
+            "@fortawesome/fontawesome-svg-core": "1.1.1"
+          },
+        """
       );
     }
 
@@ -360,10 +374,13 @@ class FileSystemPackageJsonHandlerTest {
         emptyBuilder().removeDependency(packageName("@fortawesome/fontawesome-svg-core"), VersionSource.COMMON).build()
       );
 
-      assertPackageJsonContent(folder, """
-            "dependencies": {
-                },
-          """);
+      assertPackageJsonContent(
+        folder,
+        """
+          "dependencies": {
+              },
+        """
+      );
     }
 
     private void mockVersion() {

@@ -31,37 +31,37 @@ public class ModulesSteps {
 
   private static final String MODULE_APPLICATION_TEMPLATE =
     """
-      {
-      "projectFolder": "{PROJECT_FOLDER}",
-      "parameters": {{ PARAMETERS }}
-      }
-      """;
+    {
+    "projectFolder": "{PROJECT_FOLDER}",
+    "parameters": {{ PARAMETERS }}
+    }
+    """;
 
   private static final String MODULE_APPLY_AND_COMMIT_TEMPLATE =
     """
-      {
-      "projectFolder": "{PROJECT_FOLDER}",
-      "commit": true,
-      "parameters": {{ PARAMETERS }}
-      }
-      """;
+    {
+    "projectFolder": "{PROJECT_FOLDER}",
+    "commit": true,
+    "parameters": {{ PARAMETERS }}
+    }
+    """;
 
   private static final String DEFAULT_MODULES_PROPERTIES_TEMPLATE =
     """
-      {
-        "modules": [{MODULES}],
-        "properties":
-          {
-            "projectFolder": "{PROJECT_FOLDER}",
-            "parameters": {
-              "projectName": "Chips Project",
-              "baseName": "chips",
-              "packageName": "tech.jhipster.chips",
-              "serverPort": 8080
-            }
+    {
+      "modules": [{MODULES}],
+      "properties":
+        {
+          "projectFolder": "{PROJECT_FOLDER}",
+          "parameters": {
+            "projectName": "Chips Project",
+            "baseName": "chips",
+            "packageName": "tech.jhipster.chips",
+            "serverPort": 8080
           }
-      }
-      """;
+        }
+    }
+    """;
 
   @When("I apply modules to default project")
   public void applyModulesForDefaultProject(List<String> modulesSlugs) {

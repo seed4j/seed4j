@@ -32,20 +32,20 @@ class RestJHipsterModulePropertiesTest {
 
   private static String json() {
     return """
-        {
-          "projectFolder": "/test",
-          "commit": true,
-          "parameters": {
-            "packageName": "tech.jhipster.chips",
-            "indentSize": 2,
-            "projectName": "JHipster project",
-            "baseName": "jhipster",
-            "optionalString": "optional",
-            "mandatoryInteger": 42,
-            "mandatoryBoolean": true,
-            "optionalBoolean": true
-          }
-        }
-          """;
+    {
+      "projectFolder": "/test",
+      "commit": true,
+      "parameters": {
+        "packageName": "tech.jhipster.chips",
+        "indentSize": 2,
+        "projectName": "JHipster project",
+        "baseName": "jhipster",
+        "optionalString": "optional",
+        "mandatoryInteger": 42,
+        "mandatoryBoolean": true,
+        "optionalBoolean": true
+      }
+    }
+      """;
   }
 }

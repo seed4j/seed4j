@@ -24,11 +24,11 @@ class Hibernate2ndLevelCacheModuleFactoryTest {
       .hasFile("pom.xml")
       .containing(
         """
-              <dependency>
-                <groupId>org.hibernate.orm</groupId>
-                <artifactId>hibernate-jcache</artifactId>
-              </dependency>
-          """
+            <dependency>
+              <groupId>org.hibernate.orm</groupId>
+              <artifactId>hibernate-jcache</artifactId>
+            </dependency>
+        """
       )
       .and()
       .hasFile("src/main/resources/config/application.properties")

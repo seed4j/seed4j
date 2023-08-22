@@ -16,21 +16,25 @@ class FileSystemDockerImagesReaderTest {
 
   @Test
   void shouldIgnoreInvalidVersionInFile() {
-    FileSystemDockerImagesReader reader = mockedReader("""
+    FileSystemDockerImagesReader reader = mockedReader(
+      """
       FROM invalid
        FROM mysql:8.0.29
-      FROM postgres:14.3""");
+      FROM postgres:14.3"""
+    );
 
     assertThatThrownBy(() -> reader.get().get(new DockerImageName("invalid"))).isExactlyInstanceOf(UnknownDockerImageException.class);
   }
 
   @Test
   void shouldGetVersionsFromFile() {
-    FileSystemDockerImagesReader reader = mockedReader("""
+    FileSystemDockerImagesReader reader = mockedReader(
+      """
       FROM mongo:5.0.9
        FROM mysql:8.0.29
       FROM postgres:14.3
-      """);
+      """
+    );
 
     DockerImageVersion image = reader.get().get(new DockerImageName("mysql"));
 

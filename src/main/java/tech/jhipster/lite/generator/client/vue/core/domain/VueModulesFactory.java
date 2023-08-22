@@ -32,7 +32,8 @@ public class VueModulesFactory {
     import { createPinia } from 'pinia';
     import piniaPersist from 'pinia-plugin-persist';
     """;
-  private static final String PINIA_PROVIDER = """
+  private static final String PINIA_PROVIDER =
+    """
     const pinia = createPinia();
     pinia.use(piniaPersist);
     app.use(pinia);

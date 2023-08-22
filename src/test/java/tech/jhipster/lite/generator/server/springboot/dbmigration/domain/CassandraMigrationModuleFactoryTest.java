@@ -63,11 +63,13 @@ class CassandraMigrationModuleFactoryTest {
       )
       .and()
       .hasFile("README.md")
-      .containing("""
+      .containing(
+        """
         ```bash
         docker compose -f src/main/docker/cassandra-migration.yml up -d
         ```
-        """)
+        """
+      )
       .and()
       .hasFile("src/main/docker/cassandra/Cassandra-Migration.Dockerfile")
       .containing("cassandra:4.0.7");

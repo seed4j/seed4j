@@ -27,11 +27,13 @@ class ForcedProjectFolderPrefixIntTest {
       .perform(
         post("/api/modules/init/apply-patch")
           .contentType(MediaType.APPLICATION_JSON)
-          .content("""
-            {
-              "projectFolder": "/tmp/forced/my-project"
-            }
-          """)
+          .content(
+            """
+              {
+                "projectFolder": "/tmp/forced/my-project"
+              }
+            """
+          )
       )
       .andExpect(status().isOk());
   }
@@ -42,11 +44,13 @@ class ForcedProjectFolderPrefixIntTest {
       .perform(
         post("/api/modules/init/apply-patch")
           .contentType(MediaType.APPLICATION_JSON)
-          .content("""
-            {
-              "projectFolder": "/home/my-project"
-            }
-          """)
+          .content(
+            """
+              {
+                "projectFolder": "/home/my-project"
+              }
+            """
+          )
       )
       .andExpect(status().isBadRequest());
   }
@@ -57,11 +61,13 @@ class ForcedProjectFolderPrefixIntTest {
       .perform(
         post("/api/modules/init/apply-patch")
           .contentType(MediaType.APPLICATION_JSON)
-          .content("""
-            {
-              "projectFolder": "/tmp/forced/../my-project"
-            }
-          """)
+          .content(
+            """
+              {
+                "projectFolder": "/tmp/forced/../my-project"
+              }
+            """
+          )
       )
       .andExpect(status().isBadRequest());
   }

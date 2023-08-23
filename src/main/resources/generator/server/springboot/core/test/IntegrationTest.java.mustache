@@ -14,5 +14,5 @@ import org.springframework.core.annotation.AliasFor;
 @SpringBootTest(classes = { {{ baseName }}App.class })
 public @interface IntegrationTest {
   @AliasFor(annotation = SpringBootTest.class)
-  public String[] properties() default {};
+  String[] properties() default {};
 }

@@ -3,7 +3,7 @@
     "@angular/animations": "16.2.1",
     "@angular/cdk": "16.2.1",
     "@angular/common": "16.2.1",
-    "@angular/compiler": "16.2.1",
+    "@angular/compiler": "16.2.2",
     "@angular/core": "16.2.1",
     "@angular/forms": "16.2.1",
     "@angular/material": "16.2.1",

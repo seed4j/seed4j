@@ -20,7 +20,6 @@ public final class CucumbersModules {
       .addDependency(cucumberJavaDependency())
       .addDependency(cucumberSpringDependency())
       .addDependency(junitVintageDependency())
-      .addDependency(testNgDependency())
       .and();
   }
 
@@ -53,14 +52,5 @@ public final class CucumbersModules {
 
   private static JavaDependency junitVintageDependency() {
     return javaDependency().groupId("org.junit.vintage").artifactId("junit-vintage-engine").scope(JavaDependencyScope.TEST).build();
-  }
-
-  private static JavaDependency testNgDependency() {
-    return javaDependency()
-      .groupId("org.testng")
-      .artifactId("testng")
-      .versionSlug("testng.version")
-      .scope(JavaDependencyScope.TEST)
-      .build();
   }
 }

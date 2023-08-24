@@ -35,7 +35,6 @@
     <neo4j-migrations.version>1.13.0</neo4j-migrations.version>
     <archunit-junit5.version>1.1.0</archunit-junit5.version>
     <cucumber.version>7.13.0</cucumber.version>
-    <testng.version>7.8.0</testng.version>
     <pulsar.version>2.10.0</pulsar.version>
     <liquibase.version>4.23.1</liquibase.version>
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
@@ -193,12 +192,6 @@
       <dependency>
         <groupId>org.junit.vintage</groupId>
         <artifactId>junit-vintage-engine</artifactId>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.testng</groupId>
-        <artifactId>testng</artifactId>
-        <version>${testng.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>

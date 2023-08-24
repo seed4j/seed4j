@@ -71,7 +71,6 @@
     <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
     <apache-commons-io.version>2.13.0</apache-commons-io.version>
     <cucumber.version>7.13.0</cucumber.version>
-    <testng.version>7.8.0</testng.version>
     <maven-model.version>3.9.4</maven-model.version>
     <joox.version>2.0.0</joox.version>
     <dom4j.version>2.1.4</dom4j.version>
@@ -238,13 +237,6 @@
     <dependency>
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>${testng.version}</version>
       <scope>test</scope>
     </dependency>
 

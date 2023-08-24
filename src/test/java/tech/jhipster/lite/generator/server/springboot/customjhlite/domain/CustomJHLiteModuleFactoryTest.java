@@ -32,7 +32,6 @@ class CustomJHLiteModuleFactoryTest {
         .containing("<artifactId>cucumber-java</artifactId>")
         .containing("<artifactId>cucumber-spring</artifactId>")
         .containing("<artifactId>junit-vintage-engine</artifactId>")
-        .containing("<artifactId>testng</artifactId>")
         .containing(
           """
               <dependency>

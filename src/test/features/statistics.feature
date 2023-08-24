@@ -7,7 +7,7 @@ Feature: application statistics
     Then I should have statistics
       | Applied modules | 1 |
 
-  Scenario: Should have mutliple applied module
+  Scenario: Should have multiple applied module
     Given I apply modules to default project
       | maven-java  |
       | spring-boot |

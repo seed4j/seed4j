@@ -16,6 +16,7 @@ public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
   CAFFEINE_CACHE("caffeine-cache"),
   CASSANDRA("cassandra"),
   CASSANDRA_MIGRATION("cassandra-migration"),
+  CHECKSTYLE("checkstyle"),
   CONSUL("consul"),
   CUSTOM_JHLITE("custom-jhlite"),
   CYPRESS("cypress"),

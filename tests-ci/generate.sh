@@ -50,6 +50,7 @@ spring_boot() {
   "maven-java" \
   "github-actions" \
   "java-base" \
+  "checkstyle" \
   "jacoco-check-min-coverage" \
   "spring-boot"
 }

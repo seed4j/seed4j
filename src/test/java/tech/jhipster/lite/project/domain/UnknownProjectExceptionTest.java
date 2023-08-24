@@ -15,6 +15,6 @@ class UnknownProjectExceptionTest {
 
     assertThat(exception.getMessage()).isEqualTo("A user tried to download an unknown project");
     assertThat(exception.status()).isEqualTo(ErrorStatus.BAD_REQUEST);
-    assertThat(exception.key()).isEqualTo(ProjectErrorKey.UNKOWN_PROJECT);
+    assertThat(exception.key()).isEqualTo(ProjectErrorKey.UNKNOWN_PROJECT);
   }
 }

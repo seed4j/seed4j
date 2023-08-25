@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 class RedirectionResource {
 
   private static final String FORBID_EXTENSION_PATTERN = "/{file:[^\\.]*}";
-  private static final String TRAILING_DIR_PATTERN = "/{traillingDir:.*}/";
+  private static final String TRAILING_DIR_PATTERN = "/{trailingDir:.*}/";
 
   @GetMapping(
     value = {

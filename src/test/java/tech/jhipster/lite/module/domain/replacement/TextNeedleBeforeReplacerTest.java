@@ -117,7 +117,7 @@ class TextNeedleBeforeReplacerTest {
 
 
           <!-- needle !-->
-          <!-- needle !--> with trailling text
+          <!-- needle !--> with trailing text
         </root>
         """,
         "<element />"
@@ -134,7 +134,7 @@ class TextNeedleBeforeReplacerTest {
         <element />
           <!-- needle !-->
         <element />
-          <!-- needle !--> with trailling text
+          <!-- needle !--> with trailing text
         </root>
         """
       );

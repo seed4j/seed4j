@@ -12,14 +12,14 @@ public class GeneratorException extends RuntimeException {
   private final ErrorStatus status;
   private final Map<String, String> parameters;
 
-  protected GeneratorException(GeneratorExeptionBuilder builder) {
+  protected GeneratorException(GeneratorExceptionBuilder builder) {
     super(buildMessage(builder), builder.cause);
     key = buildKey(builder);
     status = buildStatus(builder);
     parameters = Collections.unmodifiableMap(builder.parameters);
   }
 
-  private static String buildMessage(GeneratorExeptionBuilder builder) {
+  private static String buildMessage(GeneratorExceptionBuilder builder) {
     Assert.notNull("builder", builder);
 
     if (builder.message == null) {
@@ -29,7 +29,7 @@ public class GeneratorException extends RuntimeException {
     return builder.message;
   }
 
-  private ErrorKey buildKey(GeneratorExeptionBuilder builder) {
+  private ErrorKey buildKey(GeneratorExceptionBuilder builder) {
     if (builder.key == null) {
       return StandardErrorKey.INTERNAL_SERVER_ERROR;
     }
@@ -37,7 +37,7 @@ public class GeneratorException extends RuntimeException {
     return builder.key;
   }
 
-  private ErrorStatus buildStatus(GeneratorExeptionBuilder builder) {
+  private ErrorStatus buildStatus(GeneratorExceptionBuilder builder) {
     if (builder.status == null) {
       return defaultStatus();
     }
@@ -69,11 +69,11 @@ public class GeneratorException extends RuntimeException {
     return className -> className.contains(".primary");
   }
 
-  public static GeneratorExeptionBuilder internalServerError(ErrorKey key) {
+  public static GeneratorExceptionBuilder internalServerError(ErrorKey key) {
     return builder(key).status(ErrorStatus.INTERNAL_SERVER_ERROR);
   }
 
-  public static GeneratorExeptionBuilder badRequest(ErrorKey key) {
+  public static GeneratorExceptionBuilder badRequest(ErrorKey key) {
     return builder(key).status(ErrorStatus.BAD_REQUEST);
   }
 
@@ -85,8 +85,8 @@ public class GeneratorException extends RuntimeException {
     return builder(StandardErrorKey.INTERNAL_SERVER_ERROR).message(message).cause(cause).build();
   }
 
-  public static GeneratorExeptionBuilder builder(ErrorKey key) {
-    return new GeneratorExeptionBuilder(key);
+  public static GeneratorExceptionBuilder builder(ErrorKey key) {
+    return new GeneratorExceptionBuilder(key);
   }
 
   public ErrorKey key() {
@@ -101,7 +101,7 @@ public class GeneratorException extends RuntimeException {
     return parameters;
   }
 
-  public static class GeneratorExeptionBuilder {
+  public static class GeneratorExceptionBuilder {
 
     private final ErrorKey key;
     private final Map<String, String> parameters = new HashMap<>();
@@ -110,23 +110,23 @@ public class GeneratorException extends RuntimeException {
     private Throwable cause;
     private ErrorStatus status;
 
-    private GeneratorExeptionBuilder(ErrorKey key) {
+    private GeneratorExceptionBuilder(ErrorKey key) {
       this.key = key;
     }
 
-    public GeneratorExeptionBuilder message(String message) {
+    public GeneratorExceptionBuilder message(String message) {
       this.message = message;
 
       return this;
     }
 
-    public GeneratorExeptionBuilder cause(Throwable cause) {
+    public GeneratorExceptionBuilder cause(Throwable cause) {
       this.cause = cause;
 
       return this;
     }
 
-    public GeneratorExeptionBuilder addParameters(Map<String, String> parameters) {
+    public GeneratorExceptionBuilder addParameters(Map<String, String> parameters) {
       Assert.notNull("parameters", parameters);
 
       parameters.forEach(this::addParameter);
@@ -134,7 +134,7 @@ public class GeneratorException extends RuntimeException {
       return this;
     }
 
-    public GeneratorExeptionBuilder addParameter(String key, String value) {
+    public GeneratorExceptionBuilder addParameter(String key, String value) {
       Assert.notBlank("key", key);
       Assert.notNull("value", value);
 
@@ -143,7 +143,7 @@ public class GeneratorException extends RuntimeException {
       return this;
     }
 
-    public GeneratorExeptionBuilder status(ErrorStatus status) {
+    public GeneratorExceptionBuilder status(ErrorStatus status) {
       this.status = status;
 
       return this;

@@ -7,7 +7,7 @@ import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 class InvalidLandscapeException extends GeneratorException {
 
-  private InvalidLandscapeException(GeneratorExeptionBuilder builder) {
+  private InvalidLandscapeException(GeneratorExceptionBuilder builder) {
     super(builder);
   }
 

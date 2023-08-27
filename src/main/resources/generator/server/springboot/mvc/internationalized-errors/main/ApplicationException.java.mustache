@@ -12,14 +12,14 @@ public class {{ baseName }}Exception extends RuntimeException {
   private final ErrorStatus status;
   private final Map<String, String> parameters;
 
-  protected {{ baseName }}Exception({{ baseName }}ExeptionBuilder builder) {
+  protected {{ baseName }}Exception({{ baseName }}ExceptionBuilder builder) {
     super(buildMessage(builder), builder.cause);
     key = buildKey(builder);
     status = buildStatus(builder);
     parameters = Collections.unmodifiableMap(builder.parameters);
   }
 
-  private static String buildMessage({{ baseName }}ExeptionBuilder builder) {
+  private static String buildMessage({{ baseName }}ExceptionBuilder builder) {
     Assert.notNull("builder", builder);
 
     if (builder.message == null) {
@@ -29,7 +29,7 @@ public class {{ baseName }}Exception extends RuntimeException {
     return builder.message;
   }
 
-  private ErrorKey buildKey({{ baseName }}ExeptionBuilder builder) {
+  private ErrorKey buildKey({{ baseName }}ExceptionBuilder builder) {
     if (builder.key == null) {
       return StandardErrorKey.INTERNAL_SERVER_ERROR;
     }
@@ -37,7 +37,7 @@ public class {{ baseName }}Exception extends RuntimeException {
     return builder.key;
   }
 
-  private ErrorStatus buildStatus({{ baseName }}ExeptionBuilder builder) {
+  private ErrorStatus buildStatus({{ baseName }}ExceptionBuilder builder) {
     if (builder.status == null) {
       return defaultStatus();
     }
@@ -69,11 +69,11 @@ public class {{ baseName }}Exception extends RuntimeException {
     return className -> className.contains(".primary");
   }
 
-  public static {{ baseName }}ExeptionBuilder internalServerError(ErrorKey key) {
+  public static {{ baseName }}ExceptionBuilder internalServerError(ErrorKey key) {
     return builder(key).status(ErrorStatus.INTERNAL_SERVER_ERROR);
   }
 
-  public static {{ baseName }}ExeptionBuilder badRequest(ErrorKey key) {
+  public static {{ baseName }}ExceptionBuilder badRequest(ErrorKey key) {
     return builder(key).status(ErrorStatus.BAD_REQUEST);
   }
 
@@ -85,8 +85,8 @@ public class {{ baseName }}Exception extends RuntimeException {
     return builder(StandardErrorKey.INTERNAL_SERVER_ERROR).message(message).cause(cause).build();
   }
 
-  public static {{ baseName }}ExeptionBuilder builder(ErrorKey key) {
-    return new {{ baseName }}ExeptionBuilder(key);
+  public static {{ baseName }}ExceptionBuilder builder(ErrorKey key) {
+    return new {{ baseName }}ExceptionBuilder(key);
   }
 
   public ErrorKey key() {
@@ -101,7 +101,7 @@ public class {{ baseName }}Exception extends RuntimeException {
     return parameters;
   }
 
-  public static class {{ baseName }}ExeptionBuilder {
+  public static class {{ baseName }}ExceptionBuilder {
 
     private final ErrorKey key;
     private final Map<String, String> parameters = new HashMap<>();
@@ -110,23 +110,23 @@ public class {{ baseName }}Exception extends RuntimeException {
     private Throwable cause;
     private ErrorStatus status;
 
-    private {{ baseName }}ExeptionBuilder(ErrorKey key) {
+    private {{ baseName }}ExceptionBuilder(ErrorKey key) {
       this.key = key;
     }
 
-    public {{ baseName }}ExeptionBuilder message(String message) {
+    public {{ baseName }}ExceptionBuilder message(String message) {
       this.message = message;
 
       return this;
     }
 
-    public {{ baseName }}ExeptionBuilder cause(Throwable cause) {
+    public {{ baseName }}ExceptionBuilder cause(Throwable cause) {
       this.cause = cause;
 
       return this;
     }
 
-    public {{ baseName }}ExeptionBuilder addParameters(Map<String, String> parameters) {
+    public {{ baseName }}ExceptionBuilder addParameters(Map<String, String> parameters) {
       Assert.notNull("parameters", parameters);
 
       parameters.forEach(this::addParameter);
@@ -134,7 +134,7 @@ public class {{ baseName }}Exception extends RuntimeException {
       return this;
     }
 
-    public {{ baseName }}ExeptionBuilder addParameter(String key, String value) {
+    public {{ baseName }}ExceptionBuilder addParameter(String key, String value) {
       Assert.notBlank("key", key);
       Assert.notNull("value", value);
 
@@ -143,7 +143,7 @@ public class {{ baseName }}Exception extends RuntimeException {
       return this;
     }
 
-    public {{ baseName }}ExeptionBuilder status(ErrorStatus status) {
+    public {{ baseName }}ExceptionBuilder status(ErrorStatus status) {
       this.status = status;
 
       return this;

@@ -5,7 +5,6 @@ import static org.mockito.Mockito.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import org.junit.jupiter.api.Test;
@@ -89,7 +88,7 @@ class CucumberTestContextUnitTest {
   }
 
   @Test
-  void shouldNotReadStatusCodeForUreadableStatusCode() throws UnsupportedEncodingException {
+  void shouldNotReadStatusCodeForUreadableStatusCode() {
     ClientHttpResponse httpResponse = mock(ClientHttpResponse.class);
     try {
       when(httpResponse.getStatusCode()).thenThrow(IOException.class);
@@ -104,7 +103,7 @@ class CucumberTestContextUnitTest {
   }
 
   @Test
-  void shouldNotReadResponseCodeForUreadableResponse() throws UnsupportedEncodingException {
+  void shouldNotReadResponseCodeForUreadableResponse() {
     ClientHttpResponse httpResponse = mock(ClientHttpResponse.class);
     try {
       when(httpResponse.getStatusCode()).thenReturn(HttpStatus.OK);

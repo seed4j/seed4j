@@ -100,14 +100,14 @@ public class ProjectsSteps {
   }
 
   @Then("I should have commit {string}")
-  public void shouldHaveCommit(String commitMessage) throws IOException {
+  public void shouldHaveCommit(String commitMessage) {
     assertThatLastResponse().hasOkStatus();
 
     assertThat(GitTestUtil.getCommits(lastProjectPath())).contains(commitMessage);
   }
 
   @Then("I should not have any commit")
-  public void shouldNotHaveCommits() throws IOException {
+  public void shouldNotHaveCommits() {
     assertThatLastResponse().hasOkStatus();
 
     assertThat(GitTestUtil.getCommits(lastProjectPath())).isEmpty();

@@ -48,7 +48,7 @@ Run the project:
 
 Then, you can navigate to http://localhost:7471 in your browser.
 
-## Some videos
+## Some Videos
 
 - [What is JHipster Lite and why should you care?][devoxx-jhlite] by [Julien Dubois][jdubois]
 - [Simple WebServices with JHipster Lite][webservices-with-jhlite] by [Colin Damon][cdamon]

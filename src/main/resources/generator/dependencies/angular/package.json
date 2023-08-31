@@ -1,10 +1,10 @@
 {
   "dependencies": {
-    "@angular/animations": "16.2.2",
+    "@angular/animations": "16.2.3",
     "@angular/cdk": "16.2.1",
     "@angular/common": "16.2.2",
     "@angular/compiler": "16.2.2",
-    "@angular/core": "16.2.2",
+    "@angular/core": "16.2.3",
     "@angular/forms": "16.2.2",
     "@angular/material": "16.2.1",
     "@angular/platform-browser": "16.2.2",

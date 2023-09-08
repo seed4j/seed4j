@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@angular/cdk": "16.2.2",
+    "@angular/cdk": "16.2.3",
     "@angular/core": "16.2.3",
     "@angular/material": "16.2.2",
     "keycloak-js": "22.0.1",

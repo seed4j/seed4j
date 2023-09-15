@@ -274,13 +274,13 @@ jobs:
         with:
           name: lcov
       - name: 'Codecov: sending JaCoCo analysis...'
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           files: jacoco.xml
           fail_ci_if_error: true
           verbose: true
       - name: 'Codecov: sending lcov analysis...'
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           files: lcov.info
           fail_ci_if_error: true

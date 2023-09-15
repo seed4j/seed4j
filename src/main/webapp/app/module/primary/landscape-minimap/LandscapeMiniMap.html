@@ -1,0 +1,13 @@
+<div ref="minimapContainer" id="minimap-container">
+  <div ref="minimapSize" id="minimap-size"></div>
+  <div
+    ref="minimapViewer"
+    id="minimap-viewer"
+    @mousedown="startGrabbing"
+    @mousemove="grabbing"
+    @mouseup="stopGrabbing"
+    @mouseleave="stopGrabbing"
+    data-selector="minimap-viewer"
+  ></div>
+  <div data-selector="minimap-content" ref="minimapContent" id="minimap-content" v-html="minimapHTML"></div>
+</div>

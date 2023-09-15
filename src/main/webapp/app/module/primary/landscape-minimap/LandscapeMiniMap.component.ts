@@ -1,0 +1,116 @@
+import { defineComponent, onMounted, PropType, ref, Ref } from 'vue';
+
+export default defineComponent({
+  name: 'LandscapeMiniMapComponentVue',
+  props: {
+    landscapeContainer: {
+      type: Object as PropType<HTMLDivElement>,
+      required: true,
+    },
+  },
+  setup({ landscapeContainer }) {
+    const minimapHTML = ref('');
+    const realScale = ref(1);
+
+    const minimapContainer = ref<HTMLElement>(document.createElement('div'));
+    const minimapSize = ref<HTMLElement>(document.createElement('div'));
+    const minimapViewer = ref<HTMLElement>(document.createElement('div'));
+    const minimapContent = ref<HTMLElement>(document.createElement('div'));
+
+    const isMoving: Ref<boolean> = ref(false);
+    const startX: Ref<number> = ref(0);
+    const startY: Ref<number> = ref(0);
+
+    onMounted(() => {
+      minimapHTML.value = removeDataSelectorAttrs(landscapeContainer.outerHTML);
+
+      setupDimensions();
+
+      landscapeContainer.addEventListener('scroll', trackScroll);
+      window.addEventListener('resize', setupDimensions);
+    });
+
+    const removeDataSelectorAttrs = (data: string): string => {
+      const regex = /data-selector="[^"]*"/g;
+      return data.replace(regex, '');
+    };
+
+    const getRealScale = (): number => {
+      return realScale.value;
+    };
+
+    const initRealScale = (): void => {
+      realScale.value = minimapContainer.value.clientWidth / landscapeContainer.scrollWidth;
+    };
+
+    const setupDimensions = (): void => {
+      const bodyRatio = landscapeContainer.scrollHeight / landscapeContainer.scrollWidth;
+      const winRatio = window.innerHeight / window.innerWidth;
+
+      minimapContainer.value.style.width = '13%';
+
+      initRealScale();
+
+      minimapViewer.value.style.width = landscapeContainer.clientWidth * getRealScale() + 'px';
+
+      minimapSize.value.style.paddingTop = bodyRatio * 100 + '%';
+
+      minimapViewer.value.style.paddingTop = winRatio * 100 + '%';
+
+      minimapContent.value.style.transform = 'scale(' + getRealScale() + ')';
+      minimapContent.value.style.width = 100 / getRealScale() + '%';
+      minimapContent.value.style.height = 100 / getRealScale() + '%';
+    };
+
+    const startGrabbing = (mouseEvent: MouseEvent): void => {
+      isMoving.value = true;
+
+      startX.value = mouseEvent.clientX;
+      startY.value = mouseEvent.clientY;
+    };
+
+    const stopGrabbing = (): void => {
+      isMoving.value = false;
+    };
+
+    const calculateScrollPosition = (scrollX: number, scrollY: number): { x: number; y: number } => {
+      return {
+        x: landscapeContainer.scrollLeft - scrollX / getRealScale(),
+        y: landscapeContainer.scrollTop - scrollY / getRealScale(),
+      };
+    };
+    const grabbing = (mouseEvent: MouseEvent): void => {
+      if (!isMoving.value) {
+        return;
+      }
+
+      const scrollX = startX.value - mouseEvent.clientX;
+      const scrollY = startY.value - mouseEvent.clientY;
+
+      startX.value = mouseEvent.clientX;
+      startY.value = mouseEvent.clientY;
+
+      const { x, y } = calculateScrollPosition(scrollX, scrollY);
+
+      landscapeContainer.scroll(x, y);
+    };
+
+    const trackScroll = () => {
+      const translateX = `translateX(${landscapeContainer.scrollLeft * getRealScale()}px)`;
+      const translateY = `translateY(${landscapeContainer.scrollTop * getRealScale()}px)`;
+
+      minimapViewer.value.style.transform = `${translateX} ${translateY}`;
+    };
+
+    return {
+      minimapHTML,
+      minimapContainer,
+      minimapSize,
+      minimapViewer,
+      minimapContent,
+      startGrabbing,
+      stopGrabbing,
+      grabbing,
+    };
+  },
+});

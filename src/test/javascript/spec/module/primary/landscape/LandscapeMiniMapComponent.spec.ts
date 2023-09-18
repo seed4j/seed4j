@@ -1,8 +1,7 @@
 import { LandscapeMiniMapVue } from '@/module/primary/landscape-minimap';
 import { mount } from '@vue/test-utils';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, Mock } from 'vitest';
 import { wrappedElement } from '../../../WrappedElement';
-import sinon, { SinonStub } from 'sinon';
 
 const buildLandscapeContainer = (): HTMLDivElement => {
   const landscapeContainer = document.createElement('div');
@@ -28,7 +27,7 @@ const buildLandscapeContainer = (): HTMLDivElement => {
 describe('MiniMap component', () => {
   it('should scroll the landscape container if minimapViewer position has changed', async () => {
     const landscapeContainer = buildLandscapeContainer();
-    (landscapeContainer.scroll as SinonStub) = sinon.stub();
+    (landscapeContainer.scroll as Mock<any, any>) = vi.fn();
 
     const wrapper = mount(LandscapeMiniMapVue, {
       props: { landscapeContainer: landscapeContainer },
@@ -50,13 +49,13 @@ describe('MiniMap component', () => {
     await wrapper.vm.$nextTick();
     await minimapViewer.trigger('mouseleave');
 
-    expect((landscapeContainer.scroll as SinonStub).called).toBe(true);
+    expect(landscapeContainer.scroll).toHaveBeenCalled();
   });
 
   it('should not scroll the landscape container if minimapViewer is not being grabbed', async () => {
     const landscapeContainer = buildLandscapeContainer();
 
-    (landscapeContainer.scroll as SinonStub) = sinon.stub();
+    (landscapeContainer.scroll as Mock<any, any>) = vi.fn();
 
     const wrapper = mount(LandscapeMiniMapVue, {
       props: { landscapeContainer: landscapeContainer },
@@ -67,7 +66,7 @@ describe('MiniMap component', () => {
     await minimapViewer.trigger('mousemove');
     await wrapper.vm.$nextTick();
 
-    expect((landscapeContainer.scroll as SinonStub).called).toBe(false);
+    expect(landscapeContainer.scroll).toHaveBeenCalledTimes(0);
   });
 
   it('should track the scroller position of the landscape container', async () => {

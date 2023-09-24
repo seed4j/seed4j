@@ -45,7 +45,6 @@ export default defineComponent({
 
     const setupDimensions = (): void => {
       const bodyRatio = landscapeContainer.scrollHeight / landscapeContainer.scrollWidth;
-      const winRatio = window.innerHeight / window.innerWidth;
 
       minimapContainer.value.style.width = '13%';
 
@@ -55,7 +54,7 @@ export default defineComponent({
 
       minimapSize.value.style.paddingTop = bodyRatio * 100 + '%';
 
-      minimapViewer.value.style.paddingTop = winRatio * 100 + '%';
+      minimapViewer.value.style.paddingTop = landscapeContainer.clientHeight * getRealScale() + 'px';
 
       minimapContent.value.style.transform = 'scale(' + getRealScale() + ')';
       minimapContent.value.style.width = 100 / getRealScale() + '%';

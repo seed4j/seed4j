@@ -16,7 +16,7 @@
 #minimap-size {
   position: relative;
   z-index: 5;
-  border: 2px solid white;
+  border: 3px solid white;
 }
 
 #minimap-viewer {

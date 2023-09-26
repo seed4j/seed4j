@@ -62,6 +62,7 @@ public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
   KIPE_EXPRESSION("kipe-expression"),
   LIQUIBASE("liquibase"),
   LOGSTASH("logstash"),
+  LOGS_SPY("logs-spy"),
   MARIADB("mariadb"),
   MAVEN_JAVA("maven-java"),
   MAVEN_WRAPPER("maven-wrapper"),

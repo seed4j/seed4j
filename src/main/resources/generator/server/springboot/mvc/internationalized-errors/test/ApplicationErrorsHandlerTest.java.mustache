@@ -6,22 +6,21 @@ import ch.qos.logback.classic.Level;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.context.MessageSource;
+import {{ packageName }}.Logs;
 import {{ packageName }}.LogsSpy;
+import {{ packageName }}.LogsSpyExtension;
 import {{ packageName }}.UnitTest;
 import {{ packageName }}.shared.error.domain.{{ baseName }}Exception;
 import {{ packageName }}.shared.error.domain.StandardErrorKey;
 
 @UnitTest
-@ExtendWith(LogsSpy.class)
+@ExtendWith(LogsSpyExtension.class)
 class {{ baseName }}ErrorsHandlerTest {
 
   private static final {{ baseName }}ErrorsHandler handler = new {{ baseName }}ErrorsHandler(mock(MessageSource.class));
 
-  private final LogsSpy logs;
-
-  public {{ baseName }}ErrorsHandlerTest(LogsSpy logs) {
-    this.logs = logs;
-  }
+  @Logs
+  private LogsSpy logs;
 
   @Test
   void shouldLogServerErrorAsError() {

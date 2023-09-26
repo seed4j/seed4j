@@ -4,23 +4,22 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import ch.qos.logback.classic.Level;
+import {{packageName}}.Logs;
 import {{packageName}}.LogsSpy;
+import {{packageName}}.LogsSpyExtension;
 import {{packageName}}.UnitTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.security.core.Authentication;
 
 @UnitTest
-@ExtendWith(LogsSpy.class)
+@ExtendWith(LogsSpyExtension.class)
 class ObjectAccessCheckerTest {
 
   private static final ObjectAccessChecker checker = new ObjectAccessChecker();
 
-  private final LogsSpy logs;
-
-  public ObjectAccessCheckerTest(LogsSpy logs) {
-    this.logs = logs;
-  }
+  @Logs
+  private LogsSpy logs;
 
   @Test
   void shouldNotAuthorizeActionsOnNullElement() {

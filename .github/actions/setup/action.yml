@@ -1,12 +1,12 @@
 name: 'Setup'
-description: 'Setup environment with Java 17, Node 18.17.1'
+description: 'Setup environment with Java 17, Node 18.18.0'
 runs:
   using: 'composite'
   steps:
     - name: 'Setup: Node.js'
       uses: actions/setup-node@v3
       with:
-        node-version: 18.17.1
+        node-version: 18.18.0
     - name: 'Setup: update NPM'
       shell: bash
       run: npm install -g npm

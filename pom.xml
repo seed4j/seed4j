@@ -49,7 +49,7 @@
     <java.version>17</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <node.version>v18.17.1</node.version>
+    <node.version>v18.18.0</node.version>
     <npm.version>9.8.1</npm.version>
 
     <maven.version>3.6.0</maven.version>

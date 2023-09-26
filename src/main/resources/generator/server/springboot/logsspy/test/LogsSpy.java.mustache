@@ -7,22 +7,15 @@ import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 import java.util.function.Predicate;
-import org.junit.jupiter.api.extension.AfterEachCallback;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
-import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.api.extension.ParameterContext;
-import org.junit.jupiter.api.extension.ParameterResolutionException;
-import org.junit.jupiter.api.extension.ParameterResolver;
 import org.slf4j.LoggerFactory;
 
-public final class LogsSpy implements BeforeEachCallback, AfterEachCallback, ParameterResolver {
+public final class LogsSpy {
 
   private Logger logger;
   private ListAppender<ILoggingEvent> appender;
   private Level initialLevel;
 
-  @Override
-  public void beforeEach(ExtensionContext context) {
+  void prepare() {
     appender = new ListAppender<>();
     logger = (Logger) LoggerFactory.getLogger("{{ packageName }}");
     logger.addAppender(appender);
@@ -31,8 +24,7 @@ public final class LogsSpy implements BeforeEachCallback, AfterEachCallback, Par
     appender.start();
   }
 
-  @Override
-  public void afterEach(ExtensionContext context) {
+  void reset() {
     logger.setLevel(initialLevel);
     logger.detachAppender(appender);
   }
@@ -57,17 +49,5 @@ public final class LogsSpy implements BeforeEachCallback, AfterEachCallback, Par
 
   private Predicate<ILoggingEvent> withLog(Level level, String content) {
     return event -> level.equals(event.getLevel()) && event.toString().contains(content);
-  }
-
-  @Override
-  public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
-    throws ParameterResolutionException {
-    return parameterContext.getParameter().getType().equals(LogsSpy.class);
-  }
-
-  @Override
-  public LogsSpy resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
-    throws ParameterResolutionException {
-    return this;
   }
 }

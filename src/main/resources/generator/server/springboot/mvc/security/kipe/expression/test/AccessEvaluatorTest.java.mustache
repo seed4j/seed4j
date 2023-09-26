@@ -4,7 +4,9 @@ import static org.assertj.core.api.Assertions.*;
 
 import ch.qos.logback.classic.Level;
 import java.util.List;
+import {{packageName}}.Logs;
 import {{packageName}}.LogsSpy;
+import {{packageName}}.LogsSpyExtension;
 import {{packageName}}.UnitTest;
 import {{packageName}}.shared.error.domain.MissingMandatoryValueException;
 import {{packageName}}.shared.kipe.domain.KipeDummy;
@@ -16,17 +18,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
 
 @UnitTest
-@ExtendWith({ MockitoExtension.class, LogsSpy.class })
+@ExtendWith({ MockitoExtension.class, LogsSpyExtension.class })
 class AccessEvaluatorTest {
 
   @Mock
   private Authentication authentication;
 
-  private final LogsSpy logs;
-
-  public AccessEvaluatorTest(LogsSpy logs) {
-    this.logs = logs;
-  }
+  @Logs
+  private LogsSpy logs;
 
   @Test
   void shouldNotBuildWithoutObjectChecker() {

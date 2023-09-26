@@ -10,14 +10,11 @@ So, here's how to use it:
 
 ```java
 @UnitTest
-@ExtendWith(LogsSpy.class)
+@ExtendWith(LogsSpyExtension.class)
 class MyTest {
 
-  private final LogsSpy logs;
-
-  public MyTest(LogsSpy logs) {
-    this.logs = logs;
-  }
+  @Logs
+  private LogsSpy logs;
 
   @Test
   void shouldDoStuff() {

@@ -61,6 +61,11 @@ class SpringBootMvcModulesConfiguration {
   }
 
   private JHipsterModuleOrganization mvcServerOrganization() {
-    return JHipsterModuleOrganization.builder().feature(SPRING_MVC_SERVER).addDependency(SPRING_BOOT_MVC_EMPTY).build();
+    return JHipsterModuleOrganization
+      .builder()
+      .feature(SPRING_MVC_SERVER)
+      .addDependency(SPRING_BOOT_MVC_EMPTY)
+      .addDependency(LOGS_SPY)
+      .build();
   }
 }

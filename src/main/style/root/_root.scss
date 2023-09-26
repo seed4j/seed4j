@@ -10,6 +10,7 @@
   --jhlite-bg-color-secondary: #fafafa;
   --jhlite-accent-color: #cacaca;
   --jhlite-text-color-primary: #222;
+  --jhlite-primary-input-color: #000
   --jhlite-element-size: 4rem;
 
   font-family: $jhlite-global-font-primary-family;
@@ -27,6 +28,7 @@
   --jhlite-bg-color-secondary: #2d2d30;
   --jhlite-accent-color: #3f3f3f;
   --jhlite-text-color-primary: #ddd;
+  --jhlite-primary-input-color: #fff
 }
 
 @media screen and (min-width: $jhlite-global-breakpoint-small-medium) {

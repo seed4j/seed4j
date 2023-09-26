@@ -3,7 +3,9 @@ package {{packageName}}.shared.authentication.infrastructure.primary;
 import static org.assertj.core.api.Assertions.*;
 
 import ch.qos.logback.classic.Level;
+import {{packageName}}.Logs;
 import {{packageName}}.LogsSpy;
+import {{packageName}}.LogsSpyExtension;
 import {{packageName}}.UnitTest;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
@@ -21,21 +23,16 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 @UnitTest
-@ExtendWith({ LogsSpy.class, MockitoExtension.class })
+@ExtendWith({ LogsSpyExtension.class, MockitoExtension.class })
 class JwtReaderTest {
 
   private static final SecretKey KEY = Keys.hmacShaKeyFor(
     "fd54a45s65fds737b9aafcb3412e07ed99b267f33413274720ddbb7f6c5e64e9f14075f2d7ed041592f0b7657baf8".getBytes(StandardCharsets.UTF_8)
   );
 
-  private final JwtReader reader;
-  private final LogsSpy logs;
-
-  public JwtReaderTest(LogsSpy logs) {
-    this.logs = logs;
-
-    reader = new JwtReader(parser());
-  }
+  private final JwtReader reader = new JwtReader(parser());
+  @Logs
+  private LogsSpy logs;
 
   private JwtParser parser() {
     return Jwts.parserBuilder().setSigningKey(KEY).build();

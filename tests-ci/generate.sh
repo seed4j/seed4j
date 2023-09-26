@@ -52,7 +52,8 @@ spring_boot() {
   "java-base" \
   "checkstyle" \
   "jacoco-check-min-coverage" \
-  "spring-boot"
+  "spring-boot" \
+  "logs-spy"
 }
 
 spring_boot_mvc() {

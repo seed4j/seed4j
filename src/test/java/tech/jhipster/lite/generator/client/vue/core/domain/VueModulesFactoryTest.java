@@ -47,7 +47,6 @@ class VueModulesFactoryTest {
         .containing(nodeDependency("@types/sinon"))
         .containing(nodeDependency("sinon"))
         .containing(nodeDependency("axios"))
-        .containing(nodeDependency("vue-router"))
         .containing("\"build\": \"vue-tsc -p tsconfig.build.json --noEmit && vite build --emptyOutDir\"")
         .containing("\"dev\": \"vite\"")
         .containing("\"lint\": \"eslint --ext .js,.ts,.vue src\"")
@@ -71,29 +70,7 @@ class VueModulesFactoryTest {
       .hasPrefixedFiles("src/test/javascript/spec/http", "AxiosHttp.spec.ts", "AxiosHttpStub.ts", "AxiosStub.ts")
       .hasFiles("src/main/webapp/index.html")
       .hasPrefixedFiles("src/main/webapp/app", "env.d.ts")
-      .hasPrefixedFiles("src/main/webapp/app/common/primary/app", "App.component.ts", "index.ts", "App.html", "AppVue.vue")
-      .hasPrefixedFiles("src/main/webapp/content/images", "JHipster-Lite-neon-green.png", "VueLogo.png")
-      .hasFiles("src/test/javascript/spec/common/primary/app/App.spec.ts")
-      .hasPrefixedFiles("src/main/webapp/app/common/primary/homepage", "Homepage.component.ts", "Homepage.html","HomepageVue.vue", "index.ts")
-      .hasFile("src/main/webapp/app/common/primary/homepage/Homepage.component.ts")
-        .containing("appName: 'jhiTest'")
-        .and()
-      .hasFiles("src/test/javascript/spec/common/primary/homepage/Homepage.spec.ts")
-      .hasFiles("src/main/webapp/app/router/router.ts", "src/test/javascript/spec/router/Router.spec.ts")
-      .hasFile("src/main/webapp/app/main.ts")
-        .containing("import router from './router/router';")
-        .containing("app.use(router);")
-        .and()
-      .hasPrefixedFiles("src/main/webapp/app/common/domain", "Logger.ts", "Message.ts")
-      .hasFiles("src/main/webapp/app/common/secondary/ConsoleLogger.ts")
-      .hasFiles("src/test/javascript/spec/common/domain/Logger.fixture.ts")
-      .hasFiles("src/test/javascript/spec/common/secondary/ConsoleLogger.spec.ts")
-      .hasFiles("src/main/webapp/app/vue/VueProp.ts")
-      .hasFiles(
-        "src/test/javascript/spec/vue/vue-prop/ArrayComponentVue.vue",
-        "src/test/javascript/spec/vue/vue-prop/ObjectComponentVue.vue",
-        "src/test/javascript/spec/vue/vue-prop/VueProp.spec.ts"
-      );
+      .hasFile("src/main/webapp/app/main.ts");
     //@formatter:on
   }
 

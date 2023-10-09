@@ -9,14 +9,15 @@
   left: 20px;
   min-width: 20px;
   z-index: 100;
-  background-color: #0000009a;
   overflow: hidden;
 }
 
 #minimap-size {
+  background-color: #0000009a;
   position: relative;
   z-index: 5;
-  border: 3px solid white;
+  border: 1px solid var(--jhlite-brand);
+  user-select: none;
 }
 
 #minimap-viewer {
@@ -38,5 +39,17 @@
   z-index: -1;
   transform-origin: 0 0;
   border: 1px solid white;
+}
+
+.minimap-btn {
+  background-color: var(--jhlite-brand);
+  color: white;
+  border: solid 1px white;
+  border-bottom: none;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  cursor: pointer;
 }
 </style>

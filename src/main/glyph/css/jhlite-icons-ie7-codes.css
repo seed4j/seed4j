@@ -22,6 +22,9 @@
 .jhlite-icon-ok {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe807;&nbsp;');
 }
+.jhlite-icon-eye-off {
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe808;&nbsp;');
+}
 .jhlite-icon-twitter {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf099;&nbsp;');
 }

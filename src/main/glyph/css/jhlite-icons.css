@@ -1,12 +1,12 @@
 @font-face {
   font-family: 'jhlite-icons';
-  src: url('../font/jhlite-icons.eot?43345743');
+  src: url('../font/jhlite-icons.eot?60017919');
   src:
-    url('../font/jhlite-icons.eot?43345743#iefix') format('embedded-opentype'),
-    url('../font/jhlite-icons.woff2?43345743') format('woff2'),
-    url('../font/jhlite-icons.woff?43345743') format('woff'),
-    url('../font/jhlite-icons.ttf?43345743') format('truetype'),
-    url('../font/jhlite-icons.svg?43345743#jhlite-icons') format('svg');
+    url('../font/jhlite-icons.eot?60017919#iefix') format('embedded-opentype'),
+    url('../font/jhlite-icons.woff2?60017919') format('woff2'),
+    url('../font/jhlite-icons.woff?60017919') format('woff'),
+    url('../font/jhlite-icons.ttf?60017919') format('truetype'),
+    url('../font/jhlite-icons.svg?60017919#jhlite-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -16,7 +16,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'jhlite-icons';
-    src: url('../font/jhlite-icons.svg?43345743#jhlite-icons') format('svg');
+    src: url('../font/jhlite-icons.svg?60017919#jhlite-icons') format('svg');
   }
 }
 */
@@ -80,6 +80,9 @@
 .jhlite-icon-ok:before {
   content: '\e807';
 } /* '' */
+.jhlite-icon-eye-off:before {
+  content: '\e808';
+} /* '' */
 .jhlite-icon-twitter:before {
   content: '\f099';
 } /* '' */

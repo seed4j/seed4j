@@ -82,4 +82,24 @@ describe('MiniMap component', () => {
 
     expect(landscapeContainer.addEventListener).toBeCalled();
   });
+
+  it('should close and reopen the minimap', async () => {
+    const landscapeContainer = buildLandscapeContainer();
+
+    const wrapper = mount(LandscapeMiniMapVue, {
+      props: { landscapeContainer: landscapeContainer },
+    });
+
+    await wrapper.find(wrappedElement('hide-minimap-btn')).trigger('click');
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.find(wrappedElement('show-minimap-btn')).exists()).toBeTruthy();
+    expect(wrapper.find(wrappedElement('hide-minimap-btn')).exists()).toBeFalsy();
+
+    await wrapper.find(wrappedElement('show-minimap-btn')).trigger('click');
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.find(wrappedElement('show-minimap-btn')).exists()).toBeFalsy();
+    expect(wrapper.find(wrappedElement('hide-minimap-btn')).exists()).toBeTruthy();
+  });
 });

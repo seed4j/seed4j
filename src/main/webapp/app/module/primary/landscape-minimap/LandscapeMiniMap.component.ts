@@ -1,7 +1,9 @@
 import { defineComponent, onMounted, PropType, ref, Ref } from 'vue';
+import { IconVue } from '@/common/primary/icon';
 
 export default defineComponent({
   name: 'LandscapeMiniMapComponentVue',
+  components: { IconVue },
   props: {
     landscapeContainer: {
       type: Object as PropType<HTMLDivElement>,
@@ -11,6 +13,8 @@ export default defineComponent({
   setup({ landscapeContainer }) {
     const minimapHTML = ref('');
     const realScale = ref(1);
+
+    const isMiniMapOpen = ref(true);
 
     const minimapContainer = ref<HTMLElement>(document.createElement('div'));
     const minimapSize = ref<HTMLElement>(document.createElement('div'));
@@ -101,6 +105,16 @@ export default defineComponent({
       minimapViewer.value.style.transform = `${translateX} ${translateY}`;
     };
 
+    const openMiniMap = (): void => {
+      minimapSize.value.style.display = 'block';
+      isMiniMapOpen.value = true;
+    };
+
+    const closeMiniMap = (): void => {
+      minimapSize.value.style.display = 'none';
+      isMiniMapOpen.value = false;
+    };
+
     return {
       minimapHTML,
       minimapContainer,
@@ -110,6 +124,9 @@ export default defineComponent({
       startGrabbing,
       stopGrabbing,
       grabbing,
+      openMiniMap,
+      closeMiniMap,
+      isMiniMapOpen,
     };
   },
 });

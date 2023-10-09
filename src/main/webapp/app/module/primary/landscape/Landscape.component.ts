@@ -47,7 +47,7 @@ export default defineComponent({
     const landscape = ref(Loader.loading<Landscape>());
     const levels = ref(Loader.loading<LandscapeLevel[]>());
 
-    const isMiniMapOpen = ref(false);
+    const canLoadMiniMap = ref(false);
 
     const landscapeContainer = ref<HTMLElement>(document.createElement('div'));
     const landscapeConnectors = ref<LandscapeConnector[]>([]);
@@ -131,7 +131,7 @@ export default defineComponent({
       document.addEventListener('keydown', handleKeyboard);
       applicationListener.addEventListener('resize', updateConnectors);
 
-      isMiniMapOpen.value = true;
+      canLoadMiniMap.value = true;
     };
 
     type Navigation = 'ArrowLeft' | 'ArrowRight' | 'ArrowUp' | 'ArrowDown' | 'Space';
@@ -537,7 +537,7 @@ export default defineComponent({
       startGrabbing,
       stopGrabbing,
       grabbing,
-      isMiniMapOpen,
+      canLoadMiniMap,
     };
   },
 });

@@ -106,4 +106,9 @@ public class JHipsterModuleProperties {
   public Map<String, Object> getParameters() {
     return parameters.get();
   }
+
+  @Override
+  public String toString() {
+    return String.valueOf(projectName);
+  }
 }

@@ -59,4 +59,9 @@ public class JHipsterSource {
   private boolean isTemplate(String filename) {
     return filename.endsWith(MUSTACHE_EXTENSION);
   }
+
+  @Override
+  public String toString() {
+    return String.valueOf(source);
+  }
 }

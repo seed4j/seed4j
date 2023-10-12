@@ -68,4 +68,9 @@ public class JHipsterDestination {
     JHipsterDestination other = (JHipsterDestination) obj;
     return new EqualsBuilder().append(destination, other.destination).isEquals();
   }
+
+  @Override
+  public String toString() {
+    return destination;
+  }
 }

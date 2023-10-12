@@ -26,4 +26,9 @@ class JHipsterFileContent {
     String rawContent = files.readString(source.get().toString());
     return ArgumentsReplacer.replaceArguments(rawContent, context.get()).getBytes(StandardCharsets.UTF_8);
   }
+
+  @Override
+  public String toString() {
+    return source.toString();
+  }
 }

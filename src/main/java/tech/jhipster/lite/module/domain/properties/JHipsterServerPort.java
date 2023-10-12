@@ -29,4 +29,10 @@ public class JHipsterServerPort {
   public String stringValue() {
     return String.valueOf(serverPort);
   }
+
+  @Override
+  public String toString() {
+    if (get() == DEFAULT_PORT) return "default";
+    return stringValue();
+  }
 }

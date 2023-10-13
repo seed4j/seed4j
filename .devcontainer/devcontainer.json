@@ -5,7 +5,7 @@
     "args": {
       "VARIANT": "17-bullseye",
       "INSTALL_MAVEN": "true",
-      "MAVEN_VERSION": "3.8.6",
+      "MAVEN_VERSION": "3.9.5",
       "INSTALL_GRADLE": "false",
       "NODE_VERSION": "lts/*"
     }

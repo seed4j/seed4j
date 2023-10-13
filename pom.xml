@@ -52,7 +52,7 @@
     <node.version>v18.18.0</node.version>
     <npm.version>10.2.0</npm.version>
 
-    <maven.version>3.6.0</maven.version>
+    <maven.version>3.9.5</maven.version>
     <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
     <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
     <maven-javadoc-plugin.version>3.6.0</maven-javadoc-plugin.version>

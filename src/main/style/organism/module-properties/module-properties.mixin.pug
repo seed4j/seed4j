@@ -1,0 +1,63 @@
+mixin jhlite-module-properties
+  .jhipster-module-properties.jhlite-vertical-space.-paragraph
+    .jhlite-vertical-space--line
+      h2.jhipster-modules-properties-form--properties-title
+    .jhlite-vertical-space--line
+      .jhlite-field
+        .jhlite-field--label
+          label.jhlite-input Project folder
+        .jhlite-field--field
+          input.jhlite-input-text(type='text')
+    .jhlite-vertical-space--line
+      .jhlite-field
+        .jhlite-field--label
+          label.jhlite-label
+            span Base java package -&nbsp;
+            strong packageName
+        .jhlite-field--field
+          input.jhlite-input-text(type='text')
+    .jhlite-vertical-space--line
+      .jhlite-field
+        .jhlite-field--label
+          label.jhlite-label
+            span Base Project full name -&nbsp;
+            strong projectName
+        .jhlite-field--field
+          input.jhlite-input-text(type='text')
+    .jhlite-vertical-space--line
+      .jhlite-field
+        .jhlite-field--label
+          label.jhlite-label
+            span Project short name (only letters and numbers) -&nbsp;
+            strong baseName
+        .jhlite-field--field
+          input.jhlite-input-text(type='text')
+    .jhlite-vertical-space--line
+      .jhlite-field
+        .jhlite-field--label
+          label.jhlite-label
+            span Server port -&nbsp;
+            strong serverPort
+        .jhlite-field--field
+          input.jhlite-input-text(type='number')
+    .jhlite-vertical-space--line
+      .jhlite-field
+        .jhlite-field--label
+          label.jhlite-label
+            span Type of line break (lf or crlf) -&nbsp;
+            strong endOfLine
+        .jhlite-field--field
+          input.jhlite-input-text(type='text')
+        .jhlite-field--optional Optional
+    .jhlite-vertical-space--line
+      .jhlite-field
+        .jhlite-field--label
+          label.jhlite-label
+            span Number of spaces in indentation -&nbsp;
+            strong indentSize
+        .jhlite-field--field
+          input.jhlite-input-text(type='number')
+        .jhlite-field--optional Optional
+    .jhlite-vertical-space--line
+      input#commit-modules(type='checkbox')
+      label.jhipster-modules-properties-form--commit-modules-label Commit module application

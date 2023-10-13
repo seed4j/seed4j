@@ -1,0 +1,31 @@
+$jhlite-module-properties-line-color: $jhlite-global-line-color;
+$jhlite-module-properties-secondary-color: $jhlite-global-secondary-color;
+$jhlite-module-properties-primary-input-color: $jhlite-global-primary-input-color;
+
+.jhipster-modules-properties-form {
+  &--properties-title {
+    margin-top: 15px;
+    color: var(--jhlite-global-color-text);
+    font-size: 1.4em;
+  }
+
+  &--commit-modules {
+    margin: 10px 0;
+  }
+
+  &--commit-modules-label {
+    margin-left: 10px;
+    cursor: pointer;
+    color: var(--jhlite-modules-label);
+  }
+
+  &--field {
+    box-sizing: border-box;
+    border: 1px solid $jhlite-module-properties-line-color;
+    border-radius: 10px;
+    background-color: $jhlite-module-properties-secondary-color;
+    padding: 2px 7px;
+    width: 100%;
+    color: $jhlite-module-properties-primary-input-color;
+  }
+}

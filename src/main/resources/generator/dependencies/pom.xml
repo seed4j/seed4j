@@ -18,7 +18,7 @@
     <mockito.version>5.6.0</mockito.version>
     <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
     <spring-boot.version>3.1.4</spring-boot.version>
-    <spring-cloud.version>2022.0.0</spring-cloud.version>
+    <spring-cloud.version>2022.0.4</spring-cloud.version>
     <spring-cloud-netflix-eureka-client.version>4.0.3</spring-cloud-netflix-eureka-client.version>
     <springdoc-openapi-starter-webmvc.version>2.2.0</springdoc-openapi-starter-webmvc.version>
     <springdoc-openapi-starter-webflux.version>2.2.0</springdoc-openapi-starter-webflux.version>

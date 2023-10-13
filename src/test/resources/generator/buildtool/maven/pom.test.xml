@@ -28,7 +28,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <maven.version>3.6.0</maven.version>
+    <maven.version>3.9.5</maven.version>
     <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
 
     <junit-jupiter.version>5.8.1</junit-jupiter.version>

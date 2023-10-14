@@ -2,7 +2,6 @@ package tech.jhipster.lite.module.domain.file;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
@@ -32,12 +31,7 @@ class JHipsterSourceTest {
   }
 
   @Test
-  void testToString() {
-    //Given
-    final Path path = Paths.get("sample");
-    //When
-    final JHipsterSource source = new JHipsterSource(path);
-    //Then
-    assertThat(source.toString()).isEqualTo(path.toString());
+  void testToStringShowsPath() {
+    assertThat(new JHipsterSource(Paths.get("sample")).toString()).isEqualTo("sample");
   }
 }

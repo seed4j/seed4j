@@ -32,7 +32,6 @@ public class JHipsterServerPort {
 
   @Override
   public String toString() {
-    if (get() == DEFAULT_PORT) return "default";
     return stringValue();
   }
 }

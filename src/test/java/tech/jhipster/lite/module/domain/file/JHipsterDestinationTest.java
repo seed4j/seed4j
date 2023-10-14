@@ -29,13 +29,8 @@ class JHipsterDestinationTest {
   }
 
   @Test
-  void testToString() {
-    //Given
-    final String sample = "sample";
-    //When
-    final JHipsterDestination destination = new JHipsterDestination(sample);
-    //Then
-    assertThat(destination.toString()).isEqualTo(sample);
+  void testToStringShowsDestination() {
+    assertThat(new JHipsterDestination("src").toString()).isEqualTo("src");
   }
 
   private static String path(String... part) {

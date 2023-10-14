@@ -60,13 +60,11 @@ class JHipsterFileContentTest {
   }
 
   @Test
-  void testToString() {
+  void testToStringShowsPath() {
     //Given
-    final String sample = "sample.mustache";
-    //When
-    final JHipsterFileContent content = content(sample);
-    //Then
-    assertThat(content.toString()).isEqualTo(sample);
+    final JHipsterFileContent content = content("path");
+    //When Then
+    assertThat(content.toString()).isEqualTo("path");
   }
 
   private static JHipsterFileContent content(String path) {

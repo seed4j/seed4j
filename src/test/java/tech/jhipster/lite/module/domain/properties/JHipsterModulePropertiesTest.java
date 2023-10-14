@@ -182,14 +182,11 @@ class JHipsterModulePropertiesTest {
   }
 
   @Test
-  void testToString() {
+  void testToStringShowsProjectName() {
     //Given
     final JHipsterModuleProperties properties = properties();
-    final JHipsterProjectName name = properties.projectName();
-    //When
-    final String toString = properties.toString();
-    //Then
-    assertThat(toString).isEqualTo(name.toString());
+    //When Then
+    assertThat(properties.toString()).isEqualTo(properties.projectName().toString());
   }
 
   private JHipsterModuleProperties properties() {

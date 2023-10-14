@@ -17,4 +17,17 @@ class JHipsterServerPortTest {
   void shouldGetServerPortFromPort() {
     assertThat(new JHipsterServerPort(9000).get()).isEqualTo(9000);
   }
+
+  @Test
+  void testToString() {
+    //Given
+    final JHipsterServerPort normal = new JHipsterServerPort(null);
+    //When //Then
+    assertThat(normal.toString()).isEqualTo("default");
+
+    //Given
+    final JHipsterServerPort other = new JHipsterServerPort(9000);
+    //When //Then
+    assertThat(other.toString()).isEqualTo("9000");
+  }
 }

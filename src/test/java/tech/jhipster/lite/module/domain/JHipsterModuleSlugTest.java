@@ -1,6 +1,7 @@
 package tech.jhipster.lite.module.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -30,5 +31,15 @@ class JHipsterModuleSlugTest {
         new JHipsterModuleSlug("dummy"),
         new JHipsterModuleSlug("root")
       );
+  }
+
+  @Test
+  void testToString() {
+    //Given
+    final String name = "init";
+    //When
+    final JHipsterModuleSlug slug = new JHipsterModuleSlug(name);
+    // Then
+    assertThat(slug.toString()).isEqualTo(name);
   }
 }

@@ -181,6 +181,17 @@ class JHipsterModulePropertiesTest {
     assertThat(properties.projectBaseName()).isEqualTo(JHipsterProjectBaseName.DEFAULT);
   }
 
+  @Test
+  void testToString() {
+    //Given
+    final JHipsterModuleProperties properties = properties();
+    final JHipsterProjectName name = properties.projectName();
+    //When
+    final String toString = properties.toString();
+    //Then
+    assertThat(toString).isEqualTo(name.toString());
+  }
+
   private JHipsterModuleProperties properties() {
     return new JHipsterModuleProperties(
       "/tmp/folder",

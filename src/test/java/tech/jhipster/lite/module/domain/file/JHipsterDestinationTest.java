@@ -28,6 +28,16 @@ class JHipsterDestinationTest {
       .endsWith(path("src", "main", "file"));
   }
 
+  @Test
+  void testToString() {
+    //Given
+    final String sample = "sample";
+    //When
+    final JHipsterDestination destination = new JHipsterDestination(sample);
+    //Then
+    assertThat(destination.toString()).isEqualTo(sample);
+  }
+
   private static String path(String... part) {
     return Stream.of(part).collect(Collectors.joining(SEPARATOR));
   }

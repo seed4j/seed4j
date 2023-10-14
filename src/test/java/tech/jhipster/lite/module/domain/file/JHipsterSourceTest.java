@@ -2,6 +2,7 @@ package tech.jhipster.lite.module.domain.file;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
@@ -28,5 +29,15 @@ class JHipsterSourceTest {
   @Test
   void shouldGetFileExtension() {
     assertThat(new JHipsterSource(Paths.get("src/main/resources")).file("Assert.java").extension()).isEqualTo(".java");
+  }
+
+  @Test
+  void testToString() {
+    //Given
+    final Path path = Paths.get("sample");
+    //When
+    final JHipsterSource source = new JHipsterSource(path);
+    //Then
+    assertThat(source.toString()).isEqualTo(path.toString());
   }
 }

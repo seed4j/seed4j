@@ -30,7 +30,7 @@ class JHipsterDestinationTest {
 
   @Test
   void testToStringShowsDestination() {
-    assertThat(new JHipsterDestination("src").toString()).isEqualTo("src");
+    assertThat(new JHipsterDestination("src")).hasToString("src");
   }
 
   private static String path(String... part) {

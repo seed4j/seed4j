@@ -32,6 +32,6 @@ class JHipsterSourceTest {
 
   @Test
   void testToStringShowsPath() {
-    assertThat(new JHipsterSource(Paths.get("sample")).toString()).isEqualTo("sample");
+    assertThat(new JHipsterSource(Paths.get("sample"))).hasToString("sample");
   }
 }

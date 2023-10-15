@@ -20,6 +20,6 @@ class JHipsterServerPortTest {
 
   @Test
   void testToStringShowsPortNumber() {
-    assertThat(new JHipsterServerPort(9000).toString()).isEqualTo("9000");
+    assertThat(new JHipsterServerPort(9000)).hasToString("9000");
   }
 }

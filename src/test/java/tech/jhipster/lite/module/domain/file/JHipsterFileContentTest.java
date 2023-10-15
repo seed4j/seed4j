@@ -64,7 +64,7 @@ class JHipsterFileContentTest {
     //Given
     final JHipsterFileContent content = content("path");
     //When Then
-    assertThat(content.toString()).isEqualTo("path");
+    assertThat(content).hasToString("path");
   }
 
   private static JHipsterFileContent content(String path) {

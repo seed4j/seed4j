@@ -186,7 +186,7 @@ class JHipsterModulePropertiesTest {
     //Given
     final JHipsterModuleProperties properties = properties();
     //When Then
-    assertThat(properties.toString()).isEqualTo(properties.projectName().toString());
+    assertThat(properties).hasToString(properties.projectName().toString());
   }
 
   private JHipsterModuleProperties properties() {

@@ -5,8 +5,6 @@ import static org.mockito.Mockito.*;
 import static tech.jhipster.lite.project.domain.history.ProjectHistoryFixture.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import java.io.ByteArrayInputStream;
@@ -176,7 +174,7 @@ class FileSystemProjectsRepositoryTest {
   class FileSystemProjectsRepositoryGetHistoryTest {
 
     @Test
-    void shouldHandleDeserializationErrors() throws StreamReadException, DatabindException, IOException {
+    void shouldHandleDeserializationErrors() throws IOException {
       ProjectPath path = folder().add("src/test/resources/projects/history/history.json", ".jhipster/modules/history.json").build();
       ObjectMapper json = mock(ObjectMapper.class);
       when(json.readValue(any(byte[].class), eq(PersistedProjectHistory.class))).thenThrow(IOException.class);

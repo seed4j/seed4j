@@ -88,11 +88,3 @@
 </template>
 
 <script lang="ts" src="./Header.component.ts"></script>
-
-<style lang="scss">
-.jhlite-with-theme-switch {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-</style>

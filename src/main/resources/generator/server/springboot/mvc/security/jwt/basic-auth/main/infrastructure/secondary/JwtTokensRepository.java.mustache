@@ -6,7 +6,6 @@ import {{packageName}}.account.domain.TokensRepository;
 import {{packageName}}.shared.authentication.domain.Role;
 import {{packageName}}.shared.error.domain.Assert;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
@@ -33,10 +32,10 @@ class JwtTokensRepository implements TokensRepository {
 
     String token = Jwts
       .builder()
-      .setSubject(query.username().get())
+      .subject(query.username().get())
       .claim("auth", buildAuthorities(query))
-      .signWith(key, SignatureAlgorithm.HS512)
-      .setExpiration(getValidity(query))
+      .signWith(key, Jwts.SIG.HS512)
+      .expiration(getValidity(query))
       .compact();
 
     return new Token(token);

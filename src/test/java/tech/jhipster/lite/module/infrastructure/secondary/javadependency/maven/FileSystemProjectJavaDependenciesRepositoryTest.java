@@ -22,7 +22,7 @@ import tech.jhipster.lite.shared.error.domain.GeneratorException;
 @UnitTest
 class FileSystemProjectJavaDependenciesRepositoryTest {
 
-  private static FileSystemProjectJavaDependenciesRepository projectDependencies = new FileSystemProjectJavaDependenciesRepository();
+  private static final FileSystemProjectJavaDependenciesRepository projectDependencies = new FileSystemProjectJavaDependenciesRepository();
 
   @Test
   void shouldNotReadFromUnreadableMavenFile() {

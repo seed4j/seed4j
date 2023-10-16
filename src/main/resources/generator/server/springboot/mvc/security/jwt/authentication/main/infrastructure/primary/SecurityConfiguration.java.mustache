@@ -109,7 +109,7 @@ class SecurityConfiguration {
   @Bean
   @ConditionalOnMissingBean
   AuthenticationTokenReader authenticationTokenReader() {
-    return new JwtReader(Jwts.parserBuilder().setSigningKey(signingKey()).build());
+    return new JwtReader(Jwts.parser().verifyWith(signingKey()).build());
   }
 
   private SecretKey signingKey() {

@@ -14,7 +14,7 @@ public class GatewayModuleFactory {
 
   private static final String GATEWAY_PACKAGE = "wire/gateway/infrastructure/primary";
   private static final JHipsterSource SOURCE = from("server/springboot/springcloud/gateway/java");
-  private static final PropertyValue TRUE_VALUE = propertyValue("true");
+  private static final PropertyValue TRUE_VALUE = propertyValue(true);
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

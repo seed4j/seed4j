@@ -15,7 +15,7 @@ import tech.jhipster.lite.UnitTest;
 class PropertiesFileSpringPropertiesHandlerTest {
 
   public static final Path EXISTING_SPRING_PROPERTIES = Paths.get(
-    "src/test/resources/projects/project-with-spring-properties/application.properties"
+    "src/test/resources/projects/project-with-spring-application-properties/application.properties"
   );
 
   @Test

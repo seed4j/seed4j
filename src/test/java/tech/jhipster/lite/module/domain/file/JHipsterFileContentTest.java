@@ -59,6 +59,14 @@ class JHipsterFileContentTest {
       );
   }
 
+  @Test
+  void testToStringShowsPath() {
+    //Given
+    final JHipsterFileContent content = content("path");
+    //When Then
+    assertThat(content).hasToString("path");
+  }
+
   private static JHipsterFileContent content(String path) {
     return new JHipsterFileContent(new JHipsterSource(Paths.get(path)));
   }

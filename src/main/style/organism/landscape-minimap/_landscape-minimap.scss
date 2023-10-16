@@ -1,0 +1,41 @@
+$jhlite-minimap-size-background-color: #0000009a;
+
+.jhlite-minimap {
+  &--container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+    min-width: 20px;
+    overflow: hidden;
+  }
+
+  &--size {
+    position: relative;
+    z-index: 5;
+    border: 1px solid var(--jhlite-brand);
+    background-color: $jhlite-minimap-size-background-color;
+    user-select: none;
+  }
+
+  &--viewer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    z-index: 100;
+    border: 1px solid white;
+    width: 100%;
+  }
+
+  &--content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    z-index: -1;
+    border: 1px solid white;
+    width: 100%;
+    height: 100%;
+  }
+}

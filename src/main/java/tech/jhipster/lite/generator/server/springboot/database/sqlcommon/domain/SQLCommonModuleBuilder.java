@@ -18,8 +18,8 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 public class SQLCommonModuleBuilder {
 
   private static final String ORG_HIBERNATE = "org.hibernate.orm";
-  private static final PropertyValue FALSE = propertyValue("false");
-  private static final PropertyValue TRUE = propertyValue("true");
+  private static final PropertyValue FALSE = propertyValue(false);
+  private static final PropertyValue TRUE = propertyValue(true);
 
   private SQLCommonModuleBuilder() {}
 

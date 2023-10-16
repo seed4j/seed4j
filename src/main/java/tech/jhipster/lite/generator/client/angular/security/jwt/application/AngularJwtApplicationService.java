@@ -8,7 +8,7 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class AngularJwtApplicationService {
 
-  private AngularJwtModuleFactory factory;
+  private final AngularJwtModuleFactory factory;
 
   public AngularJwtApplicationService() {
     factory = new AngularJwtModuleFactory();

@@ -35,7 +35,7 @@ class KafkaPropertiesTest {
 
   @Test
   void shouldSetConsumer() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-    Map<String, Object> consumer = new HashMap();
+    Map<String, Object> consumer = new HashMap<>();
     consumer.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 
     Method postConstruct = KafkaProperties.class.getDeclaredMethod("init");
@@ -53,7 +53,7 @@ class KafkaPropertiesTest {
 
   @Test
   void shouldSetProducer() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-    Map<String, Object> producer = new HashMap();
+    Map<String, Object> producer = new HashMap<>();
     producer.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 
     Method postConstruct = KafkaProperties.class.getDeclaredMethod("init");

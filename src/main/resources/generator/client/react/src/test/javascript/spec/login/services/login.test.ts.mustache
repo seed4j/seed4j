@@ -14,7 +14,7 @@ const idToken = 123;
 describe('login function', () => {
   it('should return a promise', () => {
     const spy = vi.spyOn(axios, 'post');
-    spy.mockImplementationOnce(() => Promise.reject('error'));
+    spy.mockImplementationOnce(() => Promise.reject(new Error('error')));
     const setUsername = vi.fn();
     const setToken = vi.fn();
     expect(login({...data, setToken, setUsername})).toBeInstanceOf(Promise);

@@ -12,7 +12,7 @@ public interface ResponseAsserter {
 
   HeaderAsserter<?> hasHeader(String header);
 
-  public ResponseAsserter hasRawBody(String info);
+  ResponseAsserter hasRawBody(String info);
 
   default ElementAsserter<?> hasResponse() {
     return hasElement(null);

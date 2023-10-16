@@ -72,7 +72,7 @@ class PropertiesFileSpringPropertiesHandler {
   private String propertyLine(PropertyKey key, PropertyValue value) {
     return new StringBuilder()
       .append(propertyId(key))
-      .append(value.get().stream().collect(Collectors.joining(COLLECTION_SEPARATOR)))
+      .append(value.get().stream().map(Object::toString).collect(Collectors.joining(COLLECTION_SEPARATOR)))
       .toString();
   }
 

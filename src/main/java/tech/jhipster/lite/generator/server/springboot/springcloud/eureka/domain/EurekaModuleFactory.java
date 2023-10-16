@@ -13,8 +13,8 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class EurekaModuleFactory {
 
-  private static final PropertyValue TRUE_VALUE = propertyValue("true");
-  private static final PropertyValue FALSE_VALUE = propertyValue("false");
+  private static final PropertyValue TRUE_VALUE = propertyValue(true);
+  private static final PropertyValue FALSE_VALUE = propertyValue(false);
   private static final JHipsterSource SPRING_CLOUD_SOURCE = from("server/springboot/springcloud/configclient");
   private static final JHipsterSource EUREKA_SOURCE = from("server/springboot/springcloud/eureka");
 

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: JHLite
+
+logging:
+  level:
+    tech.jhipster.lite: INFO

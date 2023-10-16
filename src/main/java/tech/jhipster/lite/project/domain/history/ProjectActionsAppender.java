@@ -5,7 +5,7 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class ProjectActionsAppender {
 
-  private ProjectsRepository projects;
+  private final ProjectsRepository projects;
 
   public ProjectActionsAppender(ProjectsRepository projects) {
     Assert.notNull("projects", projects);

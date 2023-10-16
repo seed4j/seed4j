@@ -11,4 +11,10 @@ $jhlite-header-color-background: $jhlite-global-color-fill-secondary;
       flex-grow: 1;
     }
   }
+
+  .jhlite-with-theme-switch {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
 }

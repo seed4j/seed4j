@@ -4,6 +4,7 @@ import { ModulesRepository } from '@/module/domain/ModulesRepository';
 import { defineComponent, inject, nextTick, onBeforeUnmount, onMounted, Ref, ref } from 'vue';
 import { LandscapeModuleVue } from '../landscape-module';
 import { LandscapeLoaderVue } from '../landscape-loader';
+import { LandscapeMiniMapVue } from '../landscape-minimap';
 import { buildConnector, LandscapeConnector } from './LandscapeConnector';
 import { DisplayMode } from './DisplayMode';
 import { emptyLandscapeSize, LandscapeConnectorsSize } from './LandscapeConnectorsSize';
@@ -32,7 +33,7 @@ import { LandscapeNavigation } from './LandscapeNavigation';
 
 export default defineComponent({
   name: 'LandscapeVue',
-  components: { LandscapeModuleVue, ModulePropertiesFormVue, ProjectActionsVue, IconVue, LandscapeLoaderVue },
+  components: { LandscapeModuleVue, ModulePropertiesFormVue, ProjectActionsVue, IconVue, LandscapeLoaderVue, LandscapeMiniMapVue },
   setup() {
     const applicationListener = inject('applicationListener') as ApplicationListener;
     const alertBus = inject('alertBus') as AlertBus;
@@ -45,6 +46,8 @@ export default defineComponent({
 
     const landscape = ref(Loader.loading<Landscape>());
     const levels = ref(Loader.loading<LandscapeLevel[]>());
+
+    const canLoadMiniMap = ref(false);
 
     const landscapeContainer = ref<HTMLElement>(document.createElement('div'));
     const landscapeConnectors = ref<LandscapeConnector[]>([]);
@@ -127,6 +130,8 @@ export default defineComponent({
       landscapeNavigation.value.loaded(new LandscapeNavigation(landscapeElements.value, levels.value.value()));
       document.addEventListener('keydown', handleKeyboard);
       applicationListener.addEventListener('resize', updateConnectors);
+
+      canLoadMiniMap.value = true;
     };
 
     type Navigation = 'ArrowLeft' | 'ArrowRight' | 'ArrowUp' | 'ArrowDown' | 'Space';
@@ -532,6 +537,7 @@ export default defineComponent({
       startGrabbing,
       stopGrabbing,
       grabbing,
+      canLoadMiniMap,
     };
   },
 });

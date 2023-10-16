@@ -56,6 +56,8 @@ jobs:
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
+        with:
+          java-version: 21
       - name: 'Init: cache local Maven repository'
         uses: actions/cache@v3
         with:
@@ -168,12 +170,20 @@ jobs:
           - customjhlite
           - typescriptapp
           - gradleapp
+        include:
+          - java-version: 17
+          - java-version: 21
+            app: fullapp
+          - java-version: 21
+            app: customjhlite
     steps:
       - name: 'Setup: checkout project'
         uses: actions/checkout@v4
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
+        with:
+          java-version: ${{ matrix.java-version }}
       - name: 'Artifact: download JAR'
         uses: actions/download-artifact@v3
         with:

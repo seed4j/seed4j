@@ -21,8 +21,8 @@ public class ConsulModuleFactory {
   private static final JHipsterSource SOURCE = from("server/springboot/springcloud/consul");
 
   private static final GroupId SPRING_CLOUD_GROUP_ID = groupId("org.springframework.cloud");
-  private static final PropertyValue FALSE_VALUE = propertyValue("false");
-  private static final PropertyValue TRUE_VALUE = propertyValue("true");
+  private static final PropertyValue FALSE_VALUE = propertyValue(false);
+  private static final PropertyValue TRUE_VALUE = propertyValue(true);
   private static final String DOCKER_IMAGE_CONSUL = "consul";
   private static final String DOCKER_IMAGE_CONFIG_LOADER = "jhipster/consul-config-loader";
   private static final String DOCKER_COMPOSE_COMMAND = "docker compose -f src/main/docker/consul.yml up -d";

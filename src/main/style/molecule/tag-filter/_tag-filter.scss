@@ -1,0 +1,15 @@
+$jhlite-tag-filter-line-color: $jhlite-global-line-color;
+$jhlite-tag-filter-primary-color: $jhlite-global-primary-color;
+
+.jhipster-tag-filter {
+  border: 1px solid $jhlite-tag-filter-line-color;
+  border-radius: 1.5em;
+  background-color: transparent;
+  padding: 7px 15px;
+  color: var(--jhlite-global-color-text);
+
+  &.selected {
+    background-color: $jhlite-tag-filter-primary-color;
+    color: #fff;
+  }
+}

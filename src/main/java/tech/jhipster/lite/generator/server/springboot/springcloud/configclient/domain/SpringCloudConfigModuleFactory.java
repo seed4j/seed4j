@@ -16,7 +16,7 @@ public class SpringCloudConfigModuleFactory {
 
   private static final JHipsterSource SOURCE = from("server/springboot/springcloud/configclient");
 
-  private static final PropertyValue FALSE_VALUE = propertyValue("false");
+  private static final PropertyValue FALSE_VALUE = propertyValue(false);
 
   private final DockerImages dockerImages;
 

@@ -29,4 +29,9 @@ public class JHipsterServerPort {
   public String stringValue() {
     return String.valueOf(serverPort);
   }
+
+  @Override
+  public String toString() {
+    return stringValue();
+  }
 }

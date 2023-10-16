@@ -29,4 +29,9 @@ class JHipsterSourceTest {
   void shouldGetFileExtension() {
     assertThat(new JHipsterSource(Paths.get("src/main/resources")).file("Assert.java").extension()).isEqualTo(".java");
   }
+
+  @Test
+  void testToStringShowsPath() {
+    assertThat(new JHipsterSource(Paths.get("sample"))).hasToString("sample");
+  }
 }

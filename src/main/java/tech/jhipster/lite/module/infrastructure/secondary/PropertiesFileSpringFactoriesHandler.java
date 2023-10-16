@@ -1,5 +1,7 @@
 package tech.jhipster.lite.module.infrastructure.secondary;
 
+import static java.util.stream.Collectors.*;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -59,10 +61,10 @@ public class PropertiesFileSpringFactoriesHandler {
     StringBuilder newProperties = new StringBuilder(currentProperties);
     int eolIndex = newProperties.indexOf(LINE_BREAK, propertyIndex);
 
-    for (String propertyValue : value.get()) {
-      if (!newProperties.substring(propertyIndex, eolIndex).contains(propertyValue)) {
+    for (Object propertyValue : value.get()) {
+      if (!newProperties.substring(propertyIndex, eolIndex).contains(propertyValue.toString())) {
         newProperties.insert(eolIndex, COLLECTION_SEPARATOR + propertyValue);
-        eolIndex = eolIndex + COLLECTION_SEPARATOR.length() + propertyValue.length();
+        eolIndex = eolIndex + COLLECTION_SEPARATOR.length() + propertyValue.toString().length();
       }
     }
     return newProperties.toString();
@@ -84,7 +86,7 @@ public class PropertiesFileSpringFactoriesHandler {
   }
 
   private static String joinedPropertyValues(PropertyValue value) {
-    return String.join(COLLECTION_SEPARATOR, value.get());
+    return value.get().stream().map(Object::toString).collect(joining(COLLECTION_SEPARATOR));
   }
 
   private String propertyId(PropertyKey key) {

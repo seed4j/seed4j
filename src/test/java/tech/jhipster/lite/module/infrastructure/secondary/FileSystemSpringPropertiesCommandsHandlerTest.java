@@ -21,7 +21,7 @@ import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
 class FileSystemSpringPropertiesCommandsHandlerTest {
 
   public static final Path EXISTING_SPRING_PROPERTIES = Paths.get(
-    "src/test/resources/projects/project-with-spring-properties/application.properties"
+    "src/test/resources/projects/project-with-spring-application-properties/application.properties"
   );
   private static final FileSystemSpringPropertiesCommandsHandler handler = new FileSystemSpringPropertiesCommandsHandler();
 

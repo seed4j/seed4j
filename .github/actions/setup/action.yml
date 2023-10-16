@@ -1,20 +1,33 @@
 name: 'Setup'
-description: 'Setup environment with Java 17, Node 18.18.0'
+description: 'Setup environment with Java and Node'
+inputs:
+  java-version:
+    description: 'Java version to use'
+    required: true
+    default: '17'
+  node-version:
+    description: 'Node version to use'
+    required: true
+    default: '18.18.0'
 runs:
   using: 'composite'
   steps:
     - name: 'Setup: Node.js'
       uses: actions/setup-node@v3
       with:
-        node-version: 18.18.0
+        node-version: '${{ inputs.node-version }}'
     - name: 'Setup: update NPM'
       shell: bash
       run: npm install -g npm
-    - name: 'Setup: Java 17'
+    - name: 'Setup: Java ${{ inputs.java-version }}'
       uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
-        java-version: '17.x'
+        java-version: '${{ inputs.java-version }}'
+    - name: 'Disable maven interactive mode'
+      shell: bash
+      run: |
+        sed -i 's/<servers>/<interactiveMode>false\<\/interactiveMode>\n  <servers>/g' ~/.m2/settings.xml
     - name: 'Setup: check tools'
       shell: bash
       run: |

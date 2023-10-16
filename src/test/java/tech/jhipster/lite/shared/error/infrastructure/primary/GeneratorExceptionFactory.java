@@ -6,7 +6,7 @@ public final class GeneratorExceptionFactory {
 
   private GeneratorExceptionFactory() {}
 
-  public static final GeneratorException buildEmptyException() {
+  public static GeneratorException buildEmptyException() {
     return GeneratorException.builder(null).build();
   }
 }

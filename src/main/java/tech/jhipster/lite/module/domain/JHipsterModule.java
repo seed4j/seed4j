@@ -276,7 +276,15 @@ public class JHipsterModule {
   }
 
   public static PropertyValue propertyValue(String... values) {
-    return new PropertyValue(values);
+    return PropertyValue.of(values);
+  }
+
+  public static PropertyValue propertyValue(Boolean... values) {
+    return PropertyValue.of(values);
+  }
+
+  public static PropertyValue propertyValue(Number... values) {
+    return PropertyValue.of(values);
   }
 
   public static SpringProfile springProfile(String profile) {

@@ -605,7 +605,7 @@ describe('Modules', () => {
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(false);
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-button')).exists()).toBe(true);
-      expect(wrapper.find(wrappedElement('server-tag-filter')).classes()).toEqual(['jhipster-modules-tags-filter', 'selected']);
+      expect(wrapper.find(wrappedElement('server-tag-filter')).classes()).toEqual(['jhipster-tag-filter', 'selected']);
     });
 
     it('Should filter modules with tag and search filter', async () => {
@@ -631,7 +631,7 @@ describe('Modules', () => {
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(true);
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-button')).exists()).toBe(true);
-      expect(wrapper.find(wrappedElement('server-tag-filter')).classes()).toEqual(['jhipster-modules-tags-filter', 'not-selected']);
+      expect(wrapper.find(wrappedElement('server-tag-filter')).classes()).toEqual(['jhipster-tag-filter', 'not-selected']);
     });
   });
 

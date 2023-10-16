@@ -31,4 +31,9 @@ class JHipsterModuleSlugTest {
         new JHipsterModuleSlug("root")
       );
   }
+
+  @Test
+  void testToStringShowsSlug() {
+    assertThat(new JHipsterModuleSlug("init")).hasToString("init");
+  }
 }

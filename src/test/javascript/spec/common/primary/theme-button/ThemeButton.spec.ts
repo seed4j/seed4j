@@ -35,7 +35,7 @@ describe('ThemeButton', () => {
     const themeRepository = stubLocalWindowThemeRepository();
     const wrapper = wrap({ themeRepository });
 
-    const checkbox = wrapper.find('.jhlite-container_toggle');
+    const checkbox = wrapper.find('.jhlite-theme-button-toggle');
     expect(themeRepository.get.calledOnce).toBe(true);
     expect(themeRepository.choose.callCount).toBe(1);
 

@@ -1,11 +1,11 @@
 package {{packageName}}.shared.authentication.infrastructure.primary;
 
+import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.*;
 
 import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -36,16 +36,13 @@ import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWrite
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
-
 import {{packageName}}.shared.authentication.domain.Role;
 import {{packageName}}.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
-public class SecurityConfiguration {
+@EnableMethodSecurity(securedEnabled = true)
+class SecurityConfiguration {
 
   private static final int TIMEOUT = 2000;
 
@@ -58,7 +55,7 @@ public class SecurityConfiguration {
 
   public SecurityConfiguration(
     CorsFilter corsFilter,
-    ApplicationSecurityProperties applicationSecurityProperties, 
+    ApplicationSecurityProperties applicationSecurityProperties,
     HandlerMappingIntrospector introspector
   ) {
     this.corsFilter = corsFilter;

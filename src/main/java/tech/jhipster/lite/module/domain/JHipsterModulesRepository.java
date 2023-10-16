@@ -8,6 +8,12 @@ public interface JHipsterModulesRepository {
 
   JHipsterLandscape landscape();
 
+  /**
+   * Perform updates to target project
+   * Side effect: Write files to filesystem
+   * @param changes to be written
+   *
+   */
   void apply(JHipsterModuleChanges changes);
 
   void applied(JHipsterModuleApplied moduleApplied);

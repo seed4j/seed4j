@@ -58,7 +58,7 @@ class RestJHipsterModule {
     private String description;
     private RestJHipsterModulePropertiesDefinition properties;
 
-    private Collection<String> tags = new ArrayList<>();
+    private final Collection<String> tags = new ArrayList<>();
 
     public RestJHipsterModuleBuilder slug(String slug) {
       this.slug = slug;

@@ -23,7 +23,7 @@ public class CucumberAuthenticationConfiguration {
   @Bean
   @Primary
   public JwtDecoder jwtDecoder() {
-    JwtParser decoder = Jwts.parserBuilder().setSigningKey(JWT_KEY).build();
+    JwtParser decoder = Jwts.parser().setSigningKey(JWT_KEY).build();
 
     return token ->
       new Jwt(

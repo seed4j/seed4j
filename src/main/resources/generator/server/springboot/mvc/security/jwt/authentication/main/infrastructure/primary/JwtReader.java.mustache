@@ -46,7 +46,7 @@ class JwtReader implements AuthenticationTokenReader {
   }
 
   private Optional<Authentication> parseToken(String token) {
-    Claims claims = parser.parseClaimsJws(token).getBody();
+    Claims claims = parser.parseSignedClaims(token).getPayload();
 
     List<SimpleGrantedAuthority> authorities = readAuthorities(claims);
 

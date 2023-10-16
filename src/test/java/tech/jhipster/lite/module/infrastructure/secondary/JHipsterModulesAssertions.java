@@ -373,7 +373,7 @@ public final class JHipsterModulesAssertions {
     }
   }
 
-  public static record ModuleFile(String source, String destination) {
+  public record ModuleFile(String source, String destination) {
     public ModuleFile {
       Assert.notBlank("source", source);
       Assert.notBlank("destination", destination);

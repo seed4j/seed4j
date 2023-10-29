@@ -7,7 +7,7 @@ For that you'll need to provide 2 main parts:
 - `JHipsterModuleResource`: describe the module organization, it is used to generate the APIs;
 - `JHipsterModule`: describe the changes done by the module.
 
-You can start by the element you prefer but to create a `JHipsterModuleResource` you'll need to be able to build a `JHipsterModule`.
+You can start with the element you prefer but to create a `JHipsterModuleResource` you'll need to be able to build a `JHipsterModule`.
 
 ## Creating a JHipsterModule
 
@@ -75,7 +75,7 @@ public class MyModuleFactory {
 
 This implementation will take a file from `src/main/resources/generator/my-module` and put it in the generated project.
 
-The file is a template named `Dummy.java.mustache` and can contains some mustache placeholders:
+The file is a template named `Dummy.java.mustache` and can contain some mustache placeholders:
 
 ```java
 package {{packageName}}.my_package;
@@ -88,7 +88,7 @@ public class Dummy {
 
 Those placeholders will be replaced by properties values during module application.
 
-And this is it for this part of the documentation... Of course you can do a lot more than that in the `JHipsterModule` but the goal of this documentation is not to go deep in this usage! You have a lot of running example and you can always ask for help, we'll be really happy to help you provide your implementations!
+And this is it for this part of the documentation... Of course you can do a lot more than that in the `JHipsterModule` but the goal of this documentation is not to go deep in this usage! You have a lot of running examples and you can always ask for help, we'll be really happy to help you provide your implementations!
 
 ## Add relevant dependencies required for the new module in the Version files
 
@@ -107,7 +107,7 @@ And this is it for this part of the documentation... Of course you can do a lot 
 
 - **Java versions**
 
-  - You can add the java dependencies required for your module in the `src/main/resources/generator/dependencies/pom.xml`
+  - You can add the Java dependencies required for your module in the `src/main/resources/generator/dependencies/pom.xml`
   - These dependencies are resolved using [FileSystemJavaDependenciesReader](https://github.com/jhipster/jhipster-lite/blob/main/src/main/java/tech/jhipster/lite/module/infrastructure/secondary/javadependency/FileSystemJavaDependenciesReader.java), an implementation of the `JavaDependenciesReader` bean to read from a local file.
 
 - **NPM versions**
@@ -178,7 +178,7 @@ public class MyModuleApplicationService {
 
 ```
 
-In your `JHipsterModuleResource` you can define additional properties and an organization to display your module in the landscape (replacing `.standalone()`). Here again, you have a lot of example to rely on.
+In your `JHipsterModuleResource` you can define additional properties and an organization to display your module in the landscape (replacing `.standalone()`). Here again, you have a lot of examples to rely on.
 
 ## Applying module in CI
 

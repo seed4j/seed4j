@@ -2,7 +2,7 @@
 
 ## Style guide
 
-You can find the [JHipster style guide][jhipster-style-guide] on Figma, please use this reference to help you create new style.
+You can find the [JHipster style guide][jhipster-style-guide] on Figma, please use this reference to help you create a new style.
 
 ## Pattern Library
 
@@ -12,13 +12,13 @@ You can start Tikui with `npm run tikui:serve`, this will open the Pattern Libra
 
 To add a new component, you may like to install `tikui` command with `npm i -g @tikui/cli`.
 
-Then create the component using the `jhlite` prefix, here is an example to create `my-atom` component.
+Then create the component using the `jhlite` prefix, here is an example of creating `my-atom` component.
 
 ```shell
 tikui create -p jhlite my-atom src/main/style/atom
 ```
 
-This will generate `my-atom` under atom directory, don't forget to edit the `atom.pug` and `_atom.scss` to show `my-atom` on the [atom](http://localhost:9005/atom/atom.html) page.
+This will generate `my-atom` under the atom directory, don't forget to edit the `atom.pug` and `_atom.scss` to show `my-atom` on the [atom](http://localhost:9005/atom/atom.html) page.
 
 > You can do the same thing to make a `molecule`, an `organism` and a `template`.
 
@@ -40,7 +40,7 @@ Now you're able to launch:
 npm run glyph:build
 ```
 
-This will replace the current _CSS_ and _font_ files into the sources.
+This will replace the current _CSS_ and _font_ files in the sources.
 
 [tikui]: https://www.tikui.org
 [fontello]: https://fontello.com/

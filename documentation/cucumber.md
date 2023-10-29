@@ -5,11 +5,11 @@ In `src/test/features` create a feature file:
 ```
 Feature: Simple WebService test
   Background:
-    Given I am logged in as "user"
+    Given I am logged in as a "user"
 
   Scenario: Calling WebService with static assertion
     When I get simple bean "Bob"
-    Then I get simple response with name "Bob" and age 42
+    Then I get a simple response with the name "Bob" and age 42
 ```
 
 You'll then have to define the glue code:
@@ -48,14 +48,14 @@ As an example, you can use results arrays in your features:
 
 ```
   Scenario: Calling WebService with line presentation table
-    Given I am logged in as "user"
+    Given I am logged in as a "user"
     When I get simple bean "Bill"
-    Then I should get simple bean
+    Then I should get a simple bean
       | Name | Bill |
       | Age  | 42   |
 
   Scenario: Calling WebServices with all users
-    When I get all simple beans
+    When I get all the simple beans
     Then I should get simple beans
       | Name | Age |
       | Bob  | 42  |
@@ -78,7 +78,7 @@ public void shouldGetResponseContent(List<Map<String, Object>> responses) {
 
 ## Reading responses content
 
-Sometimes you may want to access the last response content without asserting it, you can do:
+Sometimes you may want to access the last response content without asserting it, you can do this:
 
 ```java
 CucumberTestContext.getElement("$.path");
@@ -94,13 +94,13 @@ Sometimes you have to validate behavior of async operations. You can do:
 assertThatLastAsyncResponse().hasOkStatus();
 ```
 
-To have a default waiting time of 5 second or you can get a custom max with:
+To have a default waiting time of 5 seconds or you can get a custom max with:
 
 ```java
 assertThatLastAsyncResponse(Duration.ofSeconds(30)).hasOkStatus();
 ```
 
-Behind the scene, your last service will be recalled until the assertions are OK or you reach the timeout.
+Behind the scenes, your last service will be recalled until the assertions are OK or you reach the timeout.
 
 ## Mocking beans
 

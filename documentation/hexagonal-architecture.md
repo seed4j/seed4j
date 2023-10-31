@@ -23,7 +23,7 @@ Here are some of the properties we are looking for when using this kind of archi
 
 "The Only Constant in Life Is Change."- Heraclitus. This can't be more true in Software (hence [the name](https://en.wikipedia.org/wiki/Software)) and, if you have just a few weeks of experience, you know that "the users don't know what they want!!!". If the first quote is true the second one is fallacious!
 
-It's not that the users don't know what they want, in fact, nobody knows. Building Software is not done with somebody telling the others what to do, it's done with [productive partnerships](https://manifesto.softwarecraftsmanship.org/). Yes, that means people will change their minds times and times again (and this is totally fine!).
+It's not that the users don't know what they want, in fact, nobody knows. Building Software is not done with somebody telling the others what to do, it's done with [productive partnerships](https://manifesto.softwarecraftsmanship.org/). Yes, that means people will change their mind time and time again (and this is totally fine!).
 
 So, as professional software developers we have to ensure that the code we are writing can welcome those changes. This often starts by lowering the solution complexity!
 

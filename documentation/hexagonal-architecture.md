@@ -1,6 +1,6 @@
 # Hexagonal architecture (application service flavor)
 
-Good evening and welcome to this architecture documentation. Glad you made your way there! By the time of your reading this documentation may be outdated, feel free to update it!
+Good evening, and welcome to this architecture documentation. We're pleased that you've found your way here! Please note that this documentation may become outdated over time, so feel free to update it as needed.
 
 So, this is basically about why and how to use a peculiar flavor of [hexagonal architecture](https://alistair.cockburn.us/hexagonal-architecture/).
 
@@ -21,27 +21,36 @@ Here are some of the properties we are looking for when using this kind of archi
 
 ### Built for changes
 
-"The Only Constant in Life Is Change."- Heraclitus. This can't be more true in Software (hence [the name](https://en.wikipedia.org/wiki/Software)) and, if you have just a few weeks of experience, you know that "the users don't know what they want!!!". If the first quote is true the second one is fallacious!
+"The Only Constant in Life Is Change."- Heraclitus. This can't be more true in software (hence [the name](https://en.wikipedia.org/wiki/Software)) and, if you have just a few weeks of experience, you know that "the users don't know what they want!!!". If the first quote is true the second one is fallacious!
 
-It's not that the users don't know what they want, in fact, nobody knows. Building Software is not done with somebody telling the others what to do, it's done with [productive partnerships](https://manifesto.softwarecraftsmanship.org/). Yes, that means people will change their mind time and time again (and this is totally fine!).
+
+It's not that the users don't know what they want, in fact, nobody knows. Building a software is not done with somebody telling the others what to do, it's done with [productive partnerships](https://manifesto.softwarecraftsmanship.org/). Yes, that means people will change their mind times and time again (and this is totally fine!).
+
 
 So, as professional software developers we have to ensure that the code we are writing can welcome those changes. This often starts by lowering the solution complexity!
 
 We often talk about 3 types of complexity:
 
-- **Essential**: When building Software we have to solve a problem of complexity X: this is the essential complexity. This complexity directly relates to the problem we are trying to solve and we can't really make that lower.
+- **Essential**: When building software we have to solve a problem of complexity X. This is the essential complexity. This complexity directly relates to the problem we are trying to solve and we can't really make that lower.
 - **Mandatory**: No matter the efforts, we are gonna have to add some complexity to the system since we have technical stuff to do (persist data, send messages, ...). This complexity is called mandatory complexity.
+
 - **Accidental**: On top of the two previous complexities comes the accidental complexity, the one we don't want because it's not needed. Example: if you have a configuration that has been standing still for the past 10 years you probably don't need to put that in a database, handling that in code will be easier and more efficient (and no, you probably don't need microservices with one team of 3).
 
-The hexagonal architecture allows us to reduce all those complexities to their bare minimum by giving clear responsibilities to each part of our Software.
+
+The hexagonal architecture allows us to reduce all those complexities to their bare minimum by giving clear responsibilities to each part of our software.
+
 
 The very clear Separation Of Concern enforced by the architecture eases the automatic testing of each part since it's only doing one thing. Being able to build solid tests is also a great way to build a changes welcoming Software!
+
 
 > Even if the architecture eases test writing, being able to write good tests takes time and practice!
 
 ### Shorten feedback loops
 
+
 In Software development if you want to go faster (like really faster) you'll have to go for short feedback loops. If you have a button that can tell you in a few seconds that your solution is still behaving as intended you'll be way faster than checking that by hand after any update (in fact, you won't check by hand that after any update...).
+
+
 
 Let's be honest here: hexagonal architecture won't help for the fastest feedback loops which are pair feedback in [pair](https://en.wikipedia.org/wiki/Pair_programming) or [mob programming](https://en.wikipedia.org/wiki/Mob_programming).
 
@@ -60,7 +69,10 @@ We said earlier that pairs feedbacks were the fastest ones but what about busine
 
 ### Delay infrastructure choices
 
+
 It's common to start a project with meetings to "build the architecture" which, in that case, means choosing the infrastructure elements. So, on day 0, we are trying to figure out if we need a MongoDB, a PostgreSQL or both (and what about an Elasticsearch?).
+
+
 
 The problem is: that we often make these choices without enough information and we'll just make our best guesses (since the real needs will come from the code). The other problem is that we spend a lot of time doing that. Another option would be to pick only one thing: the language (do we go Java?). Picking the language can be challenging enough but it's easier than picking a gazillion technologies along with the language.
 

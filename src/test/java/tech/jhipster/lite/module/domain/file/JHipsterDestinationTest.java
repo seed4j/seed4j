@@ -18,7 +18,7 @@ class JHipsterDestinationTest {
   private static final JHipsterProjectFolder PROJECT = new JHipsterProjectFolder(TestFileUtils.tmpDirForTest());
 
   @Test
-  void shouldAddSlashWhenHappeningElementithoutSlash() {
+  void shouldAddSlashWhenHappeningElementWithoutSlash() {
     assertThat(new JHipsterDestination("src/main").append("file").pathInProject(PROJECT).toString()).endsWith(path("src", "main", "file"));
   }
 

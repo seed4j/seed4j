@@ -28,7 +28,7 @@ class JHipsterCollectionsTest {
     }
 
     @Test
-    void shouldGetmmutableCollectionFromCollection() {
+    void shouldGetImmutableCollectionFromCollection() {
       Collection<String> source = new ArrayList<>();
       source.add("test");
       Collection<String> collection = JHipsterCollections.immutable(source);
@@ -52,7 +52,7 @@ class JHipsterCollectionsTest {
     }
 
     @Test
-    void shouldGetmmutableMapFromMap() {
+    void shouldGetImmutableMapFromMap() {
       Map<String, String> source = new HashMap<>();
       source.put("key", "value");
       Map<String, String> map = JHipsterCollections.immutable(source);

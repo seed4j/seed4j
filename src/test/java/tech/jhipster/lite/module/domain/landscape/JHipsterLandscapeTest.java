@@ -159,9 +159,9 @@ class JHipsterLandscapeTest {
     JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("bsecond").moduleDependency("root").build();
     JHipsterModuleResource thirdModule = defaultModuleResourceBuilder().slug("athird").moduleDependency("root").build();
     JHipsterModuleResource forthModule = defaultModuleResourceBuilder().slug("forth").moduleDependency("root").feature("feat").build();
-    JHipsterModuleResource fithModule = defaultModuleResourceBuilder().slug("fith").moduleDependency("root").feature("feat").build();
+    JHipsterModuleResource fifthModule = defaultModuleResourceBuilder().slug("fifth").moduleDependency("root").feature("feat").build();
 
-    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(firstModule, secondModule, thirdModule, forthModule, fithModule));
+    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(firstModule, secondModule, thirdModule, forthModule, fifthModule));
 
     Iterator<JHipsterLandscapeLevel> iterator = landscape.levels().get().iterator();
     iterator.next();

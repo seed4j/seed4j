@@ -1,6 +1,6 @@
 # Cassandra Migration tool
 
-## How it works ?
+## How it works?
 
 Similar to Liquibase, jhipster-lite provide a tool to apply your CQL migration scripts, with some restrictions:
 
@@ -28,7 +28,7 @@ Uncomment this line in `src/docker/cassandra-migration.yml`:
 #- DEBUG_LOG=1 # uncomment to show debug logs during the migration process
 ```
 
-Run the migration container :
+Run the migration container:
 
 ```bash
 docker compose -f src/main/docker/cassandra-migration.yml up -d
@@ -37,8 +37,8 @@ docker logs cassandra-migration --follow
 
 ## Differences with JHipster
 
-This tool is the same that is [used by jhipster project](https://www.jhipster.tech/using-cassandra/), with 2 differences :
+This tool is the same that is [used by jhipster project](https://www.jhipster.tech/using-cassandra/), with 2 differences:
 
 - jhipster-lite doesn't have a CLI to generate entities, so there's no automatic generation of changelog in `resources/cql/changelog` folder
 - a dedicated keyspace, `jhipsterMigration` is used to store migration metadata. It allows to not mix jhipster data with your application data
-  - it means that you must explicitly tell which keyspace to use in your `changelog/*.cql` scripts : either by using `USE` directive, or by prepending your table names with keyspace they belong to
+  - it means that you must explicitly tell which keyspace to use in your `changelog/*.cql` scripts: either by using `USE` directive, or by prepending your table names with keyspace they belong to

@@ -1,6 +1,6 @@
 # Creating a JHLite module
 
-So you want to create a JHLite module? Great!
+So, you want to create a JHLite module? Great!
 
 For that you'll need to provide 2 main parts:
 
@@ -182,7 +182,7 @@ In your `JHipsterModuleResource` you can define additional properties and an org
 
 ## Applying module in CI
 
-Now that you are confident about your module action you can add it to the JHLite ci by adding it in the `fullapp` application in [generate.sh](../tests-ci/generate.sh) so it will be compiled and analyzed by SonarQube. You can also create a brand new app if needed.
+Now that you are confident about your module's action you can add it to the JHLite ci by adding it in the `fullapp` application in [generate.sh](../tests-ci/generate.sh) so it will be compiled and analyzed by SonarQube. You can also create a brand new app if needed.
 
 If your app launches a docker container, you must edit [start_docker_compose.sh](../tests-ci/start_docker_compose.sh).
 

@@ -9,7 +9,7 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleOrganization;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 
 @Configuration
-class AngularhealthModuleConfiguration {
+class AngularHealthModuleConfiguration {
 
   @Bean
   JHipsterModuleResource angularHealthModule(AngularHealthApplicationService angularHealth) {

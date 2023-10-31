@@ -44,7 +44,7 @@
     <jacoco.version>0.8.11</jacoco.version>
     <reflections.version>0.10.2</reflections.version>
     <json-web-token.version>0.12.3</json-web-token.version>
-    <jhlite.version>0.45.0</jhlite.version>
+    <jhlite.version>0.46.0</jhlite.version>
     <commons-lang3.version>3.13.0</commons-lang3.version>
     <ehcache.version>3.10.8</ehcache.version>
     <git-commit-id-plugin.version>7.0.0</git-commit-id-plugin.version>

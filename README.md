@@ -37,6 +37,7 @@ Open your terminal and type the following command to clone:
 ```
 git clone https://github.com/jhipster/jhipster-lite
 ```
+
 To go into the folder type:
 ```
 cd jhipster-lite

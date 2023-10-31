@@ -33,7 +33,7 @@ This is a [sample application](https://github.com/jhipster/jhipster-lite-sample-
 
 ## Quick Start
 
-Open your code editor and type the following command  to clone:
+Open your terminal and type the following command to clone:
 ```
 git clone https://github.com/jhipster/jhipster-lite
 ```

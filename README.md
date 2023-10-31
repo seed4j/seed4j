@@ -42,7 +42,7 @@ To go into the folder type:
 cd jhipster-lite
 ```
 
-Run the project.
+Run the project:
 
 ```bash
 ./mvnw

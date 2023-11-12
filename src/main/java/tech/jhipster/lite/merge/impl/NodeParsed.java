@@ -1,0 +1,154 @@
+package tech.jhipster.lite.merge.impl;
+
+import jakarta.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
+public class NodeParsed extends NodeRaw {
+
+  public static NodeParsed fromRaw(NodeRaw raw) {
+    return new NodeParsed(raw.left, raw.right).state(State.raw);
+  }
+
+  public static NodeParsed closed(NodeParsed fragment) {
+    return new NodeParsed(fragment.left, fragment.right).state(State.closed);
+  }
+
+  public static NodeParsed identical(BodyPart left, BodyPart right, List<Pair> pairs) {
+    return new NodeParsed(left, right).pairs(pairs).state(NodeParsed.State.identical);
+  }
+
+  public static NodeParsed delete(NodeParsed fragment) {
+    return new NodeParsed(fragment.left, fragment.right).state(State.delete);
+  }
+
+  public static NodeParsed insert(NodeParsed fragment) {
+    return new NodeParsed(fragment.left, fragment.right).state(State.insert);
+  }
+
+  public static NodeParsed update(NodeParsed fragment, List<Pair> pairs) {
+    return new NodeParsed(fragment.left, fragment.right).pairs(pairs).state(State.update);
+  }
+
+  State state;
+
+  final List<Pair> pairs = new ArrayList<>();
+  List<NodeParsed> details = new ArrayList<>();
+  NodeParsed previous;
+
+  public NodeParsed(BodyPart left, BodyPart right) {
+    super(left, right);
+  }
+
+  public List<NodeParsed> getDetails() {
+    return details;
+  }
+
+  private NodeParsed state(State state) {
+    this.state = state;
+    return this;
+  }
+
+  public NodeParsed pairs(List<Pair> pairs) {
+    this.pairs.addAll(pairs);
+    return this;
+  }
+
+  /**
+   * Candidate score.
+   *
+   * @return value for how much this candidate covers in body.
+   */
+  public int score() {
+    return right.lines.size();
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder("{");
+    sb.append("state=").append(state);
+    if (state == State.insert) {
+      sb.append(", size=").append(right.lines.size());
+      sb.append(", right=").append(right.lines);
+    } else if (state == State.delete) {
+      sb.append(", size=").append(left.lines.size());
+      sb.append(", left=").append(left.lines);
+    } else if (state == State.update) {
+      sb.append(", pairs=").append(pairs);
+    } else if (state == State.identical) {
+      sb.append(", score=").append(score());
+      sb.append(", size=").append(pairs.size());
+      if (pairs.size() < 3) sb.append(", pairs=").append(pairs);
+    } else {
+      if (!left.lines.isEmpty()) {
+        if (left.lines.size() < 3) {
+          sb.append(", left=").append(left.lines);
+        } else {
+          sb.append(", left.size=").append(left.lines.size());
+        }
+      }
+      if (!right.lines.isEmpty()) {
+        if (right.lines.size() < 3) {
+          sb.append(", right=").append(right.lines);
+        } else {
+          sb.append(", right.size=").append(right.lines.size());
+        }
+      }
+      if (!details.isEmpty()) sb.append(", details.size=").append(details.size());
+    }
+    sb.append('}');
+    return sb.toString();
+  }
+
+  public List<NodeParsed> mergeSequence() {
+    final List<NodeParsed> list = new ArrayList<>(Math.max(left.size(), right.size()));
+    final AtomicReference<NodeParsed> previous = new AtomicReference<>();
+    this.addNode2list(list, previous);
+    return list;
+  }
+
+  void addNode2list(List<NodeParsed> list, AtomicReference<NodeParsed> previous) {
+    if (state != State.raw) {
+      this.previous = previous.get();
+      list.add(this);
+      previous.set(this);
+    }
+    for (NodeParsed detail : getDetails()) {
+      detail.addNode2list(list, previous);
+    }
+  }
+
+  /**
+   * Two lines one from left and one from right that is candidate to be same line
+   *
+   * @param left
+   * @param right
+   */
+  public record Pair(@NotNull BodyLine left, @NotNull BodyLine right) {}
+
+  public enum State {
+    /**
+     * A fragment that has not been analyzed yet.
+     */
+    raw,
+    closed,
+    /**
+     * Section is identical in both bodies. Can be "copied"
+     * Line content must be taken from body "update". Because it can be formatted the best.
+     */
+    identical,
+    /**
+     * Delete lines from body 'left'
+     */
+    delete,
+    /**
+     * Insert lines from body 'right'
+     */
+    insert,
+    /**
+     * Rows in fragment must be updated
+     */
+    update,
+  }
+}

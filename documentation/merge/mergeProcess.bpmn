@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0uwe06w" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.16.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.3.0">
+  <bpmn:process id="Process_1erx0zr" name="MergeProcess" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="mergeInitiated">
+      <bpmn:outgoing>Flow_076uprw</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_076uprw" sourceRef="StartEvent_1" targetRef="Activity_0eq7y0y" />
+    <bpmn:sequenceFlow id="Flow_054zrks" name="open()" sourceRef="Activity_0eq7y0y" targetRef="Activity_14bfv4w" />
+    <bpmn:manualTask id="Activity_0eq7y0y" name="Collect files&#10;(base, gen, custom )">
+      <bpmn:incoming>Flow_076uprw</bpmn:incoming>
+      <bpmn:outgoing>Flow_054zrks</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:serviceTask id="Activity_14bfv4w" name="verify">
+      <bpmn:incoming>Flow_054zrks</bpmn:incoming>
+      <bpmn:outgoing>Flow_1qghtot</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_0m4ic87">
+      <bpmn:incoming>Flow_1qghtot</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fostn0</bpmn:outgoing>
+      <bpmn:outgoing>Flow_109pco6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1qghtot" sourceRef="Activity_14bfv4w" targetRef="Gateway_0m4ic87" />
+    <bpmn:sequenceFlow id="Flow_1fostn0" name="Merge not needed" sourceRef="Gateway_0m4ic87" targetRef="Gateway_1nh3arq" />
+    <bpmn:sequenceFlow id="Flow_109pco6" name="mustMerge" sourceRef="Gateway_0m4ic87" targetRef="Activity_1w0qgma" />
+    <bpmn:sequenceFlow id="Flow_17ntuh4" sourceRef="Activity_1w0qgma" targetRef="Activity_1i80gic" />
+    <bpmn:manualTask id="Activity_1w0qgma" name="Client calls merger">
+      <bpmn:incoming>Flow_109pco6</bpmn:incoming>
+      <bpmn:outgoing>Flow_17ntuh4</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:serviceTask id="Activity_1i80gic" name="merge">
+      <bpmn:incoming>Flow_17ntuh4</bpmn:incoming>
+      <bpmn:outgoing>Flow_06h6ea3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_0f5ncxu">
+      <bpmn:incoming>Flow_06h6ea3</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ulw561</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0gfi2sj</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_06h6ea3" sourceRef="Activity_1i80gic" targetRef="Gateway_0f5ncxu" />
+    <bpmn:sequenceFlow id="Flow_1ulw561" name="succesfull&#10; merged" sourceRef="Gateway_0f5ncxu" targetRef="Gateway_1nh3arq" />
+    <bpmn:manualTask id="Activity_1dh2sm7" name="place files after merge">
+      <bpmn:incoming>Flow_0ovfpur</bpmn:incoming>
+      <bpmn:outgoing>Flow_0iq0ram</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:sequenceFlow id="Flow_0gfi2sj" name="mergeConflict" sourceRef="Gateway_0f5ncxu" targetRef="Activity_1t9o3x0" />
+    <bpmn:sequenceFlow id="Flow_0iq0ram" sourceRef="Activity_1dh2sm7" targetRef="Activity_0sm49ci" />
+    <bpmn:endEvent id="Event_034ebvh" name="Succesfull merged">
+      <bpmn:incoming>Flow_0e194zn</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_024dods" name="merge failed&#10;User need to merge own custom changes back into sources">
+      <bpmn:incoming>Flow_0euozi6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0fbdkfw" sourceRef="Activity_1t9o3x0" targetRef="Activity_0d7155h" />
+    <bpmn:manualTask id="Activity_1t9o3x0" name="place files after conflict.&#10;+ provide manual merge file">
+      <bpmn:incoming>Flow_0gfi2sj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fbdkfw</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:serviceTask id="Activity_0d7155h" name="deliver">
+      <bpmn:incoming>Flow_0fbdkfw</bpmn:incoming>
+      <bpmn:outgoing>Flow_0euozi6</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0euozi6" sourceRef="Activity_0d7155h" targetRef="Event_024dods" />
+    <bpmn:serviceTask id="Activity_0sm49ci" name="deliver">
+      <bpmn:incoming>Flow_0iq0ram</bpmn:incoming>
+      <bpmn:outgoing>Flow_0e194zn</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0e194zn" sourceRef="Activity_0sm49ci" targetRef="Event_034ebvh" />
+    <bpmn:exclusiveGateway id="Gateway_1nh3arq">
+      <bpmn:incoming>Flow_1ulw561</bpmn:incoming>
+      <bpmn:incoming>Flow_1fostn0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ovfpur</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0ovfpur" sourceRef="Gateway_1nh3arq" targetRef="Activity_1dh2sm7" />
+    <bpmn:textAnnotation id="TextAnnotation_1pvrdlb">
+      <bpmn:text>base     : file stored in genlog
+gen.      : the file generated by jHipster
+custom  : file stored in source tree
+               (might be custom fitted, or not)
+
+Task is done by client to merge component</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1rzw313" sourceRef="Activity_0eq7y0y" targetRef="TextAnnotation_1pvrdlb" />
+    <bpmn:textAnnotation id="TextAnnotation_05vyvtl">
+      <bpmn:text>Verify input and what to do before merging</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0ljo7a9" sourceRef="Activity_14bfv4w" targetRef="TextAnnotation_05vyvtl" />
+    <bpmn:textAnnotation id="TextAnnotation_06ofapc">
+      <bpmn:text>No custom changes</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1d575hm" sourceRef="Flow_1fostn0" targetRef="TextAnnotation_06ofapc" />
+    <bpmn:textAnnotation id="TextAnnotation_1plfdyc">
+      <bpmn:text>Helper method to place files</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0diq2ki" sourceRef="Activity_0sm49ci" targetRef="TextAnnotation_1plfdyc" />
+    <bpmn:textAnnotation id="TextAnnotation_1g9s3r1">
+      <bpmn:text>Diamond merge.
+First generated differences then custom fitted differences</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1brtfnw" sourceRef="Activity_1i80gic" targetRef="TextAnnotation_1g9s3r1" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1erx0zr">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="279" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="162" y="322" width="70" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18r87ix_di" bpmnElement="Activity_0eq7y0y" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="249" y="257" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ty8oub_di" bpmnElement="Activity_14bfv4w" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="400" y="257" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0m4ic87_di" bpmnElement="Gateway_0m4ic87" isMarkerVisible="true">
+        <dc:Bounds x="548" y="272" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wphh0u_di" bpmnElement="Activity_1w0qgma" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="713" y="330" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ab8n80_di" bpmnElement="Activity_1i80gic" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="883" y="330" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0f5ncxu_di" bpmnElement="Gateway_0f5ncxu" isMarkerVisible="true">
+        <dc:Bounds x="1017" y="345" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vcyhn5_di" bpmnElement="Activity_1dh2sm7" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="1180" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_034ebvh_di" bpmnElement="Event_034ebvh" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="1462" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1508" y="196" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_024dods_di" bpmnElement="Event_024dods" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="1462" y="462" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1438" y="505" width="86" height="66" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qtn3t6_di" bpmnElement="Activity_1t9o3x0" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="1180" y="440" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_04wz77k" bpmnElement="Activity_0d7155h" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="1320" y="440" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_16utf9o" bpmnElement="Activity_0sm49ci" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="1320" y="170" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1nh3arq_di" bpmnElement="Gateway_1nh3arq" isMarkerVisible="true">
+        <dc:Bounds x="1017" y="185" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1pvrdlb_di" bpmnElement="TextAnnotation_1pvrdlb">
+        <dc:Bounds x="185" y="110" width="269" height="98" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_05vyvtl_di" bpmnElement="TextAnnotation_05vyvtl">
+        <dc:Bounds x="473" y="120" width="100" height="55" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_06ofapc_di" bpmnElement="TextAnnotation_06ofapc">
+        <dc:Bounds x="603" y="80" width="100" height="41" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1plfdyc_di" bpmnElement="TextAnnotation_1plfdyc">
+        <dc:Bounds x="1360" y="70" width="100" height="41" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1g9s3r1_di" bpmnElement="TextAnnotation_1g9s3r1">
+        <dc:Bounds x="883" y="70" width="200" height="55" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_076uprw_di" bpmnElement="Flow_076uprw">
+        <di:waypoint x="215" y="297" />
+        <di:waypoint x="249" y="297" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_054zrks_di" bpmnElement="Flow_054zrks">
+        <di:waypoint x="349" y="297" />
+        <di:waypoint x="400" y="297" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="359" y="279" width="32" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qghtot_di" bpmnElement="Flow_1qghtot">
+        <di:waypoint x="500" y="297" />
+        <di:waypoint x="548" y="297" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fostn0_di" bpmnElement="Flow_1fostn0">
+        <di:waypoint x="573" y="272" />
+        <di:waypoint x="573" y="210" />
+        <di:waypoint x="1017" y="210" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="615" y="183" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_109pco6_di" bpmnElement="Flow_109pco6">
+        <di:waypoint x="573" y="322" />
+        <di:waypoint x="573" y="370" />
+        <di:waypoint x="713" y="370" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="616" y="352" width="56" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17ntuh4_di" bpmnElement="Flow_17ntuh4">
+        <di:waypoint x="813" y="370" />
+        <di:waypoint x="883" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06h6ea3_di" bpmnElement="Flow_06h6ea3">
+        <di:waypoint x="983" y="370" />
+        <di:waypoint x="1017" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ulw561_di" bpmnElement="Flow_1ulw561">
+        <di:waypoint x="1042" y="345" />
+        <di:waypoint x="1042" y="235" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1057" y="300" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gfi2sj_di" bpmnElement="Flow_0gfi2sj">
+        <di:waypoint x="1042" y="395" />
+        <di:waypoint x="1042" y="480" />
+        <di:waypoint x="1180" y="480" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1048" y="463" width="68" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0iq0ram_di" bpmnElement="Flow_0iq0ram">
+        <di:waypoint x="1280" y="210" />
+        <di:waypoint x="1320" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fbdkfw_di" bpmnElement="Flow_0fbdkfw">
+        <di:waypoint x="1280" y="480" />
+        <di:waypoint x="1320" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0euozi6_di" bpmnElement="Flow_0euozi6">
+        <di:waypoint x="1420" y="480" />
+        <di:waypoint x="1462" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0e194zn_di" bpmnElement="Flow_0e194zn">
+        <di:waypoint x="1420" y="210" />
+        <di:waypoint x="1462" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ovfpur_di" bpmnElement="Flow_0ovfpur">
+        <di:waypoint x="1067" y="210" />
+        <di:waypoint x="1180" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1rzw313_di" bpmnElement="Association_1rzw313">
+        <di:waypoint x="284" y="257" />
+        <di:waypoint x="266" y="208" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0ljo7a9_di" bpmnElement="Association_0ljo7a9">
+        <di:waypoint x="468" y="257" />
+        <di:waypoint x="505" y="175" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1d575hm_di" bpmnElement="Association_1d575hm">
+        <di:waypoint x="573" y="264" />
+        <di:waypoint x="636" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0diq2ki_di" bpmnElement="Association_0diq2ki">
+        <di:waypoint x="1383" y="170" />
+        <di:waypoint x="1402" y="111" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1brtfnw_di" bpmnElement="Association_1brtfnw">
+        <di:waypoint x="933" y="330" />
+        <di:waypoint x="933" y="125" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -32,7 +32,7 @@ public class BodyLine {
    * We compare "left" vs "right"
    *
    * @param other updated line
-   * @return true means {@link NodeParsed.State#identical}
+   * @return true means {@link NodeParsed.State#IDENTICAL}
    */
   public boolean identical(BodyLine other) {
     return Objects.equals(line, other.line);

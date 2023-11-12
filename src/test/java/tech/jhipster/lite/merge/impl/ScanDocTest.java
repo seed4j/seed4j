@@ -35,7 +35,7 @@ class ScanDocTest {
     //Then
     Assertions.assertThat(sequence).hasSize(1);
     final NodeParsed seq1 = sequence.get(0);
-    Assertions.assertThat(seq1.state).isEqualTo(NodeParsed.State.delete);
+    Assertions.assertThat(seq1.state).isEqualTo(NodeParsed.State.DELETE);
     Assertions.assertThat(seq1.left.lines).hasSize(5);
   }
 
@@ -61,8 +61,8 @@ class ScanDocTest {
     final List<NodeParsed> sequence = parsed.mergeSequence();
     //Then
     Assertions.assertThat(sequence).hasSize(2);
-    Assertions.assertThat(sequence.get(0).state).isEqualTo(NodeParsed.State.identical);
-    Assertions.assertThat(sequence.get(1).state).isEqualTo(NodeParsed.State.delete);
+    Assertions.assertThat(sequence.get(0).state).isEqualTo(NodeParsed.State.IDENTICAL);
+    Assertions.assertThat(sequence.get(1).state).isEqualTo(NodeParsed.State.DELETE);
   }
 
   @Test
@@ -90,9 +90,9 @@ class ScanDocTest {
     final List<NodeParsed> sequence = parsed.mergeSequence();
     //Then
     Assertions.assertThat(sequence).hasSize(3);
-    Assertions.assertThat(sequence.get(0).state).isEqualTo(NodeParsed.State.delete);
-    Assertions.assertThat(sequence.get(1).state).isEqualTo(NodeParsed.State.identical);
-    Assertions.assertThat(sequence.get(2).state).isEqualTo(NodeParsed.State.delete);
+    Assertions.assertThat(sequence.get(0).state).isEqualTo(NodeParsed.State.DELETE);
+    Assertions.assertThat(sequence.get(1).state).isEqualTo(NodeParsed.State.IDENTICAL);
+    Assertions.assertThat(sequence.get(2).state).isEqualTo(NodeParsed.State.DELETE);
   }
 
   @Test
@@ -120,7 +120,7 @@ class ScanDocTest {
     //Then
 
     Assertions.assertThat(sequence).hasSize(2);
-    Assertions.assertThat(sequence.get(0).state).isEqualTo(NodeParsed.State.identical);
-    Assertions.assertThat(sequence.get(1).state).isEqualTo(NodeParsed.State.update);
+    Assertions.assertThat(sequence.get(0).state).isEqualTo(NodeParsed.State.IDENTICAL);
+    Assertions.assertThat(sequence.get(1).state).isEqualTo(NodeParsed.State.UPDATE);
   }
 }

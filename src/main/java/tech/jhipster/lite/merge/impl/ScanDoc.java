@@ -120,18 +120,15 @@ public class ScanDoc {
     final List<BodyLine> upd = fragment.right.lines;
     final List<NodeParsed.Pair> pairs = new ArrayList<>();
     for (int index = 0; index < src.size(); index++) {
-      final BodyLine left = src.get(index);
-      final BodyLine right = upd.get(index);
-      pairs.add(new NodeParsed.Pair(left, right));
+      final BodyLine lineLeft = src.get(index);
+      final BodyLine lineRight = upd.get(index);
+      pairs.add(new NodeParsed.Pair(lineLeft, lineRight));
     }
     return pairs;
   }
 
   private boolean isReplaceCandidate(NodeParsed fragment) {
-    //noinspection UnnecessaryLocalVariable
-    boolean res =
-      !fragment.left.lines.isEmpty() && !fragment.right.lines.isEmpty() && (fragment.left.lines.size() == fragment.right.lines.size());
-    return res;
+    return !fragment.left.lines.isEmpty() && !fragment.right.lines.isEmpty() && (fragment.left.lines.size() == fragment.right.lines.size());
   }
 
   private NodeRaw before(NodeParsed fragment, NodeParsed match) {

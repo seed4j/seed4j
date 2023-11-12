@@ -56,13 +56,13 @@ public class BodyBuilder {
   }
 
   private void apply(NodeParsed fragment) {
-    if (fragment.state != NodeParsed.State.identical) {
-      if (fragment.state == NodeParsed.State.delete) {
+    if (fragment.state != NodeParsed.State.IDENTICAL) {
+      if (fragment.state == NodeParsed.State.DELETE) {
         for (BodyLine line : fragment.left.lines) {
           final UpLine uLine = findBy(line);
           uLine.remove();
         }
-      } else if (fragment.state == NodeParsed.State.insert) {
+      } else if (fragment.state == NodeParsed.State.INSERT) {
         if (fragment.right.lines.isEmpty()) throw new IllegalStateException("Insert must contain rows");
         final BodyLine left = findLeft(fragment);
         final UpLine uLine0 = findBy(left);
@@ -74,7 +74,7 @@ public class BodyBuilder {
           lines.add(index + 1, uLine);
         }
         uLine.inserts.addAll(fragment.right.lines);
-      } else if (fragment.state == NodeParsed.State.update) {
+      } else if (fragment.state == NodeParsed.State.UPDATE) {
         final List<NodeParsed.Pair> pairs = fragment.pairs;
         checkConflictOk(pairs);
         if (pairs.isEmpty()) throw new IllegalStateException("Update must contain pairs");
@@ -97,7 +97,7 @@ public class BodyBuilder {
       if (existing != null) {
         problems.append(
           String.format(
-            "Line %s with value '%s' is updated both from 'gen' with '%s' and 'custom' with '%s'\n",
+            "Line %s with value '%s' is updated both from 'gen' with '%s' and 'custom' with '%s'%n",
             existing.left().getLineNo(),
             existing.left().getLine(),
             existing.right().getLine(),

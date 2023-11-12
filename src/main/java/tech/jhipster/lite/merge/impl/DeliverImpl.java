@@ -57,10 +57,10 @@ public class DeliverImpl implements Deliver {
   }
 
   /**
-   * When merge failed we will place a 'patch' file beside the source file.
-   * The user can use this patch file to update source to preserve custom fittings.
-   * This works fine from 'Intellij' (I have not checked other IDE)
-   * TODO: generation of 'patch' is not yet implemented
+   * When the merge failed, we will place a 'patch' file beside the source file.
+   * The user can use this patch file to update the source to preserve custom fittings.
+   * This works fine from 'Intellij' (I have not checked another IDE)
+   * Must do: generation of 'patch' is not yet implemented
    * <p>
    * This method will only be called (activated) by 'merge' when a patch is relevant.
    *
@@ -68,14 +68,14 @@ public class DeliverImpl implements Deliver {
    *                       The value is needed inside 'patch' file.
    *                       Sample: 'src/main/resources/config/application.properties'
    * @param action         lambda where you must store body in a 'patch' file that is not committed to Git
-   *                       In above sample the patch file
+   *                       In the above sample the patch file
    *                       can be called 'src/main/resources/config/application.properties.patch'
    */
   public DeliverImpl whenPatchNeeded(FileName sourceFileName, Consumer<Body> action) {
     if (verify.mustCopyToSource() && (merge != null && !merge.wasMergedOkay())) {
       final String fileName = sourceFileName.name();
       System.out.println("source filename: " + fileName + " is needed in the patch file");
-      //TODO put the 'fileName' into 'patch' file before
+      // put the 'fileName' into 'patch' file before
       action.accept(merge.target());
     }
     return this;

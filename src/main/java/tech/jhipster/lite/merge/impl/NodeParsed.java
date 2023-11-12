@@ -8,27 +8,27 @@ import java.util.concurrent.atomic.AtomicReference;
 public class NodeParsed extends NodeRaw {
 
   public static NodeParsed fromRaw(NodeRaw raw) {
-    return new NodeParsed(raw.left, raw.right).state(State.raw);
+    return new NodeParsed(raw.left, raw.right).state(State.RAW);
   }
 
   public static NodeParsed closed(NodeParsed fragment) {
-    return new NodeParsed(fragment.left, fragment.right).state(State.closed);
+    return new NodeParsed(fragment.left, fragment.right).state(State.CLOSED);
   }
 
   public static NodeParsed identical(BodyPart left, BodyPart right, List<Pair> pairs) {
-    return new NodeParsed(left, right).pairs(pairs).state(NodeParsed.State.identical);
+    return new NodeParsed(left, right).pairs(pairs).state(NodeParsed.State.IDENTICAL);
   }
 
   public static NodeParsed delete(NodeParsed fragment) {
-    return new NodeParsed(fragment.left, fragment.right).state(State.delete);
+    return new NodeParsed(fragment.left, fragment.right).state(State.DELETE);
   }
 
   public static NodeParsed insert(NodeParsed fragment) {
-    return new NodeParsed(fragment.left, fragment.right).state(State.insert);
+    return new NodeParsed(fragment.left, fragment.right).state(State.INSERT);
   }
 
   public static NodeParsed update(NodeParsed fragment, List<Pair> pairs) {
-    return new NodeParsed(fragment.left, fragment.right).pairs(pairs).state(State.update);
+    return new NodeParsed(fragment.left, fragment.right).pairs(pairs).state(State.UPDATE);
   }
 
   State state;
@@ -68,15 +68,15 @@ public class NodeParsed extends NodeRaw {
   public String toString() {
     final StringBuilder sb = new StringBuilder("{");
     sb.append("state=").append(state);
-    if (state == State.insert) {
+    if (state == State.INSERT) {
       sb.append(", size=").append(right.lines.size());
       sb.append(", right=").append(right.lines);
-    } else if (state == State.delete) {
+    } else if (state == State.DELETE) {
       sb.append(", size=").append(left.lines.size());
       sb.append(", left=").append(left.lines);
-    } else if (state == State.update) {
+    } else if (state == State.UPDATE) {
       sb.append(", pairs=").append(pairs);
-    } else if (state == State.identical) {
+    } else if (state == State.IDENTICAL) {
       sb.append(", score=").append(score());
       sb.append(", size=").append(pairs.size());
       if (pairs.size() < 3) sb.append(", pairs=").append(pairs);
@@ -109,7 +109,7 @@ public class NodeParsed extends NodeRaw {
   }
 
   void addNode2list(List<NodeParsed> list, AtomicReference<NodeParsed> previous) {
-    if (state != State.raw) {
+    if (state != State.RAW) {
       this.previous = previous.get();
       list.add(this);
       previous.set(this);
@@ -131,24 +131,24 @@ public class NodeParsed extends NodeRaw {
     /**
      * A fragment that has not been analyzed yet.
      */
-    raw,
-    closed,
+    RAW,
+    CLOSED,
     /**
-     * Section is identical in both bodies. Can be "copied"
+     * The section is identical in both bodies. Can be "copied"
      * Line content must be taken from body "update". Because it can be formatted the best.
      */
-    identical,
+    IDENTICAL,
     /**
      * Delete lines from body 'left'
      */
-    delete,
+    DELETE,
     /**
      * Insert lines from body 'right'
      */
-    insert,
+    INSERT,
     /**
      * Rows in fragment must be updated
      */
-    update,
+    UPDATE,
   }
 }

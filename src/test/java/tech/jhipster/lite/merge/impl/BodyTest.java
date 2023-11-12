@@ -22,6 +22,6 @@ class BodyTest {
   @Test
   void givenNoInputWhenParsingThenSeeNone() {
     //GivenWhenThen
-    Assertions.assertThat(Body.of(null).isNone()).isTrue();
+    Assertions.assertThat(Body.of(null).isMissing()).isTrue();
   }
 }

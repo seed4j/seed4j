@@ -14,7 +14,7 @@ public class BodyBuilder {
   StringBuilder problems = new StringBuilder();
 
   public BodyBuilder(Body body) {
-    // first line is a NO_LINE to grab when adding before first line
+    // the first line is a NO_LINE to grab when adding before first line
     add(new BodyLine(body, NO_LINE, ""));
     for (BodyLine line : body.getLines()) {
       add(line);

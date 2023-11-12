@@ -203,7 +203,7 @@ public class ScanDoc {
      * @param candidates sorted list with how many lines a NodeParsed covers.
      * @return best match
      */
-    private NodeParsed findBestMatch(List<NodeParsed> candidates) {
+    private @NotNull NodeParsed findBestMatch(List<NodeParsed> candidates) {
       NodeParsed best = null;
       for (NodeParsed candidate : candidates) {
         if (best == null) {
@@ -214,6 +214,7 @@ public class ScanDoc {
           }
         }
       }
+      if (best == null) throw new IllegalArgumentException("candidates cannot be empty. To satisfy Sonar");
       return best;
     }
   }

@@ -39,7 +39,7 @@ public class FileContent {
   }
 
   public boolean isFound() {
-    return !body.isNone();
+    return !body.isMissing();
   }
 
   public Path getPath() {

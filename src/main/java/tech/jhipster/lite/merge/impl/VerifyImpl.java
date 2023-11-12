@@ -13,9 +13,9 @@ public class VerifyImpl implements Verify {
 
   public @NotNull Situation verify() {
     final Situation res;
-    if (input.base().isNone() && input.custom().isNone()) {
+    if (input.base().isMissing() && input.custom().isMissing()) {
       res = Situation.NO_FILE_BEFORE;
-    } else if (input.base().isNone() && input.custom().exists() && !input.gen().same(input.custom())) {
+    } else if (input.base().isMissing() && input.custom().exists() && !input.gen().same(input.custom())) {
       res = Situation.CUSTOM_NO_BASE;
     } else if (input.base().exists() && input.gen().same(input.base())) {
       res = Situation.UNCHANGED;

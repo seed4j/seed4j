@@ -33,20 +33,20 @@ public class Body {
     return Arrays.asList(content.split("\\r?\\n"));
   }
 
-  public static Body NONE = new Body();
+  public static final Body NONE = new Body();
   private final BodyPart part;
-  private final boolean none;
+  private final boolean missing;
 
   private Body() {
     this.part = BodyPart.empty(this);
-    this.none = true;
+    this.missing = true;
   }
 
   public Body(@NotNull List<String> lines) {
     final AtomicInteger lineNo = new AtomicInteger();
     final List<BodyLine> bl = lines.stream().map(s -> new BodyLine(this, lineNo.incrementAndGet(), s)).toList();
     this.part = BodyPart.of(this, bl);
-    this.none = false;
+    this.missing = false;
   }
 
   public List<BodyLine> getLines() {
@@ -58,12 +58,12 @@ public class Body {
    *
    * @return true when body does not exist.
    */
-  public boolean isNone() {
-    return none;
+  public boolean isMissing() {
+    return missing;
   }
 
   public boolean exists() {
-    return !none;
+    return !missing;
   }
 
   public int size() {
@@ -83,7 +83,7 @@ public class Body {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Body body = (Body) o;
-    return none == body.none && Objects.equals(part, body.part);
+    return missing == body.missing && Objects.equals(part, body.part);
   }
 
   @SuppressWarnings("unused")
@@ -111,7 +111,7 @@ public class Body {
   @Override
   public String toString() {
     final StringBuilder sb = new StringBuilder();
-    if (none) {
+    if (missing) {
       sb.append("none");
     } else {
       sb.append("lines=").append(part.lines.size());

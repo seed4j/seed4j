@@ -14,25 +14,25 @@ public class ApiImpl implements Api {
 
   public ApiImpl(Diamond context) {
     this.context = context;
-    verify = verify();
+    verify = performVerify();
     if (verify.mustMerge()) {
-      merge = merge();
+      merge = performMerge();
     } else {
       merge = null;
     }
   }
 
-  Verify.Situation verify() {
+  private Verify.Situation performVerify() {
     return Verify.by(context).verify();
   }
 
-  Merge.Rs merge() {
+  private Merge.Rs performMerge() {
     return Merge.by(context).merge();
   }
 
   /**
-   * After the merge it will be natural to deliver files to correct locations.
-   * Merger specify what files to operate on. Then it is the client that makes the physical operation.
+   * After the merge, it will be natural to deliver files to correct locations.
+   * The Merger specifies what files to operate on. Then it is the client that makes the physical operation.
    * Merge knows NOTHING about physical file. Merge abstract that in class {@link Body}
    *
    * @return next step in 'business' flow for a merge

@@ -26,7 +26,7 @@ class VerifyTest {
     //When
     final Verify.Situation rs = Verify.by(diamond).verify();
     //Then
-    Assertions.assertThat(rs).isEqualTo(Verify.Situation.noFileBefore);
+    Assertions.assertThat(rs).isEqualTo(Verify.Situation.NO_FILE_BEFORE);
     //    Assertions.assertThat(rs.target).isEqualTo(merge.gen);
   }
 
@@ -45,7 +45,7 @@ class VerifyTest {
     //When
     final Verify.Situation rs = Verify.by(diamond).verify();
     //Then
-    Assertions.assertThat(rs).isEqualTo(Verify.Situation.noGenLogButCustom);
+    Assertions.assertThat(rs).isEqualTo(Verify.Situation.CUSTOM_NO_BASE);
   }
 
   @Test
@@ -65,7 +65,7 @@ class VerifyTest {
     //When
     final Verify.Situation rs = Verify.by(diamond).verify();
     //Then
-    Assertions.assertThat(rs).isEqualTo(Verify.Situation.generatedUnchanged);
+    Assertions.assertThat(rs).isEqualTo(Verify.Situation.UNCHANGED);
   }
 
   @Test
@@ -85,7 +85,7 @@ class VerifyTest {
     //When
     final Verify.Situation rs = Verify.by(diamond).verify();
     //Then
-    Assertions.assertThat(rs).isEqualTo(Verify.Situation.notCustomFitted);
+    Assertions.assertThat(rs).isEqualTo(Verify.Situation.NOT_CUSTOM_FITTED);
   }
 
   @Test
@@ -105,6 +105,6 @@ class VerifyTest {
     );
     //When
     final Verify.Situation rs = Verify.by(diamond).verify();
-    Assertions.assertThat(rs).isEqualTo(Verify.Situation.mustMerge);
+    Assertions.assertThat(rs).isEqualTo(Verify.Situation.MUST_MERGE);
   }
 }

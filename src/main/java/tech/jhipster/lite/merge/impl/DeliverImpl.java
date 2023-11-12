@@ -83,7 +83,7 @@ public class DeliverImpl implements Deliver {
 
   @Override
   public boolean isSuccess() {
-    return verify != Verify.Situation.decisionFailure;
+    return verify != Verify.Situation.FAILED;
   }
 
   @Override

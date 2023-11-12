@@ -29,38 +29,38 @@ public interface Verify {
      * First time a file is generated. Probably the first time the generator is executed
      * BASE missing and CUSTOM missing
      */
-    noFileBefore,
+    NO_FILE_BEFORE,
     /**
-     * No "base" was found but there was a "custom" file in sources
+     * No "base" was found, but there was a "custom" file in sources
      * And that file does not match new generated file.
-     * BASE missing and CUSTOM exists and GEN != CUSTOM
+     * BASE missing and CUSTOM exist and GEN != CUSTOM
      */
-    noGenLogButCustom,
+    CUSTOM_NO_BASE,
     /**
      * Generation of file will not change the existing gen-log file.
      * BASE exists and GEN == BASE
      */
-    generatedUnchanged,
+    UNCHANGED,
     /**
      * The target custom file is not custom fitted.
-     * BASE exists and GEN exists and GEN == CUSTOM
+     * BASE exists + GEN exists + GEN == CUSTOM
      */
-    notCustomFitted,
+    NOT_CUSTOM_FITTED,
     /**
      * Three-way merge must be performed.
      * BASE exists and BASE != CUSTOM and GEN != CUSTOM
      */
-    mustMerge,
+    MUST_MERGE,
     /**
      * Decision logic has failed (program logic must be improved)
      */
-    decisionFailure;
+    FAILED;
 
     /**
      * @return true means that {@link Merge} must be performed
      */
     public boolean mustMerge() {
-      return this == Situation.mustMerge;
+      return this == Situation.MUST_MERGE;
     }
 
     /**
@@ -69,15 +69,11 @@ public interface Verify {
      * @return true when there is reason to copy. False when no reason, i.e. when file is unchanged.
      */
     public boolean mustCopyGenToGenLog() {
-      return (
-        (this != generatedUnchanged) && (this == noFileBefore || this == noGenLogButCustom || this == notCustomFitted || this == mustMerge)
-      );
+      return ((this != UNCHANGED) && (this == NO_FILE_BEFORE || this == CUSTOM_NO_BASE || this == NOT_CUSTOM_FITTED || this == MUST_MERGE));
     }
 
     public boolean mustCopyToSource() {
-      return (
-        (this != generatedUnchanged) && (this == noFileBefore || this == noGenLogButCustom || this == notCustomFitted || this == mustMerge)
-      );
+      return ((this != UNCHANGED) && (this == NO_FILE_BEFORE || this == CUSTOM_NO_BASE || this == NOT_CUSTOM_FITTED || this == MUST_MERGE));
     }
   }
 }

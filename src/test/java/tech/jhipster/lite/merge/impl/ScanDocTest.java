@@ -27,7 +27,7 @@ class ScanDocTest {
     //Then
     Assertions.assertThat(root.left.getBody()).isEqualTo(factory.left);
     Assertions.assertThat(root.left.getLines()).hasSize(5);
-    Assertions.assertThat(root.right.getLines()).hasSize(0);
+    Assertions.assertThat(root.right.getLines()).isEmpty();
 
     //When
     final NodeParsed parsed = factory.parse(root);

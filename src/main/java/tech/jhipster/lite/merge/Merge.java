@@ -22,19 +22,19 @@ public interface Merge {
      * @return this merged could not be merged with a significant trust of the automatic merge
      */
     public boolean wasMergedOkay() {
-      return outcome.equals(MergeOutcome.mergedSuccessful);
+      return outcome.equals(MergeOutcome.MERGED_SUCCESSFUL);
     }
   }
 
   enum MergeOutcome {
-    mergedSuccessful,
+    MERGED_SUCCESSFUL,
     /**
      * Automatic three-way merge cannot determinate a safe merge
-     * BASE exists
+     * BASE existing
      * and CUSTOM exists
      * and GEN != CUSTOM
      * and threeWayMerge cannot decide how to merge
      */
-    cannotSafeMerge,
+    CANNOT_MERGE,
   }
 }

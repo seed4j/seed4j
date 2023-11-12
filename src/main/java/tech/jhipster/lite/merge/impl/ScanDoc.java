@@ -27,13 +27,11 @@ public class ScanDoc {
   }
 
   NodeRaw open() {
-    //noinspection UnnecessaryLocalVariable
-    final NodeRaw root = new NodeRaw(BodyPart.root(left), BodyPart.root(right));
-    return root;
+    return new NodeRaw(BodyPart.root(left), BodyPart.root(right));
   }
 
   /**
-   * Recursive entry to drill down document
+   * Recursive entry to drill down the document
    *
    * @param raw something identified but not processed yet
    * @return parsed of above
@@ -88,13 +86,13 @@ public class ScanDoc {
         details.add(NodeParsed.update(fragment, makeReplace(fragment)));
       } else {
         if (!fragment.left.lines.isEmpty()) {
-          //TODO: store 2 rows before + 2 rows after
+          //Consider: store 2 rows before + 2 rows after
           // Intellij will free merge when row before and row after is found.
           // Intellij will ask user when the row before or row after is not found
           details.add(NodeParsed.delete(fragment));
         }
         if (!fragment.right.lines.isEmpty()) {
-          //TODO: store 2 rows before + 2 rows after
+          //consider: store 2 rows before + 2 rows after
           // Intellij will free merge when row before and row after is found.
           // Intellij will ask user when the row before or row after is not found
           details.add(NodeParsed.insert(fragment));
@@ -102,21 +100,16 @@ public class ScanDoc {
       }
     } else {
       final NodeParsed bestMatch = matcher.findBestMatch(candidates);
-      //      System.out.println("best:" + bestMatch);
       //Anything before best ??
-      {
-        final NodeRaw before = before(fragment, bestMatch);
-        if (before != null) {
-          details.add(parse(before));
-        }
+      final NodeRaw before = before(fragment, bestMatch);
+      if (before != null) {
+        details.add(parse(before));
       }
       details.add(bestMatch);
       //Anything after best ??
-      {
-        final NodeRaw after = after(fragment, bestMatch);
-        if (after != null) {
-          details.add(parse(after));
-        }
+      final NodeRaw after = after(fragment, bestMatch);
+      if (after != null) {
+        details.add(parse(after));
       }
     }
     return details;
@@ -125,10 +118,7 @@ public class ScanDoc {
   private List<NodeParsed.Pair> makeReplace(NodeParsed fragment) {
     final List<BodyLine> src = fragment.left.lines;
     final List<BodyLine> upd = fragment.right.lines;
-    List<NodeParsed.Pair> pairs = new ArrayList<>();
-    //    for(BodyLine line: fragment.source.lines){
-    //      int index=fragment.source.lines.
-    //    }
+    final List<NodeParsed.Pair> pairs = new ArrayList<>();
     for (int index = 0; index < src.size(); index++) {
       final BodyLine left = src.get(index);
       final BodyLine right = upd.get(index);
@@ -145,22 +135,22 @@ public class ScanDoc {
   }
 
   private NodeRaw before(NodeParsed fragment, NodeParsed match) {
-    List<BodyLine> left = fragment.left.beforeLine(match.left.first());
-    List<BodyLine> right = fragment.right.beforeLine(match.right.first());
-    if (left.isEmpty() && right.isEmpty()) {
+    List<BodyLine> src = fragment.left.beforeLine(match.left.first());
+    List<BodyLine> upd = fragment.right.beforeLine(match.right.first());
+    if (src.isEmpty() && upd.isEmpty()) {
       return null;
     } else {
-      return new NodeRaw(BodyPart.of(fragment.left.body, left), BodyPart.of(fragment.right.body, right));
+      return new NodeRaw(BodyPart.of(fragment.left.body, src), BodyPart.of(fragment.right.body, upd));
     }
   }
 
   private NodeRaw after(NodeParsed fragment, NodeParsed match) {
-    final List<BodyLine> left = fragment.left.afterPart(match.left.getLines());
-    final List<BodyLine> right = fragment.right.afterPart(match.right.getLines());
-    if (left.isEmpty() && right.isEmpty()) {
+    final List<BodyLine> src = fragment.left.afterPart(match.left.getLines());
+    final List<BodyLine> upd = fragment.right.afterPart(match.right.getLines());
+    if (src.isEmpty() && upd.isEmpty()) {
       return null;
     } else {
-      return new NodeRaw(BodyPart.of(fragment.left.body, left), BodyPart.of(fragment.right.body, right));
+      return new NodeRaw(BodyPart.of(fragment.left.body, src), BodyPart.of(fragment.right.body, upd));
     }
   }
 
@@ -206,7 +196,7 @@ public class ScanDoc {
     }
 
     /**
-     * Find the best match in list of candidates.
+     * Find the best match in the list of candidates.
      * 1) Must take the highest value.
      * 2) Must take the first candidate with the highest value.
      *

@@ -14,17 +14,17 @@ public class VerifyImpl implements Verify {
   public @NotNull Situation verify() {
     final Situation res;
     if (input.base().isNone() && input.custom().isNone()) {
-      res = Situation.noFileBefore;
+      res = Situation.NO_FILE_BEFORE;
     } else if (input.base().isNone() && input.custom().exists() && !input.gen().same(input.custom())) {
-      res = Situation.noGenLogButCustom;
+      res = Situation.CUSTOM_NO_BASE;
     } else if (input.base().exists() && input.gen().same(input.base())) {
-      res = Situation.generatedUnchanged;
+      res = Situation.UNCHANGED;
     } else if (input.base().exists() && input.custom().exists() && input.base().same(input.custom())) {
-      res = Situation.notCustomFitted;
+      res = Situation.NOT_CUSTOM_FITTED;
     } else if (input.base().exists() && input.custom().exists() && !input.base().same(input.custom())) {
-      res = Situation.mustMerge;
+      res = Situation.MUST_MERGE;
     } else {
-      res = Situation.decisionFailure;
+      res = Situation.FAILED;
     }
     return res;
   }

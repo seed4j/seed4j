@@ -29,12 +29,6 @@ public class MergeImpl implements Merge {
    * c) double patched "base" --> custom
    */
   public Rs merge() {
-    //    System.out.println("BASE:::");
-    //    input.base().print(System.out);
-
-    //    System.out.println("GEN:::");
-    //    input.gen().print(System.out);
-
     final ScanDoc scan1 = new ScanDoc("base", input.base(), "gen", input.gen());
     final List<NodeParsed> seq1 = scan1.parse().mergeSequence();
 
@@ -44,15 +38,10 @@ public class MergeImpl implements Merge {
     final BodyBuilder builder = new BodyBuilder(input.base());
     builder.apply(seq1);
 
-    //    System.out.println("MERGED BASE+GEN:::");
-    //    builder.makeMergedBody().print(System.out);
-
     builder.apply(seq2);
 
     final Body target = builder.makeMergedBody();
-    //    System.out.println("TARGET:::");
-    //    target.print(System.out);
-    final MergeOutcome situation = builder.isSuccess() ? MergeOutcome.mergedSuccessful : MergeOutcome.cannotSafeMerge;
+    final MergeOutcome situation = builder.isSuccess() ? MergeOutcome.MERGED_SUCCESSFUL : MergeOutcome.CANNOT_MERGE;
     return new Rs(situation, target);
   }
 }

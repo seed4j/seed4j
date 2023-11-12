@@ -17,7 +17,7 @@ class MergeTest {
    * <p>
    * And finally jLite adds server port to 'gen' + 'spring.application.name'
    * <p>
-   * This must result in {@link Role#target} with all elements correct merge.
+   * This must result in {@link Role#TARGET} with all elements correct merge.
    */
 
   @Test
@@ -73,7 +73,7 @@ class MergeTest {
     //When
     final Verify.Situation rs = Verify.by(diamond).verify();
     //Then
-    Assertions.assertThat(rs).isEqualTo(Verify.Situation.mustMerge);
+    Assertions.assertThat(rs).isEqualTo(Verify.Situation.MUST_MERGE);
     //When
     final Merge.Rs performed = Merge.by(diamond).merge();
 

@@ -72,7 +72,7 @@
     "lint-staged": "15.0.2",
     "postcss-scss": "4.0.9",
     "prettier": "3.0.3",
-    "prettier-plugin-java": "2.3.1",
+    "prettier-plugin-java": "2.4.0",
     "prettier-plugin-packagejson": "2.4.6",
     "pug-lint": "2.7.0",
     "rimraf": "5.0.5",

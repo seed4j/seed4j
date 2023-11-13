@@ -68,7 +68,6 @@ public class ScanDoc {
   }
 
   List<NodeParsed> breakDown(NodeParsed fragment) {
-    final CanMatch matcher = new CanMatch();
     // Check for simple emptiness
     if (fragment.right.isMissing()) {
       if (fragment.left.isMissing()) {
@@ -78,27 +77,13 @@ public class ScanDoc {
       }
     }
 
-    final List<NodeParsed> details = new ArrayList<>();
     // Identify matches
+    final CanMatch matcher = new CanMatch();
     final List<NodeParsed> candidates = matcher.identifyMatches(fragment);
     if (candidates.isEmpty()) {
-      if (isReplaceCandidate(fragment)) {
-        details.add(NodeParsed.update(fragment, makeReplace(fragment)));
-      } else {
-        if (!fragment.left.lines.isEmpty()) {
-          //Consider: store 2 rows before + 2 rows after
-          // Intellij will free merge when row before and row after is found.
-          // Intellij will ask user when the row before or row after is not found
-          details.add(NodeParsed.delete(fragment));
-        }
-        if (!fragment.right.lines.isEmpty()) {
-          //consider: store 2 rows before + 2 rows after
-          // Intellij will free merge when row before and row after is found.
-          // Intellij will ask user when the row before or row after is not found
-          details.add(NodeParsed.insert(fragment));
-        }
-      }
+      return breakDownNoMatchedParts(fragment);
     } else {
+      final List<NodeParsed> details = new ArrayList<>();
       final NodeParsed bestMatch = matcher.findBestMatch(candidates);
       //Anything before best ??
       final NodeRaw before = before(fragment, bestMatch);
@@ -110,6 +95,27 @@ public class ScanDoc {
       final NodeRaw after = after(fragment, bestMatch);
       if (after != null) {
         details.add(parse(after));
+      }
+      return details;
+    }
+  }
+
+  private List<NodeParsed> breakDownNoMatchedParts(NodeParsed fragment) {
+    final List<NodeParsed> details = new ArrayList<>();
+    if (isReplaceCandidate(fragment)) {
+      details.add(NodeParsed.update(fragment, makeReplace(fragment)));
+    } else {
+      if (!fragment.left.lines.isEmpty()) {
+        //Consider: store 2 rows before + 2 rows after
+        // Intellij will free merge when row before and row after is found.
+        // Intellij will ask user when the row before or row after is not found
+        details.add(NodeParsed.delete(fragment));
+      }
+      if (!fragment.right.lines.isEmpty()) {
+        //consider: store 2 rows before + 2 rows after
+        // Intellij will free merge when row before and row after is found.
+        // Intellij will ask user when the row before or row after is not found
+        details.add(NodeParsed.insert(fragment));
       }
     }
     return details;

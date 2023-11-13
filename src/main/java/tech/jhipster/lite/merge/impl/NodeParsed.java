@@ -85,22 +85,6 @@ public class NodeParsed extends NodeRaw {
       sb.append(", score=").append(score());
       sb.append(sizeLabel).append(pairs.size());
       if (pairs.size() < 3) sb.append(", pairs=").append(pairs);
-    } else {
-      if (!left.lines.isEmpty()) {
-        if (left.lines.size() < 3) {
-          sb.append(", left=").append(left.lines);
-        } else {
-          sb.append(", left.size=").append(left.lines.size());
-        }
-      }
-      if (!right.lines.isEmpty()) {
-        if (right.lines.size() < 3) {
-          sb.append(", right=").append(right.lines);
-        } else {
-          sb.append(", right.size=").append(right.lines.size());
-        }
-      }
-      if (!details.isEmpty()) sb.append(", details.size=").append(details.size());
     }
     sb.append('}');
     return sb.toString();

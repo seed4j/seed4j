@@ -1,7 +1,5 @@
 package tech.jhipster.lite.merge.impl;
 
-import static tech.jhipster.lite.merge.impl.BodyLine.NO_LINE;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +13,7 @@ public class BodyBuilder {
 
   public BodyBuilder(Body body) {
     // the first line is a NO_LINE to grab when adding before first line
-    add(new BodyLine(body, NO_LINE, ""));
+    add(new BodyLine(body, BodyLine.NO_LINE, ""));
     for (BodyLine line : body.getLines()) {
       add(line);
     }
@@ -24,7 +22,7 @@ public class BodyBuilder {
   private void add(BodyLine line) {
     final UpLine upLine = new UpLine(line);
     if (line.isMissing()) {
-      upLine.remove();
+      upLine.removeLine();
     }
     lines.add(upLine);
   }
@@ -51,41 +49,44 @@ public class BodyBuilder {
 
   public void apply(List<NodeParsed> fragments) {
     for (NodeParsed fragment : fragments) {
-      apply(fragment);
+      if (fragment.state != NodeParsed.State.IDENTICAL) {
+        applyNonIdentical(fragment);
+      }
     }
   }
 
-  private void apply(NodeParsed fragment) {
-    if (fragment.state != NodeParsed.State.IDENTICAL) {
-      if (fragment.state == NodeParsed.State.DELETE) {
+  private void applyNonIdentical(NodeParsed fragment) {
+    switch (fragment.state) {
+      case DELETE -> {
         for (BodyLine line : fragment.left.lines) {
           final UpLine uLine = findBy(line);
-          uLine.remove();
+          uLine.removeLine();
         }
-      } else if (fragment.state == NodeParsed.State.INSERT) {
+      }
+      case INSERT -> {
         if (fragment.right.lines.isEmpty()) throw new IllegalStateException("Insert must contain rows");
         final BodyLine left = findLeft(fragment);
         final UpLine uLine0 = findBy(left);
         final int index = lines.indexOf(uLine0);
-        final UpLine uLine = new UpLine(left).remove();
+        final UpLine uLine = new UpLine(left).removeLine();
         if (index + 1 == lines.size()) {
           lines.add(uLine);
         } else {
           lines.add(index + 1, uLine);
         }
         uLine.inserts.addAll(fragment.right.lines);
-      } else if (fragment.state == NodeParsed.State.UPDATE) {
+      }
+      case UPDATE -> {
         final List<NodeParsed.Pair> pairs = fragment.pairs;
         checkConflictOk(pairs);
         if (pairs.isEmpty()) throw new IllegalStateException("Update must contain pairs");
         for (NodeParsed.Pair pair : pairs) {
           final UpLine left = findBy(pair.left());
-          left.remove();
+          left.removeLine();
           left.inserts.add(pair.right());
         }
-      } else {
-        throw new IllegalArgumentException("fragments contais other: " + fragment.state);
       }
+      default -> throw new IllegalArgumentException("fragments contais other: " + fragment.state);
     }
   }
 
@@ -130,11 +131,9 @@ public class BodyBuilder {
     boolean found = false;
     final NodeParsed prev = fragment.previous;
     while (prev != null && !found) {
-      if (!prev.right.isMissing()) {
-        if (!prev.left.isMissing()) {
-          res = prev.left.last();
-          found = true;
-        }
+      if (!prev.right.isMissing() && !prev.left.isMissing()) {
+        res = prev.left.last();
+        found = true;
       }
     }
     return res;
@@ -164,7 +163,7 @@ public class BodyBuilder {
       this.line = line;
     }
 
-    public UpLine remove() {
+    public UpLine removeLine() {
       this.removed = true;
       return this;
     }

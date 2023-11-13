@@ -74,11 +74,16 @@ public class DeliverImpl implements Deliver {
   public DeliverImpl whenPatchNeeded(FileName sourceFileName, Consumer<Body> action) {
     if (verify.mustCopyToSource() && (merge != null && !merge.wasMergedOkay())) {
       final String fileName = sourceFileName.name();
-      System.out.println("source filename: " + fileName + " is needed in the patch file");
-      // put the 'fileName' into 'patch' file before
-      action.accept(merge.target());
+      final Body patch = fileWithName(fileName);
+      action.accept(patch);
     }
     return this;
+  }
+
+  private Body fileWithName(String fileName) {
+    // fileName is needed in the patch file
+    // put the 'fileName' into 'patch' file before
+    return Body.of(String.format("this must become a patch file for %s", fileName));
   }
 
   @Override

@@ -35,6 +35,10 @@ public class NodeParsed extends NodeRaw {
 
   final List<Pair> pairs = new ArrayList<>();
   List<NodeParsed> details = new ArrayList<>();
+  /**
+   * The node that came before this node
+   * will be described better.
+   */
   NodeParsed previous;
 
   public NodeParsed(BodyPart left, BodyPart right) {
@@ -68,17 +72,18 @@ public class NodeParsed extends NodeRaw {
   public String toString() {
     final StringBuilder sb = new StringBuilder("{");
     sb.append("state=").append(state);
+    final String sizeLabel = ", size=";
     if (state == State.INSERT) {
-      sb.append(", size=").append(right.lines.size());
+      sb.append(sizeLabel).append(right.lines.size());
       sb.append(", right=").append(right.lines);
     } else if (state == State.DELETE) {
-      sb.append(", size=").append(left.lines.size());
+      sb.append(sizeLabel).append(left.lines.size());
       sb.append(", left=").append(left.lines);
     } else if (state == State.UPDATE) {
       sb.append(", pairs=").append(pairs);
     } else if (state == State.IDENTICAL) {
       sb.append(", score=").append(score());
-      sb.append(", size=").append(pairs.size());
+      sb.append(sizeLabel).append(pairs.size());
       if (pairs.size() < 3) sb.append(", pairs=").append(pairs);
     } else {
       if (!left.lines.isEmpty()) {
@@ -103,8 +108,8 @@ public class NodeParsed extends NodeRaw {
 
   public List<NodeParsed> mergeSequence() {
     final List<NodeParsed> list = new ArrayList<>(Math.max(left.size(), right.size()));
-    final AtomicReference<NodeParsed> previous = new AtomicReference<>();
-    this.addNode2list(list, previous);
+    final AtomicReference<NodeParsed> previousHolder = new AtomicReference<>();
+    this.addNode2list(list, previousHolder);
     return list;
   }
 

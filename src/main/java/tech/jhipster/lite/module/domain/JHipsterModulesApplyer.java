@@ -135,11 +135,11 @@ public class JHipsterModulesApplyer {
       JHipsterProjectFolder projectFolder = moduleToApply.properties().projectFolder();
 
       git.init(projectFolder);
-      git.commitAll(projectFolder, commitMessage(moduleToApply));
+      git.commitAll(projectFolder, addCommitMessage(moduleToApply));
     }
   }
 
-  private String commitMessage(JHipsterModuleToApply moduleToApply) {
+  private String addCommitMessage(JHipsterModuleToApply moduleToApply) {
     return new StringBuilder().append("Apply ").append(moduleToApply.slug().get()).append(" module").toString();
   }
 

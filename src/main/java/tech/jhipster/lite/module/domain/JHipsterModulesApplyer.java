@@ -56,16 +56,19 @@ public class JHipsterModulesApplyer {
 
     JHipsterModule module = modules.resources().build(moduleToApply.slug(), moduleToApply.properties());
     //@formatter:off
-    var builder = JHipsterModuleChanges
+    var indentProjectFolder = JHipsterModuleChanges
       .builder()
       .projectFolder(module.projectFolder())
-      .indentation(module.indentation())
-      .filesToAdd(module.templatedFiles())
+      .indentation(module.indentation());
+
+    var operateFile = indentProjectFolder.filesToAdd(module.templatedFiles())
       .filesToMove(module.filesToMove())
-      .filesToDelete(module.filesToDelete())
-      .replacers(buildReplacers(module))
-      .javaBuildCommands(buildDependenciesChanges(module).merge(buildPluginsChanges(module)))
-      .packageJson(module.packageJson())
+      .filesToDelete(module.filesToDelete());
+
+    var replaceAndBuild = operateFile.replacers(buildReplacers(module))
+      .javaBuildCommands(buildDependenciesChanges(module).merge(buildPluginsChanges(module)));
+
+    var builder = replaceAndBuild.packageJson(module.packageJson())
       .preActions(module.preActions())
       .postActions(module.postActions())
       .springFactories(module.springFactories());

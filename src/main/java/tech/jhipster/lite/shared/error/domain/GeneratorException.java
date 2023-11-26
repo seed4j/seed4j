@@ -1,5 +1,6 @@
 package tech.jhipster.lite.shared.error.domain;
 
+import tech.jhipster.lite.module.domain.resource.ResourceErrorKey;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -147,6 +148,9 @@ public class GeneratorException extends RuntimeException {
       this.status = status;
 
       return this;
+    }
+    public GeneratorExceptionBuilder duplicatedSlugException() {
+      return internalServerError(ResourceErrorKey.DUPLICATED_SLUG).message("Found a duplicated module slug, ensure that slugs are uniq");
     }
 
     public GeneratorException build() {

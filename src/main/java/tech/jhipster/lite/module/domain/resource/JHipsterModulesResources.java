@@ -14,6 +14,7 @@ import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.JHipsterModuleSlug;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.shared.error.domain.Assert;
+import tech.jhipster.lite.shared.error.domain.GeneratorException;
 
 public class JHipsterModulesResources {
 
@@ -131,7 +132,10 @@ public class JHipsterModulesResources {
 
   private void assertUniqueSlugs(Collection<JHipsterModuleResource> modulesResources) {
     if (duplicatedSlug(modulesResources)) {
-      throw new DuplicatedSlugException();
+      throw GeneratorException
+        .internalServerError(ResourceErrorKey.DUPLICATED_SLUG)
+        .message("Found a duplicated module slug, ensure that slugs are uniq")
+        .build();
     }
   }
 

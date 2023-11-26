@@ -2,7 +2,7 @@ package tech.jhipster.lite.module.domain.resource;
 
 import tech.jhipster.lite.shared.error.domain.ErrorKey;
 
-enum ResourceErrorKey implements ErrorKey {
+public enum ResourceErrorKey implements ErrorKey {
   DUPLICATED_SLUG("duplicated-slug"),
   INVALID_TAG("invalid-tag"),
   UNKNOWN_SLUG("unknown-slug");

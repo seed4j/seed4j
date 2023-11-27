@@ -1,5 +1,6 @@
 package {{packageName}}.shared.authentication.application;
 
+import static {{packageName}}.shared.authentication.application.AuthenticatedUser.*;
 import static org.assertj.core.api.Assertions.*;
 
 import {{packageName}}.UnitTest;
@@ -40,14 +41,14 @@ class AuthenticatedUserTest {
 
     @Test
     void shouldNotGetNotAuthenticatedUserUsername() {
-      assertThatThrownBy(() -> AuthenticatedUser.username()).isExactlyInstanceOf(NotAuthenticatedUserException.class);
+      assertThatThrownBy(AuthenticatedUser::username).isExactlyInstanceOf(NotAuthenticatedUserException.class);
     }
 
     @Test
     void shouldNotGetUsernameForUnknownAuthentication() {
       authenticate(new TestingAuthenticationToken(null, null));
 
-      assertThatThrownBy(() -> AuthenticatedUser.username()).isExactlyInstanceOf(UnknownAuthenticationException.class);
+      assertThatThrownBy(AuthenticatedUser::username).isExactlyInstanceOf(UnknownAuthenticationException.class);
     }
 
     @ParameterizedTest
@@ -55,12 +56,12 @@ class AuthenticatedUserTest {
     void shouldGetAuthenticatedUserUsername(Authentication authentication) {
       authenticate(authentication);
 
-      assertThat(AuthenticatedUser.username()).isEqualTo(new Username("admin"));
+      assertThat(username()).isEqualTo(new Username("admin"));
     }
 
     @Test
     void shouldGetEmptyAuthenticatedUsernameForNotAuthenticatedUser() {
-      assertThat(AuthenticatedUser.optionalUsername()).isEmpty();
+      assertThat(optionalUsername()).isEmpty();
     }
 
     @ParameterizedTest
@@ -68,14 +69,14 @@ class AuthenticatedUserTest {
     void shouldGetOptionalAuthenticatedUserUsername(Authentication authentication) {
       authenticate(authentication);
 
-      assertThat(AuthenticatedUser.optionalUsername()).contains(new Username("admin"));
+      assertThat(optionalUsername()).contains(new Username("admin"));
     }
 
     @Test
     void shouldNotGetOptionalUsernameForUnknownAuthentication() {
       authenticate(new TestingAuthenticationToken(null, null));
 
-      assertThatThrownBy(() -> AuthenticatedUser.optionalUsername()).isExactlyInstanceOf(UnknownAuthenticationException.class);
+      assertThatThrownBy(AuthenticatedUser::optionalUsername).isExactlyInstanceOf(UnknownAuthenticationException.class);
     }
 
     private static Stream<Arguments> allValidAuthentications() {
@@ -92,14 +93,14 @@ class AuthenticatedUserTest {
 
     @Test
     void shouldGetEmptyRolesForNotAuthenticatedUser() {
-      assertThat(AuthenticatedUser.roles().hasRole()).isFalse();
+      assertThat(roles().hasRole()).isFalse();
     }
 
     @Test
     void shouldGetRolesFromClaim() {
       authenticate(usernamePasswordAuthenticationToken());
 
-      assertThat(AuthenticatedUser.roles().get()).containsExactly(Role.ADMIN);
+      assertThat(roles().get()).containsExactly(Role.ADMIN);
     }
   }
 
@@ -107,9 +108,7 @@ class AuthenticatedUserTest {
     Collection<GrantedAuthority> authorities = adminAuthorities();
     User user = new User("admin", "admin", authorities);
 
-    UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, "admin", authorities);
-
-    return token;
+      return new UsernamePasswordAuthenticationToken(user, "admin", authorities);
   }
 
   private static List<GrantedAuthority> adminAuthorities() {

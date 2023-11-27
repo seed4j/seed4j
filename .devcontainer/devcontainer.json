@@ -1,20 +1,39 @@
 {
   "name": "Java",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "args": {
-      "VARIANT": "21-bookworm",
-      "INSTALL_MAVEN": "true",
-      "MAVEN_VERSION": "3.9.5",
-      "INSTALL_GRADLE": "false",
-      "NODE_VERSION": "lts/*"
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "21-oracle",
+      "jdkDistro": "oracle"
+    },
+    "ghcr.io/devcontainers/features/node:1": {},
+    "docker-in-docker": "latest",
+    "github-cli": "latest",
+    "terraform": "latest"
+  },
+
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "dawhite.mustache",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "github.vscode-pull-request-github",
+        "hashicorp.terraform",
+        "ms-azuretools.vscode-azureterraform",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-vscode.vscode-node-azure-pack",
+        "ms-vsliveshare.vsliveshare",
+        "redhat.fabric8-analytics",
+        "redhat.vscode-xml",
+        "streetsidesoftware.code-spell-checker",
+        "visualstudioexptteam.vscodeintellicode",
+        "vscjava.vscode-java-pack"
+      ]
     }
   },
-  "settings": {
-    "java.home": "/docker-java-home",
-    "maven.executable.path": "/usr/local/sdkman/candidates/maven/current/bin/mvn"
-  },
-  "extensions": ["vscjava.vscode-java-pack"],
+
   "forwardPorts": [7471],
   "remoteUser": "vscode"
 }

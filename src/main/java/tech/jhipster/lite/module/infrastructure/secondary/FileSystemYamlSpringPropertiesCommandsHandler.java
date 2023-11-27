@@ -29,7 +29,7 @@ class FileSystemYamlSpringPropertiesCommandsHandler {
 
   private Consumer<SpringProperty> setProperty(Indentation indentation, JHipsterProjectFolder projectFolder) {
     return property ->
-      new YamlFileSpringPropertiesHandler(getPath(projectFolder, property), indentation).set(property.key(), property.value());
+      new YamlFileSpringPropertiesHandler(getPath(projectFolder, property), indentation).setValue(property.key(), property.value());
   }
 
   private static Path getPath(JHipsterProjectFolder projectFolder, SpringProperty property) {

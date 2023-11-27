@@ -53,7 +53,7 @@ public class SpringBootDockerModuleFactory {
     return """
     <configuration>
       <from>
-        <image>eclipse-temurin:17-jre-focal</image>
+        <image>eclipse-temurin:21-jre-jammy</image>
         <platforms>
           <platform>
             <architecture>amd64</architecture>

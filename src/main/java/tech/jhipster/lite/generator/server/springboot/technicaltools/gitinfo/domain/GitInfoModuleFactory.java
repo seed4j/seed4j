@@ -6,7 +6,6 @@ import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
 import tech.jhipster.lite.module.domain.javabuildplugin.JavaBuildPlugin;
-import tech.jhipster.lite.module.domain.javaproperties.Comment;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.shared.error.domain.Assert;
 
@@ -34,7 +33,7 @@ public class GitInfoModuleFactory {
         .add(MAIN_SOURCE.template(PACKAGE_INFO), mainDestination.append(PACKAGE_INFO))
         .and()
       .springMainProperties()
-        .comment(propertyKey("management.info.git.mode"), new Comment("Git Information"))
+        .comment(propertyKey("management.info.git"), comment("Git Information"))
         .set(propertyKey("management.info.git.mode"), propertyValue("full"))
         .set(propertyKey("management.info.git.enabled"), propertyValue(true))
         .set(propertyKey("management.info.env.enabled"), propertyValue(true))

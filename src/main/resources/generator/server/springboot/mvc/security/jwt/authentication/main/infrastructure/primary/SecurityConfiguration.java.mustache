@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.FrameOptionsConfig;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -101,7 +102,7 @@ class SecurityConfiguration {
       );
 
       JWTConfigurer jwtConfigurer = new JWTConfigurer(authenticationTokenReader());
-      http.apply(jwtConfigurer);
+      http.with(jwtConfigurer, Customizer.withDefaults());
       return http.build();
     // @formatter:on
   }

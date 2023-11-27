@@ -6,7 +6,7 @@ import LoginModal from '@/login/primary/loginModal';
 export const UserInfoContext = createContext<UserInfoContextType | Record<string, never>>({});
 
 const LoginForm = () => {
-  const [isOpen, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [username, setUsername] = useState<string>('');
   const [token, setToken] = useState<string>('');
 
@@ -45,7 +45,7 @@ const LoginForm = () => {
         )
       }
       <UserInfoContext.Provider value={userInfoContextValues}>
-        <LoginModal open={isOpen} onClose={onCloseModal} />
+        <LoginModal open={open} onClose={onCloseModal} />
       </UserInfoContext.Provider>
     </div>
   );

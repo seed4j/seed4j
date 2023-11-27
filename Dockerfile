@@ -13,8 +13,7 @@ RUN \
     useradd jhipster -s /bin/bash -m -g jhipster -G sudo && \
     echo 'jhipster:jhipster'|chpasswd
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
-    JAVA_OPTS="" \
-    SPRING_PROFILES_ACTIVE=cloud
+    JAVA_OPTS=""
 USER jhipster
 CMD java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /code/*.jar
 EXPOSE 7471

@@ -9,7 +9,6 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './login.component.html',
   imports: [CommonModule, MatButtonModule],
   standalone: true,
-  styleUrls: [],
 })
 export default class LoginComponent {
   constructor(private oauth2AuthService: Oauth2AuthService) {}

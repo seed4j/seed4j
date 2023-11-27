@@ -9,32 +9,12 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.0-RC2</version>
+    <version>3.2.0</version>
   </parent>
-  <repositories>
-    <repository>
-      <id>spring-milestones</id>
-      <name>Spring Milestones</name>
-      <url>https://repo.spring.io/milestone</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>spring-milestones</id>
-      <name>Spring Milestones</name>
-      <url>https://repo.spring.io/milestone</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
 
   <groupId>tech.jhipster.lite</groupId>
   <artifactId>jhlite</artifactId>
-  <version>0.47.1-SNAPSHOT</version>
+  <version>0.49.1-SNAPSHOT</version>
   <name>jhlite</name>
   <description>JHipster Lite</description>
   <packaging>jar</packaging>
@@ -80,7 +60,7 @@
     <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
     <start-class>tech.jhipster.lite.JHLiteApp</start-class>
 
-    <byte-buddy.version>1.14.9</byte-buddy.version>
+    <byte-buddy.version>1.14.10</byte-buddy.version>
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <surefire-plugin.version>3.2.2</surefire-plugin.version>
     <jacoco.version>0.8.11</jacoco.version>
@@ -90,12 +70,12 @@
     <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
     <sonar-maven-plugin.version>3.10.0.2594</sonar-maven-plugin.version>
     <apache-commons-io.version>2.15.0</apache-commons-io.version>
-    <cucumber.version>7.14.0</cucumber.version>
+    <cucumber.version>7.14.1</cucumber.version>
     <maven-model.version>3.9.5</maven-model.version>
     <joox.version>2.0.0</joox.version>
     <dom4j.version>2.1.4</dom4j.version>
     <night-config.version>3.6.7</night-config.version>
-    <testcontainers.version>1.19.1</testcontainers.version>
+    <testcontainers.version>1.19.3</testcontainers.version>
     <mongock.version>5.3.5</mongock.version>
     <git-commit-id-plugin.version>7.0.0</git-commit-id-plugin.version>
     <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
@@ -111,6 +91,13 @@
         <groupId>io.mongock</groupId>
         <artifactId>mongock-bom</artifactId>
         <version>${mongock.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-bom</artifactId>
+        <version>${testcontainers.version}</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
@@ -274,7 +261,6 @@
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>mongodb</artifactId>
-      <version>${testcontainers.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -759,7 +745,7 @@
                   <BP_JVM_VERSION>21</BP_JVM_VERSION>
                 </env>
                 <buildpacks>
-                  <buildpack>gcr.io/paketo-buildpacks/bellsoft-liberica:9.11.0</buildpack>
+                  <buildpack>gcr.io/paketo-buildpacks/bellsoft-liberica:10.4.3</buildpack>
                   <buildpack>gcr.io/paketo-buildpacks/java-native-image</buildpack>
                 </buildpacks>
               </image>

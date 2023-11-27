@@ -25,6 +25,7 @@ class DummyFeatureModuleFactoryTest {
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFiles("documentation/dummy.md")
+      .hasPrefixedFiles("src/main/java/com/jhipster/test/dummy", "package-info.java")
       .hasPrefixedFiles(
         "src/main/java/com/jhipster/test/dummy/application",
         "BeersApplicationService.java",

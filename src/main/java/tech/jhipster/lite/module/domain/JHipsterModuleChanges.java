@@ -7,7 +7,6 @@ import tech.jhipster.lite.module.domain.javabuild.command.JavaBuildCommands;
 import tech.jhipster.lite.module.domain.javaproperties.SpringComments;
 import tech.jhipster.lite.module.domain.javaproperties.SpringFactories;
 import tech.jhipster.lite.module.domain.javaproperties.SpringProperties;
-import tech.jhipster.lite.module.domain.javaproperties.SpringPropertiesBlockComments;
 import tech.jhipster.lite.module.domain.packagejson.JHipsterModulePackageJson;
 import tech.jhipster.lite.module.domain.postaction.JHipsterModulePostActions;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
@@ -30,7 +29,6 @@ public class JHipsterModuleChanges {
   private final JHipsterModulePostActions postActions;
   private final SpringProperties springProperties;
   private final SpringComments springComments;
-  private final SpringPropertiesBlockComments springPropertiesBlockComments;
   private final SpringProperties springYamlProperties;
   private final SpringComments springYamlComments;
   private final SpringFactories springFactories;
@@ -52,7 +50,6 @@ public class JHipsterModuleChanges {
     springComments = builder.springComments;
     springYamlProperties = builder.springYamlProperties;
     springYamlComments = builder.springYamlComments;
-    springPropertiesBlockComments = builder.springPropertiesBlockComments;
     springFactories = builder.springFactories;
   }
 
@@ -130,10 +127,6 @@ public class JHipsterModuleChanges {
     return springComments;
   }
 
-  public SpringPropertiesBlockComments springPropertiesBlockComments() {
-    return springPropertiesBlockComments;
-  }
-
   public SpringFactories springFactories() {
     return springFactories;
   }
@@ -152,7 +145,6 @@ public class JHipsterModuleChanges {
       JHipsterModuleChangesPostActionsBuilder,
       JHipsterModuleChangesSpringPropertiesBuilder,
       JHipsterModuleChangesSpringCommentsBuilder,
-      JHipsterModuleChangesSpringPropertiesBlockCommentsBuilder,
       JHipsterModuleChangesSpringFactoriesBuilder,
       JHipsterModuleChangesSpringYamlCommentsBuilder {
 
@@ -168,7 +160,6 @@ public class JHipsterModuleChanges {
     private JHipsterModulePostActions postActions;
     private SpringProperties springProperties = SpringProperties.EMPTY;
     private SpringComments springComments = SpringComments.EMPTY;
-    private SpringPropertiesBlockComments springPropertiesBlockComments = SpringPropertiesBlockComments.EMPTY;
     private SpringProperties springYamlProperties = SpringProperties.EMPTY;
     private SpringComments springYamlComments = SpringComments.EMPTY;
     private SpringFactories springFactories;
@@ -267,15 +258,8 @@ public class JHipsterModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChangesSpringPropertiesBlockCommentsBuilder springComments(SpringComments springComments) {
+    public JHipsterModuleChanges springComments(SpringComments springComments) {
       this.springComments = springComments;
-
-      return this;
-    }
-
-    @Override
-    public JHipsterModuleChanges springPropertiesBlockComments(SpringPropertiesBlockComments springPropertiesBlockComments) {
-      this.springPropertiesBlockComments = springPropertiesBlockComments;
 
       return new JHipsterModuleChanges(this);
     }
@@ -342,10 +326,6 @@ public class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesSpringCommentsBuilder {
-    JHipsterModuleChangesSpringPropertiesBlockCommentsBuilder springComments(SpringComments springComments);
-  }
-
-  public interface JHipsterModuleChangesSpringPropertiesBlockCommentsBuilder {
-    JHipsterModuleChanges springPropertiesBlockComments(SpringPropertiesBlockComments springPropertiesBlockComments);
+    JHipsterModuleChanges springComments(SpringComments springComments);
   }
 }

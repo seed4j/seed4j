@@ -12,7 +12,7 @@ import { MatMenuModule } from '@angular/material/menu';
   templateUrl: './app.component.html',
   imports: [CommonModule, RouterModule, MatMenuModule, MatToolbarModule, MatIconModule, MatButtonModule, NgOptimizedImage],
   standalone: true,
-  styleUrls: ['./app.component.css'],
+  styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
   appName = '';

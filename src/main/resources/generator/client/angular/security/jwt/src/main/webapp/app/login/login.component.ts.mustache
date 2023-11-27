@@ -15,7 +15,7 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './login.component.html',
   imports: [CommonModule, MatButtonModule, MatInputModule, MatCardModule, ReactiveFormsModule],
   standalone: true,
-  styleUrls: ['./login.component.css'],
+  styleUrl: './login.component.css',
 })
 export default class LoginComponent implements OnInit {
   private readonly destroy$ = new Subject<void>();

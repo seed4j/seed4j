@@ -157,6 +157,7 @@ infinitest.filters
 *.*~
 *~
 .merge_file*
+.attach_pid*
 .history
 
 ######################

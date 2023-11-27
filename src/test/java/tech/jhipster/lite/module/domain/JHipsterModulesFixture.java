@@ -112,13 +112,12 @@ public final class JHipsterModulesFixture {
       .set(propertyKey("springdoc.swagger-ui.operationsSorter"), propertyValue("test"))
       .and()
     .springTestProperties(springProfile("local"))
+      .comment(propertyKey("springdoc.swagger-ui"), comment("Swagger properties"))
       .comment(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), comment("This is a comment"))
       .set(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), propertyValue("test"))
-      .set(properties("Swagger properties")
-        .add(propertyKey("springdoc.swagger-ui.operationsSorter"), propertyValue("test"))
-        .add(propertyKey("springdoc.swagger-ui.tagsSorter"), propertyValue("test"))
-        .add(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), propertyValue("test"))
-        .build())
+      .set(propertyKey("springdoc.swagger-ui.operationsSorter"), propertyValue("test"))
+      .set(propertyKey("springdoc.swagger-ui.tagsSorter"), propertyValue("test"))
+      .set(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), propertyValue("test"))
       .and()
     .springTestFactories()
      .append(propertyKey("o.s.c.ApplicationListener"), propertyValue("c.m.m.MyListener1"))
@@ -315,8 +314,8 @@ public final class JHipsterModulesFixture {
               <version>[${maven.version},)</version>
             </requireMavenVersion>
             <requireJavaVersion>
-              <message>You are running an incompatible version of Java. JHipster supports JDK 17.</message>
-              <version>[17,18)</version>
+                <message>You are running an incompatible version of Java. JHipster engine supports JDK 21+.</message>
+                <version>[21,22)</version>
             </requireJavaVersion>
           </rules>
         </configuration>

@@ -414,6 +414,12 @@ elif [[ $application == 'typescriptapp' ]]; then
     "typescript" \
     "optional-typescript"
 
+elif [[ $application == 'thymeleafapp' ]]; then
+  spring_boot_mvc
+  sonar_back
+
+  applyModules "spring-boot-thymeleaf"
+
 else
   echo "*** Unknown configuration..."
   exit 1

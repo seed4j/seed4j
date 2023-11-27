@@ -1,9 +1,13 @@
 package tech.jhipster.lite.module.domain;
 
-import static tech.jhipster.lite.module.domain.replacement.ReplacementCondition.*;
+import static tech.jhipster.lite.module.domain.replacement.ReplacementCondition.always;
+import static tech.jhipster.lite.module.domain.replacement.ReplacementCondition.notContainingReplacement;
 
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -11,8 +15,14 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
 import tech.jhipster.lite.module.domain.JHipsterModuleContext.JHipsterModuleContextBuilder;
 import tech.jhipster.lite.module.domain.JHipsterModulePreActions.JHipsterModulePreActionsBuilder;
-import tech.jhipster.lite.module.domain.file.*;
+import tech.jhipster.lite.module.domain.file.JHipsterDestination;
+import tech.jhipster.lite.module.domain.file.JHipsterFilesToDelete;
+import tech.jhipster.lite.module.domain.file.JHipsterFilesToMove;
+import tech.jhipster.lite.module.domain.file.JHipsterModuleFiles;
 import tech.jhipster.lite.module.domain.file.JHipsterModuleFiles.JHipsterModuleFilesBuilder;
+import tech.jhipster.lite.module.domain.file.JHipsterSource;
+import tech.jhipster.lite.module.domain.file.JHipsterTemplatedFile;
+import tech.jhipster.lite.module.domain.file.JHipsterTemplatedFiles;
 import tech.jhipster.lite.module.domain.javabuild.ArtifactId;
 import tech.jhipster.lite.module.domain.javabuild.GroupId;
 import tech.jhipster.lite.module.domain.javabuild.VersionSlug;
@@ -26,10 +36,22 @@ import tech.jhipster.lite.module.domain.javadependency.JHipsterModuleJavaDepende
 import tech.jhipster.lite.module.domain.javadependency.JavaDependency;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependency.JavaDependencyGroupIdBuilder;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyVersion;
-import tech.jhipster.lite.module.domain.javaproperties.*;
+import tech.jhipster.lite.module.domain.javaproperties.Comment;
+import tech.jhipster.lite.module.domain.javaproperties.JHipsterModuleSpringFactories;
 import tech.jhipster.lite.module.domain.javaproperties.JHipsterModuleSpringFactories.JHipsterModuleSpringFactoriesBuilder;
+import tech.jhipster.lite.module.domain.javaproperties.JHipsterModuleSpringProperties;
 import tech.jhipster.lite.module.domain.javaproperties.JHipsterModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
-import tech.jhipster.lite.module.domain.javaproperties.PropertiesBlockComment.PropertiesBlockCommentPropertiesBuilder;
+import tech.jhipster.lite.module.domain.javaproperties.PropertyKey;
+import tech.jhipster.lite.module.domain.javaproperties.PropertyValue;
+import tech.jhipster.lite.module.domain.javaproperties.SpringComment;
+import tech.jhipster.lite.module.domain.javaproperties.SpringComments;
+import tech.jhipster.lite.module.domain.javaproperties.SpringFactories;
+import tech.jhipster.lite.module.domain.javaproperties.SpringFactory;
+import tech.jhipster.lite.module.domain.javaproperties.SpringFactoryType;
+import tech.jhipster.lite.module.domain.javaproperties.SpringProfile;
+import tech.jhipster.lite.module.domain.javaproperties.SpringProperties;
+import tech.jhipster.lite.module.domain.javaproperties.SpringProperty;
+import tech.jhipster.lite.module.domain.javaproperties.SpringPropertyType;
 import tech.jhipster.lite.module.domain.packagejson.JHipsterModulePackageJson;
 import tech.jhipster.lite.module.domain.packagejson.JHipsterModulePackageJson.JHipsterModulePackageJsonBuilder;
 import tech.jhipster.lite.module.domain.packagejson.PackageName;
@@ -39,9 +61,17 @@ import tech.jhipster.lite.module.domain.postaction.JHipsterModulePostActions;
 import tech.jhipster.lite.module.domain.postaction.JHipsterModulePostActions.JHipsterModulePostActionsBuilder;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
-import tech.jhipster.lite.module.domain.replacement.*;
+import tech.jhipster.lite.module.domain.replacement.FileStartReplacer;
+import tech.jhipster.lite.module.domain.replacement.JHipsterModuleMandatoryReplacementsFactory;
 import tech.jhipster.lite.module.domain.replacement.JHipsterModuleMandatoryReplacementsFactory.JHipsterModuleMandatoryReplacementsFactoryBuilder;
+import tech.jhipster.lite.module.domain.replacement.JHipsterModuleOptionalReplacementsFactory;
 import tech.jhipster.lite.module.domain.replacement.JHipsterModuleOptionalReplacementsFactory.JHipsterModuleOptionalReplacementsFactoryBuilder;
+import tech.jhipster.lite.module.domain.replacement.RegexNeedleAfterReplacer;
+import tech.jhipster.lite.module.domain.replacement.RegexNeedleBeforeReplacer;
+import tech.jhipster.lite.module.domain.replacement.RegexReplacer;
+import tech.jhipster.lite.module.domain.replacement.TextNeedleAfterReplacer;
+import tech.jhipster.lite.module.domain.replacement.TextNeedleBeforeReplacer;
+import tech.jhipster.lite.module.domain.replacement.TextReplacer;
 import tech.jhipster.lite.shared.error.domain.Assert;
 
 @SuppressWarnings("java:S6539")
@@ -61,7 +91,6 @@ public class JHipsterModule {
   private final JHipsterModulePostActions postActions;
   private final SpringProperties springProperties;
   private final SpringComments springComments;
-  private final SpringPropertiesBlockComments springPropertiesBlockComments;
   private final SpringFactories springFactories;
 
   private JHipsterModule(JHipsterModuleBuilder builder) {
@@ -78,7 +107,6 @@ public class JHipsterModule {
     postActions = builder.postActions.build();
     springProperties = buildSpringProperties(builder);
     springComments = buildSpringComments(builder);
-    springPropertiesBlockComments = buildSpringPropertiesBlockComments(builder);
     springFactories = buildSpringFactories(builder);
   }
 
@@ -97,7 +125,6 @@ public class JHipsterModule {
     postActions = source.postActions;
     springProperties = source.springProperties;
     springComments = source.springComments;
-    springPropertiesBlockComments = source.springPropertiesBlockComments;
     springFactories = source.springFactories;
   }
 
@@ -137,32 +164,6 @@ public class JHipsterModule {
         .builder(inputProperties.getKey().type())
         .key(propertyComment.getKey())
         .comment(propertyComment.getValue())
-        .profile(inputProperties.getKey().profile())
-        .build();
-  }
-
-  private SpringPropertiesBlockComments buildSpringPropertiesBlockComments(JHipsterModuleBuilder builder) {
-    return new SpringPropertiesBlockComments(
-      builder.springProperties.entrySet().stream().flatMap(toSpringPropertiesBlockComments()).toList()
-    );
-  }
-
-  private Function<
-    Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder>,
-    Stream<SpringPropertiesBlockComment>
-  > toSpringPropertiesBlockComments() {
-    return inputProperties ->
-      inputProperties.getValue().build().propertiesBlockComments().stream().map(toSpringPropertiesBlockComment(inputProperties));
-  }
-
-  private Function<PropertiesBlockComment, SpringPropertiesBlockComment> toSpringPropertiesBlockComment(
-    Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder> inputProperties
-  ) {
-    return propertiesBlockComment ->
-      SpringPropertiesBlockComment
-        .builder(inputProperties.getKey().type())
-        .comment(propertiesBlockComment.comment())
-        .properties(propertiesBlockComment.properties())
         .profile(inputProperties.getKey().profile())
         .build();
   }
@@ -299,10 +300,6 @@ public class JHipsterModule {
     return new Comment(value);
   }
 
-  public static PropertiesBlockCommentPropertiesBuilder properties(String comment) {
-    return PropertiesBlockComment.builder().comment(comment(comment));
-  }
-
   public static DocumentationTitle documentationTitle(String title) {
     return new DocumentationTitle(title);
   }
@@ -395,10 +392,6 @@ public class JHipsterModule {
 
   public SpringFactories springFactories() {
     return springFactories;
-  }
-
-  public SpringPropertiesBlockComments springPropertiesBlockComments() {
-    return springPropertiesBlockComments;
   }
 
   public static class JHipsterModuleBuilder {

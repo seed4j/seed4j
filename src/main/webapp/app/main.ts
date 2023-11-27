@@ -7,7 +7,6 @@ import ConsoleLogger from '@/common/secondary/ConsoleLogger';
 import { MittAlertBus } from '@/common/secondary/alert/MittAlertBus';
 import mitt from 'mitt';
 
-import '../content/css/custom.css';
 import { MittAlertListener } from '@/common/secondary/alert/MittAlertListener';
 import { RestModulesRepository } from './module/secondary/RestModulesRepository';
 import { RestProjectFoldersRepository } from '@/module/secondary/RestProjectFoldersRepository';

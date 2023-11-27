@@ -1,7 +1,10 @@
+######### Header comment ###########
+
 spring:
   application:
-    name: JHLite
+    name: JHLite # This is the name of the application
 
+# Logging
 logging:
   level:
     tech.jhipster.lite: INFO

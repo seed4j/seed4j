@@ -43,6 +43,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
   private final FileSystemJavaBuildCommandsHandler javaBuild;
   private final FileSystemSpringPropertiesCommandsHandler springProperties;
   private final FileSystemYamlSpringPropertiesCommandsHandler yamlSpringProperties;
+  private final FileSystemYamlSpringCommentsCommandsHandler yamlSpringComments;
   private final FileSystemSpringCommentsCommandsHandler springComments;
   private final FileSystemSpringFactoriesCommandsHandler springFactories;
   private final FileSystemPackageJsonHandler packageJson;
@@ -64,6 +65,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
     springProperties = new FileSystemSpringPropertiesCommandsHandler();
     springComments = new FileSystemSpringCommentsCommandsHandler();
     yamlSpringProperties = new FileSystemYamlSpringPropertiesCommandsHandler();
+    yamlSpringComments = new FileSystemYamlSpringCommentsCommandsHandler();
     springFactories = new FileSystemSpringFactoriesCommandsHandler();
     packageJson = new FileSystemPackageJsonHandler(npmVersions);
     replacer = new FileSystemReplacer();
@@ -80,8 +82,9 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
     files.delete(changes.projectFolder(), changes.filesToDelete());
     javaBuild.handle(changes.indentation(), changes.projectFolder(), changes.javaBuildCommands());
     springProperties.handle(changes.projectFolder(), changes.springProperties());
-    springComments.handle(changes.projectFolder(), changes.springComments(), changes.springPropertiesBlockComments());
+    springComments.handle(changes.projectFolder(), changes.springComments());
     yamlSpringProperties.handle(changes.indentation(), changes.projectFolder(), changes.springYamlProperties());
+    yamlSpringComments.handle(changes.indentation(), changes.projectFolder(), changes.springYamlComments());
     springFactories.handle(changes.projectFolder(), changes.springFactories());
     packageJson.handle(changes.indentation(), changes.projectFolder(), changes.packageJson());
     replacer.handle(changes.projectFolder(), changes.replacers());

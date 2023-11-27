@@ -10,7 +10,6 @@ import tech.jhipster.lite.module.domain.javabuildplugin.JavaBuildPlugin;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependency;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyScope;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyType;
-import tech.jhipster.lite.module.domain.javaproperties.PropertiesBlockComment;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.module.domain.replacement.TextNeedleBeforeReplacer;
 import tech.jhipster.lite.shared.error.domain.Assert;
@@ -80,12 +79,8 @@ public class SpringBootCoreModuleFactory {
         .and()
       .springTestProperties()
         .set(propertyKey("spring.main.banner-mode"), propertyValue("off"))
-        .set(PropertiesBlockComment.builder()
-          .comment(comment("Logging configuration"))
-          .add(propertyKey(basePackageLoggingLevel), propertyValue("OFF"))
-          .add(propertyKey("logging.config"), propertyValue("classpath:logback.xml"))
-          .build()
-        )
+        .set(propertyKey(basePackageLoggingLevel), propertyValue("OFF"))
+        .set(propertyKey("logging.config"), propertyValue("classpath:logback.xml"))
       .and()
       .optionalReplacements()
         .in(path("pom.xml"))

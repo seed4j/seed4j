@@ -1,5 +1,21 @@
+$jhlite-anchor-point-size: 6px;
+$jhlite-anchor-point-border-size: 3px;
+
+%anchor-point {
+  position: absolute;
+  top: calc(50% - $jhlite-anchor-point-size);
+  outline: solid 1px var(--jhlite-chip-default-anchor-color);
+  border: $jhlite-anchor-point-border-size solid var(--jhlite-chip-bg-color);
+  border-radius: $jhlite-anchor-point-size;
+  background-color: var(--jhlite-chip-default-anchor-color);
+  width: $jhlite-anchor-point-size;
+  height: $jhlite-anchor-point-size;
+  content: '';
+}
+
 .jhlite-chip {
   display: flex;
+  position: relative;
   flex-direction: column;
   gap: 5px;
   margin-bottom: 5px;
@@ -54,6 +70,37 @@
 
   &.-extended {
     margin-bottom: 15px;
+  }
+  
+  &.-left-anchor-point::before {
+    @extend %anchor-point;
+
+    left: -$jhlite-anchor-point-size;
+  }
+  
+  &.-right-anchor-point::after {
+    @extend %anchor-point;
+
+    right: -$jhlite-anchor-point-size;
+  }
+
+  &.-selectable-highlighted::before,
+  &.-selectable-highlighted::after {
+    cursor: pointer;
+    animation: $jhlite-valid-highlight-animation;
+  }
+  
+  &.-not-selectable-highlighted::before,
+  &.-not-selectable-highlighted::after {
+    background-color: $jhlite-global-color-fill-disabled-light;
+    animation: $jhlite-invalid-highlight-animation;
+  }
+
+  &.-selected::after,
+  &.-selected::before {
+    background-color: $jhlite-global-color-fill-primary-darker;
+    cursor: pointer;
+    color: $jhlite-global-color-text-light;
   }
 }
 

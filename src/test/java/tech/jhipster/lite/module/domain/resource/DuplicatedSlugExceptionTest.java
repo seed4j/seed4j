@@ -13,7 +13,7 @@ class DuplicatedSlugExceptionTest {
   void shouldGetExceptionInformation() {
     DuplicatedSlugException exception = new DuplicatedSlugException();
 
-    assertThat(exception.getMessage()).isEqualTo("Found a duplicated module slug, ensure that slugs are uniq");
+    assertThat(exception.getMessage()).isEqualTo("Found a duplicated module slug, ensure that slugs are unique");
     assertThat(exception.key()).isEqualTo(ResourceErrorKey.DUPLICATED_SLUG);
     assertThat(exception.status()).isEqualTo(ErrorStatus.INTERNAL_SERVER_ERROR);
   }

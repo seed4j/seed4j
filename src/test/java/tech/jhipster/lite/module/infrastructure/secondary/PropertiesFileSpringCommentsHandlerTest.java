@@ -44,6 +44,21 @@ class PropertiesFileSpringCommentsHandlerTest {
   }
 
   @Test
+  void shouldAddCommentToFirstPartiallyMatchingKey() {
+    Path propertiesFile = Paths.get(TestFileUtils.tmpDirForTest(), "src/main/resources/application.properties");
+    loadDefaultProperties(EXISTING_SPRING_PROPERTIES, propertiesFile);
+
+    new PropertiesFileSpringCommentsHandler(propertiesFile).set(propertyKey("logging.level"), comment("Logging configuration"));
+
+    assertThat(content(propertiesFile))
+      .contains(
+        """
+        # Logging configuration
+        logging.level.tech.jhipster.lite=INFO"""
+      );
+  }
+
+  @Test
   void shouldAddSingleLineCommentForExistingProperty() {
     Path propertiesFile = Paths.get(TestFileUtils.tmpDirForTest(), "src/main/resources/application.properties");
     loadDefaultProperties(EXISTING_SPRING_PROPERTIES, propertiesFile);

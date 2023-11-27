@@ -1,7 +1,5 @@
 package tech.jhipster.lite.module.domain.javaproperties;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import tech.jhipster.lite.module.domain.JHipsterModule.JHipsterModuleBuilder;
@@ -12,12 +10,10 @@ public class JHipsterModuleSpringProperties {
 
   private final Map<PropertyKey, PropertyValue> properties;
   private final Map<PropertyKey, Comment> comments;
-  private final Collection<PropertiesBlockComment> propertiesBlockComments;
 
   private JHipsterModuleSpringProperties(JHipsterModuleSpringPropertiesBuilder builder) {
     properties = JHipsterCollections.immutable(builder.properties);
     comments = JHipsterCollections.immutable(builder.comments);
-    propertiesBlockComments = JHipsterCollections.immutable(builder.propertiesBlockComments);
   }
 
   public static JHipsterModuleSpringPropertiesBuilder builder(JHipsterModuleBuilder module) {
@@ -32,16 +28,11 @@ public class JHipsterModuleSpringProperties {
     return comments;
   }
 
-  public Collection<PropertiesBlockComment> propertiesBlockComments() {
-    return propertiesBlockComments;
-  }
-
   public static class JHipsterModuleSpringPropertiesBuilder {
 
     private final JHipsterModuleBuilder module;
     private final Map<PropertyKey, PropertyValue> properties = new HashMap<>();
     private final Map<PropertyKey, Comment> comments = new HashMap<>();
-    private final Collection<PropertiesBlockComment> propertiesBlockComments = new ArrayList<>();
 
     private JHipsterModuleSpringPropertiesBuilder(JHipsterModuleBuilder module) {
       Assert.notNull("module", module);
@@ -63,15 +54,6 @@ public class JHipsterModuleSpringProperties {
       Assert.notNull("value", value);
 
       this.comments.put(key, value);
-
-      return this;
-    }
-
-    public JHipsterModuleSpringPropertiesBuilder set(PropertiesBlockComment propertiesBlockComment) {
-      Assert.notNull("propertiesBlockComment", propertiesBlockComment);
-
-      this.propertiesBlockComments.add(propertiesBlockComment);
-      this.properties.putAll(propertiesBlockComment.properties());
 
       return this;
     }

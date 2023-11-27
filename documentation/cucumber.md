@@ -74,6 +74,7 @@ public void shouldGetResponseContent(Map<String, Object> response) {
 public void shouldGetResponseContent(List<Map<String, Object>> responses) {
   assertThatLastResponse().hasElement("$.users").containingExactly(responses);
 }
+
 ```
 
 ## Reading responses content

@@ -168,13 +168,10 @@ jobs:
           - customjhlite
           - typescriptapp
           - gradleapp
+          - thymeleafapp
         include:
-          - java-version: 17
-            spring-config-format: yaml
-          - java-version: 21
-            app: fullapp
-          - java-version: 21
-            app: customjhlite
+          - spring-config-format: yaml
+          - app: customjhlite
             spring-config-format: properties
     steps:
       - name: 'Setup: checkout project'
@@ -226,11 +223,6 @@ jobs:
             ${{ github.workspace }}/tests-ci/wait_sonar.sh
             docker ps -a
           fi
-      - name: 'Setup: java version ${{ matrix.java-version }} for generated application'
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: ${{ matrix.java-version }}
       - name: 'Test: verify ${{ matrix.app }}'
         working-directory: /tmp/jhlite/${{ matrix.app }}/
         run: |

@@ -16,7 +16,6 @@ import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCover
 class PropertiesFileSpringCommentsHandler {
 
   private static final String HASH = "#";
-  private static final String EQUAL = "=";
   private static final String BLANK_SPACE = " ";
 
   private final Path file;
@@ -51,10 +50,10 @@ class PropertiesFileSpringCommentsHandler {
   private String buildComments(PropertyKey key, Comment comment) throws IOException {
     String currentProperties = readProperties();
 
-    int propertyIndex = currentProperties.indexOf(propertyId(key));
+    int propertyIndex = currentProperties.indexOf(key.get());
     if (propertyIndex != -1) {
       currentProperties = deletePreviousComment(currentProperties, propertyIndex);
-      propertyIndex = currentProperties.indexOf(propertyId(key));
+      propertyIndex = currentProperties.indexOf(key.get());
       String start = currentProperties.substring(0, propertyIndex);
       String end = currentProperties.substring(propertyIndex);
 
@@ -65,7 +64,9 @@ class PropertiesFileSpringCommentsHandler {
   }
 
   private String deletePreviousComment(String currentProperties, int propertyIndex) {
-    if (isFirstLine(currentProperties, propertyIndex)) return currentProperties;
+    if (isFirstLine(currentProperties, propertyIndex)) {
+      return currentProperties;
+    }
     CommentPosition commentPosition = findPossibleCommentPosition(currentProperties, propertyIndex);
     if (propertyHasComment(currentProperties, commentPosition)) {
       return deleteComment(currentProperties, commentPosition);
@@ -110,10 +111,6 @@ class PropertiesFileSpringCommentsHandler {
 
   private static Collection<String> splitLines(Comment comment) {
     return List.of(comment.get().split("\\r?\\n"));
-  }
-
-  private String propertyId(PropertyKey key) {
-    return key.get() + EQUAL;
   }
 
   private record CommentPosition(int start, int end) {}

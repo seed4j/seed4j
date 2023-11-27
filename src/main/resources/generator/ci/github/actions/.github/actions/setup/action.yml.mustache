@@ -1,5 +1,5 @@
 name: 'Setup'
-description: 'Setup environment with Java 17, Node 20.9.0'
+description: 'Setup environment with Java 21, Node 20.9.0'
 runs:
   using: 'composite'
   steps:
@@ -10,11 +10,11 @@ runs:
     - name: 'Setup: update NPM'
       shell: bash
       run: npm install -g npm
-    - name: 'Setup: Java 17'
+    - name: 'Setup: Java 21'
       uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
-        java-version: '17.x'
+        java-version: '21'
     - name: 'Setup: check tools'
       shell: bash
       run: |

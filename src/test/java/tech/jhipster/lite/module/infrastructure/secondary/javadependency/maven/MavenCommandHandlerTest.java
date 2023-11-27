@@ -1,18 +1,8 @@
 package tech.jhipster.lite.module.infrastructure.secondary.javadependency.maven;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 import static tech.jhipster.lite.module.domain.JHipsterModule.javaBuildPlugin;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.defaultVersionDependency;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.jsonWebTokenDependencyId;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.mavenEnforcerPlugin;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.mavenEnforcerPluginManagement;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.optionalTestDependency;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.springBootDependencyId;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.springBootDependencyManagement;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.springBootStarterWebDependency;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.springBootVersion;
+import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -512,8 +502,8 @@ class MavenCommandHandlerTest {
                       <version>[${maven.version},)</version>
                     </requireMavenVersion>
                     <requireJavaVersion>
-                      <message>You are running an incompatible version of Java. JHipster supports JDK 17.</message>
-                      <version>[17,18)</version>
+                      <message>You are running an incompatible version of Java. JHipster engine supports JDK 21+.</message>
+                      <version>[21,22)</version>
                     </requireJavaVersion>
                   </rules>
                 </configuration>

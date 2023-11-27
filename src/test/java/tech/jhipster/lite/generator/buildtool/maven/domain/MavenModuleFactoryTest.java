@@ -1,6 +1,7 @@
 package tech.jhipster.lite.generator.buildtool.maven.domain;
 
-import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.readmeFile;
 
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.TestFileUtils;
@@ -183,8 +184,8 @@ class MavenModuleFactoryTest {
         """
         ### Java
 
-        You need to have Java 17:
-        - [JDK 17](https://openjdk.java.net/projects/jdk/17/)
+        You need to have Java 21:
+        - [JDK 21](https://openjdk.java.net/projects/jdk/21/)
         """
       );
   }

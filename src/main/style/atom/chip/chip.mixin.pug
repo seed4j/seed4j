@@ -1,11 +1,13 @@
 mixin jhlite-chip(options)
-  -const { selectableHighlighted: isSelectableHighlighted, notSelectableHighlighted: isNotSelectableHighlighted, compacted: isCompacted, extended: isExtended, selected: isSelected, applied: isApplied } = options || {};
+  -const { selectableHighlighted: isSelectableHighlighted, notSelectableHighlighted: isNotSelectableHighlighted, compacted: isCompacted, extended: isExtended, selected: isSelected, applied: isApplied, hasLeftAnchorPoint, hasRightAnchorPoint } = options || {};
   -const selectabledHighlightedClass = isSelectableHighlighted ? '-selectable-highlighted' : null;
   -const notSelectableHighlightedClass = isNotSelectableHighlighted ? '-not-selectable-highlighted' : null;
   -const compactedClass = isCompacted ? '-compacted' : null;
   -const extendedClass = isExtended ? '-extended' : null;
   -const appliedClass = isApplied ? '-applied' : null;
   -const selectedClass = isSelected ? '-selected' : null;
-  .jhlite-chip(class=[selectabledHighlightedClass, notSelectableHighlightedClass, selectedClass, extendedClass])
+  -const leftAnchorPointClass = hasLeftAnchorPoint ? '-left-anchor-point' : null;
+  -const rightAnchorPointClass = hasRightAnchorPoint ? '-right-anchor-point' : null;
+  .jhlite-chip(class=[selectabledHighlightedClass, notSelectableHighlightedClass, selectedClass, extendedClass, leftAnchorPointClass, rightAnchorPointClass])
     .jhlite-chip--title(class=appliedClass) Chip title
     .jhlite-chip--description(class=compactedClass) Chip description

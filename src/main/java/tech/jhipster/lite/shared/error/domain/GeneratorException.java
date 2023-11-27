@@ -150,7 +150,7 @@ public class GeneratorException extends RuntimeException {
       return this;
     }
     public GeneratorExceptionBuilder duplicatedSlugException() {
-      return internalServerError(ResourceErrorKey.DUPLICATED_SLUG).message("Found a duplicated module slug, ensure that slugs are uniq");
+      return internalServerError(ResourceErrorKey.DUPLICATED_SLUG).message("Found a duplicated module slug, ensure that slugs are unique");
     }
 
     public GeneratorException build() {

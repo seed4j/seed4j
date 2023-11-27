@@ -6,6 +6,10 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.shared.error.infrastructure.primary.GeneratorExceptionFactory;
+import tech.jhipster.lite.module.domain.resource.ResourceErrorKey;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @UnitTest
 class GeneratorExceptionTest {
@@ -59,6 +63,14 @@ class GeneratorExceptionTest {
     assertThat(exception.getMessage()).isEqualTo("This is a problem");
     assertThat(exception.key()).isEqualTo(StandardErrorKey.INTERNAL_SERVER_ERROR);
     assertThat(exception.getCause()).isEqualTo(cause);
+    assertThat(exception.status()).isEqualTo(ErrorStatus.INTERNAL_SERVER_ERROR);
+  }
+
+  @Test
+  public void shouldCheckDuplicatedSlugException() {
+    GeneratorException exception = GeneratorException.builder(null).build();
+    assertThat(exception.getMessage()).isEqualTo("Found a duplicated module slug, ensure that slugs are uniq");
+    assertThat(exception.key()).isEqualTo(ResourceErrorKey.DUPLICATED_SLUG);
     assertThat(exception.status()).isEqualTo(ErrorStatus.INTERNAL_SERVER_ERROR);
   }
 }

@@ -2,7 +2,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -327,6 +327,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/pascalgrimaud"><img src="https://avatars.githubusercontent.com/u/9156882?v=4?s=100" width="100px;" alt="Pascal Grimaud"/><br /><sub><b>Pascal Grimaud</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=pascalgrimaud" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://quentin.monmert.pagesperso-orange.fr/"><img src="https://avatars.githubusercontent.com/u/9989211?v=4?s=100" width="100px;" alt="Quentin"/><br /><sub><b>Quentin</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=qmonmert" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/DamnClin"><img src="https://avatars.githubusercontent.com/u/59929679?v=4?s=100" width="100px;" alt="Colin DAMON"/><br /><sub><b>Colin DAMON</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=DamnClin" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

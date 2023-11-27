@@ -2,7 +2,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -329,6 +329,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="http://quentin.monmert.pagesperso-orange.fr/"><img src="https://avatars.githubusercontent.com/u/9989211?v=4?s=100" width="100px;" alt="Quentin"/><br /><sub><b>Quentin</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=qmonmert" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/DamnClin"><img src="https://avatars.githubusercontent.com/u/59929679?v=4?s=100" width="100px;" alt="Colin DAMON"/><br /><sub><b>Colin DAMON</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=DamnClin" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/murdos"><img src="https://avatars.githubusercontent.com/u/155828?v=4?s=100" width="100px;" alt="Aurélien Mino"/><br /><sub><b>Aurélien Mino</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=murdos" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/DanielFran"><img src="https://avatars.githubusercontent.com/u/3706415?v=4?s=100" width="100px;" alt="Daniel Franco"/><br /><sub><b>Daniel Franco</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=DanielFran" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

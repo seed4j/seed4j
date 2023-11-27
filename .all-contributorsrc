@@ -45,6 +45,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "DanielFran",
+      "name": "Daniel Franco",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3706415?v=4",
+      "profile": "https://github.com/DanielFran",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

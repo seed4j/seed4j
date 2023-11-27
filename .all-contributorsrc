@@ -9,7 +9,17 @@
   "imageSize": 100,
   "commit": true,
   "commitConvention": "none",
-  "contributors": [],
+  "contributors": [
+    {
+      "login": "pascalgrimaud",
+      "name": "Pascal Grimaud",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9156882?v=4",
+      "profile": "https://github.com/pascalgrimaud",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
   "contributorsPerLine": 7,
   "linkToUsage": false
 }

@@ -18,6 +18,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "qmonmert",
+      "name": "Quentin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9989211?v=4",
+      "profile": "http://quentin.monmert.pagesperso-orange.fr/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

@@ -85,8 +85,9 @@ class ElementAssertions {
 
   private void assertPathValue(String jsonPath, Object value) {
     Object responseValue = CucumberTestContext.getElement(jsonPath);
+    var areValuesStringInstances = value instanceof String && !(responseValue instanceof String);
 
-    if (responseValue != null && value instanceof String && !(responseValue instanceof String)) {
+    if (responseValue != null && areValuesStringInstances) {
       responseValue = responseValue.toString();
     }
 

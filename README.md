@@ -2,7 +2,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -337,6 +337,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/matthieuRioual"><img src="https://avatars.githubusercontent.com/u/60732084?v=4?s=100" width="100px;" alt="RIOUAL Matthieu"/><br /><sub><b>RIOUAL Matthieu</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=matthieuRioual" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/MSaguer"><img src="https://avatars.githubusercontent.com/u/42449441?v=4?s=100" width="100px;" alt="Marc SAGUER"/><br /><sub><b>Marc SAGUER</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=MSaguer" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://www.francois-delbrayelle.fr/"><img src="https://avatars.githubusercontent.com/u/296836?v=4?s=100" width="100px;" alt="François Delbrayelle"/><br /><sub><b>François Delbrayelle</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=fdelbrayelle" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/pblanchardie"><img src="https://avatars.githubusercontent.com/u/676407?v=4?s=100" width="100px;" alt="Patrice Blanchardie"/><br /><sub><b>Patrice Blanchardie</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=pblanchardie" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

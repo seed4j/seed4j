@@ -139,6 +139,11 @@ public class BodyBuilder {
     return res;
   }
 
+  /**
+   * Output from diamond merge.
+   * This is the diamond right side that is produced from 'base' + patches from 'gen' and patches from 'custom'
+   * @return target
+   */
   public Body makeMergedBody() {
     List<String> li = new ArrayList<>();
     for (UpLine u : lines) {

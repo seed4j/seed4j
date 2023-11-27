@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.merge.Merge;
-import tech.jhipster.lite.merge.Role;
 import tech.jhipster.lite.merge.Verify;
 
 @UnitTest
@@ -17,7 +16,7 @@ class MergeTest {
    * <p>
    * And finally jLite adds server port to 'gen' + 'spring.application.name'
    * <p>
-   * This must result in {@link Role#TARGET} with all elements correct merge.
+   * This must result in {@link BodyBuilder#makeMergedBody()} with all elements correct merge.
    */
 
   @Test

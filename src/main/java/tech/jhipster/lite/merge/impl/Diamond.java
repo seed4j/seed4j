@@ -15,10 +15,23 @@ import tech.jhipster.lite.merge.Merge;
  * @param custom how the file looks in the source tree (if exists)
  */
 public record Diamond(
+  /*
+   * Starting leg in diamond merge. Both generated and custom are directly derived from this 'file'
+   * 'base' is used on 'left' side in the compare process.
+   */
   Body base,
 
+  /*
+   * Generated 'file' from generator.
+   * The file is compared to 'base' in the first 'diamond' merge step {@link BodyBuilder#apply(List)}.
+   * As the 'right' side of compare.
+   */
   Body gen,
-
+  /*
+   * Custom file. Located in sources. In example 'src/main/resources/config/application.properties'
+   * The file is compared to 'base' in the second 'diamond' merge step {@link BodyBuilder#apply(List)}.
+   * As the 'right' side of compare.
+   */
   Body custom
 ) {
   /**

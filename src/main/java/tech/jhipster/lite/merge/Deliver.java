@@ -1,20 +1,21 @@
 package tech.jhipster.lite.merge;
 
+import tech.jhipster.lite.merge.impl.BodyBuilder;
 import tech.jhipster.lite.merge.impl.DeliverImpl;
 import tech.jhipster.lite.merge.impl.Diamond;
 
 /**
- * Deliver is about writing files to correct places dependent on merge result.
+ * Deliver is about writing files to correct places dependent on the merge result.
  * Here process will store file in file system dependent on the {@link Verify.Situation}
  * <p>
- * Merge provides lambda call back closures that client must implement.
+ * Merge provides lambda call back closures that the client must implement.
  * <p>
  * There are four things to do:
  * <ol>
  *   <li>Copy file to .genLog. That will be the newly generated file</li>
- *   <li>Copy file to 'source'. That will in best case be the merged result {@link Role#TARGET}.
- *   In case of problems it will be the {@link Role#GEN} file that overwrites 'source'</li>
- *   <li>When merge conflicts we copy the partly {@link Role#TARGET} as a sample beside the 'source'</li>
+ *   <li>Copy file to 'source'. That will in best case be the merged result {@link BodyBuilder#makeMergedBody()}.
+ *   In case of problems it will be the {@link Diamond#gen()} file that overwrites 'source'</li>
+ *   <li>When merge conflicts we copy the partly {@link BodyBuilder#makeMergedBody()} as a sample beside the 'source'</li>
  *   <li>And we produce a 'patch' file beside 'source'</li>
  * </ol>
  */

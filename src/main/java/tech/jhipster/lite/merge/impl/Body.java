@@ -7,11 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
-import tech.jhipster.lite.merge.Role;
 
 /**
  * Content of a file.
- * A merge will make around 4 instances of this class: one for each {@link Role}.
+ * A merge will make three input instances of this class: one for each {@link Diamond} members.
+ * And a final output instance 'target'
  * <p>
  * {@link Body} is an abstraction of file content.
  * It is up to the client to fill data into 'body'.ies.

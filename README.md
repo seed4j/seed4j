@@ -2,7 +2,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -331,6 +331,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/murdos"><img src="https://avatars.githubusercontent.com/u/155828?v=4?s=100" width="100px;" alt="Aurélien Mino"/><br /><sub><b>Aurélien Mino</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=murdos" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/DanielFran"><img src="https://avatars.githubusercontent.com/u/3706415?v=4?s=100" width="100px;" alt="Daniel Franco"/><br /><sub><b>Daniel Franco</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=DanielFran" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/swarajsaaj/"><img src="https://avatars.githubusercontent.com/u/6285049?v=4?s=100" width="100px;" alt="Swaraj"/><br /><sub><b>Swaraj</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=swarajsaaj" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Bolo89"><img src="https://avatars.githubusercontent.com/u/45369327?v=4?s=100" width="100px;" alt="Bolo"/><br /><sub><b>Bolo</b></sub></a><br /><a href="https://github.com/jhipster/jhipster-lite/commits?author=Bolo89" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

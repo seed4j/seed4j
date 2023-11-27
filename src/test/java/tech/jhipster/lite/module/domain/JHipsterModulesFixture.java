@@ -77,9 +77,9 @@ public final class JHipsterModulesFixture {
       .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-starter"))
       .addDependency(groupId("io.jsonwebtoken"), artifactId("jjwt-api"), versionSlug("json-web-token.version"))
       .addDependency(optionalTestDependency())
-      .addDependency(springBootStarterWebDependency())
-      .addDependencyManagement(springBootDependencyManagement())
-      .addDependencyManagement(springBootDefaultTypeDependencyManagement())
+      .addDependency(SpringBootDependencyManager.springBootStarterWebDependency())
+      .addDependencyManagement(SpringBootDependencyManager.springBootDependencyManagement())
+      .addDependencyManagement(SpringBootDependencyManager.springBootDefaultTypeDependencyManagement())
       .removeDependencyManagement(dependencyId("org.springdoc", "springdoc-openapi-ui"))
       .and()
     .javaBuildPlugins()
@@ -126,43 +126,6 @@ public final class JHipsterModulesFixture {
      .and()
     .build();
     // @formatter:on
-  }
-
-  public static JavaDependency springBootStarterWebDependency() {
-    return javaDependency()
-      .groupId("org.springframework.boot")
-      .artifactId("spring-boot-starter-web")
-      .dependencySlug("spring-boot-starter-web")
-      .addExclusion(groupId("org.springframework.boot"), artifactId("spring-boot-starter-tomcat"))
-      .build();
-  }
-
-  public static JavaDependency springBootDependencyManagement() {
-    return javaDependency()
-      .groupId("org.springframework.boot")
-      .artifactId("spring-boot-dependencies")
-      .versionSlug("spring-boot.version")
-      .scope(JavaDependencyScope.IMPORT)
-      .type(JavaDependencyType.POM)
-      .build();
-  }
-
-  public static JavaDependency springBootDefaultTypeDependencyManagement() {
-    return javaDependency()
-      .groupId("org.springframework.boot")
-      .artifactId("spring-boot-dependencies")
-      .versionSlug("spring-boot.version")
-      .scope(JavaDependencyScope.IMPORT)
-      .build();
-  }
-
-  public static DependencyId springBootDependencyId() {
-    return DependencyId
-      .builder()
-      .groupId(groupId("org.springframework.boot"))
-      .artifactId(artifactId("spring-boot-dependencies"))
-      .type(JavaDependencyType.POM)
-      .build();
   }
 
   public static JavaDependency defaultVersionDependency() {
@@ -358,6 +321,45 @@ public final class JHipsterModulesFixture {
       .build();
   }
 
+  public static class SpringBootDependencyManager {
+    public static JavaDependency springBootStarterWebDependency() {
+      return javaDependency()
+        .groupId("org.springframework.boot")
+        .artifactId("spring-boot-starter-web")
+        .dependencySlug("spring-boot-starter-web")
+        .addExclusion(groupId("org.springframework.boot"), artifactId("spring-boot-starter-tomcat"))
+        .build();
+    }
+
+    public static JavaDependency springBootDependencyManagement() {
+      return javaDependency()
+        .groupId("org.springframework.boot")
+        .artifactId("spring-boot-dependencies")
+        .versionSlug("spring-boot.version")
+        .scope(JavaDependencyScope.IMPORT)
+        .type(JavaDependencyType.POM)
+        .build();
+    }
+
+    public static JavaDependency springBootDefaultTypeDependencyManagement() {
+      return javaDependency()
+        .groupId("org.springframework.boot")
+        .artifactId("spring-boot-dependencies")
+        .versionSlug("spring-boot.version")
+        .scope(JavaDependencyScope.IMPORT)
+        .build();
+    }
+
+    public static DependencyId springBootDependencyId() {
+      return DependencyId
+        .builder()
+        .groupId(groupId("org.springframework.boot"))
+        .artifactId(artifactId("spring-boot-dependencies"))
+        .type(JavaDependencyType.POM)
+        .build();
+    }
+
+  }
   public static class JHipsterModulePropertiesBuilder {
 
     private boolean commitModules = false;

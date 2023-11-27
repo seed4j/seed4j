@@ -169,7 +169,7 @@ class DirectJavaDependencyTest {
   }
 
   private JavaDependencies projectDependenciesManagement() {
-    return new JavaDependencies(List.of(springBootDependencyManagement()));
+    return new JavaDependencies(List.of(SpringBootDependencyManager.springBootDependencyManagement()));
   }
 
   private JavaDependencies projectDependencies() {

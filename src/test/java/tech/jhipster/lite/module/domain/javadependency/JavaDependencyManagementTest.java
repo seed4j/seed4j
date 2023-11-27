@@ -164,17 +164,17 @@ class JavaDependencyManagementTest {
     ProjectJavaDependencies projectDependencies = ProjectJavaDependencies
       .builder()
       .versions(projectVersions())
-      .dependenciesManagements(new JavaDependencies(List.of(springBootDependencyManagement())))
+      .dependenciesManagements(new JavaDependencies(List.of(SpringBootDependencyManager.springBootDependencyManagement())))
       .dependencies(null);
 
-    JavaBuildCommands changes = changes().dependency(springBootDependencyManagement()).projectDependencies(projectDependencies).build();
+    JavaBuildCommands changes = changes().dependency(SpringBootDependencyManager.springBootDependencyManagement()).projectDependencies(projectDependencies).build();
 
     assertThat(changes.get()).isEmpty();
   }
 
   @Test
   void shouldAppendDependencyWithDifferentType() {
-    JavaDependency noTypeDependencyManagement = springBootDefaultTypeDependencyManagement();
+    JavaDependency noTypeDependencyManagement = SpringBootDependencyManager.springBootDefaultTypeDependencyManagement();
 
     ProjectJavaDependencies projectDependencies = ProjectJavaDependencies
       .builder()
@@ -182,9 +182,9 @@ class JavaDependencyManagementTest {
       .dependenciesManagements(new JavaDependencies(List.of(noTypeDependencyManagement)))
       .dependencies(null);
 
-    JavaBuildCommands changes = changes().dependency(springBootDependencyManagement()).projectDependencies(projectDependencies).build();
+    JavaBuildCommands changes = changes().dependency(SpringBootDependencyManager.springBootDependencyManagement()).projectDependencies(projectDependencies).build();
 
-    assertThat(changes.get()).containsExactly(new AddJavaDependencyManagement(springBootDependencyManagement()));
+    assertThat(changes.get()).containsExactly(new AddJavaDependencyManagement(SpringBootDependencyManager.springBootDependencyManagement()));
   }
 
   @Test

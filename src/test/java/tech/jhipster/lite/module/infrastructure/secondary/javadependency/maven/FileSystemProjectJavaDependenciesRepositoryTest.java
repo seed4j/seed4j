@@ -57,7 +57,7 @@ class FileSystemProjectJavaDependenciesRepositoryTest {
   void shouldGetDependenciesManagementFromMavenFile() {
     JavaDependencies dependencies = mavenDependencies().dependenciesManagement();
 
-    assertThat(dependencies.get(springBootDependencyId()).get()).usingRecursiveComparison().isEqualTo(springBootDependencyManagement());
+    assertThat(dependencies.get(SpringBootDependencyManager.springBootDependencyId()).get()).usingRecursiveComparison().isEqualTo(SpringBootDependencyManager.springBootDependencyManagement());
     assertThat(dependencies.get(jsonWebTokenDependencyId())).isEmpty();
   }
 

@@ -9,9 +9,9 @@ import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.jsonWebTok
 import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.mavenEnforcerPlugin;
 import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.mavenEnforcerPluginManagement;
 import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.optionalTestDependency;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.springBootDependencyId;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.springBootDependencyManagement;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.springBootStarterWebDependency;
+import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.SpringBootDependencyManager.springBootDependencyId;
+import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.SpringBootDependencyManager.springBootDependencyManagement;
+import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.SpringBootDependencyManager.springBootStarterWebDependency;
 import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.springBootVersion;
 
 import java.io.IOException;

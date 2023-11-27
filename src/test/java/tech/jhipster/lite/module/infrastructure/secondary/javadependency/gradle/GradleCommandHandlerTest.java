@@ -87,7 +87,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldAddEntryInLibrariesSectionToExistingTomlVersionCatalog() {
-      new GradleCommandHandler(Indentation.DEFAULT, projectFolder).handle(new AddDirectJavaDependency(springBootStarterWebDependency()));
+      new GradleCommandHandler(Indentation.DEFAULT, projectFolder).handle(new AddDirectJavaDependency(SpringBootDependencyManager.springBootStarterWebDependency()));
 
       assertThat(versionCatalogContent(projectFolder))
         .contains("""
@@ -196,9 +196,9 @@ class GradleCommandHandlerTest {
     @Test
     void shouldRemoveEntryInLibrariesSection() {
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(Indentation.DEFAULT, projectFolder);
-      gradleCommandHandler.handle(new AddDirectJavaDependency(springBootStarterWebDependency()));
+      gradleCommandHandler.handle(new AddDirectJavaDependency(SpringBootDependencyManager.springBootStarterWebDependency()));
 
-      gradleCommandHandler.handle(new RemoveDirectJavaDependency(springBootStarterWebDependency().id()));
+      gradleCommandHandler.handle(new RemoveDirectJavaDependency(SpringBootDependencyManager.springBootStarterWebDependency().id()));
 
       assertThat(versionCatalogContent(projectFolder))
         .doesNotContain("[libraries.spring-boot-starter-web]")
@@ -211,9 +211,9 @@ class GradleCommandHandlerTest {
     @Test
     void shouldRemoveDependencyInBuildGradleFile() {
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(Indentation.DEFAULT, projectFolder);
-      gradleCommandHandler.handle(new AddDirectJavaDependency(springBootStarterWebDependency()));
+      gradleCommandHandler.handle(new AddDirectJavaDependency(SpringBootDependencyManager.springBootStarterWebDependency()));
 
-      gradleCommandHandler.handle(new RemoveDirectJavaDependency(springBootStarterWebDependency().id()));
+      gradleCommandHandler.handle(new RemoveDirectJavaDependency(SpringBootDependencyManager.springBootStarterWebDependency().id()));
 
       assertThat(buildGradleContent(projectFolder)).doesNotContain("implementation(libs.spring.boot.starter.web)");
     }
@@ -271,7 +271,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldAddEntryInLibrariesSectionToExistingTomlVersionCatalog() {
-      new GradleCommandHandler(Indentation.DEFAULT, projectFolder).handle(new AddJavaDependencyManagement(springBootDependencyManagement()));
+      new GradleCommandHandler(Indentation.DEFAULT, projectFolder).handle(new AddJavaDependencyManagement(SpringBootDependencyManager.springBootDependencyManagement()));
 
       assertThat(versionCatalogContent(projectFolder))
         .contains("""
@@ -289,7 +289,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldAddImplementationDependencyInBuildGradleFileForScope() {
-      new GradleCommandHandler(Indentation.DEFAULT, projectFolder).handle(new AddJavaDependencyManagement(springBootDependencyManagement()));
+      new GradleCommandHandler(Indentation.DEFAULT, projectFolder).handle(new AddJavaDependencyManagement(SpringBootDependencyManager.springBootDependencyManagement()));
 
       assertThat(buildGradleContent(projectFolder)).contains("implementation(platform(libs.spring.boot.dependencies))");
     }
@@ -303,9 +303,9 @@ class GradleCommandHandlerTest {
     @Test
     void shouldRemoveEntryInLibrariesSection() {
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(Indentation.DEFAULT, projectFolder);
-      gradleCommandHandler.handle(new AddJavaDependencyManagement(springBootDependencyManagement()));
+      gradleCommandHandler.handle(new AddJavaDependencyManagement(SpringBootDependencyManager.springBootDependencyManagement()));
 
-      gradleCommandHandler.handle(new RemoveJavaDependencyManagement(springBootDependencyManagement().id()));
+      gradleCommandHandler.handle(new RemoveJavaDependencyManagement(SpringBootDependencyManager.springBootDependencyManagement().id()));
 
       assertThat(versionCatalogContent(projectFolder))
         .doesNotContain("[libraries.spring-boot-dependencies]")
@@ -318,9 +318,9 @@ class GradleCommandHandlerTest {
     @Test
     void shouldRemoveDependencyInBuildGradleFile() {
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(Indentation.DEFAULT, projectFolder);
-      gradleCommandHandler.handle(new AddJavaDependencyManagement(springBootDependencyManagement()));
+      gradleCommandHandler.handle(new AddJavaDependencyManagement(SpringBootDependencyManager.springBootDependencyManagement()));
 
-      gradleCommandHandler.handle(new RemoveJavaDependencyManagement(springBootDependencyManagement().id()));
+      gradleCommandHandler.handle(new RemoveJavaDependencyManagement(SpringBootDependencyManager.springBootDependencyManagement().id()));
 
       assertThat(buildGradleContent(projectFolder)).doesNotContain("implementation(platform(libs.spring.boot.dependencies))");
     }

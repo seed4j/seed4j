@@ -47,14 +47,15 @@ export default defineComponent({
       }
     };
 
+    const propertyUpdates: Record<string, PropertyUpdate> = {
+      'false': new FalsePropertyUpdate(),
+      'true': new TruePropertyUpdate(),
+      'default': new DeletePropertyUpdate(),
+    };
+
     const setBooleanProperty = (key: string, value: string): void => {
-      if (value === 'false') {
-        emit('propertyUpdated', property(key, false));
-      } else if (value === 'true') {
-        emit('propertyUpdated', property(key, true));
-      } else {
-        emit('propertyDeleted', key);
-      }
+      const update = propertyUpdates[value] || propertyUpdates['default'];
+      update.applyUpdate(key);
     };
 
     const property = (key: string, value: ModuleParameterType): ModuleParameter => ({
@@ -72,3 +73,28 @@ export default defineComponent({
     };
   },
 });
+
+abstract class PropertyUpdate {
+  abstract applyUpdate(key: string): void;
+}
+
+    // Concrete class for updating a boolean property to true
+class TruePropertyUpdate extends PropertyUpdate {
+  applyUpdate(key: string): void {
+    emit('propertyUpdated', property(key, true));
+  }
+}
+
+    // Concrete class for updating a boolean property to false
+class FalsePropertyUpdate extends PropertyUpdate {
+  applyUpdate(key: string): void {
+    emit('propertyUpdated', property(key, false));
+  }
+}
+
+    // Concrete class for deleting a property
+class DeletePropertyUpdate extends PropertyUpdate {
+  applyUpdate(key: string): void {
+    emit('propertyDeleted', key);
+  }
+}

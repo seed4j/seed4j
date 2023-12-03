@@ -490,18 +490,18 @@ export default defineComponent({
     };
 
     const applyNewModules = (): void => {
-      applyModules(landscapeValue().notAppliedSelectedModules());
+      applyModules(landscapeValue().notAppliedSelectedModules(), true);
     };
 
     const applyAllModules = (): void => {
-      applyModules(landscapeValue().selectedModules());
+      applyModules(landscapeValue().selectedModules(), true);
     };
 
     const applyModule = (module: ModuleSlug): void => {
-      applyModules([module]);
+      applyModules([module], false);
     };
 
-    const applyModules = (modulesToApply: ModuleSlug[]): void => {
+    const applyModules = (modulesToApply: ModuleSlug[], selectModules: boolean): void => {
       operationStarted();
 
       selectedModulesProperties().forEach(property => {
@@ -519,7 +519,9 @@ export default defineComponent({
         })
         .then(() => {
           operationEnded();
-          landscape.value.loaded(landscapeValue().appliedModules(modulesToApply));
+          if (selectModules) {
+            landscape.value.loaded(landscapeValue().appliedModules(modulesToApply));
+          }
 
           alertBus.success('Modules applied');
         })

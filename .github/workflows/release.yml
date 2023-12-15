@@ -34,7 +34,7 @@ jobs:
           ./mvnw clean verify
           rm target/*-javadoc.jar target/*-sources.jar target/*-tests.jar
       - name: 'Artifact: upload JAR'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: jhlite-jar
           path: '${{ github.workspace }}/target/*.jar'

@@ -85,19 +85,19 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./mvnw initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=jhipster_jhipster-lite -Dsonar.organization=jhipster -Dsonar.login= -Dsonar.password=
       - name: 'Artifact: upload JaCoCo report'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: jacoco
           path: '${{ github.workspace }}/target/jacoco/jacoco.xml'
           retention-days: 1
       - name: 'Artifact: upload lcov report'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lcov
           path: '${{ github.workspace }}/target/test-results/lcov.info'
           retention-days: 1
       - name: 'Artifact: upload JAR'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: jhlite-jar
           path: '${{ github.workspace }}/target/*.jar'

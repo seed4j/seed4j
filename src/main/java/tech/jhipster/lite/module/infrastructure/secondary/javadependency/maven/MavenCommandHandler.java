@@ -187,34 +187,54 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private void appendProfile(AddJavaBuildProfile command) {
-    Match profile = $("profile")
-      .append(LINE_BREAK)
-      .append(indentation.times(3))
-      .append($("id", command.buildProfileId().value()))
-      .append(LINE_BREAK)
-      .append(indentation.times(2));
-
+    Match profile = format($("profile"), indentation.times(3), $("id", command.buildProfileId().value()), indentation.times(2), null, true);
     if (command.activation().isPresent()) {
       Match activationNode = $("activation");
       BuildProfileActivation buildProfileActivation = command.activation().orElseThrow();
       if (buildProfileActivation.activeByDefault().isPresent()) {
         activationNode =
-          activationNode
-            .append(LINE_BREAK)
-            .append(indentation.times(4))
-            .append($("activeByDefault", buildProfileActivation.activeByDefault().orElseThrow().toString()))
-            .append(LINE_BREAK)
-            .append(indentation.times(3));
+          format(
+            activationNode,
+            indentation.times(4),
+            $("activeByDefault", buildProfileActivation.activeByDefault().orElseThrow().toString()),
+            indentation.times(3),
+            null,
+            true
+          );
       }
 
-      profile.append(indentation.times(1)).append(activationNode).append(LINE_BREAK).append(indentation.times(2));
+      shortFormat(profile.append(indentation.times(1)).append(activationNode), indentation.times(2), null);
     }
 
-    profiles().append(indentation.times(1)).append(profile).append(LINE_BREAK).append(indentation.times(1));
+    shortFormat(profiles().append(indentation.times(1)).append(profile), indentation.times(1), null);
+  }
+
+  private Match format(
+    Match match,
+    String firstIndentation,
+    Match matchAppend,
+    String secondIndentation,
+    String spaces,
+    boolean hasLineBreak
+  ) {
+    return match
+      .append(hasLineBreak ? LINE_BREAK : "")
+      .append(firstIndentation)
+      .append(matchAppend)
+      .append(LINE_BREAK)
+      .append(secondIndentation != null ? secondIndentation : "")
+      .append(spaces != null ? spaces : "");
+  }
+
+  private Match shortFormat(Match match, String content, Match matchAppend) {
+    if (matchAppend != null) {
+      return match.append(LINE_BREAK).append(content).append(matchAppend);
+    }
+    return match.append(LINE_BREAK).append(content);
   }
 
   private void appendProfiles() {
-    Match profiles = $("profiles").append(LINE_BREAK).append(indentation.spaces());
+    Match profiles = shortFormat($("profiles"), indentation.spaces(), null);
     findFirst(PROFILES_ANCHORS).after(profiles);
     profiles().before(LINE_BREAK).before(LINE_BREAK).before(indentation.spaces());
   }
@@ -228,15 +248,15 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private Match appendProperties() {
-    Match properties = $(PROPERTIES).append(LINE_BREAK).append(indentation.spaces());
+    Match properties = shortFormat($(PROPERTIES), indentation.spaces(), null);
     findFirst(PROPERTIES_ANCHORS).after(properties);
     return document.find("project > properties").before(LINE_BREAK).before(LINE_BREAK).before(indentation.spaces());
   }
 
   private Match appendPropertiesToBuildProfile(BuildProfileId buildProfile) {
-    Match properties = $(PROPERTIES).append(LINE_BREAK).append(indentation.times(3));
+    Match properties = shortFormat($(PROPERTIES), indentation.times(3), null);
     Match buildProfileNode = findBuildProfile(buildProfile).orElseThrow();
-    buildProfileNode.append(indentation.times(1)).append(properties).append(LINE_BREAK).append(indentation.times(2));
+    shortFormat(buildProfileNode.append(indentation.times(1)).append(properties), indentation.times(2), null);
     return buildProfileNode.child(PROPERTIES);
   }
 
@@ -246,11 +266,14 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     if (propertyNode.isNotEmpty()) {
       propertyNode.text(buildProperty.value().get());
     } else {
-      properties
-        .append(indentation.times(1))
-        .append($(buildProperty.key().get(), buildProperty.value().get()))
-        .append(LINE_BREAK)
-        .append(indentation.times(level));
+      format(
+        properties,
+        indentation.times(1),
+        $(buildProperty.key().get(), buildProperty.value().get()),
+        null,
+        indentation.times(level),
+        false
+      );
     }
   }
 
@@ -291,12 +314,14 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private Match extensionNode(AddMavenBuildExtension command, int level) {
-    Match extensionNode = $("extension")
-      .append(LINE_BREAK)
-      .append(indentation.times(level + 1))
-      .append($(GROUP_ID, command.buildExtension().groupId().get()))
-      .append(LINE_BREAK)
-      .append(indentation.times(level + 1))
+    Match extensionNode = format(
+      $("extension"),
+      indent(level),
+      $(GROUP_ID, command.buildExtension().groupId().get()),
+      indent(level),
+      null,
+      true
+    )
       .append($(ARTIFACT_ID, command.buildExtension().artifactId().get()));
 
     appendVersion(command.buildExtension().versionSlug(), extensionNode, level);
@@ -304,13 +329,12 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     return extensionNode.append(LINE_BREAK);
   }
 
+  private String indent(int level) {
+    return indentation.times(level + 1);
+  }
+
   private Match extensionsNode(Match extensionNode) {
-    return $("extensions")
-      .append(LINE_BREAK)
-      .append(indentation.times(3))
-      .append(extensionNode.append(indentation.times(3)))
-      .append(LINE_BREAK)
-      .append(indentation.times(2));
+    return format($("extensions"), indentation.times(3), extensionNode.append(indentation.times(3)), indentation.times(2), null, true);
   }
 
   private void appendExtensionInBuildNode(Match extensionNode, Match buildNode) {
@@ -328,11 +352,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private Match appendInExtensions(Match extensionNode, Match extensionsNode) {
-    return extensionsNode
-      .append(indentation.times(1))
-      .append(extensionNode.append(indentation.times(3)))
-      .append(LINE_BREAK)
-      .append(indentation.times(2));
+    return format(extensionsNode, indentation.times(1), extensionNode.append(indentation.times(3)), indentation.times(2), null, false);
   }
 
   @Override
@@ -350,19 +370,14 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private void appendDependenciesManagement(AddJavaDependencyManagement command) {
-    Match dependencies = $(DEPENDENCY_MANAGEMENT)
-      .append(LINE_BREAK)
-      .append(indentation.times(2))
-      .append(
-        $(DEPENDENCIES)
-          .append(LINE_BREAK)
-          .append(indentation.times(3))
-          .append(dependencyNode(command, 3))
-          .append(LINE_BREAK)
-          .append(indentation.times(2))
-      )
-      .append(LINE_BREAK)
-      .append(indentation.spaces());
+    Match dependencies = format(
+      $(DEPENDENCY_MANAGEMENT),
+      indentation.times(2),
+      format($(DEPENDENCIES), indentation.times(3), dependencyNode(command, 3), indentation.times(2), null, true),
+      null,
+      indentation.spaces(),
+      true
+    );
 
     findFirst(DEPENDENCIES_ANCHORS).after(dependencies);
 
@@ -388,12 +403,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private void appendDependencies(AddDirectJavaDependency command) {
-    Match dependencies = $(DEPENDENCIES)
-      .append(LINE_BREAK)
-      .append(indentation.times(2))
-      .append(dependencyNode(command, 2))
-      .append(LINE_BREAK)
-      .append(indentation.spaces());
+    Match dependencies = format($(DEPENDENCIES), indentation.times(2), dependencyNode(command, 2), null, indentation.spaces(), true);
 
     findFirst(DEPENDENCIES_ANCHORS).after(dependencies);
 
@@ -447,12 +457,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private void appendDependencyInLastPosition(AddJavaDependency command, Match dependencies, int level) {
-    dependencies
-      .append(LINE_BREAK)
-      .append(indentation.times(level))
-      .append(dependencyNode(command, level))
-      .append(LINE_BREAK)
-      .append(indentation.times(level - 1));
+    format(dependencies, indentation.times(level), dependencyNode(command, level), indentation.times(level - 1), null, true);
   }
 
   private Match dependencyNode(AddJavaDependency command, int level) {
@@ -465,7 +470,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     appendType(command, dependency, level);
     appendExclusions(command, dependency, level);
 
-    dependency.append(LINE_BREAK).append(indentation.times(level));
+    shortFormat(dependency, indentation.times(level), null);
 
     return dependency;
   }
@@ -476,25 +481,18 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
 
   private void appendScope(AddJavaDependency command, Match dependency, int level) {
     if (command.scope() != JavaDependencyScope.COMPILE) {
-      dependency
-        .append(LINE_BREAK)
-        .append(indentation.times(level + 1))
-        .append($("scope", Enums.map(command.scope(), MavenScope.class).key()));
+      shortFormat(dependency, indent(level), $("scope", Enums.map(command.scope(), MavenScope.class).key()));
     }
   }
 
   private void appendOptional(AddJavaDependency command, Match dependency, int level) {
     if (command.optional()) {
-      dependency.append(LINE_BREAK).append(indentation.times(level + 1)).append($("optional", "true"));
+      shortFormat(dependency, indent(level), $("optional", "true"));
     }
   }
 
   private void appendType(AddJavaDependency command, Match dependency, int level) {
-    command
-      .dependencyType()
-      .ifPresent(type ->
-        dependency.append(LINE_BREAK).append(indentation.times(level + 1)).append($("type", Enums.map(type, MavenType.class).key()))
-      );
+    command.dependencyType().ifPresent(type -> shortFormat(dependency, indent(level), $("type", Enums.map(type, MavenType.class).key())));
   }
 
   private void appendExclusions(AddJavaDependency command, Match dependency, int level) {
@@ -503,7 +501,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
       return;
     }
 
-    dependency.append(LINE_BREAK).append(indentation.times(level + 1)).append(buildExclusionsNode(level, exclusions));
+    shortFormat(dependency, indent(level), buildExclusionsNode(level, exclusions));
   }
 
   private Match buildExclusionsNode(int level, Collection<DependencyId> exclusions) {
@@ -511,17 +509,17 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
 
     exclusions.stream().map(toExclusionNode(level)).forEach(appendExclusionNode(level, exclusionsNode));
 
-    exclusionsNode.append(LINE_BREAK).append(indentation.times(level + 1));
+    shortFormat(exclusionsNode, indent(level), null);
 
     return exclusionsNode;
   }
 
   private Function<DependencyId, Match> toExclusionNode(int level) {
-    return exclusion -> appendDependencyId($("exclusion"), exclusion, level + 2).append(LINE_BREAK).append(indentation.times(level + 2));
+    return exclusion -> shortFormat(appendDependencyId($("exclusion"), exclusion, level + 2), indentation.times(level + 2), null);
   }
 
   private Consumer<Match> appendExclusionNode(int level, Match exclusionsNode) {
-    return exclusionNode -> exclusionsNode.append(LINE_BREAK).append(indentation.times(level + 2)).append(exclusionNode);
+    return exclusionNode -> shortFormat(exclusionsNode, indentation.times(level + 2), exclusionNode);
   }
 
   @Override
@@ -551,7 +549,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private Match appendPluginManagement(Match pluginNode, Match buildNode) {
-    return buildNode.append(indentation.times(1)).append(pluginManagementNode(pluginNode)).append(LINE_BREAK).append(indentation.times(1));
+    return shortFormat(buildNode.append(indentation.times(1)).append(pluginManagementNode(pluginNode)), indentation.times(1), null);
   }
 
   private void appendInPluginManagement(Match pluginNode, Match pluginManagementNode) {
@@ -565,12 +563,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private Match pluginManagementNode(Match pluginNode) {
-    return $("pluginManagement")
-      .append(LINE_BREAK)
-      .append(indentation.times(3))
-      .append(pluginsNode(pluginNode, 4))
-      .append(LINE_BREAK)
-      .append(indentation.times(2));
+    return format($("pluginManagement"), indentation.times(3), pluginsNode(pluginNode, 4), indentation.times(2), null, true);
   }
 
   @Override
@@ -600,29 +593,22 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private Match appendPluginsNode(Match parent, Match pluginNode, int level) {
-    return parent
-      .append(indentation.times(1))
-      .append(pluginsNode(pluginNode, level))
-      .append(LINE_BREAK)
-      .append(indentation.times(level - 2));
+    return format(parent, indentation.times(1), pluginsNode(pluginNode, level), indentation.times(level - 2), null, false);
   }
 
   private Match pluginsNode(Match pluginNode, int level) {
-    return $(PLUGINS)
-      .append(LINE_BREAK)
-      .append(indentation.times(level))
-      .append(pluginNode.append(indentation.times(level)))
-      .append(LINE_BREAK)
-      .append(indentation.times(level - 1));
+    return format(
+      $(PLUGINS),
+      indentation.times(level),
+      pluginNode.append(indentation.times(level)),
+      indentation.times(level - 1),
+      null,
+      true
+    );
   }
 
   private void appendBuildNode(Match innerNode) {
-    Match build = $(BUILD)
-      .append(LINE_BREAK)
-      .append(indentation.times(2))
-      .append(innerNode)
-      .append(LINE_BREAK)
-      .append(indentation.times(1));
+    Match build = format($(BUILD), indentation.times(2), innerNode, indentation.times(1), null, true);
 
     findFirst(BUILD_ANCHORS).after(build);
 
@@ -634,11 +620,14 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private Match appendPluginNode(Match pluginsNode, Match pluginNode, int level) {
-    return pluginsNode
-      .append(indentation.times(1))
-      .append(pluginNode.append(indentation.times(level)))
-      .append(LINE_BREAK)
-      .append(indentation.times(level - 1));
+    return format(
+      pluginsNode,
+      indentation.times(1),
+      pluginNode.append(indentation.times(level)),
+      indentation.times(level - 1),
+      null,
+      false
+    );
   }
 
   private Match pluginNode(AddJavaBuildPlugin command, int level) {
@@ -648,34 +637,25 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
 
     command.additionalElements().ifPresent(appendAdditionalElements(pluginNode, level));
 
-    return pluginNode.append(LINE_BREAK);
+    return shortFormat(pluginNode, "", null);
   }
 
   private Match appendDependencyId(Match node, DependencyId dependency, int level) {
-    return node
-      .append(LINE_BREAK)
-      .append(indentation.times(level + 1))
-      .append($(GROUP_ID, dependency.groupId().get()))
-      .append(LINE_BREAK)
-      .append(indentation.times(level + 1))
+    return format(node, indent(level), $(GROUP_ID, dependency.groupId().get()), indent(level), null, true)
       .append($(ARTIFACT_ID, dependency.artifactId().get()));
   }
 
   private void appendVersion(Optional<VersionSlug> versionSlug, Match node, int level) {
-    versionSlug.ifPresent(version ->
-      node.append(LINE_BREAK).append(indentation.times(level + 1)).append($(VERSION, version.mavenVariable()))
-    );
+    versionSlug.ifPresent(version -> shortFormat(node, indent(level), $(VERSION, version.mavenVariable())));
   }
 
   private void appendClassifier(Optional<JavaDependencyClassifier> classifier, Match node, int level) {
-    classifier.ifPresent(depClassifier ->
-      node.append(LINE_BREAK).append(indentation.times(level + 1)).append($(CLASSIFIER, depClassifier.get()))
-    );
+    classifier.ifPresent(depClassifier -> shortFormat(node, indent(level), $(CLASSIFIER, depClassifier.get())));
   }
 
   private Consumer<JavaBuildPluginAdditionalElements> appendAdditionalElements(Match pluginNode, int level) {
     return additionalElements ->
-      pluginNode.append(LINE_BREAK).append(indentation.times(level + 1)).append(formatAdditionalElements(additionalElements, level + 1));
+      shortFormat(pluginNode, indent(level), null).append(formatAdditionalElements(additionalElements, level + 1));
   }
 
   private String formatAdditionalElements(JavaBuildPluginAdditionalElements additionalElements, int level) {

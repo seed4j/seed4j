@@ -191,6 +191,7 @@ jobs:
           ./generate.sh ${{ matrix.app }} ${{ matrix.spring-config-format }}
           ./stop.sh
       - name: 'Generation: display md5sum ${{ matrix.app }}'
+        id: app_md5sum
         working-directory: /tmp/jhlite/${{ matrix.app }}/
         run: |
           app_md5=$(find . \
@@ -201,6 +202,7 @@ jobs:
             -not -path './build/*' \
             -type f -exec md5sum {} + | LC_ALL=C sort | md5sum | head -n1 | cut -d " " -f1)
           echo $app_md5
+          echo "md5sum=${app_md5}" >> $GITHUB_OUTPUT
       - name: 'Test: list ${{ matrix.app }}'
         id: cache_md5sum
         run: |
@@ -209,13 +211,15 @@ jobs:
           echo $MD5SUM_POM_XML
           echo "md5sum_pom_xml=${MD5SUM_POM_XML}" >> $GITHUB_OUTPUT
       - name: 'Init: cache local Maven repository'
+        id: checking_cache
         uses: actions/cache@v3
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ matrix.app }}-${{ steps.cache_md5sum.outputs.md5sum_pom_xml }}
+          key: ${{ runner.os }}-maven-${{ matrix.app }}-${{ steps.app_md5sum.outputs.md5sum }}
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: 'Test: starting Sonar'
+        if: ${{ steps.checking_cache.outputs.cache-hit != 'true' }}
         working-directory: /tmp/jhlite/${{ matrix.app }}/
         run: |
           if [ -f 'src/main/docker/sonar.yml' ]; then
@@ -224,6 +228,7 @@ jobs:
             docker ps -a
           fi
       - name: 'Test: verify ${{ matrix.app }}'
+        if: ${{ steps.checking_cache.outputs.cache-hit != 'true' }}
         working-directory: /tmp/jhlite/${{ matrix.app }}/
         run: |
           if [ -f 'mvnw' ]; then
@@ -235,17 +240,21 @@ jobs:
             npm test
           fi
       - name: 'Test: check local Sonar Analysis'
+        if: ${{ steps.checking_cache.outputs.cache-hit != 'true' }}
         run: |
           if [ -f '/tmp/jhlite/${{ matrix.app }}/src/main/docker/sonar.yml' ]; then
             ./tests-ci/sonar.sh ${{ matrix.app }}
           fi
       - name: 'Test: copy shell scripts'
+        if: ${{ steps.checking_cache.outputs.cache-hit != 'true' }}
         run: cp ./tests-ci/start.sh /tmp/jhlite/${{ matrix.app }}/
       - name: 'Test: start docker compose services'
+        if: ${{ steps.checking_cache.outputs.cache-hit != 'true' }}
         working-directory: ./tests-ci/
         run: |
           ./start_docker_compose.sh /tmp/jhlite/${{ matrix.app }}/
       - name: 'Test: start the application'
+        if: ${{ steps.checking_cache.outputs.cache-hit != 'true' }}
         working-directory: /tmp/jhlite/${{ matrix.app }}/
         run: |
           # TODO: add also 'gradlew' once gradle support is more advanced

@@ -44,6 +44,7 @@ public class VueModulesFactory {
     return ClientsModulesFactory.clientModuleBuilder(properties)
       .documentation(documentationTitle("Vue"), DOCUMENTATION_SOURCE.file("vue.md"))
       .packageJson()
+        .addType("module")
         .addDependency(packageName("vue"), VUE)
         .addDependency(packageName("axios"), VUE)
         .addDependency(packageName("vue-router"), VUE)

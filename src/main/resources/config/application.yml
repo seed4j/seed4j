@@ -3,6 +3,7 @@
 # Full reference is available at:
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 #====================================================================
+
 springdoc:
   swagger-ui:
     operationsSorter: alpha,beta
@@ -75,10 +76,15 @@ server:
   port: 7471
 
 spring:
+  application:
+    name: jhlite
+  devtools:
+    livereload:
+      enabled: false
+    restart:
+      enabled: false
+  jackson:
+    default-property-inclusion: non_null
   threads:
     virtual:
       enabled: true
-  jackson:
-    default-property-inclusion: non_null
-  application:
-    name: jhlite

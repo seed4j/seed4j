@@ -224,6 +224,12 @@ or
 java -jar target/*.jar --spring.profiles.active=vue
 ```
 
+You can start the application using the `local` profile to use Spring Boot devtools. It will **hot restart** your application when classes from your project are compiled.
+
+```bash
+./mvnw -Dspring-boot.run.profiles=local
+```
+
 ## Docker/Podman Quickstart
 
 To start a local instance of JHipster Lite, go to your desired application folder and run:

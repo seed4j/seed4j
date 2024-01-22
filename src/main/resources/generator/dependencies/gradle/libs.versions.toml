@@ -2,7 +2,7 @@
 checkstyle = "10.12.7"
 jib = "3.4.0"
 git-properties = "2.4.1"
-protobuf-plugin = "0.9.4"
+protobuf-plugin = "3.4.0"
 
 [libraries]
 [libraries.checkstyle]

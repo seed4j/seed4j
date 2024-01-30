@@ -115,7 +115,7 @@ To create the image, run the following goal:
 Then, you can run the app like any other container:
 
 ```bash
-docker run -p 7471:7471 --rm docker.io/library/jhlite:<VERSION>
+docker run -p 7471:7471 --rm jhipster/jhipster-lite:<VERSION>
 ```
 
 ## Executable with Native Build Tools

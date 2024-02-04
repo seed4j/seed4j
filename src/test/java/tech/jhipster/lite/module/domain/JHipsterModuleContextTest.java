@@ -20,7 +20,7 @@ class JHipsterModuleContextTest {
   private LogsSpy logs;
 
   @Test
-  void shouldGetIndentSizeationFromInvalidIndentation() {
+  void shouldGetIndentSizeFromInvalidIndentation() {
     Indentation indentation = JHipsterModuleContext.builder(emptyModuleBuilder()).put("indentSize", "dummy").build().indentation();
 
     logs.shouldHave(Level.INFO, "invalid indentation, using default");

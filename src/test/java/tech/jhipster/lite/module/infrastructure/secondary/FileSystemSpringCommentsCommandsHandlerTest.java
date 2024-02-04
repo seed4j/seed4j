@@ -110,7 +110,7 @@ class FileSystemSpringCommentsCommandsHandlerTest {
   }
 
   @Test
-  void shouldNotCommentWhenPropertieKeyDoesNotExists() {
+  void shouldNotCommentWhenPropertyKeyDoesNotExists() {
     String path = TestFileUtils.tmpDirForTest();
     Path propertiesFile = Paths.get(path, "src/main/resources/config/application.properties");
     loadDefaultProperties(EXISTING_SPRING_PROPERTIES, propertiesFile);

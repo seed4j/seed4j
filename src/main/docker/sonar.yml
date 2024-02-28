@@ -2,7 +2,7 @@
 version: '3.8'
 services:
   sonar:
-    image: sonarqube:10.4.0-community
+    image: sonarqube:10.4.1-community
     container_name: sonar
     platform: linux/x86_64
     # Authentication is turned off for out of the box experience while trying out SonarQube

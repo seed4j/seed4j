@@ -23,13 +23,13 @@ class ObjectAccessCheckerTest {
 
   @Test
   void shouldNotAuthorizeActionsOnNullElement() {
-    assertThat(checker.can(new NullElementAccessContext<Object>(mock(Authentication.class), "dummy-action"))).isFalse();
+    assertThat(checker.can(new NullElementAccessContext<>(mock(Authentication.class), "dummy-action"))).isFalse();
     logs.shouldHave(Level.WARN, "dummy-action").shouldHave(Level.WARN, "access checker found").shouldHave(Level.WARN, "unknown");
   }
 
   @Test
   void shouldNotAuthorizeActionsOnElement() {
-    assertThat(checker.can(new ElementAccessContext<Object>(mock(Authentication.class), "dummy-action", "element"))).isFalse();
+    assertThat(checker.can(new ElementAccessContext<>(mock(Authentication.class), "dummy-action", "element"))).isFalse();
     logs.shouldHave(Level.WARN, "dummy-action").shouldHave(Level.WARN, "access checker found").shouldHave(Level.WARN, "String");
   }
 }

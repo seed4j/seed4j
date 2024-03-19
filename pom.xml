@@ -71,7 +71,7 @@
     <sonar-maven-plugin.version>3.11.0.3922</sonar-maven-plugin.version>
     <apache-commons-io.version>2.15.1</apache-commons-io.version>
     <cucumber.version>7.15.0</cucumber.version>
-    <maven-model-helper.version>30</maven-model-helper.version>
+    <maven-model-helper.version>32</maven-model-helper.version>
     <night-config.version>3.6.7</night-config.version>
     <testcontainers.version>1.19.7</testcontainers.version>
     <mongock.version>5.4.0</mongock.version>

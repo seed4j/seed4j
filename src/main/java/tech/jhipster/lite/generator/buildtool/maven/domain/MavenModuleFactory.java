@@ -35,7 +35,7 @@ public class MavenModuleFactory {
     return moduleBuilder(properties)
       .context()
         .put("dasherizedBaseName", properties.projectBaseName().kebabCase())
-        .put("mavenVersion", mavenVersion.version())
+        .put("latestMavenVersion", mavenVersion.version())
         .and()
       .prerequisites(JAVA_PREREQUISITES)
       .files()
@@ -100,7 +100,7 @@ public class MavenModuleFactory {
     //@formatter:off
     return moduleBuilder(properties)
       .context()
-        .put("mavenVersion", mavenVersion.version())
+        .put("latestMavenVersion", mavenVersion.version())
         .and()
       .startupCommands()
         .maven("")

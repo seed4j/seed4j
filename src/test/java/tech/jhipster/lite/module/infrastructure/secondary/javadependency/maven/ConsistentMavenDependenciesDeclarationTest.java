@@ -19,9 +19,15 @@ class ConsistentMavenDependenciesDeclarationTest {
 
   private static final String CURRENT_VERSIONS_FILE = "/generator/dependencies/pom.xml";
 
-  public static Stream<Arguments> versions() {
+  public static Stream<VersionSlug> versions() {
     Model mavenModel = readMavenModel();
-    return mavenModel.getProperties().keySet().stream().map(Object::toString).map(VersionSlug::new).map(Arguments::of);
+    return mavenModel
+      .getProperties()
+      .keySet()
+      .stream()
+      .map(Object::toString)
+      .filter(name -> !"maven.version".equals(name))
+      .map(VersionSlug::new);
   }
 
   @MethodSource("versions")

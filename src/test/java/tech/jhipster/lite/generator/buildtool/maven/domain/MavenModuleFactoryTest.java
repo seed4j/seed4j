@@ -7,12 +7,14 @@ import tech.jhipster.lite.TestFileUtils;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.JHipsterModulesFixture;
+import tech.jhipster.lite.module.domain.javadependency.Version;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 
 @UnitTest
 class MavenModuleFactoryTest {
 
   private static final MavenModuleFactory factory = new MavenModuleFactory();
+  private static final Version MAVEN_VERSION = new Version("3.9.6");
 
   @Test
   void shouldBuildMavenModule() {
@@ -22,7 +24,7 @@ class MavenModuleFactoryTest {
       .projectName("JHipster test")
       .build();
 
-    JHipsterModule module = factory.buildMavenModule(properties);
+    JHipsterModule module = factory.buildMavenModule(properties, MAVEN_VERSION);
 
     assertThatModuleWithFiles(module, readmeFile())
       .hasFile("pom.xml")
@@ -155,7 +157,7 @@ class MavenModuleFactoryTest {
       .projectName("JHipster test")
       .build();
 
-    JHipsterModule module = factory.buildMavenModule(properties);
+    JHipsterModule module = factory.buildMavenModule(properties, MAVEN_VERSION);
 
     assertThatModuleWithFiles(module, readmeFile())
       .hasFile("pom.xml")
@@ -171,7 +173,7 @@ class MavenModuleFactoryTest {
   void shouldBuildMavenWrapperModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildMavenWrapperModule(properties);
+    JHipsterModule module = factory.buildMavenWrapperModule(properties, MAVEN_VERSION);
 
     assertThatModuleWithFiles(module, pomFile(), readmeFile())
       .hasExecutableFiles("mvnw", "mvnw.cmd")

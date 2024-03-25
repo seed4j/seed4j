@@ -8,6 +8,7 @@ import tech.jhipster.lite.module.domain.javabuild.ArtifactId;
 import tech.jhipster.lite.module.domain.javabuild.GroupId;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependency;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyScope;
+import tech.jhipster.lite.module.domain.javadependency.Version;
 import tech.jhipster.lite.module.domain.mavenplugin.MavenPlugin;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.shared.error.domain.Assert;
@@ -27,13 +28,14 @@ public class MavenModuleFactory {
     You need to have Java 21:
     - [JDK 21](https://openjdk.java.net/projects/jdk/21/)""";
 
-  public JHipsterModule buildMavenModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMavenModule(JHipsterModuleProperties properties, Version mavenVersion) {
     Assert.notNull("properties", properties);
 
     //@formatter:off
     return moduleBuilder(properties)
       .context()
         .put("dasherizedBaseName", properties.projectBaseName().kebabCase())
+        .put("mavenVersion", mavenVersion.version())
         .and()
       .prerequisites(JAVA_PREREQUISITES)
       .files()
@@ -92,11 +94,14 @@ public class MavenModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildMavenWrapperModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMavenWrapperModule(JHipsterModuleProperties properties, Version mavenVersion) {
     Assert.notNull("properties", properties);
 
     //@formatter:off
     return moduleBuilder(properties)
+      .context()
+        .put("mavenVersion", mavenVersion.version())
+        .and()
       .startupCommands()
         .maven("")
         .and()
@@ -105,7 +110,7 @@ public class MavenModuleFactory {
         .addExecutable(SOURCE.file("mvnw.cmd"), to("mvnw.cmd"))
         .batch(SOURCE.append(".mvn/wrapper"), to(".mvn/wrapper"))
           .addFile("maven-wrapper.jar")
-          .addFile("maven-wrapper.properties")
+          .addTemplate("maven-wrapper.properties")
           .and()
         .and()
       .build();

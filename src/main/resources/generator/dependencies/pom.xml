@@ -45,6 +45,7 @@
     <archunit-junit5.version>1.2.1</archunit-junit5.version>
     <cucumber.version>7.16.1</cucumber.version>
     <!-- Maven Plugins -->
+    <maven.version>3.9.6</maven.version>
     <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
     <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>

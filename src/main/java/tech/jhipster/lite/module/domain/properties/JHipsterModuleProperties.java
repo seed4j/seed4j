@@ -2,8 +2,10 @@ package tech.jhipster.lite.module.domain.properties;
 
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
+import java.util.Collection;
 import java.util.Map;
 import tech.jhipster.lite.module.domain.Indentation;
+import tech.jhipster.lite.module.domain.JHipsterModuleSlug;
 import tech.jhipster.lite.module.domain.javadependency.Version;
 import tech.jhipster.lite.shared.error.domain.Assert;
 
@@ -21,6 +23,8 @@ public class JHipsterModuleProperties {
   private final JHipsterProjectFolder projectFolder;
   private final boolean commitModule;
   private final JHipsterModuleParameters parameters;
+  private final Collection<JHipsterModuleSlug> newModules;
+  private final Collection<JHipsterModuleSlug> alreadyApplied;
 
   private final Indentation indentation;
   private final JHipsterBasePackage basePackage;
@@ -30,10 +34,18 @@ public class JHipsterModuleProperties {
   private final SpringConfigurationFormat springConfigurationFormat;
   private final Version javaVersion = new Version("21");
 
-  public JHipsterModuleProperties(String projectFolder, boolean commitModule, Map<String, Object> parameters) {
+  public JHipsterModuleProperties(
+    String projectFolder,
+    boolean commitModule,
+    Map<String, Object> parameters,
+    Collection<JHipsterModuleSlug> newModules,
+    Collection<JHipsterModuleSlug> alreadyApplied
+  ) {
     this.projectFolder = new JHipsterProjectFolder(projectFolder);
     this.commitModule = commitModule;
     this.parameters = new JHipsterModuleParameters(parameters);
+    this.newModules = newModules;
+    this.alreadyApplied = alreadyApplied;
 
     indentation = Indentation.from(this.parameters.getOrDefault(INDENTATION_PARAMETER, null, Integer.class));
     basePackage = new JHipsterBasePackage(this.parameters.getOrDefault(BASE_PACKAGE_PARAMETER, null, String.class));
@@ -59,6 +71,18 @@ public class JHipsterModuleProperties {
 
   public String getString(String key) {
     return parameters.get(key, String.class);
+  }
+
+  public Collection<JHipsterModuleSlug> getNewModules() {
+    return newModules;
+  }
+
+  public Collection<JHipsterModuleSlug> getAlreadyAppliedModules() {
+    return alreadyApplied;
+  }
+
+  public boolean isAppliedOrBeingApplied(JHipsterModuleSlug name) {
+    return alreadyApplied.contains(name) || newModules.contains(name);
   }
 
   public String getOrDefaultString(String key, String defaultValue) {

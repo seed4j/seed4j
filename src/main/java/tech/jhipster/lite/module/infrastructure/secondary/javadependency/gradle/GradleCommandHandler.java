@@ -420,7 +420,7 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private JHipsterModuleContext context() {
-    JHipsterModuleProperties properties = new JHipsterModuleProperties(projectFolder.get(), false, null);
+    JHipsterModuleProperties properties = new JHipsterModuleProperties(projectFolder.get(), false, null, List.of(), List.of());
     return JHipsterModuleContext.builder(moduleBuilder(properties)).build();
   }
 

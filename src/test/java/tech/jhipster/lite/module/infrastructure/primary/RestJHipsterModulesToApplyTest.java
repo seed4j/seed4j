@@ -18,7 +18,7 @@ class RestJHipsterModulesToApplyTest {
 
   @Test
   void shouldDeserializeFromJson() {
-    assertThat(JsonHelper.readFromJson(json(), RestJHipsterModulesToApply.class).toDomain(projectFolder))
+    assertThat(JsonHelper.readFromJson(json(), RestJHipsterModulesToApply.class).toDomain(projectFolder, List.of()))
       .usingRecursiveComparison()
       .isEqualTo(JHipsterModulesFixture.modulesToApply());
   }

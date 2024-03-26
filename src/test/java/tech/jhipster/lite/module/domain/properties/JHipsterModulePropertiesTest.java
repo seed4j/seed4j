@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -193,7 +194,9 @@ class JHipsterModulePropertiesTest {
     return new JHipsterModuleProperties(
       "/tmp/folder",
       false,
-      Map.of("string", "value", "boolean", true, "integer", 42, "blank", " ", "instant", today.toString())
+      Map.of("string", "value", "boolean", true, "integer", 42, "blank", " ", "instant", today.toString()),
+      List.of(),
+      List.of()
     );
   }
 }

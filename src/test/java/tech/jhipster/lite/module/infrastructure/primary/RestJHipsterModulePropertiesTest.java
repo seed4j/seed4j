@@ -1,10 +1,12 @@
 package tech.jhipster.lite.module.infrastructure.primary;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.*;
+import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.allProperties;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.JsonHelper;
 import tech.jhipster.lite.UnitTest;
@@ -20,13 +22,15 @@ class RestJHipsterModulePropertiesTest {
     when(jHipsterProjectFolderFactory.isInvalid("/test")).thenReturn(true);
 
     assertThatThrownBy(
-      () -> JsonHelper.readFromJson(json(), RestJHipsterModuleProperties.class).toDomain(jHipsterProjectFolderFactory)
+      () -> JsonHelper.readFromJson(json(), RestJHipsterModuleProperties.class).toDomain(jHipsterProjectFolderFactory, List.of(), List.of())
     ).isExactlyInstanceOf(InvalidProjectFolderException.class);
   }
 
   @Test
   void shouldConvertToProperties() {
-    assertThat(JsonHelper.readFromJson(json(), RestJHipsterModuleProperties.class).toDomain(jHipsterProjectFolderFactory))
+    assertThat(
+      JsonHelper.readFromJson(json(), RestJHipsterModuleProperties.class).toDomain(jHipsterProjectFolderFactory, List.of(), List.of())
+    )
       .usingRecursiveComparison()
       .isEqualTo(allProperties());
   }

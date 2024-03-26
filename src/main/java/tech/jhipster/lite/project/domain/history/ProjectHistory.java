@@ -41,4 +41,8 @@ public class ProjectHistory {
   public ModuleParameters latestProperties() {
     return actions.stream().map(ProjectAction::parameters).reduce(ModuleParameters.EMPTY, ModuleParameters::merge);
   }
+
+  public Collection<String> getAppliedModules() {
+    return actions.stream().map(ProjectAction::module).map(ModuleSlug::slug).toList();
+  }
 }

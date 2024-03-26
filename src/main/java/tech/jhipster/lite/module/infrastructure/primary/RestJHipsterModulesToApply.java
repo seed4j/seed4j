@@ -24,8 +24,9 @@ class RestJHipsterModulesToApply {
     this.properties = properties;
   }
 
-  public JHipsterModulesToApply toDomain(ProjectFolder projectFolder) {
-    return new JHipsterModulesToApply(getModules().stream().map(JHipsterModuleSlug::new).toList(), properties.toDomain(projectFolder));
+  public JHipsterModulesToApply toDomain(ProjectFolder projectFolder, Collection<JHipsterModuleSlug> alreadyApplied) {
+    var newModules = getModules().stream().map(JHipsterModuleSlug::new).toList();
+    return new JHipsterModulesToApply(newModules, properties.toDomain(projectFolder, newModules, alreadyApplied));
   }
 
   @NotEmpty

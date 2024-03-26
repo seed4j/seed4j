@@ -3,8 +3,10 @@ package tech.jhipster.lite.module.domain;
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.jhipster.lite.TestFileUtils;
@@ -254,7 +256,7 @@ public final class JHipsterModulesFixture {
   }
 
   public static JHipsterModuleProperties testModuleProperties() {
-    return new JHipsterModuleProperties(TestFileUtils.tmpDirForTest(), true, null);
+    return new JHipsterModuleProperties(TestFileUtils.tmpDirForTest(), true, null, List.of(), List.of());
   }
 
   public static JavaDependenciesVersions currentJavaDependenciesVersion() {
@@ -298,7 +300,9 @@ public final class JHipsterModulesFixture {
         true,
         "optionalBoolean",
         true
-      )
+      ),
+      List.of(),
+      List.of()
     );
   }
 
@@ -422,13 +426,17 @@ public final class JHipsterModulesFixture {
   }
 
   public static JHipsterModulesToApply modulesToApply() {
+    var maven = moduleSlug("maven-java");
+    var init = moduleSlug("init");
     return new JHipsterModulesToApply(
-      List.of(moduleSlug("maven-java"), moduleSlug("init")),
+      List.of(maven, init),
       propertiesBuilder("/dummy")
         .projectName("Chips Project")
         .basePackage("tech.jhipster.chips")
         .put("baseName", "chips")
         .put("serverPort", 8080)
+        .module(maven)
+        .module(init)
         .build()
     );
   }
@@ -454,6 +462,8 @@ public final class JHipsterModulesFixture {
     private boolean commitModules = false;
     private final String projectFolder;
     private final Map<String, Object> properties = new HashMap<>();
+    private final Set<JHipsterModuleSlug> newModules = new HashSet<>();
+    private final Set<JHipsterModuleSlug> alreadyApplied = new HashSet<>();
 
     private JHipsterModulePropertiesBuilder(String projectFolder) {
       this.projectFolder = projectFolder;
@@ -483,6 +493,18 @@ public final class JHipsterModulesFixture {
       return this;
     }
 
+    public JHipsterModulePropertiesBuilder module(JHipsterModuleSlug module) {
+      newModules.add(module);
+
+      return this;
+    }
+
+    public JHipsterModulePropertiesBuilder alreadyApplied(JHipsterModuleSlug module) {
+      alreadyApplied.add(module);
+
+      return this;
+    }
+
     public JHipsterModulePropertiesBuilder put(String key, Object value) {
       properties.put(key, value);
 
@@ -490,7 +512,7 @@ public final class JHipsterModulesFixture {
     }
 
     public JHipsterModuleProperties build() {
-      return new JHipsterModuleProperties(projectFolder, commitModules, properties);
+      return new JHipsterModuleProperties(projectFolder, commitModules, properties, newModules, alreadyApplied);
     }
   }
 }

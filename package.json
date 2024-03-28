@@ -75,7 +75,7 @@
     "prettier": "3.2.5",
     "prettier-plugin-gherkin": "2.2.1",
     "prettier-plugin-java": "2.6.0",
-    "prettier-plugin-packagejson": "2.4.12",
+    "prettier-plugin-packagejson": "2.4.13",
     "pug-lint": "2.7.0",
     "rimraf": "5.0.5",
     "sass": "1.72.0",

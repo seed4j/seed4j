@@ -83,7 +83,7 @@
     "stylelint": "16.3.1",
     "stylelint-config-concentric-order": "5.2.0",
     "stylelint-config-standard": "36.0.0",
-    "stylelint-config-standard-scss": "13.0.0",
+    "stylelint-config-standard-scss": "13.1.0",
     "tikuidoc-tikui": "5.0.2",
     "typescript": "5.4.3",
     "vite": "5.2.7",

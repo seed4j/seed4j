@@ -19,7 +19,7 @@
     "@angular/cli": "17.3.3",
     "@angular/compiler-cli": "17.3.3",
     "@types/jest": "29.5.12",
-    "@types/node": "20.12.4",
+    "@types/node": "20.12.5",
     "@typescript-eslint/eslint-plugin": "7.5.0",
     "@typescript-eslint/parser": "7.5.0",
     "eslint": "8.57.0",

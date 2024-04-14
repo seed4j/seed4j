@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@prettier/plugin-xml": "3.4.1",
-    "@rushstack/eslint-patch": "1.10.1",
+    "@rushstack/eslint-patch": "1.10.2",
     "@tikui/core": "4.1.0",
     "@types/sinon": "17.0.3",
     "@typescript-eslint/eslint-plugin": "7.6.0",

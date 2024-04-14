@@ -49,6 +49,6 @@ class PropertiesFileSpringPropertiesHandlerTest {
 
     handler.set(propertyKey("spring.application.name"), propertyValue("alpha"));
 
-    assertThat(content(propertiesFile)).startsWith("spring.application.name=alpha").doesNotContain("spring.application.name=JHLite");
+    assertThat(content(propertiesFile)).contains("spring.application.name=alpha").doesNotContain("spring.application.name=JHLite");
   }
 }

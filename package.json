@@ -48,7 +48,7 @@
     "mitt": "3.0.1",
     "placeholder-loading": "0.6.0",
     "vue": "3.4.23",
-    "vue-router": "4.3.1"
+    "vue-router": "4.3.2"
   },
   "devDependencies": {
     "@prettier/plugin-xml": "3.4.1",

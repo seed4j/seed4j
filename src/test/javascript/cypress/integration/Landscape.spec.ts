@@ -8,7 +8,7 @@ describe('Landscape', () => {
     cy.visit('/landscape', {
       // see https://www.cypress.io/blog/2019/12/13/test-your-web-app-in-dark-mode/
       onBeforeLoad(win) {
-        cy.stub(win, 'matchMedia').withArgs('(prefers-color-scheme: dark)').returns({ matches: true })
+        cy.stub(win, 'matchMedia').withArgs('(prefers-color-scheme: dark)').returns({ matches: true });
       },
     });
 
@@ -17,11 +17,11 @@ describe('Landscape', () => {
     cy.get(themeSwitchButton).should('exist').should('not.be.visible').should('not.be.checked');
     cy.get('[aria-label="dark-theme"]').should('exist');
 
-    cy.get(themeSwitchButton).click({ force: true })
+    cy.get(themeSwitchButton).click({ force: true });
     cy.get(themeSwitchButton).should('be.checked');
     cy.get('[aria-label="light-theme"]').should('exist');
 
-    cy.get(themeSwitchButton).click({ force: true })
+    cy.get(themeSwitchButton).click({ force: true });
     cy.get(themeSwitchButton).should('not.be.checked');
     cy.get('[aria-label="dark-theme"]').should('exist');
   });

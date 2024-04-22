@@ -34,7 +34,7 @@ describe('Patch', () => {
     it('should change theme after toggle switch theme button', () => {
       cy.visit('/patches', {
         onBeforeLoad(win) {
-          cy.stub(win, 'matchMedia').withArgs('(prefers-color-scheme: dark)').returns({ matches: true })
+          cy.stub(win, 'matchMedia').withArgs('(prefers-color-scheme: dark)').returns({ matches: true });
         },
       });
 
@@ -43,11 +43,11 @@ describe('Patch', () => {
       cy.get(themeSwitchButton).should('exist').should('not.be.visible').should('not.be.checked');
       cy.get('[aria-label="dark-theme"]').should('exist');
 
-      cy.get(themeSwitchButton).click({ force: true })
+      cy.get(themeSwitchButton).click({ force: true });
       cy.get(themeSwitchButton).should('be.checked');
       cy.get('[aria-label="light-theme"]').should('exist');
 
-      cy.get(themeSwitchButton).click({ force: true })
+      cy.get(themeSwitchButton).click({ force: true });
       cy.get(themeSwitchButton).should('not.be.checked');
       cy.get('[aria-label="dark-theme"]').should('exist');
     });

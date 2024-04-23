@@ -1,6 +1,5 @@
 <template>
   <em
-    role="img"
     class="jhlite-icon"
     :class="`jhlite-icon-${name}`"
     :aria-hidden="ariaHidden"

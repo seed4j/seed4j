@@ -33,16 +33,6 @@
             </router-link>
           </li>
           <li class="jhlite-nav--item">
-            <a class="jhlite-nav-item" href="./swagger-ui.html" target="_blank">
-              <span class="jhlite-icon-text">
-                <span class="jhlite-icon-text--icon">
-                  <IconVue name="binoculars" aria-label="Icon binoculars" title="Swagger UI" />
-                </span>
-                <span class="jhlite-icon-text--text">Swagger UI</span>
-              </span>
-            </a>
-          </li>
-          <li class="jhlite-nav--item">
             <a class="jhlite-nav-item" href="https://www.jhipster.tech/jhipster-lite" target="_blank" rel="noopener">
               <span class="jhlite-icon-text">
                 <span class="jhlite-icon-text--icon">

@@ -1,11 +1,9 @@
 package tech.jhipster.lite.module.infrastructure.secondary.javabuild;
 
-import java.util.Collection;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterFileToMove;
-import tech.jhipster.lite.module.domain.file.JHipsterFilesToMove;
 import tech.jhipster.lite.module.domain.file.JHipsterModuleFile;
 import tech.jhipster.lite.module.domain.file.JHipsterModuleFiles;
 import tech.jhipster.lite.module.domain.javabuild.JavaBuildTool;
@@ -22,29 +20,45 @@ public class FileSystemProjectJavaBuildToolRepository implements ProjectJavaBuil
   public Optional<JavaBuildTool> detect(JHipsterProjectFolder projectFolder) {
     if (projectFolder.fileExists(POM_XML)) {
       return Optional.of(JavaBuildTool.MAVEN);
-    } else if (projectFolder.fileExists(BUILD_GRADLE_KTS)) {
+    }
+
+    if (projectFolder.fileExists(BUILD_GRADLE_KTS)) {
       return Optional.of(JavaBuildTool.GRADLE);
     }
+
     return Optional.empty();
   }
 
   @Override
   public Optional<JavaBuildTool> detect(JHipsterModuleFiles moduleFiles) {
-    if (hasDestinationFile(moduleFiles.filesToAdd(), POM_XML) || hasDestinationFile(moduleFiles.filesToMove(), POM_XML)) {
+    if (hasMavenFile(moduleFiles)) {
       return Optional.of(JavaBuildTool.MAVEN);
-    } else if (
-      hasDestinationFile(moduleFiles.filesToAdd(), BUILD_GRADLE_KTS) || hasDestinationFile(moduleFiles.filesToMove(), BUILD_GRADLE_KTS)
-    ) {
+    }
+
+    if (hasGradleFile(moduleFiles)) {
       return Optional.of(JavaBuildTool.GRADLE);
     }
+
     return Optional.empty();
   }
 
-  private static boolean hasDestinationFile(JHipsterFilesToMove filesToMove, String fileName) {
-    return filesToMove.stream().map(JHipsterFileToMove::destination).map(JHipsterDestination::get).anyMatch(fileName::equals);
+  private static boolean hasMavenFile(JHipsterModuleFiles moduleFiles) {
+    return hasBuildFiles(moduleFiles, POM_XML);
   }
 
-  private static boolean hasDestinationFile(Collection<JHipsterModuleFile> filesToAdd, String fileName) {
-    return filesToAdd.stream().map(JHipsterModuleFile::destination).map(JHipsterDestination::get).anyMatch(fileName::equals);
+  private static boolean hasGradleFile(JHipsterModuleFiles moduleFiles) {
+    return hasBuildFiles(moduleFiles, BUILD_GRADLE_KTS);
+  }
+
+  private static boolean hasBuildFiles(JHipsterModuleFiles moduleFiles, String file) {
+    return hasFileToAdd(moduleFiles, file) || hasFileToMove(moduleFiles, file);
+  }
+
+  private static boolean hasFileToMove(JHipsterModuleFiles files, String fileName) {
+    return files.filesToMove().stream().map(JHipsterFileToMove::destination).map(JHipsterDestination::get).anyMatch(fileName::equals);
+  }
+
+  private static boolean hasFileToAdd(JHipsterModuleFiles files, String fileName) {
+    return files.filesToAdd().stream().map(JHipsterModuleFile::destination).map(JHipsterDestination::get).anyMatch(fileName::equals);
   }
 }

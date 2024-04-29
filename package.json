@@ -57,7 +57,7 @@
     "@typescript-eslint/eslint-plugin": "7.7.1",
     "@typescript-eslint/parser": "7.7.1",
     "@vitejs/plugin-vue": "5.0.4",
-    "@vitest/coverage-istanbul": "1.5.1",
+    "@vitest/coverage-istanbul": "1.5.2",
     "@vue/eslint-config-prettier": "9.0.0",
     "@vue/eslint-config-typescript": "13.0.0",
     "@vue/test-utils": "2.4.5",
@@ -86,7 +86,7 @@
     "tikuidoc-tikui": "5.0.2",
     "typescript": "5.4.5",
     "vite": "5.2.10",
-    "vitest": "1.5.1",
+    "vitest": "1.5.2",
     "vitest-sonar-reporter": "2.0.0",
     "vue-tsc": "2.0.14"
   },

@@ -73,7 +73,7 @@
     <cucumber.version>7.17.0</cucumber.version>
     <maven-model-helper.version>36</maven-model-helper.version>
     <mustache.java.version>0.9.13</mustache.java.version>
-    <night-config.version>3.6.7</night-config.version>
+    <night-config.version>3.7.0</night-config.version>
     <testcontainers.version>1.19.8</testcontainers.version>
     <mongock.version>5.4.2</mongock.version>
     <git-commit-id-plugin.version>8.0.2</git-commit-id-plugin.version>
@@ -169,6 +169,12 @@
     <dependency>
       <groupId>com.electronwill.night-config</groupId>
       <artifactId>toml</artifactId>
+      <version>${night-config.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.electronwill.night-config</groupId>
+      <artifactId>core</artifactId>
       <version>${night-config.version}</version>
     </dependency>
 

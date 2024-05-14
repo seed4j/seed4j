@@ -76,7 +76,7 @@
     "prettier-plugin-gherkin": "2.2.1",
     "prettier-plugin-java": "2.6.0",
     "prettier-plugin-packagejson": "2.5.0",
-    "rimraf": "5.0.6",
+    "rimraf": "5.0.7",
     "sass": "1.77.0",
     "sinon": "17.0.2",
     "stylelint": "16.5.0",

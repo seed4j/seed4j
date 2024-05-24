@@ -16,7 +16,7 @@
     <jhlite.version>@project.version@</jhlite.version>
     <!-- Dependencies -->
     <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
-    <spring-boot.version>3.2.5</spring-boot.version>
+    <spring-boot.version>3.3.0</spring-boot.version>
     <spring-cloud.version>2023.0.1</spring-cloud.version>
     <spring-cloud-netflix-eureka-client.version>4.1.1</spring-cloud-netflix-eureka-client.version>
     <springdoc-openapi-starter-webmvc.version>2.5.0</springdoc-openapi-starter-webmvc.version>

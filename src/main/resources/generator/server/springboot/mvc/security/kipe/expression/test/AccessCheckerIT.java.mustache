@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import {{packageName}}.IntegrationTest;
@@ -28,7 +27,8 @@ class AccessCheckerIT {
   }
 
   private void mustBeSpringBean(@SuppressWarnings("rawtypes") Class<? extends AccessChecker> checker) {
-    List<Class<?>> annotationsClasses = Stream.of(checker.getAnnotations()).map(Annotation::annotationType).collect(Collectors.toList());
+    Stream<Class<?>> annotationStream = Stream.of(checker.getAnnotations()).map(Annotation::annotationType);
+    List<Class<?>> annotationsClasses = annotationStream.toList();
 
     assertThat(annotationsClasses)
       .withFailMessage("AccessCheckers must be spring beans (@Component or @Service) but <%s> isn't", checker.getCanonicalName())

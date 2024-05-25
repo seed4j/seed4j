@@ -70,7 +70,7 @@
     "fontello-cli": "0.6.2",
     "husky": "9.0.11",
     "jsdom": "24.0.0",
-    "lint-staged": "15.2.2",
+    "lint-staged": "15.2.4",
     "postcss-scss": "4.0.9",
     "prettier": "3.2.5",
     "prettier-plugin-gherkin": "2.2.1",

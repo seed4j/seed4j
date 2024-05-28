@@ -79,7 +79,7 @@
     "rimraf": "5.0.7",
     "sass": "1.77.2",
     "sinon": "18.0.0",
-    "stylelint": "16.5.0",
+    "stylelint": "16.6.0",
     "stylelint-config-concentric-order": "5.2.0",
     "stylelint-config-standard": "36.0.0",
     "stylelint-config-standard-scss": "13.1.0",

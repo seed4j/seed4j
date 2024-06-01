@@ -85,7 +85,7 @@
     "serve": "14.2.3",
     "sinon": "18.0.0",
     "start-server-and-test": "2.0.3",
-    "stylelint": "16.6.0",
+    "stylelint": "16.6.1",
     "stylelint-config-concentric-order": "5.2.0",
     "stylelint-config-standard": "36.0.0",
     "stylelint-config-standard-scss": "13.1.0",

@@ -12,7 +12,7 @@
     "react-hook-form": "7.51.5"
   },
   "devDependencies": {
-    "@testing-library/react": "15.0.7",
+    "@testing-library/react": "16.0.0",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "@vitejs/plugin-react": "4.3.0",

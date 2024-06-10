@@ -12,7 +12,7 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 class CorsFilterConfiguration {
 
-  private final Logger log = LoggerFactory.getLogger(CorsFilterConfiguration.class);
+  private static final Logger log = LoggerFactory.getLogger(CorsFilterConfiguration.class);
 
   private final CorsConfiguration corsConfiguration;
 

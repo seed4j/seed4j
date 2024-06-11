@@ -5,3 +5,4 @@ spring:
 
 mongock:
   migration-scan-package: tech.jhipster.lite
+  transactionEnabled: false

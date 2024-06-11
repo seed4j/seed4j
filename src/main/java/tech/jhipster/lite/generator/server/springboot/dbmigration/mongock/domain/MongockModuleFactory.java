@@ -8,6 +8,7 @@ import tech.jhipster.lite.module.domain.javabuild.GroupId;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependency;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyScope;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependencyType;
+import tech.jhipster.lite.module.domain.javaproperties.PropertyValue;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.shared.error.domain.Assert;
 
@@ -18,6 +19,8 @@ public class MongockModuleFactory {
   private static final GroupId MONGOCK_GROUP = groupId("io.mongock");
 
   private static final String MONGOCK_SECONDARY = "wire/mongock/infrastructure/secondary";
+
+  private static final PropertyValue FALSE = propertyValue(false);
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
@@ -40,6 +43,7 @@ public class MongockModuleFactory {
         .and()
       .springMainProperties()
         .set(propertyKey("mongock.migration-scan-package"), propertyValue(properties.basePackage().get()))
+        .set(propertyKey("mongock.transactionEnabled"), FALSE)
         .and()
       .build();
     //@formatter:on

@@ -60,6 +60,7 @@ class MongockModuleFactoryTest {
         """
         mongock:
           migration-scan-package: com.jhipster.test
+          transactionEnabled: false
         """
       );
   }

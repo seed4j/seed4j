@@ -50,7 +50,7 @@
     "mitt": "3.0.1",
     "placeholder-loading": "0.6.0",
     "vue": "3.4.27",
-    "vue-router": "4.3.2"
+    "vue-router": "4.3.3"
   },
   "devDependencies": {
     "@prettier/plugin-pug": "3.0.0",

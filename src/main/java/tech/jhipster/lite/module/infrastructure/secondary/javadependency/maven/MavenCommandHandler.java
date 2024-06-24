@@ -10,10 +10,24 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 import org.apache.maven.model.*;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import tech.jhipster.lite.module.domain.Indentation;
 import tech.jhipster.lite.module.domain.buildproperties.BuildProperty;
 import tech.jhipster.lite.module.domain.buildproperties.PropertyKey;
@@ -444,6 +458,36 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     if (indentation.spacesCount() == DEFAULT_MAVEN_INDENTATION) {
       return pomContent;
     }
-    return pomContent.replace(" ".repeat(DEFAULT_MAVEN_INDENTATION), indentation.spaces());
+    return formatXml(pomContent, indentation.spacesCount());
+  }
+
+  @ExcludeFromGeneratedCodeCoverage(reason = "The exception handling is hard to test because on this step all pom.xml comes welformed")
+  private String formatXml(String xmlContent, int indentSpaces) {
+    try {
+      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      DocumentBuilder builder = factory.newDocumentBuilder();
+      Document document = builder.parse(new InputSource(new StringReader(xmlContent)));
+
+      document.normalizeDocument();
+      XPathFactory xpathFactory = XPathFactory.newInstance();
+      XPathExpression xpathExp = xpathFactory.newXPath().compile("//text()[normalize-space(.) = '']");
+      NodeList emptyTextNodes = (NodeList) xpathExp.evaluate(document, XPathConstants.NODESET);
+      for (int i = 0; i < emptyTextNodes.getLength(); i++) {
+        Node emptyTextNode = emptyTextNodes.item(i);
+        emptyTextNode.getParentNode().removeChild(emptyTextNode);
+      }
+
+      TransformerFactory transformerFactory = TransformerFactory.newInstance();
+      Transformer transformer = transformerFactory.newTransformer();
+      transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+      transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", String.valueOf(indentSpaces));
+
+      StringWriter writer = new StringWriter();
+      transformer.transform(new DOMSource(document), new StreamResult(writer));
+
+      return writer.toString().replace("\r\n", "\n");
+    } catch (Exception e) {
+      throw GeneratorException.technicalError("Error writing pom: " + e.getMessage(), e);
+    }
   }
 }

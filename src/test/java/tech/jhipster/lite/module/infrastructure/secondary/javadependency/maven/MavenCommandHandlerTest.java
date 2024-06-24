@@ -55,6 +55,41 @@ class MavenCommandHandlerTest {
       .contains("    </properties>");
   }
 
+  @Test
+  void shouldFormatXmlCorrectly() throws IOException {
+    Path pom = projectWithPom("src/test/resources/projects/maven-indent/pom.xml");
+    MavenCommandHandler mavenCommandHandler = new MavenCommandHandler(Indentation.from(4), pom);
+    mavenCommandHandler.handle(new AddJavaDependencyManagement(springBootDependencyManagement()));
+
+    assertThat(contentNormalizingNewLines(pom)).contains(
+      """
+          <dependencyManagement>
+              <dependencies>
+                  <dependency>
+                      <groupId>org.springdoc</groupId>
+                      <artifactId>springdoc-openapi-ui</artifactId>
+                      <version>${springdoc-openapi.version}</version>
+                  </dependency>
+                  <dependency>
+                      <groupId>org.springframework.boot</groupId>
+                      <artifactId>spring-boot-dependencies</artifactId>
+                      <version>${spring-boot.version}</version>
+                      <scope>import</scope>
+                      <type>pom</type>
+                  </dependency>
+                  <dependency>
+                      <groupId>org.springframework.boot</groupId>
+                      <artifactId>spring-boot-dependencies</artifactId>
+                      <version>${spring-boot.version}</version>
+                      <type>pom</type>
+                      <scope>import</scope>
+                  </dependency>
+              </dependencies>
+          </dependencyManagement>
+      """
+    );
+  }
+
   @Nested
   class HandleSetVersion {
 

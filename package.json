@@ -80,7 +80,7 @@
     "prettier-plugin-gherkin": "2.4.0",
     "prettier-plugin-java": "2.6.0",
     "prettier-plugin-packagejson": "2.5.0",
-    "rimraf": "5.0.8",
+    "rimraf": "5.0.9",
     "sass": "1.77.6",
     "serve": "14.2.3",
     "sinon": "18.0.0",

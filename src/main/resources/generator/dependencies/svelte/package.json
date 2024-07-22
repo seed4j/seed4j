@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "7.22.9",
-    "@sveltejs/adapter-static": "2.0.2",
+    "@sveltejs/adapter-static": "2.0.3",
     "@sveltejs/kit": "1.22.3",
     "@testing-library/svelte": "4.0.3",
     "@typescript-eslint/eslint-plugin": "6.0.0",

@@ -19,6 +19,6 @@
     "@vue/test-utils": "2.4.6",
     "eslint-plugin-vue": "9.27.0",
     "sinon": "18.0.0",
-    "vue-tsc": "2.0.26"
+    "vue-tsc": "2.0.28"
   }
 }

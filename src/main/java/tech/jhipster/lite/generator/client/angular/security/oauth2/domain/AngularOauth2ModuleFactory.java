@@ -95,8 +95,10 @@ public class AngularOauth2ModuleFactory {
     """
 
     it('should display login component', () => {
+      // WHEN
       fixture.detectChanges();
 
+      // THEN
       expect(fixture.debugElement.query(By.directive(LoginComponent))).toBeTruthy();
     });
     """;

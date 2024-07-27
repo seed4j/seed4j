@@ -8,7 +8,7 @@
     "@playwright/test": "1.45.3",
     "@prettier/plugin-xml": "3.4.1",
     "@types/jest": "29.5.12",
-    "@types/node": "20.14.11",
+    "@types/node": "20.14.12",
     "@typescript-eslint/eslint-plugin": "7.17.0",
     "@typescript-eslint/parser": "7.17.0",
     "@vitest/coverage-istanbul": "2.0.4",

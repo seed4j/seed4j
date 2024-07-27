@@ -3,9 +3,12 @@ import { ToastVue } from '@/shared/toast/infrastructure/primary';
 import { ToastType } from '@/shared/toast/infrastructure/primary/ToastType';
 import { AlertListener } from '@/shared/alert/domain/AlertListener';
 import { AlertListenerFixture, stubAlertListener } from '../../../shared/alert/domain/AlertListener.fixure';
-import { TimeoutListener } from '@/shared/toast/infrastructure/primary/Timeout';
+import { TimeoutListener } from '@/shared/toast/domain/Timeout';
 import { stubTimeout } from '../timeout/Timeout.fixture';
 import { describe, it, expect, vi } from 'vitest';
+import { provide } from '@/injections';
+import { ALERT_LISTENER } from '@/shared/alert/application/AlertProvider';
+import { TIMEOUT } from '@/shared/toast/application/ToastProvider';
 
 let wrapper: VueWrapper;
 let component: any;
@@ -25,14 +28,11 @@ const wrap = (wrapperOptions?: Partial<WrapperOptions>) => {
     toastTimeout: stubTimeout(),
     ...wrapperOptions,
   };
-  wrapper = shallowMount(ToastVue, {
-    global: {
-      provide: {
-        alertListener,
-        timeout: () => toastTimeout,
-      },
-    },
-  });
+
+  provide(ALERT_LISTENER, alertListener);
+  provide(TIMEOUT, toastTimeout);
+
+  wrapper = shallowMount(ToastVue);
   component = wrapper.vm;
 };
 

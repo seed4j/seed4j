@@ -1,8 +1,10 @@
 import { VueWrapper, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
-import { stubWindow } from '../../../module/primary/GlobalWindow.fixture';
 import { LocalWindowThemeRepositoryStub, stubLocalWindowThemeRepository } from '../../../module/domain/ThemeRepository.fixture';
 import { ThemeButtonVue } from '@/shared/theme-button/infrastructure/primary';
+import { GLOBAL_WINDOW, provide } from '@/injections';
+import { THEMES_REPOSITORY } from '@/module/application/ModuleProvider';
+import { stubWindow } from '../../../module/primary/GlobalWindow.fixture';
 
 interface WrapperOptions {
   themeRepository: LocalWindowThemeRepositoryStub;
@@ -14,14 +16,10 @@ const wrap = (options?: Partial<WrapperOptions>): VueWrapper => {
     ...options,
   };
 
-  return mount(ThemeButtonVue, {
-    global: {
-      provide: {
-        themeRepository,
-        globalWindow: stubWindow(),
-      },
-    },
-  });
+  provide(THEMES_REPOSITORY, themeRepository);
+  provide(GLOBAL_WINDOW, stubWindow());
+
+  return mount(ThemeButtonVue);
 };
 
 describe('ThemeButton', () => {

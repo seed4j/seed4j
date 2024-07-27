@@ -1,8 +1,9 @@
-import { AlertBus } from '@/shared/alert/domain/AlertBus';
-import { ModulesRepository } from '@/module/domain/ModulesRepository';
 import { Project } from '@/module/domain/Project';
-import { defineComponent, inject, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { IconVue } from '@/shared/icon/infrastructure/primary';
+import { GLOBAL_WINDOW, inject } from '@/injections';
+import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
+import { MODULES_REPOSITORY } from '@/module/application/ModuleProvider';
 
 export default defineComponent({
   name: 'ProjectActionsVue',
@@ -21,9 +22,9 @@ export default defineComponent({
   },
   emits: ['operationStarted', 'operationEnded'],
   setup(props, { emit }) {
-    const globalWindow = inject('globalWindow') as Window & typeof globalThis;
-    const alertBus = inject('alertBus') as AlertBus;
-    const modules = inject('modules') as ModulesRepository;
+    const globalWindow = inject(GLOBAL_WINDOW);
+    const alertBus = inject(ALERT_BUS);
+    const modules = inject(MODULES_REPOSITORY);
 
     const operationInProgress = ref(false);
 

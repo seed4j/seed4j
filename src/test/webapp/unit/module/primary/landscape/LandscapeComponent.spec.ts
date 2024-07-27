@@ -10,11 +10,19 @@ import { defaultLandscape } from '../../domain/landscape/Landscape.fixture';
 import { ModulesRepositoryStub, projectHistoryWithInit, stubModulesRepository } from '../../domain/Modules.fixture';
 import { ProjectFoldersRepositoryStub, stubProjectFoldersRepository } from '../../domain/ProjectFolders.fixture';
 import { ModuleParametersRepositoryStub, stubModuleParametersRepository } from '../../domain/ModuleParameters.fixture';
-import { stubWindow } from '../GlobalWindow.fixture';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { BodyCursorUpdater } from '@/module/primary/landscape/BodyCursorUpdater';
 import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller';
 import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
+import { APPLICATION_LISTENER, CURSOR_UPDATER, GLOBAL_WINDOW, provide } from '@/injections';
+import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
+import {
+  LANDSCAPE_SCROLLER,
+  MODULE_PARAMETERS_REPOSITORY,
+  MODULES_REPOSITORY,
+  PROJECT_FOLDERS_REPOSITORY,
+} from '@/module/application/ModuleProvider';
+import { stubWindow } from '../GlobalWindow.fixture';
 
 interface ApplicationListenerStub extends ApplicationListener {
   addEventListener: vi.fn;
@@ -61,20 +69,16 @@ const wrap = (options?: Partial<WrapperOptions>): VueWrapper => {
     ...options,
   };
 
-  return mount(LandscapeVue, {
-    global: {
-      provide: {
-        alertBus,
-        applicationListener,
-        cursorUpdater,
-        globalWindow: stubWindow(),
-        landscapeScroller,
-        modules,
-        projectFolders: repositoryWithProjectFolders(),
-        moduleParameters,
-      },
-    },
-  });
+  provide(ALERT_BUS, alertBus);
+  provide(APPLICATION_LISTENER, applicationListener);
+  provide(CURSOR_UPDATER, cursorUpdater);
+  provide(LANDSCAPE_SCROLLER, landscapeScroller);
+  provide(MODULES_REPOSITORY, modules);
+  provide(MODULE_PARAMETERS_REPOSITORY, moduleParameters);
+  provide(GLOBAL_WINDOW, stubWindow());
+  provide(PROJECT_FOLDERS_REPOSITORY, repositoryWithProjectFolders());
+
+  return mount(LandscapeVue);
 };
 
 const componentWithLandscape = async (applicationListener?: ApplicationListener): Promise<VueWrapper> => {
@@ -152,20 +156,16 @@ describe('Landscape', () => {
           moduleParameters: repositoryWithModuleParameters(),
         };
 
-        return mount(LandscapeVue, {
-          global: {
-            provide: {
-              alertBus,
-              applicationListener,
-              cursorUpdater,
-              globalWindow: stubWindow(),
-              landscapeScroller,
-              modules,
-              projectFolders: repositoryWithProjectFolders(),
-              moduleParameters,
-            },
-          },
-        });
+        provide(ALERT_BUS, alertBus);
+        provide(APPLICATION_LISTENER, applicationListener);
+        provide(CURSOR_UPDATER, cursorUpdater);
+        provide(LANDSCAPE_SCROLLER, landscapeScroller);
+        provide(MODULES_REPOSITORY, modules);
+        provide(MODULE_PARAMETERS_REPOSITORY, moduleParameters);
+        provide(GLOBAL_WINDOW, window);
+        provide(PROJECT_FOLDERS_REPOSITORY, repositoryWithProjectFolders());
+
+        return mount(LandscapeVue);
       } catch (e) {
         expect(e.message).toEqual('repositoryWithLandscapeError');
         expect(console.error).toHaveBeenCalled();
@@ -182,20 +182,16 @@ describe('Landscape', () => {
           moduleParameters: repositoryWithModuleParameters(),
         };
 
-        return mount(LandscapeVue, {
-          global: {
-            provide: {
-              alertBus,
-              applicationListener,
-              cursorUpdater,
-              globalWindow: stubWindow(),
-              landscapeScroller,
-              modules,
-              projectFolders: repositoryWithProjectFoldersError(),
-              moduleParameters,
-            },
-          },
-        });
+        provide(ALERT_BUS, alertBus);
+        provide(APPLICATION_LISTENER, applicationListener);
+        provide(CURSOR_UPDATER, cursorUpdater);
+        provide(LANDSCAPE_SCROLLER, landscapeScroller);
+        provide(MODULES_REPOSITORY, modules);
+        provide(MODULE_PARAMETERS_REPOSITORY, moduleParameters);
+        provide(GLOBAL_WINDOW, window);
+        provide(PROJECT_FOLDERS_REPOSITORY, repositoryWithProjectFoldersError());
+
+        return mount(LandscapeVue);
       } catch (e) {
         expect(e.message).toEqual('repositoryWithProjectFoldersErrorww');
         expect(console.error).toHaveBeenCalled();

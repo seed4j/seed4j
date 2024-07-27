@@ -1,6 +1,7 @@
-import { ThemeRepository } from '@/module/domain/ThemeRepository';
 import { ThemePreference as Theme } from '@/module/secondary/GetMediaPreference';
-import { defineComponent, ref, onMounted, inject } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
+import { inject } from '@/injections';
+import { THEMES_REPOSITORY } from '@/module/application/ModuleProvider';
 
 /**
  * ThemeSwitchButton
@@ -18,7 +19,7 @@ export default defineComponent({
 
     const theme = ref<Theme>('dark-theme');
 
-    const themeRepository = inject('themeRepository') as ThemeRepository;
+    const themeRepository = inject(THEMES_REPOSITORY);
 
     onMounted(() => {
       const initUserTheme = themeRepository.get();

@@ -14,11 +14,14 @@ import { stubAlertBus } from '../../../shared/alert/domain/AlertBus.fixture';
 import { ProjectFoldersRepository } from '@/module/domain/ProjectFoldersRepository';
 import { ProjectFoldersRepositoryStub, stubProjectFoldersRepository } from '../../domain/ProjectFolders.fixture';
 import { ModuleParametersRepositoryStub, stubModuleParametersRepository } from '../../domain/ModuleParameters.fixture';
-import { stubWindow } from '../GlobalWindow.fixture';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { Modules } from '@/module/domain/Modules';
 import { Module } from '@/module/domain/Module';
 import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
+import { GLOBAL_WINDOW, provide } from '@/injections';
+import { MODULE_PARAMETERS_REPOSITORY, MODULES_REPOSITORY, PROJECT_FOLDERS_REPOSITORY } from '@/module/application/ModuleProvider';
+import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
+import { stubWindow } from '../GlobalWindow.fixture';
 
 interface WrapperOptions {
   modules: ModulesRepository;
@@ -35,17 +38,14 @@ const wrap = (options?: Partial<WrapperOptions>): VueWrapper => {
     moduleParameters: repositoryWithModuleParameters(),
     ...options,
   };
-  return mount(ModulesVue, {
-    global: {
-      provide: {
-        modules,
-        projectFolders,
-        moduleParameters,
-        alertBus,
-        globalWindow: stubWindow(),
-      },
-    },
-  });
+
+  provide(MODULES_REPOSITORY, modules);
+  provide(PROJECT_FOLDERS_REPOSITORY, projectFolders);
+  provide(MODULE_PARAMETERS_REPOSITORY, moduleParameters);
+  provide(ALERT_BUS, alertBus);
+  provide(GLOBAL_WINDOW, stubWindow());
+
+  return mount(ModulesVue);
 };
 
 const makeTaggedModule = (tag: string): Module => ({
@@ -75,17 +75,14 @@ describe('Modules', () => {
           projectFolders: repositoryWithProjectFolders(),
           moduleParameters: repositoryWithModuleParameters(),
         };
-        return mount(ModulesVue, {
-          global: {
-            provide: {
-              modules,
-              projectFolders,
-              moduleParameters,
-              alertBus,
-              globalWindow: stubWindow(),
-            },
-          },
-        });
+
+        provide(MODULES_REPOSITORY, modules);
+        provide(PROJECT_FOLDERS_REPOSITORY, projectFolders);
+        provide(MODULE_PARAMETERS_REPOSITORY, moduleParameters);
+        provide(ALERT_BUS, alertBus);
+        provide(GLOBAL_WINDOW, window);
+
+        return mount(ModulesVue);
       } catch (e) {
         expect(e.message).toEqual('repositoryWithModulesError');
         expect(console.error).toHaveBeenCalled();
@@ -99,17 +96,14 @@ describe('Modules', () => {
           projectFolders: repositoryWithProjectFoldersError(),
           moduleParameters: repositoryWithModuleParameters(),
         };
-        return mount(ModulesVue, {
-          global: {
-            provide: {
-              modules,
-              projectFolders,
-              moduleParameters,
-              alertBus,
-              globalWindow: stubWindow(),
-            },
-          },
-        });
+
+        provide(MODULES_REPOSITORY, modules);
+        provide(PROJECT_FOLDERS_REPOSITORY, projectFolders);
+        provide(MODULE_PARAMETERS_REPOSITORY, moduleParameters);
+        provide(ALERT_BUS, alertBus);
+        provide(GLOBAL_WINDOW, window);
+
+        return mount(ModulesVue);
       } catch (e) {
         expect(e.message).toEqual('repositoryWithProjectFoldersError');
         expect(console.error).toHaveBeenCalled();

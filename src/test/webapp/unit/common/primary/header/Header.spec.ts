@@ -3,6 +3,8 @@ import { mount, VueWrapper } from '@vue/test-utils';
 import { describe, it, expect } from 'vitest';
 import { ManagementRepositoryStub, stubLocalManagementRepository } from '../../../module/domain/ManagementRepository.fixture';
 import { LocalWindowThemeRepositoryStub, stubLocalWindowThemeRepository } from '../../../module/domain/ThemeRepository.fixture';
+import { provide } from '@/injections';
+import { MANAGEMENT_REPOSITORY, THEMES_REPOSITORY } from '@/module/application/ModuleProvider';
 
 interface WrapperOptions {
   management: ManagementRepositoryStub;
@@ -16,12 +18,11 @@ const wrap = (options?: Partial<WrapperOptions>): VueWrapper => {
     ...options,
   };
 
+  provide(MANAGEMENT_REPOSITORY, management);
+  provide(THEMES_REPOSITORY, themeRepository);
+
   return mount(HeaderVue, {
     global: {
-      provide: {
-        management,
-        themeRepository,
-      },
       stubs: ['router-link'],
     },
   });
@@ -55,12 +56,12 @@ describe('Header', () => {
         themeRepository: stubLocalWindowThemeRepository(),
         ...options,
       };
+
+      provide(MANAGEMENT_REPOSITORY, management);
+      provide(THEMES_REPOSITORY, themeRepository);
+
       return mount(HeaderVue, {
         global: {
-          provide: {
-            management,
-            themeRepository,
-          },
           stubs: ['router-link'],
         },
       });

@@ -1,8 +1,9 @@
-import { defineComponent, inject, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { IconVue } from '@/shared/icon/infrastructure/primary';
 import { ThemeButtonVue } from '@/shared/theme-button/infrastructure/primary';
-import { ManagementRepository } from '@/module/domain/ManagementRepository';
 import { ManagementInfo } from '@/module/domain/ManagementInfo';
+import { MANAGEMENT_REPOSITORY } from '@/module/application/ModuleProvider';
+import { inject } from '@/injections';
 
 export default defineComponent({
   name: 'Header',
@@ -13,7 +14,7 @@ export default defineComponent({
   },
 
   setup() {
-    const management = inject('management') as ManagementRepository;
+    const management = inject(MANAGEMENT_REPOSITORY);
     const selectorPrefix = 'header';
     const version = ref('');
 

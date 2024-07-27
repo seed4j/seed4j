@@ -1,8 +1,5 @@
-import { AlertBus } from '@/shared/alert/domain/AlertBus';
 import { Loader } from '@/shared/loader/infrastructure/primary/Loader';
-import { ModulesRepository } from '@/module/domain/ModulesRepository';
-import { defineComponent, inject, onMounted, reactive, ref } from 'vue';
-import { ProjectFoldersRepository } from '@/module/domain/ProjectFoldersRepository';
+import { defineComponent, onMounted, reactive, ref } from 'vue';
 import { IconVue } from '@/shared/icon/infrastructure/primary';
 import { TagFilterVue } from '../tag-filter';
 import { ProjectHistory } from '@/module/domain/ProjectHistory';
@@ -16,8 +13,10 @@ import { ProjectActionsVue } from '../project-actions';
 import { ModuleParameter } from '@/module/domain/ModuleParameter';
 import { ModuleParametersVue } from '../module-parameters';
 import { castValue } from '../PropertyValue';
-import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
 import { ModulesPatchLoaderVue } from '../modules-patch-loader';
+import { inject } from '@/injections';
+import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
+import { MODULE_PARAMETERS_REPOSITORY, MODULES_REPOSITORY, PROJECT_FOLDERS_REPOSITORY } from '@/module/application/ModuleProvider';
 
 export default defineComponent({
   name: 'ModulesPatchVue',
@@ -30,19 +29,18 @@ export default defineComponent({
     ModulesPatchLoaderVue,
   },
   setup() {
-    const alertBus = inject('alertBus') as AlertBus;
-    const modules = inject('modules') as ModulesRepository;
-    const projectFolders = inject('projectFolders') as ProjectFoldersRepository;
+    const alertBus = inject(ALERT_BUS);
+    const modules = inject(MODULES_REPOSITORY);
+    const projectFolders = inject(PROJECT_FOLDERS_REPOSITORY);
+    const moduleParameters = inject(MODULE_PARAMETERS_REPOSITORY);
 
     const applicationModules = reactive({
       all: Loader.loading<ComponentModules>(),
       displayed: Loader.loading<ComponentModules>(),
     });
-
     const selectedTag = ref(undefined as string | undefined);
     const operationInProgress = ref(false);
     const selectedModule = ref<ComponentModule>();
-    const moduleParameters = inject('moduleParameters') as ModuleParametersRepository;
     const folderPath = ref(moduleParameters.getCurrentFolderPath());
     const moduleParametersValues = ref(moduleParameters.get(folderPath.value));
     const commitModule = ref(true);

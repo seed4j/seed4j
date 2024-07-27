@@ -6,6 +6,9 @@ import { ModulesRepository } from '@/module/domain/ModulesRepository';
 import { wrappedElement } from '../../../WrappedElement';
 import { stubWindow } from '../GlobalWindow.fixture';
 import { describe, it, expect, vi } from 'vitest';
+import { GLOBAL_WINDOW, provide } from '@/injections';
+import { MODULES_REPOSITORY } from '@/module/application/ModuleProvider';
+import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
 
 interface WrapperOptions {
   folderPath: string;
@@ -24,12 +27,15 @@ const wrap = (options?: Partial<WrapperOptions>): VueWrapper => {
     ...options,
   };
 
+  provide(MODULES_REPOSITORY, modules);
+  provide(ALERT_BUS, alertBus);
+  provide(GLOBAL_WINDOW, windowStub);
+
   return shallowMount(ProjectActionsVue, {
     props: {
       folderPath,
       isPrettierButtonEnabled,
     },
-    global: { provide: { modules, alertBus, globalWindow: windowStub } },
   });
 };
 

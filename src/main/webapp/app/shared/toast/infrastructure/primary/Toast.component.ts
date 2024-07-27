@@ -1,11 +1,12 @@
-import { defineComponent, inject, onBeforeUnmount, onMounted, ref, Ref } from 'vue';
+import { defineComponent, onBeforeUnmount, onMounted, ref, Ref } from 'vue';
 import { Unsubscribe } from '@/shared/alert/domain/Unsubscribe';
 import { ToastType } from '@/shared/toast/infrastructure/primary/ToastType';
 import { ToastMessage } from '@/shared/toast/infrastructure/primary/ToastMessage';
 import { AlertMessage } from '@/shared/alert/domain/AlertMessage';
-import { AlertListener } from '@/shared/alert/domain/AlertListener';
 import { IconVue } from '@/shared/icon/infrastructure/primary';
-import { TimeoutLauncher } from '@/shared/toast/infrastructure/primary/Timeout';
+import { inject } from '@/injections';
+import { ALERT_LISTENER } from '@/shared/alert/application/AlertProvider';
+import { TIMEOUT } from '@/shared/toast/application/ToastProvider';
 
 const WORD_TIME_MS = 300;
 const TOAST_ATTENTION_MS = 1500;
@@ -22,9 +23,8 @@ export default defineComponent({
   },
 
   setup() {
-    const alertListener = inject('alertListener') as AlertListener;
-    const timeout = inject('timeout') as TimeoutLauncher;
-    const toastTimeout = timeout();
+    const alertListener = inject(ALERT_LISTENER);
+    const toastTimeout = inject(TIMEOUT);
 
     const toast = ref(null);
     const show = ref(false);

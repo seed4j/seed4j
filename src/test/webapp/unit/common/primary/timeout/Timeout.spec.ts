@@ -1,4 +1,4 @@
-import { Timeout } from '@/shared/toast/infrastructure/primary/Timeout';
+import { Timeout } from '@/shared/toast/domain/Timeout';
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 
 const TIMEOUT_TIME = 3000;

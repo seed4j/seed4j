@@ -1,7 +1,5 @@
-import { ApplicationListener } from '@/shared/alert/infrastructure/primary/ApplicationListener';
 import { Loader } from '@/shared/loader/infrastructure/primary/Loader';
-import { ModulesRepository } from '@/module/domain/ModulesRepository';
-import { defineComponent, inject, nextTick, onBeforeUnmount, onMounted, Ref, ref } from 'vue';
+import { defineComponent, nextTick, onBeforeUnmount, onMounted, Ref, ref } from 'vue';
 import { LandscapeModuleVue } from '../landscape-module';
 import { LandscapeLoaderVue } from '../landscape-loader';
 import { LandscapeMiniMapVue } from '../landscape-minimap';
@@ -10,9 +8,7 @@ import { DisplayMode } from './DisplayMode';
 import { emptyLandscapeSize, LandscapeConnectorsSize } from './LandscapeConnectorsSize';
 import { ModulePropertiesFormVue } from '../module-properties-form';
 import { ModulePropertyDefinition } from '@/module/domain/ModulePropertyDefinition';
-import { AlertBus } from '@/shared/alert/domain/AlertBus';
 import { ProjectHistory } from '@/module/domain/ProjectHistory';
-import { ProjectFoldersRepository } from '@/module/domain/ProjectFoldersRepository';
 import { ProjectActionsVue } from '../project-actions';
 import { castValue, empty } from '../PropertyValue';
 import { ModuleParameter } from '@/module/domain/ModuleParameter';
@@ -26,11 +22,16 @@ import { LandscapeElement } from '@/module/domain/landscape/LandscapeElement';
 import { LandscapeFeature } from '@/module/domain/landscape/LandscapeFeature';
 import { LandscapeElementId } from '@/module/domain/landscape/LandscapeElementId';
 import { LandscapeFeatureSlug } from '@/module/domain/landscape/LandscapeFeatureSlug';
-import { BodyCursorUpdater } from '@/module/primary/landscape/BodyCursorUpdater';
-import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller';
-import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
 import { LandscapeNavigation } from './LandscapeNavigation';
 import { AnchorPointState } from '@/module/domain/AnchorPointState';
+import { APPLICATION_LISTENER, CURSOR_UPDATER, inject } from '@/injections';
+import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
+import {
+  LANDSCAPE_SCROLLER,
+  MODULE_PARAMETERS_REPOSITORY,
+  MODULES_REPOSITORY,
+  PROJECT_FOLDERS_REPOSITORY,
+} from '@/module/application/ModuleProvider';
 
 export default defineComponent({
   name: 'LandscapeVue',
@@ -43,12 +44,12 @@ export default defineComponent({
     LandscapeMiniMapVue,
   },
   setup() {
-    const applicationListener = inject('applicationListener') as ApplicationListener;
-    const alertBus = inject('alertBus') as AlertBus;
-    const cursorUpdater = inject('cursorUpdater') as BodyCursorUpdater;
-    const landscapeScroller = inject('landscapeScroller') as LandscapeScroller;
-    const modules = inject('modules') as ModulesRepository;
-    const projectFolders = inject('projectFolders') as ProjectFoldersRepository;
+    const applicationListener = inject(APPLICATION_LISTENER);
+    const alertBus = inject(ALERT_BUS);
+    const cursorUpdater = inject(CURSOR_UPDATER);
+    const landscapeScroller = inject(LANDSCAPE_SCROLLER);
+    const modules = inject(MODULES_REPOSITORY);
+    const projectFolders = inject(PROJECT_FOLDERS_REPOSITORY);
 
     const selectedMode = ref<DisplayMode>('COMPACTED');
 
@@ -65,7 +66,7 @@ export default defineComponent({
 
     const emphasizedModule = ref<ModuleSlug>();
 
-    const moduleParameters = inject('moduleParameters') as ModuleParametersRepository;
+    const moduleParameters = inject(MODULE_PARAMETERS_REPOSITORY);
     const folderPath = ref(moduleParameters.getCurrentFolderPath());
     const moduleParametersValues = ref(moduleParameters.get(folderPath.value));
     const anchorPointModulesMap = ref(new Map<string, AnchorPointState>());

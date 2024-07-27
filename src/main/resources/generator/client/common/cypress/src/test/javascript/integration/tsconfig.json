@@ -5,5 +5,5 @@
     "lib": ["es5", "es6", "dom", "dom.iterable"],
     "types": ["cypress"]
   },
-  "include": ["**/*.spec.ts"]
+  "include": ["**/*.ts"]
 }

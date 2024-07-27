@@ -83,6 +83,7 @@ class CypressModuleFactoryTest {
       .containing("baseUrl: 'http://localhost:9000',")
       .and()
       .hasPrefixedFiles("src/test/javascript/integration", ".eslintrc.cjs", "tsconfig.json")
-      .hasFiles("src/test/javascript/integration/common/primary/app/Home.spec.ts");
+      .hasFiles("src/test/javascript/integration/common/primary/app/Home.spec.ts")
+      .hasPrefixedFiles("src/test/javascript/integration/utils", "Interceptor.ts", "DataSelector.ts");
   }
 }

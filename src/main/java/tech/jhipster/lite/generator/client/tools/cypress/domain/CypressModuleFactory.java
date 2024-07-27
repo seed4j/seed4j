@@ -20,6 +20,7 @@ public class CypressModuleFactory {
   private static final JHipsterDestination CYPRESS_DESTINATION = to(CYPRESS_TEST);
 
   private static final String PRIMARY_APP = "common/primary/app";
+  private static final String UTILS = "utils";
 
   private static final String CYPRESS_EXCLUSION = "\"src/test/javascript/integration/**/*.ts\"";
   private static final String EXCLUDE_KEY = "\"exclude\"";
@@ -64,6 +65,10 @@ public class CypressModuleFactory {
           SOURCE.append(CYPRESS_TEST).append(PRIMARY_APP).file("Home.spec.ts"),
           CYPRESS_DESTINATION.append(PRIMARY_APP).append("Home.spec.ts")
         )
+        .batch(SOURCE.append(CYPRESS_TEST).append(UTILS), CYPRESS_DESTINATION.append(UTILS))
+          .addFile("Interceptor.ts")
+          .addFile("DataSelector.ts")
+          .and()
         .and()
       .optionalReplacements()
         .in(path("tsconfig.json"))

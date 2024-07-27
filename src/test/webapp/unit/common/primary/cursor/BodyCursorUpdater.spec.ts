@@ -1,4 +1,4 @@
-import { BodyCursorUpdater } from '@/common/primary/cursor/BodyCursorUpdater';
+import { BodyCursorUpdater } from '@/module/primary/landscape/BodyCursorUpdater';
 import { stubWindow } from '../../../module/primary/GlobalWindow.fixture';
 import { describe, it, expect } from 'vitest';
 

@@ -1,4 +1,4 @@
-import { AxiosHttp } from '@/http/AxiosHttp';
+import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp';
 import { AxiosResponse, RawAxiosRequestConfig } from 'axios';
 import { Modules } from '../domain/Modules';
 import { ModulesRepository } from '../domain/ModulesRepository';
@@ -14,7 +14,7 @@ import { mapToLandscape, RestLandscape } from './RestLandscape';
 import { ProjectHistory } from '../domain/ProjectHistory';
 import { ModulesToApply } from '../domain/ModulesToApply';
 import { RestModulesToApply, toRestModulesToApply } from './RestModulesToApply';
-import { Optional } from '@/common/domain/Optional';
+import { Optional } from '@/shared/optional/domain/Optional';
 
 export class RestModulesRepository implements ModulesRepository {
   constructor(private axiosInstance: AxiosHttp) {}

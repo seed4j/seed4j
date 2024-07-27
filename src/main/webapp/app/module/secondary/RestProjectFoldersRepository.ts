@@ -1,4 +1,4 @@
-import { AxiosHttp } from '@/http/AxiosHttp';
+import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp';
 import { ProjectFolder } from '../domain/ProjectFolder';
 import { ProjectFoldersRepository } from '@/module/domain/ProjectFoldersRepository';
 

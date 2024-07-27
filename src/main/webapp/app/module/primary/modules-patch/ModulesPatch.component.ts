@@ -1,9 +1,9 @@
-import { AlertBus } from '@/common/domain/alert/AlertBus';
-import { Loader } from '@/loader/primary/Loader';
+import { AlertBus } from '@/shared/alert/domain/AlertBus';
+import { Loader } from '@/shared/loader/infrastructure/primary/Loader';
 import { ModulesRepository } from '@/module/domain/ModulesRepository';
 import { defineComponent, inject, onMounted, reactive, ref } from 'vue';
 import { ProjectFoldersRepository } from '@/module/domain/ProjectFoldersRepository';
-import { IconVue } from '@/common/primary/icon';
+import { IconVue } from '@/shared/icon/infrastructure/primary';
 import { TagFilterVue } from '../tag-filter';
 import { ProjectHistory } from '@/module/domain/ProjectHistory';
 import { ModuleSlug } from '@/module/domain/ModuleSlug';
@@ -21,7 +21,14 @@ import { ModulesPatchLoaderVue } from '../modules-patch-loader';
 
 export default defineComponent({
   name: 'ModulesPatchVue',
-  components: { ModuleParametersVue, IconVue, TagFilterVue, ModulePropertiesFormVue, ProjectActionsVue, ModulesPatchLoaderVue },
+  components: {
+    ModuleParametersVue,
+    IconVue,
+    TagFilterVue,
+    ModulePropertiesFormVue,
+    ProjectActionsVue,
+    ModulesPatchLoaderVue,
+  },
   setup() {
     const alertBus = inject('alertBus') as AlertBus;
     const modules = inject('modules') as ModulesRepository;

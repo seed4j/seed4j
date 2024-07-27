@@ -1,8 +1,8 @@
-import { ThemeButtonVue } from '@/common/primary/theme-button/';
 import { VueWrapper, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { stubWindow } from '../../../module/primary/GlobalWindow.fixture';
 import { LocalWindowThemeRepositoryStub, stubLocalWindowThemeRepository } from '../../../module/domain/ThemeRepository.fixture';
+import { ThemeButtonVue } from '@/shared/theme-button/infrastructure/primary';
 
 interface WrapperOptions {
   themeRepository: LocalWindowThemeRepositoryStub;

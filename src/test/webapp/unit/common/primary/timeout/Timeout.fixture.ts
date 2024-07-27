@@ -1,5 +1,5 @@
 import sinon, { SinonStub } from 'sinon';
-import { Timeoutable, TimeoutListener } from '@/common/primary/timeout/Timeout';
+import { Timeoutable, TimeoutListener } from '@/shared/toast/infrastructure/primary/Timeout';
 
 interface TimeoutListenerStub extends TimeoutListener {
   register: SinonStub<[Timeoutable, number]>;

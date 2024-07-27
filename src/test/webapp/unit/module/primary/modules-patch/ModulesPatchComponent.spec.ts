@@ -10,7 +10,7 @@ import {
 import { ModulesVue } from '@/module/primary/modules-patch';
 import { ModulesRepository } from '@/module/domain/ModulesRepository';
 import { wrappedElement } from '../../../WrappedElement';
-import { stubAlertBus } from '../../../common/domain/AlertBus.fixture';
+import { stubAlertBus } from '../../../shared/alert/domain/AlertBus.fixture';
 import { ProjectFoldersRepository } from '@/module/domain/ProjectFoldersRepository';
 import { ProjectFoldersRepositoryStub, stubProjectFoldersRepository } from '../../domain/ProjectFolders.fixture';
 import { ModuleParametersRepositoryStub, stubModuleParametersRepository } from '../../domain/ModuleParameters.fixture';

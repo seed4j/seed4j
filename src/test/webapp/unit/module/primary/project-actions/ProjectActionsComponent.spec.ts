@@ -1,6 +1,6 @@
 import { ProjectActionsVue } from '@/module/primary/project-actions';
 import { flushPromises, shallowMount, VueWrapper } from '@vue/test-utils';
-import { stubAlertBus } from '../../../common/domain/AlertBus.fixture';
+import { stubAlertBus } from '../../../shared/alert/domain/AlertBus.fixture';
 import { defaultProject, stubModulesRepository } from '../../domain/Modules.fixture';
 import { ModulesRepository } from '@/module/domain/ModulesRepository';
 import { wrappedElement } from '../../../WrappedElement';

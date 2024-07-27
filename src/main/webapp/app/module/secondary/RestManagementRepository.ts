@@ -1,4 +1,4 @@
-import { AxiosHttp } from '@/http/AxiosHttp';
+import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp';
 import { ManagementInfo } from '../domain/ManagementInfo';
 import { ManagementRepository } from '@/module/domain/ManagementRepository';
 

@@ -1,4 +1,4 @@
-import { HeaderVue } from '@/common/primary/header';
+import { HeaderVue } from '@/shared/header/infrastructure/primary';
 import { mount, VueWrapper } from '@vue/test-utils';
 import { describe, it, expect } from 'vitest';
 import { ManagementRepositoryStub, stubLocalManagementRepository } from '../../../module/domain/ManagementRepository.fixture';

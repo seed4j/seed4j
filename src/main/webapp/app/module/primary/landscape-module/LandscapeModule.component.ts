@@ -1,5 +1,5 @@
 import { LandscapeModule } from '@/module/domain/landscape/LandscapeModule';
-import { IconVue } from '@/common/primary/icon';
+import { IconVue } from '@/shared/icon/infrastructure/primary';
 import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({

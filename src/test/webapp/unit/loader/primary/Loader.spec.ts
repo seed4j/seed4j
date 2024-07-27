@@ -1,4 +1,4 @@
-import { Loader } from '@/loader/primary/Loader';
+import { Loader } from '@/shared/loader/infrastructure/primary/Loader';
 import { describe, it, expect } from 'vitest';
 
 describe('Loader', () => {

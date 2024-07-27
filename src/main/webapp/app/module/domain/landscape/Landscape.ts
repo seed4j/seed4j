@@ -1,5 +1,5 @@
-import { Memoizer } from '@/common/domain/Memoizer';
-import { Optional } from '@/common/domain/Optional';
+import { Memoizer } from '@/shared/memoizer/domain/Memoizer';
+import { Optional } from '@/shared/optional/domain/Optional';
 import { ModulePropertyDefinition } from '../ModulePropertyDefinition';
 import { ModuleSlug } from '../ModuleSlug';
 import { LandscapeElementId } from './LandscapeElementId';

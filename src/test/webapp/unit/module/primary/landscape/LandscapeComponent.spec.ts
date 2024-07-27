@@ -1,10 +1,10 @@
-import { ApplicationListener } from '@/common/primary/applicationlistener/ApplicationListener';
+import { ApplicationListener } from '@/shared/alert/infrastructure/primary/ApplicationListener';
 import { ModuleSlug } from '@/module/domain/ModuleSlug';
 import { ModulesRepository } from '@/module/domain/ModulesRepository';
 import { ModulesToApply } from '@/module/domain/ModulesToApply';
 import { LandscapeVue } from '@/module/primary/landscape';
 import { flushPromises, mount, VueWrapper } from '@vue/test-utils';
-import { stubAlertBus } from '../../../common/domain/AlertBus.fixture';
+import { stubAlertBus } from '../../../shared/alert/domain/AlertBus.fixture';
 import { wrappedElement } from '../../../WrappedElement';
 import { defaultLandscape } from '../../domain/landscape/Landscape.fixture';
 import { ModulesRepositoryStub, projectHistoryWithInit, stubModulesRepository } from '../../domain/Modules.fixture';
@@ -12,7 +12,7 @@ import { ProjectFoldersRepositoryStub, stubProjectFoldersRepository } from '../.
 import { ModuleParametersRepositoryStub, stubModuleParametersRepository } from '../../domain/ModuleParameters.fixture';
 import { stubWindow } from '../GlobalWindow.fixture';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { BodyCursorUpdater } from '@/common/primary/cursor/BodyCursorUpdater';
+import { BodyCursorUpdater } from '@/module/primary/landscape/BodyCursorUpdater';
 import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller';
 import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
 
@@ -20,6 +20,7 @@ interface ApplicationListenerStub extends ApplicationListener {
   addEventListener: vi.fn;
   removeEventListener: vi.fn;
 }
+
 interface BodyCursorUpdaterStub extends BodyCursorUpdater {
   set: vi.fn;
   reset: vi.fn;

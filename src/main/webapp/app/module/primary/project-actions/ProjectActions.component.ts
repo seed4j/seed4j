@@ -1,8 +1,8 @@
-import { AlertBus } from '@/common/domain/alert/AlertBus';
+import { AlertBus } from '@/shared/alert/domain/AlertBus';
 import { ModulesRepository } from '@/module/domain/ModulesRepository';
 import { Project } from '@/module/domain/Project';
 import { defineComponent, inject, ref } from 'vue';
-import { IconVue } from '@/common/primary/icon';
+import { IconVue } from '@/shared/icon/infrastructure/primary';
 
 export default defineComponent({
   name: 'ProjectActionsVue',

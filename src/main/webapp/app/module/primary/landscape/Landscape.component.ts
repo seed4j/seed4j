@@ -1,5 +1,5 @@
-import { ApplicationListener } from '@/common/primary/applicationlistener/ApplicationListener';
-import { Loader } from '@/loader/primary/Loader';
+import { ApplicationListener } from '@/shared/alert/infrastructure/primary/ApplicationListener';
+import { Loader } from '@/shared/loader/infrastructure/primary/Loader';
 import { ModulesRepository } from '@/module/domain/ModulesRepository';
 import { defineComponent, inject, nextTick, onBeforeUnmount, onMounted, Ref, ref } from 'vue';
 import { LandscapeModuleVue } from '../landscape-module';
@@ -10,14 +10,14 @@ import { DisplayMode } from './DisplayMode';
 import { emptyLandscapeSize, LandscapeConnectorsSize } from './LandscapeConnectorsSize';
 import { ModulePropertiesFormVue } from '../module-properties-form';
 import { ModulePropertyDefinition } from '@/module/domain/ModulePropertyDefinition';
-import { AlertBus } from '@/common/domain/alert/AlertBus';
+import { AlertBus } from '@/shared/alert/domain/AlertBus';
 import { ProjectHistory } from '@/module/domain/ProjectHistory';
 import { ProjectFoldersRepository } from '@/module/domain/ProjectFoldersRepository';
 import { ProjectActionsVue } from '../project-actions';
 import { castValue, empty } from '../PropertyValue';
 import { ModuleParameter } from '@/module/domain/ModuleParameter';
 import { Landscape } from '@/module/domain/landscape/Landscape';
-import { IconVue } from '@/common/primary/icon';
+import { IconVue } from '@/shared/icon/infrastructure/primary';
 import { ModuleSlug } from '@/module/domain/ModuleSlug';
 import { LandscapeLevel } from '@/module/domain/landscape/LandscapeLevel';
 import { LandscapeModule } from '@/module/domain/landscape/LandscapeModule';
@@ -26,7 +26,7 @@ import { LandscapeElement } from '@/module/domain/landscape/LandscapeElement';
 import { LandscapeFeature } from '@/module/domain/landscape/LandscapeFeature';
 import { LandscapeElementId } from '@/module/domain/landscape/LandscapeElementId';
 import { LandscapeFeatureSlug } from '@/module/domain/landscape/LandscapeFeatureSlug';
-import { BodyCursorUpdater } from '@/common/primary/cursor/BodyCursorUpdater';
+import { BodyCursorUpdater } from '@/module/primary/landscape/BodyCursorUpdater';
 import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller';
 import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
 import { LandscapeNavigation } from './LandscapeNavigation';
@@ -34,7 +34,14 @@ import { AnchorPointState } from '@/module/domain/AnchorPointState';
 
 export default defineComponent({
   name: 'LandscapeVue',
-  components: { LandscapeModuleVue, ModulePropertiesFormVue, ProjectActionsVue, IconVue, LandscapeLoaderVue, LandscapeMiniMapVue },
+  components: {
+    LandscapeModuleVue,
+    ModulePropertiesFormVue,
+    ProjectActionsVue,
+    IconVue,
+    LandscapeLoaderVue,
+    LandscapeMiniMapVue,
+  },
   setup() {
     const applicationListener = inject('applicationListener') as ApplicationListener;
     const alertBus = inject('alertBus') as AlertBus;
@@ -146,7 +153,10 @@ export default defineComponent({
         if (!startingElementSlugExists) {
           anchorPointModulesMap.value.set(startingElementSlug, { atStart: true, atEnd: false });
         } else {
-          anchorPointModulesMap.value.set(startingElementSlug, { atStart: true, atEnd: startingElementSlugExists.atEnd });
+          anchorPointModulesMap.value.set(startingElementSlug, {
+            atStart: true,
+            atEnd: startingElementSlugExists.atEnd,
+          });
         }
 
         const endingElementSlugExists = anchorPointModulesMap.value.get(endingElementSlug);

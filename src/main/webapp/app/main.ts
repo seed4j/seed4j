@@ -1,19 +1,19 @@
-import { AxiosHttp } from '@/http/AxiosHttp';
+import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp';
 import router from '@/router';
 import axios from 'axios';
 import { createApp } from 'vue';
-import App from '@/common/primary/app/App.vue';
-import ConsoleLogger from '@/common/secondary/ConsoleLogger';
-import { MittAlertBus } from '@/common/secondary/alert/MittAlertBus';
+import App from '@/root/infrastructure/primary/App.vue';
+import ConsoleLogger from '@/shared/logger/infrastructure/secondary/ConsoleLogger';
+import { MittAlertBus } from '@/shared/alert/infrastructure/secondary/MittAlertBus';
 import mitt from 'mitt';
 
-import { MittAlertListener } from '@/common/secondary/alert/MittAlertListener';
+import { MittAlertListener } from '@/shared/alert/infrastructure/secondary/MittAlertListener';
 import { RestModulesRepository } from './module/secondary/RestModulesRepository';
 import { RestProjectFoldersRepository } from '@/module/secondary/RestProjectFoldersRepository';
 import { RestManagementRepository } from '@/module/secondary/RestManagementRepository';
-import { WindowApplicationListener } from './common/primary/applicationlistener/WindowApplicationListener';
-import { Timeout } from '@/common/primary/timeout/Timeout';
-import { BodyCursorUpdater } from '@/common/primary/cursor/BodyCursorUpdater';
+import { WindowApplicationListener } from './shared/alert/infrastructure/primary/WindowApplicationListener';
+import { Timeout } from '@/shared/toast/infrastructure/primary/Timeout';
+import { BodyCursorUpdater } from '@/module/primary/landscape/BodyCursorUpdater';
 import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller';
 import { LocalWindowThemeRepository } from './module/secondary/LocalWindowThemeRepository';
 import { LocalStorageModuleParametersRepository } from './module/secondary/LocalStorageModuleParametersRepository';

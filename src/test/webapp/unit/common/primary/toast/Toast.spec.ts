@@ -1,9 +1,9 @@
 import { shallowMount, VueWrapper } from '@vue/test-utils';
-import { ToastVue } from '@/common/primary/toast';
-import { ToastType } from '@/common/primary/toast/ToastType';
-import { AlertListener } from '@/common/domain/alert/AlertListener';
-import { AlertListenerFixture, stubAlertListener } from '../../domain/AlertListener.fixure';
-import { TimeoutListener } from '@/common/primary/timeout/Timeout';
+import { ToastVue } from '@/shared/toast/infrastructure/primary';
+import { ToastType } from '@/shared/toast/infrastructure/primary/ToastType';
+import { AlertListener } from '@/shared/alert/domain/AlertListener';
+import { AlertListenerFixture, stubAlertListener } from '../../../shared/alert/domain/AlertListener.fixure';
+import { TimeoutListener } from '@/shared/toast/infrastructure/primary/Timeout';
 import { stubTimeout } from '../timeout/Timeout.fixture';
 import { describe, it, expect, vi } from 'vitest';
 

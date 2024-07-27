@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import { IconVue } from '@/common/primary/icon';
+import { IconVue } from '@/shared/icon/infrastructure/primary';
 import { describe, it, expect } from 'vitest';
 
 describe('Icon', () => {

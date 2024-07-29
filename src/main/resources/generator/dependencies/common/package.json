@@ -35,7 +35,7 @@
     "postcss": "8.4.40",
     "postcss-cli": "11.0.0",
     "prettier": "3.3.3",
-    "prettier-plugin-gherkin": "2.4.0",
+    "prettier-plugin-gherkin": "2.4.1",
     "prettier-plugin-java": "2.6.4",
     "prettier-plugin-packagejson": "2.5.1",
     "recursive-copy-cli": "1.0.20",

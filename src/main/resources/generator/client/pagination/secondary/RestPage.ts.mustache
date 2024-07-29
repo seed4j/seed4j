@@ -1,0 +1,42 @@
+import { Page } from '@/shared/pagination/domain/Page';
+
+export type RestData<T> = {
+  data: T;
+};
+
+export type RestPage<T> = {
+  currentPage: number;
+  pagesCount: number;
+  pageSize: number;
+  hasPrevious: boolean;
+  hasNext: boolean;
+  totalElementsCount: number;
+  content: T[];
+};
+
+export const toPage =
+  <Data, Result>(mapper: (restData: Data) => Result) =>
+  (response: RestData<RestPage<Data>>): Page<Result> => {
+    const data = response.data;
+
+    return {
+      currentPage: data.currentPage + 1,
+      pagesCount: data.pagesCount,
+      hasPrevious: data.hasPrevious,
+      hasNext: data.hasNext,
+      totalElementsCount: data.totalElementsCount,
+      displayed: {
+        start: startElementIndex<Data>(data),
+        end: Math.min((data.currentPage + 1) * data.pageSize, data.totalElementsCount),
+      },
+      content: data.content.map(mapper),
+    };
+  };
+
+const startElementIndex = <Data>(data: RestPage<Data>): number => {
+  if (data.totalElementsCount === 0) {
+    return 0;
+  }
+
+  return data.currentPage * data.pageSize + 1;
+};

@@ -93,7 +93,7 @@
     "vite": "5.3.4",
     "vitest": "2.0.4",
     "vitest-sonar-reporter": "2.0.0",
-    "vue-tsc": "2.0.28"
+    "vue-tsc": "2.0.29"
   },
   "engines": {
     "node": ">=20"

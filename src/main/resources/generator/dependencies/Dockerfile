@@ -13,4 +13,4 @@ FROM apache/kafka:3.8.0
 FROM tchiotludo/akhq:0.25.1
 FROM apachepulsar/pulsar:3.3.0
 FROM neo4j:5.22.0-community
-FROM redis:7.2.5
+FROM redis:7.4.0

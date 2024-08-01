@@ -25,7 +25,7 @@
     <mongock.version>5.4.4</mongock.version>
     <neo4j-migrations.version>2.11.0</neo4j-migrations.version>
     <pulsar.version>3.3.0</pulsar.version>
-    <liquibase.version>4.29.0</liquibase.version>
+    <liquibase.version>4.29.1</liquibase.version>
     <reflections.version>0.10.2</reflections.version>
     <json-web-token.version>0.12.6</json-web-token.version>
     <commons-lang3.version>3.15.0</commons-lang3.version>

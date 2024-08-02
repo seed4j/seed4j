@@ -1,4 +1,4 @@
-package tech.jhipster.lite.generator.server.springboot.cucumberauthentication.domain;
+package tech.jhipster.lite.generator.server.springboot.cucumber_authentication.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 

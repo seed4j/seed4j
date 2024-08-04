@@ -50,7 +50,7 @@
     "mitt": "3.0.1",
     "piqure": "2.0.0",
     "placeholder-loading": "0.6.0",
-    "vue": "3.4.34",
+    "vue": "3.4.35",
     "vue-router": "4.4.0"
   },
   "devDependencies": {

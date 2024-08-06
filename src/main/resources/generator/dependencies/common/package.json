@@ -13,7 +13,7 @@
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "@vitest/coverage-istanbul": "2.0.5",
-    "autoprefixer": "10.4.19",
+    "autoprefixer": "10.4.20",
     "browser-sync": "3.0.2",
     "cssnano": "7.0.4",
     "cypress": "13.13.2",

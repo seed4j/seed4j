@@ -9,7 +9,7 @@
     "@prettier/plugin-xml": "3.4.1",
     "@tsconfig/recommended": "1.0.7",
     "@types/jest": "29.5.12",
-    "@types/node": "20.14.13",
+    "@types/node": "20.14.14",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "@vitest/coverage-istanbul": "2.0.5",

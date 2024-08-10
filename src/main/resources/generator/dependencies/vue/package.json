@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "axios": "1.7.3",
-    "pinia": "2.2.0",
+    "pinia": "2.2.1",
     "pinia-plugin-persistedstate": "3.2.1",
     "vue": "3.4.35",
     "vue-router": "4.4.2"

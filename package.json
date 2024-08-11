@@ -91,7 +91,7 @@
     "stylelint-config-standard-scss": "13.1.0",
     "tikuidoc-tikui": "7.0.0",
     "typescript": "5.5.4",
-    "vite": "5.3.5",
+    "vite": "5.4.0",
     "vitest": "2.0.5",
     "vitest-sonar-reporter": "2.0.0",
     "vue-tsc": "2.0.29"

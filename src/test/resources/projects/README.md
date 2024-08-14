@@ -24,6 +24,8 @@ npm install
 
 <!-- jhipster-needle-startupCommand -->
 
+<!-- jhipster-needle-sonarAnalysisCommand -->
+
 ## Documentation
 
 <!-- jhipster-needle-documentation -->

@@ -27,6 +27,7 @@ public final class JHipsterModuleChanges {
   private final JHipsterFilesToDelete filesToDelete;
   private final ContentReplacers replacers;
   private final JHipsterStartupCommands startupCommands;
+  private final JHipsterStartupCommands sonarAnalysisCommands;
   private final JavaBuildCommands javaBuildCommands;
   private final JHipsterModulePackageJson packageJson;
   private final JHipsterModulePreActions preActions;
@@ -49,6 +50,7 @@ public final class JHipsterModuleChanges {
     filesToDelete = builder.filesToDelete;
     replacers = builder.replacers;
     startupCommands = builder.startupCommands;
+    sonarAnalysisCommands = builder.sonarAnalysisCommands;
     javaBuildCommands = builder.javaBuildCommands;
     packageJson = builder.packageJson;
     preActions = builder.preActions;
@@ -111,6 +113,10 @@ public final class JHipsterModuleChanges {
     return startupCommands;
   }
 
+  public JHipsterStartupCommands sonarAnalysisCommands() {
+    return sonarAnalysisCommands;
+  }
+
   public JavaBuildCommands javaBuildCommands() {
     return javaBuildCommands;
   }
@@ -162,6 +168,7 @@ public final class JHipsterModuleChanges {
       JHipsterModuleChangesFilesToDeleteBuilder,
       JHipsterModuleChangesReplacersBuilder,
       JHipsterModuleChangesStartupCommandsBuilder,
+      JHipsterModuleChangesSonarAnalysisCommandsBuilder,
       JHipsterModuleChangesJavaBuildCommandsBuilder,
       JHipsterModuleChangesPackageJsonBuilder,
       JHipsterModuleChangesPreActionsBuilder,
@@ -179,6 +186,7 @@ public final class JHipsterModuleChanges {
     private JHipsterFilesToDelete filesToDelete;
     private ContentReplacers replacers;
     private JHipsterStartupCommands startupCommands;
+    private JHipsterStartupCommands sonarAnalysisCommands;
     private JavaBuildCommands javaBuildCommands;
     private JHipsterModulePackageJson packageJson;
     private Indentation indentation;
@@ -241,8 +249,15 @@ public final class JHipsterModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChangesJavaBuildCommandsBuilder startupCommands(JHipsterStartupCommands startupCommands) {
+    public JHipsterModuleChangesSonarAnalysisCommandsBuilder startupCommands(JHipsterStartupCommands startupCommands) {
       this.startupCommands = startupCommands;
+
+      return this;
+    }
+
+    @Override
+    public JHipsterModuleChangesJavaBuildCommandsBuilder sonarAnalysisCommands(JHipsterStartupCommands sonarAnalysisCommands) {
+      this.sonarAnalysisCommands = sonarAnalysisCommands;
 
       return this;
     }
@@ -347,7 +362,11 @@ public final class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesStartupCommandsBuilder {
-    JHipsterModuleChangesJavaBuildCommandsBuilder startupCommands(JHipsterStartupCommands startupCommands);
+    JHipsterModuleChangesSonarAnalysisCommandsBuilder startupCommands(JHipsterStartupCommands startupCommands);
+  }
+
+  public interface JHipsterModuleChangesSonarAnalysisCommandsBuilder {
+    JHipsterModuleChangesJavaBuildCommandsBuilder sonarAnalysisCommands(JHipsterStartupCommands sonarAnalysisCommands);
   }
 
   public interface JHipsterModuleChangesJavaBuildCommandsBuilder {

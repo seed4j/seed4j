@@ -33,6 +33,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
   private final FileSystemGitIgnoreHandler gitIgnore;
   private final FileSystemReplacer replacer;
   private final FileSystemStartupCommandsReadmeCommandsHandler startupCommands;
+  private final FileSystemSonarAnalysisCommandsReadmeCommandsHandler sonarAnalysisCommands;
   private final JHipsterLandscape landscape;
 
   public FileSystemJHipsterModulesRepository(
@@ -43,7 +44,8 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
     FileSystemGitIgnoreHandler gitIgnore,
     FileSystemJavaBuildCommandsHandler javaBuild,
     FileSystemPackageJsonHandler packageJson,
-    FileSystemStartupCommandsReadmeCommandsHandler startupCommands
+    FileSystemStartupCommandsReadmeCommandsHandler startupCommands,
+    FileSystemSonarAnalysisCommandsReadmeCommandsHandler sonarAnalysisCommands
   ) {
     this.projects = projects;
     this.resources = resources;
@@ -60,6 +62,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
     this.packageJson = packageJson;
     this.replacer = fileReplacer;
     this.startupCommands = startupCommands;
+    this.sonarAnalysisCommands = sonarAnalysisCommands;
   }
 
   public static Map<SpringPropertyType, List<String>> buildPaths() {
@@ -94,6 +97,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
     packageJson.handle(changes.indentation(), changes.projectFolder(), changes.packageJson(), changes.context());
     replacer.handle(changes.projectFolder(), changes.replacers(), changes.context());
     startupCommands.handle(changes.projectFolder(), changes.startupCommands(), changes.context());
+    sonarAnalysisCommands.handle(changes.projectFolder(), changes.sonarAnalysisCommands(), changes.context());
 
     changes.postActions().run(new JHipsterModuleExecutionContext(changes.projectFolder()));
   }

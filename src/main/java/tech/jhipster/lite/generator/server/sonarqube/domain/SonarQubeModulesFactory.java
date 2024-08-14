@@ -50,7 +50,7 @@ public class SonarQubeModulesFactory {
         .put("sonarqubeDockerImage", dockerImages.get(SONARQUBE).fullName())
         .and()
       .documentation(documentationTitle("sonar"), SOURCE.template("sonar.md"))
-      .startupCommands()
+      .sonarAnalysisCommands()
         .dockerCompose("src/main/docker/sonar.yml")
         .maven("clean verify sonar:sonar")
         .gradle("clean build sonar --info")

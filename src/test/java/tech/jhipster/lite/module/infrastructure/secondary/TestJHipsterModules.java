@@ -79,7 +79,8 @@ public final class TestJHipsterModules {
         new FileSystemGitIgnoreHandler(fileReplacer),
         new FileSystemJavaBuildCommandsHandler(new FileSystemProjectJavaBuildToolRepository(), files, fileReplacer),
         new FileSystemPackageJsonHandler(NpmVersionsFixture.npmVersions(filesReader, customNpmVersionsReaders), templateRenderer),
-        new FileSystemStartupCommandsReadmeCommandsHandler(fileReplacer)
+        new FileSystemStartupCommandsReadmeCommandsHandler(fileReplacer),
+        new FileSystemSonarAnalysisCommandsReadmeCommandsHandler(fileReplacer)
       );
 
       return new JHipsterModulesApplicationService(

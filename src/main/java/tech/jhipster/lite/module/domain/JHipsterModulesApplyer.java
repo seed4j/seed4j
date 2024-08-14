@@ -85,6 +85,7 @@ public class JHipsterModulesApplyer {
       .filesToDelete(module.filesToDelete())
       .replacers(buildReplacers(module))
       .startupCommands(buildStartupCommands(module))
+      .sonarAnalysisCommands(buildSonarAnalysisCommands(module))
       .javaBuildCommands(
         buildDependenciesChanges(module)
           .merge(buildPluginsChanges(module))
@@ -143,6 +144,20 @@ public class JHipsterModulesApplyer {
       return module.startupCommands();
     }
     var filteredCommands = module.startupCommands().get().stream().filter(isStartupCommandCompatibleWith(javaBuildTool.get())).toList();
+    return new JHipsterStartupCommands(filteredCommands);
+  }
+
+  private JHipsterStartupCommands buildSonarAnalysisCommands(JHipsterModule module) {
+    Optional<JavaBuildTool> javaBuildTool = detectedJavaBuildTool(module);
+    if (javaBuildTool.isEmpty()) {
+      return module.sonarAnalysisCommands();
+    }
+    var filteredCommands = module
+      .sonarAnalysisCommands()
+      .get()
+      .stream()
+      .filter(isStartupCommandCompatibleWith(javaBuildTool.get()))
+      .toList();
     return new JHipsterStartupCommands(filteredCommands);
   }
 

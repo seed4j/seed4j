@@ -79,6 +79,7 @@ public final class JHipsterModule {
   private final JHipsterModuleMandatoryReplacementsFactory mandatoryReplacements;
   private final JHipsterModuleOptionalReplacementsFactory optionalReplacements;
   private final JHipsterModuleStartupCommands startupCommands;
+  private final JHipsterModuleStartupCommands sonarAnalysisCommands;
   private final JHipsterModuleContext context;
   private final JHipsterModuleJavaDependencies javaDependencies;
   private final JHipsterModuleBuildProperties javaBuildProperties;
@@ -102,6 +103,7 @@ public final class JHipsterModule {
     mandatoryReplacements = builder.mandatoryReplacements.build();
     optionalReplacements = builder.optionalReplacements.build();
     startupCommands = builder.startupCommands.build();
+    sonarAnalysisCommands = builder.sonarAnalysisCommands.build();
     context = builder.context.build();
     javaDependencies = builder.javaDependencies.build();
     javaBuildProperties = builder.javaBuildProperties.build();
@@ -127,6 +129,7 @@ public final class JHipsterModule {
     mandatoryReplacements = source.mandatoryReplacements;
     optionalReplacements = source.optionalReplacements.add(upgrade.replacements());
     startupCommands = source.startupCommands;
+    sonarAnalysisCommands = source.sonarAnalysisCommands;
     context = source.context;
     javaDependencies = source.javaDependencies;
     javaBuildProperties = source.javaBuildProperties;
@@ -414,6 +417,10 @@ public final class JHipsterModule {
     return startupCommands.commands();
   }
 
+  public JHipsterStartupCommands sonarAnalysisCommands() {
+    return sonarAnalysisCommands.commands();
+  }
+
   public JHipsterModuleJavaDependencies javaDependencies() {
     return javaDependencies;
   }
@@ -484,6 +491,7 @@ public final class JHipsterModule {
       this
     );
     private final JHipsterModuleStartupCommandsBuilder startupCommands = JHipsterModuleStartupCommands.builder(this);
+    private final JHipsterModuleStartupCommandsBuilder sonarAnalysisCommands = JHipsterModuleStartupCommands.builder(this);
     private final JHipsterModuleJavaDependenciesBuilder<JHipsterModuleBuilder> javaDependencies = JHipsterModuleJavaDependencies.builder(
       this
     );
@@ -528,6 +536,10 @@ public final class JHipsterModule {
 
     public JHipsterModuleStartupCommandsBuilder startupCommands() {
       return startupCommands;
+    }
+
+    public JHipsterModuleStartupCommandsBuilder sonarAnalysisCommands() {
+      return sonarAnalysisCommands;
     }
 
     public JHipsterModuleBuilder prerequisites(String prerequisites) {

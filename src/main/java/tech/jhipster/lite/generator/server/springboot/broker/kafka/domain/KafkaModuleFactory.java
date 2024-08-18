@@ -31,6 +31,7 @@ public class KafkaModuleFactory {
     return moduleBuilder(properties)
       .context()
         .put("kafkaDockerImage", dockerImages.get("apache/kafka").fullName())
+        .put("kafkaDockerNativeImage", dockerImages.get("apache/kafka-native").fullName())
         .put("kafkaClusterId", kafkaClusterId)
         .and()
       .documentation(documentationTitle("Apache Kafka"), SOURCE.template("apache-kafka.md"))

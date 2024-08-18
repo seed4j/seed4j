@@ -29,6 +29,7 @@ class KafkaModuleFactoryTest {
   @Test
   void shouldBuildKafkaModuleInit() {
     when(dockerImages.get("apache/kafka")).thenReturn(new DockerImageVersion("apache/kafka", "1.0.0"));
+    when(dockerImages.get("apache/kafka-native")).thenReturn(new DockerImageVersion("apache/kafka-native", "1.0.0"));
 
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
       .basePackage("tech.jhipster.jhlitest")
@@ -52,6 +53,7 @@ class KafkaModuleFactoryTest {
       .containing("<artifactId>kafka</artifactId>")
       .and()
       .hasFile("src/main/docker/kafka.yml")
+      .containing("image: apache/kafka:")
       .containing("CLUSTER_ID: 'my-cluster'")
       .and()
       .hasFile("src/main/resources/config/application.yml")
@@ -81,6 +83,7 @@ class KafkaModuleFactoryTest {
       )
       .and()
       .hasFile("src/test/java/tech/jhipster/jhlitest/KafkaTestContainerExtension.java")
+      .containing("apache/kafka-native")
       .and()
       .hasFile("src/test/java/tech/jhipster/jhlitest/IntegrationTest.java")
       .containing("@ExtendWith(KafkaTestContainerExtension.class)")

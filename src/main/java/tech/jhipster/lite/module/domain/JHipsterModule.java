@@ -290,6 +290,10 @@ public final class JHipsterModule {
     return new RegexNeedleAfterReplacer(notContainingReplacement(), Pattern.compile(regex, Pattern.MULTILINE));
   }
 
+  public static EndOfFileReplacer append() {
+    return new EndOfFileReplacer(ReplacementCondition.always());
+  }
+
   public static BuildProfileId buildProfileId(String id) {
     return new BuildProfileId(id);
   }

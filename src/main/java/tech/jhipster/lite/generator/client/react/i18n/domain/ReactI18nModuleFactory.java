@@ -1,4 +1,4 @@
-package tech.jhipster.lite.generator.client.tools.reacti18n.domain;
+package tech.jhipster.lite.generator.client.react.i18n.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 
@@ -10,8 +10,9 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class ReactI18nModuleFactory {
 
-  private static final JHipsterSource APP_SOURCE = from("client/common/reacti18n/src/main/webapp/app");
-  private static final JHipsterSource ASSETS_SOURCE = from("client/common/reacti18n/src/main/webapp/assets");
+  private static final JHipsterSource APP_SOURCE = from("client/react/i18n/src/main/webapp/app");
+  private static final JHipsterSource ASSETS_FR_SOURCE = from("client/react/i18n/src/main/webapp/assets/locales/fr");
+  private static final JHipsterSource ASSETS_EN_SOURCE = from("client/react/i18n/src/main/webapp/assets/locales/en");
 
   private static final String INDEX = "src/main/webapp/";
   private static final String INDEX_TEST = "src/test/webapp/unit/common/primary/app/";
@@ -22,15 +23,21 @@ public class ReactI18nModuleFactory {
     //@formatter:off
     return moduleBuilder(properties)
       .packageJson()
-      .addDependency(packageName("i18next"), VersionSource.REACT)
-      .addDependency(packageName("i18next-browser-languagedetector"), VersionSource.REACT)
-      .addDependency(packageName("i18next-http-backend"), VersionSource.REACT)
+      .addDependency(packageName("i18next"), VersionSource.COMMON)
+      .addDependency(packageName("i18next-browser-languagedetector"), VersionSource.COMMON)
+      .addDependency(packageName("i18next-http-backend"), VersionSource.COMMON)
       .addDependency(packageName("react-i18next"), VersionSource.REACT)
       .and()
       .files()
-      .add(APP_SOURCE.template("i18n.ts"), to(INDEX + "app/i18n.ts"))
-      .add(ASSETS_SOURCE.template("english.json"), to(INDEX + "assets/locales/en/translation.json"))
-      .add(ASSETS_SOURCE.template("french.json"), to(INDEX + "assets/locales/fr/translation.json"))
+      .batch(APP_SOURCE, to(INDEX + "/app"))
+        .addFile("i18n.ts")
+        .and()
+      .batch(ASSETS_EN_SOURCE, to(INDEX + "assets/locales/en/"))
+        .addFile("translation.json")
+        .and()
+      .batch(ASSETS_FR_SOURCE, to(INDEX + "assets/locales/fr/"))
+        .addFile("translation.json")
+        .and()
       .and()
       .mandatoryReplacements()
         .in(path(INDEX + "app/common/primary/app/App.tsx"))

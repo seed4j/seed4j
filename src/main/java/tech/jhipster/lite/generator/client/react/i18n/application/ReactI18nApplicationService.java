@@ -1,7 +1,7 @@
-package tech.jhipster.lite.generator.client.tools.reacti18n.application;
+package tech.jhipster.lite.generator.client.react.i18n.application;
 
 import org.springframework.stereotype.Service;
-import tech.jhipster.lite.generator.client.tools.reacti18n.domain.ReactI18nModuleFactory;
+import tech.jhipster.lite.generator.client.react.i18n.domain.ReactI18nModuleFactory;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 

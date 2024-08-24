@@ -1,4 +1,4 @@
-package tech.jhipster.lite.generator.client.tools.reacti18n.domain;
+package tech.jhipster.lite.generator.client.react.i18n.domain;
 
 import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
 

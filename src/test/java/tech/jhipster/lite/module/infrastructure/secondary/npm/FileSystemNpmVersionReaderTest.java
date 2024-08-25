@@ -42,6 +42,15 @@ class FileSystemNpmVersionReaderTest {
     assertThat(version).isEqualTo(new NpmPackageVersion("1.2.3"));
   }
 
+  @Test
+  void shouldGetVersionFromEmptySourceWithEmptyDevSource() {
+    emptyProjectFiles();
+
+    NpmPackageVersion version = reader.get().get(new NpmPackageName("vue"), NpmVersionSource.COMMON);
+
+    assertThat(version).isEqualTo(new NpmPackageVersion("1.2.3"));
+  }
+
   private void mockProjectFiles() {
     when(projectFiles.readString(anyString())).thenReturn(
       """
@@ -76,6 +85,22 @@ class FileSystemNpmVersionReaderTest {
           "ts-jest": "27.1.4",
           "typescript": "4.7.3"
         }
+      }
+      """
+    );
+  }
+
+  private void emptyProjectFiles() {
+    when(projectFiles.readString(anyString())).thenReturn(
+      """
+      {
+        "name": "jhlite-dependencies",
+        "version": "0.0.0",
+        "description": "JHipster Lite : used for Dependencies",
+        "license": "Apache-2.0",
+        "dependencies": {
+          "vue": "1.2.3"
+        },
       }
       """
     );

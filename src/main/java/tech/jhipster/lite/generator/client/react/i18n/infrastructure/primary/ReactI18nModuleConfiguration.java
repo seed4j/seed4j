@@ -12,7 +12,7 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModulePropertiesDefinit
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 
 @Configuration
-public class ReactI18nModuleConfiguration {
+class ReactI18nModuleConfiguration {
 
   @Bean
   JHipsterModuleResource i18nModule(ReactI18nApplicationService i18n) {

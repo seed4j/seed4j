@@ -1,5 +1,5 @@
 [versions]
-checkstyle = "10.17.0"
+checkstyle = "10.18.0"
 jib = "3.4.3"
 git-properties = "2.4.2"
 protobuf-plugin = "0.9.4"

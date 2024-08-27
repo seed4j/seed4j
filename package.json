@@ -49,7 +49,7 @@
     "vue-router": "4.4.3"
   },
   "devDependencies": {
-    "@eslint/js": "9.9.0",
+    "@eslint/js": "9.9.1",
     "@prettier/plugin-pug": "3.0.0",
     "@prettier/plugin-xml": "3.4.1",
     "@tikui/core": "6.1.1",
@@ -60,7 +60,7 @@
     "@vitest/coverage-istanbul": "2.0.5",
     "@vue/test-utils": "2.4.6",
     "cypress": "13.13.3",
-    "eslint": "9.9.0",
+    "eslint": "9.9.1",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-cypress": "3.5.0",
     "eslint-plugin-pug": "1.2.5",

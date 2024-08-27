@@ -47,7 +47,7 @@
     "recursive-copy-cli": "1.0.20",
     "start-server-and-test": "2.0.5",
     "tailwindcss": "3.4.10",
-    "ts-jest": "29.2.4",
+    "ts-jest": "29.2.5",
     "typescript": "5.5.4",
     "vite": "5.4.2",
     "vite-tsconfig-paths": "5.0.1",

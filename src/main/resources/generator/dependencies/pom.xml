@@ -67,7 +67,7 @@
     <jib-maven-plugin.version>3.4.3</jib-maven-plugin.version>
     <compiler-plugin.version>3.13.0</compiler-plugin.version>
     <surefire-plugin.version>3.4.0</surefire-plugin.version>
-    <failsafe-plugin.version>3.4.0</failsafe-plugin.version>
+    <failsafe-plugin.version>3.5.0</failsafe-plugin.version>
     <asciidoctor-maven-plugin.version>3.0.0</asciidoctor-maven-plugin.version>
   </properties>
 

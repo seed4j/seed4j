@@ -21,7 +21,7 @@
     "autoprefixer": "10.4.20",
     "browser-sync": "3.0.2",
     "cssnano": "7.0.5",
-    "cypress": "13.13.3",
+    "cypress": "13.14.0",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-typescript": "3.6.3",

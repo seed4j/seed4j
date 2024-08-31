@@ -14,17 +14,12 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 public class VueModulesFactory {
 
   private static final JHipsterSource SOURCE = from("client/vue");
+  private static final JHipsterSource APP_SOURCE = from("client/vue/webapp/app");
   private static final JHipsterSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test/unit");
   private static final JHipsterSource IMAGE_SOURCE = SOURCE.append("webapp/content/images");
-  private static final JHipsterSource COMMON_PRIMARY_SOURCE = SOURCE.append("webapp/app/common/primary");
-  private static final JHipsterSource COMMON_PRIMARY_TEST_SOURCE = SOURCE.append("test/unit/common/primary");
   private static final JHipsterSource SOURCE_COMMON = from("client/common");
 
   private static final JHipsterDestination MAIN_DESTINATION = to("src/main/webapp/app");
-  private static final JHipsterDestination TEST_DESTINATION = to("src/test/webapp/unit");
-  private static final JHipsterDestination MAIN_PRIMARY_DESTINATION = MAIN_DESTINATION.append("common/primary");
-  private static final JHipsterDestination COMMON_PRIMARY_TEST_DESTINATION = to("src/test/webapp/unit/common/primary");
 
   private static final String IMPORT_NEEDLE = "// jhipster-needle-main-ts-import";
   private static final String PROVIDER_NEEDLE = "// jhipster-needle-main-ts-provider";
@@ -79,6 +74,7 @@ public class VueModulesFactory {
         .addScript(scriptKey("dev"), scriptCommand("npm-run-all --parallel dev:*"))
         .addScript(scriptKey("dev:vite"), scriptCommand("vite"))
         .addScript(scriptKey("watch"), scriptCommand("npm-run-all --parallel watch:*"))
+        .addDevDependency(packageName("piqure"), VUE)
         .addScript(scriptKey("lint"), scriptCommand("eslint ."))
         .addScript(scriptKey("preview"), scriptCommand("vite preview"))
         .addScript(scriptKey("start"), scriptCommand("vite"))
@@ -92,7 +88,6 @@ public class VueModulesFactory {
         .add(SOURCE.template("eslint.config.js.mustache"), to("eslint.config.js"))
         .add(SOURCE.file("tsconfig.json"), to("tsconfig.json"))
         .add(SOURCE.file("tsconfig.build.json"), to("tsconfig.build.json"))
-        .add(SOURCE.template("webapp/app/http/AxiosHttp.ts.mustache"), MAIN_DESTINATION.append("http/AxiosHttp.ts"))
         .batch(SOURCE, to("."))
           .addTemplate("vite.config.ts")
           .addTemplate("vitest.config.ts")
@@ -100,49 +95,25 @@ public class VueModulesFactory {
         .batch(SOURCE_COMMON, to("."))
           .addFile(".npmrc")
           .and()
-        .batch(SOURCE.file("test/unit/http"), to("src/test/webapp/unit/http"))
-          .addTemplate("AxiosHttp.spec.ts")
-          .addTemplate("AxiosHttpStub.ts")
-          .addTemplate("AxiosStub.ts")
-          .and()
         .add(SOURCE.template("webapp/index.html"), to("src/main/webapp/index.html"))
-        .batch(SOURCE.append("webapp/app"), MAIN_DESTINATION)
+        .batch(APP_SOURCE, MAIN_DESTINATION)
           .addTemplate("env.d.ts")
           .addTemplate("main.ts")
-          .and()
-        .batch(COMMON_PRIMARY_SOURCE.append("app"), MAIN_PRIMARY_DESTINATION.append("app"))
-          .addTemplate("App.component.ts")
-          .addTemplate("App.html")
           .addTemplate("AppVue.vue")
-          .addTemplate("index.ts")
+          .addTemplate("injections.ts")
+          .addTemplate("router.ts")
           .and()
+        .batch(APP_SOURCE.append("home"), MAIN_DESTINATION.append("home"))
+          .addTemplate("application/HomeRouter.ts")
+          .addTemplate("infrastructure/primary/HomepageVue.vue")
+          .and()
+        .add(APP_SOURCE.template("shared/http/infrastructure/secondary/AxiosHttp.ts.mustache"), MAIN_DESTINATION.append("shared/http/infrastructure/secondary/AxiosHttp.ts"))
         .batch(IMAGE_SOURCE, to("src/main/webapp/content/images"))
           .addFile("JHipster-Lite-neon-green.png")
           .addFile("VueLogo.png")
           .and()
-        .add(COMMON_PRIMARY_TEST_SOURCE.template("app/App.spec.ts"), COMMON_PRIMARY_TEST_DESTINATION.append("app/App.spec.ts"))
-        .batch(COMMON_PRIMARY_SOURCE.append("homepage"), MAIN_PRIMARY_DESTINATION.append("homepage"))
-          .addTemplate("Homepage.component.ts")
-          .addTemplate("Homepage.html")
-          .addTemplate("HomepageVue.vue")
-          .addTemplate("index.ts")
-          .and()
-        .add(COMMON_PRIMARY_TEST_SOURCE.template("homepage/Homepage.spec.ts"), COMMON_PRIMARY_TEST_DESTINATION.append("homepage/Homepage.spec.ts"))
-        .add(SOURCE.template("webapp/app/router/router.ts"), MAIN_DESTINATION.append("router/router.ts"))
-        .add(SOURCE.template("test/unit/router/Router.spec.ts"), to("src/test/webapp/unit/router/Router.spec.ts"))
-        .batch(SOURCE.append("webapp/app/common/domain"), MAIN_DESTINATION.append("common/domain"))
-          .addTemplate("Logger.ts")
-          .addTemplate("Message.ts")
-          .and()
-        .add(SOURCE.template("webapp/app/common/secondary/ConsoleLogger.ts"), MAIN_DESTINATION.append("common/secondary/ConsoleLogger.ts"))
-        .add(SOURCE.template("test/unit/common/domain/Logger.fixture.ts"), to("src/test/webapp/unit/common/domain/Logger.fixture.ts"))
-        .add(SOURCE.template("test/unit/common/secondary/ConsoleLogger.spec.ts"), to("src/test/webapp/unit/common/secondary/ConsoleLogger.spec.ts"))
-        .add(SOURCE.file("webapp/app/vue/VueProp.ts"), to("src/main/webapp/app/vue/VueProp.ts"))
-        .batch(TEST_SOURCE.append("vue/vue-prop"), TEST_DESTINATION.append("vue/vue-prop"))
-          .addFile("ArrayComponentVue.vue")
-          .addFile("ObjectComponentVue.vue")
-          .addFile("VueProp.spec.ts")
-          .and()
+        .add(SOURCE.template("webapp/app/router.ts"), MAIN_DESTINATION.append("router.ts"))
+        .add(SOURCE.template("Dummy.spec.ts"), to("src/test/webapp/unit/Dummy.spec.ts"))
         .and()
       .build();
     //@formatter:on

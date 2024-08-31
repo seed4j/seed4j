@@ -5,8 +5,8 @@ Feature: Vue.js modules
       | init     |
       | prettier |
       | vue-core |
-    Then I should have files in "src/main/webapp/app/http"
-      | AxiosHttp.ts |
+    Then I should have files in "src/main/webapp/app"
+      | AppVue.vue |
 
   Scenario: Should apply pinia module
     Given I apply "vue-core" module to default project with package json without parameters

@@ -57,6 +57,7 @@ class VueModulesFactoryTest {
         .containing(nodeScript("watch", "npm-run-all --parallel watch:*"))
         .containing(nodeScript("watch:tsc", "vue-tsc -p tsconfig.build.json --noEmit --watch"))
         .containing(nodeScript("watch:test", "vitest --"))
+        .containing(nodeDependency("piqure"))
         .containing(nodeScript("lint", "eslint ."))
         .containing(nodeScript("preview", "vite preview"))
         .containing(nodeScript("start", "vite"))
@@ -75,33 +76,12 @@ class VueModulesFactoryTest {
         )
       .and()
       .hasPrefixedFiles("", ".npmrc", "eslint.config.js", "tsconfig.json", "tsconfig.build.json", "vite.config.ts", "vitest.config.ts")
-      .hasFiles("src/main/webapp/app/http/AxiosHttp.ts")
-      .hasPrefixedFiles("src/test/webapp/unit/http", "AxiosHttp.spec.ts", "AxiosHttpStub.ts", "AxiosStub.ts")
+      .hasFiles("src/main/webapp/app/shared/http/infrastructure/secondary/AxiosHttp.ts")
       .hasFiles("src/main/webapp/index.html")
-      .hasPrefixedFiles("src/main/webapp/app", "env.d.ts")
-      .hasPrefixedFiles("src/main/webapp/app/common/primary/app", "App.component.ts", "index.ts", "App.html", "AppVue.vue")
+      .hasPrefixedFiles("src/main/webapp/app", "env.d.ts", "AppVue.vue", "injections.ts", "router.ts", "main.ts")
+      .hasPrefixedFiles("src/main/webapp/app/home","infrastructure/primary/HomepageVue.vue", "application/HomeRouter.ts")
       .hasPrefixedFiles("src/main/webapp/content/images", "JHipster-Lite-neon-green.png", "VueLogo.png")
-      .hasFiles("src/test/webapp/unit/common/primary/app/App.spec.ts")
-      .hasPrefixedFiles("src/main/webapp/app/common/primary/homepage", "Homepage.component.ts", "Homepage.html","HomepageVue.vue", "index.ts")
-      .hasFile("src/main/webapp/app/common/primary/homepage/Homepage.component.ts")
-        .containing("appName: 'jhiTest'")
-        .and()
-      .hasFiles("src/test/webapp/unit/common/primary/homepage/Homepage.spec.ts")
-      .hasFiles("src/main/webapp/app/router/router.ts", "src/test/webapp/unit/router/Router.spec.ts")
-      .hasFile("src/main/webapp/app/main.ts")
-        .containing("import router from './router/router';")
-        .containing("app.use(router);")
-        .and()
-      .hasPrefixedFiles("src/main/webapp/app/common/domain", "Logger.ts", "Message.ts")
-      .hasFiles("src/main/webapp/app/common/secondary/ConsoleLogger.ts")
-      .hasFiles("src/test/webapp/unit/common/domain/Logger.fixture.ts")
-      .hasFiles("src/test/webapp/unit/common/secondary/ConsoleLogger.spec.ts")
-      .hasFiles("src/main/webapp/app/vue/VueProp.ts")
-      .hasFiles(
-        "src/test/webapp/unit/vue/vue-prop/ArrayComponentVue.vue",
-        "src/test/webapp/unit/vue/vue-prop/ObjectComponentVue.vue",
-        "src/test/webapp/unit/vue/vue-prop/VueProp.spec.ts"
-      );
+      .hasFiles("src/test/webapp/unit/Dummy.spec.ts");
     //@formatter:on
   }
 

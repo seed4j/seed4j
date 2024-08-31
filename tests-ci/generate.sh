@@ -155,7 +155,8 @@ elif [[ $application == 'fullapp' ]]; then
     "jqassistant-jmolecules" \
     "jqassistant-spring" \
     "license-apache" \
-    "renovate"
+    "renovate" \
+    "front-hexagonal-architecture"
 
   cucumber_with_jwt
 

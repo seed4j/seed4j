@@ -78,7 +78,7 @@ public class SpringBootCoreModuleFactory {
         .and()
       .springMainProperties()
         .set(propertyKey("spring.application.name"), propertyValue(baseName))
-        .set(propertyKey("spring.threads.virtual.enabled"), propertyValue(true))
+        .set(propertyKey("spring.threads.virtual.enabled"), propertyValue(false))
         .set(propertyKey(basePackageLoggingLevel), propertyValue("INFO"))
         .and()
       .springLocalProperties()

@@ -93,18 +93,14 @@ public class ModulesSteps {
   public void applyModuleForDefaultProjectWithPackageJson(String moduleSlug, Map<String, String> parameters) {
     String projectFolder = newTestFolder();
 
-    addPackageJsonToProject(projectFolder);
+    post(applyModuleUrl("init"), buildModuleQuery(projectFolder, parameters));
 
     post(applyModuleUrl(moduleSlug), buildModuleQuery(projectFolder, parameters));
   }
 
   @When("I apply {string} module to default project with package json without parameters")
   public void applyModuleForDefaultProjectWithPackageJson(String moduleSlug) {
-    String projectFolder = newTestFolder();
-
-    addPackageJsonToProject(projectFolder);
-
-    post(applyModuleUrl(moduleSlug), buildModuleQuery(projectFolder, null));
+    applyModuleForDefaultProjectWithPackageJson(moduleSlug, null);
   }
 
   @When("I apply {string} module without parameters to last project")
@@ -126,6 +122,7 @@ public class ModulesSteps {
   public void applyModuleForDefaultProjectWithMavenFile(String moduleSlug, Map<String, String> parameters) {
     String projectFolder = newTestFolder();
 
+    post(applyModuleUrl("init"), buildModuleQuery(projectFolder, parameters));
     post(applyModuleUrl("maven-java"), buildModuleQuery(projectFolder, parameters));
 
     post(applyModuleUrl(moduleSlug), buildModuleQuery(projectFolder, parameters));
@@ -135,6 +132,7 @@ public class ModulesSteps {
   public void applyModuleForDefaultProjectWithGradle(String moduleSlug, Map<String, String> parameters) {
     String projectFolder = newTestFolder();
 
+    post(applyModuleUrl("init"), buildModuleQuery(projectFolder, parameters));
     post(applyModuleUrl("gradle-java"), buildModuleQuery(projectFolder, parameters));
 
     post(applyModuleUrl(moduleSlug), buildModuleQuery(projectFolder, parameters));
@@ -226,26 +224,6 @@ public class ModulesSteps {
     }
 
     return "\"" + value + "\"";
-  }
-
-  private static void addPackageJsonToProject(String folder) {
-    addFileToProject(folder, "src/test/resources/projects/empty-node/package.json", "package.json");
-  }
-
-  private static void addFileToProject(String folder, String source, String destination) {
-    Path folderPath = Paths.get(folder);
-    try {
-      Files.createDirectories(folderPath);
-    } catch (IOException e) {
-      throw new AssertionError(e);
-    }
-
-    Path filePath = folderPath.resolve(destination);
-    try {
-      Files.copy(Paths.get(source), filePath);
-    } catch (IOException e) {
-      throw new AssertionError(e);
-    }
   }
 
   private void post(String uri, String content) {

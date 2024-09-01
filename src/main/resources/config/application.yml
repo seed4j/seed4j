@@ -78,7 +78,7 @@ server:
 spring:
   threads:
     virtual:
-      enabled: true
+      enabled: false
   jackson:
     default-property-inclusion: non_null
   application:

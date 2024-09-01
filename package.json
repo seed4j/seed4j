@@ -82,7 +82,7 @@
     "serve": "14.2.3",
     "sinon": "18.0.0",
     "start-server-and-test": "2.0.5",
-    "stylelint": "16.8.2",
+    "stylelint": "16.9.0",
     "stylelint-config-concentric-order": "5.2.0",
     "stylelint-config-standard-scss": "13.1.0",
     "tikuidoc-tikui": "8.0.0",

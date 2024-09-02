@@ -9,7 +9,7 @@
     "i18next-http-backend": "2.6.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.24.8",
+    "@babel/cli": "7.25.6",
     "@playwright/test": "1.46.1",
     "@prettier/plugin-xml": "3.4.1",
     "@tsconfig/recommended": "1.0.7",

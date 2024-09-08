@@ -20,7 +20,7 @@
     "@vitest/coverage-istanbul": "2.0.5",
     "autoprefixer": "10.4.20",
     "browser-sync": "3.0.2",
-    "cssnano": "7.0.5",
+    "cssnano": "7.0.6",
     "cypress": "13.14.2",
     "eslint": "9.9.1",
     "eslint-config-prettier": "9.1.0",

@@ -18,6 +18,6 @@
     "@vue/tsconfig": "0.5.1",
     "eslint-plugin-vue": "9.28.0",
     "sinon": "18.0.0",
-    "vue-tsc": "2.1.4"
+    "vue-tsc": "2.1.6"
   }
 }

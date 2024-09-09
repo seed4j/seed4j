@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@babel/cli": "7.25.6",
-    "@playwright/test": "1.46.1",
+    "@playwright/test": "1.47.0",
     "@prettier/plugin-xml": "3.4.1",
     "@tsconfig/recommended": "1.0.7",
     "@types/jest": "29.5.12",

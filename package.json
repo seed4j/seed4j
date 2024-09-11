@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@eslint/js": "9.10.0",
-    "@prettier/plugin-pug": "3.0.0",
+    "@prettier/plugin-pug": "3.1.0",
     "@prettier/plugin-xml": "3.4.1",
     "@tikui/core": "6.2.0",
     "@types/sinon": "17.0.3",

@@ -70,7 +70,7 @@
     <failsafe-plugin.version>3.5.0</failsafe-plugin.version>
     <asciidoctor-maven-plugin.version>3.0.0</asciidoctor-maven-plugin.version>
     <openapi-maven-plugin.version>0.0.20</openapi-maven-plugin.version>
-    <openapi-backwards-compat-maven-plugin.version>1.0.1</openapi-backwards-compat-maven-plugin.version>
+    <openapi-backwards-compat-maven-plugin.version>1.0.3</openapi-backwards-compat-maven-plugin.version>
   </properties>
 
   <dependencyManagement>

@@ -4,7 +4,7 @@
   "description": "JHipster Lite : used for Dependencies",
   "license": "Apache-2.0",
   "dependencies": {
-    "i18next": "23.15.0",
+    "i18next": "23.15.1",
     "i18next-browser-languagedetector": "8.0.0",
     "i18next-http-backend": "2.6.1"
   },

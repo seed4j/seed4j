@@ -15,7 +15,7 @@
     "@angular/cli": "18.2.4",
     "@angular/compiler-cli": "18.2.4",
     "jest-environment-jsdom": "29.7.0",
-    "jest-preset-angular": "14.2.2",
+    "jest-preset-angular": "14.2.4",
     "jest-sonar-reporter": "2.0.0",
     "typescript": "5.5.4"
   }

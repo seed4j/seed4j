@@ -8,7 +8,7 @@ import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
 import tech.jhipster.lite.module.domain.gradleplugin.GradleMainBuildPlugin;
 import tech.jhipster.lite.module.domain.mavenplugin.MavenPlugin;
-import tech.jhipster.lite.module.domain.npm.NpmVersionSource;
+import tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource;
 import tech.jhipster.lite.module.domain.npm.NpmVersions;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.shared.error.domain.Assert;
@@ -33,7 +33,7 @@ public class FrontendJavaBuildToolModuleFactory {
     return commonModuleFiles(properties)
       .javaBuildProperties()
         .set(buildPropertyKey("node.version"), buildPropertyValue("v" + npmVersions.nodeVersion().get()))
-        .set(buildPropertyKey("npm.version"), buildPropertyValue(npmVersions.get("npm", NpmVersionSource.COMMON).get()))
+        .set(buildPropertyKey("npm.version"), buildPropertyValue(npmVersions.get("npm", JHLiteNpmVersionSource.COMMON).get()))
         .and()
       .mavenPlugins()
         .plugin(checksumPlugin())
@@ -169,7 +169,7 @@ public class FrontendJavaBuildToolModuleFactory {
     return commonModuleFiles(properties)
       .javaBuildProperties()
         .set(buildPropertyKey("node.version.value"), buildPropertyValue(npmVersions.nodeVersion().get()))
-        .set(buildPropertyKey("npm.version.value"), buildPropertyValue(npmVersions.get("npm", NpmVersionSource.COMMON).get()))
+        .set(buildPropertyKey("npm.version.value"), buildPropertyValue(npmVersions.get("npm", JHLiteNpmVersionSource.COMMON).get()))
         .and()
       .gradlePlugins()
         .plugin(frontendGradlePlugin())

@@ -1,33 +1,23 @@
 package tech.jhipster.lite.module.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.ANGULAR;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.COMMON;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.jhipster.lite.TestFileUtils;
-import tech.jhipster.lite.module.domain.buildproperties.BuildProperty;
-import tech.jhipster.lite.module.domain.buildproperties.PropertyKey;
-import tech.jhipster.lite.module.domain.buildproperties.PropertyValue;
-import tech.jhipster.lite.module.domain.gradleplugin.GradleMainBuildPlugin;
-import tech.jhipster.lite.module.domain.gradleplugin.GradlePlugin;
-import tech.jhipster.lite.module.domain.gradleplugin.GradleProfilePlugin;
-import tech.jhipster.lite.module.domain.javabuild.ArtifactId;
-import tech.jhipster.lite.module.domain.javabuild.GroupId;
-import tech.jhipster.lite.module.domain.javabuild.MavenBuildExtension;
-import tech.jhipster.lite.module.domain.javabuild.command.AddDirectJavaDependency;
-import tech.jhipster.lite.module.domain.javabuild.command.JavaBuildCommands;
-import tech.jhipster.lite.module.domain.javabuild.command.RemoveDirectJavaDependency;
-import tech.jhipster.lite.module.domain.javabuild.command.SetVersion;
+import tech.jhipster.lite.module.domain.buildproperties.*;
+import tech.jhipster.lite.module.domain.gradleplugin.*;
+import tech.jhipster.lite.module.domain.javabuild.*;
+import tech.jhipster.lite.module.domain.javabuild.command.*;
 import tech.jhipster.lite.module.domain.javabuildprofile.BuildProfileId;
 import tech.jhipster.lite.module.domain.javadependency.*;
 import tech.jhipster.lite.module.domain.javadependency.JavaDependency.JavaDependencyOptionalValueBuilder;
 import tech.jhipster.lite.module.domain.javaproperties.SpringProperty;
 import tech.jhipster.lite.module.domain.javaproperties.SpringPropertyType;
 import tech.jhipster.lite.module.domain.mavenplugin.MavenPlugin;
-import tech.jhipster.lite.module.domain.packagejson.VersionSource;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.module.domain.properties.SpringConfigurationFormat;
 import tech.jhipster.lite.shared.error.domain.Assert;
@@ -164,8 +154,8 @@ public final class JHipsterModulesFixture {
     .packageJson()
       .addScript(scriptKey("build"), scriptCommand("ng build --output-path={{projectBuildDirectory}}/classes/static"))
       .addScript(scriptKey("serve"), scriptCommand("tikui-core serve"))
-      .addDependency(packageName("@angular/animations"), VersionSource.ANGULAR, packageName("@angular/core"))
-      .addDevDependency(packageName("@playwright/test"), VersionSource.COMMON)
+      .addDependency(packageName("@angular/animations"), ANGULAR, packageName("@angular/core"))
+      .addDevDependency(packageName("@playwright/test"), COMMON)
       .and()
     .mandatoryReplacements()
       .in(path("package.json"))

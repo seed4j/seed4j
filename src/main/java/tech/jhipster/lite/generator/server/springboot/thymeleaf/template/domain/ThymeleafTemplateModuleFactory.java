@@ -1,7 +1,7 @@
 package tech.jhipster.lite.generator.server.springboot.thymeleaf.template.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
-import static tech.jhipster.lite.module.domain.packagejson.VersionSource.COMMON;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.COMMON;
 
 import java.util.regex.Pattern;
 import tech.jhipster.lite.module.domain.JHipsterModule;

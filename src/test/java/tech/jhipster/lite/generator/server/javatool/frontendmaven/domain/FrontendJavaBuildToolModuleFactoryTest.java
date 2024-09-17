@@ -1,6 +1,6 @@
 package tech.jhipster.lite.generator.server.javatool.frontendmaven.domain;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
 
 import org.jetbrains.annotations.NotNull;
@@ -13,9 +13,7 @@ import tech.jhipster.lite.TestFileUtils;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.JHipsterModulesFixture;
-import tech.jhipster.lite.module.domain.npm.NpmPackageVersion;
-import tech.jhipster.lite.module.domain.npm.NpmVersionSource;
-import tech.jhipster.lite.module.domain.npm.NpmVersions;
+import tech.jhipster.lite.module.domain.npm.*;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 
 @UnitTest
@@ -275,7 +273,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
   }
 
   private void mockNpmVersion() {
-    when(npmVersions.get("npm", NpmVersionSource.COMMON)).thenReturn(new NpmPackageVersion("4.0.0"));
+    when(npmVersions.get("npm", JHLiteNpmVersionSource.COMMON)).thenReturn(new NpmPackageVersion("4.0.0"));
     when(npmVersions.nodeVersion()).thenReturn(new NpmPackageVersion("16.0.0"));
   }
 

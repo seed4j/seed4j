@@ -5,6 +5,8 @@ import static org.mockito.Mockito.*;
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.emptyModuleBuilder;
 import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.emptyModuleContext;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.ANGULAR;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.COMMON;
 import static tech.jhipster.lite.module.domain.packagejson.NodeModuleFormat.COMMONJS;
 import static tech.jhipster.lite.module.domain.packagejson.NodeModuleFormat.MODULE;
 
@@ -19,10 +21,10 @@ import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.TestFileUtils;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.module.domain.Indentation;
-import tech.jhipster.lite.module.domain.npm.*;
+import tech.jhipster.lite.module.domain.npm.NpmPackageVersion;
+import tech.jhipster.lite.module.domain.npm.NpmVersions;
 import tech.jhipster.lite.module.domain.packagejson.JHipsterModulePackageJson;
 import tech.jhipster.lite.module.domain.packagejson.JHipsterModulePackageJson.JHipsterModulePackageJsonBuilder;
-import tech.jhipster.lite.module.domain.packagejson.VersionSource;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
 import tech.jhipster.lite.module.infrastructure.secondary.file.MustacheTemplateRenderer;
 
@@ -60,14 +62,14 @@ class FileSystemPackageJsonHandlerTest {
 
   @Test
   void shouldNotAddNotNeededBlock() {
-    when(npmVersions.get("@playwright/test", NpmVersionSource.COMMON)).thenReturn(new NpmPackageVersion("1.1.1"));
+    when(npmVersions.get("@playwright/test", COMMON.build())).thenReturn(new NpmPackageVersion("1.1.1"));
 
     JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
     packageJson.handle(
       Indentation.DEFAULT,
       folder,
-      packageJson(p -> p.addDevDependency(packageName("@playwright/test"), VersionSource.COMMON)),
+      packageJson(p -> p.addDevDependency(packageName("@playwright/test"), COMMON)),
       emptyModuleContext()
     );
 
@@ -282,7 +284,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
-        packageJson(p -> p.addDevDependency(packageName("@prettier/plugin-xmll"), VersionSource.COMMON)),
+        packageJson(p -> p.addDevDependency(packageName("@prettier/plugin-xmll"), COMMON)),
         emptyModuleContext()
       );
 
@@ -306,7 +308,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
-        packageJson(p -> p.addDevDependency(packageName("@prettier/plugin-xmll"), VersionSource.COMMON)),
+        packageJson(p -> p.addDevDependency(packageName("@prettier/plugin-xmll"), COMMON)),
         emptyModuleContext()
       );
 
@@ -322,14 +324,14 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldAddDevDependencyToPackageJsonUsingVersionSourcePackage() {
-      when(npmVersions.get("@angular/core", NpmVersionSource.ANGULAR)).thenReturn(new NpmPackageVersion("1.1.1"));
+      when(npmVersions.get("@angular/core", ANGULAR.build())).thenReturn(new NpmPackageVersion("1.1.1"));
 
       JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
-        packageJson(p -> p.addDevDependency(packageName("@angular/animations"), VersionSource.ANGULAR, packageName("@angular/core"))),
+        packageJson(p -> p.addDevDependency(packageName("@angular/animations"), ANGULAR, packageName("@angular/core"))),
         emptyModuleContext()
       );
 
@@ -351,7 +353,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
-        packageJson(p -> p.addDevDependency(packageName("@prettier/plugin-xml"), VersionSource.COMMON)),
+        packageJson(p -> p.addDevDependency(packageName("@prettier/plugin-xml"), COMMON)),
         emptyModuleContext()
       );
 
@@ -388,7 +390,7 @@ class FileSystemPackageJsonHandlerTest {
     }
 
     private void mockDevVersion() {
-      when(npmVersions.get(anyString(), eq(NpmVersionSource.COMMON))).thenReturn(new NpmPackageVersion("1.1.1"));
+      when(npmVersions.get(anyString(), eq(COMMON.build()))).thenReturn(new NpmPackageVersion("1.1.1"));
     }
   }
 
@@ -404,7 +406,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
-        packageJson(p -> p.addDependency(packageName("@fortawesome/fontawesome-svg-core"), VersionSource.COMMON)),
+        packageJson(p -> p.addDependency(packageName("@fortawesome/fontawesome-svg-core"), COMMON)),
         emptyModuleContext()
       );
 
@@ -428,7 +430,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
-        packageJson(p -> p.addDependency(packageName("@fortawesome/fontawesome-svg-coree"), VersionSource.COMMON)),
+        packageJson(p -> p.addDependency(packageName("@fortawesome/fontawesome-svg-coree"), COMMON)),
         emptyModuleContext()
       );
 
@@ -444,14 +446,14 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldAddDependencyToPackageJsonUsingVersionSourcePackage() {
-      when(npmVersions.get("@angular/core", NpmVersionSource.ANGULAR)).thenReturn(new NpmPackageVersion("1.1.1"));
+      when(npmVersions.get("@angular/core", ANGULAR.build())).thenReturn(new NpmPackageVersion("1.1.1"));
 
       JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
-        packageJson(p -> p.addDependency(packageName("@angular/animations"), VersionSource.ANGULAR, packageName("@angular/core"))),
+        packageJson(p -> p.addDependency(packageName("@angular/animations"), ANGULAR, packageName("@angular/core"))),
         emptyModuleContext()
       );
 
@@ -473,7 +475,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
-        packageJson(p -> p.addDependency(packageName("@fortawesome/fontawesome-svg-core"), VersionSource.COMMON)),
+        packageJson(p -> p.addDependency(packageName("@fortawesome/fontawesome-svg-core"), COMMON)),
         emptyModuleContext()
       );
 
@@ -510,7 +512,7 @@ class FileSystemPackageJsonHandlerTest {
     }
 
     private void mockVersion() {
-      when(npmVersions.get(anyString(), eq(NpmVersionSource.COMMON))).thenReturn(new NpmPackageVersion("1.1.1"));
+      when(npmVersions.get(anyString(), eq(COMMON.build()))).thenReturn(new NpmPackageVersion("1.1.1"));
     }
   }
 

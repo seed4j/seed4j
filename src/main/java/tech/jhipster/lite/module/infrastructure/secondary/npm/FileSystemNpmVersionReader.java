@@ -4,34 +4,40 @@ import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Repository;
 import tech.jhipster.lite.module.domain.ProjectFiles;
-import tech.jhipster.lite.module.domain.npm.NpmPackage;
-import tech.jhipster.lite.module.domain.npm.NpmPackagesVersions;
+import tech.jhipster.lite.module.domain.npm.*;
 import tech.jhipster.lite.module.domain.npm.NpmPackagesVersions.NpmPackagesVersionsBuilder;
-import tech.jhipster.lite.module.domain.npm.NpmVersionSource;
-import tech.jhipster.lite.shared.enumeration.domain.Enums;
+import tech.jhipster.lite.shared.error.domain.Assert;
 
-@Repository
-@Order
-class FileSystemNpmVersionReader implements NpmVersionsReader {
+public class FileSystemNpmVersionReader implements NpmVersionsReader {
 
   private static final Pattern DEV_DEPENDENCIES_PATTERN = Pattern.compile("\"devDependencies\"\\s*:\\s*\\{([^}]*)}", Pattern.DOTALL);
   private static final Pattern DEPENDENCIES_PATTERN = Pattern.compile("\"dependencies\"\\s*:\\s*\\{([^}]*)}", Pattern.DOTALL);
   private static final Pattern PACKAGES_PATTERN = Pattern.compile("\"([^\"]+)\"\\s*:\\s*\"([^\"]+)\"", Pattern.DOTALL);
 
   private final ProjectFiles projectFiles;
+  private final Collection<NpmVersionSource> npmVersionSources;
+  private final String parentInputFolder;
 
-  public FileSystemNpmVersionReader(ProjectFiles projectFiles) {
+  public FileSystemNpmVersionReader(
+    ProjectFiles projectFiles,
+    Collection<NpmVersionSourceFactory> npmVersionSources,
+    String parentInputFolder
+  ) {
+    Assert.notNull("projectFiles", projectFiles);
+    Assert.notNull("npmVersionSources", npmVersionSources);
+    Assert.notBlank("parentInputFolder", parentInputFolder);
+
     this.projectFiles = projectFiles;
+    this.npmVersionSources = npmVersionSources.stream().map(NpmVersionSourceFactory::build).toList();
+    this.parentInputFolder = parentInputFolder;
   }
 
   @Override
   public NpmPackagesVersions get() {
     NpmPackagesVersionsBuilder builder = NpmPackagesVersions.builder();
 
-    Stream.of(NpmVersionSource.values()).forEach(source -> builder.put(source, sourcePackages(source)));
+    npmVersionSources.forEach(source -> builder.put(source, sourcePackages(source)));
 
     return builder.build();
   }
@@ -57,10 +63,10 @@ class FileSystemNpmVersionReader implements NpmVersionsReader {
   }
 
   private String readVersionsFile(NpmVersionSource source) {
-    return projectFiles.readString("/generator/dependencies/" + sourceFolder(source) + "/package.json");
+    return projectFiles.readString(parentInputFolder + sourceFolder(source) + "/package.json");
   }
 
   private String sourceFolder(NpmVersionSource source) {
-    return Enums.map(source, NpmVersionSourceFolder.class).folder();
+    return source.name().toLowerCase();
   }
 }

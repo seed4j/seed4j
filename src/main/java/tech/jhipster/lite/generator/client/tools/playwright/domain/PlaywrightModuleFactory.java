@@ -1,11 +1,11 @@
 package tech.jhipster.lite.generator.client.tools.playwright.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.COMMON;
 
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
-import tech.jhipster.lite.module.domain.packagejson.VersionSource;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.shared.error.domain.Assert;
 
@@ -23,7 +23,7 @@ public class PlaywrightModuleFactory {
     //@formatter:off
     return commonPlaywrightModuleBuilder(properties, WEBAPP_COMPONENT_TESTS)
       .packageJson()
-        .addDevDependency(packageName("start-server-and-test"), VersionSource.COMMON)
+        .addDevDependency(packageName("start-server-and-test"), COMMON)
         .addScript(scriptKey("test:component"), scriptCommand("start-server-and-test start http://localhost:9000 'playwright test --ui --config src/test/webapp/component/playwright.config.ts'"))
         .addScript(scriptKey("test:component:headless"), scriptCommand("start-server-and-test start http://localhost:9000 'playwright test --config src/test/webapp/component/playwright.config.ts'"))
         .and()
@@ -59,7 +59,7 @@ public class PlaywrightModuleFactory {
     //@formatter:off
     return moduleBuilder(properties)
       .packageJson()
-        .addDevDependency(packageName("@playwright/test"), VersionSource.COMMON)
+        .addDevDependency(packageName("@playwright/test"), COMMON)
         .and()
       .files()
         .add(SOURCE.template("playwright.config.ts"), destinationFolder.append("playwright.config.ts"))

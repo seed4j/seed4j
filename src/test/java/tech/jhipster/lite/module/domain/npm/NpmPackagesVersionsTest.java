@@ -2,8 +2,6 @@ package tech.jhipster.lite.module.domain.npm;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static tech.jhipster.lite.module.domain.npm.NpmVersionSource.COMMON;
-import static tech.jhipster.lite.module.domain.npm.NpmVersionSource.VUE;
 
 import java.util.List;
 import org.junit.jupiter.api.Nested;
@@ -13,6 +11,9 @@ import tech.jhipster.lite.UnitTest;
 @UnitTest
 class NpmPackagesVersionsTest {
 
+  private static final NpmVersionSource COMMON = JHLiteNpmVersionSource.COMMON.build();
+  private static final NpmVersionSource VUE = JHLiteNpmVersionSource.VUE.build();
+
   @Test
   void shouldNotVersionFromUnknownSource() {
     NpmPackagesVersions versions = NpmPackagesVersions.builder().build();
@@ -20,7 +21,7 @@ class NpmPackagesVersionsTest {
     assertThatThrownBy(() -> versions.get(new NpmPackageName("unknown"), COMMON))
       .isExactlyInstanceOf(UnknownNpmPackageException.class)
       .hasMessageContaining("unknown")
-      .hasMessageContaining("COMMON");
+      .hasMessageContaining("common");
   }
 
   @Test
@@ -30,7 +31,7 @@ class NpmPackagesVersionsTest {
     assertThatThrownBy(() -> versions.get(new NpmPackageName("unknown"), COMMON))
       .isExactlyInstanceOf(UnknownNpmPackageException.class)
       .hasMessageContaining("unknown")
-      .hasMessageContaining("COMMON");
+      .hasMessageContaining("common");
   }
 
   @Test

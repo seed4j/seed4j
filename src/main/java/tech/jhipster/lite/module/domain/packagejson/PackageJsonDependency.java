@@ -2,13 +2,14 @@ package tech.jhipster.lite.module.domain.packagejson;
 
 import java.util.Objects;
 import java.util.Optional;
+import tech.jhipster.lite.module.domain.npm.NpmVersionSource;
 import tech.jhipster.lite.shared.error.domain.Assert;
 import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 public final class PackageJsonDependency {
 
   private final PackageName packageName;
-  private final VersionSource versionSource;
+  private final NpmVersionSource versionSource;
   private final Optional<PackageName> versionPackageName;
 
   private PackageJsonDependency(PackageJsonDependencyBuilder builder) {
@@ -23,7 +24,7 @@ public final class PackageJsonDependency {
     return packageName;
   }
 
-  public VersionSource versionSource() {
+  public NpmVersionSource versionSource() {
     return versionSource;
   }
 
@@ -64,7 +65,7 @@ public final class PackageJsonDependency {
     implements PackageJsonDependencyPackageNameBuilder, PackageJsonDependencyVersionSourceBuilder, PackageJsonDependencyOptionalBuilder {
 
     private PackageName packageName;
-    private VersionSource versionSource;
+    private NpmVersionSource versionSource;
     private PackageName versionPackageName;
 
     @Override
@@ -74,7 +75,7 @@ public final class PackageJsonDependency {
     }
 
     @Override
-    public PackageJsonDependencyOptionalBuilder versionSource(VersionSource versionSource) {
+    public PackageJsonDependencyOptionalBuilder versionSource(NpmVersionSource versionSource) {
       this.versionSource = versionSource;
       return this;
     }
@@ -96,7 +97,7 @@ public final class PackageJsonDependency {
   }
 
   public interface PackageJsonDependencyVersionSourceBuilder {
-    PackageJsonDependencyOptionalBuilder versionSource(VersionSource versionSource);
+    PackageJsonDependencyOptionalBuilder versionSource(NpmVersionSource versionSource);
   }
 
   public interface PackageJsonDependencyOptionalBuilder {

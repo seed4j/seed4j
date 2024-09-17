@@ -1,8 +1,8 @@
 package tech.jhipster.lite.generator.client.vue.core.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
-import static tech.jhipster.lite.module.domain.packagejson.VersionSource.COMMON;
-import static tech.jhipster.lite.module.domain.packagejson.VersionSource.VUE;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.COMMON;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.VUE;
 import static tech.jhipster.lite.module.domain.replacement.ReplacementCondition.notContainingReplacement;
 
 import java.util.function.Consumer;

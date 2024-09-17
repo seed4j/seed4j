@@ -1,10 +1,11 @@
 package tech.jhipster.lite.generator.client.react.i18n.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.COMMON;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.REACT;
 
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
-import tech.jhipster.lite.module.domain.packagejson.VersionSource;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.shared.error.domain.Assert;
 
@@ -23,10 +24,10 @@ public class ReactI18nModuleFactory {
     //@formatter:off
     return moduleBuilder(properties)
       .packageJson()
-      .addDependency(packageName("i18next"), VersionSource.COMMON)
-      .addDependency(packageName("i18next-browser-languagedetector"), VersionSource.COMMON)
-      .addDependency(packageName("i18next-http-backend"), VersionSource.COMMON)
-      .addDependency(packageName("react-i18next"), VersionSource.REACT)
+      .addDependency(packageName("i18next"), COMMON)
+      .addDependency(packageName("i18next-browser-languagedetector"), COMMON)
+      .addDependency(packageName("i18next-http-backend"), COMMON)
+      .addDependency(packageName("react-i18next"), REACT)
       .and()
       .files()
       .batch(APP_SOURCE, to(INDEX + "/app"))

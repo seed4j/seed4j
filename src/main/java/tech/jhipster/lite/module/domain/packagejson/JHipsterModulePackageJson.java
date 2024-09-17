@@ -3,6 +3,7 @@ package tech.jhipster.lite.module.domain.packagejson;
 import java.util.*;
 import java.util.stream.Stream;
 import tech.jhipster.lite.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import tech.jhipster.lite.module.domain.npm.NpmVersionSourceFactory;
 import tech.jhipster.lite.shared.error.domain.Assert;
 
 /**
@@ -103,8 +104,8 @@ public final class JHipsterModulePackageJson {
      * @param versionSource the version source
      * @return the builder itself
      */
-    public JHipsterModulePackageJsonBuilder addDependency(PackageName packageName, VersionSource versionSource) {
-      dependencies.add(PackageJsonDependency.builder().packageName(packageName).versionSource(versionSource).build());
+    public JHipsterModulePackageJsonBuilder addDependency(PackageName packageName, NpmVersionSourceFactory versionSource) {
+      dependencies.add(PackageJsonDependency.builder().packageName(packageName).versionSource(versionSource.build()).build());
 
       return this;
     }
@@ -119,11 +120,15 @@ public final class JHipsterModulePackageJson {
      */
     public JHipsterModulePackageJsonBuilder addDependency(
       PackageName packageName,
-      VersionSource versionSource,
+      NpmVersionSourceFactory versionSource,
       PackageName versionPackageName
     ) {
       dependencies.add(
-        PackageJsonDependency.builder().packageName(packageName).versionSource(versionSource).versionPackageName(versionPackageName).build()
+        PackageJsonDependency.builder()
+          .packageName(packageName)
+          .versionSource(versionSource.build())
+          .versionPackageName(versionPackageName)
+          .build()
       );
 
       return this;
@@ -148,8 +153,8 @@ public final class JHipsterModulePackageJson {
      * @param versionSource the version source
      * @return the builder itself
      */
-    public JHipsterModulePackageJsonBuilder addDevDependency(PackageName packageName, VersionSource versionSource) {
-      devDependencies.add(PackageJsonDependency.builder().packageName(packageName).versionSource(versionSource).build());
+    public JHipsterModulePackageJsonBuilder addDevDependency(PackageName packageName, NpmVersionSourceFactory versionSource) {
+      devDependencies.add(PackageJsonDependency.builder().packageName(packageName).versionSource(versionSource.build()).build());
 
       return this;
     }
@@ -164,11 +169,15 @@ public final class JHipsterModulePackageJson {
      */
     public JHipsterModulePackageJsonBuilder addDevDependency(
       PackageName packageName,
-      VersionSource versionSource,
+      NpmVersionSourceFactory versionSource,
       PackageName versionPackageName
     ) {
       devDependencies.add(
-        PackageJsonDependency.builder().packageName(packageName).versionSource(versionSource).versionPackageName(versionPackageName).build()
+        PackageJsonDependency.builder()
+          .packageName(packageName)
+          .versionSource(versionSource.build())
+          .versionPackageName(versionPackageName)
+          .build()
       );
 
       return this;

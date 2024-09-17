@@ -1,13 +1,13 @@
 package tech.jhipster.lite.generator.client.tools.cypress.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.COMMON;
 
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
-import tech.jhipster.lite.module.domain.packagejson.VersionSource;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.module.domain.replacement.RegexReplacer;
 import tech.jhipster.lite.shared.error.domain.Assert;
@@ -48,7 +48,7 @@ public class CypressModuleFactory {
     //@formatter:off
     return commonCypressModuleBuilder(properties, CYPRESS_COMPONENT_TESTS, CYPRESS_COMPONENT_TESTS_EXCLUSION)
       .packageJson()
-        .addDevDependency(packageName("start-server-and-test"), VersionSource.COMMON)
+        .addDevDependency(packageName("start-server-and-test"), COMMON)
         .addScript(scriptKey("test:component"), scriptCommand("start-server-and-test start http://localhost:9000 'cypress open --e2e --config-file src/test/webapp/component/cypress-config.ts'"))
         .addScript(
           scriptKey("test:component:headless"),
@@ -86,8 +86,8 @@ public class CypressModuleFactory {
     //@formatter:off
     return moduleBuilder(properties)
       .packageJson()
-        .addDevDependency(packageName("cypress"), VersionSource.COMMON)
-        .addDevDependency(packageName("eslint-plugin-cypress"), VersionSource.COMMON)
+        .addDevDependency(packageName("cypress"), COMMON)
+        .addDevDependency(packageName("eslint-plugin-cypress"), COMMON)
         .and()
       .files()
         .batch(SOURCE, destinationFolder)

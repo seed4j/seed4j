@@ -1,34 +1,40 @@
 package tech.jhipster.lite.module.infrastructure.secondary.npm;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.when;
 
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tech.jhipster.lite.UnitTest;
 import tech.jhipster.lite.module.domain.ProjectFiles;
-import tech.jhipster.lite.module.domain.npm.NpmPackageName;
-import tech.jhipster.lite.module.domain.npm.NpmPackageVersion;
-import tech.jhipster.lite.module.domain.npm.NpmVersionSource;
+import tech.jhipster.lite.module.domain.npm.*;
 
 @UnitTest
 @ExtendWith(MockitoExtension.class)
 class FileSystemNpmVersionReaderTest {
 
+  private static final NpmVersionSource COMMON = JHLiteNpmVersionSource.COMMON.build();
+
   @Mock
   private ProjectFiles projectFiles;
 
-  @InjectMocks
   private FileSystemNpmVersionReader reader;
+
+  @BeforeEach
+  void setup() {
+    reader = new FileSystemNpmVersionReader(projectFiles, List.of(JHLiteNpmVersionSource.COMMON), "not-used");
+  }
 
   @Test
   void shouldGetVersionFromDevSource() {
     mockProjectFiles();
 
-    NpmPackageVersion version = reader.get().get(new NpmPackageName("@types/node"), NpmVersionSource.COMMON);
+    NpmPackageVersion version = reader.get().get(new NpmPackageName("@types/node"), COMMON);
 
     assertThat(version).isEqualTo(new NpmPackageVersion("17.0.43"));
   }
@@ -37,7 +43,7 @@ class FileSystemNpmVersionReaderTest {
   void shouldGetVersionFromSource() {
     mockProjectFiles();
 
-    NpmPackageVersion version = reader.get().get(new NpmPackageName("vue"), NpmVersionSource.COMMON);
+    NpmPackageVersion version = reader.get().get(new NpmPackageName("vue"), COMMON);
 
     assertThat(version).isEqualTo(new NpmPackageVersion("1.2.3"));
   }
@@ -46,7 +52,7 @@ class FileSystemNpmVersionReaderTest {
   void shouldGetVersionFromEmptySourceWithEmptyDevSource() {
     emptyProjectFiles();
 
-    NpmPackageVersion version = reader.get().get(new NpmPackageName("vue"), NpmVersionSource.COMMON);
+    NpmPackageVersion version = reader.get().get(new NpmPackageName("vue"), COMMON);
 
     assertThat(version).isEqualTo(new NpmPackageVersion("1.2.3"));
   }

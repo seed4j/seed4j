@@ -13,10 +13,6 @@ public final class JavaDependenciesFixture {
 
   private JavaDependenciesFixture() {}
 
-  public static JavaDependenciesVersionsRepository javaVersionsRepository(ProjectFiles filesReader) {
-    return javaVersionsRepository(filesReader, List.of());
-  }
-
   public static JavaDependenciesVersionsRepository javaVersionsRepository(
     ProjectFiles filesReader,
     Collection<JavaDependenciesReader> customReaders
@@ -25,8 +21,8 @@ public final class JavaDependenciesFixture {
 
     return new JHipsterJavaDependenciesVersionsRepository(
       Stream.concat(
-        Stream.of(new MavenDependenciesReader(filesReader), new GradleVersionCatalogDependenciesReader(filesReader)),
-        customReaders.stream()
+        customReaders.stream(),
+        Stream.of(new MavenDependenciesReader(filesReader), new GradleVersionCatalogDependenciesReader(filesReader))
       ).toList()
     );
   }

@@ -42,9 +42,24 @@ public interface NpmVersions {
   }
 
   /**
+   * Get the npm package version from the given source
+   *
+   * @param packageName
+   *          name of the package to get the version for
+   * @param source
+   *          source folder for this version
+   * @return The version
+   * @throws UnknownNpmPackageException
+   *           is the package can't be found in source
+   */
+  default NpmPackageVersion get(String packageName, NpmVersionSourceFactory source) {
+    return get(packageName, source.build());
+  }
+
+  /**
    * @return The version of Node.js.
    */
   default NpmPackageVersion nodeVersion() {
-    return get("node", NpmVersionSource.COMMON);
+    return get("node", JHLiteNpmVersionSource.COMMON.build());
   }
 }

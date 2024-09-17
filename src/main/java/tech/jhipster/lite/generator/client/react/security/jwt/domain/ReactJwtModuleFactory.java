@@ -1,8 +1,8 @@
 package tech.jhipster.lite.generator.client.react.security.jwt.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
-import static tech.jhipster.lite.module.domain.packagejson.VersionSource.COMMON;
-import static tech.jhipster.lite.module.domain.packagejson.VersionSource.REACT;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.COMMON;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.REACT;
 
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.file.JHipsterDestination;

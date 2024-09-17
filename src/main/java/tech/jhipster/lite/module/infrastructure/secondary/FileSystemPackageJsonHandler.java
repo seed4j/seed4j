@@ -13,12 +13,10 @@ import org.springframework.stereotype.Service;
 import tech.jhipster.lite.module.domain.Indentation;
 import tech.jhipster.lite.module.domain.JHipsterModuleContext;
 import tech.jhipster.lite.module.domain.file.TemplateRenderer;
-import tech.jhipster.lite.module.domain.npm.NpmVersionSource;
 import tech.jhipster.lite.module.domain.npm.NpmVersions;
 import tech.jhipster.lite.module.domain.packagejson.*;
 import tech.jhipster.lite.module.domain.properties.JHipsterProjectFolder;
 import tech.jhipster.lite.shared.collection.domain.JHipsterCollections;
-import tech.jhipster.lite.shared.enumeration.domain.Enums;
 import tech.jhipster.lite.shared.error.domain.Assert;
 import tech.jhipster.lite.shared.error.domain.GeneratorException;
 import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
@@ -156,7 +154,7 @@ class FileSystemPackageJsonHandler {
 
   private String getNpmVersion(PackageJsonDependency dependency) {
     PackageName packageName = dependency.versionPackageName().orElse(dependency.packageName());
-    return npmVersions.get(packageName.get(), Enums.map(dependency.versionSource(), NpmVersionSource.class)).get();
+    return npmVersions.get(packageName.get(), dependency.versionSource()).get();
   }
 
   @ExcludeFromGeneratedCodeCoverage(reason = "The error handling is an hard to test implementation detail")

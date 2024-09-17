@@ -1,8 +1,8 @@
 package tech.jhipster.lite.generator.client.svelte.core.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
-import static tech.jhipster.lite.module.domain.packagejson.VersionSource.COMMON;
-import static tech.jhipster.lite.module.domain.packagejson.VersionSource.SVELTE;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.COMMON;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.SVELTE;
 
 import tech.jhipster.lite.module.domain.Indentation;
 import tech.jhipster.lite.module.domain.JHipsterModule;

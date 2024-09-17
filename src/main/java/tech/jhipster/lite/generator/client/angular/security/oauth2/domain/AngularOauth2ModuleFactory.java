@@ -1,13 +1,13 @@
 package tech.jhipster.lite.generator.client.angular.security.oauth2.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.ANGULAR;
 
 import java.util.regex.Pattern;
 import tech.jhipster.lite.module.domain.Indentation;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
-import tech.jhipster.lite.module.domain.packagejson.VersionSource;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.module.domain.replacement.ElementReplacer;
 import tech.jhipster.lite.module.domain.replacement.RegexReplacer;
@@ -114,7 +114,7 @@ public class AngularOauth2ModuleFactory {
     //@formatter:off
     return moduleBuilder(properties)
       .packageJson()
-        .addDependency(packageName("keycloak-js"), VersionSource.ANGULAR)
+        .addDependency(packageName("keycloak-js"), ANGULAR)
         .and()
       .files()
         .batch(SOURCE.append("auth"), APP_DESTINATION.append("auth"))

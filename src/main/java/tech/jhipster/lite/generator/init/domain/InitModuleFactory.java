@@ -14,6 +14,7 @@ public class InitModuleFactory {
 
   private static final JHipsterSource SOURCE = from("init");
   private static final JHipsterDestination DESTINATION = to(".");
+  private static final JHipsterSource SOURCE_COMMON = from("client/common");
 
   private final NpmVersions npmVersions;
 
@@ -37,6 +38,9 @@ public class InitModuleFactory {
           .addTemplate("package.json")
           .addTemplate(".editorconfig")
           .addFile(".lintstagedrc.cjs")
+          .and()
+        .batch(SOURCE_COMMON, DESTINATION)
+          .addFile(".npmrc")
           .and()
         .addExecutable(SOURCE.append(".husky").file("pre-commit"), DESTINATION.append(".husky/pre-commit"))
         .add(SOURCE.file("gitignore"), to(".gitignore"))

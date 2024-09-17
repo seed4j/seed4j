@@ -53,7 +53,8 @@ class InitModuleFactoryTest {
       .and()
       .hasFile(".lintstagedrc.cjs")
       .and()
-      .hasExecutableFiles(".husky/pre-commit");
+      .hasExecutableFiles(".husky/pre-commit")
+      .hasFile(".npmrc");
   }
 
   private JHipsterModuleProperties properties(String folder) {

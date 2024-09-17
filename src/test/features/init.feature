@@ -12,6 +12,7 @@ Feature: Init
       | package.json      |
       | README.md         |
       | .lintstagedrc.cjs |
+      | .npmrc            |      
     And I should not have files in ""
       | .prettierignore |
       | .prettierrc     |

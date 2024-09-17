@@ -14,7 +14,6 @@ public class AngularModuleFactory {
 
   private static final JHipsterSource SOURCE = from("client/angular/core");
 
-  private static final JHipsterSource SOURCE_COMMON = from("client/common");
 
   private static final String ENGINES_NEEDLE = "  \"engines\":";
   private static final PackageName ANGULAR_CORE_PACKAGE = packageName("@angular/core");
@@ -76,9 +75,6 @@ public class AngularModuleFactory {
         .add(SOURCE.template("angular.json"), to("angular.json"))
         .add(SOURCE.file("tsconfig.json"), to("tsconfig.json"))
         .add(SOURCE.file("tsconfig.app.json"), to("tsconfig.app.json"))
-        .batch(SOURCE_COMMON, to("."))
-          .addFile(".npmrc")
-          .and()
         .batch(SOURCE, to("."))
           .addTemplate("eslint.config.mjs")
           .addTemplate("proxy.conf.json")

@@ -12,7 +12,6 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 public class TypescriptModuleFactory {
 
   private static final JHipsterSource SOURCE = from("typescript");
-  private static final JHipsterSource SOURCE_COMMON = from("client/common");
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
@@ -42,9 +41,6 @@ public class TypescriptModuleFactory {
         .addScript(scriptKey("watch:test"), scriptCommand("vitest --"))
         .and()
       .files()
-        .batch(SOURCE_COMMON, to("."))
-          .addFile(".npmrc")
-          .and()
         .batch(SOURCE, to("."))
           .addFile("tsconfig.json")
           .addTemplate("vitest.config.ts")

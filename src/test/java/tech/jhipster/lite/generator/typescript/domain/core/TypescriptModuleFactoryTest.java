@@ -43,6 +43,6 @@ class TypescriptModuleFactoryTest {
       .containing(nodeScript("watch:tsc", "tsc --noEmit --watch"))
       .containing(nodeScript("lint", "eslint ."))
       .and()
-      .hasPrefixedFiles("", ".npmrc", "eslint.config.js", "tsconfig.json");
+      .hasPrefixedFiles("", "eslint.config.js", "tsconfig.json");
   }
 }

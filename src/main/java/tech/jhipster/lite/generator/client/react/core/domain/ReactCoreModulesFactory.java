@@ -13,7 +13,6 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 public class ReactCoreModulesFactory {
 
   private static final JHipsterSource SOURCE = from("client/react/core");
-  private static final JHipsterSource SOURCE_COMMON = from("client/common");
 
   private static final JHipsterSource WEBAPP_SOURCE = SOURCE.append("src/main/webapp");
   private static final JHipsterDestination WEBAPP_DESTINATION = to("src/main/webapp");
@@ -78,9 +77,6 @@ public class ReactCoreModulesFactory {
           .addTemplate("vite.config.ts")
           .addTemplate("vitest.config.ts")
           .addTemplate("eslint.config.js")
-          .and()
-        .batch(SOURCE_COMMON, to("."))
-          .addFile(".npmrc")
           .and()
         .batch(APP_SOURCE, APP_DESTINATION)
           .addTemplate("index.css")

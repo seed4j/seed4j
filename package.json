@@ -70,7 +70,7 @@
     "husky": "9.1.6",
     "jsdom": "25.0.0",
     "lint-staged": "15.2.10",
-    "npm-run-all2": "6.2.2",
+    "npm-run-all2": "6.2.3",
     "postcss-scss": "4.0.9",
     "prettier": "3.3.3",
     "prettier-plugin-gherkin": "3.1.0",

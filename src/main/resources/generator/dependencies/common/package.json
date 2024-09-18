@@ -38,7 +38,7 @@
     "npm-run-all2": "6.2.3",
     "onchange": "7.1.0",
     "path-exists-cli": "2.0.0",
-    "postcss": "8.4.45",
+    "postcss": "8.4.47",
     "postcss-cli": "11.0.0",
     "prettier": "3.3.3",
     "prettier-plugin-gherkin": "3.1.0",

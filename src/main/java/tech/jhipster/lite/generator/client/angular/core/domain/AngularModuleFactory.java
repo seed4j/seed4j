@@ -14,7 +14,6 @@ public class AngularModuleFactory {
 
   private static final JHipsterSource SOURCE = from("client/angular/core");
 
-
   private static final String ENGINES_NEEDLE = "  \"engines\":";
   private static final PackageName ANGULAR_CORE_PACKAGE = packageName("@angular/core");
 

@@ -15,6 +15,7 @@ export default typescript.config(
     ignores: ['target/'],
   },
   js.configs.recommended,
+  ...typescript.configs.recommended.map(config => (config.name === 'typescript-eslint/base' ? config : { ...config, files: ['**/*.ts'] })),
   {
     files: ['src/main/webapp/**/*.{ts,tsx}', 'src/main/webapp/**/*.spec.ts'],
     extends: [...typescript.configs.recommendedTypeChecked, react],

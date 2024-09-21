@@ -1,0 +1,9 @@
+mixin lines(gap)
+  .lines(class=`-gap-${gap}`)
+    block
+
+mixin lines-line(options)
+  -const { align } = options || {};
+  -const alignClass = align ? `-align-${align}` : null;
+  .lines--line(class=alignClass)
+    block

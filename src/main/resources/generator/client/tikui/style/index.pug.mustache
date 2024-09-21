@@ -1,0 +1,49 @@
+extends /layout-documentation
+
+block title
+  title Tikui
+
+block content
+  .tikui-vertical-spacing.-s32
+    .tikui-vertical-spacing--line
+      h1.tikui-title-main Tikui pattern library
+    .tikui-vertical-spacing--line
+      .tikui-vertical-spacing.-s24
+        .tikui-vertical-spacing--line
+          h2.tikui-title-section Use
+        .tikui-vertical-spacing--line
+          p.tikui-paragraph Import style using #[strong &lt;link&gt;] tag and replace #[strong {DOMAIN}] with the current domain:
+        .tikui-vertical-spacing--line
+          p.tikui-paragraph
+            em HTML
+        .tikui-vertical-spacing--line
+          pre
+            code.language-html.
+              #{'<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />'}
+              #{''}
+              #{'<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">'}
+              #{'<link rel="stylesheet" href="{DOMAIN}/tikui.css" />'}
+        .tikui-vertical-spacing--line
+          p.tikui-paragraph
+            em Pug
+        .tikui-vertical-spacing--line
+          pre
+            code.language-pug.
+              meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+
+              link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap')
+              link(rel='stylesheet' href='{DOMAIN}/tikui.css')
+        .tikui-vertical-spacing--line
+          h2.tikui-title-section Documentation
+        .tikui-vertical-spacing--line
+          p.tikui-paragraph The Style have an #[a.tikui-link(href='http://atomicdesign.bradfrost.com' target='_blank') Atomic Design] structure.
+        .tikui-vertical-spacing--line
+          ul.tikui-list
+            li
+              a.tikui-link(href='[[TIKUI_BASEPATH]]atom/atom.html') Atoms
+            li
+              a.tikui-link(href='[[TIKUI_BASEPATH]]molecule/molecule.html') Molecules
+            li
+              a.tikui-link(href='[[TIKUI_BASEPATH]]organism/organism.html') Organisms
+            li
+              a.tikui-link(href='[[TIKUI_BASEPATH]]template/template.html') Templates

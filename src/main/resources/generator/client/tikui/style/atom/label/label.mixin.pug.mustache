@@ -1,0 +1,5 @@
+mixin label(options)
+  -const {forId, placeholder} = options || {};
+  -const placeholderClass = placeholder ? '-placeholder' : null;
+  label.label(for=forId class=placeholderClass)
+    block

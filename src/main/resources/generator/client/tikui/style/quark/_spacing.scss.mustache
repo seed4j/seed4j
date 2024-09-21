@@ -1,0 +1,23 @@
+@use '../token/spacing/spacings';
+
+@mixin spacing-var($name, $value) {
+  --spacing-#{$name}: #{$value};
+}
+
+@mixin spacing-vars {
+  @each $name, $value in spacings.$spacings {
+    @include spacing-var($name, $value);
+  }
+}
+
+@mixin spacing-alternative($prefix, $property, $name) {
+  &.-#{$prefix}#{$name} {
+    #{$property}: var(--spacing-#{$name});
+  }
+}
+
+@mixin spacing-alternatives($prefix, $property) {
+  @each $name, $value in spacings.$spacings {
+    @include spacing-alternative($prefix, $property, $name);
+  }
+}

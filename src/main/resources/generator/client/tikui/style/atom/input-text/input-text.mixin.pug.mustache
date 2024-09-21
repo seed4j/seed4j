@@ -1,0 +1,4 @@
+mixin input-text(options)
+  -const {id, placeholder, value, placeholderLoading} = options || {};
+  -const placeholderClass = placeholderLoading ? '-placeholder' : null;
+  input.input-text(id=id type='text' placeholder=placeholder class=placeholderClass)

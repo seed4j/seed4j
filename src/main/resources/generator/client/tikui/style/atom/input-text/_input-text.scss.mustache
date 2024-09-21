@@ -1,0 +1,25 @@
+@use '../../quark/placeholder';
+
+.input-text {
+  --input-text-border-color: var(--color-border-field);
+
+  box-sizing: border-box;
+  outline: none;
+  border: 1px solid var(--input-text-border-color);
+  border-radius: var(--radius-field);
+  background-color: var(--color-background);
+  padding: var(--spacing-v-field) var(--spacing-h-field);
+  width: 100%;
+  height: var(--height-field);
+  color: var(--color-text);
+  font-size: 1rem;
+
+  &:focus {
+    --input-text-border-color: var(--color-primary);
+  }
+
+  @include placeholder.placeholder-alternative {
+    cursor: default;
+    pointer-events: none;
+  }
+}

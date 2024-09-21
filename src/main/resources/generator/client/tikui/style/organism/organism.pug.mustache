@@ -1,0 +1,16 @@
+extends /layout-documentation
+
+block append vars
+  -active='organism'
+
+block title
+  title Tikui - Organisms
+
+block content
+  .tikui-vertical-spacing.-s32
+    .tikui-vertical-spacing--line
+      h1.tikui-title-main#organisms Organisms
+    .tikui-vertical-spacing--line
+      include /documentation/atomic-design/quote/organism
+    .tikui-vertical-spacing--line
+      include:componentDoc(height=210) lines/lines.md

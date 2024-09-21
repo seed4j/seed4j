@@ -1,0 +1,25 @@
+@use '../../quark/spacing';
+
+.lines {
+  --lines-gap: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--lines-gap);
+
+  @include spacing.spacing-alternatives('gap-', '--lines-gap');
+
+  &--line {
+    &.-align-start {
+      align-self: flex-start;
+    }
+
+    &.-align-center {
+      align-self: center;
+    }
+
+    &.-align-end {
+      align-self: flex-end;
+    }
+  }
+}

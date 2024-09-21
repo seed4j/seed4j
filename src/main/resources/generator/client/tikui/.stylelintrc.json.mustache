@@ -1,0 +1,74 @@
+{
+  "plugins": ["stylelint-scss", "stylelint-order"],
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-concentric-order"],
+  "rules": {
+    "max-nesting-depth": 3,
+    "selector-class-pattern": "^-?([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+    "no-descending-specificity": null,
+    "selector-no-qualifying-type": [
+      true,
+      {
+        "ignore": ["class"]
+      }
+    ],
+    "order/order": [
+      {
+        "type": "at-rule",
+        "name": "import"
+      },
+      "dollar-variables",
+      "custom-properties",
+      {
+        "type": "at-rule",
+        "name": "extend"
+      },
+      {
+        "type": "at-rule",
+        "name": "mixin"
+      },
+      {
+        "type": "at-rule",
+        "name": "add-mixin"
+      },
+      {
+        "type": "at-rule",
+        "name": "apply"
+      },
+      "declarations",
+      {
+        "type": "rule",
+        "selector": "/^&:[\\w-]+/",
+        "hasBlock": true
+      },
+      {
+        "type": "rule",
+        "selector": "/^&:[\\w-]+/",
+        "hasBlock": true
+      },
+      "rules",
+      {
+        "type": "at-rule",
+        "name": "include",
+        "parameter": "/breakpoints?/i",
+        "hasBlock": true
+      },
+      {
+        "type": "at-rule",
+        "name": "mixin",
+        "parameter": "/breakpoints?/i",
+        "hasBlock": true
+      },
+      {
+        "type": "at-rule",
+        "name": "add-mixin",
+        "parameter": "/breakpoints?/i",
+        "hasBlock": true
+      },
+      {
+        "type": "at-rule",
+        "name": "media",
+        "hasBlock": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+@mixin placeholder-background {
+  background-image: var(--gradient-placeholder);
+  background-size: 100em;
+}
+
+@mixin placeholder-border {
+  border-image: var(--gradient-placeholder);
+}
+
+@mixin placeholder-animation {
+  animation-name: placeholder-animation;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+}
+
+@mixin placeholder-alternative {
+  &.-placeholder {
+    @include placeholder-background;
+    @include placeholder-border;
+    @include placeholder-animation;
+
+    @content;
+  }
+}

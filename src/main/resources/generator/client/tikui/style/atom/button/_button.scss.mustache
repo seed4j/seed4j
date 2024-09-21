@@ -1,0 +1,32 @@
+@use '../../quark/placeholder';
+
+.button {
+  --button-background: var(--color-primary);
+
+  box-sizing: border-box;
+  border: 1px solid var(--button-background);
+  border-radius: var(--radius-field);
+  background-color: var(--button-background);
+  cursor: pointer;
+  padding: var(--spacing-v-field) var(--spacing-h-field);
+  min-height: var(--height-field);
+  vertical-align: middle;
+  line-height: 1.25rem;
+  color: var(--color-text-on-primary);
+  font-size: 1rem;
+
+  &:hover {
+    --button-background: var(--color-primary-lighter);
+  }
+
+  &:disabled {
+    --button-background: var(--color-disabled);
+
+    cursor: not-allowed;
+  }
+
+  @include placeholder.placeholder-alternative {
+    cursor: default;
+    min-width: 6rem;
+  }
+}

@@ -1,0 +1,5 @@
+mixin button(options)
+  -const { disabled, type, placeholder } = options || {};
+  -const placeholderClass = placeholder ? '-placeholder' : null;
+  button.button(disabled=disabled type=type class=placeholderClass)
+    block

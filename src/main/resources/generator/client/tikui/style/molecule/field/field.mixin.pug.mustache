@@ -1,0 +1,9 @@
+include /atom/label/label.mixin.pug
+
+mixin field(label, options)
+  -const {forId} = options || {};
+  .field
+    .field--label
+      +label({forId: forId})=label
+    .field--input
+      block

@@ -1,0 +1,14 @@
+@use '../../quark/placeholder';
+
+.label {
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+
+  @include placeholder.placeholder-alternative {
+    display: inline-block;
+    width: 100%;
+    max-width: 7rem;
+    min-height: var(--font-size);
+  }
+}

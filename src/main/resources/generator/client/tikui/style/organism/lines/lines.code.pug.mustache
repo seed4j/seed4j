@@ -1,0 +1,13 @@
+include lines.mixin.pug
+
++lines('paragraphs')
+  +lines-line First
+  +lines-line Second
+  +lines-line Third
++lines('title-and-text')
+  +lines-line Title
+  +lines-line Text
++lines('title-and-text')
+  +lines-line({ align: 'start' }) Align start
+  +lines-line({ align: 'center' }) Align center
+  +lines-line({ align: 'end' }) Align end

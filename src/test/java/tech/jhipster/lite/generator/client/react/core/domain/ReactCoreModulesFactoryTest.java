@@ -35,7 +35,7 @@ class ReactCoreModulesFactoryTest {
       .containing(nodeDependency("vite"))
       .containing(nodeDependency("react"))
       .containing(nodeDependency("react-dom"))
-      .containing(nodeScript("dev", "npm-run-all dev:*"))
+      .containing(nodeScript("dev", "npm-run-all --parallel dev:*"))
       .containing(nodeScript("dev:vite", "vite"))
       .containing(nodeScript("build", "npm-run-all build:*"))
       .containing(nodeScript("build:tsc", "tsc"))

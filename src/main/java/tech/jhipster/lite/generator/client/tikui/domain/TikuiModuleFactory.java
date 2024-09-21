@@ -3,10 +3,13 @@ package tech.jhipster.lite.generator.client.tikui.domain;
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
 import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.*;
 
+import java.util.regex.Pattern;
 import tech.jhipster.lite.module.domain.JHipsterModule;
 import tech.jhipster.lite.module.domain.file.JHipsterDestination;
 import tech.jhipster.lite.module.domain.file.JHipsterSource;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
+import tech.jhipster.lite.module.domain.replacement.RegexNeedleAfterReplacer;
+import tech.jhipster.lite.module.domain.replacement.ReplacementCondition;
 
 public class TikuiModuleFactory {
 
@@ -114,7 +117,8 @@ public class TikuiModuleFactory {
         .and()
       .optionalReplacements()
         .in(path("vite.config.ts"))
-          .add(lineAfterRegex("port:\\s*9000,"), vueStyleProxy(properties))
+          .add(existingProxyReplacer(), proxyForStyle(properties))
+          .add(newProxyReplacer(), newProxyForStyle(properties))
           .and()
         .in(path("src/main/webapp/index.html"))
           .add(lineBeforeText("</head>"), tikuiLink(properties))
@@ -127,19 +131,40 @@ public class TikuiModuleFactory {
     //@formatter:on
   }
 
+  private static RegexNeedleAfterReplacer newProxyReplacer() {
+    return new RegexNeedleAfterReplacer(ReplacementCondition.notContaining("proxy:"), Pattern.compile("port:\\s*9000,", Pattern.MULTILINE));
+  }
+
+  private static RegexNeedleAfterReplacer existingProxyReplacer() {
+    return new RegexNeedleAfterReplacer(
+      (contentBeforeReplacement, replacement) -> contentBeforeReplacement.contains("proxy:"),
+      Pattern.compile("proxy:\\s*\\{", Pattern.MULTILINE)
+    );
+  }
+
   private String tikuiLink(JHipsterModuleProperties properties) {
     return properties.indentation().times(2) + "<link rel=\"stylesheet\" href=\"/style/tikui.css\" />";
   }
 
-  private static String vueStyleProxy(JHipsterModuleProperties properties) {
+  private static String newProxyForStyle(JHipsterModuleProperties properties) {
+    return new StringBuilder()
+      .append(properties.indentation().times(2))
+      .append("proxy: {")
+      .append(LINE_BREAK)
+      .append(proxyForStyle(properties))
+      .append(LINE_BREAK)
+      .append(properties.indentation().times(2))
+      .append("},")
+      .toString();
+  }
+
+  private static String proxyForStyle(JHipsterModuleProperties properties) {
     return """
-    {S}{S}proxy: {
     {S}{S}{S}'/style': {
     {S}{S}{S}{S}ws: true,
     {S}{S}{S}{S}changeOrigin: true,
     {S}{S}{S}{S}rewrite: path => path.replace('/style', ''),
     {S}{S}{S}{S}target: 'http://localhost:9005',
-    {S}{S}{S}},
-    {S}{S}},""".replace("{S}", properties.indentation().times(1));
+    {S}{S}{S}},""".replace("{S}", properties.indentation().times(1));
   }
 }

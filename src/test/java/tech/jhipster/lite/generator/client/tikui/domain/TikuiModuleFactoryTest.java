@@ -46,6 +46,40 @@ class TikuiModuleFactoryTest {
     }
   }
 
+  @Nested
+  class ReactTest {
+
+    @Test
+    void shouldBuildModuleOnReactProject() {
+      assertThatTikuiModule(viteConfigFile(), indexFile()).hasFile("vite.config.ts").containing(styleProxy());
+    }
+
+    private static String styleProxy() {
+      return """
+          proxy: {
+            '/style': {
+              ws: true,
+              changeOrigin: true,
+              rewrite: path => path.replace('/style', ''),
+              target: 'http://localhost:9005',
+            },
+            '/api': {
+              target: 'http://localhost:8080',
+              changeOrigin: true,
+            },
+          },\
+      """;
+    }
+
+    public static ModuleFile viteConfigFile() {
+      return file("src/main/resources/generator/client/react/core/vite.config.ts.mustache", "vite.config.ts");
+    }
+
+    private static ModuleFile indexFile() {
+      return file("src/main/resources/generator/client/react/core/src/main/webapp/index.html.mustache", "src/main/webapp/index.html");
+    }
+  }
+
   private static JHipsterModuleAsserter assertThatTikuiModule(ModuleFile proxyFile, ModuleFile indexFile) {
     JHipsterModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 

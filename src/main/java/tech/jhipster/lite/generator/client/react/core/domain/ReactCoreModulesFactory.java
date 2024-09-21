@@ -1,9 +1,8 @@
 package tech.jhipster.lite.generator.client.react.core.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
-import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.COMMON;
-import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.REACT;
-import static tech.jhipster.lite.module.domain.replacement.ReplacementCondition.always;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.*;
+import static tech.jhipster.lite.module.domain.replacement.ReplacementCondition.*;
 
 import java.util.function.Consumer;
 import tech.jhipster.lite.module.domain.Indentation;
@@ -51,7 +50,7 @@ public class ReactCoreModulesFactory {
         .addDevDependency(packageName("vite"), COMMON)
         .addDependency(packageName("react"), REACT)
         .addDependency(packageName("react-dom"), REACT)
-        .addScript(scriptKey("dev"), scriptCommand("npm-run-all dev:*"))
+        .addScript(scriptKey("dev"), scriptCommand("npm-run-all --parallel dev:*"))
         .addScript(scriptKey("dev:vite"), scriptCommand("vite"))
         .addScript(scriptKey("build"), scriptCommand("npm-run-all build:*"))
         .addScript(scriptKey("build:tsc"), scriptCommand("tsc"))

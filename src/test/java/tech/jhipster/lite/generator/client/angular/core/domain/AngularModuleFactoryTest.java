@@ -45,6 +45,8 @@ class AngularModuleFactoryTest {
       .containing(nodeDependency("globals"))
       .containing(nodeDependency("typescript-eslint"))
       .containing(nodeDependency("npm-run-all2"))
+      .containing(nodeScript("dev", "npm-run-all --parallel dev:*"))
+      .containing(nodeScript("dev:ng", "ng serve"))
       .containing(nodeScript("ng", "ng"))
       .containing(nodeScript("watch", "npm-run-all --parallel watch:*"))
       .containing(nodeScript("watch:ng", "ng build --watch --configuration development"))

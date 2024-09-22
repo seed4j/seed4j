@@ -1,8 +1,7 @@
 package tech.jhipster.lite.generator.client.angular.core.domain;
 
 import static tech.jhipster.lite.module.domain.JHipsterModule.*;
-import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.ANGULAR;
-import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.COMMON;
+import static tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource.*;
 
 import tech.jhipster.lite.module.domain.Indentation;
 import tech.jhipster.lite.module.domain.JHipsterModule;
@@ -59,6 +58,8 @@ public class AngularModuleFactory {
         .addDevDependency(packageName("typescript"), ANGULAR)
         .addDevDependency(packageName("typescript-eslint"), COMMON)
         .addDevDependency(packageName("npm-run-all2"), COMMON)
+        .addScript(scriptKey("dev"), scriptCommand("npm-run-all --parallel dev:*"))
+        .addScript(scriptKey("dev:ng"), scriptCommand("ng serve"))
         .addScript(scriptKey("ng"), scriptCommand("ng"))
         .addScript(scriptKey("start"), scriptCommand("ng serve"))
         .addScript(scriptKey("build"), scriptCommand("npm-run-all build:*"))

@@ -80,6 +80,32 @@ class TikuiModuleFactoryTest {
     }
   }
 
+  @Nested
+  class AngularTest {
+
+    @Test
+    void shouldBuildModuleOnAngularProject() {
+      assertThatTikuiModule(proxyConfFile(), indexFile()).hasFile("proxy.conf.json").containing(styleProxy());
+    }
+
+    public static ModuleFile proxyConfFile() {
+      return file("src/main/resources/generator/client/angular/core/proxy.conf.json.mustache", "proxy.conf.json");
+    }
+
+    private static ModuleFile indexFile() {
+      return file("src/main/resources/generator/client/angular/core/src/main/webapp/index.html.mustache", "src/main/webapp/index.html");
+    }
+
+    private String styleProxy() {
+      return """
+        "/style": {
+          "target": "http://localhost:9005",
+          "secure": false
+        },\
+      """;
+    }
+  }
+
   private static JHipsterModuleAsserter assertThatTikuiModule(ModuleFile proxyFile, ModuleFile indexFile) {
     JHipsterModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 

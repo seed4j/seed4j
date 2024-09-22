@@ -120,6 +120,9 @@ public class TikuiModuleFactory {
           .add(existingProxyReplacer(), proxyForStyle(properties))
           .add(newProxyReplacer(), newProxyForStyle(properties))
           .and()
+        .in(path("proxy.conf.json"))
+          .add(lineBeforeText("\"/api\":"), styleProxyConf(properties))
+          .and()
         .in(path("src/main/webapp/index.html"))
           .add(lineBeforeText("</head>"), tikuiLink(properties))
           .and()
@@ -166,5 +169,14 @@ public class TikuiModuleFactory {
     {S}{S}{S}{S}rewrite: path => path.replace('/style', ''),
     {S}{S}{S}{S}target: 'http://localhost:9005',
     {S}{S}{S}},""".replace("{S}", properties.indentation().times(1));
+  }
+
+  private String styleProxyConf(JHipsterModuleProperties properties) {
+    return """
+    {S}"/style": {
+    {S}{S}"target": "http://localhost:9005",
+    {S}{S}"secure": false
+    {S}},
+    """.replace("{S}", properties.indentation().times(1));
   }
 }

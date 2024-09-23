@@ -2,9 +2,9 @@
 
 printWidth: 140
 singleQuote: true
-tabWidth: {{indentSize}}
+tabWidth: 2
 useTabs: false
-endOfLine: '{{endOfLine}}'
+endOfLine: 'lf'
 
 plugins:
   - '@prettier/plugin-xml'
@@ -20,4 +20,3 @@ bracketSameLine: false
 
 # xml rules:
 xmlWhitespaceSensitivity: ignore
-

@@ -110,12 +110,12 @@ public class SvelteModuleFactory {
           .addFile("svelte-logo.png")
           .and()
         .and()
-          .apply(patchPrettierConfig(properties))
+          .apply(patchPrettierConfig())
       .build();
     //@formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchPrettierConfig(JHipsterModuleProperties properties) {
+  private Consumer<JHipsterModuleBuilder> patchPrettierConfig() {
     //@formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

@@ -120,7 +120,7 @@ public class SvelteModuleFactory {
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()
         .in(path(".prettierrc"))
-          .add(text("plugins:"), "plugins:\n  - prettier-plugin-svelte")
+          .line(lineBeforeText("plugins:"), properties.idendation().times(1) + "- prettier-plugin-svelte")
           .add(append(), "\n# Svelte rules:")
           .add(append(), "semi: false")
           .add(append(), "svelteSortOrder: options-scripts-styles-markup")

@@ -20,7 +20,7 @@
     "@typescript-eslint/parser": "8.6.0",
     "@vitest/coverage-istanbul": "2.1.1",
     "autoprefixer": "10.4.20",
-    "browser-sync": "3.0.2",
+    "browser-sync": "3.0.3",
     "cssnano": "7.0.6",
     "cypress": "13.14.2",
     "eslint": "9.11.0",

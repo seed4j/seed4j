@@ -1,18 +1,18 @@
 {
   "dependencies": {
     "@angular/cdk": "18.2.6",
-    "@angular/core": "18.2.5",
+    "@angular/core": "18.2.6",
     "@angular/material": "18.2.6",
     "angular-eslint": "18.3.1",
     "rxjs": "7.8.1",
     "tslib": "2.7.0",
-    "zone.js": "0.14.10"
+    "zone.js": "0.15.0"
   },
   "devDependencies": {
     "@angular-builders/jest": "18.0.0",
     "@angular/build": "18.2.6",
     "@angular/cli": "18.2.6",
-    "@angular/compiler-cli": "18.2.5",
+    "@angular/compiler-cli": "18.2.6",
     "jest-environment-jsdom": "29.7.0",
     "jest-preset-angular": "14.2.4",
     "jest-sonar-reporter": "2.0.0",

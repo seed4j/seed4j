@@ -65,7 +65,7 @@
     "@vitejs/plugin-vue": "5.1.4",
     "@vitest/coverage-istanbul": "2.1.1",
     "@vue/test-utils": "2.4.6",
-    "cypress": "13.14.2",
+    "cypress": "13.15.0",
     "eslint": "9.11.1",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-cypress": "3.5.0",

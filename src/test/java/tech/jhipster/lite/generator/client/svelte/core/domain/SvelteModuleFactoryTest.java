@@ -53,7 +53,6 @@ class SvelteModuleFactoryTest {
         .containing(nodeDependency("eslint-plugin-svelte"))
         .containing(nodeDependency("globals"))
         .containing(nodeDependency("jsdom"))
-        .containing(nodeDependency("prettier-plugin-organize-imports"))
         .containing(nodeDependency("prettier-plugin-svelte"))
         .containing(nodeDependency("svelte"))
         .containing(nodeDependency("svelte-check"))

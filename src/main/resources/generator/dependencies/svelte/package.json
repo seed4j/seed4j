@@ -13,7 +13,6 @@
     "@vitest/coverage-v8": "2.1.1",
     "@vitest/ui": "2.1.1",
     "eslint-plugin-svelte": "2.44.0",
-    "prettier-plugin-organize-imports": "4.1.0",
     "prettier-plugin-svelte": "3.2.6",
     "svelte": "4.2.19",
     "svelte-check": "4.0.2"

@@ -1,5 +1,6 @@
 package tech.jhipster.lite.generator.client.svelte.core.domain;
 
+import static tech.jhipster.lite.module.domain.JHipsterModule.append;
 import static tech.jhipster.lite.module.domain.JHipsterModule.from;
 import static tech.jhipster.lite.module.domain.JHipsterModule.lineBeforeText;
 import static tech.jhipster.lite.module.domain.JHipsterModule.moduleBuilder;
@@ -61,7 +62,6 @@ public class SvelteModuleFactory {
         .addDevDependency(packageName("eslint-plugin-svelte"), SVELTE)
         .addDevDependency(packageName("globals"), COMMON)
         .addDevDependency(packageName("jsdom"), COMMON)
-        .addDevDependency(packageName("prettier-plugin-organize-imports"), SVELTE)
         .addDevDependency(packageName("prettier-plugin-svelte"), SVELTE)
         .addDevDependency(packageName("svelte"), SVELTE)
         .addDevDependency(packageName("svelte-check"), SVELTE)

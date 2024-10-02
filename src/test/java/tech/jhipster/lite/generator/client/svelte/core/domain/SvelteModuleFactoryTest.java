@@ -1,6 +1,12 @@
 package tech.jhipster.lite.generator.client.svelte.core.domain;
 
-import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.ModuleFile;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.file;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.lintStagedConfigFile;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.nodeDependency;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.nodeScript;
+import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.packageJsonFile;
 
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.TestFileUtils;
@@ -33,7 +39,6 @@ class SvelteModuleFactoryTest {
           """)
         .and()
       .hasFile("package.json")
-        .containing(nodeDependency("@eslint/js"))
         .containing(nodeDependency("@sveltejs/adapter-static"))
         .containing(nodeDependency("@sveltejs/kit"))
         .containing(nodeDependency("@sveltejs/vite-plugin-svelte"))

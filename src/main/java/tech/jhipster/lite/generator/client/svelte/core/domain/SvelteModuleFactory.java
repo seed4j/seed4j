@@ -110,17 +110,17 @@ public class SvelteModuleFactory {
           .addFile("svelte-logo.png")
           .and()
         .and()
-          .apply(patchPrettierConfig())
+          .apply(patchPrettierConfig(properties))
       .build();
     //@formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchPrettierConfig() {
+  private Consumer<JHipsterModuleBuilder> patchPrettierConfig(JHipsterModuleProperties properties) {
     //@formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()
         .in(path(".prettierrc"))
-          .line(lineBeforeText("plugins:"), properties.idendation().times(1) + "- prettier-plugin-svelte")
+          .add(lineBeforeText("plugins:"), properties.indentation().times(1) + "- prettier-plugin-svelte")
           .add(append(), "\n# Svelte rules:")
           .add(append(), "semi: false")
           .add(append(), "svelteSortOrder: options-scripts-styles-markup")

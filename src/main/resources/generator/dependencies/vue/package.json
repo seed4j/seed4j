@@ -12,7 +12,7 @@
     "vue-router": "4.4.5"
   },
   "devDependencies": {
-    "@pinia/testing": "0.1.5",
+    "@pinia/testing": "0.1.6",
     "@types/sinon": "17.0.3",
     "@vitejs/plugin-vue": "5.1.4",
     "@vue/test-utils": "2.4.6",

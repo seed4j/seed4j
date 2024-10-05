@@ -43,7 +43,7 @@
     <jqassistant-jmolecules-plugin.version>2.1.0-M4</jqassistant-jmolecules-plugin.version>
     <jqassistant-spring-plugin.version>2.2.0</jqassistant-spring-plugin.version>
     <!-- Test dependencies -->
-    <junit-jupiter.version>5.11.1</junit-jupiter.version>
+    <junit-jupiter.version>5.11.2</junit-jupiter.version>
     <assertj.version>3.26.3</assertj.version>
     <mockito.version>5.14.1</mockito.version>
     <cassandraunit.version>4.3.1.0</cassandraunit.version>

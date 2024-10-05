@@ -32,7 +32,7 @@
     <ehcache.version>3.10.8</ehcache.version>
     <thymeleaf-layout-dialect.version>3.3.0</thymeleaf-layout-dialect.version>
     <webjars-locator.version>0.52</webjars-locator.version>
-    <htmx-webjars.version>2.0.2</htmx-webjars.version>
+    <htmx-webjars.version>2.0.3</htmx-webjars.version>
     <alpinejs-webjars.version>3.14.1</alpinejs-webjars.version>
     <protobuf.version>4.28.2</protobuf.version>
     <proto-backwards-compatibility.version>1.0.7</proto-backwards-compatibility.version>

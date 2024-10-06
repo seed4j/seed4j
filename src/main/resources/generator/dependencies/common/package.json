@@ -4,7 +4,7 @@
   "description": "JHipster Lite : used for Dependencies",
   "license": "Apache-2.0",
   "dependencies": {
-    "@babel/cli": "7.25.6",
+    "@babel/cli": "7.25.7",
     "@playwright/test": "1.47.2",
     "@prettier/plugin-pug": "3.1.0",
     "@prettier/plugin-xml": "3.4.1",

@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "@angular-builders/jest": "18.0.0",
-    "@angular/build": "18.2.6",
+    "@angular/build": "18.2.7",
     "@angular/cdk": "18.2.6",
-    "@angular/cli": "18.2.6",
+    "@angular/cli": "18.2.7",
     "@angular/compiler-cli": "18.2.6",
     "@angular/core": "18.2.6",
     "@angular/material": "18.2.6",

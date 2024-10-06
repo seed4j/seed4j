@@ -8,7 +8,7 @@
     "@playwright/test": "1.47.2",
     "@prettier/plugin-pug": "3.1.0",
     "@prettier/plugin-xml": "3.4.1",
-    "@tikui/core": "6.2.0",
+    "@tikui/core": "6.2.1",
     "@tsconfig/recommended": "1.0.7",
     "@types/jest": "29.5.13",
     "@types/node": "20.16.10",

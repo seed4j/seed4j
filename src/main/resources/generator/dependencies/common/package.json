@@ -32,7 +32,7 @@
     "keycloak-js": "25.0.6",
     "lint-staged": "15.2.10",
     "mkdirp": "3.0.1",
-    "node": "20.17.0",
+    "node": "20.18.0",
     "npm": "10.9.0",
     "npm-run-all2": "6.2.3",
     "onchange": "7.1.0",

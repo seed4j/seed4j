@@ -45,6 +45,11 @@ class PulsarModuleFactoryTest {
               <artifactId>pulsar-client</artifactId>
               <version>${pulsar.version}</version>
             </dependency>
+            <dependency>
+              <groupId>org.apache.pulsar</groupId>
+              <artifactId>pulsar-client-api</artifactId>
+              <version>${pulsar.version}</version>
+            </dependency>
         """
       )
       .containing(

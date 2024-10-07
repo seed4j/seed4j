@@ -24,7 +24,7 @@
     <kafka-clients.version>3.8.0</kafka-clients.version>
     <mongock.version>5.4.4</mongock.version>
     <neo4j-migrations.version>2.13.2</neo4j-migrations.version>
-    <pulsar.version>3.3.1</pulsar.version>
+    <pulsar.version>3.3.2</pulsar.version>
     <liquibase.version>4.29.2</liquibase.version>
     <reflections.version>0.10.2</reflections.version>
     <json-web-token.version>0.12.6</json-web-token.version>
@@ -345,6 +345,11 @@
       <dependency>
         <groupId>org.apache.pulsar</groupId>
         <artifactId>pulsar-client</artifactId>
+        <version>${pulsar.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.pulsar</groupId>
+        <artifactId>pulsar-client-api</artifactId>
         <version>${pulsar.version}</version>
       </dependency>
       <dependency>

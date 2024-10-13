@@ -1,7 +1,9 @@
 package tech.jhipster.lite.module.infrastructure.secondary.git;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Optional;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -55,6 +57,8 @@ class JGitGitRepository implements GitRepository {
 
     File gitRepository = findGitDirectory(folder).orElseThrow(() -> new GitCommitException("Can't commit in non existing git repository"));
 
+    doNpmInstall(folder);
+
     try (Git gitFolder = Git.open(gitRepository)) {
       gitFolder.add().setUpdate(true).addFilepattern(".").call(); // stage modified and deleted
       gitFolder.add().addFilepattern(".").call(); // stage modified and new
@@ -62,6 +66,29 @@ class JGitGitRepository implements GitRepository {
       gitFolder.commit().setSign(false).setMessage(message.get()).call();
     } catch (IOException | GitAPIException | JGitInternalException e) {
       throw new GitCommitException("Can't commit :" + e.getMessage(), e);
+    }
+  }
+
+  private static void doNpmInstall(JHipsterProjectFolder folder) {
+    ProcessBuilder processBuilder = new ProcessBuilder();
+    processBuilder.command("npm", "install");
+    processBuilder.directory(new File(folder.get()));
+
+    try {
+      Process process = processBuilder.start();
+
+      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+      String line = null;
+      while ((line = reader.readLine()) != null) {
+        log.trace(line);
+      }
+
+      process.waitFor();
+      log.trace("npm install finished");
+    } catch (IOException | InterruptedException e) {
+      Thread.currentThread().interrupt();
+      log.error("Interrupted: npm install failed", e);
     }
   }
 

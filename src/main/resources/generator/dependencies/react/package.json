@@ -19,7 +19,7 @@
     "react-hook-form": "7.53.0",
     "react-i18next": "15.0.2",
     "react-scripts": "5.0.1",
-    "sass": "1.79.4",
+    "sass": "1.79.5",
     "ts-node": "10.9.2"
   }
 }

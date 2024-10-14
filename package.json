@@ -85,7 +85,7 @@
     "prettier-plugin-packagejson": "2.5.3",
     "prettier-plugin-sh": "0.14.0",
     "rimraf": "6.0.1",
-    "sass": "1.79.4",
+    "sass": "1.79.5",
     "serve": "14.2.3",
     "sinon": "19.0.2",
     "start-server-and-test": "2.0.8",

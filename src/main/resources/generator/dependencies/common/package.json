@@ -6,7 +6,7 @@
   "dependencies": {
     "@babel/cli": "7.25.7",
     "@playwright/test": "1.48.0",
-    "@prettier/plugin-pug": "3.1.0",
+    "@prettier/plugin-pug": "3.2.0",
     "@prettier/plugin-xml": "3.4.1",
     "@tikui/core": "6.2.1",
     "@tsconfig/recommended": "1.0.7",

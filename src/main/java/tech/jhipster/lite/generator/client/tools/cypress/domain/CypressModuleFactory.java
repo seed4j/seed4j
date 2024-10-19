@@ -31,7 +31,6 @@ public class CypressModuleFactory {
   private static final String UTILS = "utils";
 
   private static final String CYPRESS_COMPONENT_TESTS_EXCLUSION = "\"src/test/webapp/component/**/*.ts\"";
-  private static final String CYPRESS_E2E_TESTS_EXCLUSION = "\"src/test/webapp/e2e/**/*.ts\"";
   private static final String EXCLUDE_KEY = "\"exclude\"";
   private static final RegexReplacer NEW_EXCLUSION_REPLACER = new RegexReplacer(
     (currentContent, replacement) -> !currentContent.contains(EXCLUDE_KEY),
@@ -54,7 +53,7 @@ public class CypressModuleFactory {
     Assert.notNull("properties", properties);
 
     //@formatter:off
-    return commonCypressModuleBuilder(properties, CYPRESS_COMPONENT_TESTS, CYPRESS_COMPONENT_TESTS_EXCLUSION)
+    return commonCypressModuleBuilder(properties, CYPRESS_COMPONENT_TESTS)
       .packageJson()
         .addDevDependency(packageName("start-server-and-test"), COMMON)
         .addScript(scriptKey("test:component"), scriptCommand("start-server-and-test start http://localhost:9000 'cypress open --e2e --config-file src/test/webapp/component/cypress-config.ts'"))
@@ -74,7 +73,7 @@ public class CypressModuleFactory {
     Assert.notNull("properties", properties);
 
     //@formatter:off
-    return commonCypressModuleBuilder(properties, CYPRESS_E2E_TESTS, CYPRESS_E2E_TESTS_EXCLUSION)
+    return commonCypressModuleBuilder(properties, CYPRESS_E2E_TESTS)
       .packageJson()
         .addScript(scriptKey("e2e"), scriptCommand("cypress open --e2e --config-file src/test/webapp/e2e/cypress-config.ts"))
         .addScript(scriptKey("e2e:headless"), scriptCommand("cypress run --headless --config-file src/test/webapp/e2e/cypress-config.ts"))
@@ -88,8 +87,7 @@ public class CypressModuleFactory {
 
   private static JHipsterModuleBuilder commonCypressModuleBuilder(
     JHipsterModuleProperties properties,
-    JHipsterDestination destinationFolder,
-    String tsconfigExclusion
+    JHipsterDestination destinationFolder
   ) {
     //@formatter:off
     return moduleBuilder(properties)
@@ -109,13 +107,13 @@ public class CypressModuleFactory {
           .addFile("Interceptor.ts")
           .addFile("DataSelector.ts")
           .and()
-        .and()
-      .optionalReplacements()
-        .in(path("tsconfig.json"))
-        .add(EXISTING_EXCLUSION_REPLACER_PROVIDER.apply(tsconfigExclusion), "$1, "+tsconfigExclusion+"]")
-        .add(EMPTY_EXCLUSION_REPLACER_PROVIDER.apply(tsconfigExclusion), "$1"+tsconfigExclusion+"]")
-        .add(NEW_EXCLUSION_REPLACER, newExclusionNode(properties, tsconfigExclusion))
-        .and()
+//        .and()
+//      .optionalReplacements()
+//        .in(path("tsconfig.json"))
+//        .add(EXISTING_EXCLUSION_REPLACER_PROVIDER.apply(tsconfigExclusion), "$1, "+tsconfigExclusion+"]")
+//        .add(EMPTY_EXCLUSION_REPLACER_PROVIDER.apply(tsconfigExclusion), "$1"+tsconfigExclusion+"]")
+//        .add(NEW_EXCLUSION_REPLACER, newExclusionNode(properties, tsconfigExclusion))
+//        .and()
         .and()
       ;
     //@formatter:on

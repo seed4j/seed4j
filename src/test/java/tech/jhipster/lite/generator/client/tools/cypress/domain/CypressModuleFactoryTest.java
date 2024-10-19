@@ -28,15 +28,7 @@ class CypressModuleFactoryTest {
       assertCypressComponentTestsModule(
         packageJsonFile(),
         file("src/test/resources/projects/empty-ts-config/tsconfig.json", "tsconfig.json")
-      )
-        .hasFile("tsconfig.json")
-        .containing(
-          """
-            },
-            "exclude": ["src/test/webapp/component/**/*.ts"]
-          }\
-          """
-        );
+      ).hasFile("tsconfig.json");
     }
 
     @Test
@@ -46,7 +38,7 @@ class CypressModuleFactoryTest {
         file("src/test/resources/projects/ts-config-with-empty-exclusions/tsconfig.json", "tsconfig.json")
       )
         .hasFile("tsconfig.json")
-        .containing("\"exclude\": [\"src/test/webapp/component/**/*.ts\"]");
+        .containing("\"exclude\": []");
     }
 
     @Test
@@ -56,9 +48,7 @@ class CypressModuleFactoryTest {
         file("src/test/resources/projects/ts-config-with-exclusions/tsconfig.json", "tsconfig.json")
       )
         .hasFile("tsconfig.json")
-        .containing(
-          "  \"exclude\": [\"src/test/webapp/integration/**/*spec.ts\", \"node_modules\", \"src/test/webapp/component/**/*.ts\"]"
-        );
+        .containing("  \"exclude\": [\"src/test/webapp/integration/**/*spec.ts\", \"node_modules\"]");
     }
 
     @Test
@@ -115,15 +105,10 @@ class CypressModuleFactoryTest {
 
     @Test
     void shouldBuildE2eTestsModuleOnProjectWithEmptyTsConfig() {
-      assertCypressE2ETestsModule(packageJsonFile(), file("src/test/resources/projects/empty-ts-config/tsconfig.json", "tsconfig.json"))
-        .hasFile("tsconfig.json")
-        .containing(
-          """
-            },
-            "exclude": ["src/test/webapp/e2e/**/*.ts"]
-          }\
-          """
-        );
+      assertCypressE2ETestsModule(
+        packageJsonFile(),
+        file("src/test/resources/projects/empty-ts-config/tsconfig.json", "tsconfig.json")
+      ).hasFile("tsconfig.json");
     }
 
     @Test
@@ -131,9 +116,7 @@ class CypressModuleFactoryTest {
       assertCypressE2ETestsModule(
         packageJsonFile(),
         file("src/test/resources/projects/ts-config-with-empty-exclusions/tsconfig.json", "tsconfig.json")
-      )
-        .hasFile("tsconfig.json")
-        .containing("\"exclude\": [\"src/test/webapp/e2e/**/*.ts\"]");
+      ).hasFile("tsconfig.json");
     }
 
     @Test
@@ -143,7 +126,7 @@ class CypressModuleFactoryTest {
         file("src/test/resources/projects/ts-config-with-exclusions/tsconfig.json", "tsconfig.json")
       )
         .hasFile("tsconfig.json")
-        .containing("  \"exclude\": [\"src/test/webapp/integration/**/*spec.ts\", \"node_modules\", \"src/test/webapp/e2e/**/*.ts\"]");
+        .containing("  \"exclude\": [\"src/test/webapp/integration/**/*spec.ts\", \"node_modules\"]");
     }
 
     @Test
@@ -153,7 +136,7 @@ class CypressModuleFactoryTest {
         file("src/test/resources/projects/ts-config-with-cypress-e2e-exclusions/tsconfig.json", "tsconfig.json")
       )
         .hasFile("tsconfig.json")
-        .containing("  \"exclude\": [\"src/test/webapp/e2e/**/*spec.ts\", \"node_modules\", \"src/test/webapp/e2e/**/*.ts\"]");
+        .containing("  \"exclude\": [\"src/test/webapp/e2e/**/*spec.ts\", \"node_modules\"]");
     }
 
     private static JHipsterModuleAsserter assertCypressE2ETestsModule(ModuleFile... files) {

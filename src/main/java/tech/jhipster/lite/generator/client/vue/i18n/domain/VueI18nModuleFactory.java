@@ -61,7 +61,7 @@ public class VueI18nModuleFactory {
           ), "app.use(I18NextVue, { i18next });")
         .and()
         .in(path(INDEX + "/home/infrastructure/primary/HomepageVue.vue"))
-          .add(lineAfterRegex("Vue 3 \\+ TypeScript \\+ Vite"), properties.indentation().times(2) + "<h2 v-html=\"$t('home.translationEnabled')\"></h2>")
+          .add(lineAfterRegex("Vue 3 \\+ TypeScript \\+ Vite"), properties.indentation().times(2) + "<h2>{{ $t('home.translationEnabled') }}</h2>")
         .and()
         .in(path("./vitest.config.ts"))
           .add(lineAfterRegex("test:"), properties.indentation().times(2) + "setupFiles: ['./src/test/setupTests.ts'],")

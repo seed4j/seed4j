@@ -47,7 +47,7 @@ class VueI18nModuleFactoryTest {
       .containing("app.use(I18NextVue, { i18next });")
       .and()
       .hasFile("src/main/webapp/app/home/infrastructure/primary/HomepageVue.vue")
-      .containing("<h2 v-html=\"$t('home.translationEnabled')\"></h2>")
+      .containing("<h2>{{ $t('home.translationEnabled') }}</h2>")
       .and()
       .hasFile("src/test/setupTests.ts")
       .and()

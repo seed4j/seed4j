@@ -31,7 +31,7 @@ export default defineConfig({
       include: ['src/main/webapp/**/*.ts?(x)'],
       exclude: [
         ...configDefaults.coverage.exclude as string[],
-        'src/main/webapp/app/index.tsx',
+        'src/main/webapp/app/*.ts(x)',
       ],
       provider: 'istanbul',
       reportsDirectory: 'target/test-results/',

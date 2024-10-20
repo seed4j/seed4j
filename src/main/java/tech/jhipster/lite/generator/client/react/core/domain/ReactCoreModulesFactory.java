@@ -176,14 +176,7 @@ public class ReactCoreModulesFactory {
           .add(lineAfterRegex("from 'vitest/config';"), "import react from '@vitejs/plugin-react';")
           .add(text("plugins: ["), "plugins: [react(), ")
           .add(text("environment: 'node',"), "environment: 'jsdom',")
-          .add(vitestCoverageExclusion(properties,"src/main/webapp/app/index.tsx"))
-          .add(vitestCoverageExclusion(properties,"src/main/webapp/app/injections.ts"))
           .and();
     //@formatter:on
-  }
-
-  private static MandatoryReplacer vitestCoverageExclusion(JHipsterModuleProperties properties, String filePattern) {
-    Indentation indentation = properties.indentation();
-    return new MandatoryReplacer(lineAfterRegex("configDefaults.coverage.exclude"), indentation.times(4) + "'" + filePattern + "',");
   }
 }

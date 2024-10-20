@@ -44,7 +44,7 @@ class ReactI18nModuleFactoryTest {
       .containing("describe('Home I18next', () => {")
       .and()
       .hasFile("vitest.config.ts")
-      .containing("'src/main/webapp/app/i18n.ts',");
+      .containing("'src/main/webapp/app/*.ts(x)',");
   }
 
   private ModuleFile app() {

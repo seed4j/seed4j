@@ -19,10 +19,9 @@ sonar.javascript.lcov.reportPaths={{projectBuildDirectory}}/test-results/lcov.in
 sonar.sourceEncoding=UTF-8
 sonar.exclusions=\
   src/main/webapp/app/home/infrastructure/primary/*.*,\
-  src/main/webapp/app/*.ts,\
+  src/main/webapp/app/*.ts?(x),\
   src/main/webapp/content/**/*.*,\
   {{projectBuildDirectory}}/classes/static/**/*.*,\
-  src/main/webapp/app/index.tsx,\
   src/main/webapp/main.ts
 sonar.test.exclusions=\
   src/test/**/PackageSettings.java

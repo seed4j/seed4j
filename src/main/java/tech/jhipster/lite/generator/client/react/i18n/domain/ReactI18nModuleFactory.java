@@ -78,9 +78,6 @@ public class ReactI18nModuleFactory {
              });
            });""" )
         .and()
-        .in(path("./vitest.config.ts"))
-          .add(lineAfterText("'src/main/webapp/app/index.tsx',"), properties.indentation().times(4) + "'src/main/webapp/app/i18n.ts',")
-        .and()
       .and()
       .build();
     //@formatter:off

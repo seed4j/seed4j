@@ -176,9 +176,6 @@ public class VueModulesFactory {
           .add(text("plugins: ["), "plugins: [vue(), ")
           .add(text("environment: 'node',"), "environment: 'jsdom',")
           .add(vitestCoverageExclusion(properties,"src/main/webapp/**/*.component.ts"))
-          .add(vitestCoverageExclusion(properties,"src/main/webapp/app/router.ts"))
-          .add(vitestCoverageExclusion(properties,"src/main/webapp/app/injections.ts"))
-          .add(vitestCoverageExclusion(properties,"src/main/webapp/app/main.ts"))
         .and();
     //@formatter:on
   }

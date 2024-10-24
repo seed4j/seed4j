@@ -34,7 +34,7 @@
     <webjars-locator.version>0.52</webjars-locator.version>
     <htmx-webjars.version>2.0.3</htmx-webjars.version>
     <alpinejs-webjars.version>3.14.3</alpinejs-webjars.version>
-    <protobuf.version>4.28.2</protobuf.version>
+    <protobuf.version>4.28.3</protobuf.version>
     <proto-backwards-compatibility.version>1.0.7</proto-backwards-compatibility.version>
     <jmolecules-bom.version>2023.1.6</jmolecules-bom.version>
     <jqassistant.version>2.5.0</jqassistant.version>

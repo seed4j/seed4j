@@ -34,7 +34,7 @@
     "mkdirp": "3.0.1",
     "node": "20.18.0",
     "npm": "10.9.0",
-    "npm-run-all2": "6.2.4",
+    "npm-run-all2": "6.2.6",
     "onchange": "7.1.0",
     "path-exists-cli": "2.0.0",
     "piqure": "2.1.1",

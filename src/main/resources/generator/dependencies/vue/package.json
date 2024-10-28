@@ -13,7 +13,7 @@
     "eslint-plugin-vue": "9.29.1",
     "i18next-vue": "5.0.0",
     "pinia": "2.2.4",
-    "pinia-plugin-persistedstate": "4.1.1",
+    "pinia-plugin-persistedstate": "4.1.2",
     "sinon": "19.0.2",
     "vue": "3.5.12",
     "vue-router": "4.4.5",

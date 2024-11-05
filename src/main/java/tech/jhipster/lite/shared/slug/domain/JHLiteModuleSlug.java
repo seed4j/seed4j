@@ -46,6 +46,7 @@ public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
   RENOVATE("renovate"),
   GITPOD("gitpod"),
   GRADLE_JAVA("gradle-java"),
+  GRADLE_KOTLIN("gradle-kotlin"),
   GRADLE_WRAPPER("gradle-wrapper"),
   HIBERNATE_2ND_LEVEL_CACHE("hibernate-2nd-level-cache"),
   INFINITEST_FILTERS("infinitest-filters"),

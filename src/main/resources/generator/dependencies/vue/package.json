@@ -8,7 +8,7 @@
     "@types/sinon": "17.0.3",
     "@vitejs/plugin-vue": "5.1.4",
     "@vue/test-utils": "2.4.6",
-    "@vue/tsconfig": "0.5.1",
+    "@vue/tsconfig": "0.6.0",
     "axios": "1.7.7",
     "eslint-plugin-vue": "9.30.0",
     "i18next-vue": "5.0.0",

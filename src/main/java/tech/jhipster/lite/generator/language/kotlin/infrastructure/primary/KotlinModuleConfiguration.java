@@ -1,6 +1,5 @@
 package tech.jhipster.lite.generator.language.kotlin.infrastructure.primary;
 
-import static tech.jhipster.lite.shared.slug.domain.JHLiteFeatureSlug.EXTRA_LANGUAGE;
 import static tech.jhipster.lite.shared.slug.domain.JHLiteModuleSlug.GRADLE_JAVA;
 import static tech.jhipster.lite.shared.slug.domain.JHLiteModuleSlug.GRADLE_KOTLIN;
 
@@ -19,7 +18,7 @@ public class KotlinModuleConfiguration {
       .slug(GRADLE_KOTLIN)
       .withoutProperties()
       .apiDoc("Extra Language", "Add Kotlin Language Supports")
-      .organization(JHipsterModuleOrganization.builder().feature(EXTRA_LANGUAGE).addDependency(GRADLE_JAVA).build())
+      .organization(JHipsterModuleOrganization.builder().addDependency(GRADLE_JAVA).build())
       .tags("buildtool", "test")
       .factory(gradle::buildKotlinLanguageModule);
   }

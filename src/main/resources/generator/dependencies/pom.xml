@@ -70,7 +70,7 @@
     <asciidoctor-maven-plugin.version>3.1.0</asciidoctor-maven-plugin.version>
     <openapi-maven-plugin.version>0.0.21</openapi-maven-plugin.version>
     <openapi-backwards-compat-maven-plugin.version>1.0.3</openapi-backwards-compat-maven-plugin.version>
-    <langchain4j.version>0.35.0</langchain4j.version>
+    <langchain4j.version>0.36.0</langchain4j.version>
   </properties>
 
   <dependencyManagement>

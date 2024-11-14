@@ -1,0 +1,32 @@
+package {{packageName}}.sample.infrastructure.primary;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import {{packageName}}.UnitTest;
+import dev.langchain4j.model.chat.ChatLanguageModel;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+@UnitTest
+@ExtendWith(MockitoExtension.class)
+class ChatResourceTest {
+
+  private static final String ANSWER = "Hello! How can I assist you today?";
+
+  @Mock
+  private ChatLanguageModel chatLanguageModel;
+
+  @InjectMocks
+  private ChatResource chat;
+
+  @Test
+  void shouldSendMessage() {
+   when(chatLanguageModel.generate("Hello")).thenReturn(ANSWER);
+
+    assertThat(chat.send("Hello")).isEqualTo(ANSWER);
+  }
+}

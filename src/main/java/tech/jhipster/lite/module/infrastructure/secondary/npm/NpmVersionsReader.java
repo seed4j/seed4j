@@ -4,7 +4,7 @@ import tech.jhipster.lite.module.domain.npm.NpmPackagesVersions;
 
 /**
  * <p>
- * Read version for an npm dependency
+ * Read version for a npm dependency
  * </p>
  *
  * <p>

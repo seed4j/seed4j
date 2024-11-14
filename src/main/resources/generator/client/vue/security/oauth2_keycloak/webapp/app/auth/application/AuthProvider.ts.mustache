@@ -1,6 +1,6 @@
 import type { AuthRepository } from '@/auth/domain/AuthRepository';
 import { KeycloakAuthRepository } from '@/auth/infrastructure/secondary/KeycloakAuthRepository';
-import { KeycloakHttp } from '@/auth/infrastructure/secondary/KeycloakHttp';
+import { type KeycloakHttp } from '@/auth/infrastructure/secondary/KeycloakHttp';
 import { provide } from '@/injections';
 import { key } from 'piqure';
 

@@ -16,7 +16,7 @@ export default typescript.config(
   },
   js.configs.recommended,
   {
-    files: ['src/main/webapp/**/*.{ts,tsx}', 'src/main/webapp/**/*.spec.ts'],
+    files: ['src/main/webapp/**/*.{ts,tsx}', 'src/test/webapp/unit/**/*.{ts,tsx}'],
     extends: [...typescript.configs.recommendedTypeChecked, react],
     settings: {
       react: {
@@ -31,6 +31,10 @@ export default typescript.config(
     },
     rules: {
       'react/react-in-jsx-scope': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/await-thenable': 'off',
+      '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-misused-promises': [
         'error',
         {

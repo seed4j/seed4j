@@ -32,6 +32,6 @@ class {{ baseName }}ErrorsHandlerIT {
       .perform(get("/api/errors/bad-request").locale(Locale.FRANCE))
       .andExpect(status().is4xxClientError())
       .andExpect(jsonPath("title").value("Bad request"))
-      .andExpect(jsonPath("detail").value("Votre requête n'est pas valide: 400"));
+      .andExpect(jsonPath("detail").value("Votre requête n'est pas valide : 400"));
   }
 }

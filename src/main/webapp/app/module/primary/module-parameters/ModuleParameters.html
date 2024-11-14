@@ -2,12 +2,12 @@
   v-if="propertiesDefinitions.length !== 0"
   class="jhipster-module-parameters"
   :class="stateClass()"
-  :data-selector="`module-${moduleSlug}-${propertiesType}-parameters`"
+  :data-testid="`module-${moduleSlug}-${propertiesType}-parameters`"
 >
   <div class="jhipster-module-parameters--type" :class="stateClass()">
     <div class="jhipster-module-parameters--type-title" :class="stateClass()">{{ typeLabel() }}</div>
     <div
-      :data-selector="`module-${moduleSlug}-${propertiesType}-parameters-stats`"
+      :data-testid="`module-${moduleSlug}-${propertiesType}-parameters-stats`"
       class="jhipster-module-parameters--type-stats"
       :class="stateClass()"
     >
@@ -19,7 +19,7 @@
     <div
       class="jhipster-module-parameters--parameter-value"
       :class="stateClass()"
-      :data-selector="`module-${moduleSlug}-${propertyDefinition.key}-parameter-value`"
+      :data-testid="`module-${moduleSlug}-${propertyDefinition.key}-parameter-value`"
     >
       {{ moduleParameters.get(propertyDefinition.key) }}
     </div>

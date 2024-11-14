@@ -1246,14 +1246,14 @@ describe('Landscape', () => {
       await performSearch(searchInput, 'not-found');
 
       const landscape = defaultLandscape();
-      landscape.standaloneLevels().forEach(level => {
-        level.elements.forEach(element => {
-          element.allModules().forEach(module => {
-            const moduleClasses = wrapper.find(wrappedElement(`${module.slugString()}-module`)).classes();
-            expect(moduleClasses).not.toContain('-search-highlighted');
-          });
+      landscape
+        .standaloneLevels()
+        .flatMap(level => level.elements)
+        .flatMap(element => element.allModules())
+        .forEach(module => {
+          const moduleClasses = wrapper.find(wrappedElement(`${module.slugString()}-module`)).classes();
+          expect(moduleClasses).not.toContain('-search-highlighted');
         });
-      });
     });
 
     it('should scroll vertically and horizontally to the highlighted module if it is not visible within the current viewport', async () => {
@@ -1353,9 +1353,10 @@ describe('Landscape', () => {
     }
 
     const setupScrollTest = (wrapper: VueWrapper, { moduleRect }: { moduleRect: ModuleRect }) => {
+      const mockToJSON = vi.fn().mockImplementation(() => JSON.stringify(moduleRect));
       const mockModuleRect = vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(() => ({
         ...moduleRect,
-        toJSON: () => JSON.stringify(moduleRect),
+        toJSON: mockToJSON,
       }));
 
       const mockContainerRect = vi.fn().mockReturnValue({

@@ -1,7 +1,7 @@
 import { ModuleParameterType } from '../domain/ModuleParameters';
 import { ModuleParametersRepository } from '../domain/ModuleParametersRepository';
 
-const STORAGE_KEY_MODULE_PARAMETERS_SUFIX = '_moduleParameters';
+const STORAGE_KEY_MODULE_PARAMETERS_SUFFIX = '_moduleParameters';
 const STORAGE_KEY_CURRENT_FOLDER_PATH = 'currentFolderPath';
 
 export class LocalStorageModuleParametersRepository implements ModuleParametersRepository {
@@ -13,12 +13,12 @@ export class LocalStorageModuleParametersRepository implements ModuleParametersR
   }
 
   store(folderPath: string, map: Map<string, ModuleParameterType>): void {
-    this.localStorage.setItem(folderPath + STORAGE_KEY_MODULE_PARAMETERS_SUFIX, JSON.stringify(Array.from(map.entries())));
+    this.localStorage.setItem(folderPath + STORAGE_KEY_MODULE_PARAMETERS_SUFFIX, JSON.stringify(Array.from(map.entries())));
   }
 
   get(folderPath: string): Map<string, ModuleParameterType> {
     this.localStorage.setItem(STORAGE_KEY_CURRENT_FOLDER_PATH, folderPath);
-    const storedValue = this.localStorage.getItem(folderPath + STORAGE_KEY_MODULE_PARAMETERS_SUFIX);
+    const storedValue = this.localStorage.getItem(folderPath + STORAGE_KEY_MODULE_PARAMETERS_SUFFIX);
     if (storedValue) {
       return new Map(JSON.parse(storedValue));
     }

@@ -65,7 +65,7 @@ public class ReactI18nModuleFactory {
                vi.mock('react-i18next', () => ({
                  useTranslation: () => {
                    return {
-                     t: vi.fn().mockImplementation((_str: string) => 'Internationalization enabled'),
+                     t: vi.fn().mockImplementation(() => 'Internationalization enabled'),
                    };
                  },
                }));

@@ -370,6 +370,7 @@ from the main (upstream) repository:
   - reactiveapp
   - customjhlite
   - typescriptapp
+  - langchain4japp
 - Below is the list of build tools that can be used for testing (supported input params for the generate.sh script):
   - gradle
   - maven

@@ -39,7 +39,7 @@ import { ProjectFoldersRepositoryStub, stubProjectFoldersRepository } from '../m
 import { LocalWindowThemeRepositoryStub, stubLocalWindowThemeRepository } from '../module/domain/ThemeRepository.fixture';
 import { stubWindow } from '../module/primary/GlobalWindow.fixture';
 import { stubAlertBus } from '../shared/alert/domain/AlertBus.fixture';
-import { stubAlertListener } from '../shared/alert/domain/AlertListener.fixure';
+import { stubAlertListener } from '../shared/alert/domain/AlertListener.fixture';
 
 interface ApplicationListenerStub extends ApplicationListener {
   addEventListener: vi.fn;

@@ -1,6 +1,6 @@
 import HomepageVue from '@/home/infrastructure/primary/HomepageVue.vue';
 import { routes } from '@/router';
-import { mount, VueWrapper } from '@vue/test-utils';
+import { mount, type VueWrapper } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { createRouter, createWebHistory, type Router } from 'vue-router';
 

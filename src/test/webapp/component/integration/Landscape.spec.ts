@@ -1,5 +1,5 @@
 import { interceptForever } from '../support/Interceptor';
-import { dataSelector } from '../support/selector';
+import { dataSelector } from '../support/Selector';
 
 describe('Landscape', () => {
   beforeEach(() => cy.intercept({ path: '/api/project-folders' }, { body: '/tmp/jhlite/1234' }));

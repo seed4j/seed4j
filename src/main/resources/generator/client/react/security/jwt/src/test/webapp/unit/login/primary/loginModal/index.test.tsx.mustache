@@ -37,7 +37,7 @@ describe('test login modal', () => {
   it('should contain password input', async () => {
     const { getByPlaceholderText, getByTestId } = LoginModalRender(true);
     const username = getByPlaceholderText('Mot de passe');
-    await act(async () => {
+    await act(() => {
       const displayPasswordButton = getByTestId('display-password');
       fireEvent.click(displayPasswordButton);
     });
@@ -54,7 +54,7 @@ describe('test login modal', () => {
     const { getByPlaceholderText, getByTestId } = LoginModalRender(true);
     const spy = vi.spyOn(axios, 'post');
     spy.mockImplementationOnce((): Promise<any> => Promise.resolve({ data: {} }));
-    await act(async () => {
+    await act(() => {
       fireEvent.change(getByPlaceholderText("Nom d'utilisateur"), {
         target: { value: 'admin' },
       });
@@ -71,7 +71,7 @@ describe('test login modal', () => {
     const { getByPlaceholderText, getByRole } = LoginModalRender(true);
     const spy = vi.spyOn(axios, 'post');
     spy.mockImplementationOnce((): Promise<any> => Promise.resolve({ data: {} }));
-    await act(async () => {
+    await act(() => {
       fireEvent.change(getByPlaceholderText("Nom d'utilisateur"), {
         target: { value: 'admin' },
       });
@@ -86,7 +86,7 @@ describe('test login modal', () => {
 
   it('should contain error message when submit button is clicked with empty value', async () => {
     const { getByTestId } = LoginModalRender(true);
-    await act(async () => {
+    await act(() => {
       const submitButton = getByTestId('submit-button');
       fireEvent.click(submitButton);
     });

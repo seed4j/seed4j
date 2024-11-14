@@ -14,7 +14,7 @@ const login = async () => {
   const { getByText, getByPlaceholderText, getByTestId } = render(<LoginForm />);
   const loginButton = getByText('Log in');
   fireEvent.click(loginButton);
-  await act(async () => {
+  await act(() => {
     fireEvent.change(getByPlaceholderText("Nom d'utilisateur"), {
       target: { value: 'admin' },
     });
@@ -40,7 +40,7 @@ describe('loginForm', () => {
     fireEvent.click(loginButton);
     expect(getByText('Connect')).toBeTruthy();
     const submitButton = getByTestId('submit-button');
-    await act(async () => {
+    await act(() => {
       fireEvent.click(submitButton);
     });
   });

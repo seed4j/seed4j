@@ -6,7 +6,7 @@
       type="checkbox"
       name="mode"
       :checked="!isDarkTheme"
-      data-selector="theme-switch-button"
+      data-testid="theme-switch-button"
       @change="toggleTheme"
     />
     <label for="switch" class="jhlite-theme-switch-label" :aria-label="theme">

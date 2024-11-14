@@ -94,7 +94,7 @@ class AssertionErrorsHandlerIT {
       .perform(get("/api/assertion-errors/too-many-elements"))
       .andExpect(status().isBadRequest())
       .andExpect(jsonPath("title").value("Too many elements"))
-      .andExpect(jsonPath("detail").value("There is too many elements in myField, max is 1 (current 2 element(s))"))
+      .andExpect(jsonPath("detail").value("There are too many elements in myField, max is 1 (current 2 element(s))"))
       .andExpect(jsonPath("key").value("TOO_MANY_ELEMENTS"));
   }
 

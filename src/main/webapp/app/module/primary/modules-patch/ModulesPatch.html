@@ -1,5 +1,5 @@
 <ModulesPatchLoaderVue v-if="content.isLoading()" />
-<div class="jhipster-modules-patch jhlite-menu-content-template" v-else data-selector="modules-list">
+<div class="jhipster-modules-patch jhlite-menu-content-template" v-else data-testid="modules-list">
   <div class="jhipster-modules-list jhlite-menu-content-template--content">
     <div class="jhipster-modules-filters">
       <div class="jhipster-modules-filters--tags">
@@ -12,11 +12,11 @@
         type="text"
         class="jhipster-modules-filters--filter"
         placeholder="Filter"
-        data-selector="modules-filter-field"
+        data-testid="modules-filter-field"
         @input="updateSearch($event.target.value)"
       />
 
-      <div class="jhipster-modules-filters--displayed-modules-count" data-selector="displayed-modules-count">
+      <div class="jhipster-modules-filters--displayed-modules-count" data-testid="displayed-modules-count">
         {{ displayedModulesCount() }}&nbsp;/&nbsp;{{ totalModulesCount() }}
       </div>
     </div>
@@ -31,7 +31,7 @@
               :class="moduleClass(module.slug)"
               @click="toggleModule(module.slug)"
               @keyup.enter="toggleModule(module.slug)"
-              :data-selector="`${module.slug}-module-content`"
+              :data-testid="`${module.slug}-module-content`"
             >
               <div class="jhipster-module--tags" :class="moduleClass(module.slug)">
                 <div v-for="tag in module.tags" class="jhipster-module--tag">{{ tag }}</div>
@@ -61,23 +61,13 @@
               :class="moduleClass(module.slug)"
               :disabled="disabledApplication(module.slug)"
               @click="applyModule(module.slug)"
-              :data-selector="`module-${module.slug}-application-button`"
+              :data-testid="`module-${module.slug}-application-button`"
             >
               <span v-if="appliedModule(module.slug)">
-                <IconVue
-                  name="ccw"
-                  aria-label="Reapply"
-                  title="Re-apply module"
-                  :data-selector="`module-${module.slug}-application-icon`"
-                />
+                <IconVue name="ccw" aria-label="Reapply" title="Re-apply module" :data-testid="`module-${module.slug}-application-icon`" />
               </span>
               <span v-else>
-                <IconVue
-                  name="play"
-                  aria-label="Reapply"
-                  title="Re-apply module"
-                  :data-selector="`module-${module.slug}-application-icon`"
-                />
+                <IconVue name="play" aria-label="Reapply" title="Re-apply module" :data-testid="`module-${module.slug}-application-icon`" />
               </span>
             </button>
           </div>

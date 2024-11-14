@@ -1,6 +1,6 @@
 import type { AuthRepository } from '@/auth/domain/AuthRepository';
 import type { AuthenticatedUser } from '@/auth/domain/AuthenticatedUser';
-import { KeycloakHttp } from './KeycloakHttp';
+import { type KeycloakHttp } from './KeycloakHttp';
 
 export class KeycloakAuthRepository implements AuthRepository {
   constructor(private readonly keycloakHttp: KeycloakHttp) {}

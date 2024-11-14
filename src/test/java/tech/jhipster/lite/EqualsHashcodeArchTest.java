@@ -27,7 +27,7 @@ class EqualsHashcodeArchTest {
 
   private ArchCondition.ConditionByPredicate<JavaClass> implementBothOrNone() {
     return ArchCondition.from(
-      new DescribedPredicate<>("Class should implement none or both method equals and hashcode") {
+      new DescribedPredicate<>("Class should implement none or both methods equals and hashcode") {
         @Override
         public boolean test(JavaClass clazz) {
           return hasEquals(clazz) == hasHashCode(clazz);

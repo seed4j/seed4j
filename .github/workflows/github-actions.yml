@@ -255,6 +255,7 @@ jobs:
           - customjhlite
           - typescriptapp
           - thymeleafapp
+          - langchain4japp
         include:
           - java-build-tool: maven
           - spring-config-format: yaml
@@ -263,7 +264,7 @@ jobs:
           - app: mariadbapp
             spring-config-format: properties
           - app: consulapp
-            java-version: 22
+            java-version: 23
           - app: vuejwtapp
             node-version: 'latest'
           - app: fullapp

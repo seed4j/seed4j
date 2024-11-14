@@ -149,6 +149,7 @@ public class VueModulesFactory {
           .add(eslintTypescriptVueRule("'vue/html-self-closing': 'off',", properties.indentation()))
           .add(eslintTypescriptVueRule("'@typescript-eslint/no-explicit-any': 'off',", properties.indentation()))
           .add(eslintTypescriptVueRule("'@typescript-eslint/no-empty-object-type': 'off',", properties.indentation()))
+          .add(eslintTypescriptVueRule("'@typescript-eslint/consistent-type-imports': 'error',", properties.indentation()))
           .and()
         .and();
     //@formatter:on

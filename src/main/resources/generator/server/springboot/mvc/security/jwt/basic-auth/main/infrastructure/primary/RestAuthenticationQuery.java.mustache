@@ -13,7 +13,7 @@ import {{packageName}}.account.infrastructure.primary.RestAuthenticationQuery.Re
 import {{packageName}}.shared.authentication.domain.Roles;
 
 @JsonDeserialize(builder = RestAuthenticationQueryBuilder.class)
-@Schema(name = "AuthenticationQuery", description = "Query to authenticate au user")
+@Schema(name = "AuthenticationQuery", description = "Query to authenticate a user")
 final class RestAuthenticationQuery {
 
   private final String username;

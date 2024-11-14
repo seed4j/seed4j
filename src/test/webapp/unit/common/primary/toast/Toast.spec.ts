@@ -7,7 +7,7 @@ import { ToastVue } from '@/shared/toast/infrastructure/primary';
 import { ToastType } from '@/shared/toast/infrastructure/primary/ToastType';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
-import { AlertListenerFixture, stubAlertListener } from '../../../shared/alert/domain/AlertListener.fixure';
+import { AlertListenerFixture, stubAlertListener } from '../../../shared/alert/domain/AlertListener.fixture';
 import { stubTimeout } from '../timeout/Timeout.fixture';
 
 let wrapper: VueWrapper;
@@ -82,9 +82,9 @@ describe('Toast', () => {
   it('should hide toast on close', async () => {
     await successToast();
 
-    await wrapper.find('[data-selector="toast.close"]').trigger('click');
+    await wrapper.find('[data-testid="toast.close"]').trigger('click');
 
-    expect(wrapper.find('[data-selector="toast-overlay"]').exists()).toBe(false);
+    expect(wrapper.find('[data-testid="toast-overlay"]').exists()).toBe(false);
   });
 
   it('should unsubscribe on before unmount', () => {
@@ -148,7 +148,7 @@ describe('Toast', () => {
         toastTimeout,
       });
 
-      await wrapper.find('[data-selector="toast.close"]').trigger('click');
+      await wrapper.find('[data-testid="toast.close"]').trigger('click');
 
       expect(component.show).toBe(false);
       expect(toastTimeout.unregister.callCount).toBe(1);

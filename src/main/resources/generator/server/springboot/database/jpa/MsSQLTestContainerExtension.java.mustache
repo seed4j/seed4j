@@ -10,7 +10,7 @@ public class MsSQLTestContainerExtension implements BeforeAllCallback {
 
   private static AtomicBoolean started = new AtomicBoolean(false);
 
-  private static MSSQLServerContainer<?> container =  new MSSQLServerContainer<>("{{mssqlDockerImageWithVersion}}")
+  private static MSSQLServerContainer<?> container = new MSSQLServerContainer<>("{{mssqlDockerImageWithVersion}}")
     .withUrlParam("trustServerCertificate","true")
     .acceptLicense();
 

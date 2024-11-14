@@ -122,7 +122,7 @@ class HexagonalArchTest {
           .mayNotBeAccessedByAnyLayer()
           .whereLayer("secondary adapters")
           .mayNotBeAccessedByAnyLayer()
-          .because("Each bounded context should implement an hexagonal architecture")
+          .because("Each bounded context should implement a hexagonal architecture")
           .check(classes)
       );
     }

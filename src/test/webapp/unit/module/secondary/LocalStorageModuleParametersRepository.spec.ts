@@ -16,7 +16,7 @@ const fakeStorage = (): Storage => {
   };
 };
 
-const STORAGE_KEY_MODULE_PARAMETERS_SUFIX = '_moduleParameters';
+const STORAGE_KEY_MODULE_PARAMETERS_SUFFIX = '_moduleParameters';
 const STORAGE_KEY_CURRENT_FOLDER_PATH = 'currentFolderPath';
 
 describe('LocalStorageModuleParametersRepository', () => {
@@ -32,7 +32,7 @@ describe('LocalStorageModuleParametersRepository', () => {
 
     repo.store(folderPath, new Map(data));
 
-    expect(JSON.parse(storage.getItem(folderPath + STORAGE_KEY_MODULE_PARAMETERS_SUFIX)!)).toEqual(data);
+    expect(JSON.parse(storage.getItem(folderPath + STORAGE_KEY_MODULE_PARAMETERS_SUFFIX)!)).toEqual(data);
   });
 
   it('should return empty Map when there is not module parameters in localStorage', () => {
@@ -55,7 +55,7 @@ describe('LocalStorageModuleParametersRepository', () => {
     storage.clear();
     const repo = new LocalStorageModuleParametersRepository(storage);
 
-    storage.setItem(folderPath + STORAGE_KEY_MODULE_PARAMETERS_SUFIX, JSON.stringify(Array.from(data)));
+    storage.setItem(folderPath + STORAGE_KEY_MODULE_PARAMETERS_SUFFIX, JSON.stringify(Array.from(data)));
 
     expect(repo.get(folderPath)).toEqual(new Map(data));
   });
@@ -73,12 +73,12 @@ describe('LocalStorageModuleParametersRepository', () => {
     ];
     const storage = fakeStorage();
     storage.clear();
-    storage.setItem(folderPathOne + STORAGE_KEY_MODULE_PARAMETERS_SUFIX, JSON.stringify(Array.from(dataOne)));
+    storage.setItem(folderPathOne + STORAGE_KEY_MODULE_PARAMETERS_SUFFIX, JSON.stringify(Array.from(dataOne)));
     const repo = new LocalStorageModuleParametersRepository(storage);
 
     repo.store(folderPathTwo, new Map(dataTwo));
 
-    expect(JSON.parse(storage.getItem(folderPathOne + STORAGE_KEY_MODULE_PARAMETERS_SUFIX)!)).toEqual(dataOne);
+    expect(JSON.parse(storage.getItem(folderPathOne + STORAGE_KEY_MODULE_PARAMETERS_SUFFIX)!)).toEqual(dataOne);
   });
 
   it('should remove current folder path from localStorage when the constructor is called', () => {
@@ -104,7 +104,7 @@ describe('LocalStorageModuleParametersRepository', () => {
       ['key1', 'value1'],
       ['key2', 'value2'],
     ];
-    storage.setItem(folderPath + STORAGE_KEY_MODULE_PARAMETERS_SUFIX, JSON.stringify(Array.from(data)));
+    storage.setItem(folderPath + STORAGE_KEY_MODULE_PARAMETERS_SUFFIX, JSON.stringify(Array.from(data)));
 
     repo.get(folderPath);
 

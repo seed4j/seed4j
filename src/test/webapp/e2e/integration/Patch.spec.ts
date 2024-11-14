@@ -1,4 +1,4 @@
-import { dataSelector } from '../support/selector';
+import { dataSelector } from '../support/Selector';
 
 describe('Patch', () => {
   it('should display modules', () => {

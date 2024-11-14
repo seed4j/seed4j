@@ -42,7 +42,7 @@ export default defineComponent({
     });
 
     const removeDataSelectorAttrs = (data: string): string => {
-      const regex = /data-selector="[^"]*"/g;
+      const regex = /data-testid="[^"]*"/g;
       return data.replace(regex, '');
     };
 

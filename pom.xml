@@ -14,7 +14,7 @@
 
   <groupId>tech.jhipster.lite</groupId>
   <artifactId>jhlite</artifactId>
-  <version>1.21.1-SNAPSHOT</version>
+  <version>1.22.1-SNAPSHOT</version>
   <name>jhlite</name>
   <description>JHipster Lite</description>
   <packaging>jar</packaging>
@@ -68,7 +68,7 @@
     <archunit-junit5.version>1.3.0</archunit-junit5.version>
     <springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>
     <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
-    <sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
+    <sonar-maven-plugin.version>5.0.0.4389</sonar-maven-plugin.version>
     <apache-commons-io.version>2.17.0</apache-commons-io.version>
     <cucumber.version>7.20.1</cucumber.version>
     <maven-model-helper.version>37</maven-model-helper.version>
@@ -342,7 +342,6 @@
           <excludes>
             <exclude>**/generator/buildtool/maven/.mvn/wrapper/*</exclude>
             <exclude>**/generator/buildtool/gradle/gradle/wrapper/*</exclude>
-            <exclude>src/main/webapp/app/common/primary/applicationlistener/WindowApplicationListener.ts</exclude>
           </excludes>
         </configuration>
       </plugin>
@@ -711,11 +710,13 @@
           <configuration>
             <rules>
               <requireMavenVersion>
-                <message>You are running an older version of Maven. JHipster requires at least Maven ${maven.version}</message>
+                <message>You are running an older version of Maven. JHipster Lite requires at least Maven ${maven.version}</message>
                 <version>${maven.version}</version>
               </requireMavenVersion>
               <requireJavaVersion>
-                <message>You are running an incompatible version of Java. JHipster engine requires at least Java ${java.version}</message>
+                <message>
+                  You are running an incompatible version of Java. JHipster Lite engine requires at least Java ${java.version}
+                </message>
                 <version>${java.version}</version>
               </requireJavaVersion>
             </rules>

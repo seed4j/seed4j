@@ -1,5 +1,5 @@
 <LandscapeLoaderVue v-if="levels.isLoading()" />
-<div class="jhipster-landscape jhlite-menu-content-template" v-else data-selector="landscape">
+<div class="jhipster-landscape jhlite-menu-content-template" v-else data-testid="landscape">
   <div class="jhipster-landscape-modes-selection">
     <div class="jhlite-mode-switch">
       <div class="jhlite-mode-switch--modes">
@@ -7,7 +7,7 @@
           class="jhlite-button-switch"
           :class="modeSwitchClass('COMPACTED')"
           @click="selectMode('COMPACTED')"
-          data-selector="compacted-mode-button"
+          data-testid="compacted-mode-button"
         >
           Compacted
         </button>
@@ -15,7 +15,7 @@
           class="jhlite-button-switch"
           :class="modeSwitchClass('EXTENDED')"
           @click="selectMode('EXTENDED')"
-          data-selector="extended-mode-button"
+          data-testid="extended-mode-button"
         >
           Extended
         </button>
@@ -36,7 +36,7 @@
                 class="jhlite-input-text"
                 placeholder="Search modules..."
                 @input="performSearch($event.target.value)"
-                data-selector="landscape-search-input"
+                data-testid="landscape-search-input"
               />
             </div>
           </div>
@@ -46,7 +46,7 @@
       <div
         :class="landscapeClass()"
         ref="landscapeContainer"
-        data-selector="landscape-container"
+        data-testid="landscape-container"
         @mousedown="startGrabbing"
         @mousemove="grabbing"
         @mouseup="stopGrabbing"
@@ -58,7 +58,7 @@
               <div
                 class="jhipster-landscape-feature"
                 :class="elementFlavor(element.slug())"
-                :data-selector="`${element.slugString()}-feature`"
+                :data-testid="`${element.slugString()}-feature`"
                 v-if="isFeature(element)"
                 :ref="el => landscapeElements.set(element.slugString(), el)"
               >
@@ -95,7 +95,7 @@
         <svg
           class="jhipster-landscape-connectors"
           :style="`width: ${landscapeSize.width}px; height: ${landscapeSize.height}px`"
-          data-selector="landscape-connectors"
+          data-testid="landscape-connectors"
         >
           <path
             v-for="connector in landscapeConnectors"
@@ -136,7 +136,7 @@
           <div class="jhlite-vertical-space--line">
             <button
               class="jhlite-button-main -block"
-              data-selector="modules-apply-new-button"
+              data-testid="modules-apply-new-button"
               :disabled="disabledNewApplication()"
               @click="applyNewModules"
             >
@@ -148,7 +148,7 @@
           <div class="jhlite-vertical-space--line">
             <button
               class="jhlite-button-main -block"
-              data-selector="modules-apply-all-button"
+              data-testid="modules-apply-all-button"
               :disabled="disabledAllApplication()"
               @click="applyAllModules"
             >

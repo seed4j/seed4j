@@ -423,7 +423,7 @@ Location: `src/test/webapp/unit/auth/infrastructure/secondary/KeycloakStub.ts`
 This file provides a stub for Keycloak to be used in tests.
 
 ```typescript
-import Keycloak from 'keycloak-js';
+import type Keycloak from 'keycloak-js';
 import sinon from 'sinon';
 import type { SinonStub } from 'sinon';
 

@@ -368,11 +368,11 @@ public final class Assert {
     }
 
     /**
-     * Ensure  that the value does not contain whitespace
+     * Ensure that the value does not contain whitespace
      *
      * @return The current asserter
      * @throws MissingMandatoryValueException
-     *           if the value contain whitespace
+     *           if the value contains whitespace
      */
     public StringAsserter noWhitespace() {
       notNull();

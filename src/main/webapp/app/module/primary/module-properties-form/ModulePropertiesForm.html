@@ -12,7 +12,7 @@
           type="text"
           id="folder-path"
           class="jhlite-input-text"
-          data-selector="folder-path-field"
+          data-testid="folder-path-field"
           :value="folderPath"
           @input="updateFolderPath($event.target.value)"
           @blur="folderPathSelected()"
@@ -35,7 +35,7 @@
           :placeholder="property.defaultValue"
           @input="setStringProperty(property.key, $event.target.value)"
           :value="parameters.get(property.key)"
-          :data-selector="`parameter-${property.key}-field`"
+          :data-testid="`parameter-${property.key}-field`"
           v-if="property.type === 'STRING'"
         />
         <input
@@ -45,14 +45,14 @@
           :placeholder="property.defaultValue"
           @input="setNumberProperty(property.key, $event.target.value)"
           :value="parameters.get(property.key)"
-          :data-selector="`parameter-${property.key}-field`"
+          :data-testid="`parameter-${property.key}-field`"
           v-if="property.type === 'INTEGER'"
         />
         <select
           class="jhipster-modules-properties-form--field"
           :id="`module-parameter-${property.key}`"
           @change="setBooleanProperty(property.key, $event.target.value)"
-          :data-selector="`parameter-${property.key}-field`"
+          :data-testid="`parameter-${property.key}-field`"
           v-if="property.type === 'BOOLEAN'"
         >
           <option value="" :selected="parameters.get(property.key) === undefined"></option>
@@ -60,7 +60,7 @@
           <option value="false" :selected="parameters.get(property.key) === false">No</option>
         </select>
       </div>
-      <div class="jhlite-field--optional" :data-selector="`parameter-${property.key}-optional-marker`" v-if="!property.mandatory">
+      <div class="jhlite-field--optional" :data-testid="`parameter-${property.key}-optional-marker`" v-if="!property.mandatory">
         Optional
       </div>
     </div>
@@ -70,7 +70,7 @@
       type="checkbox"
       id="commit-modules"
       @click="updateModuleCommit($event.target.checked)"
-      data-selector="commit-module-application"
+      data-testid="commit-module-application"
       checked="checked"
     />
     <label for="commit-modules" class="jhipster-modules-properties-form--commit-modules-label">Commit module application</label>

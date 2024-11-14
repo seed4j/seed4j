@@ -2,7 +2,7 @@
   class="jhlite-chip"
   :class="moduleClass()"
   :ref="el => landscapeElements.set(module.slugString(), el)"
-  :data-selector="`${module.slugString()}-module`"
+  :data-testid="`${module.slugString()}-module`"
   @mouseover="emphasizeModule()"
   @mouseleave="deEmphasizeModule()"
   @click="clickedModule()"
@@ -15,7 +15,7 @@
       name="ccw"
       aria-label="Reapply"
       title="Re-apply module"
-      :data-selector="`module-${module.slug}-application-icon`"
+      :data-testid="`module-${module.slug}-application-icon`"
     />
   </div>
   <div class="jhlite-chip--description" :class="moduleClass()">{{ module.operation() }}</div>

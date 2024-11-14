@@ -116,7 +116,7 @@ public class ReactCoreModulesFactory {
   private Consumer<JHipsterModuleBuilder> patchEslintConfig(JHipsterModuleProperties properties) {
     String reactConfig =
       """
-      \t\tfiles: ['src/main/webapp/**/*.{ts,tsx}', 'src/main/webapp/**/*.spec.ts'],
+      \t\tfiles: ['src/main/webapp/**/*.{ts,tsx}', 'src/test/webapp/unit/**/*.{ts,tsx}'],
       \t\textends: [...typescript.configs.recommendedTypeChecked, react],
       \t\tsettings: {
       \t\t\treact: {
@@ -143,6 +143,10 @@ public class ReactCoreModulesFactory {
               regex("[ \\t]+quotes: \\['error', 'single', \\{ avoidEscape: true }],"),
               """
               \t\t\t'react/react-in-jsx-scope': 'off',
+              \t\t\t'@typescript-eslint/no-explicit-any': 'off',
+              \t\t\t'@typescript-eslint/no-unsafe-argument': 'off',
+              \t\t\t'@typescript-eslint/await-thenable': 'off',
+              \t\t\t'@typescript-eslint/consistent-type-imports': 'error',
               \t\t\t'@typescript-eslint/no-misused-promises': [
               \t\t\t\t'error',
               \t\t\t\t{

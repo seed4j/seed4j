@@ -21,10 +21,10 @@
     <spring-cloud-netflix-eureka-client.version>4.1.3</spring-cloud-netflix-eureka-client.version>
     <springdoc-openapi-starter-webmvc.version>2.6.0</springdoc-openapi-starter-webmvc.version>
     <springdoc-openapi-starter-webflux.version>2.6.0</springdoc-openapi-starter-webflux.version>
-    <kafka-clients.version>3.8.1</kafka-clients.version>
+    <kafka-clients.version>3.9.0</kafka-clients.version>
     <mongock.version>5.5.0</mongock.version>
-    <neo4j-migrations.version>2.13.3</neo4j-migrations.version>
-    <liquibase.version>4.29.2</liquibase.version>
+    <neo4j-migrations.version>2.13.4</neo4j-migrations.version>
+    <liquibase.version>4.30.0</liquibase.version>
     <reflections.version>0.10.2</reflections.version>
     <json-web-token.version>0.12.6</json-web-token.version>
     <commons-lang3.version>3.17.0</commons-lang3.version>
@@ -40,7 +40,7 @@
     <jqassistant-asciidoctorj-extensions.version>1.0.1</jqassistant-asciidoctorj-extensions.version>
     <jqassistant-context-mapper-plugin.version>2.1.0-M2</jqassistant-context-mapper-plugin.version>
     <jqassistant-jmolecules-plugin.version>2.1.0-M4</jqassistant-jmolecules-plugin.version>
-    <jqassistant-spring-plugin.version>2.2.0</jqassistant-spring-plugin.version>
+    <jqassistant-spring-plugin.version>2.2.1</jqassistant-spring-plugin.version>
     <!-- Test dependencies -->
     <junit-jupiter.version>5.11.3</junit-jupiter.version>
     <assertj.version>3.26.3</assertj.version>
@@ -61,7 +61,7 @@
     <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
     <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
     <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
-    <sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
+    <sonar-maven-plugin.version>5.0.0.4389</sonar-maven-plugin.version>
     <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
     <jib-maven-plugin.version>3.4.4</jib-maven-plugin.version>
     <compiler-plugin.version>3.13.0</compiler-plugin.version>
@@ -70,6 +70,7 @@
     <asciidoctor-maven-plugin.version>3.1.0</asciidoctor-maven-plugin.version>
     <openapi-maven-plugin.version>0.0.21</openapi-maven-plugin.version>
     <openapi-backwards-compat-maven-plugin.version>1.0.3</openapi-backwards-compat-maven-plugin.version>
+    <langchain4j.version>0.36.0</langchain4j.version>
   </properties>
 
   <dependencyManagement>
@@ -399,6 +400,16 @@
         <groupId>io.kemtoa.openapi</groupId>
         <artifactId>openapi-backwards-compat-maven-plugin</artifactId>
         <version>${openapi-backwards-compat-maven-plugin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>dev.langchain4j</groupId>
+        <artifactId>langchain4j-spring-boot-starter</artifactId>
+        <version>${langchain4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>dev.langchain4j</groupId>
+        <artifactId>langchain4j-open-ai-spring-boot-starter</artifactId>
+        <version>${langchain4j.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

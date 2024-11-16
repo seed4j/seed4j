@@ -18,7 +18,7 @@
     "react-dom": "18.3.1",
     "react-hook-form": "7.53.2",
     "react-i18next": "15.1.1",
-    "sass": "1.80.6",
+    "sass": "1.80.7",
     "ts-node": "10.9.2"
   }
 }

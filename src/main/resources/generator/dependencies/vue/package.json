@@ -6,7 +6,7 @@
   "dependencies": {
     "@pinia/testing": "0.1.7",
     "@types/sinon": "17.0.3",
-    "@vitejs/plugin-vue": "5.1.5",
+    "@vitejs/plugin-vue": "5.2.0",
     "@vue/test-utils": "2.4.6",
     "@vue/tsconfig": "0.6.0",
     "axios": "1.7.7",

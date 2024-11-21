@@ -74,7 +74,7 @@
     <maven-model-helper.version>37</maven-model-helper.version>
     <mustache.java.version>0.9.14</mustache.java.version>
     <night-config.version>3.8.1</night-config.version>
-    <testcontainers.version>1.20.3</testcontainers.version>
+    <testcontainers.version>1.20.4</testcontainers.version>
     <mongock.version>5.5.0</mongock.version>
     <git-commit-id-plugin.version>9.0.1</git-commit-id-plugin.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>

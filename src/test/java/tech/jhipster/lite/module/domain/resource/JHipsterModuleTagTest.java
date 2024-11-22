@@ -26,7 +26,7 @@ class JHipsterModuleTagTest {
 
   @Test
   void shouldNotBuildWithTooLongTag() {
-    var stringTooLong = RandomStringUtils.randomAlphabetic(16);
+    var stringTooLong = RandomStringUtils.secure().nextNumeric(16);
     assertThatThrownBy(() -> new JHipsterModuleTag(stringTooLong)).isInstanceOf(StringTooLongException.class);
   }
 

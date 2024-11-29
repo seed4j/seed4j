@@ -12,7 +12,7 @@
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
     "@vitejs/plugin-react": "4.3.3",
-    "axios": "1.7.7",
+    "axios": "1.7.8",
     "eslint-plugin-react": "7.37.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",

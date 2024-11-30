@@ -23,7 +23,7 @@
     <springdoc-openapi-starter-webflux.version>2.6.0</springdoc-openapi-starter-webflux.version>
     <kafka-clients.version>3.9.0</kafka-clients.version>
     <mongock.version>5.5.0</mongock.version>
-    <neo4j-migrations.version>2.13.4</neo4j-migrations.version>
+    <neo4j-migrations.version>2.14.0</neo4j-migrations.version>
     <liquibase.version>4.30.0</liquibase.version>
     <reflections.version>0.10.2</reflections.version>
     <json-web-token.version>0.12.6</json-web-token.version>

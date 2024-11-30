@@ -78,7 +78,7 @@
     "lint-staged": "15.2.10",
     "npm-run-all2": "7.0.1",
     "postcss-scss": "4.0.9",
-    "prettier": "3.3.3",
+    "prettier": "3.4.1",
     "prettier-plugin-gherkin": "3.1.0",
     "prettier-plugin-java": "2.6.5",
     "prettier-plugin-organize-imports": "4.1.0",

@@ -20,7 +20,7 @@
     <spring-cloud.version>2023.0.4</spring-cloud.version>
     <spring-cloud-netflix-eureka-client.version>4.1.4</spring-cloud-netflix-eureka-client.version>
     <springdoc-openapi-starter-webmvc.version>2.6.0</springdoc-openapi-starter-webmvc.version>
-    <springdoc-openapi-starter-webflux.version>2.6.0</springdoc-openapi-starter-webflux.version>
+    <springdoc-openapi-starter-webflux.version>2.7.0</springdoc-openapi-starter-webflux.version>
     <kafka-clients.version>3.9.0</kafka-clients.version>
     <mongock.version>5.5.0</mongock.version>
     <neo4j-migrations.version>2.14.1</neo4j-migrations.version>

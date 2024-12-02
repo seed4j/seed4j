@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/vite-react/tsconfig.json",
   "compilerOptions": {
+    "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "composite": false,

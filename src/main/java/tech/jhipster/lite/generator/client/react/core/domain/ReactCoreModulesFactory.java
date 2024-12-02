@@ -142,7 +142,6 @@ public class ReactCoreModulesFactory {
             .add(
               regex("[ \\t]+quotes: \\['error', 'single', \\{ avoidEscape: true }],"),
               """
-              \t\t\t'react/react-in-jsx-scope': 'off',
               \t\t\t'@typescript-eslint/no-explicit-any': 'off',
               \t\t\t'@typescript-eslint/await-thenable': 'off',
               \t\t\t'@typescript-eslint/consistent-type-imports': 'error',
@@ -170,6 +169,7 @@ public class ReactCoreModulesFactory {
           .add(tsConfigCompilerOption("composite", false, properties.indentation()))
           .add(tsConfigCompilerOption("forceConsistentCasingInFileNames", true, properties.indentation()))
           .add(tsConfigCompilerOption("allowSyntheticDefaultImports", true, properties.indentation()))
+          .add(tsConfigCompilerOption("jsx", "react", properties.indentation()))
           .add(text(DEFAULT_TSCONFIG_PATH), pathsReplacement)
           .and()
       .and();
@@ -178,6 +178,11 @@ public class ReactCoreModulesFactory {
 
   private static MandatoryReplacer tsConfigCompilerOption(String optionName, boolean optionValue, Indentation indentation) {
     String compilerOption = indentation.times(2) + "\"%s\": %s,".formatted(optionName, optionValue);
+    return new MandatoryReplacer(lineAfterRegex("\"compilerOptions\":"), compilerOption);
+  }
+
+  private static MandatoryReplacer tsConfigCompilerOption(String optionName, String optionValue, Indentation indentation) {
+    String compilerOption = indentation.times(2) + "\"%s\": \"%s\",".formatted(optionName, optionValue);
     return new MandatoryReplacer(lineAfterRegex("\"compilerOptions\":"), compilerOption);
   }
 

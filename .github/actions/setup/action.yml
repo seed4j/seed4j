@@ -8,7 +8,7 @@ inputs:
   node-version:
     description: 'Node version to use'
     required: true
-    default: 'lts/*'
+    default: '22.11.0'
 runs:
   using: 'composite'
   steps:

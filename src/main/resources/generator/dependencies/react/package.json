@@ -7,7 +7,7 @@
   "dependencies": {
     "@nextui-org/react": "2.6.3",
     "@testing-library/dom": "10.4.0",
-    "@testing-library/react": "16.0.1",
+    "@testing-library/react": "16.1.0",
     "@tsconfig/vite-react": "3.4.0",
     "@types/react": "18.3.13",
     "@types/react-dom": "18.3.1",

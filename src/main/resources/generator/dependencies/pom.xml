@@ -70,7 +70,7 @@
     <openapi-maven-plugin.version>0.0.21</openapi-maven-plugin.version>
     <openapi-backwards-compat-maven-plugin.version>1.0.3</openapi-backwards-compat-maven-plugin.version>
     <langchain4j.version>0.36.2</langchain4j.version>
-    <jooq.version>3.19.15</jooq.version>
+    <jooq.version>3.19.16</jooq.version>
   </properties>
 
   <dependencyManagement>

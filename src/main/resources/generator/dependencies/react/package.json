@@ -10,7 +10,7 @@
     "@testing-library/react": "16.1.0",
     "@tsconfig/vite-react": "3.4.0",
     "@types/react": "18.3.14",
-    "@types/react-dom": "18.3.2",
+    "@types/react-dom": "18.3.3",
     "@vitejs/plugin-react": "4.3.4",
     "axios": "1.7.9",
     "eslint-plugin-react": "7.37.2",

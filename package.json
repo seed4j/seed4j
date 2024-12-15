@@ -88,7 +88,7 @@
     "sass": "1.82.0",
     "serve": "14.2.4",
     "sinon": "19.0.2",
-    "start-server-and-test": "2.0.8",
+    "start-server-and-test": "2.0.9",
     "stylelint": "16.11.0",
     "stylelint-config-concentric-order": "5.2.0",
     "stylelint-config-standard-scss": "14.0.0",

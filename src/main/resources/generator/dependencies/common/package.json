@@ -22,7 +22,7 @@
     "eslint": "9.17.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-cypress": "4.1.0",
-    "globals": "15.13.0",
+    "globals": "15.14.0",
     "husky": "9.1.7",
     "i18next": "24.1.2",
     "i18next-browser-languagedetector": "8.0.2",

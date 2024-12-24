@@ -16,7 +16,7 @@
     "eslint-plugin-react": "7.37.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-hook-form": "7.54.1",
+    "react-hook-form": "7.54.2",
     "react-i18next": "15.2.0",
     "sass": "1.83.0",
     "ts-node": "10.9.2"

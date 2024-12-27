@@ -33,7 +33,7 @@ class PlaywrightModuleFactoryTest {
       .containing(
         nodeScript(
           "test:component:headless",
-          "start-server-and-test start http://localhost:9000 'playwright test --config src/test/webapp/component/playwright.config.ts'"
+          "start-server-and-test tikui:serve-build http://localhost:9005 start http://localhost:9000 'playwright test --config src/test/webapp/component/playwright.config.ts'"
         )
       )
       .and()

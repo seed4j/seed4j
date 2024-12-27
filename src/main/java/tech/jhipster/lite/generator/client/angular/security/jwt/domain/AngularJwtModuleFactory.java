@@ -33,7 +33,6 @@ public class AngularJwtModuleFactory {
       {
         path: '',
         loadComponent: () => import('./login/login.component'),
-        title: 'Login',
       },\
     """;
 

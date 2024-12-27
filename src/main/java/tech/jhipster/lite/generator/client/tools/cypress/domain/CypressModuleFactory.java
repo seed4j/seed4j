@@ -35,7 +35,7 @@ public class CypressModuleFactory {
         .addScript(scriptKey("test:component"), scriptCommand("start-server-and-test start http://localhost:9000 'cypress open --e2e --config-file src/test/webapp/component/cypress-config.ts'"))
         .addScript(
           scriptKey("test:component:headless"),
-          scriptCommand("start-server-and-test start http://localhost:9000 'cypress run --headless --config-file src/test/webapp/component/cypress-config.ts'")
+          scriptCommand("start-server-and-test tikui:serve-build http://localhost:9005 start http://localhost:9000 'cypress run --headless --config-file src/test/webapp/component/cypress-config.ts'")
         )
         .and()
       .context()

@@ -31,7 +31,7 @@ public class PlaywrightModuleFactory {
       .packageJson()
         .addDevDependency(packageName("start-server-and-test"), COMMON)
         .addScript(scriptKey("test:component"), scriptCommand("start-server-and-test start http://localhost:9000 'playwright test --ui --config src/test/webapp/component/playwright.config.ts'"))
-        .addScript(scriptKey("test:component:headless"), scriptCommand("start-server-and-test start http://localhost:9000 'playwright test --config src/test/webapp/component/playwright.config.ts'"))
+        .addScript(scriptKey("test:component:headless"), scriptCommand("start-server-and-test tikui:serve-build http://localhost:9005 start http://localhost:9000 'playwright test --config src/test/webapp/component/playwright.config.ts'"))
         .and()
       .context()
         .put("reportSubDirectory", "component-tests")

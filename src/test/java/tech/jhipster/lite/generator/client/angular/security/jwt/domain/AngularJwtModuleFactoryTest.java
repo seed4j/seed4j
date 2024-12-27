@@ -50,7 +50,6 @@ class AngularJwtModuleFactoryTest {
           {
             path: '',
             loadComponent: () => import('./login/login.component'),
-            title: 'Login',
           },
         """
       );

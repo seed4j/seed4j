@@ -87,6 +87,7 @@
     <error-prone.version>2.45.0</error-prone.version>
     <modernizer-maven-plugin.version>3.2.0</modernizer-maven-plugin.version>
     <liquibase.version>4.33.0</liquibase.version>
+    <nullaway.version>0.12.7</nullaway.version>
   </properties>
 
   <dependencyManagement>
@@ -138,6 +139,11 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jspecify</groupId>
+      <artifactId>jspecify</artifactId>
     </dependency>
 
     <dependency>
@@ -354,6 +360,9 @@
               -Xep:UnnecessaryLambda:OFF
               -Xep:UnnecessaryStringBuilder:OFF
               -Xep:ImmutableEnumChecker:OFF
+              -Xep:NullAway:ERROR
+              -XepOpt:NullAway:JSpecifyMode=true
+              -XepOpt:NullAway:OnlyNullMarked=true
             </arg>
           </compilerArgs>
           <annotationProcessorPaths>
@@ -365,6 +374,11 @@
               <groupId>com.google.errorprone</groupId>
               <artifactId>error_prone_core</artifactId>
               <version>${error-prone.version}</version>
+            </path>
+            <path>
+              <groupId>com.uber.nullaway</groupId>
+              <artifactId>nullaway</artifactId>
+              <version>${nullaway.version}</version>
             </path>
           </annotationProcessorPaths>
         </configuration>

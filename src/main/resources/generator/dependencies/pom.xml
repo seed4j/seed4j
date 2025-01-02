@@ -44,7 +44,7 @@
     <jooq.version>3.19.16</jooq.version>
     <!-- Test dependencies -->
     <junit-jupiter.version>5.11.4</junit-jupiter.version>
-    <assertj.version>3.27.0</assertj.version>
+    <assertj.version>3.27.1</assertj.version>
     <mockito.version>5.14.2</mockito.version>
     <cassandraunit.version>4.3.1.0</cassandraunit.version>
     <testcontainers.version>1.20.4</testcontainers.version>

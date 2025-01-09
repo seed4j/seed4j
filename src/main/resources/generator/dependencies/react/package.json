@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "type": "module",
   "dependencies": {
-    "@nextui-org/react": "2.6.10",
+    "@nextui-org/react": "2.6.11",
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.1.0",
     "@tsconfig/vite-react": "3.4.0",

@@ -13,7 +13,7 @@
     "@types/react-dom": "19.0.2",
     "@vitejs/plugin-react": "4.3.4",
     "axios": "1.7.9",
-    "eslint-plugin-react": "7.37.3",
+    "eslint-plugin-react": "7.37.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-hook-form": "7.54.2",

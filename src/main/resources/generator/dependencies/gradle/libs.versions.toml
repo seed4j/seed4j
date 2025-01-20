@@ -6,7 +6,7 @@ protobuf-plugin = "0.9.4"
 jacoco = "0.8.11"
 sonarqube = "4.4.1.3373"
 node-gradle = "7.0.2"
-modernizer = "1.10.0"
+modernizer = "1.11.0"
 
 [plugins]
 [plugins.jib]

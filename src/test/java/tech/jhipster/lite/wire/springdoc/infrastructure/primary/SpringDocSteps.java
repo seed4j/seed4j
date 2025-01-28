@@ -21,7 +21,7 @@ public class SpringDocSteps {
   public void shouldHaveSchema(String schema) {
     assertThatLastResponse()
       .hasOkStatus()
-      .hasElement("$.components.schemas." + schema + ".description")
+      .hasElement("$.components.schemas." + schema + ".type")
       .withValue("Definitions for properties in this module");
   }
 }

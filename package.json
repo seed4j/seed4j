@@ -95,7 +95,7 @@
     "sass": "1.83.4",
     "sinon": "19.0.2",
     "start-server-and-test": "2.0.10",
-    "stylelint": "16.13.2",
+    "stylelint": "16.14.0",
     "stylelint-config-concentric-order": "5.2.0",
     "stylelint-config-standard-scss": "14.0.0",
     "tikuidoc-tikui": "8.0.1",

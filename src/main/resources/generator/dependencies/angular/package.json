@@ -2,11 +2,11 @@
   "dependencies": {
     "@angular-builders/jest": "19.0.0",
     "@angular/build": "19.1.5",
-    "@angular/cdk": "19.1.1",
+    "@angular/cdk": "19.1.2",
     "@angular/cli": "19.1.5",
     "@angular/compiler-cli": "19.1.4",
     "@angular/core": "19.1.4",
-    "@angular/material": "19.1.1",
+    "@angular/material": "19.1.2",
     "angular-eslint": "19.0.2",
     "jest-environment-jsdom": "29.7.0",
     "jest-preset-angular": "14.5.1",

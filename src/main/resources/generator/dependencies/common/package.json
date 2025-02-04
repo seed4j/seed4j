@@ -11,7 +11,7 @@
     "@tikui/core": "6.3.0",
     "@tsconfig/recommended": "1.0.8",
     "@types/jest": "29.5.14",
-    "@types/node": "22.12.0",
+    "@types/node": "22.13.0",
     "@typescript-eslint/eslint-plugin": "8.22.0",
     "@typescript-eslint/parser": "8.22.0",
     "@vitest/coverage-istanbul": "3.0.4",

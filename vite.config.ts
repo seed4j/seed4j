@@ -22,6 +22,7 @@ export default defineConfig({
   ],
   build: {
     outDir: '../../../target/classes/static',
+    sourcemap: true,
   },
   root: 'src/main/webapp',
   server: {

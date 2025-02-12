@@ -62,7 +62,7 @@
   "devDependencies": {
     "@cypress/code-coverage": "3.13.11",
     "@eslint/js": "9.19.0",
-    "@prettier/plugin-pug": "3.2.0",
+    "@prettier/plugin-pug": "3.2.1",
     "@prettier/plugin-xml": "3.4.1",
     "@tikui/core": "6.3.0",
     "@types/sinon": "17.0.3",

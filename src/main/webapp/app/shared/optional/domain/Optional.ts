@@ -1,7 +1,7 @@
 const checkIsNaN = <Value>(value: Value) => typeof value === 'number' && isNaN(value);
 
 export abstract class Optional<Value> {
-  static empty<Value>(): Optional<Value> {
+  static empty<Value>(this: void): Optional<Value> {
     return new EmptyOptional();
   }
 
@@ -21,7 +21,7 @@ export abstract class Optional<Value> {
   abstract or(factory: () => Optional<Value>): Optional<Value>;
   abstract orElse(value: Value): Value;
   abstract orElseGet(factory: () => Value): Value;
-  abstract orElseThrow<U = Error>(throwable?: () => U): Value;
+  abstract orElseThrow<U extends Error>(throwable?: () => U): Value;
   abstract filter(predicate: (value: Value) => boolean): Optional<Value>;
   abstract isEmpty(): boolean;
   abstract isPresent(): boolean;
@@ -50,7 +50,7 @@ class EmptyOptional<Value> extends Optional<Value> {
     return factory();
   }
 
-  orElseThrow<U>(throwable?: () => U): Value {
+  orElseThrow<U extends Error>(throwable?: () => U): Value {
     if (throwable === undefined) {
       throw new Error("Can't get value from an empty optional");
     }

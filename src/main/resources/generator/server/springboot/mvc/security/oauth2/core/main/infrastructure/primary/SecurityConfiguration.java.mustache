@@ -77,6 +77,9 @@ class SecurityConfiguration {
       )
       .authorizeHttpRequests(authz -> authz
         .requestMatchers(antMatcher(HttpMethod.OPTIONS, "/**")).permitAll()
+        .requestMatchers(antMatcher("/index.html")).permitAll()
+        .requestMatchers(antMatcher("/")).permitAll()
+        .requestMatchers(antMatcher("/assets/**")).permitAll()
         .requestMatchers(antMatcher("/app/**")).permitAll()
         .requestMatchers(antMatcher("/i18n/**")).permitAll()
         .requestMatchers(antMatcher("/content/**")).permitAll()

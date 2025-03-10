@@ -57,7 +57,7 @@ export const defaultLandscape = (): Landscape =>
     },
     {
       elements: [
-        new LandscapeFeature(featureSlug('jpa'), [initialModule('postgresql', 'Add PostGreSQL', [], moduleSlugs('spring-boot'))]),
+        new LandscapeFeature(featureSlug('jpa'), [initialModule('postgresql', 'Add PostGreSQL', [], moduleSlugs('spring-boot'), 'RANK_C')]),
         new LandscapeFeature(featureSlug('spring-mvc'), [
           initialModule('spring-boot-tomcat', 'Add Tomcat', [], moduleSlugs('spring-boot')),
           initialModule('spring-boot-undertow', 'Add Undertow', [], moduleSlugs('spring-boot')),

@@ -1,4 +1,5 @@
 import { LandscapeFeature } from '@/module/domain/landscape/LandscapeFeature';
+import { LandscapeModule } from '@/module/domain/landscape/LandscapeModule';
 import { LandscapeSelectionElement } from '@/module/domain/landscape/LandscapeSelectionElement';
 import { LandscapeSelectionTree } from '@/module/domain/landscape/LandscapeSelectionTree';
 import { Optional } from '@/shared/optional/domain/Optional';
@@ -411,6 +412,54 @@ describe('Landscape', () => {
       expect(ciFeature).toEqual(
         expect.objectContaining({
           featureSlug: featureSlug('ci'),
+        }),
+      );
+    });
+
+    it('should keep nested feature and modules dependencies with different ranks than the rank filter applied', () => {
+      const landscape = defaultLandscape();
+
+      const filteredLandscape = landscape.filterByRank(Optional.of('RANK_C'));
+
+      const levels = filteredLandscape.standaloneLevels();
+      const initModule = levels[0].elements.find(element => element instanceof LandscapeModule && element.slugString() === 'init');
+      expect(initModule).toEqual(
+        expect.objectContaining({
+          information: expect.objectContaining({
+            slug: moduleSlug('init'),
+            rank: 'RANK_S',
+          }),
+        }),
+      );
+      const javaBuildToolFeature = filteredLandscape
+        .standaloneLevels()[1]
+        .elements.find(element => element instanceof LandscapeFeature && element.slugString() === 'java-build-tools');
+      expect(javaBuildToolFeature).toEqual(
+        expect.objectContaining({
+          featureSlug: featureSlug('java-build-tools'),
+        }),
+      );
+      const springBootModule = levels[2].elements.find(
+        element => element instanceof LandscapeModule && element.slugString() === 'spring-boot',
+      );
+      expect(springBootModule).toEqual(
+        expect.objectContaining({
+          information: expect.objectContaining({
+            slug: moduleSlug('spring-boot'),
+            rank: 'RANK_D',
+          }),
+        }),
+      );
+      const postgresqlModule = levels[3].elements
+        .find(element => element instanceof LandscapeFeature)
+        ?.allModules()
+        .find(module => module.slugString() == 'postgresql');
+      expect(postgresqlModule).toEqual(
+        expect.objectContaining({
+          information: expect.objectContaining({
+            slug: moduleSlug('postgresql'),
+            rank: 'RANK_C',
+          }),
         }),
       );
     });

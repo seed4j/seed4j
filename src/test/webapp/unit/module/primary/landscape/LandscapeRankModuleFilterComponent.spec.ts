@@ -110,8 +110,8 @@ describe('LandscapeRankModuleFilterComponent', () => {
 
     expect(rankSButton.attributes('disabled')).toBeUndefined();
     expect(rankDButton.attributes('disabled')).toBeUndefined();
+    expect(rankCButton.attributes('disabled')).toBeUndefined();
     expect(rankAButton.attributes('disabled')).toBeDefined();
     expect(rankBButton.attributes('disabled')).toBeDefined();
-    expect(rankCButton.attributes('disabled')).toBeDefined();
   });
 });

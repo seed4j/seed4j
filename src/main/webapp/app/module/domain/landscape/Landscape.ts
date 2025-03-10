@@ -447,7 +447,38 @@ export class Landscape {
   private dependencyFeatureOfRankedModule(featureSlug: LandscapeFeatureSlug, rank: ModuleRank): boolean {
     return Array.from(this.modules.values())
       .filter(module => module.rank() === rank)
-      .some(rankedModule => rankedModule.dependencies().some(dep => dep.get() === featureSlug.get()));
+      .some(rankedModule => this.featureDependencyOf(featureSlug, rankedModule));
+  }
+
+  private featureDependencyOf(featureSlug: LandscapeFeatureSlug, module: LandscapeModule): boolean {
+    return this.dependencyOf(featureSlug, module);
+  }
+
+  private dependencyOf(dependencyId: LandscapeElementId, module: LandscapeModule): boolean {
+    if (this.directDependency(module, dependencyId)) {
+      return true;
+    }
+
+    return this.nestedDependency(module, dependencyId);
+  }
+
+  private directDependency(module: LandscapeModule, dependencyId: LandscapeFeatureSlug | ModuleSlug) {
+    return module.dependencies().some(dep => dep.get() === dependencyId.get());
+  }
+
+  private nestedDependency(module: LandscapeModule, dependencyId: LandscapeFeatureSlug | ModuleSlug) {
+    return module.dependencies().some(dep => {
+      if (dep instanceof ModuleSlug) {
+        return this.getModule(dep)
+          .map(depModule => this.dependencyOf(dependencyId, depModule))
+          .orElse(false);
+      }
+
+      return this.projections
+        .getFeature(dep)
+        .map(feature => feature.modules.some(featureModule => this.dependencyOf(dependencyId, featureModule)))
+        .orElse(false);
+    });
   }
 
   private moduleMatchingRank(module: LandscapeModule, rank: ModuleRank): boolean {
@@ -457,7 +488,7 @@ export class Landscape {
   private dependencyOfRankedModule(module: LandscapeModule, rank: ModuleRank): boolean {
     return Optional.of(Array.from(this.modules.values()))
       .map(modules => modules.filter(m => m.rank() === rank))
-      .map(rankedModules => rankedModules.some(rankedModule => rankedModule.dependencies().some(dep => dep.get() === module.slug().get())))
+      .map(rankedModules => rankedModules.some(rankedModule => this.dependencyOf(module.slug(), rankedModule)))
       .orElse(false);
   }
 

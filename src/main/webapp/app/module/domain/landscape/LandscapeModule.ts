@@ -20,6 +20,7 @@ export interface LandscapeModuleContext {
   applied: boolean;
   selectionTree: LandscapeSelectionTree;
   unselectionTree: LandscapeUnselectionTree;
+  visible: boolean;
 }
 
 const INITIAL_CONTEXT: LandscapeModuleContext = {
@@ -27,6 +28,7 @@ const INITIAL_CONTEXT: LandscapeModuleContext = {
   applied: false,
   selectionTree: LandscapeSelectionTree.EMPTY,
   unselectionTree: LandscapeUnselectionTree.EMPTY,
+  visible: true,
 };
 
 export class LandscapeModule implements LandscapeElement {
@@ -85,5 +87,12 @@ export class LandscapeModule implements LandscapeElement {
 
   unselectionTree(): LandscapeUnselectionTree {
     return this.context.unselectionTree;
+  }
+  isVisible(): boolean {
+    return this.context.visible;
+  }
+
+  withVisibility(visible: boolean): LandscapeModule {
+    return new LandscapeModule(this.information, { ...this.context, visible });
   }
 }

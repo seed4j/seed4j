@@ -63,7 +63,6 @@ export default defineComponent({
     const selectedMode = ref<DisplayMode>('COMPACTED');
 
     const landscape = ref(Loader.loading<Landscape>());
-    const originalLandscape = ref(Loader.loading<Landscape>());
     const levels = ref(Loader.loading<LandscapeLevel[]>());
 
     const canLoadMiniMap = ref(false);
@@ -151,8 +150,6 @@ export default defineComponent({
     };
 
     const loadLandscape = async (response: Landscape): Promise<void> => {
-      originalLandscape.value.loaded(response);
-
       landscape.value.loaded(response);
       levels.value.loaded(response.standaloneLevels());
 
@@ -652,7 +649,7 @@ export default defineComponent({
       clearPresetSelection();
 
       selectedRank.value = Optional.ofNullable(rank);
-      void reloadLandscape(originalLandscape.value.value().filterByRank(selectedRank.value));
+      void reloadLandscape(landscapeValue().filterByRank(selectedRank.value));
     };
 
     const reloadLandscape = async (response: Landscape): Promise<void> => {

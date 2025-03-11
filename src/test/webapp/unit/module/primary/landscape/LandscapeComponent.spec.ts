@@ -1433,6 +1433,23 @@ describe('Landscape', () => {
       expect(wrapper.find(wrappedElement('init-module')).classes()).toContain('-diff-rank-minimal-emphasis');
     });
 
+    it('should retain module selection state when filtered by rank', async () => {
+      const { wrapper, rankComponent } = await setupRankTest();
+
+      const initialModuleElement = wrapper.find(wrappedElement('init-module'));
+      await initialModuleElement.trigger('click');
+      await flushPromises();
+
+      await triggerRankFilter(wrapper, rankComponent, 'RANK_D');
+
+      const filteredModuleElement = wrapper.find(wrappedElement('init-module'));
+      expect(filteredModuleElement.exists()).toBe(true);
+      const classes = filteredModuleElement.classes();
+      ['-selected', '-compacted'].forEach(expectedClass => {
+        expect(classes).toContain(expectedClass);
+      });
+    });
+
     const setupRankTest = async () => {
       const wrapper = await componentWithLandscape();
       const rankComponent = wrapper.findComponent(LandscapeRankModuleFilterVue);

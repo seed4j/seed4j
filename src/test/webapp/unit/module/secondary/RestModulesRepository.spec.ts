@@ -224,7 +224,7 @@ const restLandscape = (): RestLandscape => ({
           featureDependency('spring-mvc'),
           moduleDependency('bean-validation-test'),
         ]),
-        landscapeModule('liquibase', 'Add liquibase', emptyProperties(), [featureDependency('jpa')]),
+        landscapeModule('liquibase', 'Add liquibase', emptyProperties(), [featureDependency('jpa')], 'RANK_A'),
       ],
     },
   ],

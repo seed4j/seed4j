@@ -463,6 +463,23 @@ describe('Landscape', () => {
         }),
       );
     });
+
+    it('should restore all module visibilities when removing rank filter', () => {
+      const landscape = defaultLandscape();
+      const filteredLandscape = landscape.filterByRank(Optional.of('RANK_C'));
+
+      const unfilterLandscape = filteredLandscape.filterByRank(Optional.empty());
+
+      const levels = unfilterLandscape.standaloneLevels();
+      const initModule = levels[0].elements.find(element => element.slugString() === 'init');
+      const reactModule = levels[1].elements[0].allModules().find(module => module.slugString() === 'react');
+      const postgresqlModule = levels[3].elements[0].allModules().find(module => module.slugString() === 'postgresql');
+      const liquibaseModule = levels[4].elements.find(element => element.slugString() === 'liquibase');
+      expect(initModule?.isVisible()).toBe(true);
+      expect(reactModule?.isVisible()).toBe(true);
+      expect(postgresqlModule?.isVisible()).toBe(true);
+      expect(liquibaseModule?.isVisible()).toBe(true);
+    });
   });
 });
 

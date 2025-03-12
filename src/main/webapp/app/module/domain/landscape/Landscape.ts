@@ -308,23 +308,30 @@ export class Landscape {
   }
 
   standaloneLevels(): LandscapeLevel[] {
+    return this.filterVisibleLandscapeLevel();
+  }
+
+  private filterVisibleLandscapeLevel() {
     return this.projections.levels
       .map(level => ({
-        elements: level.elements
-          .map(element => {
-            if (element instanceof LandscapeFeature) {
-              // For features, filter out non-visible modules and only keep if there are visible modules
-              const visibleModules = element.modules.filter(module => module.isVisible());
-              return visibleModules.length > 0 && element.isVisible()
-                ? new LandscapeFeature(element.slug(), visibleModules, element.isVisible())
-                : null;
-            }
-            // For modules, just check if they're visible
-            return element.isVisible() ? element : null;
-          })
-          .filter((element): element is LandscapeElement => element !== null),
+        elements: level.elements.flatMap(element =>
+          Optional.of(element)
+            .filter(e => e.isVisible())
+            .flatMap(e => this.visibleLandscapeElement(e))
+            .toArray(),
+        ),
       }))
       .filter(level => level.elements.length > 0);
+  }
+
+  private visibleLandscapeElement(element: LandscapeElement): Optional<LandscapeElement> {
+    if (element instanceof LandscapeFeature) {
+      return Optional.of(element.modules)
+        .map(modules => modules.filter(module => module.isVisible()))
+        .filter(visibleModules => visibleModules.length > 0)
+        .map(visibleModules => new LandscapeFeature(element.slug(), visibleModules, element.isVisible()));
+    }
+    return Optional.of(element);
   }
 
   resetAppliedModules(appliedModules: ModuleSlug[]): Landscape {
@@ -431,21 +438,15 @@ export class Landscape {
   }
 
   public filterByRank(rank: Optional<ModuleRank>): Landscape {
-    // First restore all visibilities to true
-    const restoredLevels = this.projections.levels.map(level => ({
-      elements: level.elements.map(element => {
-        if (element instanceof LandscapeFeature) {
-          // For features, restore all modules visibility and feature visibility
-          const restoredModules = element.modules.map(module => module.withVisibility(true));
-          return new LandscapeFeature(element.slug(), restoredModules, true);
-        }
-        // For modules, restore visibility
-        return element.allModules()[0].withVisibility(true);
-      }),
-    }));
-    const restoredLandscape = new Landscape(this.state, new LevelsProjections(restoredLevels));
+    const fullyVisibleLandscape = new Landscape(this.state, new LevelsProjections(this.createLevelsWithVisibleElements()));
 
-    return rank.map(currentRank => restoredLandscape.createFilteredLandscape(currentRank)).orElse(restoredLandscape);
+    return rank.map(currentRank => fullyVisibleLandscape.createFilteredLandscape(currentRank)).orElse(fullyVisibleLandscape);
+  }
+
+  private createLevelsWithVisibleElements() {
+    return this.projections.levels.map(level => ({
+      elements: level.elements.map(element => element.withAllVisibility(true)),
+    }));
   }
 
   private createFilteredLandscape(rank: ModuleRank): Landscape {
@@ -460,7 +461,7 @@ export class Landscape {
     if (element instanceof LandscapeFeature) {
       return this.setFeatureVisibility(element, rank);
     }
-    return this.setModuleVisibility(element, rank);
+    return this.setModuleVisibility(<LandscapeModule>element, rank);
   }
 
   private setFeatureVisibility(feature: LandscapeFeature, rank: ModuleRank): LandscapeFeature {
@@ -468,15 +469,23 @@ export class Landscape {
       return feature;
     }
 
-    const shouldBeVisible = feature.modules.some(module => this.moduleMatchingRank(module, rank));
-
-    const visibleModules = feature.modules.map(module => module.withVisibility(this.moduleMatchingRank(module, rank)));
-
-    return new LandscapeFeature(feature.slug(), visibleModules, shouldBeVisible);
+    return Optional.of(feature.modules)
+      .map(this.updateModulesVisibility(rank))
+      .filter(this.hasVisibleModules)
+      .map(modules => new LandscapeFeature(feature.slug(), modules, true))
+      .orElse(new LandscapeFeature(feature.slug(), feature.modules, false));
   }
 
-  private setModuleVisibility(element: LandscapeElement, rank: ModuleRank): LandscapeElement {
-    const module = element.allModules()[0];
+  private updateModulesVisibility(rank: ModuleRank): (modules: LandscapeModule[]) => LandscapeModule[] {
+    return modules => modules.map(module => module.withVisibility(this.moduleMatchingRank(module, rank)));
+  }
+
+  private hasVisibleModules(modules: LandscapeModule[]): boolean {
+    return modules.some(module => module.isVisible());
+  }
+
+  private setModuleVisibility(element: LandscapeModule, rank: ModuleRank): LandscapeElement {
+    const module = element.asModule();
     return module.withVisibility(this.moduleMatchingRank(module, rank));
   }
 

@@ -28,4 +28,9 @@ export class LandscapeFeature implements LandscapeElement {
   isVisible(): boolean {
     return this.visible;
   }
+
+  withAllVisibility(visible: boolean): LandscapeElement {
+    const restoredModules = this.allModules().map(module => module.withVisibility(visible));
+    return new LandscapeFeature(this.slug(), restoredModules, visible);
+  }
 }

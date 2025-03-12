@@ -69,6 +69,10 @@ export class LandscapeModule implements LandscapeElement {
     return [this];
   }
 
+  asModule(): LandscapeModule {
+    return this;
+  }
+
   inContext(context: LandscapeModuleContext): LandscapeModule {
     return new LandscapeModule(this.information, context);
   }
@@ -88,8 +92,13 @@ export class LandscapeModule implements LandscapeElement {
   unselectionTree(): LandscapeUnselectionTree {
     return this.context.unselectionTree;
   }
+
   isVisible(): boolean {
     return this.context.visible;
+  }
+
+  withAllVisibility(visible: boolean): LandscapeElement {
+    return this.withVisibility(visible);
   }
 
   withVisibility(visible: boolean): LandscapeModule {

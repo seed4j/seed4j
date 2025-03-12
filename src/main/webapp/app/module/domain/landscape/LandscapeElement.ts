@@ -6,4 +6,5 @@ export interface LandscapeElement {
   slugString(): string;
   allModules(): LandscapeModule[];
   isVisible(): boolean;
+  withAllVisibility(visible: boolean): LandscapeElement;
 }

@@ -36,7 +36,7 @@ export default defineComponent({
       emit('selected', selectedRank.value);
     };
 
-    const formatRank = (rank: ModuleRank): string => rank.replace('RANK_', '');
+    const formatRank = (rank: ModuleRank): string => rank.replace('RANK_', 'RANK ');
 
     const getRankDescription = (rank: ModuleRank): string => rankDescriptions[rank];
 

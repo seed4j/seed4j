@@ -46,7 +46,7 @@ describe('LandscapeRankModuleFilterComponent', () => {
 
     const buttons = wrapper.findAll('[data-testid^="rank-"]');
     RANKS.forEach((rank, index) => {
-      expect(buttons[index].text()).toBe(rank.replace('RANK_', ''));
+      expect(buttons[index].text()).toBe(rank.replace('RANK_', 'RANK '));
     });
   });
 

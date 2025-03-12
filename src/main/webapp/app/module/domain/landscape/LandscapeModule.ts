@@ -69,7 +69,7 @@ export class LandscapeModule implements LandscapeElement {
     return [this];
   }
 
-  asModule(): LandscapeModule {
+  asModule(): this {
     return this;
   }
 

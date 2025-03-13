@@ -477,16 +477,15 @@ export class Landscape {
   }
 
   private updateModulesVisibility(rank: ModuleRank): (modules: LandscapeModule[]) => LandscapeModule[] {
-    return modules => modules.map(module => module.withVisibility(this.moduleMatchingRank(module, rank)));
+    return modules => modules.map(module => module.withAllVisibility(this.moduleMatchingRank(module, rank)) as LandscapeModule);
   }
 
   private hasVisibleModules(modules: LandscapeModule[]): boolean {
     return modules.some(module => module.isVisible());
   }
 
-  private setModuleVisibility(element: LandscapeModule, rank: ModuleRank): LandscapeElement {
-    const module = element.asModule();
-    return module.withVisibility(this.moduleMatchingRank(module, rank));
+  private setModuleVisibility(module: LandscapeModule, rank: ModuleRank): LandscapeElement {
+    return module.withAllVisibility(this.moduleMatchingRank(module, rank));
   }
 
   private dependencyFeatureOfRankedModule(featureSlug: LandscapeFeatureSlug, rank: ModuleRank): boolean {

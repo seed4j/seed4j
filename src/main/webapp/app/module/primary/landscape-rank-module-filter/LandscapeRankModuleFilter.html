@@ -4,13 +4,19 @@
       v-for="rank in ranks"
       :key="rank"
       class="jhlite-button-toggle"
-      :class="{ '-active': isRankSelected(rank) }"
+      :class="{
+         '-active': isRankSelected(rank),
+         '-hovered': isRankHovered(rank)
+       }"
       @click="toggleRank(rank)"
       :data-testid="`rank-${rank}-filter`"
       :title="getRankDescription(rank)"
       :disabled="isRankDisabled(rank)"
     >
-      {{ formatRank(rank) }}
+      <span class="jhlite-button-toggle-content">
+        <span class="jhlite-button-toggle-short-name" :data-testid="`short-name-${rank}`">{{ formatRankShortName(rank) }}</span>
+        <span class="jhlite-button-toggle-full-name" :data-testid="`full-name-${rank}`">{{ formatRankFullName(rank) }}</span>
+      </span>
     </button>
   </div>
 </div>

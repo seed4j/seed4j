@@ -41,10 +41,18 @@ describe('LandscapeRankModuleFilterComponent', () => {
     expect(wrapper.emitted('selected')).toEqual([[RANKS[0]], [undefined]]);
   });
 
-  it('should format rank labels correctly', () => {
+  it('should format rank short name correctly', () => {
     const wrapper = wrap();
 
-    const buttons = wrapper.findAll('[data-testid^="rank-"]');
+    const buttons = wrapper.findAll('[data-testid^="short-name-"]');
+    RANKS.forEach((rank, index) => {
+      expect(buttons[index].text()).toBe(rank.replace('RANK_', ''));
+    });
+  });
+  it('should format rank full name correctly', () => {
+    const wrapper = wrap();
+
+    const buttons = wrapper.findAll('[data-testid^="full-name-"]');
     RANKS.forEach((rank, index) => {
       expect(buttons[index].text()).toBe(rank.replace('RANK_', 'RANK '));
     });

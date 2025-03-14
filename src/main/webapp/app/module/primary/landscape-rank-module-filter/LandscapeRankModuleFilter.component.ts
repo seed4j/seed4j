@@ -2,7 +2,7 @@ import type { ModuleRank } from '@/module/domain/landscape/ModuleRank';
 import { RANKS } from '@/module/domain/landscape/ModuleRank';
 import type { ModuleRankStatistics } from '@/module/domain/ModuleRankStatistics';
 import type { RankDescription } from '@/module/domain/RankDescription';
-import { PropType, defineComponent, ref } from 'vue';
+import { PropType, defineComponent, onMounted, ref } from 'vue';
 
 export default defineComponent({
   name: 'LandscapeRankModuleFilterVue',
@@ -16,6 +16,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const ranks = RANKS;
     const selectedRank = ref<ModuleRank | undefined>(undefined);
+    const hoverRankS = ref<boolean>(false);
 
     const rankDescriptions: RankDescription = {
       RANK_D: 'Experimental or advanced module requiring specific expertise',
@@ -23,6 +24,22 @@ export default defineComponent({
       RANK_B: 'Module with at least one confirmed production usage',
       RANK_A: 'Module with multiple production usages across different projects and documented through talks, books or blog posts',
       RANK_S: 'Production-proven module providing unique features, validated by community feedback (10+ endorsements)',
+    };
+
+    onMounted(() => {
+      animateRankSHover();
+    });
+
+    const animateRankSHover = (): void => {
+      const delayBeforeHover = 1000;
+      const hoverDuration = 1000;
+
+      setTimeout(() => {
+        hoverRankS.value = true;
+        setTimeout(() => {
+          hoverRankS.value = false;
+        }, hoverDuration);
+      }, delayBeforeHover);
     };
 
     const isRankSelected = (rank: ModuleRank): boolean => selectedRank.value === rank;
@@ -36,19 +53,25 @@ export default defineComponent({
       emit('selected', selectedRank.value);
     };
 
-    const formatRank = (rank: ModuleRank): string => rank.replace('RANK_', 'RANK ');
+    const formatRankShortName = (rank: ModuleRank): string => rank.replace('RANK_', '');
+
+    const formatRankFullName = (rank: ModuleRank): string => rank.replace('RANK_', 'RANK ');
 
     const getRankDescription = (rank: ModuleRank): string => rankDescriptions[rank];
 
     const isRankDisabled = (rank: ModuleRank): boolean => props.moduleRankStatistics.find(ru => ru.rank === rank)?.quantity === 0;
 
+    const isRankHovered = (rank: ModuleRank): boolean => rank === 'RANK_S' && hoverRankS.value;
+
     return {
       ranks,
       isRankSelected,
       toggleRank,
-      formatRank,
+      formatRankShortName,
+      formatRankFullName,
       getRankDescription,
       isRankDisabled,
+      isRankHovered,
     };
   },
 });

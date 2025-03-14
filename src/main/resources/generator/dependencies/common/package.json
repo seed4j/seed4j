@@ -16,7 +16,7 @@
     "@typescript-eslint/eslint-plugin": "8.26.0",
     "@typescript-eslint/parser": "8.26.0",
     "@vitest/coverage-istanbul": "3.0.8",
-    "autoprefixer": "10.4.20",
+    "autoprefixer": "10.4.21",
     "browser-sync": "3.0.3",
     "cssnano": "7.0.6",
     "cypress": "14.1.0",

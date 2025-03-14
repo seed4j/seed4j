@@ -1,5 +1,10 @@
 mixin jhlite-button-toggle(opts)
-  - const { active, disabled } = opts || {};
+  - const { active, disabled, shortName, fullName } = opts || {};
   - const activeClass = active ? '-active' : null;
   button.jhlite-button-toggle(class=activeClass, disabled=disabled)
-    block
+    if shortName && fullName
+      span.jhlite-button-toggle-content
+        span.jhlite-button-toggle-short-name= shortName
+        span.jhlite-button-toggle-full-name= fullName
+    else
+      block

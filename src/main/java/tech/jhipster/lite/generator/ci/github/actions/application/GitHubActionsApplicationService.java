@@ -9,17 +9,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class GitHubActionsApplicationService {
 
-  private final GitHubActionsModuleFactory factory;
+  private final GitHubActionsModuleFactory gitHubActions;
 
   public GitHubActionsApplicationService(NpmVersions npmVersions) {
-    factory = new GitHubActionsModuleFactory(npmVersions);
+    gitHubActions = new GitHubActionsModuleFactory(npmVersions);
   }
 
   public JHipsterModule buildGitHubActionsMavenModule(JHipsterModuleProperties properties) {
-    return factory.buildGitHubActionsMavenModule(properties);
+    return gitHubActions.buildGitHubActionsMavenModule(properties);
   }
 
   public JHipsterModule buildGitHubActionsGradleModule(JHipsterModuleProperties properties) {
-    return factory.buildGitHubActionsGradleModule(properties);
+    return gitHubActions.buildGitHubActionsGradleModule(properties);
   }
 }

@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class ReactJwtApplicationService {
 
-  private final ReactJwtModuleFactory factory;
+  private final ReactJwtModuleFactory reactJwt;
 
   public ReactJwtApplicationService() {
-    factory = new ReactJwtModuleFactory();
+    reactJwt = new ReactJwtModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return reactJwt.buildModule(properties);
   }
 }

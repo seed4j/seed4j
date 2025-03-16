@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SvelteApplicationService {
 
-  private final SvelteModuleFactory factory;
+  private final SvelteModuleFactory svelte;
 
   public SvelteApplicationService(NpmLazyInstaller npmLazyInstaller) {
-    this.factory = new SvelteModuleFactory(npmLazyInstaller);
+    this.svelte = new SvelteModuleFactory(npmLazyInstaller);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties project) {
-    return factory.buildModule(project);
+    return svelte.buildModule(project);
   }
 }

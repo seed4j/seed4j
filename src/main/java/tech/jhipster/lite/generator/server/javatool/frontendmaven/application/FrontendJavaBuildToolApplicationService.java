@@ -9,21 +9,21 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class FrontendJavaBuildToolApplicationService {
 
-  private final FrontendJavaBuildToolModuleFactory factory;
+  private final FrontendJavaBuildToolModuleFactory frontendJavaBuildTool;
 
   public FrontendJavaBuildToolApplicationService(NpmVersions npmVersions) {
-    factory = new FrontendJavaBuildToolModuleFactory(npmVersions);
+    frontendJavaBuildTool = new FrontendJavaBuildToolModuleFactory(npmVersions);
   }
 
   public JHipsterModule buildFrontendMavenModule(JHipsterModuleProperties properties) {
-    return factory.buildFrontendMavenModule(properties);
+    return frontendJavaBuildTool.buildFrontendMavenModule(properties);
   }
 
   public JHipsterModule buildFrontendGradleModule(JHipsterModuleProperties properties) {
-    return factory.buildFrontendGradleModule(properties);
+    return frontendJavaBuildTool.buildFrontendGradleModule(properties);
   }
 
   public JHipsterModule buildFrontendMavenCacheModule(JHipsterModuleProperties properties) {
-    return factory.buildFrontendMavenCacheModule(properties);
+    return frontendJavaBuildTool.buildFrontendMavenCacheModule(properties);
   }
 }

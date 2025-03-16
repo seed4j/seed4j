@@ -8,25 +8,25 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class ThymeleafTemplateModuleApplicationService {
 
-  private final ThymeleafTemplateModuleFactory thymeleafTemplateFactory;
+  private final ThymeleafTemplateModuleFactory factory;
 
   public ThymeleafTemplateModuleApplicationService() {
-    thymeleafTemplateFactory = new ThymeleafTemplateModuleFactory();
+    factory = new ThymeleafTemplateModuleFactory();
   }
 
   public JHipsterModule buildThymeleafTemplateModule(JHipsterModuleProperties properties) {
-    return thymeleafTemplateFactory.buildModule(properties);
+    return factory.buildModule(properties);
   }
 
   public JHipsterModule buildThymeleafTemplateTailwindcssModule(JHipsterModuleProperties properties) {
-    return thymeleafTemplateFactory.buildTailwindcssModule(properties);
+    return factory.buildTailwindcssModule(properties);
   }
 
   public JHipsterModule buildThymeleafHtmxWebjarsModule(JHipsterModuleProperties properties) {
-    return thymeleafTemplateFactory.buildHtmxWebjarsModule(properties);
+    return factory.buildHtmxWebjarsModule(properties);
   }
 
   public JHipsterModule buildThymeleafAlpinejsWebjarsModule(JHipsterModuleProperties properties) {
-    return thymeleafTemplateFactory.buildAlpineWebjarsModule(properties);
+    return factory.buildAlpineWebjarsModule(properties);
   }
 }

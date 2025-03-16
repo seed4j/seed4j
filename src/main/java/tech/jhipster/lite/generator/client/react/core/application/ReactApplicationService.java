@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class ReactApplicationService {
 
-  private final ReactModuleFactory factory;
+  private final ReactModuleFactory react;
 
   public ReactApplicationService(NpmLazyInstaller npmLazyInstaller) {
-    factory = new ReactModuleFactory(npmLazyInstaller);
+    react = new ReactModuleFactory(npmLazyInstaller);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return react.buildModule(properties);
   }
 }

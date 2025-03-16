@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class AngularApplicationService {
 
-  private final AngularModuleFactory factory;
+  private final AngularModuleFactory angular;
 
   public AngularApplicationService(NpmLazyInstaller npmLazyInstaller) {
-    factory = new AngularModuleFactory(npmLazyInstaller);
+    angular = new AngularModuleFactory(npmLazyInstaller);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return angular.buildModule(properties);
   }
 }

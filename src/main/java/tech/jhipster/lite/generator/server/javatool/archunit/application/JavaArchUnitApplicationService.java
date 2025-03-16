@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class JavaArchUnitApplicationService {
 
-  private final ArchUnitModuleFactory factory;
+  private final ArchUnitModuleFactory archUnit;
 
   public JavaArchUnitApplicationService() {
-    factory = new ArchUnitModuleFactory();
+    archUnit = new ArchUnitModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return archUnit.buildModule(properties);
   }
 }

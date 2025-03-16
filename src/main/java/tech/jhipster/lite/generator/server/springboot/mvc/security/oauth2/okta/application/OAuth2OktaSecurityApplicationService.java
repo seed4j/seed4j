@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class OAuth2OktaSecurityApplicationService {
 
-  private final OAuth2OktaModuleFactory oAuth2OktaModuleFactory;
+  private final OAuth2OktaModuleFactory factory;
 
   public OAuth2OktaSecurityApplicationService() {
-    oAuth2OktaModuleFactory = new OAuth2OktaModuleFactory();
+    factory = new OAuth2OktaModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return oAuth2OktaModuleFactory.buildModule(properties);
+    return factory.buildModule(properties);
   }
 }

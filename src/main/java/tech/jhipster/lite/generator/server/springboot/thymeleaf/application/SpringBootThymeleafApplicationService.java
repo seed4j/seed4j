@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SpringBootThymeleafApplicationService {
 
-  private final SpringBootThymeleafModuleFactory springBootThymeleafFactory;
+  private final SpringBootThymeleafModuleFactory factory;
 
   public SpringBootThymeleafApplicationService() {
-    springBootThymeleafFactory = new SpringBootThymeleafModuleFactory();
+    factory = new SpringBootThymeleafModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return springBootThymeleafFactory.buildModule(properties);
+    return factory.buildModule(properties);
   }
 }

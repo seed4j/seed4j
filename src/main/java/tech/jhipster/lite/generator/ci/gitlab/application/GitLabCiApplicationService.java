@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class GitLabCiApplicationService {
 
-  private final GitLabCiModuleFactory factory;
+  private final GitLabCiModuleFactory gitLabCi;
 
   public GitLabCiApplicationService() {
-    factory = new GitLabCiModuleFactory();
+    gitLabCi = new GitLabCiModuleFactory();
   }
 
   public JHipsterModule buildGitLabCiMavenModule(JHipsterModuleProperties properties) {
-    return factory.buildGitLabCiMavenModule(properties);
+    return gitLabCi.buildGitLabCiMavenModule(properties);
   }
 
   public JHipsterModule buildGitLabCiGradleModule(JHipsterModuleProperties properties) {
-    return factory.buildGitLabCiGradleModule(properties);
+    return gitLabCi.buildGitLabCiGradleModule(properties);
   }
 }

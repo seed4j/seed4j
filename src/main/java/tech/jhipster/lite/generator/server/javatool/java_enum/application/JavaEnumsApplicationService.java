@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class JavaEnumsApplicationService {
 
-  private final JavaEnumsModuleFactory javaEnums;
+  private final JavaEnumsModuleFactory factory;
 
   public JavaEnumsApplicationService() {
-    javaEnums = new JavaEnumsModuleFactory();
+    factory = new JavaEnumsModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return javaEnums.buildModule(properties);
+    return factory.buildModule(properties);
   }
 }

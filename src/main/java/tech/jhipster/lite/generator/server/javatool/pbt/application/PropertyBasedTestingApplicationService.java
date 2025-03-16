@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class PropertyBasedTestingApplicationService {
 
-  private final PropertyBasedTestingModuleFactory propertyBasedTesting;
+  private final PropertyBasedTestingModuleFactory factory;
 
   public PropertyBasedTestingApplicationService() {
-    propertyBasedTesting = new PropertyBasedTestingModuleFactory();
+    factory = new PropertyBasedTestingModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return propertyBasedTesting.buildModule(properties);
+    return factory.buildModule(properties);
   }
 }

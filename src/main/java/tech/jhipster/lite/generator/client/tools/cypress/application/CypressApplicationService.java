@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class CypressApplicationService {
 
-  private final CypressModuleFactory factory;
+  private final CypressModuleFactory cypress;
 
   public CypressApplicationService() {
-    factory = new CypressModuleFactory();
+    cypress = new CypressModuleFactory();
   }
 
   public JHipsterModule buildComponentTestsModule(JHipsterModuleProperties properties) {
-    return factory.buildComponentTestsModule(properties);
+    return cypress.buildComponentTestsModule(properties);
   }
 
   public JHipsterModule buildE2ETestsModule(JHipsterModuleProperties properties) {
-    return factory.buildE2ETestsModule(properties);
+    return cypress.buildE2ETestsModule(properties);
   }
 }

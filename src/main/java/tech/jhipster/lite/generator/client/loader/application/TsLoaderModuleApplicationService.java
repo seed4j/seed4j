@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class TsLoaderModuleApplicationService {
 
-  private final TsLoaderModuleFactory factory;
+  private final TsLoaderModuleFactory tsLoader;
 
   public TsLoaderModuleApplicationService() {
-    this.factory = new TsLoaderModuleFactory();
+    this.tsLoader = new TsLoaderModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return tsLoader.buildModule(properties);
   }
 }

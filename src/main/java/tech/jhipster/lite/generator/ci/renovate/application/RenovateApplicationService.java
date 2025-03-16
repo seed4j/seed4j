@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class RenovateApplicationService {
 
-  private final RenovateModuleFactory factory;
+  private final RenovateModuleFactory renovate;
 
   public RenovateApplicationService() {
-    factory = new RenovateModuleFactory();
+    renovate = new RenovateModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return renovate.buildModule(properties);
   }
 }

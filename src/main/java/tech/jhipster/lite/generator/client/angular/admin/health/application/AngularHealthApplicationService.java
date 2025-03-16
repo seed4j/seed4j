@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class AngularHealthApplicationService {
 
-  private final AngularHealthModuleFactory factory;
+  private final AngularHealthModuleFactory angularHealth;
 
   public AngularHealthApplicationService() {
-    factory = new AngularHealthModuleFactory();
+    angularHealth = new AngularHealthModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return angularHealth.buildModule(properties);
   }
 }

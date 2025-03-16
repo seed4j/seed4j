@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class VueOAuth2KeycloakApplicationService {
 
-  private final VueOAuth2KeycloakModuleFactory factory;
+  private final VueOAuth2KeycloakModuleFactory vueOAuth2Keycloak;
 
   public VueOAuth2KeycloakApplicationService() {
-    factory = new VueOAuth2KeycloakModuleFactory();
+    vueOAuth2Keycloak = new VueOAuth2KeycloakModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return vueOAuth2Keycloak.buildModule(properties);
   }
 }

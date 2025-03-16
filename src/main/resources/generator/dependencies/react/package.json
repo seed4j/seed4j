@@ -12,7 +12,7 @@
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
     "@vitejs/plugin-react": "4.3.4",
-    "axios": "1.8.2",
+    "axios": "1.8.3",
     "eslint-plugin-react": "7.37.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",

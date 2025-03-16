@@ -8,9 +8,9 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class TikuiApplicationService {
 
-  private final TikuiModuleFactory factory = new TikuiModuleFactory();
+  private final TikuiModuleFactory tikui = new TikuiModuleFactory();
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return tikui.buildModule(properties);
   }
 }

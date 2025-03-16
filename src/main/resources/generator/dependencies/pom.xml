@@ -21,7 +21,7 @@
     <spring-cloud-netflix-eureka-client.version>4.2.0</spring-cloud-netflix-eureka-client.version>
     <springdoc-openapi.version>2.8.5</springdoc-openapi.version>
     <kafka-clients.version>3.9.0</kafka-clients.version>
-    <mongock.version>5.5.0</mongock.version>
+    <mongock.version>5.5.1</mongock.version>
     <neo4j-migrations.version>2.17.0</neo4j-migrations.version>
     <liquibase.version>4.31.1</liquibase.version>
     <reflections.version>0.10.2</reflections.version>

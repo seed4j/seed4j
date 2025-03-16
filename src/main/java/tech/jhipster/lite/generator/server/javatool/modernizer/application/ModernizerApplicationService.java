@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class ModernizerApplicationService {
 
-  private final ModernizerModuleFactory modernizer;
+  private final ModernizerModuleFactory factory;
 
   public ModernizerApplicationService() {
-    modernizer = new ModernizerModuleFactory();
+    factory = new ModernizerModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return modernizer.buildModule(properties);
+    return factory.buildModule(properties);
   }
 }

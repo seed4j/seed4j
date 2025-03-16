@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class ReactI18nApplicationService {
 
-  private final ReactI18nModuleFactory factory;
+  private final ReactI18nModuleFactory reactI18n;
 
   public ReactI18nApplicationService() {
-    factory = new ReactI18nModuleFactory();
+    reactI18n = new ReactI18nModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return reactI18n.buildModule(properties);
   }
 }

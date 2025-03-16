@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class AngularOauth2ApplicationService {
 
-  private final AngularOauth2ModuleFactory factory;
+  private final AngularOauth2ModuleFactory angularOauth2;
 
   public AngularOauth2ApplicationService() {
-    factory = new AngularOauth2ModuleFactory();
+    angularOauth2 = new AngularOauth2ModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return angularOauth2.buildModule(properties);
   }
 }

@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class VueI18nApplicationService {
 
-  private final VueI18nModuleFactory factory;
+  private final VueI18nModuleFactory vueI18n;
 
   public VueI18nApplicationService() {
-    factory = new VueI18nModuleFactory();
+    vueI18n = new VueI18nModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return vueI18n.buildModule(properties);
   }
 }

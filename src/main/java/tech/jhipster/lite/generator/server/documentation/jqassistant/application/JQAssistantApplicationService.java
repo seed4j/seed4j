@@ -8,21 +8,21 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class JQAssistantApplicationService {
 
-  private final JQAssistantModuleFactory factory;
+  private final JQAssistantModuleFactory jqAssistant;
 
   public JQAssistantApplicationService() {
-    factory = new JQAssistantModuleFactory();
+    jqAssistant = new JQAssistantModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return jqAssistant.buildModule(properties);
   }
 
   public JHipsterModule buildJMoleculesModule(JHipsterModuleProperties properties) {
-    return factory.buildJMoleculesModule(properties);
+    return jqAssistant.buildJMoleculesModule(properties);
   }
 
   public JHipsterModule buildSpringModule(JHipsterModuleProperties properties) {
-    return factory.buildSpringModule(properties);
+    return jqAssistant.buildSpringModule(properties);
   }
 }

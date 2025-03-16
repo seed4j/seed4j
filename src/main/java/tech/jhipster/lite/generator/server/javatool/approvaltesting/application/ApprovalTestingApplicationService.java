@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class ApprovalTestingApplicationService {
 
-  private final ApprovalTestingModuleFactory approvalTesting;
+  private final ApprovalTestingModuleFactory factory;
 
   public ApprovalTestingApplicationService() {
-    approvalTesting = new ApprovalTestingModuleFactory();
+    factory = new ApprovalTestingModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return approvalTesting.buildModule(properties);
+    return factory.buildModule(properties);
   }
 }

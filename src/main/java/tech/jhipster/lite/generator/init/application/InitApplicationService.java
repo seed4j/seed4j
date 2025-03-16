@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class InitApplicationService {
 
-  private final InitModuleFactory factory;
+  private final InitModuleFactory init;
 
   public InitApplicationService(NpmVersions npmVersions) {
-    factory = new InitModuleFactory(npmVersions);
+    init = new InitModuleFactory(npmVersions);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return init.buildModule(properties);
   }
 }

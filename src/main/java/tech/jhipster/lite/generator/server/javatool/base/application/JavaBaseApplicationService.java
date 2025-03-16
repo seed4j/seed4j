@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class JavaBaseApplicationService {
 
-  private final JavaBaseModuleFactory factory;
+  private final JavaBaseModuleFactory javaBase;
 
   public JavaBaseApplicationService() {
-    factory = new JavaBaseModuleFactory();
+    javaBase = new JavaBaseModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return javaBase.buildModule(properties);
   }
 }

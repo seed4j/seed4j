@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Component
 public class CheckstyleApplicationService {
 
-  private final CheckstyleModuleFactory factory;
+  private final CheckstyleModuleFactory checkstyle;
 
   public CheckstyleApplicationService() {
-    factory = new CheckstyleModuleFactory();
+    checkstyle = new CheckstyleModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return checkstyle.buildModule(properties);
   }
 }

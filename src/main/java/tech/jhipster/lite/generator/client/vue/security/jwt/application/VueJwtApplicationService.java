@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class VueJwtApplicationService {
 
-  private final VueJwtModuleFactory factory;
+  private final VueJwtModuleFactory vueJwt;
 
   public VueJwtApplicationService() {
-    factory = new VueJwtModuleFactory();
+    vueJwt = new VueJwtModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return vueJwt.buildModule(properties);
   }
 }

@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class PrettierApplicationService {
 
-  private final PrettierModuleFactory factory;
+  private final PrettierModuleFactory prettier;
 
   public PrettierApplicationService(NpmLazyInstaller npmLazyInstaller) {
-    this.factory = new PrettierModuleFactory(npmLazyInstaller);
+    this.prettier = new PrettierModuleFactory(npmLazyInstaller);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return prettier.buildModule(properties);
   }
 }

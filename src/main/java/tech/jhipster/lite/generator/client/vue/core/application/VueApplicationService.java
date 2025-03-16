@@ -9,17 +9,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class VueApplicationService {
 
-  private final VueModuleFactory factory;
+  private final VueModuleFactory vue;
 
   public VueApplicationService(NpmLazyInstaller npmLazyInstaller) {
-    factory = new VueModuleFactory(npmLazyInstaller);
+    vue = new VueModuleFactory(npmLazyInstaller);
   }
 
   public JHipsterModule buildVueModule(JHipsterModuleProperties properties) {
-    return factory.buildVueModule(properties);
+    return vue.buildVueModule(properties);
   }
 
   public JHipsterModule buildPiniaModule(JHipsterModuleProperties properties) {
-    return factory.buildPiniaModule(properties);
+    return vue.buildPiniaModule(properties);
   }
 }

@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class HexagonalArchitectureDocumentationApplicationService {
 
-  private final HexagonalDocumentationModuleFactory factory;
+  private final HexagonalDocumentationModuleFactory hexagonalDocumentation;
 
   public HexagonalArchitectureDocumentationApplicationService() {
-    factory = new HexagonalDocumentationModuleFactory();
+    hexagonalDocumentation = new HexagonalDocumentationModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return hexagonalDocumentation.buildModule(properties);
   }
 }

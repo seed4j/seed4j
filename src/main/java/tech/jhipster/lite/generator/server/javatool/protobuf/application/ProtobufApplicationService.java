@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class ProtobufApplicationService {
 
-  private final ProtobufModuleFactory factory;
+  private final ProtobufModuleFactory protobuf;
 
   public ProtobufApplicationService() {
-    factory = new ProtobufModuleFactory();
+    protobuf = new ProtobufModuleFactory();
   }
 
   public JHipsterModule buildProtobufModule(JHipsterModuleProperties properties) {
-    return factory.buildProtobufModule(properties);
+    return protobuf.buildProtobufModule(properties);
   }
 
   public JHipsterModule buildProtobufBackwardsCompatibilityCheckModule(JHipsterModuleProperties properties) {
-    return factory.buildProtobufBackwardsCompatibilityCheckModule(properties);
+    return protobuf.buildProtobufBackwardsCompatibilityCheckModule(properties);
   }
 }

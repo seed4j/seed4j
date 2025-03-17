@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class Neo4jMigrationsApplicationService {
 
-  private final Neo4jMigrationsModuleFactory factory;
+  private final Neo4jMigrationsModuleFactory neo4jMigrations;
 
   public Neo4jMigrationsApplicationService() {
-    factory = new Neo4jMigrationsModuleFactory();
+    neo4jMigrations = new Neo4jMigrationsModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return neo4jMigrations.buildModule(properties);
   }
 }

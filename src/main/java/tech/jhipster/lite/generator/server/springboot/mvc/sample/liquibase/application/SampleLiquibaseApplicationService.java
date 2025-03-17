@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SampleLiquibaseApplicationService {
 
-  private final SampleLiquibaseModuleFactory factory;
+  private final SampleLiquibaseModuleFactory sampleLiquibase;
 
   public SampleLiquibaseApplicationService() {
-    factory = new SampleLiquibaseModuleFactory();
+    sampleLiquibase = new SampleLiquibaseModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return sampleLiquibase.buildModule(properties);
   }
 }

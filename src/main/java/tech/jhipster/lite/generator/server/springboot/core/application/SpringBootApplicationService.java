@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SpringBootApplicationService {
 
-  private final SpringBootCoreModuleFactory factory;
+  private final SpringBootCoreModuleFactory springBootCore;
 
   public SpringBootApplicationService() {
-    factory = new SpringBootCoreModuleFactory();
+    springBootCore = new SpringBootCoreModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return springBootCore.buildModule(properties);
   }
 }

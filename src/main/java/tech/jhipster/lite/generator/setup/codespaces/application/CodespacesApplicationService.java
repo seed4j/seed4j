@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class CodespacesApplicationService {
 
-  private final CodespacesModuleFactory factory;
+  private final CodespacesModuleFactory codespaces;
 
   public CodespacesApplicationService() {
-    factory = new CodespacesModuleFactory();
+    codespaces = new CodespacesModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return codespaces.buildModule(properties);
   }
 }

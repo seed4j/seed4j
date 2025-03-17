@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SpringCloudConfigClientApplicationService {
 
-  private final SpringCloudConfigModuleFactory factory;
+  private final SpringCloudConfigModuleFactory springCloudConfig;
 
   public SpringCloudConfigClientApplicationService(DockerImages dockerImages) {
-    factory = new SpringCloudConfigModuleFactory(dockerImages);
+    springCloudConfig = new SpringCloudConfigModuleFactory(dockerImages);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return springCloudConfig.buildModule(properties);
   }
 }

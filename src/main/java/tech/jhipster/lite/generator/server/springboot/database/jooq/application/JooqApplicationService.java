@@ -8,25 +8,25 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class JooqApplicationService {
 
-  private final JooqModuleFactory factory;
+  private final JooqModuleFactory jooq;
 
   public JooqApplicationService() {
-    factory = new JooqModuleFactory();
+    jooq = new JooqModuleFactory();
   }
 
   public JHipsterModule buildPostgresql(JHipsterModuleProperties properties) {
-    return factory.buildPostgresql(properties);
+    return jooq.buildPostgresql(properties);
   }
 
   public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {
-    return factory.buildMariaDB(properties);
+    return jooq.buildMariaDB(properties);
   }
 
   public JHipsterModule buildMsSQL(JHipsterModuleProperties properties) {
-    return factory.buildMsSQL(properties);
+    return jooq.buildMsSQL(properties);
   }
 
   public JHipsterModule buildMySQL(JHipsterModuleProperties properties) {
-    return factory.buildMySQL(properties);
+    return jooq.buildMySQL(properties);
   }
 }

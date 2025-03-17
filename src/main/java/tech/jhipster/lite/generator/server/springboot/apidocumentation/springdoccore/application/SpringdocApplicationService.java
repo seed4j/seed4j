@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SpringdocApplicationService {
 
-  private final SpringdocModuleFactory factory;
+  private final SpringdocModuleFactory springdoc;
 
   public SpringdocApplicationService() {
-    factory = new SpringdocModuleFactory();
+    springdoc = new SpringdocModuleFactory();
   }
 
   public JHipsterModule buildSpringdocMvcModule(JHipsterModuleProperties properties) {
-    return factory.buildModuleForMvc(properties);
+    return springdoc.buildModuleForMvc(properties);
   }
 
   public JHipsterModule buildSpringdocWebfluxModule(JHipsterModuleProperties properties) {
-    return factory.buildModuleForWebflux(properties);
+    return springdoc.buildModuleForWebflux(properties);
   }
 }

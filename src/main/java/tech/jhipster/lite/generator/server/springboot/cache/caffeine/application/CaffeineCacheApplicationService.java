@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class CaffeineCacheApplicationService {
 
-  private final CaffeineCacheModuleFactory factory;
+  private final CaffeineCacheModuleFactory caffeineCache;
 
   public CaffeineCacheApplicationService() {
-    factory = new CaffeineCacheModuleFactory();
+    caffeineCache = new CaffeineCacheModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return caffeineCache.buildModule(properties);
   }
 }

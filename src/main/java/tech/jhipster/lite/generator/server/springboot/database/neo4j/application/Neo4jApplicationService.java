@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class Neo4jApplicationService {
 
-  private final Neo4jModuleFactory factory;
+  private final Neo4jModuleFactory neo4j;
 
   public Neo4jApplicationService(DockerImages dockerImages) {
-    factory = new Neo4jModuleFactory(dockerImages);
+    neo4j = new Neo4jModuleFactory(dockerImages);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return neo4j.buildModule(properties);
   }
 }

@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SampleFlywayApplicationService {
 
-  private final SampleFlywayModuleFactory factory;
+  private final SampleFlywayModuleFactory sampleFlyway;
 
   public SampleFlywayApplicationService() {
-    factory = new SampleFlywayModuleFactory();
+    sampleFlyway = new SampleFlywayModuleFactory();
   }
 
   public JHipsterModule buildPostgresqlModule(JHipsterModuleProperties properties) {
-    return factory.buildPostgresqlModule(properties);
+    return sampleFlyway.buildPostgresqlModule(properties);
   }
 
   public JHipsterModule buildNotPostgresqlModule(JHipsterModuleProperties properties) {
-    return factory.buildNotPostgresqlModule(properties);
+    return sampleFlyway.buildNotPostgresqlModule(properties);
   }
 }

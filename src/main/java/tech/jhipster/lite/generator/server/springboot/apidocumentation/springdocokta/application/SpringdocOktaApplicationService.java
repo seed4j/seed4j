@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SpringdocOktaApplicationService {
 
-  private final SpringdocOktaModuleFactory factory;
+  private final SpringdocOktaModuleFactory springdocOkta;
 
   public SpringdocOktaApplicationService() {
-    factory = new SpringdocOktaModuleFactory();
+    springdocOkta = new SpringdocOktaModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return springdocOkta.buildModule(properties);
   }
 }

@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class JavaMemoizersApplicationService {
 
-  private final JavaMemoizersModuleFactory factory;
+  private final JavaMemoizersModuleFactory javaMemoizers;
 
   public JavaMemoizersApplicationService() {
-    factory = new JavaMemoizersModuleFactory();
+    javaMemoizers = new JavaMemoizersModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return javaMemoizers.buildModule(properties);
   }
 }

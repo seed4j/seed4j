@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SampleFeatureApplicationService {
 
-  private final SampleFeatureModuleFactory factory;
+  private final SampleFeatureModuleFactory sampleFeature;
 
   public SampleFeatureApplicationService() {
-    factory = new SampleFeatureModuleFactory();
+    sampleFeature = new SampleFeatureModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return sampleFeature.buildModule(properties);
   }
 }

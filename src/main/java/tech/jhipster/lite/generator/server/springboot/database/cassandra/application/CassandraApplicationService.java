@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class CassandraApplicationService {
 
-  private final CassandraModuleFactory factory;
+  private final CassandraModuleFactory cassandra;
 
   public CassandraApplicationService(DockerImages dockerImages) {
-    factory = new CassandraModuleFactory(dockerImages);
+    cassandra = new CassandraModuleFactory(dockerImages);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return cassandra.buildModule(properties);
   }
 }

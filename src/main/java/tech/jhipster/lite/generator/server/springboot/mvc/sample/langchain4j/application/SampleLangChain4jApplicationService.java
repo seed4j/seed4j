@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SampleLangChain4jApplicationService {
 
-  private final SampleLangChain4jModuleFactory factory;
+  private final SampleLangChain4jModuleFactory sampleLangChain4j;
 
   public SampleLangChain4jApplicationService() {
-    factory = new SampleLangChain4jModuleFactory();
+    sampleLangChain4j = new SampleLangChain4jModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return sampleLangChain4j.buildModule(properties);
   }
 }

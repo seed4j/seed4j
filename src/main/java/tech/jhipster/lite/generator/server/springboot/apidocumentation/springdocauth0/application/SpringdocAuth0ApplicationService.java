@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SpringdocAuth0ApplicationService {
 
-  private final SpringdocAuth0ModuleFactory factory;
+  private final SpringdocAuth0ModuleFactory springdocAuth0;
 
   public SpringdocAuth0ApplicationService() {
-    factory = new SpringdocAuth0ModuleFactory();
+    springdocAuth0 = new SpringdocAuth0ModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return springdocAuth0.buildModule(properties);
   }
 }

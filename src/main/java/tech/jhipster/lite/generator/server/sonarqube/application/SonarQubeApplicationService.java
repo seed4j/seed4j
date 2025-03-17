@@ -9,17 +9,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Component
 public class SonarQubeApplicationService {
 
-  private final SonarQubeModuleFactory factory;
+  private final SonarQubeModuleFactory sonarQube;
 
   public SonarQubeApplicationService(DockerImages dockerImages) {
-    factory = new SonarQubeModuleFactory(dockerImages);
+    sonarQube = new SonarQubeModuleFactory(dockerImages);
   }
 
   public JHipsterModule buildBackendModule(JHipsterModuleProperties properties) {
-    return factory.buildBackendModule(properties);
+    return sonarQube.buildBackendModule(properties);
   }
 
   public JHipsterModule buildBackendFrontendModule(JHipsterModuleProperties properties) {
-    return factory.buildBackendFrontendModule(properties);
+    return sonarQube.buildBackendFrontendModule(properties);
   }
 }

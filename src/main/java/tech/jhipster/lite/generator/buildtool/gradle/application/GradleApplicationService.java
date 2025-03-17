@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class GradleApplicationService {
 
-  private final GradleModuleFactory factory;
+  private final GradleModuleFactory gradle;
 
   public GradleApplicationService() {
-    factory = new GradleModuleFactory();
+    gradle = new GradleModuleFactory();
   }
 
   public JHipsterModule buildGradleModule(JHipsterModuleProperties properties) {
-    return factory.buildGradleModule(properties);
+    return gradle.buildGradleModule(properties);
   }
 
   public JHipsterModule buildGradleWrapperModule(JHipsterModuleProperties properties) {
-    return factory.buildGradleWrapperModule(properties);
+    return gradle.buildGradleWrapperModule(properties);
   }
 }

@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class OpenApiContractApplicationService {
 
-  private final OpenApiContractModuleFactory factory;
+  private final OpenApiContractModuleFactory openApiContract;
 
   public OpenApiContractApplicationService() {
-    factory = new OpenApiContractModuleFactory();
+    openApiContract = new OpenApiContractModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return openApiContract.buildModule(properties);
   }
 
   public JHipsterModule buildBackwardsCompatibilityCheckModule(JHipsterModuleProperties properties) {
-    return factory.buildBackwardsCompatibilityCheckModule(properties);
+    return openApiContract.buildBackwardsCompatibilityCheckModule(properties);
   }
 }

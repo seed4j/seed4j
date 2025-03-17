@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class MavenApplicationService {
 
-  private final MavenModuleFactory factory;
+  private final MavenModuleFactory maven;
 
   public MavenApplicationService() {
-    factory = new MavenModuleFactory();
+    maven = new MavenModuleFactory();
   }
 
   public JHipsterModule buildMavenModule(JHipsterModuleProperties properties) {
-    return factory.buildMavenModule(properties);
+    return maven.buildMavenModule(properties);
   }
 
   public JHipsterModule buildMavenWrapperModule(JHipsterModuleProperties properties) {
-    return factory.buildMavenWrapperModule(properties);
+    return maven.buildMavenWrapperModule(properties);
   }
 }

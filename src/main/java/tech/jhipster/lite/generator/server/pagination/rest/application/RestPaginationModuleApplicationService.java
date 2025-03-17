@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class RestPaginationModuleApplicationService {
 
-  private final RestPaginationModuleFactory factory;
+  private final RestPaginationModuleFactory restPagination;
 
   public RestPaginationModuleApplicationService() {
-    factory = new RestPaginationModuleFactory();
+    restPagination = new RestPaginationModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return restPagination.buildModule(properties);
   }
 }

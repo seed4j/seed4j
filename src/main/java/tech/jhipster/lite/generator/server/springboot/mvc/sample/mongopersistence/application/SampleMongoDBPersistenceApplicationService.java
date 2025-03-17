@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SampleMongoDBPersistenceApplicationService {
 
-  private final SampleMongoDBPersistenceModuleFactory factory;
+  private final SampleMongoDBPersistenceModuleFactory sampleMongoDBPersistence;
 
   public SampleMongoDBPersistenceApplicationService() {
-    factory = new SampleMongoDBPersistenceModuleFactory();
+    sampleMongoDBPersistence = new SampleMongoDBPersistenceModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return sampleMongoDBPersistence.buildModule(properties);
   }
 }

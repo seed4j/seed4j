@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SpringdocJwtApplicationService {
 
-  private final SpringdocJwtModuleFactory factory;
+  private final SpringdocJwtModuleFactory springdocJwt;
 
   public SpringdocJwtApplicationService() {
-    factory = new SpringdocJwtModuleFactory();
+    springdocJwt = new SpringdocJwtModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return springdocJwt.buildModule(properties);
   }
 }

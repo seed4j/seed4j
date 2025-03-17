@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class CucumberApplicationService {
 
-  private final CucumberModuleFactory factory;
+  private final CucumberModuleFactory cucumber;
 
   public CucumberApplicationService() {
-    factory = new CucumberModuleFactory();
+    cucumber = new CucumberModuleFactory();
   }
 
   public JHipsterModule buildInitializationModule(JHipsterModuleProperties properties) {
-    return factory.buildInitializationModule(properties);
+    return cucumber.buildInitializationModule(properties);
   }
 
   public JHipsterModule buildJpaResetModule(JHipsterModuleProperties properties) {
-    return factory.buildJpaResetModule(properties);
+    return cucumber.buildJpaResetModule(properties);
   }
 }

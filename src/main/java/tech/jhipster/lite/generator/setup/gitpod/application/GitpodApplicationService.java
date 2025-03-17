@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class GitpodApplicationService {
 
-  private final GitpodModuleFactory factory;
+  private final GitpodModuleFactory gitpod;
 
   public GitpodApplicationService() {
-    factory = new GitpodModuleFactory();
+    gitpod = new GitpodModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return gitpod.buildModule(properties);
   }
 }

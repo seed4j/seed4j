@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class InfinitestApplicationService {
 
-  private final InfinitestModuleFactory factory;
+  private final InfinitestModuleFactory infinitest;
 
   public InfinitestApplicationService() {
-    factory = new InfinitestModuleFactory();
+    infinitest = new InfinitestModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return infinitest.buildModule(properties);
   }
 }

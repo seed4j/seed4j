@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class GitInfoApplicationService {
 
-  private final GitInfoModuleFactory factory;
+  private final GitInfoModuleFactory gitInfo;
 
   public GitInfoApplicationService() {
-    this.factory = new GitInfoModuleFactory();
+    this.gitInfo = new GitInfoModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return gitInfo.buildModule(properties);
   }
 }

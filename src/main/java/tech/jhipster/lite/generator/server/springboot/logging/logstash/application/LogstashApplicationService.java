@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class LogstashApplicationService {
 
-  private final LogstashModuleFactory factory;
+  private final LogstashModuleFactory logstash;
 
   public LogstashApplicationService() {
-    factory = new LogstashModuleFactory();
+    logstash = new LogstashModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return logstash.buildModule(properties);
   }
 }

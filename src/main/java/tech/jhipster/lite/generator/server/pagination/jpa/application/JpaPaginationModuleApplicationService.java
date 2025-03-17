@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class JpaPaginationModuleApplicationService {
 
-  private final JpaPaginationModuleFactory factory;
+  private final JpaPaginationModuleFactory jpaPagination;
 
   public JpaPaginationModuleApplicationService() {
-    factory = new JpaPaginationModuleFactory();
+    jpaPagination = new JpaPaginationModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return jpaPagination.buildModule(properties);
   }
 }

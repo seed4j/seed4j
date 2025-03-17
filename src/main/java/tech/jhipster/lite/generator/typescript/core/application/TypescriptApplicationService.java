@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class TypescriptApplicationService {
 
-  private final TypescriptModuleFactory factory;
+  private final TypescriptModuleFactory typescript;
 
   public TypescriptApplicationService(NpmLazyInstaller npmLazyInstaller) {
-    this.factory = new TypescriptModuleFactory(npmLazyInstaller);
+    this.typescript = new TypescriptModuleFactory(npmLazyInstaller);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties project) {
-    return factory.buildModule(project);
+    return typescript.buildModule(project);
   }
 }

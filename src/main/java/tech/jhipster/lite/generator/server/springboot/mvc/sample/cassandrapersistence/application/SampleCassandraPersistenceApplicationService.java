@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SampleCassandraPersistenceApplicationService {
 
-  private final SampleCassandraPersistenceModuleFactory factory;
+  private final SampleCassandraPersistenceModuleFactory sampleCassandraPersistence;
 
   public SampleCassandraPersistenceApplicationService() {
-    factory = new SampleCassandraPersistenceModuleFactory();
+    sampleCassandraPersistence = new SampleCassandraPersistenceModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return sampleCassandraPersistence.buildModule(properties);
   }
 }

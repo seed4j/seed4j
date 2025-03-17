@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class GatewayApplicationService {
 
-  private final GatewayModuleFactory factory;
+  private final GatewayModuleFactory gateway;
 
   public GatewayApplicationService() {
-    factory = new GatewayModuleFactory();
+    gateway = new GatewayModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return gateway.buildModule(properties);
   }
 }

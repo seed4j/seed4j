@@ -9,25 +9,25 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class DatasourceApplicationService {
 
-  private final DatasourceModuleFactory factory;
+  private final DatasourceModuleFactory datasource;
 
   public DatasourceApplicationService(DockerImages dockerImages) {
-    factory = new DatasourceModuleFactory(dockerImages);
+    datasource = new DatasourceModuleFactory(dockerImages);
   }
 
   public JHipsterModule buildPostgresql(JHipsterModuleProperties properties) {
-    return factory.buildPostgresql(properties);
+    return datasource.buildPostgresql(properties);
   }
 
   public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {
-    return factory.buildMariaDB(properties);
+    return datasource.buildMariaDB(properties);
   }
 
   public JHipsterModule buildMsSQL(JHipsterModuleProperties properties) {
-    return factory.buildMsSQL(properties);
+    return datasource.buildMsSQL(properties);
   }
 
   public JHipsterModule buildMySQL(JHipsterModuleProperties properties) {
-    return factory.buildMySQL(properties);
+    return datasource.buildMySQL(properties);
   }
 }

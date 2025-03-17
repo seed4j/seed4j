@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class CustomJHLiteApplicationService {
 
-  private final CustomJHLiteModuleFactory factory;
+  private final CustomJHLiteModuleFactory customJHLite;
 
   public CustomJHLiteApplicationService() {
-    factory = new CustomJHLiteModuleFactory();
+    customJHLite = new CustomJHLiteModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return customJHLite.buildModule(properties);
   }
 }

@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SpringBootWebfluxApplicationService {
 
-  private final SpringBootWebfluxModuleFactory factory;
+  private final SpringBootWebfluxModuleFactory springBootWebflux;
 
   public SpringBootWebfluxApplicationService() {
-    factory = new SpringBootWebfluxModuleFactory();
+    springBootWebflux = new SpringBootWebfluxModuleFactory();
   }
 
   public JHipsterModule buildNettyModule(JHipsterModuleProperties properties) {
-    return factory.buildNettyModule(properties);
+    return springBootWebflux.buildNettyModule(properties);
   }
 
   public JHipsterModule buildEmptyModule(JHipsterModuleProperties properties) {
-    return factory.buildEmptyModule(properties);
+    return springBootWebflux.buildEmptyModule(properties);
   }
 }

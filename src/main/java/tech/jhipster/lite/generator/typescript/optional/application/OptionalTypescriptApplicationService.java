@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class OptionalTypescriptApplicationService {
 
-  private final OptionalTypescriptModuleFactory factory;
+  private final OptionalTypescriptModuleFactory optionalTypescript;
 
   public OptionalTypescriptApplicationService() {
-    this.factory = new OptionalTypescriptModuleFactory();
+    this.optionalTypescript = new OptionalTypescriptModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties project) {
-    return factory.buildModule(project);
+    return optionalTypescript.buildModule(project);
   }
 }

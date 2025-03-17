@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class MongodbApplicationService {
 
-  private final MongoDbModuleFactory factory;
+  private final MongoDbModuleFactory mongoDb;
 
   public MongodbApplicationService(DockerImages dockerImages) {
-    factory = new MongoDbModuleFactory(dockerImages);
+    mongoDb = new MongoDbModuleFactory(dockerImages);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return mongoDb.buildModule(properties);
   }
 }

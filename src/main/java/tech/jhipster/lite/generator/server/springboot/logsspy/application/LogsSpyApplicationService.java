@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class LogsSpyApplicationService {
 
-  private final LogsSpyModuleFactory factory;
+  private final LogsSpyModuleFactory logsSpy;
 
   public LogsSpyApplicationService() {
-    factory = new LogsSpyModuleFactory();
+    logsSpy = new LogsSpyModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return logsSpy.buildModule(properties);
   }
 }

@@ -8,25 +8,25 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class JpaApplicationService {
 
-  private final JpaModuleFactory factory;
+  private final JpaModuleFactory jpa;
 
   public JpaApplicationService() {
-    factory = new JpaModuleFactory();
+    jpa = new JpaModuleFactory();
   }
 
   public JHipsterModule buildPostgresql(JHipsterModuleProperties properties) {
-    return factory.buildPostgresql(properties);
+    return jpa.buildPostgresql(properties);
   }
 
   public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {
-    return factory.buildMariaDB(properties);
+    return jpa.buildMariaDB(properties);
   }
 
   public JHipsterModule buildMsSQL(JHipsterModuleProperties properties) {
-    return factory.buildMsSQL(properties);
+    return jpa.buildMsSQL(properties);
   }
 
   public JHipsterModule buildMySQL(JHipsterModuleProperties properties) {
-    return factory.buildMySQL(properties);
+    return jpa.buildMySQL(properties);
   }
 }

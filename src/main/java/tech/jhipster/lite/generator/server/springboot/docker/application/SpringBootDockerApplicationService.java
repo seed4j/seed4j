@@ -8,21 +8,21 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SpringBootDockerApplicationService {
 
-  private final SpringBootDockerModuleFactory factory;
+  private final SpringBootDockerModuleFactory springBootDocker;
 
   public SpringBootDockerApplicationService() {
-    factory = new SpringBootDockerModuleFactory();
+    springBootDocker = new SpringBootDockerModuleFactory();
   }
 
   public JHipsterModule buildJibModule(JHipsterModuleProperties properties) {
-    return factory.buildJibModule(properties);
+    return springBootDocker.buildJibModule(properties);
   }
 
   public JHipsterModule buildDockerFileMavenModule(JHipsterModuleProperties properties) {
-    return factory.buildDockerFileMavenModule(properties);
+    return springBootDocker.buildDockerFileMavenModule(properties);
   }
 
   public JHipsterModule buildDockerFileGradleModule(JHipsterModuleProperties properties) {
-    return factory.buildDockerFileGradleModule(properties);
+    return springBootDocker.buildDockerFileGradleModule(properties);
   }
 }

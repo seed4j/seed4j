@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class PulsarApplicationService {
 
-  private final PulsarModuleFactory factory;
+  private final PulsarModuleFactory pulsar;
 
   public PulsarApplicationService(DockerImages dockerImages) {
-    factory = new PulsarModuleFactory(dockerImages);
+    pulsar = new PulsarModuleFactory(dockerImages);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return pulsar.buildModule(properties);
   }
 }

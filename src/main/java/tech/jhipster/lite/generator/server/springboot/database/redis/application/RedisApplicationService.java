@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class RedisApplicationService {
 
-  private final RedisModuleFactory factory;
+  private final RedisModuleFactory redis;
 
   public RedisApplicationService(DockerImages dockerImages) {
-    factory = new RedisModuleFactory(dockerImages);
+    redis = new RedisModuleFactory(dockerImages);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return redis.buildModule(properties);
   }
 }

@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class MongockApplicationService {
 
-  private final MongockModuleFactory factory;
+  private final MongockModuleFactory mongock;
 
   public MongockApplicationService() {
-    factory = new MongockModuleFactory();
+    mongock = new MongockModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return mongock.buildModule(properties);
   }
 }

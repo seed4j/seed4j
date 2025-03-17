@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class CucumberAuthenticationApplicationService {
 
-  private final CucumberAuthenticationModuleFactory factory;
+  private final CucumberAuthenticationModuleFactory cucumberAuthentication;
 
   public CucumberAuthenticationApplicationService() {
-    factory = new CucumberAuthenticationModuleFactory();
+    cucumberAuthentication = new CucumberAuthenticationModuleFactory();
   }
 
   public JHipsterModule buildOauth2Module(JHipsterModuleProperties properties) {
-    return factory.buildOauth2Module(properties);
+    return cucumberAuthentication.buildOauth2Module(properties);
   }
 
   public JHipsterModule buildJWTModule(JHipsterModuleProperties properties) {
-    return factory.buildJWTModule(properties);
+    return cucumberAuthentication.buildJWTModule(properties);
   }
 }

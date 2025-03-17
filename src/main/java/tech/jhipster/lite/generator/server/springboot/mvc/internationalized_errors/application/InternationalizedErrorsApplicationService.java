@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class InternationalizedErrorsApplicationService {
 
-  private final InternationalizedErrorsModuleFactory factory;
+  private final InternationalizedErrorsModuleFactory internationalizedErrors;
 
   public InternationalizedErrorsApplicationService() {
-    factory = new InternationalizedErrorsModuleFactory();
+    internationalizedErrors = new InternationalizedErrorsModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return internationalizedErrors.buildModule(properties);
   }
 }

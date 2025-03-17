@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Component
 public class JacocoApplicationService {
 
-  private final JacocoModuleFactory factory;
+  private final JacocoModuleFactory jacoco;
 
   public JacocoApplicationService() {
-    factory = new JacocoModuleFactory();
+    jacoco = new JacocoModuleFactory();
   }
 
   public JHipsterModule buildJacocoModule(JHipsterModuleProperties properties) {
-    return factory.buildJacocoModule(properties);
+    return jacoco.buildJacocoModule(properties);
   }
 
   public JHipsterModule buildJacocoWithMinCoverageCheckModule(JHipsterModuleProperties properties) {
-    return factory.buildJacocoWithMinCoverageCheckModule(properties);
+    return jacoco.buildJacocoWithMinCoverageCheckModule(properties);
   }
 }

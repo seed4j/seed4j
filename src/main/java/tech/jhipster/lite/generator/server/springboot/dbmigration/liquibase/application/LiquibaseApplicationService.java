@@ -8,21 +8,21 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class LiquibaseApplicationService {
 
-  private final LiquibaseModuleFactory factory;
+  private final LiquibaseModuleFactory liquibase;
 
   public LiquibaseApplicationService() {
-    factory = new LiquibaseModuleFactory();
+    liquibase = new LiquibaseModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return liquibase.buildModule(properties);
   }
 
   public JHipsterModule buildAsyncModule(JHipsterModuleProperties properties) {
-    return factory.buildAsyncModule(properties);
+    return liquibase.buildAsyncModule(properties);
   }
 
   public JHipsterModule buildLinterModule(JHipsterModuleProperties properties) {
-    return factory.buildLinterModule(properties);
+    return liquibase.buildLinterModule(properties);
   }
 }

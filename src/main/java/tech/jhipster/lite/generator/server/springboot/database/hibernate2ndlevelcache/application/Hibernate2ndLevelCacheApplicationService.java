@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class Hibernate2ndLevelCacheApplicationService {
 
-  private final Hibernate2ndLevelCacheModuleFactory factory;
+  private final Hibernate2ndLevelCacheModuleFactory hibernate2ndLevelCache;
 
   public Hibernate2ndLevelCacheApplicationService() {
-    factory = new Hibernate2ndLevelCacheModuleFactory();
+    hibernate2ndLevelCache = new Hibernate2ndLevelCacheModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return hibernate2ndLevelCache.buildModule(properties);
   }
 }

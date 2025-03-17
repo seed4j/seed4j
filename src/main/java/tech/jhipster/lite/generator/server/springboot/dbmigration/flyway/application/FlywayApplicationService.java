@@ -8,25 +8,25 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class FlywayApplicationService {
 
-  private final FlywayModuleFactory factory;
+  private final FlywayModuleFactory flyway;
 
   public FlywayApplicationService() {
-    factory = new FlywayModuleFactory();
+    flyway = new FlywayModuleFactory();
   }
 
   public JHipsterModule buildInitializationModule(JHipsterModuleProperties properties) {
-    return factory.buildInitializationModule(properties);
+    return flyway.buildInitializationModule(properties);
   }
 
   public JHipsterModule buildMysqlDependencyModule(JHipsterModuleProperties properties) {
-    return factory.buildMysqlDependencyModule(properties);
+    return flyway.buildMysqlDependencyModule(properties);
   }
 
   public JHipsterModule buildPostgresqlDependencyModule(JHipsterModuleProperties properties) {
-    return factory.buildPostgresqlDependencyModule(properties);
+    return flyway.buildPostgresqlDependencyModule(properties);
   }
 
   public JHipsterModule buildMsSqlServerDependencyModule(JHipsterModuleProperties properties) {
-    return factory.buildMsSqlServerDependencyModule(properties);
+    return flyway.buildMsSqlServerDependencyModule(properties);
   }
 }

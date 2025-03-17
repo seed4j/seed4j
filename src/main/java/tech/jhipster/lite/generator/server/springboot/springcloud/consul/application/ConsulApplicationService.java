@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class ConsulApplicationService {
 
-  private final ConsulModuleFactory factory;
+  private final ConsulModuleFactory consul;
 
   public ConsulApplicationService(DockerImages dockerImages) {
-    this.factory = new ConsulModuleFactory(dockerImages);
+    this.consul = new ConsulModuleFactory(dockerImages);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return consul.buildModule(properties);
   }
 }

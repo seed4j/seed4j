@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class LicenseApplicationService {
 
-  private final LicenseModuleFactory factory;
+  private final LicenseModuleFactory license;
 
   public LicenseApplicationService() {
-    this.factory = new LicenseModuleFactory();
+    this.license = new LicenseModuleFactory();
   }
 
   public JHipsterModule buildMitModule(JHipsterModuleProperties properties) {
-    return factory.buildMitModule(properties);
+    return license.buildMitModule(properties);
   }
 
   public JHipsterModule buildApacheModule(JHipsterModuleProperties properties) {
-    return factory.buildApacheModule(properties);
+    return license.buildApacheModule(properties);
   }
 }

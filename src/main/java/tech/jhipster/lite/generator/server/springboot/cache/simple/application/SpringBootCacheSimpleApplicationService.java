@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class SpringBootCacheSimpleApplicationService {
 
-  private final SimpleCacheModuleFactory factory;
+  private final SimpleCacheModuleFactory simpleCache;
 
   public SpringBootCacheSimpleApplicationService() {
-    factory = new SimpleCacheModuleFactory();
+    simpleCache = new SimpleCacheModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return simpleCache.buildModule(properties);
   }
 }

@@ -8,13 +8,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class PaginationDomainApplicationService {
 
-  private final PaginationDomainModuleFactory factory;
+  private final PaginationDomainModuleFactory paginationDomain;
 
   public PaginationDomainApplicationService() {
-    factory = new PaginationDomainModuleFactory();
+    paginationDomain = new PaginationDomainModuleFactory();
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return paginationDomain.buildModule(properties);
   }
 }

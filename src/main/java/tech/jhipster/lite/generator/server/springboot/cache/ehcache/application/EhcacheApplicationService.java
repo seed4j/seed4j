@@ -8,17 +8,17 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class EhcacheApplicationService {
 
-  private final EHCacheModuleFactory factory;
+  private final EHCacheModuleFactory ehCache;
 
   public EhcacheApplicationService() {
-    factory = new EHCacheModuleFactory();
+    ehCache = new EHCacheModuleFactory();
   }
 
   public JHipsterModule buildJavaConfigurationModule(JHipsterModuleProperties properties) {
-    return factory.buildJavaConfigurationModule(properties);
+    return ehCache.buildJavaConfigurationModule(properties);
   }
 
   public JHipsterModule buildXmlConfigurationModule(JHipsterModuleProperties properties) {
-    return factory.buildXmlConfigurationModule(properties);
+    return ehCache.buildXmlConfigurationModule(properties);
   }
 }

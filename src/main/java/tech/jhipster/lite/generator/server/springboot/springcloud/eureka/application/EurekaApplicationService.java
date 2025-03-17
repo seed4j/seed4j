@@ -9,13 +9,13 @@ import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 @Service
 public class EurekaApplicationService {
 
-  private final EurekaModuleFactory factory;
+  private final EurekaModuleFactory eureka;
 
   public EurekaApplicationService(DockerImages dockerImages) {
-    factory = new EurekaModuleFactory(dockerImages);
+    eureka = new EurekaModuleFactory(dockerImages);
   }
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
-    return factory.buildModule(properties);
+    return eureka.buildModule(properties);
   }
 }

@@ -1,4 +1,4 @@
-package tech.jhipster.lite.generator.server.springboot.cucumber_authentication.infrastructure.primary;
+package tech.jhipster.lite.generator.server.springboot.cucumberauthentication.infrastructure.primary;
 
 import static tech.jhipster.lite.shared.slug.domain.JHLiteFeatureSlug.CUCUMBER_AUTHENTICATION;
 import static tech.jhipster.lite.shared.slug.domain.JHLiteFeatureSlug.SPRING_BOOT_CUCUMBER;
@@ -9,7 +9,7 @@ import static tech.jhipster.lite.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import tech.jhipster.lite.generator.server.springboot.cucumber_authentication.application.CucumberAuthenticationApplicationService;
+import tech.jhipster.lite.generator.server.springboot.cucumberauthentication.application.CucumberAuthenticationApplicationService;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleOrganization;
 import tech.jhipster.lite.module.domain.resource.JHipsterModulePropertiesDefinition;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;

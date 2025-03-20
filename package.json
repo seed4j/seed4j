@@ -68,7 +68,7 @@
     "@types/sinon": "17.0.4",
     "@typescript-eslint/eslint-plugin": "8.26.1",
     "@typescript-eslint/parser": "8.26.1",
-    "@vitejs/plugin-vue": "5.2.1",
+    "@vitejs/plugin-vue": "5.2.2",
     "@vitest/coverage-istanbul": "3.0.8",
     "@vue/test-utils": "2.4.6",
     "cpy-cli": "5.0.0",

@@ -69,7 +69,7 @@
     "@typescript-eslint/eslint-plugin": "8.26.1",
     "@typescript-eslint/parser": "8.26.1",
     "@vitejs/plugin-vue": "5.2.3",
-    "@vitest/coverage-istanbul": "3.0.8",
+    "@vitest/coverage-istanbul": "3.0.9",
     "@vue/test-utils": "2.4.6",
     "cpy-cli": "5.0.0",
     "cypress": "14.2.0",
@@ -103,7 +103,7 @@
     "typescript-eslint": "8.26.1",
     "vite": "6.2.2",
     "vite-plugin-istanbul": "7.0.0",
-    "vitest": "3.0.8",
+    "vitest": "3.0.9",
     "vitest-sonar-reporter": "2.0.0",
     "vue-tsc": "2.2.8"
   },

@@ -37,8 +37,7 @@ class NativeHints implements RuntimeHintsRegistrar {
       .registerType(CoreConfig.HideDotFiles.class, MemberCategory.values())
       .registerType(CoreConfig.SymLinks.class, MemberCategory.values())
       .registerType(CoreConfig.LogRefUpdates.class, MemberCategory.values())
-      .registerType(CoreConfig.TrustLooseRefStat.class, MemberCategory.values())
-      .registerType(CoreConfig.TrustPackedRefsStat.class, MemberCategory.values());
+      .registerType(CoreConfig.TrustStat.class, MemberCategory.values());
 
     // patterns for JGit and our own template files
     hints.resources().registerPattern("generator/**").registerResourceBundle("org.eclipse.jgit.internal.JGitText.properties");

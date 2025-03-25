@@ -87,13 +87,13 @@ class OpenApiModuleConfiguration {
   }
 
   private Map<String, Schema<?>> moduleApplicationSchemas(JHipsterModulesResources modules) {
-    return modules.stream().collect(Collectors.toMap(module -> schemaName(module.slug()), toModuleApplicationSchema()));
+    return modules.stream().collect(Collectors.toMap(module -> buildSchemaId(module.slug()), toModuleApplicationSchema()));
   }
 
   private Function<JHipsterModuleResource, Schema<?>> toModuleApplicationSchema() {
     return module -> {
       Schema<?> schema = new Schema<>()
-        .name(schemaName(module.slug()))
+        .name(buildSchemaId(module.slug()))
         .type(OBJECT_TYPE)
         .description(DESCRIPTION)
         .addProperty("projectFolder", new Schema<>().type(STRING_TYPE).description("Path to the project"))
@@ -199,13 +199,13 @@ class OpenApiModuleConfiguration {
       .requestBody(
         new RequestBody()
           .required(true)
-          .content(new Content().addMediaType(JSON_MEDIA_TYPE, new MediaType().schema(new Schema<>().$ref(schemaName(slug)))))
+          .content(new Content().addMediaType(JSON_MEDIA_TYPE, new MediaType().schema(new Schema<>().$ref(buildSchemaId(slug)))))
       );
 
     return new PathItem().post(postOperation);
   }
 
-  private String schemaName(JHipsterModuleSlug slug) {
+  private String buildSchemaId(JHipsterModuleSlug slug) {
     return buildSlugBasedId(slug, "schema");
   }
 

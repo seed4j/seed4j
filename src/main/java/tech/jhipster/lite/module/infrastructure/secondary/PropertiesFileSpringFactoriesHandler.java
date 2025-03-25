@@ -11,7 +11,7 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 import tech.jhipster.lite.shared.error.domain.GeneratorException;
 import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
-public class PropertiesFileSpringFactoriesHandler {
+public class PropertiesFileSpringFactoriesHandler extends AbstractSpringFactoriesHandler {
 
   private static final String COLLECTION_SEPARATOR = ",";
   private static final String LINE_BREAK = System.lineSeparator();
@@ -23,15 +23,8 @@ public class PropertiesFileSpringFactoriesHandler {
     this.file = file;
   }
 
-  public void append(PropertyKey key, PropertyValue value) {
-    Assert.notNull("key", key);
-    Assert.notNull("value", value);
-
-    updateFactories(key, value);
-  }
-
   @ExcludeFromGeneratedCodeCoverage(reason = "Hard to cover IOException")
-  private void updateFactories(PropertyKey key, PropertyValue value) {
+  protected void updateFactories(PropertyKey key, PropertyValue value) {
     try {
       String properties = buildFactories(key, value);
       Files.writeString(file, properties);

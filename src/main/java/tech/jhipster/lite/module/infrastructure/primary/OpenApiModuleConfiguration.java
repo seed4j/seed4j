@@ -69,20 +69,23 @@ class OpenApiModuleConfiguration {
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   private Schema modulePropertyDefinitionSchema() {
+    Schema<?> typeSchema = new Schema<>()
+      .type(STRING_TYPE)
+      ._enum(Stream.of(JHipsterPropertyType.values()).map(JHipsterPropertyType::name).toList())
+      .description("Type of this property");
+    Schema<?> mandatorySchema = new Schema<>().type("boolean").description("True if the field is mandatory, false otherwise");
+    Schema<?> keySchema = new Schema<>().type(STRING_TYPE).description("Key of this property");
+    Schema<?> descriptionSchema = new Schema<>().type(STRING_TYPE).description("Description of this property");
+    Schema<?> defaultValueSchema = new Schema<>().type(STRING_TYPE).description("Default value for this property");
+
     return new Schema<>()
       .name(MODULE_PROPERTIES_DEFINITION_SCHEMA_NAME)
       .type(OBJECT_TYPE)
-      .addProperty(
-        "type",
-        new Schema<>()
-          .type(STRING_TYPE)
-          ._enum(Stream.of(JHipsterPropertyType.values()).map(JHipsterPropertyType::name).toList())
-          .description("Type of this property")
-      )
-      .addProperty("mandatory", new Schema<>().type("boolean").description("True if the field is mandatory, false otherwise"))
-      .addProperty("key", new Schema<>().type(STRING_TYPE).description("Key of this property"))
-      .addProperty("description", new Schema<>().type(STRING_TYPE).description("Description of this property"))
-      .addProperty("defaultValue", new Schema<>().type(STRING_TYPE).description("Default value for this property"))
+      .addProperty("type", typeSchema)
+      .addProperty("mandatory", mandatorySchema)
+      .addProperty("key", keySchema)
+      .addProperty("description", descriptionSchema)
+      .addProperty("defaultValue", defaultValueSchema)
       .required(List.of("type", "mandatory", "key"));
   }
 

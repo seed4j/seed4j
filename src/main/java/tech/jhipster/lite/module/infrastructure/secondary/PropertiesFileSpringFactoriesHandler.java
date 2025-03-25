@@ -13,7 +13,6 @@ import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCover
 
 public class PropertiesFileSpringFactoriesHandler {
 
-  private static final String EQUAL = "=";
   private static final String COLLECTION_SEPARATOR = ",";
   private static final String LINE_BREAK = System.lineSeparator();
 
@@ -21,7 +20,6 @@ public class PropertiesFileSpringFactoriesHandler {
 
   public PropertiesFileSpringFactoriesHandler(Path file) {
     Assert.notNull("file", file);
-
     this.file = file;
   }
 
@@ -36,7 +34,6 @@ public class PropertiesFileSpringFactoriesHandler {
   private void updateFactories(PropertyKey key, PropertyValue value) {
     try {
       String properties = buildFactories(key, value);
-
       Files.writeString(file, properties);
     } catch (IOException e) {
       throw GeneratorException.technicalError("Error updating Spring Factories properties: " + e.getMessage(), e);
@@ -46,7 +43,7 @@ public class PropertiesFileSpringFactoriesHandler {
   private String buildFactories(PropertyKey key, PropertyValue value) throws IOException {
     String currentProperties = readOrInitFactories();
 
-    int propertyIndex = currentProperties.indexOf(propertyId(key));
+    int propertyIndex = currentProperties.indexOf(SpringFactoriesUtils.propertyId(key));
     if (propertyIndex != -1) {
       return appendValuesToExistingPropertyKey(propertyIndex, value, currentProperties);
     }
@@ -74,22 +71,16 @@ public class PropertiesFileSpringFactoriesHandler {
     if (Files.notExists(file)) {
       Files.createDirectories(file.getParent());
       Files.createFile(file);
-
       return "";
     }
-
     return Files.readString(file);
   }
 
   private String propertyLine(PropertyKey key, PropertyValue value) {
-    return propertyId(key) + joinedPropertyValues(value);
+    return SpringFactoriesUtils.propertyId(key) + joinedPropertyValues(value);
   }
 
   private static String joinedPropertyValues(PropertyValue value) {
     return value.get().stream().map(Object::toString).collect(joining(COLLECTION_SEPARATOR));
-  }
-
-  private String propertyId(PropertyKey key) {
-    return key.get() + EQUAL;
   }
 }

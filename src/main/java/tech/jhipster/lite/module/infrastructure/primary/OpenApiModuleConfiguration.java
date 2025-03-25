@@ -164,8 +164,8 @@ class OpenApiModuleConfiguration {
 
   private PathItem modulePropertiesDefinition(JHipsterModuleApiDoc apiDoc, JHipsterModuleSlug slug) {
     Operation getOperation = new Operation()
-      .operationId(slug.get() + "-properties-definition")
-      .summary("Get " + slug.get() + " properties definitions")
+      .operationId(buildSlugBasedId(slug, "properties-definition"))
+      .summary("Get " + buildSlugBasedId(slug, "properties") + " definitions")
       .tags(apiDoc.group().list())
       .responses(
         new ApiResponses()
@@ -193,7 +193,7 @@ class OpenApiModuleConfiguration {
 
   private PathItem moduleApplicationDefinition(JHipsterModuleApiDoc apiDoc, JHipsterModuleSlug slug) {
     Operation postOperation = new Operation()
-      .operationId(slug.get() + "-application")
+      .operationId(buildSlugBasedId(slug, "application"))
       .summary(apiDoc.operation().get())
       .tags(apiDoc.group().list())
       .requestBody(
@@ -206,6 +206,10 @@ class OpenApiModuleConfiguration {
   }
 
   private String schemaName(JHipsterModuleSlug slug) {
-    return slug.get() + "-schema";
+    return buildSlugBasedId(slug, "schema");
+  }
+
+  private String buildSlugBasedId(JHipsterModuleSlug slug, String suffix) {
+    return slug.get() + "-" + suffix;
   }
 }

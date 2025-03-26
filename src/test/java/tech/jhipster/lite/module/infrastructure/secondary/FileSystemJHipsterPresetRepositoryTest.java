@@ -1,7 +1,8 @@
 package tech.jhipster.lite.module.infrastructure.secondary;
 
 import static java.nio.charset.StandardCharsets.*;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

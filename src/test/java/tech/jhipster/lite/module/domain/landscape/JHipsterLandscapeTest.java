@@ -1,6 +1,7 @@
 package tech.jhipster.lite.module.domain.landscape;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.*;
 import static tech.jhipster.lite.module.domain.landscape.JHipsterLandscapeFixture.*;
 import static tech.jhipster.lite.module.domain.landscape.JHipsterLandscapeFixture.moduleResources;

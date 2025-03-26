@@ -1,7 +1,7 @@
 package tech.jhipster.lite.module.domain.file;
 
 import static java.nio.charset.StandardCharsets.*;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.*;
 

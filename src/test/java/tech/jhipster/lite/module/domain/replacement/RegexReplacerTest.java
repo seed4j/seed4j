@@ -1,6 +1,7 @@
 package tech.jhipster.lite.module.domain.replacement;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static tech.jhipster.lite.module.domain.replacement.ReplacementCondition.*;
 
 import org.junit.jupiter.api.Test;

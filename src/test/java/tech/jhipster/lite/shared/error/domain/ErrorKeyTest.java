@@ -1,6 +1,6 @@
 package tech.jhipster.lite.shared.error.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Set;
 import java.util.stream.Stream;

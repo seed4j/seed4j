@@ -1,6 +1,7 @@
 package tech.jhipster.lite.shared.error.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 import java.util.Map;
 import org.junit.jupiter.api.Test;

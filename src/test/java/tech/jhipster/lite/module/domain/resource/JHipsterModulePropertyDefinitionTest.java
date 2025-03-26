@@ -1,6 +1,6 @@
 package tech.jhipster.lite.module.domain.resource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static tech.jhipster.lite.module.domain.resource.JHipsterModulePropertyDefinition.*;
 
 import org.junit.jupiter.api.Test;

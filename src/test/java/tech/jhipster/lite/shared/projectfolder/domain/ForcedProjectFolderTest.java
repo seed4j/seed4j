@@ -1,6 +1,6 @@
 package tech.jhipster.lite.shared.projectfolder.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.nio.file.Path;

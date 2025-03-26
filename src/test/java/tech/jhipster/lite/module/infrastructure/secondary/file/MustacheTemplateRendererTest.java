@@ -1,6 +1,6 @@
 package tech.jhipster.lite.module.infrastructure.secondary.file;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashMap;
 import java.util.Map;

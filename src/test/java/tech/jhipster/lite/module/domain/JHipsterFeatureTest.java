@@ -1,6 +1,7 @@
 package tech.jhipster.lite.module.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 import tech.jhipster.lite.UnitTest;

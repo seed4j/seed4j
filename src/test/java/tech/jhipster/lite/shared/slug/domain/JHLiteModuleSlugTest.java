@@ -1,6 +1,6 @@
 package tech.jhipster.lite.shared.slug.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static tech.jhipster.lite.module.domain.resource.JHipsterModuleRank.*;
 
 import java.util.stream.Stream;

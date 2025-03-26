@@ -1,6 +1,6 @@
 package tech.jhipster.lite.project.domain.history;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static tech.jhipster.lite.project.domain.history.ProjectHistoryFixture.*;
 
 import java.time.Instant;

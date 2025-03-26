@@ -1,6 +1,6 @@
 package tech.jhipster.lite.module.infrastructure.secondary.javadependency;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;

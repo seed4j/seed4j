@@ -1,6 +1,7 @@
 package tech.jhipster.lite.module.infrastructure.secondary.docker;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;

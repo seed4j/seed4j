@@ -1,6 +1,7 @@
 package tech.jhipster.lite.module.infrastructure.primary;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static tech.jhipster.lite.module.domain.JHipsterModulesFixture.*;

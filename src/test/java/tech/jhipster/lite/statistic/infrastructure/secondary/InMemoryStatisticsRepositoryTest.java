@@ -1,6 +1,6 @@
 package tech.jhipster.lite.statistic.infrastructure.secondary;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.Instant;
 import java.util.stream.Stream;

@@ -1,6 +1,6 @@
 package tech.jhipster.lite.statistic.infrastructure.primary;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static tech.jhipster.lite.statistic.domain.StatisticsFixture.*;
 
 import org.junit.jupiter.api.Test;

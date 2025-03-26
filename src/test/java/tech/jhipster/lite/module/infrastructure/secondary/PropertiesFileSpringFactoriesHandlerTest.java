@@ -19,7 +19,8 @@ class PropertiesFileSpringFactoriesHandlerTest {
   @Test
   void shouldCreateUnknownFile() {
     Path factoriesFile = Path.of(tmpDirForTest(), "src/test/resources/META-INF/spring.factories");
-    PropertiesFileSpringFactoriesHandler handler = new PropertiesFileSpringFactoriesHandler(factoriesFile);
+    SpringFactoriesFileManager fileManager = new SpringFactoriesFileManager(factoriesFile);
+    PropertiesFileSpringFactoriesHandler handler = new PropertiesFileSpringFactoriesHandler(fileManager);
 
     handler.append(propertyKey("o.s.c.ApplicationListener"), propertyValue("c.m.m.MyListener1", "c.m.m.MyListener2"));
 
@@ -34,7 +35,8 @@ class PropertiesFileSpringFactoriesHandlerTest {
   void shouldAppendPropertyToFileWithProperties() {
     Path factoriesFile = Path.of(tmpDirForTest(), "src/test/resources/META-INF/spring.factories");
     loadDefaultProperties(EXISTING_SPRING_FACTORIES, factoriesFile);
-    PropertiesFileSpringFactoriesHandler handler = new PropertiesFileSpringFactoriesHandler(factoriesFile);
+    SpringFactoriesFileManager fileManager = new SpringFactoriesFileManager(factoriesFile);
+    PropertiesFileSpringFactoriesHandler handler = new PropertiesFileSpringFactoriesHandler(fileManager);
 
     handler.append(propertyKey("o.s.c.ApplicationListener"), propertyValue("c.m.m.MyListener1", "c.m.m.MyListener2"));
 
@@ -50,7 +52,8 @@ class PropertiesFileSpringFactoriesHandlerTest {
   void shouldAppendToExistingProperty() {
     Path factoriesFile = Path.of(tmpDirForTest(), "src/test/resources/META-INF/spring.factories");
     loadDefaultProperties(EXISTING_SPRING_FACTORIES, factoriesFile);
-    PropertiesFileSpringFactoriesHandler handler = new PropertiesFileSpringFactoriesHandler(factoriesFile);
+    SpringFactoriesFileManager fileManager = new SpringFactoriesFileManager(factoriesFile);
+    PropertiesFileSpringFactoriesHandler handler = new PropertiesFileSpringFactoriesHandler(fileManager);
 
     handler.append(
       propertyKey("org.springframework.test.context.ContextCustomizerFactory"),
@@ -68,7 +71,8 @@ class PropertiesFileSpringFactoriesHandlerTest {
   void shouldAppendNewAndExistingProperties() {
     Path factoriesFile = Path.of(tmpDirForTest(), "src/test/resources/META-INF/spring.factories");
     loadDefaultProperties(EXISTING_SPRING_FACTORIES, factoriesFile);
-    PropertiesFileSpringFactoriesHandler handler = new PropertiesFileSpringFactoriesHandler(factoriesFile);
+    SpringFactoriesFileManager fileManager = new SpringFactoriesFileManager(factoriesFile);
+    PropertiesFileSpringFactoriesHandler handler = new PropertiesFileSpringFactoriesHandler(fileManager);
 
     handler.append(
       propertyKey("org.springframework.test.context.ContextCustomizerFactory"),
@@ -87,7 +91,8 @@ class PropertiesFileSpringFactoriesHandlerTest {
   @Test
   void shouldNotAppendExistingValue() {
     Path factoriesFile = Path.of(tmpDirForTest(), "src/test/resources/META-INF/spring.factories");
-    PropertiesFileSpringFactoriesHandler handler = new PropertiesFileSpringFactoriesHandler(factoriesFile);
+    SpringFactoriesFileManager fileManager = new SpringFactoriesFileManager(factoriesFile);
+    PropertiesFileSpringFactoriesHandler handler = new PropertiesFileSpringFactoriesHandler(fileManager);
 
     handler.append(
       propertyKey("org.springframework.test.context.ContextCustomizerFactory"),

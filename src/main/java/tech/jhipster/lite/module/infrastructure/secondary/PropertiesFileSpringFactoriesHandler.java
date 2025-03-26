@@ -3,12 +3,9 @@ package tech.jhipster.lite.module.infrastructure.secondary;
 import static java.util.stream.Collectors.joining;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import tech.jhipster.lite.module.domain.javaproperties.PropertyKey;
 import tech.jhipster.lite.module.domain.javaproperties.PropertyValue;
 import tech.jhipster.lite.shared.error.domain.Assert;
-import tech.jhipster.lite.shared.error.domain.GeneratorException;
 import tech.jhipster.lite.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 public class PropertiesFileSpringFactoriesHandler extends AbstractSpringFactoriesHandler {
@@ -16,25 +13,25 @@ public class PropertiesFileSpringFactoriesHandler extends AbstractSpringFactorie
   private static final String COLLECTION_SEPARATOR = ",";
   private static final String LINE_BREAK = System.lineSeparator();
 
-  private final Path file;
+  private final SpringFactoriesFileManager fileManager;
 
-  public PropertiesFileSpringFactoriesHandler(Path file) {
-    Assert.notNull("file", file);
-    this.file = file;
+  public PropertiesFileSpringFactoriesHandler(SpringFactoriesFileManager fileManager) {
+    Assert.notNull("fileManager", fileManager);
+    this.fileManager = fileManager;
   }
 
   @ExcludeFromGeneratedCodeCoverage(reason = "Hard to cover IOException")
   protected void updateFactories(PropertyKey key, PropertyValue value) {
     try {
       String properties = buildFactories(key, value);
-      Files.writeString(file, properties);
+      fileManager.write(properties);
     } catch (IOException e) {
-      throw GeneratorException.technicalError("Error updating Spring Factories properties: " + e.getMessage(), e);
+      throw new IllegalStateException("Error updating Spring Factories properties: " + e.getMessage(), e);
     }
   }
 
   private String buildFactories(PropertyKey key, PropertyValue value) throws IOException {
-    String currentProperties = readOrInitFactories();
+    String currentProperties = fileManager.readOrInit();
 
     int propertyIndex = currentProperties.indexOf(SpringFactoriesUtils.propertyId(key));
     if (propertyIndex != -1) {
@@ -58,15 +55,6 @@ public class PropertiesFileSpringFactoriesHandler extends AbstractSpringFactorie
       }
     }
     return newProperties.toString();
-  }
-
-  private String readOrInitFactories() throws IOException {
-    if (Files.notExists(file)) {
-      Files.createDirectories(file.getParent());
-      Files.createFile(file);
-      return "";
-    }
-    return Files.readString(file);
   }
 
   private String propertyLine(PropertyKey key, PropertyValue value) {

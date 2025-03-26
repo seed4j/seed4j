@@ -19,7 +19,11 @@ class FileSystemSpringFactoriesCommandsHandler {
   }
 
   private Consumer<SpringFactory> setProperty(JHipsterProjectFolder projectFolder) {
-    return property -> new PropertiesFileSpringFactoriesHandler(getPath(projectFolder, property)).append(property.key(), property.value());
+    return property -> {
+      Path path = getPath(projectFolder, property);
+      SpringFactoriesFileManager fileManager = new SpringFactoriesFileManager(path);
+      new PropertiesFileSpringFactoriesHandler(fileManager).append(property.key(), property.value());
+    };
   }
 
   private static Path getPath(JHipsterProjectFolder projectFolder, SpringFactory factory) {

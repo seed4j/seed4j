@@ -14,8 +14,8 @@
     "@vitejs/plugin-react": "4.3.4",
     "axios": "1.8.4",
     "eslint-plugin-react": "7.37.4",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-hook-form": "7.55.0",
     "react-i18next": "15.4.1",
     "sass": "1.86.0"

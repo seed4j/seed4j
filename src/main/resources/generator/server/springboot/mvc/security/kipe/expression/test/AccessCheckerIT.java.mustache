@@ -19,7 +19,6 @@ class AccessCheckerIT {
     canCheckers().forEach(this::mustBeSpringBean);
   }
 
-  @SuppressWarnings("rawtypes")
   private Set<Class<? extends AccessChecker>> canCheckers() {
     return new Reflections("{{packageName}}").getSubTypesOf(AccessChecker.class);
   }

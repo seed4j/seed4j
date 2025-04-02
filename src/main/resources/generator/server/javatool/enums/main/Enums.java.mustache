@@ -27,12 +27,10 @@ public final class Enums {
 
     private final Map<CacheKey<?, ?>, Map<Enum<?>, Enum<?>>> cache = new ConcurrentHashMap<>();
 
-    @SuppressWarnings("unchecked")
     private <From extends Enum<From>, To extends Enum<To>> To get(Enum<From> from, Class<To> to) {
       return (To) cache.computeIfAbsent(new CacheKey<>(from.getClass(), to), buildCache(from)).get(from);
     }
 
-    @SuppressWarnings("unchecked")
     private <To extends Enum<To>> Function<CacheKey<?, ?>, Map<Enum<?>, Enum<?>>> buildCache(Enum<?> from) {
       return key -> {
         try {

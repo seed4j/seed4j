@@ -38,7 +38,6 @@ class LogstashTcpLifeCycle implements SmartLifecycle {
   }
 
   @Override
-  @SuppressWarnings("java:S4792")
   public void start() {
     log.debug("Adding Logstash TCP appender to {}:{}", properties.getHost(), properties.getPort());
 

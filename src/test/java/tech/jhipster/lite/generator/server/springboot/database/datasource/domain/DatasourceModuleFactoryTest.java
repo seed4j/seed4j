@@ -58,6 +58,19 @@ class DatasourceModuleFactoryTest {
       .containing("<groupId>com.zaxxer</groupId>")
       .containing("<artifactId>HikariCP</artifactId>")
       .containing("<groupId>org.testcontainers</groupId>")
+      .containing(
+        """
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-docker-compose</artifactId>
+              <scope>runtime</scope>
+              <optional>true</optional>
+            </dependency>
+        """
+      )
+      .and()
+      .hasFile("docker-compose.yml")
+      .containing("src/main/docker/postgresql.yml")
       .and()
       .hasFile("src/main/resources/config/application.yml")
       .containing(

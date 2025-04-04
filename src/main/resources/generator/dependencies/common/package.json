@@ -7,7 +7,7 @@
     "@babel/cli": "7.27.0",
     "@eslint/js": "9.23.0",
     "@playwright/test": "1.51.1",
-    "@prettier/plugin-pug": "3.2.1",
+    "@prettier/plugin-pug": "3.3.0",
     "@prettier/plugin-xml": "3.4.1",
     "@tikui/core": "6.3.0",
     "@tsconfig/recommended": "1.0.8",

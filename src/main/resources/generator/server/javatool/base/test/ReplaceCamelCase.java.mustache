@@ -6,6 +6,10 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 public class ReplaceCamelCase extends DisplayNameGenerator.Standard {
 
   @Override
+  @Deprecated
+  // Waiting maven project depends on org.junit.jupiter 5.12.0
+  // replace with generateDisplayNameForMethod(List<Class<?>> enclosingInstanceTypes, Class<?> testClass, Method testMethod)
+  // https://github.com/junit-team/junit5/blob/b514c5b059ab48e28e0ddae9e7b25db363f75e89/junit-jupiter-api/src/main/java/org/junit/jupiter/api/DisplayNameGenerator.java#L230
   public String generateDisplayNameForMethod(Class<?> testClass, Method testMethod) {
     return this.replaceCapitals(testMethod.getName());
   }

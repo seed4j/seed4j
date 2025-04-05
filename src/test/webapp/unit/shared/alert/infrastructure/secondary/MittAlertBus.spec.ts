@@ -4,21 +4,15 @@ import { describe, expect, it } from 'vitest';
 import { stubEmitter } from './EmitterStub.fixture';
 
 describe('MittAlertBus', () => {
-  it('should emit success', () => {
+  it.each([
+    ['success', AlertType.SUCCESS],
+    ['error', AlertType.ERROR],
+  ])('should emit %s', (method, alertType) => {
     const emitterStub = stubEmitter();
     const mittAlertBus = new MittAlertBus(emitterStub);
 
-    mittAlertBus.success('A message');
+    mittAlertBus[method as keyof MittAlertBus]('A message');
 
-    expect(emitterStub.emit).toHaveBeenCalledExactlyOnceWith(AlertType.SUCCESS, 'A message');
-  });
-
-  it('should emit error', () => {
-    const emitterStub = stubEmitter();
-    const mittAlertBus = new MittAlertBus(emitterStub);
-
-    mittAlertBus.error('A message');
-
-    expect(emitterStub.emit).toHaveBeenCalledExactlyOnceWith(AlertType.ERROR, 'A message');
+    expect(emitterStub.emit).toHaveBeenCalledExactlyOnceWith(alertType, 'A message');
   });
 });

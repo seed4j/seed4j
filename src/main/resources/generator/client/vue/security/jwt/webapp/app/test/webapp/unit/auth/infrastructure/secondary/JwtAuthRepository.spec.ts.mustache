@@ -101,7 +101,7 @@ describe('JwtAuthRepository', () => {
       const jwtAuthRepository = new JwtAuthRepository(mockAxiosHttp, localStorage);
       localStorage.removeItem(STORAGE_KEY_JWT_TOKEN);
 
-      return expect(jwtAuthRepository.token()).rejects.toThrow('No authentication token found');
+      expect(jwtAuthRepository.token()).rejects.toThrow('No authentication token found');
     });
   });
 });

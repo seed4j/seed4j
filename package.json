@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@cypress/code-coverage": "3.14.0",
-    "@eslint/js": "9.23.0",
+    "@eslint/js": "9.24.0",
     "@prettier/plugin-pug": "3.3.0",
     "@prettier/plugin-xml": "3.4.1",
     "@tikui/core": "6.3.0",
@@ -73,7 +73,7 @@
     "@vue/test-utils": "2.4.6",
     "cpy-cli": "5.0.0",
     "cypress": "14.2.1",
-    "eslint": "9.23.0",
+    "eslint": "9.24.0",
     "eslint-config-prettier": "10.1.1",
     "eslint-plugin-cypress": "4.2.0",
     "eslint-plugin-pug": "1.2.5",

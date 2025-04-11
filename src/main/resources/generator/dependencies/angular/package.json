@@ -4,7 +4,7 @@
   "description": "JHipster Lite : used for Angular+TypeScript dependencies",
   "license": "Apache-2.0",
   "dependencies": {
-    "@angular-builders/jest": "19.0.0",
+    "@angular-builders/jest": "19.0.1",
     "@angular/build": "19.2.6",
     "@angular/cdk": "19.2.8",
     "@angular/cli": "19.2.6",

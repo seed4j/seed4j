@@ -6,7 +6,7 @@ FROM quay.io/keycloak/keycloak:26.1.4
 FROM mariadb:11.7.2
 FROM mongo:8.0.6
 FROM mysql:9.2.0
-FROM cassandra:5.0.3
+FROM cassandra:5.0.4
 FROM mcr.microsoft.com/mssql/server:2022-latest
 FROM postgres:17.4
 FROM apache/kafka-native:4.0.0

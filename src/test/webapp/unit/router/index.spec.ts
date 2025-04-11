@@ -15,7 +15,7 @@ import { BodyCursorUpdater } from '@/module/primary/landscape/BodyCursorUpdater'
 import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller';
 import { AppVue } from '@/root/infrastructure/primary';
 import { routes } from '@/router';
-import { ALERT_BUS, ALERT_LISTENER } from '@/shared/alert/application/AlertProvider';
+import { ALERT_BUS, provideForAlerts } from '@/shared/alert/application/AlertProvider';
 import { AlertListener } from '@/shared/alert/domain/AlertListener';
 import { ApplicationListener } from '@/shared/alert/infrastructure/primary/ApplicationListener';
 import { TIMEOUT } from '@/shared/toast/application/ToastProvider';
@@ -98,7 +98,6 @@ beforeEach(async () => {
 
 const wrap = (options?: Partial<WrapperOptions>): VueWrapper => {
   const {
-    alertListener,
     toastTimeout,
     applicationListener,
     cursorUpdater,
@@ -122,7 +121,7 @@ const wrap = (options?: Partial<WrapperOptions>): VueWrapper => {
     ...options,
   };
 
-  provide(ALERT_LISTENER, alertListener);
+  provideForAlerts();
   provide(TIMEOUT, toastTimeout);
   provide(ALERT_BUS, alertBus);
   provide(APPLICATION_LISTENER, applicationListener);

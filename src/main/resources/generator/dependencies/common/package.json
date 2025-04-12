@@ -34,7 +34,7 @@
     "lint-staged": "15.5.0",
     "mkdirp": "3.0.1",
     "node": "22.14.0",
-    "npm": "11.2.0",
+    "npm": "11.3.0",
     "npm-run-all2": "7.0.2",
     "onchange": "7.1.0",
     "path-exists-cli": "2.0.0",

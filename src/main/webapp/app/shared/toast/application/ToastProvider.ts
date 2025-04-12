@@ -4,6 +4,6 @@ import { key } from 'piqure';
 
 export const TIMEOUT = key<TimeoutListener>('Timeout');
 
-export const provideForToast = (): void => {
-  provide(TIMEOUT, new Timeout());
+export const provideForToast = (timeout: TimeoutListener = new Timeout()): void => {
+  provide(TIMEOUT, timeout);
 };

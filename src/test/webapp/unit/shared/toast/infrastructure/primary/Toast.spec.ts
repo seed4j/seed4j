@@ -1,7 +1,7 @@
 import { provide } from '@/injections';
 import { ALERT_LISTENER } from '@/shared/alert/application/AlertProvider';
 import { AlertListener } from '@/shared/alert/domain/AlertListener';
-import { TIMEOUT } from '@/shared/toast/application/ToastProvider';
+import { provideForToast } from '@/shared/toast/application/ToastProvider';
 import { TimeoutListener } from '@/shared/toast/domain/Timeout';
 import { ToastVue } from '@/shared/toast/infrastructure/primary';
 import { ToastType } from '@/shared/toast/infrastructure/primary/ToastType';
@@ -30,7 +30,7 @@ const wrap = (wrapperOptions?: Partial<WrapperOptions>) => {
   };
 
   provide(ALERT_LISTENER, alertListener);
-  provide(TIMEOUT, toastTimeout);
+  provideForToast(toastTimeout);
 
   wrapper = shallowMount(ToastVue);
   component = wrapper.vm;

@@ -405,7 +405,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 - All files must follow the [.editorconfig file](http://editorconfig.org/) located at the root of the JHipster generator project. Please note that generated projects use the same `.editorconfig` file, so that both the generator and the generated projects share the same configuration.
 - Java files **must be** formatted using Prettier default code style.
 - Generators JavaScript files **must follow** the eslint configuration defined at the project root, which is based on [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript).
-- Any client side feature/change should be done for both Angular, React, Vue clients
+- Any client side feature/change should be done for both Angular, React, and Vue clients
 - Web apps JavaScript files **must follow** [Google's JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html).
 - Angular TypeScript files **must follow** the [Official Angular style guide](https://angular.dev/style-guide).
 - React/Redux TypeScript files **may follow** the [React/Redux TypeScript guide](https://github.com/piotrwitek/react-redux-typescript-guide).

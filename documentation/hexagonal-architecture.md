@@ -100,7 +100,7 @@ As said many times, each "part" here has a specific concern so let's follow the 
 
 This is the code that really matters. You can build it using [Domain Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) building blocks or any other tool that will help you build a clear representation of the business.
 
-This model doesn't depend on anything and everything depends on it so it is totally framework-agnostic, you just need to pick a language to build your Domain Model.
+This model doesn't depend on anything and everything depends on it, so it is totally framework-agnostic, you just need to pick a language to build your Domain Model.
 
 Apart from the code used to make the business operations we'll find ports in the Domain Model. Ports are `interfaces` that are used to invert dependencies. As the Domain Model sometimes needs ports for some operations, they can only be there since the Domain doesn't depend on anything.
 

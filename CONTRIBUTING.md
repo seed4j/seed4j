@@ -395,7 +395,7 @@ from the main (upstream) repository:
 
 - For example,
   - Running `./tests-ci/generate.sh fullapp maven yaml` will generate a Spring Boot project `fullapp` in the directory`/tmp/jhlite/`
-  - The generated project will have support for maven, sonar, postgresql, liquibase, ehcache, vue-core and lot more capabilities required for a Spring Boot + Vue application.
+  - The generated project will have support for maven, sonar, postgresql, liquibase, ehcache, vue-core and a lot more capabilities required for a Spring Boot + Vue application.
 
 ## <a name="rules"></a> Coding Rules
 

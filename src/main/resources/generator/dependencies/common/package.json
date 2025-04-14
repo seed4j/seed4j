@@ -21,7 +21,7 @@
     "cssnano": "7.0.6",
     "cypress": "14.3.0",
     "eslint": "9.24.0",
-    "eslint-config-prettier": "10.1.1",
+    "eslint-config-prettier": "10.1.2",
     "eslint-plugin-cypress": "4.2.1",
     "globals": "16.0.0",
     "husky": "9.1.7",

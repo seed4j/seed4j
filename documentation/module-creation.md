@@ -48,7 +48,7 @@ A few things to note here:
 
 - We are expecting to have a `buildModule(...)` method in `MyModuleFactory`;
 - The `JHipsterModulesAssertions.assertThatModule(...)` will really apply the module to a project and give you a fluent API to ensure some operations;
-- Even if the feedback loops are not perfect on that, they should be short enough to allow a decent TDD implementation of the factory (on eclipse with [infinitest](https://infinitest.github.io/) feedbacks are under a second).
+- Even if the feedback loops are not perfect on that, they should be short enough to allow a decent TDD implementation of the factory (on Eclipse and IntelliJ with [infinitest](https://infinitest.github.io/) feedbacks are under a second).
 
 So, now that we have a first test, we can do a simple implementation:
 

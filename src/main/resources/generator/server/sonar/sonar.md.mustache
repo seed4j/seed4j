@@ -24,4 +24,4 @@ For Gradle
 
 You can see the result at [http://localhost:9001/](http://localhost:9001/)
 
-[Official documentation](https://www.sonarqube.org/)
+[Official documentation](https://www.sonarsource.com/products/sonarqube/)

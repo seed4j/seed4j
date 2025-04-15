@@ -82,7 +82,7 @@
     "globals": "16.0.0",
     "husky": "9.1.7",
     "jsdom": "26.0.0",
-    "lint-staged": "15.5.0",
+    "lint-staged": "15.5.1",
     "npm-run-all2": "7.0.2",
     "postcss-scss": "4.0.9",
     "prettier": "3.5.3",

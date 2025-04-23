@@ -73,7 +73,7 @@
     <cucumber.version>7.21.1</cucumber.version>
     <maven-model-helper.version>37</maven-model-helper.version>
     <mustache.java.version>0.9.14</mustache.java.version>
-    <night-config.version>3.8.1</night-config.version>
+    <night-config.version>3.8.2</night-config.version>
     <testcontainers.version>1.20.6</testcontainers.version>
     <mongock.version>5.5.1</mongock.version>
     <git-commit-id-plugin.version>9.0.1</git-commit-id-plugin.version>

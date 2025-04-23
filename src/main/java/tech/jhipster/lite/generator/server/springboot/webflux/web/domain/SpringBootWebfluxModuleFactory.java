@@ -49,6 +49,7 @@ public class SpringBootWebfluxModuleFactory {
         .and()
       .springMainProperties()
         .set(SERVER_PORT, propertyValue(properties.serverPort().get()))
+        .set(propertyKey("server.forward-headers-strategy"), propertyValue("FRAMEWORK"))
         .set(propertyKey("spring.jackson.default-property-inclusion"), propertyValue("non_absent"))
         .and()
       .springTestProperties()

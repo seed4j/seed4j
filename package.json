@@ -105,7 +105,7 @@
     "vite-plugin-istanbul": "7.0.0",
     "vitest": "3.1.1",
     "vitest-sonar-reporter": "2.0.0",
-    "vue-tsc": "2.2.8"
+    "vue-tsc": "2.2.10"
   },
   "engines": {
     "node": ">=20"

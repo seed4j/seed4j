@@ -16,8 +16,8 @@ class Oauth2Auth0ModuleFactoryTest {
   private static final OAuth2Auth0ModuleFactory factory = new OAuth2Auth0ModuleFactory();
 
   @Test
-  @DisplayName("should build OAuth2 okta module")
-  void shouldBuildOAuth2OktaModule() {
+  @DisplayName("should build OAuth2 module")
+  void shouldBuildOAuth2Module() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("tech.jhipster.jhlitest")
       .projectBaseName("myapp")

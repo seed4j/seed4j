@@ -14,13 +14,13 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 class VueJwtModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource vueJwtModule(VueJwtApplicationService jwt) {
+  JHipsterModuleResource vueJwtModule(VueJwtApplicationService vueJwt) {
     return JHipsterModuleResource.builder()
       .slug(VUE_JWT)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addIndentation().build())
       .apiDoc("Vue", "Add JWT authentication to Vue")
       .organization(JHipsterModuleOrganization.builder().feature(VUE_AUTHENTICATION).addDependency(VUE_CORE).build())
       .tags("client", "vue", "auth", "jwt")
-      .factory(jwt::buildModule);
+      .factory(vueJwt::buildModule);
   }
 }

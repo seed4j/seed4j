@@ -14,13 +14,13 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 class VueOAuth2KeycloakModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource vueOAuth2KeycloakModule(VueOAuth2KeycloakApplicationService oauth2Keycloak) {
+  JHipsterModuleResource vueOAuth2KeycloakModule(VueOAuth2KeycloakApplicationService vueOauth2Keycloak) {
     return JHipsterModuleResource.builder()
       .slug(VUE_OAUTH2_KEYCLOAK)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addIndentation().build())
       .apiDoc("Vue", "Add OAuth2 Keycloak authentication to Vue")
       .organization(JHipsterModuleOrganization.builder().feature(VUE_AUTHENTICATION).addDependency(VUE_CORE).build())
       .tags("client", "vue", "auth", "oauth2", "keycloak")
-      .factory(oauth2Keycloak::buildModule);
+      .factory(vueOauth2Keycloak::buildModule);
   }
 }

@@ -18,7 +18,7 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 class CucumberAuthenticationModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource cucumberOAuth2AuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentications) {
+  JHipsterModuleResource cucumberOAuth2AuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentication) {
     return JHipsterModuleResource.builder()
       .slug(SPRING_BOOT_CUCUMBER_OAUTH_2_AUTHENTICATION)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
@@ -31,11 +31,11 @@ class CucumberAuthenticationModuleConfiguration {
           .build()
       )
       .tags("server", "spring", "spring-boot", "test", "oauth2")
-      .factory(cucumberAuthentications::buildOauth2Module);
+      .factory(cucumberAuthentication::buildOauth2Module);
   }
 
   @Bean
-  JHipsterModuleResource cucumberJwtAuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentications) {
+  JHipsterModuleResource cucumberJwtAuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentication) {
     return JHipsterModuleResource.builder()
       .slug(SPRING_BOOT_CUCUMBER_JWT_AUTHENTICATION)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().build())
@@ -48,6 +48,6 @@ class CucumberAuthenticationModuleConfiguration {
           .build()
       )
       .tags("server", "spring", "spring-boot", "test", "jwt")
-      .factory(cucumberAuthentications::buildJWTModule);
+      .factory(cucumberAuthentication::buildJWTModule);
   }
 }

@@ -15,13 +15,13 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 class VueI18nModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource vueI18nModule(VueI18nApplicationService i18n) {
+  JHipsterModuleResource vueI18nModule(VueI18nApplicationService vueI18n) {
     return JHipsterModuleResource.builder()
       .slug(VUE_I18N)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().build())
       .apiDoc("Frontend - Vue", "Add vue internationalization")
       .organization(JHipsterModuleOrganization.builder().feature(CLIENT_INTERNATIONALIZATION).addDependency(VUE_CORE).build())
       .tags("client", "vue", "i18n")
-      .factory(i18n::buildModule);
+      .factory(vueI18n::buildModule);
   }
 }

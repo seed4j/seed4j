@@ -18,7 +18,7 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 class SampleFeatureModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource sampleFeatureModule(SampleFeatureApplicationService sample) {
+  JHipsterModuleResource sampleFeatureModule(SampleFeatureApplicationService sampleFeature) {
     return JHipsterModuleResource.builder()
       .slug(SAMPLE_FEATURE)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().addProjectBaseName().build())
@@ -33,6 +33,6 @@ class SampleFeatureModuleConfiguration {
           .build()
       )
       .tags("server")
-      .factory(sample::buildModule);
+      .factory(sampleFeature::buildModule);
   }
 }

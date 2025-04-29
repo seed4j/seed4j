@@ -12,7 +12,7 @@ class HexagonalArchitectureDocumentationModuleConfiguration {
 
   @Bean
   JHipsterModuleResource hexagonalArchitectureDocumentationModule(
-    HexagonalArchitectureDocumentationApplicationService hexagonalArchitectureDocumentations
+    HexagonalArchitectureDocumentationApplicationService hexagonalArchitectureDocumentation
   ) {
     return JHipsterModuleResource.builder()
       .slug(APPLICATION_SERVICE_HEXAGONAL_ARCHITECTURE_DOCUMENTATION)
@@ -20,6 +20,6 @@ class HexagonalArchitectureDocumentationModuleConfiguration {
       .apiDoc("Documentation", "Add documentation for hexagonal architecture")
       .standalone()
       .tags("server", "documentation")
-      .factory(hexagonalArchitectureDocumentations::buildModule);
+      .factory(hexagonalArchitectureDocumentation::buildModule);
   }
 }

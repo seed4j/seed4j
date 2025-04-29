@@ -14,13 +14,13 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 class LogsSpyModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource logSpyModule(LogsSpyApplicationService logSpy) {
+  JHipsterModuleResource logSpyModule(LogsSpyApplicationService logsSpy) {
     return JHipsterModuleResource.builder()
       .slug(LOGS_SPY)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
       .apiDoc("Spring Boot", "Add LogsSpy JUnit5 extension to project")
       .organization(JHipsterModuleOrganization.builder().addDependency(SPRING_BOOT).build())
       .tags("server", "test", "logback", "junit-extension")
-      .factory(logSpy::buildModule);
+      .factory(logsSpy::buildModule);
   }
 }

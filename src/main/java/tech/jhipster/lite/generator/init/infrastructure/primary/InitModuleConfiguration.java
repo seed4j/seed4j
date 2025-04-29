@@ -12,14 +12,14 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 class InitModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource initModule(InitApplicationService inits) {
+  JHipsterModuleResource initModule(InitApplicationService init) {
     return JHipsterModuleResource.builder()
       .slug(INIT)
       .propertiesDefinition(initPropertiesDefinition())
       .apiDoc("Init", "Init project")
       .standalone()
       .tags("server", "init")
-      .factory(inits::buildModule);
+      .factory(init::buildModule);
   }
 
   private JHipsterModulePropertiesDefinition initPropertiesDefinition() {

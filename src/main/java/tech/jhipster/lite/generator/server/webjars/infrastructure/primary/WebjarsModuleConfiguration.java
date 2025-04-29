@@ -20,7 +20,7 @@ class WebjarsModuleConfiguration {
   private static final String WEBJARS_GROUP = "WebJars";
 
   @Bean
-  JHipsterModuleResource webjarsLocatorModule(WebjarsApplicationService webjarsModule) {
+  JHipsterModuleResource webjarsLocatorModule(WebjarsApplicationService webjars) {
     return JHipsterModuleResource.builder()
       .slug(WEBJARS_LOCATOR)
       .propertiesDefinition(
@@ -29,11 +29,11 @@ class WebjarsModuleConfiguration {
       .apiDoc(WEBJARS_GROUP, "Add webjars locator to the project")
       .organization(JHipsterModuleOrganization.builder().addDependency(SPRING_BOOT_THYMELEAF).build())
       .tags(SERVER_TAG, WEB_TAG)
-      .factory(webjarsModule::buildWebjarsLocatorModule);
+      .factory(webjars::buildWebjarsLocatorModule);
   }
 
   @Bean
-  JHipsterModuleResource webjarsHtmxModule(WebjarsApplicationService webjarsModule) {
+  JHipsterModuleResource webjarsHtmxModule(WebjarsApplicationService webjars) {
     return JHipsterModuleResource.builder()
       .slug(HTMX_WEBJARS)
       .propertiesDefinition(
@@ -42,11 +42,11 @@ class WebjarsModuleConfiguration {
       .apiDoc(WEBJARS_GROUP, "Add HTMX webjar to the project")
       .organization(JHipsterModuleOrganization.builder().addDependency(WEBJARS_LOCATOR).build())
       .tags(SERVER_TAG, WEB_TAG)
-      .factory(webjarsModule::buildWebjarsHtmxModule);
+      .factory(webjars::buildWebjarsHtmxModule);
   }
 
   @Bean
-  JHipsterModuleResource webjarsAlpineJSModule(WebjarsApplicationService webjarsModule) {
+  JHipsterModuleResource webjarsAlpineJSModule(WebjarsApplicationService webjars) {
     return JHipsterModuleResource.builder()
       .slug(ALPINE_JS_WEBJARS)
       .propertiesDefinition(
@@ -55,6 +55,6 @@ class WebjarsModuleConfiguration {
       .apiDoc(WEBJARS_GROUP, "Add alpine.js webjar to the project")
       .organization(JHipsterModuleOrganization.builder().addDependency(WEBJARS_LOCATOR).build())
       .tags(SERVER_TAG, WEB_TAG)
-      .factory(webjarsModule::buildWebjarsAlpineJSModule);
+      .factory(webjars::buildWebjarsAlpineJSModule);
   }
 }

@@ -17,7 +17,7 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 class SonarQubeModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource sonarBackendModule(SonarQubeApplicationService sonar) {
+  JHipsterModuleResource sonarBackendModule(SonarQubeApplicationService sonarQube) {
     return JHipsterModuleResource.builder()
       .slug(SONAR_QUBE_JAVA_BACKEND)
       .propertiesDefinition(propertiesDefinition())
@@ -30,11 +30,11 @@ class SonarQubeModuleConfiguration {
           .build()
       )
       .tags("server", "sonar")
-      .factory(sonar::buildBackendModule);
+      .factory(sonarQube::buildBackendModule);
   }
 
   @Bean
-  JHipsterModuleResource sonarBackendFrontendModule(SonarQubeApplicationService sonar) {
+  JHipsterModuleResource sonarBackendFrontendModule(SonarQubeApplicationService sonarQube) {
     return JHipsterModuleResource.builder()
       .slug(SONAR_QUBE_JAVA_BACKEND_AND_FRONTEND)
       .propertiesDefinition(propertiesDefinition())
@@ -47,7 +47,7 @@ class SonarQubeModuleConfiguration {
           .build()
       )
       .tags("server", "sonar")
-      .factory(sonar::buildBackendFrontendModule);
+      .factory(sonarQube::buildBackendFrontendModule);
   }
 
   private JHipsterModulePropertiesDefinition propertiesDefinition() {

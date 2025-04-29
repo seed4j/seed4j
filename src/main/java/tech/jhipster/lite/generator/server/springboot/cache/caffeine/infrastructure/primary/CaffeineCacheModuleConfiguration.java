@@ -12,13 +12,13 @@ import tech.jhipster.lite.shared.slug.domain.JHLiteModuleSlug;
 class CaffeineCacheModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource caffeineCacheModule(CaffeineCacheApplicationService caffeineCaches) {
+  JHipsterModuleResource caffeineCacheModule(CaffeineCacheApplicationService caffeineCache) {
     return JHipsterModuleResource.builder()
       .slug(JHLiteModuleSlug.CAFFEINE_CACHE)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
       .apiDoc("Spring Boot - Cache", "Add caffeine cache")
       .organization(JHipsterModuleOrganization.builder().addDependency(JHLiteModuleSlug.SPRING_BOOT_CACHE).build())
       .tags("server", "spring", "spring-boot", "cache")
-      .factory(caffeineCaches::buildModule);
+      .factory(caffeineCache::buildModule);
   }
 }

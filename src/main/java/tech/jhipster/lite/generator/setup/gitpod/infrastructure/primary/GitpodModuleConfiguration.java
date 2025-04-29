@@ -11,13 +11,13 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 class GitpodModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource gitpodModule(GitpodApplicationService gitPods) {
+  JHipsterModuleResource gitpodModule(GitpodApplicationService gitpod) {
     return JHipsterModuleResource.builder()
       .slug(GITPOD)
       .withoutProperties()
       .apiDoc("Development environment", "Init Gitpod configuration files")
       .standalone()
       .tags("setup", "gitpod")
-      .factory(gitPods::buildModule);
+      .factory(gitpod::buildModule);
   }
 }

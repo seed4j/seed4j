@@ -53,7 +53,7 @@ public class RedisModuleFactory {
         .and()
       .javaDependencies()
         .addDependency(groupId(SPRING_BOOT_GROUP), artifactId("spring-boot-starter-data-redis"))
-        .addDependency(springBootDockerComposeIntegration())
+        .addDependency(dockerComposeIntegration())
         .addDependency(reflectionsDependency())
         .addDependency(testContainerDependency())
         .and()
@@ -101,7 +101,7 @@ public class RedisModuleFactory {
       .build();
   }
 
-  private JavaDependency springBootDockerComposeIntegration() {
+  private JavaDependency dockerComposeIntegration() {
     return JavaDependency.builder().groupId(SPRING_BOOT_GROUP).artifactId("spring-boot-docker-compose").scope(RUNTIME).optional().build();
   }
 

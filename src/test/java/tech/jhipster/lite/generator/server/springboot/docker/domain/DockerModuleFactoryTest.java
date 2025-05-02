@@ -11,9 +11,9 @@ import tech.jhipster.lite.module.domain.JHipsterModulesFixture;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 
 @UnitTest
-class SpringBootDockerModuleFactoryTest {
+class DockerModuleFactoryTest {
 
-  private static final SpringBootDockerModuleFactory factory = new SpringBootDockerModuleFactory();
+  private static final DockerModuleFactory factory = new DockerModuleFactory();
 
   @Nested
   class Maven {

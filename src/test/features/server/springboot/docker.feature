@@ -1,4 +1,4 @@
-Feature: Spring boot docker
+Feature: Docker module
 
   Scenario: Should apply jib module
     When I apply "jib" module to default project with maven file

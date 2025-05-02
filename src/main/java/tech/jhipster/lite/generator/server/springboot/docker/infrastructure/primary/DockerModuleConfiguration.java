@@ -10,13 +10,13 @@ import static tech.jhipster.lite.shared.slug.domain.JHLiteModuleSlug.MAVEN_WRAPP
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import tech.jhipster.lite.generator.server.springboot.docker.application.SpringBootDockerApplicationService;
+import tech.jhipster.lite.generator.server.springboot.docker.application.DockerApplicationService;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleOrganization;
 import tech.jhipster.lite.module.domain.resource.JHipsterModulePropertiesDefinition;
 import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 
 @Configuration
-class SpringBootDockerModuleConfiguration {
+class DockerModuleConfiguration {
 
   private static final String SPRING_BOOT_TOOLS_GROUP = "Spring Boot - Tools";
   private static final String SERVER_TAG = "server";
@@ -26,7 +26,7 @@ class SpringBootDockerModuleConfiguration {
   private static final String SPRING_BOOT_TAG = "spring-boot";
 
   @Bean
-  JHipsterModuleResource jibModule(SpringBootDockerApplicationService springBootDocker) {
+  JHipsterModuleResource jibModule(DockerApplicationService springBootDocker) {
     return JHipsterModuleResource.builder()
       .slug(JIB)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addServerPort().build())
@@ -37,7 +37,7 @@ class SpringBootDockerModuleConfiguration {
   }
 
   @Bean
-  JHipsterModuleResource dockerFileMavenModule(SpringBootDockerApplicationService springBootDocker) {
+  JHipsterModuleResource dockerFileMavenModule(DockerApplicationService springBootDocker) {
     return JHipsterModuleResource.builder()
       .slug(DOCKERFILE_MAVEN)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addServerPort().build())
@@ -48,7 +48,7 @@ class SpringBootDockerModuleConfiguration {
   }
 
   @Bean
-  JHipsterModuleResource dockerFileGradleModule(SpringBootDockerApplicationService springBootDocker) {
+  JHipsterModuleResource dockerFileGradleModule(DockerApplicationService springBootDocker) {
     return JHipsterModuleResource.builder()
       .slug(DOCKERFILE_GRADLE)
       .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addServerPort().build())

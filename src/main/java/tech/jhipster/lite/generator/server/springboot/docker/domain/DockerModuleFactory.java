@@ -14,7 +14,7 @@ import tech.jhipster.lite.module.domain.mavenplugin.MavenPluginConfiguration;
 import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 import tech.jhipster.lite.shared.error.domain.Assert;
 
-public class SpringBootDockerModuleFactory {
+public class DockerModuleFactory {
 
   private static final String PROPERTIES_FIELD = "properties";
   private static final JHipsterSource SOURCE = from("server/springboot/docker");

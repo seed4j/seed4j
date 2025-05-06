@@ -54,7 +54,7 @@
     <jqwik.version>1.9.2</jqwik.version>
     <!-- Maven Plugins -->
     <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
-    <protobuf-maven-plugin.version>3.1.2</protobuf-maven-plugin.version>
+    <protobuf-maven-plugin.version>3.1.3</protobuf-maven-plugin.version>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
     <checkstyle.version>10.23.1</checkstyle.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>

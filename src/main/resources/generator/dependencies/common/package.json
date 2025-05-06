@@ -60,6 +60,6 @@
     "vite": "6.3.4",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.1.2",
-    "vitest-sonar-reporter": "2.0.0"
+    "vitest-sonar-reporter": "2.0.1"
   }
 }

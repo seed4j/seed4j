@@ -22,7 +22,7 @@ class SampleFlywayModuleConfiguration {
     return JHipsterModuleResource.builder()
       .slug(SAMPLE_POSTGRESQL_FLYWAY_CHANGELOG)
       .withoutProperties()
-      .apiDoc("Sample Feature", "Add postgreSQL flyway changelog for sample feature")
+      .apiDoc("Sample Feature", "Add PostgreSQL flyway changelog for sample feature")
       .organization(
         JHipsterModuleOrganization.builder()
           .feature(SAMPLE_SCHEMA)
@@ -40,7 +40,7 @@ class SampleFlywayModuleConfiguration {
     return JHipsterModuleResource.builder()
       .slug(SAMPLE_NOT_POSTGRESQL_FLYWAY_CHANGELOG)
       .withoutProperties()
-      .apiDoc("Sample Feature", "Add not postgreSQL flyway changelog for sample feature")
+      .apiDoc("Sample Feature", "Add not PostgreSQL flyway changelog for sample feature")
       .organization(JHipsterModuleOrganization.builder().feature(SAMPLE_SCHEMA).addDependency(FLYWAY).addDependency(SAMPLE_FEATURE).build())
       .tags("server")
       .factory(sampleFlyway::buildNotPostgreSQLModule);

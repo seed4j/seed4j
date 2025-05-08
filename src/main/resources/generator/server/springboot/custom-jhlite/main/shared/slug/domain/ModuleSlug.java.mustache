@@ -13,8 +13,7 @@ import {{packageName}}.shared.generation.domain.ExcludeFromGeneratedCodeCoverage
 public enum {{ baseName }}ModuleSlug implements JHipsterModuleSlugFactory {
 
   // Add here the slugs of your modules
-  // e.g.: MY_MODULE("my-module", JHipsterModuleRank.RANK_B),
-  ;
+  // e.g.: MY_MODULE("my-module", JHipsterModuleRank.RANK_B)
 
   private static final Map<String, {{ baseName }}ModuleSlug> moduleSlugMap = Stream.of(values()).collect(
     Collectors.toMap({{ baseName }}ModuleSlug::get, Function.identity())

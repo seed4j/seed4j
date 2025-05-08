@@ -14,8 +14,8 @@ public class JpaApplicationService {
     jpa = new JpaModuleFactory();
   }
 
-  public JHipsterModule buildPostgresql(JHipsterModuleProperties properties) {
-    return jpa.buildPostgresql(properties);
+  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
+    return jpa.buildPostgreSQL(properties);
   }
 
   public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {

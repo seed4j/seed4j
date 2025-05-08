@@ -46,7 +46,7 @@ public class DatasourceModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public JHipsterModule buildPostgresql(JHipsterModuleProperties properties) {
+  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     DatasourceProperties datasourceProperties = DatasourceProperties.builder()

@@ -14,17 +14,17 @@ import tech.jhipster.lite.shared.error.domain.Assert;
 
 public class JooqModuleFactory {
 
-  public JHipsterModule buildPostgresql(JHipsterModuleProperties properties) {
+  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
     //@formatter:off
     return commonModuleBuilder(properties)
       .mavenPlugins()
-        .plugin(jooqMavenCodegenPlugin(postgresqlPluginConfiguration(properties)))
+        .plugin(jooqMavenCodegenPlugin(postgreSQLPluginConfiguration(properties)))
         .and()
       .build();
     //@formatter:on
   }
 
-  private static String postgresqlPluginConfiguration(JHipsterModuleProperties properties) {
+  private static String postgreSQLPluginConfiguration(JHipsterModuleProperties properties) {
     return JooqModuleCodegenConfiguration.builder()
       .databaseUrl("jdbc:postgresql://localhost:5432/" + properties.projectBaseName().name())
       .user(properties.projectBaseName().name())

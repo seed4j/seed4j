@@ -20,14 +20,14 @@ class DatasourceModuleConfiguration {
   private static final String API_DOC_GROUP = "Spring Boot - Database";
 
   @Bean
-  JHipsterModuleResource postgresqlDatasourceModule(DatasourceApplicationService datasource) {
+  JHipsterModuleResource postgreSQLDatasourceModule(DatasourceApplicationService datasource) {
     return JHipsterModuleResource.builder()
       .slug(DATASOURCE_POSTGRESQL)
       .propertiesDefinition(properties())
-      .apiDoc(API_DOC_GROUP, "Add Postgresql datasource to Spring project")
+      .apiDoc(API_DOC_GROUP, "Add PostgreSQL datasource to Spring project")
       .organization(organization())
       .tags(tags())
-      .factory(datasource::buildPostgresql);
+      .factory(datasource::buildPostgreSQL);
   }
 
   @Bean

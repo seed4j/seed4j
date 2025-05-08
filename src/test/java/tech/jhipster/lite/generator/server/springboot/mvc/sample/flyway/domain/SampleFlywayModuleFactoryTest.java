@@ -20,7 +20,7 @@ class SampleFlywayModuleFactoryTest {
       .put("date", "2021-12-03T10:15:30.00Z")
       .build();
 
-    JHipsterModule module = factory.buildPostgresqlModule(properties);
+    JHipsterModule module = factory.buildPostgreSQLModule(properties);
 
     assertThatModule(module)
       .hasFile("src/main/resources/db/migration/V20211203101531__sample_feature_schema.sql")
@@ -33,7 +33,7 @@ class SampleFlywayModuleFactoryTest {
       .put("date", "2021-12-03T10:15:30.00Z")
       .build();
 
-    JHipsterModule module = factory.buildNotPostgresqlModule(properties);
+    JHipsterModule module = factory.buildNotPostgreSQLModule(properties);
 
     assertThatModule(module)
       .hasFile("src/main/resources/db/migration/V20211203101531__sample_feature_schema.sql")

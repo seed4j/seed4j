@@ -67,7 +67,7 @@ class FlywayModuleConfiguration {
       .apiDoc(API_DOC_GROUP, "Add Flyway PostgreSQL")
       .organization(JHipsterModuleOrganization.builder().addDependency(FLYWAY).addDependency(DATASOURCE_POSTGRESQL).build())
       .tags(flywayTags())
-      .factory(flyway::buildPostgresqlDependencyModule);
+      .factory(flyway::buildPostgreSQLDependencyModule);
   }
 
   @Bean

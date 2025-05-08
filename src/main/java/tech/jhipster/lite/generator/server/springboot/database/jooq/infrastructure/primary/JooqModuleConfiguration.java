@@ -23,14 +23,14 @@ class JooqModuleConfiguration {
   private static final String API_DOC_GROUP = "Spring Boot - Database";
 
   @Bean
-  JHipsterModuleResource jooqPostgresqlModule(JooqApplicationService postgresql) {
+  JHipsterModuleResource jooqPostgreSQLModule(JooqApplicationService postgreSQL) {
     return JHipsterModuleResource.builder()
       .slug(JOOQ_POSTGRESQL)
       .propertiesDefinition(properties())
-      .apiDoc(API_DOC_GROUP, "Add Jooq with Postgresql to project")
+      .apiDoc(API_DOC_GROUP, "Add Jooq with PostgreSQL to project")
       .organization(JHipsterModuleOrganization.builder().feature(JOOQ).addDependency(DATASOURCE_POSTGRESQL).build())
       .tags(tags())
-      .factory(postgresql::buildPostgresql);
+      .factory(postgreSQL::buildPostgreSQL);
   }
 
   @Bean

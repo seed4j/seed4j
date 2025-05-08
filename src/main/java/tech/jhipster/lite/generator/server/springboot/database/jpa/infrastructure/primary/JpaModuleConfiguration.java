@@ -23,14 +23,14 @@ class JpaModuleConfiguration {
   private static final String API_DOC_GROUP = "Spring Boot - Database";
 
   @Bean
-  JHipsterModuleResource jpaPostgresqlModule(JpaApplicationService postgresql) {
+  JHipsterModuleResource jpaPostgreSQLModule(JpaApplicationService postgreSQL) {
     return JHipsterModuleResource.builder()
       .slug(JPA_POSTGRESQL)
       .propertiesDefinition(properties())
-      .apiDoc(API_DOC_GROUP, "Add JPA with Postgresql to project")
+      .apiDoc(API_DOC_GROUP, "Add JPA with PostgreSQL to project")
       .organization(JHipsterModuleOrganization.builder().feature(JPA_PERSISTENCE).addDependency(DATASOURCE_POSTGRESQL).build())
       .tags(tags())
-      .factory(postgresql::buildPostgresql);
+      .factory(postgreSQL::buildPostgreSQL);
   }
 
   @Bean

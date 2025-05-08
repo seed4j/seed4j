@@ -18,11 +18,11 @@ import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
 class SampleFlywayModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource sampleFlywayPostgresqlModule(SampleFlywayApplicationService sampleFlyway) {
+  JHipsterModuleResource sampleFlywayPostgreSQLModule(SampleFlywayApplicationService sampleFlyway) {
     return JHipsterModuleResource.builder()
       .slug(SAMPLE_POSTGRESQL_FLYWAY_CHANGELOG)
       .withoutProperties()
-      .apiDoc("Sample Feature", "Add postgresql flyway changelog for sample feature")
+      .apiDoc("Sample Feature", "Add postgreSQL flyway changelog for sample feature")
       .organization(
         JHipsterModuleOrganization.builder()
           .feature(SAMPLE_SCHEMA)
@@ -32,17 +32,17 @@ class SampleFlywayModuleConfiguration {
           .build()
       )
       .tags("server")
-      .factory(sampleFlyway::buildPostgresqlModule);
+      .factory(sampleFlyway::buildPostgreSQLModule);
   }
 
   @Bean
-  JHipsterModuleResource sampleFlywayNotPostgresqlModule(SampleFlywayApplicationService sampleFlyway) {
+  JHipsterModuleResource sampleFlywayNotPostgreSQLModule(SampleFlywayApplicationService sampleFlyway) {
     return JHipsterModuleResource.builder()
       .slug(SAMPLE_NOT_POSTGRESQL_FLYWAY_CHANGELOG)
       .withoutProperties()
-      .apiDoc("Sample Feature", "Add not postgresql flyway changelog for sample feature")
+      .apiDoc("Sample Feature", "Add not postgreSQL flyway changelog for sample feature")
       .organization(JHipsterModuleOrganization.builder().feature(SAMPLE_SCHEMA).addDependency(FLYWAY).addDependency(SAMPLE_FEATURE).build())
       .tags("server")
-      .factory(sampleFlyway::buildNotPostgresqlModule);
+      .factory(sampleFlyway::buildNotPostgreSQLModule);
   }
 }

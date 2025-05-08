@@ -31,7 +31,7 @@ class DatasourceModuleFactoryTest {
   private DatasourceModuleFactory factory;
 
   @Test
-  void shouldBuildPostgresqlModule() {
+  void shouldBuildPostgreSQLModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("tech.jhipster.jhlitest")
       .projectBaseName("myapp")
@@ -39,7 +39,7 @@ class DatasourceModuleFactoryTest {
 
     when(dockerImages.get(new DockerImageName("postgres"))).thenReturn(new DockerImageVersion("postgres", "0.0.0"));
 
-    JHipsterModule module = factory.buildPostgresql(properties);
+    JHipsterModule module = factory.buildPostgreSQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("documentation/postgresql.md")

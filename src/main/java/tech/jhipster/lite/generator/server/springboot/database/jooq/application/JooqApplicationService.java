@@ -14,8 +14,8 @@ public class JooqApplicationService {
     jooq = new JooqModuleFactory();
   }
 
-  public JHipsterModule buildPostgresql(JHipsterModuleProperties properties) {
-    return jooq.buildPostgresql(properties);
+  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
+    return jooq.buildPostgreSQL(properties);
   }
 
   public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {

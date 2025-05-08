@@ -16,13 +16,13 @@ class JooqModuleFactoryTest {
   private final JooqModuleFactory factory = new JooqModuleFactory();
 
   @Test
-  void shouldBuildPostgresqlModule() {
+  void shouldBuildPostgreSQLModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("tech.jhipster.jhlitest")
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildPostgresql(properties);
+    JHipsterModule module = factory.buildPostgreSQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")

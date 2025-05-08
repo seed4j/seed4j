@@ -22,7 +22,7 @@ public class JpaModuleFactory {
   private static final PropertyValue FALSE = propertyValue(false);
   private static final PropertyValue TRUE = propertyValue(true);
 
-  public JHipsterModule buildPostgresql(JHipsterModuleProperties properties) {
+  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
     return sqlCommonModuleBuilder(properties).build();
   }
 

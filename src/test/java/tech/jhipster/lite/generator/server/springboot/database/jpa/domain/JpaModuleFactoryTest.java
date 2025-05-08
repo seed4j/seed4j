@@ -16,13 +16,13 @@ class JpaModuleFactoryTest {
   private final JpaModuleFactory factory = new JpaModuleFactory();
 
   @Test
-  void shouldBuildPostgresqlModule() {
+  void shouldBuildPostgreSQLModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("tech.jhipster.jhlitest")
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildPostgresql(properties);
+    JHipsterModule module = factory.buildPostgreSQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("src/main/java/tech/jhipster/jhlitest/wire/database/infrastructure/secondary/DatabaseConfiguration.java")

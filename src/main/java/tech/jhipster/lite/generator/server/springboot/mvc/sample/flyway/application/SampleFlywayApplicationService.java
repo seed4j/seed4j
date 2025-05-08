@@ -14,11 +14,11 @@ public class SampleFlywayApplicationService {
     sampleFlyway = new SampleFlywayModuleFactory();
   }
 
-  public JHipsterModule buildPostgresqlModule(JHipsterModuleProperties properties) {
-    return sampleFlyway.buildPostgresqlModule(properties);
+  public JHipsterModule buildPostgreSQLModule(JHipsterModuleProperties properties) {
+    return sampleFlyway.buildPostgreSQLModule(properties);
   }
 
-  public JHipsterModule buildNotPostgresqlModule(JHipsterModuleProperties properties) {
-    return sampleFlyway.buildNotPostgresqlModule(properties);
+  public JHipsterModule buildNotPostgreSQLModule(JHipsterModuleProperties properties) {
+    return sampleFlyway.buildNotPostgreSQLModule(properties);
   }
 }

@@ -15,8 +15,8 @@ public class DatasourceApplicationService {
     datasource = new DatasourceModuleFactory(dockerImages);
   }
 
-  public JHipsterModule buildPostgresql(JHipsterModuleProperties properties) {
-    return datasource.buildPostgresql(properties);
+  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
+    return datasource.buildPostgreSQL(properties);
   }
 
   public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {

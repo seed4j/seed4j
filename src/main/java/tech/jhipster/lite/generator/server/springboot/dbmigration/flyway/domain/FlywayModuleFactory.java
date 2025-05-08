@@ -58,7 +58,7 @@ public class FlywayModuleFactory {
     return moduleBuilder(properties).javaDependencies().addDependency(FLYWAY_GROUP_ID, artifactId("flyway-mysql")).and().build();
   }
 
-  public JHipsterModule buildPostgresqlDependencyModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildPostgreSQLDependencyModule(JHipsterModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return moduleBuilder(properties)

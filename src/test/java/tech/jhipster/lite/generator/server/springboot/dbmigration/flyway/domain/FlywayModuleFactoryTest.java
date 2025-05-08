@@ -68,10 +68,10 @@ class FlywayModuleFactoryTest {
   }
 
   @Test
-  void shouldBuildPostgresqlDependencyModule() {
+  void shouldBuildPostgreSQLDependencyModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildPostgresqlDependencyModule(properties);
+    JHipsterModule module = factory.buildPostgreSQLDependencyModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")

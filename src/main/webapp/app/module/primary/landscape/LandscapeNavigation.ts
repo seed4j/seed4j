@@ -1,8 +1,8 @@
-import { ModuleSlug } from '@/module/domain/ModuleSlug';
 import { LandscapeElement } from '@/module/domain/landscape/LandscapeElement';
 import { LandscapeElementId } from '@/module/domain/landscape/LandscapeElementId';
 import { LandscapeLevel } from '@/module/domain/landscape/LandscapeLevel';
 import { LandscapeModule } from '@/module/domain/landscape/LandscapeModule';
+import { ModuleSlug } from '@/module/domain/ModuleSlug';
 
 export class LandscapeNavigation {
   private currentModule: number;

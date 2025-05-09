@@ -1,9 +1,10 @@
-import { ModuleRank, RANKS, extractRankLetter } from '@/module/domain/landscape/ModuleRank';
+import { defineComponent, PropType, ref } from 'vue';
+
+import { extractRankLetter, ModuleRank, RANKS } from '@/module/domain/landscape/ModuleRank';
 import type { ModuleRankStatistics } from '@/module/domain/ModuleRankStatistics';
 import type { RankDescription } from '@/module/domain/RankDescription';
 import { Optional } from '@/shared/optional/domain/Optional';
 import { ToggleButtonExpandableVue } from '@/shared/toggle-button-expandable/infrastructure/primary';
-import { PropType, defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'LandscapeRankModuleFilterVue',

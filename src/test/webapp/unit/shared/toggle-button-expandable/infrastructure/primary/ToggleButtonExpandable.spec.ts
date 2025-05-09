@@ -1,6 +1,7 @@
-import { ToggleButtonExpandableVue } from '@/shared/toggle-button-expandable/infrastructure/primary';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
+
+import { ToggleButtonExpandableVue } from '@/shared/toggle-button-expandable/infrastructure/primary';
 
 describe('ToggleButtonExpandable', () => {
   describe('when initially rendered', () => {

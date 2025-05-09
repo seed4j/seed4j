@@ -1,3 +1,6 @@
+import { shallowMount, VueWrapper } from '@vue/test-utils';
+import { describe, expect, it, vi } from 'vitest';
+
 import { provide } from '@/injections';
 import { ALERT_LISTENER } from '@/shared/alert/application/AlertProvider';
 import { AlertListener } from '@/shared/alert/domain/AlertListener';
@@ -5,8 +8,7 @@ import { TIMEOUT } from '@/shared/toast/application/ToastProvider';
 import { TimeoutListener } from '@/shared/toast/domain/Timeout';
 import { ToastVue } from '@/shared/toast/infrastructure/primary';
 import { ToastType } from '@/shared/toast/infrastructure/primary/ToastType';
-import { VueWrapper, shallowMount } from '@vue/test-utils';
-import { describe, expect, it, vi } from 'vitest';
+
 import { AlertListenerFixture, stubAlertListener } from '../../../alert/domain/AlertListener.fixture';
 import { stubTimeout } from '../../domain/Timeout.fixture';
 

@@ -1,6 +1,8 @@
+import { describe, expect, it } from 'vitest';
+
 import { AlertType } from '@/shared/alert/infrastructure/secondary/AlertType';
 import { MittAlertBus } from '@/shared/alert/infrastructure/secondary/MittAlertBus';
-import { describe, expect, it } from 'vitest';
+
 import { stubEmitter } from './EmitterStub.fixture';
 
 describe('MittAlertBus', () => {

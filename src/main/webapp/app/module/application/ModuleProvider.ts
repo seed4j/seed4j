@@ -1,3 +1,5 @@
+import { key } from 'piqure';
+
 import { provide } from '@/injections';
 import { ManagementRepository } from '@/module/domain/ManagementRepository';
 import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
@@ -11,7 +13,6 @@ import { RestManagementRepository } from '@/module/secondary/RestManagementRepos
 import { RestModulesRepository } from '@/module/secondary/RestModulesRepository';
 import { RestProjectFoldersRepository } from '@/module/secondary/RestProjectFoldersRepository';
 import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp';
-import { key } from 'piqure';
 
 export const PROJECT_FOLDERS_REPOSITORY = key<ProjectFoldersRepository>('ProjectFoldersRepository');
 export const MANAGEMENT_REPOSITORY = key<ManagementRepository>('ManagementRepository');

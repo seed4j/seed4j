@@ -1,5 +1,6 @@
-import { WindowApplicationListener } from '@/shared/alert/infrastructure/primary/WindowApplicationListener';
 import { describe, expect, it, vi } from 'vitest';
+
+import { WindowApplicationListener } from '@/shared/alert/infrastructure/primary/WindowApplicationListener';
 
 describe('WindowApplicationListener', () => {
   it('should add event listener on window', () => {

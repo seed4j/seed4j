@@ -1,18 +1,13 @@
+import { computed, defineComponent, nextTick, onBeforeUnmount, onMounted, Ref, ref } from 'vue';
+
 import { APPLICATION_LISTENER, CURSOR_UPDATER, inject } from '@/injections';
 import {
   LANDSCAPE_SCROLLER,
-  MODULES_REPOSITORY,
   MODULE_PARAMETERS_REPOSITORY,
+  MODULES_REPOSITORY,
   PROJECT_FOLDERS_REPOSITORY,
 } from '@/module/application/ModuleProvider';
 import { AnchorPointState } from '@/module/domain/AnchorPointState';
-import { ModuleParameter } from '@/module/domain/ModuleParameter';
-import { ModulePropertyDefinition } from '@/module/domain/ModulePropertyDefinition';
-import type { ModuleRankStatistics } from '@/module/domain/ModuleRankStatistics';
-import { toModuleRankStatistics } from '@/module/domain/ModuleRankStatistics';
-import { ModuleSlug } from '@/module/domain/ModuleSlug';
-import { Preset } from '@/module/domain/Preset';
-import { ProjectHistory } from '@/module/domain/ProjectHistory';
 import { Landscape } from '@/module/domain/landscape/Landscape';
 import { LandscapeElement } from '@/module/domain/landscape/LandscapeElement';
 import { LandscapeElementId } from '@/module/domain/landscape/LandscapeElementId';
@@ -21,23 +16,30 @@ import { LandscapeFeatureSlug } from '@/module/domain/landscape/LandscapeFeature
 import { LandscapeLevel } from '@/module/domain/landscape/LandscapeLevel';
 import { LandscapeModule } from '@/module/domain/landscape/LandscapeModule';
 import { LandscapeSelectionElement } from '@/module/domain/landscape/LandscapeSelectionElement';
-import { ModuleRank, extractRankLetter } from '@/module/domain/landscape/ModuleRank';
+import { extractRankLetter, ModuleRank } from '@/module/domain/landscape/ModuleRank';
+import { ModuleParameter } from '@/module/domain/ModuleParameter';
+import { ModulePropertyDefinition } from '@/module/domain/ModulePropertyDefinition';
+import type { ModuleRankStatistics } from '@/module/domain/ModuleRankStatistics';
+import { toModuleRankStatistics } from '@/module/domain/ModuleRankStatistics';
+import { ModuleSlug } from '@/module/domain/ModuleSlug';
+import { Preset } from '@/module/domain/Preset';
+import { ProjectHistory } from '@/module/domain/ProjectHistory';
 import { LandscapeRankModuleFilterVue } from '@/module/primary/landscape-rank-module-filter';
 import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
 import { IconVue } from '@/shared/icon/infrastructure/primary';
 import { Loader } from '@/shared/loader/infrastructure/primary/Loader';
 import { Optional } from '@/shared/optional/domain/Optional';
-import { Ref, computed, defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
-import { castValue, empty } from '../PropertyValue';
+
 import { LandscapeLoaderVue } from '../landscape-loader';
 import { LandscapeMiniMapVue } from '../landscape-minimap';
 import { LandscapeModuleVue } from '../landscape-module';
 import { LandscapePresetConfigurationVue } from '../landscape-preset-configuration';
 import { ModulePropertiesFormVue } from '../module-properties-form';
 import { ProjectActionsVue } from '../project-actions';
+import { castValue, empty } from '../PropertyValue';
 import { DisplayMode } from './DisplayMode';
-import { LandscapeConnector, buildConnector } from './LandscapeConnector';
-import { LandscapeConnectorsSize, emptyLandscapeSize } from './LandscapeConnectorsSize';
+import { buildConnector, LandscapeConnector } from './LandscapeConnector';
+import { emptyLandscapeSize, LandscapeConnectorsSize } from './LandscapeConnectorsSize';
 import { LandscapeNavigation } from './LandscapeNavigation';
 
 export default defineComponent({

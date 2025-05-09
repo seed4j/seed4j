@@ -1,9 +1,10 @@
+import { Emitter, Handler } from 'mitt';
+
 import { Alerted } from '@/shared/alert/domain/Alerted';
 import { AlertListener } from '@/shared/alert/domain/AlertListener';
 import { AlertMessage } from '@/shared/alert/domain/AlertMessage';
 import { Unsubscribe } from '@/shared/alert/domain/Unsubscribe';
 import { AlertType } from '@/shared/alert/infrastructure/secondary/AlertType';
-import { Emitter, Handler } from 'mitt';
 
 export class MittAlertListener implements AlertListener {
   constructor(private readonly emitter: Emitter<any>) {}

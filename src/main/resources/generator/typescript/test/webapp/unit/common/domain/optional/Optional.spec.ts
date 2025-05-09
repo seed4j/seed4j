@@ -1,5 +1,6 @@
-import { Optional } from '@/common/domain/Optional';
 import { expect, it } from 'vitest';
+
+import { Optional } from '@/common/domain/Optional';
 
 describe('Optional', () => {
   describe('Empty check', () => {

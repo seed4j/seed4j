@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { ModuleRank } from '@/module/domain/landscape/ModuleRank';
 import { ModuleSlug } from '@/module/domain/ModuleSlug';
 import { Presets } from '@/module/domain/Presets';
@@ -9,13 +11,13 @@ import { RestModulePropertyDefinition } from '@/module/secondary/RestModulePrope
 import { RestModules } from '@/module/secondary/RestModules';
 import { RestModulesRepository } from '@/module/secondary/RestModulesRepository';
 import { RestProjectHistory } from '@/module/secondary/RestProjectHistory';
-import { describe, expect, it } from 'vitest';
+
 import { dataBackendResponse, stubAxiosHttp } from '../../shared/http/infrastructure/secondary/AxiosHttpStub';
 import { defaultLandscape } from '../domain/landscape/Landscape.fixture';
 import {
-  defaultModuleToApply,
   defaultModules,
   defaultModulesToApply,
+  defaultModuleToApply,
   defaultPresets,
   defaultProjectHistory,
   moduleSlug,

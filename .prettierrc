@@ -5,6 +5,10 @@ singleQuote: true
 tabWidth: 2
 useTabs: false
 experimentalOperatorPosition: start
+importOrder: ['^@/(.*)$', '^[./]']
+importOrderSeparation: true
+importOrderSortSpecifiers: true
+importOrderCaseInsensitive: true
 
 plugins:
   - '@prettier/plugin-xml'
@@ -14,6 +18,7 @@ plugins:
   - prettier-plugin-organize-imports
   - prettier-plugin-packagejson
   - prettier-plugin-sh
+  - '@trivago/prettier-plugin-sort-imports'
 
 # js and ts rules:
 arrowParens: avoid

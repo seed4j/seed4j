@@ -1,4 +1,5 @@
 import { Modules } from '@/module/domain/Modules';
+
 import { ComponentModuleCategory } from './ComponentModulePatchCategory';
 
 export class ComponentModules {

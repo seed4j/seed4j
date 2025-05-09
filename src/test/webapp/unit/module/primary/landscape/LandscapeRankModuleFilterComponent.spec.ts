@@ -1,10 +1,12 @@
+import { mount, VueWrapper } from '@vue/test-utils';
+import { describe, expect, it } from 'vitest';
+
 import { Landscape } from '@/module/domain/landscape/Landscape';
 import { RANKS } from '@/module/domain/landscape/ModuleRank';
 import { ModuleRankStatistics, toModuleRankStatistics } from '@/module/domain/ModuleRankStatistics';
 import { LandscapeRankModuleFilterVue } from '@/module/primary/landscape-rank-module-filter';
 import { Optional } from '@/shared/optional/domain/Optional';
-import { VueWrapper, mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
+
 import { wrappedElement } from '../../../WrappedElement';
 import { initialModule } from '../../domain/landscape/Landscape.fixture';
 import { applicationBaseNamePropertyDefinition } from '../../domain/Modules.fixture';

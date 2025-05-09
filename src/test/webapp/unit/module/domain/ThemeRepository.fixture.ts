@@ -1,5 +1,6 @@
-import { ThemeRepository } from '@/module/domain/ThemeRepository';
 import sinon, { SinonStub } from 'sinon';
+
+import { ThemeRepository } from '@/module/domain/ThemeRepository';
 
 export interface LocalWindowThemeRepositoryStub extends ThemeRepository {
   get: SinonStub;

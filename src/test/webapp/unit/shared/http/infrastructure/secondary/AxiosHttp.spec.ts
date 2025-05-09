@@ -1,6 +1,8 @@
-import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp';
 import { AxiosResponse } from 'axios';
 import { describe, expect, it } from 'vitest';
+
+import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp';
+
 import { dataAxiosResponse, stubAxiosInstance } from './AxiosStub';
 
 interface Payload {

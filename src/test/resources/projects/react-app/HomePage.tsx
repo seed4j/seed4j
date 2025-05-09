@@ -1,7 +1,7 @@
-import './HomePage.css';
-
 import JHipsterLiteNeonBlue from '@assets/JHipster-Lite-neon-blue.png';
 import ReactLogo from '@assets/ReactLogo.png';
+
+import './HomePage.css';
 
 function HomePage() {
   return (

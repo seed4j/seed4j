@@ -1,6 +1,8 @@
+import { describe, expect, it } from 'vitest';
+
 import { ModuleParameterType } from '@/module/domain/ModuleParameters';
 import { LocalStorageModuleParametersRepository } from '@/module/secondary/LocalStorageModuleParametersRepository';
-import { describe, expect, it } from 'vitest';
+
 import { fakeStorage } from './FakeStorage.fixture';
 
 const STORAGE_KEY_MODULE_PARAMETERS_SUFFIX = '_moduleParameters';

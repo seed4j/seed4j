@@ -1,5 +1,6 @@
-import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller';
 
 interface HTMLElementStub extends HTMLElement {
   scroll: vi.fn;

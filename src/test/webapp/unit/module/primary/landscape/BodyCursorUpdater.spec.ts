@@ -1,5 +1,7 @@
-import { BodyCursorUpdater } from '@/module/primary/landscape/BodyCursorUpdater';
 import { describe, expect, it } from 'vitest';
+
+import { BodyCursorUpdater } from '@/module/primary/landscape/BodyCursorUpdater';
+
 import { stubWindow } from '../GlobalWindow.fixture';
 
 describe('BodyCursorUpdater', () => {

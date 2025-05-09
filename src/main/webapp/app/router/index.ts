@@ -1,6 +1,7 @@
+import { createRouter, createWebHistory } from 'vue-router';
+
 import { LandscapeVue } from '@/module/primary/landscape';
 import { ModulesVue } from '@/module/primary/modules-patch';
-import { createRouter, createWebHistory } from 'vue-router';
 
 export const routes = [
   {

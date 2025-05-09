@@ -1,5 +1,7 @@
-import { LandscapeUnselectionTree } from '@/module/domain/landscape/LandscapeUnselectionTree';
 import { describe, expect, it } from 'vitest';
+
+import { LandscapeUnselectionTree } from '@/module/domain/landscape/LandscapeUnselectionTree';
+
 import { moduleSlug } from '../Modules.fixture';
 
 describe('Unselection tree', () => {

@@ -1,5 +1,6 @@
-import { ProjectFoldersRepository } from '@/module/domain/ProjectFoldersRepository';
 import sinon, { SinonStub } from 'sinon';
+
+import { ProjectFoldersRepository } from '@/module/domain/ProjectFoldersRepository';
 
 export interface ProjectFoldersRepositoryStub extends ProjectFoldersRepository {
   get: SinonStub;

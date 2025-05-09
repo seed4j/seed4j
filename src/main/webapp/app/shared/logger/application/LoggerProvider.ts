@@ -1,7 +1,8 @@
+import { key } from 'piqure';
+
 import { provide } from '@/injections';
 import { Logger } from '@/shared/logger/domain/Logger';
 import ConsoleLogger from '@/shared/logger/infrastructure/secondary/ConsoleLogger';
-import { key } from 'piqure';
 
 export const LOGGER = key<Logger>('Logger');
 

@@ -1,5 +1,7 @@
+import { defineComponent, onMounted, reactive, ref } from 'vue';
+
 import { inject } from '@/injections';
-import { MODULES_REPOSITORY, MODULE_PARAMETERS_REPOSITORY, PROJECT_FOLDERS_REPOSITORY } from '@/module/application/ModuleProvider';
+import { MODULE_PARAMETERS_REPOSITORY, MODULES_REPOSITORY, PROJECT_FOLDERS_REPOSITORY } from '@/module/application/ModuleProvider';
 import { ModuleParameter } from '@/module/domain/ModuleParameter';
 import { ModulePropertyDefinition } from '@/module/domain/ModulePropertyDefinition';
 import { ModulePropertyKey } from '@/module/domain/ModulePropertyKey';
@@ -8,7 +10,7 @@ import { ProjectHistory } from '@/module/domain/ProjectHistory';
 import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
 import { IconVue } from '@/shared/icon/infrastructure/primary';
 import { Loader } from '@/shared/loader/infrastructure/primary/Loader';
-import { defineComponent, onMounted, reactive, ref } from 'vue';
+
 import { ModuleParametersVue } from '../module-parameters';
 import { ModulePropertiesFormVue } from '../module-properties-form';
 import { ModulesPatchLoaderVue } from '../modules-patch-loader';

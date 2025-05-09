@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue';
+
 import ListPlaceHolderVue from './ListPlaceHolder.vue';
 import PhPictureVue from './PhPicture.vue';
 import PhRowVue from './PhRow.vue';

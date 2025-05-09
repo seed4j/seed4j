@@ -65,6 +65,7 @@
     "@prettier/plugin-pug": "3.4.0",
     "@prettier/plugin-xml": "3.4.1",
     "@tikui/core": "6.3.0",
+    "@trivago/prettier-plugin-sort-imports": "5.2.2",
     "@types/sinon": "17.0.4",
     "@typescript-eslint/eslint-plugin": "8.32.0",
     "@typescript-eslint/parser": "8.32.0",

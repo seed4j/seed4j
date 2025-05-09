@@ -6,7 +6,6 @@ import { provideRouter } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.route';
-
 import { environment } from './environments/environment';
 
 if (environment.production) {

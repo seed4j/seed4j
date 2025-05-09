@@ -1,9 +1,10 @@
+import { defineComponent, ref } from 'vue';
+
 import { GLOBAL_WINDOW, inject } from '@/injections';
 import { MODULES_REPOSITORY } from '@/module/application/ModuleProvider';
 import { Project } from '@/module/domain/Project';
 import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
 import { IconVue } from '@/shared/icon/infrastructure/primary';
-import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'ProjectActionsVue',

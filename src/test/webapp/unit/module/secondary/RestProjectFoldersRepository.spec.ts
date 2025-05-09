@@ -1,5 +1,7 @@
-import { RestProjectFoldersRepository } from '@/module/secondary/RestProjectFoldersRepository';
 import { describe, expect, it } from 'vitest';
+
+import { RestProjectFoldersRepository } from '@/module/secondary/RestProjectFoldersRepository';
+
 import { stubAxiosHttp } from '../../shared/http/infrastructure/secondary/AxiosHttpStub';
 
 describe('Rest project folders repository', () => {

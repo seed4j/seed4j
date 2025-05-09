@@ -1,5 +1,6 @@
-import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
 import sinon, { SinonStub } from 'sinon';
+
+import { ModuleParametersRepository } from '@/module/domain/ModuleParametersRepository';
 
 export interface ModuleParametersRepositoryStub extends ModuleParametersRepository {
   store: SinonStub;

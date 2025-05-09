@@ -1,6 +1,8 @@
+import { describe, expect, it } from 'vitest';
+
 import { LandscapeSelectionElement } from '@/module/domain/landscape/LandscapeSelectionElement';
 import { LandscapeSelectionTree } from '@/module/domain/landscape/LandscapeSelectionTree';
-import { describe, expect, it } from 'vitest';
+
 import { moduleSlug } from '../Modules.fixture';
 
 describe('Landscape selection tree', () => {

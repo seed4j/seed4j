@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { Router, provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
+
 import { routes } from './app.route';
 
 describe('AppRoutes', () => {

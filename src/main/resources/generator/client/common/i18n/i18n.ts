@@ -1,5 +1,6 @@
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+
 import { homeTranslations } from './home/HomeTranslations';
 import { toTranslationResources } from './Translations';
 

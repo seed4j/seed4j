@@ -1,5 +1,7 @@
-import { LocalWindowThemeRepository } from '@/module/secondary/LocalWindowThemeRepository';
 import { describe, expect, it } from 'vitest';
+
+import { LocalWindowThemeRepository } from '@/module/secondary/LocalWindowThemeRepository';
+
 import { stubWindow } from '../primary/GlobalWindow.fixture';
 import { fakeStorage } from './FakeStorage.fixture';
 

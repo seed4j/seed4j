@@ -1,5 +1,6 @@
+import { defineComponent, onMounted, PropType, Ref, ref } from 'vue';
+
 import { IconVue } from '@/shared/icon/infrastructure/primary';
-import { PropType, Ref, defineComponent, onMounted, ref } from 'vue';
 
 export default defineComponent({
   name: 'LandscapeMiniMapComponentVue',

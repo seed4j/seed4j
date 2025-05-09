@@ -1,7 +1,8 @@
+import { defineComponent, onMounted, ref } from 'vue';
+
 import { inject } from '@/injections';
 import { THEMES_REPOSITORY } from '@/module/application/ModuleProvider';
 import { ThemePreference as Theme } from '@/module/secondary/GetMediaPreference';
-import { defineComponent, onMounted, ref } from 'vue';
 
 /**
  * ThemeSwitchButton

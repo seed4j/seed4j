@@ -1,5 +1,6 @@
-import { WindowAction } from '@/WindowAction';
 import sinon from 'sinon';
+
+import { WindowAction } from '@/WindowAction';
 
 export const stubWindow = (query?: string): WindowAction => ({
   URL: { createObjectURL: sinon.stub(), revokeObjectURL: sinon.stub() },

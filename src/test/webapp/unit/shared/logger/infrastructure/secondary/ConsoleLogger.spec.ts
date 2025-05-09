@@ -1,5 +1,6 @@
-import ConsoleLogger from '@/shared/logger/infrastructure/secondary/ConsoleLogger';
 import { describe, expect, it, vi } from 'vitest';
+
+import ConsoleLogger from '@/shared/logger/infrastructure/secondary/ConsoleLogger';
 
 describe('ConsoleLogger', () => {
   it('should log an error', () => {

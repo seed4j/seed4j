@@ -1,4 +1,5 @@
 import { ModuleRank } from '@/module/domain/landscape/ModuleRank';
+
 import { ModulePropertyDefinition } from '../ModulePropertyDefinition';
 import { ModuleSlug } from '../ModuleSlug';
 import { LandscapeElement } from './LandscapeElement';

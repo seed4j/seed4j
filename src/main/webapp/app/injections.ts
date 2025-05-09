@@ -1,8 +1,9 @@
+import { key, piqureWrapper } from 'piqure';
+
 import { BodyCursorUpdater } from '@/module/primary/landscape/BodyCursorUpdater';
 import { ApplicationListener } from '@/shared/alert/infrastructure/primary/ApplicationListener';
 import { WindowApplicationListener } from '@/shared/alert/infrastructure/primary/WindowApplicationListener';
 import { WindowAction } from '@/WindowAction';
-import { key, piqureWrapper } from 'piqure';
 
 const { provide, inject } = piqureWrapper(window, 'piqure');
 

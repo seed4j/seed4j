@@ -1,5 +1,6 @@
-import { Optional } from '@/shared/optional/domain/Optional';
 import { describe, expect, it } from 'vitest';
+
+import { Optional } from '@/shared/optional/domain/Optional';
 
 describe('Optional', () => {
   describe('Empty check', () => {

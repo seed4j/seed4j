@@ -1,5 +1,7 @@
-import { LandscapeConnector, LandscapeConnectorPosition } from '@/module/primary/landscape/LandscapeConnector';
 import { describe, expect, it } from 'vitest';
+
+import { LandscapeConnector, LandscapeConnectorPosition } from '@/module/primary/landscape/LandscapeConnector';
+
 import { moduleSlug } from '../../domain/Modules.fixture';
 
 describe('LandscapeConnector', () => {

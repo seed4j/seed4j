@@ -1,9 +1,11 @@
+import { describe, expect, it } from 'vitest';
+
 import { LandscapeFeature } from '@/module/domain/landscape/LandscapeFeature';
 import { LandscapeModule } from '@/module/domain/landscape/LandscapeModule';
 import { LandscapeSelectionElement } from '@/module/domain/landscape/LandscapeSelectionElement';
 import { LandscapeSelectionTree } from '@/module/domain/landscape/LandscapeSelectionTree';
 import { Optional } from '@/shared/optional/domain/Optional';
-import { describe, expect, it } from 'vitest';
+
 import { applicationBaseNamePropertyDefinition, moduleSlug, optionalBooleanPropertyDefinition } from '../Modules.fixture';
 import { defaultLandscape, featureSlug } from './Landscape.fixture';
 

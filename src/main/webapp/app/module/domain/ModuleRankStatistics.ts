@@ -1,6 +1,6 @@
-import { ModuleRankCount } from '@/module/domain/ModuleRankCount';
 import { Landscape } from '@/module/domain/landscape/Landscape';
 import { ModuleRank, RANKS } from '@/module/domain/landscape/ModuleRank';
+import { ModuleRankCount } from '@/module/domain/ModuleRankCount';
 
 export type ModuleRankStatistics = ModuleRankCount[];
 

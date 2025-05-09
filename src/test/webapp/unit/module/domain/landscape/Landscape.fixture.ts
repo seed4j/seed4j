@@ -6,6 +6,7 @@ import { LandscapeModule } from '@/module/domain/landscape/LandscapeModule';
 import { ModuleRank } from '@/module/domain/landscape/ModuleRank';
 import { ModulePropertyDefinition } from '@/module/domain/ModulePropertyDefinition';
 import { ModuleSlug } from '@/module/domain/ModuleSlug';
+
 import {
   applicationBaseNamePropertyDefinition,
   indentSizePropertyDefinition,

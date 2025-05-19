@@ -92,7 +92,7 @@
     "prettier-plugin-packagejson": "2.5.12",
     "prettier-plugin-sh": "0.17.4",
     "rimraf": "6.0.1",
-    "sass": "1.88.0",
+    "sass": "1.89.0",
     "sinon": "20.0.0",
     "start-server-and-test": "2.0.11",
     "stylelint": "16.19.1",

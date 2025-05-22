@@ -97,7 +97,7 @@
     "start-server-and-test": "2.0.12",
     "stylelint": "16.19.1",
     "stylelint-config-concentric-order": "5.2.1",
-    "stylelint-config-standard-scss": "15.0.0",
+    "stylelint-config-standard-scss": "15.0.1",
     "tikuidoc-tikui": "8.0.1",
     "typescript": "5.8.3",
     "typescript-eslint": "8.32.1",

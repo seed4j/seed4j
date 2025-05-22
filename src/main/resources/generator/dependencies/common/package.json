@@ -54,7 +54,7 @@
     "start-server-and-test": "2.0.12",
     "stylelint": "16.19.1",
     "stylelint-config-concentric-order": "5.2.1",
-    "stylelint-config-standard-scss": "15.0.0",
+    "stylelint-config-standard-scss": "15.0.1",
     "stylelint-order": "7.0.0",
     "tailwindcss": "3.4.17",
     "tikuidoc-tikui": "8.0.1",

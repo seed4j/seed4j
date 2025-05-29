@@ -37,7 +37,7 @@
     "mkdirp": "3.0.1",
     "node": "22.16.0",
     "npm": "11.4.1",
-    "npm-run-all2": "8.0.3",
+    "npm-run-all2": "8.0.4",
     "nyc": "17.1.0",
     "onchange": "7.1.0",
     "path-exists-cli": "2.0.0",

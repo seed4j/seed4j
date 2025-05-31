@@ -46,7 +46,6 @@ class SecurityConfiguration {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    // @formatter:off
     http
       .csrf(AbstractHttpConfigurer::disable)
       .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
@@ -87,7 +86,6 @@ class SecurityConfiguration {
       var jwtConfigurer = new JWTConfigurer(authenticationTokenReader());
       http.with(jwtConfigurer, Customizer.withDefaults());
       return http.build();
-    // @formatter:on
   }
 
   @Bean

@@ -43,7 +43,7 @@
     <langchain4j.version>0.36.2</langchain4j.version>
     <jooq.version>3.20.4</jooq.version>
     <!-- Test dependencies -->
-    <junit-jupiter.version>5.12.2</junit-jupiter.version>
+    <junit-jupiter.version>5.13.0</junit-jupiter.version>
     <assertj.version>3.27.3</assertj.version>
     <mockito.version>5.18.0</mockito.version>
     <cassandraunit.version>4.3.1.0</cassandraunit.version>

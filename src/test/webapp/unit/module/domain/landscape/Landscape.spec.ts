@@ -1,16 +1,23 @@
+import { Landscape } from '@/module/domain/landscape/Landscape';
 import { LandscapeFeature } from '@/module/domain/landscape/LandscapeFeature';
 import { LandscapeModule } from '@/module/domain/landscape/LandscapeModule';
 import { LandscapeSelectionElement } from '@/module/domain/landscape/LandscapeSelectionElement';
 import { LandscapeSelectionTree } from '@/module/domain/landscape/LandscapeSelectionTree';
 import { Optional } from '@/shared/optional/domain/Optional';
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { applicationBaseNamePropertyDefinition, moduleSlug, optionalBooleanPropertyDefinition } from '../Modules.fixture';
 import { defaultLandscape, featureSlug } from './Landscape.fixture';
 
 describe('Landscape', () => {
+  let initLandscape: Landscape;
+
+  beforeEach(() => {
+    initLandscape = defaultLandscape();
+  });
+
   describe('Reset applied modules', () => {
     it('should ignore unknown modules', () => {
-      const landscape = defaultLandscape().resetAppliedModules([moduleSlug('init'), moduleSlug('unknown')]);
+      const landscape = initLandscape.resetAppliedModules([moduleSlug('init'), moduleSlug('unknown')]);
 
       expect(landscape.isSelected(moduleSlug('init'))).toBe(true);
       expect(landscape.isApplied(moduleSlug('init'))).toBe(true);
@@ -19,7 +26,7 @@ describe('Landscape', () => {
     });
 
     it('should be applied for newly applied module', () => {
-      const landscape = defaultLandscape().resetAppliedModules([moduleSlug('init')]);
+      const landscape = initLandscape.resetAppliedModules([moduleSlug('init')]);
 
       expect(landscape.isApplied(moduleSlug('init'))).toBe(true);
       expect(landscape.isSelected(moduleSlug('init'))).toBe(true);
@@ -29,7 +36,8 @@ describe('Landscape', () => {
     });
 
     it('should not be applied for previously applied module', () => {
-      const landscape = defaultLandscape()
+      const landscape = initLandscape
+        .resetAppliedModules([moduleSlug('init')])
         .resetAppliedModules([moduleSlug('init')])
         .resetAppliedModules([moduleSlug('vue')]);
 
@@ -43,15 +51,13 @@ describe('Landscape', () => {
 
   describe('Apply modules', () => {
     it('should ignore unknown modules', () => {
-      const landscape = defaultLandscape().appliedModules([moduleSlug('unknown')]);
+      const landscape = initLandscape.appliedModules([moduleSlug('unknown')]);
 
       expect(landscape.isApplied(moduleSlug('unknown'))).toBe(false);
     });
 
     it('should mark applied modules as applied', () => {
-      const landscape = defaultLandscape()
-        .resetAppliedModules([moduleSlug('init')])
-        .appliedModules([moduleSlug('vue')]);
+      const landscape = initLandscape.resetAppliedModules([moduleSlug('init')]).appliedModules([moduleSlug('vue')]);
 
       expect(landscape.isApplied(moduleSlug('init'))).toBe(true);
       expect(landscape.isSelected(moduleSlug('init'))).toBe(true);
@@ -63,19 +69,19 @@ describe('Landscape', () => {
 
   describe('Selection', () => {
     it('should not select unknown module', () => {
-      const landscape = defaultLandscape().toggle(moduleSlug('unknown'));
+      const landscape = initLandscape.toggle(moduleSlug('unknown'));
 
       expect(landscape.isSelected(moduleSlug('unknown'))).toBe(false);
     });
 
     it('should not select not selectable module', () => {
-      const landscape = defaultLandscape().toggle(moduleSlug('java-base'));
+      const landscape = initLandscape.toggle(moduleSlug('java-base'));
 
       expect(landscape.isSelected(moduleSlug('java-base'))).toBe(false);
     });
 
     it('should select modules', () => {
-      const landscape = defaultLandscape().toggle(moduleSlug('vue'));
+      const landscape = initLandscape.toggle(moduleSlug('vue'));
 
       expect(landscape.isSelected(moduleSlug('init'))).toBe(true);
       expect(landscape.isSelected(moduleSlug('vue'))).toBe(true);
@@ -87,13 +93,13 @@ describe('Landscape', () => {
     });
 
     it('should not select features', () => {
-      const landscape = defaultLandscape().toggle(moduleSlug('maven')).toggle(moduleSlug('java-base'));
+      const landscape = initLandscape.toggle(moduleSlug('maven')).toggle(moduleSlug('java-base'));
 
       expect(landscape.selectedModules()).not.toContainEqual(moduleSlug('java-build-tools'));
     });
 
     it('should switch selected module in feature', () => {
-      const landscape = defaultLandscape().toggle(moduleSlug('maven')).toggle(moduleSlug('gradle'));
+      const landscape = initLandscape.toggle(moduleSlug('maven')).toggle(moduleSlug('gradle'));
 
       expect(landscape.isSelected(moduleSlug('gradle'))).toBe(true);
       expect(landscape.isSelected(moduleSlug('maven'))).toBe(false);
@@ -102,13 +108,13 @@ describe('Landscape', () => {
 
   describe('Unselection', () => {
     it('should not unselect unknown module', () => {
-      const landscape = defaultLandscape().toggle(moduleSlug('unknown'));
+      const landscape = initLandscape.toggle(moduleSlug('unknown'));
 
       expect(landscape.isSelected(moduleSlug('unknown'))).toBe(false);
     });
 
     it('should unselect selected module', () => {
-      const landscape = defaultLandscape().toggle(moduleSlug('maven')).toggle(moduleSlug('java-base')).toggle(moduleSlug('maven'));
+      const landscape = initLandscape.toggle(moduleSlug('maven')).toggle(moduleSlug('java-base')).toggle(moduleSlug('maven'));
 
       expect(landscape.isSelected(moduleSlug('maven'))).toBe(false);
       expect(landscape.isSelected(moduleSlug('java-base'))).toBe(false);
@@ -118,33 +124,33 @@ describe('Landscape', () => {
 
   describe('Selection tree', () => {
     it('should get empty selection tree for unknown module', () => {
-      const selectionTree = defaultLandscape().selectionTreeFor(moduleSlug('unknown'));
+      const selectionTree = initLandscape.selectionTreeFor(moduleSlug('unknown'));
 
       expect(selectionTree).toEqual(LandscapeSelectionTree.EMPTY);
     });
 
     it('should get empty selection tree for root module', () => {
-      const selectionTree = defaultLandscape().selectionTreeFor(moduleSlug('init'));
+      const selectionTree = initLandscape.selectionTreeFor(moduleSlug('init'));
 
       expect(selectionTree.elements).toEqual([selectableModule('init')]);
     });
 
     it('should get selection tree with one selectable module', () => {
-      const selectionTree = defaultLandscape().selectionTreeFor(moduleSlug('vue'));
+      const selectionTree = initLandscape.selectionTreeFor(moduleSlug('vue'));
 
       expect(selectionTree.elements).toEqual([selectableModule('vue'), selectableModule('init')]);
       expect(selectionTree.isSelectable()).toBe(true);
     });
 
     it('should get selection tree with one not selectable feature', () => {
-      const selectionTree = defaultLandscape().selectionTreeFor(moduleSlug('java-base'));
+      const selectionTree = initLandscape.selectionTreeFor(moduleSlug('java-base'));
 
       expect(selectionTree.elements).toEqual([notSelectableModule('java-base'), notSelectableFeature('java-build-tools')]);
       expect(selectionTree.isSelectable()).toBe(false);
     });
 
     it('should get selection tree with selected module', () => {
-      const selectionTree = defaultLandscape().toggle(moduleSlug('maven')).selectionTreeFor(moduleSlug('java-base'));
+      const selectionTree = initLandscape.toggle(moduleSlug('maven')).selectionTreeFor(moduleSlug('java-base'));
 
       expect(selectionTree.elements).toEqual([
         selectableModule('java-base'),
@@ -156,7 +162,7 @@ describe('Landscape', () => {
     });
 
     it('should get selection tree with dependency to feature with one module', () => {
-      const selectionTree = defaultLandscape().toggle(moduleSlug('maven')).selectionTreeFor(moduleSlug('liquibase'));
+      const selectionTree = initLandscape.toggle(moduleSlug('maven')).selectionTreeFor(moduleSlug('liquibase'));
 
       expect(selectionTree.elements).toContainEqual(selectableFeature('jpa'));
       expect(selectionTree.elements).toContainEqual(selectableModule('postgresql'));
@@ -165,7 +171,7 @@ describe('Landscape', () => {
     });
 
     it('should get selection tree with dependency to feature with incompatible selected module', () => {
-      const landscape = defaultLandscape().toggle(moduleSlug('maven')).toggle(moduleSlug('gitlab-maven'));
+      const landscape = initLandscape.toggle(moduleSlug('maven')).toggle(moduleSlug('gitlab-maven'));
 
       expect(landscape.isSelectable(moduleSlug('maven'))).toBe(true);
       expect(landscape.isSelectable(moduleSlug('gradle'))).toBe(false);
@@ -182,7 +188,7 @@ describe('Landscape', () => {
     });
 
     it('should get selection tree with disabled incompatible module dependencies', () => {
-      const landscape = defaultLandscape().toggle(moduleSlug('maven'));
+      const landscape = initLandscape.toggle(moduleSlug('maven'));
       const selectionTree = landscape.selectionTreeFor(moduleSlug('gradle'));
 
       expect(landscape.isSelectable(moduleSlug('gitlab-gradle'))).toBe(false);
@@ -192,7 +198,7 @@ describe('Landscape', () => {
     });
 
     it('should get not selectable feature for applied module in feature', () => {
-      const landscape = defaultLandscape().appliedModules([moduleSlug('maven')]);
+      const landscape = initLandscape.appliedModules([moduleSlug('maven')]);
       const selectionTree = landscape.selectionTreeFor(moduleSlug('gradle'));
 
       expect(landscape.isSelectable(moduleSlug('gradle'))).toBe(false);
@@ -204,34 +210,31 @@ describe('Landscape', () => {
 
   describe('Unselection tree', () => {
     it('should get empty unselection tree for unknown module', () => {
-      const unselectionTree = defaultLandscape().unselectionTreeFor(moduleSlug('unknown'));
+      const unselectionTree = initLandscape.unselectionTreeFor(moduleSlug('unknown'));
 
       expect(unselectionTree.elements).toEqual([]);
     });
 
     it('should get empty unselection tree for not selected module', () => {
-      const unselectionTree = defaultLandscape().unselectionTreeFor(moduleSlug('init'));
+      const unselectionTree = initLandscape.unselectionTreeFor(moduleSlug('init'));
 
       expect(unselectionTree.elements).toEqual([]);
     });
 
     it('should get unselection tree for single selected module', () => {
-      const unselectionTree = defaultLandscape().toggle(moduleSlug('init')).unselectionTreeFor(moduleSlug('init'));
+      const unselectionTree = initLandscape.toggle(moduleSlug('init')).unselectionTreeFor(moduleSlug('init'));
 
       expect(unselectionTree.elements).toEqual([moduleSlug('init')]);
     });
 
     it('should get unselection of other selected module in feature', () => {
-      const unselectionTree = defaultLandscape()
-        .toggle(moduleSlug('maven'))
-        .toggle(moduleSlug('jpa'))
-        .unselectionTreeFor(moduleSlug('gradle'));
+      const unselectionTree = initLandscape.toggle(moduleSlug('maven')).toggle(moduleSlug('jpa')).unselectionTreeFor(moduleSlug('gradle'));
 
       expect(unselectionTree.elements).toEqual([moduleSlug('maven')]);
     });
 
     it('should get unselection tree of module not in a feature', () => {
-      const unselectionTree = defaultLandscape()
+      const unselectionTree = initLandscape
         .toggle(moduleSlug('maven'))
         .toggle(moduleSlug('spring-boot'))
         .unselectionTreeFor(moduleSlug('init'));
@@ -245,7 +248,7 @@ describe('Landscape', () => {
     });
 
     it('should get unselection tree of selected module in feature', () => {
-      const unselectionTree = defaultLandscape()
+      const unselectionTree = initLandscape
         .toggle(moduleSlug('maven'))
         .toggle(moduleSlug('postgresql'))
         .unselectionTreeFor(moduleSlug('maven'));
@@ -262,25 +265,25 @@ describe('Landscape', () => {
 
   describe('Selectable', () => {
     it('should not be selectable for unknown module', () => {
-      expect(defaultLandscape().isSelectable(moduleSlug('unknown'))).toBe(false);
+      expect(initLandscape.isSelectable(moduleSlug('unknown'))).toBe(false);
     });
 
     it('should be selectable for selectable module', () => {
-      expect(defaultLandscape().isSelectable(moduleSlug('init'))).toBe(true);
+      expect(initLandscape.isSelectable(moduleSlug('init'))).toBe(true);
     });
 
     it('should not be selectable for not selectable module', () => {
-      expect(defaultLandscape().isSelectable(moduleSlug('java-base'))).toBe(false);
+      expect(initLandscape.isSelectable(moduleSlug('java-base'))).toBe(false);
     });
   });
 
   describe('Selected module properties', () => {
     it('should not have any selected properties without selected module', () => {
-      expect(defaultLandscape().selectedModulesProperties()).toEqual([]);
+      expect(initLandscape.selectedModulesProperties()).toEqual([]);
     });
 
     it('should get selected module properties', () => {
-      const properties = defaultLandscape()
+      const properties = initLandscape
         .toggle(moduleSlug('init'))
         .toggle(moduleSlug('infinitest'))
         .toggle(moduleSlug('maven'))
@@ -292,37 +295,27 @@ describe('Landscape', () => {
 
   describe('Has module different rank', () => {
     it('should not detect different ranks when checking an unknown module', () => {
-      const landscape = defaultLandscape();
-
-      expect(landscape.hasModuleDifferentRank(moduleSlug('unknown'), 'RANK_S')).toBe(false);
+      expect(initLandscape.hasModuleDifferentRank(moduleSlug('unknown'), 'RANK_S')).toBe(false);
     });
 
     it('should not detect different ranks when module has same rank as checked', () => {
-      const landscape = defaultLandscape();
-
-      expect(landscape.hasModuleDifferentRank(moduleSlug('init'), 'RANK_S')).toBe(false);
+      expect(initLandscape.hasModuleDifferentRank(moduleSlug('init'), 'RANK_S')).toBe(false);
     });
 
     it('should detect different ranks when module has different rank from checked', () => {
-      const landscape = defaultLandscape();
-
-      expect(landscape.hasModuleDifferentRank(moduleSlug('react'), 'RANK_S')).toBe(true);
+      expect(initLandscape.hasModuleDifferentRank(moduleSlug('react'), 'RANK_S')).toBe(true);
     });
   });
 
   describe('Filter by rank', () => {
     it('should return same landscape when no rank filter is applied', () => {
-      const landscape = defaultLandscape();
+      const filteredLandscape = initLandscape.filterByRank(Optional.empty());
 
-      const filteredLandscape = landscape.filterByRank(Optional.empty());
-
-      expect(filteredLandscape).toEqual(landscape);
+      expect(filteredLandscape).toEqual(initLandscape);
     });
 
     it('should filter modules by rank', () => {
-      const landscape = defaultLandscape();
-
-      const filteredLandscape = landscape.filterByRank(Optional.of('RANK_S'));
+      const filteredLandscape = initLandscape.filterByRank(Optional.of('RANK_S'));
 
       const levels = filteredLandscape.standaloneLevels();
       expect(levels).toHaveLength(3);
@@ -357,9 +350,7 @@ describe('Landscape', () => {
     });
 
     it('should filter modules in feature keeping only modules with specified rank', () => {
-      const landscape = defaultLandscape();
-
-      const filteredLandscape = landscape.filterByRank(Optional.of('RANK_S'));
+      const filteredLandscape = initLandscape.filterByRank(Optional.of('RANK_S'));
 
       const clientFeature = filteredLandscape
         .standaloneLevels()[1]
@@ -376,9 +367,7 @@ describe('Landscape', () => {
     });
 
     it('should keep dependency modules with different ranks than the rank filter applied', () => {
-      const landscape = defaultLandscape();
-
-      const filteredLandscape = landscape.filterByRank(Optional.of('RANK_D'));
+      const filteredLandscape = initLandscape.filterByRank(Optional.of('RANK_D'));
 
       const levels = filteredLandscape.standaloneLevels();
       const initModule = levels[0].elements[0].allModules()[0];
@@ -402,9 +391,7 @@ describe('Landscape', () => {
     });
 
     it('should keep features with different ranks modules than the rank filter applied', () => {
-      const landscape = defaultLandscape();
-
-      const filteredLandscape = landscape.filterByRank(Optional.of('RANK_D'));
+      const filteredLandscape = initLandscape.filterByRank(Optional.of('RANK_D'));
 
       const ciFeature = filteredLandscape
         .standaloneLevels()[2]
@@ -417,9 +404,7 @@ describe('Landscape', () => {
     });
 
     it('should keep nested feature and modules dependencies with different ranks than the rank filter applied', () => {
-      const landscape = defaultLandscape();
-
-      const filteredLandscape = landscape.filterByRank(Optional.of('RANK_C'));
+      const filteredLandscape = initLandscape.filterByRank(Optional.of('RANK_C'));
 
       const levels = filteredLandscape.standaloneLevels();
       const initModule = levels[0].elements.find(element => element instanceof LandscapeModule && element.slugString() === 'init');
@@ -465,8 +450,7 @@ describe('Landscape', () => {
     });
 
     it('should restore all module visibilities when removing rank filter', () => {
-      const landscape = defaultLandscape();
-      const filteredLandscape = landscape.filterByRank(Optional.of('RANK_C'));
+      const filteredLandscape = initLandscape.filterByRank(Optional.of('RANK_C'));
 
       const unfilterLandscape = filteredLandscape.filterByRank(Optional.empty());
 

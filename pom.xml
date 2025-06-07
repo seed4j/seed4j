@@ -64,7 +64,7 @@
     <compiler-plugin.version>3.14.0</compiler-plugin.version>
     <surefire-plugin.version>3.5.3</surefire-plugin.version>
     <jacoco.version>0.8.13</jacoco.version>
-    <jgit.version>7.2.1.202505142326-r</jgit.version>
+    <jgit.version>7.3.0.202506031305-r</jgit.version>
     <archunit-junit5.version>1.4.1</archunit-junit5.version>
     <springdoc-openapi.version>2.8.8</springdoc-openapi.version>
     <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>

@@ -11,7 +11,7 @@
     "@angular/compiler-cli": "19.2.14",
     "@angular/core": "19.2.14",
     "@angular/material": "19.2.18",
-    "angular-eslint": "19.6.0",
+    "angular-eslint": "19.7.1",
     "jest-environment-jsdom": "29.7.0",
     "jest-preset-angular": "14.5.5",
     "jest-sonar-reporter": "2.0.0",

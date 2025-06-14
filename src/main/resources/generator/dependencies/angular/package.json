@@ -12,7 +12,7 @@
     "@angular/core": "19.2.14",
     "@angular/material": "19.2.18",
     "angular-eslint": "19.8.0",
-    "jest-environment-jsdom": "29.7.0",
+    "jest-environment-jsdom": "30.0.0",
     "jest-preset-angular": "14.6.0",
     "jest-sonar-reporter": "2.0.0",
     "rxjs": "7.8.2",

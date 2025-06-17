@@ -60,7 +60,7 @@
     <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
     <start-class>tech.jhipster.lite.JHLiteApp</start-class>
 
-    <byte-buddy.version>1.17.5</byte-buddy.version>
+    <byte-buddy.version>1.17.6</byte-buddy.version>
     <compiler-plugin.version>3.14.0</compiler-plugin.version>
     <surefire-plugin.version>3.5.3</surefire-plugin.version>
     <jacoco.version>0.8.13</jacoco.version>

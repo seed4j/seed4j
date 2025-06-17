@@ -30,7 +30,7 @@ applyModules() {
       -H "accept: */*" \
       -H "Content-Type: application/json" \
       -d "$payload" \
-      "http://localhost:{{serverPort}}""$api""
+      "http://localhost:{{serverPort}}"$api"
 
     local status_code=$(curl -o /dev/null -s -w "%{http_code}\n" \
       -X POST \

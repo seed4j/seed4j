@@ -47,7 +47,7 @@
     <assertj.version>3.27.3</assertj.version>
     <mockito.version>5.18.0</mockito.version>
     <cassandraunit.version>4.3.1.0</cassandraunit.version>
-    <testcontainers.version>1.21.1</testcontainers.version>
+    <testcontainers.version>1.21.2</testcontainers.version>
     <archunit-junit5.version>1.4.1</archunit-junit5.version>
     <cucumber.version>7.23.0</cucumber.version>
     <approvaltests.version>24.22.0</approvaltests.version>

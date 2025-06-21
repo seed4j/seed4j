@@ -1,4 +1,4 @@
-FROM sonarqube:25.4.0.105899-community
+FROM sonarqube:25.6.0.109173-community
 FROM consul:1.15.4
 FROM jhipster/consul-config-loader:v0.4.1
 FROM jhipster/jhipster-registry:v7.4.0

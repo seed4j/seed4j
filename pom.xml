@@ -77,7 +77,7 @@
     <testcontainers.version>1.21.2</testcontainers.version>
     <mongock.version>5.5.1</mongock.version>
     <git-commit-id-plugin.version>9.0.2</git-commit-id-plugin.version>
-    <checkstyle.version>10.25.1</checkstyle.version>
+    <checkstyle.version>10.26.0</checkstyle.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
 
     <frontend-maven-plugin.version>1.15.1</frontend-maven-plugin.version>

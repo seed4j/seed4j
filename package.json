@@ -89,7 +89,7 @@
     "prettier-plugin-java": "2.6.8",
     "prettier-plugin-organize-imports": "4.1.0",
     "prettier-plugin-packagejson": "2.5.15",
-    "prettier-plugin-sh": "0.17.4",
+    "prettier-plugin-sh": "0.18.0",
     "rimraf": "6.0.1",
     "sass": "1.89.2",
     "start-server-and-test": "2.0.12",

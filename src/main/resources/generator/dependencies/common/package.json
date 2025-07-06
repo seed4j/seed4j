@@ -4,7 +4,7 @@
   "description": "JHipster Lite : used for Dependencies",
   "license": "Apache-2.0",
   "dependencies": {
-    "@babel/cli": "7.27.2",
+    "@babel/cli": "7.28.0",
     "@cypress/code-coverage": "3.14.5",
     "@eslint/js": "9.30.1",
     "@playwright/test": "1.53.2",

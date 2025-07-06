@@ -6,11 +6,11 @@
   "dependencies": {
     "@angular-builders/jest": "20.0.0",
     "@angular/build": "20.0.5",
-    "@angular/cdk": "20.0.4",
+    "@angular/cdk": "20.0.5",
     "@angular/cli": "20.0.5",
     "@angular/compiler-cli": "20.0.6",
     "@angular/core": "20.0.6",
-    "@angular/material": "20.0.4",
+    "@angular/material": "20.0.5",
     "angular-eslint": "20.1.1",
     "jest-environment-jsdom": "29.7.0",
     "jest-preset-angular": "14.6.0",

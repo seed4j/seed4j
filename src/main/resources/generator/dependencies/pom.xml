@@ -23,7 +23,7 @@
     <kafka-clients.version>4.0.0</kafka-clients.version>
     <mongock.version>5.5.1</mongock.version>
     <neo4j-migrations.version>2.18.0</neo4j-migrations.version>
-    <liquibase.version>4.32.0</liquibase.version>
+    <liquibase.version>4.33.0</liquibase.version>
     <reflections.version>0.10.2</reflections.version>
     <json-web-token.version>0.12.6</json-web-token.version>
     <commons-lang3.version>3.17.0</commons-lang3.version>

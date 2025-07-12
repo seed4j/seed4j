@@ -1,7 +1,7 @@
 [versions]
 checkstyle = "10.21.0"
 jib = "3.4.5"
-git-properties = "2.5.0"
+git-properties = "2.5.2"
 protobuf-plugin = "0.9.5"
 jacoco = "0.8.11"
 sonarqube = "4.4.1.3373"

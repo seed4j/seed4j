@@ -12,5 +12,5 @@ FROM postgres:17.5
 FROM apache/kafka-native:4.0.0
 FROM tchiotludo/akhq:0.26.0
 FROM apachepulsar/pulsar:4.0.5
-FROM neo4j:2025.06.0-community
+FROM neo4j:2025.06.2-community
 FROM redis:8.0.3

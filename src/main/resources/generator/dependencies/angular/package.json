@@ -5,9 +5,9 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@angular-builders/jest": "20.0.0",
-    "@angular/build": "20.0.5",
+    "@angular/build": "20.1.0",
     "@angular/cdk": "20.0.5",
-    "@angular/cli": "20.0.5",
+    "@angular/cli": "20.1.0",
     "@angular/compiler-cli": "20.1.0",
     "@angular/core": "20.1.0",
     "@angular/material": "20.0.5",

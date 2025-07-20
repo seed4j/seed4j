@@ -11,7 +11,7 @@ max_retries=30
 success=false
 
 while [[ $retry_count -lt $max_retries ]]; do
-  sonar=$(curl -s 'http://localhost:9001/api/measures/component?component='"$application"'&metricKeys=bugs%2Ccoverage%2Cvulnerabilities%2Cduplicated_lines_density%2Ccode_smells%2Csecurity_hotspots')
+  sonar=$(curl -u "$SONAR_TOKEN:" -s 'http://localhost:9001/api/measures/component?component='"$application"'&metricKeys=bugs%2Ccoverage%2Cvulnerabilities%2Cduplicated_lines_density%2Ccode_smells%2Csecurity_hotspots')
 
   echo "sonar analysis response: $sonar"
 
@@ -56,7 +56,7 @@ echo "--------------------------------"
 fail() {
   echo
   echo 'List of all errors:'
-  curl -s 'http://localhost:9001/api/issues/search?componentKeys='"$application"'&resolved=false' | jq '.issues[] | {file: "\(.component)#\(.line)", error: "[\(.rule)] \(.message)"}'
+  curl -u "$SONAR_TOKEN:" -s 'http://localhost:9001/api/issues/search?componentKeys='"$application"'&resolved=false' | jq '.issues[] | {file: "\(.component)#\(.line)", error: "[\(.rule)] \(.message)"}'
   exit 1
 }
 

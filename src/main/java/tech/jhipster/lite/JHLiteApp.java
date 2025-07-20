@@ -19,6 +19,7 @@ public class JHLiteApp {
     Environment env = SpringApplication.run(JHLiteApp.class, args).getEnvironment();
 
     if (log.isInfoEnabled()) {
+      // log.info(ApplicationStartupTraces.of(env)); -> TODO: remove me, just for testing in CI
       log.info(ApplicationStartupTraces.of(env));
     }
   }

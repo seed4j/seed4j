@@ -37,7 +37,8 @@ class KipeExpressionModuleFactoryTest {
         "KipeMethodSecurityExpressionHandler.java",
         "KipeMethodSecurityExpressionRoot.java",
         "NullElementAccessContext.java",
-        "ObjectAccessChecker.java"
+        "ObjectAccessChecker.java",
+        "RolesAccessesMerger.java"
       )
       .hasPrefixedFiles(
         "src/test/java/tech/jhipster/jhlitest/shared/kipe/application",

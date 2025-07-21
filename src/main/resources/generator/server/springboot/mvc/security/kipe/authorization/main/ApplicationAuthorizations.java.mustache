@@ -20,8 +20,8 @@ public class {{ baseName }}Authorizations {
 
   private final RolesAccesses accesses;
 
-  public {{ baseName }}Authorizations(Collection<RolesAccesses> accesses) {
-    this.accesses = accesses.stream().reduce(RolesAccesses.EMPTY, RolesAccesses::merge);
+  public {{ baseName }}Authorizations(Collection<RolesAccesses> accesses, RolesAccessesMerger merger) {
+    this.accesses = merger.mergeAll(accesses);
   }
 
   public boolean allAuthorized(Authentication authentication, String action, Resource resource) {

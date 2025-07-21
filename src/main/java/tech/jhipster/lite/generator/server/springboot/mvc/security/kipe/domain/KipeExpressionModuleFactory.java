@@ -42,6 +42,7 @@ public class KipeExpressionModuleFactory {
           .addTemplate("KipeMethodSecurityExpressionRoot.java")
           .addTemplate("NullElementAccessContext.java")
           .addTemplate("ObjectAccessChecker.java")
+          .addTemplate("RolesAccessesMerger.java")
           .and()
         .batch(TEST_SOURCE, testDestination.append("application"))
           .addTemplate("AccessCheckerIT.java")

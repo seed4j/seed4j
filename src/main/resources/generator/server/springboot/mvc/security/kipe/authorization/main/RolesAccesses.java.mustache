@@ -12,8 +12,6 @@ import {{packageName}}.shared.kipe.domain.Accesses.RoleAccessesBuilder;
 
 public final class RolesAccesses {
 
-  public static final RolesAccesses EMPTY = builder().build();
-
   private final Map<Role, Accesses> roles;
 
   private RolesAccesses(RolesAccessesBuilder builder) {
@@ -26,6 +24,10 @@ public final class RolesAccesses {
 
   public static RolesAccessesBuilder builder() {
     return new RolesAccessesBuilder();
+  }
+
+  public static RolesAccesses empty() {
+    return builder().build();
   }
 
   public boolean allAuthorized(Roles userRoles, Action action, Resource resource) {
@@ -56,6 +58,10 @@ public final class RolesAccesses {
     return userRoles.stream().anyMatch(specificAuthorized(action, resource));
   }
 
+  public Map<Role, Accesses> getRoles() {
+    return roles;
+  }
+
   private Predicate<Role> specificAuthorized(Action action, Resource resource) {
     return role -> {
       var accesses = roles.get(role);
@@ -75,7 +81,11 @@ public final class RolesAccesses {
       Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue, Accesses::merge)
     );
 
-    return new RolesAccesses(mergedRoles);
+    return createFromMap(mergedRoles);
+  }
+
+  private static RolesAccesses createFromMap(Map<Role, Accesses> roles) {
+    return new RolesAccesses(roles);
   }
 
   public static final class RolesAccessesBuilder {

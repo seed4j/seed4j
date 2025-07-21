@@ -18,12 +18,14 @@ import {{packageName}}.UnitTest;
 import {{packageName}}.shared.authentication.application.UnknownAuthenticationException;
 import {{packageName}}.shared.authentication.domain.Username;
 import {{packageName}}.shared.error.domain.MissingMandatoryValueException;
+import {{packageName}}.shared.kipe.domain.RolesAccesses;
 
 @UnitTest
 class {{ baseName }}AuthorizationsTest {
 
   private static final {{ baseName }}Authorizations authorizations = new {{ baseName }}Authorizations(
-    List.of(rolesAccesses())
+    List.of(rolesAccesses()),
+    new RolesAccessesMerger(RolesAccesses.empty())
   );
 
   @Nested

@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -33,10 +34,12 @@ class SecurityConfiguration {
 
   private final JwtAuthenticationProperties properties;
   private final CorsFilter corsFilter;
+  private final AuthenticationTokenReader authenticationTokenReader;
 
-  public SecurityConfiguration(JwtAuthenticationProperties properties, CorsFilter corsFilter) {
+  public SecurityConfiguration(JwtAuthenticationProperties properties, CorsFilter corsFilter, @Lazy AuthenticationTokenReader authenticationTokenReader) {
     this.properties = properties;
     this.corsFilter = corsFilter;
+    this.authenticationTokenReader = authenticationTokenReader;
   }
 
   @Bean
@@ -84,7 +87,7 @@ class SecurityConfiguration {
         .anyRequest().authenticated()
       );
 
-      var jwtConfigurer = new JWTConfigurer(authenticationTokenReader());
+      var jwtConfigurer = new JWTConfigurer(authenticationTokenReader);
       http.with(jwtConfigurer, Customizer.withDefaults());
       return http.build();
     // @formatter:on

@@ -1,0 +1,243 @@
+package {{packageName}}.shared.kipe.application;
+
+import static org.assertj.core.api.Assertions.*;
+import static {{packageName}}.shared.kipe.domain.RolesAccessesFixture.*;
+
+import java.lang.reflect.Method;
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import {{packageName}}.UnitTest;
+import {{packageName}}.shared.authentication.domain.Role;
+import {{packageName}}.shared.kipe.domain.RolesAccesses;
+import {{packageName}}.shared.kipe.domain.RolesAccessesFixture.TestResource;
+
+@UnitTest
+class RolesAccessesMergerTest {
+
+  private RolesAccessesMerger rolesAccessesMerger;
+  private RolesAccesses emptyAccesses;
+
+  @BeforeEach
+  void setUp() {
+    emptyAccesses = RolesAccesses.empty();
+    rolesAccessesMerger = new RolesAccessesMerger(emptyAccesses);
+  }
+
+  @Test
+  void shouldReturnEmptyAccessesWhenMergingEmptyCollection() {
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of());
+
+    assertThat(result).isSameAs(emptyAccesses);
+  }
+
+  @Test
+  void shouldReturnEmptyAccessesWhenMergingCollectionWithOnlyEmptyAccesses() {
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of(emptyAccesses, emptyAccesses));
+
+    assertThat(result).isSameAs(emptyAccesses);
+  }
+
+  @Test
+  void shouldReturnSingleAccessWhenMergingCollectionWithOneNonEmptyAccess() {
+    RolesAccesses accesses = rolesAccesses();
+
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of(accesses));
+
+    assertThat(result).isSameAs(accesses);
+  }
+
+  @Test
+  void shouldReturnSingleAccessWhenMergingCollectionWithOneNonEmptyAccessAndEmptyOnes() {
+    RolesAccesses accesses = rolesAccesses();
+
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of(emptyAccesses, accesses, emptyAccesses));
+
+    assertThat(result).isSameAs(accesses);
+  }
+
+  @Test
+  void shouldMergeTwoNonEmptyAccesses() {
+    RolesAccesses firstAccesses = RolesAccesses.builder()
+        .role(Role.ADMIN)
+          .allAuthorized("read", TestResource.USERS)
+          .and()
+        .build();
+
+    RolesAccesses secondAccesses = RolesAccesses.builder()
+        .role(Role.USER)
+          .allAuthorized("write", TestResource.DATA)
+          .and()
+        .build();
+
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of(firstAccesses, secondAccesses));
+
+    assertThat(result).isSameAs(secondAccesses);
+  }
+
+  @Test
+  void shouldHandleAccessesWithEmptyRoles() {
+    RolesAccesses accessesWithEmptyRoles = RolesAccesses.builder().build();
+    RolesAccesses nonEmptyAccesses = rolesAccesses();
+
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of(accessesWithEmptyRoles, nonEmptyAccesses));
+
+    assertThat(result).isSameAs(nonEmptyAccesses);
+  }
+
+  @Test
+  void shouldReturnEmptyAccessesWhenAllAccessesHaveEmptyRoles() {
+    RolesAccesses accessesWithEmptyRoles1 = RolesAccesses.builder().build();
+    RolesAccesses accessesWithEmptyRoles2 = RolesAccesses.builder().build();
+
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of(accessesWithEmptyRoles1, accessesWithEmptyRoles2));
+
+    assertThat(result).isSameAs(emptyAccesses);
+  }
+
+  @Test
+  void shouldMergeMultipleNonEmptyAccesses() {
+    RolesAccesses firstAccesses = RolesAccesses.builder()
+        .role(Role.ADMIN)
+          .allAuthorized("read", TestResource.USERS)
+          .and()
+        .build();
+
+    RolesAccesses secondAccesses = RolesAccesses.builder()
+        .role(Role.USER)
+          .allAuthorized("write", TestResource.DATA)
+          .and()
+        .build();
+
+    RolesAccesses thirdAccesses = RolesAccesses.builder()
+        .role(Role.ADMIN)
+          .allAuthorized("delete", TestResource.DATA)
+          .and()
+        .build();
+
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of(firstAccesses, secondAccesses, thirdAccesses));
+
+    assertThat(result).isSameAs(thirdAccesses);
+  }
+
+  @Test
+  void shouldHandleMixedCollectionWithEmptyAndNonEmptyAccesses() {
+    RolesAccesses accessesWithEmptyRoles = RolesAccesses.builder().build();
+    RolesAccesses nonEmptyAccesses1 = RolesAccesses.builder()
+        .role(Role.ADMIN)
+          .allAuthorized("read", TestResource.USERS)
+          .and()
+        .build();
+    RolesAccesses nonEmptyAccesses2 = RolesAccesses.builder()
+        .role(Role.USER)
+          .allAuthorized("write", TestResource.DATA)
+          .and()
+        .build();
+
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of(
+        emptyAccesses,
+        accessesWithEmptyRoles,
+        nonEmptyAccesses1,
+        emptyAccesses,
+        nonEmptyAccesses2,
+        accessesWithEmptyRoles
+    ));
+
+    assertThat(result).isSameAs(nonEmptyAccesses2);
+  }
+
+  @Test
+  void shouldReturnFirstWhenSecondHasEmptyRoles() {
+    RolesAccesses firstAccesses = RolesAccesses.builder()
+        .role(Role.ADMIN)
+          .allAuthorized("read", TestResource.USERS)
+          .and()
+        .build();
+
+    RolesAccesses accessesWithEmptyRoles = RolesAccesses.builder().build();
+
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of(firstAccesses, accessesWithEmptyRoles));
+
+    assertThat(result).isSameAs(firstAccesses);
+  }
+
+  @Test
+  void shouldReturnSecondWhenFirstHasEmptyRoles() {
+    RolesAccesses accessesWithEmptyRoles = RolesAccesses.builder().build();
+
+    RolesAccesses secondAccesses = RolesAccesses.builder()
+        .role(Role.USER)
+          .allAuthorized("write", TestResource.DATA)
+          .and()
+        .build();
+
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of(accessesWithEmptyRoles, secondAccesses));
+
+    assertThat(result).isSameAs(secondAccesses);
+  }
+
+  @Test
+  void shouldMergeWhenBothAccessesHaveNonEmptyRolesDifferentFromEmptyAccesses() {
+    // Create two different accesses with roles, both different from emptyAccesses
+    RolesAccesses firstAccesses = RolesAccesses.builder()
+        .role(Role.ADMIN)
+          .allAuthorized("read", TestResource.USERS)
+          .and()
+        .build();
+
+    RolesAccesses secondAccesses = RolesAccesses.builder()
+        .role(Role.USER)
+          .allAuthorized("write", TestResource.DATA)
+          .and()
+        .build();
+
+    RolesAccesses thirdAccesses = RolesAccesses.builder()
+        .role(Role.ADMIN)
+          .allAuthorized("delete", TestResource.DATA)
+          .and()
+        .build();
+
+    // This should trigger the mergeUsingBuilder method where both first and second have non-empty roles
+    RolesAccesses result = rolesAccessesMerger.mergeAll(List.of(firstAccesses, secondAccesses, thirdAccesses));
+
+    assertThat(result).isSameAs(thirdAccesses);
+  }
+
+  @Test
+  void shouldHandleMergeUsingBuilderWithEmptySecond() throws Exception {
+    // Use reflection to test the private method directly to cover the edge cases
+    Method mergeUsingBuilder = RolesAccessesMerger.class.getDeclaredMethod("mergeUsingBuilder", RolesAccesses.class, RolesAccesses.class);
+    mergeUsingBuilder.setAccessible(true);
+
+    RolesAccesses firstAccesses = RolesAccesses.builder()
+        .role(Role.ADMIN)
+          .allAuthorized("read", TestResource.USERS)
+          .and()
+        .build();
+
+    RolesAccesses secondAccessesEmpty = RolesAccesses.builder().build();
+
+    RolesAccesses result = (RolesAccesses) mergeUsingBuilder.invoke(rolesAccessesMerger, firstAccesses, secondAccessesEmpty);
+
+    assertThat(result).isSameAs(firstAccesses);
+  }
+
+  @Test
+  void shouldHandleMergeUsingBuilderWithEmptyFirst() throws Exception {
+    // Use reflection to test the private method directly to cover the edge cases
+    Method mergeUsingBuilder = RolesAccessesMerger.class.getDeclaredMethod("mergeUsingBuilder", RolesAccesses.class, RolesAccesses.class);
+    mergeUsingBuilder.setAccessible(true);
+
+    RolesAccesses firstAccessesEmpty = RolesAccesses.builder().build();
+
+    RolesAccesses secondAccesses = RolesAccesses.builder()
+        .role(Role.USER)
+          .allAuthorized("write", TestResource.DATA)
+          .and()
+        .build();
+
+    RolesAccesses result = (RolesAccesses) mergeUsingBuilder.invoke(rolesAccessesMerger, firstAccessesEmpty, secondAccesses);
+
+    assertThat(result).isSameAs(secondAccesses);
+  }
+}

@@ -4,9 +4,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
+import {{packageName}}.shared.kipe.domain.RolesAccesses;
 
 @Configuration
 class KipeConfiguration {
+
+  @Bean("emptyRolesAccesses")
+  public RolesAccesses emptyRolesAccesses() {
+    return RolesAccesses.empty();
+  }
 
   @Bean
   protected MethodSecurityExpressionHandler createExpressionHandler(@Lazy AccessEvaluator evaluator) {

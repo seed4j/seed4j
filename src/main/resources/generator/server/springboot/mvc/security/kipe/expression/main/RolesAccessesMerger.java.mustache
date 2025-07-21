@@ -1,0 +1,46 @@
+package {{packageName}}.shared.kipe.application;
+
+import java.util.Collection;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import {{packageName}}.shared.kipe.domain.RolesAccesses;
+
+@Service
+public class RolesAccessesMerger {
+
+  private final RolesAccesses emptyAccesses;
+
+  public RolesAccessesMerger(@Qualifier("emptyRolesAccesses") RolesAccesses emptyAccesses) {
+    this.emptyAccesses = emptyAccesses;
+  }
+
+  public RolesAccesses mergeAll(Collection<RolesAccesses> accesses) {
+    if (accesses.isEmpty()) {
+      return emptyAccesses;
+    }
+
+    RolesAccesses result = emptyAccesses;
+    for (RolesAccesses access : accesses) {
+      if (access != emptyAccesses && !access.getRoles().isEmpty()) {
+        if (result == emptyAccesses) {
+          result = access;
+        } else {
+          result = mergeUsingBuilder(result, access);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  private RolesAccesses mergeUsingBuilder(RolesAccesses first, RolesAccesses second) {
+    if (second.getRoles().isEmpty()) {
+      return first;
+    }
+    if (first.getRoles().isEmpty()) {
+      return second;
+    }
+
+    return second;
+  }
+}

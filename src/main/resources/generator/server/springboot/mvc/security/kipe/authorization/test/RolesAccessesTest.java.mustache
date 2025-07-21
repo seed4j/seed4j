@@ -18,7 +18,7 @@ class RolesAccessesTest {
 
     @Test
     void shouldNotBeAllAuthorizedOnEmptyRolesAccesses() {
-      assertThat(RolesAccesses.EMPTY.allAuthorized(admin(), action("read"), TestResource.USERS)).isFalse();
+      assertThat(RolesAccesses.empty().allAuthorized(admin(), action("read"), TestResource.USERS)).isFalse();
     }
 
     @Test
@@ -42,7 +42,7 @@ class RolesAccessesTest {
 
     @Test
     void shouldNotBeSpecificAuthorizedOnEmptyRolesAccesses() {
-      assertThat(RolesAccesses.EMPTY.specificAuthorized(user(), action("read"), TestResource.USERS)).isFalse();
+      assertThat(RolesAccesses.empty().specificAuthorized(user(), action("read"), TestResource.USERS)).isFalse();
     }
 
     @Test

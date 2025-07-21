@@ -9,12 +9,15 @@ import org.junit.jupiter.api.Test;
 import {{packageName}}.UnitTest;
 import {{packageName}}.shared.kipe.application.AccessContext;
 import {{packageName}}.shared.kipe.application.{{ baseName }}Authorizations;
+import {{packageName}}.shared.kipe.application.RolesAccessesMerger;
+import {{packageName}}.shared.kipe.domain.RolesAccesses;
 
 @UnitTest
 class BeerIdAccessCheckerTest {
 
   private static final BeerIdAccessChecker checker = new BeerIdAccessChecker(
-    new {{ baseName }}Authorizations(List.of(new BeersAccessesConfiguration().beersAccesses()))
+    new {{ baseName }}Authorizations(List.of(new BeersAccessesConfiguration().beersAccesses()),
+                              new RolesAccessesMerger(RolesAccesses.empty()))
   );
 
   @Test

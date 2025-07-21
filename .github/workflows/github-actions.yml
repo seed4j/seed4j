@@ -138,6 +138,7 @@ jobs:
         run: |
           export SONAR_TOKEN=$(docker logs sonar-token)
           echo "SONAR_TOKEN="$SONAR_TOKEN
+          cat ./tests-ci/sonar.sh
           ./tests-ci/sonar.sh
       - name: 'Analysis: SonarCloud'
         if: github.repository == 'jhipster/jhipster-lite' && github.ref == 'refs/heads/main'

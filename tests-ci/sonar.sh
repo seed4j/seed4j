@@ -61,7 +61,8 @@ fail() {
   local app=$1
   echo
   echo 'List of all errors:'
-  curl -u "$SONAR_TOKEN:" -s 'http://localhost:9001/api/issues/search?componentKeys='"$app"'&resolved=false' | jq '.issues[] | {file: "\(.component)#\(.line)", error: "[\(.rule)] \(.message)"}'
+  sonar=$(curl -u "$SONAR_TOKEN:" -s 'http://localhost:9001/api/issues/search?componentKeys='"$app"'&resolved=false')
+  echo $sonar | jq '.issues[] | {file: "\(.component)#\(.line)", error: "[\(.rule)] \(.message)"}'
   exit 1
 }
 

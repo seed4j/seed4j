@@ -73,6 +73,11 @@ fail() {
   echo "sonar analysis response: $sonar_fail"
   echo $sonar_fail | jq
   echo $sonar_fail | jq '.issues[] | {file: "\(.component)#\(.line)", error: "[\(.rule)] \(.message)"}'
+
+  sleep 10
+
+  docker logs sonar
+
   exit 1
 }
 

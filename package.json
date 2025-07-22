@@ -78,7 +78,7 @@
     "cpy-cli": "5.0.0",
     "cypress": "14.5.2",
     "eslint": "9.31.0",
-    "eslint-config-prettier": "10.1.5",
+    "eslint-config-prettier": "10.1.8",
     "eslint-plugin-cypress": "5.1.0",
     "eslint-plugin-pug": "1.2.5",
     "eslint-plugin-vue": "10.3.0",

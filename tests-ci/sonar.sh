@@ -68,6 +68,11 @@ fail() {
   echo "sonar analysis response: $sonar_fail"
   echo $sonar_fail | jq
   echo $sonar_fail | jq '.issues[] | {file: "\(.component)#\(.line)", error: "[\(.rule)] \(.message)"}'
+
+  sonar_fail=$(curl -u "$SONAR_TOKEN:" -s 'http://localhost:9001/api/issues/search?component='"$app"'&resolved=false')
+  echo "sonar analysis response: $sonar_fail"
+  echo $sonar_fail | jq
+  echo $sonar_fail | jq '.issues[] | {file: "\(.component)#\(.line)", error: "[\(.rule)] \(.message)"}'
   exit 1
 }
 

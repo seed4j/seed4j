@@ -39,7 +39,10 @@ public final class JHipsterModulesResourceFixture {
       defaultModuleResource(),
       defaultModuleResourceBuilder().slug("module-a").build(),
       defaultModuleResourceBuilder().slug("module-b").moduleDependency("module-a").build(),
-      defaultModuleResourceBuilder().slug("module-c").moduleDependency("module-b").build()
+      defaultModuleResourceBuilder().slug("module-c").moduleDependency("module-b").build(),
+      defaultModuleResourceBuilder().feature("client-core").slug("module-d").moduleDependency("module-b").build(),
+      defaultModuleResourceBuilder().feature("client-core").slug("module-e").moduleDependency("module-b").build(),
+      defaultModuleResourceBuilder().feature("e2e-tests").slug("module-f").featureDependency("client-core").build()
     );
   }
 

@@ -42,7 +42,7 @@ class JHipsterModulesResourcesConfigurationTest {
     JHipsterModulesResources resources = configuration.jhipsterModulesResources(hiddenResources, moduleNestedResourcesCollection());
 
     assertThat(resources.stream()).usingRecursiveFieldByFieldElementComparator().containsExactly(defaultModuleResource());
-    logs.shouldHave(Level.INFO, "The following modules are hidden: module-a, module-b, module-c.");
+    logs.shouldHave(Level.INFO, "The following modules are hidden: module-a, module-b, module-c, module-e, module-f.");
   }
 
   @Test

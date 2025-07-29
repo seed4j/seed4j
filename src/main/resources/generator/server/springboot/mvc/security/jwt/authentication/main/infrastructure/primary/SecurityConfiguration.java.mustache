@@ -20,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
@@ -50,6 +51,7 @@ class SecurityConfiguration {
     http
       .csrf(AbstractHttpConfigurer::disable)
       .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+      .addFilterAfter(new SpaWebFilter(), BasicAuthenticationFilter.class)
       .headers(headers -> headers
         .contentSecurityPolicy(csp -> csp.policyDirectives(properties.getContentSecurityPolicy()))
         .frameOptions(FrameOptionsConfig::deny)
@@ -62,9 +64,12 @@ class SecurityConfiguration {
       .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(authz -> authz
         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+        .requestMatchers("/", "/index.html", "/*.css", "/*.js").permitAll()
         .requestMatchers("/app/**").permitAll()
+        .requestMatchers("/assets/**").permitAll()
         .requestMatchers("/i18n/**").permitAll()
         .requestMatchers("/content/**").permitAll()
+        .requestMatchers("/style/**").permitAll()
         .requestMatchers("/swagger-ui/**").permitAll()
         .requestMatchers("/swagger-ui.html").permitAll()
         .requestMatchers("/v3/api-docs/**").permitAll()

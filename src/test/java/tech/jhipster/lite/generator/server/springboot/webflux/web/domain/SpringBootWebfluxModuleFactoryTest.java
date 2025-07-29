@@ -55,6 +55,7 @@ class SpringBootWebfluxModuleFactoryTest {
       .containing(
         """
         server:
+          forward-headers-strategy: FRAMEWORK
           port: 9000
         spring:
           jackson:

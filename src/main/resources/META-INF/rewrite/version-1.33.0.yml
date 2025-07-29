@@ -12,32 +12,32 @@ preconditions:
       version: '[,1.33.0)'
 recipeList:
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.npm.NpmVersionSource
-      newFullyQualifiedTypeName: tech.jhipster.lite.module.domain.nodejs.NodePackagesVersionSource
+      oldFullyQualifiedTypeName: com.seed4j.module.domain.npm.NpmVersionSource
+      newFullyQualifiedTypeName: com.seed4j.module.domain.nodejs.NodePackagesVersionSource
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.npm.NpmVersionSourceFactory
-      newFullyQualifiedTypeName: tech.jhipster.lite.module.domain.nodejs.NodePackagesVersionSourceFactory
+      oldFullyQualifiedTypeName: com.seed4j.module.domain.npm.NpmVersionSourceFactory
+      newFullyQualifiedTypeName: com.seed4j.module.domain.nodejs.NodePackagesVersionSourceFactory
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.npm.NpmPackageName
-      newFullyQualifiedTypeName: tech.jhipster.lite.module.domain.nodejs.NodePackageName
+      oldFullyQualifiedTypeName: com.seed4j.module.domain.npm.NpmPackageName
+      newFullyQualifiedTypeName: com.seed4j.module.domain.nodejs.NodePackageName
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.npm.NpmPackageVersion
-      newFullyQualifiedTypeName: tech.jhipster.lite.module.domain.nodejs.NodePackageVersion
+      oldFullyQualifiedTypeName: com.seed4j.module.domain.npm.NpmPackageVersion
+      newFullyQualifiedTypeName: com.seed4j.module.domain.nodejs.NodePackageVersion
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.npm.NpmPackagesVersions
-      newFullyQualifiedTypeName: tech.jhipster.lite.module.domain.nodejs.NodePackagesVersions
+      oldFullyQualifiedTypeName: com.seed4j.module.domain.npm.NpmPackagesVersions
+      newFullyQualifiedTypeName: com.seed4j.module.domain.nodejs.NodePackagesVersions
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.module.infrastructure.secondary.npm.FileSystemNpmVersionReader
-      newFullyQualifiedTypeName: tech.jhipster.lite.module.infrastructure.secondary.nodejs.FileSystemNodePackagesVersionReader
+      oldFullyQualifiedTypeName: com.seed4j.module.infrastructure.secondary.npm.FileSystemNpmVersionReader
+      newFullyQualifiedTypeName: com.seed4j.module.infrastructure.secondary.nodejs.FileSystemNodePackagesVersionReader
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.module.infrastructure.secondary.npm.NpmVersionsReader
-      newFullyQualifiedTypeName: tech.jhipster.lite.module.infrastructure.secondary.nodejs.NodePackagesVersionsReader
+      oldFullyQualifiedTypeName: com.seed4j.module.infrastructure.secondary.npm.NpmVersionsReader
+      newFullyQualifiedTypeName: com.seed4j.module.infrastructure.secondary.nodejs.NodePackagesVersionsReader
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.npm.JHLiteNpmVersionSource
-      newFullyQualifiedTypeName: tech.jhipster.lite.module.domain.nodejs.JHLiteNodePackagesVersionSource
+      oldFullyQualifiedTypeName: com.seed4j.module.domain.npm.JHLiteNpmVersionSource
+      newFullyQualifiedTypeName: com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.npm.NpmLazyInstaller
-      newFullyQualifiedTypeName: tech.jhipster.lite.module.domain.nodejs.NodeLazyPackagesInstaller
+      oldFullyQualifiedTypeName: com.seed4j.module.domain.npm.NpmLazyInstaller
+      newFullyQualifiedTypeName: com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller
   - org.openrewrite.maven.ChangePropertyValue:
       key: jhlite.version
       newValue: 1.33.0

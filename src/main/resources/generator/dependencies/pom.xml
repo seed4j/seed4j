@@ -13,7 +13,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <jhlite.version>@project.version@</jhlite.version>
+    <seed4j.version>@project.version@</seed4j.version>
     <!-- Dependencies -->
     <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
     <spring-boot.version>3.5.4</spring-boot.version>
@@ -200,9 +200,9 @@
         <version>${jib-maven-plugin.version}</version>
       </dependency>
       <dependency>
-        <groupId>tech.jhipster.lite</groupId>
-        <artifactId>jhlite</artifactId>
-        <version>${jhlite.version}</version>
+        <groupId>com.seed4j.lite</groupId>
+        <artifactId>seed4j</artifactId>
+        <version>${seed4j.version}</version>
       </dependency>
       <dependency>
         <groupId>com.tngtech.archunit</groupId>

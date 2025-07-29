@@ -13,7 +13,7 @@ import {{packageName}}.ComponentTest;
 @IncludeEngines("cucumber")
 @SuppressWarnings("java:S2187")
 @SelectDirectories("src/test/features")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "{{packageName}}, tech.jhipster.lite.module.infrastructure.primary, tech.jhipster.lite.project.infrastructure.primary")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "{{packageName}}, com.seed4j.module.infrastructure.primary, com.seed4j.project.infrastructure.primary")
 @ConfigurationParameter(
   key = PLUGIN_PROPERTY_NAME,
   value = "pretty, json:{{projectBuildDirectory}}/cucumber/cucumber.json, html:{{projectBuildDirectory}}/cucumber/cucumber.htm, junit:{{projectBuildDirectory}}/cucumber/TEST-cucumber.xml"

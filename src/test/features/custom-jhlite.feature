@@ -5,4 +5,4 @@ Feature: Custom JHLite
       | maven-java    |
       | spring-boot   |
       | custom-jhlite |
-    Then I should have "@SpringBootApplication(scanBasePackageClasses = { JHLiteApp.class, ChipsApp.class })" in "src/main/java/tech/jhipster/chips/ChipsApp.java"
+    Then I should have "@SpringBootApplication(scanBasePackageClasses = { Seed4jApp.class, ChipsApp.class })" in "src/main/java/tech/jhipster/chips/ChipsApp.java"

@@ -1,0 +1,20 @@
+package com.seed4j.generator.server.springboot.dbmigration.mongock.application;
+
+import com.seed4j.generator.server.springboot.dbmigration.mongock.domain.MongockModuleFactory;
+import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MongockApplicationService {
+
+  private final MongockModuleFactory mongock;
+
+  public MongockApplicationService() {
+    mongock = new MongockModuleFactory();
+  }
+
+  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+    return mongock.buildModule(properties);
+  }
+}

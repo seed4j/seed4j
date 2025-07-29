@@ -1,0 +1,20 @@
+package com.seed4j.generator.server.javatool.archunit.application;
+
+import com.seed4j.generator.server.javatool.archunit.domain.ArchUnitModuleFactory;
+import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ArchUnitApplicationService {
+
+  private final ArchUnitModuleFactory archUnit;
+
+  public ArchUnitApplicationService() {
+    archUnit = new ArchUnitModuleFactory();
+  }
+
+  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+    return archUnit.buildModule(properties);
+  }
+}

@@ -13,17 +13,17 @@ You can start with the element you prefer but to create a `JHipsterModuleResourc
 
 In fact, you don't just need to create one `JHipsterModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
 
-So, as this is the business of JHLite you probably want to create a `tech.jhipster.lite.generator.my_module.domain` package. And you can start with a simple test:
+So, as this is the business of JHLite you probably want to create a `com.seed4j.generator.my_module.domain` package. And you can start with a simple test:
 
 ```java
-import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
 
+import com.seed4j.TestFileUtils;
+import com.seed4j.UnitTest;
+import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import org.junit.jupiter.api.Test;
-import tech.jhipster.lite.TestFileUtils;
-import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.module.domain.JHipsterModule;
-import tech.jhipster.lite.module.domain.JHipsterModulesFixture;
-import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
 
 @UnitTest
 class MyModuleFactoryTest {
@@ -52,7 +52,7 @@ A few things to note here:
 So, now that we have a first test, we can do a simple implementation:
 
 ```java
-import static tech.jhipster.lite.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.JHipsterModule.*;
 
 public class MyModuleFactory {
 
@@ -130,7 +130,7 @@ Feature: My module
 
 You can now run `CucumberTest` and ensure that it is failing as expected (with a 404).
 
-To be used by JHLite, the `JHipsterModuleResource` needs to be a Spring bean so, let's create a configuration in `tech.jhipster.lite.generator.my_module.infrastructure.primary`:
+To be used by JHLite, the `JHipsterModuleResource` needs to be a Spring bean so, let's create a configuration in `com.seed4j.generator.my_module.infrastructure.primary`:
 
 ```java
 @Configuration
@@ -152,7 +152,7 @@ class MyModuleModuleConfiguration {
 In fact, you don't really have choices here, the `JHipsterModuleResource.builder()` is fluent and will only let you go to the next possible step.
 The most confusing one may be the last one `.factory(myModules::buildModule)` which is, in fact, a method called to build the module.
 
-For this to work, we'll need to add a simple orchestration class in `tech.jhipster.lite.generator.my_module.application`:
+For this to work, we'll need to add a simple orchestration class in `com.seed4j.generator.my_module.application`:
 
 ```java
 @Service

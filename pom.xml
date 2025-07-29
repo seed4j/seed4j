@@ -12,37 +12,36 @@
     <version>3.5.4</version>
   </parent>
 
-  <groupId>tech.jhipster.lite</groupId>
-  <artifactId>jhlite</artifactId>
+  <groupId>com.seed4j</groupId>
+  <artifactId>seed4j</artifactId>
   <version>1.35.1-SNAPSHOT</version>
-  <name>jhlite</name>
-  <description>JHipster Lite</description>
+  <name>seed4j</name>
+  <description>seed4j</description>
   <packaging>jar</packaging>
-  <url>https://github.com/jhipster/jhipster-lite</url>
+  <url>https://github.com/seed4j/seed4j</url>
   <licenses>
     <license>
       <name>Apache License, version 2.0</name>
-      <url>https://github.com/jhipster/jhipster-lite/blob/main/LICENSE.txt</url>
+      <url>https://github.com/seed4j/seed4j/blob/main/LICENSE.txt</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
   <organization>
-    <name>JHipster</name>
-    <url>https://www.jhipster.tech</url>
+    <name>seed4j</name>
+    <url>https://www.seed4j.com</url>
   </organization>
   <developers>
     <developer>
       <id>pascalgrimaud</id>
       <name>Pascal Grimaud</name>
       <url>https://github.com/pascalgrimaud</url>
-      <organization>JHipster</organization>
-      <organizationUrl>https://www.jhipster.tech/</organizationUrl>
+      <organization>seed4j</organization>
+      <organizationUrl>https://www.seed4j.com/</organizationUrl>
     </developer>
-    <!-- The JHipster core team is listed at https://www.jhipster.tech/team/ -->
   </developers>
   <scm>
-    <connection>scm:git:https://github.com/jhipster/jhipster-lite</connection>
-    <url>https://github.com/jhipster/jhipster-lite</url>
+    <connection>scm:git:https://github.com/seed4j/seed4j</connection>
+    <url>https://github.com/seed4j/seed4j</url>
   </scm>
 
   <properties>
@@ -58,7 +57,7 @@
     <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
     <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
-    <start-class>tech.jhipster.lite.JHLiteApp</start-class>
+    <start-class>com.seed4j.Seed4jApp</start-class>
 
     <byte-buddy.version>1.17.6</byte-buddy.version>
     <compiler-plugin.version>3.14.0</compiler-plugin.version>

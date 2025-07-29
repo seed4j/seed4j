@@ -1,0 +1,21 @@
+package com.seed4j.generator.client.vue.core.application;
+
+import com.seed4j.generator.client.vue.core.domain.VueModuleFactory;
+import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
+import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import org.springframework.stereotype.Service;
+
+@Service
+public class VueApplicationService {
+
+  private final VueModuleFactory vue;
+
+  public VueApplicationService(NodeLazyPackagesInstaller nodeLazyPackagesInstaller) {
+    vue = new VueModuleFactory(nodeLazyPackagesInstaller);
+  }
+
+  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+    return vue.buildModule(properties);
+  }
+}

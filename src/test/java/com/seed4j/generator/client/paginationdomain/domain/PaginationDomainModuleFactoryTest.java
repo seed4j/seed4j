@@ -1,0 +1,29 @@
+package com.seed4j.generator.client.paginationdomain.domain;
+
+import static com.seed4j.module.domain.JHipsterModulesFixture.*;
+import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+
+import com.seed4j.TestFileUtils;
+import com.seed4j.UnitTest;
+import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import org.junit.jupiter.api.Test;
+
+@UnitTest
+class PaginationDomainModuleFactoryTest {
+
+  private static final TSPaginationDomainModuleFactory factory = new TSPaginationDomainModuleFactory();
+
+  @Test
+  void shouldBuildModule() {
+    JHipsterModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+
+    JHipsterModule module = factory.buildModule(properties);
+
+    assertThatModuleWithFiles(module, packageJsonFile()).hasPrefixedFiles(
+      "src/main/webapp/app/shared/pagination/domain",
+      "Page.ts",
+      "DisplayedOnPage.ts"
+    );
+  }
+}

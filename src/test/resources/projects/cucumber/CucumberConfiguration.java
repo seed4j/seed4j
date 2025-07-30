@@ -1,7 +1,8 @@
-package tech.jhipster.jhlitest.cucumber;
+package com.seed4j.growth.cucumber;
 
 import com.mycompany.myapp.cucumber.CucumberConfiguration.CucumberRestTemplateConfiguration;
 import com.mycompany.myapp.cucumber.rest.CucumberRestTemplate;
+import com.seed4j.growth.MyappApp;
 import io.cucumber.java.Before;
 import io.cucumber.spring.CucumberContextConfiguration;
 import java.nio.charset.StandardCharsets;
@@ -19,7 +20,6 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-import tech.jhipster.jhlitest.MyappApp;
 
 @CucumberContextConfiguration
 @SpringBootTest(classes = { MyappApp.class, CucumberRestTemplateConfiguration.class }, webEnvironment = WebEnvironment.RANDOM_PORT)

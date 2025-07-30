@@ -15,8 +15,6 @@ Feature: Simple WebService test
 You'll then have to define the glue code:
 
 ```java
-import static tech.jhipster.lite.cucumber.rest.CucumberRestAssertions.*;
-
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +107,7 @@ You may need to mock beans for your component tests, but you won't be able to do
 @RunWith(Cucumber.class)
 @CucumberContextConfiguration
 @CucumberOptions(
-  glue = "tech.jhipster.lite",
+  glue = "com.seed4j",
   plugin = { "pretty", "json:target/cucumber/cucumber.json", "html:target/cucumber/cucumber.htm", "junit:target/cucumber/cucumber.xml" },
   features = "src/test/features"
 )

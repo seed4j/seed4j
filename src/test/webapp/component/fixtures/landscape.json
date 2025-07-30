@@ -13,7 +13,7 @@
                 "mandatory": "true",
                 "key": "packageName",
                 "description": "Base package name",
-                "defaultValue": "tech.jhipster.beer",
+                "defaultValue": "com.seed4j.growth",
                 "order": -300
               }
             ]

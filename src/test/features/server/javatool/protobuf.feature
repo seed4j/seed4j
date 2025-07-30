@@ -4,7 +4,7 @@ Feature: Protobuf
     When I apply modules to default project
       | maven-java |
       | protobuf   |
-    Then I should have files in "src/main/java/tech/jhipster/chips/shared/protobuf/infrastructure"
+    Then I should have files in "src/main/java/com/seed4j/growth/shared/protobuf/infrastructure"
       | primary/ProtobufDatesReader.java   |
       | secondary/ProtobufDatesWriter.java |
 

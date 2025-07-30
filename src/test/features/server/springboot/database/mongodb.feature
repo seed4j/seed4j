@@ -5,5 +5,5 @@ Feature: MongoDB
       | maven-java  |
       | spring-boot |
       | mongodb     |
-    Then I should have files in "src/main/java/tech/jhipster/chips/wire/mongodb/infrastructure/secondary"
+    Then I should have files in "src/main/java/com/seed4j/growth/wire/mongodb/infrastructure/secondary"
       | MongodbDatabaseConfiguration.java |

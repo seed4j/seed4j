@@ -10,7 +10,7 @@
 
 !/src/main/resources/generator/buildtool/gradle/gradle/wrapper/gradle-wrapper.jar
 !/src/main/resources/generator/buildtool/maven/.mvn/wrapper/maven-wrapper.jar
-/tests-ci/.pid-jhlite
+/tests-ci/.pid-seed4j
 /roadmap/*.png
 !/roadmap/spring_boot_project.png
 

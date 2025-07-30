@@ -1,4 +1,4 @@
-package tech.jhipster.jhlitest;
+package com.seed4j.growth;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

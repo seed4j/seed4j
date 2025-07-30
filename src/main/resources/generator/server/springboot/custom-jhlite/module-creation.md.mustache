@@ -16,14 +16,14 @@ In fact, you don't just need to create one `JHipsterModule`, you'll need a facto
 So, as this is the business of JHLite you probably want to create a `{{packageName}}.my_module.domain` package. And you can start with a simple test:
 
 ```java
-import static tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
 
 import org.junit.jupiter.api.Test;
-import tech.jhipster.lite.TestFileUtils;
-import tech.jhipster.lite.UnitTest;
-import tech.jhipster.lite.module.domain.JHipsterModule;
-import tech.jhipster.lite.module.domain.JHipsterModulesFixture;
-import tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.TestFileUtils;
+import com.seed4j.UnitTest;
+import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 
 @UnitTest
 class MyModuleFactoryTest {
@@ -34,12 +34,12 @@ class MyModuleFactoryTest {
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture
       .propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
 
-    assertThatModule(module).hasPrefixedFiles("src/main/java/tech/jhipster/jhlitest/my_package", "Dummy.java");
+    assertThatModule(module).hasPrefixedFiles("src/main/java/com/seed4j/growth/my_package", "Dummy.java");
   }
 }
 
@@ -54,7 +54,7 @@ A few things to note here:
 So, now that we have a first test we can do a simple implementation:
 
 ```java
-import static tech.jhipster.lite.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.JHipsterModule.*;
 
 public class MyModuleFactory {
 
@@ -99,8 +99,8 @@ Feature: My module
 
   Scenario: Should apply my module
     When I apply "my-module" module to default project
-      | packageName | tech.jhipster.chips |
-    Then I should have files in "src/main/java/tech/jhipster/chips/my_package"
+      | packageName | com.seed4j.growth |
+    Then I should have files in "src/main/java/com/seed4j/growth/my_package"
       | Dummy.java |
 ```
 
@@ -127,8 +127,8 @@ import static {{packageName}}.slug.domain.MyAppModuleSlug.*;
 import {{packageName}}.my_module.application.MyModuleApplicationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import tech.jhipster.lite.module.domain.resource.JHipsterModulePropertiesDefinition;
-import tech.jhipster.lite.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.JHipsterModuleResource;
 
 @Configuration
 class MyModuleModuleConfiguration {
@@ -158,7 +158,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import tech.jhipster.lite.module.domain.resource.JHipsterModuleSlugFactory;
+import com.seed4j.module.domain.resource.JHipsterModuleSlugFactory;
 
 public enum MyAppModuleSlug implements JHipsterModuleSlugFactory {
   MY_MODULE("my-module");
@@ -228,7 +228,7 @@ class MyDockerImagesReader implements DockerImagesReader {
 
 ```
 
-Of course you can add any version resolution logic you want in the implementation. You can have a look at [FileSystemDockerImagesReader](https://github.com/jhipster/jhipster-lite/blob/main/src/main/java/tech/jhipster/lite/module/infrastructure/secondary/docker/FileSystemDockerImagesReader.java) for an implementation reading from a local file (managed by dependabot).
+Of course you can add any version resolution logic you want in the implementation. You can have a look at [FileSystemDockerImagesReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/tech/jhipster/lite/module/infrastructure/secondary/docker/FileSystemDockerImagesReader.java) for an implementation reading from a local file (managed by dependabot).
 
 ## Java versions
 
@@ -246,7 +246,7 @@ class MyJavaDependenciesReader implements JavaDependenciesReader {
 
 ```
 
-Of course you can add any version resolution logic you want in the implementation. You can have a look at [FileSystemMavenDependenciesReader](https://github.com/jhipster/jhipster-lite/blob/main/src/main/java/tech/jhipster/lite/module/infrastructure/secondary/javadependency/FileSystemMavenDependenciesReader.java) for an implementation reading from a local file (managed by dependabot).
+Of course you can add any version resolution logic you want in the implementation. You can have a look at [FileSystemMavenDependenciesReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/tech/jhipster/lite/module/infrastructure/secondary/javadependency/FileSystemMavenDependenciesReader.java) for an implementation reading from a local file (managed by dependabot).
 
 You can add it in your tests using
 
@@ -276,7 +276,7 @@ class MyNpmVersionsReader implements NpmVersionsReader {
 
 ```
 
-Of course you can add any version resolution logic you want in the implementation. You can have a look at [FileSystemNpmVersionReader](https://github.com/jhipster/jhipster-lite/blob/main/src/main/java/tech/jhipster/lite/module/infrastructure/secondary/npm/FileSystemNpmVersionReader.java) for an implementation reading from a local file (managed by dependabot).
+Of course you can add any version resolution logic you want in the implementation. You can have a look at [FileSystemNpmVersionReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/tech/jhipster/lite/module/infrastructure/secondary/npm/FileSystemNpmVersionReader.java) for an implementation reading from a local file (managed by dependabot).
 
 You can add it in your tests using
 

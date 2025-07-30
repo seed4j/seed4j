@@ -11,7 +11,7 @@ Feature: DevTools
 
   Scenario: Should add devtools elements using module url
     When I apply "spring-boot-devtools" module to default project with maven file
-      | packageName | tech.jhipster.chips |
-      | baseName    | jhipster            |
+      | packageName | com.seed4j.growth |
+      | baseName    | jhipster          |
     Then I should have files in "documentation"
       | dev-tools.md |

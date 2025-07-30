@@ -2,9 +2,9 @@ Feature: Init
 
   Scenario: Should init from module
     When I apply "init" module to default project
-      | packageName | tech.jhipster.chips |
-      | baseName    | jhipster            |
-      | endOfLine   | lf                  |
+      | packageName | com.seed4j.growth |
+      | baseName    | jhipster          |
+      | endOfLine   | lf                |
     Then I should have files in ""
       | .gitignore        |
       | .gitattributes    |

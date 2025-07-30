@@ -90,7 +90,7 @@ Feature: Jooq modules
       | mssql.md |
     And I should have files in "src/main/docker"
       | mssql.yml |
-    And I should have files in "src/test/java/tech/jhipster/chips"
+    And I should have files in "src/test/java/com/seed4j/growth"
       | MsSQLTestContainerExtension.java |
     And I should have files in "src/test/resources"
       | container-license-acceptance.txt |

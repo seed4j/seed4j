@@ -1,16 +1,16 @@
-package tech.jhipster.jhlitest.dummy.infrastructure.secondary;
+package com.seed4j.growth.dummy.infrastructure.secondary;
 
+import com.seed4j.growth.dummy.domain.BeerId;
+import com.seed4j.growth.dummy.domain.beer.Beer;
+import com.seed4j.growth.dummy.domain.beer.BeerSellingState;
+import com.seed4j.growth.dummy.domain.beer.Beers;
+import com.seed4j.growth.dummy.domain.beer.BeersRepository;
+import com.seed4j.growth.shared.error.domain.Assert;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import org.springframework.stereotype.Repository;
-import tech.jhipster.jhlitest.dummy.domain.BeerId;
-import tech.jhipster.jhlitest.dummy.domain.beer.Beer;
-import tech.jhipster.jhlitest.dummy.domain.beer.BeerSellingState;
-import tech.jhipster.jhlitest.dummy.domain.beer.Beers;
-import tech.jhipster.jhlitest.dummy.domain.beer.BeersRepository;
-import tech.jhipster.jhlitest.shared.error.domain.Assert;
 
 @Repository
 class InMemoryBeersRepository implements BeersRepository {

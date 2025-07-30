@@ -27,7 +27,7 @@
   </root>
   -->
 
-  <logger name="tech.jhipster.sample" level="INFO" />
+  <logger name="com.seed4j.growth" level="INFO" />
 
   <logger name="ch.qos.logback" level="WARN" />
   <logger name="com.sun" level="WARN" />

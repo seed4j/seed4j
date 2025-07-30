@@ -5,7 +5,7 @@ Feature: JWT modules
       | maven-java      |
       | spring-boot     |
       | spring-boot-jwt |
-    Then I should have files in "src/main/java/tech/jhipster/chips/shared/authentication/infrastructure/primary"
+    Then I should have files in "src/main/java/com/seed4j/growth/shared/authentication/infrastructure/primary"
       | JWTConfigurer.java |
 
   Scenario: Should apply basic jwt auth module
@@ -14,5 +14,5 @@ Feature: JWT modules
       | spring-boot                |
       | spring-boot-jwt            |
       | spring-boot-jwt-basic-auth |
-    Then I should have files in "src/main/java/tech/jhipster/chips/account/domain"
+    Then I should have files in "src/main/java/com/seed4j/growth/account/domain"
       | AuthenticationQuery.java |

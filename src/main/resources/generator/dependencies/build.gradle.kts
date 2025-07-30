@@ -19,7 +19,7 @@ repositories {
   // jhipster-needle-gradle-repositories
 }
 
-group = "tech.jhipster.lite"
+group = "com.seed4j"
 version = "0.0.1-SNAPSHOT"
 
 // jhipster-needle-profile-activation

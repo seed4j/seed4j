@@ -4,7 +4,7 @@
   <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
   <include resource="org/springframework/boot/logging/logback/base.xml" />
 
-  <logger name="tech.jhipster.lite" level="OFF" />
+  <logger name="com.seed4j" level="OFF" />
   <logger name="org.springframework" level="WARN" />
   <logger name="org.springframework.web" level="WARN" />
   <logger name="org.springframework.security" level="WARN" />

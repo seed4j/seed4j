@@ -2,7 +2,7 @@ Feature: Flyway
 
   Scenario: Should apply flyway initialization module
     When I apply "flyway" module to default project with maven file
-      | packageName | tech.jhipster.chips |
+      | packageName | com.seed4j.growth |
     Then I should have "<artifactId>flyway-core</artifactId>" in "pom.xml"
 
   Scenario: Should apply flyway mysql dependency module

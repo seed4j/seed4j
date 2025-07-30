@@ -134,18 +134,18 @@ describe('Modules', () => {
       ]);
 
       const pathField = wrapper.find(wrappedElement('folder-path-field')).element as HTMLInputElement;
-      expect(pathField.value).toBe('/tmp/jhlite/1234');
+      expect(pathField.value).toBe('/tmp/seed4j/1234');
     });
 
     it('should load folder path from local storage', async () => {
       const moduleParameters = repositoryWithModuleParameters();
-      moduleParameters.getCurrentFolderPath.mockReturnValue('/tmp/jhlite/5678');
+      moduleParameters.getCurrentFolderPath.mockReturnValue('/tmp/seed4j/5678');
 
       const wrapper = wrap({ moduleParameters });
       await flushPromises();
 
       const pathField = wrapper.find(wrappedElement('folder-path-field')).element as HTMLInputElement;
-      expect(pathField.value).toBe('/tmp/jhlite/5678');
+      expect(pathField.value).toBe('/tmp/seed4j/5678');
     });
   });
 
@@ -728,7 +728,7 @@ const repositoryWithModulesAndNonDefaultProperties = (): ModulesRepositoryStub =
 
 const repositoryWithProjectFolders = (): ProjectFoldersRepositoryStub => {
   const projectFolders = stubProjectFoldersRepository();
-  projectFolders.get.mockResolvedValue('/tmp/jhlite/1234');
+  projectFolders.get.mockResolvedValue('/tmp/seed4j/1234');
 
   return projectFolders;
 };

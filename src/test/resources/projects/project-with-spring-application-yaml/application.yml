@@ -2,9 +2,9 @@
 
 spring:
   application:
-    name: JHLite # This is the name of the application
+    name: seed4j # This is the name of the application
 
 # Logging
 logging:
   level:
-    tech.jhipster.lite: INFO
+    com.seed4j: INFO

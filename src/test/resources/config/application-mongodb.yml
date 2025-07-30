@@ -4,4 +4,4 @@ spring:
       uri: ${TEST_MONGODB_URI}
 
 mongock:
-  migration-scan-package: tech.jhipster.lite
+  migration-scan-package: com.seed4j

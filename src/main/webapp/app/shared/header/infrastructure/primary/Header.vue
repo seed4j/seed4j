@@ -33,17 +33,17 @@
             </router-link>
           </li>
           <li class="jhlite-nav--item">
-            <a class="jhlite-nav-item" href="https://www.jhipster.tech/jhipster-lite" target="_blank" rel="noopener">
+            <a class="jhlite-nav-item" href="https://www.seed4j.com" target="_blank" rel="noopener">
               <span class="jhlite-icon-text">
                 <span class="jhlite-icon-text--icon">
-                  <IconVue name="jhipster" aria-label="JHipster logo" title="JHipster website" />
+                  <IconVue name="jhipster" aria-label="JHipster logo" title="Seed4J website" />
                 </span>
                 <span class="jhlite-icon-text--text -lg-only">JHipster</span>
               </span>
             </a>
           </li>
           <li class="jhlite-nav--item">
-            <a class="jhlite-nav-item" href="https://github.com/jhipster/jhipster-lite" target="_blank" rel="noopener">
+            <a class="jhlite-nav-item" href="https://github.com/seed4j/seed4j" target="_blank" rel="noopener">
               <span class="jhlite-icon-text">
                 <span class="jhlite-icon-text--icon">
                   <IconVue name="github-circled" aria-label="GitHub logo" title="JHipster Lite GitHub page" />

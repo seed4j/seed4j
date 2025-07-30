@@ -50,8 +50,8 @@ class ApplicationStartupTracesTest {
   @Test
   void shouldBuildTraceForEnvironmentWithApplicationName() {
     MockEnvironment environment = new MockEnvironment();
-    environment.setProperty("spring.application.name", "jhlite");
+    environment.setProperty("spring.application.name", "seed4j");
 
-    assertThat(ApplicationStartupTraces.of(environment)).contains("  Application 'jhlite' is running!");
+    assertThat(ApplicationStartupTraces.of(environment)).contains("  Application 'seed4j' is running!");
   }
 }

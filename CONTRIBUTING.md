@@ -19,11 +19,11 @@ And don't forget we also accept [financial contributions to the project](https:/
 
 This is the JHipster bug tracker, and it is used for [Issues and Bugs](#issue) and for [Feature Requests](#feature). It is **not** a help desk or a support forum.
 
-If you have a question on using JHipster, or if you need help with your JHipster project, please [read our help page](https://www.jhipster.tech/help/) and use the [JHipster tag on StackOverflow](http://stackoverflow.com/tags/jhipster) or join our [Gitter.im chat room](https://gitter.im/jhipster/jhipster-lite).
+If you have a question on using Seed4J, or if you need help with your Seed4J project, please [read our help page](https://www.jhipster.tech/help/) and use the [Seed4J tag on StackOverflow](http://stackoverflow.com/tags/seed4j).
 
 ## <a name="issue"></a> Issues and Bugs
 
-If you find a bug in the source code or a mistake in the documentation, you can help us by [submitting a ticket](https://opensource.guide/how-to-contribute/#opening-an-issue) to our [GitHub issues](https://github.com/jhipster/jhipster-lite/issues). Even better, you can submit a Pull Request to our [JHipster Lite project](https://github.com/jhipster/jhipster-lite) or to our [Documentation project](https://github.com/jhipster/jhipster.github.io).
+If you find a bug in the source code or a mistake in the documentation, you can help us by [submitting a ticket](https://opensource.guide/how-to-contribute/#opening-an-issue) to our [GitHub issues](https://github.com/seed4j/seed4j/issues). Even better, you can submit a Pull Request to our [Seed4J project](https://github.com/seed4j/seed4j) or to our [Documentation project](https://github.com/jhipster/jhipster.github.io).
 
 **Please see the Submission Guidelines below**.
 
@@ -33,7 +33,7 @@ If you submitted a Pull Request that fixes a ticket with the "\$100" tag, then y
 
 ## <a name="feature"></a> Feature Requests
 
-You can request a new feature by submitting a ticket to our [GitHub issues](https://github.com/jhipster/jhipster-lite/issues). If you
+You can request a new feature by submitting a ticket to our [GitHub issues](https://github.com/seed4j/seed4j/issues). If you
 would like to implement a new feature, then consider what kind of change it is:
 
 - **Major Changes** that you wish to contribute to the project should be discussed first. Please open a ticket which clearly states that it is a feature request in the title and explain clearly what you want to achieve in the description, and the JHipster team will discuss with you what should be done in that ticket. You can then start working on a Pull Request.
@@ -88,22 +88,22 @@ $ docker -v
 Docker version 20.10.17, build 100c701
 ```
 
-### Fork the jhipster-lite project
+### Fork the seed4j project
 
-Go to the [jhipster-lite project](https://github.com/jhipster/jhipster-lite) and click on the "fork" button. You can then clone your own fork of the project, and start working on it.
+Go to the [Seed4J project](https://github.com/seed4j/seed4j) and click on the "fork" button. You can then clone your own fork of the project, and start working on it.
 
 [Please read the GitHub forking documentation for more information](https://help.github.com/articles/fork-a-repo)
 
 Using SSH:
 
 ```
-git clone git@github.com:<YOUR_USERNAME>/jhipster-lite.git
+git clone git@github.com:<YOUR_USERNAME>/seed4j.git
 ```
 
 Using HTTPS:
 
 ```
-git clone https://github.com/<YOUR_USERNAME>/jhipster-lite.git
+git clone https://github.com/<YOUR_USERNAME>/seed4j.git
 ```
 
 Then, go inside your fork and add upstream:
@@ -111,30 +111,30 @@ Then, go inside your fork and add upstream:
 Using SSH:
 
 ```bash
-git remote add upstream git@github.com:jhipster/jhipster-lite.git
+git remote add upstream git@github.com:seed4j/seed4j.git
 ```
 
 Using HTTPS:
 
 ```bash
-git remote add upstream https://github.com/jhipster/jhipster-lite.git
+git remote add upstream https://github.com/seed4j/seed4j.git
 ```
 
 The result of remote should be:
 
 ```
 $ git remote -v
-origin	git@github.com:<YOUR_USERNAME>/jhipster-lite.git (fetch)
-origin	git@github.com:<YOUR_USERNAME>/jhipster-lite.git (push)
-upstream	git@github.com:jhipster/jhipster-lite.git (fetch)
-upstream	git@github.com:jhipster/jhipster-lite.git (push)
+origin	git@github.com:<YOUR_USERNAME>/seed4j.git (fetch)
+origin	git@github.com:<YOUR_USERNAME>/seed4j.git (push)
+upstream	git@github.com:seed4j/seed4j.git (fetch)
+upstream	git@github.com:seed4j/seed4j.git (push)
 ```
 
 You can edit your `.git/config`, and update this section:
 
 ```
 [remote "upstream"]
-	url = git@github.com:jhipster/jhipster-lite.git
+	url = git@github.com:seed4j/seed4j.git
 	fetch = +refs/heads/*:refs/remotes/upstream/*
 	fetch = +refs/pull/*/head:refs/remotes/upstream/pr/*
 ```
@@ -181,7 +181,7 @@ As modifying the JHipster Lite generator includes modifying Java and TypeScript 
 
 ### [Submitting an Issue](https://opensource.guide/how-to-contribute/#opening-an-issue)
 
-Before you submit your issue search the [archive](https://github.com/jhipster/jhipster-lite/issues), maybe your question was already answered.
+Before you submit your issue search the [archive](https://github.com/seed4j/seed4j/issues), maybe your question was already answered.
 
 If your issue appears to be a bug, and has not been reported, open a new issue.
 Help us to maximize the effort we can spend fixing issues and adding new
@@ -207,7 +207,7 @@ Issues opened without any of these infos can be **closed** without any explanati
 
 Before you submit your pull request, consider the following guidelines:
 
-- Search [GitHub](https://github.com/jhipster/jhipster-lite/pulls?utf8=%E2%9C%93&q=is%3Apr) for an open or closed Pull Request
+- Search [GitHub](https://github.com/seed4j/seed4j/pulls?utf8=%E2%9C%93&q=is%3Apr) for an open or closed Pull Request
   that relates to your submission.
 - If you want to modify JHipster Lite, read our [Generator development setup](#setup)
 - Refresh your project
@@ -260,7 +260,7 @@ Before you submit your pull request, consider the following guidelines:
   git push -u origin my-fix-branch
   ```
 
-- In GitHub, send a pull request to `jhipster/jhipster-lite:main`.
+- In GitHub, send a pull request to `seed4j/seed4j:main`.
 - If we suggest changes then
   - Make the required updates.
   - Re-run the JHipster tests on your sample generated project to ensure tests are still passing.
@@ -389,11 +389,11 @@ from the main (upstream) repository:
   ```shell
   ./tests-ci/generate.sh <application> <java-build-tool> <spring-configuration-format>
   ```
-- This will generate the project in `/tmp/jhlite/<application>`. Then, you can test it.
+- This will generate the project in `/tmp/seed4j/<application>`. Then, you can test it.
 - The project location of the generated build is configured in the `test-ci/modulePayload.json`.
 
 - For example,
-  - Running `./tests-ci/generate.sh fullapp maven yaml` will generate a Spring Boot project `fullapp` in the directory`/tmp/jhlite/`
+  - Running `./tests-ci/generate.sh fullapp maven yaml` will generate a Spring Boot project `fullapp` in the directory`/tmp/seed4j/`
   - The generated project will have support for maven, sonar, postgresql, liquibase, ehcache, vue-core and a lot more capabilities required for a Spring Boot + Vue application.
 
 ## <a name="rules"></a> Coding Rules
@@ -470,16 +470,16 @@ Fix #1234
 ### Regular Contributor Guidelines
 
 These are some of the guidelines that we would like to emphasize if you are a regular contributor to the project
-or joined the [JHipster team](https://www.jhipster.tech/team/).
+or joined the [JHipster team](https://www.seed4j.com/team/).
 
 - We recommend not committing directly to main, but always submit changes through PRs.
 - Before merging, try to get at least one review on the PR.
 - Add appropriate labels to issues and PRs that you create (if you have permission to do so).
-- Follow the project's [policies](https://www.jhipster.tech/policies/#-policies).
-- Follow the project's [Code of Conduct](https://github.com/jhipster/jhipster-lite/blob/main/CODE_OF_CONDUCT.md)
+- Follow the project's [policies](https://www.seed4j.com/policies/#-policies).
+- Follow the project's [Code of Conduct](https://github.com/seed4j/seed4j/blob/main/CODE_OF_CONDUCT.md)
   and be polite and helpful to users when answering questions/bug reports and when reviewing PRs.
 - We work on our free time, so we have no obligation nor commitment. Work/life balance is important, so don't
   feel tempted to put in all your free time fixing something.
 
-[issue-template]: https://github.com/jhipster/jhipster-lite/issues/new?template=BUG_REPORT.md
-[feature-template]: https://github.com/jhipster/jhipster-lite/issues/new?template=FEATURE_REQUEST.md
+[issue-template]: https://github.com/seed4j/seed4j/issues/new?template=BUG_REPORT.md
+[feature-template]: https://github.com/seed4j/seed4j/issues/new?template=FEATURE_REQUEST.md

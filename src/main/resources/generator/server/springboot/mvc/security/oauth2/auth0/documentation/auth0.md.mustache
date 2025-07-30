@@ -18,7 +18,7 @@ If you’d like to use Auth0 instead of Keycloak, follow the configuration steps
 
 ```javascript
 exports.onExecutePostLogin = async (event, api) => {
-  const namespace = 'https://www.jhipster.tech';
+  const namespace = 'https://www.seed4j.com';
   if (event.authorization) {
     api.idToken.setCustomClaim('preferred_username', event.user.email);
     api.idToken.setCustomClaim(`${namespace}/roles`, event.authorization.roles);

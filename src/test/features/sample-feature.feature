@@ -2,8 +2,8 @@ Feature: Sample feature
 
   Scenario: Should apply sample feature module
     When I apply "sample-feature" module to default project with maven file
-      | packageName | tech.jhipster.chips |
-    Then I should have files in "src/main/java/tech/jhipster/chips/sample/domain"
+      | packageName | com.seed4j.growth |
+    Then I should have files in "src/main/java/com/seed4j/growth/sample/domain"
       | Amount.java |
 
   Scenario: Should Apply sample jpa persistence module
@@ -11,7 +11,7 @@ Feature: Sample feature
       | maven-java             |
       | sample-feature         |
       | sample-jpa-persistence |
-    Then I should have files in "src/main/java/tech/jhipster/chips/sample/infrastructure/secondary"
+    Then I should have files in "src/main/java/com/seed4j/growth/sample/infrastructure/secondary"
       | BeerEntity.java |
 
   Scenario: Should Apply sample mongodb module
@@ -19,7 +19,7 @@ Feature: Sample feature
       | maven-java                 |
       | sample-feature             |
       | sample-mongodb-persistence |
-    Then I should have files in "src/main/java/tech/jhipster/chips/sample/infrastructure/secondary"
+    Then I should have files in "src/main/java/com/seed4j/growth/sample/infrastructure/secondary"
       | BeerDocument.java |
 
   Scenario: Should Apply sample cassandra module
@@ -28,7 +28,7 @@ Feature: Sample feature
       | cassandra                    |
       | sample-feature               |
       | sample-cassandra-persistence |
-    Then I should have files in "src/main/java/tech/jhipster/chips/sample/infrastructure/secondary"
+    Then I should have files in "src/main/java/com/seed4j/growth/sample/infrastructure/secondary"
       | BeerTable.java |
 
   Scenario: Should Apply sample liquibase module

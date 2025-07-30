@@ -16,14 +16,14 @@ preconditions:
       version: '[,1.34.0)'
 recipeList:
   - org.openrewrite.java.ReplaceConstantWithAnotherConstant:
-      existingFullyQualifiedConstantName: tech.jhipster.lite.shared.slug.domain.JHLiteFeatureSlug.SONAR_QUBE_JAVA
-      fullyQualifiedConstantName: tech.jhipster.lite.shared.slug.domain.JHLiteFeatureSlug.SONARQUBE
+      existingFullyQualifiedConstantName: com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SONAR_QUBE_JAVA
+      fullyQualifiedConstantName: com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SONARQUBE
   - org.openrewrite.java.ReplaceConstantWithAnotherConstant:
-      existingFullyQualifiedConstantName: tech.jhipster.lite.shared.slug.domain.JHLiteModuleSlug.SONAR_QUBE_JAVA_BACKEND
-      fullyQualifiedConstantName: tech.jhipster.lite.shared.slug.domain.JHLiteModuleSlug.SONARQUBE_JAVA_BACKEND
+      existingFullyQualifiedConstantName: com.seed4j.shared.slug.domain.JHLiteModuleSlug.SONAR_QUBE_JAVA_BACKEND
+      fullyQualifiedConstantName: com.seed4j.shared.slug.domain.JHLiteModuleSlug.SONARQUBE_JAVA_BACKEND
   - org.openrewrite.java.ReplaceConstantWithAnotherConstant:
-      existingFullyQualifiedConstantName: tech.jhipster.lite.shared.slug.domain.JHLiteModuleSlug.SONAR_QUBE_JAVA_BACKEND_AND_FRONTEND
-      fullyQualifiedConstantName: tech.jhipster.lite.shared.slug.domain.JHLiteModuleSlug.SONARQUBE_JAVA_BACKEND_AND_FRONTEND
+      existingFullyQualifiedConstantName: com.seed4j.shared.slug.domain.JHLiteModuleSlug.SONAR_QUBE_JAVA_BACKEND_AND_FRONTEND
+      fullyQualifiedConstantName: com.seed4j.shared.slug.domain.JHLiteModuleSlug.SONARQUBE_JAVA_BACKEND_AND_FRONTEND
   - org.openrewrite.maven.ChangePropertyValue:
       key: jhlite.version
       newValue: 1.34.0

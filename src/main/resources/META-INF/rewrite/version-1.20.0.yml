@@ -28,14 +28,14 @@ preconditions:
       version: '[,1.20.0)'
 recipeList:
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.generator.slug.domain.JHLiteModuleSlug
-      newFullyQualifiedTypeName: tech.jhipster.lite.shared.slug.domain.JHLiteModuleSlug
+      oldFullyQualifiedTypeName: com.seed4j.generator.slug.domain.JHLiteModuleSlug
+      newFullyQualifiedTypeName: com.seed4j.shared.slug.domain.JHLiteModuleSlug
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.generator.slug.domain.JHLiteFeatureSlug
-      newFullyQualifiedTypeName: tech.jhipster.lite.shared.slug.domain.JHLiteFeatureSlug
+      oldFullyQualifiedTypeName: com.seed4j.generator.slug.domain.JHLiteFeatureSlug
+      newFullyQualifiedTypeName: com.seed4j.shared.slug.domain.JHLiteFeatureSlug
   - org.openrewrite.java.ChangeType:
-      oldFullyQualifiedTypeName: tech.jhipster.lite.generator.base64.domain.Base64Utils
-      newFullyQualifiedTypeName: tech.jhipster.lite.shared.base64.domain.Base64Utils
+      oldFullyQualifiedTypeName: com.seed4j.generator.base64.domain.Base64Utils
+      newFullyQualifiedTypeName: com.seed4j.shared.base64.domain.Base64Utils
   - org.openrewrite.maven.ChangePropertyValue:
       key: jhlite.version
       newValue: 1.20.0

@@ -20,7 +20,7 @@ repositories {
   // jhipster-needle-gradle-repositories
 }
 
-group = "tech.jhipster.jhlitest"
+group = "com.seed4j.growth"
 version = "0.0.1-SNAPSHOT"
 
 val profiles = (project.findProperty("profiles") as String? ?: "")

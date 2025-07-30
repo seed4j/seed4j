@@ -9,7 +9,7 @@ Feature: Java base
 
   Scenario: Should apply java base
     When I apply "java-base" module to default project
-      | packageName | tech.jhipster.chips |
-      | baseName    | jhipster            |
-    Then I should have files in "src/main/java/tech/jhipster/chips/shared/error/domain"
+      | packageName | com.seed4j.growth |
+      | baseName    | jhipster          |
+    Then I should have files in "src/main/java/com/seed4j/growth/shared/error/domain"
       | Assert.java |

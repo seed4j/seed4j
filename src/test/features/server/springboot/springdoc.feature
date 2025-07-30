@@ -6,9 +6,9 @@ Feature: Springdoc modules
       | spring-boot           |
       | springdoc-mvc-openapi |
     Then I should have "springdoc-openapi-starter-webmvc-ui" in "pom.xml"
-    And I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary"
+    And I should have files in "src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary"
       | SpringdocConfiguration.java |
-    And I should not have "jwt" in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java"
+    And I should not have "jwt" in "src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java"
     And I should have files in "src/main/resources/config"
       | application.yml |
     And I should have files in "src/test/resources/config"
@@ -21,9 +21,9 @@ Feature: Springdoc modules
       | spring-boot-webflux-netty |
       | springdoc-webflux-openapi |
     Then I should have "springdoc-openapi-starter-webflux-ui" in "pom.xml"
-    And I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary"
+    And I should have files in "src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary"
       | SpringdocConfiguration.java |
-    And I should not have "jwt" in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java"
+    And I should not have "jwt" in "src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java"
     And I should have files in "src/main/resources/config"
       | application.yml |
     And I should have files in "src/test/resources/config"
@@ -35,7 +35,7 @@ Feature: Springdoc modules
       | spring-boot           |
       | springdoc-mvc-openapi |
       | springdoc-oauth2      |
-    Then I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary/"
+    Then I should have files in "src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/"
       | SpringdocOAuth2Configuration.java |
 
   Scenario: Should apply springdoc okta module
@@ -45,11 +45,11 @@ Feature: Springdoc modules
       | springdoc-mvc-openapi |
       | springdoc-oauth2      |
     And I apply "springdoc-oauth2-okta" module with parameters to last project
-      | packageName  | tech.jhipster.chips |
+      | packageName  | com.seed4j.growth   |
       | baseName     | jhipster            |
       | oktaDomain   | dev-123456.okta.com |
       | oktaClientId | my-client-id        |
-    Then I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary/"
+    Then I should have files in "src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/"
       | SpringdocOAuth2Configuration.java |
     And I should have files in "src/main/resources/config"
       | application-okta.yml |
@@ -61,11 +61,11 @@ Feature: Springdoc modules
       | springdoc-mvc-openapi |
       | springdoc-oauth2      |
     And I apply "springdoc-oauth2-auth0" module with parameters to last project
-      | packageName   | tech.jhipster.chips     |
+      | packageName   | com.seed4j.growth       |
       | baseName      | jhipster                |
       | auth0Domain   | dev-123456.us.auth0.com |
       | auth0ClientId | my-client-id            |
-    Then I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary/"
+    Then I should have files in "src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/"
       | SpringdocOAuth2Configuration.java |
     And I should have files in "src/main/resources/config"
       | application-auth0.yml |
@@ -76,5 +76,5 @@ Feature: Springdoc modules
       | spring-boot           |
       | springdoc-mvc-openapi |
       | springdoc-jwt         |
-    Then I should have files in "src/main/java/tech/jhipster/chips/wire/springdoc/infrastructure/primary"
+    Then I should have files in "src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary"
       | SpringdocJWTConfiguration.java |

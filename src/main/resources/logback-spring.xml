@@ -6,7 +6,7 @@
   <include resource="org/springframework/boot/logging/logback/defaults.xml" />
   <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
-  <logger name="tech.jhipster.lite" level="INFO" />
+  <logger name="com.seed4j" level="INFO" />
 
   <logger name="ch.qos.logback" level="WARN" />
   <logger name="com.sun" level="WARN" />

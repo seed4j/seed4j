@@ -8,7 +8,7 @@ const STORAGE_KEY_CURRENT_FOLDER_PATH = 'currentFolderPath';
 
 describe('LocalStorageModuleParametersRepository', () => {
   it('should store the module parameters using folder path as the key in localStorage', () => {
-    const folderPath = '/tmp/jhlite/1234';
+    const folderPath = '/tmp/seed4j/1234';
     const storage = fakeStorage();
     storage.clear();
     const data: [string, ModuleParameterType][] = [
@@ -23,7 +23,7 @@ describe('LocalStorageModuleParametersRepository', () => {
   });
 
   it('should return empty Map when there is not module parameters in localStorage', () => {
-    const folderPath = '/tmp/jhlite/1234';
+    const folderPath = '/tmp/seed4j/1234';
     const storage = fakeStorage();
     storage.clear();
 
@@ -33,7 +33,7 @@ describe('LocalStorageModuleParametersRepository', () => {
   });
 
   it('should return module parameters by folder path key from localStorage when it exists', () => {
-    const folderPath = '/tmp/jhlite/1234';
+    const folderPath = '/tmp/seed4j/1234';
     const data: [string, ModuleParameterType][] = [
       ['key1', 'value1'],
       ['key2', 'value2'],
@@ -48,8 +48,8 @@ describe('LocalStorageModuleParametersRepository', () => {
   });
 
   it('should keep the previously module parameters in localStorage when store a new module parameters', () => {
-    const folderPathOne = '/tmp/jhlite/one-1234';
-    const folderPathTwo = '/tmp/jhlite/two-5678';
+    const folderPathOne = '/tmp/seed4j/one-1234';
+    const folderPathTwo = '/tmp/seed4j/two-5678';
     const dataOne: [string, ModuleParameterType][] = [
       ['key1', 'value1'],
       ['key2', 'value2'],
@@ -86,7 +86,7 @@ describe('LocalStorageModuleParametersRepository', () => {
     const storage = fakeStorage();
     storage.clear();
     const repo = new LocalStorageModuleParametersRepository(storage);
-    const folderPath = '/tmp/jhlite/1234';
+    const folderPath = '/tmp/seed4j/1234';
     const data: [string, ModuleParameterType][] = [
       ['key1', 'value1'],
       ['key2', 'value2'],
@@ -102,7 +102,7 @@ describe('LocalStorageModuleParametersRepository', () => {
     const storage = fakeStorage();
     storage.clear();
     const repo = new LocalStorageModuleParametersRepository(storage);
-    const folderPath = '/tmp/jhlite/1234';
+    const folderPath = '/tmp/seed4j/1234';
 
     storage.setItem(STORAGE_KEY_CURRENT_FOLDER_PATH, folderPath);
 

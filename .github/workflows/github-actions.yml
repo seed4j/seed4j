@@ -138,7 +138,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=seed4j -Dsonar.organization=seed4j
+        run: ./mvnw initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=seed4j_seed4j -Dsonar.organization=seed4j
       - name: 'Artifact: remove unused JARs'
         run: |
           rm target/*-javadoc.jar target/*-sources.jar

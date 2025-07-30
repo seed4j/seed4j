@@ -310,7 +310,7 @@ Support this project by becoming a sponsor! [Become a sponsor](https://opencolle
 [github-actions-jhlite-image]: https://github.com/jhipster/jhipster-lite/actions/workflows/github-actions.yml/badge.svg?branch=main
 [github-actions-url]: https://github.com/jhipster/jhipster-lite/actions
 [jhipster-image]: https://raw.githubusercontent.com/jhipster/jhipster-artwork/main/logos/lite/JHipster-Lite-neon-blue.png
-[jhipster-url]: https://www.jhipster.tech/
+[jhipster-url]: https://www.seed4j.com/
 [sonarcloud-url]: https://sonarcloud.io/project/overview?id=jhipster_jhipster-lite
 [sonarcloud-quality-gate]: https://sonarcloud.io/api/project_badges/measure?project=jhipster_jhipster-lite&metric=alert_status
 [sonarcloud-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=jhipster_jhipster-lite&metric=sqale_rating

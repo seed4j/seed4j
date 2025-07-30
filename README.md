@@ -28,15 +28,15 @@
 - You will only generate the code you want, no additional unused code
 - The best quality as possible: 💯% coverage, 0 code smell, no duplication 😎
 
-This is a [sample application](https://github.com/jhipster/jhipster-lite-sample-app) created with JHipster Lite.
+This is a [sample application](https://github.com/seed4j/seed4jsample) created with Seed4J.
 
 ## Quick Start
 
 You need to clone this project and go into the folder:
 
 ```bash
-git clone https://github.com/jhipster/jhipster-lite
-cd jhipster-lite
+git clone https://github.com/seed4j/seed4j
+cd seed4j
 ```
 
 Run the project:
@@ -282,7 +282,7 @@ Once started, go to http://localhost:7471, select your option and generate the c
 
 ## Contributing
 
-We are honored by any contributions you may have small or large. Please refer to our [contribution guidelines and instructions document](https://github.com/jhipster/jhipster-lite/blob/main/CONTRIBUTING.md) for any information about contributing to the project.
+We are honored by any contributions you may have small or large. Please refer to our [contribution guidelines and instructions document](https://github.com/seed4j/seed4j/blob/main/CONTRIBUTING.md) for any information about contributing to the project.
 
 ## Sponsors
 
@@ -300,15 +300,15 @@ Support this project by becoming a sponsor! [Become a sponsor](https://opencolle
 
 [![Backers][backers-image]][backers-url]
 
-[jhipster-lite-release-version]: https://img.shields.io/github/v/release/jhipster/jhipster-lite
-[jhipster-lite-release-url]: https://github.com/jhipster/jhipster-lite/releases
+[jhipster-lite-release-version]: https://img.shields.io/github/v/release/seed4j/seed4j
+[jhipster-lite-release-url]: https://github.com/seed4j/seed4j/releases
 [jhipster-lite-maven-central-version]: https://img.shields.io/maven-central/v/tech.jhipster.lite/jhlite?color=blue
 [jhipster-lite-maven-central-url]: https://repo.maven.apache.org/maven2/tech/jhipster/lite/jhlite/
 [jhipster-lite-docker-hub]: https://img.shields.io/badge/Docker%20Hub-jhipster%2Fjhipster--lite-blue.svg?style=flat
-[jhipster-lite-docker-hub-version]: https://img.shields.io/docker/v/jhipster/jhipster-lite?color=0073ec
-[jhipster-lite-docker-hub-url]: https://hub.docker.com/r/jhipster/jhipster-lite
-[github-actions-jhlite-image]: https://github.com/jhipster/jhipster-lite/actions/workflows/github-actions.yml/badge.svg?branch=main
-[github-actions-url]: https://github.com/jhipster/jhipster-lite/actions
+[jhipster-lite-docker-hub-version]: https://img.shields.io/docker/v/seed4j/seed4j?color=0073ec
+[jhipster-lite-docker-hub-url]: https://hub.docker.com/r/seed4j/seed4j
+[github-actions-jhlite-image]: https://github.com/seed4j/seed4j/actions/workflows/github-actions.yml/badge.svg?branch=main
+[github-actions-url]: https://github.com/seed4j/seed4j/actions
 [jhipster-image]: https://raw.githubusercontent.com/jhipster/jhipster-artwork/main/logos/lite/JHipster-Lite-neon-blue.png
 [jhipster-url]: https://www.seed4j.com/
 [sonarcloud-url]: https://sonarcloud.io/project/overview?id=jhipster_jhipster-lite

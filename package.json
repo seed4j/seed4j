@@ -3,10 +3,10 @@
   "version": "1.35.1-SNAPSHOT",
   "description": "seed4j",
   "homepage": "https://www.seed4j.com/",
-  "bugs": "https://github.com/jhipster/jhipster-lite/issues",
+  "bugs": "https://github.com/seed4j/seed4j/issues",
   "repository": {
     "type": "git",
-    "url": "git://github.com/jhipster/jhipster-lite.git"
+    "url": "git://github.com/seed4j/seed4j.git"
   },
   "funding": {
     "type": "opencollective",

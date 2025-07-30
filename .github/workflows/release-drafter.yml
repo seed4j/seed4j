@@ -6,7 +6,7 @@ on:
       - main
 jobs:
   update_release_draft:
-    if: github.repository == 'jhipster/jhipster-lite'
+    if: github.repository == 'seed4j/seed4j'
     runs-on: ubuntu-latest
     steps:
       - uses: release-drafter/release-drafter@v6

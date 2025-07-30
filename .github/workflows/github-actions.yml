@@ -134,7 +134,7 @@ jobs:
       - name: 'Analysis: see results'
         run: ./tests-ci/sonar.sh
       - name: 'Analysis: SonarCloud'
-        if: github.repository == 'jhipster/jhipster-lite' && github.ref == 'refs/heads/main'
+        if: github.repository == 'seed4j/seed4j' && github.ref == 'refs/heads/main'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -145,7 +145,7 @@ jobs:
       - name: 'Artifact: upload JAR'
         uses: actions/upload-artifact@v4
         with:
-          name: jhlite-jar
+          name: seed4j-jar
           path: '${{ github.workspace }}/target/*.jar'
           retention-days: 1
   #------------------------------------------------------
@@ -184,7 +184,7 @@ jobs:
       - name: 'Artifact: upload JAR'
         uses: actions/upload-artifact@v4
         with:
-          name: jhlite-main-jar
+          name: seed4j-main-jar
           path: '${{ github.workspace }}/target/*.jar'
           retention-days: 1
   #--------------------------------------------------
@@ -203,7 +203,7 @@ jobs:
       - name: 'Artifact: download JAR'
         uses: actions/download-artifact@v4
         with:
-          name: jhlite-jar
+          name: seed4j-jar
           path: ./tests-ci/
       - name: 'Init: install Node.js packages'
         run: npm ci
@@ -290,7 +290,7 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: actions/download-artifact@v4
         with:
-          name: jhlite-main-jar
+          name: seed4j-main-jar
           path: ./main-branch/tests-ci/
       - name: 'Generation: generate ${{ matrix.app }} from main branch'
         if: github.event_name == 'pull_request'
@@ -310,8 +310,8 @@ jobs:
         if: github.event_name == 'pull_request'
         id: calculate-md5sum-main
         run: |
-          if [ -d "/tmp/jhlite/${{ matrix.app }}" ] && [ "${{ steps.generate-main.outputs.exit_code }}" == "0" ]; then
-            cd /tmp/jhlite/${{ matrix.app }}/
+          if [ -d "/tmp/seed4j/${{ matrix.app }}" ] && [ "${{ steps.generate-main.outputs.exit_code }}" == "0" ]; then
+            cd /tmp/seed4j/${{ matrix.app }}/
             app_md5=$(find . \
               -not -path './.git/*' \
               -not -path './.github/*' \
@@ -330,7 +330,7 @@ jobs:
       - name: 'Clean: delete ${{ matrix.app }} from main branch'
         if: github.event_name == 'pull_request'
         run: |
-          rm -rf /tmp/jhlite/${{ matrix.app }}
+          rm -rf /tmp/seed4j/${{ matrix.app }}
       - name: 'Setup: checkout project'
         uses: actions/checkout@v4
         with:
@@ -345,7 +345,7 @@ jobs:
       - name: 'Artifact: download JAR'
         uses: actions/download-artifact@v4
         with:
-          name: jhlite-jar
+          name: seed4j-jar
           path: ./current-branch/tests-ci/
       - name: 'Generation: generate ${{ matrix.app }}'
         working-directory: ./current-branch/tests-ci/
@@ -356,7 +356,7 @@ jobs:
       - name: 'Generation: calculate md5sum ${{ matrix.app }}'
         if: github.event_name == 'pull_request' && steps.calculate-md5sum-main.outputs.exists == 'true'
         id: calculate-md5sum
-        working-directory: /tmp/jhlite/${{ matrix.app }}/
+        working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           app_md5=$(find . \
             -not -path './.git/*' \
@@ -368,7 +368,7 @@ jobs:
             -type f -exec md5sum {} + | LC_ALL=C sort | md5sum | head -n1 | cut -d " " -f1)
           echo pull request branch hash from project ${{ matrix.app }} $app_md5
           echo "hash=$app_md5" >> $GITHUB_OUTPUT
-          ls -al /tmp/jhlite/${{ matrix.app }}
+          ls -al /tmp/seed4j/${{ matrix.app }}
       - name: 'Compare hash main x pull request ${{ matrix.app }}'
         if: github.event_name == 'pull_request' && steps.calculate-md5sum-main.outputs.exists == 'true'
         id: compare-hash
@@ -401,7 +401,7 @@ jobs:
           steps.tests-requirement-check.outputs.execute_tests == 'true' &&
           matrix.java-build-tool == 'maven'
         id: cache_maven_md5sum
-        working-directory: /tmp/jhlite/${{ matrix.app }}/
+        working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           ls -al
           MD5SUM_POM_XML=$(md5sum pom.xml | cut -d ' ' -f 1)
@@ -422,7 +422,7 @@ jobs:
           steps.tests-requirement-check.outputs.execute_tests == 'true' &&
           matrix.java-build-tool == 'gradle'
         id: cache_gradle_md5sum
-        working-directory: /tmp/jhlite/${{ matrix.app }}/
+        working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           ls -al
           GRADLE_DEPS_MD5=$(md5sum \
@@ -447,24 +447,24 @@ jobs:
             ${{ runner.os }}-${{ matrix.java-build-tool }}-
       - name: 'Test: starting Sonar'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
-        working-directory: /tmp/jhlite/${{ matrix.app }}/
+        working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           if [ -f 'src/main/docker/sonar.yml' ]; then
             docker compose -f src/main/docker/sonar.yml up -d \
               && docker logs -f sonar-token && SONAR_TOKEN=$(docker logs sonar-token)
             docker ps -a
           fi
-      - name: 'Install jhlite snapshot jar in local maven repository'
+      - name: 'Install seed4j snapshot jar in local maven repository'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         working-directory: ./current-branch/
         run: |
-          export JHLITE_VERSION=$(find tests-ci -maxdepth 1 -name "*-tests.jar" | sed -e 's/.*jhlite-\(.*\)-tests\.jar/\1/')
-          echo "JHLITE_VERSION=${JHLITE_VERSION}"
-          ./mvnw install:install-file -Dfile=tests-ci/jhlite-${JHLITE_VERSION}.jar -DgroupId=com.seed4j -DartifactId=seed4j -Dversion=${JHLITE_VERSION}
-          ./mvnw install:install-file -Dfile=tests-ci/jhlite-${JHLITE_VERSION}-tests.jar -DgroupId=com.seed4j -DartifactId=seed4j -Dversion=${JHLITE_VERSION} -Dclassifier=tests
+          export SEED4J_VERSION=$(find tests-ci -maxdepth 1 -name "*-tests.jar" | sed -e 's/.*seed4j-\(.*\)-tests\.jar/\1/')
+          echo "SEED4J_VERSION=${SEED4J_VERSION}"
+          ./mvnw install:install-file -Dfile=tests-ci/seed4j-${SEED4J_VERSION}.jar -DgroupId=com.seed4j -DartifactId=seed4j -Dversion=${SEED4J_VERSION}
+          ./mvnw install:install-file -Dfile=tests-ci/seed4j-${SEED4J_VERSION}-tests.jar -DgroupId=com.seed4j -DartifactId=seed4j -Dversion=${SEED4J_VERSION} -Dclassifier=tests
       - name: 'Test: verify ${{ matrix.app }}'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
-        working-directory: /tmp/jhlite/${{ matrix.app }}/
+        working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           SONAR_TOKEN=$(docker logs sonar-token)
           if [ -f 'mvnw' ]; then
@@ -478,7 +478,7 @@ jobs:
           fi
       - name: 'Test: run linter for ${{ matrix.app }}'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
-        working-directory: /tmp/jhlite/${{ matrix.app }}/
+        working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           if grep -q '"lint":' package.json; then
             ${{ matrix.node-package-manager }} run lint
@@ -487,7 +487,7 @@ jobs:
           fi
       - name: 'Test: frontend component-tests for ${{ matrix.app }}'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
-        working-directory: /tmp/jhlite/${{ matrix.app }}/
+        working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           if grep -q "test:component" package.json; then
             if grep -q "playwright" package.json; then
@@ -500,20 +500,20 @@ jobs:
       - name: 'Test: check local Sonar Analysis'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         run: |
-          if [ -f '/tmp/jhlite/${{ matrix.app }}/src/main/docker/sonar.yml' ]; then
+          if [ -f '/tmp/seed4j/${{ matrix.app }}/src/main/docker/sonar.yml' ]; then
             ./current-branch/tests-ci/sonar.sh ${{ matrix.app }}
           fi
       - name: 'Test: copy shell scripts'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
-        run: cp ./current-branch/tests-ci/start.sh /tmp/jhlite/${{ matrix.app }}/
+        run: cp ./current-branch/tests-ci/start.sh /tmp/seed4j/${{ matrix.app }}/
       - name: 'Test: start docker-compose services'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         working-directory: ./current-branch/tests-ci/
         run: |
-          ./start_docker_compose.sh /tmp/jhlite/${{ matrix.app }}/
+          ./start_docker_compose.sh /tmp/seed4j/${{ matrix.app }}/
       - name: 'Test: start the application'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
-        working-directory: /tmp/jhlite/${{ matrix.app }}/
+        working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           if [ -f 'mvnw' ] || [ -f 'gradlew' ]; then
             ./start.sh
@@ -550,7 +550,7 @@ jobs:
       pull-requests: write
       contents: write
     runs-on: ubuntu-latest
-    if: github.repository == 'jhipster/jhipster-lite' && github.ref != 'refs/heads/main' && github.event.pull_request.user.login == 'dependabot[bot]'
+    if: github.repository == 'seed4j/seed4j' && github.ref != 'refs/heads/main' && github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
       - name: Dependabot metadata
         id: dependabot-metadata

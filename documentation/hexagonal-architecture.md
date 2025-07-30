@@ -11,7 +11,7 @@ So, this is basically about why and how to use a peculiar flavor of [hexagonal a
 
 ## Disclaimers
 
-- This documentation is a [JHipster Lite](https://github.com/jhipster/jhipster-lite) module. This **probably doesn't fit your exact needs, you'll have to adapt it!**;
+- This documentation is a [JHipster Lite](https://github.com/seed4j/seed4j) module. This **probably doesn't fit your exact needs, you'll have to adapt it!**;
 - This is one of the many possible implementations of this architecture. If you are not comfortable with this one, just stick to one that helps you;
 - Code architectures are here to help us build great software faster, if it's failing there is probably something to change.
 

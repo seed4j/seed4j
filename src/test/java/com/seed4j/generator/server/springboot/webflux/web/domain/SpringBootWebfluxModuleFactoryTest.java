@@ -17,7 +17,7 @@ class SpringBootWebfluxModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .put("serverPort", 9000)
       .build();
 
@@ -70,16 +70,16 @@ class SpringBootWebfluxModuleFactoryTest {
         """
       )
       .and()
-      .hasFile("src/main/java/tech/jhipster/jhlitest/wire/jackson/infrastructure/primary/JacksonConfiguration.java")
+      .hasFile("src/main/java/com/seed4j/growth/wire/jackson/infrastructure/primary/JacksonConfiguration.java")
       .and()
-      .hasFile("src/test/java/tech/jhipster/jhlitest/wire/jackson/infrastructure/primary/JacksonConfigurationIT.java")
+      .hasFile("src/test/java/com/seed4j/growth/wire/jackson/infrastructure/primary/JacksonConfigurationIT.java")
       .and()
-      .hasPrefixedFiles("src/main/java/tech/jhipster/jhlitest/shared/error/infrastructure/primary", "HeaderUtil.java", "FieldErrorDTO.java")
+      .hasPrefixedFiles("src/main/java/com/seed4j/growth/shared/error/infrastructure/primary", "HeaderUtil.java", "FieldErrorDTO.java")
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/error/infrastructure/primary",
+        "src/test/java/com/seed4j/growth/shared/error/infrastructure/primary",
         "HeaderUtilTest.java",
         "FieldErrorDTOTest.java"
       )
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/TestUtil.java");
+      .hasFiles("src/test/java/com/seed4j/growth/TestUtil.java");
   }
 }

@@ -103,7 +103,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
         )
         .and()
         .hasPrefixedFiles(
-          "src/main/java/tech/jhipster/jhlitest/wire/frontend",
+          "src/main/java/com/seed4j/growth/wire/frontend",
           "infrastructure/primary/RedirectionResource.java",
           "package-info.java"
         );
@@ -495,7 +495,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
 
   private static JHipsterModulesFixture.JHipsterModulePropertiesBuilder defaultProperties() {
     return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp");
   }
 }

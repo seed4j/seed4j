@@ -1,4 +1,4 @@
-package tech.jhipster.jhlitest.dummy.infrastructure.secondary;
+package com.seed4j.growth.dummy.infrastructure.secondary;
 
 import io.cucumber.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;

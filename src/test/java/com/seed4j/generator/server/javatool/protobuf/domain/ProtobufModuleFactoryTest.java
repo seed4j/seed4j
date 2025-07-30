@@ -21,20 +21,20 @@ class ProtobufModuleFactoryTest {
     @Test
     void shouldBuildModuleForMaven() {
       JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-        .basePackage("tech.jhipster.jhlitest")
+        .basePackage("com.seed4j.growth")
         .build();
 
       JHipsterModule module = factory.buildProtobufModule(properties);
 
       assertThatModuleWithFiles(module, pomFile())
         .hasPrefixedFiles(
-          "src/main/java/tech/jhipster/jhlitest/shared/protobuf",
+          "src/main/java/com/seed4j/growth/shared/protobuf",
           "package-info.java",
           "infrastructure/primary/ProtobufDatesReader.java",
           "infrastructure/secondary/ProtobufDatesWriter.java"
         )
         .hasPrefixedFiles(
-          "src/test/java/tech/jhipster/jhlitest/shared/protobuf",
+          "src/test/java/com/seed4j/growth/shared/protobuf",
           "infrastructure/primary/ProtobufDatesReaderTest.java",
           "infrastructure/secondary/ProtobufDatesWriterTest.java"
         )
@@ -137,7 +137,7 @@ class ProtobufModuleFactoryTest {
     @Test
     void shouldBuildModuleForMaven() {
       JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-        .basePackage("tech.jhipster.jhlitest")
+        .basePackage("com.seed4j.growth")
         .build();
 
       JHipsterModule module = factory.buildProtobufBackwardsCompatibilityCheckModule(properties);

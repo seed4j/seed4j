@@ -5,5 +5,5 @@ Feature: Neo4j
       | maven-java  |
       | spring-boot |
       | neo4j       |
-    Then I should have files in "src/test/java/tech/jhipster/chips"
+    Then I should have files in "src/test/java/com/seed4j/growth"
       | TestNeo4jManager.java |

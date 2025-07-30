@@ -17,7 +17,7 @@ class JwtAuthenticationModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("jhipster")
       .build();
 
@@ -72,17 +72,17 @@ class JwtAuthenticationModuleFactoryTest {
         """
       )
       .and()
-      .hasFiles("src/main/java/tech/jhipster/jhlitest/shared/authentication/package-info.java")
-      .hasPrefixedFiles("src/main/java/tech/jhipster/jhlitest/shared/authentication/domain", "Role.java", "Roles.java", "Username.java")
+      .hasFiles("src/main/java/com/seed4j/growth/shared/authentication/package-info.java")
+      .hasPrefixedFiles("src/main/java/com/seed4j/growth/shared/authentication/domain", "Role.java", "Roles.java", "Username.java")
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/shared/authentication/application",
+        "src/main/java/com/seed4j/growth/shared/authentication/application",
         "AuthenticatedUser.java",
         "NotAuthenticatedUserException.java",
         "AuthenticationException.java",
         "UnknownAuthenticationException.java"
       )
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/shared/authentication/infrastructure/primary",
+        "src/main/java/com/seed4j/growth/shared/authentication/infrastructure/primary",
         "AuthenticationExceptionAdvice.java",
         "AuthenticationTokenReader.java",
         "JwtAuthenticationProperties.java",
@@ -92,20 +92,20 @@ class JwtAuthenticationModuleFactoryTest {
         "SecurityConfiguration.java"
       )
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/authentication/domain",
+        "src/test/java/com/seed4j/growth/shared/authentication/domain",
         "RolesTest.java",
         "RoleTest.java",
         "UsernameTest.java"
       )
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/shared/authentication/application/AuthenticatedUserTest.java")
+      .hasFiles("src/test/java/com/seed4j/growth/shared/authentication/application/AuthenticatedUserTest.java")
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/authentication/infrastructure/primary",
+        "src/test/java/com/seed4j/growth/shared/authentication/infrastructure/primary",
         "AuthenticationExceptionAdviceIT.java",
         "JWTFilterTest.java",
         "JwtReaderTest.java",
         "AccountExceptionResource.java"
       )
-      .hasFile("src/test/java/tech/jhipster/jhlitest/IntegrationTest.java")
+      .hasFile("src/test/java/com/seed4j/growth/IntegrationTest.java")
       .containing("@WithMockUser")
       .containing("import org.springframework.security.test.context.support.WithMockUser;")
       .and()
@@ -136,7 +136,7 @@ class JwtAuthenticationModuleFactoryTest {
   void shouldBuildModuleWithJwtBase64Secret() {
     String jwtBase64Secret = "Y2EyZjQ2YmNmZjMwMTE5YjcxOTBjYzZiYWVjZjY0NzZlMzNmNjY5MjgwMjUxZDNjOTA3N2M5YjAyYTg3ODEzMA==";
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("jhipster")
       .put("jwtBase64Secret", jwtBase64Secret)
       .build();
@@ -159,6 +159,6 @@ class JwtAuthenticationModuleFactoryTest {
   }
 
   private ModuleFile integrationTestFile() {
-    return file("src/test/resources/projects/files/IntegrationTest.java", "src/test/java/tech/jhipster/jhlitest/IntegrationTest.java");
+    return file("src/test/resources/projects/files/IntegrationTest.java", "src/test/java/com/seed4j/growth/IntegrationTest.java");
   }
 }

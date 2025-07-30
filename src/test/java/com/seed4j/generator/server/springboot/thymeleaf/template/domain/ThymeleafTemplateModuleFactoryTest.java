@@ -23,7 +23,7 @@ class ThymeleafTemplateModuleFactoryTest {
   void shouldBuildThymeleafTemplateModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhiTest")
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);

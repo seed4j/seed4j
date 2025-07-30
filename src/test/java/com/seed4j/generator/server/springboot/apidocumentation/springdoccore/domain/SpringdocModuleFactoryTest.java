@@ -19,7 +19,7 @@ class SpringdocModuleFactoryTest {
     JHipsterModule module = springdocModuleFactory.buildModuleForMvc(properties());
 
     assertThatSpringdocModule(module)
-      .hasFile("src/main/java/tech/jhipster/jhlitest/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java")
+      .hasFile("src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java")
       .notContaining("JWT")
       .and()
       .hasFile("pom.xml")
@@ -33,7 +33,7 @@ class SpringdocModuleFactoryTest {
     JHipsterModule module = springdocModuleFactory.buildModuleForWebflux(properties());
 
     assertThatSpringdocModule(module)
-      .hasFile("src/main/java/tech/jhipster/jhlitest/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java")
+      .hasFile("src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java")
       .notContaining("JWT")
       .and()
       .hasFile("pom.xml")
@@ -43,7 +43,7 @@ class SpringdocModuleFactoryTest {
 
   private JHipsterModuleProperties properties() {
     return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
   }

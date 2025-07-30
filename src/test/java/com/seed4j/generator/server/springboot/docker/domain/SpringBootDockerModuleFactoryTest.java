@@ -21,7 +21,7 @@ class SpringBootDockerModuleFactoryTest {
     @Test
     void shouldBuildJibModule() {
       JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-        .basePackage("tech.jhipster.jhlitest")
+        .basePackage("com.seed4j.growth")
         .projectBaseName("myapp")
         .put("serverPort", 9000)
         .build();
@@ -80,7 +80,7 @@ class SpringBootDockerModuleFactoryTest {
         )
         .and()
         .hasFile("src/main/docker/jib/entrypoint.sh")
-        .containing("\"tech.jhipster.jhlitest.MyappApp\"");
+        .containing("\"com.seed4j.growth.MyappApp\"");
     }
 
     @Test
@@ -101,7 +101,7 @@ class SpringBootDockerModuleFactoryTest {
     @Test
     void shouldBuildJibModule() {
       JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-        .basePackage("tech.jhipster.jhlitest")
+        .basePackage("com.seed4j.growth")
         .projectBaseName("myapp")
         .put("serverPort", 9000)
         .build();
@@ -171,7 +171,7 @@ class SpringBootDockerModuleFactoryTest {
         )
         .and()
         .hasFile("src/main/docker/jib/entrypoint.sh")
-        .containing("\"tech.jhipster.jhlitest.MyappApp\"");
+        .containing("\"com.seed4j.growth.MyappApp\"");
     }
 
     @Test

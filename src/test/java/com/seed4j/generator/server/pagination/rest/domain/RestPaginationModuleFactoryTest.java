@@ -17,7 +17,7 @@ class RestPaginationModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .build();
 
@@ -28,12 +28,12 @@ class RestPaginationModuleFactoryTest {
       .containing("MyAppPage<")
       .and()
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/shared/pagination/infrastructure/primary",
+        "src/main/java/com/seed4j/growth/shared/pagination/infrastructure/primary",
         "RestMyAppPage.java",
         "RestMyAppPageable.java"
       )
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/pagination/infrastructure/primary",
+        "src/test/java/com/seed4j/growth/shared/pagination/infrastructure/primary",
         "RestMyAppPageTest.java",
         "RestMyAppPageableTest.java"
       );

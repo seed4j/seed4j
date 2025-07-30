@@ -17,7 +17,7 @@ class SpringdocOktaModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .put("oktaDomain", "dev-123456.okta.com")
       .put("oktaClientId", "my-client-id")
       .build();

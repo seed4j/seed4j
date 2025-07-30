@@ -12,7 +12,7 @@ Feature: JPA modules
       | postgresql.md |
     And I should have files in "src/main/docker"
       | postgresql.yml |
-    And I should have files in "src/main/java/tech/jhipster/chips/wire/database/infrastructure/secondary"
+    And I should have files in "src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary"
       | DatabaseConfiguration.java |
     And I should have files in "src/main/resources/config"
       | application.yml |
@@ -38,7 +38,7 @@ Feature: JPA modules
       | mariadb.md |
     And I should have files in "src/main/docker"
       | mariadb.yml |
-    And I should have files in "src/main/java/tech/jhipster/chips/wire/database/infrastructure/secondary"
+    And I should have files in "src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary"
       | DatabaseConfiguration.java |
     And I should have files in "src/main/resources/config"
       | application.yml |
@@ -64,7 +64,7 @@ Feature: JPA modules
       | mysql.md |
     And I should have files in "src/main/docker"
       | mysql.yml |
-    And I should have files in "src/main/java/tech/jhipster/chips/wire/database/infrastructure/secondary"
+    And I should have files in "src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary"
       | DatabaseConfiguration.java |
     And I should have files in "src/main/resources/config"
       | application.yml |
@@ -90,9 +90,9 @@ Feature: JPA modules
       | mssql.md |
     And I should have files in "src/main/docker"
       | mssql.yml |
-    And I should have files in "src/main/java/tech/jhipster/chips/wire/database/infrastructure/secondary"
+    And I should have files in "src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary"
       | DatabaseConfiguration.java |
-    And I should have files in "src/test/java/tech/jhipster/chips"
+    And I should have files in "src/test/java/com/seed4j/growth"
       | MsSQLTestContainerExtension.java |
     And I should have files in "src/test/resources"
       | container-license-acceptance.txt |

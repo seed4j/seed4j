@@ -18,7 +18,7 @@ class GatewayModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .build();
 
@@ -94,9 +94,9 @@ class GatewayModuleFactoryTest {
       )
       .and()
       .hasJavaSources(
-        "tech/jhipster/jhlitest/wire/gateway/infrastructure/primary/GatewayResource.java",
-        "tech/jhipster/jhlitest/wire/gateway/infrastructure/primary/vm/RouteVM.java"
+        "com/seed4j/growth/wire/gateway/infrastructure/primary/GatewayResource.java",
+        "com/seed4j/growth/wire/gateway/infrastructure/primary/vm/RouteVM.java"
       )
-      .hasJavaTests("tech/jhipster/jhlitest/wire/gateway/infrastructure/primary/GatewayResourceIT.java");
+      .hasJavaTests("com/seed4j/growth/wire/gateway/infrastructure/primary/GatewayResourceIT.java");
   }
 }

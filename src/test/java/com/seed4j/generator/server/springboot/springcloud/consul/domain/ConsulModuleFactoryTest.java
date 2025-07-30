@@ -29,8 +29,8 @@ class ConsulModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.burger")
-      .projectBaseName("burger")
+      .basePackage("com.seed4j.growth")
+      .projectBaseName("growth")
       .build();
     when(dockerImages.get("consul")).thenReturn(new DockerImageVersion("consul", "1.12.2"));
     when(dockerImages.get("jhipster/consul-config-loader")).thenReturn(new DockerImageVersion("jhipster/consul-config-loader", "v0.4.1"));
@@ -89,7 +89,7 @@ class ConsulModuleFactoryTest {
         """
         spring:
           application:
-            name: burger
+            name: growth
           cloud:
             compatibility-verifier:
               enabled: false
@@ -101,9 +101,9 @@ class ConsulModuleFactoryTest {
                   enabled: false
               discovery:
                 health-check-path: ${server.servlet.context-path:}/management/health
-                instance-id: burger:${spring.application.instance-id:${random.value}}
+                instance-id: growth:${spring.application.instance-id:${random.value}}
                 prefer-ip-address: true
-                service-name: burger
+                service-name: growth
                 tags[0]: version=@project.version@
                 tags[1]: context-path=${server.servlet.context-path:}
                 tags[2]: profile=${spring.profiles.active:}

@@ -17,7 +17,7 @@ class SimpleCacheModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
@@ -33,6 +33,6 @@ class SimpleCacheModuleFactoryTest {
         """
       )
       .and()
-      .hasJavaSources("tech/jhipster/jhlitest/wire/cache/infrastructure/secondary/CacheConfiguration.java");
+      .hasJavaSources("com/seed4j/growth/wire/cache/infrastructure/secondary/CacheConfiguration.java");
   }
 }

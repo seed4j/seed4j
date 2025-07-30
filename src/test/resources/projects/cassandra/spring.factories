@@ -1,1 +1,1 @@
-org.springframework.context.ApplicationListener=tech.jhipster.jhlitest.TestCassandraManager
+org.springframework.context.ApplicationListener=com.seed4j.growth.TestCassandraManager

@@ -31,7 +31,7 @@ class Neo4jModuleFactoryTest {
     when(dockerImages.get("neo4j")).thenReturn(new DockerImageVersion("neo4j", "4.4.11-community"));
 
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
@@ -73,9 +73,9 @@ class Neo4jModuleFactoryTest {
       .hasFile("docker-compose.yml")
       .containing("src/main/docker/neo4j.yml")
       .and()
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/TestNeo4jManager.java")
+      .hasFiles("src/test/java/com/seed4j/growth/TestNeo4jManager.java")
       .hasFile("src/test/resources/META-INF/spring.factories")
-      .containing("org.springframework.context.ApplicationListener=tech.jhipster.jhlitest")
+      .containing("org.springframework.context.ApplicationListener=com.seed4j.growth")
       .and()
       .hasFile("src/main/resources/config/application.yml")
       .containing(

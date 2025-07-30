@@ -460,8 +460,8 @@ jobs:
         run: |
           export JHLITE_VERSION=$(find tests-ci -maxdepth 1 -name "*-tests.jar" | sed -e 's/.*jhlite-\(.*\)-tests\.jar/\1/')
           echo "JHLITE_VERSION=${JHLITE_VERSION}"
-          ./mvnw install:install-file -Dfile=tests-ci/jhlite-${JHLITE_VERSION}.jar -DgroupId=tech.jhipster.lite -DartifactId=jhlite -Dversion=${JHLITE_VERSION}
-          ./mvnw install:install-file -Dfile=tests-ci/jhlite-${JHLITE_VERSION}-tests.jar -DgroupId=tech.jhipster.lite -DartifactId=jhlite -Dversion=${JHLITE_VERSION} -Dclassifier=tests
+          ./mvnw install:install-file -Dfile=tests-ci/jhlite-${JHLITE_VERSION}.jar -DgroupId=com.seed4j -DartifactId=seed4j -Dversion=${JHLITE_VERSION}
+          ./mvnw install:install-file -Dfile=tests-ci/jhlite-${JHLITE_VERSION}-tests.jar -DgroupId=com.seed4j -DartifactId=seed4j -Dversion=${JHLITE_VERSION} -Dclassifier=tests
       - name: 'Test: verify ${{ matrix.app }}'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         working-directory: /tmp/jhlite/${{ matrix.app }}/

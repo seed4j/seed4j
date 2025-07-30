@@ -1,11 +1,11 @@
-package tech.jhipster.jhlitest;
+package com.seed4j.growth;
 
+import com.seed4j.growth.common.domain.ExcludeFromGeneratedCodeCoverage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
-import tech.jhipster.jhlitest.common.domain.ExcludeFromGeneratedCodeCoverage;
 
 @SpringBootApplication
 @ExcludeFromGeneratedCodeCoverage(reason = "Not testing logs")

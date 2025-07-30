@@ -17,52 +17,52 @@ class Oauth2AccountModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModule(module)
-      .hasPrefixedFiles("src/main/java/tech/jhipster/jhlitest/account/domain", "Account.java", "AccountsRepository.java")
-      .hasFile("src/main/java/tech/jhipster/jhlitest/account/application/AccountsApplicationService.java")
+      .hasPrefixedFiles("src/main/java/com/seed4j/growth/account/domain", "Account.java", "AccountsRepository.java")
+      .hasFile("src/main/java/com/seed4j/growth/account/application/AccountsApplicationService.java")
       .and()
-      .hasPrefixedFiles("src/main/java/tech/jhipster/jhlitest/account/infrastructure/primary", "RestAccount.java", "AccountsResource.java")
+      .hasPrefixedFiles("src/main/java/com/seed4j/growth/account/infrastructure/primary", "RestAccount.java", "AccountsResource.java")
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/account/infrastructure/secondary",
+        "src/main/java/com/seed4j/growth/account/infrastructure/secondary",
         "OAuth2AccountsRepository.java",
         "OAuth2AuthenticationReader.java",
         "UnknownAuthenticationSchemeException.java"
       )
-      .hasFile("src/main/java/tech/jhipster/jhlitest/account/package-info.java")
+      .hasFile("src/main/java/com/seed4j/growth/account/package-info.java")
       .and()
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/shared/useridentity/domain",
+        "src/main/java/com/seed4j/growth/shared/useridentity/domain",
         "Email.java",
         "Firstname.java",
         "Lastname.java",
         "Name.java"
       )
-      .hasFile("src/main/java/tech/jhipster/jhlitest/shared/useridentity/package-info.java")
+      .hasFile("src/main/java/com/seed4j/growth/shared/useridentity/package-info.java")
       .and()
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/useridentity/domain",
+        "src/test/java/com/seed4j/growth/shared/useridentity/domain",
         "EmailTest.java",
         "FirstnameTest.java",
         "LastnameTest.java",
         "NameTest.java",
         "UsersIdentitiesFixture.java"
       )
-      .hasFile("src/test/java/tech/jhipster/jhlitest/account/domain/AccountsFixture.java")
+      .hasFile("src/test/java/com/seed4j/growth/account/domain/AccountsFixture.java")
       .and()
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/account/infrastructure/primary",
+        "src/test/java/com/seed4j/growth/account/infrastructure/primary",
         "RestAccountTest.java",
         "AccountsResourceIT.java",
         "AccountsResourceTest.java"
       )
-      .hasFile("src/test/java/tech/jhipster/jhlitest/account/infrastructure/secondary/OAuth2AuthenticationReaderTest.java")
+      .hasFile("src/test/java/com/seed4j/growth/account/infrastructure/secondary/OAuth2AuthenticationReaderTest.java")
       .and()
-      .hasFile("src/test/java/tech/jhipster/jhlitest/account/infrastructure/OAuth2TokenFixture.java");
+      .hasFile("src/test/java/com/seed4j/growth/account/infrastructure/OAuth2TokenFixture.java");
   }
 }

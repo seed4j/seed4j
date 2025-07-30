@@ -17,7 +17,7 @@ class SpringBootMvcsModuleFactoryTest {
   @Test
   void shouldBuildTomcatMvcModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .put("serverPort", 9000)
       .build();
 
@@ -54,7 +54,7 @@ class SpringBootMvcsModuleFactoryTest {
   @Test
   void shouldBuildUndertowModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .put("serverPort", 9000)
       .build();
 
@@ -120,22 +120,22 @@ class SpringBootMvcsModuleFactoryTest {
       )
       .and()
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/wire/security/infrastructure/primary",
+        "src/main/java/com/seed4j/growth/wire/security/infrastructure/primary",
         "CorsFilterConfiguration.java",
         "CorsProperties.java"
       )
-      .hasFiles("src/main/java/tech/jhipster/jhlitest/wire/security/package-info.java")
-      .hasPrefixedFiles("src/test/java/tech/jhipster/jhlitest", "BeanValidationAssertions.java", "BeanValidationTest.java")
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/wire/security/infrastructure/primary/CorsFilterConfigurationIT.java")
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/JsonHelper.java")
-      .hasFiles("src/main/java/tech/jhipster/jhlitest/shared/error/infrastructure/primary/BeanValidationErrorsHandler.java")
+      .hasFiles("src/main/java/com/seed4j/growth/wire/security/package-info.java")
+      .hasPrefixedFiles("src/test/java/com/seed4j/growth", "BeanValidationAssertions.java", "BeanValidationTest.java")
+      .hasFiles("src/test/java/com/seed4j/growth/wire/security/infrastructure/primary/CorsFilterConfigurationIT.java")
+      .hasFiles("src/test/java/com/seed4j/growth/JsonHelper.java")
+      .hasFiles("src/main/java/com/seed4j/growth/shared/error/infrastructure/primary/BeanValidationErrorsHandler.java")
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/error/infrastructure/primary",
+        "src/test/java/com/seed4j/growth/shared/error/infrastructure/primary",
         "BeanValidationErrorsHandlerTest.java",
         "BeanValidationErrorsHandlerIT.java"
       )
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/error_generator/infrastructure/primary",
+        "src/test/java/com/seed4j/growth/shared/error_generator/infrastructure/primary",
         "BeanValidationErrorsResource.java",
         "RestMandatoryParameter.java"
       )
@@ -149,9 +149,9 @@ class SpringBootMvcsModuleFactoryTest {
         """
       )
       .and()
-      .hasFile("src/main/java/tech/jhipster/jhlitest/wire/jackson/infrastructure/primary/JacksonConfiguration.java")
+      .hasFile("src/main/java/com/seed4j/growth/wire/jackson/infrastructure/primary/JacksonConfiguration.java")
       .and()
-      .hasFile("src/test/java/tech/jhipster/jhlitest/wire/jackson/infrastructure/primary/JacksonConfigurationIT.java")
+      .hasFile("src/test/java/com/seed4j/growth/wire/jackson/infrastructure/primary/JacksonConfigurationIT.java")
       .and();
   }
 }

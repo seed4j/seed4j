@@ -19,7 +19,7 @@ class MavenModuleFactoryTest {
   @Test
   void shouldBuildMavenModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .projectName("JHipster test")
       .build();
@@ -28,7 +28,7 @@ class MavenModuleFactoryTest {
 
     assertThatModuleWithFiles(module, readmeFile())
       .hasFile("pom.xml")
-      .containing("<groupId>tech.jhipster.jhlitest</groupId>")
+      .containing("<groupId>com.seed4j.growth</groupId>")
       .containing("<artifactId>my-app</artifactId>")
       .containing("<name>myApp</name>")
       .containing("<description>JHipster test</description>")
@@ -181,7 +181,7 @@ class MavenModuleFactoryTest {
   @Test
   void shouldDeclareFailsafePluginAfterSurefirePluginInPomXml() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .projectName("JHipster test")
       .build();

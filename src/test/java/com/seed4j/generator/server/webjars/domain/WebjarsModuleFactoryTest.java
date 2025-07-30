@@ -18,7 +18,7 @@ class WebjarsModuleFactoryTest {
   @Test
   void shouldBuildWebjarsLocatorModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
@@ -39,7 +39,7 @@ class WebjarsModuleFactoryTest {
   @Test
   void shouldBuildHtmxWebjarsModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
@@ -61,7 +61,7 @@ class WebjarsModuleFactoryTest {
   @Test
   void shouldBuildAlpineJSWebjarsModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 

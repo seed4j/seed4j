@@ -31,7 +31,7 @@ class JHLiteModuleSlugTest {
 
   @ParameterizedTest
   @NullSource
-  @ValueSource(strings = { "chips", " " })
+  @ValueSource(strings = { "growth", " " })
   void shouldNotGetRank(String slug) {
     assertThat(JHLiteModuleSlug.getRank(slug)).isEmpty();
   }

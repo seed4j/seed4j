@@ -18,7 +18,7 @@ class GradleModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .build();
 
@@ -37,7 +37,7 @@ class GradleModuleFactoryTest {
       )
       .and()
       .hasFile("build.gradle.kts")
-      .containing("group = \"tech.jhipster.jhlitest\"")
+      .containing("group = \"com.seed4j.growth\"")
       .containing("testImplementation(libs.junit.engine)")
       .containing("testImplementation(libs.junit.params)")
       .containing("testImplementation(libs.assertj)")

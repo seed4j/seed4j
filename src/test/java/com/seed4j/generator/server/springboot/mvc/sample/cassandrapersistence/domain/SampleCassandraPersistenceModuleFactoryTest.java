@@ -18,7 +18,7 @@ class SampleCassandraPersistenceModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName(BASE_NAME)
       .build();
 
@@ -26,7 +26,7 @@ class SampleCassandraPersistenceModuleFactoryTest {
 
     assertThatModuleWithFiles(module, sampleInMemoryRepository(), inMemoryBeersResetter())
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/sample/infrastructure/secondary",
+        "src/main/java/com/seed4j/growth/sample/infrastructure/secondary",
         "BeerCatalogTable.java",
         "BeerTable.java",
         "CassandraBeerCatalogRepository.java",
@@ -34,7 +34,7 @@ class SampleCassandraPersistenceModuleFactoryTest {
         "SpringDataBeersRepository.java"
       )
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/sample/infrastructure/secondary",
+        "src/test/java/com/seed4j/growth/sample/infrastructure/secondary",
         "BeerCatalogTableTest.java",
         "BeerTableTest.java",
         "CassandraBeerCatalogRepositoryIT.java",
@@ -53,22 +53,22 @@ class SampleCassandraPersistenceModuleFactoryTest {
       )
       .and()
       .doNotHaveFiles(
-        "src/main/java/tech/jhipster/jhlitest/sample/infrastructure/secondary/InMemoryBeersRepository.java",
-        "src/test/java/tech/jhipster/jhlitest/sample/infrastructure/secondary/InMemoryBeersResetter.java"
+        "src/main/java/com/seed4j/growth/sample/infrastructure/secondary/InMemoryBeersRepository.java",
+        "src/test/java/com/seed4j/growth/sample/infrastructure/secondary/InMemoryBeersResetter.java"
       );
   }
 
   private ModuleFile sampleInMemoryRepository() {
     return file(
       "src/test/resources/projects/sample-feature/InMemoryBeersRepository.java",
-      "src/main/java/tech/jhipster/jhlitest/sample/infrastructure/secondary/InMemoryBeersRepository.java"
+      "src/main/java/com/seed4j/growth/sample/infrastructure/secondary/InMemoryBeersRepository.java"
     );
   }
 
   private ModuleFile inMemoryBeersResetter() {
     return file(
       "src/test/resources/projects/sample-feature/InMemoryBeersResetter.java",
-      "src/test/java/tech/jhipster/jhlitest/sample/infrastructure/secondary/InMemoryBeersResetter.java"
+      "src/test/java/com/seed4j/growth/sample/infrastructure/secondary/InMemoryBeersResetter.java"
     );
   }
 }

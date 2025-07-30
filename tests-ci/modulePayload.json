@@ -2,10 +2,10 @@
   "projectFolder": "/tmp/jhlite/APP_NAME",
   "commit": true,
   "parameters": {
-    "projectName": "Chips Project",
+    "projectName": "Growth Project",
     "serverPort": 8081,
     "baseName": "APP_NAME",
-    "packageName": "tech.jhipster.APP_NAME",
+    "packageName": "com.seed4j.APP_NAME",
     "nodePackageManager": "NODE_PACKAGE_MANAGER",
     "jwtBase64Secret": "NmE2NDhmMmQ5OWQzYzk4NmE4NjNlMmQzNmU3ZTU4ZDY2MmUxOWEwZGI4YTk4NDY0MTk4MmQyMWZlNDNlM2FjYg==",
     "date": "2021-12-03T10:15:30.00Z",

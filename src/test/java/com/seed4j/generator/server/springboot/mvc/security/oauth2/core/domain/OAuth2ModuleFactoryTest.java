@@ -29,7 +29,7 @@ class OAuth2ModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .put("keycloakRealmName", "beer")
       .build();
@@ -39,16 +39,16 @@ class OAuth2ModuleFactoryTest {
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), integrationTestFile(), readmeFile())
-      .hasPrefixedFiles("src/main/java/tech/jhipster/jhlitest/shared/authentication/domain", "Role.java", "Roles.java", "Username.java")
+      .hasPrefixedFiles("src/main/java/com/seed4j/growth/shared/authentication/domain", "Role.java", "Roles.java", "Username.java")
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/shared/authentication/application",
+        "src/main/java/com/seed4j/growth/shared/authentication/application",
         "AuthenticatedUser.java",
         "NotAuthenticatedUserException.java",
         "AuthenticationException.java",
         "UnknownAuthenticationException.java"
       )
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/shared/authentication/infrastructure/primary",
+        "src/main/java/com/seed4j/growth/shared/authentication/infrastructure/primary",
         "ApplicationSecurityProperties.java",
         "AudienceValidator.java",
         "AuthenticationExceptionAdvice.java",
@@ -59,14 +59,14 @@ class OAuth2ModuleFactoryTest {
         "SecurityConfiguration.java"
       )
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/authentication/domain",
+        "src/test/java/com/seed4j/growth/shared/authentication/domain",
         "RolesTest.java",
         "RoleTest.java",
         "UsernameTest.java"
       )
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/shared/authentication/application/AuthenticatedUserTest.java")
+      .hasFiles("src/test/java/com/seed4j/growth/shared/authentication/application/AuthenticatedUserTest.java")
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/authentication/infrastructure/primary",
+        "src/test/java/com/seed4j/growth/shared/authentication/infrastructure/primary",
         "AccountExceptionResource.java",
         "ApplicationSecurityPropertiesTest.java",
         "AudienceValidatorTest.java",
@@ -88,7 +88,7 @@ class OAuth2ModuleFactoryTest {
       .hasFile("src/main/docker/keycloak-realm-config/beer-realm.json")
       .containing("1.1.1")
       .and()
-      .hasFile("src/main/java/tech/jhipster/jhlitest/shared/authentication/package-info.java")
+      .hasFile("src/main/java/com/seed4j/growth/shared/authentication/package-info.java")
       .and()
       .hasFile("pom.xml")
       .containing("spring-boot-starter-security")
@@ -135,9 +135,9 @@ class OAuth2ModuleFactoryTest {
         """
       )
       .and()
-      .hasFile("src/test/java/tech/jhipster/jhlitest/IntegrationTest.java")
+      .hasFile("src/test/java/com/seed4j/growth/IntegrationTest.java")
       .containing("@SpringBootTest(classes = { MyappApp.class, TestSecurityConfiguration.class })")
-      .containing("import tech.jhipster.jhlitest.shared.authentication.infrastructure.primary.TestSecurityConfiguration;")
+      .containing("import com.seed4j.growth.shared.authentication.infrastructure.primary.TestSecurityConfiguration;")
       .containing("@WithMockUser")
       .containing("import org.springframework.security.test.context.support.WithMockUser;")
       .and()
@@ -146,6 +146,6 @@ class OAuth2ModuleFactoryTest {
   }
 
   private static ModuleFile integrationTestFile() {
-    return file("src/test/resources/projects/files/IntegrationTest.java", "src/test/java/tech/jhipster/jhlitest/IntegrationTest.java");
+    return file("src/test/resources/projects/files/IntegrationTest.java", "src/test/java/com/seed4j/growth/IntegrationTest.java");
   }
 }

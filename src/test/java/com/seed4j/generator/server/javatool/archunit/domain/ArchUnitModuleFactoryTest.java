@@ -17,7 +17,7 @@ class ArchUnitModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
@@ -25,9 +25,9 @@ class ArchUnitModuleFactoryTest {
     assertThatModuleWithFiles(module, pomFile(), testLogbackFile())
       .hasFiles(
         "src/test/resources/archunit.properties",
-        "src/test/java/tech/jhipster/jhlitest/AnnotationArchTest.java",
-        "src/test/java/tech/jhipster/jhlitest/HexagonalArchTest.java",
-        "src/test/java/tech/jhipster/jhlitest/EqualsHashcodeArchTest.java"
+        "src/test/java/com/seed4j/growth/AnnotationArchTest.java",
+        "src/test/java/com/seed4j/growth/HexagonalArchTest.java",
+        "src/test/java/com/seed4j/growth/EqualsHashcodeArchTest.java"
       )
       .hasFile("pom.xml")
       .containing("<artifactId>archunit-junit5-api</artifactId>")

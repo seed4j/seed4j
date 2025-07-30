@@ -37,7 +37,7 @@ class RestJHipsterModulePropertiesTest {
       "projectFolder": "/test",
       "commit": true,
       "parameters": {
-        "packageName": "tech.jhipster.chips",
+        "packageName": "com.seed4j.growth",
         "indentSize": 2,
         "projectName": "JHipster project",
         "baseName": "jhipster",

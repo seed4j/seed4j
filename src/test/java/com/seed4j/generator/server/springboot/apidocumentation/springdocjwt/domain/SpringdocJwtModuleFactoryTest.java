@@ -17,13 +17,13 @@ class SpringdocJwtModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModule(module).hasFiles(
-      "src/main/java/tech/jhipster/jhlitest/wire/springdoc/infrastructure/primary/SpringdocJWTConfiguration.java"
+      "src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/SpringdocJWTConfiguration.java"
     );
   }
 }

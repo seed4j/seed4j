@@ -31,7 +31,7 @@ class PulsarModuleFactoryTest {
     when(dockerImages.get("apachepulsar/pulsar")).thenReturn(new DockerImageVersion("apachepulsar/pulsar", "1.1.1"));
 
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
@@ -83,17 +83,17 @@ class PulsarModuleFactoryTest {
         """
       )
       .and()
-      .hasJavaTests("tech/jhipster/jhlitest/PulsarTestContainerExtension.java")
-      .hasFile("src/test/java/tech/jhipster/jhlitest/IntegrationTest.java")
+      .hasJavaTests("com/seed4j/growth/PulsarTestContainerExtension.java")
+      .hasFile("src/test/java/com/seed4j/growth/IntegrationTest.java")
       .containing("import org.junit.jupiter.api.extension.ExtendWith;")
       .containing("@ExtendWith(PulsarTestContainerExtension.class)")
       .and()
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/wire/pulsar/infrastructure/config",
+        "src/main/java/com/seed4j/growth/wire/pulsar/infrastructure/config",
         "PulsarProperties.java",
         "PulsarConfiguration.java"
       )
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/wire/pulsar/infrastructure/config/PulsarConfigurationIT.java")
+      .hasFiles("src/test/java/com/seed4j/growth/wire/pulsar/infrastructure/config/PulsarConfigurationIT.java")
       .hasFile("README.md")
       .containing(
         """
@@ -105,6 +105,6 @@ class PulsarModuleFactoryTest {
   }
 
   private ModuleFile integrationTestAnnotation() {
-    return file("src/test/resources/projects/files/IntegrationTest.java", "src/test/java/tech/jhipster/jhlitest/IntegrationTest.java");
+    return file("src/test/resources/projects/files/IntegrationTest.java", "src/test/java/com/seed4j/growth/IntegrationTest.java");
   }
 }

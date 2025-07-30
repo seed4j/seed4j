@@ -11,9 +11,9 @@ class InvalidProjectFolderExceptionTest {
 
   @Test
   void shouldGetExceptionInformation() {
-    InvalidProjectFolderException exception = new InvalidProjectFolderException("/chips");
+    InvalidProjectFolderException exception = new InvalidProjectFolderException("/growth");
 
-    assertThat(exception.getMessage()).isEqualTo("Project folder is not valid: /chips");
+    assertThat(exception.getMessage()).isEqualTo("Project folder is not valid: /growth");
     assertThat(exception.status()).isEqualTo(ErrorStatus.BAD_REQUEST);
     assertThat(exception.key()).isEqualTo(ProjectFolderErrorKey.INVALID_FOLDER);
   }

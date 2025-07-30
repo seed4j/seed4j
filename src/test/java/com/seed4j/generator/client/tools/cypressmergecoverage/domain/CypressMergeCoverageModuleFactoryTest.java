@@ -32,7 +32,7 @@ class CypressMergeCoverageModuleFactoryTest {
   void shouldBuildCypressMergeCoverageModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhiTest")
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildCypressMergeCoverage(properties);

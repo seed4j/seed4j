@@ -18,7 +18,7 @@ class JwtBasicAuthModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("jhipster")
       .build();
 
@@ -46,16 +46,11 @@ class JwtBasicAuthModuleFactoryTest {
         """
       )
       .and()
-      .hasFiles("src/main/java/tech/jhipster/jhlitest/account/package-info.java")
-      .hasFiles("src/main/java/tech/jhipster/jhlitest/account/application/AccountApplicationService.java")
+      .hasFiles("src/main/java/com/seed4j/growth/account/package-info.java")
+      .hasFiles("src/main/java/com/seed4j/growth/account/application/AccountApplicationService.java")
+      .hasPrefixedFiles("src/main/java/com/seed4j/growth/account/domain", "AuthenticationQuery.java", "Token.java", "TokensRepository.java")
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/account/domain",
-        "AuthenticationQuery.java",
-        "Token.java",
-        "TokensRepository.java"
-      )
-      .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/account/infrastructure/primary",
+        "src/main/java/com/seed4j/growth/account/infrastructure/primary",
         "AccountResource.java",
         "AuthenticationResource.java",
         "Authenticator.java",
@@ -64,14 +59,14 @@ class JwtBasicAuthModuleFactoryTest {
         "RestToken.java"
       )
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/account/infrastructure/secondary",
+        "src/main/java/com/seed4j/growth/account/infrastructure/secondary",
         "JwtTokensConfiguration.java",
         "JwtTokensProperties.java",
         "JwtTokensRepository.java"
       )
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/account/domain/TokensFixture.java")
+      .hasFiles("src/test/java/com/seed4j/growth/account/domain/TokensFixture.java")
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/account/infrastructure/primary",
+        "src/test/java/com/seed4j/growth/account/infrastructure/primary",
         "AccountResourceIT.java",
         "AuthenticationResourceIT.java",
         "RestAccountTest.java",

@@ -20,7 +20,7 @@ class CustomJHLiteModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .put("serverPort", 9000)
       .build();
@@ -38,7 +38,7 @@ class CustomJHLiteModuleFactoryTest {
         .and()
       .hasFile("tests-ci/modulePayload.json")
         .containing("""
-          "packageName": "tech.jhipster.jhlitest.APP_NAME",
+          "packageName": "com.seed4j.growth.APP_NAME",
         """)
         .and()
       .hasFile("pom.xml")
@@ -103,36 +103,36 @@ class CustomJHLiteModuleFactoryTest {
               allow-bean-definition-overriding: true
           """)
         .and()
-      .hasFile("src/main/java/tech/jhipster/jhlitest/MyAppApp.java")
+      .hasFile("src/main/java/com/seed4j/growth/MyAppApp.java")
         .containing("import com.seed4j.Seed4jApp;")
         .containing("@SpringBootApplication(scanBasePackageClasses = { Seed4jApp.class, MyAppApp.class })")
         .and()
       .hasPrefixedFiles("documentation", "module-creation.md", "cucumber.md")
       .doNotHaveFiles(
-        "src/main/java/tech/jhipster/test/security/infrastructure/primary/CorsFilterConfiguration.java",
-        "src/main/java/tech/jhipster/test/security/infrastructure/primary/CorsProperties.java",
-        "src/test/java/tech/jhipster/test/security/infrastructure/primary/CorsFilterConfigurationIT.java"
+        "src/main/java/com/seed4j/growth/security/infrastructure/primary/CorsFilterConfiguration.java",
+        "src/main/java/com/seed4j/growth/security/infrastructure/primary/CorsProperties.java",
+        "src/test/java/com/seed4j/growth/security/infrastructure/primary/CorsFilterConfigurationIT.java"
       )
-      .hasFile("src/test/java/tech/jhipster/jhlitest/cucumber/CucumberTest.java")
-        .containing("key = GLUE_PROPERTY_NAME, value = \"tech.jhipster.jhlitest, com.seed4j.module.infrastructure.primary, com.seed4j.project.infrastructure.primary\"")
+      .hasFile("src/test/java/com/seed4j/growth/cucumber/CucumberTest.java")
+        .containing("key = GLUE_PROPERTY_NAME, value = \"com.seed4j.growth, com.seed4j.module.infrastructure.primary, com.seed4j.project.infrastructure.primary\"")
         .and()
-      .hasFile("src/test/java/tech/jhipster/jhlitest/cucumber/CucumberConfiguration.java")
-        .containing("import tech.jhipster.jhlitest.MyAppApp;")
+      .hasFile("src/test/java/com/seed4j/growth/cucumber/CucumberConfiguration.java")
+        .containing("import com.seed4j.growth.MyAppApp;")
         .and()
-      .hasPrefixedFiles("src/main/java/tech/jhipster/jhlitest/shared/slug", "package-info.java", "domain/MyAppFeatureSlug.java", "domain/MyAppModuleSlug.java")
+      .hasPrefixedFiles("src/main/java/com/seed4j/growth/shared/slug", "package-info.java", "domain/MyAppFeatureSlug.java", "domain/MyAppModuleSlug.java")
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/shared/dependencies",
+        "src/main/java/com/seed4j/growth/shared/dependencies",
         "package-info.java",
         "domain/MyAppNodePackagesVersionSource.java",
         "infrastructure/secondary/MyAppNodePackagesVersionsReader.java",
         "infrastructure/secondary/MyAppMavenDependenciesReader.java"
       )
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/dependencies/infrastructure/secondary",
+        "src/test/java/com/seed4j/growth/shared/dependencies/infrastructure/secondary",
         "MyAppNodePackagesVersionsReaderTest.java",
         "MyAppMavenDependenciesReaderTest.java"
       )
-      .hasFile("src/main/java/tech/jhipster/jhlitest/shared/dependencies/domain/MyAppNodePackagesVersionSource.java")
+      .hasFile("src/main/java/com/seed4j/growth/shared/dependencies/domain/MyAppNodePackagesVersionSource.java")
         .containing(
         """
         MY_APP("my-app");
@@ -144,12 +144,12 @@ class CustomJHLiteModuleFactoryTest {
         "my-app/package.json",
         "pom.xml"
       )
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/cucumber/rest/CucumberRestTemplate.java")
+      .hasFiles("src/test/java/com/seed4j/growth/cucumber/rest/CucumberRestTemplate.java")
       .hasFiles("src/test/features/.gitkeep");
     // @formatter:on
   }
 
   private ModuleFile mainAppFile() {
-    return file("src/test/resources/projects/files/MainApp.java", "src/main/java/tech/jhipster/jhlitest/MyAppApp.java");
+    return file("src/test/resources/projects/files/MainApp.java", "src/main/java/com/seed4j/growth/MyAppApp.java");
   }
 }

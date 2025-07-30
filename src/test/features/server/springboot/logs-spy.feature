@@ -5,7 +5,7 @@ Feature: LogSpy
       | maven-java  |
       | spring-boot |
       | logs-spy    |
-    Then I should have files in "src/test/java/tech/jhipster/chips"
+    Then I should have files in "src/test/java/com/seed4j/growth"
       | Logs.java             |
       | LogsSpy.java          |
       | LogsSpyExtension.java |

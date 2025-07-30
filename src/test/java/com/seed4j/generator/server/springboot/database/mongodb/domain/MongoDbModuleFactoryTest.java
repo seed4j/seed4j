@@ -31,7 +31,7 @@ class MongoDbModuleFactoryTest {
     when(dockerImages.get("mongo")).thenReturn(new DockerImageVersion("mongo", "1.1.1"));
 
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
@@ -83,14 +83,14 @@ class MongoDbModuleFactoryTest {
       .containing("src/main/docker/mongodb.yml")
       .and()
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/wire/mongodb/infrastructure/secondary",
+        "src/main/java/com/seed4j/growth/wire/mongodb/infrastructure/secondary",
         "MongodbDatabaseConfiguration.java",
         "JSR310DateConverters.java"
       )
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/wire/mongodb/infrastructure/secondary/JSR310DateConvertersTest.java")
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/TestMongoDBManager.java")
+      .hasFiles("src/test/java/com/seed4j/growth/wire/mongodb/infrastructure/secondary/JSR310DateConvertersTest.java")
+      .hasFiles("src/test/java/com/seed4j/growth/TestMongoDBManager.java")
       .hasFile("src/test/resources/META-INF/spring.factories")
-      .containing("org.springframework.context.ApplicationListener=tech.jhipster.jhlitest")
+      .containing("org.springframework.context.ApplicationListener=com.seed4j.growth")
       .and()
       .hasFile("src/main/resources/config/application.yml")
       .containing(

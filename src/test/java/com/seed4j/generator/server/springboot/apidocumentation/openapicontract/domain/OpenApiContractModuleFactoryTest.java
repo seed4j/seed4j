@@ -17,7 +17,7 @@ class OpenApiContractModuleFactoryTest {
 
   @Test
   void shouldBuildOpenApiContractModule() {
-    JHipsterModuleProperties properties = propertiesBuilder(tmpDirForTest()).basePackage("tech.jhipster.jhlitest").build();
+    JHipsterModuleProperties properties = propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
 
     JHipsterModule module = factory.buildModule(properties);
 
@@ -55,7 +55,7 @@ class OpenApiContractModuleFactoryTest {
                       <api>
                         <filename>openapi-contract.yml</filename>
                         <locations>
-                          <location>tech.jhipster.jhlitest</location>
+                          <location>com.seed4j.growth</location>
                         </locations>
                         <tag>
                           <substitutions>

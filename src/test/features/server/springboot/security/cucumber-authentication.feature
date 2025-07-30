@@ -5,7 +5,7 @@ Feature: Cucumber authentication
       | maven-java                                 |
       | spring-boot-cucumber-mvc                   |
       | spring-boot-cucumber-oauth2-authentication |
-    Then I should have files in "src/test/java/tech/jhipster/chips/shared/authentication/infrastructure/primary"
+    Then I should have files in "src/test/java/com/seed4j/growth/shared/authentication/infrastructure/primary"
       | AuthenticationSteps.java |
 
   Scenario: Should apply cucumber mvc jwt authentication module
@@ -13,7 +13,7 @@ Feature: Cucumber authentication
       | maven-java                              |
       | spring-boot-cucumber-mvc                |
       | spring-boot-cucumber-jwt-authentication |
-    Then I should have files in "src/test/java/tech/jhipster/chips/shared/authentication/infrastructure/primary"
+    Then I should have files in "src/test/java/com/seed4j/growth/shared/authentication/infrastructure/primary"
       | AuthenticationSteps.java |
 
   Scenario: Should apply cucumber webflux oauth2 authentication module
@@ -21,7 +21,7 @@ Feature: Cucumber authentication
       | maven-java                                 |
       | spring-boot-cucumber-webflux               |
       | spring-boot-cucumber-oauth2-authentication |
-    Then I should have files in "src/test/java/tech/jhipster/chips/shared/authentication/infrastructure/primary"
+    Then I should have files in "src/test/java/com/seed4j/growth/shared/authentication/infrastructure/primary"
       | AuthenticationSteps.java |
 
   Scenario: Should apply cucumber webflux jwt authentication module
@@ -29,5 +29,5 @@ Feature: Cucumber authentication
       | maven-java                              |
       | spring-boot-cucumber-webflux            |
       | spring-boot-cucumber-jwt-authentication |
-    Then I should have files in "src/test/java/tech/jhipster/chips/shared/authentication/infrastructure/primary"
+    Then I should have files in "src/test/java/com/seed4j/growth/shared/authentication/infrastructure/primary"
       | AuthenticationSteps.java |

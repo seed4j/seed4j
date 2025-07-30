@@ -31,9 +31,9 @@ class RestJHipsterModulesToApplyTest {
         {
           "projectFolder": "/dummy",
           "parameters": {
-            "projectName": "Chips Project",
-            "baseName": "chips",
-            "packageName": "tech.jhipster.chips",
+            "projectName": "Growth Project",
+            "baseName": "growth",
+            "packageName": "com.seed4j.growth",
             "serverPort": 8080
           }
         }

@@ -17,7 +17,7 @@ class LogstashModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
@@ -35,13 +35,13 @@ class LogstashModuleFactoryTest {
       )
       .and()
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/wire/logstash/infrastructure/secondary",
+        "src/main/java/com/seed4j/growth/wire/logstash/infrastructure/secondary",
         "LogstashTcpConfiguration.java",
         "LogstashTcpLifeCycle.java",
         "LogstashTcpProperties.java"
       )
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/wire/logstash/infrastructure/secondary",
+        "src/test/java/com/seed4j/growth/wire/logstash/infrastructure/secondary",
         "LogstashTcpConfigurationIT.java",
         "LogstashTcpConfigurationTest.java",
         "LogstashTcpLifeCycleTest.java",

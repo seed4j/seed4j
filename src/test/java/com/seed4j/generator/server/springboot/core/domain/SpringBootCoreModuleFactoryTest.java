@@ -105,7 +105,7 @@ class SpringBootCoreModuleFactoryTest {
                       </execution>
                     </executions>
                     <configuration>
-                      <mainClass>tech.jhipster.jhlitest.MyappApp</mainClass>
+                      <mainClass>com.seed4j.growth.MyappApp</mainClass>
                     </configuration>
                   </plugin>
           """
@@ -148,19 +148,19 @@ class SpringBootCoreModuleFactoryTest {
         )
         .containing("    <defaultGoal>spring-boot:run</defaultGoal>")
         .and()
-        .hasFile("src/main/java/tech/jhipster/jhlitest/MyappApp.java")
+        .hasFile("src/main/java/com/seed4j/growth/MyappApp.java")
         .containing("class MyappApp")
         .and()
-        .hasFiles("src/main/java/tech/jhipster/jhlitest/ApplicationStartupTraces.java")
-        .hasPrefixedFiles("src/test/java/tech/jhipster/jhlitest", "ApplicationStartupTracesTest.java", "IntegrationTest.java")
+        .hasFiles("src/main/java/com/seed4j/growth/ApplicationStartupTraces.java")
+        .hasPrefixedFiles("src/test/java/com/seed4j/growth", "ApplicationStartupTracesTest.java", "IntegrationTest.java")
         .hasFile("src/main/resources/config/application.yml")
         .containing(
           """
           logging:
             level:
-              tech:
-                jhipster:
-                  jhlitest: INFO
+              com:
+                seed4j:
+                  growth: INFO
           spring:
             application:
               name: Myapp
@@ -172,9 +172,9 @@ class SpringBootCoreModuleFactoryTest {
           """
           logging:
             level:
-              tech:
-                jhipster:
-                  jhlitest: DEBUG
+              com:
+                seed4j:
+                  growth: DEBUG
           """
         )
         .and()
@@ -215,7 +215,7 @@ class SpringBootCoreModuleFactoryTest {
     @Test
     void shouldBuildModule() {
       JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-        .basePackage("tech.jhipster.jhlitest")
+        .basePackage("com.seed4j.growth")
         .projectBaseName("myapp")
         .put("serverPort", 9000)
         .build();
@@ -246,7 +246,7 @@ class SpringBootCoreModuleFactoryTest {
         .containing(
           """
           springBoot {
-            mainClass = "tech.jhipster.jhlitest.MyappApp"
+            mainClass = "com.seed4j.growth.MyappApp"
           }
           """
         )
@@ -260,7 +260,7 @@ class SpringBootCoreModuleFactoryTest {
 
   private JHipsterModuleProperties properties() {
     return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
   }

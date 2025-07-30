@@ -18,15 +18,15 @@ class JpaModuleFactoryTest {
   @Test
   void shouldBuildPostgreSQLModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
     JHipsterModule module = factory.buildPostgreSQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .hasFile("src/main/java/tech/jhipster/jhlitest/wire/database/infrastructure/secondary/DatabaseConfiguration.java")
-      .containing("package tech.jhipster.jhlitest.wire.database.infrastructure.secondary;")
+      .hasFile("src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary/DatabaseConfiguration.java")
+      .containing("package com.seed4j.growth.wire.database.infrastructure.secondary;")
       .and()
       .hasFile("pom.xml")
       .containing(
@@ -77,15 +77,15 @@ class JpaModuleFactoryTest {
   @Test
   void shouldBuildMariadbModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
     JHipsterModule module = factory.buildMariaDB(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .hasFile("src/main/java/tech/jhipster/jhlitest/wire/database/infrastructure/secondary/DatabaseConfiguration.java")
-      .containing("package tech.jhipster.jhlitest.wire.database.infrastructure.secondary;")
+      .hasFile("src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary/DatabaseConfiguration.java")
+      .containing("package com.seed4j.growth.wire.database.infrastructure.secondary;")
       .and()
       .hasFile("pom.xml")
       .containing(
@@ -136,15 +136,15 @@ class JpaModuleFactoryTest {
   @Test
   void shouldBuildMysqlModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
     JHipsterModule module = factory.buildMySQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .hasFile("src/main/java/tech/jhipster/jhlitest/wire/database/infrastructure/secondary/DatabaseConfiguration.java")
-      .containing("package tech.jhipster.jhlitest.wire.database.infrastructure.secondary;")
+      .hasFile("src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary/DatabaseConfiguration.java")
+      .containing("package com.seed4j.growth.wire.database.infrastructure.secondary;")
       .and()
       .hasFile("pom.xml")
       .containing(
@@ -196,15 +196,15 @@ class JpaModuleFactoryTest {
   @Test
   void shouldBuildMssqlModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
     JHipsterModule module = factory.buildMsSQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
-      .hasFile("src/main/java/tech/jhipster/jhlitest/wire/database/infrastructure/secondary/DatabaseConfiguration.java")
-      .containing("package tech.jhipster.jhlitest.wire.database.infrastructure.secondary;")
+      .hasFile("src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary/DatabaseConfiguration.java")
+      .containing("package com.seed4j.growth.wire.database.infrastructure.secondary;")
       .and()
       .hasFile("pom.xml")
       .containing(

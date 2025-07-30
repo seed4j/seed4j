@@ -18,16 +18,16 @@ class JavaBaseModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, readmeFile())
-      .hasPrefixedFiles("src/main/java/tech/jhipster/jhlitest", "BusinessContext.java", "SharedKernel.java")
+      .hasPrefixedFiles("src/main/java/com/seed4j/growth", "BusinessContext.java", "SharedKernel.java")
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/shared/error/domain",
+        "src/main/java/com/seed4j/growth/shared/error/domain",
         "Assert.java",
         "AssertionErrorType.java",
         "MissingMandatoryValueException.java",
@@ -42,7 +42,7 @@ class JavaBaseModuleFactoryTest {
         "TooManyElementsException.java"
       )
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/error/domain/",
+        "src/test/java/com/seed4j/growth/shared/error/domain/",
         "AssertTest.java",
         "MissingMandatoryValueExceptionTest.java",
         "NotAfterTimeExceptionTest.java",
@@ -55,18 +55,18 @@ class JavaBaseModuleFactoryTest {
         "TooManyElementsExceptionTest.java"
       )
       .hasJavaTests(
-        "tech/jhipster/jhlitest/shared/collection/domain/MyappCollectionsTest.java",
-        "tech/jhipster/jhlitest/UnitTest.java",
-        "tech/jhipster/jhlitest/ComponentTest.java",
-        "tech/jhipster/jhlitest/ReplaceCamelCase.java"
+        "com/seed4j/growth/shared/collection/domain/MyappCollectionsTest.java",
+        "com/seed4j/growth/UnitTest.java",
+        "com/seed4j/growth/ComponentTest.java",
+        "com/seed4j/growth/ReplaceCamelCase.java"
       )
       .hasFiles(
-        "src/main/java/tech/jhipster/jhlitest/shared/error/package-info.java",
-        "src/main/java/tech/jhipster/jhlitest/shared/collection/package-info.java",
-        "src/main/java/tech/jhipster/jhlitest/shared/generation/package-info.java",
-        "src/main/java/tech/jhipster/jhlitest/shared/generation/domain/ExcludeFromGeneratedCodeCoverage.java"
+        "src/main/java/com/seed4j/growth/shared/error/package-info.java",
+        "src/main/java/com/seed4j/growth/shared/collection/package-info.java",
+        "src/main/java/com/seed4j/growth/shared/generation/package-info.java",
+        "src/main/java/com/seed4j/growth/shared/generation/domain/ExcludeFromGeneratedCodeCoverage.java"
       )
-      .hasFile("src/main/java/tech/jhipster/jhlitest/shared/collection/domain/MyappCollections.java")
+      .hasFile("src/main/java/com/seed4j/growth/shared/collection/domain/MyappCollections.java")
       .containing("class MyappCollections")
       .and()
       .hasPrefixedFiles("documentation", "package-types.md")

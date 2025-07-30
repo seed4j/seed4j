@@ -21,7 +21,7 @@ class GitInfoModuleFactoryTest {
     @Test
     void shouldAddGitInformation() {
       JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-        .basePackage("tech.jhipster.myapp")
+        .basePackage("com.seed4j.growth")
         .projectBaseName("myapp")
         .build();
 
@@ -53,7 +53,7 @@ class GitInfoModuleFactoryTest {
             """
           )
           .and()
-        .hasPrefixedFiles("src/main/java/tech/jhipster/myapp/wire/gitinfo", "infrastructure/primary/GitInfoConfiguration.java", "package-info.java");
+        .hasPrefixedFiles("src/main/java/com/seed4j/growth/wire/gitinfo", "infrastructure/primary/GitInfoConfiguration.java", "package-info.java");
       // @formatter:on
     }
   }
@@ -64,7 +64,7 @@ class GitInfoModuleFactoryTest {
     @Test
     void shouldAddGitInformation() {
       JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-        .basePackage("tech.jhipster.myapp")
+        .basePackage("com.seed4j.growth")
         .projectBaseName("myapp")
         .build();
 
@@ -82,7 +82,7 @@ class GitInfoModuleFactoryTest {
         .containing(
           """
           alias(libs.plugins.git.properties)
-                  """
+          """
         );
     }
   }

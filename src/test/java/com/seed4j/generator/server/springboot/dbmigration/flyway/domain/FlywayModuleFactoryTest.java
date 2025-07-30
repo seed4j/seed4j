@@ -20,7 +20,7 @@ class FlywayModuleFactoryTest {
   @Test
   void shouldBuildModuleInitializationModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .put("date", INVOCATION_DATE)
       .build();
 

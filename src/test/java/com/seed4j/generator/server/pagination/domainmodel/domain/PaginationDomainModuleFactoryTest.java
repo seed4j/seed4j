@@ -17,7 +17,7 @@ class PaginationDomainModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .build();
 
@@ -35,10 +35,10 @@ class PaginationDomainModuleFactoryTest {
         """
       )
       .and()
-      .hasFiles("src/main/java/tech/jhipster/jhlitest/shared/pagination/package-info.java")
-      .hasPrefixedFiles("src/main/java/tech/jhipster/jhlitest/shared/pagination/domain", "MyAppPage.java", "MyAppPageable.java")
+      .hasFiles("src/main/java/com/seed4j/growth/shared/pagination/package-info.java")
+      .hasPrefixedFiles("src/main/java/com/seed4j/growth/shared/pagination/domain", "MyAppPage.java", "MyAppPageable.java")
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/pagination/domain",
+        "src/test/java/com/seed4j/growth/shared/pagination/domain",
         "MyAppPageTest.java",
         "MyAppPageableTest.java",
         "MyAppPagesFixture.java"

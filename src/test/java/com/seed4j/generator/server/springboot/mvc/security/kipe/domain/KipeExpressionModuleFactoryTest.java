@@ -17,7 +17,7 @@ class KipeExpressionModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
@@ -25,9 +25,9 @@ class KipeExpressionModuleFactoryTest {
 
     assertThatModule(module)
       .hasFiles("documentation/kipe-expression.md")
-      .hasFiles("src/main/java/tech/jhipster/jhlitest/shared/kipe/package-info.java")
+      .hasFiles("src/main/java/com/seed4j/growth/shared/kipe/package-info.java")
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/shared/kipe/application",
+        "src/main/java/com/seed4j/growth/shared/kipe/application",
         "AccessChecker.java",
         "AccessContext.java",
         "AccessContextFactory.java",
@@ -40,7 +40,7 @@ class KipeExpressionModuleFactoryTest {
         "ObjectAccessChecker.java"
       )
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/shared/kipe/application",
+        "src/test/java/com/seed4j/growth/shared/kipe/application",
         "AccessCheckerIT.java",
         "AccessContextFactoryTest.java",
         "AccessEvaluatorTest.java",
@@ -49,6 +49,6 @@ class KipeExpressionModuleFactoryTest {
         "KipeIT.java",
         "ObjectAccessCheckerTest.java"
       )
-      .hasPrefixedFiles("src/test/java/tech/jhipster/jhlitest/shared/kipe/domain", "KipeDummy.java", "KipeDummyChild.java");
+      .hasPrefixedFiles("src/test/java/com/seed4j/growth/shared/kipe/domain", "KipeDummy.java", "KipeDummyChild.java");
   }
 }

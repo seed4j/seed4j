@@ -17,24 +17,24 @@ class SampleJpaPersistenceModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, beersApplicationService(), sampleInMemoryRepository(), inMemoryBeersResetter())
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/sample/infrastructure/secondary",
+        "src/main/java/com/seed4j/growth/sample/infrastructure/secondary",
         "BeerEntity.java",
         "JpaBeersRepository.java",
         "SpringDataBeersRepository.java"
       )
       .hasPrefixedFiles(
-        "src/test/java/tech/jhipster/jhlitest/sample/infrastructure/secondary",
+        "src/test/java/com/seed4j/growth/sample/infrastructure/secondary",
         "BeerEntityTest.java",
         "JpaBeersRepositoryIT.java"
       )
-      .hasFile("src/main/java/tech/jhipster/jhlitest/sample/application/BeersApplicationService.java")
+      .hasFile("src/main/java/com/seed4j/growth/sample/application/BeersApplicationService.java")
       .containing("import org.springframework.transaction.annotation.Transactional;")
       .containing(
         """
@@ -58,29 +58,29 @@ class SampleJpaPersistenceModuleFactoryTest {
       )
       .and()
       .doNotHaveFiles(
-        "src/main/java/tech/jhipster/jhlitest/sample/infrastructure/secondary/InMemoryBeersRepository.java",
-        "src/test/java/tech/jhipster/jhlitest/sample/infrastructure/secondary/InMemoryBeersResetter.java"
+        "src/main/java/com/seed4j/growth/sample/infrastructure/secondary/InMemoryBeersRepository.java",
+        "src/test/java/com/seed4j/growth/sample/infrastructure/secondary/InMemoryBeersResetter.java"
       );
   }
 
   private ModuleFile beersApplicationService() {
     return file(
       "src/test/resources/projects/sample-feature/BeersApplicationService.java",
-      "src/main/java/tech/jhipster/jhlitest/sample/application/BeersApplicationService.java"
+      "src/main/java/com/seed4j/growth/sample/application/BeersApplicationService.java"
     );
   }
 
   private ModuleFile sampleInMemoryRepository() {
     return file(
       "src/test/resources/projects/sample-feature/InMemoryBeersRepository.java",
-      "src/main/java/tech/jhipster/jhlitest/sample/infrastructure/secondary/InMemoryBeersRepository.java"
+      "src/main/java/com/seed4j/growth/sample/infrastructure/secondary/InMemoryBeersRepository.java"
     );
   }
 
   private ModuleFile inMemoryBeersResetter() {
     return file(
       "src/test/resources/projects/sample-feature/InMemoryBeersResetter.java",
-      "src/test/java/tech/jhipster/jhlitest/sample/infrastructure/secondary/InMemoryBeersResetter.java"
+      "src/test/java/com/seed4j/growth/sample/infrastructure/secondary/InMemoryBeersResetter.java"
     );
   }
 }

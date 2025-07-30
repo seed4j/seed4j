@@ -31,7 +31,7 @@ class RedisModuleFactoryTest {
     when(dockerImages.get("redis")).thenReturn(new DockerImageVersion("redis", "1.1.1"));
 
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
@@ -83,14 +83,14 @@ class RedisModuleFactoryTest {
       .containing("src/main/docker/redis.yml")
       .and()
       .hasPrefixedFiles(
-        "src/main/java/tech/jhipster/jhlitest/wire/redis/infrastructure/secondary",
+        "src/main/java/com/seed4j/growth/wire/redis/infrastructure/secondary",
         "RedisDatabaseConfiguration.java",
         "JSR310DateConverters.java"
       )
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/wire/redis/infrastructure/secondary/JSR310DateConvertersTest.java")
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/TestRedisManager.java")
+      .hasFiles("src/test/java/com/seed4j/growth/wire/redis/infrastructure/secondary/JSR310DateConvertersTest.java")
+      .hasFiles("src/test/java/com/seed4j/growth/TestRedisManager.java")
       .hasFile("src/test/resources/META-INF/spring.factories")
-      .containing("org.springframework.context.ApplicationListener=tech.jhipster.jhlitest")
+      .containing("org.springframework.context.ApplicationListener=com.seed4j.growth")
       .and()
       .hasFile("src/main/resources/config/application.yml")
       .containing(

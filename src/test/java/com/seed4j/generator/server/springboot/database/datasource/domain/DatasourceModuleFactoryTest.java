@@ -33,7 +33,7 @@ class DatasourceModuleFactoryTest {
   @Test
   void shouldBuildPostgreSQLModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
@@ -92,7 +92,7 @@ class DatasourceModuleFactoryTest {
   @Test
   void shouldBuildMariadbModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
@@ -157,7 +157,7 @@ class DatasourceModuleFactoryTest {
   @Test
   void shouldBuildMysqlModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
@@ -224,7 +224,7 @@ class DatasourceModuleFactoryTest {
   @Test
   void shouldBuildMssqlModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
@@ -238,7 +238,7 @@ class DatasourceModuleFactoryTest {
       .hasFile("documentation/mssql.md")
       .containing("docker compose -f src/main/docker/mssql.yml up -d")
       .and()
-      .hasFile("src/test/java/tech/jhipster/jhlitest/MsSQLTestContainerExtension.java")
+      .hasFile("src/test/java/com/seed4j/growth/MsSQLTestContainerExtension.java")
       .and()
       .hasFile("src/test/resources/container-license-acceptance.txt")
       .and()
@@ -294,6 +294,6 @@ class DatasourceModuleFactoryTest {
   }
 
   private JHipsterModulesAssertions.ModuleFile integrationTestAnnotation() {
-    return file("src/test/resources/projects/files/IntegrationTest.java", "src/test/java/tech/jhipster/jhlitest/IntegrationTest.java");
+    return file("src/test/resources/projects/files/IntegrationTest.java", "src/test/java/com/seed4j/growth/IntegrationTest.java");
   }
 }

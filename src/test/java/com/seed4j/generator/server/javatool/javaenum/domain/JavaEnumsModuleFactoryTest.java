@@ -17,14 +17,14 @@ class JavaEnumsModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
 
     assertThatModule(module)
-      .hasFiles("src/main/java/tech/jhipster/jhlitest/shared/enumeration/package-info.java")
-      .hasPrefixedFiles("src/main/java/tech/jhipster/jhlitest/shared/enumeration/domain/", "Enums.java", "UnmappableEnumException.java")
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/shared/enumeration/domain/EnumsTest.java");
+      .hasFiles("src/main/java/com/seed4j/growth/shared/enumeration/package-info.java")
+      .hasPrefixedFiles("src/main/java/com/seed4j/growth/shared/enumeration/domain/", "Enums.java", "UnmappableEnumException.java")
+      .hasFiles("src/test/java/com/seed4j/growth/shared/enumeration/domain/EnumsTest.java");
   }
 }

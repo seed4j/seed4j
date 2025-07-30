@@ -31,7 +31,7 @@ class CassandraMigrationModuleFactoryTest {
     when(dockerImages.get("cassandra")).thenReturn(new DockerImageVersion("cassandra", "4.0.7"));
 
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .build();
 
     JHipsterModule module = factory.buildModule(properties);
@@ -58,10 +58,10 @@ class CassandraMigrationModuleFactoryTest {
       .hasFiles("src/main/resources/config/cql/changelog/README.md")
       .hasFiles("documentation/cassandra-migration.md")
       .hasPrefixedFiles("src/main/docker/cassandra/scripts", "autoMigrate.sh", "execute-cql.sh")
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/TestCassandraMigrationLoader.java")
+      .hasFiles("src/test/java/com/seed4j/growth/TestCassandraMigrationLoader.java")
       .hasFile("src/test/resources/META-INF/spring.factories")
       .containing(
-        "org.springframework.context.ApplicationListener=tech.jhipster.jhlitest.TestCassandraManager,tech.jhipster.jhlitest.TestCassandraMigrationLoader"
+        "org.springframework.context.ApplicationListener=com.seed4j.growth.TestCassandraManager,com.seed4j.growth.TestCassandraMigrationLoader"
       )
       .and()
       .hasFile("README.md")

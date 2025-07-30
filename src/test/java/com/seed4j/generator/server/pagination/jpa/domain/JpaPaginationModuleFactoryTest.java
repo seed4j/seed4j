@@ -17,7 +17,7 @@ class JpaPaginationModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("tech.jhipster.jhlitest")
+      .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .build();
 
@@ -25,7 +25,7 @@ class JpaPaginationModuleFactoryTest {
 
     assertThatModule(module)
       .hasFiles("documentation/jpa-pages.md")
-      .hasFiles("src/main/java/tech/jhipster/jhlitest/shared/pagination/infrastructure/secondary/MyAppPages.java")
-      .hasFiles("src/test/java/tech/jhipster/jhlitest/shared/pagination/infrastructure/secondary/MyAppPagesTest.java");
+      .hasFiles("src/main/java/com/seed4j/growth/shared/pagination/infrastructure/secondary/MyAppPages.java")
+      .hasFiles("src/test/java/com/seed4j/growth/shared/pagination/infrastructure/secondary/MyAppPagesTest.java");
   }
 }

@@ -11,7 +11,7 @@ Feature: LangChain4j
 
   Scenario: Should add Spring Boot LangChain4j Sample
     When I apply "spring-boot-langchain4j-sample" module to default project with maven file
-      | packageName | tech.jhipster.chips |
-      | baseName    | jhipster            |
-    Then I should have files in "src/main/java/tech/jhipster/chips/sample/infrastructure/primary"
+      | packageName | com.seed4j.growth |
+      | baseName    | jhipster          |
+    Then I should have files in "src/main/java/com/seed4j/growth/sample/infrastructure/primary"
       | ChatResource.java |

@@ -409,7 +409,7 @@ public final class JHipsterModulesFixture {
       true,
       Map.of(
         "packageName",
-        "tech.jhipster.chips",
+        "com.seed4j.growth",
         "indentSize",
         2,
         "projectName",
@@ -637,9 +637,9 @@ public final class JHipsterModulesFixture {
     return new JHipsterModulesToApply(
       List.of(moduleSlug("maven-java"), moduleSlug("init")),
       propertiesBuilder("/dummy")
-        .projectName("Chips Project")
-        .basePackage("tech.jhipster.chips")
-        .put("baseName", "chips")
+        .projectName("Growth Project")
+        .basePackage("com.seed4j.growth")
+        .put("baseName", "growth")
         .put("serverPort", 8080)
         .build()
     );

@@ -65,7 +65,7 @@ application:
     timeout: 120
 
 jhlite:
-  #  forced-project-folder: /tmp/jhlite
+  #  forced-project-folder: /tmp/seed4j
   hidden-resources:
     slugs:
       - svelte-core

@@ -10,7 +10,7 @@ application:
     max-age: 1800
 
 jhlite:
-  forced-project-folder: /tmp/jhlite
+  forced-project-folder: /tmp/seed4j
 
 server:
   port: 8080

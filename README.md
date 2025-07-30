@@ -251,13 +251,13 @@ java -jar target/*.jar --spring.profiles.active=vue
 To start a local instance of JHipster Lite, go to your desired application folder and run:
 
 ```bash
-docker run --rm --pull=always -p 7471:7471 -v $(pwd):/tmp/jhlite:Z -it jhipster/jhipster-lite:latest
+docker run --rm --pull=always -p 7471:7471 -v $(pwd):/tmp/seed4j:Z -it jhipster/jhipster-lite:latest
 ```
 
 Or with podman:
 
 ```bash
-podman run --rm --pull=always -p 7471:7471 -v $(pwd):/tmp/jhlite:Z -u root -it jhipster/jhipster-lite:latest
+podman run --rm --pull=always -p 7471:7471 -v $(pwd):/tmp/seed4j:Z -u root -it jhipster/jhipster-lite:latest
 ```
 
 Then, go to [http://localhost:7471](http://localhost:7471)

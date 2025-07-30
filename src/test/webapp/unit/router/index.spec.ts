@@ -192,7 +192,7 @@ const repositoryWithModules = (): ModulesRepositoryStub => {
 
 const repositoryWithProjectFolders = (): ProjectFoldersRepositoryStub => {
   const projectFolders = stubProjectFoldersRepository();
-  projectFolders.get.mockResolvedValue('/tmp/jhlite/1234');
+  projectFolders.get.mockResolvedValue('/tmp/seed4j/1234');
 
   return projectFolders;
 };

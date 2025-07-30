@@ -2,7 +2,7 @@ import { interceptForever } from '../support/Interceptor';
 import { dataSelector } from '../support/Selector';
 
 describe('Patch', () => {
-  beforeEach(() => cy.intercept({ path: '/api/project-folders' }, { body: '/tmp/jhlite/1234' }));
+  beforeEach(() => cy.intercept({ path: '/api/project-folders' }, { body: '/tmp/seed4j/1234' }));
 
   it('should display loader while loading modules', () => {
     const result = interceptForever({ path: '/api/modules' }, { fixture: 'modules.json' });
@@ -18,7 +18,7 @@ describe('Patch', () => {
         cy.get(dataSelector('modules-list')).should('be.visible');
         cy.get(dataSelector('module-spring-test-application-button')).should('be.enabled');
         cy.get(dataSelector('module-spring-cucumber-application-button')).should('be.enabled');
-        cy.get(dataSelector('folder-path-field')).invoke('val').should('equal', '/tmp/jhlite/1234');
+        cy.get(dataSelector('folder-path-field')).invoke('val').should('equal', '/tmp/seed4j/1234');
       });
   });
 

@@ -2,7 +2,7 @@ import { interceptForever } from '../support/Interceptor';
 import { dataSelector } from '../support/Selector';
 
 describe('Landscape', () => {
-  beforeEach(() => cy.intercept({ path: '/api/project-folders' }, { body: '/tmp/jhlite/1234' }));
+  beforeEach(() => cy.intercept({ path: '/api/project-folders' }, { body: '/tmp/seed4j/1234' }));
 
   it('should change theme after toggle switch theme button', () => {
     cy.visit('/landscape', {
@@ -59,7 +59,7 @@ describe('Landscape', () => {
           expect(body).to.deep.equal({
             modules: ['init'],
             properties: {
-              projectFolder: '/tmp/jhlite/1234',
+              projectFolder: '/tmp/seed4j/1234',
               commit: true,
               parameters: {
                 packageName: 'value',

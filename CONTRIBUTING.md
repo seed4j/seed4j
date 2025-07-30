@@ -389,11 +389,11 @@ from the main (upstream) repository:
   ```shell
   ./tests-ci/generate.sh <application> <java-build-tool> <spring-configuration-format>
   ```
-- This will generate the project in `/tmp/jhlite/<application>`. Then, you can test it.
+- This will generate the project in `/tmp/seed4j/<application>`. Then, you can test it.
 - The project location of the generated build is configured in the `test-ci/modulePayload.json`.
 
 - For example,
-  - Running `./tests-ci/generate.sh fullapp maven yaml` will generate a Spring Boot project `fullapp` in the directory`/tmp/jhlite/`
+  - Running `./tests-ci/generate.sh fullapp maven yaml` will generate a Spring Boot project `fullapp` in the directory`/tmp/seed4j/`
   - The generated project will have support for maven, sonar, postgresql, liquibase, ehcache, vue-core and a lot more capabilities required for a Spring Boot + Vue application.
 
 ## <a name="rules"></a> Coding Rules

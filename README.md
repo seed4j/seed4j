@@ -28,7 +28,7 @@
 - You will only generate the code you want, no additional unused code
 - The best quality as possible: 💯% coverage, 0 code smell, no duplication 😎
 
-This is a [sample application](https://github.com/seed4j/seed4jsample) created with Seed4J.
+This is a [sample application](https://github.com/seed4j/seed4j-sample-app) created with Seed4J.
 
 ## Quick Start
 

@@ -151,7 +151,7 @@ class FileSystemProjectsRepositoryTest {
 
       projects.save(new ProjectHistory(path, List.of(projectAction())));
 
-      assertThat(Files.readString(Path.of(path.get(), ".jhipster/modules", "history.json"))).isEqualToIgnoringWhitespace(
+      assertThat(Files.readString(Path.of(path.get(), ".seed4j/modules", "history.json"))).isEqualToIgnoringWhitespace(
           """
           {
             "actions" : [
@@ -175,7 +175,7 @@ class FileSystemProjectsRepositoryTest {
 
     @Test
     void shouldHandleDeserializationErrors() throws IOException {
-      ProjectPath path = folder().add("src/test/resources/projects/history/history.json", ".jhipster/modules/history.json").build();
+      ProjectPath path = folder().add("src/test/resources/projects/history/history.json", ".seed4j/modules/history.json").build();
       ObjectMapper json = mock(ObjectMapper.class);
       when(json.readValue(any(byte[].class), eq(PersistedProjectHistory.class))).thenThrow(IOException.class);
 
@@ -196,7 +196,7 @@ class FileSystemProjectsRepositoryTest {
 
     @Test
     void shouldGetExistingHistory() {
-      ProjectPath path = folder().add("src/test/resources/projects/history/history.json", ".jhipster/modules/history.json").build();
+      ProjectPath path = folder().add("src/test/resources/projects/history/history.json", ".seed4j/modules/history.json").build();
 
       ProjectHistory history = projects.getHistory(path);
 

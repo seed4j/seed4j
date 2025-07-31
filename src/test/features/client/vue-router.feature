@@ -1,6 +1,15 @@
 Feature: Vue router
 
-  Scenario: Should apply Vue Router module
-    Given I apply "vue-core" module to default project with package json without parameters
-    When I apply "vue-router" module without parameters to last project
-    Then I should have "<router-view />" in "src/main/webapp/app/AppVue.vue"
+  Scenario: Should apply vue router module
+    When I apply modules to default project
+      | init       |
+      | prettier   |
+      | typescript |
+      | vue-core   |
+      | vue-router |
+    Then I should have files in "src/main/webapp/app/home/application"
+      | HomeRouter.ts |
+    And I should have files in "src/main/webapp/app"
+      | router.ts |
+    And I should have files in "src/test/webapp/unit/router/infrastructure/primary"
+      | HomeRouter.spec.ts |

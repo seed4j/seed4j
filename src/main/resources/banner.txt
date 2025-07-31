@@ -1,10 +1,10 @@
 
- ${AnsiColor.YELLOW}     ██╗ ██╗  ██╗  ${AnsiColor.CYAN}██╗      ██╗ ████████╗ ███████╗   ⚡
- ${AnsiColor.YELLOW}     ██║ ██║  ██║  ${AnsiColor.CYAN}██║      ██║ ╚══██╔══╝ ██╔════╝  ⚡
- ${AnsiColor.YELLOW}     ██║ ███████║  ${AnsiColor.CYAN}██║      ██║    ██║    █████╗   ⚡
- ${AnsiColor.YELLOW}██   ██║ ██╔══██║  ${AnsiColor.CYAN}██║      ██║    ██║    ██╔══╝    ⚡
- ${AnsiColor.YELLOW}╚█████╔╝ ██║  ██║  ${AnsiColor.CYAN}███████╗ ██║    ██║    ███████╗   ⚡
- ${AnsiColor.YELLOW} ╚════╝  ╚═╝  ╚═╝  ${AnsiColor.CYAN}╚══════╝ ╚═╝    ╚═╝    ╚══════╝  ⚡
+ ${AnsiColor.YELLOW}███████╗ ███████╗ ███████╗ ██████╗  ${AnsiColor.GREEN}██╗  ██╗      ██╗
+ ${AnsiColor.YELLOW}██╔════╝ ██╔════╝ ██╔════╝ ██╔══██╗ ${AnsiColor.GREEN}██║  ██║      ██║
+ ${AnsiColor.YELLOW}███████╗ █████╗   █████╗   ██║  ██║ ${AnsiColor.GREEN}███████║      ██║
+ ${AnsiColor.YELLOW}╚════██║ ██╔══╝   ██╔══╝   ██║  ██║ ${AnsiColor.GREEN}╚════██║ ██   ██║
+ ${AnsiColor.YELLOW}███████║ ███████╗ ███████╗ ██████╔╝ ${AnsiColor.GREEN}     ██║ ╚█████╔╝
+ ${AnsiColor.YELLOW}╚══════╝ ╚══════╝ ╚══════╝ ╚═════╝  ${AnsiColor.GREEN}     ╚═╝  ╚════╝
 
-${AnsiColor.BRIGHT_BLUE}:: Seed4J 🌱 :: Running Spring Boot ${spring-boot.version} ::
+${AnsiStyle.BOLD}${AnsiColor.BLUE}:: Seed4J 🌱 :: Running Spring Boot ${spring-boot.version} ::
 :: https://www.seed4j.com ::${AnsiColor.DEFAULT}

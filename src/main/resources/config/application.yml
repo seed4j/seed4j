@@ -81,4 +81,4 @@ spring:
   jackson:
     default-property-inclusion: non_absent
   application:
-    name: jhlite
+    name: seed4j

@@ -7,15 +7,15 @@ show_syntax() {
   exit 1
 }
 
-JHI_FOLDER_APP=$1
-if [[ $JHI_FOLDER_APP == '' ]]; then
+FOLDER_APP=$1
+if [[ $FOLDER_APP == '' ]]; then
   show_syntax
 fi
 
 #-------------------------------------------------------------------------------
 # Start docker container
 #-------------------------------------------------------------------------------
-cd "$JHI_FOLDER_APP"
+cd "$FOLDER_APP"
 if [ -a docker-compose.yml ]; then
   docker compose up -d
   echo "*** wait 20sec"

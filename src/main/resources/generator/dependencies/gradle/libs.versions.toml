@@ -4,8 +4,8 @@ jib = "3.4.5"
 git-properties = "2.5.2"
 protobuf-plugin = "0.9.5"
 jacoco = "0.8.11"
-sonarqube = "4.4.1.3373"
-node-gradle = "7.0.2"
+sonarqube = "6.2.0.5505"
+node-gradle = "7.1.0"
 modernizer = "1.11.0"
 
 [plugins]

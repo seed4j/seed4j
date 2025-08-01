@@ -56,7 +56,7 @@
     "rimraf": "6.0.1",
     "sass": "1.89.2",
     "start-server-and-test": "2.0.12",
-    "stylelint": "16.22.0",
+    "stylelint": "16.23.0",
     "stylelint-config-concentric-order": "5.2.1",
     "stylelint-config-standard-scss": "15.0.1",
     "stylelint-order": "7.0.0",

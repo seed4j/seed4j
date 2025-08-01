@@ -207,7 +207,7 @@ jobs:
           path: ./tests-ci/
       - name: 'Init: install Node.js packages'
         run: npm ci
-      - name: 'Test: start application JHipster Lite'
+      - name: 'Test: start application Seed4J'
         working-directory: ./tests-ci/
         run: |
           ./start.sh 7471
@@ -315,7 +315,7 @@ jobs:
             app_md5=$(find . \
               -not -path './.git/*' \
               -not -path './.github/*' \
-              -not -path './.jhipster/*' \
+              -not -path './.seed4j/*' \
               -not -path './node_modules/*' \
               -not -path './target/*' \
               -not -path './build/*' \
@@ -361,7 +361,7 @@ jobs:
           app_md5=$(find . \
             -not -path './.git/*' \
             -not -path './.github/*' \
-            -not -path './.jhipster/*' \
+            -not -path './.seed4j/*' \
             -not -path './node_modules/*' \
             -not -path './target/*' \
             -not -path './build/*' \

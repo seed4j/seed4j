@@ -19,7 +19,7 @@ class FileSystemProjectsRepository implements ProjectsRepository {
 
   private static final String PATH_PARAMETER = "path";
 
-  private static final String HISTORY_FOLDER = ".jhipster/modules";
+  private static final String HISTORY_FOLDER = ".seed4j/modules";
   private static final String HISTORY_FILE = "history.json";
 
   private final ObjectMapper json;

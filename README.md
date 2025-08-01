@@ -1,25 +1,23 @@
-[![Logo JHipster Lite][jhipster-image]][seed4j-url]
-
 # Seed4J 🌱
 
-[![Seed4J version][seed4j-release-version]][seed4j-release-url]
-[![Seed4J Maven Central][jhipster-lite-maven-central-version]][jhipster-lite-maven-central-url]
-[![Seed4J Docker Hub][jhipster-lite-docker-hub]][jhipster-lite-docker-hub-url]
+[![Seed4J version](https://img.shields.io/github/v/release/seed4j/seed4j)](https://github.com/seed4j/seed4j/releases)
+[![Seed4J Maven Central](https://img.shields.io/maven-central/v/com.seed4j/seed4j?color=blue)](https://repo.maven.apache.org/maven2/com/seed4j/seed4j/)
+[![Seed4J Docker Hub](https://img.shields.io/badge/Docker%20Hub-jhipster%2Fjhipster--lite-blue.svg?style=flat)](https://hub.docker.com/r/seed4j/seed4j)
 
-[![Build Status][github-actions-jhlite-image]][github-actions-url]
-[![sonarcloud-coverage][sonarcloud-coverage]][sonarcloud-url]
+[![Build Status](https://github.com/seed4j/seed4j/actions/workflows/github-actions.yml/badge.svg?branch=main)](https://github.com/seed4j/seed4j/actions)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=coverage)](https://sonarcloud.io/project/overview?id=seed4j_seed4j)
 
-[![sonarcloud-quality-gate][sonarcloud-quality-gate]][sonarcloud-url]
-[![sonarcloud-maintainability][sonarcloud-maintainability]][sonarcloud-url]
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=alert_status)](https://sonarcloud.io/project/overview?id=seed4j_seed4j)
+[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=sqale_rating)](https://sonarcloud.io/project/overview?id=seed4j_seed4j)
 
-[![sonarcloud-bugs][sonarcloud-bugs]][sonarcloud-url]
-[![sonarcloud-vulnerabilities][sonarcloud-vulnerabilities]][sonarcloud-url]
-[![sonarcloud-security][sonarcloud-security]][sonarcloud-url]
-[![sonarcloud-code-smells][sonarcloud-code-smells]][sonarcloud-url]
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=bugs)](https://sonarcloud.io/project/overview?id=seed4j_seed4j)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=vulnerabilities)](https://sonarcloud.io/project/overview?id=seed4j_seed4j)
+[![Security](https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=security_rating)](https://sonarcloud.io/project/overview?id=seed4j_seed4j)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=code_smells)](https://sonarcloud.io/project/overview?id=seed4j_seed4j)
 
 ## Description
 
-[Seed4J][seed4j-url] is a development platform to quickly generate, develop & deploy modern web applications & microservice architectures.
+[Seed4J](https://www.seed4j.com/) is a development platform to quickly generate, develop & deploy modern web applications & microservice architectures.
 
 **Seed4J** will help you to start your project by generating step by step only what you need.
 
@@ -49,9 +47,9 @@ Then, you can navigate to http://localhost:7471 in your browser.
 
 ## Some videos
 
-- [What is JHipster Lite and why should you care?][devoxx-jhlite] by [Julien Dubois][jdubois]
-- [Simple WebServices with JHipster Lite][webservices-with-jhlite] by [Colin Damon][cdamon]
-- [JHipster vs JHipster Lite][jhipster-vs-jhlite] by [Julien Dubois][jdubois]
+- [What is JHipster Lite and why should you care?](https://youtu.be/RnLGnY-vzLI) by [Julien Dubois](https://twitter.com/juliendubois)
+- [Simple WebServices with JHipster Lite](https://youtu.be/mEECPRZjajI) by [Colin Damon](https://www.linkedin.com/in/colin-damon/)
+- [JHipster vs JHipster Lite](https://youtu.be/t5GA329FMfU) by [Julien Dubois](https://twitter.com/juliendubois)
 
 ## Choosing
 
@@ -284,27 +282,6 @@ Once started, go to http://localhost:7471, select your option and generate the c
 
 We are honored by any contributions you may have small or large. Please refer to our [contribution guidelines and instructions document](https://github.com/seed4j/seed4j/blob/main/CONTRIBUTING.md) for any information about contributing to the project.
 
-[seed4j-release-version]: https://img.shields.io/github/v/release/seed4j/seed4j
-[seed4j-release-url]: https://github.com/seed4j/seed4j/releases
-[jhipster-lite-maven-central-version]: https://img.shields.io/maven-central/v/tech.jhipster.lite/jhlite?color=blue
-[jhipster-lite-maven-central-url]: https://repo.maven.apache.org/maven2/tech/jhipster/lite/jhlite/
-[jhipster-lite-docker-hub]: https://img.shields.io/badge/Docker%20Hub-jhipster%2Fjhipster--lite-blue.svg?style=flat
-[jhipster-lite-docker-hub-version]: https://img.shields.io/docker/v/seed4j/seed4j?color=0073ec
-[jhipster-lite-docker-hub-url]: https://hub.docker.com/r/seed4j/seed4j
-[github-actions-jhlite-image]: https://github.com/seed4j/seed4j/actions/workflows/github-actions.yml/badge.svg?branch=main
-[github-actions-url]: https://github.com/seed4j/seed4j/actions
-[jhipster-image]: https://raw.githubusercontent.com/jhipster/jhipster-artwork/main/logos/lite/JHipster-Lite-neon-blue.png
-[seed4j-url]: https://www.seed4j.com/
-[sonarcloud-url]: https://sonarcloud.io/project/overview?id=seed4j_seed4j
-[sonarcloud-quality-gate]: https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=alert_status
-[sonarcloud-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=sqale_rating
-[sonarcloud-bugs]: https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=bugs
-[sonarcloud-vulnerabilities]: https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=vulnerabilities
-[sonarcloud-security]: https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=security_rating
-[sonarcloud-code-smells]: https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=code_smells
-[sonarcloud-coverage]: https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=coverage
-[devoxx-jhlite]: https://youtu.be/RnLGnY-vzLI
-[jdubois]: https://twitter.com/juliendubois
-[webservices-with-jhlite]: https://youtu.be/mEECPRZjajI
-[jhipster-vs-jhlite]: https://youtu.be/t5GA329FMfU
-[cdamon]: https://www.linkedin.com/in/colin-damon/
+## Fork
+
+This project is a fork of the original [JHipster Lite](https://github.com/jhipster-lite/jhipster-lite), now maintained under the **seed4j** organization.

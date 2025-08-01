@@ -1,8 +1,8 @@
-name: Deploy JHipster Lite
-on:
-  push:
-    tags:
-      - 'v*'
+name: Deploy Seed4J
+#on:
+#  push:
+#    tags:
+#      - 'v*'
 jobs:
   pipeline:
     name: Deploy to GCP
@@ -37,9 +37,9 @@ jobs:
       - name: 'Build: build and Push Docker Image'
         run: >-
           gcloud auth configure-docker europe-west9-docker.pkg.dev &&
-          docker build -t europe-west9-docker.pkg.dev/jhipster-lite/jhipster-lite/jhipster-lite:${GITHUB_SHA} . &&
-          docker push europe-west9-docker.pkg.dev/jhipster-lite/jhipster-lite/jhipster-lite:${GITHUB_SHA}
+          docker build -t europe-west9-docker.pkg.dev/seed4j/seed4j/seed4j:${GITHUB_SHA} . &&
+          docker push europe-west9-docker.pkg.dev/seed4j/seed4j/seed4j:${GITHUB_SHA}
 
       # Deploy to App Engine Flexible
       - name: 'Deploy to GCP'
-        run: VERSION_TAG=${GITHUB_REF:10} && gcloud app deploy --image-url europe-west9-docker.pkg.dev/jhipster-lite/jhipster-lite/jhipster-lite:${GITHUB_SHA} --version ${VERSION_TAG//./-}
+        run: VERSION_TAG=${GITHUB_REF:10} && gcloud app deploy --image-url europe-west9-docker.pkg.dev/seed4j/seed4j/seed4j:${GITHUB_SHA} --version ${VERSION_TAG//./-}

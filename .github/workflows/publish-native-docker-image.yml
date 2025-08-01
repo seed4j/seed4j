@@ -1,13 +1,13 @@
 name: Build and publish native (GraalVM) images
-on:
-  push:
-    branches:
-      - main
-    tags:
-      - 'v*.*.*'
-  pull_request:
-    branches:
-      - main
+#on:
+#  push:
+#    branches:
+#      - main
+#    tags:
+#      - 'v*.*.*'
+#  pull_request:
+#    branches:
+#      - main
 
 jobs:
   build_native_docker_image:

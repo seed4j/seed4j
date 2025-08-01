@@ -76,7 +76,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-cypress": "5.1.0",
     "eslint-plugin-pug": "1.2.5",
-    "eslint-plugin-vue": "10.3.0",
+    "eslint-plugin-vue": "10.4.0",
     "fontello-cli": "0.6.2",
     "globals": "16.3.0",
     "husky": "9.1.7",

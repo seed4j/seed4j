@@ -67,7 +67,7 @@
     "@tikui/core": "6.3.0",
     "@typescript-eslint/eslint-plugin": "8.38.0",
     "@typescript-eslint/parser": "8.38.0",
-    "@vitejs/plugin-vue": "6.0.0",
+    "@vitejs/plugin-vue": "6.0.1",
     "@vitest/coverage-istanbul": "3.2.4",
     "@vue/test-utils": "2.4.6",
     "cpy-cli": "5.0.0",

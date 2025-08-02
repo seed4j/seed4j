@@ -284,4 +284,4 @@ We are honored by any contributions you may have small or large. Please refer to
 
 ## Fork
 
-This project is a fork of the original [JHipster Lite](https://github.com/jhipster-lite/jhipster-lite), now maintained under the **seed4j** organization.
+This project is a fork of the original [JHipster Lite](https://github.com/jhipster-lite/jhipster-lite), now maintained under the **seed4j** organization. It will be developed and maintained by the original authors of JHipster Lite project.

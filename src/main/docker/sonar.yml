@@ -17,6 +17,6 @@ services:
       dockerfile: sonar/Dockerfile
     container_name: sonar-token
     environment:
-      - JHIPSTER_SONAR_URL=http://sonar:9000
+      - SEED4J_SONAR_URL=http://sonar:9000
     depends_on:
       - sonar

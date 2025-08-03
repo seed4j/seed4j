@@ -33,7 +33,7 @@ git rebase $GIT_REMOTE/$GIT_MAIN_BRANCH
 
 echo "*** use specific settings.xml"
 mv ~/.m2/settings.xml ~/.m2/settings.xml.save 2> /dev/null
-cp ~/.m2/jhipster.settings.xml ~/.m2/settings.xml
+cp ~/.m2/personal.settings.xml ~/.m2/settings.xml
 
 if [[ "$1" == "patch" ]]; then
   echo "*** version: remove SNAPSHOT and keep the version"

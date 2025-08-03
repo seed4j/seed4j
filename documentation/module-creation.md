@@ -1,6 +1,6 @@
-# Creating a JHLite module
+# Creating a Seed4J module
 
-So, you want to create a JHLite module? Great!
+So, you want to create a Seed4J module? Great!
 
 For that, you'll need to provide two main parts:
 
@@ -13,7 +13,7 @@ You can start with the element you prefer but to create a `JHipsterModuleResourc
 
 In fact, you don't just need to create one `JHipsterModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
 
-So, as this is the business of JHLite you probably want to create a `com.seed4j.generator.my_module.domain` package. And you can start with a simple test:
+So, as this is the business of Seed4J you probably want to create a `com.seed4j.generator.my_module.domain` package. And you can start with a simple test:
 
 ```java
 import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
@@ -130,7 +130,7 @@ Feature: My module
 
 You can now run `CucumberTest` and ensure that it is failing as expected (with a 404).
 
-To be used by JHLite, the `JHipsterModuleResource` needs to be a Spring bean so, let's create a configuration in `com.seed4j.generator.my_module.infrastructure.primary`:
+To be used by Seed4J, the `JHipsterModuleResource` needs to be a Spring bean so, let's create a configuration in `com.seed4j.generator.my_module.infrastructure.primary`:
 
 ```java
 @Configuration
@@ -174,7 +174,7 @@ In your `JHipsterModuleResource` you can define additional properties and an org
 
 ## Applying module in CI
 
-Now that you are confident about your module's action you can add it to the JHLite ci by adding it in the `fullapp` application in [generate.sh](../tests-ci/generate.sh), so it will be compiled and analyzed by SonarQube. You can also create a brand new app if needed.
+Now that you are confident about your module's action you can add it to the Seed4J Continuous Integration by adding it in the `fullapp` application in [generate.sh](../tests-ci/generate.sh), so it will be compiled and analyzed by SonarQube. You can also create a brand new app if needed.
 
 If your app launches a docker container, you must edit [start_docker_compose.sh](../tests-ci/start_docker_compose.sh).
 

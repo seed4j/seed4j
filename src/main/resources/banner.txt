@@ -7,4 +7,4 @@
  ${AnsiColor.YELLOW}╚══════╝ ╚══════╝ ╚══════╝ ╚═════╝  ${AnsiColor.GREEN}     ╚═╝  ╚════╝
 
 ${AnsiStyle.BOLD}${AnsiColor.BLUE}:: Seed4J 🌱 :: Running Spring Boot ${spring-boot.version} ::
-:: https://www.seed4j.com ::${AnsiColor.DEFAULT}
+:: https://seed4j.com ::${AnsiColor.DEFAULT}

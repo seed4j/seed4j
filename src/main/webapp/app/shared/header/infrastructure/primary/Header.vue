@@ -33,7 +33,7 @@
             </router-link>
           </li>
           <li class="jhlite-nav--item">
-            <a class="jhlite-nav-item" href="https://www.seed4j.com" target="_blank" rel="noopener">
+            <a class="jhlite-nav-item" href="https://seed4j.com" target="_blank" rel="noopener">
               <span class="jhlite-icon-text">
                 <span class="jhlite-icon-text--icon">
                   <IconVue name="jhipster" aria-label="JHipster logo" title="Seed4J website" />

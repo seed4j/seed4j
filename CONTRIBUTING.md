@@ -470,12 +470,12 @@ Fix #1234
 ### Regular Contributor Guidelines
 
 These are some of the guidelines that we would like to emphasize if you are a regular contributor to the project
-or joined the [JHipster team](https://www.seed4j.com/team/).
+or joined the [JHipster team](https://seed4j.com/team/).
 
 - We recommend not committing directly to main, but always submit changes through PRs.
 - Before merging, try to get at least one review on the PR.
 - Add appropriate labels to issues and PRs that you create (if you have permission to do so).
-- Follow the project's [policies](https://www.seed4j.com/policies/#-policies).
+- Follow the project's [policies](https://seed4j.com/policies/).
 - Follow the project's [Code of Conduct](https://github.com/seed4j/seed4j/blob/main/CODE_OF_CONDUCT.md)
   and be polite and helpful to users when answering questions/bug reports and when reviewing PRs.
 - We work on our free time, so we have no obligation nor commitment. Work/life balance is important, so don't

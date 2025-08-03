@@ -28,7 +28,7 @@
   </licenses>
   <organization>
     <name>seed4j</name>
-    <url>https://www.seed4j.com</url>
+    <url>https://seed4j.com</url>
   </organization>
   <developers>
     <developer>
@@ -36,7 +36,7 @@
       <name>Pascal Grimaud</name>
       <url>https://github.com/pascalgrimaud</url>
       <organization>seed4j</organization>
-      <organizationUrl>https://www.seed4j.com/</organizationUrl>
+      <organizationUrl>https://seed4j.com/</organizationUrl>
     </developer>
   </developers>
   <scm>

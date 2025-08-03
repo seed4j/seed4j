@@ -17,7 +17,7 @@
 
 ## Description
 
-[Seed4J](https://www.seed4j.com/) is a development platform to quickly generate, develop & deploy modern web applications & microservice architectures.
+[Seed4J](https://seed4j.com/) is a development platform to quickly generate, develop & deploy modern web applications & microservice architectures.
 
 **Seed4J** will help you to start your project by generating step by step only what you need.
 

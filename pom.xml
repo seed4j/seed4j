@@ -61,7 +61,7 @@
 
     <byte-buddy.version>1.17.6</byte-buddy.version>
     <compiler-plugin.version>3.14.0</compiler-plugin.version>
-    <surefire-plugin.version>3.5.3</surefire-plugin.version>
+    <surefire-plugin.version>3.5.2</surefire-plugin.version>
     <jacoco.version>0.8.13</jacoco.version>
     <jgit.version>7.3.0.202506031305-r</jgit.version>
     <junit-jupiter.version>5.13.4</junit-jupiter.version>

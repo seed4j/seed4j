@@ -2,7 +2,7 @@
 
 ## How it works?
 
-Similar to Liquibase, JHipster Lite provides a tool to apply your CQL migration scripts, with some restrictions:
+Similar to Liquibase, Seed4J provides a tool to apply your CQL migration scripts, with some restrictions:
 
 - The tool is not run by the application itself when it is started but inside a Docker container or manually
 - All CQL scripts must follow the pattern `{timestamp}_{description}.cql` and be placed in the changelog directory: `src/main/resources/config/cql/changelog/`

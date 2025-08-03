@@ -4,7 +4,7 @@ import com.seed4j.statistic.domain.Statistics;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 
-@Schema(name = "statistics", description = "JHipster Lite usage statistics")
+@Schema(name = "statistics", description = "Seed4J usage statistics")
 final class RestStatistics {
 
   private final long appliedModules;

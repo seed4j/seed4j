@@ -21,7 +21,7 @@ class StatisticsResources {
   }
 
   @GetMapping
-  @ApiResponse(description = "JHipster Lite usage statistics", responseCode = "200")
+  @ApiResponse(description = "Seed4J usage statistics", responseCode = "200")
   ResponseEntity<RestStatistics> getStatistics(RestStatisticsCriteria criteria) {
     StatisticsCriteria statisticsCriteria = criteria.toDomain();
     return ResponseEntity.ok(RestStatistics.from(statistics.get(statisticsCriteria)));

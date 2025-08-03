@@ -66,7 +66,7 @@ class FileSystemNodePackagesVersionReaderTest {
         {
           "name": "seed4j-dependencies",
           "version": "0.0.0",
-          "description": "JHipster Lite : used for Dependencies",
+          "description": "Seed4J : used for Dependencies",
           "license": "Apache-2.0",
           "dependencies": {
             "vue": "1.2.3"
@@ -105,7 +105,7 @@ class FileSystemNodePackagesVersionReaderTest {
         {
           "name": "seed4j-dependencies",
           "version": "0.0.0",
-          "description": "JHipster Lite : used for Dependencies",
+          "description": "Seed4J : used for Dependencies",
           "license": "Apache-2.0",
           "dependencies": {
             "vue": "1.2.3"

@@ -1,7 +1,7 @@
 {
   "name": "seed4j-dependencies",
   "version": "0.0.0",
-  "description": "JHipster Lite : used for Angular+TypeScript dependencies",
+  "description": "Seed4J : used for Angular+TypeScript dependencies",
   "license": "Apache-2.0",
   "dependencies": {
     "@angular-builders/jest": "20.0.0",

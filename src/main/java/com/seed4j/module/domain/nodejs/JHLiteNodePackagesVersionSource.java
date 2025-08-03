@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.nodejs;
 
 /**
- * {@link NodePackagesVersionSource} that are handled by JHipster Lite.
+ * {@link NodePackagesVersionSource} that are handled by Seed4J.
  */
 public enum JHLiteNodePackagesVersionSource implements NodePackagesVersionSourceFactory {
   COMMON("common"),

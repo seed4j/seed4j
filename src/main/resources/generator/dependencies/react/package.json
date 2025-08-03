@@ -1,7 +1,7 @@
 {
   "name": "seed4j-dependencies",
   "version": "0.0.0",
-  "description": "JHipster Lite : used for Vite+React dependencies",
+  "description": "Seed4J : used for Vite+React dependencies",
   "license": "Apache-2.0",
   "type": "module",
   "dependencies": {

@@ -1,4 +1,10 @@
-# Seed4J 🌱
+<p align="center">
+  <a href="https://seed4j.com">
+    <img src="https://raw.githubusercontent.com/seed4j/seed4j-brand/main/brand/logos/seed4j_logo-name.svg" height="300">
+  </a>
+</p>
+
+# Seed4J
 
 [![Seed4J version](https://img.shields.io/github/v/release/seed4j/seed4j)](https://github.com/seed4j/seed4j/releases)
 [![Seed4J Maven Central](https://img.shields.io/maven-central/v/com.seed4j/seed4j?color=blue)](https://repo.maven.apache.org/maven2/com/seed4j/seed4j/)

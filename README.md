@@ -23,7 +23,7 @@
 
 ## Description
 
-[Seed4J](https://www.seed4j.com/) is a development platform to quickly generate, develop & deploy modern web applications & microservice architectures.
+[Seed4J](https://seed4j.com/) is a development platform to quickly generate, develop & deploy modern web applications & microservice architectures.
 
 **Seed4J** will help you to start your project by generating step by step only what you need.
 
@@ -71,7 +71,7 @@ If you have an existing project generated with Seed4J, you can handle breaking c
 mvn -U org.openrewrite.maven:rewrite-maven-plugin:run -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-spring:RELEASE,tech.jhipster.lite:jhlite:RELEASE -Drewrite.activeRecipes=tech.jhipster.lite.UpgradeJhipsterLite
 ```
 
-The main interest is for custom-jhlite instances, but it can also be useful if some modules have been renamed: it will update your `.jhipster/history.json` file to use the new module names.
+The main interest is for custom-jhlite instances, but it can also be useful if some modules have been renamed: it will update your `.seed4j/modules/history.json` file to use the new module names.
 
 ## Prerequisites
 

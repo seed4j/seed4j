@@ -1,4 +1,6 @@
-JHipster
-Copyright 2013-2025 the original author or authors from the JHipster project.
+Seed4J
+Copyright 2013-2025 the original author or authors from the JHipster project and Seed4J project.
 
-For more information on the JHipster project, see https://www.jhipster.tech/
+This project is a fork of the original [JHipster Lite](https://github.com/jhipster-lite/jhipster-lite), now maintained under the **seed4j** organization. It will be developed and maintained by the original authors of JHipster Lite project.
+
+For more information on the SeedJ project, see https://seed4j.com

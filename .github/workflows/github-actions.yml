@@ -128,6 +128,8 @@ jobs:
           ./mvnw clean verify -Dsonar.qualitygate.wait=true
       - name: 'Analysis: local Sonar'
         run: |
+          docker logs sonar
+          docker logs sonar-token
           SONAR_TOKEN=$(docker logs sonar-token)
           ./mvnw initialize sonar:sonar -Dsonar.token=$SONAR_TOKEN
           ./tests-ci/sonar.sh

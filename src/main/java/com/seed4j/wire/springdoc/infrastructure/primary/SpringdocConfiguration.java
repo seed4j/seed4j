@@ -21,12 +21,12 @@ class SpringdocConfiguration {
     return new OpenAPI()
       .info(
         new Info()
-          .title("JHipster Lite API")
-          .description("JHipster Lite API")
+          .title("Seed4J API")
+          .description("Seed4J API")
           .version(version)
           .license(new License().name("Apache 2.0").url("https://www.apache.org/licenses/LICENSE-2.0"))
       )
-      .externalDocs(new ExternalDocumentation().description("JHipster Lite Documentation").url("https://jhipster.tech/jhipster-lite/"));
+      .externalDocs(new ExternalDocumentation().description("Seed4J Documentation").url("https://seed4j.com"));
   }
 
   @Bean

@@ -3,7 +3,7 @@
     <div class="jhlite-header--slot jhlite-with-theme-switch">
       <router-link class="jhlite-logo" to="/">
         <img class="jhlite-logo--icon" src="../../../../../content/JHipster-Lite-neon-blue.png" alt="JHipster bow tie" width="48" />
-        <span class="jhlite-logo--text">JHipster Lite</span>
+        <span class="jhlite-logo--text">Seed4J</span>
         <span class="jhlite-logo-version--text">{{ version }}</span>
       </router-link>
       <ThemeButtonVue />
@@ -33,7 +33,7 @@
             </router-link>
           </li>
           <li class="jhlite-nav--item">
-            <a class="jhlite-nav-item" href="https://www.seed4j.com" target="_blank" rel="noopener">
+            <a class="jhlite-nav-item" href="https://seed4j.com" target="_blank" rel="noopener">
               <span class="jhlite-icon-text">
                 <span class="jhlite-icon-text--icon">
                   <IconVue name="jhipster" aria-label="JHipster logo" title="Seed4J website" />
@@ -46,7 +46,7 @@
             <a class="jhlite-nav-item" href="https://github.com/seed4j/seed4j" target="_blank" rel="noopener">
               <span class="jhlite-icon-text">
                 <span class="jhlite-icon-text--icon">
-                  <IconVue name="github-circled" aria-label="GitHub logo" title="JHipster Lite GitHub page" />
+                  <IconVue name="github-circled" aria-label="GitHub logo" title="Seed4J GitHub page" />
                 </span>
                 <span class="jhlite-icon-text--text -lg-only">GitHub</span>
               </span>

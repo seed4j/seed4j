@@ -1,7 +1,7 @@
 {
   "name": "seed4j-dependencies",
   "version": "0.0.0",
-  "description": "JHipster Lite : used for Dependencies",
+  "description": "Seed4J : used for Dependencies",
   "license": "Apache-2.0",
   "dependencies": {
     "@babel/cli": "7.28.0",

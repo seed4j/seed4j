@@ -9,7 +9,7 @@
   <artifactId>jhlite-dependencies</artifactId>
   <version>0.0.7-SNAPSHOT</version>
   <name>jhlite dependencies</name>
-  <description>JHipster Lite dependencies list</description>
+  <description>Seed4J dependencies list</description>
   <packaging>pom</packaging>
 
   <properties>

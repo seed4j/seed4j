@@ -28,7 +28,7 @@
   </licenses>
   <organization>
     <name>seed4j</name>
-    <url>https://www.seed4j.com</url>
+    <url>https://seed4j.com</url>
   </organization>
   <developers>
     <developer>
@@ -36,7 +36,7 @@
       <name>Pascal Grimaud</name>
       <url>https://github.com/pascalgrimaud</url>
       <organization>seed4j</organization>
-      <organizationUrl>https://www.seed4j.com/</organizationUrl>
+      <organizationUrl>https://seed4j.com/</organizationUrl>
     </developer>
   </developers>
   <scm>
@@ -780,13 +780,11 @@
           <configuration>
             <rules>
               <requireMavenVersion>
-                <message>You are running an older version of Maven. JHipster Lite requires at least Maven ${maven.version}</message>
+                <message>You are running an older version of Maven. Seed4J requires at least Maven ${maven.version}</message>
                 <version>${maven.version}</version>
               </requireMavenVersion>
               <requireJavaVersion>
-                <message>
-                  You are running an incompatible version of Java. JHipster Lite engine requires at least Java ${java.version}
-                </message>
+                <message>You are running an incompatible version of Java. Seed4J engine requires at least Java ${java.version}</message>
                 <version>${java.version}</version>
               </requireJavaVersion>
             </rules>

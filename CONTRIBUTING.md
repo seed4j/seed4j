@@ -25,12 +25,6 @@ If you have a question on using Seed4J, or if you need help with your Seed4J pro
 
 If you find a bug in the source code or a mistake in the documentation, you can help us by [submitting a ticket](https://opensource.guide/how-to-contribute/#opening-an-issue) to our [GitHub issues](https://github.com/seed4j/seed4j/issues). Even better, you can submit a Pull Request to our [Seed4J project](https://github.com/seed4j/seed4j) or to our [Documentation project](https://github.com/seed4j/seed4j.github.io).
 
-**Please see the Submission Guidelines below**.
-
-## <a name="bounties"></a> Bug bounties
-
-If you submitted a Pull Request that fixes a ticket with the "\$100" tag, then you are eligible for our bug bounty program! Go to our [bug bounties documentation](https://seed4j.com/bug-bounties/) for more information, and claim your money.
-
 ## <a name="feature"></a> Feature Requests
 
 You can request a new feature by submitting a ticket to our [GitHub issues](https://github.com/seed4j/seed4j/issues). If you

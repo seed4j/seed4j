@@ -30,7 +30,7 @@
         "surefire-plugin.version",
         "failsafe-plugin.version"
       ],
-      "allowedVersions": "!3.5.3"
+      "allowedVersions": "<3.5.3 || >3.5.3"
     }
   ]
 }

@@ -57,7 +57,7 @@ jobs:
       - name: 'Setup: checkout project'
         uses: actions/checkout@v4
       - name: 'Artifact: download JAR'
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: seed4j-jar
           path: ./target/

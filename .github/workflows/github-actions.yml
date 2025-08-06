@@ -203,7 +203,7 @@ jobs:
         id: setup
         uses: ./.github/actions/setup
       - name: 'Artifact: download JAR'
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: seed4j-jar
           path: ./tests-ci/
@@ -290,7 +290,7 @@ jobs:
         uses: ./main-branch/.github/actions/setup
       - name: 'Artifact: download JAR from main branch'
         if: github.event_name == 'pull_request'
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: seed4j-main-jar
           path: ./main-branch/tests-ci/
@@ -345,7 +345,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           node-package-manager: ${{ matrix.node-package-manager }}
       - name: 'Artifact: download JAR'
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: seed4j-jar
           path: ./current-branch/tests-ci/

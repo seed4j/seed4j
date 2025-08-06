@@ -176,13 +176,13 @@ class SonarQubeModuleFactoryTest {
         .containing(
           """
           import java.util.Properties
-          // jhipster-needle-gradle-imports\
+          // seed4j-needle-gradle-imports\
           """
         )
         .containing(
           """
             alias(libs.plugins.sonarqube)
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           """
         )
         .containing(

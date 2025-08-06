@@ -18,8 +18,8 @@ public class VueJwtModuleFactory {
   private static final JHipsterDestination MAIN_DESTINATION = to("src/main/webapp/app");
   private static final JHipsterDestination TEST_DESTINATION = to("src/test/webapp");
 
-  private static final String MAIN_TS_IMPORT_NEEDLE = "// jhipster-needle-main-ts-import";
-  private static final String MAIN_TS_PROVIDER_NEEDLE = "// jhipster-needle-main-ts-provider";
+  private static final String MAIN_TS_IMPORT_NEEDLE = "// seed4j-needle-main-ts-import";
+  private static final String MAIN_TS_PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
 
   private static final String JWT_IMPORT = """
     import { provideForAuth } from '@/auth/application/AuthProvider';

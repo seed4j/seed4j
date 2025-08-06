@@ -239,7 +239,7 @@ class SpringBootCoreModuleFactoryTest {
         .containing(
           """
             alias(libs.plugins.spring.boot)
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           """
         )
         .containing("defaultTasks(\"bootRun\")")

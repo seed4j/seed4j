@@ -3,13 +3,13 @@ jqassistant:
     - group-id: org.jqassistant.plugin
       artifact-id: jqassistant-context-mapper-plugin
       version: ${jqassistant-context-mapper-plugin.version}
-    # jhipster-needle-jqassistant-plugin
+    # seed4j-needle-jqassistant-plugin
 
   analyze:
     concept:
-      # jhipster-needle-jqassistant-analyze-concept
+      # seed4j-needle-jqassistant-analyze-concept
     groups:
-      # jhipster-needle-jqassistant-analyze-group
+      # seed4j-needle-jqassistant-analyze-group
     execute-applied-concepts: true
     report:
       continue-on-failure: true

@@ -130,7 +130,7 @@ class SpringBootDockerModuleFactoryTest {
         .containing(
           """
             alias(libs.plugins.jib)
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           """
         )
         .containing(

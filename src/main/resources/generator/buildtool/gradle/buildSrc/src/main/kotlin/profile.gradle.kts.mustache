@@ -1,21 +1,21 @@
-// jhipster-needle-gradle-imports
+// seed4j-needle-gradle-imports
 
 plugins {
   java
-  // jhipster-needle-gradle-plugins
+  // seed4j-needle-gradle-plugins
 }
 
-// jhipster-needle-gradle-properties
+// seed4j-needle-gradle-properties
 
-// jhipster-needle-gradle-plugins-configurations
+// seed4j-needle-gradle-plugins-configurations
 
 // Workaround to access the `libs` object in precompiled script plugin
 // https://github.com/gradle/gradle/issues/15383
 val libs = versionCatalogs.named("libs")
 
 dependencies {
-  // jhipster-needle-gradle-implementation-dependencies
-  // jhipster-needle-gradle-compile-dependencies
-  // jhipster-needle-gradle-runtime-dependencies
-  // jhipster-needle-gradle-test-dependencies
+  // seed4j-needle-gradle-implementation-dependencies
+  // seed4j-needle-gradle-compile-dependencies
+  // seed4j-needle-gradle-runtime-dependencies
+  // seed4j-needle-gradle-test-dependencies
 }

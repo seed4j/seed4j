@@ -326,20 +326,20 @@ class FrontendJavaBuildToolModuleFactoryTest {
         .containing(
           """
           import com.github.gradle.node.npm.task.NpmTask
-          // jhipster-needle-gradle-imports
+          // seed4j-needle-gradle-imports
           """
         )
         .containing(
           """
             alias(libs.plugins.node.gradle)
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           """
         )
         .containing(
           """
           val nodeVersionValue by extra("16.0.0")
           val npmVersionValue by extra("4.0.0")
-          // jhipster-needle-gradle-properties
+          // seed4j-needle-gradle-properties
           """
         )
         .containing(
@@ -392,7 +392,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
         .containing(
           """
             dependsOn("testNpm")
-            // jhipster-needle-gradle-tasks-test
+            // seed4j-needle-gradle-tasks-test
           """
         );
     }
@@ -409,20 +409,20 @@ class FrontendJavaBuildToolModuleFactoryTest {
         .containing(
           """
           import com.github.gradle.node.pnpm.task.PnpmTask
-          // jhipster-needle-gradle-imports
+          // seed4j-needle-gradle-imports
           """
         )
         .containing(
           """
             alias(libs.plugins.node.gradle)
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           """
         )
         .containing(
           """
           val nodeVersionValue by extra("16.0.0")
           val pnpmVersionValue by extra("10.0.0")
-          // jhipster-needle-gradle-properties
+          // seed4j-needle-gradle-properties
           """
         )
         .containing(
@@ -475,7 +475,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
         .containing(
           """
             dependsOn("testPnpm")
-            // jhipster-needle-gradle-tasks-test
+            // seed4j-needle-gradle-tasks-test
           """
         );
     }

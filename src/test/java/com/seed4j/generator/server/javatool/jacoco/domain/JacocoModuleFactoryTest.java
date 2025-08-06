@@ -159,7 +159,7 @@ class JacocoModuleFactoryTest {
         .containing(
           """
             jacoco
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           """
         )
         .containing(
@@ -181,7 +181,7 @@ class JacocoModuleFactoryTest {
         .containing(
           """
             finalizedBy("jacocoTestReport")
-            // jhipster-needle-gradle-tasks-test
+            // seed4j-needle-gradle-tasks-test
           """
         )
         .and()
@@ -201,7 +201,7 @@ class JacocoModuleFactoryTest {
       .containing(
         """
           jacoco
-          // jhipster-needle-gradle-plugins
+          // seed4j-needle-gradle-plugins
         """
       )
       .containing(
@@ -246,7 +246,7 @@ class JacocoModuleFactoryTest {
       .containing(
         """
           finalizedBy("jacocoTestCoverageVerification")
-          // jhipster-needle-gradle-tasks-test
+          // seed4j-needle-gradle-tasks-test
         """
       )
       .and()

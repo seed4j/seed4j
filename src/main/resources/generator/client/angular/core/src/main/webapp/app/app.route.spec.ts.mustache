@@ -17,5 +17,5 @@ describe('AppRoutes', () => {
     expect(routes).toBeDefined();
   });
 
-  // jhipster-needle-angular-menu
+  // seed4j-needle-angular-menu
 });

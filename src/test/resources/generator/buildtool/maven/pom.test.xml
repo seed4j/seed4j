@@ -13,14 +13,14 @@
   <description>JHipster Project</description>
   <packaging>jar</packaging>
 
-  <!-- jhipster-needle-maven-parent -->
+  <!-- seed4j-needle-maven-parent -->
 
   <repositories>
-    <!-- jhipster-needle-maven-repository -->
+    <!-- seed4j-needle-maven-repository -->
   </repositories>
 
   <pluginRepositories>
-    <!-- jhipster-needle-maven-plugin-repository -->
+    <!-- seed4j-needle-maven-plugin-repository -->
   </pluginRepositories>
 
   <properties>
@@ -36,17 +36,17 @@
     <mockito.version>4.0.0</mockito.version>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
-    <!-- jhipster-needle-maven-property -->
+    <!-- seed4j-needle-maven-property -->
   </properties>
 
   <dependencyManagement>
     <dependencies>
-      <!-- jhipster-needle-maven-add-dependency-management -->
+      <!-- seed4j-needle-maven-add-dependency-management -->
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-    <!-- jhipster-needle-maven-add-dependency -->
+    <!-- seed4j-needle-maven-add-dependency -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
@@ -65,7 +65,7 @@
       <version>${mockito.version}</version>
       <scope>test</scope>
     </dependency>
-    <!-- jhipster-needle-maven-add-dependency-test -->
+    <!-- seed4j-needle-maven-add-dependency-test -->
   </dependencies>
 
   <build>
@@ -119,7 +119,7 @@
           </execution>
         </executions>
       </plugin>
-      <!-- jhipster-needle-maven-add-plugin -->
+      <!-- seed4j-needle-maven-add-plugin -->
     </plugins>
     <pluginManagement>
       <plugins>
@@ -160,7 +160,7 @@
             </rules>
           </configuration>
         </plugin>
-        <!-- jhipster-needle-maven-add-plugin-management -->
+        <!-- seed4j-needle-maven-add-plugin-management -->
       </plugins>
     </pluginManagement>
   </build>

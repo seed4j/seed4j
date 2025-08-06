@@ -17,7 +17,7 @@ class FileSystemStartupCommandsReadmeCommandsHandler {
 
   private static final JHipsterProjectFilePath README = path("README.md");
   private static final TextNeedleBeforeReplacer JHIPSTER_STARTUP_COMMAND_SECTION_NEEDLE = lineBeforeText(
-    "\n<!-- jhipster-needle-startupCommand -->"
+    "\n<!-- seed4j-needle-startupCommand -->"
   );
   private static final String BASH_TEMPLATE = """
     ```bash

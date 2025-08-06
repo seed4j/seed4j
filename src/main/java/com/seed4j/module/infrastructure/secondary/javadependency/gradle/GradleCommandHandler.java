@@ -73,38 +73,38 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
   private static final String COMMAND = "command";
   private static final String BUILD_GRADLE_FILE = "build.gradle.kts";
   private static final String PLUGIN_BUILD_GRADLE_FILE = "buildSrc/build.gradle.kts";
-  private static final Pattern GRADLE_IMPORT_NEEDLE = Pattern.compile("^// jhipster-needle-gradle-imports$", Pattern.MULTILINE);
-  private static final Pattern GRADLE_PLUGIN_NEEDLE = Pattern.compile("^\\s+// jhipster-needle-gradle-plugins$", Pattern.MULTILINE);
+  private static final Pattern GRADLE_IMPORT_NEEDLE = Pattern.compile("^// seed4j-needle-gradle-imports$", Pattern.MULTILINE);
+  private static final Pattern GRADLE_PLUGIN_NEEDLE = Pattern.compile("^\\s+// seed4j-needle-gradle-plugins$", Pattern.MULTILINE);
   private static final Pattern GRADLE_PLUGIN_PROJECT_EXTENSION_CONFIGURATION_NEEDLE = Pattern.compile(
-    "^// jhipster-needle-gradle-plugins-configurations$",
+    "^// seed4j-needle-gradle-plugins-configurations$",
     Pattern.MULTILINE
   );
   private static final Pattern GRADLE_IMPLEMENTATION_DEPENDENCY_NEEDLE = Pattern.compile(
-    "^\\s+// jhipster-needle-gradle-implementation-dependencies$",
+    "^\\s+// seed4j-needle-gradle-implementation-dependencies$",
     Pattern.MULTILINE
   );
   private static final Pattern GRADLE_COMPILE_DEPENDENCY_NEEDLE = Pattern.compile(
-    "^\\s+// jhipster-needle-gradle-compile-dependencies$",
+    "^\\s+// seed4j-needle-gradle-compile-dependencies$",
     Pattern.MULTILINE
   );
   private static final Pattern GRADLE_RUNTIME_DEPENDENCY_NEEDLE = Pattern.compile(
-    "^\\s+// jhipster-needle-gradle-runtime-dependencies$",
+    "^\\s+// seed4j-needle-gradle-runtime-dependencies$",
     Pattern.MULTILINE
   );
   private static final Pattern GRADLE_TEST_DEPENDENCY_NEEDLE = Pattern.compile(
-    "^\\s+// jhipster-needle-gradle-test-dependencies$",
+    "^\\s+// seed4j-needle-gradle-test-dependencies$",
     Pattern.MULTILINE
   );
   private static final Pattern GRADLE_PROFILE_ACTIVATION_NEEDLE = Pattern.compile(
-    "^// jhipster-needle-profile-activation$",
+    "^// seed4j-needle-profile-activation$",
     Pattern.MULTILINE
   );
-  private static final Pattern GRADLE_PROPERTY_NEEDLE = Pattern.compile("^// jhipster-needle-gradle-properties$", Pattern.MULTILINE);
+  private static final Pattern GRADLE_PROPERTY_NEEDLE = Pattern.compile("^// seed4j-needle-gradle-properties$", Pattern.MULTILINE);
   private static final Pattern GRADLE_FREE_CONFIGURATION_BLOCKS_NEEDLE = Pattern.compile(
-    "^// jhipster-needle-gradle-free-configuration-blocks$",
+    "^// seed4j-needle-gradle-free-configuration-blocks$",
     Pattern.MULTILINE
   );
-  private static final Pattern GRADLE_TASKS_TEST_NEEDLE = Pattern.compile("^\\s+// jhipster-needle-gradle-tasks-test$", Pattern.MULTILINE);
+  private static final Pattern GRADLE_TASKS_TEST_NEEDLE = Pattern.compile("^\\s+// seed4j-needle-gradle-tasks-test$", Pattern.MULTILINE);
   private static final String PROFILE_CONDITIONAL_TEMPLATE = """
     if (profiles.contains("%s")) {
       apply(plugin = "profile-%s")

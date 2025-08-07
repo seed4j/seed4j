@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  // jhipster-needle-angular-route
+  // seed4j-needle-angular-route
 ];

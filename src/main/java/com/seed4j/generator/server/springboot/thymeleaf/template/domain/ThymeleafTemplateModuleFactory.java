@@ -43,9 +43,9 @@ public class ThymeleafTemplateModuleFactory {
   private static final JHipsterDestination DESTINATION = to(MAIN_RESOURCES_PATH.get());
   private static final JHipsterDestination ROOT_DESTINATION = to(".");
 
-  private static final String MAIN_SCRIPT_NEEDLE = "<!-- jhipster-needle-thymeleaf-main-script -->";
-  private static final String THYMELEAF_POSTCSS_PLUGINS_NEEDLE = "// jhipster-needle-thymeleaf-postcss-plugins";
-  private static final String THYMELEAF_CSS_NEEDLE = "/* jhipster-needle-thymeleaf-css */";
+  private static final String MAIN_SCRIPT_NEEDLE = "<!-- seed4j-needle-thymeleaf-main-script -->";
+  private static final String THYMELEAF_POSTCSS_PLUGINS_NEEDLE = "// seed4j-needle-thymeleaf-postcss-plugins";
+  private static final String THYMELEAF_CSS_NEEDLE = "/* seed4j-needle-thymeleaf-css */";
   private static final Pattern WELCOME_THYMELEAF_MESSAGE_PATTERN = Pattern.compile(
     "<div>Welcome to your Spring Boot with Thymeleaf project!</div>"
   );

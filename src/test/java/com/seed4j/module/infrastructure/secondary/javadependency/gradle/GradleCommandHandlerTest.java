@@ -126,7 +126,7 @@ class GradleCommandHandlerTest {
         assertThat(buildGradleContent(projectFolder)).contains(
             """
             val springProfilesActive by extra("local")
-            // jhipster-needle-gradle-properties
+            // seed4j-needle-gradle-properties
             """
           );
       }
@@ -143,7 +143,7 @@ class GradleCommandHandlerTest {
             """
             val javaVersion by extra("21")
             val springProfilesActive by extra("local")
-            // jhipster-needle-gradle-properties
+            // seed4j-needle-gradle-properties
             """
           );
       }
@@ -168,7 +168,7 @@ class GradleCommandHandlerTest {
           .contains(
             """
             val springProfilesActive by extra("dev")
-            // jhipster-needle-gradle-properties
+            // seed4j-needle-gradle-properties
             """
           )
           .doesNotContain(
@@ -195,7 +195,7 @@ class GradleCommandHandlerTest {
         assertThat(buildGradleContent(projectFolder)).contains(
             """
             val springProfilesActive by extra("local")
-            // jhipster-needle-gradle-properties
+            // seed4j-needle-gradle-properties
             """
           );
       }
@@ -226,7 +226,7 @@ class GradleCommandHandlerTest {
         assertThat(scriptPluginContent(projectFolder, localBuildProfile())).contains(
             """
             val springProfilesActive by extra("local")
-            // jhipster-needle-gradle-properties
+            // seed4j-needle-gradle-properties
             """
           );
       }
@@ -243,7 +243,7 @@ class GradleCommandHandlerTest {
             """
             val javaVersion by extra("21")
             val springProfilesActive by extra("local")
-            // jhipster-needle-gradle-properties
+            // seed4j-needle-gradle-properties
             """
           );
       }
@@ -268,7 +268,7 @@ class GradleCommandHandlerTest {
           .contains(
             """
             val springProfilesActive by extra("dev")
-            // jhipster-needle-gradle-properties
+            // seed4j-needle-gradle-properties
             """
           )
           .doesNotContain(
@@ -295,7 +295,7 @@ class GradleCommandHandlerTest {
         assertThat(scriptPluginContent(projectFolder, localBuildProfile())).contains(
             """
             val springProfilesActive by extra("local")
-            // jhipster-needle-gradle-properties
+            // seed4j-needle-gradle-properties
             """
           );
       }
@@ -340,7 +340,7 @@ class GradleCommandHandlerTest {
           if (profiles.contains("local")) {
             apply(plugin = "profile-local")
           }
-          // jhipster-needle-profile-activation\
+          // seed4j-needle-profile-activation\
           """
         );
       assertFileExists(
@@ -372,7 +372,7 @@ class GradleCommandHandlerTest {
           if (profiles.contains("dev")) {
             apply(plugin = "profile-dev")
           }
-          // jhipster-needle-profile-activation\
+          // seed4j-needle-profile-activation\
           """
         );
       assertFileExists(
@@ -405,7 +405,7 @@ class GradleCommandHandlerTest {
           if (profiles.contains("local")) {
             apply(plugin = "profile-local")
           }
-          // jhipster-needle-profile-activation\
+          // seed4j-needle-profile-activation\
           """
         );
       assertFileExists(
@@ -429,7 +429,7 @@ class GradleCommandHandlerTest {
           if (profiles.contains("local")) {
             apply(plugin = "profile-local")
           }
-          // jhipster-needle-profile-activation\
+          // seed4j-needle-profile-activation\
           """
         );
     }
@@ -451,7 +451,7 @@ class GradleCommandHandlerTest {
           if (profiles.isEmpty() || profiles.contains("local")) {
             apply(plugin = "profile-local")
           }
-          // jhipster-needle-profile-activation\
+          // seed4j-needle-profile-activation\
           """
         );
     }
@@ -483,7 +483,7 @@ class GradleCommandHandlerTest {
           if (profiles.contains("local")) {
             apply(plugin = "profile-local")
           }
-          // jhipster-needle-profile-activation\
+          // seed4j-needle-profile-activation\
           """
         );
       assertFileExists(
@@ -699,13 +699,13 @@ class GradleCommandHandlerTest {
           """
           dependencies {
             implementation(libs.guava)
-            // jhipster-needle-gradle-implementation-dependencies
+            // seed4j-needle-gradle-implementation-dependencies
             compileOnly(libs.junit.jupiter.engine)
-            // jhipster-needle-gradle-compile-dependencies
+            // seed4j-needle-gradle-compile-dependencies
             runtimeOnly(libs.spring.boot.starter.web)
-            // jhipster-needle-gradle-runtime-dependencies
+            // seed4j-needle-gradle-runtime-dependencies
             testImplementation(libs.junit.jupiter.engine)
-            // jhipster-needle-gradle-test-dependencies
+            // seed4j-needle-gradle-test-dependencies
           }
           """
         );
@@ -1358,7 +1358,7 @@ class GradleCommandHandlerTest {
         .contains(
           """
           import java.util.Properties
-          // jhipster-needle-gradle-imports
+          // seed4j-needle-gradle-imports
           """
         )
         .contains(
@@ -1366,7 +1366,7 @@ class GradleCommandHandlerTest {
           plugins {
             java
             checkstyle
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           }
           """
         )
@@ -1377,7 +1377,7 @@ class GradleCommandHandlerTest {
             toolVersion = libs.versions.checkstyle.get()
           }
 
-          // jhipster-needle-gradle-plugins-configurations
+          // seed4j-needle-gradle-plugins-configurations
           """
         );
     }
@@ -1392,7 +1392,7 @@ class GradleCommandHandlerTest {
         .contains(
           """
           import com.github.gradle.node.npm.task.NpmTask
-          // jhipster-needle-gradle-imports
+          // seed4j-needle-gradle-imports
           """
         )
         .contains(
@@ -1400,7 +1400,7 @@ class GradleCommandHandlerTest {
           plugins {
             java
             alias(libs.plugins.node.gradle)
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           }
           """
         )
@@ -1502,7 +1502,7 @@ class GradleCommandHandlerTest {
           plugins {
             java
             checkstyle
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           }
           """
         )
@@ -1518,7 +1518,7 @@ class GradleCommandHandlerTest {
             toolVersion = libs.versions.checkstyle.get()
           }
 
-          // jhipster-needle-gradle-plugins-configurations
+          // seed4j-needle-gradle-plugins-configurations
           """
         );
     }
@@ -1551,7 +1551,7 @@ class GradleCommandHandlerTest {
           plugins {
             java
             id("com.gorylenko.gradle-git-properties")
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           }
           """
         )
@@ -1563,7 +1563,7 @@ class GradleCommandHandlerTest {
             keys = listOf("git.branch", "git.commit.id.abbrev", "git.commit.id.describe", "git.build.version")
           }
 
-          // jhipster-needle-gradle-plugins-configurations
+          // seed4j-needle-gradle-plugins-configurations
           """
         );
     }
@@ -1588,7 +1588,7 @@ class GradleCommandHandlerTest {
         .contains(
           """
           import java.util.Properties
-          // jhipster-needle-gradle-imports
+          // seed4j-needle-gradle-imports
           """
         )
         .contains(
@@ -1596,7 +1596,7 @@ class GradleCommandHandlerTest {
           plugins {
             java
             id("com.bmuschko.docker-remote-api")
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           }
           """
         );
@@ -1614,7 +1614,7 @@ class GradleCommandHandlerTest {
         .contains(
           """
           import java.util.Properties
-          // jhipster-needle-gradle-imports
+          // seed4j-needle-gradle-imports
           """
         )
         .contains(
@@ -1622,7 +1622,7 @@ class GradleCommandHandlerTest {
           plugins {
             java
             checkstyle
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           }
           """
         )
@@ -1719,7 +1719,7 @@ class GradleCommandHandlerTest {
           }
         }
 
-        // jhipster-needle-gradle-free-configuration-blocks\
+        // seed4j-needle-gradle-free-configuration-blocks\
         """
       );
   }
@@ -1785,7 +1785,7 @@ class GradleCommandHandlerTest {
           }
           useJUnitPlatform()
           dependsOn("testNpm")
-          // jhipster-needle-gradle-tasks-test
+          // seed4j-needle-gradle-tasks-test
         }
         """
       );
@@ -1827,7 +1827,7 @@ class GradleCommandHandlerTest {
           }
           useJUnitPlatform()
           dependsOn("testNpm")
-          // jhipster-needle-gradle-tasks-test
+          // seed4j-needle-gradle-tasks-test
         }
         """
       );

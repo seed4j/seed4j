@@ -26,9 +26,9 @@ class JQAssistantModuleFactoryTest {
     assertThatModuleWithFiles(module, pomFile())
       .hasFile(".jqassistant.yml")
       .containing("artifact-id: jqassistant-context-mapper-plugin")
-      .containing("# jhipster-needle-jqassistant-plugin")
-      .containing("# jhipster-needle-jqassistant-analyze-concept")
-      .containing("# jhipster-needle-jqassistant-analyze-group")
+      .containing("# seed4j-needle-jqassistant-plugin")
+      .containing("# seed4j-needle-jqassistant-analyze-concept")
+      .containing("# seed4j-needle-jqassistant-analyze-group")
       .and()
       .hasFile("pom.xml")
       // jQAssistant
@@ -118,7 +118,7 @@ class JQAssistantModuleFactoryTest {
             - group-id: org.jqassistant.plugin
               artifact-id: jqassistant-jmolecules-plugin
               version: ${jqassistant-jmolecules-plugin.version}
-            # jhipster-needle-jqassistant-plugin
+            # seed4j-needle-jqassistant-plugin
         """
       )
       .containing(
@@ -126,7 +126,7 @@ class JQAssistantModuleFactoryTest {
               - jmolecules-ddd:Default
               - jmolecules-hexagonal:Default
               - jmolecules-event:Default
-              # jhipster-needle-jqassistant-analyze-group
+              # seed4j-needle-jqassistant-analyze-group
         """
       )
       .and()
@@ -150,13 +150,13 @@ class JQAssistantModuleFactoryTest {
             - group-id: org.jqassistant.plugin
               artifact-id: jqassistant-spring-plugin
               version: ${jqassistant-spring-plugin.version}
-            # jhipster-needle-jqassistant-plugin
+            # seed4j-needle-jqassistant-plugin
         """
       )
       .containing(
         """
               - spring-boot:Default
-              # jhipster-needle-jqassistant-analyze-group
+              # seed4j-needle-jqassistant-analyze-group
         """
       )
       .and()

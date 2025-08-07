@@ -35,7 +35,7 @@
   <logger name="com.github.dockerjava" level="WARN" />
   <logger name="org.testcontainers" level="WARN" />
   <logger name="com.tngtech.archunit.core.importer" level="ERROR" />
-  <!-- jhipster-needle-logback-add-log -->
+  <!-- seed4j-needle-logback-add-log -->
 
   <root>
     <level>WARN</level>

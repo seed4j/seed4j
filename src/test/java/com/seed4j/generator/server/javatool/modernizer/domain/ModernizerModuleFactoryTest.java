@@ -79,7 +79,7 @@ class ModernizerModuleFactoryTest {
       .containing(
         """
           alias(libs.plugins.modernizer)
-          // jhipster-needle-gradle-plugins
+          // seed4j-needle-gradle-plugins
         """
       )
       .containing(

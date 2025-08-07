@@ -8,6 +8,6 @@ repositories {
 }
 
 dependencies {
-  // jhipster-needle-gradle-implementation-dependencies
+  // seed4j-needle-gradle-implementation-dependencies
 }
 

@@ -1,6 +1,6 @@
 dependencies {
-  // jhipster-needle-gradle-implementation-dependencies
-  // jhipster-needle-gradle-compile-dependencies
-  // jhipster-needle-gradle-runtime-dependencies
-  // jhipster-needle-gradle-test-dependencies
+  // seed4j-needle-gradle-implementation-dependencies
+  // seed4j-needle-gradle-compile-dependencies
+  // seed4j-needle-gradle-runtime-dependencies
+  // seed4j-needle-gradle-test-dependencies
 }

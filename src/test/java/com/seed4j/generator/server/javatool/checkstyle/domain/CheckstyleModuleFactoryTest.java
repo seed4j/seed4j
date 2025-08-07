@@ -82,7 +82,7 @@ class CheckstyleModuleFactoryTest {
       .containing(
         """
           checkstyle
-          // jhipster-needle-gradle-plugins
+          // seed4j-needle-gradle-plugins
         }
         """
       )

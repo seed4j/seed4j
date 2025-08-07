@@ -113,7 +113,7 @@ class LocalProfileModuleFactoryTest {
         .containing(
           """
           val springProfilesActive by extra("")
-          // jhipster-needle-gradle-properties
+          // seed4j-needle-gradle-properties
           """
         )
         .containing(
@@ -125,7 +125,7 @@ class LocalProfileModuleFactoryTest {
           if (profiles.isEmpty() || profiles.contains("local")) {
             apply(plugin = "profile-local")
           }
-          // jhipster-needle-profile-activation\
+          // seed4j-needle-profile-activation\
           """
         )
         .containing(
@@ -143,7 +143,7 @@ class LocalProfileModuleFactoryTest {
             }
           }
 
-          // jhipster-needle-gradle-free-configuration-blocks\
+          // seed4j-needle-gradle-free-configuration-blocks\
           """
         )
         .and()
@@ -151,7 +151,7 @@ class LocalProfileModuleFactoryTest {
         .containing(
           """
           val springProfilesActive by extra("local")
-          // jhipster-needle-gradle-properties
+          // seed4j-needle-gradle-properties
           """
         )
         .and()

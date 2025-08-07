@@ -25,7 +25,7 @@ public class VueI18nModuleFactory {
   private static final String INDEX = "src/main/webapp/app/";
   private static final String INDEX_TEST = "src/test/";
 
-  private static final String PROVIDER_NEEDLE = "// jhipster-needle-main-ts-provider";
+  private static final String PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
@@ -58,8 +58,8 @@ public class VueI18nModuleFactory {
       .and()
       .mandatoryReplacements()
         .in(path(INDEX + "main.ts"))
-          .add(lineBeforeText("// jhipster-needle-main-ts-import"), "import i18next from './i18n';")
-          .add(lineBeforeText("// jhipster-needle-main-ts-import"), "import I18NextVue from 'i18next-vue';")
+          .add(lineBeforeText("// seed4j-needle-main-ts-import"), "import i18next from './i18n';")
+          .add(lineBeforeText("// seed4j-needle-main-ts-import"), "import I18NextVue from 'i18next-vue';")
           .add(lineBeforeText(PROVIDER_NEEDLE
           ), "app.use(I18NextVue, { i18next });")
           .and()

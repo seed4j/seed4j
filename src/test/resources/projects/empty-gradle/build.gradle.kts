@@ -1,11 +1,11 @@
-// jhipster-needle-gradle-imports
+// seed4j-needle-gradle-imports
 
 plugins {
   java
-  // jhipster-needle-gradle-plugins
+  // seed4j-needle-gradle-plugins
 }
 
-// jhipster-needle-gradle-properties
+// seed4j-needle-gradle-properties
 
 java {
   toolchain {
@@ -13,11 +13,11 @@ java {
   }
 }
 
-// jhipster-needle-gradle-plugins-configurations
+// seed4j-needle-gradle-plugins-configurations
 
 repositories {
   mavenCentral()
-  // jhipster-needle-gradle-repositories
+  // seed4j-needle-gradle-repositories
 }
 
 group = "com.seed4j.growth"
@@ -27,16 +27,16 @@ val profiles = (project.findProperty("profiles") as String? ?: "")
   .split(",")
   .map { it.trim() }
   .filter { it.isNotEmpty() }
-// jhipster-needle-profile-activation
+// seed4j-needle-profile-activation
 
 dependencies {
-  // jhipster-needle-gradle-implementation-dependencies
-  // jhipster-needle-gradle-compile-dependencies
-  // jhipster-needle-gradle-runtime-dependencies
-  // jhipster-needle-gradle-test-dependencies
+  // seed4j-needle-gradle-implementation-dependencies
+  // seed4j-needle-gradle-compile-dependencies
+  // seed4j-needle-gradle-runtime-dependencies
+  // seed4j-needle-gradle-test-dependencies
 }
 
-// jhipster-needle-gradle-free-configuration-blocks
+// seed4j-needle-gradle-free-configuration-blocks
 
 tasks.test {
   filter {
@@ -45,7 +45,7 @@ tasks.test {
     excludeTestsMatching("**CucumberTest*")
   }
   useJUnitPlatform()
-  // jhipster-needle-gradle-tasks-test
+  // seed4j-needle-gradle-tasks-test
 }
 
 val integrationTest = task<Test>("integrationTest") {

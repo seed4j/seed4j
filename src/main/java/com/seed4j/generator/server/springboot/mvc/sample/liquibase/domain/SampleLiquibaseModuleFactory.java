@@ -23,7 +23,7 @@ public class SampleLiquibaseModuleFactory {
   private static final JHipsterSource SOURCE = from("server/springboot/mvc/sample/liquibase");
   private static final JHipsterDestination CHANGELOG_DESTINATION = to("src/main/resources/config/liquibase/changelog");
 
-  private static final TextNeedleBeforeReplacer CHANGELOG_NEEDLE = lineBeforeText("<!-- jhipster-needle-liquibase-add-changelog -->");
+  private static final TextNeedleBeforeReplacer CHANGELOG_NEEDLE = lineBeforeText("<!-- seed4j-needle-liquibase-add-changelog -->");
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

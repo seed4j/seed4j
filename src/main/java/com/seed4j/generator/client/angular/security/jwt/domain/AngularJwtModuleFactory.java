@@ -26,7 +26,7 @@ public class AngularJwtModuleFactory {
     PROVIDE_HTTP_CLIENT_PATTERN
   );
 
-  private static final TextNeedleBeforeReplacer ROUTE_NEEDLE = lineBeforeText("// jhipster-needle-angular-route");
+  private static final TextNeedleBeforeReplacer ROUTE_NEEDLE = lineBeforeText("// seed4j-needle-angular-route");
 
   private static final String LOGIN_MODULE_ROUTE = """
       {

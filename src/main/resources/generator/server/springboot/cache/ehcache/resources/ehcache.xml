@@ -8,7 +8,7 @@
 >
   <service>
     <jsr107:defaults default-template="tinyCache">
-      <!-- jhipster-needle-ehcache-add-entity -->
+      <!-- seed4j-needle-ehcache-add-entity -->
     </jsr107:defaults>
   </service>
 

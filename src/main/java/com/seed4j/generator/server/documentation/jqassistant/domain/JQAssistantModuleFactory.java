@@ -23,8 +23,8 @@ public class JQAssistantModuleFactory {
 
   private static final String JQASSISTANT_CONFIGURATION_FILE = ".jqassistant.yml";
   private static final String SOURCE = "server/documentation/jqassistant";
-  private static final String JHIPSTER_NEEDLE_JQASSISTANT_PLUGIN = "# jhipster-needle-jqassistant-plugin";
-  private static final String JHIPSTER_NEEDLE_JQASSISTANT_ANALYZE_GROUP = "# jhipster-needle-jqassistant-analyze-group";
+  private static final String JHIPSTER_NEEDLE_JQASSISTANT_PLUGIN = "# seed4j-needle-jqassistant-plugin";
+  private static final String JHIPSTER_NEEDLE_JQASSISTANT_ANALYZE_GROUP = "# seed4j-needle-jqassistant-analyze-group";
   private static final GroupId JQASSISTANT_PLUGIN_GROUP_ID = groupId("org.jqassistant.plugin");
   private static final String PROPERTIES = "properties";
 

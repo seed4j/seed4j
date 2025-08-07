@@ -18,16 +18,16 @@ npm install
 
 ## Local environment
 
-<!-- jhipster-needle-localEnvironment -->
+<!-- seed4j-needle-localEnvironment -->
 
 ## Start up
 
-<!-- jhipster-needle-startupCommand -->
+<!-- seed4j-needle-startupCommand -->
 
 ## Documentation
 
-<!-- jhipster-needle-documentation -->
+<!-- seed4j-needle-documentation -->
 
 ## Readme
 
-<!-- jhipster-needle-readme -->
+<!-- seed4j-needle-readme -->

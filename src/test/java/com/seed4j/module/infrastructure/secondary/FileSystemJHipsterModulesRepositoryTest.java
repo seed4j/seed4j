@@ -145,7 +145,7 @@ class FileSystemJHipsterModulesRepositoryTest {
              - [Cucumber integration](documentation/cucumber-integration.md)
              - [Another cucumber integration](documentation/another-cucumber-integration.md)
 
-             <!-- jhipster-needle-documentation -->
+             <!-- seed4j-needle-documentation -->
              """
         )
         .containing("docker compose -f src/main/docker/sonar.yml up -d")
@@ -199,7 +199,7 @@ class FileSystemJHipsterModulesRepositoryTest {
         .containing(
           """
             implementation(libs.gradle.git.properties)
-            // jhipster-needle-gradle-implementation-dependencies\
+            // seed4j-needle-gradle-implementation-dependencies\
           """
         )
         .and()
@@ -207,7 +207,7 @@ class FileSystemJHipsterModulesRepositoryTest {
         .containing(
           """
           import java.util.Properties
-          // jhipster-needle-gradle-imports
+          // seed4j-needle-gradle-imports
           """
         )
         .containing(
@@ -216,7 +216,7 @@ class FileSystemJHipsterModulesRepositoryTest {
             java
             checkstyle
             id("com.gorylenko.gradle-git-properties")
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           }
           """
         )
@@ -235,19 +235,19 @@ class FileSystemJHipsterModulesRepositoryTest {
             keys = listOf("git.branch", "git.commit.id.abbrev", "git.commit.id.describe", "git.build.version")
           }
 
-          // jhipster-needle-gradle-plugins-configurations
+          // seed4j-needle-gradle-plugins-configurations
           """
         )
         .containing(
           """
             testImplementation(libs.findLibrary("cassandra.unit").get())
-            // jhipster-needle-gradle-test-dependencies
+            // seed4j-needle-gradle-test-dependencies
           """
         )
         .containing(
           """
           val springProfilesActive by extra("local")
-          // jhipster-needle-gradle-properties
+          // seed4j-needle-gradle-properties
           """
         )
         .and()
@@ -313,7 +313,7 @@ class FileSystemJHipsterModulesRepositoryTest {
              - [Cucumber integration](documentation/cucumber-integration.md)
              - [Another cucumber integration](documentation/another-cucumber-integration.md)
 
-             <!-- jhipster-needle-documentation -->
+             <!-- seed4j-needle-documentation -->
              """
         )
         .containing("docker compose -f src/main/docker/sonar.yml up -d")

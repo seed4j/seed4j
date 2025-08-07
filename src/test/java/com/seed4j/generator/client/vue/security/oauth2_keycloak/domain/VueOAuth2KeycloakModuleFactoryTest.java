@@ -39,7 +39,7 @@ class VueOAuth2KeycloakModuleFactoryTest {
           import { provideForAuth } from '@/auth/application/AuthProvider';
           import { KeycloakHttp } from '@/auth/infrastructure/secondary/KeycloakHttp';
           import Keycloak from 'keycloak-js';
-          // jhipster-needle-main-ts-import\
+          // seed4j-needle-main-ts-import\
           """
         )
         .containing("""
@@ -52,7 +52,7 @@ class VueOAuth2KeycloakModuleFactoryTest {
           );
 
           provideForAuth(keycloakHttp);
-          // jhipster-needle-main-ts-provider\
+          // seed4j-needle-main-ts-provider\
           """
         )
         .and()

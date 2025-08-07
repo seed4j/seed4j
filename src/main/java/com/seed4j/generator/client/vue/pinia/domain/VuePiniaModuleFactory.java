@@ -9,8 +9,8 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class VuePiniaModuleFactory {
 
-  private static final String IMPORT_NEEDLE = "// jhipster-needle-main-ts-import";
-  private static final String PROVIDER_NEEDLE = "// jhipster-needle-main-ts-provider";
+  private static final String IMPORT_NEEDLE = "// seed4j-needle-main-ts-import";
+  private static final String PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
   private static final String PINIA_IMPORTS = """
     import { createPinia } from 'pinia';
     import piniaPersist from 'pinia-plugin-persistedstate';

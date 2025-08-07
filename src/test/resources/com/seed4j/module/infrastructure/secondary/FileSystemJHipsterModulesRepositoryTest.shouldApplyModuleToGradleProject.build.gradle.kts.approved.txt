@@ -1,15 +1,15 @@
 import java.util.Properties
-// jhipster-needle-gradle-imports
+// seed4j-needle-gradle-imports
 
 plugins {
   java
   jacoco
   checkstyle
-  // jhipster-needle-gradle-plugins
+  // seed4j-needle-gradle-plugins
 }
 
 val springProfilesActive by extra("local")
-// jhipster-needle-gradle-properties
+// seed4j-needle-gradle-properties
 
 java {
   toolchain {
@@ -34,11 +34,11 @@ checkstyle {
   toolVersion = libs.versions.checkstyle.get()
 }
 
-// jhipster-needle-gradle-plugins-configurations
+// seed4j-needle-gradle-plugins-configurations
 
 repositories {
   mavenCentral()
-  // jhipster-needle-gradle-repositories
+  // seed4j-needle-gradle-repositories
 }
 
 group = "com.test.myapp"
@@ -51,7 +51,7 @@ val profiles = (project.findProperty("profiles") as String? ?: "")
 if (profiles.contains("local")) {
   apply(plugin = "profile-local")
 }
-// jhipster-needle-profile-activation
+// seed4j-needle-profile-activation
 
 dependencies {
   implementation(platform(libs.spring.boot.dependencies))
@@ -60,13 +60,13 @@ dependencies {
   implementation(libs.spring.boot.starter.web) {
     exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
   }
-  // jhipster-needle-gradle-implementation-dependencies
-  // jhipster-needle-gradle-compile-dependencies
-  // jhipster-needle-gradle-runtime-dependencies
+  // seed4j-needle-gradle-implementation-dependencies
+  // seed4j-needle-gradle-compile-dependencies
+  // seed4j-needle-gradle-runtime-dependencies
   testImplementation(libs.commons.lang3)
   testImplementation(libs.reflections)
   testImplementation(libs.junit.jupiter.engine)
-  // jhipster-needle-gradle-test-dependencies
+  // seed4j-needle-gradle-test-dependencies
 }
 
 
@@ -82,7 +82,7 @@ tasks.processResources {
   }
 }
 
-// jhipster-needle-gradle-free-configuration-blocks
+// seed4j-needle-gradle-free-configuration-blocks
 
 tasks.test {
   filter {
@@ -92,7 +92,7 @@ tasks.test {
   }
   useJUnitPlatform()
   finalizedBy("jacocoTestReport")
-  // jhipster-needle-gradle-tasks-test
+  // seed4j-needle-gradle-tasks-test
 }
 
 val integrationTest = task<Test>("integrationTest") {

@@ -18,8 +18,8 @@ public class VueRouterModuleFactory {
   private static final JHipsterDestination MAIN_DESTINATION = to("src/main/webapp/app");
   private static final JHipsterDestination TEST_DESTINATION = to("src/test/webapp");
 
-  private static final String IMPORT_NEEDLE = "// jhipster-needle-main-ts-import";
-  private static final String PROVIDER_NEEDLE = "// jhipster-needle-main-ts-provider";
+  private static final String IMPORT_NEEDLE = "// seed4j-needle-main-ts-import";
+  private static final String PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
   private static final String ROUTER_IMPORTS = "import router from './router';";
   private static final String ROUTER_PROVIDER = "app.use(router);";
 

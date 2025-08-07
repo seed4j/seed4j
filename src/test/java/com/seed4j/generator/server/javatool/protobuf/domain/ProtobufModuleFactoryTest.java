@@ -116,7 +116,7 @@ class ProtobufModuleFactoryTest {
         .containing(
           """
             alias(libs.plugins.protobuf)
-            // jhipster-needle-gradle-plugins
+            // seed4j-needle-gradle-plugins
           """
         )
         .containing(

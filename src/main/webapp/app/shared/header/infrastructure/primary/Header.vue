@@ -2,7 +2,7 @@
   <header class="seed4j-header">
     <div class="seed4j-header--slot seed4j-with-theme-switch">
       <router-link class="seed4j-logo" to="/">
-        <img class="seed4j-logo--icon" src="../../../../../content/JHipster-Lite-neon-blue.png" alt="JHipster bow tie" width="48" />
+        <img class="seed4j-logo--icon" src="../../../../../content/seed4j_logo.png" alt="Seed4J logo" width="48" />
         <span class="seed4j-logo--text">Seed4J</span>
         <span class="seed4j-logo-version--text">{{ version }}</span>
       </router-link>
@@ -36,9 +36,9 @@
             <a class="seed4j-nav-item" href="https://seed4j.com" target="_blank" rel="noopener">
               <span class="seed4j-icon-text">
                 <span class="seed4j-icon-text--icon">
-                  <IconVue name="jhipster" aria-label="JHipster logo" title="Seed4J website" />
+                  <IconVue name="jhipster" aria-label="Seed4J logo" title="Seed4J website" />
                 </span>
-                <span class="seed4j-icon-text--text -lg-only">JHipster</span>
+                <span class="seed4j-icon-text--text -lg-only">Seed4J</span>
               </span>
             </a>
           </li>
@@ -53,20 +53,20 @@
             </a>
           </li>
           <li class="seed4j-nav--item">
-            <a class="seed4j-nav-item" href="https://twitter.com/jhipster" target="_blank" rel="noopener">
+            <a class="seed4j-nav-item" href="https://twitter.com/seed4j" target="_blank" rel="noopener">
               <span class="seed4j-icon-text">
                 <span class="seed4j-icon-text--icon">
-                  <IconVue name="twitter" aria-label="Twitter logo" title="JHipster Twitter" />
+                  <IconVue name="twitter" aria-label="Twitter logo" title="Seed4J Twitter" />
                 </span>
                 <span class="seed4j-icon-text--text -lg-only">Twitter</span>
               </span>
             </a>
           </li>
           <li class="seed4j-nav--item">
-            <a class="seed4j-nav-item" href="https://opencollective.com/generator-jhipster" target="_blank" rel="noopener">
+            <a class="seed4j-nav-item" href="https://opencollective.com/seed4j" target="_blank" rel="noopener">
               <span class="seed4j-icon-text">
                 <span class="seed4j-icon-text--icon">
-                  <IconVue name="open-collective" aria-label="Open Collective logo" title="Open Collective JHipster page" />
+                  <IconVue name="open-collective" aria-label="Open Collective logo" title="Open Collective Seed4J page" />
                 </span>
                 <span class="seed4j-icon-text--text -lg-only">Open Collective</span>
               </span>

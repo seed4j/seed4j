@@ -4,36 +4,36 @@ include /organism/module-parameters/module-parameters.mixin.pug
 include /organism/module-properties/module-properties.mixin.pug
 include /organism/project-actions/project-actions.mixin.pug
 
-mixin jhlite-modules-patch
-  .jhipster-modules-patch.jhlite-menu-content-template
-    .jhipster-modules-list.jhlite-menu-content-template--content
-      .jhipster-modules-filters
-        .jhipster-modules-filters--tags
-          +jhlite-tag-filter
-          +jhlite-tag-filter
-          +jhlite-tag-filter
-        input.jhipster-modules-filters--filter(placeholder='Filter')
-        .jhipster-modules-filters--displayed-modules-count 3 / 5
+mixin seed4j-modules-patch
+  .seed4j-modules-patch.seed4j-menu-content-template
+    .seed4j-modules-list.seed4j-menu-content-template--content
+      .seed4j-modules-filters
+        .seed4j-modules-filters--tags
+          +seed4j-tag-filter
+          +seed4j-tag-filter
+          +seed4j-tag-filter
+        input.seed4j-modules-filters--filter(placeholder='Filter')
+        .seed4j-modules-filters--displayed-modules-count 3 / 5
 
-      .jhipster-modules-list--categories
+      .seed4j-modules-list--categories
         div
           div
-            h2.jhipster-module-category--name Angular
-            .jhipster-module.not-selected.not-applied
-              .jhipster-module--content.not-selected.not-applied
-                .jhipster-module--tags.not-selected.not-applied
-                  .jhipster-module--tag angular
-                  .jhipster-module--tag client
-                .jhipster-module--slug.not-selected.not-applied angular-core
-                .jhipster-module--description.not-selected.not-applied Add Angular + Angular CLI
-                  +jhlite-module-parameters('selected', 'all-valid-parameters')
-              button.jhipster-module--apply-button
+            h2.seed4j-module-category--name Angular
+            .seed4j-module.not-selected.not-applied
+              .seed4j-module--content.not-selected.not-applied
+                .seed4j-module--tags.not-selected.not-applied
+                  .seed4j-module--tag angular
+                  .seed4j-module--tag client
+                .seed4j-module--slug.not-selected.not-applied angular-core
+                .seed4j-module--description.not-selected.not-applied Add Angular + Angular CLI
+                  +seed4j-module-parameters('selected', 'all-valid-parameters')
+              button.seed4j-module--apply-button
                 span
-                  +jhlite-icon('play')
+                  +seed4j-icon('play')
 
-    aside.jhlite-menu-content-template--menu
-      .jhlite-side-menu
-        .jhlite-side-menu--slot.-expand
-          +jhlite-module-properties
-        .jhlite-side-menu--slot
-          +jhlite-project-actions
+    aside.seed4j-menu-content-template--menu
+      .seed4j-side-menu
+        .seed4j-side-menu--slot.-expand
+          +seed4j-module-properties
+        .seed4j-side-menu--slot
+          +seed4j-project-actions

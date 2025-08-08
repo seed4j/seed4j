@@ -1,6 +1,6 @@
 @use '../../token/breakpoint';
 
-.jhlite-icon-text {
+.seed4j-icon-text {
   display: inline-flex;
   flex-direction: column;
   gap: 0;
@@ -19,23 +19,23 @@
   }
 }
 
-@media screen and (min-width: breakpoint.$jhlite-global-breakpoint-medium-large) {
-  .jhlite-icon-text {
+@media screen and (min-width: breakpoint.$seed4j-global-breakpoint-medium-large) {
+  .seed4j-icon-text {
     &--text.-lg-only {
       display: block;
     }
   }
 }
 
-@media screen and (min-width: breakpoint.$jhlite-global-breakpoint-small-medium) {
-  .jhlite-icon-text {
+@media screen and (min-width: breakpoint.$seed4j-global-breakpoint-small-medium) {
+  .seed4j-icon-text {
     flex-direction: row;
     gap: 0.5rem;
   }
 }
 
-@media screen and (min-width: breakpoint.$jhlite-global-breakpoint-medium-large) {
-  .jhlite-icon-text {
+@media screen and (min-width: breakpoint.$seed4j-global-breakpoint-medium-large) {
+  .seed4j-icon-text {
     &--text {
       font-size: 1rem;
     }

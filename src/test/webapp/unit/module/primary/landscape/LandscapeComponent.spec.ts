@@ -542,7 +542,7 @@ describe('Landscape', () => {
       expect(alertBus.success).toHaveBeenLastCalledWith('Modules applied');
 
       let initClasses = wrapper.find(wrappedElement('init-module')).find('em').classes();
-      expect(initClasses).toContain('jhlite-icon');
+      expect(initClasses).toContain('seed4j-icon');
 
       await wrapper.find(wrappedElement('init-module')).find('em').trigger('click');
 
@@ -558,7 +558,7 @@ describe('Landscape', () => {
       expect(alertBus.success).toHaveBeenLastCalledWith('Modules applied');
 
       initClasses = wrapper.find(wrappedElement('vue-module')).find('em').classes();
-      expect(initClasses).toContain('jhlite-icon');
+      expect(initClasses).toContain('seed4j-icon');
 
       await wrapper.find(wrappedElement('vue-module')).find('em').trigger('click');
 

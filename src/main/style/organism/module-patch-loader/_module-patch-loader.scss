@@ -1,20 +1,20 @@
 @use '../../token/colors';
 
-$jhlite-module-patch-loader-secondary-color: colors.$jhlite-global-secondary-color;
-$jhlite-module-patch-loader-primary-text-color: colors.$jhlite-global-primary-text-color;
+$seed4j-module-patch-loader-secondary-color: colors.$seed4j-global-secondary-color;
+$seed4j-module-patch-loader-primary-text-color: colors.$seed4j-global-primary-text-color;
 
-.jhipster-module-patch-loader {
-  .jhlite-modules-loader-content {
-    background-color: $jhlite-module-patch-loader-secondary-color;
-    color: $jhlite-module-patch-loader-primary-text-color;
+.seed4j-module-patch-loader {
+  .seed4j-modules-loader-content {
+    background-color: $seed4j-module-patch-loader-secondary-color;
+    color: $seed4j-module-patch-loader-primary-text-color;
 
     .ph-item {
       border: none;
-      background-color: $jhlite-module-patch-loader-secondary-color;
+      background-color: $seed4j-module-patch-loader-secondary-color;
     }
   }
 
-  .ph-jhlite-modules-container-content {
+  .ph-seed4j-modules-container-content {
     box-sizing: border-box;
     display: flex;
     flex-basis: 0;
@@ -31,7 +31,7 @@ $jhlite-module-patch-loader-primary-text-color: colors.$jhlite-global-primary-te
     }
   }
 
-  .ph-jhlite-modules-sidemenu {
+  .ph-seed4j-modules-sidemenu {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

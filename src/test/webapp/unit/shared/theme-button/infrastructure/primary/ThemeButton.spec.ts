@@ -33,7 +33,7 @@ describe('ThemeButton', () => {
     const themeRepository = stubLocalWindowThemeRepository();
     const wrapper = wrap({ themeRepository });
 
-    const checkbox = wrapper.find('.jhlite-theme-button-toggle');
+    const checkbox = wrapper.find('.seed4j-theme-button-toggle');
     expect(themeRepository.get).toHaveBeenCalledOnce();
     expect(themeRepository.choose).toHaveBeenCalledOnce();
 

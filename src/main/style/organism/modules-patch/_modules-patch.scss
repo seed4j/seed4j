@@ -1,25 +1,25 @@
 @use '../../token/colors';
 @use '../../token/size';
 
-$jhlite-modules-patch-line-color: colors.$jhlite-global-line-color;
-$jhlite-modules-patch-box-radius: colors.$jhlite-global-box-radius;
-$jhlite-modules-patch-primary-color: colors.$jhlite-global-primary-color;
-$jhlite-modules-patch-applied-module-color: colors.$jhlite-global-applied-module-color;
-$jhlite-modules-patch-primary-input-color: colors.$jhlite-global-primary-input-color;
-$jhlite-modules-patch-disabled-color: colors.$jhlite-global-disabled-color;
-$jhlite-filter-color-field-border: colors.$jhlite-global-color-field-border;
-$jhlite-filter-color-field-border-focus: colors.$jhlite-global-color-field-border-focus;
-$jhlite-filter-size-field-border: size.$jhlite-global-size-field-border;
-$jhlite-filter-size-field-border-focus: size.$jhlite-global-size-field-border-focus;
-$jhlite-filter-size-field-radius: size.$jhlite-global-size-field-radius;
-$jhlite-filter-font-size: 1rem !default;
-$jhlite-filter-line-height: 1.5rem !default;
-$jhlite-filter-padding: 2px 10px !default;
+$seed4j-modules-patch-line-color: colors.$seed4j-global-line-color;
+$seed4j-modules-patch-box-radius: colors.$seed4j-global-box-radius;
+$seed4j-modules-patch-primary-color: colors.$seed4j-global-primary-color;
+$seed4j-modules-patch-applied-module-color: colors.$seed4j-global-applied-module-color;
+$seed4j-modules-patch-primary-input-color: colors.$seed4j-global-primary-input-color;
+$seed4j-modules-patch-disabled-color: colors.$seed4j-global-disabled-color;
+$seed4j-filter-color-field-border: colors.$seed4j-global-color-field-border;
+$seed4j-filter-color-field-border-focus: colors.$seed4j-global-color-field-border-focus;
+$seed4j-filter-size-field-border: size.$seed4j-global-size-field-border;
+$seed4j-filter-size-field-border-focus: size.$seed4j-global-size-field-border-focus;
+$seed4j-filter-size-field-radius: size.$seed4j-global-size-field-radius;
+$seed4j-filter-font-size: 1rem !default;
+$seed4j-filter-line-height: 1.5rem !default;
+$seed4j-filter-padding: 2px 10px !default;
 
-.jhipster-modules-patch {
-  color: var(--jhlite-global-color-text);
+.seed4j-modules-patch {
+  color: var(--seed4j-global-color-text);
 
-  .jhipster-modules-list {
+  .seed4j-modules-list {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -31,7 +31,7 @@ $jhlite-filter-padding: 2px 10px !default;
     }
   }
 
-  .jhipster-modules-filters {
+  .seed4j-modules-filters {
     display: flex;
     align-items: center;
     margin: 15px 0;
@@ -44,44 +44,44 @@ $jhlite-filter-padding: 2px 10px !default;
 
     &--filter {
       flex-grow: 1;
-      border: $jhlite-filter-size-field-border solid $jhlite-filter-color-field-border;
-      border-radius: $jhlite-filter-size-field-radius;
-      padding: $jhlite-filter-padding;
-      line-height: $jhlite-filter-line-height;
-      font-size: $jhlite-filter-font-size;
+      border: $seed4j-filter-size-field-border solid $seed4j-filter-color-field-border;
+      border-radius: $seed4j-filter-size-field-radius;
+      padding: $seed4j-filter-padding;
+      line-height: $seed4j-filter-line-height;
+      font-size: $seed4j-filter-font-size;
 
       &:focus {
         outline: none;
         border-color: transparent;
-        box-shadow: 0 0 0 $jhlite-filter-size-field-border-focus $jhlite-filter-color-field-border-focus;
+        box-shadow: 0 0 0 $seed4j-filter-size-field-border-focus $seed4j-filter-color-field-border-focus;
       }
     }
 
     &--displayed-modules-count {
       margin-left: 15px;
       border-radius: 1em;
-      background-color: $jhlite-modules-patch-primary-color;
+      background-color: $seed4j-modules-patch-primary-color;
       padding: 3px 1em;
       color: #fff;
     }
   }
 
-  .jhipster-module-category {
+  .seed4j-module-category {
     &--name {
       font-size: 1.4em;
       font-weight: 800;
     }
   }
 
-  .jhipster-module {
+  .seed4j-module {
     display: flex;
     margin-bottom: 10px;
-    border: 1px solid $jhlite-modules-patch-line-color;
-    border-radius: $jhlite-modules-patch-box-radius;
+    border: 1px solid $seed4j-modules-patch-line-color;
+    border-radius: $seed4j-modules-patch-box-radius;
 
     &.selected {
-      background-color: $jhlite-modules-patch-primary-color;
-      color: var(--jhlite-white);
+      background-color: $seed4j-modules-patch-primary-color;
+      color: var(--seed4j-white);
     }
 
     &--content {
@@ -95,7 +95,7 @@ $jhlite-filter-padding: 2px 10px !default;
     }
 
     &--content.applied {
-      background-color: $jhlite-modules-patch-applied-module-color;
+      background-color: $seed4j-modules-patch-applied-module-color;
     }
 
     &--tags.not-selected,
@@ -115,7 +115,7 @@ $jhlite-filter-padding: 2px 10px !default;
     &--tag {
       margin-right: 7px;
       border-radius: 1em;
-      background-color: $jhlite-modules-patch-primary-color;
+      background-color: $seed4j-modules-patch-primary-color;
       padding: 0 0.5em;
       font-style: italic;
     }
@@ -126,16 +126,16 @@ $jhlite-filter-padding: 2px 10px !default;
 
     &--apply-button {
       border: 0;
-      border-left: 1px solid $jhlite-modules-patch-line-color;
+      border-left: 1px solid $seed4j-modules-patch-line-color;
       background-color: transparent;
       padding: 0 10px;
-      color: $jhlite-modules-patch-primary-input-color;
+      color: $seed4j-modules-patch-primary-input-color;
       font-size: 1.5em;
       font-weight: bold;
     }
 
     &--apply-button:disabled {
-      color: $jhlite-modules-patch-disabled-color;
+      color: $seed4j-modules-patch-disabled-color;
     }
   }
 }

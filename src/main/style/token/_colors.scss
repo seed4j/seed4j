@@ -5,88 +5,88 @@
 @use 'color/neutral';
 
 /** Base */
-$jhlite-global-color-primary: brand.$jhlite-color-brand-400 !default;
-$jhlite-global-color-light: #fff !default;
-$jhlite-global-color-fill-primary: $jhlite-global-color-primary !default;
-$jhlite-global-color-fill-primary-dark: color.change($jhlite-global-color-primary, $lightness: 40%) !default;
-$jhlite-global-color-fill-primary-darker: color.change($jhlite-global-color-primary, $lightness: 15%) !default;
-$jhlite-global-color-fill-light: $jhlite-global-color-light !default;
-$jhlite-global-color-field-border: neutral.$jhlite-color-neutral-300;
-$jhlite-global-color-field-border-focus: brand.$jhlite-color-brand-500;
+$seed4j-global-color-primary: brand.$seed4j-color-brand-400 !default;
+$seed4j-global-color-light: #fff !default;
+$seed4j-global-color-fill-primary: $seed4j-global-color-primary !default;
+$seed4j-global-color-fill-primary-dark: color.change($seed4j-global-color-primary, $lightness: 40%) !default;
+$seed4j-global-color-fill-primary-darker: color.change($seed4j-global-color-primary, $lightness: 15%) !default;
+$seed4j-global-color-fill-light: $seed4j-global-color-light !default;
+$seed4j-global-color-field-border: neutral.$seed4j-color-neutral-300;
+$seed4j-global-color-field-border-focus: brand.$seed4j-color-brand-500;
 
 /** Texts */
-$jhlite-global-color-text-primary: brand.$jhlite-color-brand-400 !default;
-$jhlite-global-color-text-dark: neutral.$jhlite-color-neutral-800;
-$jhlite-global-color-text-light: #fff !default;
-$jhlite-global-primary-color: brand.$jhlite-color-brand-700;
-$jhlite-global-secondary-color: #0f172a;
-$jhlite-global-line-color: var(--jhlite-line-color);
-$jhlite-global-primary-alternative-color: #3e8abf;
-$jhlite-global-primary-input-color: var(--jhlite-primary-input-color);
-$jhlite-global-primary-text-color: #ddeffc;
-$jhlite-global-box-radius: 6px;
-$jhlite-global-applied-module-color: #2f7b17;
-$jhlite-global-disabled-color: #6d6d6d;
-$jhlite-global-color-text-light: #fff;
-$jhlite-global-selectable-highlight-animation: valid-highlight-animation 2s infinite;
-$jhlite-global-valid-highlight-start-color: #3ebf5a;
-$jhlite-global-valid-highlight-end-color: #0f9020;
-$jhlite-global-not-selectable-highlight-animation: invalid-highlight-animation 2s infinite;
-$jhlite-global-invalid-highlight-start-color: #bf3e3e;
-$jhlite-global-invalid-highlight-end-color: #900f0f;
+$seed4j-global-color-text-primary: brand.$seed4j-color-brand-400 !default;
+$seed4j-global-color-text-dark: neutral.$seed4j-color-neutral-800;
+$seed4j-global-color-text-light: #fff !default;
+$seed4j-global-primary-color: brand.$seed4j-color-brand-700;
+$seed4j-global-secondary-color: #0f172a;
+$seed4j-global-line-color: var(--seed4j-line-color);
+$seed4j-global-primary-alternative-color: #3e8abf;
+$seed4j-global-primary-input-color: var(--seed4j-primary-input-color);
+$seed4j-global-primary-text-color: #ddeffc;
+$seed4j-global-box-radius: 6px;
+$seed4j-global-applied-module-color: #2f7b17;
+$seed4j-global-disabled-color: #6d6d6d;
+$seed4j-global-color-text-light: #fff;
+$seed4j-global-selectable-highlight-animation: valid-highlight-animation 2s infinite;
+$seed4j-global-valid-highlight-start-color: #3ebf5a;
+$seed4j-global-valid-highlight-end-color: #0f9020;
+$seed4j-global-not-selectable-highlight-animation: invalid-highlight-animation 2s infinite;
+$seed4j-global-invalid-highlight-start-color: #bf3e3e;
+$seed4j-global-invalid-highlight-end-color: #900f0f;
 
 @keyframes valid-highlight-animation {
   0% {
-    background-color: $jhlite-global-valid-highlight-start-color;
-    stroke: $jhlite-global-valid-highlight-start-color;
+    background-color: $seed4j-global-valid-highlight-start-color;
+    stroke: $seed4j-global-valid-highlight-start-color;
   }
 
   50% {
-    background-color: $jhlite-global-valid-highlight-end-color;
-    stroke: $jhlite-global-valid-highlight-end-color;
+    background-color: $seed4j-global-valid-highlight-end-color;
+    stroke: $seed4j-global-valid-highlight-end-color;
   }
 
   100% {
-    background-color: $jhlite-global-valid-highlight-start-color;
-    stroke: $jhlite-global-valid-highlight-start-color;
+    background-color: $seed4j-global-valid-highlight-start-color;
+    stroke: $seed4j-global-valid-highlight-start-color;
   }
 }
 
 @keyframes invalid-highlight-animation {
   0% {
-    background-color: $jhlite-global-invalid-highlight-start-color;
-    stroke: $jhlite-global-invalid-highlight-start-color;
+    background-color: $seed4j-global-invalid-highlight-start-color;
+    stroke: $seed4j-global-invalid-highlight-start-color;
   }
 
   50% {
-    background-color: $jhlite-global-invalid-highlight-end-color;
-    stroke: $jhlite-global-invalid-highlight-end-color;
+    background-color: $seed4j-global-invalid-highlight-end-color;
+    stroke: $seed4j-global-invalid-highlight-end-color;
   }
 
   100% {
-    background-color: $jhlite-global-invalid-highlight-start-color;
-    stroke: $jhlite-global-invalid-highlight-start-color;
+    background-color: $seed4j-global-invalid-highlight-start-color;
+    stroke: $seed4j-global-invalid-highlight-start-color;
   }
 }
 
 /** Other */
-$jhlite-global-color-fill-disabled-dark: color.change($jhlite-global-color-primary, $saturation: 25%, $lightness: 40%) !default;
-$jhlite-global-color-fill-disabled-light: color.change($jhlite-global-color-primary, $saturation: 20%, $lightness: 75%) !default;
-$jhlite-global-color-text-disabled: color.change($jhlite-global-color-primary, $saturation: 25%, $lightness: 60%) !default;
-$jhlite-global-color-fill-secondary: neutral.$jhlite-color-neutral-900 !default; // @deprecated
-$jhlite-global-color-link-light: $jhlite-global-color-text-light !default; // @deprecated
-$jhlite-global-color-link-light-hover: brand.$jhlite-color-brand-200 !default; // @deprecated
-$jhlite-global-color-success: #480 !default;
-$jhlite-global-color-error: #902 !default;
-$jhlite-valid-highlight-animation: jhlite-valid-highlight-animation 2s infinite;
-$jhlite-invalid-highlight-animation: jhlite-invalid-highlight-animation 2s infinite;
-$jhlite-valid-highlight-start-color: #3ebf5a;
-$jhlite-valid-highlight-end-color: $jhlite-global-color-success;
-$jhlite-invalid-highlight-start-color: #bf3e3e;
-$jhlite-invalid-highlight-end-color: $jhlite-global-color-error;
-$jhlite-attention-highlight-color: #ffd700;
-$jhlite-rank-s-color: #673ab7;
-$jhlite-rank-a-color: #4caf50;
-$jhlite-rank-b-color: #2196f3;
-$jhlite-rank-c-color: #ffc107;
-$jhlite-rank-d-color: #ff7043;
+$seed4j-global-color-fill-disabled-dark: color.change($seed4j-global-color-primary, $saturation: 25%, $lightness: 40%) !default;
+$seed4j-global-color-fill-disabled-light: color.change($seed4j-global-color-primary, $saturation: 20%, $lightness: 75%) !default;
+$seed4j-global-color-text-disabled: color.change($seed4j-global-color-primary, $saturation: 25%, $lightness: 60%) !default;
+$seed4j-global-color-fill-secondary: neutral.$seed4j-color-neutral-900 !default; // @deprecated
+$seed4j-global-color-link-light: $seed4j-global-color-text-light !default; // @deprecated
+$seed4j-global-color-link-light-hover: brand.$seed4j-color-brand-200 !default; // @deprecated
+$seed4j-global-color-success: #480 !default;
+$seed4j-global-color-error: #902 !default;
+$seed4j-valid-highlight-animation: seed4j-valid-highlight-animation 2s infinite;
+$seed4j-invalid-highlight-animation: seed4j-invalid-highlight-animation 2s infinite;
+$seed4j-valid-highlight-start-color: #3ebf5a;
+$seed4j-valid-highlight-end-color: $seed4j-global-color-success;
+$seed4j-invalid-highlight-start-color: #bf3e3e;
+$seed4j-invalid-highlight-end-color: $seed4j-global-color-error;
+$seed4j-attention-highlight-color: #ffd700;
+$seed4j-rank-s-color: #673ab7;
+$seed4j-rank-a-color: #4caf50;
+$seed4j-rank-b-color: #2196f3;
+$seed4j-rank-c-color: #ffc107;
+$seed4j-rank-d-color: #ff7043;

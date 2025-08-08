@@ -2,41 +2,41 @@
 @use '../token/fonts';
 
 :root {
-  --jhlite-brand: #0f5b90;
-  --jhlite-white: #fff;
-  --jhlite-modules-label: #000;
-  --jhlite-line-color: #475569;
-  --jhlite-bg-color: #fff;
-  --jhlite-global-color-text: #1e293b;
-  --jhlite-chip-bg-color: rgb(255 255 255 / 70%);
-  --jhlite-chip-default-anchor-color: #2572a7;
-  --jhlite-bg-color-primary: #ebebeb;
-  --jhlite-bg-color-secondary: #fafafa;
-  --jhlite-accent-color: #cacaca;
-  --jhlite-text-color-primary: #222;
-  --jhlite-primary-input-color: #000;
-  --jhlite-element-size: 4rem;
+  --seed4j-brand: #0f5b90;
+  --seed4j-white: #fff;
+  --seed4j-modules-label: #000;
+  --seed4j-line-color: #475569;
+  --seed4j-bg-color: #fff;
+  --seed4j-global-color-text: #1e293b;
+  --seed4j-chip-bg-color: rgb(255 255 255 / 70%);
+  --seed4j-chip-default-anchor-color: #2572a7;
+  --seed4j-bg-color-primary: #ebebeb;
+  --seed4j-bg-color-secondary: #fafafa;
+  --seed4j-accent-color: #cacaca;
+  --seed4j-text-color-primary: #222;
+  --seed4j-primary-input-color: #000;
+  --seed4j-element-size: 4rem;
 
-  font-family: fonts.$jhlite-global-font-primary-family;
-  font-size: fonts.$jhlite-global-font-text-size;
+  font-family: fonts.$seed4j-global-font-primary-family;
+  font-size: fonts.$seed4j-global-font-text-size;
 }
 
 :root.dark-theme {
-  --jhlite-brand: #153751;
-  --jhlite-modules-label: #fff;
-  --jhlite-line-color: #9da9bf;
-  --jhlite-bg-color: #0f172a;
-  --jhlite-global-color-text: #fff;
-  --jhlite-chip-bg-color: #121212;
-  --jhlite-bg-color-primary: #1e1e1e;
-  --jhlite-bg-color-secondary: #2d2d30;
-  --jhlite-accent-color: #3f3f3f;
-  --jhlite-text-color-primary: #ddd;
-  --jhlite-primary-input-color: #fff;
+  --seed4j-brand: #153751;
+  --seed4j-modules-label: #fff;
+  --seed4j-line-color: #9da9bf;
+  --seed4j-bg-color: #0f172a;
+  --seed4j-global-color-text: #fff;
+  --seed4j-chip-bg-color: #121212;
+  --seed4j-bg-color-primary: #1e1e1e;
+  --seed4j-bg-color-secondary: #2d2d30;
+  --seed4j-accent-color: #3f3f3f;
+  --seed4j-text-color-primary: #ddd;
+  --seed4j-primary-input-color: #fff;
 }
 
-@media screen and (min-width: breakpoint.$jhlite-global-breakpoint-small-medium) {
+@media screen and (min-width: breakpoint.$seed4j-global-breakpoint-small-medium) {
   :root {
-    font-size: fonts.$jhlite-global-font-text-desktop-size;
+    font-size: fonts.$seed4j-global-font-text-desktop-size;
   }
 }

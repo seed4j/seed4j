@@ -1,6 +1,6 @@
-$jhlite-landscape-loader-padding: 20px;
+$seed4j-landscape-loader-padding: 20px;
 
-.jhlite-landscape-loader {
+.seed4j-landscape-loader {
   position: relative;
 
   .ph-item {
@@ -8,10 +8,10 @@ $jhlite-landscape-loader-padding: 20px;
     padding: 0;
   }
 
-  .ph-jhlite-landscape-modes-selection {
+  .ph-seed4j-landscape-modes-selection {
     position: absolute;
-    top: $jhlite-landscape-loader-padding;
-    left: $jhlite-landscape-loader-padding;
+    top: $seed4j-landscape-loader-padding;
+    left: $seed4j-landscape-loader-padding;
     z-index: 3;
     width: 220px;
 
@@ -24,11 +24,11 @@ $jhlite-landscape-loader-padding: 20px;
     }
   }
 
-  .ph-jhlite-landscape-map {
-    padding: $jhlite-landscape-loader-padding;
+  .ph-seed4j-landscape-map {
+    padding: $seed4j-landscape-loader-padding;
   }
 
-  .ph-jhlite-landscape-levels {
+  .ph-seed4j-landscape-levels {
     display: grid;
     position: relative;
     place-items: center;
@@ -41,12 +41,12 @@ $jhlite-landscape-loader-padding: 20px;
     }
   }
 
-  .ph-jhlite-landscape-element {
+  .ph-seed4j-landscape-element {
     margin-bottom: 5px;
     list-style-type: none;
   }
 
-  .ph-jhlite-landscape-sidemenu {
+  .ph-seed4j-landscape-sidemenu {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

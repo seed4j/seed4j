@@ -3,90 +3,90 @@
 @use '../../../token/color/brand' as brand;
 @use '../button-main/button-main' as button-main;
 
-$jhlite-button-toggle-padding: math.div(5, 16) * 1rem math.div(15, 16) * 1rem;
-$jhlite-button-toggle-border: 1px solid brand.$jhlite-color-brand-600;
-$jhlite-button-toggle-font-size: math.div(13, 16) * 1rem;
-$jhlite-button-toggle-hover-color-background: rgba(button-main.$jhlite-button-color-background, 0.1);
-$jhlite-button-toggle-disabled-color-background: button-main.$jhlite-button-disabled-color-background;
-$jhlite-button-toggle-active-color-background: button-main.$jhlite-button-color-background;
-$jhlite-button-toggle-active-hover-color-background: button-main.$jhlite-button-hover-color-background;
-$jhlite-button-toggle-transition-duration: 0.5s;
+$seed4j-button-toggle-padding: math.div(5, 16) * 1rem math.div(15, 16) * 1rem;
+$seed4j-button-toggle-border: 1px solid brand.$seed4j-color-brand-600;
+$seed4j-button-toggle-font-size: math.div(13, 16) * 1rem;
+$seed4j-button-toggle-hover-color-background: rgba(button-main.$seed4j-button-color-background, 0.1);
+$seed4j-button-toggle-disabled-color-background: button-main.$seed4j-button-disabled-color-background;
+$seed4j-button-toggle-active-color-background: button-main.$seed4j-button-color-background;
+$seed4j-button-toggle-active-hover-color-background: button-main.$seed4j-button-hover-color-background;
+$seed4j-button-toggle-transition-duration: 0.5s;
 
-.jhlite-button-toggle {
-  @extend %jhlite-button-main;
+.seed4j-button-toggle {
+  @extend %seed4j-button-main;
 
   display: inline-flex;
   position: relative;
   align-items: center;
-  transition: background-color $jhlite-button-toggle-transition-duration ease;
-  border: $jhlite-button-toggle-border;
+  transition: background-color $seed4j-button-toggle-transition-duration ease;
+  border: $seed4j-button-toggle-border;
   background-color: transparent;
-  padding: $jhlite-button-toggle-padding;
+  padding: $seed4j-button-toggle-padding;
   overflow: hidden;
   text-transform: none;
-  color: var(--jhlite-global-color-text);
-  font-size: $jhlite-button-toggle-font-size;
+  color: var(--seed4j-global-color-text);
+  font-size: $seed4j-button-toggle-font-size;
 
   &:hover {
-    background-color: $jhlite-button-toggle-hover-color-background;
+    background-color: $seed4j-button-toggle-hover-color-background;
   }
 
   &:disabled {
     &:hover {
-      background-color: $jhlite-button-toggle-disabled-color-background;
+      background-color: $seed4j-button-toggle-disabled-color-background;
     }
   }
 
   &.-active {
-    background-color: $jhlite-button-toggle-active-color-background;
-    color: colors.$jhlite-global-color-text-light;
+    background-color: $seed4j-button-toggle-active-color-background;
+    color: colors.$seed4j-global-color-text-light;
 
     &:hover {
-      background-color: $jhlite-button-toggle-active-hover-color-background;
+      background-color: $seed4j-button-toggle-active-hover-color-background;
     }
   }
 }
 
-.jhlite-button-toggle-content {
+.seed4j-button-toggle-content {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
 
-.jhlite-button-toggle-short-name {
+.seed4j-button-toggle-short-name {
   display: inline-block;
   transition:
-    max-width $jhlite-button-toggle-transition-duration 500ms ease-in,
-    opacity $jhlite-button-toggle-transition-duration 1ms ease-in;
+    max-width $seed4j-button-toggle-transition-duration 500ms ease-in,
+    opacity $seed4j-button-toggle-transition-duration 1ms ease-in;
   opacity: 1;
   max-width: 300px;
   white-space: nowrap;
 }
 
-.jhlite-button-toggle-full-name {
+.seed4j-button-toggle-full-name {
   display: inline-block;
   transition:
     opacity 1ms 1ms ease-out,
-    max-width $jhlite-button-toggle-transition-duration 1ms ease-out;
+    max-width $seed4j-button-toggle-transition-duration 1ms ease-out;
   opacity: 0;
   max-width: 0;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.jhlite-button-toggle:hover,
-.jhlite-button-toggle.-active {
-  .jhlite-button-toggle-short-name {
+.seed4j-button-toggle:hover,
+.seed4j-button-toggle.-active {
+  .seed4j-button-toggle-short-name {
     transition: max-width 500ms 1ms ease-out;
     opacity: 0;
     max-width: 0;
   }
 
-  .jhlite-button-toggle-full-name {
+  .seed4j-button-toggle-full-name {
     transition:
-      opacity $jhlite-button-toggle-transition-duration 1ms ease-in,
-      max-width 2 * $jhlite-button-toggle-transition-duration 1ms ease-in;
+      opacity $seed4j-button-toggle-transition-duration 1ms ease-in,
+      max-width 2 * $seed4j-button-toggle-transition-duration 1ms ease-in;
     opacity: 1;
     max-width: 300px;
   }

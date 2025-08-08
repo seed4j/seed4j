@@ -1,5 +1,5 @@
 <div
-  class="jhlite-chip"
+  class="seed4j-chip"
   :class="moduleClass()"
   :ref="el => landscapeElements.set(module.slugString(), el)"
   :data-testid="`${module.slugString()}-module`"
@@ -7,7 +7,7 @@
   @mouseleave="deEmphasizeModule()"
   @click="clickedModule()"
 >
-  <div class="jhlite-chip--title" :class="moduleClass()">
+  <div class="seed4j-chip--title" :class="moduleClass()">
     {{ module.slugString() }}
     <IconVue
       v-if="isAppliedModule()"
@@ -18,5 +18,5 @@
       :data-testid="`module-${module.slug}-application-icon`"
     />
   </div>
-  <div class="jhlite-chip--description" :class="moduleClass()">{{ module.operation() }}</div>
+  <div class="seed4j-chip--description" :class="moduleClass()">{{ module.operation() }}</div>
 </div>

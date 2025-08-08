@@ -1,9 +1,9 @@
 @use '../../token/breakpoint';
 
-$jhlite-toast-overlay-padding: 2vw;
-$jhlite-toast-overlay-medium-padding: 20px;
+$seed4j-toast-overlay-padding: 2vw;
+$seed4j-toast-overlay-medium-padding: 20px;
 
-.jhlite-toast-overlay {
+.seed4j-toast-overlay {
   position: fixed;
   top: 0;
   right: 0;
@@ -12,8 +12,8 @@ $jhlite-toast-overlay-medium-padding: 20px;
   padding: 2vw;
 }
 
-@media screen and (min-width: breakpoint.$jhlite-global-breakpoint-small-medium) {
-  .jhlite-toast-overlay {
+@media screen and (min-width: breakpoint.$seed4j-global-breakpoint-small-medium) {
+  .seed4j-toast-overlay {
     top: auto;
     right: auto;
     bottom: 0;

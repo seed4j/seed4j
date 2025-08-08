@@ -1,8 +1,8 @@
 <ModulesPatchLoaderVue v-if="content.isLoading()" />
-<div class="jhipster-modules-patch jhlite-menu-content-template" v-else data-testid="modules-list">
-  <div class="jhipster-modules-list jhlite-menu-content-template--content">
-    <div class="jhipster-modules-filters">
-      <div class="jhipster-modules-filters--tags">
+<div class="seed4j-modules-patch seed4j-menu-content-template" v-else data-testid="modules-list">
+  <div class="seed4j-modules-list seed4j-menu-content-template--content">
+    <div class="seed4j-modules-filters">
+      <div class="seed4j-modules-filters--tags">
         <TagFilterVue tag="init" :isSelected="isTagSelected('init')" @selected="toggleTag('init')" />
         <TagFilterVue tag="server" :isSelected="isTagSelected('server')" @selected="toggleTag('server')" />
         <TagFilterVue tag="client" :isSelected="isTagSelected('client')" @selected="toggleTag('client')" />
@@ -10,35 +10,35 @@
 
       <input
         type="text"
-        class="jhipster-modules-filters--filter"
+        class="seed4j-modules-filters--filter"
         placeholder="Filter"
         data-testid="modules-filter-field"
         @input="updateSearch($event.target.value)"
       />
 
-      <div class="jhipster-modules-filters--displayed-modules-count" data-testid="displayed-modules-count">
+      <div class="seed4j-modules-filters--displayed-modules-count" data-testid="displayed-modules-count">
         {{ displayedModulesCount() }}&nbsp;/&nbsp;{{ totalModulesCount() }}
       </div>
     </div>
 
-    <div class="jhipster-modules-list--categories">
+    <div class="seed4j-modules-list--categories">
       <div v-for="category in content.value().categories">
         <div>
-          <h2 class="jhipster-module-category--name">{{ category.name }}</h2>
-          <div v-for="module in category.modules" class="jhipster-module" :class="moduleClass(module.slug)">
+          <h2 class="seed4j-module-category--name">{{ category.name }}</h2>
+          <div v-for="module in category.modules" class="seed4j-module" :class="moduleClass(module.slug)">
             <div
-              class="jhipster-module--content"
+              class="seed4j-module--content"
               :class="moduleClass(module.slug)"
               @click="toggleModule(module.slug)"
               @keyup.enter="toggleModule(module.slug)"
               :data-testid="`${module.slug}-module-content`"
             >
-              <div class="jhipster-module--tags" :class="moduleClass(module.slug)">
-                <div v-for="tag in module.tags" class="jhipster-module--tag">{{ tag }}</div>
+              <div class="seed4j-module--tags" :class="moduleClass(module.slug)">
+                <div v-for="tag in module.tags" class="seed4j-module--tag">{{ tag }}</div>
               </div>
 
-              <div class="jhipster-module--slug" :class="moduleClass(module.slug)">{{ module.slug }}</div>
-              <div class="jhipster-module--description" :class="moduleClass(module.slug)">{{ module.description}}</div>
+              <div class="seed4j-module--slug" :class="moduleClass(module.slug)">{{ module.slug }}</div>
+              <div class="seed4j-module--description" :class="moduleClass(module.slug)">{{ module.description}}</div>
 
               <ModuleParametersVue
                 propertiesType="MANDATORY"
@@ -57,7 +57,7 @@
             </div>
 
             <button
-              class="jhipster-module--apply-button"
+              class="seed4j-module--apply-button"
               :class="moduleClass(module.slug)"
               :disabled="disabledApplication(module.slug)"
               @click="applyModule(module.slug)"
@@ -76,9 +76,9 @@
     </div>
   </div>
 
-  <aside class="jhlite-menu-content-template--menu">
-    <div class="jhlite-side-menu">
-      <div class="jhlite-side-menu--slot -expand">
+  <aside class="seed4j-menu-content-template--menu">
+    <div class="seed4j-side-menu">
+      <div class="seed4j-side-menu--slot -expand">
         <ModulePropertiesFormVue
           :folderPath="folderPath"
           :properties="selectedModuleProperties()"
@@ -91,7 +91,7 @@
         />
       </div>
 
-      <div class="jhlite-side-menu--slot">
+      <div class="seed4j-side-menu--slot">
         <ProjectActionsVue :folderPath="folderPath" @operationStarted="operationStarted()" @operationEnded="operationEnded()" />
       </div>
     </div>

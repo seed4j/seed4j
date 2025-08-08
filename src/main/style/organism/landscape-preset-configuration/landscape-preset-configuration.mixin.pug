@@ -1,12 +1,12 @@
-mixin jhlite-landscape-preset-configuration
-  .jhlite-landscape-preset-configuration
-    button.jhlite-button-main.-rounded-top.-small
-      em.jhlite-icon.jhlite-icon-eye-off(role='img', aria-label='Icon eye-off')
-    .jhlite-landscape-preset-configuration--content
-      .jhlite-field--label
-        label.jhlite-input(for='preset-configuration') Presets Configurations
-      .jhlite-landscape-preset-configuration--field
-        select#preset-configuration.jhlite-select(@change='handlePresetChange', :value='selectedPresetName')
+mixin seed4j-landscape-preset-configuration
+  .seed4j-landscape-preset-configuration
+    button.seed4j-button-main.-rounded-top.-small
+      em.seed4j-icon.seed4j-icon-eye-off(role='img', aria-label='Icon eye-off')
+    .seed4j-landscape-preset-configuration--content
+      .seed4j-field--label
+        label.seed4j-input(for='preset-configuration') Presets Configurations
+      .seed4j-landscape-preset-configuration--field
+        select#preset-configuration.seed4j-select(@change='handlePresetChange', :value='selectedPresetName')
           option(value='') Select a preset...
           option(value='preset.name') Java Library with Maven
           option(value='preset.name') Webapp: Vue + Spring Boot

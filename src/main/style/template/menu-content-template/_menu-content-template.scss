@@ -1,10 +1,10 @@
 @use '../../token/breakpoint';
 @use '../../token/colors';
 
-$jhlite-menu-content-template-menu-medium-width: 300px;
-$jhlite-menu-content-template-color-divider: colors.$jhlite-global-color-fill-secondary;
+$seed4j-menu-content-template-menu-medium-width: 300px;
+$seed4j-menu-content-template-color-divider: colors.$seed4j-global-color-fill-secondary;
 
-.jhlite-menu-content-template {
+.seed4j-menu-content-template {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@ $jhlite-menu-content-template-color-divider: colors.$jhlite-global-color-fill-se
     box-sizing: border-box;
     flex-basis: 0;
     flex-grow: 1;
-    border-bottom: 1px solid $jhlite-menu-content-template-color-divider;
+    border-bottom: 1px solid $seed4j-menu-content-template-color-divider;
     padding: 0;
     min-height: 0;
     overflow: auto;
@@ -31,19 +31,19 @@ $jhlite-menu-content-template-color-divider: colors.$jhlite-global-color-fill-se
   }
 }
 
-@media screen and (min-width: breakpoint.$jhlite-global-breakpoint-small-medium) {
-  .jhlite-menu-content-template {
+@media screen and (min-width: breakpoint.$seed4j-global-breakpoint-small-medium) {
+  .seed4j-menu-content-template {
     flex-direction: row;
 
     &--menu {
       flex-basis: auto;
       flex-grow: 0;
-      width: $jhlite-menu-content-template-menu-medium-width;
+      width: $seed4j-menu-content-template-menu-medium-width;
     }
 
     &--content,
     &--menu {
-      border-right: 1px solid $jhlite-menu-content-template-color-divider;
+      border-right: 1px solid $seed4j-menu-content-template-color-divider;
       border-bottom: 0;
 
       &:last-child {

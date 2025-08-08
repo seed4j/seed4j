@@ -1,11 +1,11 @@
 @use '../../token/colors';
 
-$jhlite-header-color-background: colors.$jhlite-global-color-fill-secondary;
+$seed4j-header-color-background: colors.$seed4j-global-color-fill-secondary;
 
-.jhlite-header {
+.seed4j-header {
   display: flex;
   align-items: center;
-  background-color: $jhlite-header-color-background;
+  background-color: $seed4j-header-color-background;
   padding: 0.5rem 1rem;
 
   &--slot {
@@ -14,7 +14,7 @@ $jhlite-header-color-background: colors.$jhlite-global-color-fill-secondary;
     }
   }
 
-  .jhlite-with-theme-switch {
+  .seed4j-with-theme-switch {
     display: flex;
     gap: 16px;
     align-items: center;

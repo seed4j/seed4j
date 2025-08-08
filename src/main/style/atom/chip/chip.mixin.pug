@@ -1,4 +1,4 @@
-mixin jhlite-chip(options)
+mixin seed4j-chip(options)
   - const { selectableHighlighted: isSelectableHighlighted, notSelectableHighlighted: isNotSelectableHighlighted, compacted: isCompacted, extended: isExtended, selected: isSelected, applied: isApplied, hasLeftAnchorPoint, hasRightAnchorPoint } = options || {};
   - const selectableHighlightedClass = isSelectableHighlighted ? '-selectable-highlighted' : null;
   - const notSelectableHighlightedClass = isNotSelectableHighlighted ? '-not-selectable-highlighted' : null;
@@ -8,8 +8,8 @@ mixin jhlite-chip(options)
   - const selectedClass = isSelected ? '-selected' : null;
   - const leftAnchorPointClass = hasLeftAnchorPoint ? '-left-anchor-point' : null;
   - const rightAnchorPointClass = hasRightAnchorPoint ? '-right-anchor-point' : null;
-  .jhlite-chip(
+  .seed4j-chip(
     class=[selectableHighlightedClass, notSelectableHighlightedClass, selectedClass, extendedClass, leftAnchorPointClass, rightAnchorPointClass]
   )
-    .jhlite-chip--title(class=appliedClass) Chip title
-    .jhlite-chip--description(class=compactedClass) Chip description
+    .seed4j-chip--title(class=appliedClass) Chip title
+    .seed4j-chip--description(class=compactedClass) Chip description

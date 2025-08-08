@@ -118,17 +118,17 @@ describe('Modules', () => {
       expect(wrapper.find(wrappedElement('modules-list')).exists()).toBe(true);
       expect(wrapper.find(wrappedElement('spring-cucumber-module-content')).exists()).toBe(true);
       expect(wrapper.find(wrappedElement('banner-module-content')).classes()).toEqual([
-        'jhipster-module--content',
+        'seed4j-module--content',
         'not-selected',
         'not-applied',
       ]);
       expect(wrapper.find(wrappedElement('module-spring-cucumber-MANDATORY-parameters')).classes()).toEqual([
-        'jhipster-module-parameters',
+        'seed4j-module-parameters',
         'not-selected',
         'invalid-mandatory-parameter',
       ]);
       expect(wrapper.find(wrappedElement('module-spring-cucumber-OPTIONAL-parameters')).classes()).toEqual([
-        'jhipster-module-parameters',
+        'seed4j-module-parameters',
         'not-selected',
         'invalid-optional-parameter',
       ]);
@@ -165,12 +165,12 @@ describe('Modules', () => {
       expect(wrapper.find(wrappedElement('parameter-optionalInteger-optional-marker')).exists()).toBe(true);
 
       expect(wrapper.find(wrappedElement('banner-module-content')).classes()).toEqual([
-        'jhipster-module--content',
+        'seed4j-module--content',
         'not-selected',
         'not-applied',
       ]);
       expect(wrapper.find(wrappedElement('spring-cucumber-module-content')).classes()).toEqual([
-        'jhipster-module--content',
+        'seed4j-module--content',
         'selected',
         'not-applied',
       ]);
@@ -187,7 +187,7 @@ describe('Modules', () => {
       expect(wrapper.find(wrappedElement('parameter-optionalBoolean-field')).exists()).toBe(false);
       expect(wrapper.find(wrappedElement('parameter-optionalInteger-field')).exists()).toBe(false);
       expect(wrapper.find(wrappedElement('spring-cucumber-module-content')).classes()).toEqual([
-        'jhipster-module--content',
+        'seed4j-module--content',
         'not-selected',
         'not-applied',
       ]);
@@ -267,7 +267,7 @@ describe('Modules', () => {
       expect(wrapper.find(wrappedElement('module-spring-cucumber-OPTIONAL-parameters-stats')).text()).toBe('2 / 2');
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-MANDATORY-parameters')).classes()).toEqual([
-        'jhipster-module-parameters',
+        'seed4j-module-parameters',
         'selected',
         'all-valid-parameters',
       ]);
@@ -447,9 +447,9 @@ describe('Modules', () => {
 
       await flushPromises();
 
-      expect(wrapper.find(wrappedElement('module-spring-cucumber-application-icon')).classes()).toEqual(['jhlite-icon', 'jhlite-icon-ccw']);
+      expect(wrapper.find(wrappedElement('module-spring-cucumber-application-icon')).classes()).toEqual(['seed4j-icon', 'seed4j-icon-ccw']);
       expect(wrapper.find(wrappedElement('spring-cucumber-module-content')).classes()).toEqual([
-        'jhipster-module--content',
+        'seed4j-module--content',
         'selected',
         'applied',
       ]);
@@ -469,8 +469,8 @@ describe('Modules', () => {
       await flushPromises();
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-icon')).classes()).toEqual([
-        'jhlite-icon',
-        'jhlite-icon-play',
+        'seed4j-icon',
+        'seed4j-icon-play',
       ]);
     });
 
@@ -484,7 +484,7 @@ describe('Modules', () => {
 
       await flushPromises();
 
-      expect(wrapper.find(wrappedElement('module-spring-cucumber-application-icon')).classes()).toEqual(['jhlite-icon', 'jhlite-icon-ccw']);
+      expect(wrapper.find(wrappedElement('module-spring-cucumber-application-icon')).classes()).toEqual(['seed4j-icon', 'seed4j-icon-ccw']);
     });
   });
 
@@ -605,7 +605,7 @@ describe('Modules', () => {
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(false);
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-button')).exists()).toBe(true);
-      expect(wrapper.find(wrappedElement('server-tag-filter')).classes()).toEqual(['jhipster-tag-filter', 'selected']);
+      expect(wrapper.find(wrappedElement('server-tag-filter')).classes()).toEqual(['seed4j-tag-filter', 'selected']);
     });
 
     it('should filter modules with tag and search filter', async () => {
@@ -631,7 +631,7 @@ describe('Modules', () => {
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(true);
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-button')).exists()).toBe(true);
-      expect(wrapper.find(wrappedElement('server-tag-filter')).classes()).toEqual(['jhipster-tag-filter', 'not-selected']);
+      expect(wrapper.find(wrappedElement('server-tag-filter')).classes()).toEqual(['seed4j-tag-filter', 'not-selected']);
     });
   });
 

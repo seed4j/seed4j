@@ -1,33 +1,33 @@
 @use '../../token/colors';
 @use '../../token/fonts';
 
-$jhlite-anchor-point-size: 6px;
-$jhlite-anchor-point-border-size: 3px;
+$seed4j-anchor-point-size: 6px;
+$seed4j-anchor-point-border-size: 3px;
 
 %anchor-point {
   position: absolute;
-  top: calc(50% - $jhlite-anchor-point-size);
+  top: calc(50% - $seed4j-anchor-point-size);
   z-index: 2;
-  outline: solid 1px var(--jhlite-chip-default-anchor-color);
-  border: $jhlite-anchor-point-border-size solid var(--jhlite-chip-bg-color);
-  border-radius: $jhlite-anchor-point-size;
-  background-color: var(--jhlite-chip-default-anchor-color);
-  width: $jhlite-anchor-point-size;
-  height: $jhlite-anchor-point-size;
+  outline: solid 1px var(--seed4j-chip-default-anchor-color);
+  border: $seed4j-anchor-point-border-size solid var(--seed4j-chip-bg-color);
+  border-radius: $seed4j-anchor-point-size;
+  background-color: var(--seed4j-chip-default-anchor-color);
+  width: $seed4j-anchor-point-size;
+  height: $seed4j-anchor-point-size;
   content: '';
 }
 
-.jhlite-chip {
+.seed4j-chip {
   display: flex;
   position: relative;
   flex-direction: column;
   gap: 5px;
   margin-bottom: 5px;
-  border: 1px solid colors.$jhlite-global-color-fill-primary-dark;
+  border: 1px solid colors.$seed4j-global-color-fill-primary-dark;
   border-radius: 6px;
-  background: var(--jhlite-chip-bg-color);
+  background: var(--seed4j-chip-bg-color);
   text-align: center;
-  color: var(--jhlite-global-color-text);
+  color: var(--seed4j-global-color-text);
 
   &--title {
     padding-top: 6px;
@@ -37,14 +37,14 @@ $jhlite-anchor-point-border-size: 3px;
     &.-applied::before {
       float: left;
       margin: 2px 0 0 3px;
-      color: colors.$jhlite-global-color-success;
-      font-family: fonts.$jhlite-global-font-glyph-family;
+      color: colors.$seed4j-global-color-success;
+      font-family: fonts.$seed4j-global-font-glyph-family;
       content: '\e807';
     }
   }
 
   &--description {
-    border-top: 1px dotted colors.$jhlite-global-color-fill-primary-dark;
+    border-top: 1px dotted colors.$seed4j-global-color-fill-primary-dark;
     padding-top: 6px;
     padding-bottom: 6px;
     font-size: 0.8em;
@@ -56,20 +56,20 @@ $jhlite-anchor-point-border-size: 3px;
 
   &.-selectable-highlighted {
     cursor: pointer;
-    animation: colors.$jhlite-valid-highlight-animation;
+    animation: colors.$seed4j-valid-highlight-animation;
   }
 
   &.-not-selectable-highlighted {
     border-style: dotted;
-    background-color: colors.$jhlite-global-color-fill-disabled-light;
+    background-color: colors.$seed4j-global-color-fill-disabled-light;
     cursor: not-allowed;
-    animation: colors.$jhlite-invalid-highlight-animation;
+    animation: colors.$seed4j-invalid-highlight-animation;
   }
 
   &.-selected {
-    background-color: colors.$jhlite-global-color-fill-primary-darker;
+    background-color: colors.$seed4j-global-color-fill-primary-darker;
     cursor: pointer;
-    color: colors.$jhlite-global-color-text-light;
+    color: colors.$seed4j-global-color-text-light;
   }
 
   &.-extended {
@@ -79,37 +79,37 @@ $jhlite-anchor-point-border-size: 3px;
   &.-left-anchor-point::before {
     @extend %anchor-point;
 
-    left: -$jhlite-anchor-point-size;
+    left: -$seed4j-anchor-point-size;
   }
 
   &.-right-anchor-point::after {
     @extend %anchor-point;
 
-    right: -$jhlite-anchor-point-size;
+    right: -$seed4j-anchor-point-size;
   }
 
   &.-selectable-highlighted::before,
   &.-selectable-highlighted::after {
     cursor: pointer;
-    animation: colors.$jhlite-valid-highlight-animation;
+    animation: colors.$seed4j-valid-highlight-animation;
   }
 
   &.-not-selectable-highlighted::before,
   &.-not-selectable-highlighted::after {
-    background-color: colors.$jhlite-global-color-fill-disabled-light;
-    animation: colors.$jhlite-invalid-highlight-animation;
+    background-color: colors.$seed4j-global-color-fill-disabled-light;
+    animation: colors.$seed4j-invalid-highlight-animation;
   }
 
   &.-selected::after,
   &.-selected::before {
-    background-color: colors.$jhlite-global-color-fill-primary-darker;
+    background-color: colors.$seed4j-global-color-fill-primary-darker;
     cursor: pointer;
-    color: colors.$jhlite-global-color-text-light;
+    color: colors.$seed4j-global-color-text-light;
   }
 }
 
 .-not-selectable {
-  .jhlite-chip {
+  .seed4j-chip {
     &--title,
     &--description {
       opacity: 0.5;
@@ -118,7 +118,7 @@ $jhlite-anchor-point-border-size: 3px;
 }
 
 .has-emphasized-module {
-  .jhlite-chip {
+  .seed4j-chip {
     &--title,
     &--description {
       opacity: 0.5;
@@ -128,7 +128,7 @@ $jhlite-anchor-point-border-size: 3px;
   .-selectable-highlighted,
   .-not-selectable-highlighted,
   .-selected {
-    .jhlite-chip {
+    .seed4j-chip {
       &--title,
       &--description {
         opacity: 1;

@@ -4,22 +4,22 @@ include /molecule/field/field.mixin.pug
 include /organism/side-menu/side-menu.mixin.pug
 include /organism/vertical-space/vertical-space.mixin.pug
 
-mixin jhlite-menu-content-template
-  .jhlite-menu-content-template
-    .jhlite-menu-content-template--content Content
-    .jhlite-menu-content-template--menu
-      +jhlite-side-menu
-        +jhlite-side-menu--slot({ expand: true })
-          +jhlite-vertical-space('paragraph')
-            +jhlite-vertical-space--line
-              +jhlite-field('First')
-                +jhlite-input-text
-            +jhlite-vertical-space--line
-              +jhlite-field('Second')
-                +jhlite-input-text
-        +jhlite-side-menu--slot
-          +jhlite-vertical-space('paragraph')
-            +jhlite-vertical-space--line
-              +jhlite-button-main({ block: true }) Button
-            +jhlite-vertical-space--line
-              +jhlite-button-main({ block: true }) Button
+mixin seed4j-menu-content-template
+  .seed4j-menu-content-template
+    .seed4j-menu-content-template--content Content
+    .seed4j-menu-content-template--menu
+      +seed4j-side-menu
+        +seed4j-side-menu--slot({ expand: true })
+          +seed4j-vertical-space('paragraph')
+            +seed4j-vertical-space--line
+              +seed4j-field('First')
+                +seed4j-input-text
+            +seed4j-vertical-space--line
+              +seed4j-field('Second')
+                +seed4j-input-text
+        +seed4j-side-menu--slot
+          +seed4j-vertical-space('paragraph')
+            +seed4j-vertical-space--line
+              +seed4j-button-main({ block: true }) Button
+            +seed4j-vertical-space--line
+              +seed4j-button-main({ block: true }) Button

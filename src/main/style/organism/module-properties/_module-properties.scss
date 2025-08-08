@@ -1,13 +1,13 @@
 @use '../../token/colors';
 
-$jhlite-module-properties-line-color: colors.$jhlite-global-line-color;
-$jhlite-module-properties-secondary-color: colors.$jhlite-global-secondary-color;
-$jhlite-module-properties-primary-input-color: colors.$jhlite-global-primary-input-color;
+$seed4j-module-properties-line-color: colors.$seed4j-global-line-color;
+$seed4j-module-properties-secondary-color: colors.$seed4j-global-secondary-color;
+$seed4j-module-properties-primary-input-color: colors.$seed4j-global-primary-input-color;
 
-.jhipster-modules-properties-form {
+.seed4j-modules-properties-form {
   &--properties-title {
     margin-top: 15px;
-    color: var(--jhlite-global-color-text);
+    color: var(--seed4j-global-color-text);
     font-size: 1.4em;
   }
 
@@ -18,16 +18,16 @@ $jhlite-module-properties-primary-input-color: colors.$jhlite-global-primary-inp
   &--commit-modules-label {
     margin-left: 10px;
     cursor: pointer;
-    color: var(--jhlite-modules-label);
+    color: var(--seed4j-modules-label);
   }
 
   &--field {
     box-sizing: border-box;
-    border: 1px solid $jhlite-module-properties-line-color;
+    border: 1px solid $seed4j-module-properties-line-color;
     border-radius: 10px;
-    background-color: $jhlite-module-properties-secondary-color;
+    background-color: $seed4j-module-properties-secondary-color;
     padding: 2px 7px;
     width: 100%;
-    color: $jhlite-module-properties-primary-input-color;
+    color: $seed4j-module-properties-primary-input-color;
   }
 }

@@ -1,31 +1,31 @@
 @use '../../token/breakpoint';
 @use '../../token/colors';
 
-$jhlite-toast-gap: 1vw;
-$jhlite-toast-padding: 2vw;
-$jhlite-toast-radius: 2vw;
-$jhlite-toast-medium-gap: 10px;
-$jhlite-toast-medium-padding: 10px 20px;
-$jhlite-toast-medium-radius: 20px;
-$jhlite-toast-color-text: colors.$jhlite-global-color-text-light;
-$jhlite-toast-success-color-background: colors.$jhlite-global-color-success;
-$jhlite-toast-error-color-background: colors.$jhlite-global-color-error;
+$seed4j-toast-gap: 1vw;
+$seed4j-toast-padding: 2vw;
+$seed4j-toast-radius: 2vw;
+$seed4j-toast-medium-gap: 10px;
+$seed4j-toast-medium-padding: 10px 20px;
+$seed4j-toast-medium-radius: 20px;
+$seed4j-toast-color-text: colors.$seed4j-global-color-text-light;
+$seed4j-toast-success-color-background: colors.$seed4j-global-color-success;
+$seed4j-toast-error-color-background: colors.$seed4j-global-color-error;
 
-.jhlite-toast {
+.seed4j-toast {
   display: flex;
-  gap: $jhlite-toast-gap;
+  gap: $seed4j-toast-gap;
   align-items: center;
-  border-radius: $jhlite-toast-radius;
-  padding: $jhlite-toast-padding;
-  color: $jhlite-toast-color-text;
+  border-radius: $seed4j-toast-radius;
+  padding: $seed4j-toast-padding;
+  color: $seed4j-toast-color-text;
   font-size: 1.5rem;
 
   &.-success {
-    background-color: $jhlite-toast-success-color-background;
+    background-color: $seed4j-toast-success-color-background;
   }
 
   &.-error {
-    background-color: $jhlite-toast-error-color-background;
+    background-color: $seed4j-toast-error-color-background;
   }
 
   &--message {
@@ -49,10 +49,10 @@ $jhlite-toast-error-color-background: colors.$jhlite-global-color-error;
   }
 }
 
-@media screen and (min-width: breakpoint.$jhlite-global-breakpoint-small-medium) {
-  .jhlite-toast {
-    gap: $jhlite-toast-medium-gap;
-    border-radius: $jhlite-toast-medium-radius;
-    padding: $jhlite-toast-medium-padding;
+@media screen and (min-width: breakpoint.$seed4j-global-breakpoint-small-medium) {
+  .seed4j-toast {
+    gap: $seed4j-toast-medium-gap;
+    border-radius: $seed4j-toast-medium-radius;
+    padding: $seed4j-toast-medium-padding;
   }
 }

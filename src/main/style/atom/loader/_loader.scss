@@ -1,17 +1,17 @@
 @use '../../token/colors';
 
-.jhlite-loader {
+.seed4j-loader {
   box-sizing: border-box;
   display: inline-block;
-  border: 5px solid colors.$jhlite-global-color-light;
+  border: 5px solid colors.$seed4j-global-color-light;
   border-radius: 50%;
   border-bottom-color: transparent;
   width: 48px;
   height: 48px;
-  animation: jhlite-rotation 1s linear infinite;
+  animation: seed4j-rotation 1s linear infinite;
 }
 
-@keyframes jhlite-rotation {
+@keyframes seed4j-rotation {
   0% {
     transform: rotate(0deg);
   }

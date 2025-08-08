@@ -1,7 +1,7 @@
-<div class="jhlite-landscape-preset-configuration">
+<div class="seed4j-landscape-preset-configuration">
   <button
     v-if="!isPresetConfigurationOpen"
-    class="jhlite-button-main -small"
+    class="seed4j-button-main -small"
     @click="openPresetConfiguration"
     title="Show presets configurations"
     data-testid="show-preset-configuration-btn"
@@ -9,7 +9,7 @@
     <IconVue name="cog-alt" aria-label="Icon presets configurations" title="Show presets configurations" />
   </button>
   <button
-    class="jhlite-button-main -rounded-top -small"
+    class="seed4j-button-main -rounded-top -small"
     v-if="isPresetConfigurationOpen"
     @click="closePresetConfiguration"
     title="Hide presets configurations"
@@ -17,12 +17,12 @@
   >
     <IconVue name="eye-off" aria-label="Icon presets configurations" title="Hide presets configurations" />
   </button>
-  <div class="jhlite-landscape-preset-configuration--content" v-if="isPresetConfigurationOpen">
-    <div class="jhlite-field--label">
-      <label for="preset-configuration" class="jhlite-label">Presets Configurations</label>
+  <div class="seed4j-landscape-preset-configuration--content" v-if="isPresetConfigurationOpen">
+    <div class="seed4j-field--label">
+      <label for="preset-configuration" class="seed4j-label">Presets Configurations</label>
     </div>
-    <div class="jhlite-landscape-preset-configuration--field">
-      <select id="preset-configuration" @change="handlePresetChange" :value="selectedPresetName" class="jhlite-select">
+    <div class="seed4j-landscape-preset-configuration--field">
+      <select id="preset-configuration" @change="handlePresetChange" :value="selectedPresetName" class="seed4j-select">
         <option value="">Select a preset...</option>
         <option v-for="preset in presets" :key="preset.name" :value="preset.name">{{ preset.name }}</option>
       </select>

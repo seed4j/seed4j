@@ -275,7 +275,7 @@ export default defineComponent({
 
     const landscapeClass = (): string => {
       const hasEmphasizedModule = emphasizedModule.value !== undefined;
-      return `jhipster-landscape-map jhipster-landscape-content--modules ${hasEmphasizedModule ? ' has-emphasized-module' : ''}`;
+      return `seed4j-landscape-map seed4j-landscape-content--modules ${hasEmphasizedModule ? ' has-emphasized-module' : ''}`;
     };
 
     const modeSwitchClass = (mode: DisplayMode): string => {

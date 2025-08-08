@@ -1,13 +1,13 @@
 <button
-  class="jhlite-button-toggle"
+  class="seed4j-button-toggle"
   :class="buttonClasses()"
   @click="handleClick()"
   :data-testid="dataTestId"
   :title="title"
   :disabled="disabled"
 >
-  <span class="jhlite-button-toggle-content">
-    <span class="jhlite-button-toggle-full-name" :data-testid="`full-name-${shortName}`"> {{ fullName }} </span>
-    <span class="jhlite-button-toggle-short-name" :data-testid="`short-name-${shortName}`"> {{ shortName }} </span>
+  <span class="seed4j-button-toggle-content">
+    <span class="seed4j-button-toggle-full-name" :data-testid="`full-name-${shortName}`"> {{ fullName }} </span>
+    <span class="seed4j-button-toggle-short-name" :data-testid="`short-name-${shortName}`"> {{ shortName }} </span>
   </span>
 </button>

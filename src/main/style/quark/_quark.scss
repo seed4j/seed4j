@@ -1,30 +1,30 @@
 @use '../token/colors';
 @use '../token/size';
 
-@mixin jhlite-q-link-light {
-  color: colors.$jhlite-global-color-link-light;
+@mixin seed4j-q-link-light {
+  color: colors.$seed4j-global-color-link-light;
 
   &:hover {
-    color: colors.$jhlite-global-color-link-light-hover;
+    color: colors.$seed4j-global-color-link-light-hover;
   }
 }
 
-@mixin jhlite-q-field {
+@mixin seed4j-q-field {
   box-sizing: border-box;
-  border: size.$jhlite-global-size-field-border solid colors.$jhlite-global-color-field-border;
-  border-radius: size.$jhlite-global-size-field-radius;
-  padding: size.$jhlite-global-size-field-padding;
-  line-height: size.$jhlite-global-size-field-line-height;
-  font-size: size.$jhlite-global-size-field-font-size;
+  border: size.$seed4j-global-size-field-border solid colors.$seed4j-global-color-field-border;
+  border-radius: size.$seed4j-global-size-field-radius;
+  padding: size.$seed4j-global-size-field-padding;
+  line-height: size.$seed4j-global-size-field-line-height;
+  font-size: size.$seed4j-global-size-field-font-size;
 
   &:focus {
     outline: none;
     border-color: transparent;
-    box-shadow: 0 0 0 size.$jhlite-global-size-field-border-focus colors.$jhlite-global-color-field-border-focus;
+    box-shadow: 0 0 0 size.$seed4j-global-size-field-border-focus colors.$seed4j-global-color-field-border-focus;
   }
 
   &:disabled {
     cursor: not-allowed;
-    color: colors.$jhlite-global-color-text-disabled;
+    color: colors.$seed4j-global-color-text-disabled;
   }
 }

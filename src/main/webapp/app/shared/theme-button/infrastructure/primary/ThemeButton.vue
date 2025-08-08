@@ -1,18 +1,18 @@
 <template>
-  <div class="jhlite-theme-button">
+  <div class="seed4j-theme-button">
     <input
       id="switch"
-      class="jhlite-theme-button-toggle"
+      class="seed4j-theme-button-toggle"
       type="checkbox"
       name="mode"
       :checked="!isDarkTheme"
       data-testid="theme-switch-button"
       @change="toggleTheme"
     />
-    <label for="switch" class="jhlite-theme-switch-label" :aria-label="theme">
+    <label for="switch" class="seed4j-theme-switch-label" :aria-label="theme">
       <span>🌙</span>
       <span>☀️</span>
-      <div class="jhlite-theme-switch-toggle" :class="{ 'jhlite-theme-switch-toggle-checked': theme === 'dark-theme' }"></div>
+      <div class="seed4j-theme-switch-toggle" :class="{ 'seed4j-theme-switch-toggle-checked': theme === 'dark-theme' }"></div>
     </label>
   </div>
 </template>

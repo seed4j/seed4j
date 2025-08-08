@@ -1,17 +1,17 @@
-<div class="jhipster-module-properties jhlite-vertical-space -paragraph">
-  <div class="jhlite-vertical-space--line">
-    <h2 class="jhipster-modules-properties-form--properties-title">Properties</h2>
+<div class="seed4j-module-properties seed4j-vertical-space -paragraph">
+  <div class="seed4j-vertical-space--line">
+    <h2 class="seed4j-modules-properties-form--properties-title">Properties</h2>
   </div>
-  <div class="jhlite-vertical-space--line">
-    <div class="jhlite-field">
-      <div class="jhlite-field--label">
-        <label for="folder-path" class="jhlite-input">Project folder</label>
+  <div class="seed4j-vertical-space--line">
+    <div class="seed4j-field">
+      <div class="seed4j-field--label">
+        <label for="folder-path" class="seed4j-input">Project folder</label>
       </div>
-      <div class="jhlite-field--field">
+      <div class="seed4j-field--field">
         <input
           type="text"
           id="folder-path"
-          class="jhlite-input-text"
+          class="seed4j-input-text"
           data-testid="folder-path-field"
           :value="folderPath"
           @input="updateFolderPath($event.target.value)"
@@ -20,17 +20,17 @@
       </div>
     </div>
   </div>
-  <div class="jhlite-vertical-space--line" v-for="property in properties">
-    <div class="jhlite-field">
-      <div class="jhlite-field--label">
-        <label :for="`module-parameter-${property.key}`" class="jhlite-label">
+  <div class="seed4j-vertical-space--line" v-for="property in properties">
+    <div class="seed4j-field">
+      <div class="seed4j-field--label">
+        <label :for="`module-parameter-${property.key}`" class="seed4j-label">
           <span>{{ property.description }}</span> -&nbsp;<strong>{{ property.key }}</strong>
         </label>
       </div>
-      <div class="jhlite-field--field">
+      <div class="seed4j-field--field">
         <input
           type="text"
-          class="jhlite-input-text"
+          class="seed4j-input-text"
           :id="`module-parameter-${property.key}`"
           :placeholder="property.defaultValue"
           @input="setStringProperty(property.key, $event.target.value)"
@@ -40,7 +40,7 @@
         />
         <input
           type="number"
-          class="jhlite-input-text"
+          class="seed4j-input-text"
           :id="`module-parameter-${property.key}`"
           :placeholder="property.defaultValue"
           @input="setNumberProperty(property.key, $event.target.value)"
@@ -49,7 +49,7 @@
           v-if="property.type === 'INTEGER'"
         />
         <select
-          class="jhipster-modules-properties-form--field"
+          class="seed4j-modules-properties-form--field"
           :id="`module-parameter-${property.key}`"
           @change="setBooleanProperty(property.key, $event.target.value)"
           :data-testid="`parameter-${property.key}-field`"
@@ -60,12 +60,12 @@
           <option value="false" :selected="parameters.get(property.key) === false">No</option>
         </select>
       </div>
-      <div class="jhlite-field--optional" :data-testid="`parameter-${property.key}-optional-marker`" v-if="!property.mandatory">
+      <div class="seed4j-field--optional" :data-testid="`parameter-${property.key}-optional-marker`" v-if="!property.mandatory">
         Optional
       </div>
     </div>
   </div>
-  <div class="jhlite-vertical-space--line">
+  <div class="seed4j-vertical-space--line">
     <input
       type="checkbox"
       id="commit-modules"
@@ -73,6 +73,6 @@
       data-testid="commit-module-application"
       checked="checked"
     />
-    <label for="commit-modules" class="jhipster-modules-properties-form--commit-modules-label">Commit module application</label>
+    <label for="commit-modules" class="seed4j-modules-properties-form--commit-modules-label">Commit module application</label>
   </div>
 </div>

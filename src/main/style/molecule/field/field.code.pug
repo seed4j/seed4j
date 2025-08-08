@@ -3,11 +3,11 @@ include /atom/select/select.mixin.pug
 
 include field.mixin.pug
 
-+jhlite-field('Field name', { forId: 'field-name' })
-  +jhlite-input-text({ id: 'field-name', value: 'Field value' })
++seed4j-field('Field name', { forId: 'field-name' })
+  +seed4j-input-text({ id: 'field-name', value: 'Field value' })
 
-+jhlite-field('Field optional', { forId: 'field-optional', optional: true })
-  +jhlite-input-text({ id: 'field-optional' })
++seed4j-field('Field optional', { forId: 'field-optional', optional: true })
+  +seed4j-input-text({ id: 'field-optional' })
 
-+jhlite-field('Field select name', { forId: 'field-select-name' })
-  +jhlite-select({ id: 'field-select-name' })
++seed4j-field('Field select name', { forId: 'field-select-name' })
+  +seed4j-select({ id: 'field-select-name' })

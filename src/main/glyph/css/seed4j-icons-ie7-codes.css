@@ -1,64 +1,51 @@
-[class^='jhlite-icon-'],
-[class*=' jhlite-icon-'] {
-  font-family: 'jhlite-icons', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-
-  /* fix buttons height */
-  line-height: 1em;
-
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
-}
-
-.jhlite-icon-book {
+.seed4j-icon-book {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe800;&nbsp;');
 }
-.jhlite-icon-ccw {
+.seed4j-icon-ccw {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe801;&nbsp;');
 }
-.jhlite-icon-play {
+.seed4j-icon-play {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe802;&nbsp;');
 }
-.jhlite-icon-open-collective {
+.seed4j-icon-open-collective {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe803;&nbsp;');
 }
-.jhlite-icon-jhipster {
+.seed4j-icon-jhipster {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe804;&nbsp;');
 }
-.jhlite-icon-download {
+.seed4j-icon-download {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe805;&nbsp;');
 }
-.jhlite-icon-cancel {
+.seed4j-icon-cancel {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe806;&nbsp;');
 }
-.jhlite-icon-ok {
+.seed4j-icon-ok {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe807;&nbsp;');
 }
-.jhlite-icon-eye-off {
+.seed4j-icon-eye-off {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe808;&nbsp;');
 }
-.jhlite-icon-cog-alt {
+.seed4j-icon-cog-alt {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe809;&nbsp;');
 }
-.jhlite-icon-twitter {
+.seed4j-icon-twitter {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf099;&nbsp;');
 }
-.jhlite-icon-github-circled {
+.seed4j-icon-github-circled {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf09b;&nbsp;');
 }
-.jhlite-icon-code {
+.seed4j-icon-code {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf121;&nbsp;');
 }
-.jhlite-icon-puzzle {
+.seed4j-icon-puzzle {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf12e;&nbsp;');
 }
-.jhlite-icon-play-circled {
+.seed4j-icon-play-circled {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf144;&nbsp;');
 }
-.jhlite-icon-binoculars {
+.seed4j-icon-binoculars {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf1e5;&nbsp;');
 }
-.jhlite-icon-map {
+.seed4j-icon-map {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf279;&nbsp;');
 }

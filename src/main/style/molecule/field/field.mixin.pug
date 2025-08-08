@@ -1,11 +1,11 @@
 include /atom/label/label.mixin.pug
 
-mixin jhlite-field(label, opts)
+mixin seed4j-field(label, opts)
   - const { forId, optional } = opts || {};
-  .jhlite-field
-    .jhlite-field--label
-      +jhlite-label({ forId: forId || null })= label
-    .jhlite-field--field
+  .seed4j-field
+    .seed4j-field--label
+      +seed4j-label({ forId: forId || null })= label
+    .seed4j-field--field
       block
     if optional
-      .jhlite-field--optional Optional
+      .seed4j-field--optional Optional

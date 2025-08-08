@@ -1,7 +1,7 @@
-<div ref="minimapContainer" class="jhlite-landscape-minimap jhlite-minimap--container">
-  <button v-if="!isMiniMapOpen" class="jhlite-button-main -block" @click="openMiniMap" data-testid="show-minimap-btn">OPEN MINIMAP</button>
+<div ref="minimapContainer" class="seed4j-landscape-minimap seed4j-minimap--container">
+  <button v-if="!isMiniMapOpen" class="seed4j-button-main -block" @click="openMiniMap" data-testid="show-minimap-btn">OPEN MINIMAP</button>
   <button
-    class="jhlite-button-main -rounded-top -small"
+    class="seed4j-button-main -rounded-top -small"
     v-if="isMiniMapOpen"
     @click="closeMiniMap"
     title="Hide minimap"
@@ -9,16 +9,16 @@
   >
     <IconVue name="eye-off" aria-label="Icon map" title="Hide minimap" />
   </button>
-  <div ref="minimapSize" class="jhlite-minimap--size">
+  <div ref="minimapSize" class="seed4j-minimap--size">
     <div
       ref="minimapViewer"
-      class="jhlite-minimap--viewer"
+      class="seed4j-minimap--viewer"
       @mousedown="startGrabbing"
       @mousemove="grabbing"
       @mouseup="stopGrabbing"
       @mouseleave="stopGrabbing"
       data-testid="minimap-viewer"
     ></div>
-    <div data-testid="minimap-content" ref="minimapContent" class="jhlite-minimap--content" v-html="minimapHTML"></div>
+    <div data-testid="minimap-content" ref="minimapContent" class="seed4j-minimap--content" v-html="minimapHTML"></div>
   </div>
 </div>

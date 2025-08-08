@@ -3,43 +3,43 @@
 @use '../../../token/colors' as colors;
 @use '../../../token/fonts' as fonts;
 
-$jhlite-button-color-background: brand.$jhlite-color-brand-600;
-$jhlite-button-color-text: colors.$jhlite-global-color-text-light;
-$jhlite-button-hover-color-background: brand.$jhlite-color-brand-700;
-$jhlite-button-focus-color-outline: rgba($jhlite-button-color-background, 50%);
-$jhlite-button-disabled-color-background: rgba($jhlite-button-color-background, 50%);
-$jhlite-button-disabled-color-text: rgba($jhlite-button-color-text, 50%);
-$jhlite-button-padding: math.div(9, 16) * 1rem math.div(17, 16) * 1rem;
-$jhlite-small-button-padding: 0.1rem 0.5rem;
-$jhlite-button-radius: math.div(6, 16) * 1rem;
-$jhlite-button-line-height: 1.5rem !default;
-$jhlite-button-font-family: fonts.$jhlite-global-font-primary-family;
-$jhlite-button-font-size: 1rem !default;
-$jhlite-button-font-weight: fonts.$jhlite-font-weight-semi-bold;
+$seed4j-button-color-background: brand.$seed4j-color-brand-600;
+$seed4j-button-color-text: colors.$seed4j-global-color-text-light;
+$seed4j-button-hover-color-background: brand.$seed4j-color-brand-700;
+$seed4j-button-focus-color-outline: rgba($seed4j-button-color-background, 50%);
+$seed4j-button-disabled-color-background: rgba($seed4j-button-color-background, 50%);
+$seed4j-button-disabled-color-text: rgba($seed4j-button-color-text, 50%);
+$seed4j-button-padding: math.div(9, 16) * 1rem math.div(17, 16) * 1rem;
+$seed4j-small-button-padding: 0.1rem 0.5rem;
+$seed4j-button-radius: math.div(6, 16) * 1rem;
+$seed4j-button-line-height: 1.5rem !default;
+$seed4j-button-font-family: fonts.$seed4j-global-font-primary-family;
+$seed4j-button-font-size: 1rem !default;
+$seed4j-button-font-weight: fonts.$seed4j-font-weight-semi-bold;
 
-%jhlite-button-main {
+%seed4j-button-main {
   box-sizing: border-box;
   border: 0;
-  border-radius: $jhlite-button-radius;
-  background-color: $jhlite-button-color-background;
+  border-radius: $seed4j-button-radius;
+  background-color: $seed4j-button-color-background;
   cursor: pointer;
-  padding: $jhlite-button-padding;
+  padding: $seed4j-button-padding;
   text-align: center;
   text-transform: uppercase;
-  line-height: $jhlite-button-line-height;
-  color: $jhlite-button-color-text;
-  font-family: $jhlite-button-font-family;
-  font-size: $jhlite-button-font-size;
-  font-weight: $jhlite-button-font-weight;
+  line-height: $seed4j-button-line-height;
+  color: $seed4j-button-color-text;
+  font-family: $seed4j-button-font-family;
+  font-size: $seed4j-button-font-size;
+  font-weight: $seed4j-button-font-weight;
 
   &:hover {
-    background-color: $jhlite-button-hover-color-background;
+    background-color: $seed4j-button-hover-color-background;
   }
 
   &:disabled {
-    background-color: $jhlite-button-disabled-color-background;
+    background-color: $seed4j-button-disabled-color-background;
     cursor: not-allowed;
-    color: $jhlite-button-disabled-color-text;
+    color: $seed4j-button-disabled-color-text;
   }
 
   &.-block {
@@ -48,14 +48,14 @@ $jhlite-button-font-weight: fonts.$jhlite-font-weight-semi-bold;
   }
 
   &.-small {
-    padding: $jhlite-small-button-padding;
+    padding: $seed4j-small-button-padding;
   }
 
   &.-rounded-top {
-    border-radius: $jhlite-button-radius $jhlite-button-radius 0 0;
+    border-radius: $seed4j-button-radius $seed4j-button-radius 0 0;
   }
 }
 
-.jhlite-button-main {
-  @extend %jhlite-button-main;
+.seed4j-button-main {
+  @extend %seed4j-button-main;
 }

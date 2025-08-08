@@ -1,12 +1,12 @@
-$jhlite-side-menu-padding: 1rem;
-$jhlite-side-menu-gap: 1rem;
+$seed4j-side-menu-padding: 1rem;
+$seed4j-side-menu-gap: 1rem;
 
-.jhlite-side-menu {
+.seed4j-side-menu {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: $jhlite-side-menu-gap;
-  padding: $jhlite-side-menu-padding;
+  gap: $seed4j-side-menu-gap;
+  padding: $seed4j-side-menu-padding;
   min-height: 100%;
 
   &--slot {

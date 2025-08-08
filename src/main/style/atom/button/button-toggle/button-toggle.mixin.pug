@@ -1,10 +1,10 @@
-mixin jhlite-button-toggle(opts)
+mixin seed4j-button-toggle(opts)
   - const { active, disabled, shortName, fullName } = opts || {};
   - const activeClass = active ? '-active' : null;
-  button.jhlite-button-toggle(class=activeClass, disabled=disabled)
+  button.seed4j-button-toggle(class=activeClass, disabled=disabled)
     if shortName && fullName
-      span.jhlite-button-toggle-content
-        span.jhlite-button-toggle-full-name= fullName
-        span.jhlite-button-toggle-short-name= shortName
+      span.seed4j-button-toggle-content
+        span.seed4j-button-toggle-full-name= fullName
+        span.seed4j-button-toggle-short-name= shortName
     else
       block

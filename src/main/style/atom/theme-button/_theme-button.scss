@@ -1,47 +1,47 @@
 @use '../../token/fonts';
 
-.jhlite-theme-button {
+.seed4j-theme-button {
   display: flex;
 
-  .jhlite-theme-button-toggle {
+  .seed4j-theme-button-toggle {
     visibility: hidden;
     width: 0;
     height: 0;
   }
 
-  .jhlite-theme-switch-label {
+  .seed4j-theme-switch-label {
     display: flex;
     position: relative;
     align-items: center;
     justify-content: space-between;
     transition: background 0.5s ease;
     z-index: 1;
-    border: calc(var(--jhlite-element-size) * 0.025) solid var(--jhlite-accent-color);
-    border-radius: var(--jhlite-element-size);
-    background: var(--jhlite-text-color-primary);
+    border: calc(var(--seed4j-element-size) * 0.025) solid var(--seed4j-accent-color);
+    border-radius: var(--seed4j-element-size);
+    background: var(--seed4j-text-color-primary);
     cursor: pointer;
-    padding: calc(var(--jhlite-element-size) * 0.1);
-    width: var(--jhlite-element-size);
-    height: calc(var(--jhlite-element-size) * 0.35);
-    font-family: fonts.$jhlite-global-font-emoji-family;
-    font-size: calc(var(--jhlite-element-size) * 0.3);
+    padding: calc(var(--seed4j-element-size) * 0.1);
+    width: var(--seed4j-element-size);
+    height: calc(var(--seed4j-element-size) * 0.35);
+    font-family: fonts.$seed4j-global-font-emoji-family;
+    font-size: calc(var(--seed4j-element-size) * 0.3);
   }
 
-  .jhlite-theme-switch-toggle {
+  .seed4j-theme-switch-toggle {
     position: absolute;
-    top: calc(var(--jhlite-element-size) * 0.07);
-    left: calc(var(--jhlite-element-size) * 0.07);
+    top: calc(var(--seed4j-element-size) * 0.07);
+    left: calc(var(--seed4j-element-size) * 0.07);
     transform: translateX(0);
     transition:
       transform 0.3s ease,
       background-color 0.5s ease;
     border-radius: 50%;
-    background-color: var(--jhlite-bg-color-primary);
-    width: calc(var(--jhlite-element-size) * 0.4);
-    height: calc(var(--jhlite-element-size) * 0.4);
+    background-color: var(--seed4j-bg-color-primary);
+    width: calc(var(--seed4j-element-size) * 0.4);
+    height: calc(var(--seed4j-element-size) * 0.4);
   }
 
-  .jhlite-theme-switch-toggle-checked {
-    transform: translateX(calc(var(--jhlite-element-size) * 0.6)) !important;
+  .seed4j-theme-switch-toggle-checked {
+    transform: translateX(calc(var(--seed4j-element-size) * 0.6)) !important;
   }
 }

@@ -1,8 +1,8 @@
 include /atom/icon/icon.mixin.pug
 
-mixin jhlite-toast(type)
-  .jhlite-toast(class=`-${type}`, role='alert')
-    .jhlite-toast--message
+mixin seed4j-toast(type)
+  .seed4j-toast(class=`-${type}`, role='alert')
+    .seed4j-toast--message
       block
-    button.jhlite-toast--action(aria-label='Close')
-      +jhlite-icon('cancel')
+    button.seed4j-toast--action(aria-label='Close')
+      +seed4j-icon('cancel')

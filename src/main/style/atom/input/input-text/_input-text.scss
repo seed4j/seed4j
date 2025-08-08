@@ -1,22 +1,22 @@
 @use '../../../quark/quark';
 @use '../../../token/colors';
 
-$jhlite-input-text-color-background: colors.$jhlite-global-color-fill-light;
-$jhlite-input-text-color-text: colors.$jhlite-global-color-text-dark;
-$jhlite-input-text-disabled-color-background: colors.$jhlite-global-color-fill-disabled-light;
+$seed4j-input-text-color-background: colors.$seed4j-global-color-fill-light;
+$seed4j-input-text-color-text: colors.$seed4j-global-color-text-dark;
+$seed4j-input-text-disabled-color-background: colors.$seed4j-global-color-fill-disabled-light;
 
-.jhlite-input-text {
-  @include quark.jhlite-q-field;
+.seed4j-input-text {
+  @include quark.seed4j-q-field;
 
   &:disabled {
-    border-color: colors.$jhlite-global-color-fill-disabled-dark;
-    background-color: $jhlite-input-text-disabled-color-background;
+    border-color: colors.$seed4j-global-color-fill-disabled-dark;
+    background-color: $seed4j-input-text-disabled-color-background;
   }
 
   /* stylelint-disable-next-line no-descending-specificity, no-duplicate-selectors */
   & {
-    background-color: $jhlite-input-text-color-background;
+    background-color: $seed4j-input-text-color-background;
     width: 100%;
-    color: $jhlite-input-text-color-text;
+    color: $seed4j-input-text-color-text;
   }
 }

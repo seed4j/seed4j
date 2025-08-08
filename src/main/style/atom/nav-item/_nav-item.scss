@@ -1,10 +1,10 @@
 @use '../../quark/quark';
 @use '../../token/colors';
 
-$jhlite-nav-item-current-color-text: colors.$jhlite-global-color-text-primary;
+$seed4j-nav-item-current-color-text: colors.$seed4j-global-color-text-primary;
 
-.jhlite-nav-item {
-  @include quark.jhlite-q-link-light;
+.seed4j-nav-item {
+  @include quark.seed4j-q-link-light;
 
   /* stylelint-disable-next-line no-duplicate-selectors */
   & {
@@ -12,10 +12,10 @@ $jhlite-nav-item-current-color-text: colors.$jhlite-global-color-text-primary;
   }
 
   &.-current {
-    color: $jhlite-nav-item-current-color-text;
+    color: $seed4j-nav-item-current-color-text;
 
     &:hover {
-      color: $jhlite-nav-item-current-color-text;
+      color: $seed4j-nav-item-current-color-text;
     }
   }
 }

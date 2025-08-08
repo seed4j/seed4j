@@ -3,27 +3,27 @@
 @use '../button-main/button-main' as button-main;
 @use '../../../token/size' as size;
 
-$jhlite-button-switch-padding: math.div(5, 16) * 1rem math.div(15, 16) * 1rem;
-$jhlite-button-switch-color-text-light: colors.$jhlite-global-color-text-light;
-$jhlite-button-switch-radius: size.$jhlite-global-size-switch-radius;
-$jhlite-button-switch-font-size: math.div(13, 16) * 1rem;
+$seed4j-button-switch-padding: math.div(5, 16) * 1rem math.div(15, 16) * 1rem;
+$seed4j-button-switch-color-text-light: colors.$seed4j-global-color-text-light;
+$seed4j-button-switch-radius: size.$seed4j-global-size-switch-radius;
+$seed4j-button-switch-font-size: math.div(13, 16) * 1rem;
 
-.jhlite-button-switch {
-  @extend %jhlite-button-main;
+.seed4j-button-switch {
+  @extend %seed4j-button-main;
 
-  border-radius: $jhlite-button-switch-radius;
+  border-radius: $seed4j-button-switch-radius;
   background-color: transparent;
-  padding: $jhlite-button-switch-padding;
+  padding: $seed4j-button-switch-padding;
   text-transform: none;
-  color: var(--jhlite-global-color-text);
-  font-size: $jhlite-button-switch-font-size;
+  color: var(--seed4j-global-color-text);
+  font-size: $seed4j-button-switch-font-size;
 
   &:hover {
     background-color: transparent;
   }
 
   &.-selected {
-    background-color: button-main.$jhlite-button-hover-color-background;
-    color: $jhlite-button-switch-color-text-light;
+    background-color: button-main.$seed4j-button-hover-color-background;
+    color: $seed4j-button-switch-color-text-light;
   }
 }

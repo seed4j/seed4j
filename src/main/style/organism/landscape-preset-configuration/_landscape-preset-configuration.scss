@@ -1,12 +1,12 @@
 @use '../../token/colors';
 
-$jhlite-landscape-preset-configuration-color-border: colors.$jhlite-global-line-color;
-$jhlite-landscape-preset-configuration-border-radius: colors.$jhlite-global-box-radius;
+$seed4j-landscape-preset-configuration-color-border: colors.$seed4j-global-line-color;
+$seed4j-landscape-preset-configuration-border-radius: colors.$seed4j-global-box-radius;
 
-.jhlite-landscape-preset-configuration {
+.seed4j-landscape-preset-configuration {
   &--content {
-    border: 1px dotted $jhlite-landscape-preset-configuration-color-border;
-    border-radius: 0 $jhlite-landscape-preset-configuration-border-radius $jhlite-landscape-preset-configuration-border-radius;
+    border: 1px dotted $seed4j-landscape-preset-configuration-color-border;
+    border-radius: 0 $seed4j-landscape-preset-configuration-border-radius $seed4j-landscape-preset-configuration-border-radius;
     padding: 10px;
   }
 

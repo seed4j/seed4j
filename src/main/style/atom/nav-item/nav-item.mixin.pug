@@ -1,8 +1,8 @@
-mixin jhlite-nav-item(options)
+mixin seed4j-nav-item(options)
   - const { current, href } = options || {};
   if current
-    span.jhlite-nav-item.-current
+    span.seed4j-nav-item.-current
       block
   else
-    a.jhlite-nav-item(href=`${href || '#'}`)
+    a.seed4j-nav-item(href=`${href || '#'}`)
       block

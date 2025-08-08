@@ -1,13 +1,13 @@
 @use '../../token/size';
 @use '../../token/colors';
 
-.jhlite-landscape-rank-module-filter {
+.seed4j-landscape-rank-module-filter {
   &--ranks {
     display: flex;
-    gap: size.$jhlite-global-size-field-padding;
+    gap: size.$seed4j-global-size-field-padding;
     align-items: center;
 
-    .jhlite-button-toggle::before {
+    .seed4j-button-toggle::before {
       position: absolute;
       inset: 0;
       transition: 0.5s ease-out;
@@ -16,7 +16,7 @@
       content: '';
     }
 
-    .jhlite-button-toggle {
+    .seed4j-button-toggle {
       position: relative;
       overflow: unset;
 
@@ -32,23 +32,23 @@
       }
 
       &.-rank-color.-s::before {
-        border-color: colors.$jhlite-rank-s-color;
+        border-color: colors.$seed4j-rank-s-color;
       }
 
       &.-rank-color.-a::before {
-        border-color: colors.$jhlite-rank-a-color;
+        border-color: colors.$seed4j-rank-a-color;
       }
 
       &.-rank-color.-b::before {
-        border-color: colors.$jhlite-rank-b-color;
+        border-color: colors.$seed4j-rank-b-color;
       }
 
       &.-rank-color.-c::before {
-        border-color: colors.$jhlite-rank-c-color;
+        border-color: colors.$seed4j-rank-c-color;
       }
 
       &.-rank-color.-d::before {
-        border-color: colors.$jhlite-rank-d-color;
+        border-color: colors.$seed4j-rank-d-color;
       }
     }
   }

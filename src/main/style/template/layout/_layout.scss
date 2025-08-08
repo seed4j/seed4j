@@ -1,4 +1,4 @@
-.jhlite-layout {
+.seed4j-layout {
   display: flex;
   position: fixed;
   inset: 0;
@@ -7,7 +7,7 @@
   &--body {
     flex-basis: 0;
     flex-grow: 1;
-    background-color: var(--jhlite-bg-color);
+    background-color: var(--seed4j-bg-color);
     min-width: 0;
     overflow: auto;
   }

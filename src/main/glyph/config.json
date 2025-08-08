@@ -1,6 +1,6 @@
 {
-  "name": "jhlite-icons",
-  "css_prefix_text": "jhlite-icon-",
+  "name": "seed4j-icons",
+  "css_prefix_text": "seed4j-icon-",
   "css_use_suffix": false,
   "hinting": true,
   "units_per_em": 1000,

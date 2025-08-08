@@ -1,8 +1,8 @@
 @use '../../quark/quark';
 @use '../../token/breakpoint';
 
-.jhlite-logo {
-  @include quark.jhlite-q-link-light;
+.seed4j-logo {
+  @include quark.seed4j-q-link-light;
 
   /* stylelint-disable-next-line no-duplicate-selectors */
   & {
@@ -27,8 +27,8 @@
   }
 }
 
-@media screen and (min-width: breakpoint.$jhlite-global-breakpoint-small-medium) {
-  .jhlite-logo {
+@media screen and (min-width: breakpoint.$seed4j-global-breakpoint-small-medium) {
+  .seed4j-logo {
     &--icon {
       width: 48px;
     }

@@ -1,8 +1,8 @@
-$jhipster-lite-valid-parameters-color: #2d900f;
-$jhipster-lite-invalid-mandatory-parameters-color: #900f0f;
-$jhipster-lite-invalid-optional-parameters-color: #90670f;
+$seed4j-lite-valid-parameters-color: #2d900f;
+$seed4j-lite-invalid-mandatory-parameters-color: #900f0f;
+$seed4j-lite-invalid-optional-parameters-color: #90670f;
 
-.jhipster-module-parameters {
+.seed4j-module-parameters {
   display: flex;
   border-radius: 1em;
 
@@ -17,15 +17,15 @@ $jhipster-lite-invalid-optional-parameters-color: #90670f;
   }
 
   &.invalid-mandatory-parameter {
-    background-color: $jhipster-lite-invalid-mandatory-parameters-color;
+    background-color: $seed4j-lite-invalid-mandatory-parameters-color;
   }
 
   &.invalid-optional-parameter {
-    background-color: $jhipster-lite-invalid-optional-parameters-color;
+    background-color: $seed4j-lite-invalid-optional-parameters-color;
   }
 
   &.all-valid-parameters {
-    background-color: $jhipster-lite-valid-parameters-color;
+    background-color: $seed4j-lite-valid-parameters-color;
   }
 
   &--type.selected {
@@ -51,7 +51,7 @@ $jhipster-lite-invalid-optional-parameters-color: #90670f;
 
   &--type-stats.not-selected {
     margin-left: 7px;
-    color: var(--jhlite-white);
+    color: var(--seed4j-white);
   }
 
   &--parameter.selected {

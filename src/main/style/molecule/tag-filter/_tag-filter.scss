@@ -1,17 +1,17 @@
 @use '../../token/colors';
 
-$jhlite-tag-filter-line-color: colors.$jhlite-global-line-color;
-$jhlite-tag-filter-primary-color: colors.$jhlite-global-primary-color;
+$seed4j-tag-filter-line-color: colors.$seed4j-global-line-color;
+$seed4j-tag-filter-primary-color: colors.$seed4j-global-primary-color;
 
-.jhipster-tag-filter {
-  border: 1px solid $jhlite-tag-filter-line-color;
+.seed4j-tag-filter {
+  border: 1px solid $seed4j-tag-filter-line-color;
   border-radius: 1.5em;
   background-color: transparent;
   padding: 7px 15px;
-  color: var(--jhlite-global-color-text);
+  color: var(--seed4j-global-color-text);
 
   &.selected {
-    background-color: $jhlite-tag-filter-primary-color;
+    background-color: $seed4j-tag-filter-primary-color;
     color: #fff;
   }
 }

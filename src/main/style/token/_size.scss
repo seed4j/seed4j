@@ -1,9 +1,9 @@
 @use 'sass:math';
 
-$jhlite-global-size-field-border: 1px !default;
-$jhlite-global-size-field-border-focus: 2px !default;
-$jhlite-global-size-field-line-height: 1rem !default;
-$jhlite-global-size-field-font-size: 1rem !default;
-$jhlite-global-size-field-padding: 10px !default;
-$jhlite-global-size-field-radius: math.div(6, 16) * 1rem;
-$jhlite-global-size-switch-radius: 1.5rem;
+$seed4j-global-size-field-border: 1px !default;
+$seed4j-global-size-field-border-focus: 2px !default;
+$seed4j-global-size-field-line-height: 1rem !default;
+$seed4j-global-size-field-font-size: 1rem !default;
+$seed4j-global-size-field-padding: 10px !default;
+$seed4j-global-size-field-radius: math.div(6, 16) * 1rem;
+$seed4j-global-size-switch-radius: 1.5rem;

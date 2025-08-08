@@ -1,6 +1,6 @@
-$jhlite-minimap-size-background-color: #0000009a;
+$seed4j-minimap-size-background-color: #0000009a;
 
-.jhlite-minimap {
+.seed4j-minimap {
   &--container {
     position: fixed;
     bottom: 20px;
@@ -13,8 +13,8 @@ $jhlite-minimap-size-background-color: #0000009a;
   &--size {
     position: relative;
     z-index: 5;
-    border: 1px solid var(--jhlite-brand);
-    background-color: $jhlite-minimap-size-background-color;
+    border: 1px solid var(--seed4j-brand);
+    background-color: $seed4j-minimap-size-background-color;
     user-select: none;
   }
 

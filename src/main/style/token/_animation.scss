@@ -1,35 +1,35 @@
 @use 'colors';
 
-@keyframes jhlite-valid-highlight-animation {
+@keyframes seed4j-valid-highlight-animation {
   0% {
-    background-color: colors.$jhlite-valid-highlight-start-color;
-    stroke: colors.$jhlite-valid-highlight-start-color;
+    background-color: colors.$seed4j-valid-highlight-start-color;
+    stroke: colors.$seed4j-valid-highlight-start-color;
   }
 
   50% {
-    background-color: colors.$jhlite-valid-highlight-end-color;
-    stroke: colors.$jhlite-valid-highlight-end-color;
+    background-color: colors.$seed4j-valid-highlight-end-color;
+    stroke: colors.$seed4j-valid-highlight-end-color;
   }
 
   100% {
-    background-color: colors.$jhlite-valid-highlight-start-color;
-    stroke: colors.$jhlite-valid-highlight-start-color;
+    background-color: colors.$seed4j-valid-highlight-start-color;
+    stroke: colors.$seed4j-valid-highlight-start-color;
   }
 }
 
-@keyframes jhlite-invalid-highlight-animation {
+@keyframes seed4j-invalid-highlight-animation {
   0% {
-    background-color: colors.$jhlite-invalid-highlight-start-color;
-    stroke: colors.$jhlite-invalid-highlight-start-color;
+    background-color: colors.$seed4j-invalid-highlight-start-color;
+    stroke: colors.$seed4j-invalid-highlight-start-color;
   }
 
   50% {
-    background-color: colors.$jhlite-invalid-highlight-end-color;
-    stroke: colors.$jhlite-invalid-highlight-end-color;
+    background-color: colors.$seed4j-invalid-highlight-end-color;
+    stroke: colors.$seed4j-invalid-highlight-end-color;
   }
 
   100% {
-    background-color: colors.$jhlite-invalid-highlight-start-color;
-    stroke: colors.$jhlite-invalid-highlight-start-color;
+    background-color: colors.$seed4j-invalid-highlight-start-color;
+    stroke: colors.$seed4j-invalid-highlight-start-color;
   }
 }

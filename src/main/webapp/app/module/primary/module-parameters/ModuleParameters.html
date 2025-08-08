@@ -1,23 +1,23 @@
 <div
   v-if="propertiesDefinitions.length !== 0"
-  class="jhipster-module-parameters"
+  class="seed4j-module-parameters"
   :class="stateClass()"
   :data-testid="`module-${moduleSlug}-${propertiesType}-parameters`"
 >
-  <div class="jhipster-module-parameters--type" :class="stateClass()">
-    <div class="jhipster-module-parameters--type-title" :class="stateClass()">{{ typeLabel() }}</div>
+  <div class="seed4j-module-parameters--type" :class="stateClass()">
+    <div class="seed4j-module-parameters--type-title" :class="stateClass()">{{ typeLabel() }}</div>
     <div
       :data-testid="`module-${moduleSlug}-${propertiesType}-parameters-stats`"
-      class="jhipster-module-parameters--type-stats"
+      class="seed4j-module-parameters--type-stats"
       :class="stateClass()"
     >
       {{ parametersStats() }}
     </div>
   </div>
-  <div v-for="propertyDefinition in propertiesDefinitions" class="jhipster-module-parameters--parameter" :class="stateClass()">
-    <div class="jhipster-module-parameters--parameter-key" :class="stateClass()">{{ propertyDefinition.key }}</div>
+  <div v-for="propertyDefinition in propertiesDefinitions" class="seed4j-module-parameters--parameter" :class="stateClass()">
+    <div class="seed4j-module-parameters--parameter-key" :class="stateClass()">{{ propertyDefinition.key }}</div>
     <div
-      class="jhipster-module-parameters--parameter-value"
+      class="seed4j-module-parameters--parameter-value"
       :class="stateClass()"
       :data-testid="`module-${moduleSlug}-${propertyDefinition.key}-parameter-value`"
     >

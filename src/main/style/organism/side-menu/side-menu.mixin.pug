@@ -1,9 +1,9 @@
-mixin jhlite-side-menu
-  .jhlite-side-menu
+mixin seed4j-side-menu
+  .seed4j-side-menu
     block
 
-mixin jhlite-side-menu--slot(opts)
+mixin seed4j-side-menu--slot(opts)
   - const { expand } = opts || {};
   - const expandClass = expand ? '-expand' : null;
-  .jhlite-side-menu--slot(class=expandClass)
+  .seed4j-side-menu--slot(class=expandClass)
     block

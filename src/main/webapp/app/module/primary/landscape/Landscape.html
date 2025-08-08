@@ -1,10 +1,10 @@
 <LandscapeLoaderVue v-if="levels.isLoading()" />
-<div class="jhipster-landscape jhlite-menu-content-template" v-else data-testid="landscape">
-  <div class="jhipster-landscape-modes-selection">
-    <div class="jhlite-mode-switch">
-      <div class="jhlite-mode-switch--modes">
+<div class="seed4j-landscape seed4j-menu-content-template" v-else data-testid="landscape">
+  <div class="seed4j-landscape-modes-selection">
+    <div class="seed4j-mode-switch">
+      <div class="seed4j-mode-switch--modes">
         <button
-          class="jhlite-button-switch"
+          class="seed4j-button-switch"
           :class="modeSwitchClass('COMPACTED')"
           @click="selectMode('COMPACTED')"
           data-testid="compacted-mode-button"
@@ -12,7 +12,7 @@
           Compacted
         </button>
         <button
-          class="jhlite-button-switch"
+          class="seed4j-button-switch"
           :class="modeSwitchClass('EXTENDED')"
           @click="selectMode('EXTENDED')"
           data-testid="extended-mode-button"
@@ -22,21 +22,21 @@
       </div>
     </div>
   </div>
-  <div class="jhipster-landscape-preset-selection">
+  <div class="seed4j-landscape-preset-selection">
     <LandscapePresetConfigurationVue :selectedPresetName="selectedPresetName" @selected="selectModulesFromPreset" />
   </div>
-  <div class="jhlite-menu-content-template--content">
-    <div class="jhipster-landscape-content">
-      <div class="jhipster-landscape-content--header">
-        <div class="jhipster-landscape-rank-module-selection">
+  <div class="seed4j-menu-content-template--content">
+    <div class="seed4j-landscape-content">
+      <div class="seed4j-landscape-content--header">
+        <div class="seed4j-landscape-rank-module-selection">
           <LandscapeRankModuleFilterVue :moduleRankStatistics="moduleRankStatistics" @selected="handleRankFilter" />
         </div>
-        <div class="jhipster-landscape-search-container">
-          <div class="jhipster-landscape-search">
-            <div class="jhlite-field--field">
+        <div class="seed4j-landscape-search-container">
+          <div class="seed4j-landscape-search">
+            <div class="seed4j-field--field">
               <input
                 type="text"
-                class="jhlite-input-text"
+                class="seed4j-input-text"
                 placeholder="Search modules..."
                 @input="performSearch($event.target.value)"
                 data-testid="landscape-search-input"
@@ -55,19 +55,19 @@
         @mouseup="stopGrabbing"
         @mouseleave="stopGrabbing"
       >
-        <div class="jhipster-landscape-levels">
-          <ul class="jhipster-landscape-levels--level" :class="modeClass()" v-for="level in levels.value()">
-            <li class="jhipster-landscape-element" v-for="element in level.elements" :class="modeClass()">
+        <div class="seed4j-landscape-levels">
+          <ul class="seed4j-landscape-levels--level" :class="modeClass()" v-for="level in levels.value()">
+            <li class="seed4j-landscape-element" v-for="element in level.elements" :class="modeClass()">
               <div
-                class="jhipster-landscape-feature"
+                class="seed4j-landscape-feature"
                 :class="elementFlavor(element.slug())"
                 :data-testid="`${element.slugString()}-feature`"
                 v-if="isFeature(element)"
                 :ref="el => landscapeElements.set(element.slugString(), el)"
               >
-                <h2 class="jhipster-landscape-feature--title" :class="modeClass()">{{ element.slugString() }}</h2>
-                <ul class="jhipster-landscape-feature--modules">
-                  <li class="jhipster-landscape-feature--module" v-for="module in element.modules">
+                <h2 class="seed4j-landscape-feature--title" :class="modeClass()">{{ element.slugString() }}</h2>
+                <ul class="seed4j-landscape-feature--modules">
+                  <li class="seed4j-landscape-feature--module" v-for="module in element.modules">
                     <LandscapeModuleVue
                       :module="module"
                       :landscapeElements="landscapeElements"
@@ -96,13 +96,13 @@
         </div>
 
         <svg
-          class="jhipster-landscape-connectors"
+          class="seed4j-landscape-connectors"
           :style="`width: ${landscapeSize.width}px; height: ${landscapeSize.height}px`"
           data-testid="landscape-connectors"
         >
           <path
             v-for="connector in landscapeConnectors"
-            class="jhipster-landscape-connectors--line"
+            class="seed4j-landscape-connectors--line"
             :class="elementFlavor(connector.startingElement)"
             :d="connector.path"
           />
@@ -111,11 +111,11 @@
     </div>
   </div>
 
-  <div class="jhlite-menu-content-template--menu">
-    <div class="jhlite-side-menu">
-      <div class="jhlite-side-menu--slot -expand">
-        <div class="jhlite-vertical-space -paragraph">
-          <div class="jhlite-vertical-space--line">
+  <div class="seed4j-menu-content-template--menu">
+    <div class="seed4j-side-menu">
+      <div class="seed4j-side-menu--slot -expand">
+        <div class="seed4j-vertical-space -paragraph">
+          <div class="seed4j-vertical-space--line">
             <ModulePropertiesFormVue
               :folderPath="folderPath"
               :properties="selectedModulesProperties()"
@@ -129,11 +129,11 @@
           </div>
         </div>
       </div>
-      <div class="jhlite-side-menu--slot">
+      <div class="seed4j-side-menu--slot">
         <ProjectActionsVue :folderPath="folderPath" @operationStarted="operationStarted()" @operationEnded="operationEnded()">
-          <div class="jhlite-vertical-space--line">
+          <div class="seed4j-vertical-space--line">
             <button
-              class="jhlite-button-main -block"
+              class="seed4j-button-main -block"
               data-testid="modules-apply-new-button"
               :disabled="disabledNewApplication()"
               @click="applyNewModules"
@@ -143,9 +143,9 @@
             </button>
           </div>
 
-          <div class="jhlite-vertical-space--line">
+          <div class="seed4j-vertical-space--line">
             <button
-              class="jhlite-button-main -block"
+              class="seed4j-button-main -block"
               data-testid="modules-apply-all-button"
               :disabled="disabledAllApplication()"
               @click="applyAllModules"

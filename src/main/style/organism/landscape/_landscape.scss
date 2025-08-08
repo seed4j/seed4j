@@ -2,83 +2,83 @@
 @use '../../token/colors';
 @use '../../token/size';
 
-$jhlite-landscape-padding: 20px;
-$jhipster-landscape-modes-selection-top-position: $jhlite-landscape-padding;
-$jhipster-landscape-preset-selection-top-position: 85px;
-$jhipster-landscape-modes-selection-top-position-large-screen: 85px;
-$jhipster-landscape-preset-selection-top-position-large-screen: 150px;
-$jhipster-landscape-preset-selection-left-position: $jhlite-landscape-padding;
-$jhlite-landscape-line-color: colors.$jhlite-global-line-color;
-$jhlite-landscape-box-radius: colors.$jhlite-global-box-radius;
-$jhlite-landscape-primary-color: colors.$jhlite-global-primary-color;
-$jhlite-landscape-color-text-light: colors.$jhlite-global-color-text-light;
-$jhlite-landscape-selectable-highlight-animation: colors.$jhlite-global-selectable-highlight-animation;
-$jhlite-landscape-not-selectable-highlight-animation: colors.$jhlite-global-not-selectable-highlight-animation;
-$jhlite-landscape-valid-highlight-end-color: colors.$jhlite-global-valid-highlight-end-color;
-$jhlite-landscape-primary-alternative-color: colors.$jhlite-global-primary-alternative-color;
+$seed4j-landscape-padding: 20px;
+$seed4j-landscape-modes-selection-top-position: $seed4j-landscape-padding;
+$seed4j-landscape-preset-selection-top-position: 85px;
+$seed4j-landscape-modes-selection-top-position-large-screen: 85px;
+$seed4j-landscape-preset-selection-top-position-large-screen: 150px;
+$seed4j-landscape-preset-selection-left-position: $seed4j-landscape-padding;
+$seed4j-landscape-line-color: colors.$seed4j-global-line-color;
+$seed4j-landscape-box-radius: colors.$seed4j-global-box-radius;
+$seed4j-landscape-primary-color: colors.$seed4j-global-primary-color;
+$seed4j-landscape-color-text-light: colors.$seed4j-global-color-text-light;
+$seed4j-landscape-selectable-highlight-animation: colors.$seed4j-global-selectable-highlight-animation;
+$seed4j-landscape-not-selectable-highlight-animation: colors.$seed4j-global-not-selectable-highlight-animation;
+$seed4j-landscape-valid-highlight-end-color: colors.$seed4j-global-valid-highlight-end-color;
+$seed4j-landscape-primary-alternative-color: colors.$seed4j-global-primary-alternative-color;
 
-.jhipster-landscape,
-.jhlite-landscape-minimap {
-  .jhipster-landscape-map {
+.seed4j-landscape,
+.seed4j-landscape-minimap {
+  .seed4j-landscape-map {
     position: relative;
-    padding: $jhlite-landscape-padding;
+    padding: $seed4j-landscape-padding;
   }
 
-  .jhipster-landscape-modes-selection {
+  .seed4j-landscape-modes-selection {
     position: absolute;
-    top: $jhipster-landscape-modes-selection-top-position;
-    left: $jhlite-landscape-padding;
+    top: $seed4j-landscape-modes-selection-top-position;
+    left: $seed4j-landscape-padding;
     z-index: 3;
-    border: 1px dotted $jhlite-landscape-line-color;
-    border-radius: $jhlite-landscape-box-radius;
-    background: var(--jhlite-chip-bg-color);
+    border: 1px dotted $seed4j-landscape-line-color;
+    border-radius: $seed4j-landscape-box-radius;
+    background: var(--seed4j-chip-bg-color);
     padding: 10px;
   }
 
-  .jhipster-landscape-preset-selection {
+  .seed4j-landscape-preset-selection {
     position: absolute;
-    top: $jhipster-landscape-preset-selection-top-position;
-    left: $jhipster-landscape-preset-selection-left-position;
+    top: $seed4j-landscape-preset-selection-top-position;
+    left: $seed4j-landscape-preset-selection-left-position;
     z-index: 3;
-    background: var(--jhlite-chip-bg-color);
+    background: var(--seed4j-chip-bg-color);
   }
 
-  .jhipster-landscape-rank-module-selection {
+  .seed4j-landscape-rank-module-selection {
     display: flex;
     justify-content: left;
-    margin-left: $jhlite-landscape-padding;
-    background: var(--jhlite-chip-bg-color);
+    margin-left: $seed4j-landscape-padding;
+    background: var(--seed4j-chip-bg-color);
     width: 246px;
   }
 
-  .jhipster-landscape-content {
+  .seed4j-landscape-content {
     &--header {
       display: none;
     }
   }
 
-  .jhipster-landscape-search-container {
+  .seed4j-landscape-search-container {
     display: flex;
     flex-grow: 1;
     justify-content: center;
   }
 
-  .jhipster-landscape-search {
+  .seed4j-landscape-search {
     display: flex;
     align-items: center;
-    border-radius: size.$jhlite-global-size-field-radius;
+    border-radius: size.$seed4j-global-size-field-radius;
     box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
     padding: 10px;
   }
 
-  .jhipster-landscape-connectors {
+  .seed4j-landscape-connectors {
     position: absolute;
-    top: $jhlite-landscape-padding;
-    left: $jhlite-landscape-padding;
+    top: $seed4j-landscape-padding;
+    left: $seed4j-landscape-padding;
     z-index: 1;
 
     &--line {
-      stroke: $jhlite-landscape-line-color;
+      stroke: $seed4j-landscape-line-color;
       stroke-opacity: 0.7;
       stroke-width: 1px;
       stroke-dasharray: 2 2;
@@ -94,21 +94,21 @@ $jhlite-landscape-primary-alternative-color: colors.$jhlite-global-primary-alter
       }
 
       &.-selected {
-        stroke: $jhlite-landscape-primary-color;
+        stroke: $seed4j-landscape-primary-color;
       }
 
       &.-selectable-highlighted {
-        animation: $jhlite-landscape-selectable-highlight-animation;
+        animation: $seed4j-landscape-selectable-highlight-animation;
       }
 
       &.-not-selectable-highlighted,
       &.-highlighted-unselection {
-        animation: $jhlite-landscape-not-selectable-highlight-animation;
+        animation: $seed4j-landscape-not-selectable-highlight-animation;
       }
     }
   }
 
-  .jhipster-landscape-levels {
+  .seed4j-landscape-levels {
     display: grid;
     position: relative;
     column-gap: 15px;
@@ -131,14 +131,14 @@ $jhlite-landscape-primary-alternative-color: colors.$jhlite-global-primary-alter
     }
   }
 
-  .jhipster-landscape-feature {
-    border: 2px dotted $jhlite-landscape-line-color;
-    border-radius: $jhlite-landscape-box-radius;
-    background: rgba($color: $jhlite-landscape-primary-alternative-color, $alpha: 30%);
+  .seed4j-landscape-feature {
+    border: 2px dotted $seed4j-landscape-line-color;
+    border-radius: $seed4j-landscape-box-radius;
+    background: rgba($color: $seed4j-landscape-primary-alternative-color, $alpha: 30%);
 
     &--title {
       text-align: center;
-      color: var(--jhlite-global-color-text);
+      color: var(--seed4j-global-color-text);
       font-size: 1em;
       font-weight: bold;
 
@@ -168,18 +168,18 @@ $jhlite-landscape-primary-alternative-color: colors.$jhlite-global-primary-alter
     }
 
     &.-selectable-highlighted {
-      animation: $jhlite-landscape-selectable-highlight-animation;
-      color: $jhlite-landscape-color-text-light;
+      animation: $seed4j-landscape-selectable-highlight-animation;
+      color: $seed4j-landscape-color-text-light;
     }
 
     &.-not-selectable-highlighted,
     &.-highlighted-unselection {
-      animation: $jhlite-landscape-not-selectable-highlight-animation;
-      color: $jhlite-landscape-color-text-light;
+      animation: $seed4j-landscape-not-selectable-highlight-animation;
+      color: $seed4j-landscape-color-text-light;
     }
   }
 
-  .jhipster-landscape-element {
+  .seed4j-landscape-element {
     list-style-type: none;
 
     &.-compacted {
@@ -192,55 +192,55 @@ $jhlite-landscape-primary-alternative-color: colors.$jhlite-global-primary-alter
   }
 
   .-search-highlighted {
-    border-radius: size.$jhlite-global-size-field-radius;
-    box-shadow: 0 0 0 size.$jhlite-global-size-field-border-focus colors.$jhlite-attention-highlight-color;
+    border-radius: size.$seed4j-global-size-field-radius;
+    box-shadow: 0 0 0 size.$seed4j-global-size-field-border-focus colors.$seed4j-attention-highlight-color;
   }
 
-  .jhlite-chip.-diff-rank-minimal-emphasis:nth-of-type(1),
-  .jhlite-chip.-highlight-rank.-diff-rank-minimal-emphasis:nth-of-type(1) {
-    border: 2px dotted $jhlite-landscape-line-color;
+  .seed4j-chip.-diff-rank-minimal-emphasis:nth-of-type(1),
+  .seed4j-chip.-highlight-rank.-diff-rank-minimal-emphasis:nth-of-type(1) {
+    border: 2px dotted $seed4j-landscape-line-color;
   }
 
-  .jhlite-chip.-highlight-rank:nth-of-type(1) {
+  .seed4j-chip.-highlight-rank:nth-of-type(1) {
     border-width: 2px;
 
-    &.jhlite-chip.-s:nth-of-type(1) {
-      border-color: colors.$jhlite-rank-s-color;
+    &.seed4j-chip.-s:nth-of-type(1) {
+      border-color: colors.$seed4j-rank-s-color;
     }
 
-    &.jhlite-chip.-a:nth-of-type(1) {
-      border-color: colors.$jhlite-rank-a-color;
+    &.seed4j-chip.-a:nth-of-type(1) {
+      border-color: colors.$seed4j-rank-a-color;
     }
 
-    &.jhlite-chip.-b:nth-of-type(1) {
-      border-color: colors.$jhlite-rank-b-color;
+    &.seed4j-chip.-b:nth-of-type(1) {
+      border-color: colors.$seed4j-rank-b-color;
     }
 
-    &.jhlite-chip.-c:nth-of-type(1) {
-      border-color: colors.$jhlite-rank-c-color;
+    &.seed4j-chip.-c:nth-of-type(1) {
+      border-color: colors.$seed4j-rank-c-color;
     }
 
-    &.jhlite-chip.-d:nth-of-type(1) {
-      border-color: colors.$jhlite-rank-d-color;
+    &.seed4j-chip.-d:nth-of-type(1) {
+      border-color: colors.$seed4j-rank-d-color;
     }
   }
 }
 
-.jhipster-landscape {
+.seed4j-landscape {
   position: relative;
 }
 
-@media screen and (min-width: breakpoint.$jhlite-global-breakpoint-small-medium) {
-  .jhipster-landscape {
-    .jhipster-landscape-modes-selection {
-      top: $jhipster-landscape-modes-selection-top-position-large-screen;
+@media screen and (min-width: breakpoint.$seed4j-global-breakpoint-small-medium) {
+  .seed4j-landscape {
+    .seed4j-landscape-modes-selection {
+      top: $seed4j-landscape-modes-selection-top-position-large-screen;
     }
 
-    .jhipster-landscape-preset-selection {
-      top: $jhipster-landscape-preset-selection-top-position-large-screen;
+    .seed4j-landscape-preset-selection {
+      top: $seed4j-landscape-preset-selection-top-position-large-screen;
     }
 
-    .jhipster-landscape-content {
+    .seed4j-landscape-content {
       display: flex;
       flex-direction: column;
       height: 100%;

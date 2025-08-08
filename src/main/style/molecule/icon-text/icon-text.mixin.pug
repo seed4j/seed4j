@@ -1,10 +1,10 @@
 include /atom/icon/icon.mixin.pug
 
-mixin jhlite-icon-text(icon, opts)
+mixin seed4j-icon-text(icon, opts)
   - const { only } = opts || {};
   - const onlyClass = only ? `-${only}-only` : null;
-  span.jhlite-icon-text
-    span.jhlite-icon-text--icon
-      +jhlite-icon(icon)
-    span.jhlite-icon-text--text(class=onlyClass)
+  span.seed4j-icon-text
+    span.seed4j-icon-text--icon
+      +seed4j-icon(icon)
+    span.seed4j-icon-text--text(class=onlyClass)
       block

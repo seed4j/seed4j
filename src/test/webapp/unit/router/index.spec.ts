@@ -213,7 +213,7 @@ describe('Router', () => {
 
       const wrapper = wrap();
 
-      expect(wrapper.html()).toContain('jhlite-landscape-loader');
+      expect(wrapper.html()).toContain('seed4j-landscape-loader');
     });
   });
 
@@ -227,7 +227,7 @@ describe('Router', () => {
 
       await flushPromises();
 
-      expect(wrapper.html()).toContain('jhipster-modules-patch');
+      expect(wrapper.html()).toContain('seed4j-modules-patch');
     });
   });
 });

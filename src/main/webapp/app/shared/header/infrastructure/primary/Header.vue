@@ -36,7 +36,7 @@
             <a class="seed4j-nav-item" href="https://seed4j.com" target="_blank" rel="noopener">
               <span class="seed4j-icon-text">
                 <span class="seed4j-icon-text--icon">
-                  <IconVue name="jhipster" aria-label="Seed4J logo" title="Seed4J website" />
+                  <IconVue name="seed4j" aria-label="Seed4J logo" title="Seed4J website" />
                 </span>
                 <span class="seed4j-icon-text--text -lg-only">Seed4J</span>
               </span>

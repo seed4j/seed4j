@@ -28,6 +28,9 @@
 .seed4j-icon-cog-alt {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe809;&nbsp;');
 }
+.seed4j-icon-seed4j {
+  *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xe80a;&nbsp;');
+}
 .seed4j-icon-twitter {
   *zoom: expression(this.runtimeStyle[ 'zoom'] = '1', this.innerHTML = '&#xf099;&nbsp;');
 }

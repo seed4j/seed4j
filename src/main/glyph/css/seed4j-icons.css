@@ -1,12 +1,12 @@
 @font-face {
   font-family: 'seed4j-icons';
-  src: url('../font/seed4j-icons.eot?4504351');
+  src: url('../font/seed4j-icons.eot?55872518');
   src:
-    url('../font/seed4j-icons.eot?4504351#iefix') format('embedded-opentype'),
-    url('../font/seed4j-icons.woff2?4504351') format('woff2'),
-    url('../font/seed4j-icons.woff?4504351') format('woff'),
-    url('../font/seed4j-icons.ttf?4504351') format('truetype'),
-    url('../font/seed4j-icons.svg?4504351#seed4j-icons') format('svg');
+    url('../font/seed4j-icons.eot?55872518#iefix') format('embedded-opentype'),
+    url('../font/seed4j-icons.woff2?55872518') format('woff2'),
+    url('../font/seed4j-icons.woff?55872518') format('woff'),
+    url('../font/seed4j-icons.ttf?55872518') format('truetype'),
+    url('../font/seed4j-icons.svg?55872518#seed4j-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -16,13 +16,13 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'seed4j-icons';
-    src: url('../font/seed4j-icons.svg?4504351#seed4j-icons') format('svg');
+    src: url('../font/seed4j-icons.svg?55872518#seed4j-icons') format('svg');
   }
 }
 */
 [class^='seed4j-icon-']:before,
 [class*=' seed4j-icon-']:before {
-  font-family: 'seed4j-icons', sans-serif;
+  font-family: 'seed4j-icons';
   font-style: normal;
   font-weight: normal;
   speak: never;
@@ -86,6 +86,9 @@
 .seed4j-icon-cog-alt:before {
   content: '\e809';
 } /* '' */
+.seed4j-icon-seed4j:before {
+  content: '\e80a';
+} /* '' */
 .seed4j-icon-twitter:before {
   content: '\f099';
 } /* '' */

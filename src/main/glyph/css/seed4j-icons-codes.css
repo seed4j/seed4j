@@ -28,6 +28,9 @@
 .seed4j-icon-cog-alt:before {
   content: '\e809';
 } /* '' */
+.seed4j-icon-seed4j:before {
+  content: '\e80a';
+} /* '' */
 .seed4j-icon-twitter:before {
   content: '\f099';
 } /* '' */

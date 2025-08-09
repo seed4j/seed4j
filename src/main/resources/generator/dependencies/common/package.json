@@ -69,6 +69,6 @@
     "vite-plugin-istanbul": "7.1.0",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.4",
-    "vitest-sonar-reporter": "2.0.1"
+    "vitest-sonar-reporter": "2.0.4"
   }
 }

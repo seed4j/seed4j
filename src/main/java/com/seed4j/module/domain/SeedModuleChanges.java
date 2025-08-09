@@ -18,7 +18,7 @@ import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @SuppressWarnings("java:S6539")
-public final class JHipsterModuleChanges {
+public final class SeedModuleChanges {
 
   private final SeedModuleContext context;
   private final SeedProjectFolder projectFolder;
@@ -30,7 +30,7 @@ public final class JHipsterModuleChanges {
   private final SeedStartupCommands startupCommands;
   private final JavaBuildCommands javaBuildCommands;
   private final SeedModulePackageJson packageJson;
-  private final JHipsterModulePreActions preActions;
+  private final SeedModulePreActions preActions;
   private final SeedModulePostActions postActions;
   private final SpringProperties springProperties;
   private final SpringComments springComments;
@@ -40,7 +40,7 @@ public final class JHipsterModuleChanges {
   private final SeedModuleGitIgnore gitIgnore;
   private final SeedModuleDockerComposeFile dockerComposeFile;
 
-  private JHipsterModuleChanges(JHipsterModuleChangesBuilder builder) {
+  private SeedModuleChanges(JHipsterModuleChangesBuilder builder) {
     assertMandatoryFields(builder);
 
     context = builder.context;
@@ -126,7 +126,7 @@ public final class JHipsterModuleChanges {
     return gitIgnore;
   }
 
-  public JHipsterModulePreActions preActions() {
+  public SeedModulePreActions preActions() {
     return preActions;
   }
 
@@ -190,7 +190,7 @@ public final class JHipsterModuleChanges {
     private JavaBuildCommands javaBuildCommands;
     private SeedModulePackageJson packageJson;
     private Indentation indentation;
-    private JHipsterModulePreActions preActions;
+    private SeedModulePreActions preActions;
     private SeedModulePostActions postActions;
     private SpringProperties springProperties = SpringProperties.EMPTY;
     private SpringComments springComments = SpringComments.EMPTY;
@@ -285,7 +285,7 @@ public final class JHipsterModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChangesPostActionsBuilder preActions(JHipsterModulePreActions preActions) {
+    public JHipsterModuleChangesPostActionsBuilder preActions(SeedModulePreActions preActions) {
       this.preActions = preActions;
 
       return this;
@@ -313,17 +313,17 @@ public final class JHipsterModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChanges springYamlComments(SpringComments springComments) {
+    public SeedModuleChanges springYamlComments(SpringComments springComments) {
       this.springYamlComments = springComments;
 
-      return new JHipsterModuleChanges(this);
+      return new SeedModuleChanges(this);
     }
 
     @Override
-    public JHipsterModuleChanges springComments(SpringComments springComments) {
+    public SeedModuleChanges springComments(SpringComments springComments) {
       this.springComments = springComments;
 
-      return new JHipsterModuleChanges(this);
+      return new SeedModuleChanges(this);
     }
 
     @Override
@@ -383,7 +383,7 @@ public final class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesPreActionsBuilder {
-    JHipsterModuleChangesPostActionsBuilder preActions(JHipsterModulePreActions preActions);
+    JHipsterModuleChangesPostActionsBuilder preActions(SeedModulePreActions preActions);
   }
 
   public interface JHipsterModuleChangesPostActionsBuilder {
@@ -400,10 +400,10 @@ public final class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesSpringYamlCommentsBuilder {
-    JHipsterModuleChanges springYamlComments(SpringComments springComments);
+    SeedModuleChanges springYamlComments(SpringComments springComments);
   }
 
   public interface JHipsterModuleChangesSpringCommentsBuilder {
-    JHipsterModuleChanges springComments(SpringComments springComments);
+    SeedModuleChanges springComments(SpringComments springComments);
   }
 }

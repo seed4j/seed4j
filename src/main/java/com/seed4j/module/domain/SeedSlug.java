@@ -15,7 +15,7 @@ public abstract sealed class SeedSlug implements Comparable<SeedSlug> permits Se
   protected SeedSlug(String slug) {
     Assert.field("slug", slug)
       .notBlank()
-      .matchesPatternOrThrow(SLUG_FORMAT, () -> new InvalidJHipsterSlugException(slug));
+      .matchesPatternOrThrow(SLUG_FORMAT, () -> new InvalidJSeedSlugException(slug));
 
     this.slug = slug;
   }

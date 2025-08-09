@@ -1,39 +1,39 @@
 package com.seed4j.module.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.buildProfileActivation;
-import static com.seed4j.module.domain.JHipsterModule.buildProfileId;
-import static com.seed4j.module.domain.JHipsterModule.buildPropertyKey;
-import static com.seed4j.module.domain.JHipsterModule.buildPropertyValue;
-import static com.seed4j.module.domain.JHipsterModule.comment;
-import static com.seed4j.module.domain.JHipsterModule.dependencyId;
-import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
-import static com.seed4j.module.domain.JHipsterModule.fileStart;
-import static com.seed4j.module.domain.JHipsterModule.filesWithExtension;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.gradleCommunityPlugin;
-import static com.seed4j.module.domain.JHipsterModule.gradleCorePlugin;
-import static com.seed4j.module.domain.JHipsterModule.gradleProfilePlugin;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
-import static com.seed4j.module.domain.JHipsterModule.lineBeforeRegex;
-import static com.seed4j.module.domain.JHipsterModule.lineBeforeText;
-import static com.seed4j.module.domain.JHipsterModule.mavenBuildExtension;
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.regex;
-import static com.seed4j.module.domain.JHipsterModule.scriptCommand;
-import static com.seed4j.module.domain.JHipsterModule.scriptKey;
-import static com.seed4j.module.domain.JHipsterModule.springProfile;
-import static com.seed4j.module.domain.JHipsterModule.text;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.JHipsterModule.versionSlug;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.buildProfileActivation;
+import static com.seed4j.module.domain.SeedModule.buildProfileId;
+import static com.seed4j.module.domain.SeedModule.buildPropertyKey;
+import static com.seed4j.module.domain.SeedModule.buildPropertyValue;
+import static com.seed4j.module.domain.SeedModule.comment;
+import static com.seed4j.module.domain.SeedModule.dependencyId;
+import static com.seed4j.module.domain.SeedModule.documentationTitle;
+import static com.seed4j.module.domain.SeedModule.fileStart;
+import static com.seed4j.module.domain.SeedModule.filesWithExtension;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.SeedModule.gradleCorePlugin;
+import static com.seed4j.module.domain.SeedModule.gradleProfilePlugin;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.lineBeforeRegex;
+import static com.seed4j.module.domain.SeedModule.lineBeforeText;
+import static com.seed4j.module.domain.SeedModule.mavenBuildExtension;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.regex;
+import static com.seed4j.module.domain.SeedModule.scriptCommand;
+import static com.seed4j.module.domain.SeedModule.scriptKey;
+import static com.seed4j.module.domain.SeedModule.springProfile;
+import static com.seed4j.module.domain.SeedModule.text;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.SeedModule.versionSlug;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.ANGULAR;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
@@ -78,7 +78,7 @@ public final class JHipsterModulesFixture {
 
   private JHipsterModulesFixture() {}
 
-  public static JHipsterModule moduleSecond(SeedModuleProperties properties) {
+  public static SeedModule moduleSecond(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
     .javaDependencies()
@@ -89,7 +89,7 @@ public final class JHipsterModulesFixture {
     // @formatter:on
   }
 
-  public static JHipsterModule module() {
+  public static SeedModule module() {
     SeedModuleProperties properties = testModuleProperties();
     // @formatter:off
     return moduleBuilder(properties)
@@ -633,8 +633,8 @@ public final class JHipsterModulesFixture {
       .build();
   }
 
-  public static JHipsterModulesToApply modulesToApply() {
-    return new JHipsterModulesToApply(
+  public static SeedModulesToApply modulesToApply() {
+    return new SeedModulesToApply(
       List.of(moduleSlug("maven-java"), moduleSlug("init")),
       propertiesBuilder("/dummy")
         .projectName("Growth Project")
@@ -653,8 +653,8 @@ public final class JHipsterModulesFixture {
     return new SeedFeatureSlug(slug);
   }
 
-  public static JHipsterModuleUpgrade upgrade() {
-    return JHipsterModuleUpgrade.builder()
+  public static SeedModuleUpgrade upgrade() {
+    return SeedModuleUpgrade.builder()
       .doNotAdd(to(".husky/pre-commit"))
       .delete(path("documentation/cucumber-integration.md"))
       .replace(filesWithExtension("java"), fileStart(), "// This is an updated file\n\n")

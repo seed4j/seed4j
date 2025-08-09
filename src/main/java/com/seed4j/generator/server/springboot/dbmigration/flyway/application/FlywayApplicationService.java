@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.dbmigration.flyway.application;
 
 import com.seed4j.generator.server.springboot.dbmigration.flyway.domain.FlywayModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,19 +14,19 @@ public class FlywayApplicationService {
     flyway = new FlywayModuleFactory();
   }
 
-  public JHipsterModule buildInitializationModule(SeedModuleProperties properties) {
+  public SeedModule buildInitializationModule(SeedModuleProperties properties) {
     return flyway.buildInitializationModule(properties);
   }
 
-  public JHipsterModule buildMysqlDependencyModule(SeedModuleProperties properties) {
+  public SeedModule buildMysqlDependencyModule(SeedModuleProperties properties) {
     return flyway.buildMysqlDependencyModule(properties);
   }
 
-  public JHipsterModule buildPostgreSQLDependencyModule(SeedModuleProperties properties) {
+  public SeedModule buildPostgreSQLDependencyModule(SeedModuleProperties properties) {
     return flyway.buildPostgreSQLDependencyModule(properties);
   }
 
-  public JHipsterModule buildMsSqlServerDependencyModule(SeedModuleProperties properties) {
+  public SeedModule buildMsSqlServerDependencyModule(SeedModuleProperties properties) {
     return flyway.buildMsSqlServerDependencyModule(properties);
   }
 }

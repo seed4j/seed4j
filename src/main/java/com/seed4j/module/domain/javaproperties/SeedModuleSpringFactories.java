@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.javaproperties;
 
-import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
+import com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
 import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.*;

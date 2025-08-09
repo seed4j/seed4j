@@ -1,10 +1,10 @@
 package com.seed4j.generator.server.springboot.apidocumentation.openapicontract.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -12,7 +12,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class OpenApiContractModuleFactory {
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -59,7 +59,7 @@ public class OpenApiContractModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildBackwardsCompatibilityCheckModule(SeedModuleProperties properties) {
+  public SeedModule buildBackwardsCompatibilityCheckModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

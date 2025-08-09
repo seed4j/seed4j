@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.react.i18n.application;
 
 import com.seed4j.generator.client.react.i18n.domain.ReactI18nModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class ReactI18nApplicationService {
     reactI18n = new ReactI18nModuleFactory();
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return reactI18n.buildModule(properties);
   }
 }

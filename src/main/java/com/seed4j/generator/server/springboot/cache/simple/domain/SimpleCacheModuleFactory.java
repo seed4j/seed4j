@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.cache.simple.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
@@ -17,7 +17,7 @@ public class SimpleCacheModuleFactory {
 
   private static final String CACHE_SECONDARY = "wire/cache/infrastructure/secondary";
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

@@ -1,14 +1,14 @@
 package com.seed4j.generator.server.springboot.cucumber.domain;
 
 import static com.seed4j.generator.server.springboot.cucumbercommon.domain.CucumbersModules.cucumberModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.documentationTitle;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -18,7 +18,7 @@ public class CucumberModuleFactory {
 
   private static final SeedSource SOURCE = from("server/springboot/cucumber");
 
-  public JHipsterModule buildInitializationModule(SeedModuleProperties properties) {
+  public SeedModule buildInitializationModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();
@@ -61,7 +61,7 @@ public class CucumberModuleFactory {
     return builder.build();
   }
 
-  public JHipsterModule buildJpaResetModule(SeedModuleProperties properties) {
+  public SeedModule buildJpaResetModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     return moduleBuilder(properties)

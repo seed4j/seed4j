@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 class FileSystemSpringCommentsCommandsHandler {
 
-  private static final Map<SpringPropertyType, List<String>> PROPERTIES_PATHS = FileSystemJHipsterModulesRepository.buildPaths();
+  private static final Map<SpringPropertyType, List<String>> PROPERTIES_PATHS = FileSystemSeedModulesRepository.buildPaths();
 
   public void handle(SeedProjectFolder projectFolder, SpringComments comments) {
     Assert.notNull("projectFolder", projectFolder);

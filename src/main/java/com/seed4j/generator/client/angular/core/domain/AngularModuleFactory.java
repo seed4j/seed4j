@@ -1,22 +1,22 @@
 package com.seed4j.generator.client.angular.core.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.LINE_BREAK;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.lineBeforeText;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.preCommitCommands;
-import static com.seed4j.module.domain.JHipsterModule.runScriptCommandWith;
-import static com.seed4j.module.domain.JHipsterModule.scriptCommand;
-import static com.seed4j.module.domain.JHipsterModule.scriptKey;
-import static com.seed4j.module.domain.JHipsterModule.stagedFilesFilter;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.LINE_BREAK;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.lineBeforeText;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.preCommitCommands;
+import static com.seed4j.module.domain.SeedModule.runScriptCommandWith;
+import static com.seed4j.module.domain.SeedModule.scriptCommand;
+import static com.seed4j.module.domain.SeedModule.scriptKey;
+import static com.seed4j.module.domain.SeedModule.stagedFilesFilter;
+import static com.seed4j.module.domain.SeedModule.to;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.ANGULAR;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.packagejson.PackageName;
@@ -35,7 +35,7 @@ public class AngularModuleFactory {
     this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

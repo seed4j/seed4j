@@ -1,23 +1,23 @@
 package com.seed4j.generator.server.springboot.dbmigration.liquibase.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestResources;
-import static com.seed4j.module.domain.JHipsterModule.versionSlug;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.toSrcTestResources;
+import static com.seed4j.module.domain.SeedModule.versionSlug;
 import static com.seed4j.module.domain.properties.SpringConfigurationFormat.PROPERTIES;
 import static com.seed4j.module.domain.properties.SpringConfigurationFormat.YAML;
 
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
@@ -32,7 +32,7 @@ public class LiquibaseModuleFactory {
 
   private static final String LIQUIBASE = "liquibase";
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -60,7 +60,7 @@ public class LiquibaseModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildAsyncModule(SeedModuleProperties properties) {
+  public SeedModule buildAsyncModule(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
 
     // @formatter:off
@@ -85,7 +85,7 @@ public class LiquibaseModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildLinterModule(SeedModuleProperties properties) {
+  public SeedModule buildLinterModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .mavenPlugins()

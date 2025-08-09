@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 class FileSystemYamlSpringPropertiesCommandsHandler {
 
-  private static final Map<SpringPropertyType, List<String>> PROPERTIES_PATHS = FileSystemJHipsterModulesRepository.buildPaths();
+  private static final Map<SpringPropertyType, List<String>> PROPERTIES_PATHS = FileSystemSeedModulesRepository.buildPaths();
 
   public void handle(Indentation indentation, SeedProjectFolder projectFolder, SpringProperties properties) {
     Assert.notNull("projectFolder", projectFolder);
@@ -48,9 +48,9 @@ class FileSystemYamlSpringPropertiesCommandsHandler {
   private static Supplier<Path> defaultPropertiesFile(SeedProjectFolder projectFolder, SpringProperty property) {
     return switch (property.type()) {
       case MAIN_PROPERTIES, MAIN_BOOTSTRAP_PROPERTIES -> () ->
-        projectFolder.filePath(FileSystemJHipsterModulesRepository.DEFAULT_MAIN_FOLDER + yamlFilename(property));
+        projectFolder.filePath(FileSystemSeedModulesRepository.DEFAULT_MAIN_FOLDER + yamlFilename(property));
       case TEST_PROPERTIES, TEST_BOOTSTRAP_PROPERTIES -> () ->
-        projectFolder.filePath(FileSystemJHipsterModulesRepository.DEFAULT_TEST_FOLDER + yamlFilename(property));
+        projectFolder.filePath(FileSystemSeedModulesRepository.DEFAULT_TEST_FOLDER + yamlFilename(property));
     };
   }
 

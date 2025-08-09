@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.async.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -16,7 +16,7 @@ public class SpringBootAsyncModuleFactory {
 
   private static final SeedSource SOURCE = from("server/springboot/async/src");
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append("wire/async/infrastructure/secondary");

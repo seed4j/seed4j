@@ -1,7 +1,7 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.JHipsterModule.lineBeforeText;
-import static com.seed4j.module.domain.JHipsterModule.path;
+import static com.seed4j.module.domain.SeedModule.lineBeforeText;
+import static com.seed4j.module.domain.SeedModule.path;
 
 import com.seed4j.module.domain.SeedModuleContext;
 import com.seed4j.module.domain.SeedProjectFilePath;

@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class EhcacheModuleFactoryTest {
 
   @Test
   void shouldBuildJavaConfigurationModule() {
-    JHipsterModule module = factory.buildJavaConfigurationModule(properties());
+    SeedModule module = factory.buildJavaConfigurationModule(properties());
 
     commonEHCacheModuleAsserter(module)
       .hasFile("src/main/java/com/seed4j/growth/wire/cache/infrastructure/secondary/CacheConfiguration.java")
@@ -42,7 +42,7 @@ class EhcacheModuleFactoryTest {
 
   @Test
   void shouldBuildXmlConfigurationModule() {
-    JHipsterModule module = factory.buildXmlConfigurationModule(properties());
+    SeedModule module = factory.buildXmlConfigurationModule(properties());
 
     commonEHCacheModuleAsserter(module)
       .hasFiles("src/main/resources/config/ehcache/ehcache.xml")
@@ -57,7 +57,7 @@ class EhcacheModuleFactoryTest {
       );
   }
 
-  private JHipsterModuleAsserter commonEHCacheModuleAsserter(JHipsterModule module) {
+  private JHipsterModuleAsserter commonEHCacheModuleAsserter(SeedModule module) {
     return assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile())
       .hasFile("pom.xml")
       .containing(

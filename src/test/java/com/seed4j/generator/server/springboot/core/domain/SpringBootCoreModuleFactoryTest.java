@@ -11,8 +11,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.generator.buildtool.maven.domain.MavenModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -31,8 +31,8 @@ class SpringBootCoreModuleFactoryTest {
     void shouldBuildModuleOnProjectWithoutDefaultGoal() {
       SeedModuleProperties properties = properties();
 
-      JHipsterModule mavenModule = mavenFactory.buildMavenModule(properties);
-      JHipsterModule module = factory.buildModule(properties);
+      SeedModule mavenModule = mavenFactory.buildMavenModule(properties);
+      SeedModule module = factory.buildModule(properties);
 
       assertThatTwoModulesWithFiles(mavenModule, module, pomFile())
         .hasFile("pom.xml")
@@ -196,7 +196,7 @@ class SpringBootCoreModuleFactoryTest {
     void shouldBuildModuleOnProjectWithDefaultGoal() {
       SeedModuleProperties properties = properties();
 
-      JHipsterModule module = factory.buildModule(properties);
+      SeedModule module = factory.buildModule(properties);
 
       assertThatModuleWithFiles(module, pomWithDefaultGoal())
         .hasFile("pom.xml")
@@ -220,7 +220,7 @@ class SpringBootCoreModuleFactoryTest {
         .put("serverPort", 9000)
         .build();
 
-      JHipsterModule module = factory.buildModule(properties);
+      SeedModule module = factory.buildModule(properties);
 
       assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
         .hasFile("gradle/libs.versions.toml")

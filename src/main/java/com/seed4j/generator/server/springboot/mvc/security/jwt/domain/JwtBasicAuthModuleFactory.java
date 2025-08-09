@@ -1,15 +1,15 @@
 package com.seed4j.generator.server.springboot.mvc.security.jwt.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.documentationTitle;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
@@ -27,7 +27,7 @@ public class JwtBasicAuthModuleFactory {
   private static final String PRIMARY = "infrastructure/primary";
   private static final String SECONDARY = "infrastructure/secondary";
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.TestFileUtils.projectFrom;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
 import static com.seed4j.module.domain.JHipsterModulesFixture.allProperties;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;

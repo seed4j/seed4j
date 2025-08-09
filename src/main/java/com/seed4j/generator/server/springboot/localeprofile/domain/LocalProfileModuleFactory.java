@@ -1,16 +1,16 @@
 package com.seed4j.generator.server.springboot.localeprofile.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.buildProfileActivation;
-import static com.seed4j.module.domain.JHipsterModule.buildPropertyKey;
-import static com.seed4j.module.domain.JHipsterModule.buildPropertyValue;
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.text;
+import static com.seed4j.module.domain.SeedModule.buildProfileActivation;
+import static com.seed4j.module.domain.SeedModule.buildPropertyKey;
+import static com.seed4j.module.domain.SeedModule.buildPropertyValue;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.text;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.buildproperties.PropertyKey;
 import com.seed4j.module.domain.buildproperties.PropertyValue;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
@@ -22,7 +22,7 @@ public class LocalProfileModuleFactory {
   private static final String DELIMITER = "@";
   private static final String SPRING_PROFILES_ACTIVE = "spring.profiles.active";
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

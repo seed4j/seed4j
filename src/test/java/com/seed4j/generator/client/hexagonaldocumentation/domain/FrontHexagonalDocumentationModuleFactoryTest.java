@@ -5,7 +5,7 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class FrontHexagonalDocumentationModuleFactoryTest {
   void shouldBuildModule() {
     SeedModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModule(module).hasFile("documentation/front-hexagonal-architecture.md");
   }

@@ -10,8 +10,8 @@ import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import org.junit.jupiter.api.Nested;
@@ -39,7 +39,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
       mockNpmVersion();
       mockNodeVersion();
 
-      JHipsterModule module = factory.buildFrontendMavenModule(defaultProperties().nodePackageManager(NPM).build());
+      SeedModule module = factory.buildFrontendMavenModule(defaultProperties().nodePackageManager(NPM).build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -113,7 +113,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
     void shouldBuildFrontendMavenModuleWithPnpm() {
       mockNodeVersion();
 
-      JHipsterModule module = factory.buildFrontendMavenModule(defaultProperties().nodePackageManager(PNPM).build());
+      SeedModule module = factory.buildFrontendMavenModule(defaultProperties().nodePackageManager(PNPM).build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -178,7 +178,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
 
     @Test
     void shouldBuildFrontendMavenCacheModule() {
-      JHipsterModule module = factory.buildFrontendMavenCacheModule(defaultProperties().build());
+      SeedModule module = factory.buildFrontendMavenCacheModule(defaultProperties().build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -265,7 +265,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
 
     @Test
     void shouldBuildFrontendMavenCacheModuleWithPnpm() {
-      JHipsterModule module = factory.buildFrontendMavenCacheModule(defaultProperties().nodePackageManager(PNPM).build());
+      SeedModule module = factory.buildFrontendMavenCacheModule(defaultProperties().nodePackageManager(PNPM).build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -278,7 +278,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
 
     @Test
     void shouldBuildMergeCypressCoverageModuleWithNpm() {
-      JHipsterModule module = factory.buildMergeCypressCoverageModule(defaultProperties().nodePackageManager(NPM).build());
+      SeedModule module = factory.buildMergeCypressCoverageModule(defaultProperties().nodePackageManager(NPM).build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -289,7 +289,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
 
     @Test
     void shouldBuildMergeCypressCoverageModuleWithPnpm() {
-      JHipsterModule module = factory.buildMergeCypressCoverageModule(defaultProperties().nodePackageManager(PNPM).build());
+      SeedModule module = factory.buildMergeCypressCoverageModule(defaultProperties().nodePackageManager(PNPM).build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -307,7 +307,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
       mockNodeVersion();
       mockNpmVersion();
 
-      JHipsterModule module = factory.buildFrontendGradleModule(defaultProperties().nodePackageManager(NPM).build());
+      SeedModule module = factory.buildFrontendGradleModule(defaultProperties().nodePackageManager(NPM).build());
 
       assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
         .hasFile("gradle/libs.versions.toml")
@@ -402,7 +402,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
       mockNodeVersion();
       mockPnpmVersion();
 
-      JHipsterModule module = factory.buildFrontendGradleModule(defaultProperties().nodePackageManager(PNPM).build());
+      SeedModule module = factory.buildFrontendGradleModule(defaultProperties().nodePackageManager(PNPM).build());
 
       assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
         .hasFile("build.gradle.kts")

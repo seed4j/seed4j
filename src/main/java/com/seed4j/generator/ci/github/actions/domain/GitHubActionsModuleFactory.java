@@ -1,10 +1,10 @@
 package com.seed4j.generator.ci.github.actions.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.to;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.nodejs.NodeVersions;
@@ -22,15 +22,15 @@ public class GitHubActionsModuleFactory {
     this.nodeVersions = nodeVersions;
   }
 
-  public JHipsterModule buildGitHubActionsMavenModule(SeedModuleProperties properties) {
+  public SeedModule buildGitHubActionsMavenModule(SeedModuleProperties properties) {
     return buildGitHubActionsModule(properties, JavaBuildTool.MAVEN);
   }
 
-  public JHipsterModule buildGitHubActionsGradleModule(SeedModuleProperties properties) {
+  public SeedModule buildGitHubActionsGradleModule(SeedModuleProperties properties) {
     return buildGitHubActionsModule(properties, JavaBuildTool.GRADLE);
   }
 
-  private JHipsterModule buildGitHubActionsModule(SeedModuleProperties properties, JavaBuildTool javaBuildTool) {
+  private SeedModule buildGitHubActionsModule(SeedModuleProperties properties, JavaBuildTool javaBuildTool) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

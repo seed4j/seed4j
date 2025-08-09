@@ -1,17 +1,17 @@
 package com.seed4j.generator.server.springboot.cucumberauthentication.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
-import static com.seed4j.module.domain.JHipsterModule.lineBeforeText;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.text;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
-import static com.seed4j.module.domain.JHipsterModule.versionSlug;
+import static com.seed4j.module.domain.SeedModule.documentationTitle;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.lineBeforeText;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.text;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.versionSlug;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
@@ -31,7 +31,7 @@ public class CucumberAuthenticationModuleFactory {
 
   private static final String AUTHENTICATION_STEP = "shared/authentication/infrastructure/primary/AuthenticationSteps.java";
 
-  public JHipsterModule buildOauth2Module(SeedModuleProperties properties) {
+  public SeedModule buildOauth2Module(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String mainClass = properties.projectBaseName().capitalized() + "App";
@@ -84,7 +84,7 @@ public class CucumberAuthenticationModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildJWTModule(SeedModuleProperties properties) {
+  public SeedModule buildJWTModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

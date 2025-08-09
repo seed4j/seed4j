@@ -2,9 +2,9 @@ package com.seed4j.module.domain;
 
 import com.seed4j.shared.error.domain.GeneratorException;
 
-class InvalidJHipsterSlugException extends GeneratorException {
+class InvalidJSeedSlugException extends GeneratorException {
 
-  public InvalidJHipsterSlugException(String slug) {
+  public InvalidJSeedSlugException(String slug) {
     super(internalServerError(ModuleErrorKey.INVALID_SLUG).message(buildMessage(slug)).addParameter("slug", slug));
   }
 

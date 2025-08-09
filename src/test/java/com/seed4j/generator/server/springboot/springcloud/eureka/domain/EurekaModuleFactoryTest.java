@@ -6,8 +6,8 @@ import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -35,7 +35,7 @@ class EurekaModuleFactoryTest {
 
     when(dockerImages.get("jhipster/jhipster-registry")).thenReturn(new DockerImageVersion("jhipster/jhipster-registry", "1.1.1"));
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")

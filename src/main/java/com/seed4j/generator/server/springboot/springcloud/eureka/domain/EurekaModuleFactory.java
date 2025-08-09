@@ -2,16 +2,16 @@ package com.seed4j.generator.server.springboot.springcloud.eureka.domain;
 
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.SPRING_CLOUD_GROUP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.springCloudDependenciesManagement;
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.dockerComposeFile;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.JHipsterModule.versionSlug;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.dockerComposeFile;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.SeedModule.versionSlug;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
@@ -34,7 +34,7 @@ public class EurekaModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String jwtBase64secret = properties.getOrDefaultString(JWT_BASE_64_SECRET, Base64Utils.getBase64Secret());

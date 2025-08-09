@@ -3,8 +3,8 @@ package com.seed4j.module.infrastructure.secondary;
 import static com.seed4j.TestFileUtils.contentNormalizingNewLines;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModuleUpgrade;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModuleUpgrade;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.io.IOException;
@@ -34,7 +34,7 @@ public final class JHipsterModulesAssertions {
 
   private JHipsterModulesAssertions() {}
 
-  public static JHipsterModuleAsserter assertThatModule(JHipsterModule module) {
+  public static JHipsterModuleAsserter assertThatModule(SeedModule module) {
     return new JHipsterModuleAsserter(module);
   }
 
@@ -118,27 +118,19 @@ public final class JHipsterModulesAssertions {
     return new ModuleFile(new ClassPathResource(source), destination);
   }
 
-  public static JHipsterModuleAsserter assertThatModuleWithFiles(JHipsterModule module, ModuleFile... files) {
+  public static JHipsterModuleAsserter assertThatModuleWithFiles(SeedModule module, ModuleFile... files) {
     addFilesToProject(module.projectFolder(), files);
 
     return new JHipsterModuleAsserter(module);
   }
 
-  public static JHipsterModuleUpgradeAsserter assertThatModuleUpgrade(
-    JHipsterModule module,
-    JHipsterModuleUpgrade upgrade,
-    ModuleFile... files
-  ) {
+  public static JHipsterModuleUpgradeAsserter assertThatModuleUpgrade(SeedModule module, SeedModuleUpgrade upgrade, ModuleFile... files) {
     addFilesToProject(module.projectFolder(), files);
 
     return new JHipsterModuleUpgradeAsserter(module, upgrade);
   }
 
-  public static JHipsterModuleAsserter assertThatTwoModulesWithFiles(
-    JHipsterModule module,
-    JHipsterModule moduleSecond,
-    ModuleFile... files
-  ) {
+  public static JHipsterModuleAsserter assertThatTwoModulesWithFiles(SeedModule module, SeedModule moduleSecond, ModuleFile... files) {
     addFilesToProject(module.projectFolder(), files);
 
     TestJHipsterModules.apply(module);
@@ -182,7 +174,7 @@ public final class JHipsterModulesAssertions {
 
     private final SeedProjectFolder projectFolder;
 
-    private JHipsterModuleAsserter(JHipsterModule module) {
+    private JHipsterModuleAsserter(SeedModule module) {
       assertThat(module).as("Can't make assertions on a module without module").isNotNull();
 
       TestJHipsterModules.apply(module);
@@ -274,7 +266,7 @@ public final class JHipsterModulesAssertions {
 
     private final SeedProjectFolder projectFolder;
 
-    public JHipsterModuleUpgradeAsserter(JHipsterModule module, JHipsterModuleUpgrade upgrade) {
+    public JHipsterModuleUpgradeAsserter(SeedModule module, SeedModuleUpgrade upgrade) {
       assertThat(module).as("Can't make assertions on a upgrade without module").isNotNull();
       assertThat(upgrade).as("Can't make assertions on a upgrade without upgrade").isNotNull();
 
@@ -283,7 +275,7 @@ public final class JHipsterModulesAssertions {
       projectFolder = module.projectFolder();
     }
 
-    private void applyModuleInPast(JHipsterModule module) {
+    private void applyModuleInPast(SeedModule module) {
       TestJHipsterModules.apply(module);
 
       try {

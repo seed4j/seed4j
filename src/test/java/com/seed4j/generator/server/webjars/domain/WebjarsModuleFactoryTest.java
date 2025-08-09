@@ -5,8 +5,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ class WebjarsModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildWebjarsLocatorModule(properties);
+    SeedModule module = factory.buildWebjarsLocatorModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
@@ -43,7 +43,7 @@ class WebjarsModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildWebjarsHtmxModule(properties);
+    SeedModule module = factory.buildWebjarsHtmxModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
@@ -65,7 +65,7 @@ class WebjarsModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildWebjarsAlpineJSModule(properties);
+    SeedModule module = factory.buildWebjarsAlpineJSModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")

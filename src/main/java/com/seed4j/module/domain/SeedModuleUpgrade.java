@@ -9,27 +9,27 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public final class JHipsterModuleUpgrade {
+public final class SeedModuleUpgrade {
 
   private final SeedDestinations skippedFiles;
-  private final JHipsterProjectFilesPaths filesToDelete;
+  private final SeedProjectFilesPaths filesToDelete;
   private final SeedUpgradeFilesReplacements replacements;
 
-  private JHipsterModuleUpgrade(JHipsterModuleUpgradeBuilder builder) {
+  private SeedModuleUpgrade(SeedModuleUpgradeBuilder builder) {
     skippedFiles = new SeedDestinations(builder.skippedFiles);
-    filesToDelete = new JHipsterProjectFilesPaths(builder.filesToDelete);
+    filesToDelete = new SeedProjectFilesPaths(builder.filesToDelete);
     replacements = new SeedUpgradeFilesReplacements(builder.replacements);
   }
 
-  public static JHipsterModuleUpgradeBuilder builder() {
-    return new JHipsterModuleUpgradeBuilder();
+  public static SeedModuleUpgradeBuilder builder() {
+    return new SeedModuleUpgradeBuilder();
   }
 
   public SeedDestinations skippedFiles() {
     return skippedFiles;
   }
 
-  public JHipsterProjectFilesPaths filesToDelete() {
+  public SeedProjectFilesPaths filesToDelete() {
     return filesToDelete;
   }
 
@@ -37,13 +37,13 @@ public final class JHipsterModuleUpgrade {
     return replacements;
   }
 
-  public static class JHipsterModuleUpgradeBuilder {
+  public static class SeedModuleUpgradeBuilder {
 
     private final Collection<SeedDestination> skippedFiles = new ArrayList<>();
     private final Collection<SeedProjectFilePath> filesToDelete = new ArrayList<>();
     private final Collection<SeedUpgradeFilesReplacement> replacements = new ArrayList<>();
 
-    public JHipsterModuleUpgradeBuilder doNotAdd(SeedDestination file) {
+    public SeedModuleUpgradeBuilder doNotAdd(SeedDestination file) {
       Assert.notNull("file", file);
 
       skippedFiles.add(file);
@@ -51,7 +51,7 @@ public final class JHipsterModuleUpgrade {
       return this;
     }
 
-    public JHipsterModuleUpgradeBuilder delete(SeedProjectFilePath path) {
+    public SeedModuleUpgradeBuilder delete(SeedProjectFilePath path) {
       Assert.notNull("path", path);
 
       filesToDelete.add(path);
@@ -59,14 +59,14 @@ public final class JHipsterModuleUpgrade {
       return this;
     }
 
-    public JHipsterModuleUpgradeBuilder replace(SeedFileMatcher files, ElementReplacer replacer, String replacement) {
+    public SeedModuleUpgradeBuilder replace(SeedFileMatcher files, ElementReplacer replacer, String replacement) {
       replacements.add(new SeedUpgradeFilesReplacement(files, replacer, replacement));
 
       return this;
     }
 
-    public JHipsterModuleUpgrade build() {
-      return new JHipsterModuleUpgrade(this);
+    public SeedModuleUpgrade build() {
+      return new SeedModuleUpgrade(this);
     }
   }
 }

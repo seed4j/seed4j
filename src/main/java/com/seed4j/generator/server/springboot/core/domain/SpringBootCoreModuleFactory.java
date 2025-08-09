@@ -1,23 +1,23 @@
 package com.seed4j.generator.server.springboot.core.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.dependencyId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.gradleCommunityPlugin;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
-import static com.seed4j.module.domain.JHipsterModule.versionSlug;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.dependencyId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.versionSlug;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notContaining;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
@@ -51,7 +51,7 @@ public class SpringBootCoreModuleFactory {
   private static final SeedDestination MAIN_RESOURCE_DESTINATION = to("src/main/resources");
   private static final SeedDestination TEST_RESOURCES_DESTINATION = to("src/test/resources");
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();

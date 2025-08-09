@@ -5,8 +5,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ class CucumberModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildInitializationModule(properties);
+    SeedModule module = factory.buildInitializationModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasPrefixedFiles("src/test/java/com/seed4j/growth/cucumber", "CucumberConfiguration.java", "CucumberTest.java")
@@ -64,7 +64,7 @@ class CucumberModuleFactoryTest {
       .basePackage("com.seed4j.growth")
       .build();
 
-    JHipsterModule module = factory.buildJpaResetModule(properties);
+    SeedModule module = factory.buildJpaResetModule(properties);
 
     assertThatModuleWithFiles(module, pomFile()).hasFiles("src/test/java/com/seed4j/growth/cucumber/CucumberJpaReset.java");
   }

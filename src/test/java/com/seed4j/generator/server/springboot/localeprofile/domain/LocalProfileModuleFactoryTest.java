@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ class LocalProfileModuleFactoryTest {
     void shouldBuildModule() {
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      JHipsterModule module = factory.buildModule(properties);
+      SeedModule module = factory.buildModule(properties);
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -70,7 +70,7 @@ class LocalProfileModuleFactoryTest {
     void shouldReplaceCIActions() {
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      JHipsterModule module = factory.buildModule(properties);
+      SeedModule module = factory.buildModule(properties);
 
       assertThatModuleWithFiles(module, pomFile(), githubActionsBuild(), gitlabCI())
         .hasFile("pom.xml")
@@ -106,7 +106,7 @@ class LocalProfileModuleFactoryTest {
     void shouldBuildModule() {
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      JHipsterModule module = factory.buildModule(properties);
+      SeedModule module = factory.buildModule(properties);
 
       assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
         .hasFile("build.gradle.kts")
@@ -169,7 +169,7 @@ class LocalProfileModuleFactoryTest {
     void shouldReplaceCIActions() {
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      JHipsterModule module = factory.buildModule(properties);
+      SeedModule module = factory.buildModule(properties);
 
       assertThatModuleWithFiles(module, pomFile(), githubActionsBuild(), gitlabCI())
         .hasFile("pom.xml")

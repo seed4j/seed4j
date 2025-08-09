@@ -1,17 +1,17 @@
 package com.seed4j.generator.client.tools.cypress.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.lineAfterRegex;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.scriptCommand;
-import static com.seed4j.module.domain.JHipsterModule.scriptKey;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.lineAfterRegex;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.scriptCommand;
+import static com.seed4j.module.domain.SeedModule.scriptKey;
+import static com.seed4j.module.domain.SeedModule.to;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -28,7 +28,7 @@ public class CypressModuleFactory {
   private static final String HOME = "home";
   private static final String UTILS = "utils";
 
-  public JHipsterModule buildComponentTestsModule(SeedModuleProperties properties) {
+  public SeedModule buildComponentTestsModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -49,7 +49,7 @@ public class CypressModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildE2ETestsModule(SeedModuleProperties properties) {
+  public SeedModule buildE2ETestsModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

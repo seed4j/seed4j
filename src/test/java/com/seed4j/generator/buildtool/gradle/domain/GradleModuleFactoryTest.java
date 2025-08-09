@@ -5,8 +5,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ class GradleModuleFactoryTest {
       .projectBaseName("myApp")
       .build();
 
-    JHipsterModule module = factory.buildGradleModule(properties);
+    SeedModule module = factory.buildGradleModule(properties);
 
     assertThatModule(module)
       .hasFile(".gitignore")
@@ -64,7 +64,7 @@ class GradleModuleFactoryTest {
   void shouldBuildGradleWrapperModule() {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildGradleWrapperModule(properties);
+    SeedModule module = factory.buildGradleWrapperModule(properties);
 
     assertThatModuleWithFiles(module)
       .hasFile(".gitignore")

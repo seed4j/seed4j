@@ -9,8 +9,8 @@ import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
@@ -37,7 +37,7 @@ class InitModuleFactoryTest {
     mockNodePackageManagerVersion(NPM, "11.9.9");
     SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModule(module)
       .hasFile("README.md")
@@ -68,7 +68,7 @@ class InitModuleFactoryTest {
     mockNodePackageManagerVersion(NPM, "11.9.9");
     SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(NPM).build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModule(module)
       .hasFile("README.md")
@@ -84,7 +84,7 @@ class InitModuleFactoryTest {
     mockNodePackageManagerVersion(PNPM, "9.9.9");
     SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(PNPM).build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModule(module)
       .hasFile("README.md")

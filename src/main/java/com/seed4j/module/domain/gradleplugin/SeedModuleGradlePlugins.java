@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.gradleplugin;
 
-import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
+import com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
 import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
 import com.seed4j.module.domain.javabuild.command.AddGradlePlugin.AddGradlePluginOptionalBuilder;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;

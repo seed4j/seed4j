@@ -12,8 +12,8 @@ import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -41,7 +41,7 @@ class SonarQubeModuleFactoryTest {
     void shouldBuildBackendModule() {
       mockSonarqubeImage();
 
-      JHipsterModule module = factory.buildBackendModule(properties());
+      SeedModule module = factory.buildBackendModule(properties());
 
       assertCommonModule(module)
         .hasFile("sonar-project.properties")
@@ -55,7 +55,7 @@ class SonarQubeModuleFactoryTest {
     void shouldBuildBackendFrontendModule() {
       mockSonarqubeImage();
 
-      JHipsterModule module = factory.buildBackendFrontendModule(properties());
+      SeedModule module = factory.buildBackendFrontendModule(properties());
 
       assertCommonModule(module)
         .hasFile("sonar-project.properties")
@@ -64,7 +64,7 @@ class SonarQubeModuleFactoryTest {
         .containing("sonar.javascript.lcov.reportPaths=target/test-results/lcov.info");
     }
 
-    private JHipsterModuleAsserter assertCommonModule(JHipsterModule module) {
+    private JHipsterModuleAsserter assertCommonModule(SeedModule module) {
       return assertThatModuleWithFiles(module, pomFile(), readmeFile())
         .hasFile("pom.xml")
         .containing(
@@ -137,7 +137,7 @@ class SonarQubeModuleFactoryTest {
     void shouldBuildBackendModule() {
       mockSonarqubeImage();
 
-      JHipsterModule module = factory.buildBackendModule(properties());
+      SeedModule module = factory.buildBackendModule(properties());
 
       assertCommonModule(module)
         .hasFile("sonar-project.properties")
@@ -149,7 +149,7 @@ class SonarQubeModuleFactoryTest {
     void shouldBuildBackendFrontendModule() {
       mockSonarqubeImage();
 
-      JHipsterModule module = factory.buildBackendFrontendModule(properties());
+      SeedModule module = factory.buildBackendFrontendModule(properties());
 
       assertCommonModule(module)
         .hasFile("sonar-project.properties")
@@ -158,7 +158,7 @@ class SonarQubeModuleFactoryTest {
         .containing("sonar.javascript.lcov.reportPaths=build/test-results/lcov.info");
     }
 
-    private JHipsterModuleAsserter assertCommonModule(JHipsterModule module) {
+    private JHipsterModuleAsserter assertCommonModule(SeedModule module) {
       return assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile(), readmeFile())
         .hasFile("gradle/libs.versions.toml")
         .containing("sonarqube = \"")
@@ -222,7 +222,7 @@ class SonarQubeModuleFactoryTest {
 
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      JHipsterModule module = factory.buildTypescriptModule(properties);
+      SeedModule module = factory.buildTypescriptModule(properties);
 
       // @formatter:off
       assertThatModuleWithFiles(module, packageJsonFile())

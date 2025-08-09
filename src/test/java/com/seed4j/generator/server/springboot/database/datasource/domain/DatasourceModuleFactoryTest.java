@@ -7,8 +7,8 @@ import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImageName;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
@@ -39,7 +39,7 @@ class DatasourceModuleFactoryTest {
 
     when(dockerImages.get(new DockerImageName("postgres"))).thenReturn(new DockerImageVersion("postgres", "0.0.0"));
 
-    JHipsterModule module = factory.buildPostgreSQL(properties);
+    SeedModule module = factory.buildPostgreSQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("documentation/postgresql.md")
@@ -98,7 +98,7 @@ class DatasourceModuleFactoryTest {
 
     when(dockerImages.get(new DockerImageName("mariadb"))).thenReturn(new DockerImageVersion("mariadb", "0.0.0"));
 
-    JHipsterModule module = factory.buildMariaDB(properties);
+    SeedModule module = factory.buildMariaDB(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("documentation/mariadb.md")
@@ -163,7 +163,7 @@ class DatasourceModuleFactoryTest {
 
     when(dockerImages.get(new DockerImageName("mysql"))).thenReturn(new DockerImageVersion("mysql", "0.0.0"));
 
-    JHipsterModule module = factory.buildMySQL(properties);
+    SeedModule module = factory.buildMySQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("documentation/mysql.md")
@@ -232,7 +232,7 @@ class DatasourceModuleFactoryTest {
       new DockerImageVersion("mcr.microsoft.com/mssql/server", "0.0.0")
     );
 
-    JHipsterModule module = factory.buildMsSQL(properties);
+    SeedModule module = factory.buildMsSQL(properties);
 
     assertThatModuleWithFiles(module, pomFile(), integrationTestAnnotation())
       .hasFile("documentation/mssql.md")

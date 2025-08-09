@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.thymeleaf.init.application;
 
 import com.seed4j.generator.server.springboot.thymeleaf.init.domain.SpringBootThymeleafModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class SpringBootThymeleafApplicationService {
     springBootThymeleaf = new SpringBootThymeleafModuleFactory();
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return springBootThymeleaf.buildModule(properties);
   }
 }

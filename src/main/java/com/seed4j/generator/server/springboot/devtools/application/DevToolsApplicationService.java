@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.devtools.application;
 
 import com.seed4j.generator.server.springboot.devtools.domain.DevToolsModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class DevToolsApplicationService {
     devTools = new DevToolsModuleFactory();
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return devTools.buildModule(properties);
   }
 }

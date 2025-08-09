@@ -1,10 +1,10 @@
 package com.seed4j.generator.setup.license.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.to;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import java.time.Year;
@@ -14,7 +14,7 @@ public class LicenseModuleFactory {
 
   private static final SeedSource SOURCE = from("setup").append("license");
 
-  public JHipsterModule buildMitModule(SeedModuleProperties properties) {
+  public SeedModule buildMitModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .context()
@@ -27,7 +27,7 @@ public class LicenseModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildApacheModule(SeedModuleProperties properties) {
+  public SeedModule buildApacheModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .files()

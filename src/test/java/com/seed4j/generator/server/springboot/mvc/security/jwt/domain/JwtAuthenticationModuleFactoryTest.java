@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ class JwtAuthenticationModuleFactoryTest {
       .projectBaseName("jhipster")
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), integrationTestFile(), logbackFile(), testLogbackFile())
       .hasFile("pom.xml")
@@ -141,7 +141,7 @@ class JwtAuthenticationModuleFactoryTest {
       .put("jwtBase64Secret", jwtBase64Secret)
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     String config =
       """

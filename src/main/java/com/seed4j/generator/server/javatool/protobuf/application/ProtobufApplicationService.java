@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.javatool.protobuf.application;
 
 import com.seed4j.generator.server.javatool.protobuf.domain.ProtobufModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +14,11 @@ public class ProtobufApplicationService {
     protobuf = new ProtobufModuleFactory();
   }
 
-  public JHipsterModule buildProtobufModule(SeedModuleProperties properties) {
+  public SeedModule buildProtobufModule(SeedModuleProperties properties) {
     return protobuf.buildProtobufModule(properties);
   }
 
-  public JHipsterModule buildProtobufBackwardsCompatibilityCheckModule(SeedModuleProperties properties) {
+  public SeedModule buildProtobufBackwardsCompatibilityCheckModule(SeedModuleProperties properties) {
     return protobuf.buildProtobufBackwardsCompatibilityCheckModule(properties);
   }
 }

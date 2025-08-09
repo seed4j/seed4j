@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.JHipsterModule.comment;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.comment;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 

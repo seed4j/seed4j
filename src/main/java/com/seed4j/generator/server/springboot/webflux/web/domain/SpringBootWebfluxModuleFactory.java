@@ -1,16 +1,16 @@
 package com.seed4j.generator.server.springboot.webflux.web.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
@@ -31,11 +31,11 @@ public class SpringBootWebfluxModuleFactory {
 
   private static final String EXCEPTION_PRIMARY = "shared/error/infrastructure/primary";
 
-  public JHipsterModule buildEmptyModule(SeedModuleProperties properties) {
+  public SeedModule buildEmptyModule(SeedModuleProperties properties) {
     return moduleBuilder(properties).build();
   }
 
-  public JHipsterModule buildNettyModule(SeedModuleProperties properties) {
+  public SeedModule buildNettyModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

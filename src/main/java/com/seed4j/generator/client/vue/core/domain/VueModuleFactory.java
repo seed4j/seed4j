@@ -3,11 +3,11 @@ package com.seed4j.generator.client.vue.core.domain;
 import static com.seed4j.generator.typescript.common.domain.EslintShortcuts.eslintTypescriptRule;
 import static com.seed4j.generator.typescript.common.domain.TsConfigShortcuts.tsConfigCompilerOption;
 import static com.seed4j.generator.typescript.common.domain.VitestShortcuts.vitestCoverageExclusion;
-import static com.seed4j.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.SeedModule.*;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
@@ -31,7 +31,7 @@ public class VueModuleFactory {
     this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .preCommitActions(stagedFilesFilter("{src/**/,}*.{ts,vue}"), preCommitCommands("eslint --fix", "prettier --write"))

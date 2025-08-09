@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.replacement;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.BiFunction;
 
@@ -20,7 +20,7 @@ public record TextNeedleAfterReplacer(ReplacementCondition condition, String tex
   @Override
   public BiFunction<String, String, String> replacement() {
     return (content, replacement) -> {
-      String replacementBlock = JHipsterModule.LINE_BREAK + replacement;
+      String replacementBlock = SeedModule.LINE_BREAK + replacement;
       return content.replaceAll(this.text, this.text + replacementBlock);
     };
   }

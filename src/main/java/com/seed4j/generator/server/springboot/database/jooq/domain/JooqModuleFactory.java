@@ -1,20 +1,20 @@
 package com.seed4j.generator.server.springboot.database.jooq.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.GENERATE_RESOURCES;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JooqModuleFactory {
 
-  public JHipsterModule buildPostgreSQL(SeedModuleProperties properties) {
+  public SeedModule buildPostgreSQL(SeedModuleProperties properties) {
     // @formatter:off
     return commonModuleBuilder(properties)
       .mavenPlugins()
@@ -34,7 +34,7 @@ public class JooqModuleFactory {
       .getConfiguration();
   }
 
-  public JHipsterModule buildMariaDB(SeedModuleProperties properties) {
+  public SeedModule buildMariaDB(SeedModuleProperties properties) {
     // @formatter:off
     return commonModuleBuilder(properties)
       .mavenPlugins()
@@ -54,7 +54,7 @@ public class JooqModuleFactory {
       .getConfiguration();
   }
 
-  public JHipsterModule buildMySQL(SeedModuleProperties properties) {
+  public SeedModule buildMySQL(SeedModuleProperties properties) {
     // @formatter:off
     return commonModuleBuilder(properties)
       .mavenPlugins()
@@ -74,7 +74,7 @@ public class JooqModuleFactory {
       .getConfiguration();
   }
 
-  public JHipsterModule buildMsSQL(SeedModuleProperties properties) {
+  public SeedModule buildMsSQL(SeedModuleProperties properties) {
     // @formatter:off
     return commonModuleBuilder(properties)
       .mavenPlugins()
@@ -95,7 +95,7 @@ public class JooqModuleFactory {
       .getConfiguration();
   }
 
-  public static JHipsterModule.SeedModuleBuilder commonModuleBuilder(SeedModuleProperties properties) {
+  public static SeedModule.SeedModuleBuilder commonModuleBuilder(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     return moduleBuilder(properties)

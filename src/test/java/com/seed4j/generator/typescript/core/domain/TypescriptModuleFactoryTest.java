@@ -8,8 +8,8 @@ import static org.mockito.Mockito.verify;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -33,7 +33,7 @@ class TypescriptModuleFactoryTest {
   void shouldBuildModule() {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile())
       .hasFile("package.json")
@@ -68,7 +68,7 @@ class TypescriptModuleFactoryTest {
       .nodePackageManager(NodePackageManager.PNPM)
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile()).hasFile("package.json").containing(nodeScript("test", "pnpm run watch:test"));
   }

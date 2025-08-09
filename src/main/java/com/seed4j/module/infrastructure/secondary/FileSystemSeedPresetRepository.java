@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.seed4j.module.domain.JHipsterPresetRepository;
 import com.seed4j.module.domain.ProjectFiles;
+import com.seed4j.module.domain.SeedPresetRepository;
 import com.seed4j.module.domain.preset.Preset;
 import com.seed4j.module.domain.preset.PresetName;
 import com.seed4j.module.domain.preset.Presets;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 @Repository
-class FileSystemJHipsterPresetRepository implements JHipsterPresetRepository {
+class FileSystemSeedPresetRepository implements SeedPresetRepository {
 
   private static final String ROOT_FOLDER = "/";
 
@@ -24,7 +24,7 @@ class FileSystemJHipsterPresetRepository implements JHipsterPresetRepository {
   private final ProjectFiles projectFiles;
   private final PresetName presetName;
 
-  public FileSystemJHipsterPresetRepository(
+  public FileSystemSeedPresetRepository(
     ObjectMapper json,
     ProjectFiles projectFiles,
     @Value("${seed4j.preset-folder:presets}") String presetFolderName

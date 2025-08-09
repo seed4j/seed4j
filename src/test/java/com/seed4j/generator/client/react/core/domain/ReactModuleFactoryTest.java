@@ -11,8 +11,8 @@ import static org.mockito.Mockito.verify;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ class ReactModuleFactoryTest {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhipster")
       .build();
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(
       module,
@@ -103,7 +103,7 @@ class ReactModuleFactoryTest {
 
   @Test
   void shouldViteConfigBeUpdatedWhenServerPortPropertyNotDefault() {
-    JHipsterModule module = factory.buildModule(
+    SeedModule module = factory.buildModule(
       JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("jhipster").put("serverPort", 8081).build()
     );
 
@@ -115,7 +115,7 @@ class ReactModuleFactoryTest {
 
   @Test
   void shouldViteConfigBeDefaultWhenServerPortPropertyMissing() {
-    JHipsterModule module = factory.buildModule(
+    SeedModule module = factory.buildModule(
       JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("jhipster").build()
     );
 

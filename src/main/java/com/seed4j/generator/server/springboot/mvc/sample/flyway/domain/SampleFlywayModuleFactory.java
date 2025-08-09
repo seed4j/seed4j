@@ -1,10 +1,10 @@
 package com.seed4j.generator.server.springboot.mvc.sample.flyway.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.to;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -23,7 +23,7 @@ public class SampleFlywayModuleFactory {
   private static final String NOT_POSTGRESQL_CHANGELOG = "00000000000_sample_feature_schema.sql";
   private static final String POSTGRESQL_CHANGELOG = "00000000000_postgresql_sample_feature_schema.sql";
 
-  public JHipsterModule buildPostgreSQLModule(SeedModuleProperties properties) {
+  public SeedModule buildPostgreSQLModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     Instant date = properties.getInstantOrDefault("date", Instant.now());
@@ -37,7 +37,7 @@ public class SampleFlywayModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildNotPostgreSQLModule(SeedModuleProperties properties) {
+  public SeedModule buildNotPostgreSQLModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     Instant date = properties.getInstantOrDefault("date", Instant.now());

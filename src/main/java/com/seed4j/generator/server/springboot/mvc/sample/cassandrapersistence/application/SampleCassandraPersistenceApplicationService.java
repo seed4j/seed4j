@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.mvc.sample.cassandrapersistence.application;
 
 import com.seed4j.generator.server.springboot.mvc.sample.cassandrapersistence.domain.SampleCassandraPersistenceModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class SampleCassandraPersistenceApplicationService {
     sampleCassandraPersistence = new SampleCassandraPersistenceModuleFactory();
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return sampleCassandraPersistence.buildModule(properties);
   }
 }

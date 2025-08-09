@@ -1,9 +1,9 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.gradle;
 
-import static com.seed4j.module.domain.JHipsterModule.LINE_BREAK;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.regex;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.LINE_BREAK;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.regex;
+import static com.seed4j.module.domain.SeedModule.to;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.always;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 import static com.seed4j.module.infrastructure.secondary.javadependency.gradle.VersionsCatalog.libraryAlias;

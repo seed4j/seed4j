@@ -3,7 +3,7 @@ package com.seed4j.module.domain;
 import com.seed4j.module.domain.landscape.SeedLandscape;
 import com.seed4j.module.domain.resource.SeedModulesResources;
 
-public interface JHipsterModulesRepository {
+public interface SeedModulesRepository {
   SeedModulesResources resources();
 
   SeedLandscape landscape();
@@ -14,7 +14,7 @@ public interface JHipsterModulesRepository {
    * @param changes to be written
    *
    */
-  void apply(JHipsterModuleChanges changes);
+  void apply(SeedModuleChanges changes);
 
-  void applied(JHipsterModuleApplied moduleApplied);
+  void applied(SeedModuleApplied moduleApplied);
 }

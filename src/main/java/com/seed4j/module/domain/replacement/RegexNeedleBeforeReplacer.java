@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.replacement;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.BiFunction;
 import java.util.regex.Pattern;
@@ -21,7 +21,7 @@ public record RegexNeedleBeforeReplacer(ReplacementCondition condition, Pattern 
     return (content, replacement) ->
       linePattern()
         .matcher(content)
-        .replaceAll(result -> escapeSpecialCharacters(replacement) + JHipsterModule.LINE_BREAK + result.group());
+        .replaceAll(result -> escapeSpecialCharacters(replacement) + SeedModule.LINE_BREAK + result.group());
   }
 
   private String escapeSpecialCharacters(String replacement) {

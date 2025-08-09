@@ -32,19 +32,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("java:S6539")
-public class JHipsterModulesApplyer {
+public class SeedModulesApplyer {
 
-  private static final Logger log = LoggerFactory.getLogger(JHipsterModulesApplyer.class);
+  private static final Logger log = LoggerFactory.getLogger(SeedModulesApplyer.class);
 
-  private final JHipsterModulesRepository modules;
+  private final SeedModulesRepository modules;
   private final JavaDependenciesVersionsRepository javaVersions;
   private final ProjectJavaDependenciesRepository projectDependencies;
   private final ProjectJavaBuildToolRepository javaBuildTools;
   private final GitRepository git;
   private final GeneratedProjectRepository generatedProject;
 
-  public JHipsterModulesApplyer(
-    JHipsterModulesRepository modules,
+  public SeedModulesApplyer(
+    SeedModulesRepository modules,
     JavaDependenciesVersionsRepository currentVersions,
     ProjectJavaDependenciesRepository projectDependencies,
     ProjectJavaBuildToolRepository javaBuildTools,
@@ -59,24 +59,24 @@ public class JHipsterModulesApplyer {
     this.generatedProject = generatedProject;
   }
 
-  public Collection<JHipsterModuleApplied> apply(JHipsterModulesToApply modulesToApply) {
+  public Collection<SeedModuleApplied> apply(SeedModulesToApply modulesToApply) {
     Assert.notNull("modulesToApply", modulesToApply);
 
     return modules.landscape().sort(modulesToApply.slugs()).stream().map(toModuleToApply(modulesToApply)).map(this::apply).toList();
   }
 
-  private Function<SeedModuleSlug, JHipsterModuleToApply> toModuleToApply(JHipsterModulesToApply modulesToApply) {
-    return slug -> new JHipsterModuleToApply(slug, modulesToApply.properties());
+  private Function<SeedModuleSlug, SeedModuleToApply> toModuleToApply(SeedModulesToApply modulesToApply) {
+    return slug -> new SeedModuleToApply(slug, modulesToApply.properties());
   }
 
-  public JHipsterModuleApplied apply(JHipsterModuleToApply moduleToApply) {
+  public SeedModuleApplied apply(SeedModuleToApply moduleToApply) {
     Assert.notNull("moduleToApply", moduleToApply);
 
     log.info("Apply module: {}", moduleToApply.slug());
 
-    JHipsterModule module = modules.resources().build(moduleToApply.slug(), moduleToApply.properties());
+    SeedModule module = modules.resources().build(moduleToApply.slug(), moduleToApply.properties());
     // @formatter:off
-    var builder = JHipsterModuleChanges
+    var builder = SeedModuleChanges
       .builder()
       .context(contextWithJavaBuildTool(module))
       .projectFolder(module.projectFolder())
@@ -103,7 +103,7 @@ public class JHipsterModulesApplyer {
       .springFactories(module.springFactories());
     // @formatter:on
 
-    JHipsterModuleChanges changes;
+    SeedModuleChanges changes;
     if (moduleToApply.properties().springConfigurationFormat() == PROPERTIES) {
       changes = builder.springProperties(module.springProperties()).springComments(module.springComments());
     } else {
@@ -112,7 +112,7 @@ public class JHipsterModulesApplyer {
 
     modules.apply(changes);
 
-    JHipsterModuleApplied moduleApplied = new JHipsterModuleApplied(moduleToApply.slug(), moduleToApply.properties(), Instant.now());
+    SeedModuleApplied moduleApplied = new SeedModuleApplied(moduleToApply.slug(), moduleToApply.properties(), Instant.now());
     modules.applied(moduleApplied);
 
     commitIfNeeded(moduleToApply);
@@ -120,17 +120,17 @@ public class JHipsterModulesApplyer {
     return moduleApplied;
   }
 
-  private SeedModuleContext contextWithJavaBuildTool(JHipsterModule module) {
+  private SeedModuleContext contextWithJavaBuildTool(SeedModule module) {
     return detectedJavaBuildTool(module)
       .map(javaBuildTool -> module.context().withJavaBuildTool(javaBuildTool))
       .orElse(module.context());
   }
 
-  private Optional<JavaBuildTool> detectedJavaBuildTool(JHipsterModule module) {
+  private Optional<JavaBuildTool> detectedJavaBuildTool(SeedModule module) {
     return javaBuildTools.detect(module.projectFolder()).or(() -> javaBuildTools.detect(module.files()));
   }
 
-  private SeedTemplatedFiles buildTemplatedFiles(JHipsterModule module) {
+  private SeedTemplatedFiles buildTemplatedFiles(SeedModule module) {
     SeedModuleContext context = contextWithJavaBuildTool(module);
     List<SeedTemplatedFile> templatedFiles = module
       .filesToAdd()
@@ -141,7 +141,7 @@ public class JHipsterModulesApplyer {
     return new SeedTemplatedFiles(templatedFiles);
   }
 
-  private SeedStartupCommands buildStartupCommands(JHipsterModule module) {
+  private SeedStartupCommands buildStartupCommands(SeedModule module) {
     Optional<JavaBuildTool> javaBuildTool = detectedJavaBuildTool(module);
     if (javaBuildTool.isEmpty()) {
       return module.startupCommands();
@@ -164,7 +164,7 @@ public class JHipsterModulesApplyer {
       };
   }
 
-  private ContentReplacers buildReplacers(JHipsterModule module) {
+  private ContentReplacers buildReplacers(SeedModule module) {
     List<ContentReplacer> replacers = Stream.concat(
       module.mandatoryReplacements().replacers(),
       module.optionalReplacements().buildReplacers(module.projectFolder(), generatedProject)
@@ -173,7 +173,7 @@ public class JHipsterModulesApplyer {
     return new ContentReplacers(replacers);
   }
 
-  private void commitIfNeeded(JHipsterModuleToApply moduleToApply) {
+  private void commitIfNeeded(SeedModuleToApply moduleToApply) {
     if (moduleToApply.commitNeeded()) {
       SeedProjectFolder projectFolder = moduleToApply.properties().projectFolder();
 
@@ -182,35 +182,35 @@ public class JHipsterModulesApplyer {
     }
   }
 
-  private String commitMessage(JHipsterModuleToApply moduleToApply) {
+  private String commitMessage(SeedModuleToApply moduleToApply) {
     return "Apply module: %s".formatted(moduleToApply.slug().get());
   }
 
-  private JavaBuildCommands buildGradlePluginsChanges(JHipsterModule module) {
+  private JavaBuildCommands buildGradlePluginsChanges(SeedModule module) {
     return module.gradlePlugins().buildChanges(javaVersions.get());
   }
 
-  private JavaBuildCommands buildDependenciesChanges(JHipsterModule module) {
+  private JavaBuildCommands buildDependenciesChanges(SeedModule module) {
     return module.javaDependencies().buildChanges(javaVersions.get(), projectDependencies.get(module.projectFolder()));
   }
 
-  private JavaBuildCommands buildPropertiesChanges(JHipsterModule module) {
+  private JavaBuildCommands buildPropertiesChanges(SeedModule module) {
     return module.javaBuildProperties().buildChanges();
   }
 
-  private JavaBuildCommands buildProfilesChanges(JHipsterModule module) {
+  private JavaBuildCommands buildProfilesChanges(SeedModule module) {
     return module.javaBuildProfiles().buildChanges(javaVersions.get(), projectDependencies.get(module.projectFolder()));
   }
 
-  private JavaBuildCommands buildPluginsChanges(JHipsterModule module) {
+  private JavaBuildCommands buildPluginsChanges(SeedModule module) {
     return module.mavenPlugins().buildChanges(javaVersions.get(), projectDependencies.get(module.projectFolder()));
   }
 
-  private JavaBuildCommands buildGradleConfigurationsChanges(JHipsterModule module) {
+  private JavaBuildCommands buildGradleConfigurationsChanges(SeedModule module) {
     return module.gradleConfigurations().buildChanges();
   }
 
-  private JavaBuildCommands buildMavenBuildExtensionsChanges(JHipsterModule module) {
+  private JavaBuildCommands buildMavenBuildExtensionsChanges(SeedModule module) {
     return module.mavenBuildExtensions().buildChanges(javaVersions.get());
   }
 }

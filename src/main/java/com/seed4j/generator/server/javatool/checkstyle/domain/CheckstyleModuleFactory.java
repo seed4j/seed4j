@@ -1,15 +1,15 @@
 package com.seed4j.generator.server.javatool.checkstyle.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.gradleCorePlugin;
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.gradleCorePlugin;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.to;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.VALIDATE;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javabuild.VersionSlug;
@@ -23,7 +23,7 @@ public class CheckstyleModuleFactory {
   private static final SeedSource TEMPLATES_SOURCE = from("server/javatool/checkstyle/main");
   private static final String CHECKSTYLE = "checkstyle";
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

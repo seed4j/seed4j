@@ -2,7 +2,7 @@ package com.seed4j.generator.server.springboot.mvc.security.kipe.application;
 
 import com.seed4j.generator.server.springboot.mvc.security.kipe.domain.KipeAuthorizationModuleFactory;
 import com.seed4j.generator.server.springboot.mvc.security.kipe.domain.KipeExpressionModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +17,11 @@ public class KipeApplicationService {
     authorizations = new KipeAuthorizationModuleFactory();
   }
 
-  public JHipsterModule buildKipeExpressions(SeedModuleProperties properties) {
+  public SeedModule buildKipeExpressions(SeedModuleProperties properties) {
     return expressions.buildModule(properties);
   }
 
-  public JHipsterModule buildKipeAuthorizations(SeedModuleProperties properties) {
+  public SeedModule buildKipeAuthorizations(SeedModuleProperties properties) {
     return authorizations.buildModule(properties);
   }
 }

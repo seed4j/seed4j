@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.JHipsterModule.*;
-import static com.seed4j.module.domain.JHipsterModule.from;
 import static com.seed4j.module.domain.JHipsterModulesFixture.*;
+import static com.seed4j.module.domain.SeedModule.*;
+import static com.seed4j.module.domain.SeedModule.from;
 import static org.assertj.core.api.Assertions.*;
 
 import ch.qos.logback.classic.Level;
@@ -11,8 +11,8 @@ import com.seed4j.LogsSpy;
 import com.seed4j.LogsSpyExtension;
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.file.SeedFileToMove;
 import com.seed4j.module.domain.file.SeedFilesToDelete;
@@ -47,7 +47,7 @@ class FileSystemSeedModuleFilesTest {
   void shouldNotWriteOnUnwritablePath() {
     SeedProjectFolder project = new SeedProjectFolder(Path.of("src/test/resources/generator").toAbsolutePath().toString());
 
-    JHipsterModule module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(project.folder()).build())
+    SeedModule module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(project.folder()).build())
       .files()
       .add(from("server/springboot/core/main/MainApp.java.mustache"), to("content"))
       .and()
@@ -60,7 +60,7 @@ class FileSystemSeedModuleFilesTest {
   void shouldTraceAddedFiles() {
     SeedProjectFolder project = new SeedProjectFolder(TestFileUtils.tmpDirForTest());
 
-    JHipsterModule module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(project.folder()).build())
+    SeedModule module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(project.folder()).build())
       .files()
       .add(from("server/springboot/core/main/MainApp.java.mustache"), to("MainApp.java"))
       .and()
@@ -72,7 +72,7 @@ class FileSystemSeedModuleFilesTest {
   }
 
   @NotNull
-  private static SeedTemplatedFiles templatedFilesFrom(JHipsterModule module) {
+  private static SeedTemplatedFiles templatedFilesFrom(SeedModule module) {
     Assert.notEmpty("module.filesToAdd", module.filesToAdd());
     return new SeedTemplatedFiles(
       List.of(SeedTemplatedFile.builder().file(module.filesToAdd().iterator().next()).context(context()).build())

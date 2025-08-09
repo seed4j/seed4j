@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.mvc.security.oauth2.account.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -28,7 +28,7 @@ public class OAuth2AccountModuleFactory {
   private static final SeedSource USER_IDENTITY_MAIN_SOURCE = USER_IDENTITY_SOURCE.append("main");
   private static final SeedSource USER_IDENTITY_TEST_SOURCE = USER_IDENTITY_SOURCE.append("test");
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
     SeedDestination accountMainDestination = toSrcMainJava().append(packagePath).append("account");
     SeedDestination accountTestDestination = toSrcTestJava().append(packagePath).append("account");

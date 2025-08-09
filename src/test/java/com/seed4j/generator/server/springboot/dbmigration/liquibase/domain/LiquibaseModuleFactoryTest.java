@@ -5,8 +5,8 @@ import static com.seed4j.module.domain.properties.SpringConfigurationFormat.*;
 import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ class LiquibaseModuleFactoryTest {
     void shouldBuildModule() {
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
 
-      JHipsterModule module = factory.buildModule(properties);
+      SeedModule module = factory.buildModule(properties);
 
       assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile())
         .hasFile("pom.xml")
@@ -75,7 +75,7 @@ class LiquibaseModuleFactoryTest {
     void shouldBuildAsyncModule() {
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
 
-      JHipsterModule module = factory.buildAsyncModule(properties);
+      SeedModule module = factory.buildAsyncModule(properties);
 
       assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile())
         .hasPrefixedFiles(
@@ -99,7 +99,7 @@ class LiquibaseModuleFactoryTest {
         .springConfigurationFormat(YAML)
         .build();
 
-      JHipsterModule module = factory.buildAsyncModule(properties);
+      SeedModule module = factory.buildAsyncModule(properties);
 
       assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile())
         .hasFile("src/test/java/com/seed4j/growth/wire/liquibase/infrastructure/secondary/SpringLiquibaseUtilTest.java")
@@ -114,7 +114,7 @@ class LiquibaseModuleFactoryTest {
         .springConfigurationFormat(PROPERTIES)
         .build();
 
-      JHipsterModule module = factory.buildAsyncModule(properties);
+      SeedModule module = factory.buildAsyncModule(properties);
 
       assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile())
         .hasFile("src/test/java/com/seed4j/growth/wire/liquibase/infrastructure/secondary/SpringLiquibaseUtilTest.java")
@@ -130,7 +130,7 @@ class LiquibaseModuleFactoryTest {
     void shouldBuildModule() {
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
 
-      JHipsterModule module = factory.buildLinterModule(properties);
+      SeedModule module = factory.buildLinterModule(properties);
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")

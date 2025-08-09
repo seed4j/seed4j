@@ -6,7 +6,7 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ class OpenApiContractModuleFactoryTest {
   void shouldBuildOpenApiContractModule() {
     SeedModuleProperties properties = propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
@@ -77,7 +77,7 @@ class OpenApiContractModuleFactoryTest {
   void shouldBuildOpenApiBackwardsCompatibilityCheckModule() {
     SeedModuleProperties properties = propertiesBuilder(tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildBackwardsCompatibilityCheckModule(properties);
+    SeedModule module = factory.buildBackwardsCompatibilityCheckModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")

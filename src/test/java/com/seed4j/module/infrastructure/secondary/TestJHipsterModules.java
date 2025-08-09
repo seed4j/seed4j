@@ -6,12 +6,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 import com.seed4j.module.application.JHipsterModulesApplicationService;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModuleEvents;
-import com.seed4j.module.domain.JHipsterModuleToApply;
-import com.seed4j.module.domain.JHipsterPresetRepository;
-import com.seed4j.module.domain.ProjectFiles;
-import com.seed4j.module.domain.SeedModuleSlug;
+import com.seed4j.module.domain.*;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.resource.SeedModulesResources;
 import com.seed4j.module.infrastructure.secondary.file.MustacheTemplateRenderer;
 import com.seed4j.module.infrastructure.secondary.git.GitTestUtil;
@@ -53,33 +49,33 @@ public final class TestJHipsterModules {
     customJavaDependenciesReaders.clear();
   }
 
-  static void apply(JHipsterModule module) {
+  static void apply(SeedModule module) {
     applyer(module).apply();
   }
 
-  private static TestJHipsterModulesFinalApplyer applyer(JHipsterModule module) {
+  private static TestJHipsterModulesFinalApplyer applyer(SeedModule module) {
     return new TestJHipsterModulesApplyer(module);
   }
 
   private static final class TestJHipsterModulesApplyer implements TestJHipsterModulesFinalApplyer {
 
-    private final JHipsterModule module;
+    private final SeedModule module;
     private final SeedModuleSlug slug;
     private final JHipsterModulesApplicationService modules;
 
-    private TestJHipsterModulesApplyer(JHipsterModule module) {
+    private TestJHipsterModulesApplyer(SeedModule module) {
       this.module = module;
       this.slug = new SeedModuleSlug("test-module");
       this.modules = buildApplicationService(module);
     }
 
-    private static JHipsterModulesApplicationService buildApplicationService(JHipsterModule module) {
+    private static JHipsterModulesApplicationService buildApplicationService(SeedModule module) {
       ProjectFiles filesReader = new FileSystemProjectFiles();
       MustacheTemplateRenderer templateRenderer = new MustacheTemplateRenderer();
       FileSystemReplacer fileReplacer = new FileSystemReplacer(templateRenderer);
       FileSystemJHipsterModuleFiles files = new FileSystemJHipsterModuleFiles(filesReader, templateRenderer);
 
-      FileSystemJHipsterModulesRepository modulesRepository = new FileSystemJHipsterModulesRepository(
+      FileSystemSeedModulesRepository modulesRepository = new FileSystemSeedModulesRepository(
         mock(JavaProjects.class),
         new SeedModulesResources(
           List.of(
@@ -99,20 +95,20 @@ public final class TestJHipsterModules {
       );
 
       return new JHipsterModulesApplicationService(
-        mock(JHipsterModuleEvents.class),
+        mock(SeedModuleEvents.class),
         modulesRepository,
         JavaDependenciesFixture.javaVersionsRepository(filesReader, customJavaDependenciesReaders),
         JavaDependenciesFixture.projectVersionsRepository(),
         new FileSystemProjectJavaBuildToolRepository(),
         GitTestUtil.gitRepository(),
         new FileSystemGeneratedProjectRepository(),
-        mock(JHipsterPresetRepository.class)
+        mock(SeedPresetRepository.class)
       );
     }
 
     @Override
     public void apply() {
-      modules.apply(new JHipsterModuleToApply(slug, module.properties()));
+      modules.apply(new SeedModuleToApply(slug, module.properties()));
     }
   }
 

@@ -1,18 +1,18 @@
 package com.seed4j.generator.client.angular.security.oauth2keycloak.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.lineAfterRegex;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.regex;
-import static com.seed4j.module.domain.JHipsterModule.text;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.lineAfterRegex;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.regex;
+import static com.seed4j.module.domain.SeedModule.text;
+import static com.seed4j.module.domain.SeedModule.to;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -87,7 +87,7 @@ public class AngularOAuth2KeycloakModuleFactory {
 
   private static final SeedDestination APP_DESTINATION = to("src/main/webapp/app");
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     Indentation indentation = properties.indentation();

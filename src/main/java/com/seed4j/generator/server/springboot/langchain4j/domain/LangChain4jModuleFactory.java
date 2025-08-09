@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.langchain4j.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.SeedModule.*;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
@@ -25,7 +25,7 @@ public class LangChain4jModuleFactory {
   private static final String PROPERTIES = "properties";
   private static final PropertyKey LANGCHAIN4J_PROPERTY_API_KEY = propertyKey("langchain4j.open-ai.chat-model.api-key");
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off

@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ class SpringBootMvcsModuleFactoryTest {
       .put("serverPort", 9000)
       .build();
 
-    JHipsterModule module = factory.buildTomcatModule(properties);
+    SeedModule module = factory.buildTomcatModule(properties);
 
     assertMvcModule(module)
       .hasFile("src/main/resources/logback-spring.xml")
@@ -58,7 +58,7 @@ class SpringBootMvcsModuleFactoryTest {
       .put("serverPort", 9000)
       .build();
 
-    JHipsterModule module = factory.buildUndertowModule(properties);
+    SeedModule module = factory.buildUndertowModule(properties);
 
     assertMvcModule(module)
       .hasFile("src/main/resources/logback-spring.xml")
@@ -92,7 +92,7 @@ class SpringBootMvcsModuleFactoryTest {
       );
   }
 
-  private JHipsterModuleAsserter assertMvcModule(JHipsterModule module) {
+  private JHipsterModuleAsserter assertMvcModule(SeedModule module) {
     return assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile(), readmeFile())
       .hasFile("README.md")
       .containing("- [Local server](http://localhost:9000)")

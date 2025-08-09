@@ -13,7 +13,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 @Repository
-class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
+class FileSystemSeedModulesRepository implements SeedModulesRepository {
 
   public static final String DEFAULT_MAIN_FOLDER = "src/main/resources/config/";
   public static final String DEFAULT_TEST_FOLDER = "src/test/resources/config/";
@@ -36,7 +36,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
   private final FileSystemDockerComposeFileHandler dockerComposeFile;
   private final SeedLandscape landscape;
 
-  public FileSystemJHipsterModulesRepository(
+  public FileSystemSeedModulesRepository(
     JavaProjects projects,
     SeedModulesResources resources,
     FileSystemJHipsterModuleFiles files,
@@ -78,7 +78,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
   }
 
   @Override
-  public void apply(JHipsterModuleChanges changes) {
+  public void apply(SeedModuleChanges changes) {
     Assert.notNull("changes", changes);
 
     changes.preActions().run();
@@ -101,7 +101,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
   }
 
   @Override
-  public void applied(JHipsterModuleApplied moduleApplied) {
+  public void applied(SeedModuleApplied moduleApplied) {
     projects.moduleApplied(moduleApplied);
   }
 

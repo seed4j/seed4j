@@ -10,7 +10,7 @@ class JHipsterFeatureTest {
 
   @Test
   void shouldNotBuildWithInvalidFeaturePattern() {
-    assertThatThrownBy(() -> new SeedFeatureSlug("invalid feature")).isExactlyInstanceOf(InvalidJHipsterSlugException.class);
+    assertThatThrownBy(() -> new SeedFeatureSlug("invalid feature")).isExactlyInstanceOf(InvalidJSeedSlugException.class);
   }
 
   @Test

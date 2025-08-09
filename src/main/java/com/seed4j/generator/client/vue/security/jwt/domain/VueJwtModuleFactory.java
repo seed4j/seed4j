@@ -1,8 +1,8 @@
 package com.seed4j.generator.client.vue.security.jwt.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.SeedModule.*;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -33,7 +33,7 @@ public class VueJwtModuleFactory {
     provideForAuth(axiosHttp);
     """;
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

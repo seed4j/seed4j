@@ -12,7 +12,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class RestJHipsterModulesToApplyTest {
+class RestSeedModulesToApplyTest {
 
   private static final ProjectFolder projectFolder = mock(ProjectFolder.class);
 

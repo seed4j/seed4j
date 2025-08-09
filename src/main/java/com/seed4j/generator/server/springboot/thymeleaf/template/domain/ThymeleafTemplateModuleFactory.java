@@ -1,21 +1,21 @@
 package com.seed4j.generator.server.springboot.thymeleaf.template.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.lineBeforeText;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.regex;
-import static com.seed4j.module.domain.JHipsterModule.runScriptCommandWith;
-import static com.seed4j.module.domain.JHipsterModule.scriptCommand;
-import static com.seed4j.module.domain.JHipsterModule.scriptKey;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainResources;
+import static com.seed4j.module.domain.SeedModule.documentationTitle;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.lineBeforeText;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.regex;
+import static com.seed4j.module.domain.SeedModule.runScriptCommandWith;
+import static com.seed4j.module.domain.SeedModule.scriptCommand;
+import static com.seed4j.module.domain.SeedModule.scriptKey;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.SeedModule.toSrcMainResources;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
@@ -87,7 +87,7 @@ public class ThymeleafTemplateModuleFactory {
     </main>
     """;
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -132,7 +132,7 @@ public class ThymeleafTemplateModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildTailwindcssModule(SeedModuleProperties properties) {
+  public SeedModule buildTailwindcssModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -161,7 +161,7 @@ public class ThymeleafTemplateModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildHtmxWebjarsModule(SeedModuleProperties properties) {
+  public SeedModule buildHtmxWebjarsModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -175,7 +175,7 @@ public class ThymeleafTemplateModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildAlpineWebjarsModule(SeedModuleProperties properties) {
+  public SeedModule buildAlpineWebjarsModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off

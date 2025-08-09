@@ -10,8 +10,8 @@ import static org.mockito.Mockito.verify;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ class AngularModuleFactoryTest {
       .projectBaseName("jhiTest")
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
       .hasFile("package.json")
@@ -121,7 +121,7 @@ class AngularModuleFactoryTest {
       .nodePackageManager(PNPM)
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
       .hasFile("package.json")
@@ -135,7 +135,7 @@ class AngularModuleFactoryTest {
       .put("serverPort", 8081)
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
       .hasFile("proxy.conf.json")
       .containing("\"target\": \"http://localhost:8081\"")
@@ -148,7 +148,7 @@ class AngularModuleFactoryTest {
       .projectBaseName("jhiTest")
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
       .hasFile("proxy.conf.json")
       .containing("\"target\": \"http://localhost:8080\"");

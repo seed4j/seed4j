@@ -1,13 +1,13 @@
 package com.seed4j.generator.server.documentation.jmolecules.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
 import static com.seed4j.module.domain.javadependency.JavaDependencyScope.IMPORT;
 import static com.seed4j.module.domain.javadependency.JavaDependencyType.POM;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -17,7 +17,7 @@ public class JMoleculesModuleFactory {
 
   private static final GroupId JMOLECULES_GROUP_ID = groupId("org.jmolecules");
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

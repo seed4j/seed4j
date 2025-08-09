@@ -3,12 +3,12 @@ package com.seed4j.module.infrastructure.secondary;
 import static com.seed4j.TestFileUtils.contentNormalizingNewLines;
 import static com.seed4j.TestFileUtils.loadDefaultProperties;
 import static com.seed4j.TestFileUtils.tmpDirForTest;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
 import static com.seed4j.module.domain.JHipsterModulesFixture.allProperties;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.standalonedocker.SeedModuleDockerComposeFile;
 import com.seed4j.module.domain.startupcommand.DockerComposeFile;
@@ -61,10 +61,10 @@ public class FileSystemDockerComposeFileHandlerTest {
   }
 
   private DockerComposeFile redisDockerComposeFileReference() {
-    return JHipsterModule.dockerComposeFile("src/main/docker/redis.yml");
+    return SeedModule.dockerComposeFile("src/main/docker/redis.yml");
   }
 
   private DockerComposeFile kafkaDockerComposeFileReference() {
-    return JHipsterModule.dockerComposeFile("src/main/docker/kafka.yml");
+    return SeedModule.dockerComposeFile("src/main/docker/kafka.yml");
   }
 }

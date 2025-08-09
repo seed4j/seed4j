@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class CypressModuleFactoryTest {
     ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildComponentTestsModule(properties);
+    SeedModule module = factory.buildComponentTestsModule(properties);
 
     assertThatModuleWithFiles(module, files)
       .hasFile("package.json")
@@ -56,7 +56,7 @@ class CypressModuleFactoryTest {
     ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildE2ETestsModule(properties);
+    SeedModule module = factory.buildE2ETestsModule(properties);
 
     assertThatModuleWithFiles(module, files)
       .hasFile("package.json")

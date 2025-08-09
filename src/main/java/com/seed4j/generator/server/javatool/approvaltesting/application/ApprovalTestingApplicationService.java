@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.javatool.approvaltesting.application;
 
 import com.seed4j.generator.server.javatool.approvaltesting.domain.ApprovalTestingModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class ApprovalTestingApplicationService {
     approvalTesting = new ApprovalTestingModuleFactory();
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return approvalTesting.buildModule(properties);
   }
 }

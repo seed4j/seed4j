@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.mvc.sample.langchain4j.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.SeedModule.*;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -16,7 +16,7 @@ public class SampleLangChain4jModuleFactory {
 
   private static final String PRIMARY = "infrastructure/primary";
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

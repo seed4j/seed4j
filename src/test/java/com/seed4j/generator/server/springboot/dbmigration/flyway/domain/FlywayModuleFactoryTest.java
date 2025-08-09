@@ -5,8 +5,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ class FlywayModuleFactoryTest {
       .put("date", INVOCATION_DATE)
       .build();
 
-    JHipsterModule module = factory.buildInitializationModule(properties);
+    SeedModule module = factory.buildInitializationModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
@@ -53,7 +53,7 @@ class FlywayModuleFactoryTest {
   void shouldBuildMysqlDependencyModule() {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildMysqlDependencyModule(properties);
+    SeedModule module = factory.buildMysqlDependencyModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
@@ -71,7 +71,7 @@ class FlywayModuleFactoryTest {
   void shouldBuildPostgreSQLDependencyModule() {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildPostgreSQLDependencyModule(properties);
+    SeedModule module = factory.buildPostgreSQLDependencyModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
@@ -89,7 +89,7 @@ class FlywayModuleFactoryTest {
   void shouldBuildMsSqlServerDependencyModule() {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildMsSqlServerDependencyModule(properties);
+    SeedModule module = factory.buildMsSqlServerDependencyModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")

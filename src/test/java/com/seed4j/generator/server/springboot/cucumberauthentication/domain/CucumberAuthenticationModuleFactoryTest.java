@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ class CucumberAuthenticationModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildOauth2Module(properties);
+    SeedModule module = factory.buildOauth2Module(properties);
 
     assertThatModuleWithFiles(module, pomFile(), cucumberConfiguration())
       .hasFiles("documentation/cucumber-authentication.md")
@@ -79,7 +79,7 @@ class CucumberAuthenticationModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildJWTModule(properties);
+    SeedModule module = factory.buildJWTModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFiles("documentation/cucumber-authentication.md")

@@ -7,9 +7,9 @@ import static org.mockito.Mockito.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.seed4j.JsonHelper;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModuleSlugs;
 import com.seed4j.module.domain.ProjectFiles;
 import com.seed4j.module.domain.SeedModuleSlug;
+import com.seed4j.module.domain.SeedModuleSlugs;
 import com.seed4j.module.domain.preset.Preset;
 import com.seed4j.module.domain.preset.PresetName;
 import com.seed4j.module.domain.preset.Presets;
@@ -19,7 +19,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class FileSystemJHipsterPresetRepositoryTest {
+class FileSystemSeedPresetRepositoryTest {
 
   private static final String DEFAULT_PRESET_FOLDER = "presets";
 
@@ -55,7 +55,7 @@ class FileSystemJHipsterPresetRepositoryTest {
   void shouldHandleDeserializationErrors() throws IOException {
     ObjectMapper json = mock(ObjectMapper.class);
     when(json.readValue(any(byte[].class), eq(PersistedPresets.class))).thenThrow(IOException.class);
-    FileSystemJHipsterPresetRepository fileSystemJHipsterPresetRepository = new FileSystemJHipsterPresetRepository(
+    FileSystemSeedPresetRepository fileSystemJHipsterPresetRepository = new FileSystemSeedPresetRepository(
       json,
       mockProjectFilesWithValidPresetJson(),
       DEFAULT_PRESET_FOLDER
@@ -68,7 +68,7 @@ class FileSystemJHipsterPresetRepositoryTest {
   void shouldNotReturnPresetFromUnknownFolder() {
     ProjectFiles projectFiles = mock(ProjectFiles.class);
     lenient().when(projectFiles.findRecursivelyInPath("/%s".formatted(DEFAULT_PRESET_FOLDER))).thenThrow(GeneratorException.class);
-    FileSystemJHipsterPresetRepository fileSystemJHipsterPresetRepository = new FileSystemJHipsterPresetRepository(
+    FileSystemSeedPresetRepository fileSystemJHipsterPresetRepository = new FileSystemSeedPresetRepository(
       JsonHelper.jsonMapper(),
       projectFiles,
       DEFAULT_PRESET_FOLDER
@@ -81,7 +81,7 @@ class FileSystemJHipsterPresetRepositoryTest {
   void shouldNotReturnPresetFromUnknownFile() {
     ProjectFiles projectFiles = mockProjectFilesWithValidPresetJson();
     lenient().when(projectFiles.readBytes("/presets/preset-maven.json")).thenThrow(GeneratorException.class);
-    FileSystemJHipsterPresetRepository fileSystemJHipsterPresetRepository = new FileSystemJHipsterPresetRepository(
+    FileSystemSeedPresetRepository fileSystemJHipsterPresetRepository = new FileSystemSeedPresetRepository(
       JsonHelper.jsonMapper(),
       projectFiles,
       DEFAULT_PRESET_FOLDER
@@ -92,7 +92,7 @@ class FileSystemJHipsterPresetRepositoryTest {
 
   @Test
   void shouldGetExistingPresetInAlphabeticalOrder() {
-    FileSystemJHipsterPresetRepository fileSystemJHipsterPresetRepository = new FileSystemJHipsterPresetRepository(
+    FileSystemSeedPresetRepository fileSystemJHipsterPresetRepository = new FileSystemSeedPresetRepository(
       JsonHelper.jsonMapper(),
       mockProjectFilesWithValidPresetJson(),
       DEFAULT_PRESET_FOLDER
@@ -111,7 +111,7 @@ class FileSystemJHipsterPresetRepositoryTest {
 
   @Test
   void shouldIgnorePresetFilesWithNonJsonExtension() {
-    FileSystemJHipsterPresetRepository fileSystemJHipsterPresetRepository = new FileSystemJHipsterPresetRepository(
+    FileSystemSeedPresetRepository fileSystemJHipsterPresetRepository = new FileSystemSeedPresetRepository(
       JsonHelper.jsonMapper(),
       mockProjectFilesWithValidPresetJson(),
       DEFAULT_PRESET_FOLDER
@@ -244,7 +244,7 @@ class FileSystemJHipsterPresetRepositoryTest {
   private static Preset expectedPresetJavaLibraryWithMaven() {
     return new Preset(
       new PresetName("Java Library with Maven"),
-      new JHipsterModuleSlugs(
+      new SeedModuleSlugs(
         List.of(
           new SeedModuleSlug("init"),
           new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),
@@ -262,7 +262,7 @@ class FileSystemJHipsterPresetRepositoryTest {
   private static Preset expectedPresetJavaLibraryWithGradle() {
     return new Preset(
       new PresetName("Java Library with Gradle"),
-      new JHipsterModuleSlugs(
+      new SeedModuleSlugs(
         List.of(
           new SeedModuleSlug("init"),
           new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),
@@ -280,7 +280,7 @@ class FileSystemJHipsterPresetRepositoryTest {
   private static Preset expectedPresetVueCore() {
     return new Preset(
       new PresetName("Vue Core"),
-      new JHipsterModuleSlugs(
+      new SeedModuleSlugs(
         List.of(
           new SeedModuleSlug("init"),
           new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),
@@ -295,7 +295,7 @@ class FileSystemJHipsterPresetRepositoryTest {
   private static Preset expectedPresetWebappVueSpringBoot() {
     return new Preset(
       new PresetName("Webapp: Vue + Spring Boot"),
-      new JHipsterModuleSlugs(
+      new SeedModuleSlugs(
         List.of(
           new SeedModuleSlug("init"),
           new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),
@@ -319,7 +319,7 @@ class FileSystemJHipsterPresetRepositoryTest {
   private static Preset expectedPresetAngularCore() {
     return new Preset(
       new PresetName("Angular Core"),
-      new JHipsterModuleSlugs(
+      new SeedModuleSlugs(
         List.of(
           new SeedModuleSlug("init"),
           new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),
@@ -334,7 +334,7 @@ class FileSystemJHipsterPresetRepositoryTest {
   private static Preset expectedPresetReactCore() {
     return new Preset(
       new PresetName("React Core"),
-      new JHipsterModuleSlugs(
+      new SeedModuleSlugs(
         List.of(
           new SeedModuleSlug("init"),
           new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),

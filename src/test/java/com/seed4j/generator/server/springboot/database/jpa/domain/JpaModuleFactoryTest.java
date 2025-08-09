@@ -5,8 +5,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ class JpaModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildPostgreSQL(properties);
+    SeedModule module = factory.buildPostgreSQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary/DatabaseConfiguration.java")
@@ -81,7 +81,7 @@ class JpaModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildMariaDB(properties);
+    SeedModule module = factory.buildMariaDB(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary/DatabaseConfiguration.java")
@@ -140,7 +140,7 @@ class JpaModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildMySQL(properties);
+    SeedModule module = factory.buildMySQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary/DatabaseConfiguration.java")
@@ -200,7 +200,7 @@ class JpaModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildMsSQL(properties);
+    SeedModule module = factory.buildMsSQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("src/main/java/com/seed4j/growth/wire/database/infrastructure/secondary/DatabaseConfiguration.java")

@@ -1,15 +1,15 @@
 package com.seed4j.generator.server.springboot.docker.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.gradleCommunityPlugin;
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.to;
 import static com.seed4j.module.domain.javadependency.JavaDependencyScope.RUNTIME;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javadependency.JavaDependency;
@@ -25,7 +25,7 @@ public class SpringBootDockerModuleFactory {
   private static final SeedSource JIB_SOURCE = SOURCE.append("jib");
   private static final String JAVA_DOCKER_IMAGE = "eclipse-temurin:%s-jre-jammy";
 
-  public JHipsterModule buildJibModule(SeedModuleProperties properties) {
+  public SeedModule buildJibModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off
@@ -150,19 +150,19 @@ public class SpringBootDockerModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildDockerFileMavenModule(SeedModuleProperties properties) {
+  public SeedModule buildDockerFileMavenModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     return moduleBuilder(properties).files().add(SOURCE.template("Dockerfile-maven"), to("Dockerfile")).and().build();
   }
 
-  public JHipsterModule buildDockerFileGradleModule(SeedModuleProperties properties) {
+  public SeedModule buildDockerFileGradleModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     return moduleBuilder(properties).files().add(SOURCE.template("Dockerfile-gradle"), to("Dockerfile")).and().build();
   }
 
-  public JHipsterModule buildSpringBootDockerComposeModule(SeedModuleProperties properties) {
+  public SeedModule buildSpringBootDockerComposeModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off

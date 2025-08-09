@@ -1,14 +1,14 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdoccore.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.localEnvironment;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.localEnvironment;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
 
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
@@ -26,15 +26,15 @@ public class SpringdocModuleFactory {
 
   private static final String SPRINGDOC_CONFIG_JAVA_FILE = "SpringdocConfiguration.java";
 
-  public JHipsterModule buildModuleForMvc(SeedModuleProperties moduleProperties) {
+  public SeedModule buildModuleForMvc(SeedModuleProperties moduleProperties) {
     return buildModule(moduleProperties, SpringdocDependencies.MVC);
   }
 
-  public JHipsterModule buildModuleForWebflux(SeedModuleProperties moduleProperties) {
+  public SeedModule buildModuleForWebflux(SeedModuleProperties moduleProperties) {
     return buildModule(moduleProperties, SpringdocDependencies.WEBFLUX);
   }
 
-  private JHipsterModule buildModule(SeedModuleProperties properties, SpringdocDependencies dependencies) {
+  private SeedModule buildModule(SeedModuleProperties properties, SpringdocDependencies dependencies) {
     Assert.notNull("properties", properties);
 
     SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(DESTINATION);

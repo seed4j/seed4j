@@ -1,10 +1,10 @@
 package com.seed4j.generator.client.react.security.jwt.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.SeedModule.*;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.REACT;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -36,7 +36,7 @@ public class ReactJwtModuleFactory {
       align-items: center;\
     """;
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

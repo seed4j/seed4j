@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.secondary.javabuild;
 
-import static com.seed4j.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.SeedModule.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 

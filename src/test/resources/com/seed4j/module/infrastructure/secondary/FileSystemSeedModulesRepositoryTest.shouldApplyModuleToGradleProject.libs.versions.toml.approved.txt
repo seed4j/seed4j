@@ -1,0 +1,69 @@
+plugins = {}
+bundles = {}
+
+[versions]
+	json-web-token = "[version]"
+	reflections = "[version]"
+	cassandraunit = "[version]"
+	git-properties = "[version]"
+	jacoco = "[version]"
+	spring-boot = "[version]"
+	commons-lang3 = "[version]"
+	checkstyle = "[version]"
+
+	[libraries.jjwt-api]
+		name = "jjwt-api"
+		group = "io.jsonwebtoken"
+
+		[libraries.jjwt-api.version]
+			ref = "json-web-token"
+
+	[libraries.junit-jupiter-engine]
+		name = "junit-jupiter-engine"
+		group = "org.junit.jupiter"
+
+		[libraries.junit-jupiter-engine.version]
+			ref = "spring-boot"
+
+	[libraries.spring-boot-starter]
+		name = "spring-boot-starter"
+		group = "org.springframework.boot"
+
+	[libraries.spring-boot-starter-web]
+		name = "spring-boot-starter-web"
+		group = "org.springframework.boot"
+
+	[libraries.reflections]
+		name = "reflections"
+		group = "org.reflections"
+
+		[libraries.reflections.version]
+			ref = "reflections"
+
+	[libraries.spring-boot-dependencies]
+		name = "spring-boot-dependencies"
+		group = "org.springframework.boot"
+
+		[libraries.spring-boot-dependencies.version]
+			ref = "spring-boot"
+
+	[libraries.commons-lang3]
+		name = "commons-lang3"
+		group = "org.apache.commons"
+
+		[libraries.commons-lang3.version]
+			ref = "commons-lang3"
+
+	[libraries.cassandra-unit]
+		name = "cassandra-unit"
+		group = "org.cassandraunit"
+
+		[libraries.cassandra-unit.version]
+			ref = "cassandraunit"
+
+	[libraries.gradle-git-properties]
+		name = "gradle-git-properties"
+		group = "com.gorylenko.gradle-git-properties"
+
+		[libraries.gradle-git-properties.version]
+			ref = "git-properties"

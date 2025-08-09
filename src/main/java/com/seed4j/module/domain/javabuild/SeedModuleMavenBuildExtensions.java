@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.javabuild;
 
-import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
+import com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
 import com.seed4j.module.domain.javabuild.command.AddMavenBuildExtension;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;

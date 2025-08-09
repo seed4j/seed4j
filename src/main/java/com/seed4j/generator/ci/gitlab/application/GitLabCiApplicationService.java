@@ -1,7 +1,7 @@
 package com.seed4j.generator.ci.gitlab.application;
 
 import com.seed4j.generator.ci.gitlab.domain.GitLabCiModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +14,11 @@ public class GitLabCiApplicationService {
     gitLabCi = new GitLabCiModuleFactory();
   }
 
-  public JHipsterModule buildGitLabCiMavenModule(SeedModuleProperties properties) {
+  public SeedModule buildGitLabCiMavenModule(SeedModuleProperties properties) {
     return gitLabCi.buildGitLabCiMavenModule(properties);
   }
 
-  public JHipsterModule buildGitLabCiGradleModule(SeedModuleProperties properties) {
+  public SeedModule buildGitLabCiGradleModule(SeedModuleProperties properties) {
     return gitLabCi.buildGitLabCiGradleModule(properties);
   }
 }

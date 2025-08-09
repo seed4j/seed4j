@@ -8,20 +8,20 @@ import com.seed4j.Logs;
 import com.seed4j.LogsSpy;
 import com.seed4j.LogsSpyExtension;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @UnitTest
 @ExtendWith(LogsSpyExtension.class)
-class FileSystemJHipsterModulesRepositoryTest {
+class FileSystemSeedModulesRepositoryTest {
 
   @Logs
   private LogsSpy logs;
 
   @Test
   void shouldApplyTwoModulesToMavenProject() {
-    JHipsterModule module = module();
+    SeedModule module = module();
 
     // @formatter:off
     assertThatTwoModulesWithFiles(
@@ -60,7 +60,7 @@ class FileSystemJHipsterModulesRepositoryTest {
 
   @Test
   void shouldApplyModuleToMavenProject() {
-    JHipsterModule module = module();
+    SeedModule module = module();
 
     // @formatter:off
     assertThatModuleWithFiles(
@@ -163,7 +163,7 @@ class FileSystemJHipsterModulesRepositoryTest {
 
   @Test
   void shouldApplyModuleToGradleProject() {
-    JHipsterModule module = module();
+    SeedModule module = module();
 
     // @formatter:off
     assertThatModuleWithFiles(

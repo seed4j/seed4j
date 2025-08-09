@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.primary;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.seed4j.module.domain.JHipsterModulesToApply;
 import com.seed4j.module.domain.SeedModuleSlug;
+import com.seed4j.module.domain.SeedModulesToApply;
 import com.seed4j.shared.projectfolder.domain.ProjectFolder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
@@ -24,8 +24,8 @@ class RestJHipsterModulesToApply {
     this.properties = properties;
   }
 
-  public JHipsterModulesToApply toDomain(ProjectFolder projectFolder) {
-    return new JHipsterModulesToApply(getModules().stream().map(SeedModuleSlug::new).toList(), properties.toDomain(projectFolder));
+  public SeedModulesToApply toDomain(ProjectFolder projectFolder) {
+    return new SeedModulesToApply(getModules().stream().map(SeedModuleSlug::new).toList(), properties.toDomain(projectFolder));
   }
 
   @NotEmpty

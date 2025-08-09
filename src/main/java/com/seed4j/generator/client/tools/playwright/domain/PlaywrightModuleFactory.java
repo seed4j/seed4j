@@ -1,15 +1,15 @@
 package com.seed4j.generator.client.tools.playwright.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.scriptCommand;
-import static com.seed4j.module.domain.JHipsterModule.scriptKey;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.scriptCommand;
+import static com.seed4j.module.domain.SeedModule.scriptKey;
+import static com.seed4j.module.domain.SeedModule.to;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -23,7 +23,7 @@ public class PlaywrightModuleFactory {
   private static final SeedDestination WEBAPP_E2E_TESTS = to("src/test/webapp/e2e/");
   private static final String PLAYWRIGHT_TESTS = "common/primary/app";
 
-  public JHipsterModule buildComponentTestsModule(SeedModuleProperties properties) {
+  public SeedModule buildComponentTestsModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -41,7 +41,7 @@ public class PlaywrightModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildE2ETestsModule(SeedModuleProperties properties) {
+  public SeedModule buildE2ETestsModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

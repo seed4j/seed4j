@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.file;
 
-import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
-import com.seed4j.module.domain.JHipsterModuleUpgrade;
+import com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import com.seed4j.module.domain.SeedModuleUpgrade;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
@@ -19,7 +19,7 @@ public final class SeedModuleFiles {
     filesToDelete = new SeedFilesToDelete(builder.filesToDelete);
   }
 
-  private SeedModuleFiles(SeedModuleFiles source, JHipsterModuleUpgrade upgrade) {
+  private SeedModuleFiles(SeedModuleFiles source, SeedModuleUpgrade upgrade) {
     Assert.notNull("ignoredFiles", upgrade);
 
     filesToAdd = buildFilesToAdd(source, upgrade.skippedFiles());
@@ -38,7 +38,7 @@ public final class SeedModuleFiles {
     return new JHipsterModuleFilesBuilder(module);
   }
 
-  public SeedModuleFiles forUpgrade(JHipsterModuleUpgrade upgrade) {
+  public SeedModuleFiles forUpgrade(SeedModuleUpgrade upgrade) {
     return new SeedModuleFiles(this, upgrade);
   }
 

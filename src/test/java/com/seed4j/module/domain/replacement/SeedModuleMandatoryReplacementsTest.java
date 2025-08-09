@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.replacement;
 
-import static com.seed4j.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.SeedModule.*;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterModuleMandatoryReplacementsTest {
+class SeedModuleMandatoryReplacementsTest {
 
   @Test
   void shouldNotApplyReplacementOnUnknownCurrentValue() {

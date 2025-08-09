@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.database.datasource.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
 
 import com.seed4j.module.domain.docker.DockerImageName;
 import com.seed4j.module.domain.javabuild.ArtifactId;

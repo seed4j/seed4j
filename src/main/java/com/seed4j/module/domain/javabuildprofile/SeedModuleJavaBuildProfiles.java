@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.javabuildprofile;
 
-import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
+import com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
 import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;

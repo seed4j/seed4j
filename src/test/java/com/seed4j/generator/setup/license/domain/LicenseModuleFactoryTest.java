@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import java.time.Year;
 import java.time.ZoneId;
@@ -21,7 +21,7 @@ class LicenseModuleFactoryTest {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
     int year = Year.now(ZoneId.systemDefault()).getValue();
 
-    JHipsterModule module = factory.buildMitModule(properties);
+    SeedModule module = factory.buildMitModule(properties);
 
     assertThatModuleWithFiles(module).hasFile("LICENSE.txt").containing("Copyright %d".formatted(year));
   }
@@ -30,7 +30,7 @@ class LicenseModuleFactoryTest {
   void shouldBuildApacheModule() {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildApacheModule(properties);
+    SeedModule module = factory.buildApacheModule(properties);
 
     assertThatModuleWithFiles(module).hasFile("LICENSE.txt").containing("Apache License");
   }

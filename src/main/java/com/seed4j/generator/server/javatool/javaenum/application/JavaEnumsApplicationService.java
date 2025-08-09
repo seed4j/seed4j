@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.javatool.javaenum.application;
 
 import com.seed4j.generator.server.javatool.javaenum.domain.JavaEnumsModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class JavaEnumsApplicationService {
     javaEnums = new JavaEnumsModuleFactory();
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return javaEnums.buildModule(properties);
   }
 }

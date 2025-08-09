@@ -1,38 +1,38 @@
 package com.seed4j.module.domain;
 
-import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
+import com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public final class JHipsterModulePreActions {
+public final class SeedModulePreActions {
 
   private final Collection<Runnable> actions;
 
-  private JHipsterModulePreActions(JHipsterModulePreActionsBuilder builder) {
+  private SeedModulePreActions(SeedModulePreActionsBuilder builder) {
     actions = builder.actions;
   }
 
-  public static JHipsterModulePreActionsBuilder builder(SeedModuleBuilder module) {
-    return new JHipsterModulePreActionsBuilder(module);
+  public static SeedModulePreActionsBuilder builder(SeedModuleBuilder module) {
+    return new SeedModulePreActionsBuilder(module);
   }
 
   public void run() {
     actions.forEach(Runnable::run);
   }
 
-  public static final class JHipsterModulePreActionsBuilder {
+  public static final class SeedModulePreActionsBuilder {
 
     private final SeedModuleBuilder module;
     private final Collection<Runnable> actions = new ArrayList<>();
 
-    private JHipsterModulePreActionsBuilder(SeedModuleBuilder module) {
+    private SeedModulePreActionsBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
     }
 
-    public JHipsterModulePreActionsBuilder add(Runnable action) {
+    public SeedModulePreActionsBuilder add(Runnable action) {
       Assert.notNull("action", action);
 
       actions.add(action);
@@ -44,8 +44,8 @@ public final class JHipsterModulePreActions {
       return module;
     }
 
-    public JHipsterModulePreActions build() {
-      return new JHipsterModulePreActions(this);
+    public SeedModulePreActions build() {
+      return new SeedModulePreActions(this);
     }
   }
 }

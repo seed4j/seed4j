@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class SpringdocModuleFactoryTest {
 
   @Test
   void shouldBuildModuleForMvc() {
-    JHipsterModule module = springdocModuleFactory.buildModuleForMvc(properties());
+    SeedModule module = springdocModuleFactory.buildModuleForMvc(properties());
 
     assertThatSpringdocModule(module)
       .hasFile("src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java")
@@ -30,7 +30,7 @@ class SpringdocModuleFactoryTest {
 
   @Test
   void shouldBuildModuleForWebflux() {
-    JHipsterModule module = springdocModuleFactory.buildModuleForWebflux(properties());
+    SeedModule module = springdocModuleFactory.buildModuleForWebflux(properties());
 
     assertThatSpringdocModule(module)
       .hasFile("src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java")
@@ -48,7 +48,7 @@ class SpringdocModuleFactoryTest {
       .build();
   }
 
-  private static JHipsterModuleAsserter assertThatSpringdocModule(JHipsterModule module) {
+  private static JHipsterModuleAsserter assertThatSpringdocModule(SeedModule module) {
     return assertThatModuleWithFiles(module, pomFile(), readmeFile(), logbackFile(), testLogbackFile())
       .hasFile("src/main/resources/config/application.yml")
       .containing(

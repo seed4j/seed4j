@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.vue.security.oauth2_keycloak.application;
 
 import com.seed4j.generator.client.vue.security.oauth2_keycloak.domain.VueOAuth2KeycloakModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class VueOAuth2KeycloakApplicationService {
     vueOAuth2Keycloak = new VueOAuth2KeycloakModuleFactory();
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return vueOAuth2Keycloak.buildModule(properties);
   }
 }

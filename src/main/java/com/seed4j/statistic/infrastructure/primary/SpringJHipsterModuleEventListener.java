@@ -1,6 +1,6 @@
 package com.seed4j.statistic.infrastructure.primary;
 
-import com.seed4j.module.domain.JHipsterModuleApplied;
+import com.seed4j.module.domain.SeedModuleApplied;
 import com.seed4j.statistic.application.StatisticsApplicationService;
 import com.seed4j.statistic.domain.AppliedModule;
 import com.seed4j.statistic.domain.AppliedModuleId;
@@ -12,7 +12,7 @@ import org.springframework.context.PayloadApplicationEvent;
 import org.springframework.stereotype.Component;
 
 @Component
-class SpringJHipsterModuleEventListener implements ApplicationListener<PayloadApplicationEvent<JHipsterModuleApplied>> {
+class SpringJHipsterModuleEventListener implements ApplicationListener<PayloadApplicationEvent<SeedModuleApplied>> {
 
   private final StatisticsApplicationService statistics;
 
@@ -21,11 +21,11 @@ class SpringJHipsterModuleEventListener implements ApplicationListener<PayloadAp
   }
 
   @Override
-  public void onApplicationEvent(PayloadApplicationEvent<JHipsterModuleApplied> event) {
+  public void onApplicationEvent(PayloadApplicationEvent<SeedModuleApplied> event) {
     statistics.moduleApplied(toModuleApplied(event.getPayload()));
   }
 
-  private AppliedModule toModuleApplied(JHipsterModuleApplied moduleApplied) {
+  private AppliedModule toModuleApplied(SeedModuleApplied moduleApplied) {
     return AppliedModule.builder()
       .id(AppliedModuleId.newId())
       .path(new ProjectPath(moduleApplied.properties().projectFolder().get()))

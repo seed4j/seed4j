@@ -5,7 +5,7 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import java.util.Set;
 import org.junit.jupiter.api.Nested;
@@ -23,7 +23,7 @@ class TikuiModuleFactoryTest {
     void shouldBuildModuleWithPugFormat() {
       SeedModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      JHipsterModule module = factory.buildModule(properties);
+      SeedModule module = factory.buildModule(properties);
 
       assertThatModuleWithFiles(module, packageJsonFile(), prettierConfigFile())
         .hasFile("package.json")
@@ -142,7 +142,7 @@ class TikuiModuleFactoryTest {
   private static JHipsterModuleAsserter assertThatTikuiModule(ModuleFile proxyFile, ModuleFile indexFile) {
     SeedModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     return assertThatModuleWithFiles(module, packageJsonFile(), proxyFile, indexFile)
       .hasFile("package.json")

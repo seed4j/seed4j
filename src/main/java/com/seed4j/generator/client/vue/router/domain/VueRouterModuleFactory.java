@@ -1,10 +1,10 @@
 package com.seed4j.generator.client.vue.router.domain;
 
 import static com.seed4j.generator.typescript.common.domain.VitestShortcuts.vitestCoverageExclusion;
-import static com.seed4j.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.SeedModule.*;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -29,7 +29,7 @@ public class VueRouterModuleFactory {
       };\
     """;
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .packageJson()

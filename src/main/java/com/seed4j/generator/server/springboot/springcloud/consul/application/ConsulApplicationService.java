@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.springcloud.consul.application;
 
 import com.seed4j.generator.server.springboot.springcloud.consul.domain.ConsulModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class ConsulApplicationService {
     this.consul = new ConsulModuleFactory(dockerImages);
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return consul.buildModule(properties);
   }
 }

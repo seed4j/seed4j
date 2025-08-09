@@ -5,8 +5,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 import static org.mockito.Mockito.when;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -36,7 +36,7 @@ class KafkaModuleFactoryTest {
       .put("kafkaClusterId", "my-cluster")
       .build();
 
-    JHipsterModule module = factory.buildModuleInit(properties);
+    SeedModule module = factory.buildModuleInit(properties);
 
     assertThatModuleWithFiles(
       module,
@@ -115,7 +115,7 @@ class KafkaModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildModuleSampleProducerConsumer(properties);
+    SeedModule module = factory.buildModuleSampleProducerConsumer(properties);
 
     var sampleProducerPath = "sample/infrastructure/secondary/kafka/producer";
     var sampleConsumerPath = "sample/infrastructure/primary/kafka/consumer";
@@ -154,7 +154,7 @@ class KafkaModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    JHipsterModule module = factory.buildModuleAkhq(properties);
+    SeedModule module = factory.buildModuleAkhq(properties);
 
     assertThatModuleWithFiles(module, pomFile(), readmeFile())
       .hasFile("src/main/docker/akhq.yml")

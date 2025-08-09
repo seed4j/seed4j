@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.logging.logstash.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.SeedModule.*;
 
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
@@ -14,7 +14,7 @@ public class LogstashModuleFactory {
 
   private static final String LOGSTASH_SECONDARY = "wire/logstash/infrastructure/secondary";
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

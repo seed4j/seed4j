@@ -6,8 +6,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ class MavenModuleFactoryTest {
       .projectName("JHipster test")
       .build();
 
-    JHipsterModule module = factory.buildMavenModule(properties);
+    SeedModule module = factory.buildMavenModule(properties);
 
     assertThatModuleWithFiles(module, readmeFile())
       .hasFile("pom.xml")
@@ -186,7 +186,7 @@ class MavenModuleFactoryTest {
       .projectName("JHipster test")
       .build();
 
-    JHipsterModule module = factory.buildMavenModule(properties);
+    SeedModule module = factory.buildMavenModule(properties);
 
     assertThatModuleWithFiles(module, readmeFile())
       .hasFile("pom.xml")
@@ -202,7 +202,7 @@ class MavenModuleFactoryTest {
   void shouldBuildMavenWrapperModule() {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildMavenWrapperModule(properties);
+    SeedModule module = factory.buildMavenWrapperModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), readmeFile())
       .hasFile(".gitignore")

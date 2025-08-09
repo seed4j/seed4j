@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 class FileSystemYamlSpringCommentsCommandsHandler {
 
-  private static final Map<SpringPropertyType, List<String>> PROPERTIES_PATHS = FileSystemJHipsterModulesRepository.buildPaths();
+  private static final Map<SpringPropertyType, List<String>> PROPERTIES_PATHS = FileSystemSeedModulesRepository.buildPaths();
 
   public void handle(Indentation indentation, SeedProjectFolder projectFolder, SpringComments comments) {
     Assert.notNull("projectFolder", projectFolder);

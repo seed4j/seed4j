@@ -1,15 +1,15 @@
 package com.seed4j.generator.buildtool.maven.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.to;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
@@ -35,7 +35,7 @@ public class MavenModuleFactory {
 
     - [JDK 21](https://openjdk.java.net/projects/jdk/21/)""";
 
-  public JHipsterModule buildMavenModule(SeedModuleProperties properties) {
+  public SeedModule buildMavenModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -101,7 +101,7 @@ public class MavenModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildMavenWrapperModule(SeedModuleProperties properties) {
+  public SeedModule buildMavenWrapperModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

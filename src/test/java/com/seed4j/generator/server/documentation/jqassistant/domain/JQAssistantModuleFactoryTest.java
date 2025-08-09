@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ class JQAssistantModuleFactoryTest {
       .basePackage("com.seed4j.growth")
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile(".jqassistant.yml")
@@ -109,7 +109,7 @@ class JQAssistantModuleFactoryTest {
       .basePackage("com.seed4j.growth")
       .build();
 
-    JHipsterModule module = factory.buildJMoleculesModule(properties);
+    SeedModule module = factory.buildJMoleculesModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), jQAssistantYmlFile())
       .hasFile(".jqassistant.yml")
@@ -141,7 +141,7 @@ class JQAssistantModuleFactoryTest {
       .basePackage("com.seed4j.growth")
       .build();
 
-    JHipsterModule module = factory.buildSpringModule(properties);
+    SeedModule module = factory.buildSpringModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), jQAssistantYmlFile())
       .hasFile(".jqassistant.yml")

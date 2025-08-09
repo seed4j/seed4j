@@ -5,8 +5,8 @@ import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -36,7 +36,7 @@ class OAuth2ModuleFactoryTest {
 
     when(dockerImages.get("quay.io/keycloak/keycloak")).thenReturn(new DockerImageVersion("quay.io/keycloak/keycloak", "1.1.1"));
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), integrationTestFile(), readmeFile())
       .hasPrefixedFiles("src/main/java/com/seed4j/growth/shared/authentication/domain", "Role.java", "Roles.java", "Username.java")

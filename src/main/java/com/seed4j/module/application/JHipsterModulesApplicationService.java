@@ -14,36 +14,36 @@ import org.springframework.stereotype.Service;
 @Service
 public class JHipsterModulesApplicationService {
 
-  private final JHipsterModuleEvents events;
-  private final JHipsterModulesRepository modules;
-  private final JHipsterModulesApplyer applyer;
-  private final JHipsterPresetRepository preset;
+  private final SeedModuleEvents events;
+  private final SeedModulesRepository modules;
+  private final SeedModulesApplyer applyer;
+  private final SeedPresetRepository preset;
 
   public JHipsterModulesApplicationService(
-    JHipsterModuleEvents events,
-    JHipsterModulesRepository modules,
+    SeedModuleEvents events,
+    SeedModulesRepository modules,
     JavaDependenciesVersionsRepository currentVersions,
     ProjectJavaDependenciesRepository projectDependencies,
     ProjectJavaBuildToolRepository javaBuildTools,
     GitRepository git,
     GeneratedProjectRepository generatedProject,
-    JHipsterPresetRepository preset
+    SeedPresetRepository preset
   ) {
     this.events = events;
     this.modules = modules;
     this.preset = preset;
 
-    applyer = new JHipsterModulesApplyer(modules, currentVersions, projectDependencies, javaBuildTools, git, generatedProject);
+    applyer = new SeedModulesApplyer(modules, currentVersions, projectDependencies, javaBuildTools, git, generatedProject);
   }
 
-  public void apply(JHipsterModulesToApply modulesToApply) {
-    Collection<JHipsterModuleApplied> modulesApplied = applyer.apply(modulesToApply);
+  public void apply(SeedModulesToApply modulesToApply) {
+    Collection<SeedModuleApplied> modulesApplied = applyer.apply(modulesToApply);
 
     modulesApplied.forEach(events::dispatch);
   }
 
-  public void apply(JHipsterModuleToApply moduleToApply) {
-    JHipsterModuleApplied moduleApplied = applyer.apply(moduleToApply);
+  public void apply(SeedModuleToApply moduleToApply) {
+    SeedModuleApplied moduleApplied = applyer.apply(moduleToApply);
 
     events.dispatch(moduleApplied);
   }

@@ -1,20 +1,20 @@
 package com.seed4j.generator.server.javatool.frontendmaven.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.buildPropertyKey;
-import static com.seed4j.module.domain.JHipsterModule.buildPropertyValue;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.gradleCommunityPlugin;
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.buildPropertyKey;
+import static com.seed4j.module.domain.SeedModule.buildPropertyValue;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.COMPILE;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.GENERATE_RESOURCES;
 import static com.seed4j.module.domain.nodejs.NodePackageManager.NPM;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
@@ -41,7 +41,7 @@ public class FrontendJavaBuildToolModuleFactory {
     this.nodeVersions = nodeVersions;
   }
 
-  public JHipsterModule buildFrontendMavenModule(SeedModuleProperties properties) {
+  public SeedModule buildFrontendMavenModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     SeedModuleBuilder moduleBuilder = commonModuleFiles(properties);
@@ -66,7 +66,7 @@ public class FrontendJavaBuildToolModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildFrontendMavenCacheModule(SeedModuleProperties properties) {
+  public SeedModule buildFrontendMavenCacheModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off
@@ -167,7 +167,7 @@ public class FrontendJavaBuildToolModuleFactory {
       .addExecution(MavenFrontendPluginExecutions.testFront(nodePackageManager));
   }
 
-  public JHipsterModule buildFrontendGradleModule(SeedModuleProperties properties) {
+  public SeedModule buildFrontendGradleModule(SeedModuleProperties properties) {
     NodePackageManager nodePackageManager = properties.nodePackageManager();
     // @formatter:off
     return commonModuleFiles(properties)
@@ -189,7 +189,7 @@ public class FrontendJavaBuildToolModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildMergeCypressCoverageModule(SeedModuleProperties properties) {
+  public SeedModule buildMergeCypressCoverageModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
     // @formatter:off
     return moduleBuilder(properties)

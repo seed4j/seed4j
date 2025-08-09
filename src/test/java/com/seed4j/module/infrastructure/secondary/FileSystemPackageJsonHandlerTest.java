@@ -1,10 +1,10 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.scriptCommand;
-import static com.seed4j.module.domain.JHipsterModule.scriptKey;
 import static com.seed4j.module.domain.JHipsterModulesFixture.emptyModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModulesFixture.emptyModuleContext;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.scriptCommand;
+import static com.seed4j.module.domain.SeedModule.scriptKey;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.ANGULAR;
 import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.packagejson.NodeModuleFormat.COMMONJS;

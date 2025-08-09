@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 class FileSystemSpringPropertiesCommandsHandler {
 
-  private static final Map<SpringPropertyType, List<String>> PROPERTIES_PATHS = FileSystemJHipsterModulesRepository.buildPaths();
+  private static final Map<SpringPropertyType, List<String>> PROPERTIES_PATHS = FileSystemSeedModulesRepository.buildPaths();
 
   public void handle(SeedProjectFolder projectFolder, SpringProperties properties) {
     Assert.notNull("projectFolder", projectFolder);
@@ -46,9 +46,9 @@ class FileSystemSpringPropertiesCommandsHandler {
   private static Supplier<Path> defaultPropertiesFile(SeedProjectFolder projectFolder, SpringProperty property) {
     return switch (property.type()) {
       case MAIN_PROPERTIES, MAIN_BOOTSTRAP_PROPERTIES -> () ->
-        projectFolder.filePath(FileSystemJHipsterModulesRepository.DEFAULT_MAIN_FOLDER + propertiesFilename(property));
+        projectFolder.filePath(FileSystemSeedModulesRepository.DEFAULT_MAIN_FOLDER + propertiesFilename(property));
       case TEST_PROPERTIES, TEST_BOOTSTRAP_PROPERTIES -> () ->
-        projectFolder.filePath(FileSystemJHipsterModulesRepository.DEFAULT_TEST_FOLDER + propertiesFilename(property));
+        projectFolder.filePath(FileSystemSeedModulesRepository.DEFAULT_TEST_FOLDER + propertiesFilename(property));
     };
   }
 

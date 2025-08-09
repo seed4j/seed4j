@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ class SampleFlywayModuleFactoryTest {
       .put("date", "2021-12-03T10:15:30.00Z")
       .build();
 
-    JHipsterModule module = factory.buildPostgreSQLModule(properties);
+    SeedModule module = factory.buildPostgreSQLModule(properties);
 
     assertThatModule(module)
       .hasFile("src/main/resources/db/migration/V20211203101531__sample_feature_schema.sql")
@@ -33,7 +33,7 @@ class SampleFlywayModuleFactoryTest {
       .put("date", "2021-12-03T10:15:30.00Z")
       .build();
 
-    JHipsterModule module = factory.buildNotPostgreSQLModule(properties);
+    SeedModule module = factory.buildNotPostgreSQLModule(properties);
 
     assertThatModule(module)
       .hasFile("src/main/resources/db/migration/V20211203101531__sample_feature_schema.sql")

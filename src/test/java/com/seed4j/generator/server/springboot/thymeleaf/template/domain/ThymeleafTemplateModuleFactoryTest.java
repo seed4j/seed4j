@@ -9,8 +9,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ class ThymeleafTemplateModuleFactoryTest {
       .basePackage("com.seed4j.growth")
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     // @formatter:off
     assertThatModuleWithFiles(module, packageJsonFile())
@@ -73,7 +73,7 @@ class ThymeleafTemplateModuleFactoryTest {
       .nodePackageManager(PNPM)
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     // @formatter:off
     assertThatModuleWithFiles(module, packageJsonFile())
@@ -91,7 +91,7 @@ class ThymeleafTemplateModuleFactoryTest {
       .projectBaseName("jhipster")
       .build();
 
-    JHipsterModule module = factory.buildTailwindcssModule(properties);
+    SeedModule module = factory.buildTailwindcssModule(properties);
 
     // @formatter:off
     assertThatModuleWithFiles(
@@ -168,7 +168,7 @@ class ThymeleafTemplateModuleFactoryTest {
       .put("serverPort", 8081)
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     // @formatter:off
     assertThatModuleWithFiles(module, packageJsonFile())

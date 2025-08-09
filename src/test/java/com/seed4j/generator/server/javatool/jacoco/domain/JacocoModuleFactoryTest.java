@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ class JacocoModuleFactoryTest {
     void shouldBuildJacocoModule() {
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      JHipsterModule module = factory.buildJacocoModule(properties);
+      SeedModule module = factory.buildJacocoModule(properties);
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -106,7 +106,7 @@ class JacocoModuleFactoryTest {
     void shouldBuildJacocoWithMinCoverageCheckModule() {
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      JHipsterModule module = factory.buildJacocoWithMinCoverageCheckModule(properties);
+      SeedModule module = factory.buildJacocoWithMinCoverageCheckModule(properties);
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -152,7 +152,7 @@ class JacocoModuleFactoryTest {
     void shouldBuildJacocoModule() {
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      JHipsterModule module = factory.buildJacocoModule(properties);
+      SeedModule module = factory.buildJacocoModule(properties);
 
       assertThatModuleWithFiles(module, gradleBuildFile())
         .hasFile("build.gradle.kts")
@@ -194,7 +194,7 @@ class JacocoModuleFactoryTest {
   void shouldBuildJacocoWithMinCoverageCheckModule() {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildJacocoWithMinCoverageCheckModule(properties);
+    SeedModule module = factory.buildJacocoWithMinCoverageCheckModule(properties);
 
     assertThatModuleWithFiles(module, gradleBuildFile())
       .hasFile("build.gradle.kts")

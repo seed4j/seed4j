@@ -9,12 +9,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @UnitTest
-class JHipsterModuleSlugTest {
+class SeedModuleSlugTest {
 
   @ParameterizedTest
   @ValueSource(strings = { "Invalid", "this is invalid" })
   void shouldNotBuildInvalidSlug(String slug) {
-    assertThatThrownBy(() -> new SeedModuleSlug(slug)).isExactlyInstanceOf(InvalidJHipsterSlugException.class);
+    assertThatThrownBy(() -> new SeedModuleSlug(slug)).isExactlyInstanceOf(InvalidJSeedSlugException.class);
   }
 
   @Test

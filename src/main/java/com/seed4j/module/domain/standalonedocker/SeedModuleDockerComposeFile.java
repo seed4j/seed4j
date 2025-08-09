@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.standalonedocker;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.startupcommand.DockerComposeFile;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
@@ -23,16 +23,16 @@ public final class SeedModuleDockerComposeFile {
     return dockerComposeFiles.toString();
   }
 
-  public static SeedModuleDockerComposeFileBuilder builder(JHipsterModule.SeedModuleBuilder parentModuleBuilder) {
+  public static SeedModuleDockerComposeFileBuilder builder(SeedModule.SeedModuleBuilder parentModuleBuilder) {
     return new SeedModuleDockerComposeFileBuilder(parentModuleBuilder);
   }
 
   public static final class SeedModuleDockerComposeFileBuilder {
 
     private final Collection<DockerComposeFile> dockerComposeFiles = new ArrayList<>();
-    private final JHipsterModule.SeedModuleBuilder module;
+    private final SeedModule.SeedModuleBuilder module;
 
-    private SeedModuleDockerComposeFileBuilder(JHipsterModule.SeedModuleBuilder module) {
+    private SeedModuleDockerComposeFileBuilder(SeedModule.SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -46,7 +46,7 @@ public final class SeedModuleDockerComposeFile {
       return this;
     }
 
-    public JHipsterModule.SeedModuleBuilder and() {
+    public SeedModule.SeedModuleBuilder and() {
       return module;
     }
 

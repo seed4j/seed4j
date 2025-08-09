@@ -1,11 +1,11 @@
 package com.seed4j.generator.buildtool.gradle.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.to;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
@@ -16,7 +16,7 @@ public class GradleModuleFactory {
 
   private static final SeedSource SOURCE = from("buildtool/gradle");
 
-  public JHipsterModule buildGradleModule(SeedModuleProperties properties) {
+  public SeedModule buildGradleModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -92,7 +92,7 @@ public class GradleModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildGradleWrapperModule(SeedModuleProperties properties) {
+  public SeedModule buildGradleWrapperModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

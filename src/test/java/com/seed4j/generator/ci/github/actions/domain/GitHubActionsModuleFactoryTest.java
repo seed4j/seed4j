@@ -7,8 +7,8 @@ import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -33,7 +33,7 @@ class GitHubActionsModuleFactoryTest {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
     mockNodeVersion();
 
-    JHipsterModule module = factory.buildGitHubActionsMavenModule(properties);
+    SeedModule module = factory.buildGitHubActionsMavenModule(properties);
 
     assertThatModuleWithFiles(module, pomFile()).hasFile(".github/workflows/github-actions.yml").matchingSavedSnapshot();
   }
@@ -47,7 +47,7 @@ class GitHubActionsModuleFactoryTest {
     SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
     mockNodeVersion();
 
-    JHipsterModule module = factory.buildGitHubActionsGradleModule(properties);
+    SeedModule module = factory.buildGitHubActionsGradleModule(properties);
 
     assertThatModuleWithFiles(module, gradleBuildFile()).hasFile(".github/workflows/github-actions.yml").matchingSavedSnapshot();
   }

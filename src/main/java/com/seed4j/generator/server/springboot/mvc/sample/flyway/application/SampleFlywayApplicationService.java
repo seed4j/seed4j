@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.mvc.sample.flyway.application;
 
 import com.seed4j.generator.server.springboot.mvc.sample.flyway.domain.SampleFlywayModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +14,11 @@ public class SampleFlywayApplicationService {
     sampleFlyway = new SampleFlywayModuleFactory();
   }
 
-  public JHipsterModule buildPostgreSQLModule(SeedModuleProperties properties) {
+  public SeedModule buildPostgreSQLModule(SeedModuleProperties properties) {
     return sampleFlyway.buildPostgreSQLModule(properties);
   }
 
-  public JHipsterModule buildNotPostgreSQLModule(SeedModuleProperties properties) {
+  public SeedModule buildNotPostgreSQLModule(SeedModuleProperties properties) {
     return sampleFlyway.buildNotPostgreSQLModule(properties);
   }
 }

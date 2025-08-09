@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ class ProtobufModuleFactoryTest {
         .basePackage("com.seed4j.growth")
         .build();
 
-      JHipsterModule module = factory.buildProtobufModule(properties);
+      SeedModule module = factory.buildProtobufModule(properties);
 
       assertThatModuleWithFiles(module, pomFile())
         .hasPrefixedFiles(
@@ -96,7 +96,7 @@ class ProtobufModuleFactoryTest {
     void shouldBuildModuleForGradle() {
       SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      JHipsterModule module = factory.buildProtobufModule(properties);
+      SeedModule module = factory.buildProtobufModule(properties);
 
       assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
         .hasFile("gradle/libs.versions.toml")
@@ -140,7 +140,7 @@ class ProtobufModuleFactoryTest {
         .basePackage("com.seed4j.growth")
         .build();
 
-      JHipsterModule module = factory.buildProtobufBackwardsCompatibilityCheckModule(properties);
+      SeedModule module = factory.buildProtobufBackwardsCompatibilityCheckModule(properties);
 
       assertThatModuleWithFiles(module, pomFile(), lintStagedConfigFileWithPrettier())
         .hasFile(".lintstagedrc.cjs")

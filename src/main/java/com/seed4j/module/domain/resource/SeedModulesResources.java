@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.resource;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
@@ -145,7 +145,7 @@ public class SeedModulesResources {
     return resources.get(slug);
   }
 
-  public JHipsterModule build(SeedModuleSlug slug, SeedModuleProperties properties) {
+  public SeedModule build(SeedModuleSlug slug, SeedModuleProperties properties) {
     Assert.notNull("slug", slug);
     Assert.notNull("properties", properties);
 

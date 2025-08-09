@@ -1,12 +1,12 @@
 package com.seed4j.module.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.lineAfterRegex;
-import static com.seed4j.module.domain.JHipsterModule.lineAfterText;
-import static com.seed4j.module.domain.JHipsterModule.lineBeforeText;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.regex;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.lineAfterRegex;
+import static com.seed4j.module.domain.SeedModule.lineAfterText;
+import static com.seed4j.module.domain.SeedModule.lineBeforeText;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.regex;
+import static com.seed4j.module.domain.SeedModule.to;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.always;
 
 import com.seed4j.module.domain.file.SeedSource;
@@ -17,7 +17,7 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
-final class JHipsterModuleShortcuts {
+final class SeedModuleShortcuts {
 
   private static final SeedProjectFilePath README = path("README.md");
   private static final TextNeedleBeforeReplacer JHIPSTER_DOCUMENTATION_NEEDLE = lineBeforeText("\n<!-- seed4j-needle-documentation -->");
@@ -33,7 +33,7 @@ final class JHipsterModuleShortcuts {
 
   private static final Pattern DEFAULT_LINTSTAGED_CONFIGURATION_ENTRY = Pattern.compile("\\s*'\\*': \\[\\s*].*");
 
-  private JHipsterModuleShortcuts() {}
+  private SeedModuleShortcuts() {}
 
   static Consumer<SeedModuleBuilder> documentation(DocumentationTitle title, SeedSource source) {
     Assert.notNull("title", title);

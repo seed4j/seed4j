@@ -11,7 +11,7 @@ class InvalidSeedSlugExceptionTest {
 
   @Test
   void shouldGetExceptionInformation() {
-    InvalidJHipsterSlugException exception = new InvalidJHipsterSlugException("invalid slug");
+    InvalidJSeedSlugException exception = new InvalidJSeedSlugException("invalid slug");
 
     assertThat(exception.getMessage()).isEqualTo(
       "The slug \"invalid slug\" is invalid (blank, bad format, ...). Slug should be only lower case letters, numbers and hyphens (-)"

@@ -1,7 +1,7 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.SeedModule.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;

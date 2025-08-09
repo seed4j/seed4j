@@ -1,7 +1,7 @@
 package com.seed4j.generator.ci.sonarqube.application;
 
 import com.seed4j.generator.ci.sonarqube.domain.SonarQubeModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Component;
@@ -15,15 +15,15 @@ public class SonarQubeApplicationService {
     sonarQube = new SonarQubeModuleFactory(dockerImages);
   }
 
-  public JHipsterModule buildBackendModule(SeedModuleProperties properties) {
+  public SeedModule buildBackendModule(SeedModuleProperties properties) {
     return sonarQube.buildBackendModule(properties);
   }
 
-  public JHipsterModule buildBackendFrontendModule(SeedModuleProperties properties) {
+  public SeedModule buildBackendFrontendModule(SeedModuleProperties properties) {
     return sonarQube.buildBackendFrontendModule(properties);
   }
 
-  public JHipsterModule buildTypescriptModule(SeedModuleProperties properties) {
+  public SeedModule buildTypescriptModule(SeedModuleProperties properties) {
     return sonarQube.buildTypescriptModule(properties);
   }
 }

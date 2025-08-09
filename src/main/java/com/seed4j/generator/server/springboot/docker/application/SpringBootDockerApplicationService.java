@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.docker.application;
 
 import com.seed4j.generator.server.springboot.docker.domain.SpringBootDockerModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,19 +14,19 @@ public class SpringBootDockerApplicationService {
     springBootDocker = new SpringBootDockerModuleFactory();
   }
 
-  public JHipsterModule buildJibModule(SeedModuleProperties properties) {
+  public SeedModule buildJibModule(SeedModuleProperties properties) {
     return springBootDocker.buildJibModule(properties);
   }
 
-  public JHipsterModule buildDockerFileMavenModule(SeedModuleProperties properties) {
+  public SeedModule buildDockerFileMavenModule(SeedModuleProperties properties) {
     return springBootDocker.buildDockerFileMavenModule(properties);
   }
 
-  public JHipsterModule buildDockerFileGradleModule(SeedModuleProperties properties) {
+  public SeedModule buildDockerFileGradleModule(SeedModuleProperties properties) {
     return springBootDocker.buildDockerFileGradleModule(properties);
   }
 
-  public JHipsterModule buildSpringBootDockerComposeModule(SeedModuleProperties properties) {
+  public SeedModule buildSpringBootDockerComposeModule(SeedModuleProperties properties) {
     return springBootDocker.buildSpringBootDockerComposeModule(properties);
   }
 }

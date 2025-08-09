@@ -1,20 +1,20 @@
 package com.seed4j.generator.server.javatool.protobuf.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.gradleCommunityPlugin;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
-import static com.seed4j.module.domain.JHipsterModule.stagedFilesFilter;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
-import static com.seed4j.module.domain.JHipsterModule.versionSlug;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.stagedFilesFilter;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.versionSlug;
 
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.PreCommitCommands;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
@@ -35,7 +35,7 @@ public class ProtobufModuleFactory {
   private static final VersionSlug PROTOBUF_VERSION_SLUG = versionSlug("protobuf");
   private static final GroupId PROTOBUF_GROUP_ID = groupId("com.google.protobuf");
 
-  public JHipsterModule buildProtobufModule(SeedModuleProperties properties) {
+  public SeedModule buildProtobufModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(PROTOBUF_PACKAGE);
@@ -109,7 +109,7 @@ public class ProtobufModuleFactory {
     return mavenPlugin().groupId("io.github.ascopes").artifactId("protobuf-maven-plugin");
   }
 
-  public JHipsterModule buildProtobufBackwardsCompatibilityCheckModule(SeedModuleProperties properties) {
+  public SeedModule buildProtobufBackwardsCompatibilityCheckModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .files()

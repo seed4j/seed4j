@@ -1,14 +1,14 @@
 package com.seed4j.generator.server.springboot.dbmigration.flyway.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.to;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -27,7 +27,7 @@ public class FlywayModuleFactory {
 
   private static final String PROPERTIES = "properties";
 
-  public JHipsterModule buildInitializationModule(SeedModuleProperties properties) {
+  public SeedModule buildInitializationModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     Instant date = properties.getInstantOrDefault("date", Instant.now());
@@ -52,13 +52,13 @@ public class FlywayModuleFactory {
     return "V%s__init.sql".formatted(FILE_DATE_FORMAT.format(date));
   }
 
-  public JHipsterModule buildMysqlDependencyModule(SeedModuleProperties properties) {
+  public SeedModule buildMysqlDependencyModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return moduleBuilder(properties).javaDependencies().addDependency(FLYWAY_GROUP_ID, artifactId("flyway-mysql")).and().build();
   }
 
-  public JHipsterModule buildPostgreSQLDependencyModule(SeedModuleProperties properties) {
+  public SeedModule buildPostgreSQLDependencyModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return moduleBuilder(properties)
@@ -68,7 +68,7 @@ public class FlywayModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildMsSqlServerDependencyModule(SeedModuleProperties properties) {
+  public SeedModule buildMsSqlServerDependencyModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return moduleBuilder(properties).javaDependencies().addDependency(FLYWAY_GROUP_ID, artifactId("flyway-sqlserver")).and().build();

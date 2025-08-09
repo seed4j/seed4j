@@ -2,8 +2,8 @@ package com.seed4j.module.domain;
 
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notContainingReplacement;
 
-import com.seed4j.module.domain.JHipsterModulePreActions.JHipsterModulePreActionsBuilder;
 import com.seed4j.module.domain.SeedModuleContext.JHipsterModuleContextBuilder;
+import com.seed4j.module.domain.SeedModulePreActions.SeedModulePreActionsBuilder;
 import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties;
 import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties.JHipsterModuleBuildPropertiesBuilder;
 import com.seed4j.module.domain.file.SeedDestination;
@@ -107,7 +107,7 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
 
 @SuppressWarnings("java:S6539")
-public final class JHipsterModule {
+public final class SeedModule {
 
   public static final String LINE_BREAK = "\n";
 
@@ -125,7 +125,7 @@ public final class JHipsterModule {
   private final SeedModuleGradlePlugins gradlePlugins;
   private final SeedModuleMavenBuildExtensions mavenBuildExtensions;
   private final SeedModulePackageJson packageJson;
-  private final JHipsterModulePreActions preActions;
+  private final SeedModulePreActions preActions;
   private final SeedModulePostActions postActions;
   private final SpringProperties springProperties;
   private final SpringComments springComments;
@@ -133,7 +133,7 @@ public final class JHipsterModule {
   private final SeedModuleGitIgnore gitIgnore;
   private final SeedModuleDockerComposeFile dockerComposeFile;
 
-  private JHipsterModule(SeedModuleBuilder builder) {
+  private SeedModule(SeedModuleBuilder builder) {
     properties = builder.properties;
 
     files = builder.files.build();
@@ -158,7 +158,7 @@ public final class JHipsterModule {
     dockerComposeFile = builder.dockerComposeFile.build();
   }
 
-  private JHipsterModule(JHipsterModule source, JHipsterModuleUpgrade upgrade) {
+  private SeedModule(SeedModule source, SeedModuleUpgrade upgrade) {
     Assert.notNull("upgrade", upgrade);
 
     properties = source.properties;
@@ -438,8 +438,8 @@ public final class JHipsterModule {
     return GradleCommunityProfilePlugin.builder();
   }
 
-  public JHipsterModule withUpgrade(JHipsterModuleUpgrade upgrade) {
-    return new JHipsterModule(this, upgrade);
+  public SeedModule withUpgrade(SeedModuleUpgrade upgrade) {
+    return new SeedModule(this, upgrade);
   }
 
   public SeedProjectFolder projectFolder() {
@@ -518,7 +518,7 @@ public final class JHipsterModule {
     return packageJson;
   }
 
-  public JHipsterModulePreActions preActions() {
+  public SeedModulePreActions preActions() {
     return preActions;
   }
 
@@ -568,7 +568,7 @@ public final class JHipsterModule {
     private final JHipsterModuleGradlePluginBuilder gradlePlugins = SeedModuleGradlePlugins.builder(this);
     private final JHipsterModuleMavenBuildExtensionsBuilder mavenBuildExtensions = SeedModuleMavenBuildExtensions.builder(this);
     private final JHipsterModulePackageJsonBuilder packageJson = SeedModulePackageJson.builder(this);
-    private final JHipsterModulePreActionsBuilder preActions = JHipsterModulePreActions.builder(this);
+    private final SeedModulePreActionsBuilder preActions = SeedModulePreActions.builder(this);
     private final SeedModulePostActionsBuilder postActions = SeedModulePostActions.builder(this);
     private final Map<PropertiesKey, JHipsterModuleSpringPropertiesBuilder> springProperties = new HashMap<>();
     private final Map<SpringFactoryType, JHipsterModuleSpringFactoriesBuilder> springFactories = new EnumMap<>(SpringFactoryType.class);
@@ -594,19 +594,19 @@ public final class JHipsterModule {
     }
 
     public SeedModuleBuilder documentation(DocumentationTitle title, SeedSource source) {
-      apply(JHipsterModuleShortcuts.documentation(title, source));
+      apply(SeedModuleShortcuts.documentation(title, source));
 
       return this;
     }
 
     public SeedModuleBuilder localEnvironment(LocalEnvironment localEnvironment) {
-      apply(JHipsterModuleShortcuts.localEnvironment(localEnvironment));
+      apply(SeedModuleShortcuts.localEnvironment(localEnvironment));
 
       return this;
     }
 
     public SeedModuleBuilder preCommitActions(StagedFilesFilter stagedFilesFilter, PreCommitCommands preCommitCommands) {
-      apply(JHipsterModuleShortcuts.preCommitActions(stagedFilesFilter, preCommitCommands));
+      apply(SeedModuleShortcuts.preCommitActions(stagedFilesFilter, preCommitCommands));
 
       return this;
     }
@@ -616,7 +616,7 @@ public final class JHipsterModule {
     }
 
     public SeedModuleBuilder prerequisites(String prerequisites) {
-      apply(JHipsterModuleShortcuts.prerequisites(prerequisites));
+      apply(SeedModuleShortcuts.prerequisites(prerequisites));
 
       return this;
     }
@@ -634,19 +634,19 @@ public final class JHipsterModule {
     }
 
     public SeedModuleBuilder springTestLogger(String name, LogLevel level) {
-      apply(JHipsterModuleShortcuts.springTestLogger(name, level));
+      apply(SeedModuleShortcuts.springTestLogger(name, level));
 
       return this;
     }
 
     public SeedModuleBuilder springMainLogger(String name, LogLevel level) {
-      apply(JHipsterModuleShortcuts.springMainLogger(name, level));
+      apply(SeedModuleShortcuts.springMainLogger(name, level));
 
       return this;
     }
 
     public SeedModuleBuilder integrationTestExtension(String extensionClass) {
-      apply(JHipsterModuleShortcuts.integrationTestExtension(extensionClass));
+      apply(SeedModuleShortcuts.integrationTestExtension(extensionClass));
 
       return this;
     }
@@ -696,7 +696,7 @@ public final class JHipsterModule {
       return packageJson;
     }
 
-    public JHipsterModulePreActionsBuilder preActions() {
+    public SeedModulePreActionsBuilder preActions() {
       return preActions;
     }
 
@@ -773,8 +773,8 @@ public final class JHipsterModule {
       return properties.indentation();
     }
 
-    public JHipsterModule build() {
-      return new JHipsterModule(this);
+    public SeedModule build() {
+      return new SeedModule(this);
     }
   }
 

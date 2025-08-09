@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.primary;
 
 import com.seed4j.module.application.JHipsterModulesApplicationService;
-import com.seed4j.module.domain.JHipsterModuleToApply;
 import com.seed4j.module.domain.SeedModuleSlug;
+import com.seed4j.module.domain.SeedModuleToApply;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.domain.resource.SeedModuleResource;
 import com.seed4j.shared.projectfolder.domain.ProjectFolder;
@@ -55,7 +55,7 @@ class ModulesResource {
   @PostMapping("modules/{slug}/apply-patch")
   public void applyPatch(@RequestBody @Validated RestJHipsterModuleProperties restProperties, @PathVariable("slug") String slug) {
     SeedModuleProperties properties = restProperties.toDomain(projectFolder);
-    modules.apply(new JHipsterModuleToApply(new SeedModuleSlug(slug), properties));
+    modules.apply(new SeedModuleToApply(new SeedModuleSlug(slug), properties));
   }
 
   @Hidden

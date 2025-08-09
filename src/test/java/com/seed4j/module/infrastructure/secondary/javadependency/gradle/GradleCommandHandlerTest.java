@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.gradle;
 
 import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.JHipsterModule.*;
 import static com.seed4j.module.domain.JHipsterModulesFixture.*;
+import static com.seed4j.module.domain.SeedModule.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.EnumSource.Mode.*;
 

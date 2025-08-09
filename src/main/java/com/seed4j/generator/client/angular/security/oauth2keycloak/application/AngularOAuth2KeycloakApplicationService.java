@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.angular.security.oauth2keycloak.application;
 
 import com.seed4j.generator.client.angular.security.oauth2keycloak.domain.AngularOAuth2KeycloakModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class AngularOAuth2KeycloakApplicationService {
     angularOauth2 = new AngularOAuth2KeycloakModuleFactory();
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return angularOauth2.buildModule(properties);
   }
 }

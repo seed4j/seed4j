@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.gitignore;
 
-import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
+import com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
 import com.seed4j.module.domain.gitignore.GitIgnoreEntry.GitIgnoreComment;
 import com.seed4j.module.domain.gitignore.GitIgnoreEntry.GitIgnorePattern;
 import com.seed4j.shared.error.domain.Assert;

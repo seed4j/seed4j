@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.infrastructure.secondary.FileSystemJHipsterModulesRepository.*;
+import static com.seed4j.module.infrastructure.secondary.FileSystemSeedModulesRepository.*;
 
 import com.seed4j.module.domain.javaproperties.SpringFactories;
 import com.seed4j.module.domain.javaproperties.SpringFactory;

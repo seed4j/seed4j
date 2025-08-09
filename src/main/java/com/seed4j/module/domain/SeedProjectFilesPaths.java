@@ -4,8 +4,8 @@ import com.seed4j.shared.collection.domain.SeedCollections;
 import java.util.Collection;
 import java.util.stream.Stream;
 
-public record JHipsterProjectFilesPaths(Collection<SeedProjectFilePath> paths) {
-  public JHipsterProjectFilesPaths(Collection<SeedProjectFilePath> paths) {
+public record SeedProjectFilesPaths(Collection<SeedProjectFilePath> paths) {
+  public SeedProjectFilesPaths(Collection<SeedProjectFilePath> paths) {
     this.paths = SeedCollections.immutable(paths);
   }
 

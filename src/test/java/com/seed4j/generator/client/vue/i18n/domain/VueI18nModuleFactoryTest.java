@@ -4,8 +4,8 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -15,7 +15,7 @@ class VueI18nModuleFactoryTest {
 
   @Test
   void shouldBuildI18nModule() {
-    JHipsterModule module = factory.buildModule(
+    SeedModule module = factory.buildModule(
       JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("jhipster").build()
     );
 

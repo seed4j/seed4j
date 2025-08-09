@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.svelte.core.application;
 
 import com.seed4j.generator.client.svelte.core.domain.SvelteModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class SvelteApplicationService {
     this.svelte = new SvelteModuleFactory(nodeLazyPackagesInstaller);
   }
 
-  public JHipsterModule buildModule(SeedModuleProperties project) {
+  public SeedModule buildModule(SeedModuleProperties project) {
     return svelte.buildModule(project);
   }
 }

@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.resource;
 
-import static com.seed4j.module.domain.resource.JHipsterModulePropertyDefinition.*;
+import static com.seed4j.module.domain.resource.SeedModulePropertyDefinition.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
@@ -12,7 +12,7 @@ class SeedModulePropertiesDefinitionTest {
 
   @Test
   void shouldDeduplicateProperties() {
-    Collection<JHipsterModulePropertyDefinition> properties = JHipsterModulePropertiesDefinition.builder()
+    Collection<SeedModulePropertyDefinition> properties = SeedModulePropertiesDefinition.builder()
       .addIndentation()
       .addBasePackage()
       .addBasePackage()
@@ -24,10 +24,10 @@ class SeedModulePropertiesDefinitionTest {
 
   @Test
   void shouldHaveMeaningfulToString() {
-    var definition = JHipsterModulePropertiesDefinition.builder().add(basePackageProperty()).build();
+    var definition = SeedModulePropertiesDefinition.builder().add(basePackageProperty()).build();
     assertThat(definition).hasToString(
         """
-        JHipsterModulePropertiesDefinition[definitions=[JHipsterModulePropertyDefinition[type=STRING,key=packageName,mandatory=true,description=Base java package,defaultValue=com.mycompany.myapp,order=-300]]]\
+        SeedModulePropertiesDefinition[definitions=[SeedModulePropertyDefinition[type=STRING,key=packageName,mandatory=true,description=Base java package,defaultValue=com.mycompany.myapp,order=-300]]]\
         """
       );
   }

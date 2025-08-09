@@ -3,8 +3,8 @@ package com.seed4j.module.domain.resource;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.List;
 
-public record JHipsterModuleGroup(String group) {
-  public JHipsterModuleGroup {
+public record SeedModuleGroup(String group) {
+  public SeedModuleGroup {
     Assert.field("group", group).notBlank().maxLength(50);
   }
 

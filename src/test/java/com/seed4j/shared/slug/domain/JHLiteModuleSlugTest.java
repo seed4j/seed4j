@@ -1,10 +1,10 @@
 package com.seed4j.shared.slug.domain;
 
-import static com.seed4j.module.domain.resource.JHipsterModuleRank.*;
+import static com.seed4j.module.domain.resource.SeedModuleRank.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.resource.JHipsterModuleRank;
+import com.seed4j.module.domain.resource.SeedModuleRank;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,7 +17,7 @@ class JHLiteModuleSlugTest {
 
   @MethodSource("shouldGetRank")
   @ParameterizedTest
-  void shouldGetRank(JHLiteModuleSlug jhLiteModuleSlug, JHipsterModuleRank expectedRank) {
+  void shouldGetRank(JHLiteModuleSlug jhLiteModuleSlug, SeedModuleRank expectedRank) {
     assertThat(JHLiteModuleSlug.getRank(jhLiteModuleSlug.get())).contains(expectedRank);
   }
 

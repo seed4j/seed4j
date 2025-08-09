@@ -3,9 +3,9 @@ package com.seed4j.generator.server.springboot.seed4jextension.infrastructure.pr
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.*;
 
 import com.seed4j.generator.server.springboot.seed4jextension.application.Seed4JExtensionApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,18 +13,18 @@ import org.springframework.context.annotation.Configuration;
 class Seed4JExtensionModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource seed4jExtensionModule(Seed4JExtensionApplicationService seed4jextension) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource seed4jExtensionModule(Seed4JExtensionApplicationService seed4jextension) {
+    return SeedModuleResource.builder()
       .slug(SEED4J_EXTENSION)
       .propertiesDefinition(propertiesDefinition())
       .apiDoc("Seed4j", "Create a Seed4J extension to build custom modules")
-      .organization(JHipsterModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(SeedModuleOrganization.SPRINGBOOT_DEPENDENCY)
       .tags("server")
       .factory(seed4jextension::buildModule);
   }
 
-  private JHipsterModulePropertiesDefinition propertiesDefinition() {
-    return JHipsterModulePropertiesDefinition.builder()
+  private SeedModulePropertiesDefinition propertiesDefinition() {
+    return SeedModulePropertiesDefinition.builder()
       .addBasePackage()
       .addProjectBaseName()
       .addIndentation()

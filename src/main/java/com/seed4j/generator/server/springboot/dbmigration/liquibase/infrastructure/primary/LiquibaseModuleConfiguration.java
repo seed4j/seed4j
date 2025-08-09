@@ -9,9 +9,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LOGS_SPY;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MAVEN_JAVA;
 
 import com.seed4j.generator.server.springboot.dbmigration.liquibase.application.LiquibaseApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,12 +21,12 @@ class LiquibaseModuleConfiguration {
   private static final String SPRING_BOOT_DATABASE_MIGRATION = "Spring Boot - Database Migration";
 
   @Bean
-  JHipsterModuleResource liquibaseModule(LiquibaseApplicationService liquibase) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource liquibaseModule(LiquibaseApplicationService liquibase) {
+    return SeedModuleResource.builder()
       .slug(LIQUIBASE)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addIndentation().addSpringConfigurationFormat().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addIndentation().addSpringConfigurationFormat().build())
       .apiDoc(SPRING_BOOT_DATABASE_MIGRATION, "Add Liquibase")
-      .organization(JHipsterModuleOrganization.builder().feature(DATABASE_MIGRATION).addDependency(DATASOURCE).build())
+      .organization(SeedModuleOrganization.builder().feature(DATABASE_MIGRATION).addDependency(DATASOURCE).build())
       .tags(liquibaseTags())
       .factory(liquibase::buildModule);
   }
@@ -36,25 +36,25 @@ class LiquibaseModuleConfiguration {
   }
 
   @Bean
-  JHipsterModuleResource liquibaseAsyncModule(LiquibaseApplicationService liquibase) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource liquibaseAsyncModule(LiquibaseApplicationService liquibase) {
+    return SeedModuleResource.builder()
       .slug(LIQUIBASE_ASYNC)
       .propertiesDefinition(
-        JHipsterModulePropertiesDefinition.builder().addIndentation().addBasePackage().addSpringConfigurationFormat().build()
+        SeedModulePropertiesDefinition.builder().addIndentation().addBasePackage().addSpringConfigurationFormat().build()
       )
       .apiDoc(SPRING_BOOT_DATABASE_MIGRATION, "Support updating the database asynchronously with Liquibase")
-      .organization(JHipsterModuleOrganization.builder().addDependency(LIQUIBASE).addDependency(LOGS_SPY).build())
+      .organization(SeedModuleOrganization.builder().addDependency(LIQUIBASE).addDependency(LOGS_SPY).build())
       .tags(liquibaseTags())
       .factory(liquibase::buildAsyncModule);
   }
 
   @Bean
-  JHipsterModuleResource liquibaseLinterModule(LiquibaseApplicationService liquibase) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource liquibaseLinterModule(LiquibaseApplicationService liquibase) {
+    return SeedModuleResource.builder()
       .slug(LIQUIBASE_LINTER)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.EMPTY)
+      .propertiesDefinition(SeedModulePropertiesDefinition.EMPTY)
       .apiDoc(SPRING_BOOT_DATABASE_MIGRATION, "Configure a linter for the Liquibase migration scripts")
-      .organization(JHipsterModuleOrganization.builder().addDependency(LIQUIBASE).addDependency(MAVEN_JAVA).build())
+      .organization(SeedModuleOrganization.builder().addDependency(LIQUIBASE).addDependency(MAVEN_JAVA).build())
       .tags("server", "database", "migration", "liquibase", "linter")
       .factory(liquibase::buildLinterModule);
   }

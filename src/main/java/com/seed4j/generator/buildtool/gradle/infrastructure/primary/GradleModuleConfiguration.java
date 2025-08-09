@@ -7,9 +7,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GRADLE_WRAPPER;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.INIT;
 
 import com.seed4j.generator.buildtool.gradle.application.GradleApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,23 +17,23 @@ import org.springframework.context.annotation.Configuration;
 class GradleModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource gradleModule(GradleApplicationService gradle) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource gradleModule(GradleApplicationService gradle) {
+    return SeedModuleResource.builder()
       .slug(GRADLE_JAVA)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addProjectName().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addProjectName().build())
       .apiDoc("Build Tool", "Init Gradle project with kotlin DSL")
-      .organization(JHipsterModuleOrganization.builder().feature(JAVA_BUILD_TOOL).addDependency(INIT).build())
+      .organization(SeedModuleOrganization.builder().feature(JAVA_BUILD_TOOL).addDependency(INIT).build())
       .tags("buildtool", "test")
       .factory(gradle::buildGradleModule);
   }
 
   @Bean
-  JHipsterModuleResource gradleWrapperModule(GradleApplicationService gradle) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource gradleWrapperModule(GradleApplicationService gradle) {
+    return SeedModuleResource.builder()
       .slug(GRADLE_WRAPPER)
       .withoutProperties()
       .apiDoc("Build Tool", "Add gradle wrapper")
-      .organization(JHipsterModuleOrganization.builder().feature(JAVA_BUILD_TOOL_WRAPPER).addDependency(GRADLE_JAVA).build())
+      .organization(SeedModuleOrganization.builder().feature(JAVA_BUILD_TOOL_WRAPPER).addDependency(GRADLE_JAVA).build())
       .tags("buildtool", "test")
       .factory(gradle::buildGradleWrapperModule);
   }

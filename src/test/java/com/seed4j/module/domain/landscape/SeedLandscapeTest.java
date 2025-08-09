@@ -3,13 +3,13 @@ package com.seed4j.module.domain.landscape;
 import static com.seed4j.module.domain.JHipsterModulesFixture.*;
 import static com.seed4j.module.domain.landscape.JHipsterLandscapeFixture.*;
 import static com.seed4j.module.domain.landscape.JHipsterLandscapeFixture.moduleResources;
-import static com.seed4j.module.domain.resource.JHipsterModuleRank.*;
 import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.*;
+import static com.seed4j.module.domain.resource.SeedModuleRank.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.SeedFeatureSlug;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import java.util.Iterator;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -24,11 +24,11 @@ class SeedLandscapeTest {
       .hasMessageContaining("\"test\"");
   }
 
-  private JHipsterModuleResource testFeature() {
+  private SeedModuleResource testFeature() {
     return defaultModuleResourceBuilder().feature("test").build();
   }
 
-  private JHipsterModuleResource testModule() {
+  private SeedModuleResource testModule() {
     return defaultModuleResourceBuilder().slug("test").build();
   }
 
@@ -52,9 +52,9 @@ class SeedLandscapeTest {
 
   @Test
   void shouldNotBuildLandscapeWithLoopingDependencies() {
-    JHipsterModuleResource root = defaultModuleResource();
-    JHipsterModuleResource first = defaultModuleResourceBuilder().slug("first").moduleDependency("second").build();
-    JHipsterModuleResource second = defaultModuleResourceBuilder().slug("second").moduleDependency("first").build();
+    SeedModuleResource root = defaultModuleResource();
+    SeedModuleResource first = defaultModuleResourceBuilder().slug("first").moduleDependency("second").build();
+    SeedModuleResource second = defaultModuleResourceBuilder().slug("second").moduleDependency("first").build();
 
     assertThatThrownBy(() -> SeedLandscape.from(moduleResources(root, first, second)))
       .isExactlyInstanceOf(InvalidLandscapeException.class)
@@ -81,8 +81,8 @@ class SeedLandscapeTest {
 
   @Test
   void shouldBuildOneLevelLandscapeFromOneFeatureWithTwoModules() {
-    JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("first").feature("my-feature").build();
-    JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("second").feature("my-feature").build();
+    SeedModuleResource firstModule = defaultModuleResourceBuilder().slug("first").feature("my-feature").build();
+    SeedModuleResource secondModule = defaultModuleResourceBuilder().slug("second").feature("my-feature").build();
 
     SeedLandscape landscape = SeedLandscape.from(moduleResources(firstModule, secondModule));
 
@@ -95,8 +95,8 @@ class SeedLandscapeTest {
 
   @Test
   void shouldBuildTwoLevelsLandscapeFromTwoModules() {
-    JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
-    JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("second").moduleDependency("first").build();
+    SeedModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
+    SeedModuleResource secondModule = defaultModuleResourceBuilder().slug("second").moduleDependency("first").build();
 
     SeedLandscape landscape = SeedLandscape.from(moduleResources(firstModule, secondModule));
 
@@ -110,8 +110,8 @@ class SeedLandscapeTest {
 
   @Test
   void shouldBuildTwoLevelsLandscapeFromTwoModulesWithModuleDependencyInsideAFeature() {
-    JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("first").feature("root").build();
-    JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("second").moduleDependency("first").build();
+    SeedModuleResource firstModule = defaultModuleResourceBuilder().slug("first").feature("root").build();
+    SeedModuleResource secondModule = defaultModuleResourceBuilder().slug("second").moduleDependency("first").build();
 
     SeedLandscape landscape = SeedLandscape.from(moduleResources(firstModule, secondModule));
 
@@ -125,14 +125,10 @@ class SeedLandscapeTest {
 
   @Test
   void shouldBuildThreeLevelsLandscapeFromFourModules() {
-    JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
-    JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("second").feature("my-feature").build();
-    JHipsterModuleResource thirdModule = defaultModuleResourceBuilder()
-      .slug("third")
-      .feature("my-feature")
-      .moduleDependency("first")
-      .build();
-    JHipsterModuleResource forthModule = defaultModuleResourceBuilder().slug("forth").featureDependency("my-feature").build();
+    SeedModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
+    SeedModuleResource secondModule = defaultModuleResourceBuilder().slug("second").feature("my-feature").build();
+    SeedModuleResource thirdModule = defaultModuleResourceBuilder().slug("third").feature("my-feature").moduleDependency("first").build();
+    SeedModuleResource forthModule = defaultModuleResourceBuilder().slug("forth").featureDependency("my-feature").build();
 
     SeedLandscape landscape = SeedLandscape.from(moduleResources(forthModule, secondModule, thirdModule, firstModule));
 
@@ -156,11 +152,11 @@ class SeedLandscapeTest {
 
   @Test
   void shouldSortLevelElements() {
-    JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("root").build();
-    JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("bsecond").moduleDependency("root").build();
-    JHipsterModuleResource thirdModule = defaultModuleResourceBuilder().slug("athird").moduleDependency("root").build();
-    JHipsterModuleResource forthModule = defaultModuleResourceBuilder().slug("forth").moduleDependency("root").feature("feat").build();
-    JHipsterModuleResource fifthModule = defaultModuleResourceBuilder().slug("fifth").moduleDependency("root").feature("feat").build();
+    SeedModuleResource firstModule = defaultModuleResourceBuilder().slug("root").build();
+    SeedModuleResource secondModule = defaultModuleResourceBuilder().slug("bsecond").moduleDependency("root").build();
+    SeedModuleResource thirdModule = defaultModuleResourceBuilder().slug("athird").moduleDependency("root").build();
+    SeedModuleResource forthModule = defaultModuleResourceBuilder().slug("forth").moduleDependency("root").feature("feat").build();
+    SeedModuleResource fifthModule = defaultModuleResourceBuilder().slug("fifth").moduleDependency("root").feature("feat").build();
 
     SeedLandscape landscape = SeedLandscape.from(moduleResources(firstModule, secondModule, thirdModule, forthModule, fifthModule));
 
@@ -174,14 +170,14 @@ class SeedLandscapeTest {
 
   @Test
   void shouldRemoveNestedDependencies() {
-    JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
-    JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("second").moduleDependency("first").build();
-    JHipsterModuleResource thirdModule = defaultModuleResourceBuilder()
+    SeedModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
+    SeedModuleResource secondModule = defaultModuleResourceBuilder().slug("second").moduleDependency("first").build();
+    SeedModuleResource thirdModule = defaultModuleResourceBuilder()
       .slug("third")
       .moduleDependency("second")
       .moduleDependency("first")
       .build();
-    JHipsterModuleResource forthModule = defaultModuleResourceBuilder()
+    SeedModuleResource forthModule = defaultModuleResourceBuilder()
       .slug("forth")
       .moduleDependency("third")
       .moduleDependency("second")
@@ -202,8 +198,8 @@ class SeedLandscapeTest {
 
   @Test
   void shouldSortModuleInApplicableOrder() {
-    JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
-    JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("second").feature("test").moduleDependency("first").build();
+    SeedModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
+    SeedModuleResource secondModule = defaultModuleResourceBuilder().slug("second").feature("test").moduleDependency("first").build();
 
     SeedLandscape landscape = SeedLandscape.from(moduleResources(firstModule, secondModule));
 
@@ -215,8 +211,8 @@ class SeedLandscapeTest {
 
   @Test
   void shouldSortInitAsFirstModule() {
-    JHipsterModuleResource init = defaultModuleResourceBuilder().slug("init").build();
-    JHipsterModuleResource root = defaultModuleResourceBuilder().slug("root").build();
+    SeedModuleResource init = defaultModuleResourceBuilder().slug("init").build();
+    SeedModuleResource root = defaultModuleResourceBuilder().slug("root").build();
 
     SeedLandscape landscape = SeedLandscape.from(moduleResources(root, init));
 

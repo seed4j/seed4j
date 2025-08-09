@@ -3,7 +3,7 @@ package com.seed4j.module.domain.landscape;
 import com.seed4j.module.domain.SeedFeatureSlug;
 import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.SeedSlug;
-import com.seed4j.module.domain.resource.JHipsterModulesResources;
+import com.seed4j.module.domain.resource.SeedModulesResources;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -21,17 +21,17 @@ public final class SeedLandscape {
     this.levels = levels;
   }
 
-  public static SeedLandscape from(JHipsterModulesResources resources) {
+  public static SeedLandscape from(SeedModulesResources resources) {
     assertNoDuplicatedSlug(resources);
 
     return new SeedLandscape(SeedLandscapeLevels.builder().resources(resources).build()).withoutNestedDependencies().sorted();
   }
 
-  private static void assertNoDuplicatedSlug(JHipsterModulesResources resources) {
+  private static void assertNoDuplicatedSlug(SeedModulesResources resources) {
     duplicatedSlug(resources).ifPresent(throwForDuplicatedSlug());
   }
 
-  private static Optional<String> duplicatedSlug(JHipsterModulesResources resources) {
+  private static Optional<String> duplicatedSlug(SeedModulesResources resources) {
     List<String> featureSlugs = allFeatureSlugs(resources);
 
     return resources
@@ -41,7 +41,7 @@ public final class SeedLandscape {
       .findFirst();
   }
 
-  private static List<String> allFeatureSlugs(JHipsterModulesResources resources) {
+  private static List<String> allFeatureSlugs(SeedModulesResources resources) {
     return resources
       .stream()
       .flatMap(resource -> resource.organization().feature().stream())

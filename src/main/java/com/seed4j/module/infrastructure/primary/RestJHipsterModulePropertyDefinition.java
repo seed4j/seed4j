@@ -3,7 +3,7 @@ package com.seed4j.module.infrastructure.primary;
 import com.seed4j.module.domain.properties.SeedPropertyDefaultValue;
 import com.seed4j.module.domain.properties.SeedPropertyDescription;
 import com.seed4j.module.domain.properties.SeedPropertyType;
-import com.seed4j.module.domain.resource.JHipsterModulePropertyDefinition;
+import com.seed4j.module.domain.resource.SeedModulePropertyDefinition;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 
@@ -26,7 +26,7 @@ final class RestJHipsterModulePropertyDefinition {
     order = builder.order;
   }
 
-  static RestJHipsterModulePropertyDefinition from(JHipsterModulePropertyDefinition propertyDefinition) {
+  static RestJHipsterModulePropertyDefinition from(SeedModulePropertyDefinition propertyDefinition) {
     return new RestJHipsterModulePropertyDefinitionBuilder()
       .type(propertyDefinition.type())
       .mandatory(propertyDefinition.isMandatory())

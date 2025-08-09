@@ -1,19 +1,19 @@
 package com.seed4j.module.domain.resource;
 
-import static com.seed4j.module.domain.resource.JHipsterModulePropertyDefinition.*;
+import static com.seed4j.module.domain.resource.SeedModulePropertyDefinition.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterModulePropertyDefinitionTest {
+class SeedModulePropertyDefinitionTest {
 
   @Test
   void shouldHaveMeaningfulToString() {
     assertThat(projectNameProperty()).hasToString(
         """
-        JHipsterModulePropertyDefinition[type=STRING,key=projectName,mandatory=true,description=Project full name,defaultValue=JHipster Sample Application,order=-200]\
+        SeedModulePropertyDefinition[type=STRING,key=projectName,mandatory=true,description=Project full name,defaultValue=JHipster Sample Application,order=-200]\
         """
       );
   }
@@ -22,7 +22,7 @@ class JHipsterModulePropertyDefinitionTest {
   void shouldHaveMeaningfulToStringForPropertyDefinitionWithMinimalInfos() {
     assertThat(optionalBooleanProperty("foo").build()).hasToString(
         """
-        JHipsterModulePropertyDefinition[type=BOOLEAN,key=foo,mandatory=false,description=,defaultValue=,order=0]\
+        SeedModulePropertyDefinition[type=BOOLEAN,key=foo,mandatory=false,description=,defaultValue=,order=0]\
         """
       );
   }

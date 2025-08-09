@@ -127,8 +127,8 @@ import static {{packageName}}.slug.domain.MyAppModuleSlug.*;
 import {{packageName}}.my_module.application.MyModuleApplicationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 
 @Configuration
 class MyModuleModuleConfiguration {
@@ -158,7 +158,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import com.seed4j.module.domain.resource.JHipsterModuleSlugFactory;
+import com.seed4j.module.domain.resource.SeedModuleSlugFactory;
 
 public enum MyAppModuleSlug implements JHipsterModuleSlugFactory {
   MY_MODULE("my-module");

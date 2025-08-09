@@ -2,8 +2,8 @@ package com.seed4j.module.domain.landscape;
 
 import com.seed4j.module.domain.SeedFeatureSlug;
 import com.seed4j.module.domain.SeedSlug;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
-import com.seed4j.module.domain.resource.JHipsterModulesResources;
+import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.SeedModulesResources;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.*;
 import java.util.Map.Entry;
@@ -38,7 +38,7 @@ public record SeedLandscapeLevels(Collection<SeedLandscapeLevel> levels) {
     private final Map<SeedFeatureSlug, Collection<SeedLandscapeModule>> features = new ConcurrentHashMap<>();
     private final Collection<SeedLandscapeModule> modules = new ArrayList<>();
 
-    JHipsterLandscapeLevelsBuilder resources(JHipsterModulesResources resources) {
+    JHipsterLandscapeLevelsBuilder resources(SeedModulesResources resources) {
       Assert.notNull("resources", resources);
 
       resources.stream().forEach(this::append);
@@ -46,7 +46,7 @@ public record SeedLandscapeLevels(Collection<SeedLandscapeLevel> levels) {
       return this;
     }
 
-    private JHipsterLandscapeLevelsBuilder append(JHipsterModuleResource resource) {
+    private JHipsterLandscapeLevelsBuilder append(SeedModuleResource resource) {
       Assert.notNull("resource", resource);
 
       resource.organization().feature().ifPresentOrElse(addFeature(resource), addModule(resource));
@@ -54,7 +54,7 @@ public record SeedLandscapeLevels(Collection<SeedLandscapeLevel> levels) {
       return this;
     }
 
-    private Consumer<SeedFeatureSlug> addFeature(JHipsterModuleResource resource) {
+    private Consumer<SeedFeatureSlug> addFeature(SeedModuleResource resource) {
       return feature -> features.computeIfAbsent(feature, newArrayList()).add(landscapeModule(resource));
     }
 
@@ -62,11 +62,11 @@ public record SeedLandscapeLevels(Collection<SeedLandscapeLevel> levels) {
       return key -> new ArrayList<>();
     }
 
-    private Runnable addModule(JHipsterModuleResource resource) {
+    private Runnable addModule(SeedModuleResource resource) {
       return () -> modules.add(landscapeModule(resource));
     }
 
-    private static SeedLandscapeModule landscapeModule(JHipsterModuleResource resource) {
+    private static SeedLandscapeModule landscapeModule(SeedModuleResource resource) {
       return SeedLandscapeModule.builder()
         .module(resource.slug())
         .operation(resource.apiDoc().operation())

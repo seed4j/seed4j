@@ -6,9 +6,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRINGDOC_OAUTH_2_O
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_OAUTH_2_OKTA;
 
 import com.seed4j.generator.server.springboot.apidocumentation.springdocokta.application.SpringdocOktaApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,15 +16,15 @@ import org.springframework.context.annotation.Configuration;
 class SpringdocOktaModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource springdocOktaModule(SpringdocOktaApplicationService springdocOkta) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource springdocOktaModule(SpringdocOktaApplicationService springdocOkta) {
+    return SeedModuleResource.builder()
       .slug(SPRINGDOC_OAUTH_2_OKTA)
       .propertiesDefinition(
-        JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
+        SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
       )
       .apiDoc("Spring Boot - API Documentation", "Add Okta authentication for springdoc")
       .organization(
-        JHipsterModuleOrganization.builder()
+        SeedModuleOrganization.builder()
           .feature(OAUTH_PROVIDER_SPRINGDOC)
           .addDependency(SPRINGDOC)
           .addDependency(SPRING_BOOT_OAUTH_2_OKTA)

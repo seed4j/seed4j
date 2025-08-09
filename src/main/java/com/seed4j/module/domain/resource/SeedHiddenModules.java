@@ -7,25 +7,25 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class JHipsterHiddenModules {
+public class SeedHiddenModules {
 
   private final Collection<String> slugs;
-  private final Collection<JHipsterModuleTag> tags;
+  private final Collection<SeedModuleTag> tags;
 
-  public JHipsterHiddenModules(Collection<String> slugs, Collection<String> tags) {
+  public SeedHiddenModules(Collection<String> slugs, Collection<String> tags) {
     this.slugs = SeedCollections.immutable(slugs);
     this.tags = buildTags(tags);
   }
 
-  private List<JHipsterModuleTag> buildTags(Collection<String> tags) {
-    return SeedCollections.immutable(tags).stream().map(JHipsterModuleTag::new).toList();
+  private List<SeedModuleTag> buildTags(Collection<String> tags) {
+    return SeedCollections.immutable(tags).stream().map(SeedModuleTag::new).toList();
   }
 
   public Collection<String> slugs() {
     return slugs;
   }
 
-  public Collection<JHipsterModuleTag> tags() {
+  public Collection<SeedModuleTag> tags() {
     return tags;
   }
 
@@ -42,7 +42,7 @@ public class JHipsterHiddenModules {
       return true;
     }
 
-    if (!(obj instanceof JHipsterHiddenModules other)) {
+    if (!(obj instanceof SeedHiddenModules other)) {
       return false;
     }
 

@@ -6,9 +6,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRINGDOC_JWT;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_JWT;
 
 import com.seed4j.generator.server.springboot.apidocumentation.springdocjwt.application.SpringdocJwtApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,17 +16,13 @@ import org.springframework.context.annotation.Configuration;
 class SpringdocJwtModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource springdocJwtModule(SpringdocJwtApplicationService springdocJwt) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource springdocJwtModule(SpringdocJwtApplicationService springdocJwt) {
+    return SeedModuleResource.builder()
       .slug(SPRINGDOC_JWT)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
       .apiDoc("Spring Boot - API Documentation", "Add JWT authentication for springdoc")
       .organization(
-        JHipsterModuleOrganization.builder()
-          .feature(AUTHENTICATION_SPRINGDOC)
-          .addDependency(SPRINGDOC)
-          .addDependency(SPRING_BOOT_JWT)
-          .build()
+        SeedModuleOrganization.builder().feature(AUTHENTICATION_SPRINGDOC).addDependency(SPRINGDOC).addDependency(SPRING_BOOT_JWT).build()
       )
       .tags("server", "swagger", "springdoc")
       .factory(springdocJwt::buildModule);

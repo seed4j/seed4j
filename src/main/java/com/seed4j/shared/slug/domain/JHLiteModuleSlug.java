@@ -1,20 +1,20 @@
 package com.seed4j.shared.slug.domain;
 
-import static com.seed4j.module.domain.resource.JHipsterModuleRank.RANK_A;
-import static com.seed4j.module.domain.resource.JHipsterModuleRank.RANK_B;
-import static com.seed4j.module.domain.resource.JHipsterModuleRank.RANK_C;
-import static com.seed4j.module.domain.resource.JHipsterModuleRank.RANK_D;
-import static com.seed4j.module.domain.resource.JHipsterModuleRank.RANK_S;
+import static com.seed4j.module.domain.resource.SeedModuleRank.RANK_A;
+import static com.seed4j.module.domain.resource.SeedModuleRank.RANK_B;
+import static com.seed4j.module.domain.resource.SeedModuleRank.RANK_C;
+import static com.seed4j.module.domain.resource.SeedModuleRank.RANK_D;
+import static com.seed4j.module.domain.resource.SeedModuleRank.RANK_S;
 
-import com.seed4j.module.domain.resource.JHipsterModuleRank;
-import com.seed4j.module.domain.resource.JHipsterModuleSlugFactory;
+import com.seed4j.module.domain.resource.SeedModuleRank;
+import com.seed4j.module.domain.resource.SeedModuleSlugFactory;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
+public enum JHLiteModuleSlug implements SeedModuleSlugFactory {
   ANGULAR_CORE("angular-core", RANK_A),
   ANGULAR_HEALTH("angular-health", RANK_C),
   ANGULAR_JWT("angular-jwt", RANK_C),
@@ -186,9 +186,9 @@ public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
     Collectors.toMap(JHLiteModuleSlug::get, Function.identity())
   );
   private final String slug;
-  private final JHipsterModuleRank rank;
+  private final SeedModuleRank rank;
 
-  JHLiteModuleSlug(String slug, JHipsterModuleRank rank) {
+  JHLiteModuleSlug(String slug, SeedModuleRank rank) {
     this.slug = slug;
     this.rank = rank;
   }
@@ -199,11 +199,11 @@ public enum JHLiteModuleSlug implements JHipsterModuleSlugFactory {
   }
 
   @Override
-  public JHipsterModuleRank rank() {
+  public SeedModuleRank rank() {
     return rank;
   }
 
-  public static Optional<JHipsterModuleRank> getRank(String slug) {
+  public static Optional<SeedModuleRank> getRank(String slug) {
     return fromString(slug).map(JHLiteModuleSlug::rank);
   }
 

@@ -13,15 +13,15 @@ import java.util.Collection;
 import java.util.Optional;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public final class JHipsterModuleOrganization {
+public final class SeedModuleOrganization {
 
-  public static final JHipsterModuleOrganization STANDALONE = builder().build();
-  public static final JHipsterModuleOrganization SPRINGBOOT_DEPENDENCY = builder().addDependency(JHLiteModuleSlug.SPRING_BOOT).build();
+  public static final SeedModuleOrganization STANDALONE = builder().build();
+  public static final SeedModuleOrganization SPRINGBOOT_DEPENDENCY = builder().addDependency(JHLiteModuleSlug.SPRING_BOOT).build();
 
   private final Optional<SeedFeatureSlug> feature;
   private final Collection<SeedLandscapeDependency> dependencies;
 
-  private JHipsterModuleOrganization(JHipsterModuleOrganizationBuilder builder) {
+  private SeedModuleOrganization(JHipsterModuleOrganizationBuilder builder) {
     feature = builder.feature;
     dependencies = builder.dependencies;
   }
@@ -51,7 +51,7 @@ public final class JHipsterModuleOrganization {
     private final Collection<SeedLandscapeDependency> dependencies = new ArrayList<>();
     private Optional<SeedFeatureSlug> feature = Optional.empty();
 
-    public JHipsterModuleOrganizationBuilder feature(JHipsterFeatureSlugFactory featureFactory) {
+    public JHipsterModuleOrganizationBuilder feature(SeedFeatureSlugFactory featureFactory) {
       Assert.notNull("featureFactory", featureFactory);
 
       this.feature = featureFactory.build();
@@ -59,7 +59,7 @@ public final class JHipsterModuleOrganization {
       return this;
     }
 
-    public JHipsterModuleOrganizationBuilder addDependency(JHipsterModuleSlugFactory module) {
+    public JHipsterModuleOrganizationBuilder addDependency(SeedModuleSlugFactory module) {
       Assert.notNull("module", module);
 
       dependencies.add(new SeedModuleDependency(module.build()));
@@ -67,7 +67,7 @@ public final class JHipsterModuleOrganization {
       return this;
     }
 
-    public JHipsterModuleOrganizationBuilder addDependency(JHipsterFeatureSlugFactory featureFactory) {
+    public JHipsterModuleOrganizationBuilder addDependency(SeedFeatureSlugFactory featureFactory) {
       Assert.notNull("featureFactory", featureFactory);
 
       featureFactory.build().map(SeedFeatureDependency::new).ifPresent(dependencies::add);
@@ -75,8 +75,8 @@ public final class JHipsterModuleOrganization {
       return this;
     }
 
-    public JHipsterModuleOrganization build() {
-      return new JHipsterModuleOrganization(this);
+    public SeedModuleOrganization build() {
+      return new SeedModuleOrganization(this);
     }
   }
 }

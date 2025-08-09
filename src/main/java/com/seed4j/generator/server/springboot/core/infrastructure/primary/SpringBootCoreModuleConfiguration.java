@@ -5,9 +5,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JAVA_BASE;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT;
 
 import com.seed4j.generator.server.springboot.core.application.SpringBootApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,11 +15,11 @@ import org.springframework.context.annotation.Configuration;
 class SpringBootCoreModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource springBootCoreModule(SpringBootApplicationService springBoot) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource springBootCoreModule(SpringBootApplicationService springBoot) {
+    return SeedModuleResource.builder()
       .slug(SPRING_BOOT)
       .propertiesDefinition(
-        JHipsterModulePropertiesDefinition.builder()
+        SeedModulePropertiesDefinition.builder()
           .addBasePackage()
           .addProjectBaseName()
           .addIndentation()
@@ -27,7 +27,7 @@ class SpringBootCoreModuleConfiguration {
           .build()
       )
       .apiDoc("Spring Boot", "Init Spring Boot project with dependencies, App, and properties")
-      .organization(JHipsterModuleOrganization.builder().addDependency(JAVA_BUILD_TOOL).addDependency(JAVA_BASE).build())
+      .organization(SeedModuleOrganization.builder().addDependency(JAVA_BUILD_TOOL).addDependency(JAVA_BASE).build())
       .tags("server", "spring", "spring-boot")
       .factory(springBoot::buildModule);
   }

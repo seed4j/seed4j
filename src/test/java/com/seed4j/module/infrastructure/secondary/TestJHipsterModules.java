@@ -12,7 +12,7 @@ import com.seed4j.module.domain.JHipsterModuleToApply;
 import com.seed4j.module.domain.JHipsterPresetRepository;
 import com.seed4j.module.domain.ProjectFiles;
 import com.seed4j.module.domain.SeedModuleSlug;
-import com.seed4j.module.domain.resource.JHipsterModulesResources;
+import com.seed4j.module.domain.resource.SeedModulesResources;
 import com.seed4j.module.infrastructure.secondary.file.MustacheTemplateRenderer;
 import com.seed4j.module.infrastructure.secondary.git.GitTestUtil;
 import com.seed4j.module.infrastructure.secondary.javabuild.FileSystemProjectJavaBuildToolRepository;
@@ -81,7 +81,7 @@ public final class TestJHipsterModules {
 
       FileSystemJHipsterModulesRepository modulesRepository = new FileSystemJHipsterModulesRepository(
         mock(JavaProjects.class),
-        new JHipsterModulesResources(
+        new SeedModulesResources(
           List.of(
             defaultModuleResourceBuilder()
               .slug("test-module")

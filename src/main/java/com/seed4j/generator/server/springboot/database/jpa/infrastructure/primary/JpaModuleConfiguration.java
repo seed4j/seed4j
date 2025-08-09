@@ -11,9 +11,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JPA_MYSQL;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JPA_POSTGRESQL;
 
 import com.seed4j.generator.server.springboot.database.jpa.application.JpaApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,51 +23,51 @@ class JpaModuleConfiguration {
   private static final String API_DOC_GROUP = "Spring Boot - Database";
 
   @Bean
-  JHipsterModuleResource jpaPostgreSQLModule(JpaApplicationService postgreSQL) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource jpaPostgreSQLModule(JpaApplicationService postgreSQL) {
+    return SeedModuleResource.builder()
       .slug(JPA_POSTGRESQL)
       .propertiesDefinition(properties())
       .apiDoc(API_DOC_GROUP, "Add JPA with PostgreSQL to project")
-      .organization(JHipsterModuleOrganization.builder().feature(JPA_PERSISTENCE).addDependency(DATASOURCE_POSTGRESQL).build())
+      .organization(SeedModuleOrganization.builder().feature(JPA_PERSISTENCE).addDependency(DATASOURCE_POSTGRESQL).build())
       .tags(tags())
       .factory(postgreSQL::buildPostgreSQL);
   }
 
   @Bean
-  JHipsterModuleResource jpaMariaDBModule(JpaApplicationService mariaDB) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource jpaMariaDBModule(JpaApplicationService mariaDB) {
+    return SeedModuleResource.builder()
       .slug(JPA_MARIADB)
       .propertiesDefinition(properties())
       .apiDoc(API_DOC_GROUP, "Add JPA with MariaDB to project")
-      .organization(JHipsterModuleOrganization.builder().feature(JPA_PERSISTENCE).addDependency(DATASOURCE_MARIADB).build())
+      .organization(SeedModuleOrganization.builder().feature(JPA_PERSISTENCE).addDependency(DATASOURCE_MARIADB).build())
       .tags(tags())
       .factory(mariaDB::buildMariaDB);
   }
 
   @Bean
-  JHipsterModuleResource jpaMmySQLModule(JpaApplicationService mySQL) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource jpaMmySQLModule(JpaApplicationService mySQL) {
+    return SeedModuleResource.builder()
       .slug(JPA_MYSQL)
       .propertiesDefinition(properties())
       .apiDoc(API_DOC_GROUP, "Add JPA with MySQL to project")
-      .organization(JHipsterModuleOrganization.builder().feature(JPA_PERSISTENCE).addDependency(DATASOURCE_MYSQL).build())
+      .organization(SeedModuleOrganization.builder().feature(JPA_PERSISTENCE).addDependency(DATASOURCE_MYSQL).build())
       .tags(tags())
       .factory(mySQL::buildMySQL);
   }
 
   @Bean
-  JHipsterModuleResource jpaMsSQLModule(JpaApplicationService msSQL) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource jpaMsSQLModule(JpaApplicationService msSQL) {
+    return SeedModuleResource.builder()
       .slug(JPA_MSSQL)
       .propertiesDefinition(properties())
       .apiDoc(API_DOC_GROUP, "Add JPA with MsSQL to project")
-      .organization(JHipsterModuleOrganization.builder().feature(JPA_PERSISTENCE).addDependency(DATASOURCE_MSSQL).build())
+      .organization(SeedModuleOrganization.builder().feature(JPA_PERSISTENCE).addDependency(DATASOURCE_MSSQL).build())
       .tags(tags())
       .factory(msSQL::buildMsSQL);
   }
 
-  private static JHipsterModulePropertiesDefinition properties() {
-    return JHipsterModulePropertiesDefinition.builder()
+  private static SeedModulePropertiesDefinition properties() {
+    return SeedModulePropertiesDefinition.builder()
       .addBasePackage()
       .addIndentation()
       .addProjectBaseName()

@@ -7,11 +7,11 @@ import com.seed4j.shared.error.domain.ErrorStatus;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class InvalidJHipsterModuleTagExceptionTest {
+class InvalidSeedModuleTagExceptionTest {
 
   @Test
   void shouldGetExceptionInformation() {
-    InvalidJHipsterModuleTagException exception = new InvalidJHipsterModuleTagException("invalidTag");
+    InvalidSeedModuleTagException exception = new InvalidSeedModuleTagException("invalidTag");
 
     assertThat(exception.getMessage()).isEqualTo(
       "The module tag \"invalidTag\" is invalid (blank, bad format, whitespace...). Tag should be only lower case letters, numbers and hyphens (-)"

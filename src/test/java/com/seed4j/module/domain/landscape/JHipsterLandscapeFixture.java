@@ -1,12 +1,12 @@
 package com.seed4j.module.domain.landscape;
 
-import static com.seed4j.module.domain.resource.JHipsterModuleRank.*;
 import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.*;
+import static com.seed4j.module.domain.resource.SeedModuleRank.*;
 
 import com.seed4j.module.domain.SeedFeatureSlug;
 import com.seed4j.module.domain.SeedModuleSlug;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
-import com.seed4j.module.domain.resource.JHipsterModulesResources;
+import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.SeedModulesResources;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
@@ -16,8 +16,8 @@ public final class JHipsterLandscapeFixture {
 
   private JHipsterLandscapeFixture() {}
 
-  public static JHipsterModulesResources moduleResources(JHipsterModuleResource... resources) {
-    return new JHipsterModulesResources(List.of(resources), emptyHiddenModules());
+  public static SeedModulesResources moduleResources(SeedModuleResource... resources) {
+    return new SeedModulesResources(List.of(resources), emptyHiddenModules());
   }
 
   public static SeedLandscapeModule noDependencyLandscapeModule(String slug) {

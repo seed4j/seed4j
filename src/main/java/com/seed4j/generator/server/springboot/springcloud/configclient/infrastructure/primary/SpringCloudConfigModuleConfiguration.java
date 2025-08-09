@@ -5,9 +5,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_ACTUATO
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_CLOUD;
 
 import com.seed4j.generator.server.springboot.springcloud.configclient.application.SpringCloudConfigClientApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,12 +15,12 @@ import org.springframework.context.annotation.Configuration;
 class SpringCloudConfigModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource springCloudConfigModule(SpringCloudConfigClientApplicationService cloudConfigs) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource springCloudConfigModule(SpringCloudConfigClientApplicationService cloudConfigs) {
+    return SeedModuleResource.builder()
       .slug(SPRING_CLOUD)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addProjectBaseName().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addProjectBaseName().build())
       .apiDoc("Spring Boot - Spring Cloud", "Add Spring Cloud Config Client")
-      .organization(JHipsterModuleOrganization.builder().feature(SERVICE_DISCOVERY).addDependency(SPRING_BOOT_ACTUATOR).build())
+      .organization(SeedModuleOrganization.builder().feature(SERVICE_DISCOVERY).addDependency(SPRING_BOOT_ACTUATOR).build())
       .tags("server", "spring", "spring-boot", "cloud")
       .factory(cloudConfigs::buildModule);
   }

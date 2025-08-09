@@ -2,10 +2,10 @@ package com.seed4j.module.domain.resource;
 
 import com.seed4j.module.domain.SeedModuleSlug;
 
-public interface JHipsterModuleSlugFactory {
+public interface SeedModuleSlugFactory {
   String get();
 
-  JHipsterModuleRank rank();
+  SeedModuleRank rank();
 
   default SeedModuleSlug build() {
     return new SeedModuleSlug(get());

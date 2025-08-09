@@ -13,9 +13,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FLYWAY_MYSQL;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FLYWAY_POSTGRESQL;
 
 import com.seed4j.generator.server.springboot.dbmigration.flyway.application.FlywayApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,58 +25,58 @@ class FlywayModuleConfiguration {
   private static final String API_DOC_GROUP = "Spring Boot - Database Migration";
 
   @Bean
-  JHipsterModuleResource flywayInitializationModule(FlywayApplicationService flyway) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource flywayInitializationModule(FlywayApplicationService flyway) {
+    return SeedModuleResource.builder()
       .slug(FLYWAY)
       .propertiesDefinition(
-        JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
+        SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
       )
       .apiDoc(API_DOC_GROUP, "Add Flyway")
-      .organization(JHipsterModuleOrganization.builder().feature(DATABASE_MIGRATION).addDependency(DATASOURCE).build())
+      .organization(SeedModuleOrganization.builder().feature(DATABASE_MIGRATION).addDependency(DATASOURCE).build())
       .tags(flywayTags())
       .factory(flyway::buildInitializationModule);
   }
 
   @Bean
-  JHipsterModuleResource flywayMysqlModule(FlywayApplicationService flyway) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource flywayMysqlModule(FlywayApplicationService flyway) {
+    return SeedModuleResource.builder()
       .slug(FLYWAY_MYSQL)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
       .apiDoc(API_DOC_GROUP, "Add Flyway MySQL")
-      .organization(JHipsterModuleOrganization.builder().addDependency(FLYWAY).addDependency(DATASOURCE_MYSQL).build())
+      .organization(SeedModuleOrganization.builder().addDependency(FLYWAY).addDependency(DATASOURCE_MYSQL).build())
       .tags(flywayTags())
       .factory(flyway::buildMysqlDependencyModule);
   }
 
   @Bean
-  JHipsterModuleResource flywayMariaDBModule(FlywayApplicationService flyway) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource flywayMariaDBModule(FlywayApplicationService flyway) {
+    return SeedModuleResource.builder()
       .slug(FLYWAY_MARIADB)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
       .apiDoc(API_DOC_GROUP, "Add Flyway MariaDB")
-      .organization(JHipsterModuleOrganization.builder().addDependency(FLYWAY).addDependency(DATASOURCE_MARIADB).build())
+      .organization(SeedModuleOrganization.builder().addDependency(FLYWAY).addDependency(DATASOURCE_MARIADB).build())
       .tags(flywayTags())
       .factory(flyway::buildMysqlDependencyModule);
   }
 
   @Bean
-  JHipsterModuleResource flywayPostgresModule(FlywayApplicationService flyway) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource flywayPostgresModule(FlywayApplicationService flyway) {
+    return SeedModuleResource.builder()
       .slug(FLYWAY_POSTGRESQL)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
       .apiDoc(API_DOC_GROUP, "Add Flyway PostgreSQL")
-      .organization(JHipsterModuleOrganization.builder().addDependency(FLYWAY).addDependency(DATASOURCE_POSTGRESQL).build())
+      .organization(SeedModuleOrganization.builder().addDependency(FLYWAY).addDependency(DATASOURCE_POSTGRESQL).build())
       .tags(flywayTags())
       .factory(flyway::buildPostgreSQLDependencyModule);
   }
 
   @Bean
-  JHipsterModuleResource flywayMsSqlServerModule(FlywayApplicationService flyway) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource flywayMsSqlServerModule(FlywayApplicationService flyway) {
+    return SeedModuleResource.builder()
       .slug(FLYWAY_MSSQL)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
       .apiDoc(API_DOC_GROUP, "Add Flyway PostgreSQL")
-      .organization(JHipsterModuleOrganization.builder().addDependency(FLYWAY).addDependency(DATASOURCE_MSSQL).build())
+      .organization(SeedModuleOrganization.builder().addDependency(FLYWAY).addDependency(DATASOURCE_MSSQL).build())
       .tags(flywayTags())
       .factory(flyway::buildMsSqlServerDependencyModule);
   }

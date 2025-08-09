@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Collection;
 
@@ -13,7 +13,7 @@ final class RestJHipsterModulePropertiesDefinition {
     this.definitions = definitions;
   }
 
-  static RestJHipsterModulePropertiesDefinition from(JHipsterModulePropertiesDefinition propertiesDefinition) {
+  static RestJHipsterModulePropertiesDefinition from(SeedModulePropertiesDefinition propertiesDefinition) {
     return new RestJHipsterModulePropertiesDefinition(
       propertiesDefinition.stream().map(RestJHipsterModulePropertyDefinition::from).toList()
     );

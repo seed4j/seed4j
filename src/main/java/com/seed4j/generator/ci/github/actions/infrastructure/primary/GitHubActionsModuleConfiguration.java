@@ -7,8 +7,8 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GRADLE_WRAPPER;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MAVEN_JAVA;
 
 import com.seed4j.generator.ci.github.actions.application.GitHubActionsApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,23 +20,23 @@ class GitHubActionsModuleConfiguration {
   private static final String CONTINUOUS_INTEGRATION_GROUP_DOC = "Continuous Integration";
 
   @Bean
-  JHipsterModuleResource gitHubActionsMavenModule(GitHubActionsApplicationService gitHubActions) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource gitHubActionsMavenModule(GitHubActionsApplicationService gitHubActions) {
+    return SeedModuleResource.builder()
       .slug(GITHUB_ACTIONS_MAVEN)
       .withoutProperties()
       .apiDoc(CONTINUOUS_INTEGRATION_GROUP_DOC, "Add GitHub Actions for Maven Build")
-      .organization(JHipsterModuleOrganization.builder().feature(GITHUB_ACTIONS).addDependency(MAVEN_JAVA).build())
+      .organization(SeedModuleOrganization.builder().feature(GITHUB_ACTIONS).addDependency(MAVEN_JAVA).build())
       .tags(CI_TAG, GITHUB_TAG)
       .factory(gitHubActions::buildGitHubActionsMavenModule);
   }
 
   @Bean
-  JHipsterModuleResource gitHubActionsGradleModule(GitHubActionsApplicationService gitHubActions) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource gitHubActionsGradleModule(GitHubActionsApplicationService gitHubActions) {
+    return SeedModuleResource.builder()
       .slug(GITHUB_ACTIONS_GRADLE)
       .withoutProperties()
       .apiDoc(CONTINUOUS_INTEGRATION_GROUP_DOC, "Add GitHub Actions for Gradle Build")
-      .organization(JHipsterModuleOrganization.builder().feature(GITHUB_ACTIONS).addDependency(GRADLE_WRAPPER).build())
+      .organization(SeedModuleOrganization.builder().feature(GITHUB_ACTIONS).addDependency(GRADLE_WRAPPER).build())
       .tags(CI_TAG, GITHUB_TAG)
       .factory(gitHubActions::buildGitHubActionsGradleModule);
   }

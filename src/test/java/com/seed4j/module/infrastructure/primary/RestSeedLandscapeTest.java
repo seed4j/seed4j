@@ -7,7 +7,7 @@ import com.seed4j.JsonHelper;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.landscape.JHipsterLandscapeFixture;
 import com.seed4j.module.domain.landscape.SeedLandscape;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -15,12 +15,8 @@ class RestSeedLandscapeTest {
 
   @Test
   void shouldSerializeToJson() {
-    JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
-    JHipsterModuleResource secondModule = defaultModuleResourceBuilder()
-      .slug("second")
-      .feature("my-feature")
-      .moduleDependency("first")
-      .build();
+    SeedModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
+    SeedModuleResource secondModule = defaultModuleResourceBuilder().slug("second").feature("my-feature").moduleDependency("first").build();
 
     assertThat(
       JsonHelper.writeAsString(

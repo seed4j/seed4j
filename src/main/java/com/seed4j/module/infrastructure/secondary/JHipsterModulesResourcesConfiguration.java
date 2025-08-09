@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import com.seed4j.module.domain.resource.JHipsterHiddenModules;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
-import com.seed4j.module.domain.resource.JHipsterModulesResources;
+import com.seed4j.module.domain.resource.SeedHiddenModules;
+import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.SeedModulesResources;
 import java.util.Collection;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -13,13 +13,10 @@ import org.springframework.context.annotation.Configuration;
 class JHipsterModulesResourcesConfiguration {
 
   @Bean
-  JHipsterModulesResources jhipsterModulesResources(
+  SeedModulesResources jhipsterModulesResources(
     JHipsterHiddenResourcesProperties excludedResources,
-    Collection<JHipsterModuleResource> modulesResources
+    Collection<SeedModuleResource> modulesResources
   ) {
-    return new JHipsterModulesResources(
-      modulesResources,
-      new JHipsterHiddenModules(excludedResources.getSlugs(), excludedResources.getTags())
-    );
+    return new SeedModulesResources(modulesResources, new SeedHiddenModules(excludedResources.getSlugs(), excludedResources.getTags()));
   }
 }

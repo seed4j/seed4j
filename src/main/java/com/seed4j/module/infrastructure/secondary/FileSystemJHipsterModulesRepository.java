@@ -4,7 +4,7 @@ import com.seed4j.module.domain.*;
 import com.seed4j.module.domain.javaproperties.SpringPropertyType;
 import com.seed4j.module.domain.landscape.SeedLandscape;
 import com.seed4j.module.domain.postaction.SeedModuleExecutionContext;
-import com.seed4j.module.domain.resource.JHipsterModulesResources;
+import com.seed4j.module.domain.resource.SeedModulesResources;
 import com.seed4j.module.infrastructure.secondary.javadependency.FileSystemJavaBuildCommandsHandler;
 import com.seed4j.project.infrastructure.primary.JavaProjects;
 import com.seed4j.shared.error.domain.Assert;
@@ -20,7 +20,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
   public static final String TEST_META_INF_FOLDER = "src/test/resources/META-INF/";
 
   private final JavaProjects projects;
-  private final JHipsterModulesResources resources;
+  private final SeedModulesResources resources;
 
   private final FileSystemJHipsterModuleFiles files;
   private final FileSystemJavaBuildCommandsHandler javaBuild;
@@ -38,7 +38,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
 
   public FileSystemJHipsterModulesRepository(
     JavaProjects projects,
-    JHipsterModulesResources resources,
+    SeedModulesResources resources,
     FileSystemJHipsterModuleFiles files,
     FileSystemReplacer fileReplacer,
     FileSystemGitIgnoreHandler gitIgnore,
@@ -106,7 +106,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
   }
 
   @Override
-  public JHipsterModulesResources resources() {
+  public SeedModulesResources resources() {
     return resources;
   }
 

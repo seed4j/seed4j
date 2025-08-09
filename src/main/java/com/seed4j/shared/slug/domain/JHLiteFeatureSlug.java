@@ -1,8 +1,8 @@
 package com.seed4j.shared.slug.domain;
 
-import com.seed4j.module.domain.resource.JHipsterFeatureSlugFactory;
+import com.seed4j.module.domain.resource.SeedFeatureSlugFactory;
 
-public enum JHLiteFeatureSlug implements JHipsterFeatureSlugFactory {
+public enum JHLiteFeatureSlug implements SeedFeatureSlugFactory {
   ANGULAR_AUTHENTICATION("angular-authentication"),
   AUTHENTICATION("authentication"),
   AUTHENTICATION_SPRINGDOC("authentication-springdoc"),

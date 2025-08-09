@@ -8,7 +8,7 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.Optional;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public final class JHipsterModulePropertyDefinition {
+public final class SeedModulePropertyDefinition {
 
   private final SeedPropertyType type;
   private final boolean mandatory;
@@ -17,7 +17,7 @@ public final class JHipsterModulePropertyDefinition {
   private final Optional<SeedPropertyDefaultValue> defaultValue;
   private final int order;
 
-  private JHipsterModulePropertyDefinition(JHipsterModulePropertyDefinitionBuilder builder) {
+  private SeedModulePropertyDefinition(JHipsterModulePropertyDefinitionBuilder builder) {
     Assert.notNull("type", builder.type);
     Assert.notBlank("key", builder.key);
 
@@ -29,7 +29,7 @@ public final class JHipsterModulePropertyDefinition {
     order = builder.order;
   }
 
-  public static JHipsterModulePropertyDefinition basePackageProperty() {
+  public static SeedModulePropertyDefinition basePackageProperty() {
     return mandatoryStringProperty(SeedModuleProperties.BASE_PACKAGE_PARAMETER)
       .description("Base java package")
       .defaultValue("com.mycompany.myapp")
@@ -37,7 +37,7 @@ public final class JHipsterModulePropertyDefinition {
       .build();
   }
 
-  public static JHipsterModulePropertyDefinition projectNameProperty() {
+  public static SeedModulePropertyDefinition projectNameProperty() {
     return mandatoryStringProperty(SeedModuleProperties.PROJECT_NAME_PARAMETER)
       .description("Project full name")
       .defaultValue("JHipster Sample Application")
@@ -45,7 +45,7 @@ public final class JHipsterModulePropertyDefinition {
       .build();
   }
 
-  static JHipsterModulePropertyDefinition projectBaseNameProperty() {
+  static SeedModulePropertyDefinition projectBaseNameProperty() {
     return mandatoryStringProperty(SeedModuleProperties.PROJECT_BASE_NAME_PARAMETER)
       .description("Project short name (only letters and numbers)")
       .defaultValue("jhipsterSampleApplication")
@@ -53,7 +53,7 @@ public final class JHipsterModulePropertyDefinition {
       .build();
   }
 
-  static JHipsterModulePropertyDefinition nodePackageManagerProperty() {
+  static SeedModulePropertyDefinition nodePackageManagerProperty() {
     return mandatoryStringProperty(SeedModuleProperties.NODE_PACKAGE_MANAGER)
       .description("Node package manager")
       .defaultValue("npm")
@@ -61,7 +61,7 @@ public final class JHipsterModulePropertyDefinition {
       .build();
   }
 
-  static JHipsterModulePropertyDefinition serverPortProperty() {
+  static SeedModulePropertyDefinition serverPortProperty() {
     return mandatoryIntegerProperty(SeedModuleProperties.SERVER_PORT_PARAMETER)
       .description("Server port")
       .defaultValue("8080")
@@ -69,11 +69,11 @@ public final class JHipsterModulePropertyDefinition {
       .build();
   }
 
-  public static JHipsterModulePropertyDefinition endOfLineProperty() {
+  public static SeedModulePropertyDefinition endOfLineProperty() {
     return optionalStringProperty("endOfLine").description("Type of line break (lf or crlf)").defaultValue("lf").order(100).build();
   }
 
-  public static JHipsterModulePropertyDefinition indentationProperty() {
+  public static SeedModulePropertyDefinition indentationProperty() {
     return optionalIntegerProperty(SeedModuleProperties.INDENTATION_PARAMETER)
       .description("Number of spaces in indentation")
       .defaultValue("2")
@@ -81,7 +81,7 @@ public final class JHipsterModulePropertyDefinition {
       .build();
   }
 
-  public static JHipsterModulePropertyDefinition springConfigurationFormatProperty() {
+  public static SeedModulePropertyDefinition springConfigurationFormatProperty() {
     return optionalStringProperty(SeedModuleProperties.SPRING_CONFIGURATION_FORMAT)
       .description("Format of the Spring configuration files (yaml or properties)")
       .defaultValue("yaml")
@@ -210,8 +210,8 @@ public final class JHipsterModulePropertyDefinition {
     }
 
     @Override
-    public JHipsterModulePropertyDefinition build() {
-      return new JHipsterModulePropertyDefinition(this);
+    public SeedModulePropertyDefinition build() {
+      return new SeedModulePropertyDefinition(this);
     }
   }
 
@@ -234,6 +234,6 @@ public final class JHipsterModulePropertyDefinition {
 
     JHipsterModulePropertyDefinitionOptionalFieldsBuilder order(int order);
 
-    JHipsterModulePropertyDefinition build();
+    SeedModulePropertyDefinition build();
   }
 }

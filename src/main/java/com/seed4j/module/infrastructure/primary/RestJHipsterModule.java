@@ -1,7 +1,7 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
-import com.seed4j.module.domain.resource.JHipsterModuleTag;
+import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleTag;
 import com.seed4j.shared.error.domain.Assert;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
@@ -23,12 +23,12 @@ final class RestJHipsterModule {
     tags = builder.tags;
   }
 
-  static RestJHipsterModule from(JHipsterModuleResource moduleResource) {
+  static RestJHipsterModule from(SeedModuleResource moduleResource) {
     return new RestJHipsterModuleBuilder()
       .slug(moduleResource.slug().get())
       .description(moduleResource.apiDoc().operation().get())
       .properties(RestJHipsterModulePropertiesDefinition.from(moduleResource.propertiesDefinition()))
-      .tags(moduleResource.tags().get().stream().map(JHipsterModuleTag::tag).toList())
+      .tags(moduleResource.tags().get().stream().map(SeedModuleTag::tag).toList())
       .build();
   }
 

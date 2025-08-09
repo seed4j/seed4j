@@ -2,22 +2,22 @@ package com.seed4j.module.domain.resource;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.*;
 
-import com.seed4j.module.domain.JHipsterModuleFactory;
+import com.seed4j.module.domain.SeedModuleFactory;
 import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.shared.error.domain.Assert;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public final class JHipsterModuleResource {
+public final class SeedModuleResource {
 
   private final SeedModuleSlug slug;
-  private final JHipsterModulePropertiesDefinition propertiesDefinition;
-  private final JHipsterModuleApiDoc apiDoc;
-  private final JHipsterModuleOrganization organization;
-  private final JHipsterModuleTags tags;
-  private final JHipsterModuleRank rank;
-  private final JHipsterModuleFactory factory;
+  private final SeedModulePropertiesDefinition propertiesDefinition;
+  private final SeedModuleApiDoc apiDoc;
+  private final SeedModuleOrganization organization;
+  private final SeedModuleTags tags;
+  private final SeedModuleRank rank;
+  private final SeedModuleFactory factory;
 
-  private JHipsterModuleResource(JHipsterModuleResourceBuilder builder) {
+  private SeedModuleResource(SeedModuleResourceBuilder builder) {
     assertMandatoryFields(builder);
 
     slug = builder.slug.build();
@@ -29,7 +29,7 @@ public final class JHipsterModuleResource {
     factory = builder.factory;
   }
 
-  private void assertMandatoryFields(JHipsterModuleResourceBuilder builder) {
+  private void assertMandatoryFields(SeedModuleResourceBuilder builder) {
     Assert.notNull("slug", builder.slug);
     Assert.notNull("propertiesDefinition", builder.propertiesDefinition);
     Assert.notNull("apiDoc", builder.apiDoc);
@@ -39,7 +39,7 @@ public final class JHipsterModuleResource {
   }
 
   public static JHipsterModuleResourceSlugBuilder builder() {
-    return new JHipsterModuleResourceBuilder();
+    return new SeedModuleResourceBuilder();
   }
 
   public String moduleUrl() {
@@ -50,27 +50,27 @@ public final class JHipsterModuleResource {
     return slug;
   }
 
-  public JHipsterModuleApiDoc apiDoc() {
+  public SeedModuleApiDoc apiDoc() {
     return apiDoc;
   }
 
-  public JHipsterModuleTags tags() {
+  public SeedModuleTags tags() {
     return tags;
   }
 
-  public JHipsterModuleOrganization organization() {
+  public SeedModuleOrganization organization() {
     return organization;
   }
 
-  public JHipsterModuleRank rank() {
+  public SeedModuleRank rank() {
     return rank;
   }
 
-  public JHipsterModuleFactory factory() {
+  public SeedModuleFactory factory() {
     return factory;
   }
 
-  public JHipsterModulePropertiesDefinition propertiesDefinition() {
+  public SeedModulePropertiesDefinition propertiesDefinition() {
     return propertiesDefinition;
   }
 
@@ -85,7 +85,7 @@ public final class JHipsterModuleResource {
       .build();
   }
 
-  private static final class JHipsterModuleResourceBuilder
+  private static final class SeedModuleResourceBuilder
     implements
       JHipsterModuleResourceSlugBuilder,
       JHipsterModuleResourcePropertiesDefinitionBuilder,
@@ -94,94 +94,94 @@ public final class JHipsterModuleResource {
       JHipsterModuleResourceTagsBuilder,
       JHipsterModuleResourceOptionalBuilder {
 
-    private JHipsterModuleSlugFactory slug;
-    private JHipsterModuleApiDoc apiDoc;
-    private JHipsterModuleFactory factory;
-    private JHipsterModulePropertiesDefinition propertiesDefinition;
+    private SeedModuleSlugFactory slug;
+    private SeedModuleApiDoc apiDoc;
+    private SeedModuleFactory factory;
+    private SeedModulePropertiesDefinition propertiesDefinition;
 
-    private JHipsterModuleTags tags;
-    private JHipsterModuleOrganization organization;
+    private SeedModuleTags tags;
+    private SeedModuleOrganization organization;
 
     @Override
-    public JHipsterModuleResourcePropertiesDefinitionBuilder slug(JHipsterModuleSlugFactory slug) {
+    public JHipsterModuleResourcePropertiesDefinitionBuilder slug(SeedModuleSlugFactory slug) {
       this.slug = slug;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleResourceApiDocBuilder propertiesDefinition(JHipsterModulePropertiesDefinition propertiesDefinition) {
+    public JHipsterModuleResourceApiDocBuilder propertiesDefinition(SeedModulePropertiesDefinition propertiesDefinition) {
       this.propertiesDefinition = propertiesDefinition;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleResourceOrganizationBuilder apiDoc(JHipsterModuleApiDoc apiDoc) {
+    public JHipsterModuleResourceOrganizationBuilder apiDoc(SeedModuleApiDoc apiDoc) {
       this.apiDoc = apiDoc;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleResourceTagsBuilder organization(JHipsterModuleOrganization organization) {
+    public JHipsterModuleResourceTagsBuilder organization(SeedModuleOrganization organization) {
       this.organization = organization;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleResourceOptionalBuilder tags(JHipsterModuleTags tags) {
+    public JHipsterModuleResourceOptionalBuilder tags(SeedModuleTags tags) {
       this.tags = tags;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleResource factory(JHipsterModuleFactory factory) {
+    public SeedModuleResource factory(SeedModuleFactory factory) {
       this.factory = factory;
 
-      return new JHipsterModuleResource(this);
+      return new SeedModuleResource(this);
     }
   }
 
   public interface JHipsterModuleResourceSlugBuilder {
-    JHipsterModuleResourcePropertiesDefinitionBuilder slug(JHipsterModuleSlugFactory slug);
+    JHipsterModuleResourcePropertiesDefinitionBuilder slug(SeedModuleSlugFactory slug);
   }
 
   public interface JHipsterModuleResourcePropertiesDefinitionBuilder {
-    JHipsterModuleResourceApiDocBuilder propertiesDefinition(JHipsterModulePropertiesDefinition propertiesDefinition);
+    JHipsterModuleResourceApiDocBuilder propertiesDefinition(SeedModulePropertiesDefinition propertiesDefinition);
 
     default JHipsterModuleResourceApiDocBuilder withoutProperties() {
-      return propertiesDefinition(JHipsterModulePropertiesDefinition.EMPTY);
+      return propertiesDefinition(SeedModulePropertiesDefinition.EMPTY);
     }
   }
 
   public interface JHipsterModuleResourceApiDocBuilder {
-    JHipsterModuleResourceOrganizationBuilder apiDoc(JHipsterModuleApiDoc apiDoc);
+    JHipsterModuleResourceOrganizationBuilder apiDoc(SeedModuleApiDoc apiDoc);
 
     default JHipsterModuleResourceOrganizationBuilder apiDoc(String group, String operation) {
-      return apiDoc(new JHipsterModuleApiDoc(group, operation));
+      return apiDoc(new SeedModuleApiDoc(group, operation));
     }
   }
 
   public interface JHipsterModuleResourceOrganizationBuilder {
-    JHipsterModuleResourceTagsBuilder organization(JHipsterModuleOrganization organization);
+    JHipsterModuleResourceTagsBuilder organization(SeedModuleOrganization organization);
 
     default JHipsterModuleResourceTagsBuilder standalone() {
-      return organization(JHipsterModuleOrganization.STANDALONE);
+      return organization(SeedModuleOrganization.STANDALONE);
     }
   }
 
   public interface JHipsterModuleResourceTagsBuilder {
-    JHipsterModuleResourceOptionalBuilder tags(JHipsterModuleTags tags);
+    JHipsterModuleResourceOptionalBuilder tags(SeedModuleTags tags);
 
     default JHipsterModuleResourceOptionalBuilder tags(String... tags) {
-      return tags(JHipsterModuleTags.builder().add(tags).build());
+      return tags(SeedModuleTags.builder().add(tags).build());
     }
   }
 
   public interface JHipsterModuleResourceOptionalBuilder {
-    JHipsterModuleResource factory(JHipsterModuleFactory factory);
+    SeedModuleResource factory(SeedModuleFactory factory);
   }
 }

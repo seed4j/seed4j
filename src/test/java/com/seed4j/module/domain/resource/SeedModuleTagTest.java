@@ -12,32 +12,32 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @UnitTest
-class JHipsterModuleTagTest {
+class SeedModuleTagTest {
 
   @Test
   void shouldNotBuildWithoutTag() {
-    assertThatThrownBy(() -> new JHipsterModuleTag(null)).isInstanceOf(MissingMandatoryValueException.class);
+    assertThatThrownBy(() -> new SeedModuleTag(null)).isInstanceOf(MissingMandatoryValueException.class);
   }
 
   @Test
   void shouldNotBuildWithWhitespace() {
-    assertThatThrownBy(() -> new JHipsterModuleTag("my tag")).isInstanceOf(InvalidJHipsterModuleTagException.class);
+    assertThatThrownBy(() -> new SeedModuleTag("my tag")).isInstanceOf(InvalidSeedModuleTagException.class);
   }
 
   @Test
   void shouldNotBuildWithTooLongTag() {
     var stringTooLong = RandomStringUtils.secure().nextNumeric(16);
-    assertThatThrownBy(() -> new JHipsterModuleTag(stringTooLong)).isInstanceOf(StringTooLongException.class);
+    assertThatThrownBy(() -> new SeedModuleTag(stringTooLong)).isInstanceOf(StringTooLongException.class);
   }
 
   @ParameterizedTest
   @ValueSource(strings = { "MyTag", "my_tag", "myTag123" })
   void shouldNotBuildInvalidTag(String tag) {
-    assertThatThrownBy(() -> new JHipsterModuleTag(tag)).isExactlyInstanceOf(InvalidJHipsterModuleTagException.class);
+    assertThatThrownBy(() -> new SeedModuleTag(tag)).isExactlyInstanceOf(InvalidSeedModuleTagException.class);
   }
 
   @Test
   void shouldGetTagValue() {
-    assertThat(new JHipsterModuleTag("mytag").get()).isEqualTo("mytag");
+    assertThat(new SeedModuleTag("mytag").get()).isEqualTo("mytag");
   }
 }

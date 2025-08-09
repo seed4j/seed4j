@@ -15,29 +15,26 @@ import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JHipsterModulesResources {
+public class SeedModulesResources {
 
-  private static final Logger log = LoggerFactory.getLogger(JHipsterModulesResources.class);
+  private static final Logger log = LoggerFactory.getLogger(SeedModulesResources.class);
 
-  private final Map<SeedModuleSlug, JHipsterModuleResource> resources;
+  private final Map<SeedModuleSlug, SeedModuleResource> resources;
 
-  public JHipsterModulesResources(Collection<JHipsterModuleResource> modulesResources, JHipsterHiddenModules hiddenModules) {
+  public SeedModulesResources(Collection<SeedModuleResource> modulesResources, SeedHiddenModules hiddenModules) {
     Assert.field("modulesResources", modulesResources).notEmpty().noNullElement();
-    Assert.notNull("jhipsterHiddenModules", hiddenModules);
+    Assert.notNull("seedHiddenModules", hiddenModules);
 
     assertUniqueSlugs(modulesResources);
 
     resources = Collections.unmodifiableMap(
       removeHiddenModules(modulesResources, hiddenModules).collect(
-        Collectors.toMap(JHipsterModuleResource::slug, Function.identity(), (x, y) -> y, LinkedHashMap::new)
+        Collectors.toMap(SeedModuleResource::slug, Function.identity(), (x, y) -> y, LinkedHashMap::new)
       )
     );
   }
 
-  private Stream<JHipsterModuleResource> removeHiddenModules(
-    Collection<JHipsterModuleResource> modulesResources,
-    JHipsterHiddenModules hiddenModules
-  ) {
+  private Stream<SeedModuleResource> removeHiddenModules(Collection<SeedModuleResource> modulesResources, SeedHiddenModules hiddenModules) {
     Collection<String> nestedDependenciesSlugs = findNestedDependencies(modulesResources, hiddenModules);
     DisplayHiddenResources displayHiddenResources = findDisplayAndHiddenResources(modulesResources, hiddenModules, nestedDependenciesSlugs);
     if (displayHiddenResources.hasHiddenResources()) {
@@ -48,89 +45,79 @@ public class JHipsterModulesResources {
   }
 
   private DisplayHiddenResources findDisplayAndHiddenResources(
-    Collection<JHipsterModuleResource> modulesResources,
-    JHipsterHiddenModules hiddenModules,
+    Collection<SeedModuleResource> modulesResources,
+    SeedHiddenModules hiddenModules,
     Collection<String> nestedDependenciesSlugs
   ) {
-    Map<Boolean, List<JHipsterModuleResource>> partitionedResources = modulesResources
+    Map<Boolean, List<SeedModuleResource>> partitionedResources = modulesResources
       .stream()
       .collect(Collectors.partitioningBy(resource -> allowed(resource, hiddenModules, nestedDependenciesSlugs)));
     return new DisplayHiddenResources(partitionedResources.get(true), partitionedResources.get(false));
   }
 
-  private boolean allowed(
-    JHipsterModuleResource resource,
-    JHipsterHiddenModules hiddenModules,
-    Collection<String> nestedDependenciesSlugs
-  ) {
+  private boolean allowed(SeedModuleResource resource, SeedHiddenModules hiddenModules, Collection<String> nestedDependenciesSlugs) {
     return notExcludedSlug(resource, hiddenModules, nestedDependenciesSlugs) && noExcludedTag(resource, hiddenModules);
   }
 
   private boolean notExcludedSlug(
-    JHipsterModuleResource resource,
-    JHipsterHiddenModules hiddenModules,
+    SeedModuleResource resource,
+    SeedHiddenModules hiddenModules,
     Collection<String> nestedDependenciesSlugs
   ) {
     return !hiddenModules.slugs().contains(resource.slug().get()) && !nestedDependenciesSlugs.contains(resource.slug().get());
   }
 
-  private boolean noExcludedTag(JHipsterModuleResource resource, JHipsterHiddenModules hiddenModules) {
+  private boolean noExcludedTag(SeedModuleResource resource, SeedHiddenModules hiddenModules) {
     return hiddenModules
       .tags()
       .stream()
       .noneMatch(tag -> resource.tags().contains(tag));
   }
 
-  private Collection<String> findNestedDependencies(
-    Collection<JHipsterModuleResource> modulesResources,
-    JHipsterHiddenModules hiddenModules
-  ) {
+  private Collection<String> findNestedDependencies(Collection<SeedModuleResource> modulesResources, SeedHiddenModules hiddenModules) {
     return findNestedDependenciesBySlugs(hiddenModules.slugs(), modulesResources);
   }
 
-  private Collection<String> findNestedDependenciesBySlugs(Collection<String> slugs, Collection<JHipsterModuleResource> modulesResources) {
+  private Collection<String> findNestedDependenciesBySlugs(Collection<String> slugs, Collection<SeedModuleResource> modulesResources) {
     return slugs
       .stream()
       .flatMap(slug -> allSlugsNestedDependenciesOf(slug, modulesResources))
       .toList();
   }
 
-  private Stream<String> allSlugsNestedDependenciesOf(String slug, Collection<JHipsterModuleResource> modulesResources) {
+  private Stream<String> allSlugsNestedDependenciesOf(String slug, Collection<SeedModuleResource> modulesResources) {
     return allResourcesNestedDependenciesOf(new SeedModuleSlug(slug), modulesResources).map(moduleResource -> moduleResource.slug().get());
   }
 
-  private Stream<JHipsterModuleResource> allResourcesNestedDependenciesOf(
+  private Stream<SeedModuleResource> allResourcesNestedDependenciesOf(
     SeedModuleSlug slug,
-    Collection<JHipsterModuleResource> modulesResources
+    Collection<SeedModuleResource> modulesResources
   ) {
-    Collection<JHipsterModuleResource> childrenDependencies = this.getChildrenDependencies(slug, modulesResources);
+    Collection<SeedModuleResource> childrenDependencies = this.getChildrenDependencies(slug, modulesResources);
     if (noMoreNestedResource(childrenDependencies)) {
       return Stream.of();
     }
     return Stream.concat(childrenDependencies.stream(), childrenDependencies.stream().flatMap(moveToNextNestedResource(modulesResources)));
   }
 
-  private boolean noMoreNestedResource(Collection<JHipsterModuleResource> childrenDependencies) {
+  private boolean noMoreNestedResource(Collection<SeedModuleResource> childrenDependencies) {
     return childrenDependencies.isEmpty();
   }
 
-  private Function<JHipsterModuleResource, Stream<JHipsterModuleResource>> moveToNextNestedResource(
-    Collection<JHipsterModuleResource> modulesResources
+  private Function<SeedModuleResource, Stream<SeedModuleResource>> moveToNextNestedResource(
+    Collection<SeedModuleResource> modulesResources
   ) {
     return resource -> this.allResourcesNestedDependenciesOf(resource.slug(), modulesResources);
   }
 
-  private Collection<JHipsterModuleResource> getChildrenDependencies(
-    SeedModuleSlug slug,
-    Collection<JHipsterModuleResource> modulesResources
-  ) {
+  private Collection<SeedModuleResource> getChildrenDependencies(SeedModuleSlug slug, Collection<SeedModuleResource> modulesResources) {
     return modulesResources
       .stream()
       .filter(moduleResource -> isChildrenOf(slug, moduleResource))
       .toList();
   }
 
-  private boolean isChildrenOf(SeedModuleSlug slug, JHipsterModuleResource moduleResource) {
+  private boolean isChildrenOf(SeedModuleSlug slug, SeedModuleResource moduleResource) {
     return moduleResource
       .organization()
       .dependencies()
@@ -138,21 +125,21 @@ public class JHipsterModulesResources {
       .anyMatch(dependency -> dependency.slug().equals(slug));
   }
 
-  private void assertUniqueSlugs(Collection<JHipsterModuleResource> modulesResources) {
+  private void assertUniqueSlugs(Collection<SeedModuleResource> modulesResources) {
     if (duplicatedSlug(modulesResources)) {
       throw new DuplicatedSlugException();
     }
   }
 
-  private boolean duplicatedSlug(Collection<JHipsterModuleResource> modulesResources) {
-    return modulesResources.stream().map(JHipsterModuleResource::slug).collect(Collectors.toSet()).size() != modulesResources.size();
+  private boolean duplicatedSlug(Collection<SeedModuleResource> modulesResources) {
+    return modulesResources.stream().map(SeedModuleResource::slug).collect(Collectors.toSet()).size() != modulesResources.size();
   }
 
-  public Stream<JHipsterModuleResource> stream() {
+  public Stream<SeedModuleResource> stream() {
     return resources.values().stream();
   }
 
-  public JHipsterModuleResource get(SeedModuleSlug slug) {
+  public SeedModuleResource get(SeedModuleSlug slug) {
     assertKnownSlug(slug);
 
     return resources.get(slug);
@@ -173,8 +160,8 @@ public class JHipsterModulesResources {
     }
   }
 
-  private record DisplayHiddenResources(Collection<JHipsterModuleResource> displayed, Collection<JHipsterModuleResource> hidden) {
-    private Stream<JHipsterModuleResource> displayedStream() {
+  private record DisplayHiddenResources(Collection<SeedModuleResource> displayed, Collection<SeedModuleResource> hidden) {
+    private Stream<SeedModuleResource> displayedStream() {
       return displayed().stream();
     }
 

@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.util.Collection;
@@ -19,7 +19,7 @@ final class RestJHipsterModuleCategory {
     this.modules = modules;
   }
 
-  static RestJHipsterModuleCategory from(String category, Collection<JHipsterModuleResource> modules) {
+  static RestJHipsterModuleCategory from(String category, Collection<SeedModuleResource> modules) {
     return new RestJHipsterModuleCategory(category, modules.stream().map(RestJHipsterModule::from).sorted(MODULE_COMPARATOR).toList());
   }
 

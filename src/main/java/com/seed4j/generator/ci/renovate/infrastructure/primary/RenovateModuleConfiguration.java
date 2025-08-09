@@ -3,8 +3,8 @@ package com.seed4j.generator.ci.renovate.infrastructure.primary;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.RENOVATE;
 
 import com.seed4j.generator.ci.renovate.application.RenovateApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import com.seed4j.shared.slug.domain.JHLiteFeatureSlug;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,12 +16,12 @@ class RenovateModuleConfiguration {
   private static final String RENOVATE_TAG = "renovate";
 
   @Bean
-  JHipsterModuleResource renovateModule(RenovateApplicationService renovate) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource renovateModule(RenovateApplicationService renovate) {
+    return SeedModuleResource.builder()
       .slug(RENOVATE)
       .withoutProperties()
       .apiDoc("Dependencies updates", "Add Renovate for automatic dependency updates")
-      .organization(JHipsterModuleOrganization.builder().feature(JHLiteFeatureSlug.DEPENDENCIES_UPDATES).build())
+      .organization(SeedModuleOrganization.builder().feature(JHLiteFeatureSlug.DEPENDENCIES_UPDATES).build())
       .tags(CI_TAG, RENOVATE_TAG)
       .factory(renovate::buildModule);
   }

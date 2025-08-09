@@ -4,7 +4,7 @@ import com.seed4j.module.domain.SeedFeatureSlug;
 import java.util.Optional;
 
 @FunctionalInterface
-public interface JHipsterFeatureSlugFactory {
+public interface SeedFeatureSlugFactory {
   String get();
 
   default Optional<SeedFeatureSlug> build() {

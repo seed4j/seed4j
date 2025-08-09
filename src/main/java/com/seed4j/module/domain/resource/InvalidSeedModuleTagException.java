@@ -2,9 +2,9 @@ package com.seed4j.module.domain.resource;
 
 import com.seed4j.shared.error.domain.GeneratorException;
 
-class InvalidJHipsterModuleTagException extends GeneratorException {
+class InvalidSeedModuleTagException extends GeneratorException {
 
-  public InvalidJHipsterModuleTagException(String tag) {
+  public InvalidSeedModuleTagException(String tag) {
     super(internalServerError(ResourceErrorKey.INVALID_TAG).message(buildMessage(tag)).addParameter("tag", tag));
   }
 

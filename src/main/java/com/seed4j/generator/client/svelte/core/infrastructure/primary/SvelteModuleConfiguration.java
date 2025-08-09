@@ -6,9 +6,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PRETTIER;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SVELTE_CORE;
 
 import com.seed4j.generator.client.svelte.core.application.SvelteApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,12 +16,12 @@ import org.springframework.context.annotation.Configuration;
 class SvelteModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource svelteModule(SvelteApplicationService svelte) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource svelteModule(SvelteApplicationService svelte) {
+    return SeedModuleResource.builder()
       .slug(SVELTE_CORE)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addNodePackageManager().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addNodePackageManager().build())
       .apiDoc("Frontend - Svelte", "Add Svelte")
-      .organization(JHipsterModuleOrganization.builder().feature(CLIENT_CORE).addDependency(INIT).addDependency(PRETTIER).build())
+      .organization(SeedModuleOrganization.builder().feature(CLIENT_CORE).addDependency(INIT).addDependency(PRETTIER).build())
       .tags("client", "svelte")
       .factory(svelte::buildModule);
   }

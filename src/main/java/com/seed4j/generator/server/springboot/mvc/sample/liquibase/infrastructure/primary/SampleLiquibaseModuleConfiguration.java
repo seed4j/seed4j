@@ -6,8 +6,8 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_FEATURE;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_LIQUIBASE_CHANGELOG;
 
 import com.seed4j.generator.server.springboot.mvc.sample.liquibase.application.SampleLiquibaseApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,14 +15,12 @@ import org.springframework.context.annotation.Configuration;
 class SampleLiquibaseModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource sampleLiquibaseModule(SampleLiquibaseApplicationService sampleLiquibase) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource sampleLiquibaseModule(SampleLiquibaseApplicationService sampleLiquibase) {
+    return SeedModuleResource.builder()
       .slug(SAMPLE_LIQUIBASE_CHANGELOG)
       .withoutProperties()
       .apiDoc("Sample Feature", "Add liquibase changelog for sample feature")
-      .organization(
-        JHipsterModuleOrganization.builder().feature(SAMPLE_SCHEMA).addDependency(LIQUIBASE).addDependency(SAMPLE_FEATURE).build()
-      )
+      .organization(SeedModuleOrganization.builder().feature(SAMPLE_SCHEMA).addDependency(LIQUIBASE).addDependency(SAMPLE_FEATURE).build())
       .tags("server")
       .factory(sampleLiquibase::buildModule);
   }

@@ -6,9 +6,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_THYMELE
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.WEBJARS_LOCATOR;
 
 import com.seed4j.generator.server.webjars.application.WebjarsApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,40 +20,40 @@ class WebjarsModuleConfiguration {
   private static final String WEBJARS_GROUP = "WebJars";
 
   @Bean
-  JHipsterModuleResource webjarsLocatorModule(WebjarsApplicationService webjars) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource webjarsLocatorModule(WebjarsApplicationService webjars) {
+    return SeedModuleResource.builder()
       .slug(WEBJARS_LOCATOR)
       .propertiesDefinition(
-        JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addSpringConfigurationFormat().build()
+        SeedModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addSpringConfigurationFormat().build()
       )
       .apiDoc(WEBJARS_GROUP, "Add webjars locator to the project")
-      .organization(JHipsterModuleOrganization.builder().addDependency(SPRING_BOOT_THYMELEAF).build())
+      .organization(SeedModuleOrganization.builder().addDependency(SPRING_BOOT_THYMELEAF).build())
       .tags(SERVER_TAG, WEB_TAG)
       .factory(webjars::buildWebjarsLocatorModule);
   }
 
   @Bean
-  JHipsterModuleResource webjarsHtmxModule(WebjarsApplicationService webjars) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource webjarsHtmxModule(WebjarsApplicationService webjars) {
+    return SeedModuleResource.builder()
       .slug(HTMX_WEBJARS)
       .propertiesDefinition(
-        JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addSpringConfigurationFormat().build()
+        SeedModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addSpringConfigurationFormat().build()
       )
       .apiDoc(WEBJARS_GROUP, "Add HTMX webjar to the project")
-      .organization(JHipsterModuleOrganization.builder().addDependency(WEBJARS_LOCATOR).build())
+      .organization(SeedModuleOrganization.builder().addDependency(WEBJARS_LOCATOR).build())
       .tags(SERVER_TAG, WEB_TAG)
       .factory(webjars::buildWebjarsHtmxModule);
   }
 
   @Bean
-  JHipsterModuleResource webjarsAlpineJSModule(WebjarsApplicationService webjars) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource webjarsAlpineJSModule(WebjarsApplicationService webjars) {
+    return SeedModuleResource.builder()
       .slug(ALPINE_JS_WEBJARS)
       .propertiesDefinition(
-        JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addSpringConfigurationFormat().build()
+        SeedModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addSpringConfigurationFormat().build()
       )
       .apiDoc(WEBJARS_GROUP, "Add alpine.js webjar to the project")
-      .organization(JHipsterModuleOrganization.builder().addDependency(WEBJARS_LOCATOR).build())
+      .organization(SeedModuleOrganization.builder().addDependency(WEBJARS_LOCATOR).build())
       .tags(SERVER_TAG, WEB_TAG)
       .factory(webjars::buildWebjarsAlpineJSModule);
   }

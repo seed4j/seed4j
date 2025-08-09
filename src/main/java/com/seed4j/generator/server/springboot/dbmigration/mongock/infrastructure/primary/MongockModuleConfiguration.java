@@ -4,9 +4,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MONGOCK;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MONGODB;
 
 import com.seed4j.generator.server.springboot.dbmigration.mongock.application.MongockApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,14 +14,14 @@ import org.springframework.context.annotation.Configuration;
 class MongockModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource mongockModule(MongockApplicationService mongock) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource mongockModule(MongockApplicationService mongock) {
+    return SeedModuleResource.builder()
       .slug(MONGOCK)
       .propertiesDefinition(
-        JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
+        SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
       )
       .apiDoc("Spring Boot - Database Migration", "Add Mongock")
-      .organization(JHipsterModuleOrganization.builder().addDependency(MONGODB).build())
+      .organization(SeedModuleOrganization.builder().addDependency(MONGODB).build())
       .tags("server", "spring", "spring-boot", "database", "migration", "mongo-db")
       .factory(mongock::buildModule);
   }

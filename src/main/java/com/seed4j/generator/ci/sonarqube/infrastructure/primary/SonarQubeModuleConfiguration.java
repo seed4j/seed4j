@@ -9,9 +9,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SONARQUBE_TYPESCRIP
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.TYPESCRIPT;
 
 import com.seed4j.generator.ci.sonarqube.application.SonarQubeApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,43 +19,43 @@ import org.springframework.context.annotation.Configuration;
 class SonarQubeModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource sonarqubeBackendModule(SonarQubeApplicationService sonarQube) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource sonarqubeBackendModule(SonarQubeApplicationService sonarQube) {
+    return SeedModuleResource.builder()
       .slug(SONARQUBE_JAVA_BACKEND)
       .propertiesDefinition(propertiesDefinition())
       .apiDoc("SonarQube", "Add Sonar configuration for Java Backend to inspect code quality")
       .organization(
-        JHipsterModuleOrganization.builder().feature(SONARQUBE).addDependency(JAVA_BUILD_TOOL).addDependency(CODE_COVERAGE_JAVA).build()
+        SeedModuleOrganization.builder().feature(SONARQUBE).addDependency(JAVA_BUILD_TOOL).addDependency(CODE_COVERAGE_JAVA).build()
       )
       .tags("server", "sonar", "sonarqube")
       .factory(sonarQube::buildBackendModule);
   }
 
   @Bean
-  JHipsterModuleResource sonarqubeBackendFrontendModule(SonarQubeApplicationService sonarQube) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource sonarqubeBackendFrontendModule(SonarQubeApplicationService sonarQube) {
+    return SeedModuleResource.builder()
       .slug(SONARQUBE_JAVA_BACKEND_AND_FRONTEND)
       .propertiesDefinition(propertiesDefinition())
       .apiDoc("SonarQube", "Add Sonar configuration for Java Backend and Frontend to inspect code quality")
       .organization(
-        JHipsterModuleOrganization.builder().feature(SONARQUBE).addDependency(JAVA_BUILD_TOOL).addDependency(CODE_COVERAGE_JAVA).build()
+        SeedModuleOrganization.builder().feature(SONARQUBE).addDependency(JAVA_BUILD_TOOL).addDependency(CODE_COVERAGE_JAVA).build()
       )
       .tags("server", "frontend", "sonar", "sonarqube")
       .factory(sonarQube::buildBackendFrontendModule);
   }
 
   @Bean
-  JHipsterModuleResource sonarqubeTypescriptModule(SonarQubeApplicationService sonarTypescript) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource sonarqubeTypescriptModule(SonarQubeApplicationService sonarTypescript) {
+    return SeedModuleResource.builder()
       .slug(SONARQUBE_TYPESCRIPT)
       .withoutProperties()
       .apiDoc("Typescript", "Add Sonar to project")
-      .organization(JHipsterModuleOrganization.builder().feature(SONARQUBE).addDependency(TYPESCRIPT).build())
+      .organization(SeedModuleOrganization.builder().feature(SONARQUBE).addDependency(TYPESCRIPT).build())
       .tags("typescript")
       .factory(sonarTypescript::buildTypescriptModule);
   }
 
-  private JHipsterModulePropertiesDefinition propertiesDefinition() {
-    return JHipsterModulePropertiesDefinition.builder().addProjectName().addProjectBaseName().addIndentation().build();
+  private SeedModulePropertiesDefinition propertiesDefinition() {
+    return SeedModulePropertiesDefinition.builder().addProjectName().addProjectBaseName().addIndentation().build();
   }
 }

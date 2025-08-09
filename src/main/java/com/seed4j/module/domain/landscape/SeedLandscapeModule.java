@@ -4,9 +4,9 @@ import static org.apache.commons.lang3.builder.ToStringStyle.*;
 
 import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.SeedSlug;
-import com.seed4j.module.domain.resource.JHipsterModuleOperation;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleRank;
+import com.seed4j.module.domain.resource.SeedModuleOperation;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleRank;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Collection;
@@ -19,10 +19,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public final class SeedLandscapeModule implements SeedLandscapeElement {
 
   private final SeedModuleSlug module;
-  private final JHipsterModuleOperation operation;
-  private final JHipsterModulePropertiesDefinition propertiesDefinition;
+  private final SeedModuleOperation operation;
+  private final SeedModulePropertiesDefinition propertiesDefinition;
   private final Optional<SeedLandscapeDependencies> dependencies;
-  private final JHipsterModuleRank rank;
+  private final SeedModuleRank rank;
 
   private SeedLandscapeModule(JHipsterLandscapeModuleBuilder builder) {
     Assert.notNull("module", builder.module);
@@ -45,15 +45,15 @@ public final class SeedLandscapeModule implements SeedLandscapeElement {
     return module;
   }
 
-  public JHipsterModuleOperation operation() {
+  public SeedModuleOperation operation() {
     return operation;
   }
 
-  public JHipsterModulePropertiesDefinition propertiesDefinition() {
+  public SeedModulePropertiesDefinition propertiesDefinition() {
     return propertiesDefinition;
   }
 
-  public JHipsterModuleRank rank() {
+  public SeedModuleRank rank() {
     return rank;
   }
 
@@ -113,10 +113,10 @@ public final class SeedLandscapeModule implements SeedLandscapeElement {
       JHipsterLandscapeModuleOptionalBuilder {
 
     private SeedModuleSlug module;
-    private JHipsterModuleOperation operation;
+    private SeedModuleOperation operation;
     private Collection<? extends SeedLandscapeDependency> dependencies;
-    private JHipsterModulePropertiesDefinition propertiesDefinition;
-    private JHipsterModuleRank rank;
+    private SeedModulePropertiesDefinition propertiesDefinition;
+    private SeedModuleRank rank;
 
     @Override
     public JHipsterLandscapeModuleOperationBuilder module(SeedModuleSlug module) {
@@ -126,21 +126,21 @@ public final class SeedLandscapeModule implements SeedLandscapeElement {
     }
 
     @Override
-    public JHipsterLandscapeModulePropertiesDefinitionBuilder operation(JHipsterModuleOperation operation) {
+    public JHipsterLandscapeModulePropertiesDefinitionBuilder operation(SeedModuleOperation operation) {
       this.operation = operation;
 
       return this;
     }
 
     @Override
-    public JHipsterLandscapeModuleOptionalBuilder propertiesDefinition(JHipsterModulePropertiesDefinition propertiesDefinition) {
+    public JHipsterLandscapeModuleOptionalBuilder propertiesDefinition(SeedModulePropertiesDefinition propertiesDefinition) {
       this.propertiesDefinition = propertiesDefinition;
 
       return this;
     }
 
     @Override
-    public JHipsterLandscapeModuleOptionalBuilder rank(JHipsterModuleRank rank) {
+    public JHipsterLandscapeModuleOptionalBuilder rank(SeedModuleRank rank) {
       this.rank = rank;
 
       return this;
@@ -163,19 +163,19 @@ public final class SeedLandscapeModule implements SeedLandscapeElement {
   }
 
   public interface JHipsterLandscapeModuleOperationBuilder {
-    JHipsterLandscapeModulePropertiesDefinitionBuilder operation(JHipsterModuleOperation operation);
+    JHipsterLandscapeModulePropertiesDefinitionBuilder operation(SeedModuleOperation operation);
 
     default JHipsterLandscapeModulePropertiesDefinitionBuilder operation(String operation) {
-      return operation(new JHipsterModuleOperation(operation));
+      return operation(new SeedModuleOperation(operation));
     }
   }
 
   public interface JHipsterLandscapeModulePropertiesDefinitionBuilder {
-    JHipsterLandscapeModuleOptionalBuilder propertiesDefinition(JHipsterModulePropertiesDefinition propertiesDefinition);
+    JHipsterLandscapeModuleOptionalBuilder propertiesDefinition(SeedModulePropertiesDefinition propertiesDefinition);
   }
 
   public interface JHipsterLandscapeModuleOptionalBuilder {
-    JHipsterLandscapeModuleOptionalBuilder rank(JHipsterModuleRank rank);
+    JHipsterLandscapeModuleOptionalBuilder rank(SeedModuleRank rank);
 
     SeedLandscapeModule dependencies(Collection<? extends SeedLandscapeDependency> dependencies);
 

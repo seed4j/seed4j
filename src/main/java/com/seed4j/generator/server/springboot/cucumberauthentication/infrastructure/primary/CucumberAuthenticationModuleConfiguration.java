@@ -8,9 +8,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_JWT;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_OAUTH_2;
 
 import com.seed4j.generator.server.springboot.cucumberauthentication.application.CucumberAuthenticationApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,13 +18,13 @@ import org.springframework.context.annotation.Configuration;
 class CucumberAuthenticationModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource cucumberOAuth2AuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentication) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource cucumberOAuth2AuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentication) {
+    return SeedModuleResource.builder()
       .slug(SPRING_BOOT_CUCUMBER_OAUTH_2_AUTHENTICATION)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
       .apiDoc("Spring Boot - Component Tests", "Add OAuth2 authentication steps for cucumber")
       .organization(
-        JHipsterModuleOrganization.builder()
+        SeedModuleOrganization.builder()
           .feature(CUCUMBER_AUTHENTICATION)
           .addDependency(SPRING_BOOT_CUCUMBER)
           .addDependency(SPRING_BOOT_OAUTH_2)
@@ -35,13 +35,13 @@ class CucumberAuthenticationModuleConfiguration {
   }
 
   @Bean
-  JHipsterModuleResource cucumberJwtAuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentication) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource cucumberJwtAuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentication) {
+    return SeedModuleResource.builder()
       .slug(SPRING_BOOT_CUCUMBER_JWT_AUTHENTICATION)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().build())
       .apiDoc("Spring Boot - Component Tests", "Add JWT authentication steps for cucumber")
       .organization(
-        JHipsterModuleOrganization.builder()
+        SeedModuleOrganization.builder()
           .feature(CUCUMBER_AUTHENTICATION)
           .addDependency(SPRING_BOOT_CUCUMBER)
           .addDependency(SPRING_BOOT_JWT)

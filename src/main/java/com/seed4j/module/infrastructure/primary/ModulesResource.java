@@ -4,7 +4,7 @@ import com.seed4j.module.application.JHipsterModulesApplicationService;
 import com.seed4j.module.domain.JHipsterModuleToApply;
 import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import com.seed4j.shared.projectfolder.domain.ProjectFolder;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
@@ -61,7 +61,7 @@ class ModulesResource {
   @Hidden
   @GetMapping("modules/{slug}")
   public RestJHipsterModulePropertiesDefinition propertiesDefinition(@PathVariable("slug") String slug) {
-    JHipsterModuleResource module = modules.resources().get(new SeedModuleSlug(slug));
+    SeedModuleResource module = modules.resources().get(new SeedModuleSlug(slug));
     return RestJHipsterModulePropertiesDefinition.from(module.propertiesDefinition());
   }
 

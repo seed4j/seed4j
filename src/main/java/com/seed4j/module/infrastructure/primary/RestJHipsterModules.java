@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.domain.resource.JHipsterModulesResources;
+import com.seed4j.module.domain.resource.SeedModulesResources;
 import com.seed4j.shared.error.domain.Assert;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Collection;
@@ -21,13 +21,13 @@ final class RestJHipsterModules {
     this.categories = categories;
   }
 
-  public static RestJHipsterModules from(JHipsterModulesResources modulesResources) {
+  public static RestJHipsterModules from(SeedModulesResources modulesResources) {
     Assert.notNull("modulesResources", modulesResources);
 
     return new RestJHipsterModules(buildCategories(modulesResources));
   }
 
-  private static List<RestJHipsterModuleCategory> buildCategories(JHipsterModulesResources modulesResources) {
+  private static List<RestJHipsterModuleCategory> buildCategories(SeedModulesResources modulesResources) {
     return modulesResources
       .stream()
       .collect(Collectors.groupingBy(module -> module.apiDoc().group().get()))

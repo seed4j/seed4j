@@ -9,8 +9,8 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_NOT_POSTGRES
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_POSTGRESQL_FLYWAY_CHANGELOG;
 
 import com.seed4j.generator.server.springboot.mvc.sample.flyway.application.SampleFlywayApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,13 +18,13 @@ import org.springframework.context.annotation.Configuration;
 class SampleFlywayModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource sampleFlywayPostgreSQLModule(SampleFlywayApplicationService sampleFlyway) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource sampleFlywayPostgreSQLModule(SampleFlywayApplicationService sampleFlyway) {
+    return SeedModuleResource.builder()
       .slug(SAMPLE_POSTGRESQL_FLYWAY_CHANGELOG)
       .withoutProperties()
       .apiDoc("Sample Feature", "Add PostgreSQL flyway changelog for sample feature")
       .organization(
-        JHipsterModuleOrganization.builder()
+        SeedModuleOrganization.builder()
           .feature(SAMPLE_SCHEMA)
           .addDependency(FLYWAY_POSTGRESQL)
           .addDependency(SAMPLE_FEATURE)
@@ -36,12 +36,12 @@ class SampleFlywayModuleConfiguration {
   }
 
   @Bean
-  JHipsterModuleResource sampleFlywayNotPostgreSQLModule(SampleFlywayApplicationService sampleFlyway) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource sampleFlywayNotPostgreSQLModule(SampleFlywayApplicationService sampleFlyway) {
+    return SeedModuleResource.builder()
       .slug(SAMPLE_NOT_POSTGRESQL_FLYWAY_CHANGELOG)
       .withoutProperties()
       .apiDoc("Sample Feature", "Add not PostgreSQL flyway changelog for sample feature")
-      .organization(JHipsterModuleOrganization.builder().feature(SAMPLE_SCHEMA).addDependency(FLYWAY).addDependency(SAMPLE_FEATURE).build())
+      .organization(SeedModuleOrganization.builder().feature(SAMPLE_SCHEMA).addDependency(FLYWAY).addDependency(SAMPLE_FEATURE).build())
       .tags("server")
       .factory(sampleFlyway::buildNotPostgreSQLModule);
   }

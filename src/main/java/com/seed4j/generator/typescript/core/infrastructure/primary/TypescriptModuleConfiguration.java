@@ -5,9 +5,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PRETTIER;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.TYPESCRIPT;
 
 import com.seed4j.generator.typescript.core.application.TypescriptApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,17 +15,17 @@ import org.springframework.context.annotation.Configuration;
 class TypescriptModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource typescriptModule(TypescriptApplicationService typescript) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource typescriptModule(TypescriptApplicationService typescript) {
+    return SeedModuleResource.builder()
       .slug(TYPESCRIPT)
       .propertiesDefinition(propertiesDefinition())
       .apiDoc("Typescript", "Init Typescript project")
-      .organization(JHipsterModuleOrganization.builder().addDependency(INIT).addDependency(PRETTIER).build())
+      .organization(SeedModuleOrganization.builder().addDependency(INIT).addDependency(PRETTIER).build())
       .tags("typescript")
       .factory(typescript::buildModule);
   }
 
-  private JHipsterModulePropertiesDefinition propertiesDefinition() {
-    return JHipsterModulePropertiesDefinition.builder().addNodePackageManager().build();
+  private SeedModulePropertiesDefinition propertiesDefinition() {
+    return SeedModulePropertiesDefinition.builder().addNodePackageManager().build();
   }
 }

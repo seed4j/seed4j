@@ -3,7 +3,7 @@ package com.seed4j.module.infrastructure.primary;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.seed4j.module.domain.landscape.SeedLandscapeElementType;
 import com.seed4j.module.domain.landscape.SeedLandscapeModule;
-import com.seed4j.module.domain.resource.JHipsterModuleRank;
+import com.seed4j.module.domain.resource.SeedModuleRank;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.util.Collection;
@@ -17,7 +17,7 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
   private final String operation;
   private final RestJHipsterModulePropertiesDefinition properties;
   private final Collection<RestJHipsterLandscapeDependency> dependencies;
-  private final JHipsterModuleRank rank;
+  private final SeedModuleRank rank;
 
   private RestJHipsterLandscapeModule(RestJHipsterLandscapeModuleBuilder builder) {
     slug = builder.slug;
@@ -71,7 +71,7 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
   }
 
   @Schema(description = "Rank of this module", requiredMode = RequiredMode.REQUIRED)
-  public JHipsterModuleRank getRank() {
+  public SeedModuleRank getRank() {
     return rank;
   }
 
@@ -81,7 +81,7 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
     private String operation;
     private RestJHipsterModulePropertiesDefinition properties;
     private List<RestJHipsterLandscapeDependency> dependencies;
-    private JHipsterModuleRank rank;
+    private SeedModuleRank rank;
 
     private RestJHipsterLandscapeModuleBuilder slug(String slug) {
       this.slug = slug;
@@ -107,7 +107,7 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
       return this;
     }
 
-    private RestJHipsterLandscapeModuleBuilder rank(JHipsterModuleRank rank) {
+    private RestJHipsterLandscapeModuleBuilder rank(SeedModuleRank rank) {
       this.rank = rank;
 
       return this;

@@ -5,7 +5,7 @@ package com.seed4j.module.domain.resource;
  * Ranks range from experimental to community-validated,
  * helping users assess module stability and production readiness.
  */
-public enum JHipsterModuleRank {
+public enum SeedModuleRank {
   /**
    * Experimental or advanced module requiring specific expertise
    */

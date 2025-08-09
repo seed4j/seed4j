@@ -7,7 +7,7 @@ import com.seed4j.module.domain.javadependency.JavaDependenciesVersionsRepositor
 import com.seed4j.module.domain.javadependency.ProjectJavaDependenciesRepository;
 import com.seed4j.module.domain.landscape.SeedLandscape;
 import com.seed4j.module.domain.preset.Presets;
-import com.seed4j.module.domain.resource.JHipsterModulesResources;
+import com.seed4j.module.domain.resource.SeedModulesResources;
 import java.util.Collection;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +48,7 @@ public class JHipsterModulesApplicationService {
     events.dispatch(moduleApplied);
   }
 
-  public JHipsterModulesResources resources() {
+  public SeedModulesResources resources() {
     return modules.resources();
   }
 

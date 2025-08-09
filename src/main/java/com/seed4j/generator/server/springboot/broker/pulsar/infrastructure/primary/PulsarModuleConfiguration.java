@@ -4,9 +4,9 @@ import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT;
 import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_PULSAR;
 
 import com.seed4j.generator.server.springboot.broker.pulsar.application.PulsarApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,14 +14,14 @@ import org.springframework.context.annotation.Configuration;
 class PulsarModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource pulsarModule(PulsarApplicationService pulsar) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource pulsarModule(PulsarApplicationService pulsar) {
+    return SeedModuleResource.builder()
       .slug(SPRING_BOOT_PULSAR)
       .propertiesDefinition(
-        JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
+        SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
       )
       .apiDoc("Spring Boot - Broker", "Add Pulsar dependencies, with testcontainers")
-      .organization(JHipsterModuleOrganization.builder().addDependency(SPRING_BOOT).build())
+      .organization(SeedModuleOrganization.builder().addDependency(SPRING_BOOT).build())
       .tags("server", "spring", "spring-boot", "broker")
       .factory(pulsar::buildModule);
   }

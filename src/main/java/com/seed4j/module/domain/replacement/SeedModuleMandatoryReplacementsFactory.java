@@ -19,9 +19,9 @@ public final class SeedModuleMandatoryReplacementsFactory extends SeedModuleRepl
   }
 
   public static final class SeedModuleMandatoryReplacementsFactoryBuilder
-    extends JHipsterModuleReplacementsFactoryBuilder<
+    extends SeedModuleReplacementsFactoryBuilder<
       SeedModuleMandatoryReplacementsFactory,
-      JHipsterModuleFileMandatoryReplacementsFactoryBuilder
+      SeedModuleFileMandatoryReplacementsFactoryBuilder
     > {
 
     private SeedModuleMandatoryReplacementsFactoryBuilder(SeedModuleBuilder module) {
@@ -29,8 +29,8 @@ public final class SeedModuleMandatoryReplacementsFactory extends SeedModuleRepl
     }
 
     @Override
-    public JHipsterModuleFileMandatoryReplacementsFactoryBuilder in(SeedProjectFilePath file) {
-      return new JHipsterModuleFileMandatoryReplacementsFactoryBuilder(this, file);
+    public SeedModuleFileMandatoryReplacementsFactoryBuilder in(SeedProjectFilePath file) {
+      return new SeedModuleFileMandatoryReplacementsFactoryBuilder(this, file);
     }
 
     @Override
@@ -39,20 +39,20 @@ public final class SeedModuleMandatoryReplacementsFactory extends SeedModuleRepl
     }
   }
 
-  public static final class JHipsterModuleFileMandatoryReplacementsFactoryBuilder
-    extends JHipsterModuleFileReplacementsBuilder<
+  public static final class SeedModuleFileMandatoryReplacementsFactoryBuilder
+    extends SeedModuleFileReplacementsBuilder<
       SeedModuleMandatoryReplacementsFactoryBuilder,
-      JHipsterModuleFileMandatoryReplacementsFactoryBuilder
+      SeedModuleFileMandatoryReplacementsFactoryBuilder
     > {
 
-    private JHipsterModuleFileMandatoryReplacementsFactoryBuilder(
+    private SeedModuleFileMandatoryReplacementsFactoryBuilder(
       SeedModuleMandatoryReplacementsFactoryBuilder replacements,
       SeedProjectFilePath file
     ) {
       super(replacements, file);
     }
 
-    public JHipsterModuleFileMandatoryReplacementsFactoryBuilder add(MandatoryReplacer mandatoryReplacer) {
+    public SeedModuleFileMandatoryReplacementsFactoryBuilder add(MandatoryReplacer mandatoryReplacer) {
       replacements().add(buildReplacer(file(), mandatoryReplacer.replacer(), mandatoryReplacer.updatedValue()));
 
       return this;

@@ -21,8 +21,8 @@ public record SeedLandscapeLevels(Collection<SeedLandscapeLevel> levels) {
     this.levels = Collections.unmodifiableCollection(levels);
   }
 
-  static JHipsterLandscapeLevelsBuilder builder() {
-    return new JHipsterLandscapeLevelsBuilder();
+  static SeedLandscapeLevelsBuilder builder() {
+    return new SeedLandscapeLevelsBuilder();
   }
 
   public Collection<SeedLandscapeLevel> get() {
@@ -33,12 +33,12 @@ public record SeedLandscapeLevels(Collection<SeedLandscapeLevel> levels) {
     return levels().stream();
   }
 
-  static class JHipsterLandscapeLevelsBuilder {
+  static class SeedLandscapeLevelsBuilder {
 
     private final Map<SeedFeatureSlug, Collection<SeedLandscapeModule>> features = new ConcurrentHashMap<>();
     private final Collection<SeedLandscapeModule> modules = new ArrayList<>();
 
-    JHipsterLandscapeLevelsBuilder resources(SeedModulesResources resources) {
+    SeedLandscapeLevelsBuilder resources(SeedModulesResources resources) {
       Assert.notNull("resources", resources);
 
       resources.stream().forEach(this::append);
@@ -46,7 +46,7 @@ public record SeedLandscapeLevels(Collection<SeedLandscapeLevel> levels) {
       return this;
     }
 
-    private JHipsterLandscapeLevelsBuilder append(SeedModuleResource resource) {
+    private SeedLandscapeLevelsBuilder append(SeedModuleResource resource) {
       Assert.notNull("resource", resource);
 
       resource.organization().feature().ifPresentOrElse(addFeature(resource), addModule(resource));
@@ -77,7 +77,7 @@ public record SeedLandscapeLevels(Collection<SeedLandscapeLevel> levels) {
 
     public SeedLandscapeLevels build() {
       List<SeedLandscapeElement> elements = Stream.concat(features.entrySet().stream().map(toFeature()), modules.stream()).toList();
-      JHipsterLandscapeLevelsDispatcher dispatcher = new JHipsterLandscapeLevelsDispatcher(elements);
+      SeedLandscapeLevelsDispatcher dispatcher = new SeedLandscapeLevelsDispatcher(elements);
 
       dispatcher.buildRoot();
 
@@ -93,12 +93,12 @@ public record SeedLandscapeLevels(Collection<SeedLandscapeLevel> levels) {
     }
   }
 
-  private static final class JHipsterLandscapeLevelsDispatcher {
+  private static final class SeedLandscapeLevelsDispatcher {
 
     private final List<SeedLandscapeLevel> levels = new ArrayList<>();
     private List<SeedLandscapeElement> elementsToDispatch;
 
-    private JHipsterLandscapeLevelsDispatcher(List<SeedLandscapeElement> elements) {
+    private SeedLandscapeLevelsDispatcher(List<SeedLandscapeElement> elements) {
       elementsToDispatch = elements;
     }
 

@@ -11,7 +11,7 @@ public abstract class SeedModuleReplacementsFactory {
 
   private final Collection<ContentReplacer> replacers;
 
-  protected SeedModuleReplacementsFactory(JHipsterModuleReplacementsFactoryBuilder<?, ?> builder) {
+  protected SeedModuleReplacementsFactory(SeedModuleReplacementsFactoryBuilder<?, ?> builder) {
     Assert.notNull("builder", builder);
     Assert.notNull("replacers", builder.replacers);
 
@@ -28,15 +28,15 @@ public abstract class SeedModuleReplacementsFactory {
     return replacers;
   }
 
-  public abstract static class JHipsterModuleReplacementsFactoryBuilder<
+  public abstract static class SeedModuleReplacementsFactoryBuilder<
     Replacements extends SeedModuleReplacementsFactory,
-    FileReplacementsBuilder extends JHipsterModuleFileReplacementsBuilder<?, ?>
+    FileReplacementsBuilder extends SeedModuleFileReplacementsBuilder<?, ?>
   > {
 
     private final SeedModuleBuilder module;
     private final Collection<ContentReplacer> replacers = new ArrayList<>();
 
-    protected JHipsterModuleReplacementsFactoryBuilder(SeedModuleBuilder module) {
+    protected SeedModuleReplacementsFactoryBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -57,15 +57,15 @@ public abstract class SeedModuleReplacementsFactory {
     public abstract Replacements build();
   }
 
-  public abstract static class JHipsterModuleFileReplacementsBuilder<
-    ReplacementsBuilder extends JHipsterModuleReplacementsFactoryBuilder<?, ?>,
-    Builder extends JHipsterModuleFileReplacementsBuilder<ReplacementsBuilder, Builder>
+  public abstract static class SeedModuleFileReplacementsBuilder<
+    ReplacementsBuilder extends SeedModuleReplacementsFactoryBuilder<?, ?>,
+    Builder extends SeedModuleFileReplacementsBuilder<ReplacementsBuilder, Builder>
   > {
 
     private final ReplacementsBuilder replacements;
     private final SeedProjectFilePath file;
 
-    protected JHipsterModuleFileReplacementsBuilder(ReplacementsBuilder replacements, SeedProjectFilePath file) {
+    protected SeedModuleFileReplacementsBuilder(ReplacementsBuilder replacements, SeedProjectFilePath file) {
       Assert.notNull("replacements", replacements);
       Assert.notNull("file", file);
 

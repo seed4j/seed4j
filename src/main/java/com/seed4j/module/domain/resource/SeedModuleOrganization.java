@@ -21,13 +21,13 @@ public final class SeedModuleOrganization {
   private final Optional<SeedFeatureSlug> feature;
   private final Collection<SeedLandscapeDependency> dependencies;
 
-  private SeedModuleOrganization(JHipsterModuleOrganizationBuilder builder) {
+  private SeedModuleOrganization(SeedModuleOrganizationBuilder builder) {
     feature = builder.feature;
     dependencies = builder.dependencies;
   }
 
-  public static JHipsterModuleOrganizationBuilder builder() {
-    return new JHipsterModuleOrganizationBuilder();
+  public static SeedModuleOrganizationBuilder builder() {
+    return new SeedModuleOrganizationBuilder();
   }
 
   public Optional<SeedFeatureSlug> feature() {
@@ -46,12 +46,12 @@ public final class SeedModuleOrganization {
       .build();
   }
 
-  public static class JHipsterModuleOrganizationBuilder {
+  public static class SeedModuleOrganizationBuilder {
 
     private final Collection<SeedLandscapeDependency> dependencies = new ArrayList<>();
     private Optional<SeedFeatureSlug> feature = Optional.empty();
 
-    public JHipsterModuleOrganizationBuilder feature(SeedFeatureSlugFactory featureFactory) {
+    public SeedModuleOrganizationBuilder feature(SeedFeatureSlugFactory featureFactory) {
       Assert.notNull("featureFactory", featureFactory);
 
       this.feature = featureFactory.build();
@@ -59,7 +59,7 @@ public final class SeedModuleOrganization {
       return this;
     }
 
-    public JHipsterModuleOrganizationBuilder addDependency(SeedModuleSlugFactory module) {
+    public SeedModuleOrganizationBuilder addDependency(SeedModuleSlugFactory module) {
       Assert.notNull("module", module);
 
       dependencies.add(new SeedModuleDependency(module.build()));
@@ -67,7 +67,7 @@ public final class SeedModuleOrganization {
       return this;
     }
 
-    public JHipsterModuleOrganizationBuilder addDependency(SeedFeatureSlugFactory featureFactory) {
+    public SeedModuleOrganizationBuilder addDependency(SeedFeatureSlugFactory featureFactory) {
       Assert.notNull("featureFactory", featureFactory);
 
       featureFactory.build().map(SeedFeatureDependency::new).ifPresent(dependencies::add);

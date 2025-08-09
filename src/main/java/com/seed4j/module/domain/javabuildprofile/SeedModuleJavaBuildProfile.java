@@ -1,12 +1,12 @@
 package com.seed4j.module.domain.javabuildprofile;
 
 import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties;
-import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties.JHipsterModuleBuildPropertiesBuilder;
+import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties.SeedModuleBuildPropertiesBuilder;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation.BuildProfileActivationBuilder;
 import com.seed4j.module.domain.javabuildprofile.SeedModuleGradleProfilePlugins.SeedModuleGradleProfilePluginBuilder;
 import com.seed4j.module.domain.javabuildprofile.SeedModuleJavaBuildProfiles.SeedModuleJavaBuildProfilesBuilder;
 import com.seed4j.module.domain.javadependency.SeedModuleJavaDependencies;
-import com.seed4j.module.domain.javadependency.SeedModuleJavaDependencies.JHipsterModuleJavaDependenciesBuilder;
+import com.seed4j.module.domain.javadependency.SeedModuleJavaDependencies.SeedModuleJavaDependenciesBuilder;
 import com.seed4j.module.domain.mavenplugin.SeedModuleMavenPlugins;
 import com.seed4j.module.domain.mavenplugin.SeedModuleMavenPlugins.SeedModuleMavenPluginsBuilder;
 import com.seed4j.shared.error.domain.Assert;
@@ -68,13 +68,14 @@ public final class SeedModuleJavaBuildProfile {
     private final SeedModuleJavaBuildProfilesBuilder profiles;
     private final BuildProfileId buildProfileId;
     private BuildProfileActivation activation;
-    private final JHipsterModuleBuildPropertiesBuilder<SeedModuleJavaBuildProfileBuilder> propertiesBuilder =
-      SeedModuleBuildProperties.builder(this);
+    private final SeedModuleBuildPropertiesBuilder<SeedModuleJavaBuildProfileBuilder> propertiesBuilder = SeedModuleBuildProperties.builder(
+      this
+    );
     private final SeedModuleMavenPluginsBuilder<SeedModuleJavaBuildProfileBuilder> mavenPluginsBuilder = SeedModuleMavenPlugins.builder(
       this
     );
     private final SeedModuleGradleProfilePluginBuilder gradleProfilePluginsBuilder = SeedModuleGradleProfilePlugins.builder(this);
-    private final JHipsterModuleJavaDependenciesBuilder<SeedModuleJavaBuildProfileBuilder> javaDependenciesBuilder =
+    private final SeedModuleJavaDependenciesBuilder<SeedModuleJavaBuildProfileBuilder> javaDependenciesBuilder =
       SeedModuleJavaDependencies.builder(this);
 
     private SeedModuleJavaBuildProfileBuilder(SeedModuleJavaBuildProfilesBuilder profiles, BuildProfileId buildProfileId) {
@@ -106,7 +107,7 @@ public final class SeedModuleJavaBuildProfile {
       return activation(activationBuilder.build());
     }
 
-    public JHipsterModuleBuildPropertiesBuilder<SeedModuleJavaBuildProfileBuilder> properties() {
+    public SeedModuleBuildPropertiesBuilder<SeedModuleJavaBuildProfileBuilder> properties() {
       return propertiesBuilder;
     }
 
@@ -118,7 +119,7 @@ public final class SeedModuleJavaBuildProfile {
       return gradleProfilePluginsBuilder;
     }
 
-    public JHipsterModuleJavaDependenciesBuilder<SeedModuleJavaBuildProfileBuilder> javaDependencies() {
+    public SeedModuleJavaDependenciesBuilder<SeedModuleJavaBuildProfileBuilder> javaDependencies() {
       return javaDependenciesBuilder;
     }
   }

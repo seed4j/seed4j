@@ -493,7 +493,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
     when(nodeVersions.packageManagerVersion(PNPM)).thenReturn(new NodePackageVersion("10.0.0"));
   }
 
-  private static SeedModulesFixture.JHipsterModulePropertiesBuilder defaultProperties() {
+  private static SeedModulesFixture.SeedModulePropertiesBuilder defaultProperties() {
     return SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).basePackage("com.seed4j.growth").projectBaseName("myapp");
   }
 }

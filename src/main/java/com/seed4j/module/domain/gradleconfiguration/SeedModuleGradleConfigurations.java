@@ -15,7 +15,7 @@ public final class SeedModuleGradleConfigurations {
   private final Collection<GradleConfiguration> configurations;
   private final Collection<GradleTasksTestInstruction> tasksTestInstructions;
 
-  public SeedModuleGradleConfigurations(JHipsterModuleGradleConfigurationBuilder builder) {
+  public SeedModuleGradleConfigurations(SeedModuleGradleConfigurationBuilder builder) {
     Assert.notNull("configurations", builder.configurations);
     Assert.notNull("tasksTestInstructions", builder.tasksTestInstructions);
 
@@ -23,8 +23,8 @@ public final class SeedModuleGradleConfigurations {
     this.tasksTestInstructions = builder.tasksTestInstructions;
   }
 
-  public static JHipsterModuleGradleConfigurationBuilder builder(SeedModuleBuilder module) {
-    return new JHipsterModuleGradleConfigurationBuilder(module);
+  public static SeedModuleGradleConfigurationBuilder builder(SeedModuleBuilder module) {
+    return new SeedModuleGradleConfigurationBuilder(module);
   }
 
   public JavaBuildCommands buildChanges() {
@@ -55,25 +55,25 @@ public final class SeedModuleGradleConfigurations {
     );
   }
 
-  public static final class JHipsterModuleGradleConfigurationBuilder {
+  public static final class SeedModuleGradleConfigurationBuilder {
 
     private final SeedModuleBuilder module;
     private final Collection<GradleConfiguration> configurations = new ArrayList<>();
     private final Collection<GradleTasksTestInstruction> tasksTestInstructions = new ArrayList<>();
 
-    private JHipsterModuleGradleConfigurationBuilder(SeedModuleBuilder module) {
+    private SeedModuleGradleConfigurationBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
     }
 
-    public JHipsterModuleGradleConfigurationBuilder addConfiguration(String configuration) {
+    public SeedModuleGradleConfigurationBuilder addConfiguration(String configuration) {
       configurations.add(new GradleConfiguration(configuration));
 
       return this;
     }
 
-    public JHipsterModuleGradleConfigurationBuilder addTasksTestInstruction(String instruction) {
+    public SeedModuleGradleConfigurationBuilder addTasksTestInstruction(String instruction) {
       tasksTestInstructions.add(new GradleTasksTestInstruction(instruction));
 
       return this;

@@ -13,7 +13,7 @@ public final class SeedModuleOptionalReplacementsFactory extends SeedModuleRepla
 
   private final Optional<SeedUpgradeFilesReplacements> upgrades;
 
-  private SeedModuleOptionalReplacementsFactory(JHipsterModuleOptionalReplacementsFactoryBuilder builder) {
+  private SeedModuleOptionalReplacementsFactory(SeedModuleOptionalReplacementsFactoryBuilder builder) {
     super(builder);
     upgrades = Optional.empty();
   }
@@ -23,8 +23,8 @@ public final class SeedModuleOptionalReplacementsFactory extends SeedModuleRepla
     this.upgrades = Optional.of(upgrade);
   }
 
-  public static JHipsterModuleOptionalReplacementsFactoryBuilder builder(SeedModuleBuilder module) {
-    return new JHipsterModuleOptionalReplacementsFactoryBuilder(module);
+  public static SeedModuleOptionalReplacementsFactoryBuilder builder(SeedModuleBuilder module) {
+    return new SeedModuleOptionalReplacementsFactoryBuilder(module);
   }
 
   public SeedModuleOptionalReplacementsFactory add(SeedUpgradeFilesReplacements upgrade) {
@@ -43,19 +43,16 @@ public final class SeedModuleOptionalReplacementsFactory extends SeedModuleRepla
     );
   }
 
-  public static final class JHipsterModuleOptionalReplacementsFactoryBuilder
-    extends JHipsterModuleReplacementsFactoryBuilder<
-      SeedModuleOptionalReplacementsFactory,
-      JHipsterModuleFileOptionalReplacementsFactoryBuilder
-    > {
+  public static final class SeedModuleOptionalReplacementsFactoryBuilder
+    extends SeedModuleReplacementsFactoryBuilder<SeedModuleOptionalReplacementsFactory, SeedModuleFileOptionalReplacementsFactoryBuilder> {
 
-    private JHipsterModuleOptionalReplacementsFactoryBuilder(SeedModuleBuilder module) {
+    private SeedModuleOptionalReplacementsFactoryBuilder(SeedModuleBuilder module) {
       super(module);
     }
 
     @Override
-    public JHipsterModuleFileOptionalReplacementsFactoryBuilder in(SeedProjectFilePath file) {
-      return new JHipsterModuleFileOptionalReplacementsFactoryBuilder(this, file);
+    public SeedModuleFileOptionalReplacementsFactoryBuilder in(SeedProjectFilePath file) {
+      return new SeedModuleFileOptionalReplacementsFactoryBuilder(this, file);
     }
 
     @Override
@@ -64,20 +61,20 @@ public final class SeedModuleOptionalReplacementsFactory extends SeedModuleRepla
     }
   }
 
-  public static final class JHipsterModuleFileOptionalReplacementsFactoryBuilder
-    extends JHipsterModuleFileReplacementsBuilder<
-      JHipsterModuleOptionalReplacementsFactoryBuilder,
-      JHipsterModuleFileOptionalReplacementsFactoryBuilder
+  public static final class SeedModuleFileOptionalReplacementsFactoryBuilder
+    extends SeedModuleFileReplacementsBuilder<
+      SeedModuleOptionalReplacementsFactoryBuilder,
+      SeedModuleFileOptionalReplacementsFactoryBuilder
     > {
 
-    private JHipsterModuleFileOptionalReplacementsFactoryBuilder(
-      JHipsterModuleOptionalReplacementsFactoryBuilder replacements,
+    private SeedModuleFileOptionalReplacementsFactoryBuilder(
+      SeedModuleOptionalReplacementsFactoryBuilder replacements,
       SeedProjectFilePath file
     ) {
       super(replacements, file);
     }
 
-    public JHipsterModuleFileOptionalReplacementsFactoryBuilder add(OptionalReplacer mandatoryReplacer) {
+    public SeedModuleFileOptionalReplacementsFactoryBuilder add(OptionalReplacer mandatoryReplacer) {
       replacements().add(buildReplacer(file(), mandatoryReplacer.replacer(), mandatoryReplacer.updatedValue()));
 
       return this;

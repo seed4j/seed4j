@@ -19,7 +19,7 @@ final class RestSeedLandscapeModule implements RestSeedLandscapeElement {
   private final Collection<RestSeedLandscapeDependency> dependencies;
   private final SeedModuleRank rank;
 
-  private RestSeedLandscapeModule(RestJHipsterLandscapeModuleBuilder builder) {
+  private RestSeedLandscapeModule(RestSeedLandscapeModuleBuilder builder) {
     slug = builder.slug;
     operation = builder.operation;
     properties = builder.properties;
@@ -28,7 +28,7 @@ final class RestSeedLandscapeModule implements RestSeedLandscapeElement {
   }
 
   static RestSeedLandscapeModule fromModule(SeedLandscapeModule module) {
-    return new RestJHipsterLandscapeModuleBuilder()
+    return new RestSeedLandscapeModuleBuilder()
       .slug(module.slug().get())
       .operation(module.operation().get())
       .properties(RestSeedModulePropertiesDefinition.from(module.propertiesDefinition()))
@@ -75,7 +75,7 @@ final class RestSeedLandscapeModule implements RestSeedLandscapeElement {
     return rank;
   }
 
-  private static final class RestJHipsterLandscapeModuleBuilder {
+  private static final class RestSeedLandscapeModuleBuilder {
 
     private String slug;
     private String operation;
@@ -83,31 +83,31 @@ final class RestSeedLandscapeModule implements RestSeedLandscapeElement {
     private List<RestSeedLandscapeDependency> dependencies;
     private SeedModuleRank rank;
 
-    private RestJHipsterLandscapeModuleBuilder slug(String slug) {
+    private RestSeedLandscapeModuleBuilder slug(String slug) {
       this.slug = slug;
 
       return this;
     }
 
-    private RestJHipsterLandscapeModuleBuilder operation(String operation) {
+    private RestSeedLandscapeModuleBuilder operation(String operation) {
       this.operation = operation;
 
       return this;
     }
 
-    private RestJHipsterLandscapeModuleBuilder properties(RestSeedModulePropertiesDefinition properties) {
+    private RestSeedLandscapeModuleBuilder properties(RestSeedModulePropertiesDefinition properties) {
       this.properties = properties;
 
       return this;
     }
 
-    private RestJHipsterLandscapeModuleBuilder dependencies(List<RestSeedLandscapeDependency> dependencies) {
+    private RestSeedLandscapeModuleBuilder dependencies(List<RestSeedLandscapeDependency> dependencies) {
       this.dependencies = dependencies;
 
       return this;
     }
 
-    private RestJHipsterLandscapeModuleBuilder rank(SeedModuleRank rank) {
+    private RestSeedLandscapeModuleBuilder rank(SeedModuleRank rank) {
       this.rank = rank;
 
       return this;

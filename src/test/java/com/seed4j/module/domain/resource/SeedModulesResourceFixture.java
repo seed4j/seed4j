@@ -6,8 +6,8 @@ import static com.seed4j.module.domain.resource.SeedModulePropertyDefinition.opt
 import static com.seed4j.module.domain.resource.SeedModulePropertyDefinition.optionalStringProperty;
 
 import com.seed4j.module.domain.SeedModuleFactory;
-import com.seed4j.module.domain.resource.SeedModuleOrganization.JHipsterModuleOrganizationBuilder;
-import com.seed4j.module.domain.resource.SeedModuleTags.JHipsterModuleTagsBuilder;
+import com.seed4j.module.domain.resource.SeedModuleOrganization.SeedModuleOrganizationBuilder;
+import com.seed4j.module.domain.resource.SeedModuleTags.SeedModuleTagsBuilder;
 import com.seed4j.shared.slug.domain.Seed4JModuleSlug;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,12 +24,12 @@ public final class SeedModulesResourceFixture {
   public static Collection<SeedModuleResource> moduleResourcesCollection() {
     return List.of(
       defaultModuleResource(),
-      defaultModuleResourceBuilder().slug("another-module").tags(new JHipsterModuleTagsBuilder().add("tag2").build()).build(),
+      defaultModuleResourceBuilder().slug("another-module").tags(new SeedModuleTagsBuilder().add("tag2").build()).build(),
       defaultModuleResourceBuilder()
         .slug("yet-another-module")
         .group("Another group")
         .operation("Another operation")
-        .tags(new JHipsterModuleTagsBuilder().add("tag3").build())
+        .tags(new SeedModuleTagsBuilder().add("tag3").build())
         .build()
     );
   }
@@ -47,8 +47,8 @@ public final class SeedModulesResourceFixture {
     return defaultModuleResourceBuilder().build();
   }
 
-  public static JHipsterTestModuleResourceBuilder defaultModuleResourceBuilder() {
-    return new JHipsterTestModuleResourceBuilder()
+  public static SeedTestModuleResourceBuilder defaultModuleResourceBuilder() {
+    return new SeedTestModuleResourceBuilder()
       .slug("slug")
       .operation("operation")
       .tags(SeedModuleTags.builder().add("tag1").build())
@@ -72,7 +72,7 @@ public final class SeedModulesResourceFixture {
       .build();
   }
 
-  public static final class JHipsterTestModuleResourceBuilder {
+  public static final class SeedTestModuleResourceBuilder {
 
     private String slug;
     private String group = "group";
@@ -84,51 +84,51 @@ public final class SeedModulesResourceFixture {
     private final Collection<SeedModuleSlugFactory> moduleDependencies = new ArrayList<>();
     private final Collection<SeedFeatureSlugFactory> featureDependencies = new ArrayList<>();
 
-    private JHipsterTestModuleResourceBuilder() {}
+    private SeedTestModuleResourceBuilder() {}
 
-    public JHipsterTestModuleResourceBuilder slug(String slug) {
+    public SeedTestModuleResourceBuilder slug(String slug) {
       this.slug = slug;
 
       return this;
     }
 
-    public JHipsterTestModuleResourceBuilder group(String group) {
+    public SeedTestModuleResourceBuilder group(String group) {
       this.group = group;
 
       return this;
     }
 
-    public JHipsterTestModuleResourceBuilder operation(String operation) {
+    public SeedTestModuleResourceBuilder operation(String operation) {
       this.operation = operation;
 
       return this;
     }
 
-    public JHipsterTestModuleResourceBuilder factory(SeedModuleFactory factory) {
+    public SeedTestModuleResourceBuilder factory(SeedModuleFactory factory) {
       this.factory = factory;
 
       return this;
     }
 
-    public JHipsterTestModuleResourceBuilder feature(String feature) {
+    public SeedTestModuleResourceBuilder feature(String feature) {
       this.feature = feature;
 
       return this;
     }
 
-    public JHipsterTestModuleResourceBuilder moduleDependency(String module) {
+    public SeedTestModuleResourceBuilder moduleDependency(String module) {
       moduleDependencies.add(new FakeSeedModuleSlugFactory(module, Seed4JModuleSlug.getRank(module).orElse(SeedModuleRank.RANK_D)));
 
       return this;
     }
 
-    public JHipsterTestModuleResourceBuilder featureDependency(String feature) {
+    public SeedTestModuleResourceBuilder featureDependency(String feature) {
       featureDependencies.add(() -> feature);
 
       return this;
     }
 
-    public JHipsterTestModuleResourceBuilder tags(SeedModuleTags tags) {
+    public SeedTestModuleResourceBuilder tags(SeedModuleTags tags) {
       this.tags = tags;
 
       return this;
@@ -145,7 +145,7 @@ public final class SeedModulesResourceFixture {
     }
 
     private SeedModuleOrganization buildOrganization() {
-      JHipsterModuleOrganizationBuilder builder = SeedModuleOrganization.builder().feature(() -> feature);
+      SeedModuleOrganizationBuilder builder = SeedModuleOrganization.builder().feature(() -> feature);
 
       moduleDependencies.forEach(builder::addDependency);
       featureDependencies.forEach(builder::addDependency);

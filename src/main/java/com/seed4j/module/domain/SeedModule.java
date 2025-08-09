@@ -2,21 +2,21 @@ package com.seed4j.module.domain;
 
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notContainingReplacement;
 
-import com.seed4j.module.domain.SeedModuleContext.JHipsterModuleContextBuilder;
+import com.seed4j.module.domain.SeedModuleContext.SeedModuleContextBuilder;
 import com.seed4j.module.domain.SeedModulePreActions.SeedModulePreActionsBuilder;
 import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties;
-import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties.JHipsterModuleBuildPropertiesBuilder;
+import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties.SeedModuleBuildPropertiesBuilder;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedFilesToDelete;
 import com.seed4j.module.domain.file.SeedFilesToMove;
 import com.seed4j.module.domain.file.SeedModuleFile;
 import com.seed4j.module.domain.file.SeedModuleFiles;
-import com.seed4j.module.domain.file.SeedModuleFiles.JHipsterModuleFilesBuilder;
+import com.seed4j.module.domain.file.SeedModuleFiles.SeedModuleFilesBuilder;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gitignore.SeedModuleGitIgnore;
-import com.seed4j.module.domain.gitignore.SeedModuleGitIgnore.JHipsterModuleGitIgnoreBuilder;
+import com.seed4j.module.domain.gitignore.SeedModuleGitIgnore.SeedModuleGitIgnoreBuilder;
 import com.seed4j.module.domain.gradleconfiguration.SeedModuleGradleConfigurations;
-import com.seed4j.module.domain.gradleconfiguration.SeedModuleGradleConfigurations.JHipsterModuleGradleConfigurationBuilder;
+import com.seed4j.module.domain.gradleconfiguration.SeedModuleGradleConfigurations.SeedModuleGradleConfigurationBuilder;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin.GradleCommunityPluginIdBuilder;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityProfilePlugin;
@@ -24,13 +24,13 @@ import com.seed4j.module.domain.gradleplugin.GradleCommunityProfilePlugin.Gradle
 import com.seed4j.module.domain.gradleplugin.GradleCorePlugin;
 import com.seed4j.module.domain.gradleplugin.GradleCorePlugin.GradleCorePluginIdBuilder;
 import com.seed4j.module.domain.gradleplugin.SeedModuleGradlePlugins;
-import com.seed4j.module.domain.gradleplugin.SeedModuleGradlePlugins.JHipsterModuleGradlePluginBuilder;
+import com.seed4j.module.domain.gradleplugin.SeedModuleGradlePlugins.SeedModuleGradlePluginBuilder;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.MavenBuildExtension;
 import com.seed4j.module.domain.javabuild.MavenBuildExtension.MavenBuildExtensionGroupIdBuilder;
 import com.seed4j.module.domain.javabuild.SeedModuleMavenBuildExtensions;
-import com.seed4j.module.domain.javabuild.SeedModuleMavenBuildExtensions.JHipsterModuleMavenBuildExtensionsBuilder;
+import com.seed4j.module.domain.javabuild.SeedModuleMavenBuildExtensions.SeedModuleMavenBuildExtensionsBuilder;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation.BuildProfileActivationBuilder;
@@ -41,14 +41,14 @@ import com.seed4j.module.domain.javadependency.DependencyId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency.JavaDependencyGroupIdBuilder;
 import com.seed4j.module.domain.javadependency.SeedModuleJavaDependencies;
-import com.seed4j.module.domain.javadependency.SeedModuleJavaDependencies.JHipsterModuleJavaDependenciesBuilder;
+import com.seed4j.module.domain.javadependency.SeedModuleJavaDependencies.SeedModuleJavaDependenciesBuilder;
 import com.seed4j.module.domain.javaproperties.Comment;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.javaproperties.SeedModuleSpringFactories;
-import com.seed4j.module.domain.javaproperties.SeedModuleSpringFactories.JHipsterModuleSpringFactoriesBuilder;
+import com.seed4j.module.domain.javaproperties.SeedModuleSpringFactories.SeedModuleSpringFactoriesBuilder;
 import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties;
-import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
+import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.SeedModuleSpringPropertiesBuilder;
 import com.seed4j.module.domain.javaproperties.SpringComment;
 import com.seed4j.module.domain.javaproperties.SpringComments;
 import com.seed4j.module.domain.javaproperties.SpringFactories;
@@ -69,7 +69,7 @@ import com.seed4j.module.domain.packagejson.PackageName;
 import com.seed4j.module.domain.packagejson.ScriptCommand;
 import com.seed4j.module.domain.packagejson.ScriptKey;
 import com.seed4j.module.domain.packagejson.SeedModulePackageJson;
-import com.seed4j.module.domain.packagejson.SeedModulePackageJson.JHipsterModulePackageJsonBuilder;
+import com.seed4j.module.domain.packagejson.SeedModulePackageJson.SeedModulePackageJsonBuilder;
 import com.seed4j.module.domain.postaction.SeedModulePostActions;
 import com.seed4j.module.domain.postaction.SeedModulePostActions.SeedModulePostActionsBuilder;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -83,7 +83,7 @@ import com.seed4j.module.domain.replacement.ReplacementCondition;
 import com.seed4j.module.domain.replacement.SeedModuleMandatoryReplacementsFactory;
 import com.seed4j.module.domain.replacement.SeedModuleMandatoryReplacementsFactory.SeedModuleMandatoryReplacementsFactoryBuilder;
 import com.seed4j.module.domain.replacement.SeedModuleOptionalReplacementsFactory;
-import com.seed4j.module.domain.replacement.SeedModuleOptionalReplacementsFactory.JHipsterModuleOptionalReplacementsFactoryBuilder;
+import com.seed4j.module.domain.replacement.SeedModuleOptionalReplacementsFactory.SeedModuleOptionalReplacementsFactoryBuilder;
 import com.seed4j.module.domain.replacement.TextNeedleAfterReplacer;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.module.domain.replacement.TextReplacer;
@@ -188,12 +188,12 @@ public final class SeedModule {
     return new SpringProperties(builder.springProperties.entrySet().stream().flatMap(toSpringProperties()).toList());
   }
 
-  private Function<Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder>, Stream<SpringProperty>> toSpringProperties() {
+  private Function<Entry<PropertiesKey, SeedModuleSpringPropertiesBuilder>, Stream<SpringProperty>> toSpringProperties() {
     return inputProperties -> inputProperties.getValue().build().properties().entrySet().stream().map(toSpringProperty(inputProperties));
   }
 
   private Function<Entry<PropertyKey, PropertyValue>, SpringProperty> toSpringProperty(
-    Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder> inputProperties
+    Entry<PropertiesKey, SeedModuleSpringPropertiesBuilder> inputProperties
   ) {
     return property ->
       SpringProperty.builder(inputProperties.getKey().type())
@@ -207,12 +207,12 @@ public final class SeedModule {
     return new SpringComments(builder.springProperties.entrySet().stream().flatMap(toSpringComments()).toList());
   }
 
-  private Function<Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder>, Stream<SpringComment>> toSpringComments() {
+  private Function<Entry<PropertiesKey, SeedModuleSpringPropertiesBuilder>, Stream<SpringComment>> toSpringComments() {
     return inputProperties -> inputProperties.getValue().build().comments().entrySet().stream().map(toSpringComment(inputProperties));
   }
 
   private Function<Entry<PropertyKey, Comment>, SpringComment> toSpringComment(
-    Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder> inputProperties
+    Entry<PropertiesKey, SeedModuleSpringPropertiesBuilder> inputProperties
   ) {
     return propertyComment ->
       SpringComment.builder(inputProperties.getKey().type())
@@ -226,12 +226,12 @@ public final class SeedModule {
     return new SpringFactories(builder.springFactories.entrySet().stream().flatMap(toSpringFactories()).toList());
   }
 
-  private Function<Entry<SpringFactoryType, JHipsterModuleSpringFactoriesBuilder>, Stream<SpringFactory>> toSpringFactories() {
+  private Function<Entry<SpringFactoryType, SeedModuleSpringFactoriesBuilder>, Stream<SpringFactory>> toSpringFactories() {
     return inputFactories -> inputFactories.getValue().build().factories().entrySet().stream().map(toSpringFactory(inputFactories));
   }
 
   private Function<Entry<PropertyKey, PropertyValue>, SpringFactory> toSpringFactory(
-    Entry<SpringFactoryType, JHipsterModuleSpringFactoriesBuilder> inputFactories
+    Entry<SpringFactoryType, SeedModuleSpringFactoriesBuilder> inputFactories
   ) {
     return property -> SpringFactory.builder(inputFactories.getKey()).key(property.getKey()).value(property.getValue());
   }
@@ -551,28 +551,26 @@ public final class SeedModule {
     private static final String PROFILE = "profile";
 
     private final SeedModuleProperties properties;
-    private final JHipsterModuleContextBuilder context;
-    private final JHipsterModuleFilesBuilder files = SeedModuleFiles.builder(this);
+    private final SeedModuleContextBuilder context;
+    private final SeedModuleFilesBuilder files = SeedModuleFiles.builder(this);
     private final SeedModuleMandatoryReplacementsFactoryBuilder mandatoryReplacements = SeedModuleMandatoryReplacementsFactory.builder(
       this
     );
-    private final JHipsterModuleOptionalReplacementsFactoryBuilder optionalReplacements = SeedModuleOptionalReplacementsFactory.builder(
-      this
-    );
+    private final SeedModuleOptionalReplacementsFactoryBuilder optionalReplacements = SeedModuleOptionalReplacementsFactory.builder(this);
     private final SeedModuleStartupCommandsBuilder startupCommands = SeedModuleStartupCommands.builder(this);
-    private final JHipsterModuleJavaDependenciesBuilder<SeedModuleBuilder> javaDependencies = SeedModuleJavaDependencies.builder(this);
-    private final JHipsterModuleBuildPropertiesBuilder<SeedModuleBuilder> javaBuildProperties = SeedModuleBuildProperties.builder(this);
+    private final SeedModuleJavaDependenciesBuilder<SeedModuleBuilder> javaDependencies = SeedModuleJavaDependencies.builder(this);
+    private final SeedModuleBuildPropertiesBuilder<SeedModuleBuilder> javaBuildProperties = SeedModuleBuildProperties.builder(this);
     private final SeedModuleJavaBuildProfilesBuilder javaBuildProfiles = SeedModuleJavaBuildProfiles.builder(this);
     private final SeedModuleMavenPluginsBuilder<SeedModuleBuilder> mavenPlugins = SeedModuleMavenPlugins.builder(this);
-    private final JHipsterModuleGradleConfigurationBuilder gradleConfigurations = SeedModuleGradleConfigurations.builder(this);
-    private final JHipsterModuleGradlePluginBuilder gradlePlugins = SeedModuleGradlePlugins.builder(this);
-    private final JHipsterModuleMavenBuildExtensionsBuilder mavenBuildExtensions = SeedModuleMavenBuildExtensions.builder(this);
-    private final JHipsterModulePackageJsonBuilder packageJson = SeedModulePackageJson.builder(this);
+    private final SeedModuleGradleConfigurationBuilder gradleConfigurations = SeedModuleGradleConfigurations.builder(this);
+    private final SeedModuleGradlePluginBuilder gradlePlugins = SeedModuleGradlePlugins.builder(this);
+    private final SeedModuleMavenBuildExtensionsBuilder mavenBuildExtensions = SeedModuleMavenBuildExtensions.builder(this);
+    private final SeedModulePackageJsonBuilder packageJson = SeedModulePackageJson.builder(this);
     private final SeedModulePreActionsBuilder preActions = SeedModulePreActions.builder(this);
     private final SeedModulePostActionsBuilder postActions = SeedModulePostActions.builder(this);
-    private final Map<PropertiesKey, JHipsterModuleSpringPropertiesBuilder> springProperties = new HashMap<>();
-    private final Map<SpringFactoryType, JHipsterModuleSpringFactoriesBuilder> springFactories = new EnumMap<>(SpringFactoryType.class);
-    private final JHipsterModuleGitIgnoreBuilder gitIgnore = SeedModuleGitIgnore.builder(this);
+    private final Map<PropertiesKey, SeedModuleSpringPropertiesBuilder> springProperties = new HashMap<>();
+    private final Map<SpringFactoryType, SeedModuleSpringFactoriesBuilder> springFactories = new EnumMap<>(SpringFactoryType.class);
+    private final SeedModuleGitIgnoreBuilder gitIgnore = SeedModuleGitIgnore.builder(this);
     private final SeedModuleDockerComposeFileBuilder dockerComposeFile = SeedModuleDockerComposeFile.builder(this);
 
     private SeedModuleBuilder(SeedModuleProperties properties) {
@@ -621,11 +619,11 @@ public final class SeedModule {
       return this;
     }
 
-    public JHipsterModuleContextBuilder context() {
+    public SeedModuleContextBuilder context() {
       return context;
     }
 
-    public JHipsterModuleFilesBuilder files() {
+    public SeedModuleFilesBuilder files() {
       return files;
     }
 
@@ -651,15 +649,15 @@ public final class SeedModule {
       return this;
     }
 
-    public JHipsterModuleOptionalReplacementsFactoryBuilder optionalReplacements() {
+    public SeedModuleOptionalReplacementsFactoryBuilder optionalReplacements() {
       return optionalReplacements;
     }
 
-    public JHipsterModuleJavaDependenciesBuilder<SeedModuleBuilder> javaDependencies() {
+    public SeedModuleJavaDependenciesBuilder<SeedModuleBuilder> javaDependencies() {
       return javaDependencies;
     }
 
-    public JHipsterModuleBuildPropertiesBuilder<SeedModuleBuilder> javaBuildProperties() {
+    public SeedModuleBuildPropertiesBuilder<SeedModuleBuilder> javaBuildProperties() {
       return javaBuildProperties;
     }
 
@@ -671,15 +669,15 @@ public final class SeedModule {
       return mavenPlugins;
     }
 
-    public JHipsterModuleGradleConfigurationBuilder gradleConfigurations() {
+    public SeedModuleGradleConfigurationBuilder gradleConfigurations() {
       return gradleConfigurations;
     }
 
-    public JHipsterModuleGradlePluginBuilder gradlePlugins() {
+    public SeedModuleGradlePluginBuilder gradlePlugins() {
       return gradlePlugins;
     }
 
-    public JHipsterModuleMavenBuildExtensionsBuilder mavenBuildExtensions() {
+    public SeedModuleMavenBuildExtensionsBuilder mavenBuildExtensions() {
       return mavenBuildExtensions;
     }
 
@@ -690,9 +688,9 @@ public final class SeedModule {
      * to the package.json file. It uses a builder pattern to provide a fluent interface for
      * configuring the {@code package.json} file.
      *
-     * @return a {@link JHipsterModulePackageJsonBuilder} to continue configuring the package.json
+     * @return a {@link SeedModulePackageJsonBuilder} to continue configuring the package.json
      */
-    public JHipsterModulePackageJsonBuilder packageJson() {
+    public SeedModulePackageJsonBuilder packageJson() {
       return packageJson;
     }
 
@@ -704,19 +702,19 @@ public final class SeedModule {
       return postActions;
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springMainProperties() {
+    public SeedModuleSpringPropertiesBuilder springMainProperties() {
       return springMainProperties(SpringProfile.DEFAULT);
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springLocalProperties() {
+    public SeedModuleSpringPropertiesBuilder springLocalProperties() {
       return springMainProperties(SpringProfile.LOCAL);
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springMainBootstrapProperties() {
+    public SeedModuleSpringPropertiesBuilder springMainBootstrapProperties() {
       return springMainBootstrapProperties(SpringProfile.DEFAULT);
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springMainBootstrapProperties(SpringProfile profile) {
+    public SeedModuleSpringPropertiesBuilder springMainBootstrapProperties(SpringProfile profile) {
       Assert.notNull(PROFILE, profile);
 
       return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.MAIN_BOOTSTRAP_PROPERTIES), key ->
@@ -724,7 +722,7 @@ public final class SeedModule {
       );
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springMainProperties(SpringProfile profile) {
+    public SeedModuleSpringPropertiesBuilder springMainProperties(SpringProfile profile) {
       Assert.notNull(PROFILE, profile);
 
       return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.MAIN_PROPERTIES), key ->
@@ -732,17 +730,17 @@ public final class SeedModule {
       );
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springTestProperties() {
+    public SeedModuleSpringPropertiesBuilder springTestProperties() {
       return springTestProperties(SpringProfile.TEST);
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springTestBootstrapProperties() {
+    public SeedModuleSpringPropertiesBuilder springTestBootstrapProperties() {
       return springProperties.computeIfAbsent(new PropertiesKey(SpringProfile.DEFAULT, SpringPropertyType.TEST_BOOTSTRAP_PROPERTIES), key ->
         SeedModuleSpringProperties.builder(this)
       );
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springTestProperties(SpringProfile profile) {
+    public SeedModuleSpringPropertiesBuilder springTestProperties(SpringProfile profile) {
       Assert.notNull(PROFILE, profile);
 
       return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.TEST_PROPERTIES), key ->
@@ -750,14 +748,14 @@ public final class SeedModule {
       );
     }
 
-    public JHipsterModuleSpringFactoriesBuilder springTestFactories() {
+    public SeedModuleSpringFactoriesBuilder springTestFactories() {
       return springFactories.computeIfAbsent(SpringFactoryType.TEST_FACTORIES, key -> SeedModuleSpringFactories.builder(this));
     }
 
     /**
      * Add new entries to the {@code .gitignore} file.
      */
-    public JHipsterModuleGitIgnoreBuilder gitIgnore() {
+    public SeedModuleGitIgnoreBuilder gitIgnore() {
       return gitIgnore;
     }
 

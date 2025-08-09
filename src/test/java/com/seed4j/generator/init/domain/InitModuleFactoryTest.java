@@ -102,7 +102,7 @@ class InitModuleFactoryTest {
     when(nodeVersions.packageManagerVersion(packageManager)).thenReturn(new NodePackageVersion(version));
   }
 
-  private static SeedModulesFixture.JHipsterModulePropertiesBuilder defaultProperties(String folder) {
+  private static SeedModulesFixture.SeedModulePropertiesBuilder defaultProperties(String folder) {
     return SeedModulesFixture.propertiesBuilder(folder)
       .projectBaseName("testProject")
       .projectName("Test Project")

@@ -4,14 +4,14 @@ So, you want to create a Seed4J module? Great!
 
 For that, you'll need to provide two main parts:
 
-- `JHipsterModuleResource`: describe the module organization, it is used to generate the APIs;
-- `JHipsterModule`: describe the changes done by the module.
+- `SeedModuleResource`: describe the module organization, it is used to generate the APIs;
+- `SeedModule`: describe the changes done by the module.
 
-You can start with the element you prefer but to create a `JHipsterModuleResource` you'll need to be able to build a `JHipsterModule`.
+You can start with the element you prefer but to create a `SeedModuleResource` you'll need to be able to build a `SeedModule`.
 
 ## Creating a Seed4J module
 
-In fact, you don't just need to create one `JHipsterModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
+In fact, you don't just need to create one `SeedModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
 
 So, as this is the business of Seed4J you probably want to create a `com.seed4j.generator.my_module.domain` package. And you can start with a simple test:
 
@@ -32,7 +32,7 @@ class MyModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .build();
 
@@ -46,7 +46,7 @@ class MyModuleFactoryTest {
 A few things to note here:
 
 - We are expecting to have a `buildModule(...)` method in `MyModuleFactory`;
-- The `JHipsterModulesAssertions.assertThatModule(...)` will really apply the module to a project and give you a fluent API to ensure some operations;
+- The `SeedModulesAssertions.assertThatModule(...)` will really apply the module to a project and give you a fluent API to ensure some operations;
 - Even if the feedback loops are not perfect on that, they should be short enough to allow a decent TDD implementation of the factory (on eclipse with [infinitest](https://infinitest.github.io/) feedbacks are under a second).
 
 So, now that we have a first test, we can do a simple implementation:
@@ -56,9 +56,9 @@ import static com.seed4j.module.domain.SeedModule.*;
 
 public class MyModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("my-module");
+  private static final SeedSource SOURCE = from("my-module");
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .files()
@@ -85,7 +85,7 @@ public class Dummy {
 
 Those placeholders will be replaced by properties values during module application.
 
-And this is it for this part of the documentation... Of course, you can do a lot more than that in the `JHipsterModule` but the goal of this documentation is not to go deep in this usage! You have a lot of running examples and you can always ask for help, we'll be really happy to help you provide your implementations!
+And this is it for this part of the documentation... Of course, you can do a lot more than that in the `SeedModule` but the goal of this documentation is not to go deep in this usage! You have a lot of running examples and you can always ask for help, we'll be really happy to help you provide your implementations!
 
 ## Add relevant dependencies required for the new module in the Version files
 
@@ -110,9 +110,9 @@ And this is it for this part of the documentation... Of course, you can do a lot
   - Framework specific npm dependencies can be added in the `package.json` of the respective framework folders. For e.g.: `src/main/resources/generator/dependencies/react/package.json`
   - These dependencies are resolved using [FileSystemNpmVersionReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/com/seed4j/module/infrastructure/secondary/npm/FileSystemNpmVersionReader.java), an implementation of the `NpmVersionsReader` bean to read from a local file.
 
-## Creating JHipsterModuleResource
+## Creating SeedModuleResource
 
-As the main goal of a `JHipsterModuleResource` is to expose a WebService.
+As the main goal of a `SeedModuleResource` is to expose a WebService.
 
 Let's start by creating a gherkin scenario for that. So in `src/test/features/my-module.feature` we'll do:
 
@@ -130,17 +130,17 @@ Feature: My module
 
 You can now run `CucumberTest` and ensure that it is failing as expected (with a 404).
 
-To be used by Seed4J, the `JHipsterModuleResource` needs to be a Spring bean so, let's create a configuration in `com.seed4j.generator.my_module.infrastructure.primary`:
+To be used by Seed4J, the `SeedModuleResource` needs to be a Spring bean so, let's create a configuration in `com.seed4j.generator.my_module.infrastructure.primary`:
 
 ```java
 @Configuration
 class MyModuleModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource myModule(MyModuleApplicationService myModules) {
-    return JHipsterModuleResource.builder()
-      .slug(JHLiteModuleSlug.MY_MODULE)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().build())
+  SeedModuleResource myModule(MyModuleApplicationService myModules) {
+    return SeedModuleResource.builder()
+      .slug(Seed4JModuleSlug.MY_MODULE)
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().build())
       .apiDoc("Group", "This is my module")
       .standalone()
       .tags("server")
@@ -149,7 +149,7 @@ class MyModuleModuleConfiguration {
 }
 ```
 
-In fact, you don't really have choices here, the `JHipsterModuleResource.builder()` is fluent and will only let you go to the next possible step.
+In fact, you don't really have choices here, the `SeedModuleResource.builder()` is fluent and will only let you go to the next possible step.
 The most confusing one may be the last one `.factory(myModules::buildModule)` which is, in fact, a method called to build the module.
 
 For this to work, we'll need to add a simple orchestration class in `com.seed4j.generator.my_module.application`:
@@ -164,13 +164,13 @@ public class MyModuleApplicationService {
     factory = new MyModuleFactory();
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return factory.buildModule(properties);
   }
 }
 ```
 
-In your `JHipsterModuleResource` you can define additional properties and an organization to display your module in the landscape (replacing `.standalone()`). Here again, you have a lot of examples to rely on.
+In your `SeedModuleResource` you can define additional properties and an organization to display your module in the landscape (replacing `.standalone()`). Here again, you have a lot of examples to rely on.
 
 ## Applying module in CI
 

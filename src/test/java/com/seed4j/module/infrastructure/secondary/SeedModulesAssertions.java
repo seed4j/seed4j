@@ -124,10 +124,10 @@ public final class SeedModulesAssertions {
     return new SeedModuleAsserter(module);
   }
 
-  public static JHipsterModuleUpgradeAsserter assertThatModuleUpgrade(SeedModule module, SeedModuleUpgrade upgrade, ModuleFile... files) {
+  public static SeedModuleUpgradeAsserter assertThatModuleUpgrade(SeedModule module, SeedModuleUpgrade upgrade, ModuleFile... files) {
     addFilesToProject(module.projectFolder(), files);
 
-    return new JHipsterModuleUpgradeAsserter(module, upgrade);
+    return new SeedModuleUpgradeAsserter(module, upgrade);
   }
 
   public static SeedModuleAsserter assertThatTwoModulesWithFiles(SeedModule module, SeedModule moduleSecond, ModuleFile... files) {
@@ -245,8 +245,8 @@ public final class SeedModulesAssertions {
       return path -> assertions.assertThat(Files.notExists(path)).as(fileFoundMessage(path, projectFolder)).isTrue();
     }
 
-    public JHipsterModuleFileAsserter<SeedModuleAsserter> hasFile(String file) {
-      return new JHipsterModuleFileAsserter<>(this, projectFolder, file);
+    public SeedModuleFileAsserter<SeedModuleAsserter> hasFile(String file) {
+      return new SeedModuleFileAsserter<>(this, projectFolder, file);
     }
   }
 
@@ -262,11 +262,11 @@ public final class SeedModulesAssertions {
     }
   }
 
-  public static class JHipsterModuleUpgradeAsserter {
+  public static class SeedModuleUpgradeAsserter {
 
     private final SeedProjectFolder projectFolder;
 
-    public JHipsterModuleUpgradeAsserter(SeedModule module, SeedModuleUpgrade upgrade) {
+    public SeedModuleUpgradeAsserter(SeedModule module, SeedModuleUpgrade upgrade) {
       assertThat(module).as("Can't make assertions on a upgrade without module").isNotNull();
       assertThat(upgrade).as("Can't make assertions on a upgrade without upgrade").isNotNull();
 
@@ -285,7 +285,7 @@ public final class SeedModulesAssertions {
       }
     }
 
-    public JHipsterModuleUpgradeAsserter doNotUpdate(String file) {
+    public SeedModuleUpgradeAsserter doNotUpdate(String file) {
       FileTime lastModifiedTime = readFileTime(file);
 
       assertThat(lastModifiedTime)
@@ -295,7 +295,7 @@ public final class SeedModulesAssertions {
       return this;
     }
 
-    public JHipsterModuleUpgradeAsserter update(String file) {
+    public SeedModuleUpgradeAsserter update(String file) {
       FileTime lastModifiedTime = readFileTime(file);
 
       assertThat(lastModifiedTime)
@@ -305,7 +305,7 @@ public final class SeedModulesAssertions {
       return this;
     }
 
-    public JHipsterModuleUpgradeAsserter doNotHaveFiles(String... files) {
+    public SeedModuleUpgradeAsserter doNotHaveFiles(String... files) {
       assertThat(files).as("Can't check null files as not upgrade").isNotNull();
 
       SoftAssertions assertions = new SoftAssertions();
@@ -327,18 +327,18 @@ public final class SeedModulesAssertions {
       }
     }
 
-    public JHipsterModuleFileAsserter<JHipsterModuleUpgradeAsserter> hasFile(String path) {
-      return new JHipsterModuleFileAsserter<>(this, projectFolder, path);
+    public SeedModuleFileAsserter<SeedModuleUpgradeAsserter> hasFile(String path) {
+      return new SeedModuleFileAsserter<>(this, projectFolder, path);
     }
   }
 
-  public static final class JHipsterModuleFileAsserter<T> {
+  public static final class SeedModuleFileAsserter<T> {
 
     private final T moduleAsserter;
     private final SeedProjectFolder projectFolder;
     private final String file;
 
-    private JHipsterModuleFileAsserter(T moduleAsserter, SeedProjectFolder projectFolder, String file) {
+    private SeedModuleFileAsserter(T moduleAsserter, SeedProjectFolder projectFolder, String file) {
       this.projectFolder = projectFolder;
       assertThat(file).as("Can't check file without file path").isNotBlank();
 
@@ -356,7 +356,7 @@ public final class SeedModulesAssertions {
     /**
      * Verifies that the file content matches the saved snapshot, using ApprovalTests.
      */
-    public JHipsterModuleFileAsserter<T> matchingSavedSnapshot() {
+    public SeedModuleFileAsserter<T> matchingSavedSnapshot() {
       String shortFileName = Arrays.stream(file.split("/")).toList().getLast();
       Approvals.verify(
         contentNormalizingNewLines(projectFolder.filePath(file)),
@@ -387,7 +387,7 @@ public final class SeedModulesAssertions {
       return new RegExScrubber(" = \"(\\d+\\.?)+\"", " = \"[version]\"");
     }
 
-    public JHipsterModuleFileAsserter<T> containing(String content) {
+    public SeedModuleFileAsserter<T> containing(String content) {
       assertThat(content).as("Can't check blank content").isNotBlank();
 
       Path path = projectFolder.filePath(file);
@@ -398,7 +398,7 @@ public final class SeedModulesAssertions {
       return this;
     }
 
-    public JHipsterModuleFileAsserter<T> containingInSequence(CharSequence... values) {
+    public SeedModuleFileAsserter<T> containingInSequence(CharSequence... values) {
       assertThat(values).as("Can't check blank content").isNotEmpty();
       assertThat(values)
         .as("Can't check blank content")
@@ -417,7 +417,7 @@ public final class SeedModulesAssertions {
       return this;
     }
 
-    public JHipsterModuleFileAsserter<T> notContaining(String content) {
+    public SeedModuleFileAsserter<T> notContaining(String content) {
       assertThat(content).as("Can't check blank content").isNotBlank();
 
       try {

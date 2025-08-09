@@ -15,13 +15,13 @@ public final class SeedModuleGradlePlugins {
 
   private final Collection<GradleMainBuildPlugin> plugins;
 
-  private SeedModuleGradlePlugins(JHipsterModuleGradlePluginBuilder builder) {
+  private SeedModuleGradlePlugins(SeedModuleGradlePluginBuilder builder) {
     Assert.notNull("plugins", builder.plugins);
     plugins = builder.plugins;
   }
 
-  public static JHipsterModuleGradlePluginBuilder builder(SeedModuleBuilder module) {
-    return new JHipsterModuleGradlePluginBuilder(module);
+  public static SeedModuleGradlePluginBuilder builder(SeedModuleBuilder module) {
+    return new SeedModuleGradlePluginBuilder(module);
   }
 
   public JavaBuildCommands buildChanges(JavaDependenciesVersions versions) {
@@ -50,18 +50,18 @@ public final class SeedModuleGradlePlugins {
     return commandBuilder.build();
   }
 
-  public static final class JHipsterModuleGradlePluginBuilder {
+  public static final class SeedModuleGradlePluginBuilder {
 
     private final SeedModuleBuilder module;
     private final Collection<GradleMainBuildPlugin> plugins = new ArrayList<>();
 
-    private JHipsterModuleGradlePluginBuilder(SeedModuleBuilder module) {
+    private SeedModuleGradlePluginBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
     }
 
-    public JHipsterModuleGradlePluginBuilder plugin(GradleMainBuildPlugin plugin) {
+    public SeedModuleGradlePluginBuilder plugin(GradleMainBuildPlugin plugin) {
       Assert.notNull("plugin", plugin);
 
       plugins.add(plugin);

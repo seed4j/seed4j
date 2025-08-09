@@ -6,7 +6,7 @@ import static org.mockito.Mockito.mock;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.file.SeedModuleFiles;
-import com.seed4j.module.domain.file.SeedModuleFiles.JHipsterModuleFilesBuilder;
+import com.seed4j.module.domain.file.SeedModuleFiles.SeedModuleFilesBuilder;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import java.util.Optional;
 import org.junit.jupiter.api.Nested;
@@ -20,7 +20,7 @@ class FileSystemProjectJavaBuildToolRepositoryTest {
   @Nested
   class DetectFromSeedModuleFiles {
 
-    private final JHipsterModuleFilesBuilder moduleFiles = SeedModuleFiles.builder(mock(SeedModuleBuilder.class));
+    private final SeedModuleFilesBuilder moduleFiles = SeedModuleFiles.builder(mock(SeedModuleBuilder.class));
 
     @Test
     void shouldReturnMavenWhenPomXmlIsAdded() {

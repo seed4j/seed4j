@@ -10,8 +10,8 @@
       "date": "2024-01-29T22:31:20.121046866Z",
       "properties": {
         "packageName": "com.mycompany.myapp",
-        "projectName": "JHipster Sample Application",
-        "baseName": "jhipsterSampleApplication",
+        "projectName": "Seed4J Sample Application",
+        "baseName": "seed4jSampleApplication",
         "endOfLine": "lf",
         "indentSize": 2
       }
@@ -21,8 +21,8 @@
       "date": "2024-01-29T22:31:20.126024517Z",
       "properties": {
         "packageName": "com.mycompany.myapp",
-        "projectName": "JHipster Sample Application",
-        "baseName": "jhipsterSampleApplication",
+        "projectName": "Seed4J Sample Application",
+        "baseName": "seed4jSampleApplication",
         "endOfLine": "lf",
         "indentSize": 2
       }

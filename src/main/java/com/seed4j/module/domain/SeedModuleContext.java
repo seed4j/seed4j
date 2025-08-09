@@ -31,20 +31,20 @@ public final class SeedModuleContext {
     return new SeedModuleContext(SeedCollections.concat(context, additionalValues));
   }
 
-  public static JHipsterModuleContextBuilder builder(SeedModuleBuilder module) {
-    return new JHipsterModuleContextBuilder(module);
+  public static SeedModuleContextBuilder builder(SeedModuleBuilder module) {
+    return new SeedModuleContextBuilder(module);
   }
 
   public Map<String, Object> get() {
     return context;
   }
 
-  public static final class JHipsterModuleContextBuilder {
+  public static final class SeedModuleContextBuilder {
 
     private final SeedModuleBuilder module;
     private final Map<String, Object> context;
 
-    private JHipsterModuleContextBuilder(SeedModuleBuilder module) {
+    private SeedModuleContextBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -66,7 +66,7 @@ public final class SeedModuleContext {
       return init;
     }
 
-    public JHipsterModuleContextBuilder put(String key, Object value) {
+    public SeedModuleContextBuilder put(String key, Object value) {
       Assert.notBlank("key", key);
       Assert.notNull("value", value);
 

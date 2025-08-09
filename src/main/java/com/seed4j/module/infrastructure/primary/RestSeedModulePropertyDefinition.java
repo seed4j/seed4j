@@ -17,7 +17,7 @@ final class RestSeedModulePropertyDefinition {
   private final String defaultValue;
   private final int order;
 
-  private RestSeedModulePropertyDefinition(RestJHipsterModulePropertyDefinitionBuilder builder) {
+  private RestSeedModulePropertyDefinition(RestSeedModulePropertyDefinitionBuilder builder) {
     type = builder.type;
     mandatory = builder.mandatory;
     key = builder.key;
@@ -27,7 +27,7 @@ final class RestSeedModulePropertyDefinition {
   }
 
   static RestSeedModulePropertyDefinition from(SeedModulePropertyDefinition propertyDefinition) {
-    return new RestJHipsterModulePropertyDefinitionBuilder()
+    return new RestSeedModulePropertyDefinitionBuilder()
       .type(propertyDefinition.type())
       .mandatory(propertyDefinition.isMandatory())
       .key(propertyDefinition.key().get())
@@ -67,7 +67,7 @@ final class RestSeedModulePropertyDefinition {
     return order;
   }
 
-  private static final class RestJHipsterModulePropertyDefinitionBuilder {
+  private static final class RestSeedModulePropertyDefinitionBuilder {
 
     private SeedPropertyType type;
     private boolean mandatory;
@@ -76,37 +76,37 @@ final class RestSeedModulePropertyDefinition {
     private String defaultValue;
     private int order;
 
-    private RestJHipsterModulePropertyDefinitionBuilder type(SeedPropertyType type) {
+    private RestSeedModulePropertyDefinitionBuilder type(SeedPropertyType type) {
       this.type = type;
 
       return this;
     }
 
-    private RestJHipsterModulePropertyDefinitionBuilder mandatory(boolean mandatory) {
+    private RestSeedModulePropertyDefinitionBuilder mandatory(boolean mandatory) {
       this.mandatory = mandatory;
 
       return this;
     }
 
-    private RestJHipsterModulePropertyDefinitionBuilder key(String key) {
+    private RestSeedModulePropertyDefinitionBuilder key(String key) {
       this.key = key;
 
       return this;
     }
 
-    private RestJHipsterModulePropertyDefinitionBuilder description(String description) {
+    private RestSeedModulePropertyDefinitionBuilder description(String description) {
       this.description = description;
 
       return this;
     }
 
-    private RestJHipsterModulePropertyDefinitionBuilder defaultValue(String defaultValue) {
+    private RestSeedModulePropertyDefinitionBuilder defaultValue(String defaultValue) {
       this.defaultValue = defaultValue;
 
       return this;
     }
 
-    private RestJHipsterModulePropertyDefinitionBuilder order(int order) {
+    private RestSeedModulePropertyDefinitionBuilder order(int order) {
       this.order = order;
 
       return this;

@@ -14,7 +14,7 @@ jobs:
     name: Build and publish the native (GraalVM) Docker image
     runs-on: ubuntu-24.04
     env:
-      DOCKER_IMAGE_NAME: '${{ github.repository_owner }}/jhipster-lite-native'
+      DOCKER_IMAGE_NAME: '${{ github.repository_owner }}/seed4j-native'
 
     steps:
       - name: Checkout code

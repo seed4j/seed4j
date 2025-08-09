@@ -7,8 +7,8 @@ import com.seed4j.module.domain.resource.SeedModulePropertyDefinition;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 
-@Schema(name = "JHipsterModulePropertyDefinition", description = "Definition for a given property")
-final class RestJHipsterModulePropertyDefinition {
+@Schema(name = "SeedModulePropertyDefinition", description = "Definition for a given property")
+final class RestSeedModulePropertyDefinition {
 
   private final SeedPropertyType type;
   private final boolean mandatory;
@@ -17,7 +17,7 @@ final class RestJHipsterModulePropertyDefinition {
   private final String defaultValue;
   private final int order;
 
-  private RestJHipsterModulePropertyDefinition(RestJHipsterModulePropertyDefinitionBuilder builder) {
+  private RestSeedModulePropertyDefinition(RestJHipsterModulePropertyDefinitionBuilder builder) {
     type = builder.type;
     mandatory = builder.mandatory;
     key = builder.key;
@@ -26,7 +26,7 @@ final class RestJHipsterModulePropertyDefinition {
     order = builder.order;
   }
 
-  static RestJHipsterModulePropertyDefinition from(SeedModulePropertyDefinition propertyDefinition) {
+  static RestSeedModulePropertyDefinition from(SeedModulePropertyDefinition propertyDefinition) {
     return new RestJHipsterModulePropertyDefinitionBuilder()
       .type(propertyDefinition.type())
       .mandatory(propertyDefinition.isMandatory())
@@ -112,8 +112,8 @@ final class RestJHipsterModulePropertyDefinition {
       return this;
     }
 
-    private RestJHipsterModulePropertyDefinition build() {
-      return new RestJHipsterModulePropertyDefinition(this);
+    private RestSeedModulePropertyDefinition build() {
+      return new RestSeedModulePropertyDefinition(this);
     }
   }
 }

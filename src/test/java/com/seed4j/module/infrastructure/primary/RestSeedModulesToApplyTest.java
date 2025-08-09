@@ -18,7 +18,7 @@ class RestSeedModulesToApplyTest {
 
   @Test
   void shouldDeserializeFromJson() {
-    assertThat(JsonHelper.readFromJson(json(), RestJHipsterModulesToApply.class).toDomain(projectFolder))
+    assertThat(JsonHelper.readFromJson(json(), RestSeedModulesToApply.class).toDomain(projectFolder))
       .usingRecursiveComparison()
       .isEqualTo(JHipsterModulesFixture.modulesToApply());
   }
@@ -43,11 +43,11 @@ class RestSeedModulesToApplyTest {
 
   @Test
   void shouldValidateModulesToApplyWithoutAttributes() {
-    assertThatBean(new RestJHipsterModulesToApply(null, null)).hasInvalidProperty("modules").and().hasInvalidProperty("properties");
+    assertThatBean(new RestSeedModulesToApply(null, null)).hasInvalidProperty("modules").and().hasInvalidProperty("properties");
   }
 
   @Test
   void shouldValidateModulesToApplyWithEmptyModules() {
-    assertThatBean(new RestJHipsterModulesToApply(List.of(), null)).hasInvalidProperty("modules");
+    assertThatBean(new RestSeedModulesToApply(List.of(), null)).hasInvalidProperty("modules");
   }
 }

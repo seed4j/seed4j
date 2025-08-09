@@ -20,13 +20,13 @@ class RestSeedModulePropertiesTest {
     when(jHipsterProjectFolderFactory.isInvalid("/test")).thenReturn(true);
 
     assertThatThrownBy(() ->
-      JsonHelper.readFromJson(json(), RestJHipsterModuleProperties.class).toDomain(jHipsterProjectFolderFactory)
+      JsonHelper.readFromJson(json(), RestSeedModuleProperties.class).toDomain(jHipsterProjectFolderFactory)
     ).isExactlyInstanceOf(InvalidProjectFolderException.class);
   }
 
   @Test
   void shouldConvertToProperties() {
-    assertThat(JsonHelper.readFromJson(json(), RestJHipsterModuleProperties.class).toDomain(jHipsterProjectFolderFactory))
+    assertThat(JsonHelper.readFromJson(json(), RestSeedModuleProperties.class).toDomain(jHipsterProjectFolderFactory))
       .usingRecursiveComparison()
       .isEqualTo(allProperties());
   }

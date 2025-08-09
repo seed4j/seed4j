@@ -12,7 +12,7 @@ class RestSeedModulePropertiesDefinitionTest {
 
   @Test
   void shouldSerializeToJson() {
-    assertThat(JsonHelper.writeAsString(RestJHipsterModulePropertiesDefinition.from(propertiesDefinition()))).isEqualTo(json());
+    assertThat(JsonHelper.writeAsString(RestSeedModulePropertiesDefinition.from(propertiesDefinition()))).isEqualTo(json());
   }
 
   static String json() {

@@ -8,26 +8,26 @@ import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Schema(name = "JHipsterModule", description = "Information for a JHipster module")
-final class RestJHipsterModule {
+@Schema(name = "SeedModule", description = "Information for a Seed4J module")
+final class RestSeedModule {
 
   private final String slug;
   private final String description;
-  private final RestJHipsterModulePropertiesDefinition properties;
+  private final RestSeedModulePropertiesDefinition properties;
   private final Collection<String> tags;
 
-  private RestJHipsterModule(RestJHipsterModuleBuilder builder) {
+  private RestSeedModule(RestJHipsterModuleBuilder builder) {
     slug = builder.slug;
     description = builder.description;
     properties = builder.properties;
     tags = builder.tags;
   }
 
-  static RestJHipsterModule from(SeedModuleResource moduleResource) {
+  static RestSeedModule from(SeedModuleResource moduleResource) {
     return new RestJHipsterModuleBuilder()
       .slug(moduleResource.slug().get())
       .description(moduleResource.apiDoc().operation().get())
-      .properties(RestJHipsterModulePropertiesDefinition.from(moduleResource.propertiesDefinition()))
+      .properties(RestSeedModulePropertiesDefinition.from(moduleResource.propertiesDefinition()))
       .tags(moduleResource.tags().get().stream().map(SeedModuleTag::tag).toList())
       .build();
   }
@@ -43,7 +43,7 @@ final class RestJHipsterModule {
   }
 
   @Schema(description = "Properties for this module", requiredMode = RequiredMode.REQUIRED)
-  public RestJHipsterModulePropertiesDefinition getProperties() {
+  public RestSeedModulePropertiesDefinition getProperties() {
     return properties;
   }
 
@@ -56,7 +56,7 @@ final class RestJHipsterModule {
 
     private String slug;
     private String description;
-    private RestJHipsterModulePropertiesDefinition properties;
+    private RestSeedModulePropertiesDefinition properties;
 
     private final Collection<String> tags = new ArrayList<>();
 
@@ -72,7 +72,7 @@ final class RestJHipsterModule {
       return this;
     }
 
-    private RestJHipsterModuleBuilder properties(RestJHipsterModulePropertiesDefinition properties) {
+    private RestJHipsterModuleBuilder properties(RestSeedModulePropertiesDefinition properties) {
       this.properties = properties;
 
       return this;
@@ -85,8 +85,8 @@ final class RestJHipsterModule {
       return this;
     }
 
-    private RestJHipsterModule build() {
-      return new RestJHipsterModule(this);
+    private RestSeedModule build() {
+      return new RestSeedModule(this);
     }
   }
 }

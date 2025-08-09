@@ -8,22 +8,19 @@ import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.util.Collection;
 
 @JsonPropertyOrder({ "type", "slug", "modules" })
-@Schema(name = "JHipsterLandscapeFeature", description = "Feature in a module landscape")
-final class RestJHipsterLandscapeFeature implements RestJHipsterLandscapeElement {
+@Schema(name = "SeedLandscapeFeature", description = "Feature in a module landscape")
+final class RestSeedLandscapeFeature implements RestSeedLandscapeElement {
 
   private final String slug;
-  private final Collection<RestJHipsterLandscapeModule> modules;
+  private final Collection<RestSeedLandscapeModule> modules;
 
-  private RestJHipsterLandscapeFeature(String slug, Collection<RestJHipsterLandscapeModule> modules) {
+  private RestSeedLandscapeFeature(String slug, Collection<RestSeedLandscapeModule> modules) {
     this.slug = slug;
     this.modules = modules;
   }
 
-  static RestJHipsterLandscapeFeature fromFeature(SeedLandscapeFeature feature) {
-    return new RestJHipsterLandscapeFeature(
-      feature.slug().get(),
-      feature.modules().stream().map(RestJHipsterLandscapeModule::fromModule).toList()
-    );
+  static RestSeedLandscapeFeature fromFeature(SeedLandscapeFeature feature) {
+    return new RestSeedLandscapeFeature(feature.slug().get(), feature.modules().stream().map(RestSeedLandscapeModule::fromModule).toList());
   }
 
   @Override
@@ -38,7 +35,7 @@ final class RestJHipsterLandscapeFeature implements RestJHipsterLandscapeElement
   }
 
   @Schema(description = "Modules in this feature", requiredMode = RequiredMode.REQUIRED)
-  public Collection<RestJHipsterLandscapeModule> getModules() {
+  public Collection<RestSeedLandscapeModule> getModules() {
     return modules;
   }
 }

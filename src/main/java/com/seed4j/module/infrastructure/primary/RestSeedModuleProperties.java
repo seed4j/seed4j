@@ -8,13 +8,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.util.Map;
 
-class RestJHipsterModuleProperties {
+class RestSeedModuleProperties {
 
   private final String projectFolder;
   private final boolean commit;
   private final Map<String, Object> parameters;
 
-  RestJHipsterModuleProperties(
+  RestSeedModuleProperties(
     @JsonProperty("projectFolder") String projectFolder,
     @JsonProperty("commit") boolean commit,
     @JsonProperty("parameters") Map<String, Object> parameters

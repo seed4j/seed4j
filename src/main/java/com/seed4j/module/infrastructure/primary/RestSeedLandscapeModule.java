@@ -10,16 +10,16 @@ import java.util.Collection;
 import java.util.List;
 
 @JsonPropertyOrder({ "type", "slug", "operation", "properties", "dependencies", "rank" })
-@Schema(name = "JHipsterLandscapeModule", description = "Module in a landscape")
-final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement {
+@Schema(name = "SeedLandscapeModule", description = "Module in a landscape")
+final class RestSeedLandscapeModule implements RestSeedLandscapeElement {
 
   private final String slug;
   private final String operation;
-  private final RestJHipsterModulePropertiesDefinition properties;
-  private final Collection<RestJHipsterLandscapeDependency> dependencies;
+  private final RestSeedModulePropertiesDefinition properties;
+  private final Collection<RestSeedLandscapeDependency> dependencies;
   private final SeedModuleRank rank;
 
-  private RestJHipsterLandscapeModule(RestJHipsterLandscapeModuleBuilder builder) {
+  private RestSeedLandscapeModule(RestJHipsterLandscapeModuleBuilder builder) {
     slug = builder.slug;
     operation = builder.operation;
     properties = builder.properties;
@@ -27,20 +27,20 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
     rank = builder.rank;
   }
 
-  static RestJHipsterLandscapeModule fromModule(SeedLandscapeModule module) {
+  static RestSeedLandscapeModule fromModule(SeedLandscapeModule module) {
     return new RestJHipsterLandscapeModuleBuilder()
       .slug(module.slug().get())
       .operation(module.operation().get())
-      .properties(RestJHipsterModulePropertiesDefinition.from(module.propertiesDefinition()))
+      .properties(RestSeedModulePropertiesDefinition.from(module.propertiesDefinition()))
       .rank(module.rank())
       .dependencies(buildDependencies(module))
       .build();
   }
 
-  private static List<RestJHipsterLandscapeDependency> buildDependencies(SeedLandscapeModule module) {
+  private static List<RestSeedLandscapeDependency> buildDependencies(SeedLandscapeModule module) {
     return module
       .dependencies()
-      .map(dependencies -> dependencies.stream().map(RestJHipsterLandscapeDependency::from).toList())
+      .map(dependencies -> dependencies.stream().map(RestSeedLandscapeDependency::from).toList())
       .orElse(null);
   }
 
@@ -61,12 +61,12 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
   }
 
   @Schema(description = "Definition of properties for this module", requiredMode = RequiredMode.REQUIRED)
-  public RestJHipsterModulePropertiesDefinition getProperties() {
+  public RestSeedModulePropertiesDefinition getProperties() {
     return properties;
   }
 
   @Schema(description = "Dependencies of this module")
-  public Collection<RestJHipsterLandscapeDependency> getDependencies() {
+  public Collection<RestSeedLandscapeDependency> getDependencies() {
     return dependencies;
   }
 
@@ -79,8 +79,8 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
 
     private String slug;
     private String operation;
-    private RestJHipsterModulePropertiesDefinition properties;
-    private List<RestJHipsterLandscapeDependency> dependencies;
+    private RestSeedModulePropertiesDefinition properties;
+    private List<RestSeedLandscapeDependency> dependencies;
     private SeedModuleRank rank;
 
     private RestJHipsterLandscapeModuleBuilder slug(String slug) {
@@ -95,13 +95,13 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
       return this;
     }
 
-    private RestJHipsterLandscapeModuleBuilder properties(RestJHipsterModulePropertiesDefinition properties) {
+    private RestJHipsterLandscapeModuleBuilder properties(RestSeedModulePropertiesDefinition properties) {
       this.properties = properties;
 
       return this;
     }
 
-    private RestJHipsterLandscapeModuleBuilder dependencies(List<RestJHipsterLandscapeDependency> dependencies) {
+    private RestJHipsterLandscapeModuleBuilder dependencies(List<RestSeedLandscapeDependency> dependencies) {
       this.dependencies = dependencies;
 
       return this;
@@ -113,8 +113,8 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
       return this;
     }
 
-    private RestJHipsterLandscapeModule build() {
-      return new RestJHipsterLandscapeModule(this);
+    private RestSeedLandscapeModule build() {
+      return new RestSeedLandscapeModule(this);
     }
   }
 }

@@ -10,15 +10,15 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.util.Collection;
 
-@Schema(name = "JHipsterModulesToApply", description = "Information to apply multiple modules")
-class RestJHipsterModulesToApply {
+@Schema(name = "SeedModulesToApply", description = "Information to apply multiple modules")
+class RestSeedModulesToApply {
 
   private final Collection<String> modules;
-  private final RestJHipsterModuleProperties properties;
+  private final RestSeedModuleProperties properties;
 
-  RestJHipsterModulesToApply(
+  RestSeedModulesToApply(
     @JsonProperty("modules") Collection<String> modules,
-    @JsonProperty("properties") RestJHipsterModuleProperties properties
+    @JsonProperty("properties") RestSeedModuleProperties properties
   ) {
     this.modules = modules;
     this.properties = properties;
@@ -36,7 +36,7 @@ class RestJHipsterModulesToApply {
 
   @NotNull
   @Schema(description = "Properties for the modules to apply")
-  public RestJHipsterModuleProperties getProperties() {
+  public RestSeedModuleProperties getProperties() {
     return properties;
   }
 }

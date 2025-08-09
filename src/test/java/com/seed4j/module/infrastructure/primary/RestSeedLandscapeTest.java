@@ -20,7 +20,7 @@ class RestSeedLandscapeTest {
 
     assertThat(
       JsonHelper.writeAsString(
-        RestJHipsterLandscape.from(SeedLandscape.from(JHipsterLandscapeFixture.moduleResources(firstModule, secondModule)))
+        RestSeedLandscape.from(SeedLandscape.from(JHipsterLandscapeFixture.moduleResources(firstModule, secondModule)))
       )
     ).isEqualTo(json());
   }

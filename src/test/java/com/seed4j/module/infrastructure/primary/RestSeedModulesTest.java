@@ -12,7 +12,7 @@ class RestSeedModulesTest {
 
   @Test
   void shouldSerializeToJson() {
-    assertThat(JsonHelper.writeAsString(RestJHipsterModules.from(moduleResources()))).isEqualTo(json());
+    assertThat(JsonHelper.writeAsString(RestSeedModules.from(moduleResources()))).isEqualTo(json());
   }
 
   private String json() {

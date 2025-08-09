@@ -10,8 +10,8 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.module.domain.replacement.ElementReplacer;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
@@ -39,9 +39,9 @@ public class AngularJwtModuleFactory {
     import { authInterceptor } from './app/auth/auth.interceptor';
     """;
 
-  private static final JHipsterSource SOURCE = from("client/angular/security/jwt/src/main/webapp/app");
+  private static final SeedSource SOURCE = from("client/angular/security/jwt/src/main/webapp/app");
 
-  private static final JHipsterDestination APP_DESTINATION = to("src/main/webapp/app");
+  private static final SeedDestination APP_DESTINATION = to("src/main/webapp/app");
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

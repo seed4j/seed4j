@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.replacement;
 
 import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
+import com.seed4j.module.domain.SeedProjectFilePath;
 import java.util.stream.Stream;
 
 public final class JHipsterModuleMandatoryReplacementsFactory extends JHipsterModuleReplacementsFactory {
@@ -29,7 +29,7 @@ public final class JHipsterModuleMandatoryReplacementsFactory extends JHipsterMo
     }
 
     @Override
-    public JHipsterModuleFileMandatoryReplacementsFactoryBuilder in(JHipsterProjectFilePath file) {
+    public JHipsterModuleFileMandatoryReplacementsFactoryBuilder in(SeedProjectFilePath file) {
       return new JHipsterModuleFileMandatoryReplacementsFactoryBuilder(this, file);
     }
 
@@ -47,7 +47,7 @@ public final class JHipsterModuleMandatoryReplacementsFactory extends JHipsterMo
 
     private JHipsterModuleFileMandatoryReplacementsFactoryBuilder(
       JHipsterModuleMandatoryReplacementsFactoryBuilder replacements,
-      JHipsterProjectFilePath file
+      SeedProjectFilePath file
     ) {
       super(replacements, file);
     }
@@ -59,7 +59,7 @@ public final class JHipsterModuleMandatoryReplacementsFactory extends JHipsterMo
     }
 
     @Override
-    protected ContentReplacer buildReplacer(JHipsterProjectFilePath file, ElementReplacer toReplace, String replacement) {
+    protected ContentReplacer buildReplacer(SeedProjectFilePath file, ElementReplacer toReplace, String replacement) {
       return new MandatoryFileReplacer(file, new MandatoryReplacer(toReplace, replacement));
     }
   }

@@ -15,8 +15,8 @@ import static com.seed4j.module.domain.JHipsterModule.versionSlug;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.PreCommitCommands;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
@@ -27,9 +27,9 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class ProtobufModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/javatool/protobuf");
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
+  private static final SeedSource SOURCE = from("server/javatool/protobuf");
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
 
   private static final String PROTOBUF_PACKAGE = "shared/protobuf";
   private static final VersionSlug PROTOBUF_VERSION_SLUG = versionSlug("protobuf");
@@ -38,8 +38,8 @@ public class ProtobufModuleFactory {
   public JHipsterModule buildProtobufModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
-    JHipsterDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(PROTOBUF_PACKAGE);
-    JHipsterDestination testDestination = toSrcTestJava().append(properties.packagePath()).append(PROTOBUF_PACKAGE);
+    SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(PROTOBUF_PACKAGE);
+    SeedDestination testDestination = toSrcTestJava().append(properties.packagePath()).append(PROTOBUF_PACKAGE);
 
     // @formatter:off
     return moduleBuilder(properties)

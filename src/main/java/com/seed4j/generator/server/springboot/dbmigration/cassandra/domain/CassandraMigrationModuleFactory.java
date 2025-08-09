@@ -13,8 +13,8 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
@@ -22,7 +22,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class CassandraMigrationModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/dbmigration/cassandra");
+  private static final SeedSource SOURCE = from("server/springboot/dbmigration/cassandra");
   private static final String CASSANDRA = "cassandra";
   private final DockerImages dockerImages;
 
@@ -79,11 +79,11 @@ public class CassandraMigrationModuleFactory {
       .build();
   }
 
-  private JHipsterDestination toSrcMainResourcesCql() {
+  private SeedDestination toSrcMainResourcesCql() {
     return toSrcMainResources().append("config").append("cql");
   }
 
-  private JHipsterDestination toSrcMainDockerScripts() {
+  private SeedDestination toSrcMainDockerScripts() {
     return toSrcMainDocker().append(CASSANDRA).append("scripts");
   }
 }

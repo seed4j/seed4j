@@ -10,17 +10,17 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class PlaywrightModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/common/playwright");
+  private static final SeedSource SOURCE = from("client/common/playwright");
 
-  private static final JHipsterDestination WEBAPP_COMPONENT_TESTS = to("src/test/webapp/component/");
-  private static final JHipsterDestination WEBAPP_E2E_TESTS = to("src/test/webapp/e2e/");
+  private static final SeedDestination WEBAPP_COMPONENT_TESTS = to("src/test/webapp/component/");
+  private static final SeedDestination WEBAPP_E2E_TESTS = to("src/test/webapp/e2e/");
   private static final String PLAYWRIGHT_TESTS = "common/primary/app";
 
   public JHipsterModule buildComponentTestsModule(JHipsterModuleProperties properties) {
@@ -60,7 +60,7 @@ public class PlaywrightModuleFactory {
 
   private static JHipsterModuleBuilder commonPlaywrightModuleBuilder(
     JHipsterModuleProperties properties,
-    JHipsterDestination destinationFolder
+    SeedDestination destinationFolder
   ) {
     // @formatter:off
     return moduleBuilder(properties)

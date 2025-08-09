@@ -8,8 +8,8 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
@@ -17,11 +17,11 @@ public class SampleFeatureModuleFactory {
 
   private static final String SAMPLE = "sample";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/sample/feature");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/sample/feature");
 
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
-  private static final JHipsterSource SAMPLE_TEST_SOURCE = TEST_SOURCE.append(SAMPLE);
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
+  private static final SeedSource SAMPLE_TEST_SOURCE = TEST_SOURCE.append(SAMPLE);
 
   private static final String APPLICATION = "application";
   private static final String DOMAIN = "domain";
@@ -35,8 +35,8 @@ public class SampleFeatureModuleFactory {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.basePackage().path();
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append(SAMPLE);
-    JHipsterDestination testDestination = toSrcTestJava().append(packagePath).append(SAMPLE);
+    SeedDestination mainDestination = toSrcMainJava().append(packagePath).append(SAMPLE);
+    SeedDestination testDestination = toSrcTestJava().append(packagePath).append(SAMPLE);
 
     // @formatter:off
     return moduleBuilder(properties)

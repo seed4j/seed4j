@@ -2,7 +2,7 @@ package com.seed4j.module.domain.replacement;
 
 import com.seed4j.module.domain.GeneratedProjectRepository;
 import com.seed4j.module.domain.properties.JHipsterProjectFolder;
-import com.seed4j.shared.collection.domain.JHipsterCollections;
+import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
 import java.util.function.Function;
@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public record JHipsterUpgradeFilesReplacements(Collection<JHipsterUpgradeFilesReplacement> replacements) {
   public JHipsterUpgradeFilesReplacements(Collection<JHipsterUpgradeFilesReplacement> replacements) {
-    this.replacements = JHipsterCollections.immutable(replacements);
+    this.replacements = SeedCollections.immutable(replacements);
   }
 
   public Stream<ContentReplacer> toContentReplacers(JHipsterProjectFolder folder, GeneratedProjectRepository generatedProject) {

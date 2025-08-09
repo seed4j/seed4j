@@ -7,8 +7,8 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
@@ -20,10 +20,10 @@ public class JavaBaseModuleFactory {
   private static final String GENERATION = "generation";
   private static final String COLLECTION = "collection";
 
-  private static final JHipsterSource SOURCE = from("server/javatool/base");
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final JHipsterSource MAIN_GENERATION_SOURCE = MAIN_SOURCE.append(GENERATION);
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
+  private static final SeedSource SOURCE = from("server/javatool/base");
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource MAIN_GENERATION_SOURCE = MAIN_SOURCE.append(GENERATION);
+  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
 
   private enum Destination {
     COLLECTION("shared/collection"),
@@ -50,8 +50,8 @@ public class JavaBaseModuleFactory {
     String packagePath = properties.packagePath();
     String baseName = properties.projectBaseName().capitalized();
 
-    JHipsterDestination testDestination = toSrcTestJava().append(packagePath);
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath);
+    SeedDestination testDestination = toSrcTestJava().append(packagePath);
+    SeedDestination mainDestination = toSrcMainJava().append(packagePath);
 
     // @formatter:off
     return moduleBuilder(properties)
@@ -107,15 +107,15 @@ public class JavaBaseModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterDestination packageInfoDestination(JHipsterDestination mainDestination, Destination destination) {
+  private SeedDestination packageInfoDestination(SeedDestination mainDestination, Destination destination) {
     return mainDestination.append(destination.path()).append(PACKAGE_INFO);
   }
 
-  private JHipsterDestination collectionsDestination(String className, JHipsterDestination mainDestination) {
+  private SeedDestination collectionsDestination(String className, SeedDestination mainDestination) {
     return mainDestination.append(Destination.COLLECTION_DOMAIN.path()).append(className + "Collections.java");
   }
 
-  private JHipsterDestination collectionsTestDestination(String className, JHipsterDestination testDestination) {
+  private SeedDestination collectionsTestDestination(String className, SeedDestination testDestination) {
     return testDestination.append(Destination.COLLECTION_DOMAIN.path()).append(className + "CollectionsTest.java");
   }
 }

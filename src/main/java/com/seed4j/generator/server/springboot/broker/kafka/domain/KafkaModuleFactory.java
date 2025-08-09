@@ -15,13 +15,13 @@ import static com.seed4j.module.domain.JHipsterModule.versionSlug;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import java.util.UUID;
 
 public class KafkaModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/broker/kafka");
+  private static final SeedSource SOURCE = from("server/springboot/broker/kafka");
   private static final String TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA = "/wire/kafka/infrastructure/config";
   private static final String SAMPLE_INFRASTRUCTURE_SECONDARY_KAFKA_PRODUCER = "sample/infrastructure/secondary/kafka/producer";
   private static final String SAMPLE_INFRASTRUCTURE_PRIMARY_KAFKA_CONSUMER = "sample/infrastructure/primary/kafka/consumer";

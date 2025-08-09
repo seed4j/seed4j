@@ -13,7 +13,7 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainDocker;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.JHipsterModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
@@ -24,7 +24,7 @@ public class SpringCloudConfigModuleFactory {
 
   private static final String JWT_BASE_64_SECRET = "jwtBase64Secret";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/springcloud/configclient");
+  private static final SeedSource SOURCE = from("server/springboot/springcloud/configclient");
 
   private static final PropertyValue FALSE_VALUE = propertyValue(false);
 

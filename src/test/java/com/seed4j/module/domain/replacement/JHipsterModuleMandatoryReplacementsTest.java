@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
+import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.properties.JHipsterProjectFolder;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,7 +28,7 @@ class JHipsterModuleMandatoryReplacementsTest {
     JHipsterModuleBuilder module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(folder.get()).build());
 
     return JHipsterModuleMandatoryReplacementsFactory.builder(module)
-      .in(new JHipsterProjectFilePath(file))
+      .in(new SeedProjectFilePath(file))
       .add(new TextReplacer(always(), "old"), "new")
       .and()
       .build()

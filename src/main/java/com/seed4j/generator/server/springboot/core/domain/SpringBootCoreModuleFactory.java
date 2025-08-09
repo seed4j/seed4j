@@ -18,8 +18,8 @@ import static com.seed4j.module.domain.JHipsterModule.versionSlug;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notContaining;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
@@ -33,9 +33,9 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class SpringBootCoreModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/core");
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
+  private static final SeedSource SOURCE = from("server/springboot/core");
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
 
   private static final GroupId SPRING_BOOT_GROUP = groupId("org.springframework.boot");
 
@@ -48,15 +48,15 @@ public class SpringBootCoreModuleFactory {
     "</build>"
   );
 
-  private static final JHipsterDestination MAIN_RESOURCE_DESTINATION = to("src/main/resources");
-  private static final JHipsterDestination TEST_RESOURCES_DESTINATION = to("src/test/resources");
+  private static final SeedDestination MAIN_RESOURCE_DESTINATION = to("src/main/resources");
+  private static final SeedDestination TEST_RESOURCES_DESTINATION = to("src/test/resources");
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();
     String packagePath = properties.packagePath();
-    JHipsterDestination testDestination = toSrcTestJava().append(packagePath);
+    SeedDestination testDestination = toSrcTestJava().append(packagePath);
     String fullyQualifiedMainClass = properties.basePackage().get() + "." + baseName + "App";
     String basePackageLoggingLevel = "logging.level.%s".formatted(properties.basePackage().get());
 

@@ -13,13 +13,13 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import java.util.function.Consumer;
 
 public class CypressMergeCoverageModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/tools/cypressmergecoverage");
+  private static final SeedSource SOURCE = from("client/tools/cypressmergecoverage");
   private static final String CYPRESS_COMPONENT_TESTS = "src/test/webapp/component";
 
   public JHipsterModule buildCypressMergeCoverage(JHipsterModuleProperties properties) {

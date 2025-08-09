@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterFileMatcher;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
+import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.properties.JHipsterProjectFolder;
 import com.seed4j.shared.error.domain.GeneratorException;
 import java.util.stream.Stream;
@@ -29,7 +29,7 @@ class FileSystemGeneratedProjectRepositoryTest {
     Stream<String> files = generatedProject
       .list(new JHipsterProjectFolder(SOURCE), filesWithExtension("java"))
       .stream()
-      .map(JHipsterProjectFilePath::get);
+      .map(SeedProjectFilePath::get);
 
     assertThat(files).containsExactlyInAnyOrder("IntegrationTest.java", "MainApp.java");
   }

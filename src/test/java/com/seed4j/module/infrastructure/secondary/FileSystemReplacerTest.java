@@ -12,7 +12,7 @@ import com.seed4j.LogsSpyExtension;
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.GeneratedProjectRepository;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
+import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.file.TemplateRenderer;
 import com.seed4j.module.domain.properties.JHipsterProjectFolder;
 import com.seed4j.module.domain.replacement.*;
@@ -37,7 +37,7 @@ class FileSystemReplacerTest {
         new JHipsterProjectFolder(path),
         new ContentReplacers(
           JHipsterModuleMandatoryReplacementsFactory.builder(emptyModuleBuilder())
-            .in(new JHipsterProjectFilePath("unknown"))
+            .in(new SeedProjectFilePath("unknown"))
             .add(new TextReplacer(always(), "old"), "new")
             .and()
             .build()
@@ -58,7 +58,7 @@ class FileSystemReplacerTest {
         new JHipsterProjectFolder(path),
         new ContentReplacers(
           JHipsterModuleOptionalReplacementsFactory.builder(emptyModuleBuilder())
-            .in(new JHipsterProjectFilePath("unknown"))
+            .in(new SeedProjectFilePath("unknown"))
             .add(new TextReplacer(always(), "old"), "new")
             .and()
             .build()

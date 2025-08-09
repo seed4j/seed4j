@@ -17,7 +17,7 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
@@ -26,7 +26,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class CassandraModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/database/cassandra");
+  private static final SeedSource SOURCE = from("server/springboot/database/cassandra");
   private static final String CASSANDRA_SECONDARY = "wire/cassandra/infrastructure/secondary";
   private static final String DC = "datacenter1";
   private static final PropertyKey LOCAL_DATACENTER_PROPERTY = propertyKey("spring.cassandra.local-datacenter");

@@ -16,7 +16,7 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
@@ -24,7 +24,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class RedisModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/database/redis");
+  private static final SeedSource SOURCE = from("server/springboot/database/redis");
 
   private static final String REDIS_SECONDARY = "wire/redis/infrastructure/secondary";
   private static final String REFLECTIONS_GROUP = "org.reflections";

@@ -7,19 +7,19 @@ import java.nio.file.Path;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class JHipsterDestination {
+public class SeedDestination {
 
-  public static final JHipsterDestination SRC_MAIN_JAVA = new JHipsterDestination("src/main/java");
-  public static final JHipsterDestination SRC_TEST_JAVA = new JHipsterDestination("src/test/java");
-  public static final JHipsterDestination SRC_MAIN_DOCKER = new JHipsterDestination("src/main/docker");
-  public static final JHipsterDestination SRC_MAIN_RESOURCES = new JHipsterDestination("src/main/resources");
-  public static final JHipsterDestination SRC_TEST_RESOURCES = new JHipsterDestination("src/test/resources");
+  public static final SeedDestination SRC_MAIN_JAVA = new SeedDestination("src/main/java");
+  public static final SeedDestination SRC_TEST_JAVA = new SeedDestination("src/test/java");
+  public static final SeedDestination SRC_MAIN_DOCKER = new SeedDestination("src/main/docker");
+  public static final SeedDestination SRC_MAIN_RESOURCES = new SeedDestination("src/main/resources");
+  public static final SeedDestination SRC_TEST_RESOURCES = new SeedDestination("src/test/resources");
 
   private static final String MUSTACHE_EXTENSION = ".mustache";
 
   private final String destination;
 
-  public JHipsterDestination(String destination) {
+  public SeedDestination(String destination) {
     this.destination = buildDestination(destination);
   }
 
@@ -37,8 +37,8 @@ public class JHipsterDestination {
     return destination;
   }
 
-  public JHipsterDestination append(String element) {
-    return new JHipsterDestination(destination + "/" + element);
+  public SeedDestination append(String element) {
+    return new SeedDestination(destination + "/" + element);
   }
 
   public Path folder(JHipsterProjectFolder project) {
@@ -66,7 +66,7 @@ public class JHipsterDestination {
       return true;
     }
 
-    if (!(obj instanceof JHipsterDestination other)) {
+    if (!(obj instanceof SeedDestination other)) {
       return false;
     }
 

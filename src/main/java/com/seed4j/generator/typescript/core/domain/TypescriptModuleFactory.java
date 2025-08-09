@@ -11,14 +11,14 @@ import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.CO
 import static com.seed4j.module.domain.packagejson.NodeModuleFormat.MODULE;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class TypescriptModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("typescript");
+  private static final SeedSource SOURCE = from("typescript");
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
   public TypescriptModuleFactory(NodeLazyPackagesInstaller nodeLazyPackagesInstaller) {

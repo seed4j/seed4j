@@ -2,8 +2,8 @@ package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notContainingReplacement;
 
-import com.seed4j.module.domain.JHipsterModuleContext;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
+import com.seed4j.module.domain.SeedModuleContext;
+import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.gitignore.GitIgnoreEntry;
 import com.seed4j.module.domain.gitignore.JHipsterModuleGitIgnore;
 import com.seed4j.module.domain.properties.JHipsterProjectFolder;
@@ -58,8 +58,8 @@ class FileSystemGitIgnoreHandler {
       MandatoryReplacer replacer = new MandatoryReplacer(new EndOfFileReplacer(notContainingReplacement()), gitIgnoreEntry.get());
       fileReplacer.handle(
         projectFolder,
-        ContentReplacers.of(new MandatoryFileReplacer(new JHipsterProjectFilePath(GIT_IGNORE_FILE_PATH), replacer)),
-        JHipsterModuleContext.empty()
+        ContentReplacers.of(new MandatoryFileReplacer(new SeedProjectFilePath(GIT_IGNORE_FILE_PATH), replacer)),
+        SeedModuleContext.empty()
       );
     };
   }

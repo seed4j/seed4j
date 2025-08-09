@@ -9,8 +9,8 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
@@ -18,7 +18,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class SpringdocModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/apidocumentation/springdoccore");
+  private static final SeedSource SOURCE = from("server/springboot/apidocumentation/springdoccore");
   private static final String DESTINATION = "wire/springdoc/infrastructure/primary";
 
   private static final PropertyValue ALPHA = propertyValue("alpha");
@@ -37,7 +37,7 @@ public class SpringdocModuleFactory {
   private JHipsterModule buildModule(JHipsterModuleProperties properties, SpringdocDependencies dependencies) {
     Assert.notNull("properties", properties);
 
-    JHipsterDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(DESTINATION);
+    SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(DESTINATION);
 
     // @formatter:off
     return moduleBuilder(properties)

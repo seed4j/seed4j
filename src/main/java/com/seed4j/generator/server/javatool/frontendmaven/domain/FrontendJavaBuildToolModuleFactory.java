@@ -15,8 +15,8 @@ import static com.seed4j.module.domain.nodejs.NodePackageManager.NPM;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
@@ -30,7 +30,7 @@ public class FrontendJavaBuildToolModuleFactory {
 
   private static final String PROPERTIES_FIELD = "properties";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/frontend");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/frontend");
 
   private static final String REDIRECTION = "wire/frontend";
   private static final String REDIRECTION_PRIMARY = REDIRECTION + "/infrastructure/primary";
@@ -205,7 +205,7 @@ public class FrontendJavaBuildToolModuleFactory {
 
     String packagePath = properties.packagePath();
 
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath);
+    SeedDestination mainDestination = toSrcMainJava().append(packagePath);
     // @formatter:off
     return moduleBuilder(properties)
       .files()

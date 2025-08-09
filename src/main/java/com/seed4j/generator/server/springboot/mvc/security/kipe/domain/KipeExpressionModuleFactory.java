@@ -7,24 +7,24 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class KipeExpressionModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/security/kipe/expression");
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/security/kipe/expression");
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
 
   private static final String KIPE_DESTINATION = "shared/kipe";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
-    JHipsterDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(KIPE_DESTINATION);
-    JHipsterDestination testDestination = toSrcTestJava().append(properties.packagePath()).append(KIPE_DESTINATION);
+    SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(KIPE_DESTINATION);
+    SeedDestination testDestination = toSrcTestJava().append(properties.packagePath()).append(KIPE_DESTINATION);
 
     // @formatter:off
     return moduleBuilder(properties)

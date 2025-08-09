@@ -16,9 +16,9 @@ import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.CO
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedProjectFilePath;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.module.domain.replacement.ElementReplacer;
 import com.seed4j.shared.error.domain.Assert;
@@ -35,13 +35,13 @@ public class ThymeleafTemplateModuleFactory {
   private static final String POSTCSS_CONFIG_JS = "postcss.config.js";
   private static final String TAILWIND_CONFIG_JS = "tailwind.config.js";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/thymeleaf/template");
-  private static final JHipsterSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
-  private static final JHipsterSource RESOURCES_SOURCE = SOURCE.append("src/main/resources");
+  private static final SeedSource SOURCE = from("server/springboot/thymeleaf/template");
+  private static final SeedSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
+  private static final SeedSource RESOURCES_SOURCE = SOURCE.append("src/main/resources");
 
-  private static final JHipsterProjectFilePath MAIN_RESOURCES_PATH = path("src/main/resources");
-  private static final JHipsterDestination DESTINATION = to(MAIN_RESOURCES_PATH.get());
-  private static final JHipsterDestination ROOT_DESTINATION = to(".");
+  private static final SeedProjectFilePath MAIN_RESOURCES_PATH = path("src/main/resources");
+  private static final SeedDestination DESTINATION = to(MAIN_RESOURCES_PATH.get());
+  private static final SeedDestination ROOT_DESTINATION = to(".");
 
   private static final String MAIN_SCRIPT_NEEDLE = "<!-- seed4j-needle-thymeleaf-main-script -->";
   private static final String THYMELEAF_POSTCSS_PLUGINS_NEEDLE = "// seed4j-needle-thymeleaf-postcss-plugins";

@@ -9,11 +9,11 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterModuleContextTest {
+class SeedModuleContextTest {
 
   @Test
   void shouldGetDefaultContext() {
-    Map<String, Object> context = JHipsterModuleContext.builder(emptyModuleBuilder()).build().get();
+    Map<String, Object> context = SeedModuleContext.builder(emptyModuleBuilder()).build().get();
 
     assertThat(context)
       .hasSize(8)
@@ -29,7 +29,7 @@ class JHipsterModuleContextTest {
 
   @Test
   void shouldEnrichContextWithJavaBuildTool() {
-    JHipsterModuleContext context = JHipsterModuleContext.builder(emptyModuleBuilder()).build();
+    SeedModuleContext context = SeedModuleContext.builder(emptyModuleBuilder()).build();
 
     Map<String, Object> newContext = context.withJavaBuildTool(JavaBuildTool.GRADLE).get();
 

@@ -1,17 +1,17 @@
 package com.seed4j.module.domain.file;
 
-import com.seed4j.module.domain.JHipsterModuleContext;
 import com.seed4j.module.domain.ProjectFiles;
+import com.seed4j.module.domain.SeedModuleContext;
 import com.seed4j.module.domain.properties.JHipsterProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Path;
 
-public final class JHipsterTemplatedFile {
+public final class SeedTemplatedFile {
 
-  private final JHipsterModuleFile file;
-  private final JHipsterModuleContext context;
+  private final SeedModuleFile file;
+  private final SeedModuleContext context;
 
-  private JHipsterTemplatedFile(TemplatedFileBuilder builder) {
+  private SeedTemplatedFile(TemplatedFileBuilder builder) {
     Assert.notNull("file", builder.file);
     Assert.notNull("context", builder.context);
 
@@ -45,23 +45,23 @@ public final class JHipsterTemplatedFile {
 
   public static class TemplatedFileBuilder {
 
-    private JHipsterModuleFile file;
-    private JHipsterModuleContext context;
+    private SeedModuleFile file;
+    private SeedModuleContext context;
 
-    public TemplatedFileBuilder file(JHipsterModuleFile file) {
+    public TemplatedFileBuilder file(SeedModuleFile file) {
       this.file = file;
 
       return this;
     }
 
-    public TemplatedFileBuilder context(JHipsterModuleContext context) {
+    public TemplatedFileBuilder context(SeedModuleContext context) {
       this.context = context;
 
       return this;
     }
 
-    public JHipsterTemplatedFile build() {
-      return new JHipsterTemplatedFile(this);
+    public SeedTemplatedFile build() {
+      return new SeedTemplatedFile(this);
     }
   }
 }

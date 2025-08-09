@@ -7,13 +7,13 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SampleMongoDBPersistenceModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/sample/mongodbpersistence");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/sample/mongodbpersistence");
 
   private static final String SECONDARY = "infrastructure/secondary";
   private static final String SECONDARY_DESTINATION = "sample/" + SECONDARY;

@@ -22,8 +22,8 @@ import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.RE
 import static com.seed4j.module.domain.replacement.ReplacementCondition.always;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
@@ -31,21 +31,21 @@ import java.util.function.Consumer;
 
 public class ReactModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/react/core");
+  private static final SeedSource SOURCE = from("client/react/core");
 
-  private static final JHipsterSource WEBAPP_SOURCE = SOURCE.append("src/main/webapp");
-  private static final JHipsterDestination WEBAPP_DESTINATION = to("src/main/webapp");
+  private static final SeedSource WEBAPP_SOURCE = SOURCE.append("src/main/webapp");
+  private static final SeedDestination WEBAPP_DESTINATION = to("src/main/webapp");
 
-  private static final JHipsterSource APP_SOURCE = WEBAPP_SOURCE.append("app");
-  private static final JHipsterDestination APP_DESTINATION = WEBAPP_DESTINATION.append("app");
+  private static final SeedSource APP_SOURCE = WEBAPP_SOURCE.append("app");
+  private static final SeedDestination APP_DESTINATION = WEBAPP_DESTINATION.append("app");
 
-  private static final JHipsterSource PIQURE_SOURCE = from("client/common/piqure");
+  private static final SeedSource PIQURE_SOURCE = from("client/common/piqure");
 
   private static final String PRIMARY_APP = "home/infrastructure/primary";
   private static final String ASSETS = "assets";
 
-  private static final JHipsterSource PRIMARY_APP_SOURCE = APP_SOURCE.append(PRIMARY_APP);
-  private static final JHipsterDestination PRIMARY_APP_DESTINATION = APP_DESTINATION.append(PRIMARY_APP);
+  private static final SeedSource PRIMARY_APP_SOURCE = APP_SOURCE.append(PRIMARY_APP);
+  private static final SeedDestination PRIMARY_APP_DESTINATION = APP_DESTINATION.append(PRIMARY_APP);
 
   private static final String TEST_PRIMARY = "src/test/webapp/unit/home/infrastructure/primary";
   private static final String DEFAULT_TSCONFIG_PATH = "\"@/*\": [\"src/main/webapp/app/*\"]";

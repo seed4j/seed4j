@@ -21,7 +21,7 @@ import com.seed4j.module.domain.LogLevel;
 import com.seed4j.module.domain.docker.DockerImageName;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
@@ -39,7 +39,7 @@ public class DatasourceModuleFactory {
   private static final String SPRING_DATASOURCE_PASSWORD = "spring.datasource.password";
   private static final String SPRING_DATASOURCE_DRIVER_CLASS_NAME = "spring.datasource.driver-class-name";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/database/datasource");
+  private static final SeedSource SOURCE = from("server/springboot/database/datasource");
 
   private final DockerImages dockerImages;
 

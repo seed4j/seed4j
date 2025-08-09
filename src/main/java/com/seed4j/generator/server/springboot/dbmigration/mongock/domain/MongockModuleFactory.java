@@ -11,7 +11,7 @@ import static com.seed4j.module.domain.JHipsterModule.propertyValue;
 import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
@@ -21,7 +21,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class MongockModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/dbmigration/mongock");
+  private static final SeedSource SOURCE = from("server/springboot/dbmigration/mongock");
 
   private static final GroupId MONGOCK_GROUP = groupId("io.mongock");
 

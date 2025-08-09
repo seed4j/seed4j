@@ -9,7 +9,7 @@ import static com.seed4j.module.domain.JHipsterModule.regex;
 import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.always;
 
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.replacement.OptionalReplacer;
 import com.seed4j.module.domain.replacement.TextNeedleAfterReplacer;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 final class JHipsterModuleShortcuts {
 
-  private static final JHipsterProjectFilePath README = path("README.md");
+  private static final SeedProjectFilePath README = path("README.md");
   private static final TextNeedleBeforeReplacer JHIPSTER_DOCUMENTATION_NEEDLE = lineBeforeText("\n<!-- seed4j-needle-documentation -->");
   private static final TextNeedleBeforeReplacer JHIPSTER_LOCAL_ENVIRONMENT_NEEDLE = lineBeforeText(
     "\n<!-- seed4j-needle-localEnvironment -->"
@@ -27,15 +27,15 @@ final class JHipsterModuleShortcuts {
 
   private static final TextNeedleAfterReplacer JHIPSTER_PREREQUISITES = lineAfterText("\n## Prerequisites");
 
-  private static final JHipsterProjectFilePath SPRING_MAIN_LOG_FILE = path("src/main/resources/logback-spring.xml");
-  private static final JHipsterProjectFilePath SPRING_TEST_LOG_FILE = path("src/test/resources/logback.xml");
+  private static final SeedProjectFilePath SPRING_MAIN_LOG_FILE = path("src/main/resources/logback-spring.xml");
+  private static final SeedProjectFilePath SPRING_TEST_LOG_FILE = path("src/test/resources/logback.xml");
   private static final TextNeedleBeforeReplacer JHIPSTER_LOGGER_NEEDLE = lineBeforeText("<!-- seed4j-needle-logback-add-log -->");
 
   private static final Pattern DEFAULT_LINTSTAGED_CONFIGURATION_ENTRY = Pattern.compile("\\s*'\\*': \\[\\s*].*");
 
   private JHipsterModuleShortcuts() {}
 
-  static Consumer<JHipsterModuleBuilder> documentation(DocumentationTitle title, JHipsterSource source) {
+  static Consumer<JHipsterModuleBuilder> documentation(DocumentationTitle title, SeedSource source) {
     Assert.notNull("title", title);
     Assert.notNull("source", source);
 

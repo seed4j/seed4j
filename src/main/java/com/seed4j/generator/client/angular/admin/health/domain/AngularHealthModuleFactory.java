@@ -7,18 +7,18 @@ import static com.seed4j.module.domain.JHipsterModule.path;
 import static com.seed4j.module.domain.JHipsterModule.to;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedProjectFilePath;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class AngularHealthModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/angular/admin/src/main/webapp/app");
+  private static final SeedSource SOURCE = from("client/angular/admin/src/main/webapp/app");
 
-  private static final JHipsterProjectFilePath APP_PATH = path("src/main/webapp/app");
-  private static final JHipsterDestination APP_DESTINATION = to(APP_PATH.get());
+  private static final SeedProjectFilePath APP_PATH = path("src/main/webapp/app");
+  private static final SeedDestination APP_DESTINATION = to(APP_PATH.get());
 
   private static final String ADMIN_NAVIGATION_TEST = """
       it('should navigate on admin endpoint', () => {

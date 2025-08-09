@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.javabuild.command;
 
-import static com.seed4j.shared.collection.domain.JHipsterCollections.*;
+import static com.seed4j.shared.collection.domain.SeedCollections.*;
 
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;

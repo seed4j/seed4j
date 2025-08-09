@@ -17,7 +17,7 @@ import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.CO
 
 import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.packagejson.PackageName;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
@@ -25,7 +25,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class AngularModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/angular/core");
+  private static final SeedSource SOURCE = from("client/angular/core");
 
   private static final String ENGINES_NEEDLE = "  \"engines\":";
   private static final PackageName ANGULAR_CORE_PACKAGE = packageName("@angular/core");

@@ -10,8 +10,8 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
@@ -51,10 +51,8 @@ public class JpaModuleFactory {
   public static JHipsterModule.JHipsterModuleBuilder sqlCommonModuleBuilder(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
-    JHipsterSource jpaSource = from("server/springboot/database/jpa");
-    JHipsterDestination mainDestination = toSrcMainJava()
-      .append(properties.packagePath())
-      .append("wire/database/infrastructure/secondary/");
+    SeedSource jpaSource = from("server/springboot/database/jpa");
+    SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append("wire/database/infrastructure/secondary/");
 
     // @formatter:off
     return moduleBuilder(properties)

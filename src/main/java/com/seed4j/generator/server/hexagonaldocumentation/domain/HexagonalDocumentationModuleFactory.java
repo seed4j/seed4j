@@ -6,13 +6,13 @@ import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.to;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class HexagonalDocumentationModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/documentation/hexagonal-application-service");
+  private static final SeedSource SOURCE = from("server/documentation/hexagonal-application-service");
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

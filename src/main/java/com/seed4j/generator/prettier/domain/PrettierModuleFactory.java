@@ -11,16 +11,16 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class PrettierModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("prettier");
-  private static final JHipsterDestination DESTINATION = to(".");
+  private static final SeedSource SOURCE = from("prettier");
+  private static final SeedDestination DESTINATION = to(".");
 
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 

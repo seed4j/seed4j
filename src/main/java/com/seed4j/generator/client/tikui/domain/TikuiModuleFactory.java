@@ -15,8 +15,8 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.module.domain.replacement.RegexNeedleAfterReplacer;
 import com.seed4j.module.domain.replacement.ReplacementCondition;
@@ -26,10 +26,10 @@ import java.util.regex.Pattern;
 
 public class TikuiModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/tikui");
-  private static final JHipsterSource STYLE_SOURCE = SOURCE.append("style");
+  private static final SeedSource SOURCE = from("client/tikui");
+  private static final SeedSource STYLE_SOURCE = SOURCE.append("style");
 
-  private static final JHipsterDestination STYLE_DESTINATION = to("src/main/style");
+  private static final SeedDestination STYLE_DESTINATION = to("src/main/style");
 
   private static final String ATOM = "atom";
   private static final String ATOM_BUTTON = ATOM + "/button";

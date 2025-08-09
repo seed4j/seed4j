@@ -1,13 +1,13 @@
 package com.seed4j.module.domain.properties;
 
-import com.seed4j.shared.collection.domain.JHipsterCollections;
+import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Map;
 import java.util.function.Predicate;
 
 record JHipsterModuleParameters(Map<String, Object> parameters) {
   public JHipsterModuleParameters(Map<String, Object> parameters) {
-    this.parameters = JHipsterCollections.immutable(parameters);
+    this.parameters = SeedCollections.immutable(parameters);
   }
 
   <T> T getOrDefault(String key, T defaultValue, Class<T> clazz) {

@@ -8,7 +8,7 @@ import static com.seed4j.module.domain.JHipsterModule.propertyValue;
 import static com.seed4j.module.domain.JHipsterModule.to;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.javaproperties.SpringProfile;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
@@ -16,7 +16,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class OAuth2Auth0ModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/security/oauth2/auth0");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/security/oauth2/auth0");
 
   private static final SpringProfile AUTH0_SPRING_PROFILE = new SpringProfile("auth0");
 

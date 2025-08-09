@@ -5,8 +5,8 @@ import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.to;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.time.Instant;
@@ -17,8 +17,8 @@ public class SampleFlywayModuleFactory {
 
   private static final DateTimeFormatter FILE_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC);
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/sample/flyway");
-  private static final JHipsterDestination MIGRATION_DESTINATION = to("src/main/resources/db/migration/");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/sample/flyway");
+  private static final SeedDestination MIGRATION_DESTINATION = to("src/main/resources/db/migration/");
 
   private static final String NOT_POSTGRESQL_CHANGELOG = "00000000000_sample_feature_schema.sql";
   private static final String POSTGRESQL_CHANGELOG = "00000000000_postgresql_sample_feature_schema.sql";
@@ -51,7 +51,7 @@ public class SampleFlywayModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterDestination changelogDestination(Instant date) {
+  private SeedDestination changelogDestination(Instant date) {
     return MIGRATION_DESTINATION.append(sampleFlywayFilename(date));
   }
 

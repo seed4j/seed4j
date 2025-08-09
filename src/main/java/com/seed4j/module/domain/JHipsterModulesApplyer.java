@@ -4,8 +4,8 @@ import static com.seed4j.module.domain.javabuild.JavaBuildTool.GRADLE;
 import static com.seed4j.module.domain.javabuild.JavaBuildTool.MAVEN;
 import static com.seed4j.module.domain.properties.SpringConfigurationFormat.PROPERTIES;
 
-import com.seed4j.module.domain.file.JHipsterTemplatedFile;
-import com.seed4j.module.domain.file.JHipsterTemplatedFiles;
+import com.seed4j.module.domain.file.SeedTemplatedFile;
+import com.seed4j.module.domain.file.SeedTemplatedFiles;
 import com.seed4j.module.domain.git.GitRepository;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.javabuild.ProjectJavaBuildToolRepository;
@@ -120,7 +120,7 @@ public class JHipsterModulesApplyer {
     return moduleApplied;
   }
 
-  private JHipsterModuleContext contextWithJavaBuildTool(JHipsterModule module) {
+  private SeedModuleContext contextWithJavaBuildTool(JHipsterModule module) {
     return detectedJavaBuildTool(module)
       .map(javaBuildTool -> module.context().withJavaBuildTool(javaBuildTool))
       .orElse(module.context());
@@ -130,15 +130,15 @@ public class JHipsterModulesApplyer {
     return javaBuildTools.detect(module.projectFolder()).or(() -> javaBuildTools.detect(module.files()));
   }
 
-  private JHipsterTemplatedFiles buildTemplatedFiles(JHipsterModule module) {
-    JHipsterModuleContext context = contextWithJavaBuildTool(module);
-    List<JHipsterTemplatedFile> templatedFiles = module
+  private SeedTemplatedFiles buildTemplatedFiles(JHipsterModule module) {
+    SeedModuleContext context = contextWithJavaBuildTool(module);
+    List<SeedTemplatedFile> templatedFiles = module
       .filesToAdd()
       .stream()
-      .map(file -> JHipsterTemplatedFile.builder().file(file).context(context).build())
+      .map(file -> SeedTemplatedFile.builder().file(file).context(context).build())
       .toList();
 
-    return new JHipsterTemplatedFiles(templatedFiles);
+    return new SeedTemplatedFiles(templatedFiles);
   }
 
   private JHipsterStartupCommands buildStartupCommands(JHipsterModule module) {

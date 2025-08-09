@@ -1,8 +1,8 @@
 package com.seed4j.module.domain;
 
-import com.seed4j.module.domain.file.JHipsterFilesToDelete;
-import com.seed4j.module.domain.file.JHipsterFilesToMove;
-import com.seed4j.module.domain.file.JHipsterTemplatedFiles;
+import com.seed4j.module.domain.file.SeedFilesToDelete;
+import com.seed4j.module.domain.file.SeedFilesToMove;
+import com.seed4j.module.domain.file.SeedTemplatedFiles;
 import com.seed4j.module.domain.gitignore.JHipsterModuleGitIgnore;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javaproperties.SpringComments;
@@ -20,12 +20,12 @@ import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 @SuppressWarnings("java:S6539")
 public final class JHipsterModuleChanges {
 
-  private final JHipsterModuleContext context;
+  private final SeedModuleContext context;
   private final JHipsterProjectFolder projectFolder;
   private final Indentation indentation;
-  private final JHipsterTemplatedFiles filesToAdd;
-  private final JHipsterFilesToMove filesToMove;
-  private final JHipsterFilesToDelete filesToDelete;
+  private final SeedTemplatedFiles filesToAdd;
+  private final SeedFilesToMove filesToMove;
+  private final SeedFilesToDelete filesToDelete;
   private final ContentReplacers replacers;
   private final JHipsterStartupCommands startupCommands;
   private final JavaBuildCommands javaBuildCommands;
@@ -82,7 +82,7 @@ public final class JHipsterModuleChanges {
     return new JHipsterModuleChangesBuilder();
   }
 
-  public JHipsterModuleContext context() {
+  public SeedModuleContext context() {
     return context;
   }
 
@@ -94,15 +94,15 @@ public final class JHipsterModuleChanges {
     return indentation;
   }
 
-  public JHipsterTemplatedFiles filesToAdd() {
+  public SeedTemplatedFiles filesToAdd() {
     return filesToAdd;
   }
 
-  public JHipsterFilesToMove filesToMove() {
+  public SeedFilesToMove filesToMove() {
     return filesToMove;
   }
 
-  public JHipsterFilesToDelete filesToDelete() {
+  public SeedFilesToDelete filesToDelete() {
     return filesToDelete;
   }
 
@@ -180,11 +180,11 @@ public final class JHipsterModuleChanges {
       JHipsterModuleChangesGitIgnorePatternsBuilder,
       JHipsterModuleChangesDockerComposeFileBuilder {
 
-    private JHipsterModuleContext context;
+    private SeedModuleContext context;
     private JHipsterProjectFolder projectFolder;
-    private JHipsterTemplatedFiles filesToAdd;
-    private JHipsterFilesToMove filesToMove;
-    private JHipsterFilesToDelete filesToDelete;
+    private SeedTemplatedFiles filesToAdd;
+    private SeedFilesToMove filesToMove;
+    private SeedFilesToDelete filesToDelete;
     private ContentReplacers replacers;
     private JHipsterStartupCommands startupCommands;
     private JavaBuildCommands javaBuildCommands;
@@ -201,7 +201,7 @@ public final class JHipsterModuleChanges {
     private JHipsterModuleDockerComposeFile dockerComposeFile;
 
     @Override
-    public JHipsterModuleChangesProjectFolderBuilder context(JHipsterModuleContext context) {
+    public JHipsterModuleChangesProjectFolderBuilder context(SeedModuleContext context) {
       this.context = context;
 
       return this;
@@ -222,21 +222,21 @@ public final class JHipsterModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChangesFilesToMoveBuilder filesToAdd(JHipsterTemplatedFiles filesToAdd) {
+    public JHipsterModuleChangesFilesToMoveBuilder filesToAdd(SeedTemplatedFiles filesToAdd) {
       this.filesToAdd = filesToAdd;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesFilesToDeleteBuilder filesToMove(JHipsterFilesToMove filesToMove) {
+    public JHipsterModuleChangesFilesToDeleteBuilder filesToMove(SeedFilesToMove filesToMove) {
       this.filesToMove = filesToMove;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesReplacersBuilder filesToDelete(JHipsterFilesToDelete filesToDelete) {
+    public JHipsterModuleChangesReplacersBuilder filesToDelete(SeedFilesToDelete filesToDelete) {
       this.filesToDelete = filesToDelete;
 
       return this;
@@ -335,7 +335,7 @@ public final class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesContextBuilder {
-    JHipsterModuleChangesProjectFolderBuilder context(JHipsterModuleContext context);
+    JHipsterModuleChangesProjectFolderBuilder context(SeedModuleContext context);
   }
 
   public interface JHipsterModuleChangesProjectFolderBuilder {
@@ -347,15 +347,15 @@ public final class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesFilesToAddBuilder {
-    JHipsterModuleChangesFilesToMoveBuilder filesToAdd(JHipsterTemplatedFiles filesToAdd);
+    JHipsterModuleChangesFilesToMoveBuilder filesToAdd(SeedTemplatedFiles filesToAdd);
   }
 
   public interface JHipsterModuleChangesFilesToMoveBuilder {
-    JHipsterModuleChangesFilesToDeleteBuilder filesToMove(JHipsterFilesToMove filesToMove);
+    JHipsterModuleChangesFilesToDeleteBuilder filesToMove(SeedFilesToMove filesToMove);
   }
 
   public interface JHipsterModuleChangesFilesToDeleteBuilder {
-    JHipsterModuleChangesReplacersBuilder filesToDelete(JHipsterFilesToDelete filesToDelete);
+    JHipsterModuleChangesReplacersBuilder filesToDelete(SeedFilesToDelete filesToDelete);
   }
 
   public interface JHipsterModuleChangesReplacersBuilder {

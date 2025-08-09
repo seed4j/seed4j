@@ -9,7 +9,7 @@ import static com.seed4j.module.domain.JHipsterModule.propertyKey;
 import static com.seed4j.module.domain.JHipsterModule.propertyValue;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
@@ -20,7 +20,7 @@ public class DevToolsModuleFactory {
 
   private static final GroupId SPRING_GROUP = groupId("org.springframework.boot");
 
-  private static final JHipsterSource SOURCE = from("server/springboot/devtools");
+  private static final SeedSource SOURCE = from("server/springboot/devtools");
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

@@ -367,16 +367,16 @@ public final class JHipsterModulesFixture {
     return new BuildProperty(new PropertyKey("spring.profiles.active"), new PropertyValue("local"));
   }
 
-  public static JHipsterModuleContext context() {
-    return JHipsterModuleContext.builder(emptyModuleBuilder()).put("packageName", "com.test.myapp").build();
+  public static SeedModuleContext context() {
+    return SeedModuleContext.builder(emptyModuleBuilder()).put("packageName", "com.test.myapp").build();
   }
 
   public static JHipsterModuleBuilder emptyModuleBuilder() {
     return moduleBuilder(testModuleProperties());
   }
 
-  public static JHipsterModuleContext emptyModuleContext() {
-    return JHipsterModuleContext.builder(emptyModuleBuilder()).build();
+  public static SeedModuleContext emptyModuleContext() {
+    return SeedModuleContext.builder(emptyModuleBuilder()).build();
   }
 
   public static JHipsterModuleProperties testModuleProperties() {

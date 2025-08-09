@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @UnitTest
 @ExtendWith(MockitoExtension.class)
-class JHipsterFileContentTest {
+class SeedFileContentTest {
 
   @Mock
   private ProjectFiles files;
@@ -43,21 +43,21 @@ class JHipsterFileContentTest {
 
   @Test
   void shouldReadNotTemplatedContent() {
-    JHipsterFileContent content = content("/generator/content/no-template.txt");
+    SeedFileContent content = content("/generator/content/no-template.txt");
 
     assertThat(content.read(files, context(), templateRenderer)).asString(UTF_8).isEqualTo("This is my content");
   }
 
   @Test
   void shouldReadTemplatedContent() {
-    JHipsterFileContent content = content("/generator/content/template.txt.mustache");
+    SeedFileContent content = content("/generator/content/template.txt.mustache");
 
     assertThat(content.read(files, context(), templateRenderer)).asString(UTF_8).isEqualTo("This is com.test.myapp");
   }
 
   @Test
   void shouldGetRawContentForNotTemplatedFile() throws IOException {
-    JHipsterFileContent content = content("/generator/client/vue/webapp/content/images/JHipster-Lite-neon-green.png");
+    SeedFileContent content = content("/generator/client/vue/webapp/content/images/JHipster-Lite-neon-green.png");
 
     assertThat(content.read(files, context(), templateRenderer)).isEqualTo(
       Files.readAllBytes(Path.of("src/main/resources/generator/client/vue/webapp/content/images/JHipster-Lite-neon-green.png"))
@@ -66,11 +66,11 @@ class JHipsterFileContentTest {
 
   @Test
   void testToStringShowsPath() {
-    JHipsterFileContent content = content("path");
+    SeedFileContent content = content("path");
     assertThat(content).hasToString("path");
   }
 
-  private static JHipsterFileContent content(String path) {
-    return new JHipsterFileContent(new JHipsterSource(Path.of(path)));
+  private static SeedFileContent content(String path) {
+    return new SeedFileContent(new SeedSource(Path.of(path)));
   }
 }

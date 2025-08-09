@@ -16,7 +16,7 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
@@ -24,7 +24,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class Neo4jModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/database/neo4j");
+  private static final SeedSource SOURCE = from("server/springboot/database/neo4j");
 
   private static final String NEO4J_SECONDARY = "technical/infrastructure/secondary/neo4j";
 

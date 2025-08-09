@@ -9,20 +9,20 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class CucumberModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/cucumber");
+  private static final SeedSource SOURCE = from("server/springboot/cucumber");
 
   public JHipsterModule buildInitializationModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();
-    JHipsterDestination destination = toSrcTestJava().append(properties.packagePath()).append("cucumber");
+    SeedDestination destination = toSrcTestJava().append(properties.packagePath()).append("cucumber");
 
     // @formatter:off
     JHipsterModuleBuilder builder = cucumberModuleBuilder(properties)

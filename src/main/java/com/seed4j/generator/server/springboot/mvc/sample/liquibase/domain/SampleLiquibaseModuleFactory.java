@@ -7,8 +7,8 @@ import static com.seed4j.module.domain.JHipsterModule.path;
 import static com.seed4j.module.domain.JHipsterModule.to;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.shared.error.domain.Assert;
@@ -20,8 +20,8 @@ public class SampleLiquibaseModuleFactory {
 
   private static final DateTimeFormatter FILE_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC);
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/sample/liquibase");
-  private static final JHipsterDestination CHANGELOG_DESTINATION = to("src/main/resources/config/liquibase/changelog");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/sample/liquibase");
+  private static final SeedDestination CHANGELOG_DESTINATION = to("src/main/resources/config/liquibase/changelog");
 
   private static final TextNeedleBeforeReplacer CHANGELOG_NEEDLE = lineBeforeText("<!-- seed4j-needle-liquibase-add-changelog -->");
 

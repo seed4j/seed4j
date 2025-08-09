@@ -10,7 +10,7 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.javadependency.JavaDependencyScope.RUNTIME;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
@@ -21,8 +21,8 @@ import com.seed4j.shared.error.domain.Assert;
 public class SpringBootDockerModuleFactory {
 
   private static final String PROPERTIES_FIELD = "properties";
-  private static final JHipsterSource SOURCE = from("server/springboot/docker");
-  private static final JHipsterSource JIB_SOURCE = SOURCE.append("jib");
+  private static final SeedSource SOURCE = from("server/springboot/docker");
+  private static final SeedSource JIB_SOURCE = SOURCE.append("jib");
   private static final String JAVA_DOCKER_IMAGE = "eclipse-temurin:%s-jre-jammy";
 
   public JHipsterModule buildJibModule(JHipsterModuleProperties properties) {

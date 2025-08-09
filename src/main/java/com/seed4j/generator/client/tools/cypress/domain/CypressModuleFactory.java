@@ -12,18 +12,18 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
 
 public class CypressModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/common/cypress");
+  private static final SeedSource SOURCE = from("client/common/cypress");
 
-  private static final JHipsterDestination CYPRESS_COMPONENT_TESTS = to("src/test/webapp/component");
-  private static final JHipsterDestination CYPRESS_E2E_TESTS = to("src/test/webapp/e2e");
+  private static final SeedDestination CYPRESS_COMPONENT_TESTS = to("src/test/webapp/component");
+  private static final SeedDestination CYPRESS_E2E_TESTS = to("src/test/webapp/e2e");
 
   private static final String HOME = "home";
   private static final String UTILS = "utils";
@@ -66,10 +66,7 @@ public class CypressModuleFactory {
     // @formatter:on
   }
 
-  private static JHipsterModuleBuilder commonCypressModuleBuilder(
-    JHipsterModuleProperties properties,
-    JHipsterDestination destinationFolder
-  ) {
+  private static JHipsterModuleBuilder commonCypressModuleBuilder(JHipsterModuleProperties properties, SeedDestination destinationFolder) {
     // @formatter:off
     return moduleBuilder(properties)
       .packageJson()

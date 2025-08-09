@@ -4,18 +4,18 @@ import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
-import com.seed4j.shared.collection.domain.JHipsterCollections;
+import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public final class JHipsterModuleBuildProperties {
+public final class SeedModuleBuildProperties {
 
   private final Map<PropertyKey, PropertyValue> properties;
 
-  private JHipsterModuleBuildProperties(JHipsterModuleBuildPropertiesBuilder<?> builder) {
-    properties = JHipsterCollections.immutable(builder.properties);
+  private SeedModuleBuildProperties(JHipsterModuleBuildPropertiesBuilder<?> builder) {
+    properties = SeedCollections.immutable(builder.properties);
   }
 
   public static <T> JHipsterModuleBuildPropertiesBuilder<T> builder(T parent) {
@@ -63,8 +63,8 @@ public final class JHipsterModuleBuildProperties {
       return parent;
     }
 
-    public JHipsterModuleBuildProperties build() {
-      return new JHipsterModuleBuildProperties(this);
+    public SeedModuleBuildProperties build() {
+      return new SeedModuleBuildProperties(this);
     }
   }
 }

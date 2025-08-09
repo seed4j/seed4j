@@ -2,17 +2,17 @@ package com.seed4j.module.domain;
 
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notContainingReplacement;
 
-import com.seed4j.module.domain.JHipsterModuleContext.JHipsterModuleContextBuilder;
 import com.seed4j.module.domain.JHipsterModulePreActions.JHipsterModulePreActionsBuilder;
-import com.seed4j.module.domain.buildproperties.JHipsterModuleBuildProperties;
-import com.seed4j.module.domain.buildproperties.JHipsterModuleBuildProperties.JHipsterModuleBuildPropertiesBuilder;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterFilesToDelete;
-import com.seed4j.module.domain.file.JHipsterFilesToMove;
-import com.seed4j.module.domain.file.JHipsterModuleFile;
-import com.seed4j.module.domain.file.JHipsterModuleFiles;
-import com.seed4j.module.domain.file.JHipsterModuleFiles.JHipsterModuleFilesBuilder;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedModuleContext.JHipsterModuleContextBuilder;
+import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties;
+import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties.JHipsterModuleBuildPropertiesBuilder;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedFilesToDelete;
+import com.seed4j.module.domain.file.SeedFilesToMove;
+import com.seed4j.module.domain.file.SeedModuleFile;
+import com.seed4j.module.domain.file.SeedModuleFiles;
+import com.seed4j.module.domain.file.SeedModuleFiles.JHipsterModuleFilesBuilder;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gitignore.JHipsterModuleGitIgnore;
 import com.seed4j.module.domain.gitignore.JHipsterModuleGitIgnore.JHipsterModuleGitIgnoreBuilder;
 import com.seed4j.module.domain.gradleconfiguration.JHipsterModuleGradleConfigurations;
@@ -112,13 +112,13 @@ public final class JHipsterModule {
   public static final String LINE_BREAK = "\n";
 
   private final JHipsterModuleProperties properties;
-  private final JHipsterModuleFiles files;
+  private final SeedModuleFiles files;
   private final JHipsterModuleMandatoryReplacementsFactory mandatoryReplacements;
   private final JHipsterModuleOptionalReplacementsFactory optionalReplacements;
   private final JHipsterModuleStartupCommands startupCommands;
-  private final JHipsterModuleContext context;
+  private final SeedModuleContext context;
   private final JHipsterModuleJavaDependencies javaDependencies;
-  private final JHipsterModuleBuildProperties javaBuildProperties;
+  private final SeedModuleBuildProperties javaBuildProperties;
   private final JHipsterModuleJavaBuildProfiles javaBuildProfiles;
   private final JHipsterModuleMavenPlugins mavenPlugins;
   private final JHipsterModuleGradleConfigurations gradleConfigurations;
@@ -256,38 +256,38 @@ public final class JHipsterModule {
     return MavenPlugin.builder();
   }
 
-  public static JHipsterSource from(String source) {
+  public static SeedSource from(String source) {
     Assert.notBlank("source", source);
 
-    return new JHipsterSource(Path.of("/generator", source));
+    return new SeedSource(Path.of("/generator", source));
   }
 
-  public static JHipsterProjectFilePath path(String path) {
-    return new JHipsterProjectFilePath(path);
+  public static SeedProjectFilePath path(String path) {
+    return new SeedProjectFilePath(path);
   }
 
-  public static JHipsterDestination to(String destination) {
-    return new JHipsterDestination(destination);
+  public static SeedDestination to(String destination) {
+    return new SeedDestination(destination);
   }
 
-  public static JHipsterDestination toSrcMainJava() {
-    return JHipsterDestination.SRC_MAIN_JAVA;
+  public static SeedDestination toSrcMainJava() {
+    return SeedDestination.SRC_MAIN_JAVA;
   }
 
-  public static JHipsterDestination toSrcMainDocker() {
-    return JHipsterDestination.SRC_MAIN_DOCKER;
+  public static SeedDestination toSrcMainDocker() {
+    return SeedDestination.SRC_MAIN_DOCKER;
   }
 
-  public static JHipsterDestination toSrcTestJava() {
-    return JHipsterDestination.SRC_TEST_JAVA;
+  public static SeedDestination toSrcTestJava() {
+    return SeedDestination.SRC_TEST_JAVA;
   }
 
-  public static JHipsterDestination toSrcMainResources() {
-    return JHipsterDestination.SRC_MAIN_RESOURCES;
+  public static SeedDestination toSrcMainResources() {
+    return SeedDestination.SRC_MAIN_RESOURCES;
   }
 
-  public static JHipsterDestination toSrcTestResources() {
-    return JHipsterDestination.SRC_TEST_RESOURCES;
+  public static SeedDestination toSrcTestResources() {
+    return SeedDestination.SRC_TEST_RESOURCES;
   }
 
   public static JHipsterFileMatcher filesWithExtension(String extension) {
@@ -454,23 +454,23 @@ public final class JHipsterModule {
     return properties.indentation();
   }
 
-  public JHipsterModuleFiles files() {
+  public SeedModuleFiles files() {
     return files;
   }
 
-  public JHipsterModuleContext context() {
+  public SeedModuleContext context() {
     return context;
   }
 
-  public Collection<JHipsterModuleFile> filesToAdd() {
+  public Collection<SeedModuleFile> filesToAdd() {
     return files.filesToAdd();
   }
 
-  public JHipsterFilesToMove filesToMove() {
+  public SeedFilesToMove filesToMove() {
     return files.filesToMove();
   }
 
-  public JHipsterFilesToDelete filesToDelete() {
+  public SeedFilesToDelete filesToDelete() {
     return files.filesToDelete();
   }
 
@@ -490,7 +490,7 @@ public final class JHipsterModule {
     return javaDependencies;
   }
 
-  public JHipsterModuleBuildProperties javaBuildProperties() {
+  public SeedModuleBuildProperties javaBuildProperties() {
     return javaBuildProperties;
   }
 
@@ -552,7 +552,7 @@ public final class JHipsterModule {
 
     private final JHipsterModuleProperties properties;
     private final JHipsterModuleContextBuilder context;
-    private final JHipsterModuleFilesBuilder files = JHipsterModuleFiles.builder(this);
+    private final JHipsterModuleFilesBuilder files = SeedModuleFiles.builder(this);
     private final JHipsterModuleMandatoryReplacementsFactoryBuilder mandatoryReplacements =
       JHipsterModuleMandatoryReplacementsFactory.builder(this);
     private final JHipsterModuleOptionalReplacementsFactoryBuilder optionalReplacements = JHipsterModuleOptionalReplacementsFactory.builder(
@@ -562,9 +562,7 @@ public final class JHipsterModule {
     private final JHipsterModuleJavaDependenciesBuilder<JHipsterModuleBuilder> javaDependencies = JHipsterModuleJavaDependencies.builder(
       this
     );
-    private final JHipsterModuleBuildPropertiesBuilder<JHipsterModuleBuilder> javaBuildProperties = JHipsterModuleBuildProperties.builder(
-      this
-    );
+    private final JHipsterModuleBuildPropertiesBuilder<JHipsterModuleBuilder> javaBuildProperties = SeedModuleBuildProperties.builder(this);
     private final JHipsterModuleJavaBuildProfilesBuilder javaBuildProfiles = JHipsterModuleJavaBuildProfiles.builder(this);
     private final JHipsterModuleMavenPluginsBuilder<JHipsterModuleBuilder> mavenPlugins = JHipsterModuleMavenPlugins.builder(this);
     private final JHipsterModuleGradleConfigurationBuilder gradleConfigurations = JHipsterModuleGradleConfigurations.builder(this);
@@ -582,7 +580,7 @@ public final class JHipsterModule {
       Assert.notNull("properties", properties);
 
       this.properties = properties;
-      context = JHipsterModuleContext.builder(this);
+      context = SeedModuleContext.builder(this);
     }
 
     JHipsterModuleProperties properties() {
@@ -596,7 +594,7 @@ public final class JHipsterModule {
       return this;
     }
 
-    public JHipsterModuleBuilder documentation(DocumentationTitle title, JHipsterSource source) {
+    public JHipsterModuleBuilder documentation(DocumentationTitle title, SeedSource source) {
       apply(JHipsterModuleShortcuts.documentation(title, source));
 
       return this;

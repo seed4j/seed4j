@@ -13,8 +13,8 @@ import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatch
 
 import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.module.domain.replacement.ElementReplacer;
 import com.seed4j.shared.error.domain.Assert;
@@ -83,9 +83,9 @@ public class AngularOAuth2KeycloakModuleFactory {
 
   private static final String HTTP_AUTH_INTERCEPTOR_IMPORT = "import { httpAuthInterceptor } from './app/auth/http-auth.interceptor';";
 
-  private static final JHipsterSource SOURCE = from("client/angular/security/oauth2keycloak/src/main/webapp/app");
+  private static final SeedSource SOURCE = from("client/angular/security/oauth2keycloak/src/main/webapp/app");
 
-  private static final JHipsterDestination APP_DESTINATION = to("src/main/webapp/app");
+  private static final SeedDestination APP_DESTINATION = to("src/main/webapp/app");
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

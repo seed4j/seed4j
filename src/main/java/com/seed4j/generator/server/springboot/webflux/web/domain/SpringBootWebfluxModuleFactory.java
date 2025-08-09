@@ -11,7 +11,7 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
@@ -21,9 +21,9 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class SpringBootWebfluxModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/webflux/web");
-  private static final JHipsterSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
-  private static final JHipsterSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
+  private static final SeedSource SOURCE = from("server/springboot/webflux/web");
+  private static final SeedSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
+  private static final SeedSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
   private static final String WIRE_JACKSON_CONFIG = "wire/jackson/infrastructure/primary";
   private static final PropertyKey SERVER_PORT = propertyKey("server.port");
 

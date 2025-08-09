@@ -3,7 +3,7 @@ package com.seed4j.module.infrastructure.secondary;
 import static com.seed4j.module.domain.JHipsterModule.LINE_BREAK;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.JHipsterModuleContext;
+import com.seed4j.module.domain.SeedModuleContext;
 import com.seed4j.module.domain.file.TemplateRenderer;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import com.seed4j.module.domain.packagejson.JHipsterModulePackageJson;
@@ -14,7 +14,7 @@ import com.seed4j.module.domain.packagejson.PackageName;
 import com.seed4j.module.domain.packagejson.PackageNames;
 import com.seed4j.module.domain.packagejson.Scripts;
 import com.seed4j.module.domain.properties.JHipsterProjectFolder;
-import com.seed4j.shared.collection.domain.JHipsterCollections;
+import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
@@ -54,7 +54,7 @@ class FileSystemPackageJsonHandler {
     Indentation indentation,
     JHipsterProjectFolder projectFolder,
     JHipsterModulePackageJson packageJson,
-    JHipsterModuleContext context
+    SeedModuleContext context
   ) {
     Assert.notNull("indentation", indentation);
     Assert.notNull("projectFolder", projectFolder);
@@ -91,7 +91,7 @@ class FileSystemPackageJsonHandler {
     return file;
   }
 
-  private String replacePlaceholders(String content, JHipsterModuleContext context) {
+  private String replacePlaceholders(String content, SeedModuleContext context) {
     return templateRenderer.render(content, context);
   }
 
@@ -369,7 +369,7 @@ class FileSystemPackageJsonHandler {
       }
 
       private JsonActionBuilder entries(Collection<JsonEntry> entries) {
-        this.entries = JHipsterCollections.immutable(entries);
+        this.entries = SeedCollections.immutable(entries);
 
         return this;
       }

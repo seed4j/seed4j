@@ -2,21 +2,21 @@ package com.seed4j.module.domain.file;
 
 import static java.nio.charset.StandardCharsets.*;
 
-import com.seed4j.module.domain.JHipsterModuleContext;
 import com.seed4j.module.domain.ProjectFiles;
+import com.seed4j.module.domain.SeedModuleContext;
 import com.seed4j.shared.error.domain.Assert;
 
-public class JHipsterFileContent {
+public class SeedFileContent {
 
-  private final JHipsterSource source;
+  private final SeedSource source;
 
-  public JHipsterFileContent(JHipsterSource source) {
+  public SeedFileContent(SeedSource source) {
     Assert.notNull("source", source);
 
     this.source = source;
   }
 
-  public byte[] read(ProjectFiles files, JHipsterModuleContext context, TemplateRenderer templateRenderer) {
+  public byte[] read(ProjectFiles files, SeedModuleContext context, TemplateRenderer templateRenderer) {
     Assert.notNull("files", files);
     Assert.notNull("context", context);
     Assert.notNull("templateRenderer", templateRenderer);

@@ -5,7 +5,7 @@ import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.to;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
@@ -14,7 +14,7 @@ import java.util.Locale;
 
 public class GitHubActionsModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("ci/github/actions/.github");
+  private static final SeedSource SOURCE = from("ci/github/actions/.github");
 
   private final NodeVersions nodeVersions;
 

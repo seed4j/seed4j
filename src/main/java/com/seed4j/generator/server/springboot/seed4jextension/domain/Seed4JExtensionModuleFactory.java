@@ -20,9 +20,9 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 import static com.seed4j.module.domain.JHipsterModule.versionSlug;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedProjectFilePath;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency.JavaDependencyOptionalValueBuilder;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
@@ -40,14 +40,14 @@ public class Seed4JExtensionModuleFactory {
   private static final String SECONDARY = "secondary";
   private static final String DEPENDENCIES = "dependencies";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/seed4j-extension");
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final JHipsterSource SLUG_SOURCE = MAIN_SOURCE.append(SHARED).append("slug");
+  private static final SeedSource SOURCE = from("server/springboot/seed4j-extension");
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource SLUG_SOURCE = MAIN_SOURCE.append(SHARED).append("slug");
 
-  private static final JHipsterSource DEPENDENCIES_MAIN_SOURCE = MAIN_SOURCE.append(SHARED).append(DEPENDENCIES);
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
-  private static final JHipsterSource DEPENDENCIES_TEST_SOURCE = TEST_SOURCE.append(SHARED).append(DEPENDENCIES);
-  private static final JHipsterSource CUCUMBER_SOURCE = from("server/springboot/cucumber");
+  private static final SeedSource DEPENDENCIES_MAIN_SOURCE = MAIN_SOURCE.append(SHARED).append(DEPENDENCIES);
+  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
+  private static final SeedSource DEPENDENCIES_TEST_SOURCE = TEST_SOURCE.append(SHARED).append(DEPENDENCIES);
+  private static final SeedSource CUCUMBER_SOURCE = from("server/springboot/cucumber");
 
   private static final String SRC_MAIN_JAVA = "src/main/java";
 
@@ -105,7 +105,7 @@ public class Seed4JExtensionModuleFactory {
 
   private Consumer<JHipsterModuleBuilder> cucumberBuilder(JHipsterModuleProperties properties) {
     String packagePath = properties.packagePath();
-    JHipsterDestination cucumberDestination = toSrcTestJava().append(packagePath).append("cucumber");
+    SeedDestination cucumberDestination = toSrcTestJava().append(packagePath).append("cucumber");
 
     // @formatter:off
     return builder -> builder
@@ -123,8 +123,8 @@ public class Seed4JExtensionModuleFactory {
   private Consumer<JHipsterModuleBuilder> dependenciesReadersBuilder(JHipsterModuleProperties properties) {
     String packagePath = properties.packagePath();
     String baseName = properties.projectBaseName().capitalized();
-    JHipsterDestination npmMainDestination = toSrcMainJava().append(packagePath).append(SHARED).append(DEPENDENCIES);
-    JHipsterDestination npmTestDestination = toSrcTestJava().append(packagePath).append(SHARED).append(DEPENDENCIES);
+    SeedDestination npmMainDestination = toSrcMainJava().append(packagePath).append(SHARED).append(DEPENDENCIES);
+    SeedDestination npmTestDestination = toSrcTestJava().append(packagePath).append(SHARED).append(DEPENDENCIES);
 
     // @formatter:off
     return builder -> builder
@@ -172,7 +172,7 @@ public class Seed4JExtensionModuleFactory {
   private Consumer<JHipsterModuleBuilder> slugBuilder(JHipsterModuleProperties properties) {
     String packagePath = properties.packagePath();
     String baseName = properties.projectBaseName().capitalized();
-    JHipsterDestination slugDestination = toSrcMainJava().append(packagePath).append(SHARED).append("slug");
+    SeedDestination slugDestination = toSrcMainJava().append(packagePath).append(SHARED).append("slug");
 
     // @formatter:off
     return builder -> builder
@@ -199,7 +199,7 @@ public class Seed4JExtensionModuleFactory {
     return "@SpringBootApplication(scanBasePackageClasses = { Seed4jApp.class, " + mainClassName(properties) + ".class })";
   }
 
-  private JHipsterProjectFilePath mainClassFile(JHipsterModuleProperties properties) {
+  private SeedProjectFilePath mainClassFile(JHipsterModuleProperties properties) {
     return path(SRC_MAIN_JAVA).append(properties.packagePath()).append(mainClassName(properties) + ".java");
   }
 

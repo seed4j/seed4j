@@ -12,7 +12,7 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 import static com.seed4j.module.domain.JHipsterModule.versionSlug;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.JavaDependency;
@@ -22,9 +22,9 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class CucumberAuthenticationModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/cucumberauthentication");
-  private static final JHipsterSource OAUTH2_SOURCE = SOURCE.append("oauth2");
-  private static final JHipsterSource JWT_SOURCE = SOURCE.append("jwt");
+  private static final SeedSource SOURCE = from("server/springboot/cucumberauthentication");
+  private static final SeedSource OAUTH2_SOURCE = SOURCE.append("oauth2");
+  private static final SeedSource JWT_SOURCE = SOURCE.append("jwt");
 
   private static final GroupId JSON_WEBTOKEN_GROUP = groupId("io.jsonwebtoken");
   private static final VersionSlug JSON_WEBTOKEN_VERSION = versionSlug("json-web-token");

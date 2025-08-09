@@ -1,9 +1,9 @@
 package com.seed4j.module.domain.replacement;
 
-import com.seed4j.module.domain.JHipsterProjectFilePath;
+import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.shared.error.domain.Assert;
 
-public record MandatoryFileReplacer(JHipsterProjectFilePath file, MandatoryReplacer replacement) implements ContentReplacer {
+public record MandatoryFileReplacer(SeedProjectFilePath file, MandatoryReplacer replacement) implements ContentReplacer {
   public MandatoryFileReplacer {
     Assert.notNull("file", file);
     Assert.notNull("replacement", replacement);

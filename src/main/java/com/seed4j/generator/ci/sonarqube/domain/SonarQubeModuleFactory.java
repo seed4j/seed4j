@@ -13,8 +13,8 @@ import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.CO
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
@@ -24,8 +24,8 @@ import com.seed4j.shared.error.domain.Assert;
 public class SonarQubeModuleFactory {
 
   private static final String PROPERTIES = "properties";
-  private static final JHipsterSource SOURCE = from("ci/sonarqube");
-  private static final JHipsterDestination SONAR_PROPERTIES_DESTINATION = to("sonar-project.properties");
+  private static final SeedSource SOURCE = from("ci/sonarqube");
+  private static final SeedDestination SONAR_PROPERTIES_DESTINATION = to("sonar-project.properties");
   private static final String SONARQUBE = "sonarqube";
 
   private final DockerImages dockerImages;

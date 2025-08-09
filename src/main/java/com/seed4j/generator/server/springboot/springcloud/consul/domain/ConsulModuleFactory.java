@@ -15,7 +15,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
@@ -27,7 +27,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class ConsulModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/springcloud/consul");
+  private static final SeedSource SOURCE = from("server/springboot/springcloud/consul");
 
   private static final String JWT_BASE_64_SECRET = "jwtBase64Secret";
   private static final GroupId SPRING_CLOUD_GROUP_ID = groupId("org.springframework.cloud");

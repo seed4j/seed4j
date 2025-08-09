@@ -9,20 +9,20 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 import static com.seed4j.module.domain.JHipsterModule.versionSlug;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class ApprovalTestingModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/javatool/approvaltesting");
+  private static final SeedSource SOURCE = from("server/javatool/approvaltesting");
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
-    JHipsterDestination testDestination = toSrcTestJava().append(packagePath);
+    SeedDestination testDestination = toSrcTestJava().append(packagePath);
 
     // @formatter:off
     return moduleBuilder(properties)

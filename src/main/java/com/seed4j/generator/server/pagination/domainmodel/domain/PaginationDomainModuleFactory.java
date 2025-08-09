@@ -9,26 +9,26 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 import static com.seed4j.module.domain.JHipsterModule.versionSlug;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class PaginationDomainModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/pagination/domain");
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
+  private static final SeedSource SOURCE = from("server/pagination/domain");
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
 
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append("shared/pagination");
-    JHipsterDestination mainDomainDestination = mainDestination.append("domain");
+    SeedDestination mainDestination = toSrcMainJava().append(packagePath).append("shared/pagination");
+    SeedDestination mainDomainDestination = mainDestination.append("domain");
 
-    JHipsterDestination testDomainDestination = toSrcTestJava().append(packagePath).append("shared/pagination/domain");
+    SeedDestination testDomainDestination = toSrcTestJava().append(packagePath).append("shared/pagination/domain");
 
     String baseName = properties.projectBaseName().capitalized();
 

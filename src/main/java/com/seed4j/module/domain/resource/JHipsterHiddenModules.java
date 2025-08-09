@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.resource;
 
-import com.seed4j.shared.collection.domain.JHipsterCollections;
+import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Collection;
 import java.util.List;
@@ -13,12 +13,12 @@ public class JHipsterHiddenModules {
   private final Collection<JHipsterModuleTag> tags;
 
   public JHipsterHiddenModules(Collection<String> slugs, Collection<String> tags) {
-    this.slugs = JHipsterCollections.immutable(slugs);
+    this.slugs = SeedCollections.immutable(slugs);
     this.tags = buildTags(tags);
   }
 
   private List<JHipsterModuleTag> buildTags(Collection<String> tags) {
-    return JHipsterCollections.immutable(tags).stream().map(JHipsterModuleTag::new).toList();
+    return SeedCollections.immutable(tags).stream().map(JHipsterModuleTag::new).toList();
   }
 
   public Collection<String> slugs() {

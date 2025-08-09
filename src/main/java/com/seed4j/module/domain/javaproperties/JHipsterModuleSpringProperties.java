@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.javaproperties;
 
 import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
-import com.seed4j.shared.collection.domain.JHipsterCollections;
+import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.*;
 
@@ -11,8 +11,8 @@ public final class JHipsterModuleSpringProperties {
   private final Map<PropertyKey, Comment> comments;
 
   private JHipsterModuleSpringProperties(JHipsterModuleSpringPropertiesBuilder builder) {
-    properties = JHipsterCollections.immutable(builder.properties);
-    comments = JHipsterCollections.immutable(builder.comments);
+    properties = SeedCollections.immutable(builder.properties);
+    comments = SeedCollections.immutable(builder.comments);
   }
 
   public static JHipsterModuleSpringPropertiesBuilder builder(JHipsterModuleBuilder module) {

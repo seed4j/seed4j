@@ -5,13 +5,13 @@ import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.to;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class TsLoaderModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/loader");
+  private static final SeedSource SOURCE = from("client/loader");
   private static final String DESTINATION = "shared/loader/infrastructure/primary";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {

@@ -18,8 +18,8 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
@@ -40,11 +40,11 @@ public class OAuth2ModuleFactory {
   );
   private static final GroupId SPRING_GROUP = groupId("org.springframework.boot");
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/security/oauth2/core");
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
-  private static final JHipsterSource DOCKER_SOURCE = SOURCE.append("docker");
-  private static final JHipsterDestination DOCKER_DESTINATION = to("src/main/docker");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/security/oauth2/core");
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
+  private static final SeedSource DOCKER_SOURCE = SOURCE.append("docker");
+  private static final SeedDestination DOCKER_DESTINATION = to("src/main/docker");
 
   private static final String APPLICATION = "application";
   private static final String PRIMARY = "infrastructure/primary";
@@ -103,8 +103,8 @@ public class OAuth2ModuleFactory {
 
   private static void appendJavaFiles(JHipsterModuleBuilder builder, JHipsterModuleProperties properties) {
     String packagePath = properties.basePackage().path();
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
-    JHipsterDestination testDestination = toSrcTestJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
+    SeedDestination mainDestination = toSrcMainJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
+    SeedDestination testDestination = toSrcTestJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
 
     // @formatter:off
     builder

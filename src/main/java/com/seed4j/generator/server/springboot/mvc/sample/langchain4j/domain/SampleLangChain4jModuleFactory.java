@@ -3,8 +3,8 @@ package com.seed4j.generator.server.springboot.mvc.sample.langchain4j.domain;
 import static com.seed4j.module.domain.JHipsterModule.*;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
@@ -12,7 +12,7 @@ public class SampleLangChain4jModuleFactory {
 
   private static final String SAMPLE = "sample";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/sample/langchain4j");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/sample/langchain4j");
 
   private static final String PRIMARY = "infrastructure/primary";
 
@@ -20,8 +20,8 @@ public class SampleLangChain4jModuleFactory {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append(SAMPLE);
-    JHipsterDestination testDestination = toSrcTestJava().append(packagePath).append(SAMPLE);
+    SeedDestination mainDestination = toSrcMainJava().append(packagePath).append(SAMPLE);
+    SeedDestination testDestination = toSrcTestJava().append(packagePath).append(SAMPLE);
 
     // @formatter:off
     return moduleBuilder(properties)

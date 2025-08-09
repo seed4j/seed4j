@@ -10,7 +10,7 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.VALIDATE;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.JavaDependency;
@@ -20,7 +20,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class CheckstyleModuleFactory {
 
-  private static final JHipsterSource TEMPLATES_SOURCE = from("server/javatool/checkstyle/main");
+  private static final SeedSource TEMPLATES_SOURCE = from("server/javatool/checkstyle/main");
   private static final String CHECKSTYLE = "checkstyle";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {

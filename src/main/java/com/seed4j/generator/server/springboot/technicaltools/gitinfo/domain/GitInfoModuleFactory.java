@@ -10,8 +10,8 @@ import static com.seed4j.module.domain.JHipsterModule.propertyValue;
 import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
@@ -22,15 +22,15 @@ public class GitInfoModuleFactory {
 
   private static final String PACKAGE_INFO = "package-info.java";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/technicaltools/gitinfo");
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource SOURCE = from("server/springboot/technicaltools/gitinfo");
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
   private static final String PRIMARY = "/infrastructure/primary";
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append("wire/gitinfo");
+    SeedDestination mainDestination = toSrcMainJava().append(packagePath).append("wire/gitinfo");
 
     // @formatter:off
     return moduleBuilder(properties)

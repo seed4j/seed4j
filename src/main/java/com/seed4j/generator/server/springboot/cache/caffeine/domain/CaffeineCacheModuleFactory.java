@@ -7,13 +7,13 @@ import static com.seed4j.module.domain.JHipsterModule.groupId;
 import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class CaffeineCacheModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/cache/caffeine");
+  private static final SeedSource SOURCE = from("server/springboot/cache/caffeine");
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);

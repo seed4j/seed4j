@@ -10,9 +10,9 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-public final class JHipsterCollections {
+public final class SeedCollections {
 
-  private JHipsterCollections() {}
+  private SeedCollections() {}
 
   public static <T> Collection<T> immutable(Collection<? extends T> collection) {
     if (collection == null) {

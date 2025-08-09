@@ -9,7 +9,7 @@ import java.nio.file.FileSystems;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterDestinationTest {
+class SeedDestinationTest {
 
   private static final String SEPARATOR = FileSystems.getDefault().getSeparator();
 
@@ -17,19 +17,17 @@ class JHipsterDestinationTest {
 
   @Test
   void shouldAddSlashWhenHappeningElementWithoutSlash() {
-    assertThat(new JHipsterDestination("src/main").append("file").pathInProject(PROJECT).toString()).endsWith(path("src", "main", "file"));
+    assertThat(new SeedDestination("src/main").append("file").pathInProject(PROJECT).toString()).endsWith(path("src", "main", "file"));
   }
 
   @Test
   void shouldDeduplicateSlashes() {
-    assertThat(new JHipsterDestination("src/main/").append("/file").pathInProject(PROJECT).toString()).endsWith(
-      path("src", "main", "file")
-    );
+    assertThat(new SeedDestination("src/main/").append("/file").pathInProject(PROJECT).toString()).endsWith(path("src", "main", "file"));
   }
 
   @Test
   void testToStringShowsDestination() {
-    assertThat(new JHipsterDestination("src")).hasToString("src");
+    assertThat(new SeedDestination("src")).hasToString("src");
   }
 
   private static String path(String... part) {

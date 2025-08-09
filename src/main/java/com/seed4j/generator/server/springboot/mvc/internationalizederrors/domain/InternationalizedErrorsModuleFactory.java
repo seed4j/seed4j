@@ -9,8 +9,8 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
@@ -22,12 +22,12 @@ public class InternationalizedErrorsModuleFactory {
   private static final String DOMAIN = "domain";
   private static final String INFRASTRUCTURE_PRIMARY = "infrastructure/primary";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/internationalized-errors");
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final JHipsterSource RESOURCES_SOURCE = SOURCE.append("resources");
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/internationalized-errors");
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource RESOURCES_SOURCE = SOURCE.append("resources");
+  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
 
-  private static final JHipsterDestination MESSAGES_DESTINATION = to("src/main/resources/messages");
+  private static final SeedDestination MESSAGES_DESTINATION = to("src/main/resources/messages");
 
   public JHipsterModule buildModule(JHipsterModuleProperties properties) {
     Assert.notNull("properties", properties);
@@ -36,16 +36,16 @@ public class InternationalizedErrorsModuleFactory {
     String baseFileName = properties.projectBaseName().kebabCase();
     String packagePath = properties.packagePath();
 
-    JHipsterDestination mainErrorDestination = toSrcMainJava().append(packagePath).append(ERROR);
-    JHipsterDestination mainDomainDestination = mainErrorDestination.append(DOMAIN);
-    JHipsterDestination mainPrimaryDestination = mainErrorDestination.append(INFRASTRUCTURE_PRIMARY);
+    SeedDestination mainErrorDestination = toSrcMainJava().append(packagePath).append(ERROR);
+    SeedDestination mainDomainDestination = mainErrorDestination.append(DOMAIN);
+    SeedDestination mainPrimaryDestination = mainErrorDestination.append(INFRASTRUCTURE_PRIMARY);
 
-    JHipsterDestination testErrorDestination = toSrcTestJava().append(packagePath).append(ERROR);
-    JHipsterDestination testPrimaryDestination = testErrorDestination.append(INFRASTRUCTURE_PRIMARY);
-    JHipsterDestination testDomainDestination = testErrorDestination.append(DOMAIN);
+    SeedDestination testErrorDestination = toSrcTestJava().append(packagePath).append(ERROR);
+    SeedDestination testPrimaryDestination = testErrorDestination.append(INFRASTRUCTURE_PRIMARY);
+    SeedDestination testDomainDestination = testErrorDestination.append(DOMAIN);
 
-    JHipsterDestination errorGeneratorDestination = toSrcTestJava().append(packagePath).append("shared/error_generator");
-    JHipsterDestination errorGeneratorPrimaryDestination = errorGeneratorDestination.append(INFRASTRUCTURE_PRIMARY);
+    SeedDestination errorGeneratorDestination = toSrcTestJava().append(packagePath).append("shared/error_generator");
+    SeedDestination errorGeneratorPrimaryDestination = errorGeneratorDestination.append(INFRASTRUCTURE_PRIMARY);
 
     // @formatter:off
     return moduleBuilder(properties)

@@ -2,24 +2,24 @@ package com.seed4j.module.domain.file;
 
 import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
 import com.seed4j.module.domain.JHipsterModuleUpgrade;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
-import com.seed4j.shared.collection.domain.JHipsterCollections;
+import com.seed4j.module.domain.SeedProjectFilePath;
+import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.*;
 
-public final class JHipsterModuleFiles {
+public final class SeedModuleFiles {
 
-  private final Collection<JHipsterModuleFile> filesToAdd;
-  private final JHipsterFilesToDelete filesToDelete;
-  private final JHipsterFilesToMove filesToMove;
+  private final Collection<SeedModuleFile> filesToAdd;
+  private final SeedFilesToDelete filesToDelete;
+  private final SeedFilesToMove filesToMove;
 
-  private JHipsterModuleFiles(JHipsterModuleFilesBuilder builder) {
-    filesToAdd = JHipsterCollections.immutable(builder.filesToAdd);
-    filesToMove = new JHipsterFilesToMove(builder.filesToMove);
-    filesToDelete = new JHipsterFilesToDelete(builder.filesToDelete);
+  private SeedModuleFiles(JHipsterModuleFilesBuilder builder) {
+    filesToAdd = SeedCollections.immutable(builder.filesToAdd);
+    filesToMove = new SeedFilesToMove(builder.filesToMove);
+    filesToDelete = new SeedFilesToDelete(builder.filesToDelete);
   }
 
-  private JHipsterModuleFiles(JHipsterModuleFiles source, JHipsterModuleUpgrade upgrade) {
+  private SeedModuleFiles(SeedModuleFiles source, JHipsterModuleUpgrade upgrade) {
     Assert.notNull("ignoredFiles", upgrade);
 
     filesToAdd = buildFilesToAdd(source, upgrade.skippedFiles());
@@ -27,7 +27,7 @@ public final class JHipsterModuleFiles {
     filesToMove = source.filesToMove;
   }
 
-  private List<JHipsterModuleFile> buildFilesToAdd(JHipsterModuleFiles source, JHipsterDestinations skippedFiles) {
+  private List<SeedModuleFile> buildFilesToAdd(SeedModuleFiles source, SeedDestinations skippedFiles) {
     return source.filesToAdd
       .stream()
       .filter(file -> skippedFiles.doesNotContain(file.destination()))
@@ -38,28 +38,28 @@ public final class JHipsterModuleFiles {
     return new JHipsterModuleFilesBuilder(module);
   }
 
-  public JHipsterModuleFiles forUpgrade(JHipsterModuleUpgrade upgrade) {
-    return new JHipsterModuleFiles(this, upgrade);
+  public SeedModuleFiles forUpgrade(JHipsterModuleUpgrade upgrade) {
+    return new SeedModuleFiles(this, upgrade);
   }
 
-  public Collection<JHipsterModuleFile> filesToAdd() {
+  public Collection<SeedModuleFile> filesToAdd() {
     return filesToAdd;
   }
 
-  public JHipsterFilesToMove filesToMove() {
+  public SeedFilesToMove filesToMove() {
     return filesToMove;
   }
 
-  public JHipsterFilesToDelete filesToDelete() {
+  public SeedFilesToDelete filesToDelete() {
     return filesToDelete;
   }
 
   public static final class JHipsterModuleFilesBuilder {
 
     private final JHipsterModuleBuilder module;
-    private final Collection<JHipsterModuleFile> filesToAdd = new ArrayList<>();
-    private final Collection<JHipsterFileToMove> filesToMove = new ArrayList<>();
-    private final Collection<JHipsterProjectFilePath> filesToDelete = new ArrayList<>();
+    private final Collection<SeedModuleFile> filesToAdd = new ArrayList<>();
+    private final Collection<SeedFileToMove> filesToMove = new ArrayList<>();
+    private final Collection<SeedProjectFilePath> filesToDelete = new ArrayList<>();
 
     private JHipsterModuleFilesBuilder(JHipsterModuleBuilder module) {
       Assert.notNull("module", module);
@@ -67,29 +67,29 @@ public final class JHipsterModuleFiles {
       this.module = module;
     }
 
-    public JHipsterModuleFilesBuilder add(JHipsterSource source, JHipsterDestination destination) {
-      filesToAdd.add(new JHipsterModuleFile(new JHipsterFileContent(source), destination, false));
+    public JHipsterModuleFilesBuilder add(SeedSource source, SeedDestination destination) {
+      filesToAdd.add(new SeedModuleFile(new SeedFileContent(source), destination, false));
 
       return this;
     }
 
-    public JHipsterModuleFilesBuilder addExecutable(JHipsterSource source, JHipsterDestination destination) {
-      filesToAdd.add(new JHipsterModuleFile(new JHipsterFileContent(source), destination, true));
+    public JHipsterModuleFilesBuilder addExecutable(SeedSource source, SeedDestination destination) {
+      filesToAdd.add(new SeedModuleFile(new SeedFileContent(source), destination, true));
 
       return this;
     }
 
-    public JHipsterModuleFileBatchBuilder batch(JHipsterSource source, JHipsterDestination destination) {
+    public JHipsterModuleFileBatchBuilder batch(SeedSource source, SeedDestination destination) {
       return new JHipsterModuleFileBatchBuilder(source, destination, this);
     }
 
-    public JHipsterModuleFilesBuilder move(JHipsterProjectFilePath source, JHipsterDestination destination) {
-      filesToMove.add(new JHipsterFileToMove(source, destination));
+    public JHipsterModuleFilesBuilder move(SeedProjectFilePath source, SeedDestination destination) {
+      filesToMove.add(new SeedFileToMove(source, destination));
 
       return this;
     }
 
-    public JHipsterModuleFilesBuilder delete(JHipsterProjectFilePath path) {
+    public JHipsterModuleFilesBuilder delete(SeedProjectFilePath path) {
       Assert.notNull("path", path);
 
       filesToDelete.add(path);
@@ -101,18 +101,18 @@ public final class JHipsterModuleFiles {
       return module;
     }
 
-    public JHipsterModuleFiles build() {
-      return new JHipsterModuleFiles(this);
+    public SeedModuleFiles build() {
+      return new SeedModuleFiles(this);
     }
   }
 
   public static final class JHipsterModuleFileBatchBuilder {
 
-    private final JHipsterSource source;
-    private final JHipsterDestination destination;
+    private final SeedSource source;
+    private final SeedDestination destination;
     private final JHipsterModuleFilesBuilder files;
 
-    private JHipsterModuleFileBatchBuilder(JHipsterSource source, JHipsterDestination destination, JHipsterModuleFilesBuilder files) {
+    private JHipsterModuleFileBatchBuilder(SeedSource source, SeedDestination destination, JHipsterModuleFilesBuilder files) {
       this.source = source;
       this.destination = destination;
       this.files = files;
@@ -145,7 +145,7 @@ public final class JHipsterModuleFiles {
       return this;
     }
 
-    private JHipsterModuleFileBatchBuilder add(JHipsterSource source, JHipsterDestination destination) {
+    private JHipsterModuleFileBatchBuilder add(SeedSource source, SeedDestination destination) {
       files.add(source, destination);
 
       return this;

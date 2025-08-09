@@ -14,15 +14,15 @@ import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.CO
 import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.REACT;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class ReactI18nModuleFactory {
 
-  private static final JHipsterSource APP_SOURCE = from("client/common/i18n");
-  private static final JHipsterSource HOME_CONTEXT_SOURCE = from("client/common/i18n/app");
-  private static final JHipsterSource ASSETS_SOURCE = from("client/common/i18n/app/locales");
+  private static final SeedSource APP_SOURCE = from("client/common/i18n");
+  private static final SeedSource HOME_CONTEXT_SOURCE = from("client/common/i18n/app");
+  private static final SeedSource ASSETS_SOURCE = from("client/common/i18n/app/locales");
 
   private static final String INDEX = "src/main/webapp/app/";
   private static final String INDEX_TEST = "src/test/";

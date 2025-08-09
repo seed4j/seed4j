@@ -9,17 +9,17 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class InitModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("init");
-  private static final JHipsterDestination DESTINATION = to(".");
-  private static final JHipsterSource SOURCE_COMMON = from("client/common");
+  private static final SeedSource SOURCE = from("init");
+  private static final SeedDestination DESTINATION = to(".");
+  private static final SeedSource SOURCE_COMMON = from("client/common");
 
   private final NodeVersions nodeVersions;
 

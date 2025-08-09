@@ -2,13 +2,13 @@ package com.seed4j.module.infrastructure.secondary;
 
 import static java.nio.file.attribute.PosixFilePermission.*;
 
-import com.seed4j.module.domain.JHipsterProjectFilePath;
 import com.seed4j.module.domain.ProjectFiles;
-import com.seed4j.module.domain.file.JHipsterFileToMove;
-import com.seed4j.module.domain.file.JHipsterFilesToDelete;
-import com.seed4j.module.domain.file.JHipsterFilesToMove;
-import com.seed4j.module.domain.file.JHipsterTemplatedFile;
-import com.seed4j.module.domain.file.JHipsterTemplatedFiles;
+import com.seed4j.module.domain.SeedProjectFilePath;
+import com.seed4j.module.domain.file.SeedFileToMove;
+import com.seed4j.module.domain.file.SeedFilesToDelete;
+import com.seed4j.module.domain.file.SeedFilesToMove;
+import com.seed4j.module.domain.file.SeedTemplatedFile;
+import com.seed4j.module.domain.file.SeedTemplatedFiles;
 import com.seed4j.module.domain.file.TemplateRenderer;
 import com.seed4j.module.domain.properties.JHipsterProjectFolder;
 import com.seed4j.shared.error.domain.GeneratorException;
@@ -42,11 +42,11 @@ public class FileSystemJHipsterModuleFiles {
     return Set.of(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ, GROUP_WRITE, GROUP_EXECUTE);
   }
 
-  public void create(JHipsterProjectFolder projectFolder, JHipsterTemplatedFiles files) {
+  public void create(JHipsterProjectFolder projectFolder, SeedTemplatedFiles files) {
     files.get().forEach(writeFile(projectFolder));
   }
 
-  private Consumer<JHipsterTemplatedFile> writeFile(JHipsterProjectFolder projectFolder) {
+  private Consumer<SeedTemplatedFile> writeFile(JHipsterProjectFolder projectFolder) {
     return file -> {
       Path filePath = file.path(projectFolder);
 
@@ -64,7 +64,7 @@ public class FileSystemJHipsterModuleFiles {
   }
 
   @ExcludeFromGeneratedCodeCoverage(reason = "Ensuring posix FS will be a nightmare :)")
-  private void setExecutable(JHipsterTemplatedFile file, Path filePath) throws IOException {
+  private void setExecutable(SeedTemplatedFile file, Path filePath) throws IOException {
     if (isNotPosix()) {
       return;
     }
@@ -81,11 +81,11 @@ public class FileSystemJHipsterModuleFiles {
     return !FileSystems.getDefault().supportedFileAttributeViews().contains("posix");
   }
 
-  void move(JHipsterProjectFolder folder, JHipsterFilesToMove filesToMove) {
+  void move(JHipsterProjectFolder folder, SeedFilesToMove filesToMove) {
     filesToMove.stream().forEach(moveFile(folder));
   }
 
-  private Consumer<JHipsterFileToMove> moveFile(JHipsterProjectFolder folder) {
+  private Consumer<SeedFileToMove> moveFile(JHipsterProjectFolder folder) {
     return file -> {
       String filename = file.source().get();
       Path source = folder.filePath(filename);
@@ -115,11 +115,11 @@ public class FileSystemJHipsterModuleFiles {
     }
   }
 
-  void delete(JHipsterProjectFolder folder, JHipsterFilesToDelete filesToDelete) {
+  void delete(JHipsterProjectFolder folder, SeedFilesToDelete filesToDelete) {
     filesToDelete.stream().forEach(deleteFile(folder));
   }
 
-  private Consumer<JHipsterProjectFilePath> deleteFile(JHipsterProjectFolder folder) {
+  private Consumer<SeedProjectFilePath> deleteFile(JHipsterProjectFolder folder) {
     return file -> {
       Path path = folder.filePath(file.path());
 

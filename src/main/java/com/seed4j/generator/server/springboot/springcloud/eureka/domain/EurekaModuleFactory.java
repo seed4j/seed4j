@@ -13,7 +13,7 @@ import static com.seed4j.module.domain.JHipsterModule.versionSlug;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.base64.domain.Base64Utils;
@@ -25,8 +25,8 @@ public class EurekaModuleFactory {
   private static final String JWT_BASE_64_SECRET = "jwtBase64Secret";
   private static final PropertyValue TRUE_VALUE = propertyValue(true);
   private static final PropertyValue FALSE_VALUE = propertyValue(false);
-  private static final JHipsterSource SPRING_CLOUD_SOURCE = from("server/springboot/springcloud/configclient");
-  private static final JHipsterSource EUREKA_SOURCE = from("server/springboot/springcloud/eureka");
+  private static final SeedSource SPRING_CLOUD_SOURCE = from("server/springboot/springcloud/configclient");
+  private static final SeedSource EUREKA_SOURCE = from("server/springboot/springcloud/eureka");
 
   private final DockerImages dockerImages;
 

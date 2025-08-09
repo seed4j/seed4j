@@ -10,14 +10,14 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainResources;
 import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SampleCassandraPersistenceModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/sample/cassandrapersistence");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/sample/cassandrapersistence");
   private static final String SECONDARY = "infrastructure/secondary";
   private static final String SECONDARY_DESTINATION = "sample/" + SECONDARY;
 
@@ -59,7 +59,7 @@ public class SampleCassandraPersistenceModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterDestination toSrcMainResourcesCql() {
+  private SeedDestination toSrcMainResourcesCql() {
     return toSrcMainResources().append("config").append("cql");
   }
 }

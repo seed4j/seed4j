@@ -3,32 +3,32 @@ package com.seed4j.module.domain;
 import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
-import com.seed4j.shared.collection.domain.JHipsterCollections;
+import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public final class JHipsterModuleContext {
+public final class SeedModuleContext {
 
   private final Map<String, Object> context;
 
-  private JHipsterModuleContext(Map<String, Object> context) {
-    this.context = JHipsterCollections.immutable(context);
+  private SeedModuleContext(Map<String, Object> context) {
+    this.context = SeedCollections.immutable(context);
   }
 
-  public static JHipsterModuleContext empty() {
-    return new JHipsterModuleContext(new HashMap<>());
+  public static SeedModuleContext empty() {
+    return new SeedModuleContext(new HashMap<>());
   }
 
-  public JHipsterModuleContext withJavaBuildTool(JavaBuildTool javaBuildTool) {
+  public SeedModuleContext withJavaBuildTool(JavaBuildTool javaBuildTool) {
     Map<String, Object> additionalValues = Map.of(
       JHipsterModuleProperties.JAVA_BUILD_TOOL,
       javaBuildTool.name().toLowerCase(Locale.ROOT),
       JHipsterModuleProperties.PROJECT_BUILD_DIRECTORY,
       javaBuildTool.buildDirectory().get()
     );
-    return new JHipsterModuleContext(JHipsterCollections.concat(context, additionalValues));
+    return new SeedModuleContext(SeedCollections.concat(context, additionalValues));
   }
 
   public static JHipsterModuleContextBuilder builder(JHipsterModuleBuilder module) {
@@ -75,8 +75,8 @@ public final class JHipsterModuleContext {
       return this;
     }
 
-    public JHipsterModuleContext build() {
-      return new JHipsterModuleContext(this.context);
+    public SeedModuleContext build() {
+      return new SeedModuleContext(this.context);
     }
 
     public JHipsterModuleBuilder and() {

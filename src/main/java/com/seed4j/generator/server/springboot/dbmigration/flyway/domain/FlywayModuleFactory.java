@@ -9,7 +9,7 @@ import static com.seed4j.module.domain.JHipsterModule.propertyValue;
 import static com.seed4j.module.domain.JHipsterModule.to;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 
 public class FlywayModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/dbmigration/flyway/resources");
+  private static final SeedSource SOURCE = from("server/springboot/dbmigration/flyway/resources");
 
   private static final DateTimeFormatter FILE_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC);
 

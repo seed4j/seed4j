@@ -2,7 +2,7 @@ package com.seed4j.module.domain.replacement;
 
 import com.seed4j.module.domain.GeneratedProjectRepository;
 import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
+import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.properties.JHipsterProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
@@ -57,7 +57,7 @@ public final class JHipsterModuleOptionalReplacementsFactory extends JHipsterMod
     }
 
     @Override
-    public JHipsterModuleFileOptionalReplacementsFactoryBuilder in(JHipsterProjectFilePath file) {
+    public JHipsterModuleFileOptionalReplacementsFactoryBuilder in(SeedProjectFilePath file) {
       return new JHipsterModuleFileOptionalReplacementsFactoryBuilder(this, file);
     }
 
@@ -75,7 +75,7 @@ public final class JHipsterModuleOptionalReplacementsFactory extends JHipsterMod
 
     private JHipsterModuleFileOptionalReplacementsFactoryBuilder(
       JHipsterModuleOptionalReplacementsFactoryBuilder replacements,
-      JHipsterProjectFilePath file
+      SeedProjectFilePath file
     ) {
       super(replacements, file);
     }
@@ -87,7 +87,7 @@ public final class JHipsterModuleOptionalReplacementsFactory extends JHipsterMod
     }
 
     @Override
-    protected ContentReplacer buildReplacer(JHipsterProjectFilePath file, ElementReplacer toReplace, String replacement) {
+    protected ContentReplacer buildReplacer(SeedProjectFilePath file, ElementReplacer toReplace, String replacement) {
       return new OptionalFileReplacer(file, new OptionalReplacer(toReplace, replacement));
     }
   }

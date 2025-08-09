@@ -10,7 +10,7 @@ import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
 import static com.seed4j.module.domain.JHipsterModule.to;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
@@ -22,7 +22,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class MavenModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("buildtool/maven");
+  private static final SeedSource SOURCE = from("buildtool/maven");
 
   private static final GroupId APACHE_PLUGINS_GROUP = groupId("org.apache.maven.plugins");
   private static final ArtifactId ENFORCER_ARTIFACT_ID = artifactId("maven-enforcer-plugin");

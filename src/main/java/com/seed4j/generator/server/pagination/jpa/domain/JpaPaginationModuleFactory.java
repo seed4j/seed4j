@@ -7,16 +7,16 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JpaPaginationModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/pagination/jpa");
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
+  private static final SeedSource SOURCE = from("server/pagination/jpa");
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
 
   private static final String SECONDARY_DESTINATION = "shared/pagination/infrastructure/secondary";
 
@@ -27,8 +27,8 @@ public class JpaPaginationModuleFactory {
 
     String packagePath = properties.packagePath();
 
-    JHipsterDestination testDestination = toSrcTestJava().append(packagePath).append(SECONDARY_DESTINATION);
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath).append(SECONDARY_DESTINATION);
+    SeedDestination testDestination = toSrcTestJava().append(packagePath).append(SECONDARY_DESTINATION);
+    SeedDestination mainDestination = toSrcMainJava().append(packagePath).append(SECONDARY_DESTINATION);
 
     // @formatter:off
     return moduleBuilder(properties)

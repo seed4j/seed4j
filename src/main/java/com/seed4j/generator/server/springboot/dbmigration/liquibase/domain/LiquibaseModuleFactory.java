@@ -18,7 +18,7 @@ import static com.seed4j.module.domain.properties.SpringConfigurationFormat.YAML
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
@@ -26,7 +26,7 @@ import com.seed4j.shared.error.domain.Assert;
 
 public class LiquibaseModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/dbmigration/liquibase");
+  private static final SeedSource SOURCE = from("server/springboot/dbmigration/liquibase");
 
   private static final String LIQUIBASE_SECONDARY = "wire/liquibase/infrastructure/secondary";
 

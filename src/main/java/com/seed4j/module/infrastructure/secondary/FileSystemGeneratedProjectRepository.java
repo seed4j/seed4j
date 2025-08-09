@@ -2,8 +2,8 @@ package com.seed4j.module.infrastructure.secondary;
 
 import com.seed4j.module.domain.GeneratedProjectRepository;
 import com.seed4j.module.domain.JHipsterFileMatcher;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
 import com.seed4j.module.domain.JHipsterProjectFilesPaths;
+import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.properties.JHipsterProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
@@ -27,7 +27,7 @@ class FileSystemGeneratedProjectRepository implements GeneratedProjectRepository
           .filter(file -> !Files.isDirectory(file))
           .map(Path::toString)
           .map(file -> file.substring(folder.get().length() + 1))
-          .map(JHipsterProjectFilePath::new)
+          .map(SeedProjectFilePath::new)
           .filter(files::match)
           .toList()
       );

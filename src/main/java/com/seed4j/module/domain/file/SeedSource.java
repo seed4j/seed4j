@@ -4,13 +4,13 @@ import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Path;
 import org.apache.commons.io.FilenameUtils;
 
-public class JHipsterSource {
+public class SeedSource {
 
   private static final String MUSTACHE_EXTENSION = ".mustache";
 
   private final Path source;
 
-  public JHipsterSource(Path source) {
+  public SeedSource(Path source) {
     Assert.notNull("source", source);
 
     this.source = source;
@@ -20,7 +20,7 @@ public class JHipsterSource {
     return source;
   }
 
-  public JHipsterSource template(String file) {
+  public SeedSource template(String file) {
     Assert.notBlank("file", file);
 
     if (isTemplate(file)) {
@@ -30,12 +30,12 @@ public class JHipsterSource {
     return file(file + MUSTACHE_EXTENSION);
   }
 
-  public JHipsterSource append(String element) {
+  public SeedSource append(String element) {
     return file(element);
   }
 
-  public JHipsterSource file(String file) {
-    return new JHipsterSource(source.resolve(file));
+  public SeedSource file(String file) {
+    return new SeedSource(source.resolve(file));
   }
 
   public String extension() {

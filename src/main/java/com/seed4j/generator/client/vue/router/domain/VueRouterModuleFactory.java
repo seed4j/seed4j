@@ -5,18 +5,18 @@ import static com.seed4j.module.domain.JHipsterModule.*;
 import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.VUE;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import java.util.function.Consumer;
 
 public class VueRouterModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/vue");
-  private static final JHipsterSource APP_SOURCE = from("client/vue/webapp/app");
+  private static final SeedSource SOURCE = from("client/vue");
+  private static final SeedSource APP_SOURCE = from("client/vue/webapp/app");
 
-  private static final JHipsterDestination MAIN_DESTINATION = to("src/main/webapp/app");
-  private static final JHipsterDestination TEST_DESTINATION = to("src/test/webapp");
+  private static final SeedDestination MAIN_DESTINATION = to("src/main/webapp/app");
+  private static final SeedDestination TEST_DESTINATION = to("src/test/webapp");
 
   private static final String IMPORT_NEEDLE = "// seed4j-needle-main-ts-import";
   private static final String PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";

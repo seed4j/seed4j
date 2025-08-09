@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.javabuildprofile;
 
-import com.seed4j.module.domain.buildproperties.JHipsterModuleBuildProperties;
-import com.seed4j.module.domain.buildproperties.JHipsterModuleBuildProperties.JHipsterModuleBuildPropertiesBuilder;
+import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties;
+import com.seed4j.module.domain.buildproperties.SeedModuleBuildProperties.JHipsterModuleBuildPropertiesBuilder;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation.BuildProfileActivationBuilder;
 import com.seed4j.module.domain.javabuildprofile.JHipsterModuleGradleProfilePlugins.JHipsterModuleGradleProfilePluginBuilder;
 import com.seed4j.module.domain.javabuildprofile.JHipsterModuleJavaBuildProfiles.JHipsterModuleJavaBuildProfilesBuilder;
@@ -16,7 +16,7 @@ public final class JHipsterModuleJavaBuildProfile {
 
   private final BuildProfileId buildProfileId;
   private final Optional<BuildProfileActivation> activation;
-  private final JHipsterModuleBuildProperties properties;
+  private final SeedModuleBuildProperties properties;
   private final JHipsterModuleMavenPlugins mavenPlugins;
   private final JHipsterModuleGradleProfilePlugins gradleProfilePlugins;
   private final JHipsterModuleJavaDependencies javaDependencies;
@@ -50,7 +50,7 @@ public final class JHipsterModuleJavaBuildProfile {
     return activation;
   }
 
-  public JHipsterModuleBuildProperties properties() {
+  public SeedModuleBuildProperties properties() {
     return properties;
   }
 
@@ -72,7 +72,7 @@ public final class JHipsterModuleJavaBuildProfile {
     private final BuildProfileId buildProfileId;
     private BuildProfileActivation activation;
     private final JHipsterModuleBuildPropertiesBuilder<JHipsterModuleJavaBuildProfileBuilder> propertiesBuilder =
-      JHipsterModuleBuildProperties.builder(this);
+      SeedModuleBuildProperties.builder(this);
     private final JHipsterModuleMavenPluginsBuilder<JHipsterModuleJavaBuildProfileBuilder> mavenPluginsBuilder =
       JHipsterModuleMavenPlugins.builder(this);
     private final JHipsterModuleGradleProfilePluginBuilder gradleProfilePluginsBuilder = JHipsterModuleGradleProfilePlugins.builder(this);

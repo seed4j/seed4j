@@ -1,14 +1,14 @@
 package com.seed4j.generator.ci.github.actions.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.gradleBuildFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.gradleBuildFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -30,7 +30,7 @@ class GitHubActionsModuleFactoryTest {
 
   @Test
   void shouldBuildGitHubActionsMavenModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
     mockNodeVersion();
 
     SeedModule module = factory.buildGitHubActionsMavenModule(properties);
@@ -44,7 +44,7 @@ class GitHubActionsModuleFactoryTest {
 
   @Test
   void shouldBuildGitHubActionsGradleModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
     mockNodeVersion();
 
     SeedModule module = factory.buildGitHubActionsGradleModule(properties);

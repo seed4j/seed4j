@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.pagination.domainmodel.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JAVA_BASE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PAGINATION_DOMAIN;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JAVA_BASE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PAGINATION_DOMAIN;
 
 import com.seed4j.generator.server.pagination.domainmodel.application.PaginationDomainApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

@@ -1,10 +1,10 @@
 package com.seed4j.module.domain.landscape;
 
-import static com.seed4j.module.domain.JHipsterModulesFixture.*;
-import static com.seed4j.module.domain.landscape.JHipsterLandscapeFixture.*;
-import static com.seed4j.module.domain.landscape.JHipsterLandscapeFixture.moduleResources;
-import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.*;
+import static com.seed4j.module.domain.SeedModulesFixture.*;
+import static com.seed4j.module.domain.landscape.SeedLandscapeFixture.*;
+import static com.seed4j.module.domain.landscape.SeedLandscapeFixture.moduleResources;
 import static com.seed4j.module.domain.resource.SeedModuleRank.*;
+import static com.seed4j.module.domain.resource.SeedModulesResourceFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;

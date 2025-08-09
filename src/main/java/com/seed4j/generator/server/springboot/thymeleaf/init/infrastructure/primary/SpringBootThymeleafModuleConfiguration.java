@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.thymeleaf.init.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_THYMELEAF;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_THYMELEAF;
 
 import com.seed4j.generator.server.springboot.thymeleaf.init.application.SpringBootThymeleafApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

@@ -1,10 +1,10 @@
 package com.seed4j.generator.client.tools.playwright.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CLIENT_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.E2E_TESTS;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.FRONTEND_COMPONENT_TESTS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PLAYWRIGHT_COMPONENT_TESTS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PLAYWRIGHT_E2E;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CLIENT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.E2E_TESTS;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.FRONTEND_COMPONENT_TESTS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PLAYWRIGHT_COMPONENT_TESTS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PLAYWRIGHT_E2E;
 
 import com.seed4j.generator.client.tools.playwright.application.PlaywrightApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

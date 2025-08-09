@@ -1,19 +1,19 @@
 package com.seed4j.generator.ci.sonarqube.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.JHipsterModuleAsserter;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.gradleBuildFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.gradleLibsVersionFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.packageJsonFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.readmeFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.SeedModuleAsserter;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.gradleBuildFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.gradleLibsVersionFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.readmeFile;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -64,7 +64,7 @@ class SonarQubeModuleFactoryTest {
         .containing("sonar.javascript.lcov.reportPaths=target/test-results/lcov.info");
     }
 
-    private JHipsterModuleAsserter assertCommonModule(SeedModule module) {
+    private SeedModuleAsserter assertCommonModule(SeedModule module) {
       return assertThatModuleWithFiles(module, pomFile(), readmeFile())
         .hasFile("pom.xml")
         .containing(
@@ -158,7 +158,7 @@ class SonarQubeModuleFactoryTest {
         .containing("sonar.javascript.lcov.reportPaths=build/test-results/lcov.info");
     }
 
-    private JHipsterModuleAsserter assertCommonModule(SeedModule module) {
+    private SeedModuleAsserter assertCommonModule(SeedModule module) {
       return assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile(), readmeFile())
         .hasFile("gradle/libs.versions.toml")
         .containing("sonarqube = \"")
@@ -220,7 +220,7 @@ class SonarQubeModuleFactoryTest {
     void shouldBuildTypescriptModule() {
       mockSonarqubeImage();
 
-      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
       SeedModule module = factory.buildTypescriptModule(properties);
 
@@ -250,7 +250,7 @@ class SonarQubeModuleFactoryTest {
   }
 
   private SeedModuleProperties properties() {
-    return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    return SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();

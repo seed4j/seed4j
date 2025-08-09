@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.cache.ehcache.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JCACHE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.EHCACHE_JAVA_CONFIG;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.EHCACHE_XML_CONFIG;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_CACHE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JCACHE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.EHCACHE_JAVA_CONFIG;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.EHCACHE_XML_CONFIG;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CACHE;
 
 import com.seed4j.generator.server.springboot.cache.ehcache.application.EhcacheApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

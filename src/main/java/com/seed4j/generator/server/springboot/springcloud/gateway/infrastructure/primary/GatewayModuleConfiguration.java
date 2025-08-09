@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.springcloud.gateway.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GATEWAY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_WEBFLUX_EMPTY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_CLOUD;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GATEWAY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_WEBFLUX_EMPTY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_CLOUD;
 
 import com.seed4j.generator.server.springboot.springcloud.gateway.application.GatewayApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

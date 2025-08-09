@@ -1,19 +1,19 @@
 package com.seed4j.generator.server.springboot.database.datasource.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.file;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.file;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.docker.DockerImageName;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
-import com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions;
+import com.seed4j.module.infrastructure.secondary.SeedModulesAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,7 +32,7 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildPostgreSQLModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -91,7 +91,7 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildMariadbModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -156,7 +156,7 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildMysqlModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -223,7 +223,7 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildMssqlModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -293,7 +293,7 @@ class DatasourceModuleFactoryTest {
       );
   }
 
-  private JHipsterModulesAssertions.ModuleFile integrationTestAnnotation() {
+  private SeedModulesAssertions.ModuleFile integrationTestAnnotation() {
     return file("src/test/resources/projects/files/IntegrationTest.java", "src/test/java/com/seed4j/growth/IntegrationTest.java");
   }
 }

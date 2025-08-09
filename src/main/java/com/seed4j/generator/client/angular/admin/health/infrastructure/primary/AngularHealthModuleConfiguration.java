@@ -1,8 +1,8 @@
 package com.seed4j.generator.client.angular.admin.health.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.ANGULAR_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.ANGULAR_HEALTH;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_ACTUATOR;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_HEALTH;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_ACTUATOR;
 
 import com.seed4j.generator.client.angular.admin.health.application.AngularHealthApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

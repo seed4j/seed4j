@@ -1,8 +1,8 @@
 package com.seed4j.generator.client.angular.security.oauth2keycloak.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.ANGULAR_AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.ANGULAR_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.ANGULAR_OAUTH_2;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.ANGULAR_AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_OAUTH_2;
 
 import com.seed4j.generator.client.angular.security.oauth2keycloak.application.AngularOAuth2KeycloakApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

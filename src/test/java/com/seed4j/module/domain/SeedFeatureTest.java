@@ -6,7 +6,7 @@ import com.seed4j.UnitTest;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterFeatureTest {
+class SeedFeatureTest {
 
   @Test
   void shouldNotBuildWithInvalidFeaturePattern() {

@@ -49,8 +49,8 @@ import com.seed4j.module.domain.replacement.MandatoryFileReplacer;
 import com.seed4j.module.domain.replacement.MandatoryReplacer;
 import com.seed4j.module.domain.replacement.RegexNeedleBeforeReplacer;
 import com.seed4j.module.domain.replacement.RegexReplacer;
-import com.seed4j.module.infrastructure.secondary.FileSystemJHipsterModuleFiles;
 import com.seed4j.module.infrastructure.secondary.FileSystemReplacer;
+import com.seed4j.module.infrastructure.secondary.FileSystemSeedModuleFiles;
 import com.seed4j.module.infrastructure.secondary.javadependency.JavaDependenciesCommandHandler;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
@@ -122,13 +122,13 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
   private final SeedModuleContext context;
   private final VersionsCatalog versionsCatalog;
   private final FileSystemReplacer fileReplacer;
-  private final FileSystemJHipsterModuleFiles files;
+  private final FileSystemSeedModuleFiles files;
 
   public GradleCommandHandler(
     Indentation indentation,
     SeedProjectFolder projectFolder,
     SeedModuleContext context,
-    FileSystemJHipsterModuleFiles files,
+    FileSystemSeedModuleFiles files,
     FileSystemReplacer fileReplacer
   ) {
     Assert.notNull("indentation", indentation);

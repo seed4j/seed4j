@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.mvc.web.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_MVC_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LOGS_SPY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_MVC_EMPTY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_TOMCAT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_UNDERTOW;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_MVC_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LOGS_SPY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_MVC_EMPTY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_TOMCAT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_UNDERTOW;
 
 import com.seed4j.generator.server.springboot.mvc.web.application.SpringBootMvcApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

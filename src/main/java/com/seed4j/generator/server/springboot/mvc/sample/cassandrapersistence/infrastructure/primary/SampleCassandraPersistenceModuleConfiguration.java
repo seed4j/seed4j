@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.mvc.sample.cassandrapersistence.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SAMPLE_PERSISTENCE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.CASSANDRA_MIGRATION;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_CASSANDRA_PERSISTENCE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_FEATURE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SAMPLE_PERSISTENCE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CASSANDRA_MIGRATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SAMPLE_CASSANDRA_PERSISTENCE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SAMPLE_FEATURE;
 
 import com.seed4j.generator.server.springboot.mvc.sample.cassandrapersistence.application.SampleCassandraPersistenceApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

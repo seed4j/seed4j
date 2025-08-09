@@ -16,12 +16,12 @@ In fact, you don't just need to create one `JHipsterModule`, you'll need a facto
 So, as this is the business of Seed4J you probably want to create a `com.seed4j.generator.my_module.domain` package. And you can start with a simple test:
 
 ```java
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 

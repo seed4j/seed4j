@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.tikui.domain;
 
-import static com.seed4j.module.domain.JHipsterModulesFixture.*;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.domain.SeedModulesFixture.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
@@ -139,7 +139,7 @@ class TikuiModuleFactoryTest {
     return Set.of("_" + name + ".scss", name + ".code.pug", name + ".md", name + ".mixin.pug", name + ".render.pug").toArray(String[]::new);
   }
 
-  private static JHipsterModuleAsserter assertThatTikuiModule(ModuleFile proxyFile, ModuleFile indexFile) {
+  private static SeedModuleAsserter assertThatTikuiModule(ModuleFile proxyFile, ModuleFile indexFile) {
     SeedModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     SeedModule module = factory.buildModule(properties);

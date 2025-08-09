@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.javatool.jacoco.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CODE_COVERAGE_JAVA;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JACOCO;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JACOCO_WITH_MIN_COVERAGE_CHECK;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CODE_COVERAGE_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JACOCO;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JACOCO_WITH_MIN_COVERAGE_CHECK;
 
 import com.seed4j.generator.server.javatool.jacoco.application.JacocoApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

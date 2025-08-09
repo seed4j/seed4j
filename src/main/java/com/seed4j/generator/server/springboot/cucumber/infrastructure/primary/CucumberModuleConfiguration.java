@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.cucumber.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JPA_PERSISTENCE;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_BOOT_CUCUMBER;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_MVC_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_CUCUMBER_JPA_RESET;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_CUCUMBER_MVC;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_CUCUMBER_WEBFLUX;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_WEBFLUX_NETTY;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JPA_PERSISTENCE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_BOOT_CUCUMBER;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_MVC_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CUCUMBER_JPA_RESET;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CUCUMBER_MVC;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CUCUMBER_WEBFLUX;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_WEBFLUX_NETTY;
 
 import com.seed4j.generator.server.springboot.cucumber.application.CucumberApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

@@ -1,15 +1,15 @@
 package com.seed4j.generator.server.springboot.docker.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.DOCKERFILE;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DOCKERFILE_GRADLE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DOCKERFILE_MAVEN;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GRADLE_WRAPPER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JIB;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MAVEN_JAVA;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MAVEN_WRAPPER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_DOCKER_COMPOSE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.DOCKERFILE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DOCKERFILE_GRADLE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DOCKERFILE_MAVEN;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GRADLE_WRAPPER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JIB;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MAVEN_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MAVEN_WRAPPER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_DOCKER_COMPOSE;
 
 import com.seed4j.generator.server.springboot.docker.application.SpringBootDockerApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

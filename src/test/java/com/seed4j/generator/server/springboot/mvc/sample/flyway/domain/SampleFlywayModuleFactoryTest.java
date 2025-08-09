@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.mvc.sample.flyway.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModule;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModule;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class SampleFlywayModuleFactoryTest {
 
   @Test
   void shouldBuildModuleForPostGreSQL() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .put("date", "2021-12-03T10:15:30.00Z")
       .build();
 
@@ -29,7 +29,7 @@ class SampleFlywayModuleFactoryTest {
 
   @Test
   void shouldBuildModuleForNotPostGreSQL() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .put("date", "2021-12-03T10:15:30.00Z")
       .build();
 

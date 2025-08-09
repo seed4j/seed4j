@@ -1,6 +1,6 @@
 package com.seed4j.generator.setup.infinitest.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.INFINITEST_FILTERS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INFINITEST_FILTERS;
 
 import com.seed4j.generator.setup.infinitest.application.InfinitestApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleResource;

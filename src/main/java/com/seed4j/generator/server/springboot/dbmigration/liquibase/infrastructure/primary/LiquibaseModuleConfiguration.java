@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.dbmigration.liquibase.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.DATABASE_MIGRATION;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.DATASOURCE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LIQUIBASE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LIQUIBASE_ASYNC;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LIQUIBASE_LINTER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LOGS_SPY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MAVEN_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.DATABASE_MIGRATION;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.DATASOURCE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LIQUIBASE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LIQUIBASE_ASYNC;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LIQUIBASE_LINTER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LOGS_SPY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MAVEN_JAVA;
 
 import com.seed4j.generator.server.springboot.dbmigration.liquibase.application.LiquibaseApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

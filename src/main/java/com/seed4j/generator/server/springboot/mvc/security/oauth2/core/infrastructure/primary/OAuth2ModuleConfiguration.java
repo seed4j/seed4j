@@ -1,10 +1,10 @@
 package com.seed4j.generator.server.springboot.mvc.security.oauth2.core.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_MVC_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JAVA_BASE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JAVA_MEMOIZERS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_OAUTH_2;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_MVC_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JAVA_BASE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JAVA_MEMOIZERS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_OAUTH_2;
 
 import com.seed4j.generator.server.springboot.mvc.security.oauth2.core.application.OAuth2ApplicationService;
 import com.seed4j.generator.server.springboot.mvc.security.oauth2.core.domain.OAuth2ModuleFactory;

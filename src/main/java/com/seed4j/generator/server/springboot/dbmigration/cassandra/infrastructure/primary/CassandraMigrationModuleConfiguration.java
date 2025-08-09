@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.dbmigration.cassandra.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.CASSANDRA;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.CASSANDRA_MIGRATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CASSANDRA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CASSANDRA_MIGRATION;
 
 import com.seed4j.generator.server.springboot.dbmigration.cassandra.application.CassandraMigrationApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

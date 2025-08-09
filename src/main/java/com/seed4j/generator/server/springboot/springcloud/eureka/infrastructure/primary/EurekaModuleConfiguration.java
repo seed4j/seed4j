@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.springcloud.eureka.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.EUREKA_CLIENT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_CLOUD;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.EUREKA_CLIENT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_CLOUD;
 
 import com.seed4j.generator.server.springboot.springcloud.eureka.application.EurekaApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

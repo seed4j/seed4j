@@ -1,16 +1,16 @@
 package com.seed4j.generator.server.springboot.thymeleaf.template.domain;
 
 import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.ModuleFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeScript;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.ModuleFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.packageJsonFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ class ThymeleafTemplateModuleFactoryTest {
 
   @Test
   void shouldBuildThymeleafTemplateModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhiTest")
       .basePackage("com.seed4j.growth")
       .build();
@@ -69,9 +69,7 @@ class ThymeleafTemplateModuleFactoryTest {
 
   @Test
   void shouldBuildThymeleafTemplateModuleWithPnpm() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .nodePackageManager(PNPM)
-      .build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).nodePackageManager(PNPM).build();
 
     SeedModule module = factory.buildModule(properties);
 
@@ -87,7 +85,7 @@ class ThymeleafTemplateModuleFactoryTest {
 
   @Test
   void shouldBuildTailwindcssModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhipster")
       .build();
 
@@ -163,7 +161,7 @@ class ThymeleafTemplateModuleFactoryTest {
 
   @Test
   void shouldProxyBeUpdatedWhenServerPortPropertyNotDefault() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhipster")
       .put("serverPort", 8081)
       .build();

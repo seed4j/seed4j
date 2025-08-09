@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.dbmigration.neo4j.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.NEO4J;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.NEO4J_MIGRATIONS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.NEO4J;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.NEO4J_MIGRATIONS;
 
 import com.seed4j.generator.server.springboot.dbmigration.neo4j.application.Neo4jMigrationApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

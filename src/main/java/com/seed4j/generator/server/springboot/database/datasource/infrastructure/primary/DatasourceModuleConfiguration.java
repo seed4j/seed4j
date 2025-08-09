@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.database.datasource.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.DATASOURCE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MARIADB;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MSSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MYSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_POSTGRESQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.DATASOURCE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MARIADB;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MSSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MYSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_POSTGRESQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
 
 import com.seed4j.generator.server.springboot.database.datasource.application.DatasourceApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

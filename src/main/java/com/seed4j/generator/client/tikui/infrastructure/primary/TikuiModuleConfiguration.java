@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.tikui.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CLIENT_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.TIKUI;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CLIENT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.TIKUI;
 
 import com.seed4j.generator.client.tikui.application.TikuiApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

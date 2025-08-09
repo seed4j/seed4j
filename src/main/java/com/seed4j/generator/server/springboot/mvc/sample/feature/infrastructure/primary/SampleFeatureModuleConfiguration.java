@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.mvc.sample.feature.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CUCUMBER_AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRINGDOC;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JAVA_BASE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.KIPE_AUTHORIZATION;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.KIPE_EXPRESSION;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_FEATURE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CUCUMBER_AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRINGDOC;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JAVA_BASE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.KIPE_AUTHORIZATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.KIPE_EXPRESSION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SAMPLE_FEATURE;
 
 import com.seed4j.generator.server.springboot.mvc.sample.feature.application.SampleFeatureApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

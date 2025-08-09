@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.application.JHipsterModulesApplicationService;
+import com.seed4j.module.application.SeedModulesApplicationService;
 import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.SeedModuleToApply;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 class ModulesResource {
 
-  private final JHipsterModulesApplicationService modules;
+  private final SeedModulesApplicationService modules;
   private final ProjectFolder projectFolder;
 
   private final RestSeedModules modulesList;
   private final RestSeedLandscape modulesLandscape;
 
-  public ModulesResource(JHipsterModulesApplicationService modules, ProjectFolder projectFolder) {
+  public ModulesResource(SeedModulesApplicationService modules, ProjectFolder projectFolder) {
     this.modules = modules;
     this.projectFolder = projectFolder;
 

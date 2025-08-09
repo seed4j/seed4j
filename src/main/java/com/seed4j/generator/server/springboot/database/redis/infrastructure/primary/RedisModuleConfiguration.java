@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.database.redis.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.REDIS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.REDIS;
 
 import com.seed4j.generator.server.springboot.database.redis.application.RedisApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

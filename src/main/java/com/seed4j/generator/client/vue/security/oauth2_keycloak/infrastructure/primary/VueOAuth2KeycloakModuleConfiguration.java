@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.vue.security.oauth2_keycloak.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.*;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.*;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.*;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.*;
 
 import com.seed4j.generator.client.vue.security.oauth2_keycloak.application.VueOAuth2KeycloakApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

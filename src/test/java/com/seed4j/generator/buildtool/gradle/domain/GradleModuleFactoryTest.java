@@ -1,12 +1,12 @@
 package com.seed4j.generator.buildtool.gradle.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModule;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModule;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ class GradleModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .build();
@@ -62,7 +62,7 @@ class GradleModuleFactoryTest {
 
   @Test
   void shouldBuildGradleWrapperModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     SeedModule module = factory.buildGradleWrapperModule(properties);
 

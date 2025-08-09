@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.mvc.sample.flyway.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SAMPLE_SCHEMA;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FLYWAY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FLYWAY_POSTGRESQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JPA_POSTGRESQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_FEATURE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_NOT_POSTGRESQL_FLYWAY_CHANGELOG;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_POSTGRESQL_FLYWAY_CHANGELOG;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SAMPLE_SCHEMA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.FLYWAY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.FLYWAY_POSTGRESQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JPA_POSTGRESQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SAMPLE_FEATURE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SAMPLE_NOT_POSTGRESQL_FLYWAY_CHANGELOG;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SAMPLE_POSTGRESQL_FLYWAY_CHANGELOG;
 
 import com.seed4j.generator.server.springboot.mvc.sample.flyway.application.SampleFlywayApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

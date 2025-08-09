@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdocauth0.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.OAUTH_PROVIDER_SPRINGDOC;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRINGDOC;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRINGDOC_OAUTH_2_AUTH_0;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_OAUTH_2_AUTH_0;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.OAUTH_PROVIDER_SPRINGDOC;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRINGDOC;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRINGDOC_OAUTH_2_AUTH_0;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_OAUTH_2_AUTH_0;
 
 import com.seed4j.generator.server.springboot.apidocumentation.springdocauth0.application.SpringdocAuth0ApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

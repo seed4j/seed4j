@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.mvc.sample.mongopersistence.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SAMPLE_PERSISTENCE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MONGOCK;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_FEATURE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_MONGODB_PERSISTENCE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SAMPLE_PERSISTENCE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MONGOCK;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SAMPLE_FEATURE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SAMPLE_MONGODB_PERSISTENCE;
 
 import com.seed4j.generator.server.springboot.mvc.sample.mongopersistence.application.SampleMongoDBPersistenceApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.webflux.web.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_WEBFLUX_EMPTY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_WEBFLUX_NETTY;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_WEBFLUX_EMPTY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_WEBFLUX_NETTY;
 
 import com.seed4j.generator.server.springboot.webflux.web.application.SpringBootWebfluxApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

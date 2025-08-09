@@ -7,7 +7,7 @@ import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.slug.domain.JHLiteModuleSlug;
+import com.seed4j.shared.slug.domain.Seed4JModuleSlug;
 
 public class VueJwtModuleFactory {
 
@@ -39,7 +39,7 @@ public class VueJwtModuleFactory {
     // @formatter:off
     return moduleBuilder(properties)
       .context()
-        .put("springBootJwtBasicAuthModule", JHLiteModuleSlug.SPRING_BOOT_JWT_BASIC_AUTH.get())
+        .put("springBootJwtBasicAuthModule", Seed4JModuleSlug.SPRING_BOOT_JWT_BASIC_AUTH.get())
         .and()
       .documentation(documentationTitle("Vue JWT Authentication Components"),
         DOCUMENTATION_SOURCE.template("vue-jwt-authentication-components.md"))

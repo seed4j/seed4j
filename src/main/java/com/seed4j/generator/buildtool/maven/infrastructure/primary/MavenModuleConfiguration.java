@@ -1,10 +1,10 @@
 package com.seed4j.generator.buildtool.maven.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JAVA_BUILD_TOOL_WRAPPER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.INIT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MAVEN_JAVA;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MAVEN_WRAPPER;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL_WRAPPER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INIT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MAVEN_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MAVEN_WRAPPER;
 
 import com.seed4j.generator.buildtool.maven.application.MavenApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

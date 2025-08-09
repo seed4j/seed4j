@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.localeprofile.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_LOCAL_PROFILE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_LOCAL_PROFILE;
 
 import com.seed4j.generator.server.springboot.localeprofile.application.LocalProfileApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

@@ -1,8 +1,8 @@
 package com.seed4j.module.domain.javadependency;
 
-import static com.seed4j.module.domain.JHipsterModulesFixture.localBuildProfile;
-import static com.seed4j.module.domain.JHipsterModulesFixture.springBootDependencyId;
-import static com.seed4j.module.domain.JHipsterModulesFixture.springBootStarterWebDependency;
+import static com.seed4j.module.domain.SeedModulesFixture.localBuildProfile;
+import static com.seed4j.module.domain.SeedModulesFixture.springBootDependencyId;
+import static com.seed4j.module.domain.SeedModulesFixture.springBootStarterWebDependency;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;

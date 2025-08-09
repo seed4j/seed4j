@@ -1,7 +1,7 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.JHipsterModulesFixture.emptyModuleContext;
+import static com.seed4j.module.domain.SeedModulesFixture.emptyModuleContext;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import ch.qos.logback.classic.Level;

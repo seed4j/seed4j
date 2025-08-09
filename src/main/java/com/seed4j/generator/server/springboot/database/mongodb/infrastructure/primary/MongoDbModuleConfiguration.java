@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.database.mongodb.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MONGODB;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MONGODB;
 
 import com.seed4j.generator.server.springboot.database.mongodb.application.MongoDbApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

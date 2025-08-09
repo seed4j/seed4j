@@ -1,10 +1,10 @@
 package com.seed4j.generator.ci.github.actions.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.GITHUB_ACTIONS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GITHUB_ACTIONS_GRADLE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GITHUB_ACTIONS_MAVEN;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GRADLE_WRAPPER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MAVEN_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.GITHUB_ACTIONS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GITHUB_ACTIONS_GRADLE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GITHUB_ACTIONS_MAVEN;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GRADLE_WRAPPER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MAVEN_JAVA;
 
 import com.seed4j.generator.ci.github.actions.application.GitHubActionsApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

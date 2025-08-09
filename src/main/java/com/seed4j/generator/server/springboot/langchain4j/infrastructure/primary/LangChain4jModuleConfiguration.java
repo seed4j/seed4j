@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.langchain4j.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LANGCHAIN4J;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LANGCHAIN4J;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
 
 import com.seed4j.generator.server.springboot.langchain4j.application.LangChain4jApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

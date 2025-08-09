@@ -1,10 +1,10 @@
 package com.seed4j.generator.ci.gitlab.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.GITLAB_CI;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GITLAB_CI_GRADLE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GITLAB_CI_MAVEN;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GRADLE_JAVA;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MAVEN_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.GITLAB_CI;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GITLAB_CI_GRADLE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GITLAB_CI_MAVEN;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GRADLE_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MAVEN_JAVA;
 
 import com.seed4j.generator.ci.gitlab.application.GitLabCiApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

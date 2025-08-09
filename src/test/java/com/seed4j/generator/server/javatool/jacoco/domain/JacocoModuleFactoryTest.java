@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.javatool.jacoco.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class JacocoModuleFactoryTest {
 
     @Test
     void shouldBuildJacocoModule() {
-      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
       SeedModule module = factory.buildJacocoModule(properties);
 
@@ -104,7 +104,7 @@ class JacocoModuleFactoryTest {
 
     @Test
     void shouldBuildJacocoWithMinCoverageCheckModule() {
-      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
       SeedModule module = factory.buildJacocoWithMinCoverageCheckModule(properties);
 
@@ -150,7 +150,7 @@ class JacocoModuleFactoryTest {
 
     @Test
     void shouldBuildJacocoModule() {
-      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
       SeedModule module = factory.buildJacocoModule(properties);
 
@@ -192,7 +192,7 @@ class JacocoModuleFactoryTest {
 
   @Test
   void shouldBuildJacocoWithMinCoverageCheckModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     SeedModule module = factory.buildJacocoWithMinCoverageCheckModule(properties);
 

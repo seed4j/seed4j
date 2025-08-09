@@ -13,19 +13,19 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @UnitTest
-class JHLiteModuleSlugTest {
+class Seed4JModuleSlugTest {
 
   @MethodSource("shouldGetRank")
   @ParameterizedTest
-  void shouldGetRank(JHLiteModuleSlug jhLiteModuleSlug, SeedModuleRank expectedRank) {
-    assertThat(JHLiteModuleSlug.getRank(jhLiteModuleSlug.get())).contains(expectedRank);
+  void shouldGetRank(Seed4JModuleSlug seed4JModuleSlug, SeedModuleRank expectedRank) {
+    assertThat(Seed4JModuleSlug.getRank(seed4JModuleSlug.get())).contains(expectedRank);
   }
 
   private static Stream<Arguments> shouldGetRank() {
     return Stream.of(
-      Arguments.of(JHLiteModuleSlug.INIT, RANK_S),
-      Arguments.of(JHLiteModuleSlug.SPRING_BOOT, RANK_S),
-      Arguments.of(JHLiteModuleSlug.SPRING_BOOT_ASYNC, RANK_A)
+      Arguments.of(Seed4JModuleSlug.INIT, RANK_S),
+      Arguments.of(Seed4JModuleSlug.SPRING_BOOT, RANK_S),
+      Arguments.of(Seed4JModuleSlug.SPRING_BOOT_ASYNC, RANK_A)
     );
   }
 
@@ -33,6 +33,6 @@ class JHLiteModuleSlugTest {
   @NullSource
   @ValueSource(strings = { "growth", " " })
   void shouldNotGetRank(String slug) {
-    assertThat(JHLiteModuleSlug.getRank(slug)).isEmpty();
+    assertThat(Seed4JModuleSlug.getRank(slug)).isEmpty();
   }
 }

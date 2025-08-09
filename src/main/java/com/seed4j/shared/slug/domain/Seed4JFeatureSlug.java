@@ -2,7 +2,7 @@ package com.seed4j.shared.slug.domain;
 
 import com.seed4j.module.domain.resource.SeedFeatureSlugFactory;
 
-public enum JHLiteFeatureSlug implements SeedFeatureSlugFactory {
+public enum Seed4JFeatureSlug implements SeedFeatureSlugFactory {
   ANGULAR_AUTHENTICATION("angular-authentication"),
   AUTHENTICATION("authentication"),
   AUTHENTICATION_SPRINGDOC("authentication-springdoc"),
@@ -40,7 +40,7 @@ public enum JHLiteFeatureSlug implements SeedFeatureSlugFactory {
 
   private final String slug;
 
-  JHLiteFeatureSlug(String slug) {
+  Seed4JFeatureSlug(String slug) {
     this.slug = slug;
   }
 

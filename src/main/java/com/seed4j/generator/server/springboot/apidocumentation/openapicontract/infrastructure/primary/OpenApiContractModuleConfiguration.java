@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.apidocumentation.openapicontract.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_MVC_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MAVEN_JAVA;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.OPENAPI_BACKWARDS_COMPATIBILITY_CHECK;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.OPENAPI_CONTRACT;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_MVC_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MAVEN_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.OPENAPI_BACKWARDS_COMPATIBILITY_CHECK;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.OPENAPI_CONTRACT;
 
 import com.seed4j.generator.server.springboot.apidocumentation.openapicontract.application.OpenApiContractApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

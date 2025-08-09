@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.mavenplugin;
 
-import static com.seed4j.module.domain.JHipsterModulesFixture.*;
+import static com.seed4j.module.domain.SeedModulesFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;

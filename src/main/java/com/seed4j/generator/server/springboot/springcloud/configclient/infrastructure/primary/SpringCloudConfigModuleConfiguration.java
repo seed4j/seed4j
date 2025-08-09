@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.springcloud.configclient.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SERVICE_DISCOVERY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_ACTUATOR;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_CLOUD;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SERVICE_DISCOVERY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_ACTUATOR;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_CLOUD;
 
 import com.seed4j.generator.server.springboot.springcloud.configclient.application.SpringCloudConfigClientApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

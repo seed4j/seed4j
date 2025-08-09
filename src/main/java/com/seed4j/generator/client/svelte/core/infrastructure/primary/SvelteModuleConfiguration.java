@@ -1,9 +1,9 @@
 package com.seed4j.generator.client.svelte.core.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CLIENT_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.INIT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PRETTIER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SVELTE_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CLIENT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INIT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PRETTIER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SVELTE_CORE;
 
 import com.seed4j.generator.client.svelte.core.application.SvelteApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

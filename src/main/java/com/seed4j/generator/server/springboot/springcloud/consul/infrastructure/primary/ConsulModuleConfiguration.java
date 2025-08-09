@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.springcloud.consul.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SERVICE_DISCOVERY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.CONSUL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_ACTUATOR;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SERVICE_DISCOVERY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CONSUL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_ACTUATOR;
 
 import com.seed4j.generator.server.springboot.springcloud.consul.application.ConsulApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

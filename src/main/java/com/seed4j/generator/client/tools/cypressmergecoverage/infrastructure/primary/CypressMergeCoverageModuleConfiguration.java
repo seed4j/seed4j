@@ -1,8 +1,8 @@
 package com.seed4j.generator.client.tools.cypressmergecoverage.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CODE_COVERAGE_CLIENT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.CYPRESS_COMPONENT_TESTS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.CYPRESS_MERGE_COVERAGE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CODE_COVERAGE_CLIENT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CYPRESS_COMPONENT_TESTS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CYPRESS_MERGE_COVERAGE;
 
 import com.seed4j.generator.client.tools.cypressmergecoverage.application.CypressMergeCoverageApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

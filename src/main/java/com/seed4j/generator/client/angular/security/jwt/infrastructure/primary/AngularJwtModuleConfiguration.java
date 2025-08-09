@@ -1,8 +1,8 @@
 package com.seed4j.generator.client.angular.security.jwt.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.ANGULAR_AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.ANGULAR_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.ANGULAR_JWT;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.ANGULAR_AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_JWT;
 
 import com.seed4j.generator.client.angular.security.jwt.application.AngularJwtApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

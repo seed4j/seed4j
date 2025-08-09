@@ -22,7 +22,7 @@ class FileSystemSeedModulesRepository implements SeedModulesRepository {
   private final JavaProjects projects;
   private final SeedModulesResources resources;
 
-  private final FileSystemJHipsterModuleFiles files;
+  private final FileSystemSeedModuleFiles files;
   private final FileSystemJavaBuildCommandsHandler javaBuild;
   private final FileSystemSpringPropertiesCommandsHandler springProperties;
   private final FileSystemYamlSpringPropertiesCommandsHandler yamlSpringProperties;
@@ -39,7 +39,7 @@ class FileSystemSeedModulesRepository implements SeedModulesRepository {
   public FileSystemSeedModulesRepository(
     JavaProjects projects,
     SeedModulesResources resources,
-    FileSystemJHipsterModuleFiles files,
+    FileSystemSeedModuleFiles files,
     FileSystemReplacer fileReplacer,
     FileSystemGitIgnoreHandler gitIgnore,
     FileSystemJavaBuildCommandsHandler javaBuild,

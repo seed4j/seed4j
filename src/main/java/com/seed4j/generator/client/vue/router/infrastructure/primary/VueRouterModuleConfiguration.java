@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.vue.router.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.VUE_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.VUE_ROUTER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.VUE_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.VUE_ROUTER;
 
 import com.seed4j.generator.client.vue.router.application.VueRouterApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

@@ -16,14 +16,14 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterNodeVersionsTest {
+class SeedNodeVersionsTest {
 
   private static final NodePackagesVersionSource COMMON = SeedNodePackagesVersionSource.COMMON.build();
   private static final NodePackagesVersionSource VUE = SeedNodePackagesVersionSource.VUE.build();
 
   @Test
   void shouldNotReadVersionWithoutReaders() {
-    JHipsterNodeVersions versions = new JHipsterNodeVersions(List.of());
+    SeedNodeVersions versions = new SeedNodeVersions(List.of());
 
     assertThatThrownBy(() -> versions.get(new NodePackageName("unknown"), COMMON))
       .isExactlyInstanceOf(UnknownNodePackageException.class)
@@ -32,7 +32,7 @@ class JHipsterNodeVersionsTest {
 
   @Test
   void shouldNotReadUnknownVersion() {
-    JHipsterNodeVersions versions = new JHipsterNodeVersions(List.of(emptyReader()));
+    SeedNodeVersions versions = new SeedNodeVersions(List.of(emptyReader()));
 
     assertThatThrownBy(() -> versions.get(new NodePackageName("unknown"), COMMON))
       .isExactlyInstanceOf(UnknownNodePackageException.class)
@@ -53,7 +53,7 @@ class JHipsterNodeVersionsTest {
         .put(VUE, packages(new NodePackage("vue", "1.2.7")))
         .build();
 
-    JHipsterNodeVersions versions = new JHipsterNodeVersions(List.of(emptyReader(), firstReader, secondReader));
+    SeedNodeVersions versions = new SeedNodeVersions(List.of(emptyReader(), firstReader, secondReader));
 
     assertThat(versions.get("vue", COMMON)).isEqualTo(new NodePackageVersion("1.2.3"));
     assertThat(versions.get("vue", SeedNodePackagesVersionSource.VUE)).isEqualTo(new NodePackageVersion("1.2.7"));

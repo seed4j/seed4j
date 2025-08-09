@@ -8,14 +8,14 @@ import static com.seed4j.module.domain.resource.SeedModulePropertyDefinition.opt
 import com.seed4j.module.domain.SeedModuleFactory;
 import com.seed4j.module.domain.resource.SeedModuleOrganization.JHipsterModuleOrganizationBuilder;
 import com.seed4j.module.domain.resource.SeedModuleTags.JHipsterModuleTagsBuilder;
-import com.seed4j.shared.slug.domain.JHLiteModuleSlug;
+import com.seed4j.shared.slug.domain.Seed4JModuleSlug;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public final class JHipsterModulesResourceFixture {
+public final class SeedModulesResourceFixture {
 
-  private JHipsterModulesResourceFixture() {}
+  private SeedModulesResourceFixture() {}
 
   public static SeedModulesResources moduleResources() {
     return new SeedModulesResources(moduleResourcesCollection(), emptyHiddenModules());
@@ -117,7 +117,7 @@ public final class JHipsterModulesResourceFixture {
     }
 
     public JHipsterTestModuleResourceBuilder moduleDependency(String module) {
-      moduleDependencies.add(new FakeSeedModuleSlugFactory(module, JHLiteModuleSlug.getRank(module).orElse(SeedModuleRank.RANK_D)));
+      moduleDependencies.add(new FakeSeedModuleSlugFactory(module, Seed4JModuleSlug.getRank(module).orElse(SeedModuleRank.RANK_D)));
 
       return this;
     }
@@ -136,7 +136,7 @@ public final class JHipsterModulesResourceFixture {
 
     public SeedModuleResource build() {
       return SeedModuleResource.builder()
-        .slug(new FakeSeedModuleSlugFactory(slug, JHLiteModuleSlug.getRank(slug).orElse(SeedModuleRank.RANK_D)))
+        .slug(new FakeSeedModuleSlugFactory(slug, Seed4JModuleSlug.getRank(slug).orElse(SeedModuleRank.RANK_D)))
         .propertiesDefinition(propertiesDefinition())
         .apiDoc(group, operation)
         .organization(buildOrganization())

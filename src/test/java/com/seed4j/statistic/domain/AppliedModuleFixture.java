@@ -1,6 +1,6 @@
 package com.seed4j.statistic.domain;
 
-import com.seed4j.shared.slug.domain.JHLiteModuleSlug;
+import com.seed4j.shared.slug.domain.Seed4JModuleSlug;
 import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
@@ -31,7 +31,7 @@ public final class AppliedModuleFixture {
   }
 
   private static Module moduleSlug(String slug) {
-    return JHLiteModuleSlug.fromString(slug).map(JHLiteModuleSlug::get).map(Module::new).orElse(new Module("module"));
+    return Seed4JModuleSlug.fromString(slug).map(Seed4JModuleSlug::get).map(Module::new).orElse(new Module("module"));
   }
 
   private static ModuleProperties moduleProperties() {

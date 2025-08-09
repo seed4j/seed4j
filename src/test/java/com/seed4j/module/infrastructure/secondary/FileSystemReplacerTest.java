@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.JHipsterModulesFixture.*;
+import static com.seed4j.module.domain.SeedModulesFixture.*;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;

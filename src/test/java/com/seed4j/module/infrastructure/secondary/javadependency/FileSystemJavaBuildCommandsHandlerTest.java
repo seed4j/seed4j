@@ -2,7 +2,7 @@ package com.seed4j.module.infrastructure.secondary.javadependency;
 
 import static com.seed4j.TestFileUtils.content;
 import static com.seed4j.TestFileUtils.projectFrom;
-import static com.seed4j.module.domain.JHipsterModulesFixture.*;
+import static com.seed4j.module.domain.SeedModulesFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
@@ -21,7 +21,7 @@ class FileSystemJavaBuildCommandsHandlerTest {
 
   private static final FileSystemJavaBuildCommandsHandler handler = new FileSystemJavaBuildCommandsHandler(
     new FileSystemProjectJavaBuildToolRepository(),
-    new FileSystemJHipsterModuleFiles(new FileSystemProjectFiles(), TemplateRenderer.NOOP),
+    new FileSystemSeedModuleFiles(new FileSystemProjectFiles(), TemplateRenderer.NOOP),
     new FileSystemReplacer(TemplateRenderer.NOOP)
   );
 

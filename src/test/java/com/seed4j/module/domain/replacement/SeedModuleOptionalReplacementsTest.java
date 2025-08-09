@@ -7,7 +7,7 @@ import static org.mockito.Mockito.*;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.GeneratedProjectRepository;
-import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,7 +24,7 @@ class SeedModuleOptionalReplacementsTest {
 
   private static String replaceIn(String file) {
     SeedProjectFolder folder = new SeedProjectFolder("src/test/resources/projects");
-    SeedModuleBuilder module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(folder.get()).build());
+    SeedModuleBuilder module = moduleBuilder(SeedModulesFixture.propertiesBuilder(folder.get()).build());
 
     return SeedModuleOptionalReplacementsFactory.builder(module)
       .in(path(file))

@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.javatool.memoizer.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JAVA_BASE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JAVA_MEMOIZERS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JAVA_BASE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JAVA_MEMOIZERS;
 
 import com.seed4j.generator.server.javatool.memoizer.application.JavaMemoizersApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

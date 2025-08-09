@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.gradle;
 
 import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.JHipsterModulesFixture.*;
 import static com.seed4j.module.domain.SeedModule.*;
+import static com.seed4j.module.domain.SeedModulesFixture.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.EnumSource.Mode.*;
 
@@ -21,9 +21,9 @@ import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
-import com.seed4j.module.infrastructure.secondary.FileSystemJHipsterModuleFiles;
 import com.seed4j.module.infrastructure.secondary.FileSystemProjectFiles;
 import com.seed4j.module.infrastructure.secondary.FileSystemReplacer;
+import com.seed4j.module.infrastructure.secondary.FileSystemSeedModuleFiles;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
@@ -36,10 +36,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 @UnitTest
 class GradleCommandHandlerTest {
 
-  private static final FileSystemJHipsterModuleFiles files = new FileSystemJHipsterModuleFiles(
-    new FileSystemProjectFiles(),
-    TemplateRenderer.NOOP
-  );
+  private static final FileSystemSeedModuleFiles files = new FileSystemSeedModuleFiles(new FileSystemProjectFiles(), TemplateRenderer.NOOP);
   private static final FileSystemReplacer fileReplacer = new FileSystemReplacer(TemplateRenderer.NOOP);
 
   @Test

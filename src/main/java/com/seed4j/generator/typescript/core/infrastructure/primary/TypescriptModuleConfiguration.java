@@ -1,8 +1,8 @@
 package com.seed4j.generator.typescript.core.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.INIT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PRETTIER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.TYPESCRIPT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INIT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PRETTIER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.TYPESCRIPT;
 
 import com.seed4j.generator.typescript.core.application.TypescriptApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

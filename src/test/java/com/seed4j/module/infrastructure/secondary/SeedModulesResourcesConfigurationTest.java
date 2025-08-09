@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.*;
+import static com.seed4j.module.domain.resource.SeedModulesResourceFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import ch.qos.logback.classic.Level;

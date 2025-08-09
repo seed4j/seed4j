@@ -72,11 +72,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class JHipsterModulesFixture {
+public final class SeedModulesFixture {
 
-  private static final Logger log = LoggerFactory.getLogger(JHipsterModulesFixture.class);
+  private static final Logger log = LoggerFactory.getLogger(SeedModulesFixture.class);
 
-  private JHipsterModulesFixture() {}
+  private SeedModulesFixture() {}
 
   public static SeedModule moduleSecond(SeedModuleProperties properties) {
     // @formatter:off

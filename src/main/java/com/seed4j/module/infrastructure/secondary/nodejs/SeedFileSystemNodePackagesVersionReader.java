@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 
 @Order
 @Repository
-public class JHipsterLiteFileSystemNodePackagesVersionReader implements NodePackagesVersionsReader {
+public class SeedFileSystemNodePackagesVersionReader implements NodePackagesVersionsReader {
 
   private final FileSystemNodePackagesVersionReader reader;
 
-  public JHipsterLiteFileSystemNodePackagesVersionReader(ProjectFiles projectFiles) {
+  public SeedFileSystemNodePackagesVersionReader(ProjectFiles projectFiles) {
     reader = new FileSystemNodePackagesVersionReader(
       projectFiles,
       List.of(SeedNodePackagesVersionSource.values()),

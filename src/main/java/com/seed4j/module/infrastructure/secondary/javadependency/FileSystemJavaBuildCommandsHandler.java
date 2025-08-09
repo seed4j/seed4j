@@ -6,8 +6,8 @@ import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.javabuild.ProjectJavaBuildToolRepository;
 import com.seed4j.module.domain.javabuild.command.*;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
-import com.seed4j.module.infrastructure.secondary.FileSystemJHipsterModuleFiles;
 import com.seed4j.module.infrastructure.secondary.FileSystemReplacer;
+import com.seed4j.module.infrastructure.secondary.FileSystemSeedModuleFiles;
 import com.seed4j.module.infrastructure.secondary.javadependency.gradle.GradleCommandHandler;
 import com.seed4j.module.infrastructure.secondary.javadependency.maven.MavenCommandHandler;
 import com.seed4j.shared.error.domain.Assert;
@@ -18,12 +18,12 @@ import org.springframework.stereotype.Service;
 public class FileSystemJavaBuildCommandsHandler {
 
   private final ProjectJavaBuildToolRepository javaBuildTools;
-  private final FileSystemJHipsterModuleFiles files;
+  private final FileSystemSeedModuleFiles files;
   private final FileSystemReplacer fileReplacer;
 
   public FileSystemJavaBuildCommandsHandler(
     ProjectJavaBuildToolRepository javaBuildTools,
-    FileSystemJHipsterModuleFiles files,
+    FileSystemSeedModuleFiles files,
     FileSystemReplacer fileReplacer
   ) {
     this.javaBuildTools = javaBuildTools;

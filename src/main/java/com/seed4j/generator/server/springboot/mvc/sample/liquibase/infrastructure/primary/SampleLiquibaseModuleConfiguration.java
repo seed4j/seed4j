@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.mvc.sample.liquibase.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SAMPLE_SCHEMA;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LIQUIBASE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_FEATURE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SAMPLE_LIQUIBASE_CHANGELOG;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SAMPLE_SCHEMA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LIQUIBASE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SAMPLE_FEATURE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SAMPLE_LIQUIBASE_CHANGELOG;
 
 import com.seed4j.generator.server.springboot.mvc.sample.liquibase.application.SampleLiquibaseApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

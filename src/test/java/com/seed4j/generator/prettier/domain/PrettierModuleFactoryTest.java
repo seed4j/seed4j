@@ -1,20 +1,20 @@
 package com.seed4j.generator.prettier.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.file;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.lintStagedConfigFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeScript;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.file;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.lintStagedConfigFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.packageJsonFile;
 import static org.mockito.Mockito.verify;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
-import com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions;
+import com.seed4j.module.infrastructure.secondary.SeedModulesAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -91,7 +91,7 @@ class PrettierModuleFactoryTest {
   }
 
   private SeedModuleProperties properties(String folder) {
-    return JHipsterModulesFixture.propertiesBuilder(folder)
+    return SeedModulesFixture.propertiesBuilder(folder)
       .projectBaseName("testProject")
       .put("projectName", "Test Project")
       .put("indentSize", 2)
@@ -99,7 +99,7 @@ class PrettierModuleFactoryTest {
       .build();
   }
 
-  public static JHipsterModulesAssertions.ModuleFile lintStagedConfigFileWithoutPrettier() {
+  public static SeedModulesAssertions.ModuleFile lintStagedConfigFileWithoutPrettier() {
     return file("src/test/resources/projects/init/.lintstagedrc.withoutPrettier.cjs", ".lintstagedrc.cjs");
   }
 }

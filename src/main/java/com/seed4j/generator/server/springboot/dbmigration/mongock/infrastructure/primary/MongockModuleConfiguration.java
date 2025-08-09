@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.dbmigration.mongock.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MONGOCK;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MONGODB;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MONGOCK;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MONGODB;
 
 import com.seed4j.generator.server.springboot.dbmigration.mongock.application.MongockApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

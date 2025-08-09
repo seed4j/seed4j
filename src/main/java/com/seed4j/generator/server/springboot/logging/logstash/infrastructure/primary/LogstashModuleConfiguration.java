@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.logging.logstash.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LOGSTASH;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LOGSTASH;
 
 import com.seed4j.generator.server.springboot.logging.logstash.application.LogstashApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

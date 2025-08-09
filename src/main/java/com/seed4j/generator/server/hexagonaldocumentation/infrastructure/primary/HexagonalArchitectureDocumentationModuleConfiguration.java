@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.hexagonaldocumentation.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.APPLICATION_SERVICE_HEXAGONAL_ARCHITECTURE_DOCUMENTATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.APPLICATION_SERVICE_HEXAGONAL_ARCHITECTURE_DOCUMENTATION;
 
 import com.seed4j.generator.server.hexagonaldocumentation.application.HexagonalArchitectureDocumentationApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleResource;

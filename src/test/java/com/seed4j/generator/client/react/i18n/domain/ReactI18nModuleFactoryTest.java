@@ -1,11 +1,11 @@
 package com.seed4j.generator.client.react.i18n.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -18,10 +18,10 @@ class ReactI18nModuleFactoryTest {
   @Test
   void shouldBuildModule() {
     SeedModule module = factory.buildModule(
-      JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("jhipster").build()
+      SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("jhipster").build()
     );
 
-    JHipsterModuleAsserter asserter = assertThatModuleWithFiles(module, packageJsonFile(), app(), appTest(), index(), vitest());
+    SeedModuleAsserter asserter = assertThatModuleWithFiles(module, packageJsonFile(), app(), appTest(), index(), vitest());
 
     asserter
       .hasFile("package.json")

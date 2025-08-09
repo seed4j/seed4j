@@ -12,14 +12,14 @@ import java.util.Collection;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JHipsterModulesApplicationService {
+public class SeedModulesApplicationService {
 
   private final SeedModuleEvents events;
   private final SeedModulesRepository modules;
   private final SeedModulesApplyer applyer;
   private final SeedPresetRepository preset;
 
-  public JHipsterModulesApplicationService(
+  public SeedModulesApplicationService(
     SeedModuleEvents events,
     SeedModulesRepository modules,
     JavaDependenciesVersionsRepository currentVersions,

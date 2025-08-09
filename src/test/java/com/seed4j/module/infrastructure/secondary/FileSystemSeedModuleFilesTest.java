@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.JHipsterModulesFixture.*;
 import static com.seed4j.module.domain.SeedModule.*;
 import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModulesFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import ch.qos.logback.classic.Level;
@@ -11,8 +11,8 @@ import com.seed4j.LogsSpy;
 import com.seed4j.LogsSpyExtension;
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.file.SeedFileToMove;
 import com.seed4j.module.domain.file.SeedFilesToDelete;
@@ -35,10 +35,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(LogsSpyExtension.class)
 class FileSystemSeedModuleFilesTest {
 
-  private static final FileSystemJHipsterModuleFiles files = new FileSystemJHipsterModuleFiles(
-    new FileSystemProjectFiles(),
-    TemplateRenderer.NOOP
-  );
+  private static final FileSystemSeedModuleFiles files = new FileSystemSeedModuleFiles(new FileSystemProjectFiles(), TemplateRenderer.NOOP);
 
   @Logs
   private LogsSpy logs;
@@ -47,7 +44,7 @@ class FileSystemSeedModuleFilesTest {
   void shouldNotWriteOnUnwritablePath() {
     SeedProjectFolder project = new SeedProjectFolder(Path.of("src/test/resources/generator").toAbsolutePath().toString());
 
-    SeedModule module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(project.folder()).build())
+    SeedModule module = moduleBuilder(SeedModulesFixture.propertiesBuilder(project.folder()).build())
       .files()
       .add(from("server/springboot/core/main/MainApp.java.mustache"), to("content"))
       .and()
@@ -60,7 +57,7 @@ class FileSystemSeedModuleFilesTest {
   void shouldTraceAddedFiles() {
     SeedProjectFolder project = new SeedProjectFolder(TestFileUtils.tmpDirForTest());
 
-    SeedModule module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(project.folder()).build())
+    SeedModule module = moduleBuilder(SeedModulesFixture.propertiesBuilder(project.folder()).build())
       .files()
       .add(from("server/springboot/core/main/MainApp.java.mustache"), to("MainApp.java"))
       .and()

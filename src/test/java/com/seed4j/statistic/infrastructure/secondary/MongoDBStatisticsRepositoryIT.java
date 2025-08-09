@@ -4,7 +4,7 @@ import static com.seed4j.statistic.domain.AppliedModuleFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.IntegrationTest;
-import com.seed4j.shared.slug.domain.JHLiteModuleSlug;
+import com.seed4j.shared.slug.domain.Seed4JModuleSlug;
 import com.seed4j.statistic.domain.AppliedModule;
 import com.seed4j.statistic.domain.StatisticsRepository;
 import com.seed4j.statistic.domain.criteria.StatisticsCriteria;
@@ -71,7 +71,7 @@ class MongoDBStatisticsRepositoryIT {
 
   static Stream<StatisticsCriteria> provideFilterCriteria() {
     return Stream.of(
-      StatisticsCriteria.builder().startTime(null).endTime(null).moduleSlug(JHLiteModuleSlug.ANGULAR_CORE.get()).build(),
+      StatisticsCriteria.builder().startTime(null).endTime(null).moduleSlug(Seed4JModuleSlug.ANGULAR_CORE.get()).build(),
       StatisticsCriteria.builder().startTime(null).endTime(Instant.parse("2021-12-04T10:15:30.00Z")).moduleSlug(null).build(),
       StatisticsCriteria.builder().startTime(null).endTime(Instant.parse("2021-12-04T10:15:30.00Z")).moduleSlug(null).build()
     );
@@ -82,7 +82,7 @@ class MongoDBStatisticsRepositoryIT {
       StatisticsCriteria.builder()
         .startTime(Instant.parse("2020-12-03T10:15:30.00Z"))
         .endTime(Instant.parse("2022-12-03T10:15:30.00Z"))
-        .moduleSlug(JHLiteModuleSlug.ANGULAR_CORE.get())
+        .moduleSlug(Seed4JModuleSlug.ANGULAR_CORE.get())
         .build(),
       StatisticsCriteria.builder()
         .startTime(Instant.parse("2022-12-03T10:15:30.00Z"))
@@ -111,7 +111,7 @@ class MongoDBStatisticsRepositoryIT {
   @ParameterizedTest
   @MethodSource("provideFilterCriteria")
   void shouldGetOneForEachFilteredCriteria(StatisticsCriteria criteria) {
-    AppliedModule appliedModule = appliedModule(JHLiteModuleSlug.ANGULAR_CORE.get());
+    AppliedModule appliedModule = appliedModule(Seed4JModuleSlug.ANGULAR_CORE.get());
     statistics.save(appliedModule);
 
     assertThat(statistics.get(criteria).appliedModules()).isEqualTo(1);

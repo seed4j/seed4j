@@ -1,8 +1,8 @@
 package com.seed4j.module.domain.standalonedocker;
 
-import static com.seed4j.module.domain.JHipsterModulesFixture.allProperties;
 import static com.seed4j.module.domain.SeedModule.dockerComposeFile;
 import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModulesFixture.allProperties;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;

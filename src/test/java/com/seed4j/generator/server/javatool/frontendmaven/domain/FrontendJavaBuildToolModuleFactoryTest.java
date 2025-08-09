@@ -2,16 +2,16 @@ package com.seed4j.generator.server.javatool.frontendmaven.domain;
 
 import static com.seed4j.module.domain.nodejs.NodePackageManager.NPM;
 import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.gradleBuildFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.gradleLibsVersionFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.gradleBuildFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.gradleLibsVersionFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import org.junit.jupiter.api.Nested;
@@ -493,9 +493,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
     when(nodeVersions.packageManagerVersion(PNPM)).thenReturn(new NodePackageVersion("10.0.0"));
   }
 
-  private static JHipsterModulesFixture.JHipsterModulePropertiesBuilder defaultProperties() {
-    return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("com.seed4j.growth")
-      .projectBaseName("myapp");
+  private static SeedModulesFixture.JHipsterModulePropertiesBuilder defaultProperties() {
+    return SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).basePackage("com.seed4j.growth").projectBaseName("myapp");
   }
 }

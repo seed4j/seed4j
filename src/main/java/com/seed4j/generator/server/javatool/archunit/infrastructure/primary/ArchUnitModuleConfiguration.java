@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.javatool.archunit.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JAVA_ARCHUNIT;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JAVA_ARCHUNIT;
 
 import com.seed4j.generator.server.javatool.archunit.application.ArchUnitApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.pagination.jpa.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JPA_PERSISTENCE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JPA_PAGINATION;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PAGINATION_DOMAIN;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JPA_PERSISTENCE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JPA_PAGINATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PAGINATION_DOMAIN;
 
 import com.seed4j.generator.server.pagination.jpa.application.JpaPaginationModuleApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

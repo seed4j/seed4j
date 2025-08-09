@@ -1,15 +1,15 @@
 package com.seed4j.generator.typescript.core.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeScript;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.packageJsonFile;
 import static org.mockito.Mockito.verify;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -31,7 +31,7 @@ class TypescriptModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     SeedModule module = factory.buildModule(properties);
 
@@ -64,7 +64,7 @@ class TypescriptModuleFactoryTest {
 
   @Test
   void shouldBuildModuleWithPnpm() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .nodePackageManager(NodePackageManager.PNPM)
       .build();
 

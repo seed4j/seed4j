@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.technicaltools.actuator.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_ACTUATOR;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_ACTUATOR;
 
 import com.seed4j.generator.server.springboot.technicaltools.actuator.application.SpringBootActuatorApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

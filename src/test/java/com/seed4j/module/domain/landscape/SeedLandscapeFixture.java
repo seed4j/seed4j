@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.landscape;
 
-import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.*;
 import static com.seed4j.module.domain.resource.SeedModuleRank.*;
+import static com.seed4j.module.domain.resource.SeedModulesResourceFixture.*;
 
 import com.seed4j.module.domain.SeedFeatureSlug;
 import com.seed4j.module.domain.SeedModuleSlug;
@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public final class JHipsterLandscapeFixture {
+public final class SeedLandscapeFixture {
 
-  private JHipsterLandscapeFixture() {}
+  private SeedLandscapeFixture() {}
 
   public static SeedModulesResources moduleResources(SeedModuleResource... resources) {
     return new SeedModulesResources(List.of(resources), emptyHiddenModules());

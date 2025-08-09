@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdocjwt.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.AUTHENTICATION_SPRINGDOC;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRINGDOC;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRINGDOC_JWT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_JWT;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.AUTHENTICATION_SPRINGDOC;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRINGDOC;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRINGDOC_JWT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_JWT;
 
 import com.seed4j.generator.server.springboot.apidocumentation.springdocjwt.application.SpringdocJwtApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

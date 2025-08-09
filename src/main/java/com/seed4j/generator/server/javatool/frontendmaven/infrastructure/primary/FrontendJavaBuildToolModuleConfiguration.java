@@ -1,16 +1,16 @@
 package com.seed4j.generator.server.javatool.frontendmaven.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CLIENT_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.FRONTEND_JAVA_BUILD_TOOL_PLUGIN;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_MVC_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.CYPRESS_COMPONENT_TESTS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FRONTEND_MAVEN_PLUGIN;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FRONTEND_MAVEN_PLUGIN_CACHE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FRONTEND_MAVEN_PLUGIN_MERGE_COVERAGE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GRADLE_JAVA;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.MAVEN_JAVA;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.NODE_GRADLE_PLUGIN;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CLIENT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.FRONTEND_JAVA_BUILD_TOOL_PLUGIN;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_MVC_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CYPRESS_COMPONENT_TESTS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.FRONTEND_MAVEN_PLUGIN;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.FRONTEND_MAVEN_PLUGIN_CACHE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.FRONTEND_MAVEN_PLUGIN_MERGE_COVERAGE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GRADLE_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MAVEN_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.NODE_GRADLE_PLUGIN;
 
 import com.seed4j.generator.server.javatool.frontendmaven.application.FrontendJavaBuildToolApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

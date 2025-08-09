@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.thymeleaf.template.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.ALPINE_JS_WEBJARS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.HTMX_WEBJARS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_THYMELEAF;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.THYMELEAF_TEMPLATE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.THYMELEAF_TEMPLATE_ALPINEJS_WEBJAR;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.THYMELEAF_TEMPLATE_HTMX_WEBJAR;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.THYMELEAF_TEMPLATE_TAILWINDCSS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ALPINE_JS_WEBJARS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.HTMX_WEBJARS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_THYMELEAF;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.THYMELEAF_TEMPLATE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.THYMELEAF_TEMPLATE_ALPINEJS_WEBJAR;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.THYMELEAF_TEMPLATE_HTMX_WEBJAR;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.THYMELEAF_TEMPLATE_TAILWINDCSS;
 
 import com.seed4j.generator.server.springboot.thymeleaf.template.application.ThymeleafTemplateModuleApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

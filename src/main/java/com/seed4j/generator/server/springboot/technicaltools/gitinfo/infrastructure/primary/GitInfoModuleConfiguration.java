@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.technicaltools.gitinfo.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GIT_INFORMATION;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_ACTUATOR;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GIT_INFORMATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_ACTUATOR;
 
 import com.seed4j.generator.server.springboot.technicaltools.gitinfo.application.GitInfoApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

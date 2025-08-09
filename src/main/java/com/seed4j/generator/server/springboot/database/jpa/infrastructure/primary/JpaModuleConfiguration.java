@@ -1,14 +1,14 @@
 package com.seed4j.generator.server.springboot.database.jpa.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JPA_PERSISTENCE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MARIADB;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MSSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MYSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_POSTGRESQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JPA_MARIADB;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JPA_MSSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JPA_MYSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JPA_POSTGRESQL;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JPA_PERSISTENCE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MARIADB;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MSSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MYSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_POSTGRESQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JPA_MARIADB;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JPA_MSSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JPA_MYSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JPA_POSTGRESQL;
 
 import com.seed4j.generator.server.springboot.database.jpa.application.JpaApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

@@ -1,16 +1,16 @@
 package com.seed4j.generator.server.springboot.dbmigration.flyway.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.DATABASE_MIGRATION;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.DATASOURCE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MARIADB;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MSSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MYSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_POSTGRESQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FLYWAY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FLYWAY_MARIADB;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FLYWAY_MSSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FLYWAY_MYSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.FLYWAY_POSTGRESQL;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.DATABASE_MIGRATION;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.DATASOURCE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MARIADB;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MSSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MYSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_POSTGRESQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.FLYWAY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.FLYWAY_MARIADB;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.FLYWAY_MSSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.FLYWAY_MYSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.FLYWAY_POSTGRESQL;
 
 import com.seed4j.generator.server.springboot.dbmigration.flyway.application.FlywayApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

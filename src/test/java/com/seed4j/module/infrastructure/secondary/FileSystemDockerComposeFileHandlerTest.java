@@ -3,8 +3,8 @@ package com.seed4j.module.infrastructure.secondary;
 import static com.seed4j.TestFileUtils.contentNormalizingNewLines;
 import static com.seed4j.TestFileUtils.loadDefaultProperties;
 import static com.seed4j.TestFileUtils.tmpDirForTest;
-import static com.seed4j.module.domain.JHipsterModulesFixture.allProperties;
 import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModulesFixture.allProperties;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;

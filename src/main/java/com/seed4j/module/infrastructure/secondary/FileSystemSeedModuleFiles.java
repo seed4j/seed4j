@@ -25,15 +25,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class FileSystemJHipsterModuleFiles {
+public class FileSystemSeedModuleFiles {
 
-  private static final Logger log = LoggerFactory.getLogger(FileSystemJHipsterModuleFiles.class);
+  private static final Logger log = LoggerFactory.getLogger(FileSystemSeedModuleFiles.class);
   private static final Set<PosixFilePermission> EXECUTABLE_FILE_PERMISSIONS = buildExecutableFilePermission();
 
   private final ProjectFiles files;
   private final TemplateRenderer templateRenderer;
 
-  public FileSystemJHipsterModuleFiles(ProjectFiles files, TemplateRenderer templateRenderer) {
+  public FileSystemSeedModuleFiles(ProjectFiles files, TemplateRenderer templateRenderer) {
     this.files = files;
     this.templateRenderer = templateRenderer;
   }

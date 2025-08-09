@@ -1,10 +1,10 @@
 package com.seed4j.generator.client.tools.cypress.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CLIENT_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.E2E_TESTS;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.FRONTEND_COMPONENT_TESTS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.CYPRESS_COMPONENT_TESTS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.CYPRESS_E2E;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CLIENT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.E2E_TESTS;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.FRONTEND_COMPONENT_TESTS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CYPRESS_COMPONENT_TESTS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CYPRESS_E2E;
 
 import com.seed4j.generator.client.tools.cypress.application.CypressApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

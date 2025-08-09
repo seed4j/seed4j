@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.react.security.jwt.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.REACT_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.REACT_JWT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.REACT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.REACT_JWT;
 
 import com.seed4j.generator.client.react.security.jwt.application.ReactJwtApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

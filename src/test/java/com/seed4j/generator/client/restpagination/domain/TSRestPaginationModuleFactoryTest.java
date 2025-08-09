@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.restpagination.domain;
 
-import static com.seed4j.module.domain.JHipsterModulesFixture.*;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.domain.SeedModulesFixture.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;

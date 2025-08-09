@@ -1,17 +1,17 @@
 package com.seed4j.generator.client.svelte.core.domain;
 
 import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.lintStagedConfigFileWithPrettier;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeScript;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.lintStagedConfigFileWithPrettier;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.packageJsonFile;
 import static org.mockito.Mockito.verify;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ class SvelteModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     SeedModule module = factory.buildModule(properties);
 
@@ -95,9 +95,7 @@ class SvelteModuleFactoryTest {
 
   @Test
   void shouldBuildModuleWithPnpm() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .nodePackageManager(PNPM)
-      .build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).nodePackageManager(PNPM).build();
 
     SeedModule module = factory.buildModule(properties);
 

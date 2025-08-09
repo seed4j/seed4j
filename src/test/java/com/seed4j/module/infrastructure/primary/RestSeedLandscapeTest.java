@@ -1,12 +1,12 @@
 package com.seed4j.module.infrastructure.primary;
 
-import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.*;
+import static com.seed4j.module.domain.resource.SeedModulesResourceFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.JsonHelper;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.landscape.JHipsterLandscapeFixture;
 import com.seed4j.module.domain.landscape.SeedLandscape;
+import com.seed4j.module.domain.landscape.SeedLandscapeFixture;
 import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.junit.jupiter.api.Test;
 
@@ -19,9 +19,7 @@ class RestSeedLandscapeTest {
     SeedModuleResource secondModule = defaultModuleResourceBuilder().slug("second").feature("my-feature").moduleDependency("first").build();
 
     assertThat(
-      JsonHelper.writeAsString(
-        RestSeedLandscape.from(SeedLandscape.from(JHipsterLandscapeFixture.moduleResources(firstModule, secondModule)))
-      )
+      JsonHelper.writeAsString(RestSeedLandscape.from(SeedLandscape.from(SeedLandscapeFixture.moduleResources(firstModule, secondModule))))
     ).isEqualTo(json());
   }
 

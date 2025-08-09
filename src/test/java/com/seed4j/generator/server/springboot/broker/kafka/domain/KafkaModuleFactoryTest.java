@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.broker.kafka.domain;
 
 import static com.seed4j.TestFileUtils.tmpDirForTest;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
@@ -30,7 +30,7 @@ class KafkaModuleFactoryTest {
   void shouldBuildKafkaModuleInit() {
     when(dockerImages.get("apache/kafka-native")).thenReturn(new DockerImageVersion("apache/kafka-native", "1.0.0"));
 
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .put("kafkaClusterId", "my-cluster")
@@ -110,7 +110,7 @@ class KafkaModuleFactoryTest {
 
   @Test
   void shouldBuildKafkaModuleSampleProducerConsumer() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -149,7 +149,7 @@ class KafkaModuleFactoryTest {
   void shouldBuildKafkaModuleAkhq() {
     when(dockerImages.get("tchiotludo/akhq")).thenReturn(new DockerImageVersion("tchiotludo/akhq", "1.0.0"));
 
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();

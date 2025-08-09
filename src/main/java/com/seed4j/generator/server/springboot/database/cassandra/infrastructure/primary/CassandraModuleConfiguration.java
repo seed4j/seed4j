@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.database.cassandra.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.CASSANDRA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CASSANDRA;
 
 import com.seed4j.generator.server.springboot.database.cassandra.application.CassandraApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

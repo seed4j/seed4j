@@ -28,14 +28,14 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamSource;
 
-public final class JHipsterModulesAssertions {
+public final class SeedModulesAssertions {
 
   private static final FileTime FILE_APPLICATION_TIME = FileTime.fromMillis(0);
 
-  private JHipsterModulesAssertions() {}
+  private SeedModulesAssertions() {}
 
-  public static JHipsterModuleAsserter assertThatModule(SeedModule module) {
-    return new JHipsterModuleAsserter(module);
+  public static SeedModuleAsserter assertThatModule(SeedModule module) {
+    return new SeedModuleAsserter(module);
   }
 
   public static ModuleFile pomFile() {
@@ -118,10 +118,10 @@ public final class JHipsterModulesAssertions {
     return new ModuleFile(new ClassPathResource(source), destination);
   }
 
-  public static JHipsterModuleAsserter assertThatModuleWithFiles(SeedModule module, ModuleFile... files) {
+  public static SeedModuleAsserter assertThatModuleWithFiles(SeedModule module, ModuleFile... files) {
     addFilesToProject(module.projectFolder(), files);
 
-    return new JHipsterModuleAsserter(module);
+    return new SeedModuleAsserter(module);
   }
 
   public static JHipsterModuleUpgradeAsserter assertThatModuleUpgrade(SeedModule module, SeedModuleUpgrade upgrade, ModuleFile... files) {
@@ -130,12 +130,12 @@ public final class JHipsterModulesAssertions {
     return new JHipsterModuleUpgradeAsserter(module, upgrade);
   }
 
-  public static JHipsterModuleAsserter assertThatTwoModulesWithFiles(SeedModule module, SeedModule moduleSecond, ModuleFile... files) {
+  public static SeedModuleAsserter assertThatTwoModulesWithFiles(SeedModule module, SeedModule moduleSecond, ModuleFile... files) {
     addFilesToProject(module.projectFolder(), files);
 
-    TestJHipsterModules.apply(module);
+    TestSeedModules.apply(module);
 
-    return new JHipsterModuleAsserter(moduleSecond);
+    return new SeedModuleAsserter(moduleSecond);
   }
 
   public static String nodeDependency(String dependency) {
@@ -168,28 +168,28 @@ public final class JHipsterModulesAssertions {
       });
   }
 
-  public static final class JHipsterModuleAsserter {
+  public static final class SeedModuleAsserter {
 
     private static final String SLASH = "/";
 
     private final SeedProjectFolder projectFolder;
 
-    private JHipsterModuleAsserter(SeedModule module) {
+    private SeedModuleAsserter(SeedModule module) {
       assertThat(module).as("Can't make assertions on a module without module").isNotNull();
 
-      TestJHipsterModules.apply(module);
+      TestSeedModules.apply(module);
       projectFolder = module.projectFolder();
     }
 
-    public JHipsterModuleAsserter hasJavaSources(String... files) {
+    public SeedModuleAsserter hasJavaSources(String... files) {
       return hasPrefixedFiles("src/main/java", files);
     }
 
-    public JHipsterModuleAsserter hasJavaTests(String... files) {
+    public SeedModuleAsserter hasJavaTests(String... files) {
       return hasPrefixedFiles("src/test/java", files);
     }
 
-    public JHipsterModuleAsserter hasPrefixedFiles(String prefix, String... files) {
+    public SeedModuleAsserter hasPrefixedFiles(String prefix, String... files) {
       assertThat(files).as("Can't check null files for a module").isNotNull();
 
       String[] sourceFiles = Stream.of(files)
@@ -199,7 +199,7 @@ public final class JHipsterModulesAssertions {
       return hasFiles(sourceFiles);
     }
 
-    public JHipsterModuleAsserter hasFiles(String... files) {
+    public SeedModuleAsserter hasFiles(String... files) {
       assertThat(files).as("Can't check null files for a module").isNotNull();
 
       SoftAssertions assertions = new SoftAssertions();
@@ -213,7 +213,7 @@ public final class JHipsterModulesAssertions {
       return path -> assertions.assertThat(Files.exists(path)).as(fileNotFoundMessage(path, projectFolder)).isTrue();
     }
 
-    public JHipsterModuleAsserter hasExecutableFiles(String... files) {
+    public SeedModuleAsserter hasExecutableFiles(String... files) {
       assertThat(files).as("Can't check null files for a module").isNotNull();
 
       SoftAssertions assertions = new SoftAssertions();
@@ -231,7 +231,7 @@ public final class JHipsterModulesAssertions {
           .isTrue();
     }
 
-    public JHipsterModuleAsserter doNotHaveFiles(String... files) {
+    public SeedModuleAsserter doNotHaveFiles(String... files) {
       assertThat(files).as("Can't check null files as not created for a module").isNotNull();
 
       SoftAssertions assertions = new SoftAssertions();
@@ -245,7 +245,7 @@ public final class JHipsterModulesAssertions {
       return path -> assertions.assertThat(Files.notExists(path)).as(fileFoundMessage(path, projectFolder)).isTrue();
     }
 
-    public JHipsterModuleFileAsserter<JHipsterModuleAsserter> hasFile(String file) {
+    public JHipsterModuleFileAsserter<SeedModuleAsserter> hasFile(String file) {
       return new JHipsterModuleFileAsserter<>(this, projectFolder, file);
     }
   }
@@ -271,12 +271,12 @@ public final class JHipsterModulesAssertions {
       assertThat(upgrade).as("Can't make assertions on a upgrade without upgrade").isNotNull();
 
       applyModuleInPast(module);
-      TestJHipsterModules.apply(module.withUpgrade(upgrade));
+      TestSeedModules.apply(module.withUpgrade(upgrade));
       projectFolder = module.projectFolder();
     }
 
     private void applyModuleInPast(SeedModule module) {
-      TestJHipsterModules.apply(module);
+      TestSeedModules.apply(module);
 
       try {
         Files.walkFileTree(module.projectFolder().filePath("."), new FileModifiedTimeUpdater());

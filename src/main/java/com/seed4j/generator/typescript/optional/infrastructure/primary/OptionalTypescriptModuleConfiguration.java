@@ -1,7 +1,7 @@
 package com.seed4j.generator.typescript.optional.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.OPTIONAL_TYPESCRIPT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.TYPESCRIPT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.OPTIONAL_TYPESCRIPT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.TYPESCRIPT;
 
 import com.seed4j.generator.typescript.optional.application.OptionalTypescriptApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

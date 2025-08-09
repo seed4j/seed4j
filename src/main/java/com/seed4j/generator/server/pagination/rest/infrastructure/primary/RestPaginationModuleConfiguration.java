@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.pagination.rest.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRINGDOC;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PAGINATION_DOMAIN;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.REST_PAGINATION;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRINGDOC;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PAGINATION_DOMAIN;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.REST_PAGINATION;
 
 import com.seed4j.generator.server.pagination.rest.application.RestPaginationModuleApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

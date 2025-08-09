@@ -1,11 +1,11 @@
 package com.seed4j.generator.client.angular.security.oauth2keycloak.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +28,8 @@ class AngularOAuth2KeycloakModuleFactoryTest {
       .containing("\"allowedCommonJsDependencies\": [\"dummy.js\", \"base64-js\", \"js-sha256\", \"keycloak-js\"]");
   }
 
-  private static JHipsterModuleAsserter assertAngularOAuthModule(ModuleFile angularJson) {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+  private static SeedModuleAsserter assertAngularOAuthModule(ModuleFile angularJson) {
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     SeedModule module = factory.buildModule(properties);
 

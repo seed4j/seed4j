@@ -1,8 +1,8 @@
 package com.seed4j.generator.setup.license.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.LICENSE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LICENSE_APACHE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LICENSE_MIT;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.LICENSE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LICENSE_APACHE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LICENSE_MIT;
 
 import com.seed4j.generator.setup.license.application.LicenseApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

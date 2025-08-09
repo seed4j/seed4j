@@ -1,9 +1,9 @@
 package com.seed4j.generator.client.angular.core.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CLIENT_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.ANGULAR_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.INIT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PRETTIER;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CLIENT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INIT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PRETTIER;
 
 import com.seed4j.generator.client.angular.core.application.AngularApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

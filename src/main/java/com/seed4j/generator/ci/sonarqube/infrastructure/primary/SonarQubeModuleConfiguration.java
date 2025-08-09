@@ -1,12 +1,12 @@
 package com.seed4j.generator.ci.sonarqube.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CODE_COVERAGE_JAVA;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SONARQUBE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SONARQUBE_JAVA_BACKEND;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SONARQUBE_JAVA_BACKEND_AND_FRONTEND;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SONARQUBE_TYPESCRIPT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.TYPESCRIPT;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CODE_COVERAGE_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SONARQUBE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SONARQUBE_JAVA_BACKEND;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SONARQUBE_JAVA_BACKEND_AND_FRONTEND;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SONARQUBE_TYPESCRIPT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.TYPESCRIPT;
 
 import com.seed4j.generator.ci.sonarqube.application.SonarQubeApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

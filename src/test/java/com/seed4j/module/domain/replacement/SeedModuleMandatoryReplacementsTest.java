@@ -5,7 +5,7 @@ import static com.seed4j.module.domain.replacement.ReplacementCondition.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
 import java.io.IOException;
@@ -25,7 +25,7 @@ class SeedModuleMandatoryReplacementsTest {
 
   private static String replaceIn(String file) {
     SeedProjectFolder folder = new SeedProjectFolder("src/test/resources/projects");
-    SeedModuleBuilder module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(folder.get()).build());
+    SeedModuleBuilder module = moduleBuilder(SeedModulesFixture.propertiesBuilder(folder.get()).build());
 
     return SeedModuleMandatoryReplacementsFactory.builder(module)
       .in(new SeedProjectFilePath(file))

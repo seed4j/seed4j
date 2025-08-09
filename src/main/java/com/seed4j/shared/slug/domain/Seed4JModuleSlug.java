@@ -14,7 +14,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public enum JHLiteModuleSlug implements SeedModuleSlugFactory {
+public enum Seed4JModuleSlug implements SeedModuleSlugFactory {
   ANGULAR_CORE("angular-core", RANK_A),
   ANGULAR_HEALTH("angular-health", RANK_C),
   ANGULAR_JWT("angular-jwt", RANK_C),
@@ -182,13 +182,13 @@ public enum JHLiteModuleSlug implements SeedModuleSlugFactory {
   VUE_PINIA("vue-pinia", RANK_C),
   VUE_ROUTER("vue-router", RANK_C);
 
-  private static final Map<String, JHLiteModuleSlug> moduleSlugMap = Stream.of(values()).collect(
-    Collectors.toMap(JHLiteModuleSlug::get, Function.identity())
+  private static final Map<String, Seed4JModuleSlug> moduleSlugMap = Stream.of(values()).collect(
+    Collectors.toMap(Seed4JModuleSlug::get, Function.identity())
   );
   private final String slug;
   private final SeedModuleRank rank;
 
-  JHLiteModuleSlug(String slug, SeedModuleRank rank) {
+  Seed4JModuleSlug(String slug, SeedModuleRank rank) {
     this.slug = slug;
     this.rank = rank;
   }
@@ -204,10 +204,10 @@ public enum JHLiteModuleSlug implements SeedModuleSlugFactory {
   }
 
   public static Optional<SeedModuleRank> getRank(String slug) {
-    return fromString(slug).map(JHLiteModuleSlug::rank);
+    return fromString(slug).map(Seed4JModuleSlug::rank);
   }
 
-  public static Optional<JHLiteModuleSlug> fromString(String slug) {
+  public static Optional<Seed4JModuleSlug> fromString(String slug) {
     return Optional.ofNullable(moduleSlugMap.get(slug));
   }
 }

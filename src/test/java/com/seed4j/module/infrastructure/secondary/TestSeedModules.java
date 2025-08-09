@@ -1,11 +1,11 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.defaultModuleResourceBuilder;
-import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.emptyHiddenModules;
+import static com.seed4j.module.domain.resource.SeedModulesResourceFixture.defaultModuleResourceBuilder;
+import static com.seed4j.module.domain.resource.SeedModulesResourceFixture.emptyHiddenModules;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-import com.seed4j.module.application.JHipsterModulesApplicationService;
+import com.seed4j.module.application.SeedModulesApplicationService;
 import com.seed4j.module.domain.*;
 import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.resource.SeedModulesResources;
@@ -23,14 +23,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public final class TestJHipsterModules {
+public final class TestSeedModules {
 
   private static final Set<NodePackagesVersionsReader> customNodePackagesVersionsReader = Collections.newSetFromMap(
     new ConcurrentHashMap<>()
   );
   private static final Set<JavaDependenciesReader> customJavaDependenciesReaders = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
-  private TestJHipsterModules() {}
+  private TestSeedModules() {}
 
   public static void register(NodePackagesVersionsReader nodePackagesVersionsReader) {
     assertThat(nodePackagesVersionsReader).as("Npm versions reader to register can't be null").isNotNull();
@@ -61,7 +61,7 @@ public final class TestJHipsterModules {
 
     private final SeedModule module;
     private final SeedModuleSlug slug;
-    private final JHipsterModulesApplicationService modules;
+    private final SeedModulesApplicationService modules;
 
     private TestJHipsterModulesApplyer(SeedModule module) {
       this.module = module;
@@ -69,11 +69,11 @@ public final class TestJHipsterModules {
       this.modules = buildApplicationService(module);
     }
 
-    private static JHipsterModulesApplicationService buildApplicationService(SeedModule module) {
+    private static SeedModulesApplicationService buildApplicationService(SeedModule module) {
       ProjectFiles filesReader = new FileSystemProjectFiles();
       MustacheTemplateRenderer templateRenderer = new MustacheTemplateRenderer();
       FileSystemReplacer fileReplacer = new FileSystemReplacer(templateRenderer);
-      FileSystemJHipsterModuleFiles files = new FileSystemJHipsterModuleFiles(filesReader, templateRenderer);
+      FileSystemSeedModuleFiles files = new FileSystemSeedModuleFiles(filesReader, templateRenderer);
 
       FileSystemSeedModulesRepository modulesRepository = new FileSystemSeedModulesRepository(
         mock(JavaProjects.class),
@@ -94,7 +94,7 @@ public final class TestJHipsterModules {
         new FileSystemStartupCommandsReadmeCommandsHandler(fileReplacer)
       );
 
-      return new JHipsterModulesApplicationService(
+      return new SeedModulesApplicationService(
         mock(SeedModuleEvents.class),
         modulesRepository,
         JavaDependenciesFixture.javaVersionsRepository(filesReader, customJavaDependenciesReaders),

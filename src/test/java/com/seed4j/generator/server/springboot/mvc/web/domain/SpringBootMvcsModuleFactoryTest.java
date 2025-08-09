@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.mvc.web.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class SpringBootMvcsModuleFactoryTest {
 
   @Test
   void shouldBuildTomcatMvcModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .put("serverPort", 9000)
       .build();
@@ -53,7 +53,7 @@ class SpringBootMvcsModuleFactoryTest {
 
   @Test
   void shouldBuildUndertowModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .put("serverPort", 9000)
       .build();
@@ -92,7 +92,7 @@ class SpringBootMvcsModuleFactoryTest {
       );
   }
 
-  private JHipsterModuleAsserter assertMvcModule(SeedModule module) {
+  private SeedModuleAsserter assertMvcModule(SeedModule module) {
     return assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile(), readmeFile())
       .hasFile("README.md")
       .containing("- [Local server](http://localhost:9000)")

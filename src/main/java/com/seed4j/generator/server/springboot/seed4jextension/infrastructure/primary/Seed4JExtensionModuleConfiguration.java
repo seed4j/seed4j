@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.seed4jextension.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.*;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.*;
 
 import com.seed4j.generator.server.springboot.seed4jextension.application.Seed4JExtensionApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

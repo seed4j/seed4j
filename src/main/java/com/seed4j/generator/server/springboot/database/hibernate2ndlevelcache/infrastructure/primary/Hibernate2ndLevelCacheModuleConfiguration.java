@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.database.hibernate2ndlevelcache.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JCACHE;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JPA_PERSISTENCE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.HIBERNATE_2ND_LEVEL_CACHE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JCACHE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JPA_PERSISTENCE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.HIBERNATE_2ND_LEVEL_CACHE;
 
 import com.seed4j.generator.server.springboot.database.hibernate2ndlevelcache.application.Hibernate2ndLevelCacheApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

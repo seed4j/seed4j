@@ -1,11 +1,11 @@
 package com.seed4j.generator.client.react.security.jwt.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ class ReactJwtModuleFactoryTest {
   void shouldBuildModule() {
     SeedModule module = factory.buildModule(properties());
 
-    JHipsterModuleAsserter asserter = assertThatModuleWithFiles(
+    SeedModuleAsserter asserter = assertThatModuleWithFiles(
       module,
       packageJsonFile(),
       app(),
@@ -91,14 +91,14 @@ class ReactJwtModuleFactoryTest {
   }
 
   private SeedModuleProperties properties() {
-    return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    return SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
   }
 
   private ModuleFile tailwindConfigFile() {
     return file("src/main/resources/generator/client/react/security/jwt/tailwind.config.js", "tailwind.config.js");
   }
 
-  private void assertReactApp(JHipsterModuleAsserter asserter) {
+  private void assertReactApp(SeedModuleAsserter asserter) {
     asserter
       .hasFile("package.json")
       .containing(nodeDependency("autoprefixer"))

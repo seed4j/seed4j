@@ -1,13 +1,13 @@
 package com.seed4j.generator.server.documentation.jqassistant.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
-import com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions;
+import com.seed4j.module.infrastructure.secondary.SeedModulesAssertions;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -17,7 +17,7 @@ class JQAssistantModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .build();
 
@@ -105,7 +105,7 @@ class JQAssistantModuleFactoryTest {
 
   @Test
   void shouldBuildJqassistantJmoleculesModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .build();
 
@@ -137,7 +137,7 @@ class JQAssistantModuleFactoryTest {
 
   @Test
   void shouldBuildJqassistantSpringModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .build();
 
@@ -165,7 +165,7 @@ class JQAssistantModuleFactoryTest {
       .containing("<jqassistant-spring-plugin.version>");
   }
 
-  private JHipsterModulesAssertions.ModuleFile jQAssistantYmlFile() {
+  private SeedModulesAssertions.ModuleFile jQAssistantYmlFile() {
     return file("src/main/resources/generator/server/documentation/jqassistant/.jqassistant.yml", ".jqassistant.yml");
   }
 }

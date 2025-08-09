@@ -1,7 +1,7 @@
 package com.seed4j.generator.prettier.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.INIT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PRETTIER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INIT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PRETTIER;
 
 import com.seed4j.generator.prettier.application.PrettierApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

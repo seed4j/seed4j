@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.primary;
 
-import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.*;
+import static com.seed4j.module.domain.resource.SeedModulesResourceFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.JsonHelper;

@@ -1,6 +1,6 @@
 package com.seed4j.generator.init.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.INIT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INIT;
 
 import com.seed4j.generator.init.application.InitApplicationService;
 import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;

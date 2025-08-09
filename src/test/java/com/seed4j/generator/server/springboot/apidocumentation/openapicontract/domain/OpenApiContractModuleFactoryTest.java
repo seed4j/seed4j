@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.apidocumentation.openapicontract.domain;
 
 import static com.seed4j.TestFileUtils.tmpDirForTest;
-import static com.seed4j.module.domain.JHipsterModulesFixture.propertiesBuilder;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
+import static com.seed4j.module.domain.SeedModulesFixture.propertiesBuilder;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.SeedModule;

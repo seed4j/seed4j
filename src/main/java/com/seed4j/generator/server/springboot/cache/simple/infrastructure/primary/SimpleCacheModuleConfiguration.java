@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.cache.simple.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_CACHE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CACHE;
 
 import com.seed4j.generator.server.springboot.cache.simple.application.SimpleCacheApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

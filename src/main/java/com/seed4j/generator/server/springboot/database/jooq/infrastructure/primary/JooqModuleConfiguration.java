@@ -1,14 +1,14 @@
 package com.seed4j.generator.server.springboot.database.jooq.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JOOQ;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MARIADB;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MSSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_MYSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.DATASOURCE_POSTGRESQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JOOQ_MARIADB;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JOOQ_MSSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JOOQ_MYSQL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JOOQ_POSTGRESQL;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JOOQ;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MARIADB;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MSSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MYSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_POSTGRESQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JOOQ_MARIADB;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JOOQ_MSSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JOOQ_MYSQL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JOOQ_POSTGRESQL;
 
 import com.seed4j.generator.server.springboot.database.jooq.application.JooqApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

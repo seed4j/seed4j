@@ -1,11 +1,11 @@
 package com.seed4j.generator.setup.license.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import java.time.Year;
 import java.time.ZoneId;
@@ -18,7 +18,7 @@ class LicenseModuleFactoryTest {
 
   @Test
   void shouldBuildMitModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
     int year = Year.now(ZoneId.systemDefault()).getValue();
 
     SeedModule module = factory.buildMitModule(properties);
@@ -28,7 +28,7 @@ class LicenseModuleFactoryTest {
 
   @Test
   void shouldBuildApacheModule() {
-    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     SeedModule module = factory.buildApacheModule(properties);
 

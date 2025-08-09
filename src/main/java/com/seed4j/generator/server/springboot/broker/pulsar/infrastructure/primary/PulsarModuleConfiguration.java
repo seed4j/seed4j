@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.broker.pulsar.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_PULSAR;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_PULSAR;
 
 import com.seed4j.generator.server.springboot.broker.pulsar.application.PulsarApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

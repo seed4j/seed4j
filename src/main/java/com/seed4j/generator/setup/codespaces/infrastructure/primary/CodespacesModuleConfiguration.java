@@ -1,6 +1,6 @@
 package com.seed4j.generator.setup.codespaces.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GITHUB_CODESPACES;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GITHUB_CODESPACES;
 
 import com.seed4j.generator.setup.codespaces.application.CodespacesApplicationService;
 import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;

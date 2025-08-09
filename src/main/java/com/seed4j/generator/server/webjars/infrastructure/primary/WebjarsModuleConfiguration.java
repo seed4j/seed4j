@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.webjars.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.ALPINE_JS_WEBJARS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.HTMX_WEBJARS;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_THYMELEAF;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.WEBJARS_LOCATOR;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ALPINE_JS_WEBJARS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.HTMX_WEBJARS;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_THYMELEAF;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.WEBJARS_LOCATOR;
 
 import com.seed4j.generator.server.webjars.application.WebjarsApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

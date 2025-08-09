@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.javatool.checkstyle.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.CHECKSTYLE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CHECKSTYLE;
 
 import com.seed4j.generator.server.javatool.checkstyle.application.CheckstyleApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

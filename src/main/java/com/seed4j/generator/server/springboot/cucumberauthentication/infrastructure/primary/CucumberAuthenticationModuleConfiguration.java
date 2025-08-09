@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.cucumberauthentication.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CUCUMBER_AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_BOOT_CUCUMBER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_CUCUMBER_JWT_AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_CUCUMBER_OAUTH_2_AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_JWT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_OAUTH_2;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CUCUMBER_AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_BOOT_CUCUMBER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CUCUMBER_JWT_AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CUCUMBER_OAUTH_2_AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_JWT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_OAUTH_2;
 
 import com.seed4j.generator.server.springboot.cucumberauthentication.application.CucumberAuthenticationApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

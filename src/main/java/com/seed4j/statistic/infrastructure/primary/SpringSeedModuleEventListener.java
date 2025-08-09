@@ -12,11 +12,11 @@ import org.springframework.context.PayloadApplicationEvent;
 import org.springframework.stereotype.Component;
 
 @Component
-class SpringJHipsterModuleEventListener implements ApplicationListener<PayloadApplicationEvent<SeedModuleApplied>> {
+class SpringSeedModuleEventListener implements ApplicationListener<PayloadApplicationEvent<SeedModuleApplied>> {
 
   private final StatisticsApplicationService statistics;
 
-  public SpringJHipsterModuleEventListener(StatisticsApplicationService statistics) {
+  public SpringSeedModuleEventListener(StatisticsApplicationService statistics) {
     this.statistics = statistics;
   }
 

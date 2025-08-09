@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.mvc.sample.langchain4j.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_MVC_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.*;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_MVC_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.*;
 
 import com.seed4j.generator.server.springboot.mvc.sample.langchain4j.application.SampleLangChain4jApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

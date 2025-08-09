@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.mvc.security.oauth2.account.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_OAUTH_2;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_OAUTH_2_ACCOUNT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_OAUTH_2;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_OAUTH_2_ACCOUNT;
 
 import com.seed4j.generator.server.springboot.mvc.security.oauth2.account.application.OAuth2AccountApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

@@ -1,10 +1,10 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdoccore.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRINGDOC;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_MVC_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRINGDOC_MVC_OPENAPI;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRINGDOC_WEBFLUX_OPENAPI;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_WEBFLUX_NETTY;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRINGDOC;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_MVC_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRINGDOC_MVC_OPENAPI;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRINGDOC_WEBFLUX_OPENAPI;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_WEBFLUX_NETTY;
 
 import com.seed4j.generator.server.springboot.apidocumentation.springdoccore.application.SpringdocApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

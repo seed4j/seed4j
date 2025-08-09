@@ -1,9 +1,9 @@
 package com.seed4j.generator.client.react.core.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CLIENT_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PRETTIER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.REACT_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.TYPESCRIPT;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CLIENT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PRETTIER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.REACT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.TYPESCRIPT;
 
 import com.seed4j.generator.client.react.core.application.ReactApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

@@ -1,10 +1,10 @@
 package com.seed4j.generator.buildtool.gradle.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JAVA_BUILD_TOOL_WRAPPER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GRADLE_JAVA;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GRADLE_WRAPPER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.INIT;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL_WRAPPER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GRADLE_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GRADLE_WRAPPER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INIT;
 
 import com.seed4j.generator.buildtool.gradle.application.GradleApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

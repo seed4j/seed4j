@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.mvc.security.jwt.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_MVC_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JAVA_BASE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRINGDOC_JWT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_JWT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_JWT_BASIC_AUTH;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_MVC_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JAVA_BASE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRINGDOC_JWT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_JWT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_JWT_BASIC_AUTH;
 
 import com.seed4j.generator.server.springboot.mvc.security.jwt.application.JwtAuthenticationApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

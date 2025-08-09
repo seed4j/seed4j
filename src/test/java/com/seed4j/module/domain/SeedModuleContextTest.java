@@ -1,6 +1,6 @@
 package com.seed4j.module.domain;
 
-import static com.seed4j.module.domain.JHipsterModulesFixture.emptyModuleBuilder;
+import static com.seed4j.module.domain.SeedModulesFixture.emptyModuleBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;

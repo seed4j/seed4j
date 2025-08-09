@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.broker.kafka.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_KAFKA;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_KAFKA_AKHQ;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_KAFKA_SAMPLE_PRODUCER_CONSUMER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_KAFKA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_KAFKA_AKHQ;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_KAFKA_SAMPLE_PRODUCER_CONSUMER;
 
 import com.seed4j.generator.server.springboot.broker.kafka.application.KafkaApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

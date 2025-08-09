@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.vue.pinia.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.VUE_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.VUE_PINIA;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.VUE_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.VUE_PINIA;
 
 import com.seed4j.generator.client.vue.pinia.application.VuePiniaApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

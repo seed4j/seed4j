@@ -1,8 +1,8 @@
 package com.seed4j.generator.client.react.i18n.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CLIENT_INTERNATIONALIZATION;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.REACT_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.REACT_I18N;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CLIENT_INTERNATIONALIZATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.REACT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.REACT_I18N;
 
 import com.seed4j.generator.client.react.i18n.application.ReactI18nApplicationService;
 import com.seed4j.module.domain.resource.SeedModuleOrganization;

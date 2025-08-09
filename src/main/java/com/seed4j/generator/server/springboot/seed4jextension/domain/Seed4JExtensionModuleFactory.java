@@ -28,7 +28,7 @@ import com.seed4j.module.domain.javadependency.JavaDependency.JavaDependencyOpti
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
 
@@ -58,7 +58,7 @@ public class Seed4JExtensionModuleFactory {
   private static final PropertyKey BEAN_DEFINITION_OVERRIDING_PROPERTY_KEY = propertyKey("spring.main.allow-bean-definition-overriding");
   private static final String PACKAGE_INFO_JAVA = "package-info.java";
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -103,7 +103,7 @@ public class Seed4JExtensionModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> cucumberBuilder(JHipsterModuleProperties properties) {
+  private Consumer<JHipsterModuleBuilder> cucumberBuilder(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
     SeedDestination cucumberDestination = toSrcTestJava().append(packagePath).append("cucumber");
 
@@ -120,7 +120,7 @@ public class Seed4JExtensionModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> dependenciesReadersBuilder(JHipsterModuleProperties properties) {
+  private Consumer<JHipsterModuleBuilder> dependenciesReadersBuilder(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
     String baseName = properties.projectBaseName().capitalized();
     SeedDestination npmMainDestination = toSrcMainJava().append(packagePath).append(SHARED).append(DEPENDENCIES);
@@ -169,7 +169,7 @@ public class Seed4JExtensionModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> slugBuilder(JHipsterModuleProperties properties) {
+  private Consumer<JHipsterModuleBuilder> slugBuilder(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
     String baseName = properties.projectBaseName().capitalized();
     SeedDestination slugDestination = toSrcMainJava().append(packagePath).append(SHARED).append("slug");
@@ -195,15 +195,15 @@ public class Seed4JExtensionModuleFactory {
     return javaDependency().groupId("com.seed4j").artifactId("seed4j").versionSlug("seed4j");
   }
 
-  private String springBootApplicationWithSeed4J(JHipsterModuleProperties properties) {
+  private String springBootApplicationWithSeed4J(SeedModuleProperties properties) {
     return "@SpringBootApplication(scanBasePackageClasses = { Seed4jApp.class, " + mainClassName(properties) + ".class })";
   }
 
-  private SeedProjectFilePath mainClassFile(JHipsterModuleProperties properties) {
+  private SeedProjectFilePath mainClassFile(SeedModuleProperties properties) {
     return path(SRC_MAIN_JAVA).append(properties.packagePath()).append(mainClassName(properties) + ".java");
   }
 
-  private String mainClassName(JHipsterModuleProperties properties) {
+  private String mainClassName(SeedModuleProperties properties) {
     return properties.projectBaseName().capitalized() + "App";
   }
 }

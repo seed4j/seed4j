@@ -3,7 +3,7 @@ package com.seed4j.module.infrastructure.secondary;
 import com.seed4j.module.domain.*;
 import com.seed4j.module.domain.javaproperties.SpringPropertyType;
 import com.seed4j.module.domain.landscape.SeedLandscape;
-import com.seed4j.module.domain.postaction.JHipsterModuleExecutionContext;
+import com.seed4j.module.domain.postaction.SeedModuleExecutionContext;
 import com.seed4j.module.domain.resource.JHipsterModulesResources;
 import com.seed4j.module.infrastructure.secondary.javadependency.FileSystemJavaBuildCommandsHandler;
 import com.seed4j.project.infrastructure.primary.JavaProjects;
@@ -97,7 +97,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
     replacer.handle(changes.projectFolder(), changes.replacers(), changes.context());
     startupCommands.handle(changes.projectFolder(), changes.startupCommands(), changes.context());
     dockerComposeFile.handle(changes.projectFolder(), changes.dockerComposeFile());
-    changes.postActions().run(new JHipsterModuleExecutionContext(changes.projectFolder()));
+    changes.postActions().run(new SeedModuleExecutionContext(changes.projectFolder()));
   }
 
   @Override

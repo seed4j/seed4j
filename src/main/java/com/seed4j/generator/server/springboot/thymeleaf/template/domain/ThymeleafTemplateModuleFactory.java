@@ -19,7 +19,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.domain.replacement.ElementReplacer;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.regex.Pattern;
@@ -87,7 +87,7 @@ public class ThymeleafTemplateModuleFactory {
     </main>
     """;
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -132,7 +132,7 @@ public class ThymeleafTemplateModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildTailwindcssModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildTailwindcssModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -161,7 +161,7 @@ public class ThymeleafTemplateModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildHtmxWebjarsModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildHtmxWebjarsModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -175,7 +175,7 @@ public class ThymeleafTemplateModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildAlpineWebjarsModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildAlpineWebjarsModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off

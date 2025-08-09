@@ -10,7 +10,7 @@ import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.file.TemplateRenderer;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.infrastructure.secondary.*;
 import com.seed4j.module.infrastructure.secondary.javabuild.FileSystemProjectJavaBuildToolRepository;
 import java.util.List;
@@ -51,7 +51,7 @@ class FileSystemJavaBuildCommandsHandlerTest {
 
   @Test
   void shouldHandleCommandsWithMavenOnProjectWithPom() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-maven");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-maven");
     handler.handle(
       Indentation.DEFAULT,
       projectFolder,
@@ -63,7 +63,7 @@ class FileSystemJavaBuildCommandsHandlerTest {
 
   @Test
   void shouldHandleCommandsWithGradleOnProjectWithBuildGradle() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
     handler.handle(
       Indentation.DEFAULT,
       projectFolder,

@@ -5,42 +5,42 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public final class JHipsterModulePostActions {
+public final class SeedModulePostActions {
 
   private final Collection<RunnableInContext> actions;
 
-  private JHipsterModulePostActions(JHipsterModulePostActionsBuilder builder) {
+  private SeedModulePostActions(SeedModulePostActionsBuilder builder) {
     actions = builder.actions;
   }
 
-  public static JHipsterModulePostActionsBuilder builder(JHipsterModuleBuilder module) {
-    return new JHipsterModulePostActionsBuilder(module);
+  public static SeedModulePostActionsBuilder builder(JHipsterModuleBuilder module) {
+    return new SeedModulePostActionsBuilder(module);
   }
 
-  public void run(JHipsterModuleExecutionContext context) {
+  public void run(SeedModuleExecutionContext context) {
     Assert.notNull("context", context);
 
     actions.forEach(action -> action.run(context));
   }
 
-  public static final class JHipsterModulePostActionsBuilder {
+  public static final class SeedModulePostActionsBuilder {
 
     private final JHipsterModuleBuilder module;
     private final Collection<RunnableInContext> actions = new ArrayList<>();
 
-    private JHipsterModulePostActionsBuilder(JHipsterModuleBuilder module) {
+    private SeedModulePostActionsBuilder(JHipsterModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
     }
 
-    public JHipsterModulePostActionsBuilder add(Runnable action) {
+    public SeedModulePostActionsBuilder add(Runnable action) {
       Assert.notNull("action", action);
 
       return add(context -> action.run());
     }
 
-    public JHipsterModulePostActionsBuilder add(RunnableInContext action) {
+    public SeedModulePostActionsBuilder add(RunnableInContext action) {
       Assert.notNull("action", action);
 
       actions.add(action);
@@ -52,8 +52,8 @@ public final class JHipsterModulePostActions {
       return module;
     }
 
-    public JHipsterModulePostActions build() {
-      return new JHipsterModulePostActions(this);
+    public SeedModulePostActions build() {
+      return new SeedModulePostActions(this);
     }
   }
 }

@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModuleUpgrade;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
@@ -158,7 +158,7 @@ public final class JHipsterModulesAssertions {
     return nodeScript(key) + command + "\"";
   }
 
-  private static void addFilesToProject(JHipsterProjectFolder project, ModuleFile... files) {
+  private static void addFilesToProject(SeedProjectFolder project, ModuleFile... files) {
     Stream.of(files).forEach(file -> {
         Path destination = Path.of(project.folder()).resolve(file.destination);
 
@@ -180,7 +180,7 @@ public final class JHipsterModulesAssertions {
 
     private static final String SLASH = "/";
 
-    private final JHipsterProjectFolder projectFolder;
+    private final SeedProjectFolder projectFolder;
 
     private JHipsterModuleAsserter(JHipsterModule module) {
       assertThat(module).as("Can't make assertions on a module without module").isNotNull();
@@ -258,11 +258,11 @@ public final class JHipsterModulesAssertions {
     }
   }
 
-  private static Supplier<String> fileNotFoundMessage(Path path, JHipsterProjectFolder projectFolder) {
+  private static Supplier<String> fileNotFoundMessage(Path path, SeedProjectFolder projectFolder) {
     return () -> "Can't find file " + path + " in project folder, found " + projectFiles(projectFolder);
   }
 
-  private static String projectFiles(JHipsterProjectFolder projectFolder) {
+  private static String projectFiles(SeedProjectFolder projectFolder) {
     try (Stream<Path> files = Files.walk(Path.of(projectFolder.folder()))) {
       return files.filter(Files::isRegularFile).map(Path::toString).collect(Collectors.joining(", "));
     } catch (IOException e) {
@@ -272,7 +272,7 @@ public final class JHipsterModulesAssertions {
 
   public static class JHipsterModuleUpgradeAsserter {
 
-    private final JHipsterProjectFolder projectFolder;
+    private final SeedProjectFolder projectFolder;
 
     public JHipsterModuleUpgradeAsserter(JHipsterModule module, JHipsterModuleUpgrade upgrade) {
       assertThat(module).as("Can't make assertions on a upgrade without module").isNotNull();
@@ -343,10 +343,10 @@ public final class JHipsterModulesAssertions {
   public static final class JHipsterModuleFileAsserter<T> {
 
     private final T moduleAsserter;
-    private final JHipsterProjectFolder projectFolder;
+    private final SeedProjectFolder projectFolder;
     private final String file;
 
-    private JHipsterModuleFileAsserter(T moduleAsserter, JHipsterProjectFolder projectFolder, String file) {
+    private JHipsterModuleFileAsserter(T moduleAsserter, SeedProjectFolder projectFolder, String file) {
       this.projectFolder = projectFolder;
       assertThat(file).as("Can't check file without file path").isNotBlank();
 
@@ -446,7 +446,7 @@ public final class JHipsterModulesAssertions {
     }
   }
 
-  private static Supplier<String> fileFoundMessage(Path path, JHipsterProjectFolder projectFolder) {
+  private static Supplier<String> fileFoundMessage(Path path, SeedProjectFolder projectFolder) {
     return () -> "Found file " + path + " in project folder, found " + projectFiles(projectFolder);
   }
 

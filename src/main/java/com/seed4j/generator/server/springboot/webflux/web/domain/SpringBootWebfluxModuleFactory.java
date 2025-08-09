@@ -16,7 +16,7 @@ import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringBootWebfluxModuleFactory {
@@ -31,11 +31,11 @@ public class SpringBootWebfluxModuleFactory {
 
   private static final String EXCEPTION_PRIMARY = "shared/error/infrastructure/primary";
 
-  public JHipsterModule buildEmptyModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildEmptyModule(SeedModuleProperties properties) {
     return moduleBuilder(properties).build();
   }
 
-  public JHipsterModule buildNettyModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildNettyModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

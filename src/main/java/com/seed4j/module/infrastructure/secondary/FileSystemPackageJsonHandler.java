@@ -6,14 +6,14 @@ import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.SeedModuleContext;
 import com.seed4j.module.domain.file.TemplateRenderer;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.packagejson.JHipsterModulePackageJson;
 import com.seed4j.module.domain.packagejson.NodeModuleFormat;
 import com.seed4j.module.domain.packagejson.PackageJsonDependencies;
 import com.seed4j.module.domain.packagejson.PackageJsonDependency;
 import com.seed4j.module.domain.packagejson.PackageName;
 import com.seed4j.module.domain.packagejson.PackageNames;
 import com.seed4j.module.domain.packagejson.Scripts;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.packagejson.SeedModulePackageJson;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
@@ -52,8 +52,8 @@ class FileSystemPackageJsonHandler {
 
   public void handle(
     Indentation indentation,
-    JHipsterProjectFolder projectFolder,
-    JHipsterModulePackageJson packageJson,
+    SeedProjectFolder projectFolder,
+    SeedModulePackageJson packageJson,
     SeedModuleContext context
   ) {
     Assert.notNull("indentation", indentation);
@@ -81,7 +81,7 @@ class FileSystemPackageJsonHandler {
     write(file, content);
   }
 
-  private Path getPackageJsonFile(JHipsterProjectFolder projectFolder) {
+  private Path getPackageJsonFile(SeedProjectFolder projectFolder) {
     Path file = projectFolder.filePath("package.json");
 
     if (Files.notExists(file)) {

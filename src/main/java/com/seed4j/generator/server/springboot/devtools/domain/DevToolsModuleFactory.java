@@ -13,7 +13,7 @@ import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class DevToolsModuleFactory {
@@ -22,7 +22,7 @@ public class DevToolsModuleFactory {
 
   private static final SeedSource SOURCE = from("server/springboot/devtools");
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

@@ -2,7 +2,7 @@ package com.seed4j.generator.server.springboot.database.jpa.application;
 
 import com.seed4j.generator.server.springboot.database.jpa.domain.JpaModuleFactory;
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,19 +14,19 @@ public class JpaApplicationService {
     jpa = new JpaModuleFactory();
   }
 
-  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildPostgreSQL(SeedModuleProperties properties) {
     return jpa.buildPostgreSQL(properties);
   }
 
-  public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMariaDB(SeedModuleProperties properties) {
     return jpa.buildMariaDB(properties);
   }
 
-  public JHipsterModule buildMsSQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMsSQL(SeedModuleProperties properties) {
     return jpa.buildMsSQL(properties);
   }
 
-  public JHipsterModule buildMySQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMySQL(SeedModuleProperties properties) {
     return jpa.buildMySQL(properties);
   }
 }

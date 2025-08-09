@@ -13,7 +13,7 @@ import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,7 +34,7 @@ class PrettierModuleFactoryTest {
   @Test
   void shouldBuildModuleWithoutPrettierLintStaged() {
     String folder = TestFileUtils.tmpDirForTest();
-    JHipsterModuleProperties properties = properties(folder);
+    SeedModuleProperties properties = properties(folder);
 
     JHipsterModule module = factory.buildModule(properties);
 
@@ -75,7 +75,7 @@ class PrettierModuleFactoryTest {
   @Test
   void shouldBuildModuleWithEmptyLintStaged() {
     String folder = TestFileUtils.tmpDirForTest();
-    JHipsterModuleProperties properties = properties(folder);
+    SeedModuleProperties properties = properties(folder);
 
     JHipsterModule module = factory.buildModule(properties);
 
@@ -90,7 +90,7 @@ class PrettierModuleFactoryTest {
       );
   }
 
-  private JHipsterModuleProperties properties(String folder) {
+  private SeedModuleProperties properties(String folder) {
     return JHipsterModulesFixture.propertiesBuilder(folder)
       .projectBaseName("testProject")
       .put("projectName", "Test Project")

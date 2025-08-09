@@ -7,7 +7,7 @@ import static com.seed4j.module.domain.JHipsterModule.propertyValue;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.javaproperties.SpringProfile;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringdocOktaModuleFactory {
@@ -17,7 +17,7 @@ public class SpringdocOktaModuleFactory {
   private static final String OKTA_CLIENT_ID_PROPERTY = "oktaClientId";
   private static final String OKTA_DOMAIN_PROPERTY = "oktaDomain";
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -32,11 +32,11 @@ public class SpringdocOktaModuleFactory {
     // @formatter:on
   }
 
-  private static PropertyValue clientId(JHipsterModuleProperties properties) {
+  private static PropertyValue clientId(SeedModuleProperties properties) {
     return propertyValue(properties.getString(OKTA_CLIENT_ID_PROPERTY));
   }
 
-  private static PropertyValue authorizationUrl(JHipsterModuleProperties properties) {
+  private static PropertyValue authorizationUrl(SeedModuleProperties properties) {
     return propertyValue(
       new StringBuilder()
         .append("https://")

@@ -17,7 +17,7 @@ import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class MavenModuleFactory {
@@ -35,7 +35,7 @@ public class MavenModuleFactory {
 
     - [JDK 21](https://openjdk.java.net/projects/jdk/21/)""";
 
-  public JHipsterModule buildMavenModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMavenModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -101,7 +101,7 @@ public class MavenModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildMavenWrapperModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMavenWrapperModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

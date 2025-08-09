@@ -6,7 +6,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -16,7 +16,7 @@ class SampleFlywayModuleFactoryTest {
 
   @Test
   void shouldBuildModuleForPostGreSQL() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .put("date", "2021-12-03T10:15:30.00Z")
       .build();
 
@@ -29,7 +29,7 @@ class SampleFlywayModuleFactoryTest {
 
   @Test
   void shouldBuildModuleForNotPostGreSQL() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .put("date", "2021-12-03T10:15:30.00Z")
       .build();
 

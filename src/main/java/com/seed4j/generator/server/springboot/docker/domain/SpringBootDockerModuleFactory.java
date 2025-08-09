@@ -15,7 +15,7 @@ import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPluginConfiguration;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringBootDockerModuleFactory {
@@ -25,7 +25,7 @@ public class SpringBootDockerModuleFactory {
   private static final SeedSource JIB_SOURCE = SOURCE.append("jib");
   private static final String JAVA_DOCKER_IMAGE = "eclipse-temurin:%s-jre-jammy";
 
-  public JHipsterModule buildJibModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildJibModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off
@@ -46,11 +46,11 @@ public class SpringBootDockerModuleFactory {
     // @formatter:on
   }
 
-  private String mainClassName(JHipsterModuleProperties properties) {
+  private String mainClassName(SeedModuleProperties properties) {
     return "%s.%sApp".formatted(properties.basePackage().get(), properties.projectBaseName().capitalized());
   }
 
-  private MavenPlugin mavenJibPlugin(JHipsterModuleProperties properties) {
+  private MavenPlugin mavenJibPlugin(SeedModuleProperties properties) {
     return mavenPlugin()
       .groupId("com.google.cloud.tools")
       .artifactId("jib-maven-plugin")
@@ -59,11 +59,11 @@ public class SpringBootDockerModuleFactory {
       .build();
   }
 
-  private String dockerBaseImage(JHipsterModuleProperties properties) {
+  private String dockerBaseImage(SeedModuleProperties properties) {
     return JAVA_DOCKER_IMAGE.formatted(properties.javaVersion().get());
   }
 
-  private MavenPluginConfiguration jibPluginConfiguration(JHipsterModuleProperties properties) {
+  private MavenPluginConfiguration jibPluginConfiguration(SeedModuleProperties properties) {
     return new MavenPluginConfiguration(
       """
         <from>
@@ -107,7 +107,7 @@ public class SpringBootDockerModuleFactory {
     );
   }
 
-  private GradleMainBuildPlugin gradleJibPlugin(JHipsterModuleProperties properties) {
+  private GradleMainBuildPlugin gradleJibPlugin(SeedModuleProperties properties) {
     return gradleCommunityPlugin()
       .id("com.google.cloud.tools.jib")
       .pluginSlug("jib")
@@ -150,19 +150,19 @@ public class SpringBootDockerModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildDockerFileMavenModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildDockerFileMavenModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     return moduleBuilder(properties).files().add(SOURCE.template("Dockerfile-maven"), to("Dockerfile")).and().build();
   }
 
-  public JHipsterModule buildDockerFileGradleModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildDockerFileGradleModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     return moduleBuilder(properties).files().add(SOURCE.template("Dockerfile-gradle"), to("Dockerfile")).and().build();
   }
 
-  public JHipsterModule buildSpringBootDockerComposeModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildSpringBootDockerComposeModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off

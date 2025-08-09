@@ -12,7 +12,7 @@ import com.seed4j.module.domain.javabuild.ProjectJavaBuildToolRepository;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javadependency.JavaDependenciesVersionsRepository;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependenciesRepository;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.replacement.ContentReplacer;
 import com.seed4j.module.domain.replacement.ContentReplacers;
 import com.seed4j.module.domain.startupcommand.DockerComposeStartupCommandLine;
@@ -175,7 +175,7 @@ public class JHipsterModulesApplyer {
 
   private void commitIfNeeded(JHipsterModuleToApply moduleToApply) {
     if (moduleToApply.commitNeeded()) {
-      JHipsterProjectFolder projectFolder = moduleToApply.properties().projectFolder();
+      SeedProjectFolder projectFolder = moduleToApply.properties().projectFolder();
 
       git.init(projectFolder);
       git.commitAll(projectFolder, commitMessage(moduleToApply));

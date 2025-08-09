@@ -13,7 +13,7 @@ import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,7 +32,7 @@ class AngularModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhiTest")
       .build();
 
@@ -117,7 +117,7 @@ class AngularModuleFactoryTest {
 
   @Test
   void shouldBuildModuleWithPnpm() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .nodePackageManager(PNPM)
       .build();
 
@@ -130,7 +130,7 @@ class AngularModuleFactoryTest {
 
   @Test
   void shouldProxyBeUpdatedWhenServerPortPropertyNotDefault() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhiTest")
       .put("serverPort", 8081)
       .build();
@@ -144,7 +144,7 @@ class AngularModuleFactoryTest {
 
   @Test
   void shouldProxyBeDefaultWhenServerPortPropertyMissing() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhiTest")
       .build();
 

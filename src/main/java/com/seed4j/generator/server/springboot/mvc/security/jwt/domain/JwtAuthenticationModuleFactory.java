@@ -20,7 +20,7 @@ import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.base64.domain.Base64Utils;
 import com.seed4j.shared.error.domain.Assert;
 
@@ -42,7 +42,7 @@ public class JwtAuthenticationModuleFactory {
 
   private static final String SPRING_SECURITY_PACKAGE = "org.springframework.security";
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

@@ -11,7 +11,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -21,7 +21,7 @@ class ThymeleafTemplateModuleFactoryTest {
 
   @Test
   void shouldBuildThymeleafTemplateModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhiTest")
       .basePackage("com.seed4j.growth")
       .build();
@@ -69,7 +69,7 @@ class ThymeleafTemplateModuleFactoryTest {
 
   @Test
   void shouldBuildThymeleafTemplateModuleWithPnpm() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .nodePackageManager(PNPM)
       .build();
 
@@ -87,7 +87,7 @@ class ThymeleafTemplateModuleFactoryTest {
 
   @Test
   void shouldBuildTailwindcssModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhipster")
       .build();
 
@@ -163,7 +163,7 @@ class ThymeleafTemplateModuleFactoryTest {
 
   @Test
   void shouldProxyBeUpdatedWhenServerPortPropertyNotDefault() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhipster")
       .put("serverPort", 8081)
       .build();

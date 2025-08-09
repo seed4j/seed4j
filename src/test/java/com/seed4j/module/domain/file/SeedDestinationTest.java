@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import java.nio.file.FileSystems;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ class SeedDestinationTest {
 
   private static final String SEPARATOR = FileSystems.getDefault().getSeparator();
 
-  private static final JHipsterProjectFolder PROJECT = new JHipsterProjectFolder(TestFileUtils.tmpDirForTest());
+  private static final SeedProjectFolder PROJECT = new SeedProjectFolder(TestFileUtils.tmpDirForTest());
 
   @Test
   void shouldAddSlashWhenHappeningElementWithoutSlash() {

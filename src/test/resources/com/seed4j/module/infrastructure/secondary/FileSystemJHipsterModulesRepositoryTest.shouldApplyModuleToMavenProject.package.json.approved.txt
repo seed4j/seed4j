@@ -2,7 +2,7 @@
   "name": "{{ dasherizedBaseName }}",
   "version": "[version]",
   "private": true,
-  "description": "JHipster Project",
+  "description": "Seed4J Project",
   "license": "UNLICENSED",
   "packageManager": "{{ nodePackageManagerPackage }}@{{ nodePackageManagerVersion }}",
   "jestSonar": {

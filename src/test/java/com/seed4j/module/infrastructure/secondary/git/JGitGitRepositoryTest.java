@@ -9,7 +9,7 @@ import com.seed4j.LogsSpy;
 import com.seed4j.LogsSpyExtension;
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,7 +38,7 @@ class JGitGitRepositoryTest {
     void shouldHandleGitInitException() throws IOException {
       String folder = createReadOnlyFolder();
 
-      assertThatThrownBy(() -> git.init(new JHipsterProjectFolder(folder))).isExactlyInstanceOf(GitInitException.class);
+      assertThatThrownBy(() -> git.init(new SeedProjectFolder(folder))).isExactlyInstanceOf(GitInitException.class);
     }
 
     private String createReadOnlyFolder() throws IOException {
@@ -62,7 +62,7 @@ class JGitGitRepositoryTest {
     void shouldNotInitAlreadyInitializedProject() throws IOException {
       Path path = gitInit();
 
-      git.init(new JHipsterProjectFolder(path.toString()));
+      git.init(new SeedProjectFolder(path.toString()));
 
       logs.shouldHave(Level.TRACE, "already");
     }
@@ -73,7 +73,7 @@ class JGitGitRepositoryTest {
       Path subFolder = gitDirectory.resolve("subFolder");
       Files.createDirectories(subFolder);
 
-      git.init(new JHipsterProjectFolder(subFolder.toString()));
+      git.init(new SeedProjectFolder(subFolder.toString()));
 
       logs.shouldHave(Level.TRACE, "already");
     }
@@ -85,7 +85,7 @@ class JGitGitRepositoryTest {
     @Test
     void shouldHandleCommitErrors() {
       assertThatThrownBy(() ->
-        git.commitAll(new JHipsterProjectFolder(TestFileUtils.tmpDirForTest()), "Add application.properties")
+        git.commitAll(new SeedProjectFolder(TestFileUtils.tmpDirForTest()), "Add application.properties")
       ).isExactlyInstanceOf(GitCommitException.class);
     }
 
@@ -94,7 +94,7 @@ class JGitGitRepositoryTest {
       Path path = gitInit();
       Files.copy(Path.of("src/test/resources/projects/files/dummy.txt"), path.resolve("dummy.txt"));
 
-      git.commitAll(new JHipsterProjectFolder(path.toString()), "Add dummy.txt");
+      git.commitAll(new SeedProjectFolder(path.toString()), "Add dummy.txt");
 
       assertThat(GitTestUtil.getCommits(path)).contains("Add dummy.txt");
       assertThat(GitTestUtil.getCurrentBranch(path)).contains("main");
@@ -107,7 +107,7 @@ class JGitGitRepositoryTest {
       Files.createDirectories(subFolder);
       Files.copy(Path.of("src/test/resources/projects/files/dummy.txt"), subFolder.resolve("dummy.txt"));
 
-      git.commitAll(new JHipsterProjectFolder(subFolder.toString()), "Add dummy.txt");
+      git.commitAll(new SeedProjectFolder(subFolder.toString()), "Add dummy.txt");
 
       assertThat(GitTestUtil.getCommits(subFolder)).contains("Add dummy.txt");
       assertThat(GitTestUtil.getCurrentBranch(subFolder)).contains("main");
@@ -119,7 +119,7 @@ class JGitGitRepositoryTest {
     Path folderPath = Path.of(folder);
     Files.createDirectories(folderPath);
 
-    git.init(new JHipsterProjectFolder(folder));
+    git.init(new SeedProjectFolder(folder));
 
     return folderPath;
   }

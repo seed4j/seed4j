@@ -1,10 +1,10 @@
 package com.seed4j.module.infrastructure.primary;
 
 import com.seed4j.module.domain.SeedModuleSlug;
-import com.seed4j.module.domain.properties.JHipsterPropertyDefaultValue;
-import com.seed4j.module.domain.properties.JHipsterPropertyDescription;
-import com.seed4j.module.domain.properties.JHipsterPropertyKey;
-import com.seed4j.module.domain.properties.JHipsterPropertyType;
+import com.seed4j.module.domain.properties.SeedPropertyDefaultValue;
+import com.seed4j.module.domain.properties.SeedPropertyDescription;
+import com.seed4j.module.domain.properties.SeedPropertyKey;
+import com.seed4j.module.domain.properties.SeedPropertyType;
 import com.seed4j.module.domain.resource.JHipsterModuleApiDoc;
 import com.seed4j.module.domain.resource.JHipsterModulePropertyDefinition;
 import com.seed4j.module.domain.resource.JHipsterModuleResource;
@@ -78,7 +78,7 @@ class OpenApiModuleConfiguration {
         "type",
         new Schema<>()
           .type(STRING_TYPE)
-          ._enum(Stream.of(JHipsterPropertyType.values()).map(JHipsterPropertyType::name).toList())
+          ._enum(Stream.of(SeedPropertyType.values()).map(SeedPropertyType::name).toList())
           .description("Type of this property")
       )
       .addProperty("mandatory", new Schema<>().type("boolean").description("True if the field is mandatory, false otherwise"))
@@ -131,7 +131,7 @@ class OpenApiModuleConfiguration {
         .stream()
         .filter(JHipsterModulePropertyDefinition::isMandatory)
         .map(JHipsterModulePropertyDefinition::key)
-        .map(JHipsterPropertyKey::get)
+        .map(SeedPropertyKey::get)
     ).toList();
   }
 
@@ -144,8 +144,8 @@ class OpenApiModuleConfiguration {
     return property ->
       new Schema<>()
         .type(Enums.map(property.type(), OpenApiFieldType.class).key())
-        .description(property.description().map(JHipsterPropertyDescription::get).orElse(null))
-        .example(property.defaultValue().map(JHipsterPropertyDefaultValue::get).orElse(null));
+        .description(property.description().map(SeedPropertyDescription::get).orElse(null))
+        .example(property.defaultValue().map(SeedPropertyDefaultValue::get).orElse(null));
   }
 
   private Paths buildJHipsterModulesPaths(JHipsterModulesResources modules) {

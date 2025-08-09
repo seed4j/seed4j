@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.standalonedocker.JHipsterModuleDockerComposeFile;
 import com.seed4j.module.domain.startupcommand.DockerComposeFile;
 import java.nio.file.Path;
@@ -29,7 +29,7 @@ public class FileSystemDockerComposeFileHandlerTest {
   void shouldCreateDefaultRootDockerComposeFileForProjectWithoutIntegration() {
     String folder = tmpDirForTest();
 
-    handler.handle(new JHipsterProjectFolder(folder), dockerComposeFile(redisDockerComposeFileReference()));
+    handler.handle(new SeedProjectFolder(folder), dockerComposeFile(redisDockerComposeFileReference()));
 
     assertThat(contentNormalizingNewLines(Path.of(folder, COMPOSE_FILE_NAME))).contains(
         """
@@ -45,7 +45,7 @@ public class FileSystemDockerComposeFileHandlerTest {
     Path propertiesFile = Path.of(folder, COMPOSE_FILE_NAME);
     loadDefaultProperties(EXISTING_SPRING_COMPOSE, propertiesFile);
 
-    handler.handle(new JHipsterProjectFolder(folder), dockerComposeFile(kafkaDockerComposeFileReference()));
+    handler.handle(new SeedProjectFolder(folder), dockerComposeFile(kafkaDockerComposeFileReference()));
 
     assertThat(contentNormalizingNewLines(propertiesFile)).contains(
         """

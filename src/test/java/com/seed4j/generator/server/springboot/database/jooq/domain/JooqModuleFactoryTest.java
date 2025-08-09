@@ -7,7 +7,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -17,7 +17,7 @@ class JooqModuleFactoryTest {
 
   @Test
   void shouldBuildPostgreSQLModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -74,7 +74,7 @@ class JooqModuleFactoryTest {
 
   @Test
   void shouldBuildMariadbModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -131,7 +131,7 @@ class JooqModuleFactoryTest {
 
   @Test
   void shouldBuildMysqlModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -188,7 +188,7 @@ class JooqModuleFactoryTest {
 
   @Test
   void shouldBuildMssqlModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();

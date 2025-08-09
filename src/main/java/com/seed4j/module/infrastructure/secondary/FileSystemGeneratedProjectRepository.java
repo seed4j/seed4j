@@ -4,7 +4,7 @@ import com.seed4j.module.domain.GeneratedProjectRepository;
 import com.seed4j.module.domain.JHipsterFileMatcher;
 import com.seed4j.module.domain.JHipsterProjectFilesPaths;
 import com.seed4j.module.domain.SeedProjectFilePath;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 class FileSystemGeneratedProjectRepository implements GeneratedProjectRepository {
 
   @Override
-  public JHipsterProjectFilesPaths list(JHipsterProjectFolder folder, JHipsterFileMatcher files) {
+  public JHipsterProjectFilesPaths list(SeedProjectFolder folder, JHipsterFileMatcher files) {
     Assert.notNull("folder", folder);
     Assert.notNull("files", files);
 

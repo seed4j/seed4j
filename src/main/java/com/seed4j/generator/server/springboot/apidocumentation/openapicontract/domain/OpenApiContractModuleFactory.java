@@ -7,12 +7,12 @@ import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class OpenApiContractModuleFactory {
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -29,7 +29,7 @@ public class OpenApiContractModuleFactory {
     return mavenPlugin().groupId("io.github.kbuntrock").artifactId("openapi-maven-plugin");
   }
 
-  private MavenPlugin openApiPluginManagement(JHipsterModuleProperties properties) {
+  private MavenPlugin openApiPluginManagement(SeedModuleProperties properties) {
     return openApiPlugin()
       .versionSlug("openapi-maven-plugin")
       .addExecution(pluginExecution().goals("documentation").id("generate-openapi-contract"))
@@ -59,7 +59,7 @@ public class OpenApiContractModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildBackwardsCompatibilityCheckModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildBackwardsCompatibilityCheckModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

@@ -3,7 +3,7 @@ package com.seed4j.generator.init.application;
 import com.seed4j.generator.init.domain.InitModuleFactory;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +15,7 @@ public class InitApplicationService {
     init = new InitModuleFactory(nodeVersions);
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     return init.buildModule(properties);
   }
 }

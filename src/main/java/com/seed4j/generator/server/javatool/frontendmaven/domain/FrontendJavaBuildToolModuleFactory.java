@@ -21,7 +21,7 @@ import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class FrontendJavaBuildToolModuleFactory {
@@ -41,7 +41,7 @@ public class FrontendJavaBuildToolModuleFactory {
     this.nodeVersions = nodeVersions;
   }
 
-  public JHipsterModule buildFrontendMavenModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildFrontendMavenModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     JHipsterModuleBuilder moduleBuilder = commonModuleFiles(properties);
@@ -66,7 +66,7 @@ public class FrontendJavaBuildToolModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildFrontendMavenCacheModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildFrontendMavenCacheModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off
@@ -167,7 +167,7 @@ public class FrontendJavaBuildToolModuleFactory {
       .addExecution(MavenFrontendPluginExecutions.testFront(nodePackageManager));
   }
 
-  public JHipsterModule buildFrontendGradleModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildFrontendGradleModule(SeedModuleProperties properties) {
     NodePackageManager nodePackageManager = properties.nodePackageManager();
     // @formatter:off
     return commonModuleFiles(properties)
@@ -189,7 +189,7 @@ public class FrontendJavaBuildToolModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildMergeCypressCoverageModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMergeCypressCoverageModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
     // @formatter:off
     return moduleBuilder(properties)
@@ -200,7 +200,7 @@ public class FrontendJavaBuildToolModuleFactory {
     // @formatter:on
   }
 
-  private static JHipsterModuleBuilder commonModuleFiles(JHipsterModuleProperties properties) {
+  private static JHipsterModuleBuilder commonModuleFiles(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     String packagePath = properties.packagePath();

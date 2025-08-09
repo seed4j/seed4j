@@ -65,15 +65,15 @@ import com.seed4j.module.domain.mavenplugin.MavenPluginExecution.MavenPluginExec
 import com.seed4j.module.domain.mavenplugin.SeedModuleMavenPlugins;
 import com.seed4j.module.domain.mavenplugin.SeedModuleMavenPlugins.SeedModuleMavenPluginsBuilder;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
-import com.seed4j.module.domain.packagejson.JHipsterModulePackageJson;
-import com.seed4j.module.domain.packagejson.JHipsterModulePackageJson.JHipsterModulePackageJsonBuilder;
 import com.seed4j.module.domain.packagejson.PackageName;
 import com.seed4j.module.domain.packagejson.ScriptCommand;
 import com.seed4j.module.domain.packagejson.ScriptKey;
-import com.seed4j.module.domain.postaction.JHipsterModulePostActions;
-import com.seed4j.module.domain.postaction.JHipsterModulePostActions.JHipsterModulePostActionsBuilder;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.packagejson.SeedModulePackageJson;
+import com.seed4j.module.domain.packagejson.SeedModulePackageJson.JHipsterModulePackageJsonBuilder;
+import com.seed4j.module.domain.postaction.SeedModulePostActions;
+import com.seed4j.module.domain.postaction.SeedModulePostActions.SeedModulePostActionsBuilder;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.replacement.EndOfFileReplacer;
 import com.seed4j.module.domain.replacement.FileStartReplacer;
 import com.seed4j.module.domain.replacement.JHipsterModuleMandatoryReplacementsFactory;
@@ -111,7 +111,7 @@ public final class JHipsterModule {
 
   public static final String LINE_BREAK = "\n";
 
-  private final JHipsterModuleProperties properties;
+  private final SeedModuleProperties properties;
   private final SeedModuleFiles files;
   private final JHipsterModuleMandatoryReplacementsFactory mandatoryReplacements;
   private final JHipsterModuleOptionalReplacementsFactory optionalReplacements;
@@ -124,9 +124,9 @@ public final class JHipsterModule {
   private final SeedModuleGradleConfigurations gradleConfigurations;
   private final SeedModuleGradlePlugins gradlePlugins;
   private final SeedModuleMavenBuildExtensions mavenBuildExtensions;
-  private final JHipsterModulePackageJson packageJson;
+  private final SeedModulePackageJson packageJson;
   private final JHipsterModulePreActions preActions;
-  private final JHipsterModulePostActions postActions;
+  private final SeedModulePostActions postActions;
   private final SpringProperties springProperties;
   private final SpringComments springComments;
   private final SpringFactories springFactories;
@@ -236,7 +236,7 @@ public final class JHipsterModule {
     return property -> SpringFactory.builder(inputFactories.getKey()).key(property.getKey()).value(property.getValue());
   }
 
-  public static JHipsterModuleBuilder moduleBuilder(JHipsterModuleProperties properties) {
+  public static JHipsterModuleBuilder moduleBuilder(SeedModuleProperties properties) {
     return new JHipsterModuleBuilder(properties);
   }
 
@@ -442,11 +442,11 @@ public final class JHipsterModule {
     return new JHipsterModule(this, upgrade);
   }
 
-  public JHipsterProjectFolder projectFolder() {
+  public SeedProjectFolder projectFolder() {
     return properties.projectFolder();
   }
 
-  public JHipsterModuleProperties properties() {
+  public SeedModuleProperties properties() {
     return properties;
   }
 
@@ -514,7 +514,7 @@ public final class JHipsterModule {
     return mavenBuildExtensions;
   }
 
-  public JHipsterModulePackageJson packageJson() {
+  public SeedModulePackageJson packageJson() {
     return packageJson;
   }
 
@@ -522,7 +522,7 @@ public final class JHipsterModule {
     return preActions;
   }
 
-  public JHipsterModulePostActions postActions() {
+  public SeedModulePostActions postActions() {
     return postActions;
   }
 
@@ -550,7 +550,7 @@ public final class JHipsterModule {
 
     private static final String PROFILE = "profile";
 
-    private final JHipsterModuleProperties properties;
+    private final SeedModuleProperties properties;
     private final JHipsterModuleContextBuilder context;
     private final JHipsterModuleFilesBuilder files = SeedModuleFiles.builder(this);
     private final JHipsterModuleMandatoryReplacementsFactoryBuilder mandatoryReplacements =
@@ -566,22 +566,22 @@ public final class JHipsterModule {
     private final JHipsterModuleGradleConfigurationBuilder gradleConfigurations = SeedModuleGradleConfigurations.builder(this);
     private final JHipsterModuleGradlePluginBuilder gradlePlugins = SeedModuleGradlePlugins.builder(this);
     private final JHipsterModuleMavenBuildExtensionsBuilder mavenBuildExtensions = SeedModuleMavenBuildExtensions.builder(this);
-    private final JHipsterModulePackageJsonBuilder packageJson = JHipsterModulePackageJson.builder(this);
+    private final JHipsterModulePackageJsonBuilder packageJson = SeedModulePackageJson.builder(this);
     private final JHipsterModulePreActionsBuilder preActions = JHipsterModulePreActions.builder(this);
-    private final JHipsterModulePostActionsBuilder postActions = JHipsterModulePostActions.builder(this);
+    private final SeedModulePostActionsBuilder postActions = SeedModulePostActions.builder(this);
     private final Map<PropertiesKey, JHipsterModuleSpringPropertiesBuilder> springProperties = new HashMap<>();
     private final Map<SpringFactoryType, JHipsterModuleSpringFactoriesBuilder> springFactories = new EnumMap<>(SpringFactoryType.class);
     private final JHipsterModuleGitIgnoreBuilder gitIgnore = SeedModuleGitIgnore.builder(this);
     private final JHipsterModuleDockerComposeFileBuilder dockerComposeFile = JHipsterModuleDockerComposeFile.builder(this);
 
-    private JHipsterModuleBuilder(JHipsterModuleProperties properties) {
+    private JHipsterModuleBuilder(SeedModuleProperties properties) {
       Assert.notNull("properties", properties);
 
       this.properties = properties;
       context = SeedModuleContext.builder(this);
     }
 
-    JHipsterModuleProperties properties() {
+    SeedModuleProperties properties() {
       return properties;
     }
 
@@ -699,7 +699,7 @@ public final class JHipsterModule {
       return preActions;
     }
 
-    public JHipsterModulePostActionsBuilder postActions() {
+    public SeedModulePostActionsBuilder postActions() {
       return postActions;
     }
 

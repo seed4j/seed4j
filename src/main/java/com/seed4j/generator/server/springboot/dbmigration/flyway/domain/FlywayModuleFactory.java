@@ -11,7 +11,7 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.time.Instant;
 import java.time.ZoneOffset;
@@ -27,7 +27,7 @@ public class FlywayModuleFactory {
 
   private static final String PROPERTIES = "properties";
 
-  public JHipsterModule buildInitializationModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildInitializationModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     Instant date = properties.getInstantOrDefault("date", Instant.now());
@@ -52,13 +52,13 @@ public class FlywayModuleFactory {
     return "V%s__init.sql".formatted(FILE_DATE_FORMAT.format(date));
   }
 
-  public JHipsterModule buildMysqlDependencyModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMysqlDependencyModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return moduleBuilder(properties).javaDependencies().addDependency(FLYWAY_GROUP_ID, artifactId("flyway-mysql")).and().build();
   }
 
-  public JHipsterModule buildPostgreSQLDependencyModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildPostgreSQLDependencyModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return moduleBuilder(properties)
@@ -68,7 +68,7 @@ public class FlywayModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildMsSqlServerDependencyModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMsSqlServerDependencyModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return moduleBuilder(properties).javaDependencies().addDependency(FLYWAY_GROUP_ID, artifactId("flyway-sqlserver")).and().build();

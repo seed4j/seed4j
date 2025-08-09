@@ -6,7 +6,7 @@ import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.javabuild.GroupId;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class WebjarsModuleFactory {
@@ -15,7 +15,7 @@ public class WebjarsModuleFactory {
   private static final GroupId WEBJARS_GROUP = groupId("org.webjars");
   private static final GroupId WEBJARS_NPM_GROUP = groupId("org.webjars.npm");
 
-  public JHipsterModule buildWebjarsLocatorModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildWebjarsLocatorModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off
@@ -27,7 +27,7 @@ public class WebjarsModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildWebjarsHtmxModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildWebjarsHtmxModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
     // @formatter:off
     return moduleBuilder(properties)
@@ -38,7 +38,7 @@ public class WebjarsModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildWebjarsAlpineJSModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildWebjarsAlpineJSModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off

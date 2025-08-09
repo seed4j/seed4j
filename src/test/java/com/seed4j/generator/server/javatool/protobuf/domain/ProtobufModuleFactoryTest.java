@@ -6,7 +6,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ class ProtobufModuleFactoryTest {
 
     @Test
     void shouldBuildModuleForMaven() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .basePackage("com.seed4j.growth")
         .build();
 
@@ -94,7 +94,7 @@ class ProtobufModuleFactoryTest {
 
     @Test
     void shouldBuildModuleForGradle() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
       JHipsterModule module = factory.buildProtobufModule(properties);
 
@@ -136,7 +136,7 @@ class ProtobufModuleFactoryTest {
 
     @Test
     void shouldBuildModuleForMaven() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .basePackage("com.seed4j.growth")
         .build();
 

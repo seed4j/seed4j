@@ -6,7 +6,7 @@ import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
 
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 
 public final class CucumbersModules {
 
@@ -15,7 +15,7 @@ public final class CucumbersModules {
 
   private CucumbersModules() {}
 
-  public static JHipsterModuleBuilder cucumberModuleBuilder(JHipsterModuleProperties properties) {
+  public static JHipsterModuleBuilder cucumberModuleBuilder(SeedModuleProperties properties) {
     return moduleBuilder(properties)
       .javaDependencies()
       .addDependency(cucumberJunitPlatformEngineDependency())

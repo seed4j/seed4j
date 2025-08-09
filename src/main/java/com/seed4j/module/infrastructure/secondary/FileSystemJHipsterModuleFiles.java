@@ -10,7 +10,7 @@ import com.seed4j.module.domain.file.SeedFilesToMove;
 import com.seed4j.module.domain.file.SeedTemplatedFile;
 import com.seed4j.module.domain.file.SeedTemplatedFiles;
 import com.seed4j.module.domain.file.TemplateRenderer;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.GeneratorException;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.io.IOException;
@@ -42,11 +42,11 @@ public class FileSystemJHipsterModuleFiles {
     return Set.of(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ, GROUP_WRITE, GROUP_EXECUTE);
   }
 
-  public void create(JHipsterProjectFolder projectFolder, SeedTemplatedFiles files) {
+  public void create(SeedProjectFolder projectFolder, SeedTemplatedFiles files) {
     files.get().forEach(writeFile(projectFolder));
   }
 
-  private Consumer<SeedTemplatedFile> writeFile(JHipsterProjectFolder projectFolder) {
+  private Consumer<SeedTemplatedFile> writeFile(SeedProjectFolder projectFolder) {
     return file -> {
       Path filePath = file.path(projectFolder);
 
@@ -81,11 +81,11 @@ public class FileSystemJHipsterModuleFiles {
     return !FileSystems.getDefault().supportedFileAttributeViews().contains("posix");
   }
 
-  void move(JHipsterProjectFolder folder, SeedFilesToMove filesToMove) {
+  void move(SeedProjectFolder folder, SeedFilesToMove filesToMove) {
     filesToMove.stream().forEach(moveFile(folder));
   }
 
-  private Consumer<SeedFileToMove> moveFile(JHipsterProjectFolder folder) {
+  private Consumer<SeedFileToMove> moveFile(SeedProjectFolder folder) {
     return file -> {
       String filename = file.source().get();
       Path source = folder.filePath(filename);
@@ -115,11 +115,11 @@ public class FileSystemJHipsterModuleFiles {
     }
   }
 
-  void delete(JHipsterProjectFolder folder, SeedFilesToDelete filesToDelete) {
+  void delete(SeedProjectFolder folder, SeedFilesToDelete filesToDelete) {
     filesToDelete.stream().forEach(deleteFile(folder));
   }
 
-  private Consumer<SeedProjectFilePath> deleteFile(JHipsterProjectFolder folder) {
+  private Consumer<SeedProjectFilePath> deleteFile(SeedProjectFolder folder) {
     return file -> {
       Path path = folder.filePath(file.path());
 

@@ -3,7 +3,7 @@ package com.seed4j.generator.client.react.core.application;
 import com.seed4j.generator.client.react.core.domain.ReactModuleFactory;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +15,7 @@ public class ReactApplicationService {
     react = new ReactModuleFactory(nodeLazyPackagesInstaller);
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     return react.buildModule(properties);
   }
 }

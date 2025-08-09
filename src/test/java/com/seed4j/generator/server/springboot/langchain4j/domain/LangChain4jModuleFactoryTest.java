@@ -7,7 +7,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -17,7 +17,7 @@ class LangChain4jModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("myApp")
       .build();
 

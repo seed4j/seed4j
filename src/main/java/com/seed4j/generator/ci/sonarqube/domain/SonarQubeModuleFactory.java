@@ -18,7 +18,7 @@ import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SonarQubeModuleFactory {
@@ -34,7 +34,7 @@ public class SonarQubeModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public JHipsterModule buildBackendModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildBackendModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return commonBackendModuleFiles(properties)
@@ -44,7 +44,7 @@ public class SonarQubeModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildBackendFrontendModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildBackendFrontendModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return commonBackendModuleFiles(properties)
@@ -54,7 +54,7 @@ public class SonarQubeModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildTypescriptModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildTypescriptModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -70,7 +70,7 @@ public class SonarQubeModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterModuleBuilder commonModuleFiles(JHipsterModuleProperties properties) {
+  private JHipsterModuleBuilder commonModuleFiles(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -90,7 +90,7 @@ public class SonarQubeModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterModuleBuilder commonBackendModuleFiles(JHipsterModuleProperties properties) {
+  private JHipsterModuleBuilder commonBackendModuleFiles(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off

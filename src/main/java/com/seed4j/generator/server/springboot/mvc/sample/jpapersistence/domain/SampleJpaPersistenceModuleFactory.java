@@ -9,7 +9,7 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.domain.replacement.RegexNeedleBeforeReplacer;
 import com.seed4j.module.domain.replacement.ReplacementCondition;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
@@ -43,7 +43,7 @@ public class SampleJpaPersistenceModuleFactory {
     )
   );
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

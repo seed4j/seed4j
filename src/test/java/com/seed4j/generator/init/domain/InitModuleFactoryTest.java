@@ -14,7 +14,7 @@ import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,7 +35,7 @@ class InitModuleFactoryTest {
   void shouldBuildModule() {
     mockNodeVersion();
     mockNodePackageManagerVersion(NPM, "11.9.9");
-    JHipsterModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).build();
 
     JHipsterModule module = factory.buildModule(properties);
 
@@ -66,7 +66,7 @@ class InitModuleFactoryTest {
   void shouldBuildModuleForNpm() {
     mockNodeVersion();
     mockNodePackageManagerVersion(NPM, "11.9.9");
-    JHipsterModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(NPM).build();
+    SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(NPM).build();
 
     JHipsterModule module = factory.buildModule(properties);
 
@@ -82,7 +82,7 @@ class InitModuleFactoryTest {
   void shouldBuildModuleForPnpm() {
     mockNodeVersion();
     mockNodePackageManagerVersion(PNPM, "9.9.9");
-    JHipsterModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(PNPM).build();
+    SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(PNPM).build();
 
     JHipsterModule module = factory.buildModule(properties);
 

@@ -8,7 +8,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Locale;
 
@@ -22,15 +22,15 @@ public class GitHubActionsModuleFactory {
     this.nodeVersions = nodeVersions;
   }
 
-  public JHipsterModule buildGitHubActionsMavenModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildGitHubActionsMavenModule(SeedModuleProperties properties) {
     return buildGitHubActionsModule(properties, JavaBuildTool.MAVEN);
   }
 
-  public JHipsterModule buildGitHubActionsGradleModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildGitHubActionsGradleModule(SeedModuleProperties properties) {
     return buildGitHubActionsModule(properties, JavaBuildTool.GRADLE);
   }
 
-  private JHipsterModule buildGitHubActionsModule(JHipsterModuleProperties properties, JavaBuildTool javaBuildTool) {
+  private JHipsterModule buildGitHubActionsModule(SeedModuleProperties properties, JavaBuildTool javaBuildTool) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

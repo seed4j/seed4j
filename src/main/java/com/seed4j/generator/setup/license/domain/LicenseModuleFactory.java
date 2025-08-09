@@ -6,7 +6,7 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import java.time.Year;
 import java.time.ZoneId;
 
@@ -14,7 +14,7 @@ public class LicenseModuleFactory {
 
   private static final SeedSource SOURCE = from("setup").append("license");
 
-  public JHipsterModule buildMitModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMitModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .context()
@@ -27,7 +27,7 @@ public class LicenseModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildApacheModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildApacheModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .files()

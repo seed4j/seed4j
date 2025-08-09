@@ -10,7 +10,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class AngularHealthModuleFactory {
@@ -35,7 +35,7 @@ public class AngularHealthModuleFactory {
       },\
     """;
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

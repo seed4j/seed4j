@@ -6,7 +6,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -16,7 +16,7 @@ class SpringdocOktaModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .put("oktaDomain", "dev-123456.okta.com")
       .put("oktaClientId", "my-client-id")

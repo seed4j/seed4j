@@ -17,7 +17,7 @@ import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMM
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.domain.replacement.RegexNeedleAfterReplacer;
 import com.seed4j.module.domain.replacement.ReplacementCondition;
 import java.util.Collection;
@@ -49,7 +49,7 @@ public class TikuiModuleFactory {
   private static final String TEMPLATE_TOASTING = TEMPLATE + "/toasting";
   private static final String QUARK = "quark";
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .preCommitActions(stagedFilesFilter("*.pug"), preCommitCommands("prettier --write"))
@@ -184,15 +184,15 @@ public class TikuiModuleFactory {
     );
   }
 
-  private String tikuiLink(JHipsterModuleProperties properties) {
+  private String tikuiLink(SeedModuleProperties properties) {
     return properties.indentation().times(2) + "<link rel=\"stylesheet\" href=\"/style/tikui.css\" />";
   }
 
-  private String pugPlugin(JHipsterModuleProperties properties) {
+  private String pugPlugin(SeedModuleProperties properties) {
     return properties.indentation().times(1) + "- '@prettier/plugin-pug'";
   }
 
-  private static String newProxyForStyle(JHipsterModuleProperties properties) {
+  private static String newProxyForStyle(SeedModuleProperties properties) {
     return new StringBuilder()
       .append(properties.indentation().times(2))
       .append("proxy: {")
@@ -204,7 +204,7 @@ public class TikuiModuleFactory {
       .toString();
   }
 
-  private static String proxyForStyle(JHipsterModuleProperties properties) {
+  private static String proxyForStyle(SeedModuleProperties properties) {
     return """
     {S}{S}{S}'/style': {
     {S}{S}{S}{S}ws: true,
@@ -214,7 +214,7 @@ public class TikuiModuleFactory {
     {S}{S}{S}},""".replace("{S}", properties.indentation().times(1));
   }
 
-  private String styleProxyConf(JHipsterModuleProperties properties) {
+  private String styleProxyConf(SeedModuleProperties properties) {
     return """
     {S}"/style": {
     {S}{S}"target": "http://localhost:9005",

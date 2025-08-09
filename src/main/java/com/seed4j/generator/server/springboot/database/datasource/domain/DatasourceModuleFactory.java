@@ -22,7 +22,7 @@ import com.seed4j.module.domain.docker.DockerImageName;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
 
@@ -47,7 +47,7 @@ public class DatasourceModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildPostgreSQL(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     DatasourceProperties datasourceProperties = DatasourceProperties.builder()
@@ -85,7 +85,7 @@ public class DatasourceModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMariaDB(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     DatasourceProperties datasourceProperties = DatasourceProperties.builder()
@@ -110,7 +110,7 @@ public class DatasourceModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildMySQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMySQL(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     DatasourceProperties datasourceProperties = DatasourceProperties.builder()
@@ -135,7 +135,7 @@ public class DatasourceModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildMsSQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMsSQL(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     DatasourceProperties datasourceProperties = DatasourceProperties.builder()
@@ -219,7 +219,7 @@ public class DatasourceModuleFactory {
           .add(SOURCE.append("docker").template(datasourceProperties.id() + ".yml"), toSrcMainDocker().append(datasourceProperties.id() + ".yml"));
   }
 
-  public static Consumer<JHipsterModule.JHipsterModuleBuilder> testcontainers(DockerImages dockerImages, JHipsterModuleProperties moduleProperties, DatasourceProperties datasourceProperties) {
+  public static Consumer<JHipsterModule.JHipsterModuleBuilder> testcontainers(DockerImages dockerImages, SeedModuleProperties moduleProperties, DatasourceProperties datasourceProperties) {
     DockerImageVersion dockerImage = dockerImages.get(datasourceProperties.dockerImageName());
 
     // @formatter:off

@@ -12,7 +12,7 @@ import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMM
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class PlaywrightModuleFactory {
@@ -23,7 +23,7 @@ public class PlaywrightModuleFactory {
   private static final SeedDestination WEBAPP_E2E_TESTS = to("src/test/webapp/e2e/");
   private static final String PLAYWRIGHT_TESTS = "common/primary/app";
 
-  public JHipsterModule buildComponentTestsModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildComponentTestsModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -41,7 +41,7 @@ public class PlaywrightModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildE2ETestsModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildE2ETestsModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -58,10 +58,7 @@ public class PlaywrightModuleFactory {
     // @formatter:on
   }
 
-  private static JHipsterModuleBuilder commonPlaywrightModuleBuilder(
-    JHipsterModuleProperties properties,
-    SeedDestination destinationFolder
-  ) {
+  private static JHipsterModuleBuilder commonPlaywrightModuleBuilder(SeedModuleProperties properties, SeedDestination destinationFolder) {
     // @formatter:off
     return moduleBuilder(properties)
       .packageJson()

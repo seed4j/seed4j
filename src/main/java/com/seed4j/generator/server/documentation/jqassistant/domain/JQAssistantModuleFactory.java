@@ -16,7 +16,7 @@ import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JQAssistantModuleFactory {
@@ -28,7 +28,7 @@ public class JQAssistantModuleFactory {
   private static final GroupId JQASSISTANT_PLUGIN_GROUP_ID = groupId("org.jqassistant.plugin");
   private static final String PROPERTIES = "properties";
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -96,7 +96,7 @@ public class JQAssistantModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildJMoleculesModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildJMoleculesModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -136,7 +136,7 @@ public class JQAssistantModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildSpringModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildSpringModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off

@@ -14,7 +14,7 @@ import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMM
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
 
@@ -28,7 +28,7 @@ public class CypressModuleFactory {
   private static final String HOME = "home";
   private static final String UTILS = "utils";
 
-  public JHipsterModule buildComponentTestsModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildComponentTestsModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -49,7 +49,7 @@ public class CypressModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildE2ETestsModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildE2ETestsModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -66,7 +66,7 @@ public class CypressModuleFactory {
     // @formatter:on
   }
 
-  private static JHipsterModuleBuilder commonCypressModuleBuilder(JHipsterModuleProperties properties, SeedDestination destinationFolder) {
+  private static JHipsterModuleBuilder commonCypressModuleBuilder(SeedModuleProperties properties, SeedDestination destinationFolder) {
     // @formatter:off
     return moduleBuilder(properties)
       .packageJson()
@@ -89,15 +89,15 @@ public class CypressModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintPluginCypressE2E(JHipsterModuleProperties properties) {
+  private Consumer<JHipsterModuleBuilder> patchEslintPluginCypressE2E(SeedModuleProperties properties) {
     return patchEslintPluginCypress(properties, "e2e");
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintPluginCypressComponent(JHipsterModuleProperties properties) {
+  private Consumer<JHipsterModuleBuilder> patchEslintPluginCypressComponent(SeedModuleProperties properties) {
     return patchEslintPluginCypress(properties, "component");
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintPluginCypress(JHipsterModuleProperties properties, String path) {
+  private Consumer<JHipsterModuleBuilder> patchEslintPluginCypress(SeedModuleProperties properties, String path) {
     String eslintPluginCypress = """
       \t{
       \t\tfiles: ['src/test/webapp/%s/**/*.ts'],

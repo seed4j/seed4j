@@ -6,20 +6,20 @@ import com.seed4j.UnitTest;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterPropertyDescriptionTest {
+class SeedPropertyDescriptionTest {
 
   @Test
   void shouldGetEmptyDescriptionFromNullDescription() {
-    assertThat(JHipsterPropertyDescription.of(null)).isEmpty();
+    assertThat(SeedPropertyDescription.of(null)).isEmpty();
   }
 
   @Test
   void shouldGetEmptyDescriptionFromBlankDescription() {
-    assertThat(JHipsterPropertyDescription.of(" ")).isEmpty();
+    assertThat(SeedPropertyDescription.of(" ")).isEmpty();
   }
 
   @Test
   void shouldGetDescriptionFromActualDescription() {
-    assertThat(JHipsterPropertyDescription.of("description")).contains(new JHipsterPropertyDescription("description"));
+    assertThat(SeedPropertyDescription.of("description")).contains(new SeedPropertyDescription("description"));
   }
 }

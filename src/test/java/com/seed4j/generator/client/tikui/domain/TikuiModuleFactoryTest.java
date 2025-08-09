@@ -6,7 +6,7 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import java.util.Set;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ class TikuiModuleFactoryTest {
 
     @Test
     void shouldBuildModuleWithPugFormat() {
-      JHipsterModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      SeedModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
       JHipsterModule module = factory.buildModule(properties);
 
@@ -140,7 +140,7 @@ class TikuiModuleFactoryTest {
   }
 
   private static JHipsterModuleAsserter assertThatTikuiModule(ModuleFile proxyFile, ModuleFile indexFile) {
-    JHipsterModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     JHipsterModule module = factory.buildModule(properties);
 

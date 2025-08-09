@@ -2,7 +2,7 @@ package com.seed4j.module.infrastructure.secondary.javadependency;
 
 import com.seed4j.module.domain.javadependency.ProjectJavaDependencies;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependenciesRepository;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import java.util.Collection;
 import java.util.function.Function;
 import org.springframework.stereotype.Repository;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 class JHipsterJavaDependenciesRepository implements ProjectJavaDependenciesRepository {
 
-  private final Function<JHipsterProjectFolder, ProjectJavaDependencies> javaDependencies;
+  private final Function<SeedProjectFolder, ProjectJavaDependencies> javaDependencies;
 
   public JHipsterJavaDependenciesRepository(Collection<JHipsterProjectFolderJavaDependenciesReader> readers) {
     javaDependencies = readJavaDependencies(readers);
   }
 
-  private Function<JHipsterProjectFolder, ProjectJavaDependencies> readJavaDependencies(
+  private Function<SeedProjectFolder, ProjectJavaDependencies> readJavaDependencies(
     Collection<JHipsterProjectFolderJavaDependenciesReader> readers
   ) {
     return folder ->
@@ -27,7 +27,7 @@ class JHipsterJavaDependenciesRepository implements ProjectJavaDependenciesRepos
   }
 
   @Override
-  public ProjectJavaDependencies get(JHipsterProjectFolder folder) {
+  public ProjectJavaDependencies get(SeedProjectFolder folder) {
     return javaDependencies.apply(folder);
   }
 }

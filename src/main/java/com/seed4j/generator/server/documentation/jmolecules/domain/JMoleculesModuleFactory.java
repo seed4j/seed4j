@@ -10,14 +10,14 @@ import static com.seed4j.module.domain.javadependency.JavaDependencyType.POM;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JMoleculesModuleFactory {
 
   private static final GroupId JMOLECULES_GROUP_ID = groupId("org.jmolecules");
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

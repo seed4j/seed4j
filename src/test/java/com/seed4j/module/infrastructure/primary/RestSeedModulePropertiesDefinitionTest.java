@@ -8,7 +8,7 @@ import com.seed4j.UnitTest;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class RestJHipsterModulePropertiesDefinitionTest {
+class RestSeedModulePropertiesDefinitionTest {
 
   @Test
   void shouldSerializeToJson() {

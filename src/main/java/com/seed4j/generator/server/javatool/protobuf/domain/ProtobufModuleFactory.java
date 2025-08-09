@@ -22,7 +22,7 @@ import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class ProtobufModuleFactory {
@@ -35,7 +35,7 @@ public class ProtobufModuleFactory {
   private static final VersionSlug PROTOBUF_VERSION_SLUG = versionSlug("protobuf");
   private static final GroupId PROTOBUF_GROUP_ID = groupId("com.google.protobuf");
 
-  public JHipsterModule buildProtobufModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildProtobufModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(PROTOBUF_PACKAGE);
@@ -109,7 +109,7 @@ public class ProtobufModuleFactory {
     return mavenPlugin().groupId("io.github.ascopes").artifactId("protobuf-maven-plugin");
   }
 
-  public JHipsterModule buildProtobufBackwardsCompatibilityCheckModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildProtobufBackwardsCompatibilityCheckModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .files()

@@ -22,7 +22,7 @@ import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.regex.Pattern;
@@ -61,7 +61,7 @@ public class OAuth2ModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     var realmName = properties.getOrDefaultString(REALM_NAME, DEFAULT_REALM_NAME);
@@ -101,7 +101,7 @@ public class OAuth2ModuleFactory {
     builder.dockerComposeFile().append(dockerComposeFile("src/main/docker/keycloak.yml"));
   }
 
-  private static void appendJavaFiles(JHipsterModuleBuilder builder, JHipsterModuleProperties properties) {
+  private static void appendJavaFiles(JHipsterModuleBuilder builder, SeedModuleProperties properties) {
     String packagePath = properties.basePackage().path();
     SeedDestination mainDestination = toSrcMainJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
     SeedDestination testDestination = toSrcTestJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
@@ -164,7 +164,7 @@ public class OAuth2ModuleFactory {
       );
   }
 
-  private static void appendIntegrationTestAnnotationUpdates(JHipsterModuleBuilder builder, JHipsterModuleProperties properties) {
+  private static void appendIntegrationTestAnnotationUpdates(JHipsterModuleBuilder builder, SeedModuleProperties properties) {
     String baseClass = properties.projectBaseName().capitalized() + "App.class";
 
     builder
@@ -174,7 +174,7 @@ public class OAuth2ModuleFactory {
       .add(text(baseClass), baseClass + ", TestSecurityConfiguration.class");
   }
 
-  private static String testSecurityConfigurationImport(JHipsterModuleProperties properties) {
+  private static String testSecurityConfigurationImport(SeedModuleProperties properties) {
     return "import %s.shared.authentication.infrastructure.primary.TestSecurityConfiguration;".formatted(properties.basePackage().get());
   }
 }

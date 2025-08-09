@@ -17,7 +17,7 @@ import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class CucumberAuthenticationModuleFactory {
@@ -31,7 +31,7 @@ public class CucumberAuthenticationModuleFactory {
 
   private static final String AUTHENTICATION_STEP = "shared/authentication/infrastructure/primary/AuthenticationSteps.java";
 
-  public JHipsterModule buildOauth2Module(JHipsterModuleProperties properties) {
+  public JHipsterModule buildOauth2Module(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String mainClass = properties.projectBaseName().capitalized() + "App";
@@ -71,7 +71,7 @@ public class CucumberAuthenticationModuleFactory {
     return cucumberConfigurationNeedle + ", TestSecurityConfiguration.class, CucumberAuthenticationConfiguration.class";
   }
 
-  private String securityConfigurationImport(JHipsterModuleProperties properties) {
+  private String securityConfigurationImport(SeedModuleProperties properties) {
     return "import " + properties.basePackage().get() + ".shared.authentication.infrastructure.primary.TestSecurityConfiguration;";
   }
 
@@ -84,7 +84,7 @@ public class CucumberAuthenticationModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildJWTModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildJWTModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

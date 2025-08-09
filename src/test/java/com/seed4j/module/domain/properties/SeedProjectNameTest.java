@@ -6,20 +6,20 @@ import com.seed4j.UnitTest;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterProjectNameTest {
+class SeedProjectNameTest {
 
   @Test
   void shouldGetDefaultNameFromNullName() {
-    assertThat(new JHipsterProjectName(null).get()).isEqualTo("JHipster Project");
+    assertThat(new SeedProjectName(null).get()).isEqualTo("Seed4J Project");
   }
 
   @Test
   void shouldGetDefaultNameFromBlankName() {
-    assertThat(new JHipsterProjectName(" ").get()).isEqualTo("JHipster Project");
+    assertThat(new SeedProjectName(" ").get()).isEqualTo("Seed4J Project");
   }
 
   @Test
   void shouldGetProjectNameFromActualName() {
-    assertThat(new JHipsterProjectName("My project").get()).isEqualTo("My project");
+    assertThat(new SeedProjectName("My project").get()).isEqualTo("My project");
   }
 }

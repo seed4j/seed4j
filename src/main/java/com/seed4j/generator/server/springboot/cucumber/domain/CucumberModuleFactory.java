@@ -11,14 +11,14 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class CucumberModuleFactory {
 
   private static final SeedSource SOURCE = from("server/springboot/cucumber");
 
-  public JHipsterModule buildInitializationModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildInitializationModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();
@@ -61,7 +61,7 @@ public class CucumberModuleFactory {
     return builder.build();
   }
 
-  public JHipsterModule buildJpaResetModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildJpaResetModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     return moduleBuilder(properties)

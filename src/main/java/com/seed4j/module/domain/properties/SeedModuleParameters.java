@@ -5,8 +5,8 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.Map;
 import java.util.function.Predicate;
 
-record JHipsterModuleParameters(Map<String, Object> parameters) {
-  public JHipsterModuleParameters(Map<String, Object> parameters) {
+record SeedModuleParameters(Map<String, Object> parameters) {
+  public SeedModuleParameters(Map<String, Object> parameters) {
     this.parameters = SeedCollections.immutable(parameters);
   }
 

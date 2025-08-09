@@ -34,6 +34,6 @@ class RestJHipsterModulesTest {
     "properties":{MODULE_PROPERTIES},\
     "tags":["tag1"]}\
     ]}]}\
-    """.replace("{MODULE_PROPERTIES}", RestJHipsterModulePropertiesDefinitionTest.json());
+    """.replace("{MODULE_PROPERTIES}", RestSeedModulePropertiesDefinitionTest.json());
   }
 }

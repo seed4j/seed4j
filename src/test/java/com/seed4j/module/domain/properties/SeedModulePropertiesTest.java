@@ -14,14 +14,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @UnitTest
-class JHipsterModulePropertiesTest {
+class SeedModulePropertiesTest {
 
   private final Instant today = Instant.now();
   private final Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
 
   @Nested
   @DisplayName("Mandatory String")
-  class JHipsterModulePropertiesMandatoryStringTest {
+  class SeedModulePropertiesMandatoryStringTest {
 
     @Test
     void shouldNotGetUnknownProperty() {
@@ -42,7 +42,7 @@ class JHipsterModulePropertiesTest {
 
   @Nested
   @DisplayName("Optional String")
-  class JHipsterModulePropertiesOptionalStringTest {
+  class SeedModulePropertiesOptionalStringTest {
 
     @Test
     void shouldNotGetDefaultValueForUnknownProperty() {
@@ -68,7 +68,7 @@ class JHipsterModulePropertiesTest {
 
   @Nested
   @DisplayName("Mandatory Boolean")
-  class JHipsterModulePropertiesMandatoryBooleanTest {
+  class SeedModulePropertiesMandatoryBooleanTest {
 
     @Test
     void shouldNotGetUnknownProperty() {
@@ -89,7 +89,7 @@ class JHipsterModulePropertiesTest {
 
   @Nested
   @DisplayName("Optional Boolean")
-  class JHipsterModulePropertiesOptionalBooleanTest {
+  class SeedModulePropertiesOptionalBooleanTest {
 
     @Test
     void shouldNotGetUnknownProperty() {
@@ -110,7 +110,7 @@ class JHipsterModulePropertiesTest {
 
   @Nested
   @DisplayName("Mandatory Integer")
-  class JHipsterModulePropertiesMandatoryIntegerTest {
+  class SeedModulePropertiesMandatoryIntegerTest {
 
     @Test
     void shouldNotGetUnknownProperty() {
@@ -131,7 +131,7 @@ class JHipsterModulePropertiesTest {
 
   @Nested
   @DisplayName("Optional Integer")
-  class JHipsterModulePropertiesOptionalIntegerTest {
+  class SeedModulePropertiesOptionalIntegerTest {
 
     @Test
     void shouldNotGetUnknownProperty() {
@@ -152,7 +152,7 @@ class JHipsterModulePropertiesTest {
 
   @Nested
   @DisplayName("Instant")
-  class JHipsterModulePropertiesInstantTest {
+  class SeedModulePropertiesInstantTest {
 
     @ParameterizedTest
     @ValueSource(strings = { "string", "boolean", "integer" })
@@ -173,22 +173,22 @@ class JHipsterModulePropertiesTest {
 
   @Test
   void shouldGetDefaultProjectProperties() {
-    JHipsterModuleProperties properties = properties();
+    SeedModuleProperties properties = properties();
 
     assertThat(properties.indentation()).isEqualTo(Indentation.DEFAULT);
-    assertThat(properties.basePackage()).isEqualTo(JHipsterBasePackage.DEFAULT);
-    assertThat(properties.projectName()).isEqualTo(JHipsterProjectName.DEFAULT);
-    assertThat(properties.projectBaseName()).isEqualTo(JHipsterProjectBaseName.DEFAULT);
+    assertThat(properties.basePackage()).isEqualTo(SeedBasePackage.DEFAULT);
+    assertThat(properties.projectName()).isEqualTo(SeedProjectName.DEFAULT);
+    assertThat(properties.projectBaseName()).isEqualTo(SeedProjectBaseName.DEFAULT);
   }
 
   @Test
   void testToStringShowsProjectName() {
-    JHipsterModuleProperties properties = properties();
+    SeedModuleProperties properties = properties();
     assertThat(properties).hasToString(properties.projectName().toString());
   }
 
-  private JHipsterModuleProperties properties() {
-    return new JHipsterModuleProperties(
+  private SeedModuleProperties properties() {
+    return new SeedModuleProperties(
       "/tmp/folder",
       false,
       Map.of("string", "value", "boolean", true, "integer", 42, "blank", " ", "instant", today.toString())

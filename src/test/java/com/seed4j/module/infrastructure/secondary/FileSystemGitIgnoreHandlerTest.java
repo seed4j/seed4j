@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.file.TemplateRenderer;
 import com.seed4j.module.domain.gitignore.SeedModuleGitIgnore;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -18,7 +18,7 @@ class FileSystemGitIgnoreHandlerTest {
 
   @Test
   void shouldNotCreateGitIgnoreFileIfPatternsAreEmpty() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
 
     handler.handle(projectFolder, SeedModuleGitIgnore.builder(moduleBuilder(allProperties())).build());
 
@@ -27,7 +27,7 @@ class FileSystemGitIgnoreHandlerTest {
 
   @Test
   void shouldAutomaticallyCreateMissingGitIgnoreFileIfPatternsIsNotEmpty() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
 
     handler.handle(projectFolder, SeedModuleGitIgnore.builder(moduleBuilder(allProperties())).pattern("target/").build());
 
@@ -36,7 +36,7 @@ class FileSystemGitIgnoreHandlerTest {
 
   @Test
   void shouldNotAddAgainAnExistingEntry() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
     handler.handle(projectFolder, SeedModuleGitIgnore.builder(moduleBuilder(allProperties())).pattern("target/").build());
 
     handler.handle(projectFolder, SeedModuleGitIgnore.builder(moduleBuilder(allProperties())).pattern("target/").build());

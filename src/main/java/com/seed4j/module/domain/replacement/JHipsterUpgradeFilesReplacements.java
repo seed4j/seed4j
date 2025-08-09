@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.replacement;
 
 import com.seed4j.module.domain.GeneratedProjectRepository;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
@@ -13,7 +13,7 @@ public record JHipsterUpgradeFilesReplacements(Collection<JHipsterUpgradeFilesRe
     this.replacements = SeedCollections.immutable(replacements);
   }
 
-  public Stream<ContentReplacer> toContentReplacers(JHipsterProjectFolder folder, GeneratedProjectRepository generatedProject) {
+  public Stream<ContentReplacer> toContentReplacers(SeedProjectFolder folder, GeneratedProjectRepository generatedProject) {
     Assert.notNull("folder", folder);
     Assert.notNull("generatedProject", generatedProject);
 
@@ -21,7 +21,7 @@ public record JHipsterUpgradeFilesReplacements(Collection<JHipsterUpgradeFilesRe
   }
 
   private Function<JHipsterUpgradeFilesReplacement, Stream<ContentReplacer>> toReplacer(
-    JHipsterProjectFolder folder,
+    SeedProjectFolder folder,
     GeneratedProjectRepository generatedProject
   ) {
     return replacement ->

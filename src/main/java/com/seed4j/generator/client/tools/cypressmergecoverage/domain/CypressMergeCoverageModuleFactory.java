@@ -14,7 +14,7 @@ import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMM
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import java.util.function.Consumer;
 
 public class CypressMergeCoverageModuleFactory {
@@ -22,7 +22,7 @@ public class CypressMergeCoverageModuleFactory {
   private static final SeedSource SOURCE = from("client/tools/cypressmergecoverage");
   private static final String CYPRESS_COMPONENT_TESTS = "src/test/webapp/component";
 
-  public JHipsterModule buildCypressMergeCoverage(JHipsterModuleProperties properties) {
+  public JHipsterModule buildCypressMergeCoverage(SeedModuleProperties properties) {
     // @formatter:off
     return JHipsterModule.moduleBuilder(properties)
       .packageJson()
@@ -72,7 +72,7 @@ public class CypressMergeCoverageModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModule.JHipsterModuleBuilder> patchCypressConfig(JHipsterModuleProperties properties) {
+  private Consumer<JHipsterModule.JHipsterModuleBuilder> patchCypressConfig(SeedModuleProperties properties) {
     return moduleBuilder ->
       moduleBuilder
         .mandatoryReplacements()

@@ -2,7 +2,7 @@ package com.seed4j.module.domain.file;
 
 import com.seed4j.module.domain.ProjectFiles;
 import com.seed4j.module.domain.SeedModuleContext;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Path;
 
@@ -23,13 +23,13 @@ public final class SeedTemplatedFile {
     return new TemplatedFileBuilder();
   }
 
-  public Path folder(JHipsterProjectFolder projectFolder) {
+  public Path folder(SeedProjectFolder projectFolder) {
     Assert.notNull("projectFolder", projectFolder);
 
     return file.destination().folder(projectFolder);
   }
 
-  public Path path(JHipsterProjectFolder projectFolder) {
+  public Path path(SeedProjectFolder projectFolder) {
     Assert.notNull("projectFolder", projectFolder);
 
     return file.destination().pathInProject(projectFolder);

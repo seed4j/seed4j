@@ -16,7 +16,7 @@ import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.base64.domain.Base64Utils;
 import com.seed4j.shared.error.domain.Assert;
 
@@ -34,7 +34,7 @@ public class SpringCloudConfigModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     PropertyValue baseNameValue = propertyValue(properties.projectBaseName().get());
@@ -60,7 +60,7 @@ public class SpringCloudConfigModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterModuleBuilder initBuilder(JHipsterModuleProperties properties) {
+  private JHipsterModuleBuilder initBuilder(SeedModuleProperties properties) {
     String jwtBase64secret = properties.getOrDefaultString(JWT_BASE_64_SECRET, Base64Utils.getBase64Secret());
 
     // @formatter:off

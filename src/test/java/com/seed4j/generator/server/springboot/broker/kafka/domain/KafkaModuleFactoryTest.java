@@ -9,7 +9,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,7 +30,7 @@ class KafkaModuleFactoryTest {
   void shouldBuildKafkaModuleInit() {
     when(dockerImages.get("apache/kafka-native")).thenReturn(new DockerImageVersion("apache/kafka-native", "1.0.0"));
 
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .put("kafkaClusterId", "my-cluster")
@@ -110,7 +110,7 @@ class KafkaModuleFactoryTest {
 
   @Test
   void shouldBuildKafkaModuleSampleProducerConsumer() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -149,7 +149,7 @@ class KafkaModuleFactoryTest {
   void shouldBuildKafkaModuleAkhq() {
     when(dockerImages.get("tchiotludo/akhq")).thenReturn(new DockerImageVersion("tchiotludo/akhq", "1.0.0"));
 
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();

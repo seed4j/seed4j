@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.domain.properties.JHipsterPropertyDefaultValue;
-import com.seed4j.module.domain.properties.JHipsterPropertyDescription;
-import com.seed4j.module.domain.properties.JHipsterPropertyType;
+import com.seed4j.module.domain.properties.SeedPropertyDefaultValue;
+import com.seed4j.module.domain.properties.SeedPropertyDescription;
+import com.seed4j.module.domain.properties.SeedPropertyType;
 import com.seed4j.module.domain.resource.JHipsterModulePropertyDefinition;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 @Schema(name = "JHipsterModulePropertyDefinition", description = "Definition for a given property")
 final class RestJHipsterModulePropertyDefinition {
 
-  private final JHipsterPropertyType type;
+  private final SeedPropertyType type;
   private final boolean mandatory;
   private final String key;
   private final String description;
@@ -31,14 +31,14 @@ final class RestJHipsterModulePropertyDefinition {
       .type(propertyDefinition.type())
       .mandatory(propertyDefinition.isMandatory())
       .key(propertyDefinition.key().get())
-      .description(propertyDefinition.description().map(JHipsterPropertyDescription::get).orElse(null))
-      .defaultValue(propertyDefinition.defaultValue().map(JHipsterPropertyDefaultValue::get).orElse(null))
+      .description(propertyDefinition.description().map(SeedPropertyDescription::get).orElse(null))
+      .defaultValue(propertyDefinition.defaultValue().map(SeedPropertyDefaultValue::get).orElse(null))
       .order(propertyDefinition.order())
       .build();
   }
 
   @Schema(description = "Type of this property", requiredMode = RequiredMode.REQUIRED)
-  public JHipsterPropertyType getType() {
+  public SeedPropertyType getType() {
     return type;
   }
 
@@ -69,14 +69,14 @@ final class RestJHipsterModulePropertyDefinition {
 
   private static final class RestJHipsterModulePropertyDefinitionBuilder {
 
-    private JHipsterPropertyType type;
+    private SeedPropertyType type;
     private boolean mandatory;
     private String key;
     private String description;
     private String defaultValue;
     private int order;
 
-    private RestJHipsterModulePropertyDefinitionBuilder type(JHipsterPropertyType type) {
+    private RestJHipsterModulePropertyDefinitionBuilder type(SeedPropertyType type) {
       this.type = type;
 
       return this;

@@ -6,7 +6,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ class JacocoModuleFactoryTest {
 
     @Test
     void shouldBuildJacocoModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
       JHipsterModule module = factory.buildJacocoModule(properties);
 
@@ -104,7 +104,7 @@ class JacocoModuleFactoryTest {
 
     @Test
     void shouldBuildJacocoWithMinCoverageCheckModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
       JHipsterModule module = factory.buildJacocoWithMinCoverageCheckModule(properties);
 
@@ -150,7 +150,7 @@ class JacocoModuleFactoryTest {
 
     @Test
     void shouldBuildJacocoModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
       JHipsterModule module = factory.buildJacocoModule(properties);
 
@@ -192,7 +192,7 @@ class JacocoModuleFactoryTest {
 
   @Test
   void shouldBuildJacocoWithMinCoverageCheckModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     JHipsterModule module = factory.buildJacocoWithMinCoverageCheckModule(properties);
 

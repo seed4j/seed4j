@@ -14,7 +14,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class PrettierModuleFactory {
@@ -28,7 +28,7 @@ public class PrettierModuleFactory {
     this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -61,7 +61,7 @@ public class PrettierModuleFactory {
     // @formatter:on
   }
 
-  private String endOfLine(JHipsterModuleProperties properties) {
+  private String endOfLine(SeedModuleProperties properties) {
     return properties.getOrDefaultString("endOfLine", "lf");
   }
 }

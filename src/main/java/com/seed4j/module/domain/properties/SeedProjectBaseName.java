@@ -5,13 +5,13 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
-public record JHipsterProjectBaseName(String name) {
+public record SeedProjectBaseName(String name) {
   private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z0-9]+$");
   private static final String DEFAULT_NAME = "jhipster";
 
-  public static final JHipsterProjectBaseName DEFAULT = new JHipsterProjectBaseName(DEFAULT_NAME);
+  public static final SeedProjectBaseName DEFAULT = new SeedProjectBaseName(DEFAULT_NAME);
 
-  public JHipsterProjectBaseName(String name) {
+  public SeedProjectBaseName(String name) {
     this.name = buildName(name);
   }
 

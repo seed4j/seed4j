@@ -2,7 +2,7 @@ package com.seed4j.generator.setup.license.application;
 
 import com.seed4j.generator.setup.license.domain.LicenseModuleFactory;
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,11 +14,11 @@ public class LicenseApplicationService {
     this.license = new LicenseModuleFactory();
   }
 
-  public JHipsterModule buildMitModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMitModule(SeedModuleProperties properties) {
     return license.buildMitModule(properties);
   }
 
-  public JHipsterModule buildApacheModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildApacheModule(SeedModuleProperties properties) {
     return license.buildApacheModule(properties);
   }
 }

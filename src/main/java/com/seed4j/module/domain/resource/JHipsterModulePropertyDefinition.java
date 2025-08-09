@@ -2,22 +2,19 @@ package com.seed4j.module.domain.resource;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
-import com.seed4j.module.domain.properties.JHipsterPropertyDefaultValue;
-import com.seed4j.module.domain.properties.JHipsterPropertyDescription;
-import com.seed4j.module.domain.properties.JHipsterPropertyKey;
-import com.seed4j.module.domain.properties.JHipsterPropertyType;
+import com.seed4j.module.domain.properties.*;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Optional;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public final class JHipsterModulePropertyDefinition {
 
-  private final JHipsterPropertyType type;
+  private final SeedPropertyType type;
   private final boolean mandatory;
-  private final JHipsterPropertyKey key;
-  private final Optional<JHipsterPropertyDescription> description;
-  private final Optional<JHipsterPropertyDefaultValue> defaultValue;
+  private final SeedPropertyKey key;
+  private final Optional<SeedPropertyDescription> description;
+  private final Optional<SeedPropertyDefaultValue> defaultValue;
   private final int order;
 
   private JHipsterModulePropertyDefinition(JHipsterModulePropertyDefinitionBuilder builder) {
@@ -26,14 +23,14 @@ public final class JHipsterModulePropertyDefinition {
 
     type = builder.type;
     mandatory = builder.mandatory;
-    key = new JHipsterPropertyKey(builder.key);
-    description = JHipsterPropertyDescription.of(builder.description);
-    defaultValue = JHipsterPropertyDefaultValue.of(builder.defaultValue);
+    key = new SeedPropertyKey(builder.key);
+    description = SeedPropertyDescription.of(builder.description);
+    defaultValue = SeedPropertyDefaultValue.of(builder.defaultValue);
     order = builder.order;
   }
 
   public static JHipsterModulePropertyDefinition basePackageProperty() {
-    return mandatoryStringProperty(JHipsterModuleProperties.BASE_PACKAGE_PARAMETER)
+    return mandatoryStringProperty(SeedModuleProperties.BASE_PACKAGE_PARAMETER)
       .description("Base java package")
       .defaultValue("com.mycompany.myapp")
       .order(-300)
@@ -41,7 +38,7 @@ public final class JHipsterModulePropertyDefinition {
   }
 
   public static JHipsterModulePropertyDefinition projectNameProperty() {
-    return mandatoryStringProperty(JHipsterModuleProperties.PROJECT_NAME_PARAMETER)
+    return mandatoryStringProperty(SeedModuleProperties.PROJECT_NAME_PARAMETER)
       .description("Project full name")
       .defaultValue("JHipster Sample Application")
       .order(-200)
@@ -49,7 +46,7 @@ public final class JHipsterModulePropertyDefinition {
   }
 
   static JHipsterModulePropertyDefinition projectBaseNameProperty() {
-    return mandatoryStringProperty(JHipsterModuleProperties.PROJECT_BASE_NAME_PARAMETER)
+    return mandatoryStringProperty(SeedModuleProperties.PROJECT_BASE_NAME_PARAMETER)
       .description("Project short name (only letters and numbers)")
       .defaultValue("jhipsterSampleApplication")
       .order(-100)
@@ -57,7 +54,7 @@ public final class JHipsterModulePropertyDefinition {
   }
 
   static JHipsterModulePropertyDefinition nodePackageManagerProperty() {
-    return mandatoryStringProperty(JHipsterModuleProperties.NODE_PACKAGE_MANAGER)
+    return mandatoryStringProperty(SeedModuleProperties.NODE_PACKAGE_MANAGER)
       .description("Node package manager")
       .defaultValue("npm")
       .order(-100)
@@ -65,7 +62,7 @@ public final class JHipsterModulePropertyDefinition {
   }
 
   static JHipsterModulePropertyDefinition serverPortProperty() {
-    return mandatoryIntegerProperty(JHipsterModuleProperties.SERVER_PORT_PARAMETER)
+    return mandatoryIntegerProperty(SeedModuleProperties.SERVER_PORT_PARAMETER)
       .description("Server port")
       .defaultValue("8080")
       .order(-50)
@@ -77,7 +74,7 @@ public final class JHipsterModulePropertyDefinition {
   }
 
   public static JHipsterModulePropertyDefinition indentationProperty() {
-    return optionalIntegerProperty(JHipsterModuleProperties.INDENTATION_PARAMETER)
+    return optionalIntegerProperty(SeedModuleProperties.INDENTATION_PARAMETER)
       .description("Number of spaces in indentation")
       .defaultValue("2")
       .order(500)
@@ -85,7 +82,7 @@ public final class JHipsterModulePropertyDefinition {
   }
 
   public static JHipsterModulePropertyDefinition springConfigurationFormatProperty() {
-    return optionalStringProperty(JHipsterModuleProperties.SPRING_CONFIGURATION_FORMAT)
+    return optionalStringProperty(SeedModuleProperties.SPRING_CONFIGURATION_FORMAT)
       .description("Format of the Spring configuration files (yaml or properties)")
       .defaultValue("yaml")
       .order(500)
@@ -93,38 +90,38 @@ public final class JHipsterModulePropertyDefinition {
   }
 
   public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder mandatoryStringProperty(String key) {
-    return builder().type(JHipsterPropertyType.STRING).mandatory(true).key(key);
+    return builder().type(SeedPropertyType.STRING).mandatory(true).key(key);
   }
 
   public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder optionalStringProperty(String key) {
-    return builder().type(JHipsterPropertyType.STRING).mandatory(false).key(key);
+    return builder().type(SeedPropertyType.STRING).mandatory(false).key(key);
   }
 
   public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder mandatoryIntegerProperty(String key) {
-    return builder().type(JHipsterPropertyType.INTEGER).mandatory(true).key(key);
+    return builder().type(SeedPropertyType.INTEGER).mandatory(true).key(key);
   }
 
   public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder optionalIntegerProperty(String key) {
-    return builder().type(JHipsterPropertyType.INTEGER).mandatory(false).key(key);
+    return builder().type(SeedPropertyType.INTEGER).mandatory(false).key(key);
   }
 
   public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder mandatoryBooleanProperty(String key) {
-    return builder().type(JHipsterPropertyType.BOOLEAN).mandatory(true).key(key);
+    return builder().type(SeedPropertyType.BOOLEAN).mandatory(true).key(key);
   }
 
   public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder optionalBooleanProperty(String key) {
-    return builder().type(JHipsterPropertyType.BOOLEAN).mandatory(false).key(key);
+    return builder().type(SeedPropertyType.BOOLEAN).mandatory(false).key(key);
   }
 
   public static JHipsterModulePropertyDefinitionTypeBuilder builder() {
     return new JHipsterModulePropertyDefinitionBuilder();
   }
 
-  public JHipsterPropertyType type() {
+  public SeedPropertyType type() {
     return type;
   }
 
-  public JHipsterPropertyKey key() {
+  public SeedPropertyKey key() {
     return key;
   }
 
@@ -132,11 +129,11 @@ public final class JHipsterModulePropertyDefinition {
     return mandatory;
   }
 
-  public Optional<JHipsterPropertyDescription> description() {
+  public Optional<SeedPropertyDescription> description() {
     return description;
   }
 
-  public Optional<JHipsterPropertyDefaultValue> defaultValue() {
+  public Optional<SeedPropertyDefaultValue> defaultValue() {
     return defaultValue;
   }
 
@@ -150,8 +147,8 @@ public final class JHipsterModulePropertyDefinition {
       .append("type", type)
       .append("key", key)
       .append("mandatory", mandatory)
-      .append("description", description.map(JHipsterPropertyDescription::get).orElse(""))
-      .append("defaultValue", defaultValue.map(JHipsterPropertyDefaultValue::get).orElse(""))
+      .append("description", description.map(SeedPropertyDescription::get).orElse(""))
+      .append("defaultValue", defaultValue.map(SeedPropertyDefaultValue::get).orElse(""))
       .append("order", order)
       .build();
   }
@@ -163,7 +160,7 @@ public final class JHipsterModulePropertyDefinition {
       JHipsterModulePropertyDefinitionKeyBuilder,
       JHipsterModulePropertyDefinitionOptionalFieldsBuilder {
 
-    private JHipsterPropertyType type;
+    private SeedPropertyType type;
     private boolean mandatory;
     private String key;
     private String description;
@@ -171,7 +168,7 @@ public final class JHipsterModulePropertyDefinition {
     private int order;
 
     @Override
-    public JHipsterModulePropertyDefinitionOptionalityBuilder type(JHipsterPropertyType type) {
+    public JHipsterModulePropertyDefinitionOptionalityBuilder type(SeedPropertyType type) {
       this.type = type;
 
       return this;
@@ -219,7 +216,7 @@ public final class JHipsterModulePropertyDefinition {
   }
 
   public interface JHipsterModulePropertyDefinitionTypeBuilder {
-    JHipsterModulePropertyDefinitionOptionalityBuilder type(JHipsterPropertyType type);
+    JHipsterModulePropertyDefinitionOptionalityBuilder type(SeedPropertyType type);
   }
 
   public interface JHipsterModulePropertyDefinitionOptionalityBuilder {

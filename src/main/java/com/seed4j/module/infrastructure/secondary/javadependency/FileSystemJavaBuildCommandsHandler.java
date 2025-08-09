@@ -5,7 +5,7 @@ import com.seed4j.module.domain.SeedModuleContext;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.javabuild.ProjectJavaBuildToolRepository;
 import com.seed4j.module.domain.javabuild.command.*;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.infrastructure.secondary.FileSystemJHipsterModuleFiles;
 import com.seed4j.module.infrastructure.secondary.FileSystemReplacer;
 import com.seed4j.module.infrastructure.secondary.javadependency.gradle.GradleCommandHandler;
@@ -31,7 +31,7 @@ public class FileSystemJavaBuildCommandsHandler {
     this.fileReplacer = fileReplacer;
   }
 
-  public void handle(Indentation indentation, JHipsterProjectFolder projectFolder, SeedModuleContext context, JavaBuildCommands commands) {
+  public void handle(Indentation indentation, SeedProjectFolder projectFolder, SeedModuleContext context, JavaBuildCommands commands) {
     Assert.notNull("indentation", indentation);
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("context", context);
@@ -48,7 +48,7 @@ public class FileSystemJavaBuildCommandsHandler {
 
   private JavaDependenciesCommandHandler buildCommandHandler(
     Indentation indentation,
-    JHipsterProjectFolder projectFolder,
+    SeedProjectFolder projectFolder,
     SeedModuleContext context
   ) {
     JavaBuildTool javaBuildTool = javaBuildTools

@@ -2,7 +2,7 @@ package com.seed4j.module.domain;
 
 import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.HashMap;
@@ -23,9 +23,9 @@ public final class SeedModuleContext {
 
   public SeedModuleContext withJavaBuildTool(JavaBuildTool javaBuildTool) {
     Map<String, Object> additionalValues = Map.of(
-      JHipsterModuleProperties.JAVA_BUILD_TOOL,
+      SeedModuleProperties.JAVA_BUILD_TOOL,
       javaBuildTool.name().toLowerCase(Locale.ROOT),
-      JHipsterModuleProperties.PROJECT_BUILD_DIRECTORY,
+      SeedModuleProperties.PROJECT_BUILD_DIRECTORY,
       javaBuildTool.buildDirectory().get()
     );
     return new SeedModuleContext(SeedCollections.concat(context, additionalValues));
@@ -51,17 +51,17 @@ public final class SeedModuleContext {
       context = initialContext(module.properties());
     }
 
-    private Map<String, Object> initialContext(JHipsterModuleProperties properties) {
+    private Map<String, Object> initialContext(SeedModuleProperties properties) {
       Map<String, Object> init = new HashMap<>();
 
-      init.put(JHipsterModuleProperties.PROJECT_BASE_NAME_PARAMETER, properties.projectBaseName().get());
-      init.put(JHipsterModuleProperties.PROJECT_NAME_PARAMETER, properties.projectName().get());
-      init.put(JHipsterModuleProperties.BASE_PACKAGE_PARAMETER, properties.basePackage().get());
-      init.put(JHipsterModuleProperties.SERVER_PORT_PARAMETER, properties.serverPort().get());
-      init.put(JHipsterModuleProperties.INDENTATION_PARAMETER, properties.indentation().spacesCount());
-      init.put(JHipsterModuleProperties.JAVA_VERSION, properties.javaVersion().get());
-      init.put(JHipsterModuleProperties.PROJECT_BUILD_DIRECTORY, JavaBuildTool.MAVEN.buildDirectory().get());
-      init.put(JHipsterModuleProperties.SPRING_CONFIGURATION_FORMAT, properties.springConfigurationFormat().get());
+      init.put(SeedModuleProperties.PROJECT_BASE_NAME_PARAMETER, properties.projectBaseName().get());
+      init.put(SeedModuleProperties.PROJECT_NAME_PARAMETER, properties.projectName().get());
+      init.put(SeedModuleProperties.BASE_PACKAGE_PARAMETER, properties.basePackage().get());
+      init.put(SeedModuleProperties.SERVER_PORT_PARAMETER, properties.serverPort().get());
+      init.put(SeedModuleProperties.INDENTATION_PARAMETER, properties.indentation().spacesCount());
+      init.put(SeedModuleProperties.JAVA_VERSION, properties.javaVersion().get());
+      init.put(SeedModuleProperties.PROJECT_BUILD_DIRECTORY, JavaBuildTool.MAVEN.buildDirectory().get());
+      init.put(SeedModuleProperties.SPRING_CONFIGURATION_FORMAT, properties.springConfigurationFormat().get());
 
       return init;
     }

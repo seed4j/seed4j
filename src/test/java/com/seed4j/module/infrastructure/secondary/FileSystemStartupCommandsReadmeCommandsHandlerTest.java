@@ -10,7 +10,7 @@ import com.seed4j.LogsSpy;
 import com.seed4j.LogsSpyExtension;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.file.TemplateRenderer;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.startupcommand.*;
 import java.nio.file.Path;
 import java.util.List;
@@ -34,7 +34,7 @@ class FileSystemStartupCommandsReadmeCommandsHandlerTest {
 
   @Test
   void shouldAddMavenCommandToReadme() {
-    JHipsterProjectFolder projectFolder = projectFolderWithReadme();
+    SeedProjectFolder projectFolder = projectFolderWithReadme();
     JHipsterStartupCommand command = new MavenStartupCommandLine("clean verify sonar:sonar");
 
     handler.handle(projectFolder, new JHipsterStartupCommands(List.of(command)), emptyModuleContext());
@@ -44,7 +44,7 @@ class FileSystemStartupCommandsReadmeCommandsHandlerTest {
 
   @Test
   void shouldNotAddMavenCommandToMavenProjectWithoutReadme() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
     JHipsterStartupCommand command = new MavenStartupCommandLine("clean verify sonar:sonar");
 
     handler.handle(projectFolder, new JHipsterStartupCommands(List.of(command)), emptyModuleContext());
@@ -54,7 +54,7 @@ class FileSystemStartupCommandsReadmeCommandsHandlerTest {
 
   @Test
   void shouldAddGradleCommandToReadme() {
-    JHipsterProjectFolder projectFolder = projectFolderWithReadme();
+    SeedProjectFolder projectFolder = projectFolderWithReadme();
     JHipsterStartupCommand command = new GradleStartupCommandLine("clean build sonar --info");
 
     handler.handle(projectFolder, new JHipsterStartupCommands(List.of(command)), emptyModuleContext());
@@ -64,7 +64,7 @@ class FileSystemStartupCommandsReadmeCommandsHandlerTest {
 
   @Test
   void shouldAddDockerComposeCommandToReadme() {
-    JHipsterProjectFolder projectFolder = projectFolderWithReadme();
+    SeedProjectFolder projectFolder = projectFolderWithReadme();
     JHipsterStartupCommand command = new DockerComposeStartupCommandLine(new DockerComposeFile("src/main/docker/sonar.yml"));
 
     handler.handle(projectFolder, new JHipsterStartupCommands(List.of(command)), emptyModuleContext());
@@ -75,15 +75,15 @@ class FileSystemStartupCommandsReadmeCommandsHandlerTest {
   @ParameterizedTest
   @MethodSource("commandOrderScenarios")
   void shouldAddCommandsToProjectReadmeRespectingInsertOrder(List<JHipsterStartupCommand> commands, String expectedReadmeContent) {
-    JHipsterProjectFolder projectFolder = projectFolderWithReadme();
+    SeedProjectFolder projectFolder = projectFolderWithReadme();
 
     handler.handle(projectFolder, new JHipsterStartupCommands(commands), emptyModuleContext());
 
     assertThat(content(projectFolder.filePath("README.md"))).contains(expectedReadmeContent);
   }
 
-  private JHipsterProjectFolder projectFolderWithReadme() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
+  private SeedProjectFolder projectFolderWithReadme() {
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
     copy(Path.of("src/test/resources/projects/README.md"), projectFolder.filePath("README.md"));
     return projectFolder;
   }

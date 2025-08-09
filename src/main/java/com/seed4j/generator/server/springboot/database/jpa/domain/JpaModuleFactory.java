@@ -13,7 +13,7 @@ import com.seed4j.module.domain.LogLevel;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JpaModuleFactory {
@@ -22,19 +22,19 @@ public class JpaModuleFactory {
   private static final PropertyValue FALSE = propertyValue(false);
   private static final PropertyValue TRUE = propertyValue(true);
 
-  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildPostgreSQL(SeedModuleProperties properties) {
     return sqlCommonModuleBuilder(properties).build();
   }
 
-  public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMariaDB(SeedModuleProperties properties) {
     return sqlCommonModuleBuilder(properties).build();
   }
 
-  public JHipsterModule buildMySQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMySQL(SeedModuleProperties properties) {
     return sqlCommonModuleBuilder(properties).build();
   }
 
-  public JHipsterModule buildMsSQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMsSQL(SeedModuleProperties properties) {
     // @formatter:off
     return sqlCommonModuleBuilder(properties)
       .springMainProperties()
@@ -48,7 +48,7 @@ public class JpaModuleFactory {
     // @formatter:on
   }
 
-  public static JHipsterModule.JHipsterModuleBuilder sqlCommonModuleBuilder(JHipsterModuleProperties properties) {
+  public static JHipsterModule.JHipsterModuleBuilder sqlCommonModuleBuilder(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     SeedSource jpaSource = from("server/springboot/database/jpa");

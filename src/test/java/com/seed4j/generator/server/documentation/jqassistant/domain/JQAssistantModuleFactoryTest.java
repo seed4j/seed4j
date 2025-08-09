@@ -6,7 +6,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ class JQAssistantModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .build();
 
@@ -105,7 +105,7 @@ class JQAssistantModuleFactoryTest {
 
   @Test
   void shouldBuildJqassistantJmoleculesModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .build();
 
@@ -137,7 +137,7 @@ class JQAssistantModuleFactoryTest {
 
   @Test
   void shouldBuildJqassistantSpringModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .build();
 

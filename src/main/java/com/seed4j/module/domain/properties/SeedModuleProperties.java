@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 
-public class JHipsterModuleProperties {
+public class SeedModuleProperties {
 
   public static final String BASE_PACKAGE_PARAMETER = "packageName";
   public static final String INDENTATION_PARAMETER = "indentSize";
@@ -21,38 +21,38 @@ public class JHipsterModuleProperties {
   public static final String JAVA_BUILD_TOOL = "javaBuildTool";
   public static final String PROJECT_BUILD_DIRECTORY = "projectBuildDirectory";
 
-  private final JHipsterProjectFolder projectFolder;
+  private final SeedProjectFolder projectFolder;
   private final boolean commitModule;
-  private final JHipsterModuleParameters parameters;
+  private final SeedModuleParameters parameters;
 
   private final Indentation indentation;
-  private final JHipsterBasePackage basePackage;
-  private final JHipsterProjectName projectName;
-  private final JHipsterProjectBaseName projectBaseName;
+  private final SeedBasePackage basePackage;
+  private final SeedProjectName projectName;
+  private final SeedProjectBaseName projectBaseName;
   private final NodePackageManager nodePackageManager;
-  private final JHipsterServerPort serverPort;
+  private final SeedServerPort serverPort;
   private final SpringConfigurationFormat springConfigurationFormat;
   private final Version javaVersion = new Version("21");
 
-  public JHipsterModuleProperties(String projectFolder, boolean commitModule, Map<String, Object> parameters) {
-    this.projectFolder = new JHipsterProjectFolder(projectFolder);
+  public SeedModuleProperties(String projectFolder, boolean commitModule, Map<String, Object> parameters) {
+    this.projectFolder = new SeedProjectFolder(projectFolder);
     this.commitModule = commitModule;
-    this.parameters = new JHipsterModuleParameters(parameters);
+    this.parameters = new SeedModuleParameters(parameters);
 
     indentation = Indentation.from(this.parameters.getOrDefault(INDENTATION_PARAMETER, null, Integer.class));
-    basePackage = new JHipsterBasePackage(this.parameters.getOrDefault(BASE_PACKAGE_PARAMETER, null, String.class));
-    projectName = new JHipsterProjectName(this.parameters.getOrDefault(PROJECT_NAME_PARAMETER, null, String.class));
-    projectBaseName = new JHipsterProjectBaseName(this.parameters.getOrDefault(PROJECT_BASE_NAME_PARAMETER, null, String.class));
+    basePackage = new SeedBasePackage(this.parameters.getOrDefault(BASE_PACKAGE_PARAMETER, null, String.class));
+    projectName = new SeedProjectName(this.parameters.getOrDefault(PROJECT_NAME_PARAMETER, null, String.class));
+    projectBaseName = new SeedProjectBaseName(this.parameters.getOrDefault(PROJECT_BASE_NAME_PARAMETER, null, String.class));
     nodePackageManager = NodePackageManager.fromPropertyKey(
       this.parameters.getOrDefault(NODE_PACKAGE_MANAGER, NodePackageManager.NPM.propertyKey(), String.class)
     );
-    serverPort = new JHipsterServerPort(this.parameters.getOrDefault(SERVER_PORT_PARAMETER, null, Integer.class));
+    serverPort = new SeedServerPort(this.parameters.getOrDefault(SERVER_PORT_PARAMETER, null, Integer.class));
     springConfigurationFormat = SpringConfigurationFormat.from(
       this.parameters.getOrDefault(SPRING_CONFIGURATION_FORMAT, SpringConfigurationFormat.YAML.get(), String.class)
     );
   }
 
-  public JHipsterProjectFolder projectFolder() {
+  public SeedProjectFolder projectFolder() {
     return projectFolder;
   }
 
@@ -107,15 +107,15 @@ public class JHipsterModuleProperties {
     return basePackage.path();
   }
 
-  public JHipsterBasePackage basePackage() {
+  public SeedBasePackage basePackage() {
     return basePackage;
   }
 
-  public JHipsterProjectName projectName() {
+  public SeedProjectName projectName() {
     return projectName;
   }
 
-  public JHipsterProjectBaseName projectBaseName() {
+  public SeedProjectBaseName projectBaseName() {
     return projectBaseName;
   }
 
@@ -123,7 +123,7 @@ public class JHipsterModuleProperties {
     return nodePackageManager;
   }
 
-  public JHipsterServerPort serverPort() {
+  public SeedServerPort serverPort() {
     return serverPort;
   }
 

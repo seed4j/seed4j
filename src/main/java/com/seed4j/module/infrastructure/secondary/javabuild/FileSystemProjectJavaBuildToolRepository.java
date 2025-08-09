@@ -6,7 +6,7 @@ import com.seed4j.module.domain.file.SeedModuleFile;
 import com.seed4j.module.domain.file.SeedModuleFiles;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.javabuild.ProjectJavaBuildToolRepository;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ public class FileSystemProjectJavaBuildToolRepository implements ProjectJavaBuil
   private static final String BUILD_GRADLE_KTS = "build.gradle.kts";
 
   @Override
-  public Optional<JavaBuildTool> detect(JHipsterProjectFolder projectFolder) {
+  public Optional<JavaBuildTool> detect(SeedProjectFolder projectFolder) {
     if (projectFolder.fileExists(POM_XML)) {
       return Optional.of(JavaBuildTool.MAVEN);
     }

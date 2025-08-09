@@ -2,7 +2,7 @@ package com.seed4j.module.domain.resource;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.SeedModuleSlug;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
 import java.util.Collections;
@@ -158,7 +158,7 @@ public class JHipsterModulesResources {
     return resources.get(slug);
   }
 
-  public JHipsterModule build(SeedModuleSlug slug, JHipsterModuleProperties properties) {
+  public JHipsterModule build(SeedModuleSlug slug, SeedModuleProperties properties) {
     Assert.notNull("slug", slug);
     Assert.notNull("properties", properties);
 

@@ -14,7 +14,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.buildproperties.PropertyKey;
 import com.seed4j.module.domain.buildproperties.PropertyValue;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class LocalProfileModuleFactory {
@@ -22,7 +22,7 @@ public class LocalProfileModuleFactory {
   private static final String DELIMITER = "@";
   private static final String SPRING_PROFILES_ACTIVE = "spring.profiles.active";
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

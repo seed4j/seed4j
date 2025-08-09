@@ -18,7 +18,7 @@ import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JacocoModuleFactory {
@@ -28,7 +28,7 @@ public class JacocoModuleFactory {
   private static final ArtifactId JACOCO_ARTIFACT_ID = artifactId("jacoco-maven-plugin");
   private static final VersionSlug JACOCO_VERSION = versionSlug(JACOCO);
 
-  public JHipsterModule buildJacocoModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildJacocoModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -51,7 +51,7 @@ public class JacocoModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildJacocoWithMinCoverageCheckModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildJacocoWithMinCoverageCheckModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

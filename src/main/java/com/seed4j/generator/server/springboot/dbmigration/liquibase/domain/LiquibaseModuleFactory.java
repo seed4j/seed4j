@@ -21,7 +21,7 @@ import com.seed4j.module.domain.LogLevel;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class LiquibaseModuleFactory {
@@ -32,7 +32,7 @@ public class LiquibaseModuleFactory {
 
   private static final String LIQUIBASE = "liquibase";
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -60,7 +60,7 @@ public class LiquibaseModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildAsyncModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildAsyncModule(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
 
     // @formatter:off
@@ -85,7 +85,7 @@ public class LiquibaseModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildLinterModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildLinterModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .mavenPlugins()

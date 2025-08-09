@@ -27,7 +27,7 @@ import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.shared.error.domain.Assert;
 
@@ -51,7 +51,7 @@ public class SpringBootCoreModuleFactory {
   private static final SeedDestination MAIN_RESOURCE_DESTINATION = to("src/main/resources");
   private static final SeedDestination TEST_RESOURCES_DESTINATION = to("src/test/resources");
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();

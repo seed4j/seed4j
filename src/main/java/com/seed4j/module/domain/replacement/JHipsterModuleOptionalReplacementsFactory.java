@@ -3,7 +3,7 @@ package com.seed4j.module.domain.replacement;
 import com.seed4j.module.domain.GeneratedProjectRepository;
 import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
 import com.seed4j.module.domain.SeedProjectFilePath;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
 import java.util.Optional;
@@ -36,7 +36,7 @@ public final class JHipsterModuleOptionalReplacementsFactory extends JHipsterMod
     return new JHipsterModuleOptionalReplacementsFactory(getReplacers(), upgrade);
   }
 
-  public Stream<ContentReplacer> buildReplacers(JHipsterProjectFolder folder, GeneratedProjectRepository generatedProject) {
+  public Stream<ContentReplacer> buildReplacers(SeedProjectFolder folder, GeneratedProjectRepository generatedProject) {
     Assert.notNull("folder", folder);
     Assert.notNull("generatedProject", generatedProject);
 

@@ -12,7 +12,7 @@ import java.util.Optional;
  * It includes scripts, dependencies, development dependencies, and configurations
  * for removing unnecessary dependencies.
  */
-public final class JHipsterModulePackageJson {
+public final class SeedModulePackageJson {
 
   private final Scripts scripts;
   private final PackageJsonDependencies dependencies;
@@ -21,7 +21,7 @@ public final class JHipsterModulePackageJson {
   private final PackageNames devDependenciesToRemove;
   private final Optional<NodeModuleFormat> nodeModuleFormat;
 
-  private JHipsterModulePackageJson(JHipsterModulePackageJsonBuilder builder) {
+  private SeedModulePackageJson(JHipsterModulePackageJsonBuilder builder) {
     scripts = new Scripts(builder.scripts);
     dependencies = new PackageJsonDependencies(builder.dependencies);
     dependenciesToRemove = new PackageNames(builder.dependenciesToRemove);
@@ -222,8 +222,8 @@ public final class JHipsterModulePackageJson {
      *
      * @return a new instance of {@code JHipsterModulePackageJson}
      */
-    public JHipsterModulePackageJson build() {
-      return new JHipsterModulePackageJson(this);
+    public SeedModulePackageJson build() {
+      return new SeedModulePackageJson(this);
     }
   }
 }

@@ -6,20 +6,20 @@ import com.seed4j.UnitTest;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterPropertyDefaultValueTest {
+class SeedPropertyDefaultValueTest {
 
   @Test
   void shouldGetEmptyDefaultValueFromNullValue() {
-    assertThat(JHipsterPropertyDefaultValue.of(null)).isEmpty();
+    assertThat(SeedPropertyDefaultValue.of(null)).isEmpty();
   }
 
   @Test
   void shouldGetEmptyDefaultValueFromBlankValue() {
-    assertThat(JHipsterPropertyDefaultValue.of(" ")).isEmpty();
+    assertThat(SeedPropertyDefaultValue.of(" ")).isEmpty();
   }
 
   @Test
   void shouldGetDefaultValueFromActualDefaultValue() {
-    assertThat(JHipsterPropertyDefaultValue.of("defaultValue")).contains(new JHipsterPropertyDefaultValue("defaultValue"));
+    assertThat(SeedPropertyDefaultValue.of("defaultValue")).contains(new SeedPropertyDefaultValue("defaultValue"));
   }
 }

@@ -6,7 +6,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ class SpringBootDockerModuleFactoryTest {
 
     @Test
     void shouldBuildJibModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .basePackage("com.seed4j.growth")
         .projectBaseName("myapp")
         .put("serverPort", 9000)
@@ -85,7 +85,7 @@ class SpringBootDockerModuleFactoryTest {
 
     @Test
     void shouldBuildDockerFileModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .put("serverPort", 9000)
         .build();
 
@@ -100,7 +100,7 @@ class SpringBootDockerModuleFactoryTest {
 
     @Test
     void shouldBuildJibModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .basePackage("com.seed4j.growth")
         .projectBaseName("myapp")
         .put("serverPort", 9000)
@@ -176,7 +176,7 @@ class SpringBootDockerModuleFactoryTest {
 
     @Test
     void shouldBuildDockerFileModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .put("serverPort", 9000)
         .build();
 
@@ -191,7 +191,7 @@ class SpringBootDockerModuleFactoryTest {
 
     @Test
     void shouldBuildSpringBootDockerComposeIntegrationModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .put("serverPort", 9000)
         .build();
 

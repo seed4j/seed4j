@@ -4,8 +4,8 @@ import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public record JHipsterProjectFolder(String folder) {
-  public JHipsterProjectFolder {
+public record SeedProjectFolder(String folder) {
+  public SeedProjectFolder {
     Assert.notBlank("folder", folder);
   }
 

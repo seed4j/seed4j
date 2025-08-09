@@ -8,7 +8,7 @@ import java.util.Collection;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterModulePropertiesDefinitionTest {
+class SeedModulePropertiesDefinitionTest {
 
   @Test
   void shouldDeduplicateProperties() {

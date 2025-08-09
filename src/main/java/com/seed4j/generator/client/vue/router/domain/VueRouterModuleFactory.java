@@ -7,7 +7,7 @@ import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import java.util.function.Consumer;
 
 public class VueRouterModuleFactory {
@@ -29,7 +29,7 @@ public class VueRouterModuleFactory {
       };\
     """;
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .packageJson()

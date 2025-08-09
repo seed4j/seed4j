@@ -2,7 +2,7 @@ package com.seed4j.generator.client.vue.i18n.application;
 
 import com.seed4j.generator.client.vue.i18n.domain.VueI18nModuleFactory;
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class VueI18nApplicationService {
     vueI18n = new VueI18nModuleFactory();
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     return vueI18n.buildModule(properties);
   }
 }

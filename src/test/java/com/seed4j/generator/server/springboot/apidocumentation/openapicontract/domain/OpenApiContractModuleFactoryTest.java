@@ -7,7 +7,7 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -17,7 +17,7 @@ class OpenApiContractModuleFactoryTest {
 
   @Test
   void shouldBuildOpenApiContractModule() {
-    JHipsterModuleProperties properties = propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
+    SeedModuleProperties properties = propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
 
     JHipsterModule module = factory.buildModule(properties);
 
@@ -75,7 +75,7 @@ class OpenApiContractModuleFactoryTest {
 
   @Test
   void shouldBuildOpenApiBackwardsCompatibilityCheckModule() {
-    JHipsterModuleProperties properties = propertiesBuilder(tmpDirForTest()).build();
+    SeedModuleProperties properties = propertiesBuilder(tmpDirForTest()).build();
 
     JHipsterModule module = factory.buildBackwardsCompatibilityCheckModule(properties);
 

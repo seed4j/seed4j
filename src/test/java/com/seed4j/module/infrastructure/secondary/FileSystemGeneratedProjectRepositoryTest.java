@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterFileMatcher;
 import com.seed4j.module.domain.SeedProjectFilePath;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.GeneratorException;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class FileSystemGeneratedProjectRepositoryTest {
 
   @Test
   void shouldGracefullyHandleException() {
-    assertThatThrownBy(() -> generatedProject.list(new JHipsterProjectFolder("unknown"), allMatch())).isExactlyInstanceOf(
+    assertThatThrownBy(() -> generatedProject.list(new SeedProjectFolder("unknown"), allMatch())).isExactlyInstanceOf(
       GeneratorException.class
     );
   }
@@ -27,7 +27,7 @@ class FileSystemGeneratedProjectRepositoryTest {
   @Test
   void shouldListFiles() {
     Stream<String> files = generatedProject
-      .list(new JHipsterProjectFolder(SOURCE), filesWithExtension("java"))
+      .list(new SeedProjectFolder(SOURCE), filesWithExtension("java"))
       .stream()
       .map(SeedProjectFilePath::get);
 

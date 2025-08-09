@@ -11,7 +11,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import java.util.function.Consumer;
 
 public class VueModuleFactory {
@@ -31,7 +31,7 @@ public class VueModuleFactory {
     this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .preCommitActions(stagedFilesFilter("{src/**/,}*.{ts,vue}"), preCommitCommands("eslint --fix", "prettier --write"))
@@ -93,7 +93,7 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintConfig(JHipsterModuleProperties properties) {
+  private Consumer<JHipsterModuleBuilder> patchEslintConfig(SeedModuleProperties properties) {
     String vuePluginConfig = """
       \t...vue.configs['flat/recommended'],
       \t{
@@ -120,7 +120,7 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchTsConfig(JHipsterModuleProperties properties) {
+  private Consumer<JHipsterModuleBuilder> patchTsConfig(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

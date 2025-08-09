@@ -6,7 +6,7 @@ import com.seed4j.module.domain.SeedModuleContext;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.gitignore.GitIgnoreEntry;
 import com.seed4j.module.domain.gitignore.SeedModuleGitIgnore;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.replacement.*;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
@@ -27,7 +27,7 @@ class FileSystemGitIgnoreHandler {
     this.fileReplacer = fileReplacer;
   }
 
-  public void handle(JHipsterProjectFolder projectFolder, SeedModuleGitIgnore gitIgnore) {
+  public void handle(SeedProjectFolder projectFolder, SeedModuleGitIgnore gitIgnore) {
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("gitIgnore", gitIgnore);
 
@@ -38,7 +38,7 @@ class FileSystemGitIgnoreHandler {
   }
 
   @ExcludeFromGeneratedCodeCoverage(reason = "IOException is hard to test")
-  private static void createGitIgnoreFileIfNeeded(JHipsterProjectFolder projectFolder) {
+  private static void createGitIgnoreFileIfNeeded(SeedProjectFolder projectFolder) {
     Path gitIgnoreFilePath = projectFolder.filePath(GIT_IGNORE_FILE_PATH);
 
     if (Files.notExists(gitIgnoreFilePath)) {
@@ -53,7 +53,7 @@ class FileSystemGitIgnoreHandler {
     }
   }
 
-  private Consumer<GitIgnoreEntry> handleIgnorePattern(JHipsterProjectFolder projectFolder) {
+  private Consumer<GitIgnoreEntry> handleIgnorePattern(SeedProjectFolder projectFolder) {
     return gitIgnoreEntry -> {
       MandatoryReplacer replacer = new MandatoryReplacer(new EndOfFileReplacer(notContainingReplacement()), gitIgnoreEntry.get());
       fileReplacer.handle(

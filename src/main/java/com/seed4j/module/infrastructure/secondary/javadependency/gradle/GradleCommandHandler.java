@@ -43,7 +43,7 @@ import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.replacement.ContentReplacers;
 import com.seed4j.module.domain.replacement.MandatoryFileReplacer;
 import com.seed4j.module.domain.replacement.MandatoryReplacer;
@@ -118,7 +118,7 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
   private static final String BUILD_GRADLE_PROFILE_PATH_TEMPLATE = "buildSrc/src/main/kotlin/profile-%s.gradle.kts";
 
   private final Indentation indentation;
-  private final JHipsterProjectFolder projectFolder;
+  private final SeedProjectFolder projectFolder;
   private final SeedModuleContext context;
   private final VersionsCatalog versionsCatalog;
   private final FileSystemReplacer fileReplacer;
@@ -126,7 +126,7 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
 
   public GradleCommandHandler(
     Indentation indentation,
-    JHipsterProjectFolder projectFolder,
+    SeedProjectFolder projectFolder,
     SeedModuleContext context,
     FileSystemJHipsterModuleFiles files,
     FileSystemReplacer fileReplacer

@@ -13,7 +13,7 @@ import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringdocModuleFactory {
@@ -26,15 +26,15 @@ public class SpringdocModuleFactory {
 
   private static final String SPRINGDOC_CONFIG_JAVA_FILE = "SpringdocConfiguration.java";
 
-  public JHipsterModule buildModuleForMvc(JHipsterModuleProperties moduleProperties) {
+  public JHipsterModule buildModuleForMvc(SeedModuleProperties moduleProperties) {
     return buildModule(moduleProperties, SpringdocDependencies.MVC);
   }
 
-  public JHipsterModule buildModuleForWebflux(JHipsterModuleProperties moduleProperties) {
+  public JHipsterModule buildModuleForWebflux(SeedModuleProperties moduleProperties) {
     return buildModule(moduleProperties, SpringdocDependencies.WEBFLUX);
   }
 
-  private JHipsterModule buildModule(JHipsterModuleProperties properties, SpringdocDependencies dependencies) {
+  private JHipsterModule buildModule(SeedModuleProperties properties, SpringdocDependencies dependencies) {
     Assert.notNull("properties", properties);
 
     SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(DESTINATION);

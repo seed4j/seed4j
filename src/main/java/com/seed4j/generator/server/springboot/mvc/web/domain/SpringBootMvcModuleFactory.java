@@ -23,7 +23,7 @@ import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringBootMvcModuleFactory {
@@ -47,11 +47,11 @@ public class SpringBootMvcModuleFactory {
   private static final String CORS_DESTINATION = "wire/security";
   private static final String CORS_PRIMARY = CORS_DESTINATION + "/infrastructure/primary";
 
-  public JHipsterModule buildEmptyModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildEmptyModule(SeedModuleProperties properties) {
     return moduleBuilder(properties).build();
   }
 
-  public JHipsterModule buildTomcatModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildTomcatModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -63,7 +63,7 @@ public class SpringBootMvcModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildUndertowModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildUndertowModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -84,7 +84,7 @@ public class SpringBootMvcModuleFactory {
       .build();
   }
 
-  private JHipsterModuleBuilder springMvcBuilder(JHipsterModuleProperties properties, String loggerName, LogLevel logLevel) {
+  private JHipsterModuleBuilder springMvcBuilder(SeedModuleProperties properties, String loggerName, LogLevel logLevel) {
     String packagePath = properties.packagePath();
 
     SeedDestination mainDestination = toSrcMainJava().append(packagePath);

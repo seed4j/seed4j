@@ -11,7 +11,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.javaproperties.SpringProfile;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class OAuth2Auth0ModuleFactory {
@@ -24,7 +24,7 @@ public class OAuth2Auth0ModuleFactory {
   private static final String AUTH0_DOMAIN_PROPERTY = "auth0Domain";
   private static final String AUTH0_SHELL_SCRIPT = "auth0.sh";
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -46,15 +46,15 @@ public class OAuth2Auth0ModuleFactory {
     // @formatter:on
   }
 
-  private static PropertyValue audience(JHipsterModuleProperties properties) {
+  private static PropertyValue audience(SeedModuleProperties properties) {
     return propertyValue("account", "api://default", "https://" + properties.getString(AUTH0_DOMAIN_PROPERTY) + "/api/v2/");
   }
 
-  private static PropertyValue issuerUri(JHipsterModuleProperties properties) {
+  private static PropertyValue issuerUri(SeedModuleProperties properties) {
     return propertyValue("https://" + properties.getString(AUTH0_DOMAIN_PROPERTY) + "/");
   }
 
-  private static PropertyValue clientId(JHipsterModuleProperties properties) {
+  private static PropertyValue clientId(SeedModuleProperties properties) {
     return propertyValue(properties.getString(CLIENT_ID_PROPERTY));
   }
 }

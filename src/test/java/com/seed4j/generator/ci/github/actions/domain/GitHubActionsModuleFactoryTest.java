@@ -11,7 +11,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,7 +30,7 @@ class GitHubActionsModuleFactoryTest {
 
   @Test
   void shouldBuildGitHubActionsMavenModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
     mockNodeVersion();
 
     JHipsterModule module = factory.buildGitHubActionsMavenModule(properties);
@@ -44,7 +44,7 @@ class GitHubActionsModuleFactoryTest {
 
   @Test
   void shouldBuildGitHubActionsGradleModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
     mockNodeVersion();
 
     JHipsterModule module = factory.buildGitHubActionsGradleModule(properties);

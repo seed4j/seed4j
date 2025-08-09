@@ -2,7 +2,7 @@ package com.seed4j.generator.server.webjars.application;
 
 import com.seed4j.generator.server.webjars.domain.WebjarsModuleFactory;
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,15 +14,15 @@ public class WebjarsApplicationService {
     webjars = new WebjarsModuleFactory();
   }
 
-  public JHipsterModule buildWebjarsLocatorModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildWebjarsLocatorModule(SeedModuleProperties properties) {
     return webjars.buildWebjarsLocatorModule(properties);
   }
 
-  public JHipsterModule buildWebjarsHtmxModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildWebjarsHtmxModule(SeedModuleProperties properties) {
     return webjars.buildWebjarsHtmxModule(properties);
   }
 
-  public JHipsterModule buildWebjarsAlpineJSModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildWebjarsAlpineJSModule(SeedModuleProperties properties) {
     return webjars.buildWebjarsAlpineJSModule(properties);
   }
 }

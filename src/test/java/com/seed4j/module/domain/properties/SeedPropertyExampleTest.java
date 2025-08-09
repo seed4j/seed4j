@@ -6,25 +6,25 @@ import com.seed4j.UnitTest;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterPropertyExampleTest {
+class SeedPropertyExampleTest {
 
   @Test
   void shouldGetEmptyExampleFromNullExample() {
-    assertThat(JHipsterPropertyExample.of(null)).isEmpty();
+    assertThat(SeedPropertyExample.of(null)).isEmpty();
   }
 
   @Test
   void shouldGetEmptyExampleFromBlankExample() {
-    assertThat(JHipsterPropertyExample.of(" ")).isEmpty();
+    assertThat(SeedPropertyExample.of(" ")).isEmpty();
   }
 
   @Test
   void shouldGetExampleFromActualExample() {
-    assertThat(JHipsterPropertyExample.of("example")).contains(new JHipsterPropertyExample("example"));
+    assertThat(SeedPropertyExample.of("example")).contains(new SeedPropertyExample("example"));
   }
 
   @Test
   void shouldGetValueFromGet() {
-    assertThat(JHipsterPropertyExample.of("example").orElseThrow().get()).isEqualTo(new JHipsterPropertyExample("example").get());
+    assertThat(SeedPropertyExample.of("example").orElseThrow().get()).isEqualTo(new SeedPropertyExample("example").get());
   }
 }

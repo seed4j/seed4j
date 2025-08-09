@@ -16,7 +16,7 @@ import static com.seed4j.module.domain.JHipsterModule.versionSlug;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import java.util.UUID;
 
 public class KafkaModuleFactory {
@@ -34,7 +34,7 @@ public class KafkaModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public JHipsterModule buildModuleInit(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModuleInit(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
     String kafkaClusterId = properties.getOrDefaultString("kafkaClusterId", UUID.randomUUID().toString());
 
@@ -80,7 +80,7 @@ public class KafkaModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildModuleSampleProducerConsumer(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModuleSampleProducerConsumer(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
 
     // @formatter:off
@@ -101,7 +101,7 @@ public class KafkaModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildModuleAkhq(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModuleAkhq(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .context()

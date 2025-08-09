@@ -7,7 +7,7 @@ import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertio
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -21,9 +21,7 @@ class LiquibaseModuleFactoryTest {
 
     @Test
     void shouldBuildModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
-        .basePackage("com.seed4j.growth")
-        .build();
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
 
       JHipsterModule module = factory.buildModule(properties);
 
@@ -75,9 +73,7 @@ class LiquibaseModuleFactoryTest {
 
     @Test
     void shouldBuildAsyncModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
-        .basePackage("com.seed4j.growth")
-        .build();
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
 
       JHipsterModule module = factory.buildAsyncModule(properties);
 
@@ -98,7 +94,7 @@ class LiquibaseModuleFactoryTest {
 
     @Test
     void shouldBuildModuleWithYamlSpringConfigurationFormat() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
         .basePackage("com.seed4j.growth")
         .springConfigurationFormat(YAML)
         .build();
@@ -113,7 +109,7 @@ class LiquibaseModuleFactoryTest {
 
     @Test
     void shouldBuildModuleWithPropertiesSpringConfigurationFormat() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
         .basePackage("com.seed4j.growth")
         .springConfigurationFormat(PROPERTIES)
         .build();
@@ -132,9 +128,7 @@ class LiquibaseModuleFactoryTest {
 
     @Test
     void shouldBuildModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest())
-        .basePackage("com.seed4j.growth")
-        .build();
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
 
       JHipsterModule module = factory.buildLinterModule(properties);
 

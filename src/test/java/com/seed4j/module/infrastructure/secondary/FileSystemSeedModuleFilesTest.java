@@ -20,7 +20,7 @@ import com.seed4j.module.domain.file.SeedFilesToMove;
 import com.seed4j.module.domain.file.SeedTemplatedFile;
 import com.seed4j.module.domain.file.SeedTemplatedFiles;
 import com.seed4j.module.domain.file.TemplateRenderer;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
 import java.io.IOException;
@@ -45,7 +45,7 @@ class FileSystemSeedModuleFilesTest {
 
   @Test
   void shouldNotWriteOnUnwritablePath() {
-    JHipsterProjectFolder project = new JHipsterProjectFolder(Path.of("src/test/resources/generator").toAbsolutePath().toString());
+    SeedProjectFolder project = new SeedProjectFolder(Path.of("src/test/resources/generator").toAbsolutePath().toString());
 
     JHipsterModule module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(project.folder()).build())
       .files()
@@ -58,7 +58,7 @@ class FileSystemSeedModuleFilesTest {
 
   @Test
   void shouldTraceAddedFiles() {
-    JHipsterProjectFolder project = new JHipsterProjectFolder(TestFileUtils.tmpDirForTest());
+    SeedProjectFolder project = new SeedProjectFolder(TestFileUtils.tmpDirForTest());
 
     JHipsterModule module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(project.folder()).build())
       .files()
@@ -81,7 +81,7 @@ class FileSystemSeedModuleFilesTest {
 
   @Test
   void shouldNotMoveUnknownFile() {
-    JHipsterProjectFolder project = new JHipsterProjectFolder(TestFileUtils.tmpDirForTest());
+    SeedProjectFolder project = new SeedProjectFolder(TestFileUtils.tmpDirForTest());
 
     assertThatThrownBy(() ->
       files.move(project, new SeedFilesToMove(List.of(new SeedFileToMove(new SeedProjectFilePath("unknown-file"), to("dummy")))))
@@ -94,7 +94,7 @@ class FileSystemSeedModuleFilesTest {
   void shouldTraceNotMoveFileWithExistingDestination() throws IOException {
     String folder = TestFileUtils.tmpDirForTest();
     Path folderPath = Path.of(folder);
-    JHipsterProjectFolder project = new JHipsterProjectFolder(folder);
+    SeedProjectFolder project = new SeedProjectFolder(folder);
     Files.createDirectories(folderPath);
     Files.copy(Path.of("src/test/resources/projects/files/dummy.txt"), folderPath.resolve("dummy.txt"));
 
@@ -105,7 +105,7 @@ class FileSystemSeedModuleFilesTest {
 
   @Test
   void shouldNotDeleteUnknownFile() {
-    JHipsterProjectFolder project = new JHipsterProjectFolder(TestFileUtils.tmpDirForTest());
+    SeedProjectFolder project = new SeedProjectFolder(TestFileUtils.tmpDirForTest());
 
     assertThatThrownBy(() -> files.delete(project, new SeedFilesToDelete(List.of(new SeedProjectFilePath("unknown-file")))))
       .isExactlyInstanceOf(UnknownFileToDeleteException.class)

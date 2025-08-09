@@ -2,8 +2,8 @@ package com.seed4j.module.domain.properties;
 
 import com.seed4j.shared.error.domain.Assert;
 
-public record JHipsterPropertyKey(String key) {
-  public JHipsterPropertyKey {
+public record SeedPropertyKey(String key) {
+  public SeedPropertyKey {
     Assert.notBlank("key", key);
   }
 

@@ -6,7 +6,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -16,7 +16,7 @@ class JwtAuthenticationModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("jhipster")
       .build();
@@ -135,7 +135,7 @@ class JwtAuthenticationModuleFactoryTest {
   @Test
   void shouldBuildModuleWithJwtBase64Secret() {
     String jwtBase64Secret = "Y2EyZjQ2YmNmZjMwMTE5YjcxOTBjYzZiYWVjZjY0NzZlMzNmNjY5MjgwMjUxZDNjOTA3N2M5YjAyYTg3ODEzMA==";
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("jhipster")
       .put("jwtBase64Secret", jwtBase64Secret)

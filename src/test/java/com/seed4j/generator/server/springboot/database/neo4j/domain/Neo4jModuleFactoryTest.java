@@ -9,7 +9,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,7 +30,7 @@ class Neo4jModuleFactoryTest {
   void shouldBuildModule() {
     when(dockerImages.get("neo4j")).thenReturn(new DockerImageVersion("neo4j", "4.4.11-community"));
 
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .build();
 

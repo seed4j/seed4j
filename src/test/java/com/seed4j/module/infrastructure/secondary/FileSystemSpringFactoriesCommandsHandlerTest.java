@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.javaproperties.*;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ class FileSystemSpringFactoriesCommandsHandlerTest {
   void shouldCreateDefaultTestPropertiesForProjectWithoutProperties() {
     String folder = tmpDirForTest();
 
-    handler.handle(new JHipsterProjectFolder(folder), properties(springTestFactory()));
+    handler.handle(new SeedProjectFolder(folder), properties(springTestFactory()));
 
     assertThat(contentNormalizingNewLines(Path.of(folder, "src/test/resources/META-INF/spring.factories"))).contains(
         """
@@ -38,7 +38,7 @@ class FileSystemSpringFactoriesCommandsHandlerTest {
     Path propertiesFile = Path.of(folder, "src/test/resources/META-INF/spring.factories");
     loadDefaultProperties(EXISTING_SPRING_FACTORIES, propertiesFile);
 
-    handler.handle(new JHipsterProjectFolder(folder), properties(springTestFactory()));
+    handler.handle(new SeedProjectFolder(folder), properties(springTestFactory()));
 
     assertThat(contentNormalizingNewLines(propertiesFile)).contains(
         """

@@ -6,7 +6,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -41,7 +41,7 @@ class SpringdocModuleFactoryTest {
       .containing("<artifactId>springdoc-openapi-starter-webflux-api</artifactId>");
   }
 
-  private JHipsterModuleProperties properties() {
+  private SeedModuleProperties properties() {
     return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")

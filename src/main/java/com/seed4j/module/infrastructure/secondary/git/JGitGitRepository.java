@@ -2,7 +2,7 @@ package com.seed4j.module.infrastructure.secondary.git;
 
 import com.seed4j.module.domain.git.GitCommitMessage;
 import com.seed4j.module.domain.git.GitRepository;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.io.File;
@@ -23,7 +23,7 @@ class JGitGitRepository implements GitRepository {
   private static final Logger log = LoggerFactory.getLogger(JGitGitRepository.class);
 
   @Override
-  public void init(JHipsterProjectFolder folder) {
+  public void init(SeedProjectFolder folder) {
     Assert.notNull("folder", folder);
 
     if (isGit(folder)) {
@@ -39,18 +39,18 @@ class JGitGitRepository implements GitRepository {
     }
   }
 
-  private boolean isGit(JHipsterProjectFolder folder) {
+  private boolean isGit(SeedProjectFolder folder) {
     return findGitDirectory(folder).isPresent();
   }
 
-  private Optional<File> findGitDirectory(JHipsterProjectFolder folder) {
+  private Optional<File> findGitDirectory(SeedProjectFolder folder) {
     FileRepositoryBuilder repositoryBuilder = new FileRepositoryBuilder();
     return Optional.ofNullable(repositoryBuilder.findGitDir(folderFile(folder)).getGitDir());
   }
 
   @Override
   @ExcludeFromGeneratedCodeCoverage(reason = "IOException are hard to test")
-  public void commitAll(JHipsterProjectFolder folder, GitCommitMessage message) {
+  public void commitAll(SeedProjectFolder folder, GitCommitMessage message) {
     Assert.notNull("folder", folder);
     Assert.notNull("message", message);
 
@@ -66,7 +66,7 @@ class JGitGitRepository implements GitRepository {
     }
   }
 
-  private File folderFile(JHipsterProjectFolder folder) {
+  private File folderFile(SeedProjectFolder folder) {
     return Path.of(folder.get()).toFile();
   }
 }

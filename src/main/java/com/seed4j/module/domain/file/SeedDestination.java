@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.file;
 
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.nio.file.Path;
@@ -41,13 +41,13 @@ public class SeedDestination {
     return new SeedDestination(destination + "/" + element);
   }
 
-  public Path folder(JHipsterProjectFolder project) {
+  public Path folder(SeedProjectFolder project) {
     Assert.notNull("project", project);
 
     return project.filePath(destination).getParent();
   }
 
-  public Path pathInProject(JHipsterProjectFolder project) {
+  public Path pathInProject(SeedProjectFolder project) {
     Assert.notNull("project", project);
 
     return project.filePath(destination);

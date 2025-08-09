@@ -11,7 +11,7 @@ import com.seed4j.shared.projectfolder.domain.ProjectFolder;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class RestJHipsterModulePropertiesTest {
+class RestSeedModulePropertiesTest {
 
   private static final ProjectFolder jHipsterProjectFolderFactory = mock(ProjectFolder.class);
 

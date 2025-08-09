@@ -8,7 +8,7 @@ import static com.seed4j.module.domain.JHipsterModule.to;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class TSRestPaginationModuleFactory {
@@ -17,7 +17,7 @@ public class TSRestPaginationModuleFactory {
   private static final SeedDestination MAIN_DESTINATION = to("src/main/webapp/app/shared/pagination/infrastructure/secondary/");
   private static final SeedDestination TEST_DESTINATION = to("src/test/webapp/unit/shared/pagination/infrastructure/secondary/");
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

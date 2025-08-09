@@ -22,9 +22,9 @@ import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.packagejson.JHipsterModulePackageJson;
-import com.seed4j.module.domain.packagejson.JHipsterModulePackageJson.JHipsterModulePackageJsonBuilder;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.packagejson.SeedModulePackageJson;
+import com.seed4j.module.domain.packagejson.SeedModulePackageJson.JHipsterModulePackageJsonBuilder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.infrastructure.secondary.file.MustacheTemplateRenderer;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -64,15 +64,15 @@ class FileSystemPackageJsonHandlerTest {
     ).isExactlyInstanceOf(MissingPackageJsonException.class);
   }
 
-  private JHipsterProjectFolder emptyFolder() {
-    return new JHipsterProjectFolder(TestFileUtils.tmpDirForTest());
+  private SeedProjectFolder emptyFolder() {
+    return new SeedProjectFolder(TestFileUtils.tmpDirForTest());
   }
 
   @Test
   void shouldNotAddNotNeededBlock() {
     when(nodeVersions.get("@playwright/test", COMMON.build())).thenReturn(new NodePackageVersion("1.1.1"));
 
-    JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+    SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
     packageJson.handle(
       Indentation.DEFAULT,
@@ -86,7 +86,7 @@ class FileSystemPackageJsonHandlerTest {
 
   @Test
   void shouldNotGreedExistingBlocks() {
-    JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+    SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
     packageJson.handle(
       Indentation.DEFAULT,
@@ -120,7 +120,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldAddTypeToPackageJsonWithoutType() {
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
       packageJson.handle(Indentation.DEFAULT, folder, packageJson(p -> p.type(MODULE)), emptyModuleContext());
 
@@ -135,7 +135,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldReplaceExistingType() {
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(Indentation.DEFAULT, folder, packageJson(p -> p.type(COMMONJS)), emptyModuleContext());
 
@@ -154,7 +154,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldAddScriptToPackageJsonWithoutScriptSection() {
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -176,7 +176,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldAddScriptsToPackageJsonWithScriptSection() {
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -201,7 +201,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldAddScriptsToPackageJsonWithScriptsTemplate() {
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node-template/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node-template/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -222,7 +222,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldReplaceOnlyExistingScript() {
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -245,7 +245,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldReplaceExistingScript() {
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node-multiple-scripts/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node-multiple-scripts/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -272,7 +272,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDevDependencyToPackageJsonWithoutDevDependencySection() {
       mockDevVersion();
 
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -296,7 +296,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDevDependencyToPackageJsonWithDevDependencySection() {
       mockDevVersion();
 
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -319,7 +319,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDevDependencyToPackageJsonUsingVersionSourcePackage() {
       when(nodeVersions.get("@angular/core", ANGULAR.build())).thenReturn(new NodePackageVersion("1.1.1"));
 
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -341,7 +341,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldReplaceExistingDevDependency() {
       mockDevVersion();
 
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -364,7 +364,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldRemoveExistingDevDependency() {
       mockDevVersion();
 
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -394,7 +394,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDependencyToPackageJsonWithoutDependencySection() {
       mockVersion();
 
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -418,7 +418,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDependencyToPackageJsonWithDependencySection() {
       mockVersion();
 
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -441,7 +441,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDependencyToPackageJsonUsingVersionSourcePackage() {
       when(nodeVersions.get("@angular/core", ANGULAR.build())).thenReturn(new NodePackageVersion("1.1.1"));
 
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -463,7 +463,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldReplaceExistingDependency() {
       mockVersion();
 
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -486,7 +486,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldRemoveExistingDependency() {
       mockVersion();
 
-      JHipsterProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -510,7 +510,7 @@ class FileSystemPackageJsonHandlerTest {
   }
 
   @SafeVarargs
-  private @NotNull JHipsterModulePackageJson packageJson(Consumer<JHipsterModulePackageJsonBuilder>... builderConfigurations) {
+  private @NotNull SeedModulePackageJson packageJson(Consumer<JHipsterModulePackageJsonBuilder>... builderConfigurations) {
     JHipsterModulePackageJsonBuilder builder = emptyBuilder();
     Stream.of(builderConfigurations).forEach(configuration -> configuration.accept(builder));
 
@@ -518,10 +518,10 @@ class FileSystemPackageJsonHandlerTest {
   }
 
   private JHipsterModulePackageJsonBuilder emptyBuilder() {
-    return JHipsterModulePackageJson.builder(emptyModuleBuilder());
+    return SeedModulePackageJson.builder(emptyModuleBuilder());
   }
 
-  private static JHipsterProjectFolder projectWithPackageJson(String packageJson) {
+  private static SeedProjectFolder projectWithPackageJson(String packageJson) {
     String target = TestFileUtils.tmpDirForTest();
 
     try {
@@ -531,10 +531,10 @@ class FileSystemPackageJsonHandlerTest {
       throw new AssertionError(e);
     }
 
-    return new JHipsterProjectFolder(target);
+    return new SeedProjectFolder(target);
   }
 
-  private static void assertPackageJsonContent(JHipsterProjectFolder folder, String expectedContent) {
+  private static void assertPackageJsonContent(SeedProjectFolder folder, String expectedContent) {
     String packageJsonContent = packageJsonContent(folder);
 
     assertThat(packageJsonContent)
@@ -542,7 +542,7 @@ class FileSystemPackageJsonHandlerTest {
       .contains(expectedContent);
   }
 
-  private static String packageJsonContent(JHipsterProjectFolder folder) {
+  private static String packageJsonContent(SeedProjectFolder folder) {
     try {
       return Files.readString(folder.filePath(PACKAGE_JSON)).replace("\r", "");
     } catch (IOException e) {

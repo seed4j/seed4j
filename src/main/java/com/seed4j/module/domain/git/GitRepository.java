@@ -1,13 +1,13 @@
 package com.seed4j.module.domain.git;
 
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 
 public interface GitRepository {
-  void init(JHipsterProjectFolder folder);
+  void init(SeedProjectFolder folder);
 
-  void commitAll(JHipsterProjectFolder folder, GitCommitMessage message);
+  void commitAll(SeedProjectFolder folder, GitCommitMessage message);
 
-  default void commitAll(JHipsterProjectFolder folder, String message) {
+  default void commitAll(SeedProjectFolder folder, String message) {
     commitAll(folder, new GitCommitMessage(message));
   }
 }

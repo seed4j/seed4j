@@ -9,12 +9,12 @@ import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.GENERATE_RESO
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JooqModuleFactory {
 
-  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildPostgreSQL(SeedModuleProperties properties) {
     // @formatter:off
     return commonModuleBuilder(properties)
       .mavenPlugins()
@@ -24,7 +24,7 @@ public class JooqModuleFactory {
     // @formatter:on
   }
 
-  private static String postgreSQLPluginConfiguration(JHipsterModuleProperties properties) {
+  private static String postgreSQLPluginConfiguration(SeedModuleProperties properties) {
     return JooqModuleCodegenConfiguration.builder()
       .databaseUrl("jdbc:postgresql://localhost:5432/" + properties.projectBaseName().name())
       .user(properties.projectBaseName().name())
@@ -34,7 +34,7 @@ public class JooqModuleFactory {
       .getConfiguration();
   }
 
-  public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMariaDB(SeedModuleProperties properties) {
     // @formatter:off
     return commonModuleBuilder(properties)
       .mavenPlugins()
@@ -44,7 +44,7 @@ public class JooqModuleFactory {
     // @formatter:on
   }
 
-  private static String mariadbPluginConfiguration(JHipsterModuleProperties properties) {
+  private static String mariadbPluginConfiguration(SeedModuleProperties properties) {
     return JooqModuleCodegenConfiguration.builder()
       .databaseUrl("jdbc:mariadb://localhost:3306/" + properties.projectBaseName().name())
       .user("root")
@@ -54,7 +54,7 @@ public class JooqModuleFactory {
       .getConfiguration();
   }
 
-  public JHipsterModule buildMySQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMySQL(SeedModuleProperties properties) {
     // @formatter:off
     return commonModuleBuilder(properties)
       .mavenPlugins()
@@ -64,7 +64,7 @@ public class JooqModuleFactory {
     // @formatter:on
   }
 
-  private static String mysqlPluginConfiguration(JHipsterModuleProperties properties) {
+  private static String mysqlPluginConfiguration(SeedModuleProperties properties) {
     return JooqModuleCodegenConfiguration.builder()
       .databaseUrl("jdbc:mysql://localhost:3306/" + properties.projectBaseName().name())
       .user("root")
@@ -74,7 +74,7 @@ public class JooqModuleFactory {
       .getConfiguration();
   }
 
-  public JHipsterModule buildMsSQL(JHipsterModuleProperties properties) {
+  public JHipsterModule buildMsSQL(SeedModuleProperties properties) {
     // @formatter:off
     return commonModuleBuilder(properties)
       .mavenPlugins()
@@ -84,7 +84,7 @@ public class JooqModuleFactory {
     // @formatter:on
   }
 
-  private static String mssqlPluginConfiguration(JHipsterModuleProperties properties) {
+  private static String mssqlPluginConfiguration(SeedModuleProperties properties) {
     return JooqModuleCodegenConfiguration.builder()
       .databaseUrl("jdbc:sqlserver://localhost:1433;database=" + properties.projectBaseName().name() + ";trustServerCertificate=true")
       .user("SA")
@@ -95,7 +95,7 @@ public class JooqModuleFactory {
       .getConfiguration();
   }
 
-  public static JHipsterModule.JHipsterModuleBuilder commonModuleBuilder(JHipsterModuleProperties properties) {
+  public static JHipsterModule.JHipsterModuleBuilder commonModuleBuilder(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     return moduleBuilder(properties)

@@ -8,7 +8,7 @@ import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependencies;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependenciesVersions;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.infrastructure.secondary.javadependency.JHipsterProjectFolderJavaDependenciesReader;
 import com.seed4j.shared.enumeration.domain.Enums;
 import com.seed4j.shared.error.domain.GeneratorException;
@@ -33,7 +33,7 @@ public class MavenProjectJavaDependenciesRepository implements JHipsterProjectFo
   private static final String POM_XML = "pom.xml";
 
   @Override
-  public ProjectJavaDependencies get(JHipsterProjectFolder folder) {
+  public ProjectJavaDependencies get(SeedProjectFolder folder) {
     Path pomPath = folder.filePath(POM_XML);
 
     if (Files.notExists(pomPath)) {

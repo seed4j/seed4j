@@ -226,6 +226,6 @@ class SeedLandscapeTest {
   @Test
   void shouldHaveMeaningfulToString() {
     assertThat(defaultModuleResource().toString()).contains("slug=", "apiDoc=", "description=");
-    assertThat(noDependencyLandscapeModule("first").toString()).contains("JHipsterLandscapeModule[module=");
+    assertThat(noDependencyLandscapeModule("first").toString()).contains("SeedLandscapeModule[module=");
   }
 }

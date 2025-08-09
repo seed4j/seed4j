@@ -16,7 +16,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -220,7 +220,7 @@ class SonarQubeModuleFactoryTest {
     void shouldBuildTypescriptModule() {
       mockSonarqubeImage();
 
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
       JHipsterModule module = factory.buildTypescriptModule(properties);
 
@@ -249,7 +249,7 @@ class SonarQubeModuleFactoryTest {
     when(dockerImages.get("sonarqube")).thenReturn(new DockerImageVersion("sonarqube", "1.1.1"));
   }
 
-  private JHipsterModuleProperties properties() {
+  private SeedModuleProperties properties() {
     return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")

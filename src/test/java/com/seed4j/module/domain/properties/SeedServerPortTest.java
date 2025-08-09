@@ -9,16 +9,16 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 @UnitTest
-class JHipsterServerPortTest {
+class SeedServerPortTest {
 
   @Test
   void shouldGetDefaultServerPortFromNullPort() {
-    assertThat(new JHipsterServerPort(null).get()).isEqualTo(8080);
+    assertThat(new SeedServerPort(null).get()).isEqualTo(8080);
   }
 
   @Test
   void shouldGetServerPortFromPort() {
-    assertThat(new JHipsterServerPort(9000).get()).isEqualTo(9000);
+    assertThat(new SeedServerPort(9000).get()).isEqualTo(9000);
   }
 
   @ParameterizedTest
@@ -29,11 +29,11 @@ class JHipsterServerPortTest {
     }
   )
   void shouldValidatePortNumbers(int port, Class<Exception> exceptionClass) {
-    assertThatExceptionOfType(exceptionClass).isThrownBy(() -> new JHipsterServerPort(port));
+    assertThatExceptionOfType(exceptionClass).isThrownBy(() -> new SeedServerPort(port));
   }
 
   @Test
   void testToStringShowsPortNumber() {
-    assertThat(new JHipsterServerPort(9000)).hasToString("9000");
+    assertThat(new SeedServerPort(9000)).hasToString("9000");
   }
 }

@@ -2,11 +2,11 @@ package com.seed4j.module.domain.properties;
 
 import org.apache.commons.lang3.StringUtils;
 
-public record JHipsterBasePackage(String basePackage) {
+public record SeedBasePackage(String basePackage) {
   private static final String DEFAULT_PACKAGE = "com.mycompany.myapp";
-  public static final JHipsterBasePackage DEFAULT = new JHipsterBasePackage(DEFAULT_PACKAGE);
+  public static final SeedBasePackage DEFAULT = new SeedBasePackage(DEFAULT_PACKAGE);
 
-  public JHipsterBasePackage(String basePackage) {
+  public SeedBasePackage(String basePackage) {
     this.basePackage = buildBasePackage(basePackage);
   }
 

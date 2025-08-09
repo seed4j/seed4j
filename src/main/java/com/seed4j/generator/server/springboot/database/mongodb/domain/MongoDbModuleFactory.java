@@ -19,7 +19,7 @@ import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class MongoDbModuleFactory {
@@ -37,7 +37,7 @@ public class MongoDbModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

@@ -1,7 +1,7 @@
 package com.seed4j.module.infrastructure.primary;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.projectfolder.domain.ProjectFolder;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,12 +24,12 @@ class RestJHipsterModuleProperties {
     this.parameters = parameters;
   }
 
-  public JHipsterModuleProperties toDomain(ProjectFolder jHipsterProjectFolderFactory) {
+  public SeedModuleProperties toDomain(ProjectFolder jHipsterProjectFolderFactory) {
     Assert.notNull("jHipsterProjectFolderFactory", jHipsterProjectFolderFactory);
 
     assertValidProjectFolder(jHipsterProjectFolderFactory);
 
-    return new JHipsterModuleProperties(getProjectFolder(), isCommit(), getParameters());
+    return new SeedModuleProperties(getProjectFolder(), isCommit(), getParameters());
   }
 
   private void assertValidProjectFolder(ProjectFolder jHipsterProjectFolderFactory) {

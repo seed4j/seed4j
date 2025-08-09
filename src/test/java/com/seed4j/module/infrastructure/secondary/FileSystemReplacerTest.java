@@ -14,7 +14,7 @@ import com.seed4j.UnitTest;
 import com.seed4j.module.domain.GeneratedProjectRepository;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.file.TemplateRenderer;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.replacement.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,7 +34,7 @@ class FileSystemReplacerTest {
 
     assertThatThrownBy(() ->
       replacer.handle(
-        new JHipsterProjectFolder(path),
+        new SeedProjectFolder(path),
         new ContentReplacers(
           JHipsterModuleMandatoryReplacementsFactory.builder(emptyModuleBuilder())
             .in(new SeedProjectFilePath("unknown"))
@@ -55,14 +55,14 @@ class FileSystemReplacerTest {
 
     assertThatCode(() ->
       replacer.handle(
-        new JHipsterProjectFolder(path),
+        new SeedProjectFolder(path),
         new ContentReplacers(
           JHipsterModuleOptionalReplacementsFactory.builder(emptyModuleBuilder())
             .in(new SeedProjectFilePath("unknown"))
             .add(new TextReplacer(always(), "old"), "new")
             .and()
             .build()
-            .buildReplacers(new JHipsterProjectFolder("dummy"), mock(GeneratedProjectRepository.class))
+            .buildReplacers(new SeedProjectFolder("dummy"), mock(GeneratedProjectRepository.class))
             .toList()
         ),
         emptyModuleContext()

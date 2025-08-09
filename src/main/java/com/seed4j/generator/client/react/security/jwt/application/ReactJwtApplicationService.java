@@ -2,7 +2,7 @@ package com.seed4j.generator.client.react.security.jwt.application;
 
 import com.seed4j.generator.client.react.security.jwt.domain.ReactJwtModuleFactory;
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class ReactJwtApplicationService {
     reactJwt = new ReactJwtModuleFactory();
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     return reactJwt.buildModule(properties);
   }
 }

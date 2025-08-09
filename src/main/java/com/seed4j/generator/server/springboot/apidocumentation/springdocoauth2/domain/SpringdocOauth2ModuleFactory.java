@@ -8,7 +8,7 @@ import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.regex.Pattern;
 
@@ -20,7 +20,7 @@ public class SpringdocOauth2ModuleFactory {
 
   private static final SeedSource SOURCE = from("server/springboot/apidocumentation/springdocoauth");
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String realmName = properties.getOrDefaultString(REALM_NAME, DEFAULT_REALM_NAME);

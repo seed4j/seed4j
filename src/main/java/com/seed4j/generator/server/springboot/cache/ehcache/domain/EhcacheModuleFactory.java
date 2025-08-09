@@ -16,7 +16,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class EhcacheModuleFactory {
@@ -30,7 +30,7 @@ public class EhcacheModuleFactory {
 
   private static final String CACHE_SECONDARY = "wire/cache/infrastructure/secondary";
 
-  public JHipsterModule buildJavaConfigurationModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildJavaConfigurationModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
@@ -53,7 +53,7 @@ public class EhcacheModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildXmlConfigurationModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildXmlConfigurationModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -68,7 +68,7 @@ public class EhcacheModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterModuleBuilder commonEHCacheModuleBuilder(JHipsterModuleProperties properties) {
+  private JHipsterModuleBuilder commonEHCacheModuleBuilder(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .javaDependencies()

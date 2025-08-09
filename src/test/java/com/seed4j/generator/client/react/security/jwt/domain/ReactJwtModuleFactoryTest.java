@@ -6,7 +6,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -90,7 +90,7 @@ class ReactJwtModuleFactoryTest {
     return file("src/test/resources/projects/react/index.css", "src/main/webapp/app/index.css");
   }
 
-  private JHipsterModuleProperties properties() {
+  private SeedModuleProperties properties() {
     return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
   }
 

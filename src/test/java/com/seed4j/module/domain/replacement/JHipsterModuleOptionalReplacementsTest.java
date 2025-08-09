@@ -8,7 +8,7 @@ import static org.mockito.Mockito.*;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.GeneratedProjectRepository;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,7 +23,7 @@ class JHipsterModuleOptionalReplacementsTest {
   }
 
   private static String replaceIn(String file) {
-    JHipsterProjectFolder folder = new JHipsterProjectFolder("src/test/resources/projects");
+    SeedProjectFolder folder = new SeedProjectFolder("src/test/resources/projects");
     JHipsterModuleBuilder module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(folder.get()).build());
 
     return JHipsterModuleOptionalReplacementsFactory.builder(module)
@@ -31,7 +31,7 @@ class JHipsterModuleOptionalReplacementsTest {
       .add(new TextReplacer(always(), "old"), "new")
       .and()
       .build()
-      .buildReplacers(new JHipsterProjectFolder("dummy"), mock(GeneratedProjectRepository.class))
+      .buildReplacers(new SeedProjectFolder("dummy"), mock(GeneratedProjectRepository.class))
       .reduce(readContent(file), (content, replacer) -> replacer.apply(content), (first, second) -> first);
   }
 

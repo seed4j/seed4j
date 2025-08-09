@@ -18,7 +18,7 @@ class SeedModuleContextTest {
     assertThat(context)
       .hasSize(8)
       .containsEntry("baseName", "jhipster")
-      .containsEntry("projectName", "JHipster Project")
+      .containsEntry("projectName", "Seed4J Project")
       .containsEntry("packageName", "com.mycompany.myapp")
       .containsEntry("serverPort", 8080)
       .containsEntry("indentSize", 2)

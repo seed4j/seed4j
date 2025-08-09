@@ -2,7 +2,7 @@ package com.seed4j.generator.server.springboot.cache.simple.application;
 
 import com.seed4j.generator.server.springboot.cache.simple.domain.SimpleCacheModuleFactory;
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class SimpleCacheApplicationService {
     simpleCache = new SimpleCacheModuleFactory();
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     return simpleCache.buildModule(properties);
   }
 }

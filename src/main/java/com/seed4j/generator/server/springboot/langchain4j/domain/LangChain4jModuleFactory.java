@@ -8,7 +8,7 @@ import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class LangChain4jModuleFactory {
@@ -25,7 +25,7 @@ public class LangChain4jModuleFactory {
   private static final String PROPERTIES = "properties";
   private static final PropertyKey LANGCHAIN4J_PROPERTY_API_KEY = propertyKey("langchain4j.open-ai.chat-model.api-key");
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off

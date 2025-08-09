@@ -2,11 +2,11 @@ package com.seed4j.module.domain.properties;
 
 import org.apache.commons.lang3.StringUtils;
 
-public record JHipsterProjectName(String projectName) {
-  private static final String DEFAULT_NAME = "JHipster Project";
-  public static final JHipsterProjectName DEFAULT = new JHipsterProjectName(DEFAULT_NAME);
+public record SeedProjectName(String projectName) {
+  private static final String DEFAULT_NAME = "Seed4J Project";
+  public static final SeedProjectName DEFAULT = new SeedProjectName(DEFAULT_NAME);
 
-  public JHipsterProjectName(String projectName) {
+  public SeedProjectName(String projectName) {
     this.projectName = buildProjectName(projectName);
   }
 

@@ -4,7 +4,7 @@ import com.seed4j.module.domain.javaproperties.SpringComment;
 import com.seed4j.module.domain.javaproperties.SpringComments;
 import com.seed4j.module.domain.javaproperties.SpringPropertyType;
 import com.seed4j.module.domain.javaproperties.SpringPropertyTypeFileName;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,19 +20,19 @@ class FileSystemSpringCommentsCommandsHandler {
 
   private static final Map<SpringPropertyType, List<String>> PROPERTIES_PATHS = FileSystemJHipsterModulesRepository.buildPaths();
 
-  public void handle(JHipsterProjectFolder projectFolder, SpringComments comments) {
+  public void handle(SeedProjectFolder projectFolder, SpringComments comments) {
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("comments", comments);
 
     comments.get().forEach(setComment(projectFolder));
   }
 
-  private Consumer<SpringComment> setComment(JHipsterProjectFolder projectFolder) {
+  private Consumer<SpringComment> setComment(SeedProjectFolder projectFolder) {
     return comment ->
       getPath(projectFolder, comment).ifPresent(path -> new PropertiesFileSpringCommentsHandler(path).set(comment.key(), comment.value()));
   }
 
-  private static Optional<Path> getPath(JHipsterProjectFolder projectFolder, SpringPropertyTypeFileName springPropertyTypeFileName) {
+  private static Optional<Path> getPath(SeedProjectFolder projectFolder, SpringPropertyTypeFileName springPropertyTypeFileName) {
     return PROPERTIES_PATHS.get(springPropertyTypeFileName.type())
       .stream()
       .map(toFilePath(projectFolder, springPropertyTypeFileName))
@@ -40,10 +40,7 @@ class FileSystemSpringCommentsCommandsHandler {
       .findFirst();
   }
 
-  private static Function<String, Path> toFilePath(
-    JHipsterProjectFolder projectFolder,
-    SpringPropertyTypeFileName springPropertyTypeFileName
-  ) {
+  private static Function<String, Path> toFilePath(SeedProjectFolder projectFolder, SpringPropertyTypeFileName springPropertyTypeFileName) {
     return folder -> projectFolder.filePath(folder + propertiesFilename(springPropertyTypeFileName));
   }
 

@@ -1,8 +1,8 @@
 package com.seed4j.module.domain;
 
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 
 @FunctionalInterface
 public interface JHipsterModuleFactory {
-  JHipsterModule create(JHipsterModuleProperties properties);
+  JHipsterModule create(SeedModuleProperties properties);
 }

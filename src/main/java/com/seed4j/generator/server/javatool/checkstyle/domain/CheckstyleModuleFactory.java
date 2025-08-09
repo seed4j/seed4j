@@ -15,7 +15,7 @@ import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class CheckstyleModuleFactory {
@@ -23,7 +23,7 @@ public class CheckstyleModuleFactory {
   private static final SeedSource TEMPLATES_SOURCE = from("server/javatool/checkstyle/main");
   private static final String CHECKSTYLE = "checkstyle";
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

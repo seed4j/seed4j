@@ -12,7 +12,7 @@ import com.seed4j.module.domain.JHipsterModulesFixture;
 import com.seed4j.module.domain.docker.DockerImageName;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +32,7 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildPostgreSQLModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -91,7 +91,7 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildMariadbModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -156,7 +156,7 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildMysqlModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -223,7 +223,7 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildMssqlModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();

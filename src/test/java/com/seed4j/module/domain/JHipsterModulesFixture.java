@@ -63,7 +63,7 @@ import com.seed4j.module.domain.javaproperties.SpringProperty;
 import com.seed4j.module.domain.javaproperties.SpringPropertyType;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.domain.properties.SpringConfigurationFormat;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.HashMap;
@@ -78,7 +78,7 @@ public final class JHipsterModulesFixture {
 
   private JHipsterModulesFixture() {}
 
-  public static JHipsterModule moduleSecond(JHipsterModuleProperties properties) {
+  public static JHipsterModule moduleSecond(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
     .javaDependencies()
@@ -90,7 +90,7 @@ public final class JHipsterModulesFixture {
   }
 
   public static JHipsterModule module() {
-    JHipsterModuleProperties properties = testModuleProperties();
+    SeedModuleProperties properties = testModuleProperties();
     // @formatter:off
     return moduleBuilder(properties)
     .context()
@@ -379,8 +379,8 @@ public final class JHipsterModulesFixture {
     return SeedModuleContext.builder(emptyModuleBuilder()).build();
   }
 
-  public static JHipsterModuleProperties testModuleProperties() {
-    return new JHipsterModuleProperties(TestFileUtils.tmpDirForTest(), true, null);
+  public static SeedModuleProperties testModuleProperties() {
+    return new SeedModuleProperties(TestFileUtils.tmpDirForTest(), true, null);
   }
 
   public static JavaDependenciesVersions currentJavaDependenciesVersion() {
@@ -403,8 +403,8 @@ public final class JHipsterModulesFixture {
     return new JavaDependencyVersion("maven-enforcer-plugin", "1.1.1");
   }
 
-  public static JHipsterModuleProperties allProperties() {
-    return new JHipsterModuleProperties(
+  public static SeedModuleProperties allProperties() {
+    return new SeedModuleProperties(
       "/test",
       true,
       Map.of(
@@ -715,8 +715,8 @@ public final class JHipsterModulesFixture {
       return this;
     }
 
-    public JHipsterModuleProperties build() {
-      return new JHipsterModuleProperties(projectFolder, commitModules, properties);
+    public SeedModuleProperties build() {
+      return new SeedModuleProperties(projectFolder, commitModules, properties);
     }
   }
 }

@@ -6,7 +6,7 @@ import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class CypressModuleFactoryTest {
   @Test
   void shouldBuildComponentTestsModule() {
     ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     JHipsterModule module = factory.buildComponentTestsModule(properties);
 
@@ -54,7 +54,7 @@ class CypressModuleFactoryTest {
   @DisplayName("should build E2E tests module")
   void shouldBuildE2eTestsModule() {
     ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     JHipsterModule module = factory.buildE2ETestsModule(properties);
 

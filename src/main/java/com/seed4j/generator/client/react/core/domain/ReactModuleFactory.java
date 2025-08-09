@@ -25,7 +25,7 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
 
@@ -56,7 +56,7 @@ public class ReactModuleFactory {
     this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -116,7 +116,7 @@ public class ReactModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintConfig(JHipsterModuleProperties properties) {
+  private Consumer<JHipsterModuleBuilder> patchEslintConfig(SeedModuleProperties properties) {
     String reactConfig = """
       \t\tfiles: ['src/main/webapp/**/*.{ts,tsx}', 'src/test/webapp/unit/**/*.{ts,tsx}'],
       \t\textends: [...typescript.configs.recommendedTypeChecked, react],
@@ -161,7 +161,7 @@ public class ReactModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchTsConfig(JHipsterModuleProperties properties) {
+  private Consumer<JHipsterModuleBuilder> patchTsConfig(SeedModuleProperties properties) {
     String pathsReplacement =
       DEFAULT_TSCONFIG_PATH + "," + LINE_BREAK + properties.indentation().times(3) + "\"@assets/*\": [\"src/main/webapp/assets/*\"]";
     // @formatter:off

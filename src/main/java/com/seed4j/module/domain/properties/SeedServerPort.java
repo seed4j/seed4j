@@ -2,14 +2,14 @@ package com.seed4j.module.domain.properties;
 
 import com.seed4j.shared.error.domain.Assert;
 
-public record JHipsterServerPort(int serverPort) {
+public record SeedServerPort(int serverPort) {
   private static final int DEFAULT_PORT = 8080;
 
-  public JHipsterServerPort {
+  public SeedServerPort {
     Assert.field("serverPort", serverPort).min(1).max(65_535);
   }
 
-  public JHipsterServerPort(Integer port) {
+  public SeedServerPort(Integer port) {
     this(buildPort(port));
   }
 

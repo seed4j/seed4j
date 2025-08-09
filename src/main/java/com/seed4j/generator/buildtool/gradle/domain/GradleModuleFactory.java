@@ -9,14 +9,14 @@ import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class GradleModuleFactory {
 
   private static final SeedSource SOURCE = from("buildtool/gradle");
 
-  public JHipsterModule buildGradleModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildGradleModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -92,7 +92,7 @@ public class GradleModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildGradleWrapperModule(JHipsterModuleProperties properties) {
+  public JHipsterModule buildGradleWrapperModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

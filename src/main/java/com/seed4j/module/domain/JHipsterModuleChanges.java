@@ -8,9 +8,9 @@ import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javaproperties.SpringComments;
 import com.seed4j.module.domain.javaproperties.SpringFactories;
 import com.seed4j.module.domain.javaproperties.SpringProperties;
-import com.seed4j.module.domain.packagejson.JHipsterModulePackageJson;
-import com.seed4j.module.domain.postaction.JHipsterModulePostActions;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.packagejson.SeedModulePackageJson;
+import com.seed4j.module.domain.postaction.SeedModulePostActions;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.replacement.ContentReplacers;
 import com.seed4j.module.domain.standalonedocker.JHipsterModuleDockerComposeFile;
 import com.seed4j.module.domain.startupcommand.JHipsterStartupCommands;
@@ -21,7 +21,7 @@ import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 public final class JHipsterModuleChanges {
 
   private final SeedModuleContext context;
-  private final JHipsterProjectFolder projectFolder;
+  private final SeedProjectFolder projectFolder;
   private final Indentation indentation;
   private final SeedTemplatedFiles filesToAdd;
   private final SeedFilesToMove filesToMove;
@@ -29,9 +29,9 @@ public final class JHipsterModuleChanges {
   private final ContentReplacers replacers;
   private final JHipsterStartupCommands startupCommands;
   private final JavaBuildCommands javaBuildCommands;
-  private final JHipsterModulePackageJson packageJson;
+  private final SeedModulePackageJson packageJson;
   private final JHipsterModulePreActions preActions;
-  private final JHipsterModulePostActions postActions;
+  private final SeedModulePostActions postActions;
   private final SpringProperties springProperties;
   private final SpringComments springComments;
   private final SpringProperties springYamlProperties;
@@ -86,7 +86,7 @@ public final class JHipsterModuleChanges {
     return context;
   }
 
-  public JHipsterProjectFolder projectFolder() {
+  public SeedProjectFolder projectFolder() {
     return projectFolder;
   }
 
@@ -118,7 +118,7 @@ public final class JHipsterModuleChanges {
     return javaBuildCommands;
   }
 
-  public JHipsterModulePackageJson packageJson() {
+  public SeedModulePackageJson packageJson() {
     return packageJson;
   }
 
@@ -130,7 +130,7 @@ public final class JHipsterModuleChanges {
     return preActions;
   }
 
-  public JHipsterModulePostActions postActions() {
+  public SeedModulePostActions postActions() {
     return postActions;
   }
 
@@ -181,17 +181,17 @@ public final class JHipsterModuleChanges {
       JHipsterModuleChangesDockerComposeFileBuilder {
 
     private SeedModuleContext context;
-    private JHipsterProjectFolder projectFolder;
+    private SeedProjectFolder projectFolder;
     private SeedTemplatedFiles filesToAdd;
     private SeedFilesToMove filesToMove;
     private SeedFilesToDelete filesToDelete;
     private ContentReplacers replacers;
     private JHipsterStartupCommands startupCommands;
     private JavaBuildCommands javaBuildCommands;
-    private JHipsterModulePackageJson packageJson;
+    private SeedModulePackageJson packageJson;
     private Indentation indentation;
     private JHipsterModulePreActions preActions;
-    private JHipsterModulePostActions postActions;
+    private SeedModulePostActions postActions;
     private SpringProperties springProperties = SpringProperties.EMPTY;
     private SpringComments springComments = SpringComments.EMPTY;
     private SpringProperties springYamlProperties = SpringProperties.EMPTY;
@@ -208,7 +208,7 @@ public final class JHipsterModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChangesIndentationBuilder projectFolder(JHipsterProjectFolder projectFolder) {
+    public JHipsterModuleChangesIndentationBuilder projectFolder(SeedProjectFolder projectFolder) {
       this.projectFolder = projectFolder;
 
       return this;
@@ -264,7 +264,7 @@ public final class JHipsterModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChangesGitIgnorePatternsBuilder packageJson(JHipsterModulePackageJson packageJson) {
+    public JHipsterModuleChangesGitIgnorePatternsBuilder packageJson(SeedModulePackageJson packageJson) {
       this.packageJson = packageJson;
 
       return this;
@@ -292,7 +292,7 @@ public final class JHipsterModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChangesSpringFactoriesBuilder postActions(JHipsterModulePostActions postActions) {
+    public JHipsterModuleChangesSpringFactoriesBuilder postActions(SeedModulePostActions postActions) {
       this.postActions = postActions;
 
       return this;
@@ -339,7 +339,7 @@ public final class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesProjectFolderBuilder {
-    JHipsterModuleChangesIndentationBuilder projectFolder(JHipsterProjectFolder projectFolder);
+    JHipsterModuleChangesIndentationBuilder projectFolder(SeedProjectFolder projectFolder);
   }
 
   public interface JHipsterModuleChangesIndentationBuilder {
@@ -371,7 +371,7 @@ public final class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesPackageJsonBuilder {
-    JHipsterModuleChangesGitIgnorePatternsBuilder packageJson(JHipsterModulePackageJson packageJson);
+    JHipsterModuleChangesGitIgnorePatternsBuilder packageJson(SeedModulePackageJson packageJson);
   }
 
   public interface JHipsterModuleChangesGitIgnorePatternsBuilder {
@@ -387,7 +387,7 @@ public final class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesPostActionsBuilder {
-    JHipsterModuleChangesSpringFactoriesBuilder postActions(JHipsterModulePostActions postActions);
+    JHipsterModuleChangesSpringFactoriesBuilder postActions(SeedModulePostActions postActions);
   }
 
   public interface JHipsterModuleChangesSpringFactoriesBuilder {

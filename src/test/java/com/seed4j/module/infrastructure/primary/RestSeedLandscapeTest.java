@@ -38,6 +38,6 @@ class RestSeedLandscapeTest {
     [{"type":"MODULE","slug":"second","operation":"operation","properties":{PROPERTIES_DEFINITION},"dependencies":[{"type":"MODULE","slug":"first"}],"rank":"RANK_D"}]}]}\
     ]\
     }\
-    """.replace("{PROPERTIES_DEFINITION}", RestJHipsterModulePropertiesDefinitionTest.json());
+    """.replace("{PROPERTIES_DEFINITION}", RestSeedModulePropertiesDefinitionTest.json());
   }
 }

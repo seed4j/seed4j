@@ -15,7 +15,7 @@ import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.shared.error.domain.Assert;
 
@@ -41,7 +41,7 @@ public final class AuthenticationModuleFactory {
 
   private AuthenticationModuleFactory() {}
 
-  public static JHipsterModuleBuilder authenticationModuleBuilder(JHipsterModuleProperties properties) {
+  public static JHipsterModuleBuilder authenticationModuleBuilder(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.basePackage().path();

@@ -3,7 +3,7 @@ package com.seed4j.module.infrastructure.secondary;
 import java.util.Collection;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties("jhlite.hidden-resources")
+@ConfigurationProperties("seed4j.hidden-resources")
 class JHipsterHiddenResourcesProperties {
 
   private Collection<String> slugs;

@@ -54,7 +54,7 @@ public class CustomJHLiteModuleFactory {
   private static final PropertyKey SERVER_PORT_KEY = propertyKey("server.port");
   private static final PropertyKey JACKSON_INCLUSION_KEY = propertyKey("spring.jackson.default-property-inclusion");
 
-  private static final PropertyKey HIDDEN_SLUGS_PROPERTY_KEY = propertyKey("jhlite.hidden-resources.slugs");
+  private static final PropertyKey HIDDEN_SLUGS_PROPERTY_KEY = propertyKey("seed4j.hidden-resources.slugs");
   private static final PropertyKey BEAN_DEFINITION_OVERRIDING_PROPERTY_KEY = propertyKey("spring.main.allow-bean-definition-overriding");
   private static final String PACKAGE_INFO_JAVA = "package-info.java";
 

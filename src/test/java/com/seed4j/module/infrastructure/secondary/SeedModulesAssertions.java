@@ -245,8 +245,8 @@ public final class SeedModulesAssertions {
       return path -> assertions.assertThat(Files.notExists(path)).as(fileFoundMessage(path, projectFolder)).isTrue();
     }
 
-    public JHipsterModuleFileAsserter<SeedModuleAsserter> hasFile(String file) {
-      return new JHipsterModuleFileAsserter<>(this, projectFolder, file);
+    public SeedModuleFileAsserter<SeedModuleAsserter> hasFile(String file) {
+      return new SeedModuleFileAsserter<>(this, projectFolder, file);
     }
   }
 
@@ -327,18 +327,18 @@ public final class SeedModulesAssertions {
       }
     }
 
-    public JHipsterModuleFileAsserter<JHipsterModuleUpgradeAsserter> hasFile(String path) {
-      return new JHipsterModuleFileAsserter<>(this, projectFolder, path);
+    public SeedModuleFileAsserter<JHipsterModuleUpgradeAsserter> hasFile(String path) {
+      return new SeedModuleFileAsserter<>(this, projectFolder, path);
     }
   }
 
-  public static final class JHipsterModuleFileAsserter<T> {
+  public static final class SeedModuleFileAsserter<T> {
 
     private final T moduleAsserter;
     private final SeedProjectFolder projectFolder;
     private final String file;
 
-    private JHipsterModuleFileAsserter(T moduleAsserter, SeedProjectFolder projectFolder, String file) {
+    private SeedModuleFileAsserter(T moduleAsserter, SeedProjectFolder projectFolder, String file) {
       this.projectFolder = projectFolder;
       assertThat(file).as("Can't check file without file path").isNotBlank();
 
@@ -356,7 +356,7 @@ public final class SeedModulesAssertions {
     /**
      * Verifies that the file content matches the saved snapshot, using ApprovalTests.
      */
-    public JHipsterModuleFileAsserter<T> matchingSavedSnapshot() {
+    public SeedModuleFileAsserter<T> matchingSavedSnapshot() {
       String shortFileName = Arrays.stream(file.split("/")).toList().getLast();
       Approvals.verify(
         contentNormalizingNewLines(projectFolder.filePath(file)),
@@ -387,7 +387,7 @@ public final class SeedModulesAssertions {
       return new RegExScrubber(" = \"(\\d+\\.?)+\"", " = \"[version]\"");
     }
 
-    public JHipsterModuleFileAsserter<T> containing(String content) {
+    public SeedModuleFileAsserter<T> containing(String content) {
       assertThat(content).as("Can't check blank content").isNotBlank();
 
       Path path = projectFolder.filePath(file);
@@ -398,7 +398,7 @@ public final class SeedModulesAssertions {
       return this;
     }
 
-    public JHipsterModuleFileAsserter<T> containingInSequence(CharSequence... values) {
+    public SeedModuleFileAsserter<T> containingInSequence(CharSequence... values) {
       assertThat(values).as("Can't check blank content").isNotEmpty();
       assertThat(values)
         .as("Can't check blank content")
@@ -417,7 +417,7 @@ public final class SeedModulesAssertions {
       return this;
     }
 
-    public JHipsterModuleFileAsserter<T> notContaining(String content) {
+    public SeedModuleFileAsserter<T> notContaining(String content) {
       assertThat(content).as("Can't check blank content").isNotBlank();
 
       try {

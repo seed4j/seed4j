@@ -24,15 +24,15 @@ public final class SeedModuleJavaDependencies {
   private final Collection<DependencyId> dependenciesManagementToRemove;
   private final Collection<DirectJavaDependency> dependencies;
 
-  private SeedModuleJavaDependencies(JHipsterModuleJavaDependenciesBuilder<?> builder) {
+  private SeedModuleJavaDependencies(SeedModuleJavaDependenciesBuilder<?> builder) {
     dependenciesToRemove = builder.dependenciesToRemove;
     dependenciesManagement = builder.dependenciesManagement;
     dependenciesManagementToRemove = builder.dependenciesManagementToRemove;
     dependencies = builder.dependencies;
   }
 
-  public static <M> JHipsterModuleJavaDependenciesBuilder<M> builder(M module) {
-    return new JHipsterModuleJavaDependenciesBuilder<>(module);
+  public static <M> SeedModuleJavaDependenciesBuilder<M> builder(M module) {
+    return new SeedModuleJavaDependenciesBuilder<>(module);
   }
 
   public JavaBuildCommands buildChanges(JavaDependenciesVersions versions, ProjectJavaDependencies projectDependencies) {
@@ -100,7 +100,7 @@ public final class SeedModuleJavaDependencies {
     return dependencies.stream().map(dependency -> dependency.changeCommands(currentVersions, projectDependencies, buildProfile));
   }
 
-  public static final class JHipsterModuleJavaDependenciesBuilder<T> {
+  public static final class SeedModuleJavaDependenciesBuilder<T> {
 
     private static final String DEPENDENCY = "dependency";
 
@@ -110,13 +110,13 @@ public final class SeedModuleJavaDependencies {
     private final Collection<JavaDependencyManagement> dependenciesManagement = new ArrayList<>();
     private final Collection<DependencyId> dependenciesManagementToRemove = new ArrayList<>();
 
-    private JHipsterModuleJavaDependenciesBuilder(T parentModuleBuilder) {
+    private SeedModuleJavaDependenciesBuilder(T parentModuleBuilder) {
       Assert.notNull("module", parentModuleBuilder);
 
       this.parentModuleBuilder = parentModuleBuilder;
     }
 
-    public JHipsterModuleJavaDependenciesBuilder<T> removeDependency(DependencyId dependency) {
+    public SeedModuleJavaDependenciesBuilder<T> removeDependency(DependencyId dependency) {
       Assert.notNull(DEPENDENCY, dependency);
 
       dependenciesToRemove.add(dependency);
@@ -124,17 +124,17 @@ public final class SeedModuleJavaDependencies {
       return this;
     }
 
-    public JHipsterModuleJavaDependenciesBuilder<T> addDependency(GroupId groupId, ArtifactId artifactId) {
+    public SeedModuleJavaDependenciesBuilder<T> addDependency(GroupId groupId, ArtifactId artifactId) {
       return addDependency(groupId, artifactId, null);
     }
 
-    public JHipsterModuleJavaDependenciesBuilder<T> addDependency(GroupId groupId, ArtifactId artifactId, VersionSlug versionSlug) {
+    public SeedModuleJavaDependenciesBuilder<T> addDependency(GroupId groupId, ArtifactId artifactId, VersionSlug versionSlug) {
       JavaDependency dependency = JavaDependency.builder().groupId(groupId).artifactId(artifactId).versionSlug(versionSlug).build();
 
       return addDependency(dependency);
     }
 
-    public JHipsterModuleJavaDependenciesBuilder<T> addTestDependency(GroupId groupId, ArtifactId artifactId, VersionSlug versionSlug) {
+    public SeedModuleJavaDependenciesBuilder<T> addTestDependency(GroupId groupId, ArtifactId artifactId, VersionSlug versionSlug) {
       JavaDependency dependency = JavaDependency.builder()
         .groupId(groupId)
         .artifactId(artifactId)
@@ -145,7 +145,7 @@ public final class SeedModuleJavaDependencies {
       return addDependency(dependency);
     }
 
-    public JHipsterModuleJavaDependenciesBuilder<T> addDependency(JavaDependency dependency) {
+    public SeedModuleJavaDependenciesBuilder<T> addDependency(JavaDependency dependency) {
       Assert.notNull(DEPENDENCY, dependency);
 
       dependencies.add(new DirectJavaDependency(dependency));
@@ -153,7 +153,7 @@ public final class SeedModuleJavaDependencies {
       return this;
     }
 
-    public JHipsterModuleJavaDependenciesBuilder<T> addDependencyManagement(JavaDependency dependency) {
+    public SeedModuleJavaDependenciesBuilder<T> addDependencyManagement(JavaDependency dependency) {
       Assert.notNull(DEPENDENCY, dependency);
 
       dependenciesManagement.add(new JavaDependencyManagement(dependency));
@@ -161,7 +161,7 @@ public final class SeedModuleJavaDependencies {
       return this;
     }
 
-    public JHipsterModuleJavaDependenciesBuilder<T> removeDependencyManagement(DependencyId dependency) {
+    public SeedModuleJavaDependenciesBuilder<T> removeDependencyManagement(DependencyId dependency) {
       Assert.notNull(DEPENDENCY, dependency);
 
       dependenciesManagementToRemove.add(dependency);

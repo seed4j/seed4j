@@ -6,7 +6,7 @@ import static com.seed4j.module.domain.resource.SeedModulePropertyDefinition.opt
 import static com.seed4j.module.domain.resource.SeedModulePropertyDefinition.optionalStringProperty;
 
 import com.seed4j.module.domain.SeedModuleFactory;
-import com.seed4j.module.domain.resource.SeedModuleOrganization.JHipsterModuleOrganizationBuilder;
+import com.seed4j.module.domain.resource.SeedModuleOrganization.SeedModuleOrganizationBuilder;
 import com.seed4j.module.domain.resource.SeedModuleTags.JHipsterModuleTagsBuilder;
 import com.seed4j.shared.slug.domain.Seed4JModuleSlug;
 import java.util.ArrayList;
@@ -145,7 +145,7 @@ public final class SeedModulesResourceFixture {
     }
 
     private SeedModuleOrganization buildOrganization() {
-      JHipsterModuleOrganizationBuilder builder = SeedModuleOrganization.builder().feature(() -> feature);
+      SeedModuleOrganizationBuilder builder = SeedModuleOrganization.builder().feature(() -> feature);
 
       moduleDependencies.forEach(builder::addDependency);
       featureDependencies.forEach(builder::addDependency);

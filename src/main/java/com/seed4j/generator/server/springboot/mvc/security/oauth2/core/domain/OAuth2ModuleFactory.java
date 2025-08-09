@@ -94,7 +94,7 @@ public class OAuth2ModuleFactory {
       .files()
       .add(DOCKER_SOURCE.template("keycloak.yml"), DOCKER_DESTINATION.append("keycloak.yml"))
       .add(
-        DOCKER_SOURCE.template("jhipster-realm.json"),
+        DOCKER_SOURCE.template("seed4j-realm.json"),
         DOCKER_DESTINATION.append("keycloak-realm-config").append(realmName + "-realm.json")
       );
 

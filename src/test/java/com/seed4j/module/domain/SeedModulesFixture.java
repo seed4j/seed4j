@@ -428,8 +428,8 @@ public final class SeedModulesFixture {
     );
   }
 
-  public static JHipsterModulePropertiesBuilder propertiesBuilder(String projectFolder) {
-    return new JHipsterModulePropertiesBuilder(projectFolder);
+  public static SeedModulePropertiesBuilder propertiesBuilder(String projectFolder) {
+    return new SeedModulePropertiesBuilder(projectFolder);
   }
 
   public static SpringProperty springLocalMainProperty() {
@@ -661,55 +661,55 @@ public final class SeedModulesFixture {
       .build();
   }
 
-  public static final class JHipsterModulePropertiesBuilder {
+  public static final class SeedModulePropertiesBuilder {
 
     private boolean commitModules = false;
     private final String projectFolder;
     private final Map<String, Object> properties = new HashMap<>();
 
-    private JHipsterModulePropertiesBuilder(String projectFolder) {
+    private SeedModulePropertiesBuilder(String projectFolder) {
       this.projectFolder = projectFolder;
     }
 
-    public JHipsterModulePropertiesBuilder commitModules() {
+    public SeedModulePropertiesBuilder commitModules() {
       commitModules = true;
 
       return this;
     }
 
-    public JHipsterModulePropertiesBuilder basePackage(String basePackage) {
+    public SeedModulePropertiesBuilder basePackage(String basePackage) {
       properties.put("packageName", basePackage);
 
       return this;
     }
 
-    public JHipsterModulePropertiesBuilder projectBaseName(String projectBaseName) {
+    public SeedModulePropertiesBuilder projectBaseName(String projectBaseName) {
       properties.put("baseName", projectBaseName);
 
       return this;
     }
 
-    public JHipsterModulePropertiesBuilder projectName(String projectName) {
+    public SeedModulePropertiesBuilder projectName(String projectName) {
       properties.put("projectName", projectName);
 
       return this;
     }
 
-    public JHipsterModulePropertiesBuilder nodePackageManager(NodePackageManager nodePackageManager) {
+    public SeedModulePropertiesBuilder nodePackageManager(NodePackageManager nodePackageManager) {
       Assert.notNull("nodePackageManager", nodePackageManager);
       properties.put("nodePackageManager", nodePackageManager.propertyKey());
 
       return this;
     }
 
-    public JHipsterModulePropertiesBuilder springConfigurationFormat(SpringConfigurationFormat format) {
+    public SeedModulePropertiesBuilder springConfigurationFormat(SpringConfigurationFormat format) {
       Assert.notNull("format", format);
       properties.put("springConfigurationFormat", format.get());
 
       return this;
     }
 
-    public JHipsterModulePropertiesBuilder put(String key, Object value) {
+    public SeedModulePropertiesBuilder put(String key, Object value) {
       properties.put(key, value);
 
       return this;

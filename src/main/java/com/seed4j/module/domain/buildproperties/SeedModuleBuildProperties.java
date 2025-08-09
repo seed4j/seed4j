@@ -14,12 +14,12 @@ public final class SeedModuleBuildProperties {
 
   private final Map<PropertyKey, PropertyValue> properties;
 
-  private SeedModuleBuildProperties(JHipsterModuleBuildPropertiesBuilder<?> builder) {
+  private SeedModuleBuildProperties(SeedModuleBuildPropertiesBuilder<?> builder) {
     properties = SeedCollections.immutable(builder.properties);
   }
 
-  public static <T> JHipsterModuleBuildPropertiesBuilder<T> builder(T parent) {
-    return new JHipsterModuleBuildPropertiesBuilder<>(parent);
+  public static <T> SeedModuleBuildPropertiesBuilder<T> builder(T parent) {
+    return new SeedModuleBuildPropertiesBuilder<>(parent);
   }
 
   public JavaBuildCommands buildChanges() {
@@ -39,18 +39,18 @@ public final class SeedModuleBuildProperties {
       .map(property -> new SetBuildProperty(new BuildProperty(property.getKey(), property.getValue()), buildProfile));
   }
 
-  public static final class JHipsterModuleBuildPropertiesBuilder<T> {
+  public static final class SeedModuleBuildPropertiesBuilder<T> {
 
     private final T parent;
     private final Map<PropertyKey, PropertyValue> properties = new HashMap<>();
 
-    private JHipsterModuleBuildPropertiesBuilder(T parent) {
+    private SeedModuleBuildPropertiesBuilder(T parent) {
       Assert.notNull("parent", parent);
 
       this.parent = parent;
     }
 
-    public JHipsterModuleBuildPropertiesBuilder<T> set(PropertyKey key, PropertyValue value) {
+    public SeedModuleBuildPropertiesBuilder<T> set(PropertyKey key, PropertyValue value) {
       Assert.notNull("key", key);
       Assert.notNull("value", value);
 

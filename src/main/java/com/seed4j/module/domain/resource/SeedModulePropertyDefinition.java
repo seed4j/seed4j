@@ -17,7 +17,7 @@ public final class SeedModulePropertyDefinition {
   private final Optional<SeedPropertyDefaultValue> defaultValue;
   private final int order;
 
-  private SeedModulePropertyDefinition(JHipsterModulePropertyDefinitionBuilder builder) {
+  private SeedModulePropertyDefinition(SeedModulePropertyDefinitionBuilder builder) {
     Assert.notNull("type", builder.type);
     Assert.notBlank("key", builder.key);
 
@@ -89,32 +89,32 @@ public final class SeedModulePropertyDefinition {
       .build();
   }
 
-  public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder mandatoryStringProperty(String key) {
+  public static SeedModulePropertyDefinitionOptionalFieldsBuilder mandatoryStringProperty(String key) {
     return builder().type(SeedPropertyType.STRING).mandatory(true).key(key);
   }
 
-  public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder optionalStringProperty(String key) {
+  public static SeedModulePropertyDefinitionOptionalFieldsBuilder optionalStringProperty(String key) {
     return builder().type(SeedPropertyType.STRING).mandatory(false).key(key);
   }
 
-  public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder mandatoryIntegerProperty(String key) {
+  public static SeedModulePropertyDefinitionOptionalFieldsBuilder mandatoryIntegerProperty(String key) {
     return builder().type(SeedPropertyType.INTEGER).mandatory(true).key(key);
   }
 
-  public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder optionalIntegerProperty(String key) {
+  public static SeedModulePropertyDefinitionOptionalFieldsBuilder optionalIntegerProperty(String key) {
     return builder().type(SeedPropertyType.INTEGER).mandatory(false).key(key);
   }
 
-  public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder mandatoryBooleanProperty(String key) {
+  public static SeedModulePropertyDefinitionOptionalFieldsBuilder mandatoryBooleanProperty(String key) {
     return builder().type(SeedPropertyType.BOOLEAN).mandatory(true).key(key);
   }
 
-  public static JHipsterModulePropertyDefinitionOptionalFieldsBuilder optionalBooleanProperty(String key) {
+  public static SeedModulePropertyDefinitionOptionalFieldsBuilder optionalBooleanProperty(String key) {
     return builder().type(SeedPropertyType.BOOLEAN).mandatory(false).key(key);
   }
 
-  public static JHipsterModulePropertyDefinitionTypeBuilder builder() {
-    return new JHipsterModulePropertyDefinitionBuilder();
+  public static SeedModulePropertyDefinitionTypeBuilder builder() {
+    return new SeedModulePropertyDefinitionBuilder();
   }
 
   public SeedPropertyType type() {
@@ -153,12 +153,12 @@ public final class SeedModulePropertyDefinition {
       .build();
   }
 
-  private static final class JHipsterModulePropertyDefinitionBuilder
+  private static final class SeedModulePropertyDefinitionBuilder
     implements
-      JHipsterModulePropertyDefinitionTypeBuilder,
-      JHipsterModulePropertyDefinitionOptionalityBuilder,
-      JHipsterModulePropertyDefinitionKeyBuilder,
-      JHipsterModulePropertyDefinitionOptionalFieldsBuilder {
+      SeedModulePropertyDefinitionTypeBuilder,
+      SeedModulePropertyDefinitionOptionalityBuilder,
+      SeedModulePropertyDefinitionKeyBuilder,
+      SeedModulePropertyDefinitionOptionalFieldsBuilder {
 
     private SeedPropertyType type;
     private boolean mandatory;
@@ -168,42 +168,42 @@ public final class SeedModulePropertyDefinition {
     private int order;
 
     @Override
-    public JHipsterModulePropertyDefinitionOptionalityBuilder type(SeedPropertyType type) {
+    public SeedModulePropertyDefinitionOptionalityBuilder type(SeedPropertyType type) {
       this.type = type;
 
       return this;
     }
 
     @Override
-    public JHipsterModulePropertyDefinitionKeyBuilder mandatory(boolean mandatory) {
+    public SeedModulePropertyDefinitionKeyBuilder mandatory(boolean mandatory) {
       this.mandatory = mandatory;
 
       return this;
     }
 
     @Override
-    public JHipsterModulePropertyDefinitionOptionalFieldsBuilder key(String key) {
+    public SeedModulePropertyDefinitionOptionalFieldsBuilder key(String key) {
       this.key = key;
 
       return this;
     }
 
     @Override
-    public JHipsterModulePropertyDefinitionOptionalFieldsBuilder description(String description) {
+    public SeedModulePropertyDefinitionOptionalFieldsBuilder description(String description) {
       this.description = description;
 
       return this;
     }
 
     @Override
-    public JHipsterModulePropertyDefinitionOptionalFieldsBuilder defaultValue(String defaultValue) {
+    public SeedModulePropertyDefinitionOptionalFieldsBuilder defaultValue(String defaultValue) {
       this.defaultValue = defaultValue;
 
       return this;
     }
 
     @Override
-    public JHipsterModulePropertyDefinitionOptionalFieldsBuilder order(int order) {
+    public SeedModulePropertyDefinitionOptionalFieldsBuilder order(int order) {
       this.order = order;
 
       return this;
@@ -215,24 +215,24 @@ public final class SeedModulePropertyDefinition {
     }
   }
 
-  public interface JHipsterModulePropertyDefinitionTypeBuilder {
-    JHipsterModulePropertyDefinitionOptionalityBuilder type(SeedPropertyType type);
+  public interface SeedModulePropertyDefinitionTypeBuilder {
+    SeedModulePropertyDefinitionOptionalityBuilder type(SeedPropertyType type);
   }
 
-  public interface JHipsterModulePropertyDefinitionOptionalityBuilder {
-    JHipsterModulePropertyDefinitionKeyBuilder mandatory(boolean mandatory);
+  public interface SeedModulePropertyDefinitionOptionalityBuilder {
+    SeedModulePropertyDefinitionKeyBuilder mandatory(boolean mandatory);
   }
 
-  public interface JHipsterModulePropertyDefinitionKeyBuilder {
-    JHipsterModulePropertyDefinitionOptionalFieldsBuilder key(String key);
+  public interface SeedModulePropertyDefinitionKeyBuilder {
+    SeedModulePropertyDefinitionOptionalFieldsBuilder key(String key);
   }
 
-  public interface JHipsterModulePropertyDefinitionOptionalFieldsBuilder {
-    JHipsterModulePropertyDefinitionOptionalFieldsBuilder description(String description);
+  public interface SeedModulePropertyDefinitionOptionalFieldsBuilder {
+    SeedModulePropertyDefinitionOptionalFieldsBuilder description(String description);
 
-    JHipsterModulePropertyDefinitionOptionalFieldsBuilder defaultValue(String defaultValue);
+    SeedModulePropertyDefinitionOptionalFieldsBuilder defaultValue(String defaultValue);
 
-    JHipsterModulePropertyDefinitionOptionalFieldsBuilder order(int order);
+    SeedModulePropertyDefinitionOptionalFieldsBuilder order(int order);
 
     SeedModulePropertyDefinition build();
   }

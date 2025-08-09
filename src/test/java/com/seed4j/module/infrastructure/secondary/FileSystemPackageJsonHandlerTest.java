@@ -23,7 +23,7 @@ import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import com.seed4j.module.domain.packagejson.SeedModulePackageJson;
-import com.seed4j.module.domain.packagejson.SeedModulePackageJson.JHipsterModulePackageJsonBuilder;
+import com.seed4j.module.domain.packagejson.SeedModulePackageJson.SeedModulePackageJsonBuilder;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.infrastructure.secondary.file.MustacheTemplateRenderer;
 import java.io.IOException;
@@ -510,14 +510,14 @@ class FileSystemPackageJsonHandlerTest {
   }
 
   @SafeVarargs
-  private @NotNull SeedModulePackageJson packageJson(Consumer<JHipsterModulePackageJsonBuilder>... builderConfigurations) {
-    JHipsterModulePackageJsonBuilder builder = emptyBuilder();
+  private @NotNull SeedModulePackageJson packageJson(Consumer<SeedModulePackageJsonBuilder>... builderConfigurations) {
+    SeedModulePackageJsonBuilder builder = emptyBuilder();
     Stream.of(builderConfigurations).forEach(configuration -> configuration.accept(builder));
 
     return builder.build();
   }
 
-  private JHipsterModulePackageJsonBuilder emptyBuilder() {
+  private SeedModulePackageJsonBuilder emptyBuilder() {
     return SeedModulePackageJson.builder(emptyModuleBuilder());
   }
 

@@ -17,7 +17,7 @@ public class SeedModuleMavenBuildExtensions {
 
   private final Collection<MavenBuildExtension> buildExtensions;
 
-  public SeedModuleMavenBuildExtensions(JHipsterModuleMavenBuildExtensionsBuilder builder) {
+  public SeedModuleMavenBuildExtensions(SeedModuleMavenBuildExtensionsBuilder builder) {
     this.buildExtensions = builder.buildExtensions;
   }
 
@@ -45,22 +45,22 @@ public class SeedModuleMavenBuildExtensions {
     };
   }
 
-  public static JHipsterModuleMavenBuildExtensionsBuilder builder(SeedModuleBuilder module) {
-    return new JHipsterModuleMavenBuildExtensionsBuilder(module);
+  public static SeedModuleMavenBuildExtensionsBuilder builder(SeedModuleBuilder module) {
+    return new SeedModuleMavenBuildExtensionsBuilder(module);
   }
 
-  public static final class JHipsterModuleMavenBuildExtensionsBuilder {
+  public static final class SeedModuleMavenBuildExtensionsBuilder {
 
     private final SeedModuleBuilder module;
     private final Collection<MavenBuildExtension> buildExtensions = new ArrayList<>();
 
-    private JHipsterModuleMavenBuildExtensionsBuilder(SeedModuleBuilder module) {
+    private SeedModuleMavenBuildExtensionsBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
     }
 
-    public JHipsterModuleMavenBuildExtensionsBuilder addExtension(MavenBuildExtension buildExtension) {
+    public SeedModuleMavenBuildExtensionsBuilder addExtension(MavenBuildExtension buildExtension) {
       Assert.notNull("buildExtension", buildExtension);
 
       buildExtensions.add(buildExtension);
@@ -68,7 +68,7 @@ public class SeedModuleMavenBuildExtensions {
       return this;
     }
 
-    public JHipsterModuleMavenBuildExtensionsBuilder addExtension(GroupId groupId, ArtifactId artifactId, VersionSlug versionSlug) {
+    public SeedModuleMavenBuildExtensionsBuilder addExtension(GroupId groupId, ArtifactId artifactId, VersionSlug versionSlug) {
       MavenBuildExtension buildExtension = MavenBuildExtension.builder()
         .groupId(groupId)
         .artifactId(artifactId)

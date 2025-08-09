@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 /**
- * This class represents the {@code package.json} configurations for a JHipster module.
+ * This class represents the {@code package.json} configurations for a Seed4J module.
  * It includes scripts, dependencies, development dependencies, and configurations
  * for removing unnecessary dependencies.
  */
@@ -21,7 +21,7 @@ public final class SeedModulePackageJson {
   private final PackageNames devDependenciesToRemove;
   private final Optional<NodeModuleFormat> nodeModuleFormat;
 
-  private SeedModulePackageJson(JHipsterModulePackageJsonBuilder builder) {
+  private SeedModulePackageJson(SeedModulePackageJsonBuilder builder) {
     scripts = new Scripts(builder.scripts);
     dependencies = new PackageJsonDependencies(builder.dependencies);
     dependenciesToRemove = new PackageNames(builder.dependenciesToRemove);
@@ -30,8 +30,8 @@ public final class SeedModulePackageJson {
     nodeModuleFormat = Optional.ofNullable(builder.nodeModuleFormat);
   }
 
-  public static JHipsterModulePackageJsonBuilder builder(SeedModuleBuilder module) {
-    return new JHipsterModulePackageJsonBuilder(module);
+  public static SeedModulePackageJsonBuilder builder(SeedModuleBuilder module) {
+    return new SeedModulePackageJsonBuilder(module);
   }
 
   public boolean isEmpty() {
@@ -69,7 +69,7 @@ public final class SeedModulePackageJson {
     return nodeModuleFormat;
   }
 
-  public static final class JHipsterModulePackageJsonBuilder {
+  public static final class SeedModulePackageJsonBuilder {
 
     private final SeedModuleBuilder module;
     private final Collection<Script> scripts = new ArrayList<>();
@@ -79,7 +79,7 @@ public final class SeedModulePackageJson {
     private final Collection<PackageName> devDependenciesToRemove = new ArrayList<>();
     private NodeModuleFormat nodeModuleFormat;
 
-    private JHipsterModulePackageJsonBuilder(SeedModuleBuilder module) {
+    private SeedModulePackageJsonBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -92,7 +92,7 @@ public final class SeedModulePackageJson {
      * @param command the script command
      * @return the builder itself
      */
-    public JHipsterModulePackageJsonBuilder addScript(ScriptKey key, ScriptCommand command) {
+    public SeedModulePackageJsonBuilder addScript(ScriptKey key, ScriptCommand command) {
       scripts.add(new Script(key, command));
 
       return this;
@@ -105,7 +105,7 @@ public final class SeedModulePackageJson {
      * @param versionSource the version source
      * @return the builder itself
      */
-    public JHipsterModulePackageJsonBuilder addDependency(PackageName packageName, NodePackagesVersionSourceFactory versionSource) {
+    public SeedModulePackageJsonBuilder addDependency(PackageName packageName, NodePackagesVersionSourceFactory versionSource) {
       dependencies.add(PackageJsonDependency.builder().packageName(packageName).versionSource(versionSource.build()).build());
 
       return this;
@@ -119,7 +119,7 @@ public final class SeedModulePackageJson {
      * @param versionPackageName the name of the package providing the version
      * @return the builder itself
      */
-    public JHipsterModulePackageJsonBuilder addDependency(
+    public SeedModulePackageJsonBuilder addDependency(
       PackageName packageName,
       NodePackagesVersionSourceFactory versionSource,
       PackageName versionPackageName
@@ -141,7 +141,7 @@ public final class SeedModulePackageJson {
      * @param packageName the name of the package
      * @return the builder itself
      */
-    public JHipsterModulePackageJsonBuilder removeDependency(PackageName packageName) {
+    public SeedModulePackageJsonBuilder removeDependency(PackageName packageName) {
       dependenciesToRemove.add(packageName);
 
       return this;
@@ -154,7 +154,7 @@ public final class SeedModulePackageJson {
      * @param versionSource the version source
      * @return the builder itself
      */
-    public JHipsterModulePackageJsonBuilder addDevDependency(PackageName packageName, NodePackagesVersionSourceFactory versionSource) {
+    public SeedModulePackageJsonBuilder addDevDependency(PackageName packageName, NodePackagesVersionSourceFactory versionSource) {
       devDependencies.add(PackageJsonDependency.builder().packageName(packageName).versionSource(versionSource.build()).build());
 
       return this;
@@ -168,7 +168,7 @@ public final class SeedModulePackageJson {
      * @param versionPackageName the name of the package providing the version
      * @return the builder itself
      */
-    public JHipsterModulePackageJsonBuilder addDevDependency(
+    public SeedModulePackageJsonBuilder addDevDependency(
       PackageName packageName,
       NodePackagesVersionSourceFactory versionSource,
       PackageName versionPackageName
@@ -190,7 +190,7 @@ public final class SeedModulePackageJson {
      * @param packageName the name of the package
      * @return the builder itself
      */
-    public JHipsterModulePackageJsonBuilder removeDevDependency(PackageName packageName) {
+    public SeedModulePackageJsonBuilder removeDevDependency(PackageName packageName) {
       devDependenciesToRemove.add(packageName);
 
       return this;
@@ -202,7 +202,7 @@ public final class SeedModulePackageJson {
      * @param moduleFormat the module format
      * @return the builder itself
      */
-    public JHipsterModulePackageJsonBuilder type(NodeModuleFormat moduleFormat) {
+    public SeedModulePackageJsonBuilder type(NodeModuleFormat moduleFormat) {
       nodeModuleFormat = moduleFormat;
 
       return this;
@@ -218,9 +218,9 @@ public final class SeedModulePackageJson {
     }
 
     /**
-     * Build the {@code JHipsterModulePackageJson} instance.
+     * Build the {@code SeedModulePackageJson} instance.
      *
-     * @return a new instance of {@code JHipsterModulePackageJson}
+     * @return a new instance of {@code SeedModulePackageJson}
      */
     public SeedModulePackageJson build() {
       return new SeedModulePackageJson(this);

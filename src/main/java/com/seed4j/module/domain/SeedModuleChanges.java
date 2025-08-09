@@ -40,7 +40,7 @@ public final class SeedModuleChanges {
   private final SeedModuleGitIgnore gitIgnore;
   private final SeedModuleDockerComposeFile dockerComposeFile;
 
-  private SeedModuleChanges(JHipsterModuleChangesBuilder builder) {
+  private SeedModuleChanges(SeedModuleChangesBuilder builder) {
     assertMandatoryFields(builder);
 
     context = builder.context;
@@ -64,7 +64,7 @@ public final class SeedModuleChanges {
     dockerComposeFile = builder.dockerComposeFile;
   }
 
-  private void assertMandatoryFields(JHipsterModuleChangesBuilder builder) {
+  private void assertMandatoryFields(SeedModuleChangesBuilder builder) {
     Assert.notNull("context", builder.context);
     Assert.notNull("projectFolder", builder.projectFolder);
     Assert.notNull("indentation", builder.indentation);
@@ -78,8 +78,8 @@ public final class SeedModuleChanges {
     Assert.notNull("springFactories", builder.springFactories);
   }
 
-  public static JHipsterModuleChangesContextBuilder builder() {
-    return new JHipsterModuleChangesBuilder();
+  public static SeedModuleChangesContextBuilder builder() {
+    return new SeedModuleChangesBuilder();
   }
 
   public SeedModuleContext context() {
@@ -159,26 +159,26 @@ public final class SeedModuleChanges {
     return dockerComposeFile;
   }
 
-  private static final class JHipsterModuleChangesBuilder
+  private static final class SeedModuleChangesBuilder
     implements
-      JHipsterModuleChangesContextBuilder,
-      JHipsterModuleChangesProjectFolderBuilder,
-      JHipsterModuleChangesIndentationBuilder,
-      JHipsterModuleChangesFilesToAddBuilder,
-      JHipsterModuleChangesFilesToMoveBuilder,
-      JHipsterModuleChangesFilesToDeleteBuilder,
-      JHipsterModuleChangesReplacersBuilder,
-      JHipsterModuleChangesStartupCommandsBuilder,
-      JHipsterModuleChangesJavaBuildCommandsBuilder,
-      JHipsterModuleChangesPackageJsonBuilder,
-      JHipsterModuleChangesPreActionsBuilder,
-      JHipsterModuleChangesPostActionsBuilder,
-      JHipsterModuleChangesSpringPropertiesBuilder,
-      JHipsterModuleChangesSpringCommentsBuilder,
-      JHipsterModuleChangesSpringFactoriesBuilder,
-      JHipsterModuleChangesSpringYamlCommentsBuilder,
-      JHipsterModuleChangesGitIgnorePatternsBuilder,
-      JHipsterModuleChangesDockerComposeFileBuilder {
+      SeedModuleChangesContextBuilder,
+      SeedModuleChangesProjectFolderBuilder,
+      SeedModuleChangesIndentationBuilder,
+      SeedModuleChangesFilesToAddBuilder,
+      SeedModuleChangesFilesToMoveBuilder,
+      SeedModuleChangesFilesToDeleteBuilder,
+      SeedModuleChangesReplacersBuilder,
+      SeedModuleChangesStartupCommandsBuilder,
+      SeedModuleChangesJavaBuildCommandsBuilder,
+      SeedModuleChangesPackageJsonBuilder,
+      SeedModuleChangesPreActionsBuilder,
+      SeedModuleChangesPostActionsBuilder,
+      SeedModuleChangesSpringPropertiesBuilder,
+      SeedModuleChangesSpringCommentsBuilder,
+      SeedModuleChangesSpringFactoriesBuilder,
+      SeedModuleChangesSpringYamlCommentsBuilder,
+      SeedModuleChangesGitIgnorePatternsBuilder,
+      SeedModuleChangesDockerComposeFileBuilder {
 
     private SeedModuleContext context;
     private SeedProjectFolder projectFolder;
@@ -201,112 +201,112 @@ public final class SeedModuleChanges {
     private SeedModuleDockerComposeFile dockerComposeFile;
 
     @Override
-    public JHipsterModuleChangesProjectFolderBuilder context(SeedModuleContext context) {
+    public SeedModuleChangesProjectFolderBuilder context(SeedModuleContext context) {
       this.context = context;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesIndentationBuilder projectFolder(SeedProjectFolder projectFolder) {
+    public SeedModuleChangesIndentationBuilder projectFolder(SeedProjectFolder projectFolder) {
       this.projectFolder = projectFolder;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesFilesToAddBuilder indentation(Indentation indentation) {
+    public SeedModuleChangesFilesToAddBuilder indentation(Indentation indentation) {
       this.indentation = indentation;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesFilesToMoveBuilder filesToAdd(SeedTemplatedFiles filesToAdd) {
+    public SeedModuleChangesFilesToMoveBuilder filesToAdd(SeedTemplatedFiles filesToAdd) {
       this.filesToAdd = filesToAdd;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesFilesToDeleteBuilder filesToMove(SeedFilesToMove filesToMove) {
+    public SeedModuleChangesFilesToDeleteBuilder filesToMove(SeedFilesToMove filesToMove) {
       this.filesToMove = filesToMove;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesReplacersBuilder filesToDelete(SeedFilesToDelete filesToDelete) {
+    public SeedModuleChangesReplacersBuilder filesToDelete(SeedFilesToDelete filesToDelete) {
       this.filesToDelete = filesToDelete;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesStartupCommandsBuilder replacers(ContentReplacers replacers) {
+    public SeedModuleChangesStartupCommandsBuilder replacers(ContentReplacers replacers) {
       this.replacers = replacers;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesJavaBuildCommandsBuilder startupCommands(SeedStartupCommands startupCommands) {
+    public SeedModuleChangesJavaBuildCommandsBuilder startupCommands(SeedStartupCommands startupCommands) {
       this.startupCommands = startupCommands;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesPackageJsonBuilder javaBuildCommands(JavaBuildCommands javaDependencies) {
+    public SeedModuleChangesPackageJsonBuilder javaBuildCommands(JavaBuildCommands javaDependencies) {
       this.javaBuildCommands = javaDependencies;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesGitIgnorePatternsBuilder packageJson(SeedModulePackageJson packageJson) {
+    public SeedModuleChangesGitIgnorePatternsBuilder packageJson(SeedModulePackageJson packageJson) {
       this.packageJson = packageJson;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesDockerComposeFileBuilder gitIgnore(SeedModuleGitIgnore gitIgnore) {
+    public SeedModuleChangesDockerComposeFileBuilder gitIgnore(SeedModuleGitIgnore gitIgnore) {
       this.gitIgnore = gitIgnore;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesPreActionsBuilder dockerComposeFile(SeedModuleDockerComposeFile dockerComposeFile) {
+    public SeedModuleChangesPreActionsBuilder dockerComposeFile(SeedModuleDockerComposeFile dockerComposeFile) {
       this.dockerComposeFile = dockerComposeFile;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesPostActionsBuilder preActions(SeedModulePreActions preActions) {
+    public SeedModuleChangesPostActionsBuilder preActions(SeedModulePreActions preActions) {
       this.preActions = preActions;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesSpringFactoriesBuilder postActions(SeedModulePostActions postActions) {
+    public SeedModuleChangesSpringFactoriesBuilder postActions(SeedModulePostActions postActions) {
       this.postActions = postActions;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesSpringYamlCommentsBuilder springYamlProperties(SpringProperties springProperties) {
+    public SeedModuleChangesSpringYamlCommentsBuilder springYamlProperties(SpringProperties springProperties) {
       this.springYamlProperties = springProperties;
 
       return this;
     }
 
     @Override
-    public JHipsterModuleChangesSpringCommentsBuilder springProperties(SpringProperties springProperties) {
+    public SeedModuleChangesSpringCommentsBuilder springProperties(SpringProperties springProperties) {
       this.springProperties = springProperties;
 
       return this;
@@ -327,83 +327,83 @@ public final class SeedModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChangesSpringPropertiesBuilder springFactories(SpringFactories springFactories) {
+    public SeedModuleChangesSpringPropertiesBuilder springFactories(SpringFactories springFactories) {
       this.springFactories = springFactories;
 
       return this;
     }
   }
 
-  public interface JHipsterModuleChangesContextBuilder {
-    JHipsterModuleChangesProjectFolderBuilder context(SeedModuleContext context);
+  public interface SeedModuleChangesContextBuilder {
+    SeedModuleChangesProjectFolderBuilder context(SeedModuleContext context);
   }
 
-  public interface JHipsterModuleChangesProjectFolderBuilder {
-    JHipsterModuleChangesIndentationBuilder projectFolder(SeedProjectFolder projectFolder);
+  public interface SeedModuleChangesProjectFolderBuilder {
+    SeedModuleChangesIndentationBuilder projectFolder(SeedProjectFolder projectFolder);
   }
 
-  public interface JHipsterModuleChangesIndentationBuilder {
-    JHipsterModuleChangesFilesToAddBuilder indentation(Indentation indentation);
+  public interface SeedModuleChangesIndentationBuilder {
+    SeedModuleChangesFilesToAddBuilder indentation(Indentation indentation);
   }
 
-  public interface JHipsterModuleChangesFilesToAddBuilder {
-    JHipsterModuleChangesFilesToMoveBuilder filesToAdd(SeedTemplatedFiles filesToAdd);
+  public interface SeedModuleChangesFilesToAddBuilder {
+    SeedModuleChangesFilesToMoveBuilder filesToAdd(SeedTemplatedFiles filesToAdd);
   }
 
-  public interface JHipsterModuleChangesFilesToMoveBuilder {
-    JHipsterModuleChangesFilesToDeleteBuilder filesToMove(SeedFilesToMove filesToMove);
+  public interface SeedModuleChangesFilesToMoveBuilder {
+    SeedModuleChangesFilesToDeleteBuilder filesToMove(SeedFilesToMove filesToMove);
   }
 
-  public interface JHipsterModuleChangesFilesToDeleteBuilder {
-    JHipsterModuleChangesReplacersBuilder filesToDelete(SeedFilesToDelete filesToDelete);
+  public interface SeedModuleChangesFilesToDeleteBuilder {
+    SeedModuleChangesReplacersBuilder filesToDelete(SeedFilesToDelete filesToDelete);
   }
 
-  public interface JHipsterModuleChangesReplacersBuilder {
-    JHipsterModuleChangesStartupCommandsBuilder replacers(ContentReplacers replacers);
+  public interface SeedModuleChangesReplacersBuilder {
+    SeedModuleChangesStartupCommandsBuilder replacers(ContentReplacers replacers);
   }
 
-  public interface JHipsterModuleChangesStartupCommandsBuilder {
-    JHipsterModuleChangesJavaBuildCommandsBuilder startupCommands(SeedStartupCommands startupCommands);
+  public interface SeedModuleChangesStartupCommandsBuilder {
+    SeedModuleChangesJavaBuildCommandsBuilder startupCommands(SeedStartupCommands startupCommands);
   }
 
-  public interface JHipsterModuleChangesJavaBuildCommandsBuilder {
-    JHipsterModuleChangesPackageJsonBuilder javaBuildCommands(JavaBuildCommands javaBuildCommands);
+  public interface SeedModuleChangesJavaBuildCommandsBuilder {
+    SeedModuleChangesPackageJsonBuilder javaBuildCommands(JavaBuildCommands javaBuildCommands);
   }
 
-  public interface JHipsterModuleChangesPackageJsonBuilder {
-    JHipsterModuleChangesGitIgnorePatternsBuilder packageJson(SeedModulePackageJson packageJson);
+  public interface SeedModuleChangesPackageJsonBuilder {
+    SeedModuleChangesGitIgnorePatternsBuilder packageJson(SeedModulePackageJson packageJson);
   }
 
-  public interface JHipsterModuleChangesGitIgnorePatternsBuilder {
-    JHipsterModuleChangesDockerComposeFileBuilder gitIgnore(SeedModuleGitIgnore gitIgnore);
+  public interface SeedModuleChangesGitIgnorePatternsBuilder {
+    SeedModuleChangesDockerComposeFileBuilder gitIgnore(SeedModuleGitIgnore gitIgnore);
   }
 
-  public interface JHipsterModuleChangesDockerComposeFileBuilder {
-    JHipsterModuleChangesPreActionsBuilder dockerComposeFile(SeedModuleDockerComposeFile dockerComposeFile);
+  public interface SeedModuleChangesDockerComposeFileBuilder {
+    SeedModuleChangesPreActionsBuilder dockerComposeFile(SeedModuleDockerComposeFile dockerComposeFile);
   }
 
-  public interface JHipsterModuleChangesPreActionsBuilder {
-    JHipsterModuleChangesPostActionsBuilder preActions(SeedModulePreActions preActions);
+  public interface SeedModuleChangesPreActionsBuilder {
+    SeedModuleChangesPostActionsBuilder preActions(SeedModulePreActions preActions);
   }
 
-  public interface JHipsterModuleChangesPostActionsBuilder {
-    JHipsterModuleChangesSpringFactoriesBuilder postActions(SeedModulePostActions postActions);
+  public interface SeedModuleChangesPostActionsBuilder {
+    SeedModuleChangesSpringFactoriesBuilder postActions(SeedModulePostActions postActions);
   }
 
-  public interface JHipsterModuleChangesSpringFactoriesBuilder {
-    JHipsterModuleChangesSpringPropertiesBuilder springFactories(SpringFactories springFactories);
+  public interface SeedModuleChangesSpringFactoriesBuilder {
+    SeedModuleChangesSpringPropertiesBuilder springFactories(SpringFactories springFactories);
   }
 
-  public interface JHipsterModuleChangesSpringPropertiesBuilder {
-    JHipsterModuleChangesSpringYamlCommentsBuilder springYamlProperties(SpringProperties springProperties);
-    JHipsterModuleChangesSpringCommentsBuilder springProperties(SpringProperties springProperties);
+  public interface SeedModuleChangesSpringPropertiesBuilder {
+    SeedModuleChangesSpringYamlCommentsBuilder springYamlProperties(SpringProperties springProperties);
+    SeedModuleChangesSpringCommentsBuilder springProperties(SpringProperties springProperties);
   }
 
-  public interface JHipsterModuleChangesSpringYamlCommentsBuilder {
+  public interface SeedModuleChangesSpringYamlCommentsBuilder {
     SeedModuleChanges springYamlComments(SpringComments springComments);
   }
 
-  public interface JHipsterModuleChangesSpringCommentsBuilder {
+  public interface SeedModuleChangesSpringCommentsBuilder {
     SeedModuleChanges springComments(SpringComments springComments);
   }
 }

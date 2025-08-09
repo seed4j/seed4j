@@ -32,16 +32,16 @@ public final class SeedModuleGitIgnore {
     return entries.toString();
   }
 
-  public static JHipsterModuleGitIgnoreBuilder builder(SeedModuleBuilder parentModuleBuilder) {
-    return new JHipsterModuleGitIgnoreBuilder(parentModuleBuilder);
+  public static SeedModuleGitIgnoreBuilder builder(SeedModuleBuilder parentModuleBuilder) {
+    return new SeedModuleGitIgnoreBuilder(parentModuleBuilder);
   }
 
-  public static final class JHipsterModuleGitIgnoreBuilder {
+  public static final class SeedModuleGitIgnoreBuilder {
 
     private final SeedModuleBuilder parentModuleBuilder;
     private final Collection<GitIgnoreEntry> entries = new ArrayList<>();
 
-    private JHipsterModuleGitIgnoreBuilder(SeedModuleBuilder parentModuleBuilder) {
+    private SeedModuleGitIgnoreBuilder(SeedModuleBuilder parentModuleBuilder) {
       Assert.notNull("module", parentModuleBuilder);
 
       this.parentModuleBuilder = parentModuleBuilder;
@@ -50,7 +50,7 @@ public final class SeedModuleGitIgnore {
     /**
      * Declare a pattern to be added to the {@code .gitignore} file.
      */
-    public JHipsterModuleGitIgnoreBuilder pattern(GitIgnorePattern pattern) {
+    public SeedModuleGitIgnoreBuilder pattern(GitIgnorePattern pattern) {
       Assert.notNull("pattern", pattern);
       entries.add(pattern);
 
@@ -60,14 +60,14 @@ public final class SeedModuleGitIgnore {
     /**
      * Declare a pattern to be added to the {@code .gitignore} file.
      */
-    public JHipsterModuleGitIgnoreBuilder pattern(String pattern) {
+    public SeedModuleGitIgnoreBuilder pattern(String pattern) {
       return pattern(new GitIgnorePattern(pattern));
     }
 
     /**
      * Declare a comment to be added to the {@code .gitignore} file.
      */
-    public JHipsterModuleGitIgnoreBuilder comment(GitIgnoreComment comment) {
+    public SeedModuleGitIgnoreBuilder comment(GitIgnoreComment comment) {
       Assert.notNull("comment", comment);
       entries.add(comment);
 
@@ -77,7 +77,7 @@ public final class SeedModuleGitIgnore {
     /**
      * Declare a comment to be added to the {@code .gitignore} file.
      */
-    public JHipsterModuleGitIgnoreBuilder comment(String comment) {
+    public SeedModuleGitIgnoreBuilder comment(String comment) {
       return comment(new GitIgnoreComment(comment));
     }
 

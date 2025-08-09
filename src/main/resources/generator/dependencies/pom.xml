@@ -6,9 +6,9 @@
 >
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>jhlite-dependencies</artifactId>
+  <artifactId>seed4j-dependencies</artifactId>
   <version>0.0.7-SNAPSHOT</version>
-  <name>jhlite dependencies</name>
+  <name>seed4j dependencies</name>
   <description>Seed4J dependencies list</description>
   <packaging>pom</packaging>
 

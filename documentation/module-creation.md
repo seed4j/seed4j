@@ -9,7 +9,7 @@ For that, you'll need to provide two main parts:
 
 You can start with the element you prefer but to create a `JHipsterModuleResource` you'll need to be able to build a `JHipsterModule`.
 
-## Creating a JHipsterModule
+## Creating a Seed4J module
 
 In fact, you don't just need to create one `JHipsterModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
 
@@ -99,16 +99,16 @@ And this is it for this part of the documentation... Of course, you can do a lot
 
 - **Docker versions**
   - You can add the docker images required for your module in the `src/main/resources/generator/dependencies/Dockerfile`
-  - These dependencies are resolved using the [FileSystemDockerImagesReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/tech/jhipster/lite/module/infrastructure/secondary/docker/FileSystemDockerImagesReader.java), an implementation of the `DockerImagesReader` bean to read from a local file.
+  - These dependencies are resolved using the [FileSystemDockerImagesReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/com/seed4j/module/infrastructure/secondary/docker/FileSystemDockerImagesReader.java), an implementation of the `DockerImagesReader` bean to read from a local file.
 
 - **Java versions**
   - You can add the java dependencies required for your module in the `src/main/resources/generator/dependencies/pom.xml`
-  - These dependencies are resolved using [FileSystemMavenDependenciesReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/tech/jhipster/lite/module/infrastructure/secondary/javadependency/FileSystemMavenDependenciesReader.java), an implementation of the `JavaDependenciesReader` bean to read from a local file.
+  - These dependencies are resolved using [FileSystemMavenDependenciesReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/com/seed4j/module/infrastructure/secondary/javadependency/FileSystemMavenDependenciesReader.java), an implementation of the `JavaDependenciesReader` bean to read from a local file.
 
 - **NPM versions**
   - Common npm dependencies can be added in the `src/main/resources/generator/dependencies/common/package.json`
   - Framework specific npm dependencies can be added in the `package.json` of the respective framework folders. For e.g.: `src/main/resources/generator/dependencies/react/package.json`
-  - These dependencies are resolved using [FileSystemNpmVersionReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/tech/jhipster/lite/module/infrastructure/secondary/npm/FileSystemNpmVersionReader.java), an implementation of the `NpmVersionsReader` bean to read from a local file.
+  - These dependencies are resolved using [FileSystemNpmVersionReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/com/seed4j/module/infrastructure/secondary/npm/FileSystemNpmVersionReader.java), an implementation of the `NpmVersionsReader` bean to read from a local file.
 
 ## Creating JHipsterModuleResource
 

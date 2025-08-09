@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>jhlite-test-maven-project</artifactId>
+  <artifactId>seed4j-test-maven-project</artifactId>
   <version>0.0.1</version>
   <name>Test project</name>
   <packaging>pom</packaging>
@@ -11,8 +11,8 @@
     <json-web-token.version>0.12.6</json-web-token.version>
     <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
     <spring-boot.version>3.3.3</spring-boot.version>
-    
-    
+
+
     <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
     <spring-profiles-active>local</spring-profiles-active>
     <cassandraunit.version>4.3.1.0</cassandraunit.version>

@@ -5,5 +5,5 @@ Button toggle can display a short name by default and expand to show a full name
 Use the `shortName` and `fullName` properties to enable this feature:
 
 ```pug
-+jhlite-button-toggle({ shortName: 'JS', fullName: 'JavaScript' })
++seed4j-button-toggle({ shortName: 'JS', fullName: 'JavaScript' })
 ```

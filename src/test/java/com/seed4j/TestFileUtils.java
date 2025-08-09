@@ -15,7 +15,7 @@ public final class TestFileUtils {
   private TestFileUtils() {}
 
   public static String tmpDirForTest() {
-    return Path.of(tmpDir()).resolve("jhlite-test").resolve(UUID.randomUUID().toString()).toString().replace("\\", "/");
+    return Path.of(tmpDir()).resolve("seed4j-test").resolve(UUID.randomUUID().toString()).toString().replace("\\", "/");
   }
 
   private static String tmpDir() {

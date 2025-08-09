@@ -1,1 +1,1 @@
-rootProject.name = "jhlite-test-gradle-project"
+rootProject.name = "seed4j-test-gradle-project"

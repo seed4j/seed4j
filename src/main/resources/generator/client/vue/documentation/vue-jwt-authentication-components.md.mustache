@@ -605,9 +605,9 @@ setupAxiosInterceptors(axiosInstance);
 app.mount('#app');
 ```
 
-## JHLite Backend
+## Seed4J Backend
 
-Start the JHLite application and apply the `{{springBootJwtBasicAuthModule}}` module and the required dependencies.
+Start the Seed4J application and apply the `{{springBootJwtBasicAuthModule}}` module and the required dependencies.
 
 Then edit the `application-local.yml` file and add the following configuration:
 
@@ -623,9 +623,9 @@ application:
       - Authorization
       - Link
       - X-Total-Count
-      - X-jhipster-alert
-      - X-jhipster-error
-      - X-jhipster-params
+      - X-seed4j-alert
+      - X-seed4j-error
+      - X-seed4j-params
     allow-credentials: true
     max-age: 1800
     allowed-origin-patterns:
@@ -651,4 +651,4 @@ The core of the authentication system is the `AuthVue` component, which manages 
 
 The accompanying test files (`AuthVue.spec.ts`, `AxiosAuthInterceptor.spec.ts`) demonstrate how to effectively test these components, while the stub file (`AxiosStub.ts`) provides mock implementations of Axios, enabling more streamlined and reliable testing.
 
-For the backend setup, the **JHLite Backend** documentation outlines the necessary steps to configure the `{{springBootJwtBasicAuthModule}}` module, which serves as the foundation for handling authentication and authorization in the application. This integration ensures a secure and robust communication layer between the frontend and backend, enabling JWT-based authentication.
+For the backend setup, the **Seed4J Backend** documentation outlines the necessary steps to configure the `{{springBootJwtBasicAuthModule}}` module, which serves as the foundation for handling authentication and authorization in the application. This integration ensures a secure and robust communication layer between the frontend and backend, enabling JWT-based authentication.

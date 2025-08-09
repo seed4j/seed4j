@@ -6,7 +6,7 @@
 >
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>jhlite-test-maven-project</artifactId>
+  <artifactId>seed4j-test-maven-project</artifactId>
   <version>0.0.1</version>
   <name>Test project</name>
   <packaging>pom</packaging>

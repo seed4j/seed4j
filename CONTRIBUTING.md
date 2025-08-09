@@ -362,7 +362,7 @@ from the main (upstream) repository:
   - kafkaapp
   - pulsarapp
   - reactiveapp
-  - customjhlite
+  - seed4jextension
   - typescriptapp
   - thymeleafapp
   - langchain4japp

@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.javatool.frontendmaven.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.buildPropertyKey;
 import static com.seed4j.module.domain.JHipsterModule.buildPropertyValue;
 import static com.seed4j.module.domain.JHipsterModule.from;
@@ -44,7 +44,7 @@ public class FrontendJavaBuildToolModuleFactory {
   public JHipsterModule buildFrontendMavenModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
-    JHipsterModuleBuilder moduleBuilder = commonModuleFiles(properties);
+    SeedModuleBuilder moduleBuilder = commonModuleFiles(properties);
 
     NodePackageManager nodePackageManager = properties.nodePackageManager();
     if (nodePackageManager == NPM) {
@@ -200,7 +200,7 @@ public class FrontendJavaBuildToolModuleFactory {
     // @formatter:on
   }
 
-  private static JHipsterModuleBuilder commonModuleFiles(SeedModuleProperties properties) {
+  private static SeedModuleBuilder commonModuleFiles(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     String packagePath = properties.packagePath();

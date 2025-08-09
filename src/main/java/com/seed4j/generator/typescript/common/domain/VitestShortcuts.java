@@ -11,7 +11,7 @@ public final class VitestShortcuts {
 
   private VitestShortcuts() {}
 
-  public static Consumer<JHipsterModule.JHipsterModuleBuilder> vitestCoverageExclusion(String exclusionFilePattern) {
+  public static Consumer<JHipsterModule.SeedModuleBuilder> vitestCoverageExclusion(String exclusionFilePattern) {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

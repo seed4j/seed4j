@@ -1,6 +1,6 @@
 package com.seed4j.module.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.artifactId;
 import static com.seed4j.module.domain.JHipsterModule.buildProfileActivation;
 import static com.seed4j.module.domain.JHipsterModule.buildProfileId;
@@ -371,7 +371,7 @@ public final class JHipsterModulesFixture {
     return SeedModuleContext.builder(emptyModuleBuilder()).put("packageName", "com.test.myapp").build();
   }
 
-  public static JHipsterModuleBuilder emptyModuleBuilder() {
+  public static SeedModuleBuilder emptyModuleBuilder() {
     return moduleBuilder(testModuleProperties());
   }
 

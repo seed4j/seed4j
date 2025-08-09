@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.cache.ehcache.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.artifactId;
 import static com.seed4j.module.domain.JHipsterModule.from;
 import static com.seed4j.module.domain.JHipsterModule.groupId;
@@ -68,7 +68,7 @@ public class EhcacheModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterModuleBuilder commonEHCacheModuleBuilder(SeedModuleProperties properties) {
+  private SeedModuleBuilder commonEHCacheModuleBuilder(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .javaDependencies()

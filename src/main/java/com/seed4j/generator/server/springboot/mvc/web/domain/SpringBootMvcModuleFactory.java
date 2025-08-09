@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.mvc.web.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.artifactId;
 import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
 import static com.seed4j.module.domain.JHipsterModule.from;
@@ -84,7 +84,7 @@ public class SpringBootMvcModuleFactory {
       .build();
   }
 
-  private JHipsterModuleBuilder springMvcBuilder(SeedModuleProperties properties, String loggerName, LogLevel logLevel) {
+  private SeedModuleBuilder springMvcBuilder(SeedModuleProperties properties, String loggerName, LogLevel logLevel) {
     String packagePath = properties.packagePath();
 
     SeedDestination mainDestination = toSrcMainJava().append(packagePath);

@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.replacement;
 
 import com.seed4j.module.domain.GeneratedProjectRepository;
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
@@ -9,31 +9,28 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public final class JHipsterModuleOptionalReplacementsFactory extends JHipsterModuleReplacementsFactory {
+public final class SeedModuleOptionalReplacementsFactory extends SeedModuleReplacementsFactory {
 
-  private final Optional<JHipsterUpgradeFilesReplacements> upgrades;
+  private final Optional<SeedUpgradeFilesReplacements> upgrades;
 
-  private JHipsterModuleOptionalReplacementsFactory(JHipsterModuleOptionalReplacementsFactoryBuilder builder) {
+  private SeedModuleOptionalReplacementsFactory(JHipsterModuleOptionalReplacementsFactoryBuilder builder) {
     super(builder);
     upgrades = Optional.empty();
   }
 
-  private JHipsterModuleOptionalReplacementsFactory(
-    Collection<? extends ContentReplacer> replacers,
-    JHipsterUpgradeFilesReplacements upgrade
-  ) {
+  private SeedModuleOptionalReplacementsFactory(Collection<? extends ContentReplacer> replacers, SeedUpgradeFilesReplacements upgrade) {
     super(replacers);
     this.upgrades = Optional.of(upgrade);
   }
 
-  public static JHipsterModuleOptionalReplacementsFactoryBuilder builder(JHipsterModuleBuilder module) {
+  public static JHipsterModuleOptionalReplacementsFactoryBuilder builder(SeedModuleBuilder module) {
     return new JHipsterModuleOptionalReplacementsFactoryBuilder(module);
   }
 
-  public JHipsterModuleOptionalReplacementsFactory add(JHipsterUpgradeFilesReplacements upgrade) {
+  public SeedModuleOptionalReplacementsFactory add(SeedUpgradeFilesReplacements upgrade) {
     Assert.notNull("upgrade", upgrade);
 
-    return new JHipsterModuleOptionalReplacementsFactory(getReplacers(), upgrade);
+    return new SeedModuleOptionalReplacementsFactory(getReplacers(), upgrade);
   }
 
   public Stream<ContentReplacer> buildReplacers(SeedProjectFolder folder, GeneratedProjectRepository generatedProject) {
@@ -48,11 +45,11 @@ public final class JHipsterModuleOptionalReplacementsFactory extends JHipsterMod
 
   public static final class JHipsterModuleOptionalReplacementsFactoryBuilder
     extends JHipsterModuleReplacementsFactoryBuilder<
-      JHipsterModuleOptionalReplacementsFactory,
+      SeedModuleOptionalReplacementsFactory,
       JHipsterModuleFileOptionalReplacementsFactoryBuilder
     > {
 
-    private JHipsterModuleOptionalReplacementsFactoryBuilder(JHipsterModuleBuilder module) {
+    private JHipsterModuleOptionalReplacementsFactoryBuilder(SeedModuleBuilder module) {
       super(module);
     }
 
@@ -62,8 +59,8 @@ public final class JHipsterModuleOptionalReplacementsFactory extends JHipsterMod
     }
 
     @Override
-    public JHipsterModuleOptionalReplacementsFactory build() {
-      return new JHipsterModuleOptionalReplacementsFactory(this);
+    public SeedModuleOptionalReplacementsFactory build() {
+      return new SeedModuleOptionalReplacementsFactory(this);
     }
   }
 

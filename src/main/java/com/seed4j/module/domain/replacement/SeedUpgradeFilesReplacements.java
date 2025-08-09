@@ -8,8 +8,8 @@ import java.util.Collection;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public record JHipsterUpgradeFilesReplacements(Collection<JHipsterUpgradeFilesReplacement> replacements) {
-  public JHipsterUpgradeFilesReplacements(Collection<JHipsterUpgradeFilesReplacement> replacements) {
+public record SeedUpgradeFilesReplacements(Collection<SeedUpgradeFilesReplacement> replacements) {
+  public SeedUpgradeFilesReplacements(Collection<SeedUpgradeFilesReplacement> replacements) {
     this.replacements = SeedCollections.immutable(replacements);
   }
 
@@ -20,7 +20,7 @@ public record JHipsterUpgradeFilesReplacements(Collection<JHipsterUpgradeFilesRe
     return replacements().stream().flatMap(toReplacer(folder, generatedProject));
   }
 
-  private Function<JHipsterUpgradeFilesReplacement, Stream<ContentReplacer>> toReplacer(
+  private Function<SeedUpgradeFilesReplacement, Stream<ContentReplacer>> toReplacer(
     SeedProjectFolder folder,
     GeneratedProjectRepository generatedProject
   ) {

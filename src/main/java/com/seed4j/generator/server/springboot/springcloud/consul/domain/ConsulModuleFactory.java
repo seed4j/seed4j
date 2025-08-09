@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.springcloud.consul.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.artifactId;
 import static com.seed4j.module.domain.JHipsterModule.dockerComposeFile;
 import static com.seed4j.module.domain.JHipsterModule.from;
@@ -51,7 +51,7 @@ public class ConsulModuleFactory {
     DockerImageVersion dockerImageConfigLoader = dockerImages.get(DOCKER_IMAGE_CONFIG_LOADER);
 
     // @formatter:off
-    JHipsterModuleBuilder builder = moduleBuilder(properties)
+    SeedModuleBuilder builder = moduleBuilder(properties)
       .context()
         .put("dockerImageConsul", dockerImageConsul.fullName())
         .put("dockerImageConfigLoader", dockerImageConfigLoader.fullName())

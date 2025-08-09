@@ -72,7 +72,7 @@ public class CypressMergeCoverageModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModule.JHipsterModuleBuilder> patchCypressConfig(SeedModuleProperties properties) {
+  private Consumer<JHipsterModule.SeedModuleBuilder> patchCypressConfig(SeedModuleProperties properties) {
     return moduleBuilder ->
       moduleBuilder
         .mandatoryReplacements()
@@ -90,7 +90,7 @@ public class CypressMergeCoverageModuleFactory {
         .add(text("supportFile: false"), "supportFile: 'src/test/webapp/component/support/component-tests.ts'");
   }
 
-  private Consumer<JHipsterModule.JHipsterModuleBuilder> patchVitestConfig() {
+  private Consumer<JHipsterModule.SeedModuleBuilder> patchVitestConfig() {
     return moduleBuilder ->
       moduleBuilder
         .mandatoryReplacements()
@@ -98,7 +98,7 @@ public class CypressMergeCoverageModuleFactory {
         .add(regex("reportsDirectory: '(.*?)/test-results/'"), "reportsDirectory: 'target/frontend-coverage/unit-tests/'");
   }
 
-  private Consumer<JHipsterModule.JHipsterModuleBuilder> patchViteConfig() {
+  private Consumer<JHipsterModule.SeedModuleBuilder> patchViteConfig() {
     return moduleBuilder ->
       moduleBuilder
         .mandatoryReplacements()

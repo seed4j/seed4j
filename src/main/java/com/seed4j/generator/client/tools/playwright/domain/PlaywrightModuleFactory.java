@@ -1,6 +1,6 @@
 package com.seed4j.generator.client.tools.playwright.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.from;
 import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.packageName;
@@ -58,7 +58,7 @@ public class PlaywrightModuleFactory {
     // @formatter:on
   }
 
-  private static JHipsterModuleBuilder commonPlaywrightModuleBuilder(SeedModuleProperties properties, SeedDestination destinationFolder) {
+  private static SeedModuleBuilder commonPlaywrightModuleBuilder(SeedModuleProperties properties, SeedDestination destinationFolder) {
     // @formatter:off
     return moduleBuilder(properties)
       .packageJson()

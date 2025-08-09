@@ -3,8 +3,8 @@ package com.seed4j.generator.client.react.core.domain;
 import static com.seed4j.generator.typescript.common.domain.EslintShortcuts.eslintTypescriptRule;
 import static com.seed4j.generator.typescript.common.domain.TsConfigShortcuts.tsConfigCompilerOption;
 import static com.seed4j.generator.typescript.common.domain.VitestShortcuts.vitestCoverageExclusion;
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.LINE_BREAK;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.from;
 import static com.seed4j.module.domain.JHipsterModule.lineAfterRegex;
 import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
@@ -116,7 +116,7 @@ public class ReactModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintConfig(SeedModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> patchEslintConfig(SeedModuleProperties properties) {
     String reactConfig = """
       \t\tfiles: ['src/main/webapp/**/*.{ts,tsx}', 'src/test/webapp/unit/**/*.{ts,tsx}'],
       \t\textends: [...typescript.configs.recommendedTypeChecked, react],
@@ -161,7 +161,7 @@ public class ReactModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchTsConfig(SeedModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> patchTsConfig(SeedModuleProperties properties) {
     String pathsReplacement =
       DEFAULT_TSCONFIG_PATH + "," + LINE_BREAK + properties.indentation().times(3) + "\"@assets/*\": [\"src/main/webapp/assets/*\"]";
     // @formatter:off
@@ -178,7 +178,7 @@ public class ReactModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchVitestConfig() {
+  private Consumer<SeedModuleBuilder> patchVitestConfig() {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

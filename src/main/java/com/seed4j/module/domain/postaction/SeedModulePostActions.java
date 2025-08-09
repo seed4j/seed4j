@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.postaction;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +13,7 @@ public final class SeedModulePostActions {
     actions = builder.actions;
   }
 
-  public static SeedModulePostActionsBuilder builder(JHipsterModuleBuilder module) {
+  public static SeedModulePostActionsBuilder builder(SeedModuleBuilder module) {
     return new SeedModulePostActionsBuilder(module);
   }
 
@@ -25,10 +25,10 @@ public final class SeedModulePostActions {
 
   public static final class SeedModulePostActionsBuilder {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Collection<RunnableInContext> actions = new ArrayList<>();
 
-    private SeedModulePostActionsBuilder(JHipsterModuleBuilder module) {
+    private SeedModulePostActionsBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -48,7 +48,7 @@ public final class SeedModulePostActions {
       return this;
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
 

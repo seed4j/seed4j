@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.mvc.security.jwt.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
 import static com.seed4j.module.domain.JHipsterModule.from;
 import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
@@ -36,7 +36,7 @@ public class JwtBasicAuthModuleFactory {
     SeedDestination testDestination = toSrcTestJava().append(packagePath).append(ACCOUNT);
 
     // @formatter:off
-    JHipsterModuleBuilder builder = moduleBuilder(properties)
+    SeedModuleBuilder builder = moduleBuilder(properties)
       .documentation(documentationTitle("JWT basic auth"), SOURCE.template("jwt-basic-auth.md"))
       .files()
         .add(MAIN_SOURCE.template("package-info.java"), mainDestination.append("package-info.java"))

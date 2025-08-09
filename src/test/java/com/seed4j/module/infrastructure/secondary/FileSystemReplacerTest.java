@@ -36,7 +36,7 @@ class FileSystemReplacerTest {
       replacer.handle(
         new SeedProjectFolder(path),
         new ContentReplacers(
-          JHipsterModuleMandatoryReplacementsFactory.builder(emptyModuleBuilder())
+          SeedModuleMandatoryReplacementsFactory.builder(emptyModuleBuilder())
             .in(new SeedProjectFilePath("unknown"))
             .add(new TextReplacer(always(), "old"), "new")
             .and()
@@ -57,7 +57,7 @@ class FileSystemReplacerTest {
       replacer.handle(
         new SeedProjectFolder(path),
         new ContentReplacers(
-          JHipsterModuleOptionalReplacementsFactory.builder(emptyModuleBuilder())
+          SeedModuleOptionalReplacementsFactory.builder(emptyModuleBuilder())
             .in(new SeedProjectFilePath("unknown"))
             .add(new TextReplacer(always(), "old"), "new")
             .and()

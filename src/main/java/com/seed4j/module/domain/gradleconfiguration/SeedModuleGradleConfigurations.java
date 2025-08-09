@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.gradleconfiguration;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.module.domain.javabuild.command.AddGradleConfiguration;
 import com.seed4j.module.domain.javabuild.command.AddGradleTasksTestInstruction;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
@@ -23,7 +23,7 @@ public final class SeedModuleGradleConfigurations {
     this.tasksTestInstructions = builder.tasksTestInstructions;
   }
 
-  public static JHipsterModuleGradleConfigurationBuilder builder(JHipsterModuleBuilder module) {
+  public static JHipsterModuleGradleConfigurationBuilder builder(SeedModuleBuilder module) {
     return new JHipsterModuleGradleConfigurationBuilder(module);
   }
 
@@ -57,11 +57,11 @@ public final class SeedModuleGradleConfigurations {
 
   public static final class JHipsterModuleGradleConfigurationBuilder {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Collection<GradleConfiguration> configurations = new ArrayList<>();
     private final Collection<GradleTasksTestInstruction> tasksTestInstructions = new ArrayList<>();
 
-    private JHipsterModuleGradleConfigurationBuilder(JHipsterModuleBuilder module) {
+    private JHipsterModuleGradleConfigurationBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -79,7 +79,7 @@ public final class SeedModuleGradleConfigurations {
       return this;
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
 

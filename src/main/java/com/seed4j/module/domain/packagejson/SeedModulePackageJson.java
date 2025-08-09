@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.packagejson;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.module.domain.nodejs.NodePackagesVersionSourceFactory;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public final class SeedModulePackageJson {
     nodeModuleFormat = Optional.ofNullable(builder.nodeModuleFormat);
   }
 
-  public static JHipsterModulePackageJsonBuilder builder(JHipsterModuleBuilder module) {
+  public static JHipsterModulePackageJsonBuilder builder(SeedModuleBuilder module) {
     return new JHipsterModulePackageJsonBuilder(module);
   }
 
@@ -71,7 +71,7 @@ public final class SeedModulePackageJson {
 
   public static final class JHipsterModulePackageJsonBuilder {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Collection<Script> scripts = new ArrayList<>();
     private final Collection<PackageJsonDependency> dependencies = new ArrayList<>();
     private final Collection<PackageJsonDependency> devDependencies = new ArrayList<>();
@@ -79,7 +79,7 @@ public final class SeedModulePackageJson {
     private final Collection<PackageName> devDependenciesToRemove = new ArrayList<>();
     private NodeModuleFormat nodeModuleFormat;
 
-    private JHipsterModulePackageJsonBuilder(JHipsterModuleBuilder module) {
+    private JHipsterModulePackageJsonBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -213,7 +213,7 @@ public final class SeedModulePackageJson {
      *
      * @return the parent module builder
      */
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
 

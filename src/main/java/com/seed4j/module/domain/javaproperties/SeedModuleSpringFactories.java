@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.javaproperties;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.*;
@@ -13,7 +13,7 @@ public final class SeedModuleSpringFactories {
     factories = SeedCollections.immutable(builder.factories);
   }
 
-  public static JHipsterModuleSpringFactoriesBuilder builder(JHipsterModuleBuilder module) {
+  public static JHipsterModuleSpringFactoriesBuilder builder(SeedModuleBuilder module) {
     return new JHipsterModuleSpringFactoriesBuilder(module);
   }
 
@@ -23,10 +23,10 @@ public final class SeedModuleSpringFactories {
 
   public static final class JHipsterModuleSpringFactoriesBuilder {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Map<PropertyKey, PropertyValue> factories = new HashMap<>();
 
-    private JHipsterModuleSpringFactoriesBuilder(JHipsterModuleBuilder module) {
+    private JHipsterModuleSpringFactoriesBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -41,7 +41,7 @@ public final class SeedModuleSpringFactories {
       return this;
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
 

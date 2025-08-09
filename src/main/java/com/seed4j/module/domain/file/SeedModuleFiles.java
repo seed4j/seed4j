@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.file;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.module.domain.JHipsterModuleUpgrade;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.shared.collection.domain.SeedCollections;
@@ -34,7 +34,7 @@ public final class SeedModuleFiles {
       .toList();
   }
 
-  public static JHipsterModuleFilesBuilder builder(JHipsterModuleBuilder module) {
+  public static JHipsterModuleFilesBuilder builder(SeedModuleBuilder module) {
     return new JHipsterModuleFilesBuilder(module);
   }
 
@@ -56,12 +56,12 @@ public final class SeedModuleFiles {
 
   public static final class JHipsterModuleFilesBuilder {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Collection<SeedModuleFile> filesToAdd = new ArrayList<>();
     private final Collection<SeedFileToMove> filesToMove = new ArrayList<>();
     private final Collection<SeedProjectFilePath> filesToDelete = new ArrayList<>();
 
-    private JHipsterModuleFilesBuilder(JHipsterModuleBuilder module) {
+    private JHipsterModuleFilesBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -97,7 +97,7 @@ public final class SeedModuleFiles {
       return this;
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
 

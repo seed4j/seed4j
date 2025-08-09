@@ -1,6 +1,6 @@
 package com.seed4j.generator.client.tools.cypress.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.from;
 import static com.seed4j.module.domain.JHipsterModule.lineAfterRegex;
 import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
@@ -66,7 +66,7 @@ public class CypressModuleFactory {
     // @formatter:on
   }
 
-  private static JHipsterModuleBuilder commonCypressModuleBuilder(SeedModuleProperties properties, SeedDestination destinationFolder) {
+  private static SeedModuleBuilder commonCypressModuleBuilder(SeedModuleProperties properties, SeedDestination destinationFolder) {
     // @formatter:off
     return moduleBuilder(properties)
       .packageJson()
@@ -89,15 +89,15 @@ public class CypressModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintPluginCypressE2E(SeedModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> patchEslintPluginCypressE2E(SeedModuleProperties properties) {
     return patchEslintPluginCypress(properties, "e2e");
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintPluginCypressComponent(SeedModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> patchEslintPluginCypressComponent(SeedModuleProperties properties) {
     return patchEslintPluginCypress(properties, "component");
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintPluginCypress(SeedModuleProperties properties, String path) {
+  private Consumer<SeedModuleBuilder> patchEslintPluginCypress(SeedModuleProperties properties, String path) {
     String eslintPluginCypress = """
       \t{
       \t\tfiles: ['src/test/webapp/%s/**/*.ts'],

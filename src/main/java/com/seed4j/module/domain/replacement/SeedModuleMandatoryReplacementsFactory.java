@@ -1,30 +1,30 @@
 package com.seed4j.module.domain.replacement;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import java.util.stream.Stream;
 
-public final class JHipsterModuleMandatoryReplacementsFactory extends JHipsterModuleReplacementsFactory {
+public final class SeedModuleMandatoryReplacementsFactory extends SeedModuleReplacementsFactory {
 
-  private JHipsterModuleMandatoryReplacementsFactory(JHipsterModuleMandatoryReplacementsFactoryBuilder builder) {
+  private SeedModuleMandatoryReplacementsFactory(SeedModuleMandatoryReplacementsFactoryBuilder builder) {
     super(builder);
   }
 
-  public static JHipsterModuleMandatoryReplacementsFactoryBuilder builder(JHipsterModuleBuilder module) {
-    return new JHipsterModuleMandatoryReplacementsFactoryBuilder(module);
+  public static SeedModuleMandatoryReplacementsFactoryBuilder builder(SeedModuleBuilder module) {
+    return new SeedModuleMandatoryReplacementsFactoryBuilder(module);
   }
 
   public Stream<ContentReplacer> replacers() {
     return getReplacers().stream();
   }
 
-  public static final class JHipsterModuleMandatoryReplacementsFactoryBuilder
+  public static final class SeedModuleMandatoryReplacementsFactoryBuilder
     extends JHipsterModuleReplacementsFactoryBuilder<
-      JHipsterModuleMandatoryReplacementsFactory,
+      SeedModuleMandatoryReplacementsFactory,
       JHipsterModuleFileMandatoryReplacementsFactoryBuilder
     > {
 
-    private JHipsterModuleMandatoryReplacementsFactoryBuilder(JHipsterModuleBuilder module) {
+    private SeedModuleMandatoryReplacementsFactoryBuilder(SeedModuleBuilder module) {
       super(module);
     }
 
@@ -34,19 +34,19 @@ public final class JHipsterModuleMandatoryReplacementsFactory extends JHipsterMo
     }
 
     @Override
-    public JHipsterModuleMandatoryReplacementsFactory build() {
-      return new JHipsterModuleMandatoryReplacementsFactory(this);
+    public SeedModuleMandatoryReplacementsFactory build() {
+      return new SeedModuleMandatoryReplacementsFactory(this);
     }
   }
 
   public static final class JHipsterModuleFileMandatoryReplacementsFactoryBuilder
     extends JHipsterModuleFileReplacementsBuilder<
-      JHipsterModuleMandatoryReplacementsFactoryBuilder,
+      SeedModuleMandatoryReplacementsFactoryBuilder,
       JHipsterModuleFileMandatoryReplacementsFactoryBuilder
     > {
 
     private JHipsterModuleFileMandatoryReplacementsFactoryBuilder(
-      JHipsterModuleMandatoryReplacementsFactoryBuilder replacements,
+      SeedModuleMandatoryReplacementsFactoryBuilder replacements,
       SeedProjectFilePath file
     ) {
       super(replacements, file);

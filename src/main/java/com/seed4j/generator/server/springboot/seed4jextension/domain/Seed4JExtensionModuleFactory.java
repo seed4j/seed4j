@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.seed4jextension.domain;
 
 import static com.seed4j.generator.server.springboot.cucumbercommon.domain.CucumbersModules.cucumberModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.artifactId;
 import static com.seed4j.module.domain.JHipsterModule.comment;
 import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
@@ -103,7 +103,7 @@ public class Seed4JExtensionModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> cucumberBuilder(SeedModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> cucumberBuilder(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
     SeedDestination cucumberDestination = toSrcTestJava().append(packagePath).append("cucumber");
 
@@ -120,7 +120,7 @@ public class Seed4JExtensionModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> dependenciesReadersBuilder(SeedModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> dependenciesReadersBuilder(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
     String baseName = properties.projectBaseName().capitalized();
     SeedDestination npmMainDestination = toSrcMainJava().append(packagePath).append(SHARED).append(DEPENDENCIES);
@@ -169,7 +169,7 @@ public class Seed4JExtensionModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> slugBuilder(SeedModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> slugBuilder(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
     String baseName = properties.projectBaseName().capitalized();
     SeedDestination slugDestination = toSrcMainJava().append(packagePath).append(SHARED).append("slug");

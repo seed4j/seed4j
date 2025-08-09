@@ -4,7 +4,7 @@ import static com.seed4j.module.domain.JHipsterModule.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterFileMatcher;
+import com.seed4j.module.domain.SeedFileMatcher;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.GeneratorException;
@@ -34,7 +34,7 @@ class FileSystemGeneratedProjectRepositoryTest {
     assertThat(files).containsExactlyInAnyOrder("IntegrationTest.java", "MainApp.java");
   }
 
-  private JHipsterFileMatcher allMatch() {
+  private SeedFileMatcher allMatch() {
     return path -> true;
   }
 }

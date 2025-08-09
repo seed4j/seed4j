@@ -1,6 +1,6 @@
 package com.seed4j.module.domain;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +13,7 @@ public final class JHipsterModulePreActions {
     actions = builder.actions;
   }
 
-  public static JHipsterModulePreActionsBuilder builder(JHipsterModuleBuilder module) {
+  public static JHipsterModulePreActionsBuilder builder(SeedModuleBuilder module) {
     return new JHipsterModulePreActionsBuilder(module);
   }
 
@@ -23,10 +23,10 @@ public final class JHipsterModulePreActions {
 
   public static final class JHipsterModulePreActionsBuilder {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Collection<Runnable> actions = new ArrayList<>();
 
-    private JHipsterModulePreActionsBuilder(JHipsterModuleBuilder module) {
+    private JHipsterModulePreActionsBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -40,7 +40,7 @@ public final class JHipsterModulePreActions {
       return this;
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
 

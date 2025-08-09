@@ -1,24 +1,24 @@
 package com.seed4j.module.domain.replacement;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public abstract class JHipsterModuleReplacementsFactory {
+public abstract class SeedModuleReplacementsFactory {
 
   private final Collection<ContentReplacer> replacers;
 
-  protected JHipsterModuleReplacementsFactory(JHipsterModuleReplacementsFactoryBuilder<?, ?> builder) {
+  protected SeedModuleReplacementsFactory(JHipsterModuleReplacementsFactoryBuilder<?, ?> builder) {
     Assert.notNull("builder", builder);
     Assert.notNull("replacers", builder.replacers);
 
     this.replacers = SeedCollections.immutable(builder.replacers);
   }
 
-  protected JHipsterModuleReplacementsFactory(Collection<? extends ContentReplacer> replacers) {
+  protected SeedModuleReplacementsFactory(Collection<? extends ContentReplacer> replacers) {
     Assert.notNull("replacers", replacers);
 
     this.replacers = SeedCollections.immutable(replacers);
@@ -29,20 +29,20 @@ public abstract class JHipsterModuleReplacementsFactory {
   }
 
   public abstract static class JHipsterModuleReplacementsFactoryBuilder<
-    Replacements extends JHipsterModuleReplacementsFactory,
+    Replacements extends SeedModuleReplacementsFactory,
     FileReplacementsBuilder extends JHipsterModuleFileReplacementsBuilder<?, ?>
   > {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Collection<ContentReplacer> replacers = new ArrayList<>();
 
-    protected JHipsterModuleReplacementsFactoryBuilder(JHipsterModuleBuilder module) {
+    protected JHipsterModuleReplacementsFactoryBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
 

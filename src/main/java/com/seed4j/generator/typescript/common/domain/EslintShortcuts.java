@@ -12,7 +12,7 @@ public final class EslintShortcuts {
 
   private EslintShortcuts() {}
 
-  public static Consumer<JHipsterModule.JHipsterModuleBuilder> eslintTypescriptRule(String rule, Indentation indentation) {
+  public static Consumer<JHipsterModule.SeedModuleBuilder> eslintTypescriptRule(String rule, Indentation indentation) {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

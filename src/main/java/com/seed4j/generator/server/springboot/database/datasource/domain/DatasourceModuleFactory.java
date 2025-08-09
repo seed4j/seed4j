@@ -192,12 +192,12 @@ public class DatasourceModuleFactory {
     // @formatter:on
   }
 
-  public static Consumer<JHipsterModule.JHipsterModuleBuilder> declareDockerComposeService(DatasourceProperties datasourceProperties) {
+  public static Consumer<JHipsterModule.SeedModuleBuilder> declareDockerComposeService(DatasourceProperties datasourceProperties) {
     return moduleBuilder ->
       moduleBuilder.dockerComposeFile().append(dockerComposeFile("src/main/docker/%s.yml".formatted(datasourceProperties.id())));
   }
 
-  public static Consumer<JHipsterModule.JHipsterModuleBuilder> dockerContainer(
+  public static Consumer<JHipsterModule.SeedModuleBuilder> dockerContainer(
     DockerImages dockerImages,
     DatasourceProperties datasourceProperties
   ) {
@@ -219,7 +219,7 @@ public class DatasourceModuleFactory {
           .add(SOURCE.append("docker").template(datasourceProperties.id() + ".yml"), toSrcMainDocker().append(datasourceProperties.id() + ".yml"));
   }
 
-  public static Consumer<JHipsterModule.JHipsterModuleBuilder> testcontainers(DockerImages dockerImages, SeedModuleProperties moduleProperties, DatasourceProperties datasourceProperties) {
+  public static Consumer<JHipsterModule.SeedModuleBuilder> testcontainers(DockerImages dockerImages, SeedModuleProperties moduleProperties, DatasourceProperties datasourceProperties) {
     DockerImageVersion dockerImage = dockerImages.get(datasourceProperties.dockerImageName());
 
     // @formatter:off
@@ -241,7 +241,7 @@ public class DatasourceModuleFactory {
         .springTestLogger("org.testcontainers", LogLevel.WARN);
   }
 
-  public static Consumer<JHipsterModule.JHipsterModuleBuilder> connectionPool(DatasourceProperties datasourceProperties) {
+  public static Consumer<JHipsterModule.SeedModuleBuilder> connectionPool(DatasourceProperties datasourceProperties) {
     // @formatter:off
     return moduleBuilder ->
       moduleBuilder

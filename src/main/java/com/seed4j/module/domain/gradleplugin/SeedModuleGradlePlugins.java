@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.gradleplugin;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
 import com.seed4j.module.domain.javabuild.command.AddGradlePlugin.AddGradlePluginOptionalBuilder;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
@@ -20,7 +20,7 @@ public final class SeedModuleGradlePlugins {
     plugins = builder.plugins;
   }
 
-  public static JHipsterModuleGradlePluginBuilder builder(JHipsterModuleBuilder module) {
+  public static JHipsterModuleGradlePluginBuilder builder(SeedModuleBuilder module) {
     return new JHipsterModuleGradlePluginBuilder(module);
   }
 
@@ -52,10 +52,10 @@ public final class SeedModuleGradlePlugins {
 
   public static final class JHipsterModuleGradlePluginBuilder {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Collection<GradleMainBuildPlugin> plugins = new ArrayList<>();
 
-    private JHipsterModuleGradlePluginBuilder(JHipsterModuleBuilder module) {
+    private JHipsterModuleGradlePluginBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -69,7 +69,7 @@ public final class SeedModuleGradlePlugins {
       return this;
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
 

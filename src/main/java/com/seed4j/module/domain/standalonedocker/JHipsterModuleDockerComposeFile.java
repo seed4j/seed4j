@@ -23,16 +23,16 @@ public final class JHipsterModuleDockerComposeFile {
     return dockerComposeFiles.toString();
   }
 
-  public static JHipsterModuleDockerComposeFileBuilder builder(JHipsterModule.JHipsterModuleBuilder parentModuleBuilder) {
+  public static JHipsterModuleDockerComposeFileBuilder builder(JHipsterModule.SeedModuleBuilder parentModuleBuilder) {
     return new JHipsterModuleDockerComposeFileBuilder(parentModuleBuilder);
   }
 
   public static final class JHipsterModuleDockerComposeFileBuilder {
 
     private final Collection<DockerComposeFile> dockerComposeFiles = new ArrayList<>();
-    private final JHipsterModule.JHipsterModuleBuilder module;
+    private final JHipsterModule.SeedModuleBuilder module;
 
-    private JHipsterModuleDockerComposeFileBuilder(JHipsterModule.JHipsterModuleBuilder module) {
+    private JHipsterModuleDockerComposeFileBuilder(JHipsterModule.SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -46,7 +46,7 @@ public final class JHipsterModuleDockerComposeFile {
       return this;
     }
 
-    public JHipsterModule.JHipsterModuleBuilder and() {
+    public JHipsterModule.SeedModuleBuilder and() {
       return module;
     }
 

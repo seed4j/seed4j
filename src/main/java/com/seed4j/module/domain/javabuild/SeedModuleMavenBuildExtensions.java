@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.javabuild;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.module.domain.javabuild.command.AddMavenBuildExtension;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
@@ -45,16 +45,16 @@ public class SeedModuleMavenBuildExtensions {
     };
   }
 
-  public static JHipsterModuleMavenBuildExtensionsBuilder builder(JHipsterModuleBuilder module) {
+  public static JHipsterModuleMavenBuildExtensionsBuilder builder(SeedModuleBuilder module) {
     return new JHipsterModuleMavenBuildExtensionsBuilder(module);
   }
 
   public static final class JHipsterModuleMavenBuildExtensionsBuilder {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Collection<MavenBuildExtension> buildExtensions = new ArrayList<>();
 
-    private JHipsterModuleMavenBuildExtensionsBuilder(JHipsterModuleBuilder module) {
+    private JHipsterModuleMavenBuildExtensionsBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -78,7 +78,7 @@ public class SeedModuleMavenBuildExtensions {
       return addExtension(buildExtension);
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
 

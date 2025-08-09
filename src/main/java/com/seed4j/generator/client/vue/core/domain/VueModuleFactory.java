@@ -93,7 +93,7 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintConfig(SeedModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> patchEslintConfig(SeedModuleProperties properties) {
     String vuePluginConfig = """
       \t...vue.configs['flat/recommended'],
       \t{
@@ -120,7 +120,7 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchTsConfig(SeedModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> patchTsConfig(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()
@@ -134,7 +134,7 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchVitestConfig() {
+  private Consumer<SeedModuleBuilder> patchVitestConfig() {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.mvc.security.common.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.artifactId;
 import static com.seed4j.module.domain.JHipsterModule.from;
 import static com.seed4j.module.domain.JHipsterModule.groupId;
@@ -41,7 +41,7 @@ public final class AuthenticationModuleFactory {
 
   private AuthenticationModuleFactory() {}
 
-  public static JHipsterModuleBuilder authenticationModuleBuilder(SeedModuleProperties properties) {
+  public static SeedModuleBuilder authenticationModuleBuilder(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.basePackage().path();

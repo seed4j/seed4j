@@ -25,9 +25,9 @@ class JHipsterModuleMandatoryReplacementsTest {
 
   private static String replaceIn(String file) {
     SeedProjectFolder folder = new SeedProjectFolder("src/test/resources/projects");
-    JHipsterModuleBuilder module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(folder.get()).build());
+    SeedModuleBuilder module = moduleBuilder(JHipsterModulesFixture.propertiesBuilder(folder.get()).build());
 
-    return JHipsterModuleMandatoryReplacementsFactory.builder(module)
+    return SeedModuleMandatoryReplacementsFactory.builder(module)
       .in(new SeedProjectFilePath(file))
       .add(new TextReplacer(always(), "old"), "new")
       .and()

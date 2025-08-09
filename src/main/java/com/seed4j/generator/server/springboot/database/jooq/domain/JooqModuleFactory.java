@@ -95,7 +95,7 @@ public class JooqModuleFactory {
       .getConfiguration();
   }
 
-  public static JHipsterModule.JHipsterModuleBuilder commonModuleBuilder(SeedModuleProperties properties) {
+  public static JHipsterModule.SeedModuleBuilder commonModuleBuilder(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     return moduleBuilder(properties)

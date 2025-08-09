@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.gitignore;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.module.domain.gitignore.GitIgnoreEntry.GitIgnoreComment;
 import com.seed4j.module.domain.gitignore.GitIgnoreEntry.GitIgnorePattern;
 import com.seed4j.shared.error.domain.Assert;
@@ -32,16 +32,16 @@ public final class SeedModuleGitIgnore {
     return entries.toString();
   }
 
-  public static JHipsterModuleGitIgnoreBuilder builder(JHipsterModuleBuilder parentModuleBuilder) {
+  public static JHipsterModuleGitIgnoreBuilder builder(SeedModuleBuilder parentModuleBuilder) {
     return new JHipsterModuleGitIgnoreBuilder(parentModuleBuilder);
   }
 
   public static final class JHipsterModuleGitIgnoreBuilder {
 
-    private final JHipsterModuleBuilder parentModuleBuilder;
+    private final SeedModuleBuilder parentModuleBuilder;
     private final Collection<GitIgnoreEntry> entries = new ArrayList<>();
 
-    private JHipsterModuleGitIgnoreBuilder(JHipsterModuleBuilder parentModuleBuilder) {
+    private JHipsterModuleGitIgnoreBuilder(SeedModuleBuilder parentModuleBuilder) {
       Assert.notNull("module", parentModuleBuilder);
 
       this.parentModuleBuilder = parentModuleBuilder;
@@ -81,7 +81,7 @@ public final class SeedModuleGitIgnore {
       return comment(new GitIgnoreComment(comment));
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return parentModuleBuilder;
     }
 

@@ -61,7 +61,7 @@ public class VueRouterModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchVitestConfig() {
+  private Consumer<SeedModuleBuilder> patchVitestConfig() {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .apply(vitestCoverageExclusion("src/main/webapp/app/router.ts"));

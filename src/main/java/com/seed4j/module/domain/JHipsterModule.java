@@ -76,14 +76,14 @@ import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.replacement.EndOfFileReplacer;
 import com.seed4j.module.domain.replacement.FileStartReplacer;
-import com.seed4j.module.domain.replacement.JHipsterModuleMandatoryReplacementsFactory;
-import com.seed4j.module.domain.replacement.JHipsterModuleMandatoryReplacementsFactory.JHipsterModuleMandatoryReplacementsFactoryBuilder;
-import com.seed4j.module.domain.replacement.JHipsterModuleOptionalReplacementsFactory;
-import com.seed4j.module.domain.replacement.JHipsterModuleOptionalReplacementsFactory.JHipsterModuleOptionalReplacementsFactoryBuilder;
 import com.seed4j.module.domain.replacement.RegexNeedleAfterReplacer;
 import com.seed4j.module.domain.replacement.RegexNeedleBeforeReplacer;
 import com.seed4j.module.domain.replacement.RegexReplacer;
 import com.seed4j.module.domain.replacement.ReplacementCondition;
+import com.seed4j.module.domain.replacement.SeedModuleMandatoryReplacementsFactory;
+import com.seed4j.module.domain.replacement.SeedModuleMandatoryReplacementsFactory.SeedModuleMandatoryReplacementsFactoryBuilder;
+import com.seed4j.module.domain.replacement.SeedModuleOptionalReplacementsFactory;
+import com.seed4j.module.domain.replacement.SeedModuleOptionalReplacementsFactory.JHipsterModuleOptionalReplacementsFactoryBuilder;
 import com.seed4j.module.domain.replacement.TextNeedleAfterReplacer;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.module.domain.replacement.TextReplacer;
@@ -113,8 +113,8 @@ public final class JHipsterModule {
 
   private final SeedModuleProperties properties;
   private final SeedModuleFiles files;
-  private final JHipsterModuleMandatoryReplacementsFactory mandatoryReplacements;
-  private final JHipsterModuleOptionalReplacementsFactory optionalReplacements;
+  private final SeedModuleMandatoryReplacementsFactory mandatoryReplacements;
+  private final SeedModuleOptionalReplacementsFactory optionalReplacements;
   private final JHipsterModuleStartupCommands startupCommands;
   private final SeedModuleContext context;
   private final SeedModuleJavaDependencies javaDependencies;
@@ -133,7 +133,7 @@ public final class JHipsterModule {
   private final SeedModuleGitIgnore gitIgnore;
   private final JHipsterModuleDockerComposeFile dockerComposeFile;
 
-  private JHipsterModule(JHipsterModuleBuilder builder) {
+  private JHipsterModule(SeedModuleBuilder builder) {
     properties = builder.properties;
 
     files = builder.files.build();
@@ -184,7 +184,7 @@ public final class JHipsterModule {
     dockerComposeFile = source.dockerComposeFile;
   }
 
-  private SpringProperties buildSpringProperties(JHipsterModuleBuilder builder) {
+  private SpringProperties buildSpringProperties(SeedModuleBuilder builder) {
     return new SpringProperties(builder.springProperties.entrySet().stream().flatMap(toSpringProperties()).toList());
   }
 
@@ -203,7 +203,7 @@ public final class JHipsterModule {
         .build();
   }
 
-  private SpringComments buildSpringComments(JHipsterModuleBuilder builder) {
+  private SpringComments buildSpringComments(SeedModuleBuilder builder) {
     return new SpringComments(builder.springProperties.entrySet().stream().flatMap(toSpringComments()).toList());
   }
 
@@ -222,7 +222,7 @@ public final class JHipsterModule {
         .build();
   }
 
-  private SpringFactories buildSpringFactories(JHipsterModuleBuilder builder) {
+  private SpringFactories buildSpringFactories(SeedModuleBuilder builder) {
     return new SpringFactories(builder.springFactories.entrySet().stream().flatMap(toSpringFactories()).toList());
   }
 
@@ -236,8 +236,8 @@ public final class JHipsterModule {
     return property -> SpringFactory.builder(inputFactories.getKey()).key(property.getKey()).value(property.getValue());
   }
 
-  public static JHipsterModuleBuilder moduleBuilder(SeedModuleProperties properties) {
-    return new JHipsterModuleBuilder(properties);
+  public static SeedModuleBuilder moduleBuilder(SeedModuleProperties properties) {
+    return new SeedModuleBuilder(properties);
   }
 
   public static JavaDependencyGroupIdBuilder javaDependency() {
@@ -290,7 +290,7 @@ public final class JHipsterModule {
     return SeedDestination.SRC_TEST_RESOURCES;
   }
 
-  public static JHipsterFileMatcher filesWithExtension(String extension) {
+  public static SeedFileMatcher filesWithExtension(String extension) {
     return path -> StringUtils.endsWithIgnoreCase(path.get(), "." + extension);
   }
 
@@ -474,11 +474,11 @@ public final class JHipsterModule {
     return files.filesToDelete();
   }
 
-  public JHipsterModuleMandatoryReplacementsFactory mandatoryReplacements() {
+  public SeedModuleMandatoryReplacementsFactory mandatoryReplacements() {
     return mandatoryReplacements;
   }
 
-  public JHipsterModuleOptionalReplacementsFactory optionalReplacements() {
+  public SeedModuleOptionalReplacementsFactory optionalReplacements() {
     return optionalReplacements;
   }
 
@@ -546,23 +546,24 @@ public final class JHipsterModule {
     return dockerComposeFile;
   }
 
-  public static final class JHipsterModuleBuilder {
+  public static final class SeedModuleBuilder {
 
     private static final String PROFILE = "profile";
 
     private final SeedModuleProperties properties;
     private final JHipsterModuleContextBuilder context;
     private final JHipsterModuleFilesBuilder files = SeedModuleFiles.builder(this);
-    private final JHipsterModuleMandatoryReplacementsFactoryBuilder mandatoryReplacements =
-      JHipsterModuleMandatoryReplacementsFactory.builder(this);
-    private final JHipsterModuleOptionalReplacementsFactoryBuilder optionalReplacements = JHipsterModuleOptionalReplacementsFactory.builder(
+    private final SeedModuleMandatoryReplacementsFactoryBuilder mandatoryReplacements = SeedModuleMandatoryReplacementsFactory.builder(
+      this
+    );
+    private final JHipsterModuleOptionalReplacementsFactoryBuilder optionalReplacements = SeedModuleOptionalReplacementsFactory.builder(
       this
     );
     private final JHipsterModuleStartupCommandsBuilder startupCommands = JHipsterModuleStartupCommands.builder(this);
-    private final JHipsterModuleJavaDependenciesBuilder<JHipsterModuleBuilder> javaDependencies = SeedModuleJavaDependencies.builder(this);
-    private final JHipsterModuleBuildPropertiesBuilder<JHipsterModuleBuilder> javaBuildProperties = SeedModuleBuildProperties.builder(this);
+    private final JHipsterModuleJavaDependenciesBuilder<SeedModuleBuilder> javaDependencies = SeedModuleJavaDependencies.builder(this);
+    private final JHipsterModuleBuildPropertiesBuilder<SeedModuleBuilder> javaBuildProperties = SeedModuleBuildProperties.builder(this);
     private final SeedModuleJavaBuildProfilesBuilder javaBuildProfiles = SeedModuleJavaBuildProfiles.builder(this);
-    private final SeedModuleMavenPluginsBuilder<JHipsterModuleBuilder> mavenPlugins = SeedModuleMavenPlugins.builder(this);
+    private final SeedModuleMavenPluginsBuilder<SeedModuleBuilder> mavenPlugins = SeedModuleMavenPlugins.builder(this);
     private final JHipsterModuleGradleConfigurationBuilder gradleConfigurations = SeedModuleGradleConfigurations.builder(this);
     private final JHipsterModuleGradlePluginBuilder gradlePlugins = SeedModuleGradlePlugins.builder(this);
     private final JHipsterModuleMavenBuildExtensionsBuilder mavenBuildExtensions = SeedModuleMavenBuildExtensions.builder(this);
@@ -574,7 +575,7 @@ public final class JHipsterModule {
     private final JHipsterModuleGitIgnoreBuilder gitIgnore = SeedModuleGitIgnore.builder(this);
     private final JHipsterModuleDockerComposeFileBuilder dockerComposeFile = JHipsterModuleDockerComposeFile.builder(this);
 
-    private JHipsterModuleBuilder(SeedModuleProperties properties) {
+    private SeedModuleBuilder(SeedModuleProperties properties) {
       Assert.notNull("properties", properties);
 
       this.properties = properties;
@@ -585,26 +586,26 @@ public final class JHipsterModule {
       return properties;
     }
 
-    public JHipsterModuleBuilder apply(Consumer<JHipsterModuleBuilder> builderCustomizer) {
+    public SeedModuleBuilder apply(Consumer<SeedModuleBuilder> builderCustomizer) {
       Assert.notNull("builderCustomizer", builderCustomizer);
       builderCustomizer.accept(this);
 
       return this;
     }
 
-    public JHipsterModuleBuilder documentation(DocumentationTitle title, SeedSource source) {
+    public SeedModuleBuilder documentation(DocumentationTitle title, SeedSource source) {
       apply(JHipsterModuleShortcuts.documentation(title, source));
 
       return this;
     }
 
-    public JHipsterModuleBuilder localEnvironment(LocalEnvironment localEnvironment) {
+    public SeedModuleBuilder localEnvironment(LocalEnvironment localEnvironment) {
       apply(JHipsterModuleShortcuts.localEnvironment(localEnvironment));
 
       return this;
     }
 
-    public JHipsterModuleBuilder preCommitActions(StagedFilesFilter stagedFilesFilter, PreCommitCommands preCommitCommands) {
+    public SeedModuleBuilder preCommitActions(StagedFilesFilter stagedFilesFilter, PreCommitCommands preCommitCommands) {
       apply(JHipsterModuleShortcuts.preCommitActions(stagedFilesFilter, preCommitCommands));
 
       return this;
@@ -614,7 +615,7 @@ public final class JHipsterModule {
       return startupCommands;
     }
 
-    public JHipsterModuleBuilder prerequisites(String prerequisites) {
+    public SeedModuleBuilder prerequisites(String prerequisites) {
       apply(JHipsterModuleShortcuts.prerequisites(prerequisites));
 
       return this;
@@ -628,23 +629,23 @@ public final class JHipsterModule {
       return files;
     }
 
-    public JHipsterModuleMandatoryReplacementsFactoryBuilder mandatoryReplacements() {
+    public SeedModuleMandatoryReplacementsFactoryBuilder mandatoryReplacements() {
       return mandatoryReplacements;
     }
 
-    public JHipsterModuleBuilder springTestLogger(String name, LogLevel level) {
+    public SeedModuleBuilder springTestLogger(String name, LogLevel level) {
       apply(JHipsterModuleShortcuts.springTestLogger(name, level));
 
       return this;
     }
 
-    public JHipsterModuleBuilder springMainLogger(String name, LogLevel level) {
+    public SeedModuleBuilder springMainLogger(String name, LogLevel level) {
       apply(JHipsterModuleShortcuts.springMainLogger(name, level));
 
       return this;
     }
 
-    public JHipsterModuleBuilder integrationTestExtension(String extensionClass) {
+    public SeedModuleBuilder integrationTestExtension(String extensionClass) {
       apply(JHipsterModuleShortcuts.integrationTestExtension(extensionClass));
 
       return this;
@@ -654,11 +655,11 @@ public final class JHipsterModule {
       return optionalReplacements;
     }
 
-    public JHipsterModuleJavaDependenciesBuilder<JHipsterModuleBuilder> javaDependencies() {
+    public JHipsterModuleJavaDependenciesBuilder<SeedModuleBuilder> javaDependencies() {
       return javaDependencies;
     }
 
-    public JHipsterModuleBuildPropertiesBuilder<JHipsterModuleBuilder> javaBuildProperties() {
+    public JHipsterModuleBuildPropertiesBuilder<SeedModuleBuilder> javaBuildProperties() {
       return javaBuildProperties;
     }
 
@@ -666,7 +667,7 @@ public final class JHipsterModule {
       return javaBuildProfiles;
     }
 
-    public SeedModuleMavenPluginsBuilder<JHipsterModuleBuilder> mavenPlugins() {
+    public SeedModuleMavenPluginsBuilder<SeedModuleBuilder> mavenPlugins() {
       return mavenPlugins;
     }
 

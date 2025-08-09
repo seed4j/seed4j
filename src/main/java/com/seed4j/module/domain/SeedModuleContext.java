@@ -1,6 +1,6 @@
 package com.seed4j.module.domain;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.collection.domain.SeedCollections;
@@ -31,7 +31,7 @@ public final class SeedModuleContext {
     return new SeedModuleContext(SeedCollections.concat(context, additionalValues));
   }
 
-  public static JHipsterModuleContextBuilder builder(JHipsterModuleBuilder module) {
+  public static JHipsterModuleContextBuilder builder(SeedModuleBuilder module) {
     return new JHipsterModuleContextBuilder(module);
   }
 
@@ -41,10 +41,10 @@ public final class SeedModuleContext {
 
   public static final class JHipsterModuleContextBuilder {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Map<String, Object> context;
 
-    private JHipsterModuleContextBuilder(JHipsterModuleBuilder module) {
+    private JHipsterModuleContextBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -79,7 +79,7 @@ public final class SeedModuleContext {
       return new SeedModuleContext(this.context);
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
   }

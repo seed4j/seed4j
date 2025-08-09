@@ -2,7 +2,7 @@ package com.seed4j.generator.server.springboot.springcloud.configclient.domain;
 
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.SPRING_CLOUD_GROUP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.springCloudDependenciesManagement;
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.artifactId;
 import static com.seed4j.module.domain.JHipsterModule.from;
 import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
@@ -39,7 +39,7 @@ public class SpringCloudConfigModuleFactory {
 
     PropertyValue baseNameValue = propertyValue(properties.projectBaseName().get());
 
-    JHipsterModuleBuilder builder = initBuilder(properties);
+    SeedModuleBuilder builder = initBuilder(properties);
 
     appendCommonProperties(builder.springMainBootstrapProperties(), baseNameValue);
     appendCommonProperties(builder.springMainBootstrapProperties(springProfile("local")), baseNameValue);
@@ -60,7 +60,7 @@ public class SpringCloudConfigModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterModuleBuilder initBuilder(SeedModuleProperties properties) {
+  private SeedModuleBuilder initBuilder(SeedModuleProperties properties) {
     String jwtBase64secret = properties.getOrDefaultString(JWT_BASE_64_SECRET, Base64Utils.getBase64Secret());
 
     // @formatter:off

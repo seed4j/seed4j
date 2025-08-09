@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.mvc.security.oauth2.core.domain;
 
 import static com.seed4j.generator.server.springboot.mvc.security.common.domain.AuthenticationModuleFactory.authenticationModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.artifactId;
 import static com.seed4j.module.domain.JHipsterModule.dockerComposeFile;
 import static com.seed4j.module.domain.JHipsterModule.from;
@@ -69,7 +69,7 @@ public class OAuth2ModuleFactory {
     Assert.field(REALM_NAME, realmName).notNull().matchesPattern(NAME_FORMAT).maxLength(30);
     Assert.field(CLIENT_SCOPE_NAME, clientScopeName).notNull().matchesPattern(NAME_FORMAT).maxLength(30);
 
-    JHipsterModuleBuilder builder = authenticationModuleBuilder(properties);
+    SeedModuleBuilder builder = authenticationModuleBuilder(properties);
 
     appendKeycloak(builder, realmName, clientScopeName);
     appendJavaFiles(builder, properties);
@@ -80,7 +80,7 @@ public class OAuth2ModuleFactory {
     return builder.build();
   }
 
-  private void appendKeycloak(JHipsterModuleBuilder builder, String realmName, String clientScopeName) {
+  private void appendKeycloak(SeedModuleBuilder builder, String realmName, String clientScopeName) {
     DockerImageVersion keycloakImage = dockerImages.get("quay.io/keycloak/keycloak");
 
     builder
@@ -101,7 +101,7 @@ public class OAuth2ModuleFactory {
     builder.dockerComposeFile().append(dockerComposeFile("src/main/docker/keycloak.yml"));
   }
 
-  private static void appendJavaFiles(JHipsterModuleBuilder builder, SeedModuleProperties properties) {
+  private static void appendJavaFiles(SeedModuleBuilder builder, SeedModuleProperties properties) {
     String packagePath = properties.basePackage().path();
     SeedDestination mainDestination = toSrcMainJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
     SeedDestination testDestination = toSrcTestJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
@@ -136,14 +136,14 @@ public class OAuth2ModuleFactory {
     // @formatter:on
   }
 
-  private static void appendDependencies(JHipsterModuleBuilder builder) {
+  private static void appendDependencies(SeedModuleBuilder builder) {
     builder
       .javaDependencies()
       .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-oauth2-client"))
       .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-oauth2-resource-server"));
   }
 
-  private static void appendSpringProperties(JHipsterModuleBuilder builder, String realmName) {
+  private static void appendSpringProperties(SeedModuleBuilder builder, String realmName) {
     builder
       .springMainProperties()
       .set(
@@ -164,7 +164,7 @@ public class OAuth2ModuleFactory {
       );
   }
 
-  private static void appendIntegrationTestAnnotationUpdates(JHipsterModuleBuilder builder, SeedModuleProperties properties) {
+  private static void appendIntegrationTestAnnotationUpdates(SeedModuleBuilder builder, SeedModuleProperties properties) {
     String baseClass = properties.projectBaseName().capitalized() + "App.class";
 
     builder

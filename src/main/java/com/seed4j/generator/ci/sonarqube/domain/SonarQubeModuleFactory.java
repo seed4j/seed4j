@@ -1,6 +1,6 @@
 package com.seed4j.generator.ci.sonarqube.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
 import static com.seed4j.module.domain.JHipsterModule.from;
 import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
@@ -70,7 +70,7 @@ public class SonarQubeModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterModuleBuilder commonModuleFiles(SeedModuleProperties properties) {
+  private SeedModuleBuilder commonModuleFiles(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -90,7 +90,7 @@ public class SonarQubeModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterModuleBuilder commonBackendModuleFiles(SeedModuleProperties properties) {
+  private SeedModuleBuilder commonBackendModuleFiles(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off

@@ -48,7 +48,7 @@ public class JpaModuleFactory {
     // @formatter:on
   }
 
-  public static JHipsterModule.JHipsterModuleBuilder sqlCommonModuleBuilder(SeedModuleProperties properties) {
+  public static JHipsterModule.SeedModuleBuilder sqlCommonModuleBuilder(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     SeedSource jpaSource = from("server/springboot/database/jpa");

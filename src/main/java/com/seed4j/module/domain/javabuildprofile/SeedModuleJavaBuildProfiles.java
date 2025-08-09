@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.javabuildprofile;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
@@ -22,7 +22,7 @@ public final class SeedModuleJavaBuildProfiles {
     this.profiles = builder.profiles.values().stream().map(SeedModuleJavaBuildProfileBuilder::build).toList();
   }
 
-  public static SeedModuleJavaBuildProfilesBuilder builder(JHipsterModuleBuilder module) {
+  public static SeedModuleJavaBuildProfilesBuilder builder(SeedModuleBuilder module) {
     return new SeedModuleJavaBuildProfilesBuilder(module);
   }
 
@@ -76,10 +76,10 @@ public final class SeedModuleJavaBuildProfiles {
 
   public static final class SeedModuleJavaBuildProfilesBuilder {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Map<BuildProfileId, SeedModuleJavaBuildProfileBuilder> profiles = new HashMap<>();
 
-    private SeedModuleJavaBuildProfilesBuilder(JHipsterModuleBuilder module) {
+    private SeedModuleJavaBuildProfilesBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -95,7 +95,7 @@ public final class SeedModuleJavaBuildProfiles {
       return addProfile(new BuildProfileId(buildProfileId));
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
 

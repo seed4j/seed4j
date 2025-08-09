@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.startupcommand;
 
-import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +13,7 @@ public final class JHipsterModuleStartupCommands {
     commands = new JHipsterStartupCommands(builder.commands);
   }
 
-  public static JHipsterModuleStartupCommandsBuilder builder(JHipsterModuleBuilder module) {
+  public static JHipsterModuleStartupCommandsBuilder builder(SeedModuleBuilder module) {
     return new JHipsterModuleStartupCommandsBuilder(module);
   }
 
@@ -23,10 +23,10 @@ public final class JHipsterModuleStartupCommands {
 
   public static final class JHipsterModuleStartupCommandsBuilder {
 
-    private final JHipsterModuleBuilder module;
+    private final SeedModuleBuilder module;
     private final Collection<JHipsterStartupCommand> commands = new ArrayList<>();
 
-    private JHipsterModuleStartupCommandsBuilder(JHipsterModuleBuilder module) {
+    private JHipsterModuleStartupCommandsBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
@@ -51,7 +51,7 @@ public final class JHipsterModuleStartupCommands {
       return this;
     }
 
-    public JHipsterModuleBuilder and() {
+    public SeedModuleBuilder and() {
       return module;
     }
 

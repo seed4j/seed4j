@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.cucumber.domain;
 
 import static com.seed4j.generator.server.springboot.cucumbercommon.domain.CucumbersModules.cucumberModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
 import static com.seed4j.module.domain.JHipsterModule.from;
 import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
@@ -25,7 +25,7 @@ public class CucumberModuleFactory {
     SeedDestination destination = toSrcTestJava().append(properties.packagePath()).append("cucumber");
 
     // @formatter:off
-    JHipsterModuleBuilder builder = cucumberModuleBuilder(properties)
+    SeedModuleBuilder builder = cucumberModuleBuilder(properties)
     .context()
       .put("baseName", baseName)
       .and()

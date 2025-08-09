@@ -12,7 +12,7 @@ public final class TsConfigShortcuts {
 
   private TsConfigShortcuts() {}
 
-  public static Consumer<JHipsterModule.JHipsterModuleBuilder> tsConfigCompilerOption(
+  public static Consumer<JHipsterModule.SeedModuleBuilder> tsConfigCompilerOption(
     String optionName,
     boolean optionValue,
     Indentation indentation

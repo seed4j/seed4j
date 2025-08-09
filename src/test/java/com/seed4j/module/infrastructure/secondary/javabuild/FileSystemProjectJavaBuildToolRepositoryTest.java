@@ -20,7 +20,7 @@ class FileSystemProjectJavaBuildToolRepositoryTest {
   @Nested
   class DetectFromSeedModuleFiles {
 
-    private final JHipsterModuleFilesBuilder moduleFiles = SeedModuleFiles.builder(mock(JHipsterModuleBuilder.class));
+    private final JHipsterModuleFilesBuilder moduleFiles = SeedModuleFiles.builder(mock(SeedModuleBuilder.class));
 
     @Test
     void shouldReturnMavenWhenPomXmlIsAdded() {

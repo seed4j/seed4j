@@ -1,6 +1,6 @@
 package com.seed4j.module.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
+import static com.seed4j.module.domain.JHipsterModule.SeedModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.lineAfterRegex;
 import static com.seed4j.module.domain.JHipsterModule.lineAfterText;
 import static com.seed4j.module.domain.JHipsterModule.lineBeforeText;
@@ -35,7 +35,7 @@ final class JHipsterModuleShortcuts {
 
   private JHipsterModuleShortcuts() {}
 
-  static Consumer<JHipsterModuleBuilder> documentation(DocumentationTitle title, SeedSource source) {
+  static Consumer<SeedModuleBuilder> documentation(DocumentationTitle title, SeedSource source) {
     Assert.notNull("title", title);
     Assert.notNull("source", source);
 
@@ -48,17 +48,17 @@ final class JHipsterModuleShortcuts {
     };
   }
 
-  static Consumer<JHipsterModuleBuilder> localEnvironment(LocalEnvironment localEnvironment) {
+  static Consumer<SeedModuleBuilder> localEnvironment(LocalEnvironment localEnvironment) {
     Assert.notNull("localEnvironment", localEnvironment);
     return builder -> builder.optionalReplacements().in(README).add(JHIPSTER_LOCAL_ENVIRONMENT_NEEDLE, localEnvironment.get());
   }
 
-  static Consumer<JHipsterModuleBuilder> prerequisites(String prerequisites) {
+  static Consumer<SeedModuleBuilder> prerequisites(String prerequisites) {
     Assert.notBlank("prerequisites", prerequisites);
     return builder -> builder.optionalReplacements().in(README).add(JHIPSTER_PREREQUISITES, prerequisites);
   }
 
-  static Consumer<JHipsterModuleBuilder> springTestLogger(String name, LogLevel level) {
+  static Consumer<SeedModuleBuilder> springTestLogger(String name, LogLevel level) {
     Assert.notBlank("name", name);
     Assert.notNull("level", level);
 
@@ -66,7 +66,7 @@ final class JHipsterModuleShortcuts {
       builder.optionalReplacements().in(SPRING_TEST_LOG_FILE).add(logConfigurationEntry(name, level, builder.indentation()));
   }
 
-  static Consumer<JHipsterModuleBuilder> springMainLogger(String name, LogLevel level) {
+  static Consumer<SeedModuleBuilder> springMainLogger(String name, LogLevel level) {
     Assert.notBlank("name", name);
     Assert.notNull("level", level);
 
@@ -89,7 +89,7 @@ final class JHipsterModuleShortcuts {
       .toString();
   }
 
-  static Consumer<JHipsterModuleBuilder> integrationTestExtension(String extensionClass) {
+  static Consumer<SeedModuleBuilder> integrationTestExtension(String extensionClass) {
     Assert.notBlank("extensionClass", extensionClass);
 
     return builder ->
@@ -103,7 +103,7 @@ final class JHipsterModuleShortcuts {
         .add(lineBeforeText("public @interface"), "@ExtendWith(" + extensionClass + ".class)");
   }
 
-  static Consumer<JHipsterModuleBuilder> preCommitActions(StagedFilesFilter stagedFilesFilter, PreCommitCommands preCommitCommands) {
+  static Consumer<SeedModuleBuilder> preCommitActions(StagedFilesFilter stagedFilesFilter, PreCommitCommands preCommitCommands) {
     Assert.notNull("stagedFilesFilter", stagedFilesFilter);
     Assert.notNull("preCommitCommands", preCommitCommands);
 

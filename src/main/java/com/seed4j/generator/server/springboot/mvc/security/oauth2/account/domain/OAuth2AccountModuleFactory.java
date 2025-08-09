@@ -1,14 +1,14 @@
 package com.seed4j.generator.server.springboot.mvc.security.oauth2.account.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 
 public class OAuth2AccountModuleFactory {
 
@@ -20,21 +20,21 @@ public class OAuth2AccountModuleFactory {
   private static final String SECONDARY = INFRASTRUCTURE + "/secondary";
   private static final String USER_IDENTITY_DESTINATION = "shared/useridentity";
 
-  private static final JHipsterSource ACCOUNT_SOURCE = from("server/springboot/mvc/security/oauth2/account");
-  private static final JHipsterSource ACCOUNT_MAIN_SOURCE = ACCOUNT_SOURCE.append("main");
-  private static final JHipsterSource ACCOUNT_TEST_SOURCE = ACCOUNT_SOURCE.append("test");
+  private static final SeedSource ACCOUNT_SOURCE = from("server/springboot/mvc/security/oauth2/account");
+  private static final SeedSource ACCOUNT_MAIN_SOURCE = ACCOUNT_SOURCE.append("main");
+  private static final SeedSource ACCOUNT_TEST_SOURCE = ACCOUNT_SOURCE.append("test");
 
-  private static final JHipsterSource USER_IDENTITY_SOURCE = from("server/springboot/mvc/security/oauth2/useridentity");
-  private static final JHipsterSource USER_IDENTITY_MAIN_SOURCE = USER_IDENTITY_SOURCE.append("main");
-  private static final JHipsterSource USER_IDENTITY_TEST_SOURCE = USER_IDENTITY_SOURCE.append("test");
+  private static final SeedSource USER_IDENTITY_SOURCE = from("server/springboot/mvc/security/oauth2/useridentity");
+  private static final SeedSource USER_IDENTITY_MAIN_SOURCE = USER_IDENTITY_SOURCE.append("main");
+  private static final SeedSource USER_IDENTITY_TEST_SOURCE = USER_IDENTITY_SOURCE.append("test");
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     String packagePath = properties.packagePath();
-    JHipsterDestination accountMainDestination = toSrcMainJava().append(packagePath).append("account");
-    JHipsterDestination accountTestDestination = toSrcTestJava().append(packagePath).append("account");
+    SeedDestination accountMainDestination = toSrcMainJava().append(packagePath).append("account");
+    SeedDestination accountTestDestination = toSrcTestJava().append(packagePath).append("account");
 
-    JHipsterDestination userIdentityMainDestination = toSrcMainJava().append(packagePath).append(USER_IDENTITY_DESTINATION);
-    JHipsterDestination userIdentityTestDestination = toSrcTestJava().append(packagePath).append(USER_IDENTITY_DESTINATION);
+    SeedDestination userIdentityMainDestination = toSrcMainJava().append(packagePath).append(USER_IDENTITY_DESTINATION);
+    SeedDestination userIdentityTestDestination = toSrcTestJava().append(packagePath).append(USER_IDENTITY_DESTINATION);
 
     // @formatter:off
     return moduleBuilder(properties)

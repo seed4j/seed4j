@@ -1,10 +1,10 @@
 package com.seed4j.generator.init.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.INIT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INIT;
 
 import com.seed4j.generator.init.application.InitApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 class InitModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource initModule(InitApplicationService init) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource initModule(InitApplicationService init) {
+    return SeedModuleResource.builder()
       .slug(INIT)
       .propertiesDefinition(initPropertiesDefinition())
       .apiDoc("Init", "Init project")
@@ -22,8 +22,8 @@ class InitModuleConfiguration {
       .factory(init::buildModule);
   }
 
-  private JHipsterModulePropertiesDefinition initPropertiesDefinition() {
-    return JHipsterModulePropertiesDefinition.builder()
+  private SeedModulePropertiesDefinition initPropertiesDefinition() {
+    return SeedModulePropertiesDefinition.builder()
       .addProjectBaseName()
       .addProjectName()
       .addEndOfLine()

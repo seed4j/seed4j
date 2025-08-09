@@ -1,15 +1,15 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdoccore.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRINGDOC;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_MVC_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRINGDOC_MVC_OPENAPI;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRINGDOC_WEBFLUX_OPENAPI;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_WEBFLUX_NETTY;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRINGDOC;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_MVC_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRINGDOC_MVC_OPENAPI;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRINGDOC_WEBFLUX_OPENAPI;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_WEBFLUX_NETTY;
 
 import com.seed4j.generator.server.springboot.apidocumentation.springdoccore.application.SpringdocApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,29 +24,29 @@ class SpringdocModuleConfiguration {
   private static final String DOCUMENTATION_TAG = "documentation";
 
   @Bean
-  JHipsterModuleResource springdocMvcModule(SpringdocApplicationService springdoc) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource springdocMvcModule(SpringdocApplicationService springdoc) {
+    return SeedModuleResource.builder()
       .slug(SPRINGDOC_MVC_OPENAPI)
       .propertiesDefinition(buildPropertiesDefinition())
       .apiDoc(API_GROUP, "Add springdoc-openapi for spring MVC")
-      .organization(JHipsterModuleOrganization.builder().feature(SPRINGDOC).addDependency(SPRING_MVC_SERVER).build())
+      .organization(SeedModuleOrganization.builder().feature(SPRINGDOC).addDependency(SPRING_MVC_SERVER).build())
       .tags(SERVER_TAG, SPRING_TAG, SPRING_BOOT_TAG, DOCUMENTATION_TAG, SWAGGER_TAG)
       .factory(springdoc::buildSpringdocMvcModule);
   }
 
   @Bean
-  JHipsterModuleResource springdocWebfluxModule(SpringdocApplicationService springdoc) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource springdocWebfluxModule(SpringdocApplicationService springdoc) {
+    return SeedModuleResource.builder()
       .slug(SPRINGDOC_WEBFLUX_OPENAPI)
       .propertiesDefinition(buildPropertiesDefinition())
       .apiDoc(API_GROUP, "Add springdoc-openapi for webflux")
-      .organization(JHipsterModuleOrganization.builder().feature(SPRINGDOC).addDependency(SPRING_BOOT_WEBFLUX_NETTY).build())
+      .organization(SeedModuleOrganization.builder().feature(SPRINGDOC).addDependency(SPRING_BOOT_WEBFLUX_NETTY).build())
       .tags(SERVER_TAG, SPRING_TAG, SPRING_BOOT_TAG, DOCUMENTATION_TAG, SWAGGER_TAG)
       .factory(springdoc::buildSpringdocWebfluxModule);
   }
 
-  private JHipsterModulePropertiesDefinition buildPropertiesDefinition() {
-    return JHipsterModulePropertiesDefinition.builder()
+  private SeedModulePropertiesDefinition buildPropertiesDefinition() {
+    return SeedModulePropertiesDefinition.builder()
       .addBasePackage()
       .addProjectBaseName()
       .addIndentation()

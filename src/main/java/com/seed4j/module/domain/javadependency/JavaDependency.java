@@ -9,7 +9,7 @@ import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
-import com.seed4j.shared.collection.domain.JHipsterCollections;
+import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public final class JavaDependency {
     dependencySlug = Optional.ofNullable(builder.dependencySlug);
     scope = JavaDependencyScope.from(builder.scope);
     optional = builder.optional;
-    exclusions = JHipsterCollections.immutable(builder.exclusions);
+    exclusions = SeedCollections.immutable(builder.exclusions);
   }
 
   private DependencyId buildId(JavaDependencyBuilder builder) {

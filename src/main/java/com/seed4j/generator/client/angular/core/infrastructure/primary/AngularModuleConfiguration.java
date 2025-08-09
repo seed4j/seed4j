@@ -1,14 +1,14 @@
 package com.seed4j.generator.client.angular.core.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.CLIENT_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.ANGULAR_CORE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.INIT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.PRETTIER;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CLIENT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INIT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PRETTIER;
 
 import com.seed4j.generator.client.angular.core.application.AngularApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,14 +16,14 @@ import org.springframework.context.annotation.Configuration;
 class AngularModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource angularModule(AngularApplicationService angular) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource angularModule(AngularApplicationService angular) {
+    return SeedModuleResource.builder()
       .slug(ANGULAR_CORE)
       .propertiesDefinition(
-        JHipsterModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addProjectName().addNodePackageManager().build()
+        SeedModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addProjectName().addNodePackageManager().build()
       )
       .apiDoc("Frontend - Angular", "Add Angular + Angular CLI")
-      .organization(JHipsterModuleOrganization.builder().feature(CLIENT_CORE).addDependency(INIT).addDependency(PRETTIER).build())
+      .organization(SeedModuleOrganization.builder().feature(CLIENT_CORE).addDependency(INIT).addDependency(PRETTIER).build())
       .tags("client", "angular")
       .factory(angular::buildModule);
   }

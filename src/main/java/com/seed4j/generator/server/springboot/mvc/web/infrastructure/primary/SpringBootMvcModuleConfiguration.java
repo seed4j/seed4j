@@ -1,17 +1,17 @@
 package com.seed4j.generator.server.springboot.mvc.web.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_MVC_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LOGS_SPY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_MVC_EMPTY;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_TOMCAT;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_UNDERTOW;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_MVC_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LOGS_SPY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_MVC_EMPTY;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_TOMCAT;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_UNDERTOW;
 
 import com.seed4j.generator.server.springboot.mvc.web.application.SpringBootMvcApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,19 +26,19 @@ class SpringBootMvcModuleConfiguration {
   private static final String WEB_TAG = "web";
 
   @Bean
-  JHipsterModuleResource springBootMvcModule(SpringBootMvcApplicationService springBootMvc) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource springBootMvcModule(SpringBootMvcApplicationService springBootMvc) {
+    return SeedModuleResource.builder()
       .slug(SPRING_BOOT_MVC_EMPTY)
       .propertiesDefinition(properties())
       .apiDoc(SPRING_BOOT_MVC_API_GROUP, "Empty module: do not use alone. You should add another module in Spring MVC Server")
-      .organization(JHipsterModuleOrganization.builder().feature(SPRING_SERVER).addDependency(SPRING_BOOT).build())
+      .organization(SeedModuleOrganization.builder().feature(SPRING_SERVER).addDependency(SPRING_BOOT).build())
       .tags(SERVER_TAG, SPRING_TAG, SPRING_BOOT_TAG, MVC_TAG, WEB_TAG)
       .factory(springBootMvc::buildEmptyModule);
   }
 
   @Bean
-  JHipsterModuleResource springBootTomcatMvcModule(SpringBootMvcApplicationService springBootMvc) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource springBootTomcatMvcModule(SpringBootMvcApplicationService springBootMvc) {
+    return SeedModuleResource.builder()
       .slug(SPRING_BOOT_TOMCAT)
       .propertiesDefinition(properties())
       .apiDoc(SPRING_BOOT_MVC_API_GROUP, "Add Spring Boot MVC with Tomcat")
@@ -48,8 +48,8 @@ class SpringBootMvcModuleConfiguration {
   }
 
   @Bean
-  JHipsterModuleResource springBootUndertowMvcModule(SpringBootMvcApplicationService springBootMvc) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource springBootUndertowMvcModule(SpringBootMvcApplicationService springBootMvc) {
+    return SeedModuleResource.builder()
       .slug(SPRING_BOOT_UNDERTOW)
       .propertiesDefinition(properties())
       .apiDoc(SPRING_BOOT_MVC_API_GROUP, "Add Spring Boot MVC with Undertow")
@@ -58,8 +58,8 @@ class SpringBootMvcModuleConfiguration {
       .factory(springBootMvc::buildUndertowModule);
   }
 
-  private JHipsterModulePropertiesDefinition properties() {
-    return JHipsterModulePropertiesDefinition.builder()
+  private SeedModulePropertiesDefinition properties() {
+    return SeedModulePropertiesDefinition.builder()
       .addBasePackage()
       .addIndentation()
       .addServerPort()
@@ -67,11 +67,7 @@ class SpringBootMvcModuleConfiguration {
       .build();
   }
 
-  private JHipsterModuleOrganization mvcServerOrganization() {
-    return JHipsterModuleOrganization.builder()
-      .feature(SPRING_MVC_SERVER)
-      .addDependency(SPRING_BOOT_MVC_EMPTY)
-      .addDependency(LOGS_SPY)
-      .build();
+  private SeedModuleOrganization mvcServerOrganization() {
+    return SeedModuleOrganization.builder().feature(SPRING_MVC_SERVER).addDependency(SPRING_BOOT_MVC_EMPTY).addDependency(LOGS_SPY).build();
   }
 }

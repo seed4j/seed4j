@@ -2,8 +2,8 @@ package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.TestFileUtils.content;
 import static com.seed4j.TestFileUtils.loadDefaultProperties;
-import static com.seed4j.module.domain.JHipsterModule.comment;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.comment;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
@@ -13,7 +13,7 @@ import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.javaproperties.SpringComment;
 import com.seed4j.module.domain.javaproperties.SpringComments;
 import com.seed4j.module.domain.javaproperties.SpringPropertyType;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.List;
@@ -165,8 +165,8 @@ class FileSystemYamlSpringCommentsCommandsHandlerTest {
     assertThat(thrown).hasCauseInstanceOf(NoSuchFileException.class);
   }
 
-  private JHipsterProjectFolder folder(String path) {
-    return new JHipsterProjectFolder(path);
+  private SeedProjectFolder folder(String path) {
+    return new SeedProjectFolder(path);
   }
 
   private SpringComments commentOn(SpringPropertyType springPropertyType, String propertyKey) {

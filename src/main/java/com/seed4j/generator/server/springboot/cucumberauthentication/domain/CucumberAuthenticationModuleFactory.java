@@ -1,37 +1,37 @@
 package com.seed4j.generator.server.springboot.cucumberauthentication.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
-import static com.seed4j.module.domain.JHipsterModule.lineBeforeText;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.text;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
-import static com.seed4j.module.domain.JHipsterModule.versionSlug;
+import static com.seed4j.module.domain.SeedModule.documentationTitle;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.lineBeforeText;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.text;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.versionSlug;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class CucumberAuthenticationModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/cucumberauthentication");
-  private static final JHipsterSource OAUTH2_SOURCE = SOURCE.append("oauth2");
-  private static final JHipsterSource JWT_SOURCE = SOURCE.append("jwt");
+  private static final SeedSource SOURCE = from("server/springboot/cucumberauthentication");
+  private static final SeedSource OAUTH2_SOURCE = SOURCE.append("oauth2");
+  private static final SeedSource JWT_SOURCE = SOURCE.append("jwt");
 
   private static final GroupId JSON_WEBTOKEN_GROUP = groupId("io.jsonwebtoken");
   private static final VersionSlug JSON_WEBTOKEN_VERSION = versionSlug("json-web-token");
 
   private static final String AUTHENTICATION_STEP = "shared/authentication/infrastructure/primary/AuthenticationSteps.java";
 
-  public JHipsterModule buildOauth2Module(JHipsterModuleProperties properties) {
+  public SeedModule buildOauth2Module(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String mainClass = properties.projectBaseName().capitalized() + "App";
@@ -71,7 +71,7 @@ public class CucumberAuthenticationModuleFactory {
     return cucumberConfigurationNeedle + ", TestSecurityConfiguration.class, CucumberAuthenticationConfiguration.class";
   }
 
-  private String securityConfigurationImport(JHipsterModuleProperties properties) {
+  private String securityConfigurationImport(SeedModuleProperties properties) {
     return "import " + properties.basePackage().get() + ".shared.authentication.infrastructure.primary.TestSecurityConfiguration;";
   }
 
@@ -84,7 +84,7 @@ public class CucumberAuthenticationModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildJWTModule(JHipsterModuleProperties properties) {
+  public SeedModule buildJWTModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

@@ -2,16 +2,16 @@ package com.seed4j.generator.server.javatool.frontendmaven.domain;
 
 import static com.seed4j.module.domain.nodejs.NodePackageManager.NPM;
 import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.gradleBuildFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.gradleLibsVersionFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.gradleBuildFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.gradleLibsVersionFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import org.junit.jupiter.api.Nested;
@@ -39,7 +39,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
       mockNpmVersion();
       mockNodeVersion();
 
-      JHipsterModule module = factory.buildFrontendMavenModule(defaultProperties().nodePackageManager(NPM).build());
+      SeedModule module = factory.buildFrontendMavenModule(defaultProperties().nodePackageManager(NPM).build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -113,7 +113,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
     void shouldBuildFrontendMavenModuleWithPnpm() {
       mockNodeVersion();
 
-      JHipsterModule module = factory.buildFrontendMavenModule(defaultProperties().nodePackageManager(PNPM).build());
+      SeedModule module = factory.buildFrontendMavenModule(defaultProperties().nodePackageManager(PNPM).build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -178,7 +178,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
 
     @Test
     void shouldBuildFrontendMavenCacheModule() {
-      JHipsterModule module = factory.buildFrontendMavenCacheModule(defaultProperties().build());
+      SeedModule module = factory.buildFrontendMavenCacheModule(defaultProperties().build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -265,7 +265,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
 
     @Test
     void shouldBuildFrontendMavenCacheModuleWithPnpm() {
-      JHipsterModule module = factory.buildFrontendMavenCacheModule(defaultProperties().nodePackageManager(PNPM).build());
+      SeedModule module = factory.buildFrontendMavenCacheModule(defaultProperties().nodePackageManager(PNPM).build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -278,7 +278,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
 
     @Test
     void shouldBuildMergeCypressCoverageModuleWithNpm() {
-      JHipsterModule module = factory.buildMergeCypressCoverageModule(defaultProperties().nodePackageManager(NPM).build());
+      SeedModule module = factory.buildMergeCypressCoverageModule(defaultProperties().nodePackageManager(NPM).build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -289,7 +289,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
 
     @Test
     void shouldBuildMergeCypressCoverageModuleWithPnpm() {
-      JHipsterModule module = factory.buildMergeCypressCoverageModule(defaultProperties().nodePackageManager(PNPM).build());
+      SeedModule module = factory.buildMergeCypressCoverageModule(defaultProperties().nodePackageManager(PNPM).build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -307,7 +307,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
       mockNodeVersion();
       mockNpmVersion();
 
-      JHipsterModule module = factory.buildFrontendGradleModule(defaultProperties().nodePackageManager(NPM).build());
+      SeedModule module = factory.buildFrontendGradleModule(defaultProperties().nodePackageManager(NPM).build());
 
       assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
         .hasFile("gradle/libs.versions.toml")
@@ -402,7 +402,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
       mockNodeVersion();
       mockPnpmVersion();
 
-      JHipsterModule module = factory.buildFrontendGradleModule(defaultProperties().nodePackageManager(PNPM).build());
+      SeedModule module = factory.buildFrontendGradleModule(defaultProperties().nodePackageManager(PNPM).build());
 
       assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
         .hasFile("build.gradle.kts")
@@ -493,9 +493,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
     when(nodeVersions.packageManagerVersion(PNPM)).thenReturn(new NodePackageVersion("10.0.0"));
   }
 
-  private static JHipsterModulesFixture.JHipsterModulePropertiesBuilder defaultProperties() {
-    return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("com.seed4j.growth")
-      .projectBaseName("myapp");
+  private static SeedModulesFixture.JHipsterModulePropertiesBuilder defaultProperties() {
+    return SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).basePackage("com.seed4j.growth").projectBaseName("myapp");
   }
 }

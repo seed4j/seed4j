@@ -3,7 +3,7 @@ package com.seed4j.module.domain.landscape;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModuleSlug;
+import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.shared.error.domain.ErrorStatus;
 import java.util.List;
 import java.util.Set;
@@ -27,8 +27,8 @@ class InvalidLandscapeExceptionTest {
   @Test
   void shouldGetUnknownDependencyExceptionInformation() {
     InvalidLandscapeException exception = InvalidLandscapeException.unknownDependency(
-      Set.of(new JHipsterModuleSlug("known")),
-      List.of(new JHipsterModuleSlug("remaining"))
+      Set.of(new SeedModuleSlug("known")),
+      List.of(new SeedModuleSlug("remaining"))
     );
 
     assertThat(exception.getMessage()).isEqualTo(

@@ -1,28 +1,28 @@
 package com.seed4j.generator.buildtool.maven.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
-import static com.seed4j.module.domain.JHipsterModule.mavenPlugin;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.mavenPlugin;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.to;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class MavenModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("buildtool/maven");
+  private static final SeedSource SOURCE = from("buildtool/maven");
 
   private static final GroupId APACHE_PLUGINS_GROUP = groupId("org.apache.maven.plugins");
   private static final ArtifactId ENFORCER_ARTIFACT_ID = artifactId("maven-enforcer-plugin");
@@ -35,7 +35,7 @@ public class MavenModuleFactory {
 
     - [JDK 21](https://openjdk.java.net/projects/jdk/21/)""";
 
-  public JHipsterModule buildMavenModule(JHipsterModuleProperties properties) {
+  public SeedModule buildMavenModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -101,7 +101,7 @@ public class MavenModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildMavenWrapperModule(JHipsterModuleProperties properties) {
+  public SeedModule buildMavenWrapperModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

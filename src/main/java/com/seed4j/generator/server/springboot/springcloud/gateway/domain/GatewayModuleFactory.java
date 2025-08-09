@@ -2,33 +2,33 @@ package com.seed4j.generator.server.springboot.springcloud.gateway.domain;
 
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.SPRING_CLOUD_GROUP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.springCloudDependenciesManagement;
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class GatewayModuleFactory {
 
   private static final String GATEWAY_PACKAGE = "wire/gateway/infrastructure/primary";
-  private static final JHipsterSource SOURCE = from("server/springboot/springcloud/gateway/java");
+  private static final SeedSource SOURCE = from("server/springboot/springcloud/gateway/java");
   private static final PropertyValue TRUE_VALUE = propertyValue(true);
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
-    JHipsterDestination testDestination = toSrcTestJava().append(packagePath).append(GATEWAY_PACKAGE);
-    JHipsterDestination destination = toSrcMainJava().append(packagePath).append(GATEWAY_PACKAGE);
+    SeedDestination testDestination = toSrcTestJava().append(packagePath).append(GATEWAY_PACKAGE);
+    SeedDestination destination = toSrcMainJava().append(packagePath).append(GATEWAY_PACKAGE);
 
     // @formatter:off
     return moduleBuilder(properties)

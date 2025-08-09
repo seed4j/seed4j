@@ -1,0 +1,26 @@
+{
+  "name": "{{ dasherizedBaseName }}",
+  "version": "[version]",
+  "private": true,
+  "description": "Seed4J Project",
+  "license": "UNLICENSED",
+  "packageManager": "{{ nodePackageManagerPackage }}@{{ nodePackageManagerVersion }}",
+  "jestSonar": {
+    "reportPath": "target/test-results",
+    "reportFile": "TESTS-results-sonar.xml"
+  },
+
+  "engines": {
+    "node": ">={{ nodeMajorVersion }}"
+  },
+  "scripts": {
+    "build": "ng build --output-path=target/classes/static",
+    "serve": "tikui-core serve"
+  },
+  "devDependencies": {
+    "@playwright/test": "[version]"
+  },
+  "dependencies": {
+    "@angular/animations": "[version]"
+  }
+}

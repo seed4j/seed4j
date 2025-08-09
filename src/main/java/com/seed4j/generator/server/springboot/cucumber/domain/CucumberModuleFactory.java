@@ -1,31 +1,31 @@
 package com.seed4j.generator.server.springboot.cucumber.domain;
 
 import static com.seed4j.generator.server.springboot.cucumbercommon.domain.CucumbersModules.cucumberModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.documentationTitle;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class CucumberModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/cucumber");
+  private static final SeedSource SOURCE = from("server/springboot/cucumber");
 
-  public JHipsterModule buildInitializationModule(JHipsterModuleProperties properties) {
+  public SeedModule buildInitializationModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();
-    JHipsterDestination destination = toSrcTestJava().append(properties.packagePath()).append("cucumber");
+    SeedDestination destination = toSrcTestJava().append(properties.packagePath()).append("cucumber");
 
     // @formatter:off
-    JHipsterModuleBuilder builder = cucumberModuleBuilder(properties)
+    SeedModuleBuilder builder = cucumberModuleBuilder(properties)
     .context()
       .put("baseName", baseName)
       .and()
@@ -61,7 +61,7 @@ public class CucumberModuleFactory {
     return builder.build();
   }
 
-  public JHipsterModule buildJpaResetModule(JHipsterModuleProperties properties) {
+  public SeedModule buildJpaResetModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     return moduleBuilder(properties)

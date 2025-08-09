@@ -1,10 +1,10 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.application.JHipsterModulesApplicationService;
-import com.seed4j.module.domain.JHipsterModuleSlug;
-import com.seed4j.module.domain.JHipsterModuleToApply;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.application.SeedModulesApplicationService;
+import com.seed4j.module.domain.SeedModuleSlug;
+import com.seed4j.module.domain.SeedModuleToApply;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import com.seed4j.shared.projectfolder.domain.ProjectFolder;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,50 +19,50 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 class ModulesResource {
 
-  private final JHipsterModulesApplicationService modules;
+  private final SeedModulesApplicationService modules;
   private final ProjectFolder projectFolder;
 
-  private final RestJHipsterModules modulesList;
-  private final RestJHipsterLandscape modulesLandscape;
+  private final RestSeedModules modulesList;
+  private final RestSeedLandscape modulesLandscape;
 
-  public ModulesResource(JHipsterModulesApplicationService modules, ProjectFolder projectFolder) {
+  public ModulesResource(SeedModulesApplicationService modules, ProjectFolder projectFolder) {
     this.modules = modules;
     this.projectFolder = projectFolder;
 
-    modulesList = RestJHipsterModules.from(modules.resources());
-    modulesLandscape = RestJHipsterLandscape.from(modules.landscape());
+    modulesList = RestSeedModules.from(modules.resources());
+    modulesLandscape = RestSeedLandscape.from(modules.landscape());
   }
 
   @GetMapping("/modules")
   @Operation(summary = "List available modules")
-  public ResponseEntity<RestJHipsterModules> listModules() {
+  public ResponseEntity<RestSeedModules> listModules() {
     return ResponseEntity.ok(modulesList);
   }
 
   @GetMapping("modules-landscape")
   @Operation(summary = "Get a view of the current modules landscape")
-  public ResponseEntity<RestJHipsterLandscape> modulesLandscape() {
+  public ResponseEntity<RestSeedLandscape> modulesLandscape() {
     return ResponseEntity.ok(modulesLandscape);
   }
 
   @PostMapping("apply-patches")
   @Operation(summary = "Apply multiple modules patches")
-  public void applyPatches(@RequestBody @Validated RestJHipsterModulesToApply modulesToApply) {
+  public void applyPatches(@RequestBody @Validated RestSeedModulesToApply modulesToApply) {
     modules.apply(modulesToApply.toDomain(projectFolder));
   }
 
   @Hidden
   @PostMapping("modules/{slug}/apply-patch")
-  public void applyPatch(@RequestBody @Validated RestJHipsterModuleProperties restProperties, @PathVariable("slug") String slug) {
-    JHipsterModuleProperties properties = restProperties.toDomain(projectFolder);
-    modules.apply(new JHipsterModuleToApply(new JHipsterModuleSlug(slug), properties));
+  public void applyPatch(@RequestBody @Validated RestSeedModuleProperties restProperties, @PathVariable("slug") String slug) {
+    SeedModuleProperties properties = restProperties.toDomain(projectFolder);
+    modules.apply(new SeedModuleToApply(new SeedModuleSlug(slug), properties));
   }
 
   @Hidden
   @GetMapping("modules/{slug}")
-  public RestJHipsterModulePropertiesDefinition propertiesDefinition(@PathVariable("slug") String slug) {
-    JHipsterModuleResource module = modules.resources().get(new JHipsterModuleSlug(slug));
-    return RestJHipsterModulePropertiesDefinition.from(module.propertiesDefinition());
+  public RestSeedModulePropertiesDefinition propertiesDefinition(@PathVariable("slug") String slug) {
+    SeedModuleResource module = modules.resources().get(new SeedModuleSlug(slug));
+    return RestSeedModulePropertiesDefinition.from(module.propertiesDefinition());
   }
 
   @Operation(summary = "Get presets configuration")

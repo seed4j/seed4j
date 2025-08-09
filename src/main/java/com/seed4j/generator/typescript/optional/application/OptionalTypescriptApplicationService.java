@@ -1,8 +1,8 @@
 package com.seed4j.generator.typescript.optional.application;
 
 import com.seed4j.generator.typescript.optional.domain.OptionalTypescriptModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class OptionalTypescriptApplicationService {
     this.optionalTypescript = new OptionalTypescriptModuleFactory();
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties project) {
+  public SeedModule buildModule(SeedModuleProperties project) {
     return optionalTypescript.buildModule(project);
   }
 }

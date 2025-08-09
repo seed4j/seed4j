@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.mvc.sample.langchain4j.application;
 
 import com.seed4j.generator.server.springboot.mvc.sample.langchain4j.domain.SampleLangChain4jModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class SampleLangChain4jApplicationService {
     sampleLangChain4j = new SampleLangChain4jModuleFactory();
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return sampleLangChain4j.buildModule(properties);
   }
 }

@@ -1,10 +1,10 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.JHipsterModule.LINE_BREAK;
+import static com.seed4j.module.domain.SeedModule.LINE_BREAK;
 
-import com.seed4j.module.domain.JHipsterModuleContext;
+import com.seed4j.module.domain.SeedModuleContext;
 import com.seed4j.module.domain.file.TemplateRenderer;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.replacement.ContentReplacer;
 import com.seed4j.module.domain.replacement.ContentReplacers;
 import com.seed4j.shared.error.domain.Assert;
@@ -24,14 +24,14 @@ public class FileSystemReplacer {
     this.templateRenderer = templateRenderer;
   }
 
-  public void handle(JHipsterProjectFolder projectFolder, ContentReplacers replacers, JHipsterModuleContext context) {
+  public void handle(SeedProjectFolder projectFolder, ContentReplacers replacers, SeedModuleContext context) {
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("replacers", replacers);
 
     replacers.forEach(applyReplacer(projectFolder, context));
   }
 
-  private Consumer<ContentReplacer> applyReplacer(JHipsterProjectFolder projectFolder, JHipsterModuleContext context) {
+  private Consumer<ContentReplacer> applyReplacer(SeedProjectFolder projectFolder, SeedModuleContext context) {
     return replacement -> {
       Path filePath = projectFolder.filePath(replacement.file().get());
 
@@ -48,7 +48,7 @@ public class FileSystemReplacer {
     };
   }
 
-  private String replacePlaceholders(String content, JHipsterModuleContext context) {
+  private String replacePlaceholders(String content, SeedModuleContext context) {
     return templateRenderer.render(content, context);
   }
 }

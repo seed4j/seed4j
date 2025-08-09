@@ -1,23 +1,23 @@
 package com.seed4j.generator.client.tikui.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.LINE_BREAK;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.lineAfterText;
-import static com.seed4j.module.domain.JHipsterModule.lineBeforeText;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.preCommitCommands;
-import static com.seed4j.module.domain.JHipsterModule.scriptCommand;
-import static com.seed4j.module.domain.JHipsterModule.scriptKey;
-import static com.seed4j.module.domain.JHipsterModule.stagedFilesFilter;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.SeedModule.LINE_BREAK;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.lineAfterText;
+import static com.seed4j.module.domain.SeedModule.lineBeforeText;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.preCommitCommands;
+import static com.seed4j.module.domain.SeedModule.scriptCommand;
+import static com.seed4j.module.domain.SeedModule.scriptKey;
+import static com.seed4j.module.domain.SeedModule.stagedFilesFilter;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.domain.replacement.RegexNeedleAfterReplacer;
 import com.seed4j.module.domain.replacement.ReplacementCondition;
 import java.util.Collection;
@@ -26,10 +26,10 @@ import java.util.regex.Pattern;
 
 public class TikuiModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/tikui");
-  private static final JHipsterSource STYLE_SOURCE = SOURCE.append("style");
+  private static final SeedSource SOURCE = from("client/tikui");
+  private static final SeedSource STYLE_SOURCE = SOURCE.append("style");
 
-  private static final JHipsterDestination STYLE_DESTINATION = to("src/main/style");
+  private static final SeedDestination STYLE_DESTINATION = to("src/main/style");
 
   private static final String ATOM = "atom";
   private static final String ATOM_BUTTON = ATOM + "/button";
@@ -49,7 +49,7 @@ public class TikuiModuleFactory {
   private static final String TEMPLATE_TOASTING = TEMPLATE + "/toasting";
   private static final String QUARK = "quark";
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .preCommitActions(stagedFilesFilter("*.pug"), preCommitCommands("prettier --write"))
@@ -184,15 +184,15 @@ public class TikuiModuleFactory {
     );
   }
 
-  private String tikuiLink(JHipsterModuleProperties properties) {
+  private String tikuiLink(SeedModuleProperties properties) {
     return properties.indentation().times(2) + "<link rel=\"stylesheet\" href=\"/style/tikui.css\" />";
   }
 
-  private String pugPlugin(JHipsterModuleProperties properties) {
+  private String pugPlugin(SeedModuleProperties properties) {
     return properties.indentation().times(1) + "- '@prettier/plugin-pug'";
   }
 
-  private static String newProxyForStyle(JHipsterModuleProperties properties) {
+  private static String newProxyForStyle(SeedModuleProperties properties) {
     return new StringBuilder()
       .append(properties.indentation().times(2))
       .append("proxy: {")
@@ -204,7 +204,7 @@ public class TikuiModuleFactory {
       .toString();
   }
 
-  private static String proxyForStyle(JHipsterModuleProperties properties) {
+  private static String proxyForStyle(SeedModuleProperties properties) {
     return """
     {S}{S}{S}'/style': {
     {S}{S}{S}{S}ws: true,
@@ -214,7 +214,7 @@ public class TikuiModuleFactory {
     {S}{S}{S}},""".replace("{S}", properties.indentation().times(1));
   }
 
-  private String styleProxyConf(JHipsterModuleProperties properties) {
+  private String styleProxyConf(SeedModuleProperties properties) {
     return """
     {S}"/style": {
     {S}{S}"target": "http://localhost:9005",

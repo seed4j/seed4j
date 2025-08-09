@@ -1,24 +1,24 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdoccore.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.localEnvironment;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.localEnvironment;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
 
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringdocModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/apidocumentation/springdoccore");
+  private static final SeedSource SOURCE = from("server/springboot/apidocumentation/springdoccore");
   private static final String DESTINATION = "wire/springdoc/infrastructure/primary";
 
   private static final PropertyValue ALPHA = propertyValue("alpha");
@@ -26,18 +26,18 @@ public class SpringdocModuleFactory {
 
   private static final String SPRINGDOC_CONFIG_JAVA_FILE = "SpringdocConfiguration.java";
 
-  public JHipsterModule buildModuleForMvc(JHipsterModuleProperties moduleProperties) {
+  public SeedModule buildModuleForMvc(SeedModuleProperties moduleProperties) {
     return buildModule(moduleProperties, SpringdocDependencies.MVC);
   }
 
-  public JHipsterModule buildModuleForWebflux(JHipsterModuleProperties moduleProperties) {
+  public SeedModule buildModuleForWebflux(SeedModuleProperties moduleProperties) {
     return buildModule(moduleProperties, SpringdocDependencies.WEBFLUX);
   }
 
-  private JHipsterModule buildModule(JHipsterModuleProperties properties, SpringdocDependencies dependencies) {
+  private SeedModule buildModule(SeedModuleProperties properties, SpringdocDependencies dependencies) {
     Assert.notNull("properties", properties);
 
-    JHipsterDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(DESTINATION);
+    SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(DESTINATION);
 
     // @formatter:off
     return moduleBuilder(properties)

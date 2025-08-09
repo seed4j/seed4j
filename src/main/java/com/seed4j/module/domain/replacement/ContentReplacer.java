@@ -1,9 +1,9 @@
 package com.seed4j.module.domain.replacement;
 
-import com.seed4j.module.domain.JHipsterProjectFilePath;
+import com.seed4j.module.domain.SeedProjectFilePath;
 
 public interface ContentReplacer {
-  JHipsterProjectFilePath file();
+  SeedProjectFilePath file();
 
   String apply(String content);
 

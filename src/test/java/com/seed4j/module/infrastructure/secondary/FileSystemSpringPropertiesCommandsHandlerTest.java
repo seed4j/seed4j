@@ -2,14 +2,14 @@ package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.TestFileUtils.content;
 import static com.seed4j.TestFileUtils.loadDefaultProperties;
-import static com.seed4j.module.domain.JHipsterModulesFixture.*;
+import static com.seed4j.module.domain.SeedModulesFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.javaproperties.SpringProperties;
 import com.seed4j.module.domain.javaproperties.SpringProperty;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ class FileSystemSpringPropertiesCommandsHandlerTest {
   void shouldCreateDefaultMainPropertiesForProjectWithoutProperties() {
     String folder = TestFileUtils.tmpDirForTest();
 
-    handler.handle(new JHipsterProjectFolder(folder), properties(springMainProperty()));
+    handler.handle(new SeedProjectFolder(folder), properties(springMainProperty()));
 
     assertThat(content(Path.of(folder, "src/main/resources/config/application.properties"))).contains(
       "springdoc.swagger-ui.operationsSorter=alpha,beta"
@@ -39,7 +39,7 @@ class FileSystemSpringPropertiesCommandsHandlerTest {
   void shouldCreateProfileMainPropertiesForProjectWithoutProperties() {
     String folder = TestFileUtils.tmpDirForTest();
 
-    handler.handle(new JHipsterProjectFolder(folder), properties(springLocalMainProperty()));
+    handler.handle(new SeedProjectFolder(folder), properties(springLocalMainProperty()));
 
     assertThat(content(Path.of(folder, "src/main/resources/config/application-local.properties"))).contains(
       "springdoc.swagger-ui.operationsSorter=alpha,beta"
@@ -50,7 +50,7 @@ class FileSystemSpringPropertiesCommandsHandlerTest {
   void shouldCreateDefaultTestPropertiesForProjectWithoutProperties() {
     String folder = TestFileUtils.tmpDirForTest();
 
-    handler.handle(new JHipsterProjectFolder(folder), properties(springTestProperty()));
+    handler.handle(new SeedProjectFolder(folder), properties(springTestProperty()));
 
     assertThat(content(Path.of(folder, "src/test/resources/config/application.properties"))).contains(
       "springdoc.swagger-ui.operationsSorter=alpha,beta"
@@ -64,7 +64,7 @@ class FileSystemSpringPropertiesCommandsHandlerTest {
     Path propertiesFile = Path.of(folder, propertiesPath);
     loadDefaultProperties(EXISTING_SPRING_PROPERTIES, propertiesFile);
 
-    handler.handle(new JHipsterProjectFolder(folder), properties(springMainProperty()));
+    handler.handle(new SeedProjectFolder(folder), properties(springMainProperty()));
 
     assertThat(content(propertiesFile)).contains("springdoc.swagger-ui.operationsSorter=alpha,beta");
   }
@@ -76,7 +76,7 @@ class FileSystemSpringPropertiesCommandsHandlerTest {
     Path propertiesFile = Path.of(folder, propertiesPath);
     loadDefaultProperties(EXISTING_SPRING_PROPERTIES, propertiesFile);
 
-    handler.handle(new JHipsterProjectFolder(folder), properties(springTestProperty()));
+    handler.handle(new SeedProjectFolder(folder), properties(springTestProperty()));
 
     assertThat(content(propertiesFile)).contains("springdoc.swagger-ui.operationsSorter=alpha,beta");
   }

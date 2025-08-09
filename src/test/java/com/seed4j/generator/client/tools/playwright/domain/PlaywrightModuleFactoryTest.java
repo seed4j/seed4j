@@ -1,12 +1,12 @@
 package com.seed4j.generator.client.tools.playwright.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -16,9 +16,9 @@ class PlaywrightModuleFactoryTest {
 
   @Test
   void shouldBuildComponentTestsModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildComponentTestsModule(properties);
+    SeedModule module = factory.buildComponentTestsModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile())
       .hasFile("package.json")
@@ -47,9 +47,9 @@ class PlaywrightModuleFactoryTest {
 
   @Test
   void shouldBuildE2ETestsModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildE2ETestsModule(properties);
+    SeedModule module = factory.buildE2ETestsModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile())
       .hasFile("package.json")

@@ -1,29 +1,29 @@
 package com.seed4j.generator.server.springboot.mvc.web.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
-import static com.seed4j.module.domain.JHipsterModule.localEnvironment;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.documentationTitle;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.localEnvironment;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
 
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringBootMvcModuleFactory {
@@ -31,12 +31,12 @@ public class SpringBootMvcModuleFactory {
   private static final String PACKAGE_INFO = "package-info.java";
   private static final String CORS = "cors";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/mvc/web");
-  private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
-  private static final JHipsterSource TEST_SOURCE = SOURCE.append("test");
+  private static final SeedSource SOURCE = from("server/springboot/mvc/web");
+  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
 
-  private static final JHipsterSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
-  private static final JHipsterSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
+  private static final SeedSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
+  private static final SeedSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
   private static final String WIRE_JACKSON_CONFIG = "wire/jackson/infrastructure/primary";
 
   private static final GroupId SPRING_BOOT_GROUP = groupId("org.springframework.boot");
@@ -47,11 +47,11 @@ public class SpringBootMvcModuleFactory {
   private static final String CORS_DESTINATION = "wire/security";
   private static final String CORS_PRIMARY = CORS_DESTINATION + "/infrastructure/primary";
 
-  public JHipsterModule buildEmptyModule(JHipsterModuleProperties properties) {
+  public SeedModule buildEmptyModule(SeedModuleProperties properties) {
     return moduleBuilder(properties).build();
   }
 
-  public JHipsterModule buildTomcatModule(JHipsterModuleProperties properties) {
+  public SeedModule buildTomcatModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -63,7 +63,7 @@ public class SpringBootMvcModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildUndertowModule(JHipsterModuleProperties properties) {
+  public SeedModule buildUndertowModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -84,11 +84,11 @@ public class SpringBootMvcModuleFactory {
       .build();
   }
 
-  private JHipsterModuleBuilder springMvcBuilder(JHipsterModuleProperties properties, String loggerName, LogLevel logLevel) {
+  private SeedModuleBuilder springMvcBuilder(SeedModuleProperties properties, String loggerName, LogLevel logLevel) {
     String packagePath = properties.packagePath();
 
-    JHipsterDestination mainDestination = toSrcMainJava().append(packagePath);
-    JHipsterDestination testDestination = toSrcTestJava().append(packagePath);
+    SeedDestination mainDestination = toSrcMainJava().append(packagePath);
+    SeedDestination testDestination = toSrcTestJava().append(packagePath);
 
     // @formatter:off
     return moduleBuilder(properties)

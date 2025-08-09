@@ -1,19 +1,19 @@
 package com.seed4j.generator.server.springboot.database.jpa.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
 
-import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JpaModuleFactory {
@@ -22,19 +22,19 @@ public class JpaModuleFactory {
   private static final PropertyValue FALSE = propertyValue(false);
   private static final PropertyValue TRUE = propertyValue(true);
 
-  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
+  public SeedModule buildPostgreSQL(SeedModuleProperties properties) {
     return sqlCommonModuleBuilder(properties).build();
   }
 
-  public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {
+  public SeedModule buildMariaDB(SeedModuleProperties properties) {
     return sqlCommonModuleBuilder(properties).build();
   }
 
-  public JHipsterModule buildMySQL(JHipsterModuleProperties properties) {
+  public SeedModule buildMySQL(SeedModuleProperties properties) {
     return sqlCommonModuleBuilder(properties).build();
   }
 
-  public JHipsterModule buildMsSQL(JHipsterModuleProperties properties) {
+  public SeedModule buildMsSQL(SeedModuleProperties properties) {
     // @formatter:off
     return sqlCommonModuleBuilder(properties)
       .springMainProperties()
@@ -48,13 +48,11 @@ public class JpaModuleFactory {
     // @formatter:on
   }
 
-  public static JHipsterModule.JHipsterModuleBuilder sqlCommonModuleBuilder(JHipsterModuleProperties properties) {
+  public static SeedModule.SeedModuleBuilder sqlCommonModuleBuilder(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
-    JHipsterSource jpaSource = from("server/springboot/database/jpa");
-    JHipsterDestination mainDestination = toSrcMainJava()
-      .append(properties.packagePath())
-      .append("wire/database/infrastructure/secondary/");
+    SeedSource jpaSource = from("server/springboot/database/jpa");
+    SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append("wire/database/infrastructure/secondary/");
 
     // @formatter:off
     return moduleBuilder(properties)

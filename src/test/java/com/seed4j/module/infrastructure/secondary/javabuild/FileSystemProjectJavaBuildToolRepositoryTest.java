@@ -1,12 +1,12 @@
 package com.seed4j.module.infrastructure.secondary.javabuild;
 
-import static com.seed4j.module.domain.JHipsterModule.*;
+import static com.seed4j.module.domain.SeedModule.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.file.JHipsterModuleFiles;
-import com.seed4j.module.domain.file.JHipsterModuleFiles.JHipsterModuleFilesBuilder;
+import com.seed4j.module.domain.file.SeedModuleFiles;
+import com.seed4j.module.domain.file.SeedModuleFiles.JHipsterModuleFilesBuilder;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import java.util.Optional;
 import org.junit.jupiter.api.Nested;
@@ -18,9 +18,9 @@ class FileSystemProjectJavaBuildToolRepositoryTest {
   private final FileSystemProjectJavaBuildToolRepository javaBuildTools = new FileSystemProjectJavaBuildToolRepository();
 
   @Nested
-  class DetectFromJHipsterModuleFiles {
+  class DetectFromSeedModuleFiles {
 
-    private final JHipsterModuleFilesBuilder moduleFiles = JHipsterModuleFiles.builder(mock(JHipsterModuleBuilder.class));
+    private final JHipsterModuleFilesBuilder moduleFiles = SeedModuleFiles.builder(mock(SeedModuleBuilder.class));
 
     @Test
     void shouldReturnMavenWhenPomXmlIsAdded() {

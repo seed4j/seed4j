@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdoccore.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -16,7 +16,7 @@ class SpringdocModuleFactoryTest {
 
   @Test
   void shouldBuildModuleForMvc() {
-    JHipsterModule module = springdocModuleFactory.buildModuleForMvc(properties());
+    SeedModule module = springdocModuleFactory.buildModuleForMvc(properties());
 
     assertThatSpringdocModule(module)
       .hasFile("src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java")
@@ -30,7 +30,7 @@ class SpringdocModuleFactoryTest {
 
   @Test
   void shouldBuildModuleForWebflux() {
-    JHipsterModule module = springdocModuleFactory.buildModuleForWebflux(properties());
+    SeedModule module = springdocModuleFactory.buildModuleForWebflux(properties());
 
     assertThatSpringdocModule(module)
       .hasFile("src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/SpringdocConfiguration.java")
@@ -41,14 +41,14 @@ class SpringdocModuleFactoryTest {
       .containing("<artifactId>springdoc-openapi-starter-webflux-api</artifactId>");
   }
 
-  private JHipsterModuleProperties properties() {
-    return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+  private SeedModuleProperties properties() {
+    return SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
   }
 
-  private static JHipsterModuleAsserter assertThatSpringdocModule(JHipsterModule module) {
+  private static SeedModuleAsserter assertThatSpringdocModule(SeedModule module) {
     return assertThatModuleWithFiles(module, pomFile(), readmeFile(), logbackFile(), testLogbackFile())
       .hasFile("src/main/resources/config/application.yml")
       .containing(

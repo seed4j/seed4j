@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.springcloud.common.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.groupId;
+import static com.seed4j.module.domain.SeedModule.groupId;
 
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;

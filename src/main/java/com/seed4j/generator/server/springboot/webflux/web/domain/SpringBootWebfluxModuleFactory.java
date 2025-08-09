@@ -1,29 +1,29 @@
 package com.seed4j.generator.server.springboot.webflux.web.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.groupId;
-import static com.seed4j.module.domain.JHipsterModule.javaDependency;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainJava;
-import static com.seed4j.module.domain.JHipsterModule.toSrcTestJava;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.groupId;
+import static com.seed4j.module.domain.SeedModule.javaDependency;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringBootWebfluxModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("server/springboot/webflux/web");
-  private static final JHipsterSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
-  private static final JHipsterSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
+  private static final SeedSource SOURCE = from("server/springboot/webflux/web");
+  private static final SeedSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
+  private static final SeedSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
   private static final String WIRE_JACKSON_CONFIG = "wire/jackson/infrastructure/primary";
   private static final PropertyKey SERVER_PORT = propertyKey("server.port");
 
@@ -31,11 +31,11 @@ public class SpringBootWebfluxModuleFactory {
 
   private static final String EXCEPTION_PRIMARY = "shared/error/infrastructure/primary";
 
-  public JHipsterModule buildEmptyModule(JHipsterModuleProperties properties) {
+  public SeedModule buildEmptyModule(SeedModuleProperties properties) {
     return moduleBuilder(properties).build();
   }
 
-  public JHipsterModule buildNettyModule(JHipsterModuleProperties properties) {
+  public SeedModule buildNettyModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

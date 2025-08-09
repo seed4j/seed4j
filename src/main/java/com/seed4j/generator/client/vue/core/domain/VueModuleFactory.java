@@ -3,27 +3,27 @@ package com.seed4j.generator.client.vue.core.domain;
 import static com.seed4j.generator.typescript.common.domain.EslintShortcuts.eslintTypescriptRule;
 import static com.seed4j.generator.typescript.common.domain.TsConfigShortcuts.tsConfigCompilerOption;
 import static com.seed4j.generator.typescript.common.domain.VitestShortcuts.vitestCoverageExclusion;
-import static com.seed4j.module.domain.JHipsterModule.*;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.VUE;
+import static com.seed4j.module.domain.SeedModule.*;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import java.util.function.Consumer;
 
 public class VueModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/vue");
-  private static final JHipsterSource APP_SOURCE = from("client/vue/webapp/app");
-  private static final JHipsterSource PIQURE_SOURCE = from("client/common/piqure");
-  private static final JHipsterSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
-  private static final JHipsterSource IMAGE_SOURCE = SOURCE.append("webapp/content/images");
+  private static final SeedSource SOURCE = from("client/vue");
+  private static final SeedSource APP_SOURCE = from("client/vue/webapp/app");
+  private static final SeedSource PIQURE_SOURCE = from("client/common/piqure");
+  private static final SeedSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
+  private static final SeedSource IMAGE_SOURCE = SOURCE.append("webapp/content/images");
 
-  private static final JHipsterDestination MAIN_DESTINATION = to("src/main/webapp/app");
-  private static final JHipsterDestination TEST_DESTINATION = to("src/test/webapp");
+  private static final SeedDestination MAIN_DESTINATION = to("src/main/webapp/app");
+  private static final SeedDestination TEST_DESTINATION = to("src/test/webapp");
 
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
@@ -31,7 +31,7 @@ public class VueModuleFactory {
     this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .preCommitActions(stagedFilesFilter("{src/**/,}*.{ts,vue}"), preCommitCommands("eslint --fix", "prettier --write"))
@@ -93,7 +93,7 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintConfig(JHipsterModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> patchEslintConfig(SeedModuleProperties properties) {
     String vuePluginConfig = """
       \t...vue.configs['flat/recommended'],
       \t{
@@ -120,7 +120,7 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchTsConfig(JHipsterModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> patchTsConfig(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()
@@ -134,7 +134,7 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchVitestConfig() {
+  private Consumer<SeedModuleBuilder> patchVitestConfig() {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.database.datasource.application;
 
 import com.seed4j.generator.server.springboot.database.datasource.domain.DatasourceModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,19 +15,19 @@ public class DatasourceApplicationService {
     datasource = new DatasourceModuleFactory(dockerImages);
   }
 
-  public JHipsterModule buildPostgreSQL(JHipsterModuleProperties properties) {
+  public SeedModule buildPostgreSQL(SeedModuleProperties properties) {
     return datasource.buildPostgreSQL(properties);
   }
 
-  public JHipsterModule buildMariaDB(JHipsterModuleProperties properties) {
+  public SeedModule buildMariaDB(SeedModuleProperties properties) {
     return datasource.buildMariaDB(properties);
   }
 
-  public JHipsterModule buildMsSQL(JHipsterModuleProperties properties) {
+  public SeedModule buildMsSQL(SeedModuleProperties properties) {
     return datasource.buildMsSQL(properties);
   }
 
-  public JHipsterModule buildMySQL(JHipsterModuleProperties properties) {
+  public SeedModule buildMySQL(SeedModuleProperties properties) {
     return datasource.buildMySQL(properties);
   }
 }

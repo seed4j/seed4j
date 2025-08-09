@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 
-import static com.seed4j.module.domain.JHipsterModulesFixture.jsonWebTokenDependencyId;
-import static com.seed4j.module.domain.JHipsterModulesFixture.springBootDependencyId;
-import static com.seed4j.module.domain.JHipsterModulesFixture.springBootDependencyManagement;
+import static com.seed4j.module.domain.SeedModulesFixture.jsonWebTokenDependencyId;
+import static com.seed4j.module.domain.SeedModulesFixture.springBootDependencyId;
+import static com.seed4j.module.domain.SeedModulesFixture.springBootDependencyManagement;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -18,7 +18,7 @@ import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependencies;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependenciesVersions;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.GeneratorException;
 import org.junit.jupiter.api.Test;
 
@@ -30,20 +30,20 @@ class MavenProjectJavaDependenciesRepositoryTest {
   @Test
   void shouldNotReadFromUnreadableMavenFile() {
     assertThatThrownBy(() ->
-      projectDependencies.get(new JHipsterProjectFolder("src/test/resources/projects/maven-unreadable"))
+      projectDependencies.get(new SeedProjectFolder("src/test/resources/projects/maven-unreadable"))
     ).isExactlyInstanceOf(GeneratorException.class);
   }
 
   @Test
   void shouldGetEmptyDependenciesFromEmptyProject() {
-    assertThat(projectDependencies.get(new JHipsterProjectFolder("src/test/resources/projects/empty"))).isEqualTo(
+    assertThat(projectDependencies.get(new SeedProjectFolder("src/test/resources/projects/empty"))).isEqualTo(
       ProjectJavaDependencies.EMPTY
     );
   }
 
   @Test
   void shouldGetEmptyProjectDependenciesFromEmptyMavenFile() {
-    assertThat(projectDependencies.get(new JHipsterProjectFolder("src/test/resources/projects/empty-maven")))
+    assertThat(projectDependencies.get(new SeedProjectFolder("src/test/resources/projects/empty-maven")))
       .usingRecursiveComparison()
       .isEqualTo(ProjectJavaDependencies.EMPTY);
   }
@@ -105,6 +105,6 @@ class MavenProjectJavaDependenciesRepositoryTest {
   }
 
   private ProjectJavaDependencies mavenDependencies() {
-    return projectDependencies.get(new JHipsterProjectFolder("src/test/resources/projects/maven"));
+    return projectDependencies.get(new SeedProjectFolder("src/test/resources/projects/maven"));
   }
 }

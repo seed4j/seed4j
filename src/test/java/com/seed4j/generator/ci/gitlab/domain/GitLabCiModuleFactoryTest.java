@@ -1,12 +1,12 @@
 package com.seed4j.generator.ci.gitlab.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModule;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModule;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -16,18 +16,18 @@ class GitLabCiModuleFactoryTest {
 
   @Test
   void shouldBuildGitLabCiMavenModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildGitLabCiMavenModule(properties);
+    SeedModule module = factory.buildGitLabCiMavenModule(properties);
 
     assertThatModule(module).hasFiles(".gitlab-ci.yml");
   }
 
   @Test
   void shouldBuildGitLabCiGradleModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildGitLabCiGradleModule(properties);
+    SeedModule module = factory.buildGitLabCiGradleModule(properties);
 
     assertThatModule(module).hasFiles(".gitlab-ci.yml");
   }

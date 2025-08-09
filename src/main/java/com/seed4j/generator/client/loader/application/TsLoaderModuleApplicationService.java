@@ -1,8 +1,8 @@
 package com.seed4j.generator.client.loader.application;
 
 import com.seed4j.generator.client.loader.domain.TsLoaderModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class TsLoaderModuleApplicationService {
     this.tsLoader = new TsLoaderModuleFactory();
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return tsLoader.buildModule(properties);
   }
 }

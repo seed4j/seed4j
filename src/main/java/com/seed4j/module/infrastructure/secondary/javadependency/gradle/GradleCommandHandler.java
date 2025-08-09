@@ -1,25 +1,25 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.gradle;
 
-import static com.seed4j.module.domain.JHipsterModule.LINE_BREAK;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.regex;
-import static com.seed4j.module.domain.JHipsterModule.to;
+import static com.seed4j.module.domain.SeedModule.LINE_BREAK;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.regex;
+import static com.seed4j.module.domain.SeedModule.to;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.always;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 import static com.seed4j.module.infrastructure.secondary.javadependency.gradle.VersionsCatalog.libraryAlias;
 import static com.seed4j.module.infrastructure.secondary.javadependency.gradle.VersionsCatalog.pluginAlias;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.JHipsterModuleContext;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
+import com.seed4j.module.domain.SeedModuleContext;
+import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.buildproperties.BuildProperty;
 import com.seed4j.module.domain.buildproperties.PropertyKey;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterFileContent;
-import com.seed4j.module.domain.file.JHipsterModuleFile;
-import com.seed4j.module.domain.file.JHipsterSource;
-import com.seed4j.module.domain.file.JHipsterTemplatedFile;
-import com.seed4j.module.domain.file.JHipsterTemplatedFiles;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedFileContent;
+import com.seed4j.module.domain.file.SeedModuleFile;
+import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.file.SeedTemplatedFile;
+import com.seed4j.module.domain.file.SeedTemplatedFiles;
 import com.seed4j.module.domain.gradleplugin.BuildGradleImport;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityProfilePlugin;
@@ -43,14 +43,14 @@ import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.replacement.ContentReplacers;
 import com.seed4j.module.domain.replacement.MandatoryFileReplacer;
 import com.seed4j.module.domain.replacement.MandatoryReplacer;
 import com.seed4j.module.domain.replacement.RegexNeedleBeforeReplacer;
 import com.seed4j.module.domain.replacement.RegexReplacer;
-import com.seed4j.module.infrastructure.secondary.FileSystemJHipsterModuleFiles;
 import com.seed4j.module.infrastructure.secondary.FileSystemReplacer;
+import com.seed4j.module.infrastructure.secondary.FileSystemSeedModuleFiles;
 import com.seed4j.module.infrastructure.secondary.javadependency.JavaDependenciesCommandHandler;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
@@ -118,17 +118,17 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
   private static final String BUILD_GRADLE_PROFILE_PATH_TEMPLATE = "buildSrc/src/main/kotlin/profile-%s.gradle.kts";
 
   private final Indentation indentation;
-  private final JHipsterProjectFolder projectFolder;
-  private final JHipsterModuleContext context;
+  private final SeedProjectFolder projectFolder;
+  private final SeedModuleContext context;
   private final VersionsCatalog versionsCatalog;
   private final FileSystemReplacer fileReplacer;
-  private final FileSystemJHipsterModuleFiles files;
+  private final FileSystemSeedModuleFiles files;
 
   public GradleCommandHandler(
     Indentation indentation,
-    JHipsterProjectFolder projectFolder,
-    JHipsterModuleContext context,
-    FileSystemJHipsterModuleFiles files,
+    SeedProjectFolder projectFolder,
+    SeedModuleContext context,
+    FileSystemSeedModuleFiles files,
     FileSystemReplacer fileReplacer
   ) {
     Assert.notNull("indentation", indentation);
@@ -354,8 +354,8 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
     );
   }
 
-  private JHipsterProjectFilePath projectFolderRelativePathFrom(Path buildGradleFile) {
-    return new JHipsterProjectFilePath(Path.of(projectFolder.folder()).relativize(buildGradleFile).toString());
+  private SeedProjectFilePath projectFolderRelativePathFrom(Path buildGradleFile) {
+    return new SeedProjectFilePath(Path.of(projectFolder.folder()).relativize(buildGradleFile).toString());
   }
 
   private MandatoryReplacer existingPropertyReplacer(BuildProperty property) {
@@ -420,7 +420,7 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
     );
     fileReplacer.handle(
       projectFolder,
-      ContentReplacers.of(new MandatoryFileReplacer(new JHipsterProjectFilePath(BUILD_GRADLE_FILE), replacer)),
+      ContentReplacers.of(new MandatoryFileReplacer(new SeedProjectFilePath(BUILD_GRADLE_FILE), replacer)),
       context
     );
   }
@@ -441,18 +441,15 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
     );
   }
 
-  private void addFileToProject(JHipsterSource source, JHipsterDestination destination) {
+  private void addFileToProject(SeedSource source, SeedDestination destination) {
     if (projectFolder.fileExists(destination.get())) {
       return;
     }
     files.create(
       projectFolder,
-      new JHipsterTemplatedFiles(
+      new SeedTemplatedFiles(
         List.of(
-          JHipsterTemplatedFile.builder()
-            .file(new JHipsterModuleFile(new JHipsterFileContent(source), destination, false))
-            .context(context)
-            .build()
+          SeedTemplatedFile.builder().file(new SeedModuleFile(new SeedFileContent(source), destination, false)).context(context).build()
         )
       )
     );
@@ -556,7 +553,7 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
     );
     fileReplacer.handle(
       projectFolder,
-      ContentReplacers.of(new MandatoryFileReplacer(new JHipsterProjectFilePath(BUILD_GRADLE_FILE), replacer)),
+      ContentReplacers.of(new MandatoryFileReplacer(new SeedProjectFilePath(BUILD_GRADLE_FILE), replacer)),
       context
     );
   }
@@ -572,7 +569,7 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
     );
     fileReplacer.handle(
       projectFolder,
-      ContentReplacers.of(new MandatoryFileReplacer(new JHipsterProjectFilePath(BUILD_GRADLE_FILE), replacer)),
+      ContentReplacers.of(new MandatoryFileReplacer(new SeedProjectFilePath(BUILD_GRADLE_FILE), replacer)),
       context
     );
   }

@@ -1,14 +1,14 @@
 package com.seed4j.generator.server.springboot.cache.ehcache.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.JCACHE;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.EHCACHE_JAVA_CONFIG;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.EHCACHE_XML_CONFIG;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.SPRING_BOOT_CACHE;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JCACHE;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.EHCACHE_JAVA_CONFIG;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.EHCACHE_XML_CONFIG;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CACHE;
 
 import com.seed4j.generator.server.springboot.cache.ehcache.application.EhcacheApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,8 +19,8 @@ class EhcacheModuleConfiguration {
   private static final String CACHE_TAG = "cache";
 
   @Bean
-  JHipsterModuleResource javaEHCacheModule(EhcacheApplicationService ehCache) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource javaEHCacheModule(EhcacheApplicationService ehCache) {
+    return SeedModuleResource.builder()
       .slug(EHCACHE_JAVA_CONFIG)
       .propertiesDefinition(properties())
       .apiDoc("Spring Boot - Cache", "Add Ehcache with Java configuration")
@@ -30,8 +30,8 @@ class EhcacheModuleConfiguration {
   }
 
   @Bean
-  JHipsterModuleResource xmlEHCacheModule(EhcacheApplicationService ehCache) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource xmlEHCacheModule(EhcacheApplicationService ehCache) {
+    return SeedModuleResource.builder()
       .slug(EHCACHE_XML_CONFIG)
       .propertiesDefinition(properties())
       .apiDoc("Spring Boot - Cache", "Add Ehcache with XML configuration")
@@ -40,11 +40,11 @@ class EhcacheModuleConfiguration {
       .factory(ehCache::buildXmlConfigurationModule);
   }
 
-  private JHipsterModulePropertiesDefinition properties() {
-    return JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build();
+  private SeedModulePropertiesDefinition properties() {
+    return SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build();
   }
 
-  private JHipsterModuleOrganization organization() {
-    return JHipsterModuleOrganization.builder().feature(JCACHE).addDependency(SPRING_BOOT_CACHE).build();
+  private SeedModuleOrganization organization() {
+    return SeedModuleOrganization.builder().feature(JCACHE).addDependency(SPRING_BOOT_CACHE).build();
   }
 }

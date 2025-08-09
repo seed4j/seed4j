@@ -2,8 +2,8 @@ package com.seed4j.generator.server.springboot.mvc.security.jwt.application;
 
 import com.seed4j.generator.server.springboot.mvc.security.jwt.domain.JwtAuthenticationModuleFactory;
 import com.seed4j.generator.server.springboot.mvc.security.jwt.domain.JwtBasicAuthModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,11 +17,11 @@ public class JwtAuthenticationApplicationService {
     basicAuthFactory = new JwtBasicAuthModuleFactory();
   }
 
-  public JHipsterModule buildAuthenticationModule(JHipsterModuleProperties properties) {
+  public SeedModule buildAuthenticationModule(SeedModuleProperties properties) {
     return authenticationFactory.buildModule(properties);
   }
 
-  public JHipsterModule buildBasicAuthModule(JHipsterModuleProperties properties) {
+  public SeedModule buildBasicAuthModule(SeedModuleProperties properties) {
     return basicAuthFactory.buildModule(properties);
   }
 }

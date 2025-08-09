@@ -60,10 +60,10 @@ public interface NodeVersions {
    * The version of Node.js.
    */
   default NodePackageVersion nodeVersion() {
-    return get("node", JHLiteNodePackagesVersionSource.COMMON.build());
+    return get("node", SeedNodePackagesVersionSource.COMMON.build());
   }
 
   default NodePackageVersion packageManagerVersion(NodePackageManager nodePackageManager) {
-    return get(nodePackageManager.packageName(), JHLiteNodePackagesVersionSource.COMMON.build());
+    return get(nodePackageManager.packageName(), SeedNodePackagesVersionSource.COMMON.build());
   }
 }

@@ -1,29 +1,29 @@
 package com.seed4j.generator.client.tools.playwright.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.scriptCommand;
-import static com.seed4j.module.domain.JHipsterModule.scriptKey;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.scriptCommand;
+import static com.seed4j.module.domain.SeedModule.scriptKey;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class PlaywrightModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/common/playwright");
+  private static final SeedSource SOURCE = from("client/common/playwright");
 
-  private static final JHipsterDestination WEBAPP_COMPONENT_TESTS = to("src/test/webapp/component/");
-  private static final JHipsterDestination WEBAPP_E2E_TESTS = to("src/test/webapp/e2e/");
+  private static final SeedDestination WEBAPP_COMPONENT_TESTS = to("src/test/webapp/component/");
+  private static final SeedDestination WEBAPP_E2E_TESTS = to("src/test/webapp/e2e/");
   private static final String PLAYWRIGHT_TESTS = "common/primary/app";
 
-  public JHipsterModule buildComponentTestsModule(JHipsterModuleProperties properties) {
+  public SeedModule buildComponentTestsModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -41,7 +41,7 @@ public class PlaywrightModuleFactory {
     // @formatter:on
   }
 
-  public JHipsterModule buildE2ETestsModule(JHipsterModuleProperties properties) {
+  public SeedModule buildE2ETestsModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -58,10 +58,7 @@ public class PlaywrightModuleFactory {
     // @formatter:on
   }
 
-  private static JHipsterModuleBuilder commonPlaywrightModuleBuilder(
-    JHipsterModuleProperties properties,
-    JHipsterDestination destinationFolder
-  ) {
+  private static SeedModuleBuilder commonPlaywrightModuleBuilder(SeedModuleProperties properties, SeedDestination destinationFolder) {
     // @formatter:off
     return moduleBuilder(properties)
       .packageJson()

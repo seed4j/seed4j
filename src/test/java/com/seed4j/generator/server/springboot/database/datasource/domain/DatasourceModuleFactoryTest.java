@@ -1,19 +1,19 @@
 package com.seed4j.generator.server.springboot.database.datasource.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.file;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.file;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.docker.DockerImageName;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
-import com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.infrastructure.secondary.SeedModulesAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,14 +32,14 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildPostgreSQLModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
     when(dockerImages.get(new DockerImageName("postgres"))).thenReturn(new DockerImageVersion("postgres", "0.0.0"));
 
-    JHipsterModule module = factory.buildPostgreSQL(properties);
+    SeedModule module = factory.buildPostgreSQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("documentation/postgresql.md")
@@ -91,14 +91,14 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildMariadbModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
     when(dockerImages.get(new DockerImageName("mariadb"))).thenReturn(new DockerImageVersion("mariadb", "0.0.0"));
 
-    JHipsterModule module = factory.buildMariaDB(properties);
+    SeedModule module = factory.buildMariaDB(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("documentation/mariadb.md")
@@ -156,14 +156,14 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildMysqlModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
 
     when(dockerImages.get(new DockerImageName("mysql"))).thenReturn(new DockerImageVersion("mysql", "0.0.0"));
 
-    JHipsterModule module = factory.buildMySQL(properties);
+    SeedModule module = factory.buildMySQL(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("documentation/mysql.md")
@@ -223,7 +223,7 @@ class DatasourceModuleFactoryTest {
 
   @Test
   void shouldBuildMssqlModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();
@@ -232,7 +232,7 @@ class DatasourceModuleFactoryTest {
       new DockerImageVersion("mcr.microsoft.com/mssql/server", "0.0.0")
     );
 
-    JHipsterModule module = factory.buildMsSQL(properties);
+    SeedModule module = factory.buildMsSQL(properties);
 
     assertThatModuleWithFiles(module, pomFile(), integrationTestAnnotation())
       .hasFile("documentation/mssql.md")
@@ -293,7 +293,7 @@ class DatasourceModuleFactoryTest {
       );
   }
 
-  private JHipsterModulesAssertions.ModuleFile integrationTestAnnotation() {
+  private SeedModulesAssertions.ModuleFile integrationTestAnnotation() {
     return file("src/test/resources/projects/files/IntegrationTest.java", "src/test/java/com/seed4j/growth/IntegrationTest.java");
   }
 }

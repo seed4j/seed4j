@@ -1,20 +1,20 @@
 package com.seed4j.generator.prettier.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.file;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.lintStagedConfigFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeScript;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.file;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.lintStagedConfigFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.packageJsonFile;
 import static org.mockito.Mockito.verify;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
-import com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.infrastructure.secondary.SeedModulesAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -34,9 +34,9 @@ class PrettierModuleFactoryTest {
   @Test
   void shouldBuildModuleWithoutPrettierLintStaged() {
     String folder = TestFileUtils.tmpDirForTest();
-    JHipsterModuleProperties properties = properties(folder);
+    SeedModuleProperties properties = properties(folder);
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithoutPrettier())
       .hasFiles(".prettierignore")
@@ -75,9 +75,9 @@ class PrettierModuleFactoryTest {
   @Test
   void shouldBuildModuleWithEmptyLintStaged() {
     String folder = TestFileUtils.tmpDirForTest();
-    JHipsterModuleProperties properties = properties(folder);
+    SeedModuleProperties properties = properties(folder);
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFile())
       .hasFile(".lintstagedrc.cjs")
@@ -90,8 +90,8 @@ class PrettierModuleFactoryTest {
       );
   }
 
-  private JHipsterModuleProperties properties(String folder) {
-    return JHipsterModulesFixture.propertiesBuilder(folder)
+  private SeedModuleProperties properties(String folder) {
+    return SeedModulesFixture.propertiesBuilder(folder)
       .projectBaseName("testProject")
       .put("projectName", "Test Project")
       .put("indentSize", 2)
@@ -99,7 +99,7 @@ class PrettierModuleFactoryTest {
       .build();
   }
 
-  public static JHipsterModulesAssertions.ModuleFile lintStagedConfigFileWithoutPrettier() {
+  public static SeedModulesAssertions.ModuleFile lintStagedConfigFileWithoutPrettier() {
     return file("src/test/resources/projects/init/.lintstagedrc.withoutPrettier.cjs", ".lintstagedrc.cjs");
   }
 }

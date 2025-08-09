@@ -1,0 +1,37 @@
+package com.seed4j.module.infrastructure.primary;
+
+import static com.seed4j.module.domain.resource.SeedModulesResourceFixture.*;
+import static org.assertj.core.api.Assertions.*;
+
+import com.seed4j.JsonHelper;
+import com.seed4j.UnitTest;
+import com.seed4j.module.domain.landscape.SeedLandscape;
+import com.seed4j.module.domain.landscape.SeedLandscapeFixture;
+import com.seed4j.module.domain.resource.SeedModuleResource;
+import org.junit.jupiter.api.Test;
+
+@UnitTest
+class RestSeedLandscapeTest {
+
+  @Test
+  void shouldSerializeToJson() {
+    SeedModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
+    SeedModuleResource secondModule = defaultModuleResourceBuilder().slug("second").feature("my-feature").moduleDependency("first").build();
+
+    assertThat(
+      JsonHelper.writeAsString(RestSeedLandscape.from(SeedLandscape.from(SeedLandscapeFixture.moduleResources(firstModule, secondModule))))
+    ).isEqualTo(json());
+  }
+
+  private String json() {
+    return """
+    {\
+    "levels":[\
+    {"elements":[{"type":"MODULE","slug":"first","operation":"operation","properties":{PROPERTIES_DEFINITION},"rank":"RANK_D"}]},\
+    {"elements":[{"type":"FEATURE","slug":"my-feature","modules":\
+    [{"type":"MODULE","slug":"second","operation":"operation","properties":{PROPERTIES_DEFINITION},"dependencies":[{"type":"MODULE","slug":"first"}],"rank":"RANK_D"}]}]}\
+    ]\
+    }\
+    """.replace("{PROPERTIES_DEFINITION}", RestSeedModulePropertiesDefinitionTest.json());
+  }
+}

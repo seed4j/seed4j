@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.gradle;
 
 import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.JHipsterModule.*;
-import static com.seed4j.module.domain.JHipsterModulesFixture.*;
+import static com.seed4j.module.domain.SeedModule.*;
+import static com.seed4j.module.domain.SeedModulesFixture.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.EnumSource.Mode.*;
 
@@ -20,10 +20,10 @@ import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
-import com.seed4j.module.infrastructure.secondary.FileSystemJHipsterModuleFiles;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.infrastructure.secondary.FileSystemProjectFiles;
 import com.seed4j.module.infrastructure.secondary.FileSystemReplacer;
+import com.seed4j.module.infrastructure.secondary.FileSystemSeedModuleFiles;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
@@ -36,15 +36,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 @UnitTest
 class GradleCommandHandlerTest {
 
-  private static final FileSystemJHipsterModuleFiles files = new FileSystemJHipsterModuleFiles(
-    new FileSystemProjectFiles(),
-    TemplateRenderer.NOOP
-  );
+  private static final FileSystemSeedModuleFiles files = new FileSystemSeedModuleFiles(new FileSystemProjectFiles(), TemplateRenderer.NOOP);
   private static final FileSystemReplacer fileReplacer = new FileSystemReplacer(TemplateRenderer.NOOP);
 
   @Test
   void shouldHandleInvalidTomlVersionCatalog() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-unreadable");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-unreadable");
 
     assertThatThrownBy(() ->
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer)
@@ -56,7 +53,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldAddVersionToMissingTomlVersionCatalogAnd() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
 
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new SetVersion(springBootVersion())
@@ -72,7 +69,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldAddVersionToExistingTomlVersionCatalog() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new SetVersion(springBootVersion())
@@ -88,7 +85,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldUpdateExistingProperty() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -117,7 +114,7 @@ class GradleCommandHandlerTest {
 
       @Test
       void shouldAddPropertiesToBuildGradleFileWithoutProperties() {
-        JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+        SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
         new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
           new SetBuildProperty(new BuildProperty(new PropertyKey("spring-profiles-active"), new PropertyValue("local")))
@@ -133,7 +130,7 @@ class GradleCommandHandlerTest {
 
       @Test
       void shouldAddPropertiesToBuildGradleFileWithProperties() {
-        JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-properties");
+        SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-properties");
 
         new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
           new SetBuildProperty(springProfilesActiveProperty())
@@ -150,7 +147,7 @@ class GradleCommandHandlerTest {
 
       @Test
       void shouldUpdateExistingProperty() {
-        JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-properties");
+        SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-properties");
         GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
           Indentation.DEFAULT,
           projectFolder,
@@ -180,7 +177,7 @@ class GradleCommandHandlerTest {
 
       @Test
       void shouldNotUpdateExistingPropertyWithSameValue() {
-        JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-properties");
+        SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-properties");
         GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
           Indentation.DEFAULT,
           projectFolder,
@@ -206,7 +203,7 @@ class GradleCommandHandlerTest {
 
       @Test
       void shouldNotAddPropertiesToGradleWithoutBuildGradleProfileFile() {
-        JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+        SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
         assertThatThrownBy(() ->
           new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
@@ -217,7 +214,7 @@ class GradleCommandHandlerTest {
 
       @Test
       void shouldAddPropertiesToBuildGradleProfileFileWithoutProperties() {
-        JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+        SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
 
         new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
           new SetBuildProperty(springProfilesActiveProperty(), localBuildProfile())
@@ -233,7 +230,7 @@ class GradleCommandHandlerTest {
 
       @Test
       void shouldAddPropertiesToBuildGradleProfileFileWithProperties() {
-        JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile-and-properties");
+        SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile-and-properties");
 
         new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
           new SetBuildProperty(springProfilesActiveProperty(), localBuildProfile())
@@ -250,7 +247,7 @@ class GradleCommandHandlerTest {
 
       @Test
       void shouldUpdateExistingProfileProperty() {
-        JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile-and-properties");
+        SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile-and-properties");
         GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
           Indentation.DEFAULT,
           projectFolder,
@@ -280,7 +277,7 @@ class GradleCommandHandlerTest {
 
       @Test
       void shouldNotUpdateExistingProfilePropertyWithSameValue() {
-        JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile-and-properties");
+        SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile-and-properties");
         GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
           Indentation.DEFAULT,
           projectFolder,
@@ -307,7 +304,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldEnablePrecompiledScriptPluginsToBuildGradleFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new AddJavaBuildProfile(buildProfileId("local"))
@@ -318,7 +315,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldInjectTomlVersionCatalogLibsIntoBuildGradleFileWithProfiles() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new AddJavaBuildProfile(buildProfileId("local"))
@@ -329,7 +326,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldAddProfileWithIdOnlyToBuildGradleFileWithoutProfiles() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new AddJavaBuildProfile(buildProfileId("local"))
@@ -352,7 +349,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldAddProfileWithIdOnlyToBuildGradleFileWithProfiles() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -384,7 +381,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldNotDuplicateExistingProfile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -418,7 +415,7 @@ class GradleCommandHandlerTest {
     @ParameterizedTest
     @MethodSource("provideBuildProfileActivations")
     void shouldNotAddDefaultActivationToBuildGradleFile(BuildProfileActivation profileActivation) {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new AddJavaBuildProfile(buildProfileId("local"), profileActivation)
@@ -440,7 +437,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldAddDefaultActivationWithActivationByDefaultTrueToBuildGradleFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new AddJavaBuildProfile(buildProfileId("local"), BuildProfileActivation.builder().activeByDefault().build())
@@ -458,7 +455,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldNotDuplicateExistingProfileWithDifferentActivation() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -497,7 +494,7 @@ class GradleCommandHandlerTest {
   @Nested
   class HandleAddDirectJavaDependency {
 
-    private final JHipsterProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+    private final SeedProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
     @Test
     void shouldAddEntryInLibrariesSectionToExistingTomlVersionCatalog() {
@@ -713,7 +710,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldAddDependencyToBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
       JavaDependency dependency = javaDependency()
         .groupId("org.spring.boot")
         .artifactId("spring-boot-starter-web")
@@ -735,7 +732,7 @@ class GradleCommandHandlerTest {
   @Nested
   class HandleRemoveDirectJavaDependency {
 
-    private final JHipsterProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+    private final SeedProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
     @Test
     void shouldRemoveEntryInLibrariesSection() {
@@ -918,7 +915,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldRemoveRuntimeDependencyInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -944,7 +941,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldNotRemoveEntryInLibrariesSectionWhenDependencyNotFoundInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -973,7 +970,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldRemoveEntryInLibrariesSectionAndEntryInVersionsSectionWhenRemovedDependencyIsInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -1005,7 +1002,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldRemoveEntryInLibrariesSectionButKeepEntryInVersionsSectionIfStillUsedByDependencyInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -1043,7 +1040,7 @@ class GradleCommandHandlerTest {
   @Nested
   class HandleAddJavaDependencyManagement {
 
-    private final JHipsterProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+    private final SeedProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
     @Test
     void shouldAddEntryInLibrariesSectionToExistingTomlVersionCatalog() {
@@ -1101,7 +1098,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldAddImplementationDependencyInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
 
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new AddJavaDependencyManagement(springBootDependencyManagement(), localBuildProfile())
@@ -1118,7 +1115,7 @@ class GradleCommandHandlerTest {
   @Nested
   class HandleRemoveJavaDependencyManagement {
 
-    private final JHipsterProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+    private final SeedProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
     @Test
     void shouldRemoveEntryInLibrariesSection() {
@@ -1241,7 +1238,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldRemoveDependencyInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -1262,7 +1259,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldNotRemoveEntryInLibrariesSectionWhenDependencyManagerNotFoundInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -1286,7 +1283,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldRemoveEntryInLibrariesSectionAndEntryInVersionsSectionWhenRemovedDependencyManagementIsInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -1312,7 +1309,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldRemoveEntryInLibrariesSectionButKeepEntryInVersionsSectionIfStillUsedByDependencyManagementInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
       GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
         Indentation.DEFAULT,
         projectFolder,
@@ -1346,7 +1343,7 @@ class GradleCommandHandlerTest {
   @Nested
   class HandleAddGradlePlugin {
 
-    private final JHipsterProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+    private final SeedProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
     @Test
     void shouldDeclareAndConfigureCorePluginAndAddImportInBuildGradleFile() {
@@ -1525,7 +1522,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldDeclareAndConfigureCommunityPluginInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
 
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         AddGradlePlugin.builder().plugin(gitPropertiesGradleProfilePlugin()).buildProfile(localBuildProfile()).build()
@@ -1570,7 +1567,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldDeclareCommunityPluginWithDifferentGroupIdAndPluginIdInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
 
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         AddGradlePlugin.builder().plugin(dockerGradlePluginDependency()).buildProfile(localBuildProfile()).build()
@@ -1604,7 +1601,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldDeclareAndConfigureCorePluginAndAddImportInBuildGradleProfileFile() {
-      JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
+      SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
 
       new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         AddGradlePlugin.builder().plugin(checkstyleGradleProfilePlugin()).buildProfile(localBuildProfile()).build()
@@ -1638,7 +1635,7 @@ class GradleCommandHandlerTest {
 
   @Test
   void addMavenBuildExtensionShouldNotBeHandled() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
 
     GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
       Indentation.DEFAULT,
@@ -1653,7 +1650,7 @@ class GradleCommandHandlerTest {
 
   @Test
   void addAddDirectMavenPluginShouldNotBeHandled() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
 
     GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
       Indentation.DEFAULT,
@@ -1668,7 +1665,7 @@ class GradleCommandHandlerTest {
 
   @Test
   void addAddBuildPluginManagementShouldNotBeHandled() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
 
     GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
       Indentation.DEFAULT,
@@ -1683,7 +1680,7 @@ class GradleCommandHandlerTest {
 
   @Test
   void shouldAddGradleFreeConfigurationBlock() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
     new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new AddGradleConfiguration(
@@ -1726,7 +1723,7 @@ class GradleCommandHandlerTest {
 
   @Test
   void shouldNotDuplicateExistingGradleFreeConfigurationBlock() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
     GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
       Indentation.DEFAULT,
       projectFolder,
@@ -1765,7 +1762,7 @@ class GradleCommandHandlerTest {
 
   @Test
   void shouldAddTasksTestInstruction() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
 
     new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new AddGradleTasksTestInstruction(
@@ -1793,7 +1790,7 @@ class GradleCommandHandlerTest {
 
   @Test
   void shouldNotDuplicateExistingTasksTestInstruction() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty-gradle");
     GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
       Indentation.DEFAULT,
       projectFolder,
@@ -1833,23 +1830,23 @@ class GradleCommandHandlerTest {
       );
   }
 
-  private static String buildGradleContent(JHipsterProjectFolder projectFolder) {
+  private static String buildGradleContent(SeedProjectFolder projectFolder) {
     return content(Path.of(projectFolder.get()).resolve("build.gradle.kts"));
   }
 
-  private static String versionCatalogContent(JHipsterProjectFolder projectFolder) {
+  private static String versionCatalogContent(SeedProjectFolder projectFolder) {
     return contentNormalizingNewLines(Path.of(projectFolder.get()).resolve("gradle/libs.versions.toml"));
   }
 
-  private static String pluginBuildGradleContent(JHipsterProjectFolder projectFolder) {
+  private static String pluginBuildGradleContent(SeedProjectFolder projectFolder) {
     return content(Path.of(projectFolder.get()).resolve("buildSrc/build.gradle.kts"));
   }
 
-  private static String scriptPluginContent(JHipsterProjectFolder projectFolder, BuildProfileId buildProfileId) {
+  private static String scriptPluginContent(SeedProjectFolder projectFolder, BuildProfileId buildProfileId) {
     return content(Path.of(projectFolder.get()).resolve("buildSrc/src/main/kotlin/profile-%s.gradle.kts".formatted(buildProfileId)));
   }
 
-  private static void assertFileExists(JHipsterProjectFolder projectFolder, String other, String description) {
+  private static void assertFileExists(SeedProjectFolder projectFolder, String other, String description) {
     Path profileGradlePath = Path.of(projectFolder.get()).resolve(other);
     assertThat(Files.exists(profileGradlePath)).as(description, profileGradlePath.toString()).isTrue();
   }

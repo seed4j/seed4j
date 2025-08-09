@@ -1,14 +1,14 @@
 package com.seed4j.generator.buildtool.maven.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.readmeFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.readmeFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -18,13 +18,13 @@ class MavenModuleFactoryTest {
 
   @Test
   void shouldBuildMavenModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .projectName("JHipster test")
       .build();
 
-    JHipsterModule module = factory.buildMavenModule(properties);
+    SeedModule module = factory.buildMavenModule(properties);
 
     assertThatModuleWithFiles(module, readmeFile())
       .hasFile("pom.xml")
@@ -180,13 +180,13 @@ class MavenModuleFactoryTest {
 
   @Test
   void shouldDeclareFailsafePluginAfterSurefirePluginInPomXml() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .projectName("JHipster test")
       .build();
 
-    JHipsterModule module = factory.buildMavenModule(properties);
+    SeedModule module = factory.buildMavenModule(properties);
 
     assertThatModuleWithFiles(module, readmeFile())
       .hasFile("pom.xml")
@@ -200,9 +200,9 @@ class MavenModuleFactoryTest {
 
   @Test
   void shouldBuildMavenWrapperModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildMavenWrapperModule(properties);
+    SeedModule module = factory.buildMavenWrapperModule(properties);
 
     assertThatModuleWithFiles(module, pomFile(), readmeFile())
       .hasFile(".gitignore")

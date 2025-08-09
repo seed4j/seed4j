@@ -1,14 +1,14 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.domain.JHipsterModuleSlug;
-import com.seed4j.module.domain.properties.JHipsterPropertyDefaultValue;
-import com.seed4j.module.domain.properties.JHipsterPropertyDescription;
-import com.seed4j.module.domain.properties.JHipsterPropertyKey;
-import com.seed4j.module.domain.properties.JHipsterPropertyType;
-import com.seed4j.module.domain.resource.JHipsterModuleApiDoc;
-import com.seed4j.module.domain.resource.JHipsterModulePropertyDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
-import com.seed4j.module.domain.resource.JHipsterModulesResources;
+import com.seed4j.module.domain.SeedModuleSlug;
+import com.seed4j.module.domain.properties.SeedPropertyDefaultValue;
+import com.seed4j.module.domain.properties.SeedPropertyDescription;
+import com.seed4j.module.domain.properties.SeedPropertyKey;
+import com.seed4j.module.domain.properties.SeedPropertyType;
+import com.seed4j.module.domain.resource.SeedModuleApiDoc;
+import com.seed4j.module.domain.resource.SeedModulePropertyDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.SeedModulesResources;
 import com.seed4j.shared.enumeration.domain.Enums;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.PathItem;
@@ -49,7 +49,7 @@ class OpenApiModuleConfiguration {
   private static final String JSON_MEDIA_TYPE = "application/json";
 
   @Bean
-  OpenApiCustomizer openApiModules(JHipsterModulesResources modules) {
+  OpenApiCustomizer openApiModules(SeedModulesResources modules) {
     return openApi -> {
       openApi
         .schema(MODULE_PROPERTIES_DEFINITION_SCHEMA_NAME, modulePropertyDefinitionSchema())
@@ -78,7 +78,7 @@ class OpenApiModuleConfiguration {
         "type",
         new Schema<>()
           .type(STRING_TYPE)
-          ._enum(Stream.of(JHipsterPropertyType.values()).map(JHipsterPropertyType::name).toList())
+          ._enum(Stream.of(SeedPropertyType.values()).map(SeedPropertyType::name).toList())
           .description("Type of this property")
       )
       .addProperty("mandatory", new Schema<>().type("boolean").description("True if the field is mandatory, false otherwise"))
@@ -88,11 +88,11 @@ class OpenApiModuleConfiguration {
       .required(List.of("type", "mandatory", "key"));
   }
 
-  private Map<String, Schema<?>> moduleApplicationSchemas(JHipsterModulesResources modules) {
+  private Map<String, Schema<?>> moduleApplicationSchemas(SeedModulesResources modules) {
     return modules.stream().collect(Collectors.toMap(module -> schemaName(module.slug()), toModuleApplicationSchema()));
   }
 
-  private Function<JHipsterModuleResource, Schema<?>> toModuleApplicationSchema() {
+  private Function<SeedModuleResource, Schema<?>> toModuleApplicationSchema() {
     return module -> {
       Schema<?> schema = new Schema<>()
         .name(schemaName(module.slug()))
@@ -110,7 +110,7 @@ class OpenApiModuleConfiguration {
     };
   }
 
-  private void appendPropertiesDefinition(JHipsterModuleResource module, Schema<?> schema) {
+  private void appendPropertiesDefinition(SeedModuleResource module, Schema<?> schema) {
     @SuppressWarnings("rawtypes")
     Map<String, Schema> moduleProperties = moduleProperties(module);
 
@@ -123,32 +123,32 @@ class OpenApiModuleConfiguration {
     schema.addProperty("properties", modulePropertiesSchema);
   }
 
-  private List<String> buildRequirements(JHipsterModuleResource module) {
+  private List<String> buildRequirements(SeedModuleResource module) {
     return Stream.concat(
       Stream.of("projectFolder"),
       module
         .propertiesDefinition()
         .stream()
-        .filter(JHipsterModulePropertyDefinition::isMandatory)
-        .map(JHipsterModulePropertyDefinition::key)
-        .map(JHipsterPropertyKey::get)
+        .filter(SeedModulePropertyDefinition::isMandatory)
+        .map(SeedModulePropertyDefinition::key)
+        .map(SeedPropertyKey::get)
     ).toList();
   }
 
   @SuppressWarnings("rawtypes")
-  private Map<String, Schema> moduleProperties(JHipsterModuleResource module) {
+  private Map<String, Schema> moduleProperties(SeedModuleResource module) {
     return module.propertiesDefinition().stream().collect(Collectors.toMap(property -> property.key().get(), toPropertySchema()));
   }
 
-  private Function<JHipsterModulePropertyDefinition, Schema<?>> toPropertySchema() {
+  private Function<SeedModulePropertyDefinition, Schema<?>> toPropertySchema() {
     return property ->
       new Schema<>()
         .type(Enums.map(property.type(), OpenApiFieldType.class).key())
-        .description(property.description().map(JHipsterPropertyDescription::get).orElse(null))
-        .example(property.defaultValue().map(JHipsterPropertyDefaultValue::get).orElse(null));
+        .description(property.description().map(SeedPropertyDescription::get).orElse(null))
+        .example(property.defaultValue().map(SeedPropertyDefaultValue::get).orElse(null));
   }
 
-  private Paths buildJHipsterModulesPaths(JHipsterModulesResources modules) {
+  private Paths buildJHipsterModulesPaths(SeedModulesResources modules) {
     Paths paths = new Paths();
 
     paths.putAll(modulesPropertiesDefinitions(modules));
@@ -157,13 +157,13 @@ class OpenApiModuleConfiguration {
     return paths;
   }
 
-  private Map<String, PathItem> modulesPropertiesDefinitions(JHipsterModulesResources modules) {
+  private Map<String, PathItem> modulesPropertiesDefinitions(SeedModulesResources modules) {
     return modules
       .stream()
-      .collect(Collectors.toMap(JHipsterModuleResource::moduleUrl, module -> modulePropertiesDefinition(module.apiDoc(), module.slug())));
+      .collect(Collectors.toMap(SeedModuleResource::moduleUrl, module -> modulePropertiesDefinition(module.apiDoc(), module.slug())));
   }
 
-  private PathItem modulePropertiesDefinition(JHipsterModuleApiDoc apiDoc, JHipsterModuleSlug slug) {
+  private PathItem modulePropertiesDefinition(SeedModuleApiDoc apiDoc, SeedModuleSlug slug) {
     Operation getOperation = new Operation()
       .operationId(slug.get() + "-properties-definition")
       .summary("Get " + slug.get() + " properties definitions")
@@ -180,7 +180,7 @@ class OpenApiModuleConfiguration {
     return new PathItem().get(getOperation);
   }
 
-  private Map<String, PathItem> modulesApplications(JHipsterModulesResources modules) {
+  private Map<String, PathItem> modulesApplications(SeedModulesResources modules) {
     return modules
       .stream()
       .collect(
@@ -191,7 +191,7 @@ class OpenApiModuleConfiguration {
       );
   }
 
-  private PathItem moduleApplicationDefinition(JHipsterModuleApiDoc apiDoc, JHipsterModuleSlug slug) {
+  private PathItem moduleApplicationDefinition(SeedModuleApiDoc apiDoc, SeedModuleSlug slug) {
     Operation postOperation = new Operation()
       .operationId(slug.get() + "-application")
       .summary(apiDoc.operation().get())
@@ -205,7 +205,7 @@ class OpenApiModuleConfiguration {
     return new PathItem().post(postOperation);
   }
 
-  private String schemaName(JHipsterModuleSlug slug) {
+  private String schemaName(SeedModuleSlug slug) {
     return slug.get() + "-schema";
   }
 }

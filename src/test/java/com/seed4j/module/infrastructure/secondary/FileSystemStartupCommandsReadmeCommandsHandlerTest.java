@@ -1,7 +1,7 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.JHipsterModulesFixture.emptyModuleContext;
+import static com.seed4j.module.domain.SeedModulesFixture.emptyModuleContext;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import ch.qos.logback.classic.Level;
@@ -10,7 +10,7 @@ import com.seed4j.LogsSpy;
 import com.seed4j.LogsSpyExtension;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.file.TemplateRenderer;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.startupcommand.*;
 import java.nio.file.Path;
 import java.util.List;
@@ -34,65 +34,65 @@ class FileSystemStartupCommandsReadmeCommandsHandlerTest {
 
   @Test
   void shouldAddMavenCommandToReadme() {
-    JHipsterProjectFolder projectFolder = projectFolderWithReadme();
-    JHipsterStartupCommand command = new MavenStartupCommandLine("clean verify sonar:sonar");
+    SeedProjectFolder projectFolder = projectFolderWithReadme();
+    SeedStartupCommand command = new MavenStartupCommandLine("clean verify sonar:sonar");
 
-    handler.handle(projectFolder, new JHipsterStartupCommands(List.of(command)), emptyModuleContext());
+    handler.handle(projectFolder, new SeedStartupCommands(List.of(command)), emptyModuleContext());
 
     assertThat(content(projectFolder.filePath("README.md"))).contains("./mvnw clean verify sonar:sonar");
   }
 
   @Test
   void shouldNotAddMavenCommandToMavenProjectWithoutReadme() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
-    JHipsterStartupCommand command = new MavenStartupCommandLine("clean verify sonar:sonar");
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
+    SeedStartupCommand command = new MavenStartupCommandLine("clean verify sonar:sonar");
 
-    handler.handle(projectFolder, new JHipsterStartupCommands(List.of(command)), emptyModuleContext());
+    handler.handle(projectFolder, new SeedStartupCommands(List.of(command)), emptyModuleContext());
 
     logs.shouldHave(Level.DEBUG, "Can't apply optional replacement: ");
   }
 
   @Test
   void shouldAddGradleCommandToReadme() {
-    JHipsterProjectFolder projectFolder = projectFolderWithReadme();
-    JHipsterStartupCommand command = new GradleStartupCommandLine("clean build sonar --info");
+    SeedProjectFolder projectFolder = projectFolderWithReadme();
+    SeedStartupCommand command = new GradleStartupCommandLine("clean build sonar --info");
 
-    handler.handle(projectFolder, new JHipsterStartupCommands(List.of(command)), emptyModuleContext());
+    handler.handle(projectFolder, new SeedStartupCommands(List.of(command)), emptyModuleContext());
 
     assertThat(content(projectFolder.filePath("README.md"))).contains("./gradlew clean build sonar --info");
   }
 
   @Test
   void shouldAddDockerComposeCommandToReadme() {
-    JHipsterProjectFolder projectFolder = projectFolderWithReadme();
-    JHipsterStartupCommand command = new DockerComposeStartupCommandLine(new DockerComposeFile("src/main/docker/sonar.yml"));
+    SeedProjectFolder projectFolder = projectFolderWithReadme();
+    SeedStartupCommand command = new DockerComposeStartupCommandLine(new DockerComposeFile("src/main/docker/sonar.yml"));
 
-    handler.handle(projectFolder, new JHipsterStartupCommands(List.of(command)), emptyModuleContext());
+    handler.handle(projectFolder, new SeedStartupCommands(List.of(command)), emptyModuleContext());
 
     assertThat(content(projectFolder.filePath("README.md"))).contains("docker compose -f src/main/docker/sonar.yml up -d");
   }
 
   @ParameterizedTest
   @MethodSource("commandOrderScenarios")
-  void shouldAddCommandsToProjectReadmeRespectingInsertOrder(List<JHipsterStartupCommand> commands, String expectedReadmeContent) {
-    JHipsterProjectFolder projectFolder = projectFolderWithReadme();
+  void shouldAddCommandsToProjectReadmeRespectingInsertOrder(List<SeedStartupCommand> commands, String expectedReadmeContent) {
+    SeedProjectFolder projectFolder = projectFolderWithReadme();
 
-    handler.handle(projectFolder, new JHipsterStartupCommands(commands), emptyModuleContext());
+    handler.handle(projectFolder, new SeedStartupCommands(commands), emptyModuleContext());
 
     assertThat(content(projectFolder.filePath("README.md"))).contains(expectedReadmeContent);
   }
 
-  private JHipsterProjectFolder projectFolderWithReadme() {
-    JHipsterProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
+  private SeedProjectFolder projectFolderWithReadme() {
+    SeedProjectFolder projectFolder = projectFrom("src/test/resources/projects/empty");
     copy(Path.of("src/test/resources/projects/README.md"), projectFolder.filePath("README.md"));
     return projectFolder;
   }
 
   private static Stream<Arguments> commandOrderScenarios() {
-    JHipsterStartupCommand mavenCommand = new MavenStartupCommandLine("clean verify sonar:sonar");
-    JHipsterStartupCommand mavenCommandEmpty = new MavenStartupCommandLine("");
-    JHipsterStartupCommand gradleCommandEmpty = new GradleStartupCommandLine("");
-    JHipsterStartupCommand dockerComposeCommand = new DockerComposeStartupCommandLine(new DockerComposeFile("src/main/docker/sonar.yml"));
+    SeedStartupCommand mavenCommand = new MavenStartupCommandLine("clean verify sonar:sonar");
+    SeedStartupCommand mavenCommandEmpty = new MavenStartupCommandLine("");
+    SeedStartupCommand gradleCommandEmpty = new GradleStartupCommandLine("");
+    SeedStartupCommand dockerComposeCommand = new DockerComposeStartupCommandLine(new DockerComposeFile("src/main/docker/sonar.yml"));
 
     return Stream.of(
       Arguments.of(

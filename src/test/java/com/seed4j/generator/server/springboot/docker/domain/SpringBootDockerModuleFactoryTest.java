@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.docker.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -20,13 +20,13 @@ class SpringBootDockerModuleFactoryTest {
 
     @Test
     void shouldBuildJibModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .basePackage("com.seed4j.growth")
         .projectBaseName("myapp")
         .put("serverPort", 9000)
         .build();
 
-      JHipsterModule module = factory.buildJibModule(properties);
+      SeedModule module = factory.buildJibModule(properties);
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
@@ -85,11 +85,9 @@ class SpringBootDockerModuleFactoryTest {
 
     @Test
     void shouldBuildDockerFileModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-        .put("serverPort", 9000)
-        .build();
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).put("serverPort", 9000).build();
 
-      JHipsterModule module = factory.buildDockerFileMavenModule(properties);
+      SeedModule module = factory.buildDockerFileMavenModule(properties);
 
       assertThatModule(module).hasFile("Dockerfile").containing("EXPOSE 9000").containing("./mvnw");
     }
@@ -100,13 +98,13 @@ class SpringBootDockerModuleFactoryTest {
 
     @Test
     void shouldBuildJibModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .basePackage("com.seed4j.growth")
         .projectBaseName("myapp")
         .put("serverPort", 9000)
         .build();
 
-      JHipsterModule module = factory.buildJibModule(properties);
+      SeedModule module = factory.buildJibModule(properties);
 
       assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
         .hasFile("gradle/libs.versions.toml")
@@ -176,11 +174,9 @@ class SpringBootDockerModuleFactoryTest {
 
     @Test
     void shouldBuildDockerFileModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-        .put("serverPort", 9000)
-        .build();
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).put("serverPort", 9000).build();
 
-      JHipsterModule module = factory.buildDockerFileGradleModule(properties);
+      SeedModule module = factory.buildDockerFileGradleModule(properties);
 
       assertThatModule(module).hasFile("Dockerfile").containing("EXPOSE 9000").containing("./gradlew");
     }
@@ -191,11 +187,9 @@ class SpringBootDockerModuleFactoryTest {
 
     @Test
     void shouldBuildSpringBootDockerComposeIntegrationModule() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-        .put("serverPort", 9000)
-        .build();
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).put("serverPort", 9000).build();
 
-      JHipsterModule module = factory.buildSpringBootDockerComposeModule(properties);
+      SeedModule module = factory.buildSpringBootDockerComposeModule(properties);
       assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile(), readmeFile())
         .hasFile("pom.xml")
         .containing(

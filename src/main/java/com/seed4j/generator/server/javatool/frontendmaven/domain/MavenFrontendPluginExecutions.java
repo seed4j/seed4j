@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.javatool.frontendmaven.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.GENERATE_RESOURCES;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.TEST;
 

@@ -1,29 +1,29 @@
 package com.seed4j.generator.client.react.security.jwt.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.*;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.REACT;
+import static com.seed4j.module.domain.SeedModule.*;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.REACT;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.module.domain.replacement.RegexNeedleBeforeReplacer;
 import com.seed4j.shared.error.domain.Assert;
 
 public class ReactJwtModuleFactory {
 
-  private static final JHipsterSource ROOT = from("client/react/security/jwt");
+  private static final SeedSource ROOT = from("client/react/security/jwt");
 
-  private static final JHipsterSource SOURCE = ROOT.append("src");
+  private static final SeedSource SOURCE = ROOT.append("src");
 
-  private static final JHipsterSource APP_SOURCE = SOURCE.append("main/webapp/app");
-  private static final JHipsterSource TEST_JAVASCRIPT_SOURCE = SOURCE.append("test/webapp/unit");
+  private static final SeedSource APP_SOURCE = SOURCE.append("main/webapp/app");
+  private static final SeedSource TEST_JAVASCRIPT_SOURCE = SOURCE.append("test/webapp/unit");
 
-  private static final JHipsterDestination APP_DESTINATION = to("src/main/webapp/app");
-  private static final JHipsterDestination COMMON_DESTINATION = APP_DESTINATION.append("common");
+  private static final SeedDestination APP_DESTINATION = to("src/main/webapp/app");
+  private static final SeedDestination COMMON_DESTINATION = APP_DESTINATION.append("common");
 
-  private static final JHipsterDestination TEST_DESTINATION = to("src/test/webapp/unit/");
+  private static final SeedDestination TEST_DESTINATION = to("src/test/webapp/unit/");
 
   private static final RegexNeedleBeforeReplacer LOGIN_FORM_MATCHER = lineBeforeRegex(
     "[  ]{0,10}[<\\/div>]{0,1}\n{0,5}[  ]{0,10}<\\/div>\n{0,5}[  ]{0,10}[);]{0,2}\n{0,5}\\}\n{0,5}[  ]{0,10}export default HomePage;"
@@ -36,7 +36,7 @@ public class ReactJwtModuleFactory {
       align-items: center;\
     """;
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

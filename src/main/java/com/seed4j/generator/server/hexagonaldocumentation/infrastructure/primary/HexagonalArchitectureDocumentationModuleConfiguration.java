@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.hexagonaldocumentation.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.APPLICATION_SERVICE_HEXAGONAL_ARCHITECTURE_DOCUMENTATION;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.APPLICATION_SERVICE_HEXAGONAL_ARCHITECTURE_DOCUMENTATION;
 
 import com.seed4j.generator.server.hexagonaldocumentation.application.HexagonalArchitectureDocumentationApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
 class HexagonalArchitectureDocumentationModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource hexagonalArchitectureDocumentationModule(
+  SeedModuleResource hexagonalArchitectureDocumentationModule(
     HexagonalArchitectureDocumentationApplicationService hexagonalArchitectureDocumentation
   ) {
-    return JHipsterModuleResource.builder()
+    return SeedModuleResource.builder()
       .slug(APPLICATION_SERVICE_HEXAGONAL_ARCHITECTURE_DOCUMENTATION)
       .withoutProperties()
       .apiDoc("Documentation", "Add documentation for hexagonal architecture")

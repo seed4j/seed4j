@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.javatool.archunit.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteFeatureSlug.SPRING_SERVER;
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.JAVA_ARCHUNIT;
+import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JAVA_ARCHUNIT;
 
 import com.seed4j.generator.server.javatool.archunit.application.ArchUnitApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,12 +14,12 @@ import org.springframework.context.annotation.Configuration;
 class ArchUnitModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource archUnitModule(ArchUnitApplicationService archUnit) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource archUnitModule(ArchUnitApplicationService archUnit) {
+    return SeedModuleResource.builder()
       .slug(JAVA_ARCHUNIT)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().build())
       .apiDoc("Java", "Add Hexagonal Arch Unit Tests to project")
-      .organization(JHipsterModuleOrganization.builder().addDependency(SPRING_SERVER).build())
+      .organization(SeedModuleOrganization.builder().addDependency(SPRING_SERVER).build())
       .tags("server", "test")
       .factory(archUnit::buildModule);
   }

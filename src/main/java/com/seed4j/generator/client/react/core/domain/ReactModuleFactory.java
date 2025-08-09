@@ -3,49 +3,49 @@ package com.seed4j.generator.client.react.core.domain;
 import static com.seed4j.generator.typescript.common.domain.EslintShortcuts.eslintTypescriptRule;
 import static com.seed4j.generator.typescript.common.domain.TsConfigShortcuts.tsConfigCompilerOption;
 import static com.seed4j.generator.typescript.common.domain.VitestShortcuts.vitestCoverageExclusion;
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.LINE_BREAK;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.lineAfterRegex;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.preCommitCommands;
-import static com.seed4j.module.domain.JHipsterModule.regex;
-import static com.seed4j.module.domain.JHipsterModule.scriptCommand;
-import static com.seed4j.module.domain.JHipsterModule.scriptKey;
-import static com.seed4j.module.domain.JHipsterModule.stagedFilesFilter;
-import static com.seed4j.module.domain.JHipsterModule.text;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.REACT;
+import static com.seed4j.module.domain.SeedModule.LINE_BREAK;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.lineAfterRegex;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.preCommitCommands;
+import static com.seed4j.module.domain.SeedModule.regex;
+import static com.seed4j.module.domain.SeedModule.scriptCommand;
+import static com.seed4j.module.domain.SeedModule.scriptKey;
+import static com.seed4j.module.domain.SeedModule.stagedFilesFilter;
+import static com.seed4j.module.domain.SeedModule.text;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.REACT;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.always;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
 
 public class ReactModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/react/core");
+  private static final SeedSource SOURCE = from("client/react/core");
 
-  private static final JHipsterSource WEBAPP_SOURCE = SOURCE.append("src/main/webapp");
-  private static final JHipsterDestination WEBAPP_DESTINATION = to("src/main/webapp");
+  private static final SeedSource WEBAPP_SOURCE = SOURCE.append("src/main/webapp");
+  private static final SeedDestination WEBAPP_DESTINATION = to("src/main/webapp");
 
-  private static final JHipsterSource APP_SOURCE = WEBAPP_SOURCE.append("app");
-  private static final JHipsterDestination APP_DESTINATION = WEBAPP_DESTINATION.append("app");
+  private static final SeedSource APP_SOURCE = WEBAPP_SOURCE.append("app");
+  private static final SeedDestination APP_DESTINATION = WEBAPP_DESTINATION.append("app");
 
-  private static final JHipsterSource PIQURE_SOURCE = from("client/common/piqure");
+  private static final SeedSource PIQURE_SOURCE = from("client/common/piqure");
 
   private static final String PRIMARY_APP = "home/infrastructure/primary";
   private static final String ASSETS = "assets";
 
-  private static final JHipsterSource PRIMARY_APP_SOURCE = APP_SOURCE.append(PRIMARY_APP);
-  private static final JHipsterDestination PRIMARY_APP_DESTINATION = APP_DESTINATION.append(PRIMARY_APP);
+  private static final SeedSource PRIMARY_APP_SOURCE = APP_SOURCE.append(PRIMARY_APP);
+  private static final SeedDestination PRIMARY_APP_DESTINATION = APP_DESTINATION.append(PRIMARY_APP);
 
   private static final String TEST_PRIMARY = "src/test/webapp/unit/home/infrastructure/primary";
   private static final String DEFAULT_TSCONFIG_PATH = "\"@/*\": [\"src/main/webapp/app/*\"]";
@@ -56,7 +56,7 @@ public class ReactModuleFactory {
     this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -116,7 +116,7 @@ public class ReactModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchEslintConfig(JHipsterModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> patchEslintConfig(SeedModuleProperties properties) {
     String reactConfig = """
       \t\tfiles: ['src/main/webapp/**/*.{ts,tsx}', 'src/test/webapp/unit/**/*.{ts,tsx}'],
       \t\textends: [...typescript.configs.recommendedTypeChecked, react],
@@ -161,7 +161,7 @@ public class ReactModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchTsConfig(JHipsterModuleProperties properties) {
+  private Consumer<SeedModuleBuilder> patchTsConfig(SeedModuleProperties properties) {
     String pathsReplacement =
       DEFAULT_TSCONFIG_PATH + "," + LINE_BREAK + properties.indentation().times(3) + "\"@assets/*\": [\"src/main/webapp/assets/*\"]";
     // @formatter:off
@@ -178,7 +178,7 @@ public class ReactModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<JHipsterModuleBuilder> patchVitestConfig() {
+  private Consumer<SeedModuleBuilder> patchVitestConfig() {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.javatool.protobuf.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -20,11 +20,11 @@ class ProtobufModuleFactoryTest {
 
     @Test
     void shouldBuildModuleForMaven() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .basePackage("com.seed4j.growth")
         .build();
 
-      JHipsterModule module = factory.buildProtobufModule(properties);
+      SeedModule module = factory.buildProtobufModule(properties);
 
       assertThatModuleWithFiles(module, pomFile())
         .hasPrefixedFiles(
@@ -94,9 +94,9 @@ class ProtobufModuleFactoryTest {
 
     @Test
     void shouldBuildModuleForGradle() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      JHipsterModule module = factory.buildProtobufModule(properties);
+      SeedModule module = factory.buildProtobufModule(properties);
 
       assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
         .hasFile("gradle/libs.versions.toml")
@@ -136,11 +136,11 @@ class ProtobufModuleFactoryTest {
 
     @Test
     void shouldBuildModuleForMaven() {
-      JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .basePackage("com.seed4j.growth")
         .build();
 
-      JHipsterModule module = factory.buildProtobufBackwardsCompatibilityCheckModule(properties);
+      SeedModule module = factory.buildProtobufBackwardsCompatibilityCheckModule(properties);
 
       assertThatModuleWithFiles(module, pomFile(), lintStagedConfigFileWithPrettier())
         .hasFile(".lintstagedrc.cjs")

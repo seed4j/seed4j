@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.javadependency;
 
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 
 public interface ProjectJavaDependenciesRepository {
-  ProjectJavaDependencies get(JHipsterProjectFolder folder);
+  ProjectJavaDependencies get(SeedProjectFolder folder);
 }

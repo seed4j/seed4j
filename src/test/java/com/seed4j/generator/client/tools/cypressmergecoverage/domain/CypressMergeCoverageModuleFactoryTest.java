@@ -1,21 +1,21 @@
 package com.seed4j.generator.client.tools.cypressmergecoverage.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.cypressTestConfigFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.eslintConfigFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeScript;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.packageJsonFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.tsConfigFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.viteConfigFile;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.vitestConfigFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.cypressTestConfigFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.eslintConfigFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.tsConfigFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.viteConfigFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.vitestConfigFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,12 +30,12 @@ class CypressMergeCoverageModuleFactoryTest {
 
   @Test
   void shouldBuildCypressMergeCoverageModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .projectBaseName("jhiTest")
       .basePackage("com.seed4j.growth")
       .build();
 
-    JHipsterModule module = factory.buildCypressMergeCoverage(properties);
+    SeedModule module = factory.buildCypressMergeCoverage(properties);
 
     assertThatModuleWithFiles(
       module,

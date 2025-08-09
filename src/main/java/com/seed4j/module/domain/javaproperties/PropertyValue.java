@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.javaproperties;
 
-import com.seed4j.shared.collection.domain.JHipsterCollections;
+import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public final class PropertyValue {
   private PropertyValue(Collection<Object> values) {
     Assert.field("values", values).noNullElement();
 
-    this.values = JHipsterCollections.immutable(values);
+    this.values = SeedCollections.immutable(values);
   }
 
   public static PropertyValue of(String[] values) {

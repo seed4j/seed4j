@@ -1,33 +1,33 @@
 package com.seed4j.generator.client.vue.i18n.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.lineAfterRegex;
-import static com.seed4j.module.domain.JHipsterModule.lineBeforeText;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.VUE;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.lineAfterRegex;
+import static com.seed4j.module.domain.SeedModule.lineBeforeText;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
 
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class VueI18nModuleFactory {
 
-  private static final JHipsterSource APP_SOURCE = from("client/common/i18n");
-  private static final JHipsterSource HOME_CONTEXT_SOURCE = from("client/common/i18n/app");
-  private static final JHipsterSource ASSETS_SOURCE = from("client/common/i18n/app/locales");
-  private static final JHipsterSource TEST_SOURCE = from("client/vue/i18n/src/test");
+  private static final SeedSource APP_SOURCE = from("client/common/i18n");
+  private static final SeedSource HOME_CONTEXT_SOURCE = from("client/common/i18n/app");
+  private static final SeedSource ASSETS_SOURCE = from("client/common/i18n/app/locales");
+  private static final SeedSource TEST_SOURCE = from("client/vue/i18n/src/test");
 
   private static final String INDEX = "src/main/webapp/app/";
   private static final String INDEX_TEST = "src/test/";
 
   private static final String PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

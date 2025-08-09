@@ -1,29 +1,29 @@
 package com.seed4j.generator.client.vue.security.oauth2_keycloak.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.lineBeforeText;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.path;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.SeedModule.documentationTitle;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.lineBeforeText;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.path;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class VueOAuth2KeycloakModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("client/vue");
-  private static final JHipsterSource APP_SOURCE = from("client/vue/security/oauth2_keycloak/webapp/app");
-  private static final JHipsterSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
+  private static final SeedSource SOURCE = from("client/vue");
+  private static final SeedSource APP_SOURCE = from("client/vue/security/oauth2_keycloak/webapp/app");
+  private static final SeedSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
 
-  private static final JHipsterDestination MAIN_DESTINATION = to("src/main/webapp/app");
-  private static final JHipsterDestination TEST_DESTINATION = to("src/test/webapp");
+  private static final SeedDestination MAIN_DESTINATION = to("src/main/webapp/app");
+  private static final SeedDestination TEST_DESTINATION = to("src/test/webapp");
 
   private static final String MAIN_TS_IMPORT_NEEDLE = "// seed4j-needle-main-ts-import";
   private static final String MAIN_TS_PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
@@ -45,7 +45,7 @@ public class VueOAuth2KeycloakModuleFactory {
     provideForAuth(keycloakHttp);\
     """;
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     Indentation indentation = properties.indentation();

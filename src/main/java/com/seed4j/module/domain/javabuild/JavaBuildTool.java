@@ -1,18 +1,18 @@
 package com.seed4j.module.domain.javabuild;
 
-import com.seed4j.module.domain.JHipsterProjectFilePath;
+import com.seed4j.module.domain.SeedProjectFilePath;
 
 public enum JavaBuildTool {
   MAVEN("target"),
   GRADLE("build");
 
-  private final JHipsterProjectFilePath buildDirectory;
+  private final SeedProjectFilePath buildDirectory;
 
   JavaBuildTool(String buildDirectory) {
-    this.buildDirectory = new JHipsterProjectFilePath(buildDirectory);
+    this.buildDirectory = new SeedProjectFilePath(buildDirectory);
   }
 
-  public JHipsterProjectFilePath buildDirectory() {
+  public SeedProjectFilePath buildDirectory() {
     return buildDirectory;
   }
 }

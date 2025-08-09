@@ -2,7 +2,7 @@ package com.seed4j.module.domain.startupcommand;
 
 import com.seed4j.shared.error.domain.Assert;
 
-public record MavenStartupCommandLine(String commandLineParameters) implements JHipsterStartupCommand {
+public record MavenStartupCommandLine(String commandLineParameters) implements SeedStartupCommand {
   public MavenStartupCommandLine {
     Assert.notNull("commandLineParameters", commandLineParameters);
   }

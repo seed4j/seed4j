@@ -1,9 +1,9 @@
 package com.seed4j.generator.setup.gitpod.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.GITPOD;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GITPOD;
 
 import com.seed4j.generator.setup.gitpod.application.GitpodApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 class GitpodModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource gitpodModule(GitpodApplicationService gitpod) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource gitpodModule(GitpodApplicationService gitpod) {
+    return SeedModuleResource.builder()
       .slug(GITPOD)
       .withoutProperties()
       .apiDoc("Development environment", "Init Gitpod configuration files")

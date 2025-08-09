@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.logging.logstash.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.JHLiteModuleSlug.LOGSTASH;
+import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LOGSTASH;
 
 import com.seed4j.generator.server.springboot.logging.logstash.application.LogstashApplicationService;
-import com.seed4j.module.domain.resource.JHipsterModuleOrganization;
-import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.JHipsterModuleResource;
+import com.seed4j.module.domain.resource.SeedModuleOrganization;
+import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.SeedModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,14 +13,14 @@ import org.springframework.context.annotation.Configuration;
 class LogstashModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource logstashModule(LogstashApplicationService logstash) {
-    return JHipsterModuleResource.builder()
+  SeedModuleResource logstashModule(LogstashApplicationService logstash) {
+    return SeedModuleResource.builder()
       .slug(LOGSTASH)
       .propertiesDefinition(
-        JHipsterModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
+        SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
       )
       .apiDoc("Spring Boot", "Add Logstash TCP appender")
-      .organization(JHipsterModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(SeedModuleOrganization.SPRINGBOOT_DEPENDENCY)
       .tags("server", "logstash", "spring", "spring-boot")
       .factory(logstash::buildModule);
   }

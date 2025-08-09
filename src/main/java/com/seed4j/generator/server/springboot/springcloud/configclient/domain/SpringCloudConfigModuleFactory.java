@@ -2,21 +2,21 @@ package com.seed4j.generator.server.springboot.springcloud.configclient.domain;
 
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.SPRING_CLOUD_GROUP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.springCloudDependenciesManagement;
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.artifactId;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.propertyKey;
-import static com.seed4j.module.domain.JHipsterModule.propertyValue;
-import static com.seed4j.module.domain.JHipsterModule.springProfile;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainDocker;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.artifactId;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.propertyKey;
+import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.SeedModule.springProfile;
+import static com.seed4j.module.domain.SeedModule.toSrcMainDocker;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterSource;
-import com.seed4j.module.domain.javaproperties.JHipsterModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.base64.domain.Base64Utils;
 import com.seed4j.shared.error.domain.Assert;
 
@@ -24,7 +24,7 @@ public class SpringCloudConfigModuleFactory {
 
   private static final String JWT_BASE_64_SECRET = "jwtBase64Secret";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/springcloud/configclient");
+  private static final SeedSource SOURCE = from("server/springboot/springcloud/configclient");
 
   private static final PropertyValue FALSE_VALUE = propertyValue(false);
 
@@ -34,12 +34,12 @@ public class SpringCloudConfigModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     PropertyValue baseNameValue = propertyValue(properties.projectBaseName().get());
 
-    JHipsterModuleBuilder builder = initBuilder(properties);
+    SeedModuleBuilder builder = initBuilder(properties);
 
     appendCommonProperties(builder.springMainBootstrapProperties(), baseNameValue);
     appendCommonProperties(builder.springMainBootstrapProperties(springProfile("local")), baseNameValue);
@@ -60,7 +60,7 @@ public class SpringCloudConfigModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterModuleBuilder initBuilder(JHipsterModuleProperties properties) {
+  private SeedModuleBuilder initBuilder(SeedModuleProperties properties) {
     String jwtBase64secret = properties.getOrDefaultString(JWT_BASE_64_SECRET, Base64Utils.getBase64Secret());
 
     // @formatter:off

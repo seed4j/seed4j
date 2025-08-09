@@ -1,10 +1,10 @@
 package com.seed4j.generator.typescript.common.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.lineAfterRegex;
-import static com.seed4j.module.domain.JHipsterModule.path;
+import static com.seed4j.module.domain.SeedModule.lineAfterRegex;
+import static com.seed4j.module.domain.SeedModule.path;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.replacement.MandatoryReplacer;
 import java.util.function.Consumer;
 
@@ -12,7 +12,7 @@ public final class TsConfigShortcuts {
 
   private TsConfigShortcuts() {}
 
-  public static Consumer<JHipsterModule.JHipsterModuleBuilder> tsConfigCompilerOption(
+  public static Consumer<SeedModule.SeedModuleBuilder> tsConfigCompilerOption(
     String optionName,
     boolean optionValue,
     Indentation indentation

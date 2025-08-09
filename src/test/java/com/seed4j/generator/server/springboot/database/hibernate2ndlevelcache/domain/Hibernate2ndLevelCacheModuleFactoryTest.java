@@ -1,13 +1,13 @@
 package com.seed4j.generator.server.springboot.database.hibernate2ndlevelcache.domain;
 
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -17,7 +17,7 @@ class Hibernate2ndLevelCacheModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    JHipsterModule module = factory.buildModule(properties());
+    SeedModule module = factory.buildModule(properties());
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
@@ -45,7 +45,7 @@ class Hibernate2ndLevelCacheModuleFactoryTest {
       .hasFile("src/test/java/com/seed4j/growth/wire/cache/infrastructure/secondary/Hibernate2ndLevelCacheConfigurationIT.java");
   }
 
-  private JHipsterModuleProperties properties() {
-    return JHipsterModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).basePackage("com.seed4j.growth").build();
+  private SeedModuleProperties properties() {
+    return SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).basePackage("com.seed4j.growth").build();
   }
 }

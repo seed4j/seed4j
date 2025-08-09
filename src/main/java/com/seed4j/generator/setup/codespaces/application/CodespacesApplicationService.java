@@ -1,8 +1,8 @@
 package com.seed4j.generator.setup.codespaces.application;
 
 import com.seed4j.generator.setup.codespaces.domain.CodespacesModuleFactory;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class CodespacesApplicationService {
     codespaces = new CodespacesModuleFactory();
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return codespaces.buildModule(properties);
   }
 }

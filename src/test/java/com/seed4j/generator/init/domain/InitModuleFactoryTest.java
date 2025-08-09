@@ -2,19 +2,19 @@ package com.seed4j.generator.init.domain;
 
 import static com.seed4j.module.domain.nodejs.NodePackageManager.NPM;
 import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModule;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModule;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeScript;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModulesFixture;
+import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.SeedModulesFixture;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,9 +35,9 @@ class InitModuleFactoryTest {
   void shouldBuildModule() {
     mockNodeVersion();
     mockNodePackageManagerVersion(NPM, "11.9.9");
-    JHipsterModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).build();
+    SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModule(module)
       .hasFile("README.md")
@@ -66,9 +66,9 @@ class InitModuleFactoryTest {
   void shouldBuildModuleForNpm() {
     mockNodeVersion();
     mockNodePackageManagerVersion(NPM, "11.9.9");
-    JHipsterModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(NPM).build();
+    SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(NPM).build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModule(module)
       .hasFile("README.md")
@@ -82,9 +82,9 @@ class InitModuleFactoryTest {
   void shouldBuildModuleForPnpm() {
     mockNodeVersion();
     mockNodePackageManagerVersion(PNPM, "9.9.9");
-    JHipsterModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(PNPM).build();
+    SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(PNPM).build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModule(module)
       .hasFile("README.md")
@@ -102,8 +102,8 @@ class InitModuleFactoryTest {
     when(nodeVersions.packageManagerVersion(packageManager)).thenReturn(new NodePackageVersion(version));
   }
 
-  private static JHipsterModulesFixture.JHipsterModulePropertiesBuilder defaultProperties(String folder) {
-    return JHipsterModulesFixture.propertiesBuilder(folder)
+  private static SeedModulesFixture.JHipsterModulePropertiesBuilder defaultProperties(String folder) {
+    return SeedModulesFixture.propertiesBuilder(folder)
       .projectBaseName("testProject")
       .projectName("Test Project")
       .nodePackageManager(NPM)

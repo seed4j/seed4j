@@ -1,10 +1,10 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import com.seed4j.module.domain.GeneratedProjectRepository;
-import com.seed4j.module.domain.JHipsterFileMatcher;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
-import com.seed4j.module.domain.JHipsterProjectFilesPaths;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.SeedFileMatcher;
+import com.seed4j.module.domain.SeedProjectFilePath;
+import com.seed4j.module.domain.SeedProjectFilesPaths;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
 import java.io.IOException;
@@ -17,17 +17,17 @@ import org.springframework.stereotype.Repository;
 class FileSystemGeneratedProjectRepository implements GeneratedProjectRepository {
 
   @Override
-  public JHipsterProjectFilesPaths list(JHipsterProjectFolder folder, JHipsterFileMatcher files) {
+  public SeedProjectFilesPaths list(SeedProjectFolder folder, SeedFileMatcher files) {
     Assert.notNull("folder", folder);
     Assert.notNull("files", files);
 
     try (Stream<Path> content = Files.walk(Path.of(folder.get()))) {
-      return new JHipsterProjectFilesPaths(
+      return new SeedProjectFilesPaths(
         content
           .filter(file -> !Files.isDirectory(file))
           .map(Path::toString)
           .map(file -> file.substring(folder.get().length() + 1))
-          .map(JHipsterProjectFilePath::new)
+          .map(SeedProjectFilePath::new)
           .filter(files::match)
           .toList()
       );

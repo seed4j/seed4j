@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.JHipsterModulesFixture.*;
+import static com.seed4j.module.domain.SeedModulesFixture.*;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -12,9 +12,9 @@ import com.seed4j.LogsSpyExtension;
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.GeneratedProjectRepository;
-import com.seed4j.module.domain.JHipsterProjectFilePath;
+import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.file.TemplateRenderer;
-import com.seed4j.module.domain.properties.JHipsterProjectFolder;
+import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.replacement.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,10 +34,10 @@ class FileSystemReplacerTest {
 
     assertThatThrownBy(() ->
       replacer.handle(
-        new JHipsterProjectFolder(path),
+        new SeedProjectFolder(path),
         new ContentReplacers(
-          JHipsterModuleMandatoryReplacementsFactory.builder(emptyModuleBuilder())
-            .in(new JHipsterProjectFilePath("unknown"))
+          SeedModuleMandatoryReplacementsFactory.builder(emptyModuleBuilder())
+            .in(new SeedProjectFilePath("unknown"))
             .add(new TextReplacer(always(), "old"), "new")
             .and()
             .build()
@@ -55,14 +55,14 @@ class FileSystemReplacerTest {
 
     assertThatCode(() ->
       replacer.handle(
-        new JHipsterProjectFolder(path),
+        new SeedProjectFolder(path),
         new ContentReplacers(
-          JHipsterModuleOptionalReplacementsFactory.builder(emptyModuleBuilder())
-            .in(new JHipsterProjectFilePath("unknown"))
+          SeedModuleOptionalReplacementsFactory.builder(emptyModuleBuilder())
+            .in(new SeedProjectFilePath("unknown"))
             .add(new TextReplacer(always(), "old"), "new")
             .and()
             .build()
-            .buildReplacers(new JHipsterProjectFolder("dummy"), mock(GeneratedProjectRepository.class))
+            .buildReplacers(new SeedProjectFolder("dummy"), mock(GeneratedProjectRepository.class))
             .toList()
         ),
         emptyModuleContext()

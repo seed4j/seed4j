@@ -1,31 +1,31 @@
 package com.seed4j.generator.ci.sonarqube.domain;
 
-import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.documentationTitle;
-import static com.seed4j.module.domain.JHipsterModule.from;
-import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
-import static com.seed4j.module.domain.JHipsterModule.packageName;
-import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
-import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.JHipsterModule.toSrcMainDocker;
+import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
+import static com.seed4j.module.domain.SeedModule.documentationTitle;
+import static com.seed4j.module.domain.SeedModule.from;
+import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.SeedModule.packageName;
+import static com.seed4j.module.domain.SeedModule.pluginExecution;
+import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.SeedModule.toSrcMainDocker;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.INITIALIZE;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
-import com.seed4j.module.domain.JHipsterModule;
+import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.JHipsterDestination;
-import com.seed4j.module.domain.file.JHipsterSource;
+import com.seed4j.module.domain.file.SeedDestination;
+import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.JHipsterModuleProperties;
+import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SonarQubeModuleFactory {
 
   private static final String PROPERTIES = "properties";
-  private static final JHipsterSource SOURCE = from("ci/sonarqube");
-  private static final JHipsterDestination SONAR_PROPERTIES_DESTINATION = to("sonar-project.properties");
+  private static final SeedSource SOURCE = from("ci/sonarqube");
+  private static final SeedDestination SONAR_PROPERTIES_DESTINATION = to("sonar-project.properties");
   private static final String SONARQUBE = "sonarqube";
 
   private final DockerImages dockerImages;
@@ -34,7 +34,7 @@ public class SonarQubeModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public JHipsterModule buildBackendModule(JHipsterModuleProperties properties) {
+  public SeedModule buildBackendModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return commonBackendModuleFiles(properties)
@@ -44,7 +44,7 @@ public class SonarQubeModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildBackendFrontendModule(JHipsterModuleProperties properties) {
+  public SeedModule buildBackendFrontendModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return commonBackendModuleFiles(properties)
@@ -54,7 +54,7 @@ public class SonarQubeModuleFactory {
       .build();
   }
 
-  public JHipsterModule buildTypescriptModule(JHipsterModuleProperties properties) {
+  public SeedModule buildTypescriptModule(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -70,7 +70,7 @@ public class SonarQubeModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterModuleBuilder commonModuleFiles(JHipsterModuleProperties properties) {
+  private SeedModuleBuilder commonModuleFiles(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -90,7 +90,7 @@ public class SonarQubeModuleFactory {
     // @formatter:on
   }
 
-  private JHipsterModuleBuilder commonBackendModuleFiles(JHipsterModuleProperties properties) {
+  private SeedModuleBuilder commonBackendModuleFiles(SeedModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off

@@ -1,6 +1,6 @@
-# Creating a JHLite module
+# Creating a Seed4J module
 
-So you want to create a JHLite module? Great!
+So you want to create a Seed4J module? Great!
 
 For that, you'll need to provide 2 main parts:
 
@@ -13,7 +13,7 @@ You can start by the element you prefer but to create a `JHipsterModuleResource`
 
 In fact, you don't just need to create one `JHipsterModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
 
-So, as this is the business of JHLite you probably want to create a `{{packageName}}.my_module.domain` package. And you can start with a simple test:
+So, as this is the business of Seed4J you probably want to create a `{{packageName}}.my_module.domain` package. And you can start with a simple test:
 
 ```java
 import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.*;
@@ -119,7 +119,7 @@ You can now run `CucumberTest` and ensure that it is failing as expected:
 }
 ```
 
-To be used by JHLite, the `JHipsterModuleResource` needs to be a Spring bean so, let's create a configuration in `{{packageName}}.my_module.infrastructure.primary`:
+To be used by Seed4J, the `JHipsterModuleResource` needs to be a Spring bean so, let's create a configuration in `{{packageName}}.my_module.infrastructure.primary`:
 
 ```java
 import static {{packageName}}.slug.domain.MyAppModuleSlug.*;
@@ -209,8 +209,8 @@ In your `JHipsterModuleResource` you can define additional properties and an org
 
 You can hide modules from your custom instance in project configuration with:
 
-- `jhlite.hidden-resources.slugs`: To disable including its dependencies by slugs
-- `jhlite.hidden-resources.tags`: To disable by tags
+- `seed4j.hidden-resources.slugs`: To disable including its dependencies by slugs
+- `seed4j.hidden-resources.tags`: To disable by tags
 
 ## Docker versions
 

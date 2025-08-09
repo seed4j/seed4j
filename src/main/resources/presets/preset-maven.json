@@ -33,7 +33,7 @@
       ]
     },
     {
-      "name": "JHLite Extension with Maven",
+      "name": "Seed4J Extension with Maven",
       "modules": [
         "init",
         "application-service-hexagonal-architecture-documentation",
@@ -44,7 +44,7 @@
         "checkstyle",
         "jacoco-with-min-coverage-check",
         "spring-boot",
-        "custom-jhlite"
+        "seed4j-extension"
       ]
     }
   ]

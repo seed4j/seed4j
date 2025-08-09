@@ -1,4 +1,4 @@
-package com.seed4j.generator.server.springboot.customjhlite.domain;
+package com.seed4j.generator.server.springboot.seed4jextension.domain;
 
 import static com.seed4j.generator.server.springboot.cucumbercommon.domain.CucumbersModules.cucumberModuleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
@@ -32,7 +32,7 @@ import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
 
-public class CustomJHLiteModuleFactory {
+public class Seed4JExtensionModuleFactory {
 
   private static final String DOMAIN = "domain";
   private static final String SHARED = "shared";
@@ -40,7 +40,7 @@ public class CustomJHLiteModuleFactory {
   private static final String SECONDARY = "secondary";
   private static final String DEPENDENCIES = "dependencies";
 
-  private static final JHipsterSource SOURCE = from("server/springboot/custom-jhlite");
+  private static final JHipsterSource SOURCE = from("server/springboot/seed4j-extension");
   private static final JHipsterSource MAIN_SOURCE = SOURCE.append("main");
   private static final JHipsterSource SLUG_SOURCE = MAIN_SOURCE.append(SHARED).append("slug");
 
@@ -74,7 +74,7 @@ public class CustomJHLiteModuleFactory {
       .and()
       .mandatoryReplacements()
         .in(mainClassFile(properties))
-          .add(text("@SpringBootApplication"), springBootApplicationWithJHLite(properties))
+          .add(text("@SpringBootApplication"), springBootApplicationWithSeed4J(properties))
           .add(lineBeforeText("import org.springframework.boot.SpringApplication;"), "import com.seed4j.Seed4jApp;")
         .and()
       .and()
@@ -82,7 +82,7 @@ public class CustomJHLiteModuleFactory {
         .set(SERVER_PORT_KEY, propertyValue(properties.serverPort().get()))
         .set(JACKSON_INCLUSION_KEY, propertyValue("non_null"))
         .comment(HIDDEN_SLUGS_PROPERTY_KEY, comment("Disable the modules and its dependencies by slugs"))
-        .set(HIDDEN_SLUGS_PROPERTY_KEY, propertyValue("custom-jhlite"))
+        .set(HIDDEN_SLUGS_PROPERTY_KEY, propertyValue("seed4j-extension"))
         .and()
       .springTestProperties()
         .set(SERVER_PORT_KEY, propertyValue(0))
@@ -184,18 +184,18 @@ public class CustomJHLiteModuleFactory {
   }
 
   private JavaDependency jhipsterLiteDependency() {
-    return jhLiteDependencyBuilder().build();
+    return seed4jDependencyBuilder().build();
   }
 
   private JavaDependency jhipsterLiteTestDependency() {
-    return jhLiteDependencyBuilder().classifier("tests").scope(JavaDependencyScope.TEST).type(JavaDependencyType.TEST_JAR).build();
+    return seed4jDependencyBuilder().classifier("tests").scope(JavaDependencyScope.TEST).type(JavaDependencyType.TEST_JAR).build();
   }
 
-  private JavaDependencyOptionalValueBuilder jhLiteDependencyBuilder() {
+  private JavaDependencyOptionalValueBuilder seed4jDependencyBuilder() {
     return javaDependency().groupId("com.seed4j").artifactId("seed4j").versionSlug("seed4j");
   }
 
-  private String springBootApplicationWithJHLite(JHipsterModuleProperties properties) {
+  private String springBootApplicationWithSeed4J(JHipsterModuleProperties properties) {
     return "@SpringBootApplication(scanBasePackageClasses = { Seed4jApp.class, " + mainClassName(properties) + ".class })";
   }
 

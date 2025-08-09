@@ -514,12 +514,12 @@ elif [[ $application == 'reactiveapp' ]]; then
   apply_modules \
     "springdoc-webflux-openapi"
 
-elif [[ $application == 'customjhlite' ]]; then
+elif [[ $application == 'seed4jextension' ]]; then
   init_server
   spring_boot
   sonar_back
 
-  apply_modules "custom-jhlite"
+  apply_modules "seed4j-extension"
 
 elif [[ $application == 'typescriptapp' ]]; then
   apply_modules \

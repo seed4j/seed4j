@@ -1,4 +1,4 @@
-package com.seed4j.generator.server.springboot.customjhlite.domain;
+package com.seed4j.generator.server.springboot.seed4jextension.domain;
 
 import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.ModuleFile;
 import static com.seed4j.module.infrastructure.secondary.JHipsterModulesAssertions.assertThatModuleWithFiles;
@@ -13,9 +13,9 @@ import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class CustomJHLiteModuleFactoryTest {
+class Seed4JExtensionModuleFactoryTest {
 
-  private static final CustomJHLiteModuleFactory factory = new CustomJHLiteModuleFactory();
+  private static final Seed4JExtensionModuleFactory factory = new Seed4JExtensionModuleFactory();
 
   @Test
   void shouldBuildModule() {
@@ -84,7 +84,7 @@ class CustomJHLiteModuleFactoryTest {
           seed4j:
             hidden-resources:
               # Disable the modules and its dependencies by slugs
-              slugs: custom-jhlite
+              slugs: seed4j-extension
           server:
             port: 9000
           spring:

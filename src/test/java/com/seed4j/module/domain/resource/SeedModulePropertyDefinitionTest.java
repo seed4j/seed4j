@@ -13,7 +13,7 @@ class SeedModulePropertyDefinitionTest {
   void shouldHaveMeaningfulToString() {
     assertThat(projectNameProperty()).hasToString(
         """
-        SeedModulePropertyDefinition[type=STRING,key=projectName,mandatory=true,description=Project full name,defaultValue=JHipster Sample Application,order=-200]\
+        SeedModulePropertyDefinition[type=STRING,key=projectName,mandatory=true,description=Project full name,defaultValue=Seed4J Sample Application,order=-200]\
         """
       );
   }

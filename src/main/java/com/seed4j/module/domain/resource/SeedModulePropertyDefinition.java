@@ -40,7 +40,7 @@ public final class SeedModulePropertyDefinition {
   public static SeedModulePropertyDefinition projectNameProperty() {
     return mandatoryStringProperty(SeedModuleProperties.PROJECT_NAME_PARAMETER)
       .description("Project full name")
-      .defaultValue("JHipster Sample Application")
+      .defaultValue("Seed4J Sample Application")
       .order(-200)
       .build();
   }
@@ -48,7 +48,7 @@ public final class SeedModulePropertyDefinition {
   static SeedModulePropertyDefinition projectBaseNameProperty() {
     return mandatoryStringProperty(SeedModuleProperties.PROJECT_BASE_NAME_PARAMETER)
       .description("Project short name (only letters and numbers)")
-      .defaultValue("jhipsterSampleApplication")
+      .defaultValue("seed4jSampleApplication")
       .order(-100)
       .build();
   }

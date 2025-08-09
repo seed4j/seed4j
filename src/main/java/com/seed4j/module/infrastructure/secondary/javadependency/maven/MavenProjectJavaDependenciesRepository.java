@@ -9,7 +9,7 @@ import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependencies;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependenciesVersions;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
-import com.seed4j.module.infrastructure.secondary.javadependency.JHipsterProjectFolderJavaDependenciesReader;
+import com.seed4j.module.infrastructure.secondary.javadependency.SeedProjectFolderJavaDependenciesReader;
 import com.seed4j.shared.enumeration.domain.Enums;
 import com.seed4j.shared.error.domain.GeneratorException;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MavenProjectJavaDependenciesRepository implements JHipsterProjectFolderJavaDependenciesReader {
+public class MavenProjectJavaDependenciesRepository implements SeedProjectFolderJavaDependenciesReader {
 
   private static final String POM_XML = "pom.xml";
 

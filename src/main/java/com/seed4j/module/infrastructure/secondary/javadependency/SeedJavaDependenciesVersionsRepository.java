@@ -8,11 +8,11 @@ import java.util.function.Supplier;
 import org.springframework.stereotype.Repository;
 
 @Repository
-class JHipsterJavaDependenciesVersionsRepository implements JavaDependenciesVersionsRepository {
+class SeedJavaDependenciesVersionsRepository implements JavaDependenciesVersionsRepository {
 
   private final Supplier<JavaDependenciesVersions> versions;
 
-  public JHipsterJavaDependenciesVersionsRepository(Collection<JavaDependenciesReader> readers) {
+  public SeedJavaDependenciesVersionsRepository(Collection<JavaDependenciesReader> readers) {
     versions = Memoizers.of(readVersions(readers));
   }
 

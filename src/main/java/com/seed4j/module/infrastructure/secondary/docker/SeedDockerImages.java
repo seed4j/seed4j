@@ -8,11 +8,11 @@ import java.util.function.Supplier;
 import org.springframework.stereotype.Repository;
 
 @Repository
-class JHipsterDockerImages implements DockerImages {
+class SeedDockerImages implements DockerImages {
 
   private final Supplier<DockerImageVersions> versions;
 
-  public JHipsterDockerImages(Collection<DockerImagesReader> readers) {
+  public SeedDockerImages(Collection<DockerImagesReader> readers) {
     versions = Memoizers.of(versionsReader(readers));
   }
 

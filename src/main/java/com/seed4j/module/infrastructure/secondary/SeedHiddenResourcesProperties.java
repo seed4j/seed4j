@@ -4,7 +4,7 @@ import java.util.Collection;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("seed4j.hidden-resources")
-class JHipsterHiddenResourcesProperties {
+class SeedHiddenResourcesProperties {
 
   private Collection<String> slugs;
   private Collection<String> tags;

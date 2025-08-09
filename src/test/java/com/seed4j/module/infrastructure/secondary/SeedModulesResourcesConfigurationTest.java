@@ -17,14 +17,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(LogsSpyExtension.class)
 class SeedModulesResourcesConfigurationTest {
 
-  private static final JHipsterModulesResourcesConfiguration configuration = new JHipsterModulesResourcesConfiguration();
+  private static final SeedModulesResourcesConfiguration configuration = new SeedModulesResourcesConfiguration();
 
   @Logs
   private LogsSpy logs;
 
   @Test
   void shouldGetAllResourcesWithoutHiddenResources() {
-    JHipsterHiddenResourcesProperties hiddenResources = new JHipsterHiddenResourcesProperties();
+    SeedHiddenResourcesProperties hiddenResources = new SeedHiddenResourcesProperties();
     hiddenResources.setSlugs(null);
     hiddenResources.setTags(null);
 
@@ -35,7 +35,7 @@ class SeedModulesResourcesConfigurationTest {
 
   @Test
   void shouldGetAllResourcesWithoutHiddenAndNestedDependenciesResources() {
-    JHipsterHiddenResourcesProperties hiddenResources = new JHipsterHiddenResourcesProperties();
+    SeedHiddenResourcesProperties hiddenResources = new SeedHiddenResourcesProperties();
     hiddenResources.setSlugs(List.of("module-a"));
     hiddenResources.setTags(null);
 
@@ -47,7 +47,7 @@ class SeedModulesResourcesConfigurationTest {
 
   @Test
   void shouldHideResourcesBySlugs() {
-    JHipsterHiddenResourcesProperties hiddenResources = new JHipsterHiddenResourcesProperties();
+    SeedHiddenResourcesProperties hiddenResources = new SeedHiddenResourcesProperties();
     hiddenResources.setSlugs(List.of("another-module", "yet-another-module"));
 
     SeedModulesResources resources = configuration.jhipsterModulesResources(hiddenResources, moduleResourcesCollection());
@@ -57,7 +57,7 @@ class SeedModulesResourcesConfigurationTest {
 
   @Test
   void shouldHideResourcesByTags() {
-    JHipsterHiddenResourcesProperties hiddenResources = new JHipsterHiddenResourcesProperties();
+    SeedHiddenResourcesProperties hiddenResources = new SeedHiddenResourcesProperties();
     hiddenResources.setTags(List.of("tag2", "tag3"));
 
     SeedModulesResources resources = configuration.jhipsterModulesResources(hiddenResources, moduleResourcesCollection());

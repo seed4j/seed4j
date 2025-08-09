@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableConfigurationProperties(JHipsterHiddenResourcesProperties.class)
-class JHipsterModulesResourcesConfiguration {
+@EnableConfigurationProperties(SeedHiddenResourcesProperties.class)
+class SeedModulesResourcesConfiguration {
 
   @Bean
   SeedModulesResources jhipsterModulesResources(
-    JHipsterHiddenResourcesProperties excludedResources,
+    SeedHiddenResourcesProperties excludedResources,
     Collection<SeedModuleResource> modulesResources
   ) {
     return new SeedModulesResources(modulesResources, new SeedHiddenModules(excludedResources.getSlugs(), excludedResources.getTags()));

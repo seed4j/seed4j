@@ -8,6 +8,6 @@ import com.seed4j.module.domain.properties.SeedProjectFolder;
  * Read java dependencies in existing JHipster project folder.
  * </p>
  */
-public interface JHipsterProjectFolderJavaDependenciesReader {
+public interface SeedProjectFolderJavaDependenciesReader {
   ProjectJavaDependencies get(SeedProjectFolder folder);
 }

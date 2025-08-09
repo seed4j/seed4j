@@ -9,14 +9,14 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterJavaDependenciesVersionsRepositoryTest {
+class SeedJavaDependenciesVersionsRepositoryTest {
 
   @Test
   void shouldGetVersionsFromReaders() {
     JavaDependenciesReader customVersions = () -> versions(version("json-web-token", "1.2.3"));
     JavaDependenciesReader defaultVersions = () -> versions(version("json-web-token", "1.1.3"), version("spring", "2.1.2"));
 
-    JHipsterJavaDependenciesVersionsRepository repository = new JHipsterJavaDependenciesVersionsRepository(
+    SeedJavaDependenciesVersionsRepository repository = new SeedJavaDependenciesVersionsRepository(
       List.of(customVersions, defaultVersions)
     );
 

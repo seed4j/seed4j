@@ -7,13 +7,13 @@ import org.springframework.stereotype.Repository;
 
 @Order
 @Repository
-class JHLiteMavenDependenciesReader implements JavaDependenciesReader {
+class SeedMavenDependenciesReader implements JavaDependenciesReader {
 
   private static final String CURRENT_VERSIONS_FILE = "/generator/dependencies/pom.xml";
 
   private final FileSystemMavenDependenciesReader reader;
 
-  public JHLiteMavenDependenciesReader(ProjectFiles files) {
+  public SeedMavenDependenciesReader(ProjectFiles files) {
     this.reader = new FileSystemMavenDependenciesReader(files, CURRENT_VERSIONS_FILE);
   }
 

@@ -8,16 +8,16 @@ import java.util.function.Function;
 import org.springframework.stereotype.Repository;
 
 @Repository
-class JHipsterJavaDependenciesRepository implements ProjectJavaDependenciesRepository {
+class SeedJavaDependenciesRepository implements ProjectJavaDependenciesRepository {
 
   private final Function<SeedProjectFolder, ProjectJavaDependencies> javaDependencies;
 
-  public JHipsterJavaDependenciesRepository(Collection<JHipsterProjectFolderJavaDependenciesReader> readers) {
+  public SeedJavaDependenciesRepository(Collection<SeedProjectFolderJavaDependenciesReader> readers) {
     javaDependencies = readJavaDependencies(readers);
   }
 
   private Function<SeedProjectFolder, ProjectJavaDependencies> readJavaDependencies(
-    Collection<JHipsterProjectFolderJavaDependenciesReader> readers
+    Collection<SeedProjectFolderJavaDependenciesReader> readers
   ) {
     return folder ->
       readers

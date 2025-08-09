@@ -12,18 +12,18 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterDockerImagesTest {
+class SeedDockerImagesTest {
 
   @Test
   void shouldNotReadImageWithoutReaders() {
-    JHipsterDockerImages images = new JHipsterDockerImages(List.of());
+    SeedDockerImages images = new SeedDockerImages(List.of());
 
     assertThatThrownBy(() -> images.get(new DockerImageName("unknown"))).isExactlyInstanceOf(UnknownDockerImageException.class);
   }
 
   @Test
   void shouldNotReadUnknownImage() {
-    JHipsterDockerImages images = new JHipsterDockerImages(List.of(emptyReader()));
+    SeedDockerImages images = new SeedDockerImages(List.of(emptyReader()));
 
     assertThatThrownBy(() -> images.get(new DockerImageName("unknown"))).isExactlyInstanceOf(UnknownDockerImageException.class);
   }
@@ -32,7 +32,7 @@ class JHipsterDockerImagesTest {
   void shouldGetFirstKnownImage() {
     DockerImagesReader firstReader = () -> versions(version("mysql", "8.0.29"));
     DockerImagesReader secondReader = () -> versions(version("mysql", "8.0.12"));
-    JHipsterDockerImages images = new JHipsterDockerImages(List.of(emptyReader(), firstReader, secondReader));
+    SeedDockerImages images = new SeedDockerImages(List.of(emptyReader(), firstReader, secondReader));
 
     DockerImageVersion dockerImage = images.get(new DockerImageName("MYsql"));
 

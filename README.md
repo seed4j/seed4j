@@ -8,7 +8,7 @@
 
 [![Seed4J version](https://img.shields.io/github/v/release/seed4j/seed4j)](https://github.com/seed4j/seed4j/releases)
 [![Seed4J Maven Central](https://img.shields.io/maven-central/v/com.seed4j/seed4j?color=blue)](https://repo.maven.apache.org/maven2/com/seed4j/seed4j/)
-[![Seed4J Docker Hub](https://img.shields.io/badge/Docker%20Hub-jhipster%2Fjhipster--lite-blue.svg?style=flat)](https://hub.docker.com/r/seed4j/seed4j)
+[![Seed4J Docker doHub](https://img.shields.io/badge/Docker%20Hub-seed4j%2Fseed4j-blue.svg?style=flat)](https://hub.docker.com/r/seed4j/seed4j)
 
 [![Build Status](https://github.com/seed4j/seed4j/actions/workflows/github-actions.yml/badge.svg?branch=main)](https://github.com/seed4j/seed4j/actions)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=seed4j_seed4j&metric=coverage)](https://sonarcloud.io/project/overview?id=seed4j_seed4j)
@@ -128,7 +128,7 @@ To create the image, run the following goal:
 Then, you can run the app like any other container:
 
 ```bash
-docker run -p 1339:1339 --rm docker.io/library/jhlite:<VERSION>
+docker run -p 1339:1339 --rm docker.io/library/seed4j:<VERSION>
 ```
 
 ## Executable with Native Build Tools
@@ -255,13 +255,13 @@ java -jar target/*.jar --spring.profiles.active=vue
 To start a local instance of Seed4J, go to your desired application folder and run:
 
 ```bash
-docker run --rm --pull=always -p 1339:1339 -v $(pwd):/tmp/seed4j:Z -it jhipster/jhipster-lite:latest
+docker run --rm --pull=always -p 1339:1339 -v $(pwd):/tmp/seed4j/:Z -it seed4j/seed4j:latest
 ```
 
 Or with podman:
 
 ```bash
-podman run --rm --pull=always -p 1339:1339 -v $(pwd):/tmp/seed4j:Z -u root -it jhipster/jhipster-lite:latest
+podman run --rm --pull=always -p 1339:1339 -v $(pwd):/tmp/seed4j/:Z -u root -it seed4j/seed4j:latest
 ```
 
 Then, go to [http://localhost:1339](http://localhost:1339)

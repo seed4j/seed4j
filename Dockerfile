@@ -17,7 +17,8 @@ RUN \
     useradd seed4j -s /bin/bash -m -g seed4j -G sudo && \
     echo 'seed4j:seed4j'|chpasswd
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
-    JAVA_OPTS=""
+    JAVA_OPTS="" \
+    SEED4J_FORCED_PROJECT_FOLDER=/tmp/seed4j
 USER seed4j
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/code/seed4j.jar"]
-EXPOSE 7471
+EXPOSE 1339

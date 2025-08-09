@@ -8,7 +8,7 @@ RUN \
   apt clean
 ENV \
   SEED4J_SONAR_URL=http://sonar:9000 \
-  SEED4J_SONAR_PASSWORD=Seed4J-7471-Project \
+  SEED4J_SONAR_PASSWORD=Seed4J-1339-Project \
   SEED4J_SONAR_TOKENNAME=seed4jtoken
 COPY sonar/sonar_generate_token.sh /usr/local/bin/sonar_generate_token
 RUN chmod 755 /usr/local/bin/sonar_generate_token

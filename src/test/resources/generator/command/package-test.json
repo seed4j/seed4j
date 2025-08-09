@@ -1,5 +1,5 @@
 {
-  "name": "jhlitetest",
+  "name": "seed4jtest",
   "version": "0.0.1",
   "scripts": {
     "prettier:check": "prettier --check .",

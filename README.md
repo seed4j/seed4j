@@ -141,7 +141,7 @@ To create the executable, run the following goal:
 Then, you can run the app as follows:
 
 ```bash
-./target/jhlite
+./target/seed4j
 ```
 
 You can also run your existing tests suite in a native image. This is an efficient way to validate the compatibility of your application.

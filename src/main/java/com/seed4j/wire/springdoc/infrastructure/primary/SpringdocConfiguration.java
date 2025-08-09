@@ -17,7 +17,7 @@ class SpringdocConfiguration {
   private String version;
 
   @Bean
-  public OpenAPI jhLiteOpenAPI() {
+  public OpenAPI seed4jOpenAPI() {
     return new OpenAPI()
       .info(
         new Info()
@@ -30,7 +30,7 @@ class SpringdocConfiguration {
   }
 
   @Bean
-  public GroupedOpenApi jhLiteAllOpenAPI(OpenApiCustomizer openApiModules) {
+  public GroupedOpenApi seed4jAllOpenAPI(OpenApiCustomizer openApiModules) {
     return GroupedOpenApi.builder().group("all").pathsToMatch("/api/**").addOpenApiCustomizer(openApiModules).build();
   }
 }

@@ -4,7 +4,7 @@ There are many ways to implement Hexagonal Architecture in front applications. T
 THE WAY. It is just a way, feel free to adapt it to your needs.
 
 This documentation is not an introduction to hexagonal architecture. If you want to learn more about it, you can read
-[this page](https://github.com/jhipster/jhipster-lite/blob/main/documentation/hexagonal-architecture.md).
+[this page](https://github.com/seed4j/seed4j/blob/main/documentation/hexagonal-architecture.md).
 
 ## Folder structure
 

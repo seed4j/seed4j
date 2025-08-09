@@ -17,14 +17,14 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public final class JHipsterModuleJavaDependencies {
+public final class SeedModuleJavaDependencies {
 
   private final Collection<DependencyId> dependenciesToRemove;
   private final Collection<JavaDependencyManagement> dependenciesManagement;
   private final Collection<DependencyId> dependenciesManagementToRemove;
   private final Collection<DirectJavaDependency> dependencies;
 
-  private JHipsterModuleJavaDependencies(JHipsterModuleJavaDependenciesBuilder<?> builder) {
+  private SeedModuleJavaDependencies(JHipsterModuleJavaDependenciesBuilder<?> builder) {
     dependenciesToRemove = builder.dependenciesToRemove;
     dependenciesManagement = builder.dependenciesManagement;
     dependenciesManagementToRemove = builder.dependenciesManagementToRemove;
@@ -173,8 +173,8 @@ public final class JHipsterModuleJavaDependencies {
       return parentModuleBuilder;
     }
 
-    public JHipsterModuleJavaDependencies build() {
-      return new JHipsterModuleJavaDependencies(this);
+    public SeedModuleJavaDependencies build() {
+      return new SeedModuleJavaDependencies(this);
     }
   }
 }

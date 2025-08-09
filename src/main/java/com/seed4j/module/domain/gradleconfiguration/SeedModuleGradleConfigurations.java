@@ -10,12 +10,12 @@ import java.util.Collection;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public final class JHipsterModuleGradleConfigurations {
+public final class SeedModuleGradleConfigurations {
 
   private final Collection<GradleConfiguration> configurations;
   private final Collection<GradleTasksTestInstruction> tasksTestInstructions;
 
-  public JHipsterModuleGradleConfigurations(JHipsterModuleGradleConfigurationBuilder builder) {
+  public SeedModuleGradleConfigurations(JHipsterModuleGradleConfigurationBuilder builder) {
     Assert.notNull("configurations", builder.configurations);
     Assert.notNull("tasksTestInstructions", builder.tasksTestInstructions);
 
@@ -83,8 +83,8 @@ public final class JHipsterModuleGradleConfigurations {
       return module;
     }
 
-    public JHipsterModuleGradleConfigurations build() {
-      return new JHipsterModuleGradleConfigurations(this);
+    public SeedModuleGradleConfigurations build() {
+      return new SeedModuleGradleConfigurations(this);
     }
   }
 }

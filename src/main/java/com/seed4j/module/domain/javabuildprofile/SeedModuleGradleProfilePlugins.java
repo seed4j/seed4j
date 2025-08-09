@@ -7,7 +7,7 @@ import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
 import com.seed4j.module.domain.javabuild.command.AddGradlePlugin.AddGradlePluginOptionalBuilder;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
-import com.seed4j.module.domain.javabuildprofile.JHipsterModuleJavaBuildProfile.JHipsterModuleJavaBuildProfileBuilder;
+import com.seed4j.module.domain.javabuildprofile.SeedModuleJavaBuildProfile.SeedModuleJavaBuildProfileBuilder;
 import com.seed4j.module.domain.javadependency.JavaDependenciesVersions;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
@@ -15,18 +15,18 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Function;
 
-public final class JHipsterModuleGradleProfilePlugins {
+public final class SeedModuleGradleProfilePlugins {
 
   private final Collection<GradleProfilePlugin> plugins;
 
-  public JHipsterModuleGradleProfilePlugins(JHipsterModuleGradleProfilePluginBuilder builder) {
+  public SeedModuleGradleProfilePlugins(SeedModuleGradleProfilePluginBuilder builder) {
     Assert.notNull("builder", builder);
 
     this.plugins = builder.plugins;
   }
 
-  public static JHipsterModuleGradleProfilePluginBuilder builder(JHipsterModuleJavaBuildProfileBuilder module) {
-    return new JHipsterModuleGradleProfilePluginBuilder(module);
+  public static SeedModuleGradleProfilePluginBuilder builder(SeedModuleJavaBuildProfileBuilder module) {
+    return new SeedModuleGradleProfilePluginBuilder(module);
   }
 
   public JavaBuildCommands buildChanges(JavaDependenciesVersions versions, BuildProfileId buildProfile) {
@@ -73,18 +73,18 @@ public final class JHipsterModuleGradleProfilePlugins {
     return commandBuilder.build();
   }
 
-  public static final class JHipsterModuleGradleProfilePluginBuilder {
+  public static final class SeedModuleGradleProfilePluginBuilder {
 
-    private final JHipsterModuleJavaBuildProfileBuilder module;
+    private final SeedModuleJavaBuildProfileBuilder module;
     private final Collection<GradleProfilePlugin> plugins = new ArrayList<>();
 
-    private JHipsterModuleGradleProfilePluginBuilder(JHipsterModuleJavaBuildProfileBuilder module) {
+    private SeedModuleGradleProfilePluginBuilder(SeedModuleJavaBuildProfileBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
     }
 
-    public JHipsterModuleGradleProfilePluginBuilder plugin(GradleProfilePlugin plugin) {
+    public SeedModuleGradleProfilePluginBuilder plugin(GradleProfilePlugin plugin) {
       Assert.notNull("plugin", plugin);
 
       plugins.add(plugin);
@@ -92,12 +92,12 @@ public final class JHipsterModuleGradleProfilePlugins {
       return this;
     }
 
-    public JHipsterModuleJavaBuildProfileBuilder and() {
+    public SeedModuleJavaBuildProfileBuilder and() {
       return module;
     }
 
-    public JHipsterModuleGradleProfilePlugins build() {
-      return new JHipsterModuleGradleProfilePlugins(this);
+    public SeedModuleGradleProfilePlugins build() {
+      return new SeedModuleGradleProfilePlugins(this);
     }
   }
 }

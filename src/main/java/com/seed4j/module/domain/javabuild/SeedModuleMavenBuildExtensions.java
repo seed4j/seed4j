@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public class JHipsterModuleMavenBuildExtensions {
+public class SeedModuleMavenBuildExtensions {
 
   private final Collection<MavenBuildExtension> buildExtensions;
 
-  public JHipsterModuleMavenBuildExtensions(JHipsterModuleMavenBuildExtensionsBuilder builder) {
+  public SeedModuleMavenBuildExtensions(JHipsterModuleMavenBuildExtensionsBuilder builder) {
     this.buildExtensions = builder.buildExtensions;
   }
 
@@ -82,8 +82,8 @@ public class JHipsterModuleMavenBuildExtensions {
       return module;
     }
 
-    public JHipsterModuleMavenBuildExtensions build() {
-      return new JHipsterModuleMavenBuildExtensions(this);
+    public SeedModuleMavenBuildExtensions build() {
+      return new SeedModuleMavenBuildExtensions(this);
     }
   }
 }

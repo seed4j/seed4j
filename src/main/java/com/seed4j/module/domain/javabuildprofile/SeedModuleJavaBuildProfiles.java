@@ -4,7 +4,7 @@ import com.seed4j.module.domain.JHipsterModule.JHipsterModuleBuilder;
 import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
-import com.seed4j.module.domain.javabuildprofile.JHipsterModuleJavaBuildProfile.JHipsterModuleJavaBuildProfileBuilder;
+import com.seed4j.module.domain.javabuildprofile.SeedModuleJavaBuildProfile.SeedModuleJavaBuildProfileBuilder;
 import com.seed4j.module.domain.javadependency.JavaDependenciesVersions;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependencies;
 import com.seed4j.shared.error.domain.Assert;
@@ -14,16 +14,16 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public final class JHipsterModuleJavaBuildProfiles {
+public final class SeedModuleJavaBuildProfiles {
 
-  private final Collection<JHipsterModuleJavaBuildProfile> profiles;
+  private final Collection<SeedModuleJavaBuildProfile> profiles;
 
-  private JHipsterModuleJavaBuildProfiles(JHipsterModuleJavaBuildProfilesBuilder builder) {
-    this.profiles = builder.profiles.values().stream().map(JHipsterModuleJavaBuildProfileBuilder::build).toList();
+  private SeedModuleJavaBuildProfiles(SeedModuleJavaBuildProfilesBuilder builder) {
+    this.profiles = builder.profiles.values().stream().map(SeedModuleJavaBuildProfileBuilder::build).toList();
   }
 
-  public static JHipsterModuleJavaBuildProfilesBuilder builder(JHipsterModuleBuilder module) {
-    return new JHipsterModuleJavaBuildProfilesBuilder(module);
+  public static SeedModuleJavaBuildProfilesBuilder builder(JHipsterModuleBuilder module) {
+    return new SeedModuleJavaBuildProfilesBuilder(module);
   }
 
   public JavaBuildCommands buildChanges(JavaDependenciesVersions versions, ProjectJavaDependencies projectJavaDependencies) {
@@ -48,50 +48,50 @@ public final class JHipsterModuleJavaBuildProfiles {
     return new JavaBuildCommands(commands);
   }
 
-  private Function<JHipsterModuleJavaBuildProfile, JavaBuildCommand> toAddProfileCommands() {
+  private Function<SeedModuleJavaBuildProfile, JavaBuildCommand> toAddProfileCommands() {
     return profile -> new AddJavaBuildProfile(profile.id(), profile.activation());
   }
 
-  private Function<JHipsterModuleJavaBuildProfile, Stream<JavaBuildCommand>> toAddPropertyCommands() {
+  private Function<SeedModuleJavaBuildProfile, Stream<JavaBuildCommand>> toAddPropertyCommands() {
     return profile -> profile.properties().buildChanges(profile.id());
   }
 
-  private Function<JHipsterModuleJavaBuildProfile, Stream<JavaBuildCommand>> toMavenPluginCommands(
+  private Function<SeedModuleJavaBuildProfile, Stream<JavaBuildCommand>> toMavenPluginCommands(
     JavaDependenciesVersions versions,
     ProjectJavaDependencies projectJavaDependencies
   ) {
     return profile -> profile.mavenPlugins().buildChanges(versions, projectJavaDependencies, profile.id()).get().stream();
   }
 
-  private Function<JHipsterModuleJavaBuildProfile, Stream<JavaBuildCommand>> toGradlePluginCommands(JavaDependenciesVersions versions) {
+  private Function<SeedModuleJavaBuildProfile, Stream<JavaBuildCommand>> toGradlePluginCommands(JavaDependenciesVersions versions) {
     return profile -> profile.gradlePlugins().buildChanges(versions, profile.id()).get().stream();
   }
 
-  private Function<JHipsterModuleJavaBuildProfile, Stream<JavaBuildCommand>> toJavaDependenciesCommands(
+  private Function<SeedModuleJavaBuildProfile, Stream<JavaBuildCommand>> toJavaDependenciesCommands(
     JavaDependenciesVersions versions,
     ProjectJavaDependencies projectJavaDependencies
   ) {
     return profile -> profile.javaDependencies().buildChanges(versions, projectJavaDependencies, profile.id()).get().stream();
   }
 
-  public static final class JHipsterModuleJavaBuildProfilesBuilder {
+  public static final class SeedModuleJavaBuildProfilesBuilder {
 
     private final JHipsterModuleBuilder module;
-    private final Map<BuildProfileId, JHipsterModuleJavaBuildProfileBuilder> profiles = new HashMap<>();
+    private final Map<BuildProfileId, SeedModuleJavaBuildProfileBuilder> profiles = new HashMap<>();
 
-    private JHipsterModuleJavaBuildProfilesBuilder(JHipsterModuleBuilder module) {
+    private SeedModuleJavaBuildProfilesBuilder(JHipsterModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
     }
 
-    public JHipsterModuleJavaBuildProfileBuilder addProfile(BuildProfileId buildProfileId) {
+    public SeedModuleJavaBuildProfileBuilder addProfile(BuildProfileId buildProfileId) {
       Assert.notNull("buildProfileId", buildProfileId);
 
-      return profiles.computeIfAbsent(buildProfileId, id -> JHipsterModuleJavaBuildProfile.builder(this, buildProfileId));
+      return profiles.computeIfAbsent(buildProfileId, id -> SeedModuleJavaBuildProfile.builder(this, buildProfileId));
     }
 
-    public JHipsterModuleJavaBuildProfileBuilder addProfile(String buildProfileId) {
+    public SeedModuleJavaBuildProfileBuilder addProfile(String buildProfileId) {
       return addProfile(new BuildProfileId(buildProfileId));
     }
 
@@ -99,8 +99,8 @@ public final class JHipsterModuleJavaBuildProfiles {
       return module;
     }
 
-    public JHipsterModuleJavaBuildProfiles build() {
-      return new JHipsterModuleJavaBuildProfiles(this);
+    public SeedModuleJavaBuildProfiles build() {
+      return new SeedModuleJavaBuildProfiles(this);
     }
   }
 }

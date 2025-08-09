@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Consumer;
 
-public final class JHipsterModuleGitIgnore {
+public final class SeedModuleGitIgnore {
 
   private final Collection<GitIgnoreEntry> entries;
 
-  private JHipsterModuleGitIgnore(Collection<GitIgnoreEntry> entries) {
+  private SeedModuleGitIgnore(Collection<GitIgnoreEntry> entries) {
     Assert.field("entries", entries).notNull().noNullElement();
     this.entries = entries;
   }
@@ -85,8 +85,8 @@ public final class JHipsterModuleGitIgnore {
       return parentModuleBuilder;
     }
 
-    public JHipsterModuleGitIgnore build() {
-      return new JHipsterModuleGitIgnore(entries);
+    public SeedModuleGitIgnore build() {
+      return new SeedModuleGitIgnore(entries);
     }
   }
 }

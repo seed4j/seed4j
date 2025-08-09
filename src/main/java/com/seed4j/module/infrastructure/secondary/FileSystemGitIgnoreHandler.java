@@ -5,7 +5,7 @@ import static com.seed4j.module.domain.replacement.ReplacementCondition.notConta
 import com.seed4j.module.domain.SeedModuleContext;
 import com.seed4j.module.domain.SeedProjectFilePath;
 import com.seed4j.module.domain.gitignore.GitIgnoreEntry;
-import com.seed4j.module.domain.gitignore.JHipsterModuleGitIgnore;
+import com.seed4j.module.domain.gitignore.SeedModuleGitIgnore;
 import com.seed4j.module.domain.properties.JHipsterProjectFolder;
 import com.seed4j.module.domain.replacement.*;
 import com.seed4j.shared.error.domain.Assert;
@@ -27,7 +27,7 @@ class FileSystemGitIgnoreHandler {
     this.fileReplacer = fileReplacer;
   }
 
-  public void handle(JHipsterProjectFolder projectFolder, JHipsterModuleGitIgnore gitIgnore) {
+  public void handle(JHipsterProjectFolder projectFolder, SeedModuleGitIgnore gitIgnore) {
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("gitIgnore", gitIgnore);
 

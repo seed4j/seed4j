@@ -8,11 +8,11 @@ import com.seed4j.UnitTest;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterModuleGitIgnoreTest {
+class SeedModuleGitIgnoreTest {
 
   @Test
   void hasSimpleString() {
-    JHipsterModuleGitIgnore gitIgnore = JHipsterModuleGitIgnore.builder(moduleBuilder(allProperties()))
+    SeedModuleGitIgnore gitIgnore = SeedModuleGitIgnore.builder(moduleBuilder(allProperties()))
       .comment("A comment")
       .pattern("target/")
       .build();

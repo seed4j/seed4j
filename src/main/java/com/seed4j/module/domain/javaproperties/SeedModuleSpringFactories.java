@@ -5,11 +5,11 @@ import com.seed4j.shared.collection.domain.SeedCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.*;
 
-public final class JHipsterModuleSpringFactories {
+public final class SeedModuleSpringFactories {
 
   private final Map<PropertyKey, PropertyValue> factories;
 
-  private JHipsterModuleSpringFactories(JHipsterModuleSpringFactoriesBuilder builder) {
+  private SeedModuleSpringFactories(JHipsterModuleSpringFactoriesBuilder builder) {
     factories = SeedCollections.immutable(builder.factories);
   }
 
@@ -45,8 +45,8 @@ public final class JHipsterModuleSpringFactories {
       return module;
     }
 
-    public JHipsterModuleSpringFactories build() {
-      return new JHipsterModuleSpringFactories(this);
+    public SeedModuleSpringFactories build() {
+      return new SeedModuleSpringFactories(this);
     }
   }
 }

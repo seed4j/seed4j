@@ -3,7 +3,7 @@ package com.seed4j.module.domain;
 import com.seed4j.module.domain.file.SeedFilesToDelete;
 import com.seed4j.module.domain.file.SeedFilesToMove;
 import com.seed4j.module.domain.file.SeedTemplatedFiles;
-import com.seed4j.module.domain.gitignore.JHipsterModuleGitIgnore;
+import com.seed4j.module.domain.gitignore.SeedModuleGitIgnore;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javaproperties.SpringComments;
 import com.seed4j.module.domain.javaproperties.SpringFactories;
@@ -37,7 +37,7 @@ public final class JHipsterModuleChanges {
   private final SpringProperties springYamlProperties;
   private final SpringComments springYamlComments;
   private final SpringFactories springFactories;
-  private final JHipsterModuleGitIgnore gitIgnore;
+  private final SeedModuleGitIgnore gitIgnore;
   private final JHipsterModuleDockerComposeFile dockerComposeFile;
 
   private JHipsterModuleChanges(JHipsterModuleChangesBuilder builder) {
@@ -122,7 +122,7 @@ public final class JHipsterModuleChanges {
     return packageJson;
   }
 
-  public JHipsterModuleGitIgnore gitIgnore() {
+  public SeedModuleGitIgnore gitIgnore() {
     return gitIgnore;
   }
 
@@ -197,7 +197,7 @@ public final class JHipsterModuleChanges {
     private SpringProperties springYamlProperties = SpringProperties.EMPTY;
     private SpringComments springYamlComments = SpringComments.EMPTY;
     private SpringFactories springFactories;
-    private JHipsterModuleGitIgnore gitIgnore;
+    private SeedModuleGitIgnore gitIgnore;
     private JHipsterModuleDockerComposeFile dockerComposeFile;
 
     @Override
@@ -271,7 +271,7 @@ public final class JHipsterModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChangesDockerComposeFileBuilder gitIgnore(JHipsterModuleGitIgnore gitIgnore) {
+    public JHipsterModuleChangesDockerComposeFileBuilder gitIgnore(SeedModuleGitIgnore gitIgnore) {
       this.gitIgnore = gitIgnore;
 
       return this;
@@ -375,7 +375,7 @@ public final class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesGitIgnorePatternsBuilder {
-    JHipsterModuleChangesDockerComposeFileBuilder gitIgnore(JHipsterModuleGitIgnore gitIgnore);
+    JHipsterModuleChangesDockerComposeFileBuilder gitIgnore(SeedModuleGitIgnore gitIgnore);
   }
 
   public interface JHipsterModuleChangesDockerComposeFileBuilder {

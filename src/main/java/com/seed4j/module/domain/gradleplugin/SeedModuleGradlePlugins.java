@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 
-public final class JHipsterModuleGradlePlugins {
+public final class SeedModuleGradlePlugins {
 
   private final Collection<GradleMainBuildPlugin> plugins;
 
-  private JHipsterModuleGradlePlugins(JHipsterModuleGradlePluginBuilder builder) {
+  private SeedModuleGradlePlugins(JHipsterModuleGradlePluginBuilder builder) {
     Assert.notNull("plugins", builder.plugins);
     plugins = builder.plugins;
   }
@@ -73,8 +73,8 @@ public final class JHipsterModuleGradlePlugins {
       return module;
     }
 
-    public JHipsterModuleGradlePlugins build() {
-      return new JHipsterModuleGradlePlugins(this);
+    public SeedModuleGradlePlugins build() {
+      return new SeedModuleGradlePlugins(this);
     }
   }
 }

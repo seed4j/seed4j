@@ -13,42 +13,42 @@ import com.seed4j.module.domain.file.SeedModuleFile;
 import com.seed4j.module.domain.file.SeedModuleFiles;
 import com.seed4j.module.domain.file.SeedModuleFiles.JHipsterModuleFilesBuilder;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.gitignore.JHipsterModuleGitIgnore;
-import com.seed4j.module.domain.gitignore.JHipsterModuleGitIgnore.JHipsterModuleGitIgnoreBuilder;
-import com.seed4j.module.domain.gradleconfiguration.JHipsterModuleGradleConfigurations;
-import com.seed4j.module.domain.gradleconfiguration.JHipsterModuleGradleConfigurations.JHipsterModuleGradleConfigurationBuilder;
+import com.seed4j.module.domain.gitignore.SeedModuleGitIgnore;
+import com.seed4j.module.domain.gitignore.SeedModuleGitIgnore.JHipsterModuleGitIgnoreBuilder;
+import com.seed4j.module.domain.gradleconfiguration.SeedModuleGradleConfigurations;
+import com.seed4j.module.domain.gradleconfiguration.SeedModuleGradleConfigurations.JHipsterModuleGradleConfigurationBuilder;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin.GradleCommunityPluginIdBuilder;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityProfilePlugin;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityProfilePlugin.GradleCommunityProfilePluginIdBuilder;
 import com.seed4j.module.domain.gradleplugin.GradleCorePlugin;
 import com.seed4j.module.domain.gradleplugin.GradleCorePlugin.GradleCorePluginIdBuilder;
-import com.seed4j.module.domain.gradleplugin.JHipsterModuleGradlePlugins;
-import com.seed4j.module.domain.gradleplugin.JHipsterModuleGradlePlugins.JHipsterModuleGradlePluginBuilder;
+import com.seed4j.module.domain.gradleplugin.SeedModuleGradlePlugins;
+import com.seed4j.module.domain.gradleplugin.SeedModuleGradlePlugins.JHipsterModuleGradlePluginBuilder;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
-import com.seed4j.module.domain.javabuild.JHipsterModuleMavenBuildExtensions;
-import com.seed4j.module.domain.javabuild.JHipsterModuleMavenBuildExtensions.JHipsterModuleMavenBuildExtensionsBuilder;
 import com.seed4j.module.domain.javabuild.MavenBuildExtension;
 import com.seed4j.module.domain.javabuild.MavenBuildExtension.MavenBuildExtensionGroupIdBuilder;
+import com.seed4j.module.domain.javabuild.SeedModuleMavenBuildExtensions;
+import com.seed4j.module.domain.javabuild.SeedModuleMavenBuildExtensions.JHipsterModuleMavenBuildExtensionsBuilder;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation.BuildProfileActivationBuilder;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
-import com.seed4j.module.domain.javabuildprofile.JHipsterModuleJavaBuildProfiles;
-import com.seed4j.module.domain.javabuildprofile.JHipsterModuleJavaBuildProfiles.JHipsterModuleJavaBuildProfilesBuilder;
+import com.seed4j.module.domain.javabuildprofile.SeedModuleJavaBuildProfiles;
+import com.seed4j.module.domain.javabuildprofile.SeedModuleJavaBuildProfiles.SeedModuleJavaBuildProfilesBuilder;
 import com.seed4j.module.domain.javadependency.DependencyId;
-import com.seed4j.module.domain.javadependency.JHipsterModuleJavaDependencies;
-import com.seed4j.module.domain.javadependency.JHipsterModuleJavaDependencies.JHipsterModuleJavaDependenciesBuilder;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency.JavaDependencyGroupIdBuilder;
+import com.seed4j.module.domain.javadependency.SeedModuleJavaDependencies;
+import com.seed4j.module.domain.javadependency.SeedModuleJavaDependencies.JHipsterModuleJavaDependenciesBuilder;
 import com.seed4j.module.domain.javaproperties.Comment;
-import com.seed4j.module.domain.javaproperties.JHipsterModuleSpringFactories;
-import com.seed4j.module.domain.javaproperties.JHipsterModuleSpringFactories.JHipsterModuleSpringFactoriesBuilder;
-import com.seed4j.module.domain.javaproperties.JHipsterModuleSpringProperties;
-import com.seed4j.module.domain.javaproperties.JHipsterModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
+import com.seed4j.module.domain.javaproperties.SeedModuleSpringFactories;
+import com.seed4j.module.domain.javaproperties.SeedModuleSpringFactories.JHipsterModuleSpringFactoriesBuilder;
+import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties;
+import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
 import com.seed4j.module.domain.javaproperties.SpringComment;
 import com.seed4j.module.domain.javaproperties.SpringComments;
 import com.seed4j.module.domain.javaproperties.SpringFactories;
@@ -117,20 +117,20 @@ public final class JHipsterModule {
   private final JHipsterModuleOptionalReplacementsFactory optionalReplacements;
   private final JHipsterModuleStartupCommands startupCommands;
   private final SeedModuleContext context;
-  private final JHipsterModuleJavaDependencies javaDependencies;
+  private final SeedModuleJavaDependencies javaDependencies;
   private final SeedModuleBuildProperties javaBuildProperties;
-  private final JHipsterModuleJavaBuildProfiles javaBuildProfiles;
+  private final SeedModuleJavaBuildProfiles javaBuildProfiles;
   private final JHipsterModuleMavenPlugins mavenPlugins;
-  private final JHipsterModuleGradleConfigurations gradleConfigurations;
-  private final JHipsterModuleGradlePlugins gradlePlugins;
-  private final JHipsterModuleMavenBuildExtensions mavenBuildExtensions;
+  private final SeedModuleGradleConfigurations gradleConfigurations;
+  private final SeedModuleGradlePlugins gradlePlugins;
+  private final SeedModuleMavenBuildExtensions mavenBuildExtensions;
   private final JHipsterModulePackageJson packageJson;
   private final JHipsterModulePreActions preActions;
   private final JHipsterModulePostActions postActions;
   private final SpringProperties springProperties;
   private final SpringComments springComments;
   private final SpringFactories springFactories;
-  private final JHipsterModuleGitIgnore gitIgnore;
+  private final SeedModuleGitIgnore gitIgnore;
   private final JHipsterModuleDockerComposeFile dockerComposeFile;
 
   private JHipsterModule(JHipsterModuleBuilder builder) {
@@ -486,7 +486,7 @@ public final class JHipsterModule {
     return startupCommands.commands();
   }
 
-  public JHipsterModuleJavaDependencies javaDependencies() {
+  public SeedModuleJavaDependencies javaDependencies() {
     return javaDependencies;
   }
 
@@ -494,7 +494,7 @@ public final class JHipsterModule {
     return javaBuildProperties;
   }
 
-  public JHipsterModuleJavaBuildProfiles javaBuildProfiles() {
+  public SeedModuleJavaBuildProfiles javaBuildProfiles() {
     return javaBuildProfiles;
   }
 
@@ -502,15 +502,15 @@ public final class JHipsterModule {
     return mavenPlugins;
   }
 
-  public JHipsterModuleGradleConfigurations gradleConfigurations() {
+  public SeedModuleGradleConfigurations gradleConfigurations() {
     return gradleConfigurations;
   }
 
-  public JHipsterModuleGradlePlugins gradlePlugins() {
+  public SeedModuleGradlePlugins gradlePlugins() {
     return gradlePlugins;
   }
 
-  public JHipsterModuleMavenBuildExtensions mavenBuildExtensions() {
+  public SeedModuleMavenBuildExtensions mavenBuildExtensions() {
     return mavenBuildExtensions;
   }
 
@@ -538,7 +538,7 @@ public final class JHipsterModule {
     return springFactories;
   }
 
-  public JHipsterModuleGitIgnore gitIgnore() {
+  public SeedModuleGitIgnore gitIgnore() {
     return gitIgnore;
   }
 
@@ -559,21 +559,19 @@ public final class JHipsterModule {
       this
     );
     private final JHipsterModuleStartupCommandsBuilder startupCommands = JHipsterModuleStartupCommands.builder(this);
-    private final JHipsterModuleJavaDependenciesBuilder<JHipsterModuleBuilder> javaDependencies = JHipsterModuleJavaDependencies.builder(
-      this
-    );
+    private final JHipsterModuleJavaDependenciesBuilder<JHipsterModuleBuilder> javaDependencies = SeedModuleJavaDependencies.builder(this);
     private final JHipsterModuleBuildPropertiesBuilder<JHipsterModuleBuilder> javaBuildProperties = SeedModuleBuildProperties.builder(this);
-    private final JHipsterModuleJavaBuildProfilesBuilder javaBuildProfiles = JHipsterModuleJavaBuildProfiles.builder(this);
+    private final SeedModuleJavaBuildProfilesBuilder javaBuildProfiles = SeedModuleJavaBuildProfiles.builder(this);
     private final JHipsterModuleMavenPluginsBuilder<JHipsterModuleBuilder> mavenPlugins = JHipsterModuleMavenPlugins.builder(this);
-    private final JHipsterModuleGradleConfigurationBuilder gradleConfigurations = JHipsterModuleGradleConfigurations.builder(this);
-    private final JHipsterModuleGradlePluginBuilder gradlePlugins = JHipsterModuleGradlePlugins.builder(this);
-    private final JHipsterModuleMavenBuildExtensionsBuilder mavenBuildExtensions = JHipsterModuleMavenBuildExtensions.builder(this);
+    private final JHipsterModuleGradleConfigurationBuilder gradleConfigurations = SeedModuleGradleConfigurations.builder(this);
+    private final JHipsterModuleGradlePluginBuilder gradlePlugins = SeedModuleGradlePlugins.builder(this);
+    private final JHipsterModuleMavenBuildExtensionsBuilder mavenBuildExtensions = SeedModuleMavenBuildExtensions.builder(this);
     private final JHipsterModulePackageJsonBuilder packageJson = JHipsterModulePackageJson.builder(this);
     private final JHipsterModulePreActionsBuilder preActions = JHipsterModulePreActions.builder(this);
     private final JHipsterModulePostActionsBuilder postActions = JHipsterModulePostActions.builder(this);
     private final Map<PropertiesKey, JHipsterModuleSpringPropertiesBuilder> springProperties = new HashMap<>();
     private final Map<SpringFactoryType, JHipsterModuleSpringFactoriesBuilder> springFactories = new EnumMap<>(SpringFactoryType.class);
-    private final JHipsterModuleGitIgnoreBuilder gitIgnore = JHipsterModuleGitIgnore.builder(this);
+    private final JHipsterModuleGitIgnoreBuilder gitIgnore = SeedModuleGitIgnore.builder(this);
     private final JHipsterModuleDockerComposeFileBuilder dockerComposeFile = JHipsterModuleDockerComposeFile.builder(this);
 
     private JHipsterModuleBuilder(JHipsterModuleProperties properties) {
@@ -664,7 +662,7 @@ public final class JHipsterModule {
       return javaBuildProperties;
     }
 
-    public JHipsterModuleJavaBuildProfilesBuilder javaBuildProfiles() {
+    public SeedModuleJavaBuildProfilesBuilder javaBuildProfiles() {
       return javaBuildProfiles;
     }
 
@@ -721,7 +719,7 @@ public final class JHipsterModule {
       Assert.notNull(PROFILE, profile);
 
       return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.MAIN_BOOTSTRAP_PROPERTIES), key ->
-        JHipsterModuleSpringProperties.builder(this)
+        SeedModuleSpringProperties.builder(this)
       );
     }
 
@@ -729,7 +727,7 @@ public final class JHipsterModule {
       Assert.notNull(PROFILE, profile);
 
       return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.MAIN_PROPERTIES), key ->
-        JHipsterModuleSpringProperties.builder(this)
+        SeedModuleSpringProperties.builder(this)
       );
     }
 
@@ -739,7 +737,7 @@ public final class JHipsterModule {
 
     public JHipsterModuleSpringPropertiesBuilder springTestBootstrapProperties() {
       return springProperties.computeIfAbsent(new PropertiesKey(SpringProfile.DEFAULT, SpringPropertyType.TEST_BOOTSTRAP_PROPERTIES), key ->
-        JHipsterModuleSpringProperties.builder(this)
+        SeedModuleSpringProperties.builder(this)
       );
     }
 
@@ -747,12 +745,12 @@ public final class JHipsterModule {
       Assert.notNull(PROFILE, profile);
 
       return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.TEST_PROPERTIES), key ->
-        JHipsterModuleSpringProperties.builder(this)
+        SeedModuleSpringProperties.builder(this)
       );
     }
 
     public JHipsterModuleSpringFactoriesBuilder springTestFactories() {
-      return springFactories.computeIfAbsent(SpringFactoryType.TEST_FACTORIES, key -> JHipsterModuleSpringFactories.builder(this));
+      return springFactories.computeIfAbsent(SpringFactoryType.TEST_FACTORIES, key -> SeedModuleSpringFactories.builder(this));
     }
 
     /**

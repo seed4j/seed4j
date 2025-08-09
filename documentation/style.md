@@ -12,10 +12,10 @@ You can start Tikui with `npm run tikui:serve`, this will open the Pattern Libra
 
 To add a new component, you may like to install `tikui` command with `npm i -g @tikui/cli`.
 
-Then create the component using the `jhlite` prefix, here is an example to create `my-atom` component.
+Then create the component using the `seed4j` prefix, here is an example to create `my-atom` component.
 
 ```shell
-tikui create -p jhlite my-atom src/main/style/atom
+tikui create -p seed4j my-atom src/main/style/atom
 ```
 
 This will generate `my-atom` under atom directory, don't forget to edit the `atom.pug` and `_atom.scss` to show `my-atom` on the [atom](http://localhost:9005/atom/atom.html) page.

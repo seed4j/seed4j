@@ -57,12 +57,6 @@ Then, you can navigate to http://localhost:1339 in your browser.
 - [Simple WebServices with JHipster Lite](https://youtu.be/mEECPRZjajI) by [Colin Damon](https://www.linkedin.com/in/colin-damon/)
 - [JHipster vs JHipster Lite](https://youtu.be/t5GA329FMfU) by [Julien Dubois](https://twitter.com/juliendubois)
 
-## Choosing
-
-The original JHipster and JHLite are **not the same thing**, they are **not generating the same code** and **not serving the same purpose**! Here are some choice elements you can take into account:
-
-![Choosing JHipster](documentation/jhlite-choice.png)
-
 ## Upgrading an existing generated project
 
 If you have an existing project generated with Seed4J, you can handle breaking changes in latest versions by running the following command:

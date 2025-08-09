@@ -1,12 +1,12 @@
 @font-face {
   font-family: 'seed4j-icons';
-  src: url('../font/seed4j-icons.eot?55872518');
+  src: url('../font/seed4j-icons.eot?9788036');
   src:
-    url('../font/seed4j-icons.eot?55872518#iefix') format('embedded-opentype'),
-    url('../font/seed4j-icons.woff2?55872518') format('woff2'),
-    url('../font/seed4j-icons.woff?55872518') format('woff'),
-    url('../font/seed4j-icons.ttf?55872518') format('truetype'),
-    url('../font/seed4j-icons.svg?55872518#seed4j-icons') format('svg');
+    url('../font/seed4j-icons.eot?9788036#iefix') format('embedded-opentype'),
+    url('../font/seed4j-icons.woff2?9788036') format('woff2'),
+    url('../font/seed4j-icons.woff?9788036') format('woff'),
+    url('../font/seed4j-icons.ttf?9788036') format('truetype'),
+    url('../font/seed4j-icons.svg?9788036#seed4j-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -16,7 +16,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'seed4j-icons';
-    src: url('../font/seed4j-icons.svg?55872518#seed4j-icons') format('svg');
+    src: url('../font/seed4j-icons.svg?9788036#seed4j-icons') format('svg');
   }
 }
 */
@@ -68,9 +68,6 @@
 .seed4j-icon-open-collective:before {
   content: '\e803';
 } /* '' */
-.seed4j-icon-jhipster:before {
-  content: '\e804';
-} /* '' */
 .seed4j-icon-download:before {
   content: '\e805';
 } /* '' */

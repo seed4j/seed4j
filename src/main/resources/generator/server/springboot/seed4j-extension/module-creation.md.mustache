@@ -4,14 +4,14 @@ So you want to create a Seed4J module? Great!
 
 For that, you'll need to provide 2 main parts:
 
-- `JHipsterModuleResource`: describe the module organization, it is used to generate the APIs;
-- `JHipsterModule`: describe the changes done by the module.
+- `SeedModuleResource`: describe the module organization, it is used to generate the APIs;
+- `SeedModule`: describe the changes done by the module.
 
-You can start by the element you prefer but to create a `JHipsterModuleResource` you'll need to be able to build a `JHipsterModule`.
+You can start by the element you prefer but to create a `SeedModuleResource` you'll need to be able to build a `SeedModule`.
 
-## Creating a JHipsterModule
+## Creating a SeedModule
 
-In fact, you don't just need to create one `JHipsterModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
+In fact, you don't just need to create one `SeedModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
 
 So, as this is the business of Seed4J you probably want to create a `{{packageName}}.my_module.domain` package. And you can start with a simple test:
 
@@ -32,12 +32,12 @@ class MyModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    JHipsterModuleProperties properties = JHipsterModulesFixture
+    SeedModuleProperties properties = SeedModulesFixture
       .propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .build();
 
-    JHipsterModule module = factory.buildModule(properties);
+    SeedModule module = factory.buildModule(properties);
 
     assertThatModule(module).hasPrefixedFiles("src/main/java/com/seed4j/growth/my_package", "Dummy.java");
   }
@@ -48,7 +48,7 @@ class MyModuleFactoryTest {
 A few things to note here:
 
 - We are expecting to have a `buildModule(...)` method in `MyModuleFactory`;
-- The `JHipsterModulesAssertions.assertThatModule(...)` will really apply the module to a project and give you a fluent API to ensure some operations;
+- The `SeedModulesAssertions.assertThatModule(...)` will really apply the module to a project and give you a fluent API to ensure some operations;
 - Even if the feedback loops are not perfect on that they should be short enough to allow a decent TDD implementation of the factory (on eclipse with [infinitest](https://infinitest.github.io/) feedbacks are under a second).
 
 So, now that we have a first test we can do a simple implementation:
@@ -58,9 +58,9 @@ import static com.seed4j.module.domain.SeedModule.*;
 
 public class MyModuleFactory {
 
-  private static final JHipsterSource SOURCE = from("my-module");
+  private static final SeedSource SOURCE = from("my-module");
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .files()
@@ -88,11 +88,11 @@ public class Dummy {
 
 Those placeholders will be replaced by properties values during module application.
 
-And this is it for this part of the documentation... Of course you can do a lot more than that in the `JHipsterModule` but the goal of this documentation is not to go deep in this usage! You have a lot of running example and you can always ask for help, we'll be really happy to help you provide your implementations!
+And this is it for this part of the documentation... Of course you can do a lot more than that in the `SeedModule` but the goal of this documentation is not to go deep in this usage! You have a lot of running example and you can always ask for help, we'll be really happy to help you provide your implementations!
 
-## Creating JHipsterModuleResource
+## Creating SeedModuleResource
 
-As the main goal of a `JHipsterModuleResource` is to expose a WebService let's start by creating a gherkin scenario for that. So in `src/test/features/my-module.feature` we'll do:
+As the main goal of a `SeedModuleResource` is to expose a WebService let's start by creating a gherkin scenario for that. So in `src/test/features/my-module.feature` we'll do:
 
 ```
 Feature: My module
@@ -119,7 +119,7 @@ You can now run `CucumberTest` and ensure that it is failing as expected:
 }
 ```
 
-To be used by Seed4J, the `JHipsterModuleResource` needs to be a Spring bean so, let's create a configuration in `{{packageName}}.my_module.infrastructure.primary`:
+To be used by Seed4J, the `SeedModuleResource` needs to be a Spring bean so, let's create a configuration in `{{packageName}}.my_module.infrastructure.primary`:
 
 ```java
 import static {{packageName}}.slug.domain.MyAppModuleSlug.*;
@@ -134,11 +134,11 @@ import com.seed4j.module.domain.resource.SeedModuleResource;
 class MyModuleModuleConfiguration {
 
   @Bean
-  JHipsterModuleResource myModule(MyModuleApplicationService myModules) {
-    return JHipsterModuleResource
+  SeedModuleResource myModule(MyModuleApplicationService myModules) {
+    return SeedModuleResource
       .builder()
       .slug(MY_MODULE)
-      .propertiesDefinition(JHipsterModulePropertiesDefinition.builder().addBasePackage().build())
+      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().build())
       .apiDoc("Group", "This is my module")
       .standalone()
       .tags("server")
@@ -148,7 +148,7 @@ class MyModuleModuleConfiguration {
 
 ```
 
-In fact, you don't really have choices here, the `JHipsterModuleResource.builder()` is fluent and will only let you go to the next possible step. The most confusing one may be the last one `.factory(myModules::buildModule)` which is, in fact, a method called to build the module.
+In fact, you don't really have choices here, the `SeedModuleResource.builder()` is fluent and will only let you go to the next possible step. The most confusing one may be the last one `.factory(myModules::buildModule)` which is, in fact, a method called to build the module.
 
 You'll need to create the MyAppModuleSlug.MY_MODULE enum, which was mentioned earlier. Let's create it in the `{{packageName}}.slug.domain` package:
 
@@ -160,7 +160,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import com.seed4j.module.domain.resource.SeedModuleSlugFactory;
 
-public enum MyAppModuleSlug implements JHipsterModuleSlugFactory {
+public enum MyAppModuleSlug implements SeedModuleSlugFactory {
   MY_MODULE("my-module");
 
   private static final Map<String, MyAppModuleSlug> moduleSlugMap = Stream
@@ -196,14 +196,14 @@ public class MyModuleApplicationService {
     factory = new MyModuleFactory();
   }
 
-  public JHipsterModule buildModule(JHipsterModuleProperties properties) {
+  public SeedModule buildModule(SeedModuleProperties properties) {
     return factory.buildModule(properties);
   }
 }
 
 ```
 
-In your `JHipsterModuleResource` you can define additional properties and an organization to display your module in the landscape (replacing `.standalone()`). Here again, you have a lot of examples to rely on.
+In your `SeedModuleResource` you can define additional properties and an organization to display your module in the landscape (replacing `.standalone()`). Here again, you have a lot of examples to rely on.
 
 ## Hide modules
 
@@ -251,13 +251,13 @@ Of course you can add any version resolution logic you want in the implementatio
 You can add it in your tests using
 
 ```java
-TestJHipsterModules.register(myReader);
+TestSeedModules.register(myReader);
 ```
 
 And remove it using
 
 ```java
-TestJHipsterModules.unregisterReaders();
+TestSeedModules.unregisterReaders();
 ```
 
 ## Npm versions
@@ -281,11 +281,11 @@ Of course you can add any version resolution logic you want in the implementatio
 You can add it in your tests using
 
 ```java
-TestJHipsterModules.register(myReader);
+TestSeedModules.register(myReader);
 ```
 
 And remove it using
 
 ```java
-TestJHipsterModules.unregisterReaders();
+TestSeedModules.unregisterReaders();
 ```

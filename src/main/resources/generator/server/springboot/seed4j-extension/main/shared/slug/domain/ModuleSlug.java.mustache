@@ -10,20 +10,20 @@ import com.seed4j.module.domain.resource.SeedModuleRank;
 import {{packageName}}.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @ExcludeFromGeneratedCodeCoverage
-public enum {{ baseName }}ModuleSlug implements JHipsterModuleSlugFactory {
+public enum {{ baseName }}ModuleSlug implements SeedModuleSlugFactory {
 
   // Add here the slugs of your modules
-  // e.g.: MY_MODULE("my-module", JHipsterModuleRank.RANK_B),
+  // e.g.: MY_MODULE("my-module", SeedModuleRank.RANK_B),
   ;
 
   private static final Map<String, {{ baseName }}ModuleSlug> moduleSlugMap = Stream.of(values()).collect(
     Collectors.toMap({{ baseName }}ModuleSlug::get, Function.identity())
   );
   private final String slug;
-  private final JHipsterModuleRank rank;
+  private final SeedModuleRank rank;
 
   @SuppressWarnings("java:S1144")
-  {{ baseName }}ModuleSlug(String slug, JHipsterModuleRank rank) {
+  {{ baseName }}ModuleSlug(String slug, SeedModuleRank rank) {
     this.slug = slug;
     this.rank = rank;
   }
@@ -34,7 +34,7 @@ public enum {{ baseName }}ModuleSlug implements JHipsterModuleSlugFactory {
   }
 
   @Override
-  public JHipsterModuleRank rank() {
+  public SeedModuleRank rank() {
     return rank;
   }
 

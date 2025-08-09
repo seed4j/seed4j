@@ -28,7 +28,7 @@ echo "*** Starting application using ${EXEC_JAR}..."
 java \
   -jar ${EXEC_JAR} \
   --logging.level.ROOT=OFF & > /dev/null
-echo $! > .pid-jhlite
+echo $! > .pid-seed4j
 
 retryCount=1
 maxRetry=30

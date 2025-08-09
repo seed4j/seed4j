@@ -68,8 +68,8 @@ public class Seed4JExtensionModuleFactory {
         .and()
       .documentation(documentationTitle("Module creation"), SOURCE.template("module-creation.md"))
       .javaDependencies()
-        .addDependency(jhipsterLiteDependency())
-        .addDependency(jhipsterLiteTestDependency())
+        .addDependency(seed4jDependency())
+        .addDependency(seed4jTestDependency())
         .addTestDependency(groupId("com.approvaltests"), artifactId("approvaltests"), versionSlug("approvaltests"))
       .and()
       .mandatoryReplacements()
@@ -183,11 +183,11 @@ public class Seed4JExtensionModuleFactory {
     // @formatter:on
   }
 
-  private JavaDependency jhipsterLiteDependency() {
+  private JavaDependency seed4jDependency() {
     return seed4jDependencyBuilder().build();
   }
 
-  private JavaDependency jhipsterLiteTestDependency() {
+  private JavaDependency seed4jTestDependency() {
     return seed4jDependencyBuilder().classifier("tests").scope(JavaDependencyScope.TEST).type(JavaDependencyType.TEST_JAR).build();
   }
 

@@ -10,11 +10,11 @@ if [ "$#" -ne 1 ]; then
 fi
 
 DOCKER_IMAGE=$1
-PORT=7471
+PORT=1339
 
 # Start docker container
 echo "*** Starting docker container using image ${DOCKER_IMAGE}..."
-docker run -p $PORT:7471 -d ${DOCKER_IMAGE} > .container_seed4j
+docker run -p $PORT:1339 -d ${DOCKER_IMAGE} > .container_seed4j
 
 retryCount=1
 maxRetry=10

@@ -49,7 +49,7 @@ Run the project:
 ./mvnw
 ```
 
-Then, you can navigate to http://localhost:7471 in your browser.
+Then, you can navigate to http://localhost:1339 in your browser.
 
 ## Some videos
 
@@ -128,7 +128,7 @@ To create the image, run the following goal:
 Then, you can run the app like any other container:
 
 ```bash
-docker run -p 7471:7471 --rm docker.io/library/jhlite:<VERSION>
+docker run -p 1339:1339 --rm docker.io/library/jhlite:<VERSION>
 ```
 
 ## Executable with Native Build Tools
@@ -230,7 +230,7 @@ Then, run:
 java -jar target/*.jar
 ```
 
-So you can navigate to http://localhost:7471 in your browser.
+So you can navigate to http://localhost:1339 in your browser.
 
 These following profiles are available, and you can use it to only display the frameworks you want:
 
@@ -255,16 +255,16 @@ java -jar target/*.jar --spring.profiles.active=vue
 To start a local instance of Seed4J, go to your desired application folder and run:
 
 ```bash
-docker run --rm --pull=always -p 7471:7471 -v $(pwd):/tmp/seed4j:Z -it jhipster/jhipster-lite:latest
+docker run --rm --pull=always -p 1339:1339 -v $(pwd):/tmp/seed4j:Z -it jhipster/jhipster-lite:latest
 ```
 
 Or with podman:
 
 ```bash
-podman run --rm --pull=always -p 7471:7471 -v $(pwd):/tmp/seed4j:Z -u root -it jhipster/jhipster-lite:latest
+podman run --rm --pull=always -p 1339:1339 -v $(pwd):/tmp/seed4j:Z -u root -it jhipster/jhipster-lite:latest
 ```
 
-Then, go to [http://localhost:7471](http://localhost:7471)
+Then, go to [http://localhost:1339](http://localhost:1339)
 
 ## e2e tests
 
@@ -282,7 +282,7 @@ npm run e2e:headless
 
 ## Generate your project
 
-Once started, go to http://localhost:7471, select your option and generate the code you want, step by step, and only what you need.
+Once started, go to http://localhost:1339, select your option and generate the code you want, step by step, and only what you need.
 
 ## Contributing
 

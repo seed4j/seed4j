@@ -212,7 +212,7 @@ jobs:
       - name: 'Test: start application Seed4J'
         working-directory: ./tests-ci/
         run: |
-          ./start.sh 7471
+          ./start.sh 1339
       - name: 'Test: launch Cypress'
         run: npm run e2e:headless
 
@@ -303,7 +303,7 @@ jobs:
           # Set up trap to ensure stop.sh is called on exit
           trap './stop.sh' EXIT
 
-          ./start.sh 7471
+          ./start.sh 1339
           ./generate.sh ${{ matrix.app }} ${{ matrix.java-build-tool }} ${{ matrix.spring-config-format }} ${{ matrix.node-package-manager }}
           GENERATE_EXIT_CODE=$?
           echo "exit_code=$GENERATE_EXIT_CODE" >> $GITHUB_OUTPUT
@@ -352,7 +352,7 @@ jobs:
       - name: 'Generation: generate ${{ matrix.app }}'
         working-directory: ./current-branch/tests-ci/
         run: |
-          ./start.sh 7471
+          ./start.sh 1339
           ./generate.sh ${{ matrix.app }} ${{ matrix.java-build-tool }} ${{ matrix.spring-config-format }} ${{ matrix.node-package-manager }}
           ./stop.sh
       - name: 'Generation: calculate md5sum ${{ matrix.app }}'

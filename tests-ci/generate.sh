@@ -37,7 +37,7 @@ apply_modules() {
       -H "accept: */*" \
       -H "Content-Type: application/json" \
       -d "$payload" \
-      "http://localhost:7471""$api")
+      "http://localhost:1339""$api")
 
     if [[ $status_code == '40'* || $status_code == '50'* ]]; then
       echo "Error when calling API:" "$status_code" "$api"

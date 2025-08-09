@@ -10,13 +10,13 @@ public final class SeedModuleSpringProperties {
   private final Map<PropertyKey, PropertyValue> properties;
   private final Map<PropertyKey, Comment> comments;
 
-  private SeedModuleSpringProperties(JHipsterModuleSpringPropertiesBuilder builder) {
+  private SeedModuleSpringProperties(SeedModuleSpringPropertiesBuilder builder) {
     properties = SeedCollections.immutable(builder.properties);
     comments = SeedCollections.immutable(builder.comments);
   }
 
-  public static JHipsterModuleSpringPropertiesBuilder builder(SeedModuleBuilder module) {
-    return new JHipsterModuleSpringPropertiesBuilder(module);
+  public static SeedModuleSpringPropertiesBuilder builder(SeedModuleBuilder module) {
+    return new SeedModuleSpringPropertiesBuilder(module);
   }
 
   public Map<PropertyKey, PropertyValue> properties() {
@@ -27,19 +27,19 @@ public final class SeedModuleSpringProperties {
     return comments;
   }
 
-  public static final class JHipsterModuleSpringPropertiesBuilder {
+  public static final class SeedModuleSpringPropertiesBuilder {
 
     private final SeedModuleBuilder module;
     private final Map<PropertyKey, PropertyValue> properties = new TreeMap<>();
     private final Map<PropertyKey, Comment> comments = new HashMap<>();
 
-    private JHipsterModuleSpringPropertiesBuilder(SeedModuleBuilder module) {
+    private SeedModuleSpringPropertiesBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
     }
 
-    public JHipsterModuleSpringPropertiesBuilder set(PropertyKey key, PropertyValue value) {
+    public SeedModuleSpringPropertiesBuilder set(PropertyKey key, PropertyValue value) {
       Assert.notNull("key", key);
       Assert.notNull("value", value);
 
@@ -48,7 +48,7 @@ public final class SeedModuleSpringProperties {
       return this;
     }
 
-    public JHipsterModuleSpringPropertiesBuilder comment(PropertyKey key, Comment value) {
+    public SeedModuleSpringPropertiesBuilder comment(PropertyKey key, Comment value) {
       Assert.notNull("key", key);
       Assert.notNull("value", value);
 

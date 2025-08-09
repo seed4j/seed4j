@@ -9,30 +9,30 @@ public final class SeedModuleSpringFactories {
 
   private final Map<PropertyKey, PropertyValue> factories;
 
-  private SeedModuleSpringFactories(JHipsterModuleSpringFactoriesBuilder builder) {
+  private SeedModuleSpringFactories(SeedModuleSpringFactoriesBuilder builder) {
     factories = SeedCollections.immutable(builder.factories);
   }
 
-  public static JHipsterModuleSpringFactoriesBuilder builder(SeedModuleBuilder module) {
-    return new JHipsterModuleSpringFactoriesBuilder(module);
+  public static SeedModuleSpringFactoriesBuilder builder(SeedModuleBuilder module) {
+    return new SeedModuleSpringFactoriesBuilder(module);
   }
 
   public Map<PropertyKey, PropertyValue> factories() {
     return factories;
   }
 
-  public static final class JHipsterModuleSpringFactoriesBuilder {
+  public static final class SeedModuleSpringFactoriesBuilder {
 
     private final SeedModuleBuilder module;
     private final Map<PropertyKey, PropertyValue> factories = new HashMap<>();
 
-    private JHipsterModuleSpringFactoriesBuilder(SeedModuleBuilder module) {
+    private SeedModuleSpringFactoriesBuilder(SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
     }
 
-    public JHipsterModuleSpringFactoriesBuilder append(PropertyKey key, PropertyValue value) {
+    public SeedModuleSpringFactoriesBuilder append(PropertyKey key, PropertyValue value) {
       Assert.notNull("key", key);
       Assert.notNull("value", value);
 

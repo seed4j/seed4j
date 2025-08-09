@@ -16,7 +16,7 @@ final class RestSeedModule {
   private final RestSeedModulePropertiesDefinition properties;
   private final Collection<String> tags;
 
-  private RestSeedModule(RestJHipsterModuleBuilder builder) {
+  private RestSeedModule(RestSeedModuleBuilder builder) {
     slug = builder.slug;
     description = builder.description;
     properties = builder.properties;
@@ -24,7 +24,7 @@ final class RestSeedModule {
   }
 
   static RestSeedModule from(SeedModuleResource moduleResource) {
-    return new RestJHipsterModuleBuilder()
+    return new RestSeedModuleBuilder()
       .slug(moduleResource.slug().get())
       .description(moduleResource.apiDoc().operation().get())
       .properties(RestSeedModulePropertiesDefinition.from(moduleResource.propertiesDefinition()))
@@ -52,7 +52,7 @@ final class RestSeedModule {
     return tags;
   }
 
-  private static final class RestJHipsterModuleBuilder {
+  private static final class RestSeedModuleBuilder {
 
     private String slug;
     private String description;
@@ -60,25 +60,25 @@ final class RestSeedModule {
 
     private final Collection<String> tags = new ArrayList<>();
 
-    private RestJHipsterModuleBuilder slug(String slug) {
+    private RestSeedModuleBuilder slug(String slug) {
       this.slug = slug;
 
       return this;
     }
 
-    private RestJHipsterModuleBuilder description(String description) {
+    private RestSeedModuleBuilder description(String description) {
       this.description = description;
 
       return this;
     }
 
-    private RestJHipsterModuleBuilder properties(RestSeedModulePropertiesDefinition properties) {
+    private RestSeedModuleBuilder properties(RestSeedModulePropertiesDefinition properties) {
       this.properties = properties;
 
       return this;
     }
 
-    private RestJHipsterModuleBuilder tags(Collection<String> tags) {
+    private RestSeedModuleBuilder tags(Collection<String> tags) {
       Assert.field("tags", tags).noNullElement();
       this.tags.addAll(tags);
 

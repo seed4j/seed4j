@@ -124,10 +124,10 @@ public final class SeedModulesAssertions {
     return new SeedModuleAsserter(module);
   }
 
-  public static JHipsterModuleUpgradeAsserter assertThatModuleUpgrade(SeedModule module, SeedModuleUpgrade upgrade, ModuleFile... files) {
+  public static SeedModuleUpgradeAsserter assertThatModuleUpgrade(SeedModule module, SeedModuleUpgrade upgrade, ModuleFile... files) {
     addFilesToProject(module.projectFolder(), files);
 
-    return new JHipsterModuleUpgradeAsserter(module, upgrade);
+    return new SeedModuleUpgradeAsserter(module, upgrade);
   }
 
   public static SeedModuleAsserter assertThatTwoModulesWithFiles(SeedModule module, SeedModule moduleSecond, ModuleFile... files) {
@@ -262,11 +262,11 @@ public final class SeedModulesAssertions {
     }
   }
 
-  public static class JHipsterModuleUpgradeAsserter {
+  public static class SeedModuleUpgradeAsserter {
 
     private final SeedProjectFolder projectFolder;
 
-    public JHipsterModuleUpgradeAsserter(SeedModule module, SeedModuleUpgrade upgrade) {
+    public SeedModuleUpgradeAsserter(SeedModule module, SeedModuleUpgrade upgrade) {
       assertThat(module).as("Can't make assertions on a upgrade without module").isNotNull();
       assertThat(upgrade).as("Can't make assertions on a upgrade without upgrade").isNotNull();
 
@@ -285,7 +285,7 @@ public final class SeedModulesAssertions {
       }
     }
 
-    public JHipsterModuleUpgradeAsserter doNotUpdate(String file) {
+    public SeedModuleUpgradeAsserter doNotUpdate(String file) {
       FileTime lastModifiedTime = readFileTime(file);
 
       assertThat(lastModifiedTime)
@@ -295,7 +295,7 @@ public final class SeedModulesAssertions {
       return this;
     }
 
-    public JHipsterModuleUpgradeAsserter update(String file) {
+    public SeedModuleUpgradeAsserter update(String file) {
       FileTime lastModifiedTime = readFileTime(file);
 
       assertThat(lastModifiedTime)
@@ -305,7 +305,7 @@ public final class SeedModulesAssertions {
       return this;
     }
 
-    public JHipsterModuleUpgradeAsserter doNotHaveFiles(String... files) {
+    public SeedModuleUpgradeAsserter doNotHaveFiles(String... files) {
       assertThat(files).as("Can't check null files as not upgrade").isNotNull();
 
       SoftAssertions assertions = new SoftAssertions();
@@ -327,7 +327,7 @@ public final class SeedModulesAssertions {
       }
     }
 
-    public SeedModuleFileAsserter<JHipsterModuleUpgradeAsserter> hasFile(String path) {
+    public SeedModuleFileAsserter<SeedModuleUpgradeAsserter> hasFile(String path) {
       return new SeedModuleFileAsserter<>(this, projectFolder, path);
     }
   }

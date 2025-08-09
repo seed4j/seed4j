@@ -15,7 +15,7 @@ import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.file.SeedSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
+import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.SeedModuleSpringPropertiesBuilder;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.base64.domain.Base64Utils;
 import com.seed4j.shared.error.domain.Assert;
@@ -84,7 +84,7 @@ public class SpringCloudConfigModuleFactory {
     // @formatter:on
   }
 
-  private void appendCommonProperties(JHipsterModuleSpringPropertiesBuilder builder, PropertyValue baseNameValue) {
+  private void appendCommonProperties(SeedModuleSpringPropertiesBuilder builder, PropertyValue baseNameValue) {
     builder
       .set(propertyKey("spring.application.name"), baseNameValue)
       .set(propertyKey("jhipster.registry.password"), propertyValue("admin"))

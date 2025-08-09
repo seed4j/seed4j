@@ -12,7 +12,7 @@ import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
 import com.seed4j.module.domain.SeedModule;
 import com.seed4j.module.domain.file.SeedDestination;
 import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
+import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.SeedModuleSpringPropertiesBuilder;
 import com.seed4j.module.domain.properties.SeedModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
@@ -78,7 +78,7 @@ public class JwtBasicAuthModuleFactory {
     return builder.build();
   }
 
-  private void appendProperties(JHipsterModuleSpringPropertiesBuilder builder) {
+  private void appendProperties(SeedModuleSpringPropertiesBuilder builder) {
     builder
       .set(propertyKey("application.security.token-validity"), propertyValue("P1D"))
       .set(propertyKey("application.security.remember-me-token-validity"), propertyValue("P365D"))

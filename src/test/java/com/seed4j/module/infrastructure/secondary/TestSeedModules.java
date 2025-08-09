@@ -53,17 +53,17 @@ public final class TestSeedModules {
     applyer(module).apply();
   }
 
-  private static TestJHipsterModulesFinalApplyer applyer(SeedModule module) {
-    return new TestJHipsterModulesApplyer(module);
+  private static TestSeedModulesFinalApplyer applyer(SeedModule module) {
+    return new TestSeedModulesApplyer(module);
   }
 
-  private static final class TestJHipsterModulesApplyer implements TestJHipsterModulesFinalApplyer {
+  private static final class TestSeedModulesApplyer implements TestSeedModulesFinalApplyer {
 
     private final SeedModule module;
     private final SeedModuleSlug slug;
     private final SeedModulesApplicationService modules;
 
-    private TestJHipsterModulesApplyer(SeedModule module) {
+    private TestSeedModulesApplyer(SeedModule module) {
       this.module = module;
       this.slug = new SeedModuleSlug("test-module");
       this.modules = buildApplicationService(module);
@@ -112,7 +112,7 @@ public final class TestSeedModules {
     }
   }
 
-  public interface TestJHipsterModulesFinalApplyer {
+  public interface TestSeedModulesFinalApplyer {
     void apply();
   }
 }

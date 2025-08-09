@@ -46,9 +46,9 @@ import com.seed4j.module.domain.javaproperties.Comment;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.javaproperties.SeedModuleSpringFactories;
-import com.seed4j.module.domain.javaproperties.SeedModuleSpringFactories.JHipsterModuleSpringFactoriesBuilder;
+import com.seed4j.module.domain.javaproperties.SeedModuleSpringFactories.SeedModuleSpringFactoriesBuilder;
 import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties;
-import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.JHipsterModuleSpringPropertiesBuilder;
+import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.SeedModuleSpringPropertiesBuilder;
 import com.seed4j.module.domain.javaproperties.SpringComment;
 import com.seed4j.module.domain.javaproperties.SpringComments;
 import com.seed4j.module.domain.javaproperties.SpringFactories;
@@ -188,12 +188,12 @@ public final class SeedModule {
     return new SpringProperties(builder.springProperties.entrySet().stream().flatMap(toSpringProperties()).toList());
   }
 
-  private Function<Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder>, Stream<SpringProperty>> toSpringProperties() {
+  private Function<Entry<PropertiesKey, SeedModuleSpringPropertiesBuilder>, Stream<SpringProperty>> toSpringProperties() {
     return inputProperties -> inputProperties.getValue().build().properties().entrySet().stream().map(toSpringProperty(inputProperties));
   }
 
   private Function<Entry<PropertyKey, PropertyValue>, SpringProperty> toSpringProperty(
-    Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder> inputProperties
+    Entry<PropertiesKey, SeedModuleSpringPropertiesBuilder> inputProperties
   ) {
     return property ->
       SpringProperty.builder(inputProperties.getKey().type())
@@ -207,12 +207,12 @@ public final class SeedModule {
     return new SpringComments(builder.springProperties.entrySet().stream().flatMap(toSpringComments()).toList());
   }
 
-  private Function<Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder>, Stream<SpringComment>> toSpringComments() {
+  private Function<Entry<PropertiesKey, SeedModuleSpringPropertiesBuilder>, Stream<SpringComment>> toSpringComments() {
     return inputProperties -> inputProperties.getValue().build().comments().entrySet().stream().map(toSpringComment(inputProperties));
   }
 
   private Function<Entry<PropertyKey, Comment>, SpringComment> toSpringComment(
-    Entry<PropertiesKey, JHipsterModuleSpringPropertiesBuilder> inputProperties
+    Entry<PropertiesKey, SeedModuleSpringPropertiesBuilder> inputProperties
   ) {
     return propertyComment ->
       SpringComment.builder(inputProperties.getKey().type())
@@ -226,12 +226,12 @@ public final class SeedModule {
     return new SpringFactories(builder.springFactories.entrySet().stream().flatMap(toSpringFactories()).toList());
   }
 
-  private Function<Entry<SpringFactoryType, JHipsterModuleSpringFactoriesBuilder>, Stream<SpringFactory>> toSpringFactories() {
+  private Function<Entry<SpringFactoryType, SeedModuleSpringFactoriesBuilder>, Stream<SpringFactory>> toSpringFactories() {
     return inputFactories -> inputFactories.getValue().build().factories().entrySet().stream().map(toSpringFactory(inputFactories));
   }
 
   private Function<Entry<PropertyKey, PropertyValue>, SpringFactory> toSpringFactory(
-    Entry<SpringFactoryType, JHipsterModuleSpringFactoriesBuilder> inputFactories
+    Entry<SpringFactoryType, SeedModuleSpringFactoriesBuilder> inputFactories
   ) {
     return property -> SpringFactory.builder(inputFactories.getKey()).key(property.getKey()).value(property.getValue());
   }
@@ -568,8 +568,8 @@ public final class SeedModule {
     private final SeedModulePackageJsonBuilder packageJson = SeedModulePackageJson.builder(this);
     private final SeedModulePreActionsBuilder preActions = SeedModulePreActions.builder(this);
     private final SeedModulePostActionsBuilder postActions = SeedModulePostActions.builder(this);
-    private final Map<PropertiesKey, JHipsterModuleSpringPropertiesBuilder> springProperties = new HashMap<>();
-    private final Map<SpringFactoryType, JHipsterModuleSpringFactoriesBuilder> springFactories = new EnumMap<>(SpringFactoryType.class);
+    private final Map<PropertiesKey, SeedModuleSpringPropertiesBuilder> springProperties = new HashMap<>();
+    private final Map<SpringFactoryType, SeedModuleSpringFactoriesBuilder> springFactories = new EnumMap<>(SpringFactoryType.class);
     private final SeedModuleGitIgnoreBuilder gitIgnore = SeedModuleGitIgnore.builder(this);
     private final SeedModuleDockerComposeFileBuilder dockerComposeFile = SeedModuleDockerComposeFile.builder(this);
 
@@ -702,19 +702,19 @@ public final class SeedModule {
       return postActions;
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springMainProperties() {
+    public SeedModuleSpringPropertiesBuilder springMainProperties() {
       return springMainProperties(SpringProfile.DEFAULT);
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springLocalProperties() {
+    public SeedModuleSpringPropertiesBuilder springLocalProperties() {
       return springMainProperties(SpringProfile.LOCAL);
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springMainBootstrapProperties() {
+    public SeedModuleSpringPropertiesBuilder springMainBootstrapProperties() {
       return springMainBootstrapProperties(SpringProfile.DEFAULT);
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springMainBootstrapProperties(SpringProfile profile) {
+    public SeedModuleSpringPropertiesBuilder springMainBootstrapProperties(SpringProfile profile) {
       Assert.notNull(PROFILE, profile);
 
       return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.MAIN_BOOTSTRAP_PROPERTIES), key ->
@@ -722,7 +722,7 @@ public final class SeedModule {
       );
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springMainProperties(SpringProfile profile) {
+    public SeedModuleSpringPropertiesBuilder springMainProperties(SpringProfile profile) {
       Assert.notNull(PROFILE, profile);
 
       return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.MAIN_PROPERTIES), key ->
@@ -730,17 +730,17 @@ public final class SeedModule {
       );
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springTestProperties() {
+    public SeedModuleSpringPropertiesBuilder springTestProperties() {
       return springTestProperties(SpringProfile.TEST);
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springTestBootstrapProperties() {
+    public SeedModuleSpringPropertiesBuilder springTestBootstrapProperties() {
       return springProperties.computeIfAbsent(new PropertiesKey(SpringProfile.DEFAULT, SpringPropertyType.TEST_BOOTSTRAP_PROPERTIES), key ->
         SeedModuleSpringProperties.builder(this)
       );
     }
 
-    public JHipsterModuleSpringPropertiesBuilder springTestProperties(SpringProfile profile) {
+    public SeedModuleSpringPropertiesBuilder springTestProperties(SpringProfile profile) {
       Assert.notNull(PROFILE, profile);
 
       return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.TEST_PROPERTIES), key ->
@@ -748,7 +748,7 @@ public final class SeedModule {
       );
     }
 
-    public JHipsterModuleSpringFactoriesBuilder springTestFactories() {
+    public SeedModuleSpringFactoriesBuilder springTestFactories() {
       return springFactories.computeIfAbsent(SpringFactoryType.TEST_FACTORIES, key -> SeedModuleSpringFactories.builder(this));
     }
 

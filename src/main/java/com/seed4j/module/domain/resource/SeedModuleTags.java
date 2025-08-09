@@ -12,12 +12,12 @@ public final class SeedModuleTags {
 
   private final Collection<SeedModuleTag> tags;
 
-  private SeedModuleTags(JHipsterModuleTagsBuilder builder) {
+  private SeedModuleTags(SeedModuleTagsBuilder builder) {
     tags = builder.tags.stream().sorted(TAG_COMPARATOR).toList();
   }
 
-  public static JHipsterModuleTagsBuilder builder() {
-    return new JHipsterModuleTagsBuilder();
+  public static SeedModuleTagsBuilder builder() {
+    return new SeedModuleTagsBuilder();
   }
 
   public Collection<SeedModuleTag> get() {
@@ -35,17 +35,17 @@ public final class SeedModuleTags {
     return tags.toString();
   }
 
-  public static class JHipsterModuleTagsBuilder {
+  public static class SeedModuleTagsBuilder {
 
     private final Collection<SeedModuleTag> tags = new ArrayList<>();
 
-    public JHipsterModuleTagsBuilder add(String... tags) {
+    public SeedModuleTagsBuilder add(String... tags) {
       add(List.of(tags));
 
       return this;
     }
 
-    private JHipsterModuleTagsBuilder add(Collection<String> tags) {
+    private SeedModuleTagsBuilder add(Collection<String> tags) {
       Assert.field("tags", tags).noNullElement();
 
       this.tags.addAll(tags.stream().map(SeedModuleTag::new).toList());

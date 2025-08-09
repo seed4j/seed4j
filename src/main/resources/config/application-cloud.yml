@@ -9,7 +9,7 @@ application:
     allow-credentials: true
     max-age: 1800
 
-jhlite:
+seed4j:
   forced-project-folder: /tmp/seed4j
 
 server:

@@ -13,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 @AutoConfigureMockMvc
-@IntegrationTest(properties = "jhlite.forced-project-folder=/tmp/forced")
+@IntegrationTest(properties = "seed4j.forced-project-folder=/tmp/forced")
 class ForcedProjectFolderPrefixIT {
 
   private static final String SEPARATOR = FileSystems.getDefault().getSeparator();

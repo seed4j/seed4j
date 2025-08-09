@@ -10,7 +10,7 @@ application:
       - http://localhost:8100
       - http://localhost:9000
 
-jhlite:
+seed4j:
   hidden-resources:
     slugs:
     tags:

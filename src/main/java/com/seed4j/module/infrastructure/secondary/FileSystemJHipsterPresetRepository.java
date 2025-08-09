@@ -27,7 +27,7 @@ class FileSystemJHipsterPresetRepository implements JHipsterPresetRepository {
   public FileSystemJHipsterPresetRepository(
     ObjectMapper json,
     ProjectFiles projectFiles,
-    @Value("${jhlite.preset-folder:presets}") String presetFolderName
+    @Value("${seed4j.preset-folder:presets}") String presetFolderName
   ) {
     this.json = json;
     this.projectFiles = projectFiles;

@@ -57,14 +57,14 @@ application:
       - Authorization
       - Link
       - X-Total-Count
-      - X-jhlite-alert
-      - X-jhlite-error
-      - X-jhlite-params
+      - X-seed4j-alert
+      - X-seed4j-error
+      - X-seed4j-params
   version: '@project.version@'
   cmd:
     timeout: 120
 
-jhlite:
+seed4j:
   #  forced-project-folder: /tmp/seed4j
   hidden-resources:
     slugs:

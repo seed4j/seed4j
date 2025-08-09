@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Configuration;
 class ProjectFolderConfiguration {
 
   @Bean
-  @ConditionalOnProperty(value = "jhlite.forced-project-folder")
-  ProjectFolder forcedProjectFolder(@Value("${jhlite.forced-project-folder}") String forcedProjectFolder) {
+  @ConditionalOnProperty(value = "seed4j.forced-project-folder")
+  ProjectFolder forcedProjectFolder(@Value("${seed4j.forced-project-folder}") String forcedProjectFolder) {
     return new ForcedProjectFolder(forcedProjectFolder);
   }
 
   @Bean
-  @ConditionalOnProperty(value = "jhlite.forced-project-folder", matchIfMissing = true, havingValue = "dummy")
+  @ConditionalOnProperty(value = "seed4j.forced-project-folder", matchIfMissing = true, havingValue = "dummy")
   ProjectFolder freeProjectFolder() {
     return new FreeProjectFolder();
   }

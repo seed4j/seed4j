@@ -1,4 +1,4 @@
-jhlite:
+seed4j:
   hidden-resources:
     slugs:
       - spring-boot-kafka-sample-producer-consumer

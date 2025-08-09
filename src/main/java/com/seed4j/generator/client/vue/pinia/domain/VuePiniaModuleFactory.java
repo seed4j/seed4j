@@ -1,7 +1,7 @@
 package com.seed4j.generator.client.vue.pinia.domain;
 
 import static com.seed4j.module.domain.JHipsterModule.*;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.VUE;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;

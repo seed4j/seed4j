@@ -2,7 +2,7 @@ package com.seed4j.generator.client.vue.router.domain;
 
 import static com.seed4j.generator.typescript.common.domain.VitestShortcuts.vitestCoverageExclusion;
 import static com.seed4j.module.domain.JHipsterModule.*;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.VUE;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;

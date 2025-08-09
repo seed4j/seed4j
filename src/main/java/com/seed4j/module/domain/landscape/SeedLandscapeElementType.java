@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.landscape;
 
-public enum JHipsterLandscapeElementType {
+public enum SeedLandscapeElementType {
   FEATURE,
   MODULE,
 }

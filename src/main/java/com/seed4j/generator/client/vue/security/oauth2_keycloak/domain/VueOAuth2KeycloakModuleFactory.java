@@ -7,7 +7,7 @@ import static com.seed4j.module.domain.JHipsterModule.moduleBuilder;
 import static com.seed4j.module.domain.JHipsterModule.packageName;
 import static com.seed4j.module.domain.JHipsterModule.path;
 import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.JHipsterModule;

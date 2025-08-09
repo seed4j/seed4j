@@ -1,8 +1,8 @@
 package com.seed4j.generator.client.react.security.jwt.domain;
 
 import static com.seed4j.module.domain.JHipsterModule.*;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.REACT;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.REACT;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;

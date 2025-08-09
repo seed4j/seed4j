@@ -65,7 +65,7 @@ public class JHipsterModulesApplyer {
     return modules.landscape().sort(modulesToApply.slugs()).stream().map(toModuleToApply(modulesToApply)).map(this::apply).toList();
   }
 
-  private Function<JHipsterModuleSlug, JHipsterModuleToApply> toModuleToApply(JHipsterModulesToApply modulesToApply) {
+  private Function<SeedModuleSlug, JHipsterModuleToApply> toModuleToApply(JHipsterModulesToApply modulesToApply) {
     return slug -> new JHipsterModuleToApply(slug, modulesToApply.properties());
   }
 

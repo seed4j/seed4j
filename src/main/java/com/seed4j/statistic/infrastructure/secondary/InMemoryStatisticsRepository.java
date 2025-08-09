@@ -1,6 +1,6 @@
 package com.seed4j.statistic.infrastructure.secondary;
 
-import com.seed4j.module.domain.JHipsterModuleSlug;
+import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.statistic.domain.AppliedModule;
 import com.seed4j.statistic.domain.Statistics;
@@ -51,10 +51,10 @@ class InMemoryStatisticsRepository implements StatisticsRepository {
     return appliedModule -> endTime.map(end -> appliedModule.date().isBefore(end)).orElse(true);
   }
 
-  private static Predicate<AppliedModule> hasModuleSlug(Optional<JHipsterModuleSlug> moduleSlug) {
+  private static Predicate<AppliedModule> hasModuleSlug(Optional<SeedModuleSlug> moduleSlug) {
     return appliedModule ->
       moduleSlug
-        .map(JHipsterModuleSlug::get)
+        .map(SeedModuleSlug::get)
         .map(slug -> appliedModule.module().slug().equals(slug))
         .orElse(true);
   }

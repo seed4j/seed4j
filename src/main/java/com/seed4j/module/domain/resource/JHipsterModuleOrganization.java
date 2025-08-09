@@ -2,10 +2,10 @@ package com.seed4j.module.domain.resource;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.*;
 
-import com.seed4j.module.domain.JHipsterFeatureSlug;
-import com.seed4j.module.domain.landscape.JHipsterFeatureDependency;
-import com.seed4j.module.domain.landscape.JHipsterLandscapeDependency;
-import com.seed4j.module.domain.landscape.JHipsterModuleDependency;
+import com.seed4j.module.domain.SeedFeatureSlug;
+import com.seed4j.module.domain.landscape.SeedFeatureDependency;
+import com.seed4j.module.domain.landscape.SeedLandscapeDependency;
+import com.seed4j.module.domain.landscape.SeedModuleDependency;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.slug.domain.JHLiteModuleSlug;
 import java.util.ArrayList;
@@ -18,8 +18,8 @@ public final class JHipsterModuleOrganization {
   public static final JHipsterModuleOrganization STANDALONE = builder().build();
   public static final JHipsterModuleOrganization SPRINGBOOT_DEPENDENCY = builder().addDependency(JHLiteModuleSlug.SPRING_BOOT).build();
 
-  private final Optional<JHipsterFeatureSlug> feature;
-  private final Collection<JHipsterLandscapeDependency> dependencies;
+  private final Optional<SeedFeatureSlug> feature;
+  private final Collection<SeedLandscapeDependency> dependencies;
 
   private JHipsterModuleOrganization(JHipsterModuleOrganizationBuilder builder) {
     feature = builder.feature;
@@ -30,26 +30,26 @@ public final class JHipsterModuleOrganization {
     return new JHipsterModuleOrganizationBuilder();
   }
 
-  public Optional<JHipsterFeatureSlug> feature() {
+  public Optional<SeedFeatureSlug> feature() {
     return feature;
   }
 
-  public Collection<JHipsterLandscapeDependency> dependencies() {
+  public Collection<SeedLandscapeDependency> dependencies() {
     return dependencies;
   }
 
   @Override
   public String toString() {
     return new ToStringBuilder(this, SHORT_PREFIX_STYLE)
-      .append("feature", feature.map(JHipsterFeatureSlug::get).orElse(""))
+      .append("feature", feature.map(SeedFeatureSlug::get).orElse(""))
       .append("dependencies", dependencies)
       .build();
   }
 
   public static class JHipsterModuleOrganizationBuilder {
 
-    private final Collection<JHipsterLandscapeDependency> dependencies = new ArrayList<>();
-    private Optional<JHipsterFeatureSlug> feature = Optional.empty();
+    private final Collection<SeedLandscapeDependency> dependencies = new ArrayList<>();
+    private Optional<SeedFeatureSlug> feature = Optional.empty();
 
     public JHipsterModuleOrganizationBuilder feature(JHipsterFeatureSlugFactory featureFactory) {
       Assert.notNull("featureFactory", featureFactory);
@@ -62,7 +62,7 @@ public final class JHipsterModuleOrganization {
     public JHipsterModuleOrganizationBuilder addDependency(JHipsterModuleSlugFactory module) {
       Assert.notNull("module", module);
 
-      dependencies.add(new JHipsterModuleDependency(module.build()));
+      dependencies.add(new SeedModuleDependency(module.build()));
 
       return this;
     }
@@ -70,7 +70,7 @@ public final class JHipsterModuleOrganization {
     public JHipsterModuleOrganizationBuilder addDependency(JHipsterFeatureSlugFactory featureFactory) {
       Assert.notNull("featureFactory", featureFactory);
 
-      featureFactory.build().map(JHipsterFeatureDependency::new).ifPresent(dependencies::add);
+      featureFactory.build().map(SeedFeatureDependency::new).ifPresent(dependencies::add);
 
       return this;
     }

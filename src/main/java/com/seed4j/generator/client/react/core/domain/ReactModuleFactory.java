@@ -17,8 +17,8 @@ import static com.seed4j.module.domain.JHipsterModule.scriptKey;
 import static com.seed4j.module.domain.JHipsterModule.stagedFilesFilter;
 import static com.seed4j.module.domain.JHipsterModule.text;
 import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.REACT;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.REACT;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.always;
 
 import com.seed4j.module.domain.JHipsterModule;

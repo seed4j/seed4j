@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.primary;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.seed4j.module.domain.landscape.JHipsterLandscapeElementType;
-import com.seed4j.module.domain.landscape.JHipsterLandscapeModule;
+import com.seed4j.module.domain.landscape.SeedLandscapeElementType;
+import com.seed4j.module.domain.landscape.SeedLandscapeModule;
 import com.seed4j.module.domain.resource.JHipsterModuleRank;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
@@ -27,7 +27,7 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
     rank = builder.rank;
   }
 
-  static RestJHipsterLandscapeModule fromModule(JHipsterLandscapeModule module) {
+  static RestJHipsterLandscapeModule fromModule(SeedLandscapeModule module) {
     return new RestJHipsterLandscapeModuleBuilder()
       .slug(module.slug().get())
       .operation(module.operation().get())
@@ -37,7 +37,7 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
       .build();
   }
 
-  private static List<RestJHipsterLandscapeDependency> buildDependencies(JHipsterLandscapeModule module) {
+  private static List<RestJHipsterLandscapeDependency> buildDependencies(SeedLandscapeModule module) {
     return module
       .dependencies()
       .map(dependencies -> dependencies.stream().map(RestJHipsterLandscapeDependency::from).toList())
@@ -46,8 +46,8 @@ final class RestJHipsterLandscapeModule implements RestJHipsterLandscapeElement 
 
   @Override
   @Schema(description = "Type of this landscape element", requiredMode = RequiredMode.REQUIRED)
-  public JHipsterLandscapeElementType getType() {
-    return JHipsterLandscapeElementType.MODULE;
+  public SeedLandscapeElementType getType() {
+    return SeedLandscapeElementType.MODULE;
   }
 
   @Schema(description = "Unique slug of this module", requiredMode = RequiredMode.REQUIRED)

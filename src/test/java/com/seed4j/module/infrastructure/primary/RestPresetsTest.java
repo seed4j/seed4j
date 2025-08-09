@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.JsonHelper;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModuleSlug;
 import com.seed4j.module.domain.JHipsterModuleSlugs;
+import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.preset.Preset;
 import com.seed4j.module.domain.preset.PresetName;
 import com.seed4j.module.domain.preset.Presets;
@@ -25,11 +25,11 @@ class RestPresetsTest {
       List.of(
         new Preset(
           new PresetName("test preset one"),
-          new JHipsterModuleSlugs(List.of(new JHipsterModuleSlug("test-module-one"), new JHipsterModuleSlug("test-module-two")))
+          new JHipsterModuleSlugs(List.of(new SeedModuleSlug("test-module-one"), new SeedModuleSlug("test-module-two")))
         ),
         new Preset(
           new PresetName("test preset two"),
-          new JHipsterModuleSlugs(List.of(new JHipsterModuleSlug("test-module-three"), new JHipsterModuleSlug("test-module-four")))
+          new JHipsterModuleSlugs(List.of(new SeedModuleSlug("test-module-three"), new SeedModuleSlug("test-module-four")))
         )
       )
     );

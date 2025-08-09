@@ -7,9 +7,9 @@ import static org.mockito.Mockito.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.seed4j.JsonHelper;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModuleSlug;
 import com.seed4j.module.domain.JHipsterModuleSlugs;
 import com.seed4j.module.domain.ProjectFiles;
+import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.preset.Preset;
 import com.seed4j.module.domain.preset.PresetName;
 import com.seed4j.module.domain.preset.Presets;
@@ -246,14 +246,14 @@ class FileSystemJHipsterPresetRepositoryTest {
       new PresetName("Java Library with Maven"),
       new JHipsterModuleSlugs(
         List.of(
-          new JHipsterModuleSlug("init"),
-          new JHipsterModuleSlug("application-service-hexagonal-architecture-documentation"),
-          new JHipsterModuleSlug("maven-java"),
-          new JHipsterModuleSlug("maven-wrapper"),
-          new JHipsterModuleSlug("prettier"),
-          new JHipsterModuleSlug("java-base"),
-          new JHipsterModuleSlug("checkstyle"),
-          new JHipsterModuleSlug("jacoco-with-min-coverage-check")
+          new SeedModuleSlug("init"),
+          new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),
+          new SeedModuleSlug("maven-java"),
+          new SeedModuleSlug("maven-wrapper"),
+          new SeedModuleSlug("prettier"),
+          new SeedModuleSlug("java-base"),
+          new SeedModuleSlug("checkstyle"),
+          new SeedModuleSlug("jacoco-with-min-coverage-check")
         )
       )
     );
@@ -264,14 +264,14 @@ class FileSystemJHipsterPresetRepositoryTest {
       new PresetName("Java Library with Gradle"),
       new JHipsterModuleSlugs(
         List.of(
-          new JHipsterModuleSlug("init"),
-          new JHipsterModuleSlug("application-service-hexagonal-architecture-documentation"),
-          new JHipsterModuleSlug("gradle-java"),
-          new JHipsterModuleSlug("gradle-wrapper"),
-          new JHipsterModuleSlug("prettier"),
-          new JHipsterModuleSlug("java-base"),
-          new JHipsterModuleSlug("checkstyle"),
-          new JHipsterModuleSlug("jacoco-with-min-coverage-check")
+          new SeedModuleSlug("init"),
+          new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),
+          new SeedModuleSlug("gradle-java"),
+          new SeedModuleSlug("gradle-wrapper"),
+          new SeedModuleSlug("prettier"),
+          new SeedModuleSlug("java-base"),
+          new SeedModuleSlug("checkstyle"),
+          new SeedModuleSlug("jacoco-with-min-coverage-check")
         )
       )
     );
@@ -282,11 +282,11 @@ class FileSystemJHipsterPresetRepositoryTest {
       new PresetName("Vue Core"),
       new JHipsterModuleSlugs(
         List.of(
-          new JHipsterModuleSlug("init"),
-          new JHipsterModuleSlug("application-service-hexagonal-architecture-documentation"),
-          new JHipsterModuleSlug("prettier"),
-          new JHipsterModuleSlug("typescript"),
-          new JHipsterModuleSlug("vue-core")
+          new SeedModuleSlug("init"),
+          new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),
+          new SeedModuleSlug("prettier"),
+          new SeedModuleSlug("typescript"),
+          new SeedModuleSlug("vue-core")
         )
       )
     );
@@ -297,20 +297,20 @@ class FileSystemJHipsterPresetRepositoryTest {
       new PresetName("Webapp: Vue + Spring Boot"),
       new JHipsterModuleSlugs(
         List.of(
-          new JHipsterModuleSlug("init"),
-          new JHipsterModuleSlug("application-service-hexagonal-architecture-documentation"),
-          new JHipsterModuleSlug("maven-java"),
-          new JHipsterModuleSlug("maven-wrapper"),
-          new JHipsterModuleSlug("prettier"),
-          new JHipsterModuleSlug("vue-core"),
-          new JHipsterModuleSlug("java-base"),
-          new JHipsterModuleSlug("checkstyle"),
-          new JHipsterModuleSlug("jacoco-with-min-coverage-check"),
-          new JHipsterModuleSlug("spring-boot"),
-          new JHipsterModuleSlug("spring-boot-mvc-empty"),
-          new JHipsterModuleSlug("logs-spy"),
-          new JHipsterModuleSlug("spring-boot-tomcat"),
-          new JHipsterModuleSlug("frontend-maven-plugin")
+          new SeedModuleSlug("init"),
+          new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),
+          new SeedModuleSlug("maven-java"),
+          new SeedModuleSlug("maven-wrapper"),
+          new SeedModuleSlug("prettier"),
+          new SeedModuleSlug("vue-core"),
+          new SeedModuleSlug("java-base"),
+          new SeedModuleSlug("checkstyle"),
+          new SeedModuleSlug("jacoco-with-min-coverage-check"),
+          new SeedModuleSlug("spring-boot"),
+          new SeedModuleSlug("spring-boot-mvc-empty"),
+          new SeedModuleSlug("logs-spy"),
+          new SeedModuleSlug("spring-boot-tomcat"),
+          new SeedModuleSlug("frontend-maven-plugin")
         )
       )
     );
@@ -321,11 +321,11 @@ class FileSystemJHipsterPresetRepositoryTest {
       new PresetName("Angular Core"),
       new JHipsterModuleSlugs(
         List.of(
-          new JHipsterModuleSlug("init"),
-          new JHipsterModuleSlug("application-service-hexagonal-architecture-documentation"),
-          new JHipsterModuleSlug("prettier"),
-          new JHipsterModuleSlug("typescript"),
-          new JHipsterModuleSlug("angular-core")
+          new SeedModuleSlug("init"),
+          new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),
+          new SeedModuleSlug("prettier"),
+          new SeedModuleSlug("typescript"),
+          new SeedModuleSlug("angular-core")
         )
       )
     );
@@ -336,11 +336,11 @@ class FileSystemJHipsterPresetRepositoryTest {
       new PresetName("React Core"),
       new JHipsterModuleSlugs(
         List.of(
-          new JHipsterModuleSlug("init"),
-          new JHipsterModuleSlug("application-service-hexagonal-architecture-documentation"),
-          new JHipsterModuleSlug("prettier"),
-          new JHipsterModuleSlug("typescript"),
-          new JHipsterModuleSlug("react-core")
+          new SeedModuleSlug("init"),
+          new SeedModuleSlug("application-service-hexagonal-architecture-documentation"),
+          new SeedModuleSlug("prettier"),
+          new SeedModuleSlug("typescript"),
+          new SeedModuleSlug("react-core")
         )
       )
     );

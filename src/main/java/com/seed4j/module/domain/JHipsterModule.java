@@ -58,12 +58,12 @@ import com.seed4j.module.domain.javaproperties.SpringProfile;
 import com.seed4j.module.domain.javaproperties.SpringProperties;
 import com.seed4j.module.domain.javaproperties.SpringProperty;
 import com.seed4j.module.domain.javaproperties.SpringPropertyType;
-import com.seed4j.module.domain.mavenplugin.JHipsterModuleMavenPlugins;
-import com.seed4j.module.domain.mavenplugin.JHipsterModuleMavenPlugins.JHipsterModuleMavenPluginsBuilder;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginGroupIdBuilder;
 import com.seed4j.module.domain.mavenplugin.MavenPluginExecution;
 import com.seed4j.module.domain.mavenplugin.MavenPluginExecution.MavenPluginExecutionGoalsBuilder;
+import com.seed4j.module.domain.mavenplugin.SeedModuleMavenPlugins;
+import com.seed4j.module.domain.mavenplugin.SeedModuleMavenPlugins.SeedModuleMavenPluginsBuilder;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.packagejson.JHipsterModulePackageJson;
 import com.seed4j.module.domain.packagejson.JHipsterModulePackageJson.JHipsterModulePackageJsonBuilder;
@@ -120,7 +120,7 @@ public final class JHipsterModule {
   private final SeedModuleJavaDependencies javaDependencies;
   private final SeedModuleBuildProperties javaBuildProperties;
   private final SeedModuleJavaBuildProfiles javaBuildProfiles;
-  private final JHipsterModuleMavenPlugins mavenPlugins;
+  private final SeedModuleMavenPlugins mavenPlugins;
   private final SeedModuleGradleConfigurations gradleConfigurations;
   private final SeedModuleGradlePlugins gradlePlugins;
   private final SeedModuleMavenBuildExtensions mavenBuildExtensions;
@@ -498,7 +498,7 @@ public final class JHipsterModule {
     return javaBuildProfiles;
   }
 
-  public JHipsterModuleMavenPlugins mavenPlugins() {
+  public SeedModuleMavenPlugins mavenPlugins() {
     return mavenPlugins;
   }
 
@@ -562,7 +562,7 @@ public final class JHipsterModule {
     private final JHipsterModuleJavaDependenciesBuilder<JHipsterModuleBuilder> javaDependencies = SeedModuleJavaDependencies.builder(this);
     private final JHipsterModuleBuildPropertiesBuilder<JHipsterModuleBuilder> javaBuildProperties = SeedModuleBuildProperties.builder(this);
     private final SeedModuleJavaBuildProfilesBuilder javaBuildProfiles = SeedModuleJavaBuildProfiles.builder(this);
-    private final JHipsterModuleMavenPluginsBuilder<JHipsterModuleBuilder> mavenPlugins = JHipsterModuleMavenPlugins.builder(this);
+    private final SeedModuleMavenPluginsBuilder<JHipsterModuleBuilder> mavenPlugins = SeedModuleMavenPlugins.builder(this);
     private final JHipsterModuleGradleConfigurationBuilder gradleConfigurations = SeedModuleGradleConfigurations.builder(this);
     private final JHipsterModuleGradlePluginBuilder gradlePlugins = SeedModuleGradlePlugins.builder(this);
     private final JHipsterModuleMavenBuildExtensionsBuilder mavenBuildExtensions = SeedModuleMavenBuildExtensions.builder(this);
@@ -666,7 +666,7 @@ public final class JHipsterModule {
       return javaBuildProfiles;
     }
 
-    public JHipsterModuleMavenPluginsBuilder<JHipsterModuleBuilder> mavenPlugins() {
+    public SeedModuleMavenPluginsBuilder<JHipsterModuleBuilder> mavenPlugins() {
       return mavenPlugins;
     }
 

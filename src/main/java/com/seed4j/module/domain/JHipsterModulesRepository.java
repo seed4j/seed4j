@@ -1,12 +1,12 @@
 package com.seed4j.module.domain;
 
-import com.seed4j.module.domain.landscape.JHipsterLandscape;
+import com.seed4j.module.domain.landscape.SeedLandscape;
 import com.seed4j.module.domain.resource.JHipsterModulesResources;
 
 public interface JHipsterModulesRepository {
   JHipsterModulesResources resources();
 
-  JHipsterLandscape landscape();
+  SeedLandscape landscape();
 
   /**
    * Perform updates to target project

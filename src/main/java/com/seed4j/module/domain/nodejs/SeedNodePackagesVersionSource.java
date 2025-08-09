@@ -3,7 +3,7 @@ package com.seed4j.module.domain.nodejs;
 /**
  * {@link NodePackagesVersionSource} that are handled by Seed4J.
  */
-public enum JHLiteNodePackagesVersionSource implements NodePackagesVersionSourceFactory {
+public enum SeedNodePackagesVersionSource implements NodePackagesVersionSourceFactory {
   COMMON("common"),
   ANGULAR("angular"),
   REACT("react"),
@@ -12,7 +12,7 @@ public enum JHLiteNodePackagesVersionSource implements NodePackagesVersionSource
 
   private final String source;
 
-  JHLiteNodePackagesVersionSource(String source) {
+  SeedNodePackagesVersionSource(String source) {
     this.source = source;
   }
 

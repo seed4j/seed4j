@@ -14,18 +14,18 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public final class JHipsterModuleMavenPlugins {
+public final class SeedModuleMavenPlugins {
 
   private final Collection<MavenPlugin> pluginsManagement;
   private final Collection<MavenPlugin> plugins;
 
-  private JHipsterModuleMavenPlugins(JHipsterModuleMavenPluginsBuilder<?> builder) {
+  private SeedModuleMavenPlugins(SeedModuleMavenPluginsBuilder<?> builder) {
     pluginsManagement = builder.pluginsManagement;
     plugins = builder.plugins;
   }
 
-  public static <T> JHipsterModuleMavenPluginsBuilder<T> builder(T parentModuleBuilder) {
-    return new JHipsterModuleMavenPluginsBuilder<>(parentModuleBuilder);
+  public static <T> SeedModuleMavenPluginsBuilder<T> builder(T parentModuleBuilder) {
+    return new SeedModuleMavenPluginsBuilder<>(parentModuleBuilder);
   }
 
   public JavaBuildCommands buildChanges(JavaDependenciesVersions versions, ProjectJavaDependencies projectJavaDependencies) {
@@ -85,19 +85,19 @@ public final class JHipsterModuleMavenPlugins {
     return dependency -> dependency.version().flatMap(JavaDependency.toVersion(versions, projectDependencies)).stream();
   }
 
-  public static final class JHipsterModuleMavenPluginsBuilder<T> {
+  public static final class SeedModuleMavenPluginsBuilder<T> {
 
     private final T parentModuleBuilder;
     private final Collection<MavenPlugin> pluginsManagement = new ArrayList<>();
     private final Collection<MavenPlugin> plugins = new ArrayList<>();
 
-    private JHipsterModuleMavenPluginsBuilder(T parentModuleBuilder) {
+    private SeedModuleMavenPluginsBuilder(T parentModuleBuilder) {
       Assert.notNull("parentModuleBuilder", parentModuleBuilder);
 
       this.parentModuleBuilder = parentModuleBuilder;
     }
 
-    public JHipsterModuleMavenPluginsBuilder<T> pluginManagement(MavenPlugin pluginManagement) {
+    public SeedModuleMavenPluginsBuilder<T> pluginManagement(MavenPlugin pluginManagement) {
       Assert.notNull("pluginManagement", pluginManagement);
 
       pluginsManagement.add(pluginManagement);
@@ -105,7 +105,7 @@ public final class JHipsterModuleMavenPlugins {
       return this;
     }
 
-    public JHipsterModuleMavenPluginsBuilder<T> plugin(MavenPlugin plugin) {
+    public SeedModuleMavenPluginsBuilder<T> plugin(MavenPlugin plugin) {
       Assert.notNull("plugin", plugin);
 
       plugins.add(plugin);
@@ -117,8 +117,8 @@ public final class JHipsterModuleMavenPlugins {
       return parentModuleBuilder;
     }
 
-    public JHipsterModuleMavenPlugins build() {
-      return new JHipsterModuleMavenPlugins(this);
+    public SeedModuleMavenPlugins build() {
+      return new SeedModuleMavenPlugins(this);
     }
   }
 }

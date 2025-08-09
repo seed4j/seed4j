@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.domain.JHipsterModuleSlug;
+import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.properties.JHipsterPropertyDefaultValue;
 import com.seed4j.module.domain.properties.JHipsterPropertyDescription;
 import com.seed4j.module.domain.properties.JHipsterPropertyKey;
@@ -163,7 +163,7 @@ class OpenApiModuleConfiguration {
       .collect(Collectors.toMap(JHipsterModuleResource::moduleUrl, module -> modulePropertiesDefinition(module.apiDoc(), module.slug())));
   }
 
-  private PathItem modulePropertiesDefinition(JHipsterModuleApiDoc apiDoc, JHipsterModuleSlug slug) {
+  private PathItem modulePropertiesDefinition(JHipsterModuleApiDoc apiDoc, SeedModuleSlug slug) {
     Operation getOperation = new Operation()
       .operationId(slug.get() + "-properties-definition")
       .summary("Get " + slug.get() + " properties definitions")
@@ -191,7 +191,7 @@ class OpenApiModuleConfiguration {
       );
   }
 
-  private PathItem moduleApplicationDefinition(JHipsterModuleApiDoc apiDoc, JHipsterModuleSlug slug) {
+  private PathItem moduleApplicationDefinition(JHipsterModuleApiDoc apiDoc, SeedModuleSlug slug) {
     Operation postOperation = new Operation()
       .operationId(slug.get() + "-application")
       .summary(apiDoc.operation().get())
@@ -205,7 +205,7 @@ class OpenApiModuleConfiguration {
     return new PathItem().post(postOperation);
   }
 
-  private String schemaName(JHipsterModuleSlug slug) {
+  private String schemaName(SeedModuleSlug slug) {
     return slug.get() + "-schema";
   }
 }

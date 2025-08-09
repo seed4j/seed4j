@@ -2,8 +2,8 @@ package com.seed4j.module.domain.landscape;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.*;
 
-import com.seed4j.module.domain.JHipsterModuleSlug;
-import com.seed4j.module.domain.JHipsterSlug;
+import com.seed4j.module.domain.SeedModuleSlug;
+import com.seed4j.module.domain.SeedSlug;
 import com.seed4j.module.domain.resource.JHipsterModuleOperation;
 import com.seed4j.module.domain.resource.JHipsterModulePropertiesDefinition;
 import com.seed4j.module.domain.resource.JHipsterModuleRank;
@@ -16,15 +16,15 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public final class JHipsterLandscapeModule implements JHipsterLandscapeElement {
+public final class SeedLandscapeModule implements SeedLandscapeElement {
 
-  private final JHipsterModuleSlug module;
+  private final SeedModuleSlug module;
   private final JHipsterModuleOperation operation;
   private final JHipsterModulePropertiesDefinition propertiesDefinition;
-  private final Optional<JHipsterLandscapeDependencies> dependencies;
+  private final Optional<SeedLandscapeDependencies> dependencies;
   private final JHipsterModuleRank rank;
 
-  private JHipsterLandscapeModule(JHipsterLandscapeModuleBuilder builder) {
+  private SeedLandscapeModule(JHipsterLandscapeModuleBuilder builder) {
     Assert.notNull("module", builder.module);
     Assert.notNull("operation", builder.operation);
     Assert.notNull("propertiesDefinition", builder.propertiesDefinition);
@@ -32,7 +32,7 @@ public final class JHipsterLandscapeModule implements JHipsterLandscapeElement {
     module = builder.module;
     operation = builder.operation;
     propertiesDefinition = builder.propertiesDefinition;
-    dependencies = JHipsterLandscapeDependencies.of(builder.dependencies);
+    dependencies = SeedLandscapeDependencies.of(builder.dependencies);
     rank = builder.rank;
   }
 
@@ -41,7 +41,7 @@ public final class JHipsterLandscapeModule implements JHipsterLandscapeElement {
   }
 
   @Override
-  public JHipsterModuleSlug slug() {
+  public SeedModuleSlug slug() {
     return module;
   }
 
@@ -58,17 +58,17 @@ public final class JHipsterLandscapeModule implements JHipsterLandscapeElement {
   }
 
   @Override
-  public Optional<JHipsterLandscapeDependencies> dependencies() {
+  public Optional<SeedLandscapeDependencies> dependencies() {
     return dependencies;
   }
 
   @Override
-  public Stream<JHipsterLandscapeModule> allModules() {
+  public Stream<SeedLandscapeModule> allModules() {
     return Stream.of(this);
   }
 
   @Override
-  public Stream<JHipsterSlug> slugs() {
+  public Stream<SeedSlug> slugs() {
     return Stream.of(slug());
   }
 
@@ -89,7 +89,7 @@ public final class JHipsterLandscapeModule implements JHipsterLandscapeElement {
       return false;
     }
 
-    JHipsterLandscapeModule other = (JHipsterLandscapeModule) obj;
+    SeedLandscapeModule other = (SeedLandscapeModule) obj;
 
     return new EqualsBuilder().append(module, other.module).isEquals();
   }
@@ -112,14 +112,14 @@ public final class JHipsterLandscapeModule implements JHipsterLandscapeElement {
       JHipsterLandscapeModulePropertiesDefinitionBuilder,
       JHipsterLandscapeModuleOptionalBuilder {
 
-    private JHipsterModuleSlug module;
+    private SeedModuleSlug module;
     private JHipsterModuleOperation operation;
-    private Collection<? extends JHipsterLandscapeDependency> dependencies;
+    private Collection<? extends SeedLandscapeDependency> dependencies;
     private JHipsterModulePropertiesDefinition propertiesDefinition;
     private JHipsterModuleRank rank;
 
     @Override
-    public JHipsterLandscapeModuleOperationBuilder module(JHipsterModuleSlug module) {
+    public JHipsterLandscapeModuleOperationBuilder module(SeedModuleSlug module) {
       this.module = module;
 
       return this;
@@ -147,18 +147,18 @@ public final class JHipsterLandscapeModule implements JHipsterLandscapeElement {
     }
 
     @Override
-    public JHipsterLandscapeModule dependencies(Collection<? extends JHipsterLandscapeDependency> dependencies) {
+    public SeedLandscapeModule dependencies(Collection<? extends SeedLandscapeDependency> dependencies) {
       this.dependencies = dependencies;
 
-      return new JHipsterLandscapeModule(this);
+      return new SeedLandscapeModule(this);
     }
   }
 
   public interface JHipsterLandscapeModuleSlugBuilder {
-    JHipsterLandscapeModuleOperationBuilder module(JHipsterModuleSlug module);
+    JHipsterLandscapeModuleOperationBuilder module(SeedModuleSlug module);
 
     default JHipsterLandscapeModuleOperationBuilder module(String module) {
-      return module(new JHipsterModuleSlug(module));
+      return module(new SeedModuleSlug(module));
     }
   }
 
@@ -177,9 +177,9 @@ public final class JHipsterLandscapeModule implements JHipsterLandscapeElement {
   public interface JHipsterLandscapeModuleOptionalBuilder {
     JHipsterLandscapeModuleOptionalBuilder rank(JHipsterModuleRank rank);
 
-    JHipsterLandscapeModule dependencies(Collection<? extends JHipsterLandscapeDependency> dependencies);
+    SeedLandscapeModule dependencies(Collection<? extends SeedLandscapeDependency> dependencies);
 
-    default JHipsterLandscapeModule withoutDependencies() {
+    default SeedLandscapeModule withoutDependencies() {
       return dependencies(null);
     }
   }

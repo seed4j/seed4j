@@ -10,21 +10,21 @@ class JHipsterFeatureTest {
 
   @Test
   void shouldNotBuildWithInvalidFeaturePattern() {
-    assertThatThrownBy(() -> new JHipsterFeatureSlug("invalid feature")).isExactlyInstanceOf(InvalidJHipsterSlugException.class);
+    assertThatThrownBy(() -> new SeedFeatureSlug("invalid feature")).isExactlyInstanceOf(InvalidJHipsterSlugException.class);
   }
 
   @Test
   void shouldGetEmptyFeatureFromNullFeature() {
-    assertThat(JHipsterFeatureSlug.of(null)).isEmpty();
+    assertThat(SeedFeatureSlug.of(null)).isEmpty();
   }
 
   @Test
   void shouldGetEmptyFeatureFromBlankFeature() {
-    assertThat(JHipsterFeatureSlug.of(" ")).isEmpty();
+    assertThat(SeedFeatureSlug.of(" ")).isEmpty();
   }
 
   @Test
   void shouldGetFeatureFromActualFeature() {
-    assertThat(JHipsterFeatureSlug.of("this-is-a-feature")).contains(new JHipsterFeatureSlug("this-is-a-feature"));
+    assertThat(SeedFeatureSlug.of("this-is-a-feature")).contains(new SeedFeatureSlug("this-is-a-feature"));
   }
 }

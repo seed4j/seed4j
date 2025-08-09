@@ -1,13 +1,13 @@
 package com.seed4j.module.domain.resource;
 
-import com.seed4j.module.domain.JHipsterModuleSlug;
+import com.seed4j.module.domain.SeedModuleSlug;
 
 public interface JHipsterModuleSlugFactory {
   String get();
 
   JHipsterModuleRank rank();
 
-  default JHipsterModuleSlug build() {
-    return new JHipsterModuleSlug(get());
+  default SeedModuleSlug build() {
+    return new SeedModuleSlug(get());
   }
 }

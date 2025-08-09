@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.primary;
 
 import com.seed4j.module.application.JHipsterModulesApplicationService;
-import com.seed4j.module.domain.JHipsterModuleSlug;
 import com.seed4j.module.domain.JHipsterModuleToApply;
+import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.module.domain.resource.JHipsterModuleResource;
 import com.seed4j.shared.projectfolder.domain.ProjectFolder;
@@ -55,13 +55,13 @@ class ModulesResource {
   @PostMapping("modules/{slug}/apply-patch")
   public void applyPatch(@RequestBody @Validated RestJHipsterModuleProperties restProperties, @PathVariable("slug") String slug) {
     JHipsterModuleProperties properties = restProperties.toDomain(projectFolder);
-    modules.apply(new JHipsterModuleToApply(new JHipsterModuleSlug(slug), properties));
+    modules.apply(new JHipsterModuleToApply(new SeedModuleSlug(slug), properties));
   }
 
   @Hidden
   @GetMapping("modules/{slug}")
   public RestJHipsterModulePropertiesDefinition propertiesDefinition(@PathVariable("slug") String slug) {
-    JHipsterModuleResource module = modules.resources().get(new JHipsterModuleSlug(slug));
+    JHipsterModuleResource module = modules.resources().get(new SeedModuleSlug(slug));
     return RestJHipsterModulePropertiesDefinition.from(module.propertiesDefinition());
   }
 

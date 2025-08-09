@@ -34,8 +34,8 @@ import static com.seed4j.module.domain.JHipsterModule.springProfile;
 import static com.seed4j.module.domain.JHipsterModule.text;
 import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.JHipsterModule.versionSlug;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.ANGULAR;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.ANGULAR;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.module.domain.buildproperties.BuildProperty;
@@ -645,12 +645,12 @@ public final class JHipsterModulesFixture {
     );
   }
 
-  public static JHipsterModuleSlug moduleSlug(String slug) {
-    return new JHipsterModuleSlug(slug);
+  public static SeedModuleSlug moduleSlug(String slug) {
+    return new SeedModuleSlug(slug);
   }
 
-  public static JHipsterFeatureSlug featureSlug(String slug) {
-    return new JHipsterFeatureSlug(slug);
+  public static SeedFeatureSlug featureSlug(String slug) {
+    return new SeedFeatureSlug(slug);
   }
 
   public static JHipsterModuleUpgrade upgrade() {

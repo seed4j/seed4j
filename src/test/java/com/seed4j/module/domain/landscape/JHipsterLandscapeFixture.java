@@ -3,8 +3,8 @@ package com.seed4j.module.domain.landscape;
 import static com.seed4j.module.domain.resource.JHipsterModuleRank.*;
 import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.*;
 
-import com.seed4j.module.domain.JHipsterFeatureSlug;
-import com.seed4j.module.domain.JHipsterModuleSlug;
+import com.seed4j.module.domain.SeedFeatureSlug;
+import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.resource.JHipsterModuleResource;
 import com.seed4j.module.domain.resource.JHipsterModulesResources;
 import java.util.Collection;
@@ -20,8 +20,8 @@ public final class JHipsterLandscapeFixture {
     return new JHipsterModulesResources(List.of(resources), emptyHiddenModules());
   }
 
-  public static JHipsterLandscapeModule noDependencyLandscapeModule(String slug) {
-    return JHipsterLandscapeModule.builder()
+  public static SeedLandscapeModule noDependencyLandscapeModule(String slug) {
+    return SeedLandscapeModule.builder()
       .module(slug)
       .operation("operation")
       .propertiesDefinition(propertiesDefinition())
@@ -29,8 +29,8 @@ public final class JHipsterLandscapeFixture {
       .withoutDependencies();
   }
 
-  public static JHipsterLandscapeModule oneModuleDependencyLandscapeModule(String slug, String dependency) {
-    return JHipsterLandscapeModule.builder()
+  public static SeedLandscapeModule oneModuleDependencyLandscapeModule(String slug, String dependency) {
+    return SeedLandscapeModule.builder()
       .module(slug)
       .operation("operation")
       .propertiesDefinition(propertiesDefinition())
@@ -38,19 +38,19 @@ public final class JHipsterLandscapeFixture {
       .dependencies(landscapeModuleDependencies(dependency));
   }
 
-  public static JHipsterLandscapeLevel landscapeLevel(JHipsterLandscapeElement... elements) {
-    return new JHipsterLandscapeLevel(List.of(elements));
+  public static SeedLandscapeLevel landscapeLevel(SeedLandscapeElement... elements) {
+    return new SeedLandscapeLevel(List.of(elements));
   }
 
-  public static JHipsterLandscapeFeature landscapeFeature(String slug, JHipsterLandscapeModule... modules) {
-    return new JHipsterLandscapeFeature(new JHipsterFeatureSlug(slug), List.of(modules));
+  public static SeedLandscapeFeature landscapeFeature(String slug, SeedLandscapeModule... modules) {
+    return new SeedLandscapeFeature(new SeedFeatureSlug(slug), List.of(modules));
   }
 
-  public static Collection<JHipsterLandscapeDependency> landscapeModuleDependencies(String... modules) {
-    return Stream.of(modules).map(JHipsterModuleSlug::new).map(toModuleDependency()).toList();
+  public static Collection<SeedLandscapeDependency> landscapeModuleDependencies(String... modules) {
+    return Stream.of(modules).map(SeedModuleSlug::new).map(toModuleDependency()).toList();
   }
 
-  private static Function<JHipsterModuleSlug, JHipsterLandscapeDependency> toModuleDependency() {
-    return JHipsterModuleDependency::new;
+  private static Function<SeedModuleSlug, SeedLandscapeDependency> toModuleDependency() {
+    return SeedModuleDependency::new;
   }
 }

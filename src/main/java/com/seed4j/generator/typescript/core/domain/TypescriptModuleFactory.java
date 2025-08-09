@@ -7,7 +7,7 @@ import static com.seed4j.module.domain.JHipsterModule.runScriptCommandWith;
 import static com.seed4j.module.domain.JHipsterModule.scriptCommand;
 import static com.seed4j.module.domain.JHipsterModule.scriptKey;
 import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.packagejson.NodeModuleFormat.MODULE;
 
 import com.seed4j.module.domain.JHipsterModule;

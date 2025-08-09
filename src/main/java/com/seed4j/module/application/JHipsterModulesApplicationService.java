@@ -5,7 +5,7 @@ import com.seed4j.module.domain.git.GitRepository;
 import com.seed4j.module.domain.javabuild.ProjectJavaBuildToolRepository;
 import com.seed4j.module.domain.javadependency.JavaDependenciesVersionsRepository;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependenciesRepository;
-import com.seed4j.module.domain.landscape.JHipsterLandscape;
+import com.seed4j.module.domain.landscape.SeedLandscape;
 import com.seed4j.module.domain.preset.Presets;
 import com.seed4j.module.domain.resource.JHipsterModulesResources;
 import java.util.Collection;
@@ -52,7 +52,7 @@ public class JHipsterModulesApplicationService {
     return modules.resources();
   }
 
-  public JHipsterLandscape landscape() {
+  public SeedLandscape landscape() {
     return modules.landscape();
   }
 

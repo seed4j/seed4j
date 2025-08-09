@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.primary;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.seed4j.module.domain.landscape.JHipsterLandscapeElementType;
-import com.seed4j.module.domain.landscape.JHipsterLandscapeFeature;
+import com.seed4j.module.domain.landscape.SeedLandscapeElementType;
+import com.seed4j.module.domain.landscape.SeedLandscapeFeature;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.util.Collection;
@@ -19,7 +19,7 @@ final class RestJHipsterLandscapeFeature implements RestJHipsterLandscapeElement
     this.modules = modules;
   }
 
-  static RestJHipsterLandscapeFeature fromFeature(JHipsterLandscapeFeature feature) {
+  static RestJHipsterLandscapeFeature fromFeature(SeedLandscapeFeature feature) {
     return new RestJHipsterLandscapeFeature(
       feature.slug().get(),
       feature.modules().stream().map(RestJHipsterLandscapeModule::fromModule).toList()
@@ -28,8 +28,8 @@ final class RestJHipsterLandscapeFeature implements RestJHipsterLandscapeElement
 
   @Override
   @Schema(description = "Type of this landscape element", requiredMode = RequiredMode.REQUIRED)
-  public JHipsterLandscapeElementType getType() {
-    return JHipsterLandscapeElementType.FEATURE;
+  public SeedLandscapeElementType getType() {
+    return SeedLandscapeElementType.FEATURE;
   }
 
   @Schema(description = "Unique slug of this feature", requiredMode = RequiredMode.REQUIRED)

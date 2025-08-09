@@ -12,7 +12,7 @@ import static com.seed4j.module.domain.JHipsterModule.scriptCommand;
 import static com.seed4j.module.domain.JHipsterModule.scriptKey;
 import static com.seed4j.module.domain.JHipsterModule.stagedFilesFilter;
 import static com.seed4j.module.domain.JHipsterModule.to;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;

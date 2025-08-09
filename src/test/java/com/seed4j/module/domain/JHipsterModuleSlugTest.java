@@ -14,28 +14,28 @@ class JHipsterModuleSlugTest {
   @ParameterizedTest
   @ValueSource(strings = { "Invalid", "this is invalid" })
   void shouldNotBuildInvalidSlug(String slug) {
-    assertThatThrownBy(() -> new JHipsterModuleSlug(slug)).isExactlyInstanceOf(InvalidJHipsterSlugException.class);
+    assertThatThrownBy(() -> new SeedModuleSlug(slug)).isExactlyInstanceOf(InvalidJHipsterSlugException.class);
   }
 
   @Test
   void shouldSortModules() {
-    Stream<JHipsterModuleSlug> modules = Stream.of(
-      new JHipsterModuleSlug("root"),
-      new JHipsterModuleSlug("init"),
-      new JHipsterModuleSlug("dummy"),
-      new JHipsterModuleSlug("init")
+    Stream<SeedModuleSlug> modules = Stream.of(
+      new SeedModuleSlug("root"),
+      new SeedModuleSlug("init"),
+      new SeedModuleSlug("dummy"),
+      new SeedModuleSlug("init")
     ).sorted();
 
     assertThat(modules).containsExactly(
-      new JHipsterModuleSlug("init"),
-      new JHipsterModuleSlug("init"),
-      new JHipsterModuleSlug("dummy"),
-      new JHipsterModuleSlug("root")
+      new SeedModuleSlug("init"),
+      new SeedModuleSlug("init"),
+      new SeedModuleSlug("dummy"),
+      new SeedModuleSlug("root")
     );
   }
 
   @Test
   void testToStringShowsSlug() {
-    assertThat(new JHipsterModuleSlug("init")).hasToString("init");
+    assertThat(new SeedModuleSlug("init")).hasToString("init");
   }
 }

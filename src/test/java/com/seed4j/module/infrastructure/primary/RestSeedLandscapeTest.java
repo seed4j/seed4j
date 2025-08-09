@@ -5,13 +5,13 @@ import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.JsonHelper;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.landscape.JHipsterLandscape;
 import com.seed4j.module.domain.landscape.JHipsterLandscapeFixture;
+import com.seed4j.module.domain.landscape.SeedLandscape;
 import com.seed4j.module.domain.resource.JHipsterModuleResource;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class RestJHipsterLandscapeTest {
+class RestSeedLandscapeTest {
 
   @Test
   void shouldSerializeToJson() {
@@ -24,7 +24,7 @@ class RestJHipsterLandscapeTest {
 
     assertThat(
       JsonHelper.writeAsString(
-        RestJHipsterLandscape.from(JHipsterLandscape.from(JHipsterLandscapeFixture.moduleResources(firstModule, secondModule)))
+        RestJHipsterLandscape.from(SeedLandscape.from(JHipsterLandscapeFixture.moduleResources(firstModule, secondModule)))
       )
     ).isEqualTo(json());
   }

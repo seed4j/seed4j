@@ -2,7 +2,7 @@ package com.seed4j.module.infrastructure.secondary;
 
 import com.seed4j.module.domain.*;
 import com.seed4j.module.domain.javaproperties.SpringPropertyType;
-import com.seed4j.module.domain.landscape.JHipsterLandscape;
+import com.seed4j.module.domain.landscape.SeedLandscape;
 import com.seed4j.module.domain.postaction.JHipsterModuleExecutionContext;
 import com.seed4j.module.domain.resource.JHipsterModulesResources;
 import com.seed4j.module.infrastructure.secondary.javadependency.FileSystemJavaBuildCommandsHandler;
@@ -34,7 +34,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
   private final FileSystemReplacer replacer;
   private final FileSystemStartupCommandsReadmeCommandsHandler startupCommands;
   private final FileSystemDockerComposeFileHandler dockerComposeFile;
-  private final JHipsterLandscape landscape;
+  private final SeedLandscape landscape;
 
   public FileSystemJHipsterModulesRepository(
     JavaProjects projects,
@@ -48,7 +48,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
   ) {
     this.projects = projects;
     this.resources = resources;
-    this.landscape = JHipsterLandscape.from(resources);
+    this.landscape = SeedLandscape.from(resources);
 
     this.files = files;
     this.javaBuild = javaBuild;
@@ -111,7 +111,7 @@ class FileSystemJHipsterModulesRepository implements JHipsterModulesRepository {
   }
 
   @Override
-  public JHipsterLandscape landscape() {
+  public SeedLandscape landscape() {
     return landscape;
   }
 }

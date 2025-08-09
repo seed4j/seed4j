@@ -3,13 +3,13 @@ package com.seed4j.module.domain.resource;
 import static org.apache.commons.lang3.builder.ToStringStyle.*;
 
 import com.seed4j.module.domain.JHipsterModuleFactory;
-import com.seed4j.module.domain.JHipsterModuleSlug;
+import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.shared.error.domain.Assert;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public final class JHipsterModuleResource {
 
-  private final JHipsterModuleSlug slug;
+  private final SeedModuleSlug slug;
   private final JHipsterModulePropertiesDefinition propertiesDefinition;
   private final JHipsterModuleApiDoc apiDoc;
   private final JHipsterModuleOrganization organization;
@@ -46,7 +46,7 @@ public final class JHipsterModuleResource {
     return "/api/modules/" + slug.get();
   }
 
-  public JHipsterModuleSlug slug() {
+  public SeedModuleSlug slug() {
     return slug;
   }
 

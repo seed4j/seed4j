@@ -7,7 +7,7 @@ import com.seed4j.shared.error.domain.ErrorStatus;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class InvalidJHipsterSlugExceptionTest {
+class InvalidSeedSlugExceptionTest {
 
   @Test
   void shouldGetExceptionInformation() {

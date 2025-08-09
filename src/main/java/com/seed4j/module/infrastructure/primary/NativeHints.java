@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.domain.landscape.JHipsterLandscapeElementType;
+import com.seed4j.module.domain.landscape.SeedLandscapeElementType;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
@@ -21,6 +21,6 @@ class NativeHints implements RuntimeHintsRegistrar {
       .registerType(RestJHipsterLandscapeFeature.class, MemberCategory.values())
       .registerType(RestJHipsterLandscapeDependency.class, MemberCategory.values())
       .registerType(RestJHipsterModulePropertiesDefinition.class, MemberCategory.values())
-      .registerType(JHipsterLandscapeElementType.class, MemberCategory.values());
+      .registerType(SeedLandscapeElementType.class, MemberCategory.values());
   }
 }

@@ -9,7 +9,7 @@ import static com.seed4j.module.domain.JHipsterModule.pluginExecution;
 import static com.seed4j.module.domain.JHipsterModule.to;
 import static com.seed4j.module.domain.JHipsterModule.toSrcMainDocker;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.INITIALIZE;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.docker.DockerImages;

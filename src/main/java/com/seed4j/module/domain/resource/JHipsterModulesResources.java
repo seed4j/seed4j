@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.resource;
 
 import com.seed4j.module.domain.JHipsterModule;
-import com.seed4j.module.domain.JHipsterModuleSlug;
+import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.properties.JHipsterModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
@@ -19,7 +19,7 @@ public class JHipsterModulesResources {
 
   private static final Logger log = LoggerFactory.getLogger(JHipsterModulesResources.class);
 
-  private final Map<JHipsterModuleSlug, JHipsterModuleResource> resources;
+  private final Map<SeedModuleSlug, JHipsterModuleResource> resources;
 
   public JHipsterModulesResources(Collection<JHipsterModuleResource> modulesResources, JHipsterHiddenModules hiddenModules) {
     Assert.field("modulesResources", modulesResources).notEmpty().noNullElement();
@@ -96,13 +96,11 @@ public class JHipsterModulesResources {
   }
 
   private Stream<String> allSlugsNestedDependenciesOf(String slug, Collection<JHipsterModuleResource> modulesResources) {
-    return allResourcesNestedDependenciesOf(new JHipsterModuleSlug(slug), modulesResources).map(moduleResource ->
-      moduleResource.slug().get()
-    );
+    return allResourcesNestedDependenciesOf(new SeedModuleSlug(slug), modulesResources).map(moduleResource -> moduleResource.slug().get());
   }
 
   private Stream<JHipsterModuleResource> allResourcesNestedDependenciesOf(
-    JHipsterModuleSlug slug,
+    SeedModuleSlug slug,
     Collection<JHipsterModuleResource> modulesResources
   ) {
     Collection<JHipsterModuleResource> childrenDependencies = this.getChildrenDependencies(slug, modulesResources);
@@ -123,7 +121,7 @@ public class JHipsterModulesResources {
   }
 
   private Collection<JHipsterModuleResource> getChildrenDependencies(
-    JHipsterModuleSlug slug,
+    SeedModuleSlug slug,
     Collection<JHipsterModuleResource> modulesResources
   ) {
     return modulesResources
@@ -132,7 +130,7 @@ public class JHipsterModulesResources {
       .toList();
   }
 
-  private boolean isChildrenOf(JHipsterModuleSlug slug, JHipsterModuleResource moduleResource) {
+  private boolean isChildrenOf(SeedModuleSlug slug, JHipsterModuleResource moduleResource) {
     return moduleResource
       .organization()
       .dependencies()
@@ -154,20 +152,20 @@ public class JHipsterModulesResources {
     return resources.values().stream();
   }
 
-  public JHipsterModuleResource get(JHipsterModuleSlug slug) {
+  public JHipsterModuleResource get(SeedModuleSlug slug) {
     assertKnownSlug(slug);
 
     return resources.get(slug);
   }
 
-  public JHipsterModule build(JHipsterModuleSlug slug, JHipsterModuleProperties properties) {
+  public JHipsterModule build(SeedModuleSlug slug, JHipsterModuleProperties properties) {
     Assert.notNull("slug", slug);
     Assert.notNull("properties", properties);
 
     return get(slug).factory().create(properties);
   }
 
-  private void assertKnownSlug(JHipsterModuleSlug slug) {
+  private void assertKnownSlug(SeedModuleSlug slug) {
     Assert.notNull("slug", slug);
 
     if (!resources.containsKey(slug)) {

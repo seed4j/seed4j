@@ -8,18 +8,18 @@ import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.*
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterFeatureSlug;
+import com.seed4j.module.domain.SeedFeatureSlug;
 import com.seed4j.module.domain.resource.JHipsterModuleResource;
 import java.util.Iterator;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterLandscapeTest {
+class SeedLandscapeTest {
 
   @Test
   void shouldNotBuildWithFeatureNameConflictingWithModuleName() {
-    assertThatThrownBy(() -> JHipsterLandscape.from(moduleResources(testModule(), testFeature())))
+    assertThatThrownBy(() -> SeedLandscape.from(moduleResources(testModule(), testFeature())))
       .isExactlyInstanceOf(InvalidLandscapeException.class)
       .hasMessageContaining("\"test\"");
   }
@@ -34,7 +34,7 @@ class JHipsterLandscapeTest {
 
   @Test
   void shouldNotBuildLandscapeWithoutRootElement() {
-    assertThatThrownBy(() -> JHipsterLandscape.from(moduleResources(defaultModuleResourceBuilder().moduleDependency("unknown").build())))
+    assertThatThrownBy(() -> SeedLandscape.from(moduleResources(defaultModuleResourceBuilder().moduleDependency("unknown").build())))
       .isExactlyInstanceOf(InvalidLandscapeException.class)
       .hasMessageContaining("root element");
   }
@@ -42,7 +42,7 @@ class JHipsterLandscapeTest {
   @Test
   void shouldNotBuildLandscapeWithUnknownDependency() {
     assertThatThrownBy(() ->
-      JHipsterLandscape.from(
+      SeedLandscape.from(
         moduleResources(defaultModuleResource(), defaultModuleResourceBuilder().slug("dummy").moduleDependency("unknown").build())
       )
     )
@@ -56,14 +56,14 @@ class JHipsterLandscapeTest {
     JHipsterModuleResource first = defaultModuleResourceBuilder().slug("first").moduleDependency("second").build();
     JHipsterModuleResource second = defaultModuleResourceBuilder().slug("second").moduleDependency("first").build();
 
-    assertThatThrownBy(() -> JHipsterLandscape.from(moduleResources(root, first, second)))
+    assertThatThrownBy(() -> SeedLandscape.from(moduleResources(root, first, second)))
       .isExactlyInstanceOf(InvalidLandscapeException.class)
       .hasMessageContaining("unknown dependency");
   }
 
   @Test
   void shouldBuildOneLevelLandscapeFromOneModule() {
-    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(defaultModuleResource()));
+    SeedLandscape landscape = SeedLandscape.from(moduleResources(defaultModuleResource()));
 
     assertThat(landscape.levels().get())
       .usingRecursiveFieldByFieldElementComparator()
@@ -72,7 +72,7 @@ class JHipsterLandscapeTest {
 
   @Test
   void shouldBuildOneLevelLandscapeFromOneFeatureWithOneModule() {
-    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(defaultModuleResourceBuilder().feature("my-feature").build()));
+    SeedLandscape landscape = SeedLandscape.from(moduleResources(defaultModuleResourceBuilder().feature("my-feature").build()));
 
     assertThat(landscape.levels().get())
       .usingRecursiveFieldByFieldElementComparator()
@@ -84,7 +84,7 @@ class JHipsterLandscapeTest {
     JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("first").feature("my-feature").build();
     JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("second").feature("my-feature").build();
 
-    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(firstModule, secondModule));
+    SeedLandscape landscape = SeedLandscape.from(moduleResources(firstModule, secondModule));
 
     assertThat(landscape.levels().get())
       .usingRecursiveFieldByFieldElementComparator()
@@ -98,7 +98,7 @@ class JHipsterLandscapeTest {
     JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
     JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("second").moduleDependency("first").build();
 
-    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(firstModule, secondModule));
+    SeedLandscape landscape = SeedLandscape.from(moduleResources(firstModule, secondModule));
 
     assertThat(landscape.levels().get())
       .usingRecursiveFieldByFieldElementComparator()
@@ -113,7 +113,7 @@ class JHipsterLandscapeTest {
     JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("first").feature("root").build();
     JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("second").moduleDependency("first").build();
 
-    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(firstModule, secondModule));
+    SeedLandscape landscape = SeedLandscape.from(moduleResources(firstModule, secondModule));
 
     assertThat(landscape.levels().get())
       .usingRecursiveFieldByFieldElementComparator()
@@ -134,7 +134,7 @@ class JHipsterLandscapeTest {
       .build();
     JHipsterModuleResource forthModule = defaultModuleResourceBuilder().slug("forth").featureDependency("my-feature").build();
 
-    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(forthModule, secondModule, thirdModule, firstModule));
+    SeedLandscape landscape = SeedLandscape.from(moduleResources(forthModule, secondModule, thirdModule, firstModule));
 
     assertThat(landscape.levels().get())
       .usingRecursiveFieldByFieldElementComparator()
@@ -144,12 +144,12 @@ class JHipsterLandscapeTest {
           landscapeFeature("my-feature", noDependencyLandscapeModule("second"), oneModuleDependencyLandscapeModule("third", "first"))
         ),
         landscapeLevel(
-          JHipsterLandscapeModule.builder()
+          SeedLandscapeModule.builder()
             .module("forth")
             .operation("operation")
             .propertiesDefinition(propertiesDefinition())
             .rank(RANK_D)
-            .dependencies(List.of(new JHipsterFeatureDependency(new JHipsterFeatureSlug("my-feature"))))
+            .dependencies(List.of(new SeedFeatureDependency(new SeedFeatureSlug("my-feature"))))
         )
       );
   }
@@ -162,13 +162,13 @@ class JHipsterLandscapeTest {
     JHipsterModuleResource forthModule = defaultModuleResourceBuilder().slug("forth").moduleDependency("root").feature("feat").build();
     JHipsterModuleResource fifthModule = defaultModuleResourceBuilder().slug("fifth").moduleDependency("root").feature("feat").build();
 
-    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(firstModule, secondModule, thirdModule, forthModule, fifthModule));
+    SeedLandscape landscape = SeedLandscape.from(moduleResources(firstModule, secondModule, thirdModule, forthModule, fifthModule));
 
-    Iterator<JHipsterLandscapeLevel> iterator = landscape.levels().get().iterator();
+    Iterator<SeedLandscapeLevel> iterator = landscape.levels().get().iterator();
     iterator.next();
-    JHipsterLandscapeLevel firstLevel = iterator.next();
+    SeedLandscapeLevel firstLevel = iterator.next();
     assertThat(firstLevel.elements())
-      .extracting(JHipsterLandscapeElement::slug)
+      .extracting(SeedLandscapeElement::slug)
       .containsExactly(moduleSlug("athird"), moduleSlug("bsecond"), featureSlug("feat"));
   }
 
@@ -188,7 +188,7 @@ class JHipsterLandscapeTest {
       .moduleDependency("first")
       .build();
 
-    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(firstModule, secondModule, thirdModule, forthModule));
+    SeedLandscape landscape = SeedLandscape.from(moduleResources(firstModule, secondModule, thirdModule, forthModule));
 
     assertThat(landscape.levels().get())
       .usingRecursiveFieldByFieldElementComparator()
@@ -205,7 +205,7 @@ class JHipsterLandscapeTest {
     JHipsterModuleResource firstModule = defaultModuleResourceBuilder().slug("first").build();
     JHipsterModuleResource secondModule = defaultModuleResourceBuilder().slug("second").feature("test").moduleDependency("first").build();
 
-    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(firstModule, secondModule));
+    SeedLandscape landscape = SeedLandscape.from(moduleResources(firstModule, secondModule));
 
     assertThat(landscape.sort(List.of(moduleSlug("second"), moduleSlug("first")))).containsExactly(
       moduleSlug("first"),
@@ -218,7 +218,7 @@ class JHipsterLandscapeTest {
     JHipsterModuleResource init = defaultModuleResourceBuilder().slug("init").build();
     JHipsterModuleResource root = defaultModuleResourceBuilder().slug("root").build();
 
-    JHipsterLandscape landscape = JHipsterLandscape.from(moduleResources(root, init));
+    SeedLandscape landscape = SeedLandscape.from(moduleResources(root, init));
 
     assertThat(landscape.sort(List.of(moduleSlug("root"), moduleSlug("init")))).containsExactly(moduleSlug("init"), moduleSlug("root"));
   }

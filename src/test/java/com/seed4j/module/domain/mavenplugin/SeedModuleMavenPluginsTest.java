@@ -11,11 +11,11 @@ import com.seed4j.module.domain.javadependency.ProjectJavaDependencies;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterModuleMavenPluginsTest {
+class SeedModuleMavenPluginsTest {
 
   @Test
   void shouldAddNewDependencyManagement() {
-    JavaBuildCommands changes = JHipsterModuleMavenPlugins.builder(emptyModuleBuilder())
+    JavaBuildCommands changes = SeedModuleMavenPlugins.builder(emptyModuleBuilder())
       .pluginManagement(mavenEnforcerPluginManagement())
       .build()
       .buildChanges(currentJavaDependenciesVersion(), ProjectJavaDependencies.EMPTY);
@@ -33,7 +33,7 @@ class JHipsterModuleMavenPluginsTest {
 
   @Test
   void shouldAddNewDependency() {
-    JavaBuildCommands changes = JHipsterModuleMavenPlugins.builder(emptyModuleBuilder())
+    JavaBuildCommands changes = SeedModuleMavenPlugins.builder(emptyModuleBuilder())
       .plugin(mavenEnforcerPluginManagement())
       .build()
       .buildChanges(currentJavaDependenciesVersion(), ProjectJavaDependencies.EMPTY);

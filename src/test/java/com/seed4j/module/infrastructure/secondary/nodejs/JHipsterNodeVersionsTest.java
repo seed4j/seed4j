@@ -4,12 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource;
 import com.seed4j.module.domain.nodejs.NodePackage;
 import com.seed4j.module.domain.nodejs.NodePackageName;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodePackagesVersionSource;
 import com.seed4j.module.domain.nodejs.NodePackagesVersions;
+import com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource;
 import com.seed4j.module.domain.nodejs.UnknownNodePackageException;
 import java.util.Collection;
 import java.util.List;
@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 @UnitTest
 class JHipsterNodeVersionsTest {
 
-  private static final NodePackagesVersionSource COMMON = JHLiteNodePackagesVersionSource.COMMON.build();
-  private static final NodePackagesVersionSource VUE = JHLiteNodePackagesVersionSource.VUE.build();
+  private static final NodePackagesVersionSource COMMON = SeedNodePackagesVersionSource.COMMON.build();
+  private static final NodePackagesVersionSource VUE = SeedNodePackagesVersionSource.VUE.build();
 
   @Test
   void shouldNotReadVersionWithoutReaders() {
@@ -56,7 +56,7 @@ class JHipsterNodeVersionsTest {
     JHipsterNodeVersions versions = new JHipsterNodeVersions(List.of(emptyReader(), firstReader, secondReader));
 
     assertThat(versions.get("vue", COMMON)).isEqualTo(new NodePackageVersion("1.2.3"));
-    assertThat(versions.get("vue", JHLiteNodePackagesVersionSource.VUE)).isEqualTo(new NodePackageVersion("1.2.7"));
+    assertThat(versions.get("vue", SeedNodePackagesVersionSource.VUE)).isEqualTo(new NodePackageVersion("1.2.7"));
   }
 
   private static Collection<NodePackage> packages(NodePackage... packages) {

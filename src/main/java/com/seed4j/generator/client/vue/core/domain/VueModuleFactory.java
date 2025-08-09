@@ -4,8 +4,8 @@ import static com.seed4j.generator.typescript.common.domain.EslintShortcuts.esli
 import static com.seed4j.generator.typescript.common.domain.TsConfigShortcuts.tsConfigCompilerOption;
 import static com.seed4j.generator.typescript.common.domain.VitestShortcuts.vitestCoverageExclusion;
 import static com.seed4j.module.domain.JHipsterModule.*;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.COMMON;
-import static com.seed4j.module.domain.nodejs.JHLiteNodePackagesVersionSource.VUE;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
 
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.file.SeedDestination;

@@ -8,10 +8,10 @@ import static org.mockito.Mockito.mock;
 import com.seed4j.module.application.JHipsterModulesApplicationService;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.JHipsterModuleEvents;
-import com.seed4j.module.domain.JHipsterModuleSlug;
 import com.seed4j.module.domain.JHipsterModuleToApply;
 import com.seed4j.module.domain.JHipsterPresetRepository;
 import com.seed4j.module.domain.ProjectFiles;
+import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.module.domain.resource.JHipsterModulesResources;
 import com.seed4j.module.infrastructure.secondary.file.MustacheTemplateRenderer;
 import com.seed4j.module.infrastructure.secondary.git.GitTestUtil;
@@ -64,12 +64,12 @@ public final class TestJHipsterModules {
   private static final class TestJHipsterModulesApplyer implements TestJHipsterModulesFinalApplyer {
 
     private final JHipsterModule module;
-    private final JHipsterModuleSlug slug;
+    private final SeedModuleSlug slug;
     private final JHipsterModulesApplicationService modules;
 
     private TestJHipsterModulesApplyer(JHipsterModule module) {
       this.module = module;
-      this.slug = new JHipsterModuleSlug("test-module");
+      this.slug = new SeedModuleSlug("test-module");
       this.modules = buildApplicationService(module);
     }
 

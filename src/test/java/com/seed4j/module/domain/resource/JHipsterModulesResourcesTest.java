@@ -4,7 +4,7 @@ import static com.seed4j.module.domain.resource.JHipsterModulesResourceFixture.*
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.JHipsterModuleSlug;
+import com.seed4j.module.domain.SeedModuleSlug;
 import com.seed4j.shared.error.domain.MissingMandatoryValueException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class JHipsterModulesResourcesTest {
       emptyHiddenModules()
     );
 
-    assertThatThrownBy(() -> jHipsterModulesResources.get(new JHipsterModuleSlug("dummy-2")))
+    assertThatThrownBy(() -> jHipsterModulesResources.get(new SeedModuleSlug("dummy-2")))
       .isExactlyInstanceOf(UnknownSlugException.class)
       .hasMessageContaining("Module dummy-2 does not exist");
   }

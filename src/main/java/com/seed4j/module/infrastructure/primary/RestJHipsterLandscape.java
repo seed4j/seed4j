@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.domain.landscape.JHipsterLandscape;
+import com.seed4j.module.domain.landscape.SeedLandscape;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.util.Collection;
@@ -14,7 +14,7 @@ final class RestJHipsterLandscape {
     this.levels = levels;
   }
 
-  static RestJHipsterLandscape from(JHipsterLandscape landscape) {
+  static RestJHipsterLandscape from(SeedLandscape landscape) {
     return new RestJHipsterLandscape(landscape.levels().stream().map(RestJHipsterLandscapeLevel::from).toList());
   }
 

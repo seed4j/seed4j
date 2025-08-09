@@ -6,13 +6,13 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public abstract sealed class JHipsterSlug implements Comparable<JHipsterSlug> permits JHipsterModuleSlug, JHipsterFeatureSlug {
+public abstract sealed class SeedSlug implements Comparable<SeedSlug> permits SeedModuleSlug, SeedFeatureSlug {
 
   private static final Pattern SLUG_FORMAT = Pattern.compile("^[a-z0-9-]+$");
 
   private final String slug;
 
-  protected JHipsterSlug(String slug) {
+  protected SeedSlug(String slug) {
     Assert.field("slug", slug)
       .notBlank()
       .matchesPatternOrThrow(SLUG_FORMAT, () -> new InvalidJHipsterSlugException(slug));
@@ -25,7 +25,7 @@ public abstract sealed class JHipsterSlug implements Comparable<JHipsterSlug> pe
   }
 
   @Override
-  public int compareTo(JHipsterSlug other) {
+  public int compareTo(SeedSlug other) {
     if (isInit()) {
       return -1;
     }
@@ -54,7 +54,7 @@ public abstract sealed class JHipsterSlug implements Comparable<JHipsterSlug> pe
       return true;
     }
 
-    if (!(obj instanceof JHipsterSlug other)) {
+    if (!(obj instanceof SeedSlug other)) {
       return false;
     }
 

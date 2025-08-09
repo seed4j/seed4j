@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.landscape;
 
-import com.seed4j.module.domain.JHipsterFeatureSlug;
-import com.seed4j.module.domain.JHipsterSlug;
+import com.seed4j.module.domain.SeedFeatureSlug;
+import com.seed4j.module.domain.SeedSlug;
 import com.seed4j.module.domain.resource.JHipsterModuleResource;
 import com.seed4j.module.domain.resource.JHipsterModulesResources;
 import com.seed4j.shared.error.domain.Assert;
@@ -14,8 +14,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public record JHipsterLandscapeLevels(Collection<JHipsterLandscapeLevel> levels) {
-  public JHipsterLandscapeLevels(Collection<JHipsterLandscapeLevel> levels) {
+public record SeedLandscapeLevels(Collection<SeedLandscapeLevel> levels) {
+  public SeedLandscapeLevels(Collection<SeedLandscapeLevel> levels) {
     Assert.notEmpty("levels", levels);
 
     this.levels = Collections.unmodifiableCollection(levels);
@@ -25,18 +25,18 @@ public record JHipsterLandscapeLevels(Collection<JHipsterLandscapeLevel> levels)
     return new JHipsterLandscapeLevelsBuilder();
   }
 
-  public Collection<JHipsterLandscapeLevel> get() {
+  public Collection<SeedLandscapeLevel> get() {
     return levels();
   }
 
-  public Stream<JHipsterLandscapeLevel> stream() {
+  public Stream<SeedLandscapeLevel> stream() {
     return levels().stream();
   }
 
   static class JHipsterLandscapeLevelsBuilder {
 
-    private final Map<JHipsterFeatureSlug, Collection<JHipsterLandscapeModule>> features = new ConcurrentHashMap<>();
-    private final Collection<JHipsterLandscapeModule> modules = new ArrayList<>();
+    private final Map<SeedFeatureSlug, Collection<SeedLandscapeModule>> features = new ConcurrentHashMap<>();
+    private final Collection<SeedLandscapeModule> modules = new ArrayList<>();
 
     JHipsterLandscapeLevelsBuilder resources(JHipsterModulesResources resources) {
       Assert.notNull("resources", resources);
@@ -54,11 +54,11 @@ public record JHipsterLandscapeLevels(Collection<JHipsterLandscapeLevel> levels)
       return this;
     }
 
-    private Consumer<JHipsterFeatureSlug> addFeature(JHipsterModuleResource resource) {
+    private Consumer<SeedFeatureSlug> addFeature(JHipsterModuleResource resource) {
       return feature -> features.computeIfAbsent(feature, newArrayList()).add(landscapeModule(resource));
     }
 
-    private Function<JHipsterFeatureSlug, Collection<JHipsterLandscapeModule>> newArrayList() {
+    private Function<SeedFeatureSlug, Collection<SeedLandscapeModule>> newArrayList() {
       return key -> new ArrayList<>();
     }
 
@@ -66,8 +66,8 @@ public record JHipsterLandscapeLevels(Collection<JHipsterLandscapeLevel> levels)
       return () -> modules.add(landscapeModule(resource));
     }
 
-    private static JHipsterLandscapeModule landscapeModule(JHipsterModuleResource resource) {
-      return JHipsterLandscapeModule.builder()
+    private static SeedLandscapeModule landscapeModule(JHipsterModuleResource resource) {
+      return SeedLandscapeModule.builder()
         .module(resource.slug())
         .operation(resource.apiDoc().operation())
         .propertiesDefinition(resource.propertiesDefinition())
@@ -75,8 +75,8 @@ public record JHipsterLandscapeLevels(Collection<JHipsterLandscapeLevel> levels)
         .dependencies(resource.organization().dependencies());
     }
 
-    public JHipsterLandscapeLevels build() {
-      List<JHipsterLandscapeElement> elements = Stream.concat(features.entrySet().stream().map(toFeature()), modules.stream()).toList();
+    public SeedLandscapeLevels build() {
+      List<SeedLandscapeElement> elements = Stream.concat(features.entrySet().stream().map(toFeature()), modules.stream()).toList();
       JHipsterLandscapeLevelsDispatcher dispatcher = new JHipsterLandscapeLevelsDispatcher(elements);
 
       dispatcher.buildRoot();
@@ -85,25 +85,25 @@ public record JHipsterLandscapeLevels(Collection<JHipsterLandscapeLevel> levels)
         dispatcher.dispatchNextLevel();
       }
 
-      return new JHipsterLandscapeLevels(dispatcher.levels());
+      return new SeedLandscapeLevels(dispatcher.levels());
     }
 
-    private Function<Entry<JHipsterFeatureSlug, Collection<JHipsterLandscapeModule>>, JHipsterLandscapeFeature> toFeature() {
-      return entry -> new JHipsterLandscapeFeature(entry.getKey(), entry.getValue());
+    private Function<Entry<SeedFeatureSlug, Collection<SeedLandscapeModule>>, SeedLandscapeFeature> toFeature() {
+      return entry -> new SeedLandscapeFeature(entry.getKey(), entry.getValue());
     }
   }
 
   private static final class JHipsterLandscapeLevelsDispatcher {
 
-    private final List<JHipsterLandscapeLevel> levels = new ArrayList<>();
-    private List<JHipsterLandscapeElement> elementsToDispatch;
+    private final List<SeedLandscapeLevel> levels = new ArrayList<>();
+    private List<SeedLandscapeElement> elementsToDispatch;
 
-    private JHipsterLandscapeLevelsDispatcher(List<JHipsterLandscapeElement> elements) {
+    private JHipsterLandscapeLevelsDispatcher(List<SeedLandscapeElement> elements) {
       elementsToDispatch = elements;
     }
 
     private void buildRoot() {
-      List<JHipsterLandscapeElement> rootElements = levelElements(withoutDependencies());
+      List<SeedLandscapeElement> rootElements = levelElements(withoutDependencies());
 
       if (rootElements.isEmpty()) {
         throw InvalidLandscapeException.missingRootElement();
@@ -112,7 +112,7 @@ public record JHipsterLandscapeLevels(Collection<JHipsterLandscapeLevel> levels)
       appendLevel(rootElements);
     }
 
-    private Predicate<JHipsterLandscapeElement> withoutDependencies() {
+    private Predicate<SeedLandscapeElement> withoutDependencies() {
       return element -> element.dependencies().isEmpty();
     }
 
@@ -121,48 +121,45 @@ public record JHipsterLandscapeLevels(Collection<JHipsterLandscapeLevel> levels)
     }
 
     private void dispatchNextLevel() {
-      Set<JHipsterSlug> knownSlugs = knownSlugs();
-      List<JHipsterLandscapeElement> levelElements = levelElements(withAllKnownDependencies(knownSlugs));
+      Set<SeedSlug> knownSlugs = knownSlugs();
+      List<SeedLandscapeElement> levelElements = levelElements(withAllKnownDependencies(knownSlugs));
 
       if (levelElements.isEmpty()) {
-        throw InvalidLandscapeException.unknownDependency(
-          knownSlugs,
-          elementsToDispatch.stream().map(JHipsterLandscapeElement::slug).toList()
-        );
+        throw InvalidLandscapeException.unknownDependency(knownSlugs, elementsToDispatch.stream().map(SeedLandscapeElement::slug).toList());
       }
 
       appendLevel(levelElements);
     }
 
-    private List<JHipsterLandscapeElement> levelElements(Predicate<JHipsterLandscapeElement> condition) {
+    private List<SeedLandscapeElement> levelElements(Predicate<SeedLandscapeElement> condition) {
       return elementsToDispatch.stream().filter(condition).toList();
     }
 
-    private Predicate<JHipsterLandscapeElement> withAllKnownDependencies(Set<JHipsterSlug> knownSlugs) {
+    private Predicate<SeedLandscapeElement> withAllKnownDependencies(Set<SeedSlug> knownSlugs) {
       return element ->
         knownSlugs.containsAll(
-          element.dependencies().stream().flatMap(JHipsterLandscapeDependencies::stream).map(JHipsterLandscapeDependency::slug).toList()
+          element.dependencies().stream().flatMap(SeedLandscapeDependencies::stream).map(SeedLandscapeDependency::slug).toList()
         );
     }
 
-    private Set<JHipsterSlug> knownSlugs() {
-      return levels.stream().flatMap(JHipsterLandscapeLevel::slugs).collect(Collectors.toSet());
+    private Set<SeedSlug> knownSlugs() {
+      return levels.stream().flatMap(SeedLandscapeLevel::slugs).collect(Collectors.toSet());
     }
 
-    private void appendLevel(List<JHipsterLandscapeElement> elements) {
+    private void appendLevel(List<SeedLandscapeElement> elements) {
       updateElementsToDispatch(elements);
 
-      levels.add(new JHipsterLandscapeLevel(elements));
+      levels.add(new SeedLandscapeLevel(elements));
     }
 
-    private void updateElementsToDispatch(List<JHipsterLandscapeElement> elements) {
+    private void updateElementsToDispatch(List<SeedLandscapeElement> elements) {
       elementsToDispatch = elementsToDispatch
         .stream()
         .filter(element -> !elements.contains(element))
         .toList();
     }
 
-    private Collection<JHipsterLandscapeLevel> levels() {
+    private Collection<SeedLandscapeLevel> levels() {
       return levels;
     }
   }

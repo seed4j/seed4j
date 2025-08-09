@@ -1,8 +1,8 @@
 package com.seed4j.module.domain;
 
-public final class JHipsterModuleSlug extends JHipsterSlug {
+public final class SeedModuleSlug extends SeedSlug {
 
-  public JHipsterModuleSlug(String slug) {
+  public SeedModuleSlug(String slug) {
     super(slug);
   }
 

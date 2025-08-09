@@ -6,11 +6,11 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public final class JHipsterModuleDockerComposeFile {
+public final class SeedModuleDockerComposeFile {
 
   private final DockerComposeFiles dockerComposeFiles;
 
-  private JHipsterModuleDockerComposeFile(JHipsterModuleDockerComposeFileBuilder builder) {
+  private SeedModuleDockerComposeFile(SeedModuleDockerComposeFileBuilder builder) {
     dockerComposeFiles = new DockerComposeFiles(builder.dockerComposeFiles);
   }
 
@@ -23,22 +23,22 @@ public final class JHipsterModuleDockerComposeFile {
     return dockerComposeFiles.toString();
   }
 
-  public static JHipsterModuleDockerComposeFileBuilder builder(JHipsterModule.SeedModuleBuilder parentModuleBuilder) {
-    return new JHipsterModuleDockerComposeFileBuilder(parentModuleBuilder);
+  public static SeedModuleDockerComposeFileBuilder builder(JHipsterModule.SeedModuleBuilder parentModuleBuilder) {
+    return new SeedModuleDockerComposeFileBuilder(parentModuleBuilder);
   }
 
-  public static final class JHipsterModuleDockerComposeFileBuilder {
+  public static final class SeedModuleDockerComposeFileBuilder {
 
     private final Collection<DockerComposeFile> dockerComposeFiles = new ArrayList<>();
     private final JHipsterModule.SeedModuleBuilder module;
 
-    private JHipsterModuleDockerComposeFileBuilder(JHipsterModule.SeedModuleBuilder module) {
+    private SeedModuleDockerComposeFileBuilder(JHipsterModule.SeedModuleBuilder module) {
       Assert.notNull("module", module);
 
       this.module = module;
     }
 
-    public JHipsterModuleDockerComposeFileBuilder append(DockerComposeFile dockerComposeFile) {
+    public SeedModuleDockerComposeFileBuilder append(DockerComposeFile dockerComposeFile) {
       Assert.notNull("dockerComposeFile", dockerComposeFile);
 
       dockerComposeFiles.add(dockerComposeFile);
@@ -50,8 +50,8 @@ public final class JHipsterModuleDockerComposeFile {
       return module;
     }
 
-    public JHipsterModuleDockerComposeFile build() {
-      return new JHipsterModuleDockerComposeFile(this);
+    public SeedModuleDockerComposeFile build() {
+      return new SeedModuleDockerComposeFile(this);
     }
   }
 }

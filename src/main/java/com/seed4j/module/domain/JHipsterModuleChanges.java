@@ -12,8 +12,8 @@ import com.seed4j.module.domain.packagejson.SeedModulePackageJson;
 import com.seed4j.module.domain.postaction.SeedModulePostActions;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
 import com.seed4j.module.domain.replacement.ContentReplacers;
-import com.seed4j.module.domain.standalonedocker.JHipsterModuleDockerComposeFile;
-import com.seed4j.module.domain.startupcommand.JHipsterStartupCommands;
+import com.seed4j.module.domain.standalonedocker.SeedModuleDockerComposeFile;
+import com.seed4j.module.domain.startupcommand.SeedStartupCommands;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
@@ -27,7 +27,7 @@ public final class JHipsterModuleChanges {
   private final SeedFilesToMove filesToMove;
   private final SeedFilesToDelete filesToDelete;
   private final ContentReplacers replacers;
-  private final JHipsterStartupCommands startupCommands;
+  private final SeedStartupCommands startupCommands;
   private final JavaBuildCommands javaBuildCommands;
   private final SeedModulePackageJson packageJson;
   private final JHipsterModulePreActions preActions;
@@ -38,7 +38,7 @@ public final class JHipsterModuleChanges {
   private final SpringComments springYamlComments;
   private final SpringFactories springFactories;
   private final SeedModuleGitIgnore gitIgnore;
-  private final JHipsterModuleDockerComposeFile dockerComposeFile;
+  private final SeedModuleDockerComposeFile dockerComposeFile;
 
   private JHipsterModuleChanges(JHipsterModuleChangesBuilder builder) {
     assertMandatoryFields(builder);
@@ -110,7 +110,7 @@ public final class JHipsterModuleChanges {
     return replacers;
   }
 
-  public JHipsterStartupCommands startupCommands() {
+  public SeedStartupCommands startupCommands() {
     return startupCommands;
   }
 
@@ -155,7 +155,7 @@ public final class JHipsterModuleChanges {
     return springFactories;
   }
 
-  public JHipsterModuleDockerComposeFile dockerComposeFile() {
+  public SeedModuleDockerComposeFile dockerComposeFile() {
     return dockerComposeFile;
   }
 
@@ -186,7 +186,7 @@ public final class JHipsterModuleChanges {
     private SeedFilesToMove filesToMove;
     private SeedFilesToDelete filesToDelete;
     private ContentReplacers replacers;
-    private JHipsterStartupCommands startupCommands;
+    private SeedStartupCommands startupCommands;
     private JavaBuildCommands javaBuildCommands;
     private SeedModulePackageJson packageJson;
     private Indentation indentation;
@@ -198,7 +198,7 @@ public final class JHipsterModuleChanges {
     private SpringComments springYamlComments = SpringComments.EMPTY;
     private SpringFactories springFactories;
     private SeedModuleGitIgnore gitIgnore;
-    private JHipsterModuleDockerComposeFile dockerComposeFile;
+    private SeedModuleDockerComposeFile dockerComposeFile;
 
     @Override
     public JHipsterModuleChangesProjectFolderBuilder context(SeedModuleContext context) {
@@ -250,7 +250,7 @@ public final class JHipsterModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChangesJavaBuildCommandsBuilder startupCommands(JHipsterStartupCommands startupCommands) {
+    public JHipsterModuleChangesJavaBuildCommandsBuilder startupCommands(SeedStartupCommands startupCommands) {
       this.startupCommands = startupCommands;
 
       return this;
@@ -278,7 +278,7 @@ public final class JHipsterModuleChanges {
     }
 
     @Override
-    public JHipsterModuleChangesPreActionsBuilder dockerComposeFile(JHipsterModuleDockerComposeFile dockerComposeFile) {
+    public JHipsterModuleChangesPreActionsBuilder dockerComposeFile(SeedModuleDockerComposeFile dockerComposeFile) {
       this.dockerComposeFile = dockerComposeFile;
 
       return this;
@@ -363,7 +363,7 @@ public final class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesStartupCommandsBuilder {
-    JHipsterModuleChangesJavaBuildCommandsBuilder startupCommands(JHipsterStartupCommands startupCommands);
+    JHipsterModuleChangesJavaBuildCommandsBuilder startupCommands(SeedStartupCommands startupCommands);
   }
 
   public interface JHipsterModuleChangesJavaBuildCommandsBuilder {
@@ -379,7 +379,7 @@ public final class JHipsterModuleChanges {
   }
 
   public interface JHipsterModuleChangesDockerComposeFileBuilder {
-    JHipsterModuleChangesPreActionsBuilder dockerComposeFile(JHipsterModuleDockerComposeFile dockerComposeFile);
+    JHipsterModuleChangesPreActionsBuilder dockerComposeFile(SeedModuleDockerComposeFile dockerComposeFile);
   }
 
   public interface JHipsterModuleChangesPreActionsBuilder {

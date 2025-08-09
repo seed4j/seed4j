@@ -9,11 +9,11 @@ import com.seed4j.UnitTest;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class JHipsterModuleDockerComposeFileTest {
+class SeedModuleDockerComposeFileTest {
 
   @Test
   void hasSimpleString() {
-    JHipsterModuleDockerComposeFile dockerComposeFile = JHipsterModuleDockerComposeFile.builder(moduleBuilder(allProperties()))
+    SeedModuleDockerComposeFile dockerComposeFile = SeedModuleDockerComposeFile.builder(moduleBuilder(allProperties()))
       .append(dockerComposeFile("src/main/docker/redis.yml"))
       .append(dockerComposeFile("src/main/docker/kafka.yml"))
       .build();

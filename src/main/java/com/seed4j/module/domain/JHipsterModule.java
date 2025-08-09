@@ -87,12 +87,12 @@ import com.seed4j.module.domain.replacement.SeedModuleOptionalReplacementsFactor
 import com.seed4j.module.domain.replacement.TextNeedleAfterReplacer;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.module.domain.replacement.TextReplacer;
-import com.seed4j.module.domain.standalonedocker.JHipsterModuleDockerComposeFile;
-import com.seed4j.module.domain.standalonedocker.JHipsterModuleDockerComposeFile.JHipsterModuleDockerComposeFileBuilder;
+import com.seed4j.module.domain.standalonedocker.SeedModuleDockerComposeFile;
+import com.seed4j.module.domain.standalonedocker.SeedModuleDockerComposeFile.SeedModuleDockerComposeFileBuilder;
 import com.seed4j.module.domain.startupcommand.DockerComposeFile;
-import com.seed4j.module.domain.startupcommand.JHipsterModuleStartupCommands;
-import com.seed4j.module.domain.startupcommand.JHipsterModuleStartupCommands.JHipsterModuleStartupCommandsBuilder;
-import com.seed4j.module.domain.startupcommand.JHipsterStartupCommands;
+import com.seed4j.module.domain.startupcommand.SeedModuleStartupCommands;
+import com.seed4j.module.domain.startupcommand.SeedModuleStartupCommands.SeedModuleStartupCommandsBuilder;
+import com.seed4j.module.domain.startupcommand.SeedStartupCommands;
 import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Path;
 import java.util.Collection;
@@ -115,7 +115,7 @@ public final class JHipsterModule {
   private final SeedModuleFiles files;
   private final SeedModuleMandatoryReplacementsFactory mandatoryReplacements;
   private final SeedModuleOptionalReplacementsFactory optionalReplacements;
-  private final JHipsterModuleStartupCommands startupCommands;
+  private final SeedModuleStartupCommands startupCommands;
   private final SeedModuleContext context;
   private final SeedModuleJavaDependencies javaDependencies;
   private final SeedModuleBuildProperties javaBuildProperties;
@@ -131,7 +131,7 @@ public final class JHipsterModule {
   private final SpringComments springComments;
   private final SpringFactories springFactories;
   private final SeedModuleGitIgnore gitIgnore;
-  private final JHipsterModuleDockerComposeFile dockerComposeFile;
+  private final SeedModuleDockerComposeFile dockerComposeFile;
 
   private JHipsterModule(SeedModuleBuilder builder) {
     properties = builder.properties;
@@ -482,7 +482,7 @@ public final class JHipsterModule {
     return optionalReplacements;
   }
 
-  public JHipsterStartupCommands startupCommands() {
+  public SeedStartupCommands startupCommands() {
     return startupCommands.commands();
   }
 
@@ -542,7 +542,7 @@ public final class JHipsterModule {
     return gitIgnore;
   }
 
-  public JHipsterModuleDockerComposeFile dockerComposeFile() {
+  public SeedModuleDockerComposeFile dockerComposeFile() {
     return dockerComposeFile;
   }
 
@@ -559,7 +559,7 @@ public final class JHipsterModule {
     private final JHipsterModuleOptionalReplacementsFactoryBuilder optionalReplacements = SeedModuleOptionalReplacementsFactory.builder(
       this
     );
-    private final JHipsterModuleStartupCommandsBuilder startupCommands = JHipsterModuleStartupCommands.builder(this);
+    private final SeedModuleStartupCommandsBuilder startupCommands = SeedModuleStartupCommands.builder(this);
     private final JHipsterModuleJavaDependenciesBuilder<SeedModuleBuilder> javaDependencies = SeedModuleJavaDependencies.builder(this);
     private final JHipsterModuleBuildPropertiesBuilder<SeedModuleBuilder> javaBuildProperties = SeedModuleBuildProperties.builder(this);
     private final SeedModuleJavaBuildProfilesBuilder javaBuildProfiles = SeedModuleJavaBuildProfiles.builder(this);
@@ -573,7 +573,7 @@ public final class JHipsterModule {
     private final Map<PropertiesKey, JHipsterModuleSpringPropertiesBuilder> springProperties = new HashMap<>();
     private final Map<SpringFactoryType, JHipsterModuleSpringFactoriesBuilder> springFactories = new EnumMap<>(SpringFactoryType.class);
     private final JHipsterModuleGitIgnoreBuilder gitIgnore = SeedModuleGitIgnore.builder(this);
-    private final JHipsterModuleDockerComposeFileBuilder dockerComposeFile = JHipsterModuleDockerComposeFile.builder(this);
+    private final SeedModuleDockerComposeFileBuilder dockerComposeFile = SeedModuleDockerComposeFile.builder(this);
 
     private SeedModuleBuilder(SeedModuleProperties properties) {
       Assert.notNull("properties", properties);
@@ -611,7 +611,7 @@ public final class JHipsterModule {
       return this;
     }
 
-    public JHipsterModuleStartupCommandsBuilder startupCommands() {
+    public SeedModuleStartupCommandsBuilder startupCommands() {
       return startupCommands;
     }
 
@@ -761,7 +761,7 @@ public final class JHipsterModule {
       return gitIgnore;
     }
 
-    public JHipsterModuleDockerComposeFileBuilder dockerComposeFile() {
+    public SeedModuleDockerComposeFileBuilder dockerComposeFile() {
       return dockerComposeFile;
     }
 

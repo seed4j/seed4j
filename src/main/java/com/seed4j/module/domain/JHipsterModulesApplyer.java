@@ -17,9 +17,9 @@ import com.seed4j.module.domain.replacement.ContentReplacer;
 import com.seed4j.module.domain.replacement.ContentReplacers;
 import com.seed4j.module.domain.startupcommand.DockerComposeStartupCommandLine;
 import com.seed4j.module.domain.startupcommand.GradleStartupCommandLine;
-import com.seed4j.module.domain.startupcommand.JHipsterStartupCommand;
-import com.seed4j.module.domain.startupcommand.JHipsterStartupCommands;
 import com.seed4j.module.domain.startupcommand.MavenStartupCommandLine;
+import com.seed4j.module.domain.startupcommand.SeedStartupCommand;
+import com.seed4j.module.domain.startupcommand.SeedStartupCommands;
 import com.seed4j.shared.error.domain.Assert;
 import java.time.Instant;
 import java.util.Collection;
@@ -141,7 +141,7 @@ public class JHipsterModulesApplyer {
     return new SeedTemplatedFiles(templatedFiles);
   }
 
-  private JHipsterStartupCommands buildStartupCommands(JHipsterModule module) {
+  private SeedStartupCommands buildStartupCommands(JHipsterModule module) {
     Optional<JavaBuildTool> javaBuildTool = detectedJavaBuildTool(module);
     if (javaBuildTool.isEmpty()) {
       return module.startupCommands();
@@ -152,10 +152,10 @@ public class JHipsterModulesApplyer {
       .stream()
       .filter(isStartupCommandCompatibleWith(javaBuildTool.orElseThrow()))
       .toList();
-    return new JHipsterStartupCommands(filteredCommands);
+    return new SeedStartupCommands(filteredCommands);
   }
 
-  private static Predicate<JHipsterStartupCommand> isStartupCommandCompatibleWith(JavaBuildTool javaBuildTool) {
+  private static Predicate<SeedStartupCommand> isStartupCommandCompatibleWith(JavaBuildTool javaBuildTool) {
     return startupCommand ->
       switch (startupCommand) {
         case MavenStartupCommandLine __ -> javaBuildTool == MAVEN;

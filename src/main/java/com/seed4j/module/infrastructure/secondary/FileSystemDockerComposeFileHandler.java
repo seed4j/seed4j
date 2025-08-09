@@ -1,7 +1,7 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import com.seed4j.module.domain.properties.SeedProjectFolder;
-import com.seed4j.module.domain.standalonedocker.JHipsterModuleDockerComposeFile;
+import com.seed4j.module.domain.standalonedocker.SeedModuleDockerComposeFile;
 import com.seed4j.module.domain.startupcommand.DockerComposeFile;
 import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Path;
@@ -11,7 +11,7 @@ class FileSystemDockerComposeFileHandler {
 
   public static final String COMPOSE_FILE_NAME = "docker-compose.yml";
 
-  public void handle(SeedProjectFolder projectFolder, JHipsterModuleDockerComposeFile files) {
+  public void handle(SeedProjectFolder projectFolder, SeedModuleDockerComposeFile files) {
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("files", files);
 

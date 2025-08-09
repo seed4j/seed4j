@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.JHipsterModule;
 import com.seed4j.module.domain.properties.SeedProjectFolder;
-import com.seed4j.module.domain.standalonedocker.JHipsterModuleDockerComposeFile;
+import com.seed4j.module.domain.standalonedocker.SeedModuleDockerComposeFile;
 import com.seed4j.module.domain.startupcommand.DockerComposeFile;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
@@ -56,8 +56,8 @@ public class FileSystemDockerComposeFileHandlerTest {
       );
   }
 
-  private JHipsterModuleDockerComposeFile dockerComposeFile(DockerComposeFile file) {
-    return JHipsterModuleDockerComposeFile.builder(moduleBuilder(allProperties())).append(file).build();
+  private SeedModuleDockerComposeFile dockerComposeFile(DockerComposeFile file) {
+    return SeedModuleDockerComposeFile.builder(moduleBuilder(allProperties())).append(file).build();
   }
 
   private DockerComposeFile redisDockerComposeFileReference() {

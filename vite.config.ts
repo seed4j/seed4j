@@ -30,12 +30,12 @@ export default defineConfig({
       '/api': {
         ws: true,
         changeOrigin: true,
-        target: 'http://localhost:7471',
+        target: 'http://localhost:1339',
       },
       '/management': {
         ws: true,
         changeOrigin: true,
-        target: 'http://localhost:7471',
+        target: 'http://localhost:1339',
       },
       '/style': {
         ws: true,

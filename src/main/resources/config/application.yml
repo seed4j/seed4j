@@ -72,7 +72,7 @@ jhlite:
   preset-folder: presets
 
 server:
-  port: 7471
+  port: 1339
 
 spring:
   threads:

@@ -83,7 +83,7 @@ class VueModuleFactoryTest {
       .hasFiles("src/main/webapp/index.html")
       .hasPrefixedFiles("src/main/webapp/app", "env.d.ts", "AppVue.vue", "injections.ts", "main.ts")
       .hasPrefixedFiles("src/main/webapp/app/home","infrastructure/primary/HomepageVue.vue")
-      .hasPrefixedFiles("src/main/webapp/content/images", "JHipster-Lite-neon-green.png", "VueLogo.png")
+      .hasPrefixedFiles("src/main/webapp/content/images", "seed4j_logo-name.png", "VueLogo.png")
       .hasFiles("src/test/webapp/unit/Dummy.spec.ts")
       .hasFiles("src/test/webapp/unit/shared/http/infrastructure/secondary/AxiosHttp.spec.ts")
       .hasFiles("src/test/webapp/unit/shared/http/infrastructure/secondary/AxiosStub.ts");

@@ -114,7 +114,7 @@ public class AngularModuleFactory {
           .addTemplate("app.route.spec.ts")
           .and()
         .batch(SOURCE.file("src/main/webapp/content/images"), to("src/main/webapp/content/images"))
-          .addFile("JHipster-Lite-neon-red.png")
+          .addFile("seed4j_logo-name.png")
           .addFile("AngularLogo.svg")
           .and()
         .batch(SOURCE.file("src/main/webapp/environments"), to("src/main/webapp/environments"))

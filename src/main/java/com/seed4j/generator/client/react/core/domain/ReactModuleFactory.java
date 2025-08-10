@@ -105,7 +105,7 @@ public class ReactModuleFactory {
         .add(PRIMARY_APP_SOURCE.template("HomePage.tsx"), PRIMARY_APP_DESTINATION.append("HomePage.tsx"))
         .add(PRIMARY_APP_SOURCE.template("HomePage.css"), PRIMARY_APP_DESTINATION.append("HomePage.css"))
         .batch(WEBAPP_SOURCE.append(ASSETS), WEBAPP_DESTINATION.append(ASSETS))
-          .addFile("JHipster-Lite-neon-blue.png")
+          .addFile("seed4j_logo-name.png")
           .addFile("ReactLogo.png")
           .and()
         .and()

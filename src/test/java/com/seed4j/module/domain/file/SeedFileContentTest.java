@@ -57,10 +57,10 @@ class SeedFileContentTest {
 
   @Test
   void shouldGetRawContentForNotTemplatedFile() throws IOException {
-    SeedFileContent content = content("/generator/client/vue/webapp/content/images/JHipster-Lite-neon-green.png");
+    SeedFileContent content = content("/generator/client/vue/webapp/content/images/seed4j_logo-name.png");
 
     assertThat(content.read(files, context(), templateRenderer)).isEqualTo(
-      Files.readAllBytes(Path.of("src/main/resources/generator/client/vue/webapp/content/images/JHipster-Lite-neon-green.png"))
+      Files.readAllBytes(Path.of("src/main/resources/generator/client/vue/webapp/content/images/seed4j_logo-name.png"))
     );
   }
 

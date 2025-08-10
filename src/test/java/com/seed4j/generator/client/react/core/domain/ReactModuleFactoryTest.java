@@ -96,7 +96,7 @@ class ReactModuleFactoryTest {
       .containing("import './HomePage.css';")
       .and()
       .hasFiles("src/main/webapp/app/home/infrastructure/primary/HomePage.css")
-      .hasPrefixedFiles("src/main/webapp/assets", "ReactLogo.png", "JHipster-Lite-neon-blue.png");
+      .hasPrefixedFiles("src/main/webapp/assets", "ReactLogo.png", "seed4j_logo-name.png");
 
     verify(nodeLazyPackagesInstaller).runInstallIn(properties.projectFolder(), properties.nodePackageManager());
   }

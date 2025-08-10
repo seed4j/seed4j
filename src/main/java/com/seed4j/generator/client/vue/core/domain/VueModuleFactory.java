@@ -79,7 +79,7 @@ public class VueModuleFactory {
           .and()
         .add(APP_SOURCE.template("shared/http/infrastructure/secondary/AxiosHttp.ts.mustache"), MAIN_DESTINATION.append("shared/http/infrastructure/secondary/AxiosHttp.ts"))
         .batch(IMAGE_SOURCE, to("src/main/webapp/content/images"))
-          .addFile("JHipster-Lite-neon-green.png")
+          .addFile("seed4j_logo-name.png")
           .addFile("VueLogo.png")
           .and()
         .add(SOURCE.template("Dummy.spec.ts"), to("src/test/webapp/unit/Dummy.spec.ts"))

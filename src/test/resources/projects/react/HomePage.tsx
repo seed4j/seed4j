@@ -1,7 +1,7 @@
 import './HomePage.css';
 
-import JHipsterLiteNeonBlue from '@assets/JHipster-Lite-neon-blue.png';
 import ReactLogo from '@assets/ReactLogo.png';
+import Seed4JLogo from '@assets/seed4j_logo-name.png';
 
 function HomePage() {
   return (
@@ -9,7 +9,7 @@ function HomePage() {
       <div id="app">
         <img alt="React logo" src={ReactLogo} />
         <br />
-        <img alt="JHipster logo" src={JHipsterLiteNeonBlue} />
+        <img alt="Seed4J logo" width={200} height={200} src={Seed4JLogo} />
         <h1>React + TypeScript + Vite</h1>
         <p>
           Recommended IDE setup:&nbsp;

@@ -103,7 +103,7 @@ class AngularModuleFactoryTest {
         "eslint.config.mjs"
       )
       .hasPrefixedFiles("src/main/webapp/app", "app.css", "app.ts", "app.html", "app.spec.ts", "app.route.spec.ts", "app.route.ts")
-      .hasPrefixedFiles("src/main/webapp/content/images", "JHipster-Lite-neon-red.png", "AngularLogo.svg")
+      .hasPrefixedFiles("src/main/webapp/content/images", "seed4j_logo-name.png", "AngularLogo.svg")
       .hasPrefixedFiles(
         "src/main/webapp/environments",
         "environment.ts",

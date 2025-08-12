@@ -3,7 +3,11 @@
   "compilerOptions": {
     "outDir": "{{projectBuildDirectory}}/out-tsc/spec",
     "isolatedModules": true,
-    "types": ["jest", "node"]
+    "types": ["node", "vitest/globals"],
+    "target": "esnext",
   },
-  "include": ["src/main/webapp/**/*.spec.ts", "src/main/webapp/**/*.d.ts"]
+  "include": ["src/main/webapp/**/*.spec.ts", "src/main/webapp/**/*.d.ts"],
+  "files": [
+    "test-setup.ts"
+  ]
 }

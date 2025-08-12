@@ -32,7 +32,7 @@ describe('httpAuthInterceptor', () => {
 
   describe('Bearer Token', () => {
     it('should add authorization bearer token in request when defined', () => {
-      jest.spyOn(oauth2AuthService, 'token', 'get').mockReturnValue(TOKEN);
+      vi.spyOn(oauth2AuthService, 'token', 'get').mockReturnValue(TOKEN);
       const originalRequest = buildHttpRequest();
 
       httpClient.request(originalRequest).subscribe();
@@ -45,7 +45,7 @@ describe('httpAuthInterceptor', () => {
     });
 
     it('should not add authorization bearer token in request when it is not defined', () => {
-      jest.spyOn(oauth2AuthService, 'token', 'get').mockReturnValue(undefined);
+      vi.spyOn(oauth2AuthService, 'token', 'get').mockReturnValue(undefined);
       const originalRequest: HttpRequest<unknown> = buildHttpRequest();
 
       httpClient.request(originalRequest).subscribe();

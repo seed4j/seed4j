@@ -1,6 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { firstValueFrom } from 'rxjs';
 
 import { ApplicationConfigService } from '../../config/application-config.service';
 import { HealthService } from './health.service';
@@ -25,20 +26,20 @@ describe('HealthService Service', () => {
   });
 
   describe('Service methods', () => {
-    it('should call management/health endpoint with correct values', (done) => {
+    it('should call management/health endpoint with correct values', async() => {
       const checkHealth = {
         components: [],
       };
 
-      service.checkHealth().subscribe(received => {
-        expect(received).toEqual(checkHealth);
-        done();
-      });
+      const received = firstValueFrom(service.checkHealth());
+
       const testRequest = httpMock.expectOne({
         method: 'GET',
         url: applicationConfigService.getEndpointFor('management/health'),
       });
       testRequest.flush(checkHealth);
+
+      expect(await received).toEqual(checkHealth);
     });
   });
 });

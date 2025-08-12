@@ -4,6 +4,8 @@
   "description": "Seed4J : used for Angular+TypeScript dependencies",
   "license": "Apache-2.0",
   "dependencies": {
+    "@analogjs/vite-plugin-angular": "1.19.4",
+    "@analogjs/vitest-angular": "1.19.4",
     "@angular-builders/jest": "20.0.0",
     "@angular/build": "20.1.5",
     "@angular/cdk": "20.1.5",

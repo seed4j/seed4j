@@ -31,8 +31,8 @@ describe('Login Component', () => {
         {
           provide: LoginService,
           useValue: {
-            login: jest.fn(() => of({})),
-            logout: jest.fn(() => of({})),
+            login: vi.fn(() => of({})),
+            logout: vi.fn(() => of({})),
           },
         },
       ],
@@ -51,7 +51,7 @@ describe('Login Component', () => {
   describe('ngOnInit', () => {
     it('should check authentication', () => {
       const authenticationState = new Subject<Account | null>();
-      mockAccountService.getAuthenticationState = jest.fn(() => authenticationState.asObservable());
+      mockAccountService.getAuthenticationState = vi.fn(() => authenticationState.asObservable());
 
       comp.ngOnInit();
 
@@ -88,7 +88,7 @@ describe('Login Component', () => {
 
     it('should not authenticate the user', () => {
       const err = { status: 403 };
-      jest.spyOn(mockLoginService, 'login').mockReturnValue(throwError(() => err));
+      vi.spyOn(mockLoginService, 'login').mockReturnValue(throwError(() => err));
 
       comp.login();
 

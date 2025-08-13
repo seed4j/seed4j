@@ -40,7 +40,7 @@
     <jqassistant-jmolecules-plugin.version>2.1.0-M4</jqassistant-jmolecules-plugin.version>
     <jqassistant-spring-plugin.version>2.2.1</jqassistant-spring-plugin.version>
     <langchain4j.version>0.36.2</langchain4j.version>
-    <jooq.version>3.20.5</jooq.version>
+    <jooq.version>3.20.6</jooq.version>
     <!-- Test dependencies -->
     <junit-jupiter.version>5.13.4</junit-jupiter.version>
     <assertj.version>3.27.4</assertj.version>

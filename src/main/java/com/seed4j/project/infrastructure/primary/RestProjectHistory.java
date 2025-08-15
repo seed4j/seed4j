@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Collection;
 import java.util.Map;
 
-@Schema(name = "ProjectHistory", description = "Information on the JHipster project history")
+@Schema(name = "ProjectHistory", description = "Information on the Seed4J project history")
 final class RestProjectHistory {
 
   private final Collection<RestAppliedModule> modules;

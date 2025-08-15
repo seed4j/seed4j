@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 class FileSystemStartupCommandsReadmeCommandsHandler {
 
   private static final SeedProjectFilePath README = path("README.md");
-  private static final TextNeedleBeforeReplacer JHIPSTER_STARTUP_COMMAND_SECTION_NEEDLE = lineBeforeText(
+  private static final TextNeedleBeforeReplacer SEED4J_STARTUP_COMMAND_SECTION_NEEDLE = lineBeforeText(
     "\n<!-- seed4j-needle-startupCommand -->"
   );
   private static final String BASH_TEMPLATE = """
@@ -45,7 +45,7 @@ class FileSystemStartupCommandsReadmeCommandsHandler {
 
   private void addCommandToReadme(SeedProjectFolder projectFolder, SeedStartupCommand command, SeedModuleContext context) {
     String replacedTemplate = BASH_TEMPLATE.replace("{{command}}", command.commandLine().get());
-    OptionalReplacer replacer = new OptionalReplacer(JHIPSTER_STARTUP_COMMAND_SECTION_NEEDLE, replacedTemplate);
+    OptionalReplacer replacer = new OptionalReplacer(SEED4J_STARTUP_COMMAND_SECTION_NEEDLE, replacedTemplate);
     fileReplacer.handle(projectFolder, ContentReplacers.of(new OptionalFileReplacer(README, replacer)), context);
   }
 }

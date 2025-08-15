@@ -1,6 +1,6 @@
 {
-  "name": "jhipster",
+  "name": "seed4j",
   "version": "0.0.0",
   "private": true,
-  "description": "JHipster project"
+  "description": "Seed4J project"
 }

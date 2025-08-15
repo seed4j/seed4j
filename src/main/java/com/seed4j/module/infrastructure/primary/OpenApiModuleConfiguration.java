@@ -36,8 +36,8 @@ class OpenApiModuleConfiguration {
   private static final String STRING_TYPE = "string";
   private static final String OBJECT_TYPE = "object";
   private static final String DESCRIPTION = "Definitions for properties in this module";
-  private static final String MODULE_PROPERTY_DEFINITION_SCHEMA_NAME = "JHipsterModulePropertiesDefinition";
-  private static final String MODULE_PROPERTIES_DEFINITION_SCHEMA_NAME = "JHipsterModulePropertyDefinition";
+  private static final String MODULE_PROPERTY_DEFINITION_SCHEMA_NAME = "Seed4JModulePropertiesDefinition";
+  private static final String MODULE_PROPERTIES_DEFINITION_SCHEMA_NAME = "Seed4JModulePropertyDefinition";
 
   private static final Schema<?> MODULE_PROPERTY_DEFINITION_SCHEMA = new Schema<>().$ref(
     "#/components/schemas/" + MODULE_PROPERTY_DEFINITION_SCHEMA_NAME
@@ -57,7 +57,7 @@ class OpenApiModuleConfiguration {
 
       openApi.getComponents().getSchemas().putAll(moduleApplicationSchemas(modules));
 
-      openApi.getPaths().putAll(buildJHipsterModulesPaths(modules));
+      openApi.getPaths().putAll(buildSeed4JModulesPaths(modules));
     };
   }
 
@@ -148,7 +148,7 @@ class OpenApiModuleConfiguration {
         .example(property.defaultValue().map(SeedPropertyDefaultValue::get).orElse(null));
   }
 
-  private Paths buildJHipsterModulesPaths(SeedModulesResources modules) {
+  private Paths buildSeed4JModulesPaths(SeedModulesResources modules) {
     Paths paths = new Paths();
 
     paths.putAll(modulesPropertiesDefinitions(modules));

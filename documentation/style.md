@@ -1,9 +1,5 @@
 # Style
 
-## Style guide
-
-You can find the [JHipster style guide][jhipster-style-guide] on Figma, please use this reference to help you create new style.
-
 ## Pattern Library
 
 Component styles (CSS, HTML) are designed under `src/main/style` using [Tikui][tikui].
@@ -45,4 +41,3 @@ This will replace the current _CSS_ and _font_ files into the sources.
 [tikui]: https://www.tikui.org
 [fontello]: https://fontello.com/
 [fontello-help]: https://github.com/fontello/fontello/wiki/Help
-[jhipster-style-guide]: https://www.figma.com/file/h2uxNtJbfPATVUMjCZJNdU/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%A6%B0-JHipster-Lite?node-id=1402%3A5617

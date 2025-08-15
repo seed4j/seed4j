@@ -60,7 +60,7 @@ class SpringBootDockerModuleFactoryTest {
                       </ports>
                       <environment>
                         <SPRING_OUTPUT_ANSI_ENABLED>ALWAYS</SPRING_OUTPUT_ANSI_ENABLED>
-                        <JHIPSTER_SLEEP>0</JHIPSTER_SLEEP>
+                        <SEED4J_SLEEP>0</SEED4J_SLEEP>
                       </environment>
                       <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
                       <user>1000</user>
@@ -151,7 +151,7 @@ class SpringBootDockerModuleFactoryTest {
               ports = listOf("9000")
               environment = mapOf(
                "SPRING_OUTPUT_ANSI_ENABLED" to "ALWAYS",
-               "JHIPSTER_SLEEP" to "0"
+               "SEED4J_SLEEP" to "0"
               )
               creationTime = "USE_CURRENT_TIMESTAMP"
               user = "1000"

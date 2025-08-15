@@ -1,13 +1,13 @@
 FROM openjdk:21-slim
-COPY . /code/jhipster-app/
-WORKDIR /code/jhipster-app/
+COPY . /code/app/
+WORKDIR /code/japp/
 RUN \
     rm -Rf build node_modules && \
     chmod +x gradlew && \
     sleep 1 && \
     ./gradlew assemble -x test && \
-    mv /code/jhipster-app/build/libs/*.jar /code/ && \
-    rm -Rf /code/jhipster-app/ /root/.gradle /root/.cache /tmp/* /var/tmp/*
+    mv /code/app/build/libs/*.jar /code/ && \
+    rm -Rf /code/app/ /root/.gradle /root/.cache /tmp/* /var/tmp/*
 
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
     JAVA_OPTS=""

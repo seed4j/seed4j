@@ -28,7 +28,7 @@ class SeedModulesResourcesConfigurationTest {
     hiddenResources.setSlugs(null);
     hiddenResources.setTags(null);
 
-    SeedModulesResources resources = configuration.jhipsterModulesResources(hiddenResources, moduleResourcesCollection());
+    SeedModulesResources resources = configuration.seedModulesResources(hiddenResources, moduleResourcesCollection());
 
     assertThat(resources.stream()).usingRecursiveFieldByFieldElementComparator().containsExactlyElementsOf(moduleResourcesCollection());
   }
@@ -39,7 +39,7 @@ class SeedModulesResourcesConfigurationTest {
     hiddenResources.setSlugs(List.of("module-a"));
     hiddenResources.setTags(null);
 
-    SeedModulesResources resources = configuration.jhipsterModulesResources(hiddenResources, moduleNestedResourcesCollection());
+    SeedModulesResources resources = configuration.seedModulesResources(hiddenResources, moduleNestedResourcesCollection());
 
     assertThat(resources.stream()).usingRecursiveFieldByFieldElementComparator().containsExactly(defaultModuleResource());
     logs.shouldHave(Level.INFO, "The following modules are hidden: module-a, module-b, module-c.");
@@ -50,7 +50,7 @@ class SeedModulesResourcesConfigurationTest {
     SeedHiddenResourcesProperties hiddenResources = new SeedHiddenResourcesProperties();
     hiddenResources.setSlugs(List.of("another-module", "yet-another-module"));
 
-    SeedModulesResources resources = configuration.jhipsterModulesResources(hiddenResources, moduleResourcesCollection());
+    SeedModulesResources resources = configuration.seedModulesResources(hiddenResources, moduleResourcesCollection());
 
     assertThat(resources.stream()).usingRecursiveFieldByFieldElementComparator().containsExactly(defaultModuleResource());
   }
@@ -60,7 +60,7 @@ class SeedModulesResourcesConfigurationTest {
     SeedHiddenResourcesProperties hiddenResources = new SeedHiddenResourcesProperties();
     hiddenResources.setTags(List.of("tag2", "tag3"));
 
-    SeedModulesResources resources = configuration.jhipsterModulesResources(hiddenResources, moduleResourcesCollection());
+    SeedModulesResources resources = configuration.seedModulesResources(hiddenResources, moduleResourcesCollection());
 
     assertThat(resources.stream()).usingRecursiveFieldByFieldElementComparator().containsExactly(defaultModuleResource());
   }

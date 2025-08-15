@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MIGRATION_KEYSPACE_NAME=jhipstermigration
+MIGRATION_KEYSPACE_NAME=seed4jmigration
 
 unset scripts
 declare -A scripts

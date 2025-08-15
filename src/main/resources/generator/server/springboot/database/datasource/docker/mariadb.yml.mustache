@@ -3,7 +3,7 @@ services:
   mariadb:
     image: {{mariadbDockerImageWithVersion}}
     # volumes:
-    #   - ~/volumes/jhipster/{{baseName}}/mariadb/:/var/lib/mysql/
+    #   - ~/volumes/seed4j/{{baseName}}/mariadb/:/var/lib/mysql/
     environment:
       - MYSQL_DATABASE={{baseName}}
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes

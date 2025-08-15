@@ -20,16 +20,16 @@ import java.util.regex.Pattern;
 final class SeedModuleShortcuts {
 
   private static final SeedProjectFilePath README = path("README.md");
-  private static final TextNeedleBeforeReplacer JHIPSTER_DOCUMENTATION_NEEDLE = lineBeforeText("\n<!-- seed4j-needle-documentation -->");
-  private static final TextNeedleBeforeReplacer JHIPSTER_LOCAL_ENVIRONMENT_NEEDLE = lineBeforeText(
+  private static final TextNeedleBeforeReplacer SEED4J_DOCUMENTATION_NEEDLE = lineBeforeText("\n<!-- seed4j-needle-documentation -->");
+  private static final TextNeedleBeforeReplacer SEED4J_LOCAL_ENVIRONMENT_NEEDLE = lineBeforeText(
     "\n<!-- seed4j-needle-localEnvironment -->"
   );
 
-  private static final TextNeedleAfterReplacer JHIPSTER_PREREQUISITES = lineAfterText("\n## Prerequisites");
+  private static final TextNeedleAfterReplacer SEED4J_PREREQUISITES = lineAfterText("\n## Prerequisites");
 
   private static final SeedProjectFilePath SPRING_MAIN_LOG_FILE = path("src/main/resources/logback-spring.xml");
   private static final SeedProjectFilePath SPRING_TEST_LOG_FILE = path("src/test/resources/logback.xml");
-  private static final TextNeedleBeforeReplacer JHIPSTER_LOGGER_NEEDLE = lineBeforeText("<!-- seed4j-needle-logback-add-log -->");
+  private static final TextNeedleBeforeReplacer SEED4J_LOGGER_NEEDLE = lineBeforeText("<!-- seed4j-needle-logback-add-log -->");
 
   private static final Pattern DEFAULT_LINTSTAGED_CONFIGURATION_ENTRY = Pattern.compile("\\s*'\\*': \\[\\s*].*");
 
@@ -44,18 +44,18 @@ final class SeedModuleShortcuts {
       builder.files().add(source, to(target));
 
       String markdownLink = "- [" + title.get() + "](" + target + ")";
-      builder.optionalReplacements().in(README).add(JHIPSTER_DOCUMENTATION_NEEDLE, markdownLink);
+      builder.optionalReplacements().in(README).add(SEED4J_DOCUMENTATION_NEEDLE, markdownLink);
     };
   }
 
   static Consumer<SeedModuleBuilder> localEnvironment(LocalEnvironment localEnvironment) {
     Assert.notNull("localEnvironment", localEnvironment);
-    return builder -> builder.optionalReplacements().in(README).add(JHIPSTER_LOCAL_ENVIRONMENT_NEEDLE, localEnvironment.get());
+    return builder -> builder.optionalReplacements().in(README).add(SEED4J_LOCAL_ENVIRONMENT_NEEDLE, localEnvironment.get());
   }
 
   static Consumer<SeedModuleBuilder> prerequisites(String prerequisites) {
     Assert.notBlank("prerequisites", prerequisites);
-    return builder -> builder.optionalReplacements().in(README).add(JHIPSTER_PREREQUISITES, prerequisites);
+    return builder -> builder.optionalReplacements().in(README).add(SEED4J_PREREQUISITES, prerequisites);
   }
 
   static Consumer<SeedModuleBuilder> springTestLogger(String name, LogLevel level) {
@@ -75,7 +75,7 @@ final class SeedModuleShortcuts {
   }
 
   private static OptionalReplacer logConfigurationEntry(String name, LogLevel level, Indentation indentation) {
-    return new OptionalReplacer(JHIPSTER_LOGGER_NEEDLE, logger(name, level, indentation));
+    return new OptionalReplacer(SEED4J_LOGGER_NEEDLE, logger(name, level, indentation));
   }
 
   private static String logger(String name, LogLevel level, Indentation indentation) {

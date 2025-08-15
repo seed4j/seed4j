@@ -23,7 +23,7 @@ class SampleProducerTest {
   @BeforeEach
   void setUp() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     mockProducer = new MockProducer<>(true, new StringSerializer(), new StringSerializer());
-    sampleProducer = new SampleProducer("queue.jhipster.sample", mockProducer);
+    sampleProducer = new SampleProducer("queue.seed4j.sample", mockProducer);
     Method postConstruct = SampleProducer.class.getDeclaredMethod("init");
     postConstruct.setAccessible(true);
     postConstruct.invoke(sampleProducer);
@@ -41,7 +41,7 @@ class SampleProducerTest {
   void shouldNotSend() {
     MockProducer<String, String> mockProducer = new MockProducer<>(false, new StringSerializer(), new StringSerializer());
 
-    sampleProducer = new SampleProducer("queue.jhipster.sample", mockProducer);
+    sampleProducer = new SampleProducer("queue.seed4j.sample", mockProducer);
     final Future<RecordMetadata> producerRecord = sampleProducer.send("sample message");
     RuntimeException expectedException = new RuntimeException();
     mockProducer.errorNext(expectedException);

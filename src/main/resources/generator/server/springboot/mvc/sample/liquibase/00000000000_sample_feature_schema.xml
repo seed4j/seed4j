@@ -4,7 +4,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
 >
-  <changeSet id="create_table_beers" author="jhipster">
+  <changeSet id="create_table_beers" author="seed4j">
     <createTable tableName="beers">
       <column name="id" type="${uuidType}">
         <constraints nullable="false" primaryKey="true" />
@@ -24,7 +24,7 @@
     </createTable>
   </changeSet>
 
-  <changeSet id="create_idx_beers_selling_state" author="jhipster">
+  <changeSet id="create_idx_beers_selling_state" author="seed4j">
     <createIndex tableName="beers" indexName="idx_beers_selling_state">
       <column name="selling_state" />
     </createIndex>

@@ -1,8 +1,8 @@
 {
-  "name": "test-jhipster-project",
+  "name": "test-seed4j-project",
   "version": "0.0.0",
   "private": true,
-  "description": "JHipster Project",
+  "description": "Seed4J Project",
   "license": "UNLICENSED",
   "scripts": {},
   "dependencies": {},

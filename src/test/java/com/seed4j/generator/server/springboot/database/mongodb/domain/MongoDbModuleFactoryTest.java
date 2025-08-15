@@ -98,8 +98,8 @@ class MongoDbModuleFactoryTest {
         spring:
           data:
             mongodb:
-              database: jhipster
-              uri: mongodb://localhost:27017/jhipster
+              database: seed4j
+              uri: mongodb://localhost:27017/seed4j
         """
       )
       .and()

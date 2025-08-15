@@ -1,6 +1,6 @@
 FROM openjdk:21-slim
 COPY . /code/app/
-WORKDIR /code/japp/
+WORKDIR /code/app/
 RUN \
     rm -Rf build node_modules && \
     chmod +x gradlew && \

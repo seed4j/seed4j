@@ -7,10 +7,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.mycompany.myapp</groupId>
-  <artifactId>jhipster</artifactId>
+  <artifactId>seed4j</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>jhipster</name>
-  <description>JHipster Project</description>
+  <description>Seed4J Project</description>
   <packaging>jar</packaging>
 
   <!-- seed4j-needle-maven-parent -->

@@ -3,7 +3,7 @@ services:
   mysql:
     image: {{mysqlDockerImageWithVersion}}
     # volumes:
-    #   - ~/volumes/jhipster/{{baseName}}/mysql/:/var/lib/mysql/
+    #   - ~/volumes/seed4j/{{baseName}}/mysql/:/var/lib/mysql/
     environment:
       - MYSQL_DATABASE={{baseName}}
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes

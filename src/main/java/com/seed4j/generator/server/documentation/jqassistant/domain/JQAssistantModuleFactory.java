@@ -23,8 +23,8 @@ public class JQAssistantModuleFactory {
 
   private static final String JQASSISTANT_CONFIGURATION_FILE = ".jqassistant.yml";
   private static final String SOURCE = "server/documentation/jqassistant";
-  private static final String JHIPSTER_NEEDLE_JQASSISTANT_PLUGIN = "# seed4j-needle-jqassistant-plugin";
-  private static final String JHIPSTER_NEEDLE_JQASSISTANT_ANALYZE_GROUP = "# seed4j-needle-jqassistant-analyze-group";
+  private static final String SEED4J_NEEDLE_JQASSISTANT_PLUGIN = "# seed4j-needle-jqassistant-plugin";
+  private static final String SEED4J_NEEDLE_JQASSISTANT_ANALYZE_GROUP = "# seed4j-needle-jqassistant-analyze-group";
   private static final GroupId JQASSISTANT_PLUGIN_GROUP_ID = groupId("org.jqassistant.plugin");
   private static final String PROPERTIES = "properties";
 
@@ -107,19 +107,19 @@ public class JQAssistantModuleFactory {
       .mandatoryReplacements()
         .in(path(JQASSISTANT_CONFIGURATION_FILE))
           .add(
-            lineBeforeText(JHIPSTER_NEEDLE_JQASSISTANT_PLUGIN),
+            lineBeforeText(SEED4J_NEEDLE_JQASSISTANT_PLUGIN),
             jQAssistantPluginDeclaration(jQAssistantJMoleculesDependency())
           )
           .add(
-            lineBeforeText(JHIPSTER_NEEDLE_JQASSISTANT_ANALYZE_GROUP),
+            lineBeforeText(SEED4J_NEEDLE_JQASSISTANT_ANALYZE_GROUP),
             conceptOrGroupDeclaration("jmolecules-ddd:Default")
           )
           .add(
-            lineBeforeText(JHIPSTER_NEEDLE_JQASSISTANT_ANALYZE_GROUP),
+            lineBeforeText(SEED4J_NEEDLE_JQASSISTANT_ANALYZE_GROUP),
             conceptOrGroupDeclaration("jmolecules-hexagonal:Default")
           )
           .add(
-            lineBeforeText(JHIPSTER_NEEDLE_JQASSISTANT_ANALYZE_GROUP),
+            lineBeforeText(SEED4J_NEEDLE_JQASSISTANT_ANALYZE_GROUP),
             conceptOrGroupDeclaration("jmolecules-event:Default")
           )
           .and()
@@ -147,11 +147,11 @@ public class JQAssistantModuleFactory {
       .mandatoryReplacements()
         .in(path(JQASSISTANT_CONFIGURATION_FILE))
           .add(
-            lineBeforeText(JHIPSTER_NEEDLE_JQASSISTANT_PLUGIN),
+            lineBeforeText(SEED4J_NEEDLE_JQASSISTANT_PLUGIN),
             jQAssistantPluginDeclaration(jQAssistantSpringDependency())
           )
           .add(
-            lineBeforeText(JHIPSTER_NEEDLE_JQASSISTANT_ANALYZE_GROUP),
+            lineBeforeText(SEED4J_NEEDLE_JQASSISTANT_ANALYZE_GROUP),
             conceptOrGroupDeclaration("spring-boot:Default")
           )
           .and()

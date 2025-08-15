@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/project-folders")
 class ProjectFoldersResource {
 
-  private final ProjectFolder jHipsterProjectFolderFactory;
+  private final ProjectFolder projectFolder;
 
-  ProjectFoldersResource(ProjectFolder jHipsterProjectFolderFactory) {
-    this.jHipsterProjectFolderFactory = jHipsterProjectFolderFactory;
+  ProjectFoldersResource(ProjectFolder projectFolder) {
+    this.projectFolder = projectFolder;
   }
 
   @GetMapping
   public String getAvailableFolderName() {
-    return jHipsterProjectFolderFactory.generatePath();
+    return projectFolder.generatePath();
   }
 }

@@ -16,12 +16,12 @@ class SeedProjectBaseNameTest {
 
   @Test
   void shouldGetDefaultProjectNameFromNullBaseName() {
-    assertThat(new SeedProjectBaseName(null).get()).isEqualTo("jhipster");
+    assertThat(new SeedProjectBaseName(null).get()).isEqualTo("seed4j");
   }
 
   @Test
   void shouldGetDefaultProjectBaseNameFromBlankName() {
-    assertThat(new SeedProjectBaseName(" ").get()).isEqualTo("jhipster");
+    assertThat(new SeedProjectBaseName(" ").get()).isEqualTo("seed4j");
   }
 
   @Test

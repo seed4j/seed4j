@@ -64,7 +64,7 @@ class LangChain4jModuleFactoryTest {
         langchain4j:
           open-ai:
             chat-model:
-              api-key: jhipster
+              api-key: seed4j
         """
       );
   }

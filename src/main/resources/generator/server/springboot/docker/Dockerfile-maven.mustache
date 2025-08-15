@@ -1,13 +1,13 @@
 FROM openjdk:21-slim
-COPY . /code/jhipster-app/
-WORKDIR /code/jhipster-app/
+COPY . /code/app/
+WORKDIR /code/app/
 RUN \
     rm -Rf {{projectBuildDirectory}} node_modules && \
     chmod +x mvnw && \
     sleep 1 && \
     ./mvnw package -DskipTests && \
-    mv /code/jhipster-app/{{projectBuildDirectory}}/*.jar /code/ && \
-    rm -Rf /code/jhipster-app/ /root/.m2 /root/.cache /tmp/* /var/tmp/*
+    mv /code/app/{{projectBuildDirectory}}/*.jar /code/ && \
+    rm -Rf /code/app/ /root/.m2 /root/.cache /tmp/* /var/tmp/*
 
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
     JAVA_OPTS=""

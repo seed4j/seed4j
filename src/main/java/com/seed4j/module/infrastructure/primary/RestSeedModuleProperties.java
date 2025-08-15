@@ -24,17 +24,17 @@ class RestSeedModuleProperties {
     this.parameters = parameters;
   }
 
-  public SeedModuleProperties toDomain(ProjectFolder jHipsterProjectFolderFactory) {
-    Assert.notNull("jHipsterProjectFolderFactory", jHipsterProjectFolderFactory);
+  public SeedModuleProperties toDomain(ProjectFolder projectFolder) {
+    Assert.notNull("projectFolder", projectFolder);
 
-    assertValidProjectFolder(jHipsterProjectFolderFactory);
+    assertValidProjectFolder(projectFolder);
 
     return new SeedModuleProperties(getProjectFolder(), isCommit(), getParameters());
   }
 
-  private void assertValidProjectFolder(ProjectFolder jHipsterProjectFolderFactory) {
-    if (jHipsterProjectFolderFactory.isInvalid(projectFolder)) {
-      throw new InvalidProjectFolderException(projectFolder);
+  private void assertValidProjectFolder(ProjectFolder projectFolder) {
+    if (projectFolder.isInvalid(this.projectFolder)) {
+      throw new InvalidProjectFolderException(this.projectFolder);
     }
   }
 

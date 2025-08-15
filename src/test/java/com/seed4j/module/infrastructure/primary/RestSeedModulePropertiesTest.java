@@ -13,20 +13,20 @@ import org.junit.jupiter.api.Test;
 @UnitTest
 class RestSeedModulePropertiesTest {
 
-  private static final ProjectFolder jHipsterProjectFolderFactory = mock(ProjectFolder.class);
+  private static final ProjectFolder projectFolder = mock(ProjectFolder.class);
 
   @Test
   void shouldNotConvertToPropertiesWithInvalidProjectFolder() {
-    when(jHipsterProjectFolderFactory.isInvalid("/test")).thenReturn(true);
+    when(projectFolder.isInvalid("/test")).thenReturn(true);
 
-    assertThatThrownBy(() ->
-      JsonHelper.readFromJson(json(), RestSeedModuleProperties.class).toDomain(jHipsterProjectFolderFactory)
-    ).isExactlyInstanceOf(InvalidProjectFolderException.class);
+    assertThatThrownBy(() -> JsonHelper.readFromJson(json(), RestSeedModuleProperties.class).toDomain(projectFolder)).isExactlyInstanceOf(
+      InvalidProjectFolderException.class
+    );
   }
 
   @Test
   void shouldConvertToProperties() {
-    assertThat(JsonHelper.readFromJson(json(), RestSeedModuleProperties.class).toDomain(jHipsterProjectFolderFactory))
+    assertThat(JsonHelper.readFromJson(json(), RestSeedModuleProperties.class).toDomain(projectFolder))
       .usingRecursiveComparison()
       .isEqualTo(allProperties());
   }
@@ -39,8 +39,8 @@ class RestSeedModulePropertiesTest {
       "parameters": {
         "packageName": "com.seed4j.growth",
         "indentSize": 2,
-        "projectName": "JHipster project",
-        "baseName": "jhipster",
+        "projectName": "Seed4J project",
+        "baseName": "seed4j",
         "optionalString": "optional",
         "mandatoryInteger": 42,
         "mandatoryBoolean": true,

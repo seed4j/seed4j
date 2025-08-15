@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public record SeedProjectBaseName(String name) {
   private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z0-9]+$");
-  private static final String DEFAULT_NAME = "jhipster";
+  private static final String DEFAULT_NAME = "seed4j";
 
   public static final SeedProjectBaseName DEFAULT = new SeedProjectBaseName(DEFAULT_NAME);
 

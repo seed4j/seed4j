@@ -43,7 +43,7 @@ public class LangChain4jModuleFactory {
         .set(propertyKey("langchain4j.open-ai.chat-model.log-responses"), propertyValue("true"))
         .and()
       .springTestProperties()
-        .set(LANGCHAIN4J_PROPERTY_API_KEY, propertyValue("jhipster"))
+        .set(LANGCHAIN4J_PROPERTY_API_KEY, propertyValue("seed4j"))
         .and()
       .build();
     // @formatter:on

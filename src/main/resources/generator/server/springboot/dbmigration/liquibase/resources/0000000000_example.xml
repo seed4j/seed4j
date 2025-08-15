@@ -6,7 +6,7 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
 >
-  <changeSet id="example_schema" author="jhipster">
+  <changeSet id="example_schema" author="seed4j">
     <createTable tableName="example">
       <column name="id" type="${uuidType}">
         <constraints nullable="false" primaryKey="true" />

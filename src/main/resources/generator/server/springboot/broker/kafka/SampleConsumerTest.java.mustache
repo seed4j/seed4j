@@ -32,7 +32,7 @@ class SampleConsumerTest {
 
   @BeforeEach
   void setUp() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-    sampleConsumer = new SampleConsumer("queue.jhipster.sample", 10_000, consumer);
+    sampleConsumer = new SampleConsumer("queue.seed4j.sample", 10_000, consumer);
 
     Method postConstructInit = SampleConsumer.class.getDeclaredMethod("init");
     postConstructInit.setAccessible(true);
@@ -45,14 +45,14 @@ class SampleConsumerTest {
 
   @Test
   void shouldHandleMessage() {
-    ConsumerRecord<String, String> record = new ConsumerRecord<>("queue.jhipster.sample", 0, 0, null, "sample message");
+    ConsumerRecord<String, String> record = new ConsumerRecord<>("queue.seed4j.sample", 0, 0, null, "sample message");
     boolean actualResult = sampleConsumer.handleMessage(record);
     assertThat(actualResult).isTrue();
   }
 
   @Test
   void shouldNotHandleMessage() {
-    ConsumerRecord<String, String> record = new ConsumerRecord<>("queue.jhipster.sample", 0, 0, null, null);
+    ConsumerRecord<String, String> record = new ConsumerRecord<>("queue.seed4j.sample", 0, 0, null, null);
     boolean actualResult = sampleConsumer.handleMessage(record);
     assertThat(actualResult).isFalse();
   }
@@ -61,15 +61,15 @@ class SampleConsumerTest {
   void shouldExecuteKafkaRunner() {
     Map<TopicPartition, List<ConsumerRecord<String, String>>> recordsMap = new HashMap<>();
     List<ConsumerRecord<String, String>> recordsList = new ArrayList<>();
-    recordsList.add(new ConsumerRecord<>("queue.jhipster.sample", 0, 0, null, "sample message"));
-    recordsMap.put(new TopicPartition("queue.jhipster", 0), recordsList);
+    recordsList.add(new ConsumerRecord<>("queue.seed4j.sample", 0, 0, null, "sample message"));
+    recordsMap.put(new TopicPartition("queue.seed4j", 0), recordsList);
     ConsumerRecords<String, String> records = new ConsumerRecords(recordsMap);
     when(consumer.poll(Duration.ofMillis(10000))).thenReturn(records);
     sampleConsumer.setClosed(false);
 
     sampleConsumer.executeKafkaRunner();
 
-    verify(consumer, timeout(TIMEOUT_FOR_EXECUTOR)).subscribe(Collections.singleton("queue.jhipster.sample"));
+    verify(consumer, timeout(TIMEOUT_FOR_EXECUTOR)).subscribe(Collections.singleton("queue.seed4j.sample"));
   }
 
   @Test
@@ -78,7 +78,7 @@ class SampleConsumerTest {
 
     sampleConsumer.executeKafkaRunner();
 
-    verify(consumer, timeout(TIMEOUT_FOR_EXECUTOR)).subscribe(Collections.singleton("queue.jhipster.sample"));
+    verify(consumer, timeout(TIMEOUT_FOR_EXECUTOR)).subscribe(Collections.singleton("queue.seed4j.sample"));
   }
 
   @Test
@@ -88,7 +88,7 @@ class SampleConsumerTest {
 
     sampleConsumer.executeKafkaRunner();
 
-    verify(consumer, timeout(TIMEOUT_FOR_EXECUTOR)).subscribe(Collections.singleton("queue.jhipster.sample"));
+    verify(consumer, timeout(TIMEOUT_FOR_EXECUTOR)).subscribe(Collections.singleton("queue.seed4j.sample"));
   }
 
   @Test
@@ -98,17 +98,17 @@ class SampleConsumerTest {
 
     sampleConsumer.executeKafkaRunner();
 
-    verify(consumer, timeout(TIMEOUT_FOR_EXECUTOR)).subscribe(Collections.singleton("queue.jhipster.sample"));
+    verify(consumer, timeout(TIMEOUT_FOR_EXECUTOR)).subscribe(Collections.singleton("queue.seed4j.sample"));
   }
 
   @Test
   void shouldThrowsWakeupExceptionWithClosing() {
     sampleConsumer.setClosed(true);
-    doThrow(WakeupException.class).when(consumer).subscribe(Collections.singleton("queue.jhipster.sample"));
+    doThrow(WakeupException.class).when(consumer).subscribe(Collections.singleton("queue.seed4j.sample"));
 
     sampleConsumer.executeKafkaRunner();
 
-    verify(consumer, timeout(TIMEOUT_FOR_EXECUTOR)).subscribe(Collections.singleton("queue.jhipster.sample"));
+    verify(consumer, timeout(TIMEOUT_FOR_EXECUTOR)).subscribe(Collections.singleton("queue.seed4j.sample"));
   }
 
   @Test

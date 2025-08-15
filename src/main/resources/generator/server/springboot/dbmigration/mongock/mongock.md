@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.TextIndexDefinition;
 import org.springframework.data.mongodb.core.index.TextIndexDefinition.TextIndexDefinitionBuilder;
 
-@ChangeUnit(id = "create-beers-collection", order = "002", author = "jhipster")
+@ChangeUnit(id = "create-beers-collection", order = "002", author = "seed4j")
 public class BeersCollectionChangeUnit {
 
   @Execution

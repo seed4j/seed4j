@@ -17,6 +17,6 @@ export class App implements OnInit {
   appName = signal('');
 
   ngOnInit(): void {
-    this.appName.set('jhipster');
+    this.appName.set('seed4j');
   }
 }

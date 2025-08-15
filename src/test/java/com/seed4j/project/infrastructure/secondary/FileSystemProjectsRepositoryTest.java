@@ -91,7 +91,7 @@ class FileSystemProjectsRepositoryTest {
 
       Project project = projects.get(path).orElseThrow();
 
-      assertThat(project.name()).isEqualTo(new ProjectName("jhipster-project"));
+      assertThat(project.name()).isEqualTo(new ProjectName("seed4j-project"));
       assertThat(zippedFiles(project.content())).containsExactly("package.json");
     }
 

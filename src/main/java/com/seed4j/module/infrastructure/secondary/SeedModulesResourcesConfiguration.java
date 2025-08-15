@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 class SeedModulesResourcesConfiguration {
 
   @Bean
-  SeedModulesResources jhipsterModulesResources(
+  SeedModulesResources seedModulesResources(
     SeedHiddenResourcesProperties excludedResources,
     Collection<SeedModuleResource> modulesResources
   ) {

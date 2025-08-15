@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.resource;
 
 /**
- * Represents the maturity and adoption level of JHipster modules.
+ * Represents the maturity and adoption level of Seed4J modules.
  * Ranks range from experimental to community-validated,
  * helping users assess module stability and production readiness.
  */

@@ -7,5 +7,5 @@ Feature: Modernizer
   Scenario: Should apply modernizer module for gradle
     When I apply "modernizer" module to default project with gradle build
       | packageName | com.seed4j.growth |
-      | baseName    | jhipster          |
+      | baseName    | growth            |
     Then I should have "id = \"com.github.andygoossens.modernizer\"" in "gradle/libs.versions.toml"

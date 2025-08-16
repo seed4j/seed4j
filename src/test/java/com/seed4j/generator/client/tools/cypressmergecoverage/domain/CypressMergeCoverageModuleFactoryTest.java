@@ -31,7 +31,7 @@ class CypressMergeCoverageModuleFactoryTest {
   @Test
   void shouldBuildCypressMergeCoverageModule() {
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .projectBaseName("jhiTest")
+      .projectBaseName("growth")
       .basePackage("com.seed4j.growth")
       .build();
 

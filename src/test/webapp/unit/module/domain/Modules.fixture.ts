@@ -36,7 +36,7 @@ export const applicationBaseNamePropertyDefinition = (): ModulePropertyDefinitio
   mandatory: true,
   key: 'baseName',
   description: 'Application base name',
-  defaultValue: 'jhipster',
+  defaultValue: 'seed4j',
   order: -300,
 });
 
@@ -174,7 +174,7 @@ export const projectHistoryWithInit = (): ProjectHistory => ({
 export const appliedModuleProperties = (): ModulePropertyValue[] => [{ key: 'baseName', value: 'setbase' }];
 
 export const defaultProject = (): Project => ({
-  filename: 'jhipster.zip',
+  filename: 'seed4j.zip',
   content: Uint8Array.from([]).buffer,
 });
 

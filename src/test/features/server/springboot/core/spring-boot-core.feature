@@ -3,14 +3,14 @@ Feature: Spring boot core
   Scenario: Should apply spring boot core module
     When I apply "spring-boot" module to default project with maven file
       | packageName | com.seed4j.growth |
-      | baseName    | jhipster          |
+      | baseName    | growth            |
     Then I should have files in "src/main/java/com/seed4j/growth"
-      | JhipsterApp.java |
+      | GrowthApp.java |
 
   Scenario: Should handle application configuration with properties format
     When I apply "spring-boot" module to default project with maven file
       | packageName               | com.seed4j.growth |
-      | baseName                  | jhipster          |
+      | baseName                  | growth            |
       | springConfigurationFormat | properties        |
     Then I should have files in "src/main/resources/config/"
       | application.properties |
@@ -24,7 +24,7 @@ Feature: Spring boot core
   Scenario: Should handle application configuration with YAML format
     When I apply "spring-boot" module to default project with maven file
       | packageName               | com.seed4j.growth |
-      | baseName                  | jhipster          |
+      | baseName                  | growth            |
       | springConfigurationFormat | yaml              |
     Then I should have files in "src/main/resources/config/"
       | application.yml |

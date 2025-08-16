@@ -16,7 +16,7 @@ class VueI18nModuleFactoryTest {
   @Test
   void shouldBuildI18nModule() {
     SeedModule module = factory.buildModule(
-      SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("jhipster").build()
+      SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build()
     );
 
     SeedModuleAsserter asserter = assertThatModuleWithFiles(module, packageJsonFile(), mainFile(), homepage(), vitest());

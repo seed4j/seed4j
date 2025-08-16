@@ -25,7 +25,7 @@ class LogstashTcpConfigurationIT {
   @Nested
   @IntegrationTest(
     properties = {
-      "spring.application.name=lite",
+      "spring.application.name=seed4j",
       "server.port=8080",
       "application.logging.logstash.tcp.enabled=true",
       "application.logging.logstash.tcp.host=127.0.0.1",
@@ -61,7 +61,7 @@ class LogstashTcpConfigurationIT {
 
       var logstashEncoder = (LogstashEncoder) encoder;
 
-      assertThat(logstashEncoder.getCustomFields()).contains("lite").contains("8080");
+      assertThat(logstashEncoder.getCustomFields()).contains("seed4j").contains("8080");
 
       assertThat(applicationContext.getBean("logstashTcpLifeCycle")).isInstanceOf(LogstashTcpLifeCycle.class);
     }

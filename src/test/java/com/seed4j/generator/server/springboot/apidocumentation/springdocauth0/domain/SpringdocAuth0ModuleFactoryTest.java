@@ -35,7 +35,7 @@ class SpringdocAuth0ModuleFactoryTest {
           swagger-ui:
             oauth:
               client-id: my-client-id
-              realm: jhipster
+              realm: seed4j
               scopes:
               - openid
               - profile

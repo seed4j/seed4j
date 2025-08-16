@@ -682,7 +682,7 @@ public final class SeedModule {
     }
 
     /**
-     * Configure the {@code package.json} file for the JHipster module.
+     * Configure the {@code package.json} file for the Seed4J module.
      * <p>
      * This method allows you to add scripts, dependencies, and development dependencies
      * to the package.json file. It uses a builder pattern to provide a fluent interface for

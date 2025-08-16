@@ -24,7 +24,7 @@ Feature: OAuth2 modules
       | spring-boot-oauth2 |
     And I apply "spring-boot-oauth2-okta" module with parameters to last project
       | packageName  | com.seed4j.growth   |
-      | baseName     | jhipster            |
+      | baseName     | growth              |
       | oktaDomain   | dev-123456.okta.com |
       | oktaClientId | my-client-id        |
     And I should have files in "src/main/resources/config"
@@ -37,7 +37,7 @@ Feature: OAuth2 modules
       | spring-boot-oauth2 |
     And I apply "spring-boot-oauth2-auth0" module with parameters to last project
       | packageName   | com.seed4j.growth       |
-      | baseName      | jhipster                |
+      | baseName      | growth                  |
       | auth0Domain   | dev-123456.us.auth0.com |
       | auth0ClientId | my-client-id            |
     And I should have files in "src/main/resources/config"

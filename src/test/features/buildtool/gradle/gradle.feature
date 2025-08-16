@@ -3,8 +3,8 @@ Feature: Gradle
   Scenario: Should apply gradle init module
     When I apply "gradle-java" module to default project
       | packageName | com.seed4j.growth |
-      | baseName    | jhipster          |
-      | projectName | Jhipster          |
+      | baseName    | growth            |
+      | projectName | Growth            |
     Then I should have files in "."
       | build.gradle.kts    |
       | settings.gradle.kts |

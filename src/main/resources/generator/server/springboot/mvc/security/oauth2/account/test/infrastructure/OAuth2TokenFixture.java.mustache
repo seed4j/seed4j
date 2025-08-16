@@ -52,7 +52,7 @@ public final class OAuth2TokenFixture {
   }
 
   public static JwtAuthenticationToken testJwtAuthenticationToken() {
-    Jwt.Builder jwt = Jwt.withTokenValue("token-just-for-drinking-beers").header("alg", JwsAlgorithms.RS256).subject("jhipster");
+    Jwt.Builder jwt = Jwt.withTokenValue("token-just-for-drinking-beers").header("alg", JwsAlgorithms.RS256).subject("seed4j");
     testAuthenticationClaims().forEach(jwt::claim);
     return new JwtAuthenticationToken(jwt.build(), adminAuthorities());
   }

@@ -37,7 +37,7 @@ public class VueOAuth2KeycloakModuleFactory {
     const keycloakHttp = new KeycloakHttp(
     %snew Keycloak({
     %surl: 'http://localhost:9080',
-    %srealm: 'jhipster',
+    %srealm: 'seed4j',
     %sclientId: 'web_app',
     %s}),
     );

@@ -30,9 +30,9 @@ import java.util.regex.Pattern;
 public class OAuth2ModuleFactory {
 
   public static final String REALM_NAME = "keycloakRealmName";
-  public static final String DEFAULT_REALM_NAME = "jhipster";
+  public static final String DEFAULT_REALM_NAME = "seed4j";
   public static final String CLIENT_SCOPE_NAME = "keycloakClientScopeName";
-  public static final String DEFAULT_CLIENT_SCOPE_NAME = "jhipster";
+  public static final String DEFAULT_CLIENT_SCOPE_NAME = "seed4j";
 
   private static final Pattern NAME_FORMAT = Pattern.compile("^[a-z0-9-]+$");
   private static final TextNeedleBeforeReplacer IMPORT_NEEDLE = lineBeforeText(

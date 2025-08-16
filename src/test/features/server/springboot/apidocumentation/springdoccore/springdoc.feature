@@ -46,7 +46,7 @@ Feature: Springdoc modules
       | springdoc-oauth2      |
     And I apply "springdoc-oauth2-okta" module with parameters to last project
       | packageName  | com.seed4j.growth   |
-      | baseName     | jhipster            |
+      | baseName     | growth              |
       | oktaDomain   | dev-123456.okta.com |
       | oktaClientId | my-client-id        |
     Then I should have files in "src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/"
@@ -62,7 +62,7 @@ Feature: Springdoc modules
       | springdoc-oauth2      |
     And I apply "springdoc-oauth2-auth0" module with parameters to last project
       | packageName   | com.seed4j.growth       |
-      | baseName      | jhipster                |
+      | baseName      | growth                  |
       | auth0Domain   | dev-123456.us.auth0.com |
       | auth0ClientId | my-client-id            |
     Then I should have files in "src/main/java/com/seed4j/growth/wire/springdoc/infrastructure/primary/"

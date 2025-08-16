@@ -21,7 +21,7 @@ class MavenModuleFactoryTest {
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
-      .projectName("JHipster test")
+      .projectName("Seed4J test")
       .build();
 
     SeedModule module = factory.buildMavenModule(properties);
@@ -31,7 +31,7 @@ class MavenModuleFactoryTest {
       .containing("<groupId>com.seed4j.growth</groupId>")
       .containing("<artifactId>my-app</artifactId>")
       .containing("<name>myApp</name>")
-      .containing("<description>JHipster test</description>")
+      .containing("<description>Seed4J test</description>")
       .containing(
         """
               <dependency>
@@ -183,7 +183,7 @@ class MavenModuleFactoryTest {
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
-      .projectName("JHipster test")
+      .projectName("Seed4J test")
       .build();
 
     SeedModule module = factory.buildMavenModule(properties);

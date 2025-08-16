@@ -35,7 +35,7 @@ public class TestSecurityConfiguration {
 
   private ClientRegistration.Builder clientRegistrationBuilder() {
     Map<String, Object> metadata = new HashMap<>();
-    metadata.put("end_session_endpoint", "https://jhipster.org/logout");
+    metadata.put("end_session_endpoint", "https://seed4j.com/logout");
 
     return ClientRegistration.withRegistrationId("oidc")
       .issuerUri("{baseUrl}")
@@ -43,10 +43,10 @@ public class TestSecurityConfiguration {
       .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
       .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
       .scope("read:user")
-      .authorizationUri("https://jhipster.org/login/oauth/authorize")
-      .tokenUri("https://jhipster.org/login/oauth/access_token")
-      .jwkSetUri("https://jhipster.org/oauth/jwk")
-      .userInfoUri("https://api.jhipster.org/user")
+      .authorizationUri("https://seed4j.com/login/oauth/authorize")
+      .tokenUri("https://seed4j.com/login/oauth/access_token")
+      .jwkSetUri("https://seed4j.com/oauth/jwk")
+      .userInfoUri("https://api.seed4j.com/user")
       .providerConfigurationMetadata(metadata)
       .userNameAttributeName("id")
       .clientName("Client Name")

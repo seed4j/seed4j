@@ -16,9 +16,7 @@ class AngularJwtModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .projectBaseName("jhipster")
-      .build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build();
 
     SeedModule module = factory.buildModule(properties);
 

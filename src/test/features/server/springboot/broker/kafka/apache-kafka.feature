@@ -18,7 +18,7 @@ Feature: Apache Kafka
   Scenario: Should apply Apache Kafka sample producer consumer module
     When I apply "spring-boot-kafka-sample-producer-consumer" module to default project with maven file
       | packageName | com.seed4j.growth |
-      | baseName    | jhipster          |
+      | baseName    | growth            |
     Then I should have files in "src/main/java/com/seed4j/growth/sample/infrastructure/secondary/kafka/producer"
       | SampleProducer.java |
     Then I should have files in "src/test/java/com/seed4j/growth/sample/infrastructure/secondary/kafka/producer"
@@ -33,6 +33,6 @@ Feature: Apache Kafka
   Scenario: Should apply Apache Kafka AKHQ module
     When I apply "spring-boot-kafka-akhq" module to default project with maven file
       | packageName | com.seed4j.growth |
-      | baseName    | jhipster          |
+      | baseName    | growth            |
     Then I should have files in "src/main/docker"
       | akhq.yml |

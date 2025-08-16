@@ -479,11 +479,11 @@ public final class SeedModulesFixture {
         """
         <rules>
           <requireMavenVersion>
-            <message>You are running an older version of Maven. JHipster requires at least Maven ${maven.version}</message>
+            <message>You are running an older version of Maven. Seed4J requires at least Maven ${maven.version}</message>
             <version>[${maven.version},)</version>
           </requireMavenVersion>
           <requireJavaVersion>
-              <message>You are running an incompatible version of Java. JHipster engine supports JDK 21+.</message>
+              <message>You are running an incompatible version of Java. Seed4J engine supports JDK 21+.</message>
               <version>[21,22)</version>
           </requireJavaVersion>
         </rules>

@@ -26,7 +26,7 @@ class SpringdocOAuth2Configuration {
     return openApi ->
       openApi
         .components(oauthComponents(openApi.getComponents()))
-        .addSecurityItem(new SecurityRequirement().addList("security_auth", Arrays.asList("jhipster")));
+        .addSecurityItem(new SecurityRequirement().addList("security_auth", Arrays.asList("seed4j")));
   }
 
   private Components oauthComponents(Components existingComponents) {

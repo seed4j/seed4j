@@ -12,7 +12,7 @@ class ForcedProjectFolderTest {
 
   private static final String ENDING_BY_UUID_REGEX = ".*\\w{8}(-\\w{4}){3}-\\w{12}$";
 
-  private final ForcedProjectFolder forcedProjectFolder = new ForcedProjectFolder("/tmp/jhipster");
+  private final ForcedProjectFolder forcedProjectFolder = new ForcedProjectFolder("/tmp/seed4j");
 
   @Test
   void shouldBeInvalidWithNotMatchingPrefix() {
@@ -21,16 +21,16 @@ class ForcedProjectFolderTest {
 
   @Test
   void shouldBeInvalidWithDotDot() {
-    assertThat(forcedProjectFolder.isInvalid("/tmp/jhipster/../project")).isTrue();
+    assertThat(forcedProjectFolder.isInvalid("/tmp/seed4j/../project")).isTrue();
   }
 
   @Test
   void shouldBeValid() {
-    assertThat(forcedProjectFolder.isInvalid("/tmp/jhipster/project")).isFalse();
+    assertThat(forcedProjectFolder.isInvalid("/tmp/seed4j/project")).isFalse();
   }
 
   @Test
   void shouldGetValidPath() {
-    assertThat(forcedProjectFolder.generatePath()).startsWith(Path.of("/tmp/jhipster") + File.separator).matches(ENDING_BY_UUID_REGEX);
+    assertThat(forcedProjectFolder.generatePath()).startsWith(Path.of("/tmp/seed4j") + File.separator).matches(ENDING_BY_UUID_REGEX);
   }
 }

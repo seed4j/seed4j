@@ -19,7 +19,7 @@ class JwtBasicAuthModuleFactoryTest {
   void shouldBuildModule() {
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
-      .projectBaseName("jhipster")
+      .projectBaseName("seed4j")
       .build();
 
     SeedModule module = factory.buildModule(properties);

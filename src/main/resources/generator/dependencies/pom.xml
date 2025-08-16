@@ -200,7 +200,7 @@
         <version>${jib-maven-plugin.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.seed4j.lite</groupId>
+        <groupId>com.seed4j</groupId>
         <artifactId>seed4j</artifactId>
         <version>${seed4j.version}</version>
       </dependency>

@@ -3,7 +3,7 @@ Feature: Init
   Scenario: Should init from module
     When I apply "init" module to default project
       | packageName | com.seed4j.growth |
-      | baseName    | jhipster          |
+      | baseName    | seed4j            |
       | endOfLine   | lf                |
     Then I should have files in ""
       | .gitignore        |

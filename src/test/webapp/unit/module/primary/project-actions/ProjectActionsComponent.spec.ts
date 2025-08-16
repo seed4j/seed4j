@@ -73,7 +73,7 @@ describe('Project actions', () => {
       expect(windowStub.URL.revokeObjectURL).toHaveBeenCalledOnce();
       expect(windowStub.document.body.removeChild).toHaveBeenCalledOnce();
 
-      expect(link.download).toBe('jhipster.zip');
+      expect(link.download).toBe('seed4j.zip');
       expect(modules.download).toHaveBeenCalledOnce();
     });
 

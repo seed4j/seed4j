@@ -33,9 +33,7 @@ class ReactModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .projectBaseName("jhipster")
-      .build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build();
     SeedModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(
@@ -104,7 +102,7 @@ class ReactModuleFactoryTest {
   @Test
   void shouldViteConfigBeUpdatedWhenServerPortPropertyNotDefault() {
     SeedModule module = factory.buildModule(
-      SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("jhipster").put("serverPort", 8081).build()
+      SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").put("serverPort", 8081).build()
     );
 
     assertThatModuleWithFiles(module, packageJsonFile(), eslintConfigFile(), tsConfigFile(), vitestConfigFile())
@@ -116,7 +114,7 @@ class ReactModuleFactoryTest {
   @Test
   void shouldViteConfigBeDefaultWhenServerPortPropertyMissing() {
     SeedModule module = factory.buildModule(
-      SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("jhipster").build()
+      SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build()
     );
 
     assertThatModuleWithFiles(module, packageJsonFile(), eslintConfigFile(), tsConfigFile(), vitestConfigFile())

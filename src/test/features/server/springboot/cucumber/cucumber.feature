@@ -11,7 +11,7 @@ Feature: Cucumber
   Scenario: Should add cucumber mvc elements using module url
     When I apply "spring-boot-cucumber-mvc" module to default project with maven file
       | packageName | com.seed4j.growth |
-      | baseName    | jhipster          |
+      | baseName    | growth            |
     Then I should have files in "src/test/java/com/seed4j/growth/cucumber"
       | CucumberConfiguration.java |
 
@@ -34,7 +34,7 @@ Feature: Cucumber
   Scenario: Should add cucumber webflux elements using module url
     When I apply "spring-boot-cucumber-webflux" module to default project with maven file
       | packageName | com.seed4j.growth |
-      | baseName    | jhipster          |
+      | baseName    | growth            |
     Then I should have files in "src/test/java/com/seed4j/growth/cucumber"
       | CucumberConfiguration.java |
 

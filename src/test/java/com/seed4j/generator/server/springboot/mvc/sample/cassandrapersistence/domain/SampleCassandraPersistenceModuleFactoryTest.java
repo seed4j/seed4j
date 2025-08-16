@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 @UnitTest
 class SampleCassandraPersistenceModuleFactoryTest {
 
-  private static final String BASE_NAME = "jhipster";
+  private static final String BASE_NAME = "seed4j";
   private static final SampleCassandraPersistenceModuleFactory factory = new SampleCassandraPersistenceModuleFactory();
 
   @Test
@@ -48,7 +48,7 @@ class SampleCassandraPersistenceModuleFactoryTest {
         """
         spring:
           cassandra:
-            keyspace-name: jhipster
+            keyspace-name: seed4j
         """
       )
       .and()

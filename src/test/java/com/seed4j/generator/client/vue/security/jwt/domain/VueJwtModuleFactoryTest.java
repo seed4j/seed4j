@@ -17,7 +17,7 @@ class VueJwtModuleFactoryTest {
   @Test
   void shouldBuildVueJwtModule() {
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .projectBaseName("jhipster")
+      .projectBaseName("seed4j")
       .basePackage("com.seed4j.growth")
       .build();
 

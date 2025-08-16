@@ -27,9 +27,9 @@ describe('HealthModal', () => {
         status: 'UP',
       };
 
-      const result = comp.readableValue({ name: 'jhipster' });
+      const result = comp.readableValue({ name: 'seed4j' });
 
-      expect(result).toBe('{"name":"jhipster"}');
+      expect(result).toBe('{"name":"seed4j"}');
     });
 
     it('should return string value', () => {
@@ -38,9 +38,9 @@ describe('HealthModal', () => {
         status: 'UP',
       };
 
-      const result = comp.readableValue('jhipster');
+      const result = comp.readableValue('seed4j');
 
-      expect(result).toBe('jhipster');
+      expect(result).toBe('seed4j');
     });
 
     it('should return storage space in a human-readable unit (GB)', () => {

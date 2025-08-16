@@ -60,7 +60,7 @@ class AngularOAuth2KeycloakModuleFactoryTest {
         """
           keycloak: {
             url: 'http://localhost:9080',
-            realm: 'jhipster',
+            realm: 'seed4j',
             client_id: 'web_app',
           },
           production: true,
@@ -72,14 +72,14 @@ class AngularOAuth2KeycloakModuleFactoryTest {
         """
           keycloak: {
             url: 'http://localhost:9080',
-            realm: 'jhipster',
+            realm: 'seed4j',
             client_id: 'web_app',
           },
         """
       )
       .and()
       .hasFile("src/main/webapp/app/app.html")
-      .containing("<jhi-login />")
+      .containing("<seed-login />")
       .and()
       .hasFile("src/main/webapp/app/app.spec.ts")
       .and();

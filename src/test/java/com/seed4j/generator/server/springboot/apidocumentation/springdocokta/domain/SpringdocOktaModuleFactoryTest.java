@@ -31,11 +31,11 @@ class SpringdocOktaModuleFactoryTest {
         """
         springdoc:
           oauth2:
-            authorization-url: https://dev-123456.okta.com/oauth2/default/v1/authorize?nonce="jhipster"
+            authorization-url: https://dev-123456.okta.com/oauth2/default/v1/authorize?nonce="seed4j"
           swagger-ui:
             oauth:
               client-id: my-client-id
-              realm: jhipster
+              realm: seed4j
               scopes:
               - openid
               - profile

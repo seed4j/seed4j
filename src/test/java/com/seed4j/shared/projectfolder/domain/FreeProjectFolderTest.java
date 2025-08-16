@@ -16,7 +16,7 @@ class FreeProjectFolderTest {
 
   @Test
   void shouldBeValid() {
-    assertThat(freeProjectFolder.isInvalid("/tmp/jhipster/project")).isFalse();
+    assertThat(freeProjectFolder.isInvalid("/tmp/seed4j/project")).isFalse();
   }
 
   @Test

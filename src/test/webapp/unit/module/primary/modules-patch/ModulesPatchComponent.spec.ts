@@ -350,7 +350,7 @@ describe('Modules', () => {
       await flushPromises();
 
       expect(modules.apply).toHaveBeenCalledOnce();
-      expect(wrapper.find(wrappedElement('module-spring-cucumber-baseName-parameter-value')).text()).toBe('jhipster');
+      expect(wrapper.find(wrappedElement('module-spring-cucumber-baseName-parameter-value')).text()).toBe('seed4j');
       expect(wrapper.find(wrappedElement('module-spring-cucumber-mandatoryBooleanDefault-parameter-value')).text()).toBe('true');
       expect(wrapper.find(wrappedElement('module-spring-cucumber-mandatoryInteger-parameter-value')).text()).toBe('1337');
     });

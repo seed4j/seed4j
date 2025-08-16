@@ -55,50 +55,50 @@ class FileSystemSeedPresetRepositoryTest {
   void shouldHandleDeserializationErrors() throws IOException {
     ObjectMapper json = mock(ObjectMapper.class);
     when(json.readValue(any(byte[].class), eq(PersistedPresets.class))).thenThrow(IOException.class);
-    FileSystemSeedPresetRepository fileSystemJHipsterPresetRepository = new FileSystemSeedPresetRepository(
+    FileSystemSeedPresetRepository fileSystemSeed4JPresetRepository = new FileSystemSeedPresetRepository(
       json,
       mockProjectFilesWithValidPresetJson(),
       DEFAULT_PRESET_FOLDER
     );
 
-    assertThatThrownBy(fileSystemJHipsterPresetRepository::getPresets).isExactlyInstanceOf(GeneratorException.class);
+    assertThatThrownBy(fileSystemSeed4JPresetRepository::getPresets).isExactlyInstanceOf(GeneratorException.class);
   }
 
   @Test
   void shouldNotReturnPresetFromUnknownFolder() {
     ProjectFiles projectFiles = mock(ProjectFiles.class);
     lenient().when(projectFiles.findRecursivelyInPath("/%s".formatted(DEFAULT_PRESET_FOLDER))).thenThrow(GeneratorException.class);
-    FileSystemSeedPresetRepository fileSystemJHipsterPresetRepository = new FileSystemSeedPresetRepository(
+    FileSystemSeedPresetRepository fileSystemSeed4JPresetRepository = new FileSystemSeedPresetRepository(
       JsonHelper.jsonMapper(),
       projectFiles,
       DEFAULT_PRESET_FOLDER
     );
 
-    assertThatThrownBy(fileSystemJHipsterPresetRepository::getPresets).isExactlyInstanceOf(GeneratorException.class);
+    assertThatThrownBy(fileSystemSeed4JPresetRepository::getPresets).isExactlyInstanceOf(GeneratorException.class);
   }
 
   @Test
   void shouldNotReturnPresetFromUnknownFile() {
     ProjectFiles projectFiles = mockProjectFilesWithValidPresetJson();
     lenient().when(projectFiles.readBytes("/presets/preset-maven.json")).thenThrow(GeneratorException.class);
-    FileSystemSeedPresetRepository fileSystemJHipsterPresetRepository = new FileSystemSeedPresetRepository(
+    FileSystemSeedPresetRepository fileSystemSeed4JPresetRepository = new FileSystemSeedPresetRepository(
       JsonHelper.jsonMapper(),
       projectFiles,
       DEFAULT_PRESET_FOLDER
     );
 
-    assertThatThrownBy(fileSystemJHipsterPresetRepository::getPresets).isExactlyInstanceOf(GeneratorException.class);
+    assertThatThrownBy(fileSystemSeed4JPresetRepository::getPresets).isExactlyInstanceOf(GeneratorException.class);
   }
 
   @Test
   void shouldGetExistingPresetInAlphabeticalOrder() {
-    FileSystemSeedPresetRepository fileSystemJHipsterPresetRepository = new FileSystemSeedPresetRepository(
+    FileSystemSeedPresetRepository fileSystemSeed4JPresetRepository = new FileSystemSeedPresetRepository(
       JsonHelper.jsonMapper(),
       mockProjectFilesWithValidPresetJson(),
       DEFAULT_PRESET_FOLDER
     );
 
-    Presets presets = fileSystemJHipsterPresetRepository.getPresets();
+    Presets presets = fileSystemSeed4JPresetRepository.getPresets();
 
     assertThat(presets.presets()).containsExactly(
       expectedPresetAngularCore(),
@@ -111,13 +111,13 @@ class FileSystemSeedPresetRepositoryTest {
 
   @Test
   void shouldIgnorePresetFilesWithNonJsonExtension() {
-    FileSystemSeedPresetRepository fileSystemJHipsterPresetRepository = new FileSystemSeedPresetRepository(
+    FileSystemSeedPresetRepository fileSystemSeed4JPresetRepository = new FileSystemSeedPresetRepository(
       JsonHelper.jsonMapper(),
       mockProjectFilesWithValidPresetJson(),
       DEFAULT_PRESET_FOLDER
     );
 
-    Presets presets = fileSystemJHipsterPresetRepository.getPresets();
+    Presets presets = fileSystemSeed4JPresetRepository.getPresets();
 
     assertThat(presets.presets()).isNotEmpty();
     assertThat(presets.presets()).doesNotContain(expectedPresetReactCore());

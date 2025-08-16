@@ -655,7 +655,7 @@ describe('Landscape', () => {
 
       await flushPromises();
 
-      expect((wrapper.find(wrappedElement('parameter-baseName-field')).element as HTMLInputElement).value).toBe('jhipster');
+      expect((wrapper.find(wrappedElement('parameter-baseName-field')).element as HTMLInputElement).value).toBe('seed4j');
       expect((wrapper.find(wrappedElement('parameter-mandatoryBooleanDefault-field')).element as HTMLInputElement).value).toBe('true');
       expect((wrapper.find(wrappedElement('parameter-indentSize-field')).element as HTMLInputElement).value).toBe('2');
 

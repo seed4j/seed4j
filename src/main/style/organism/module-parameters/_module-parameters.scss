@@ -1,6 +1,6 @@
-$seed4j-lite-valid-parameters-color: #2d900f;
-$seed4j-lite-invalid-mandatory-parameters-color: #900f0f;
-$seed4j-lite-invalid-optional-parameters-color: #90670f;
+$seed4j-valid-parameters-color: #2d900f;
+$seed4j-invalid-mandatory-parameters-color: #900f0f;
+$seed4j-invalid-optional-parameters-color: #90670f;
 
 .seed4j-module-parameters {
   display: flex;
@@ -17,15 +17,15 @@ $seed4j-lite-invalid-optional-parameters-color: #90670f;
   }
 
   &.invalid-mandatory-parameter {
-    background-color: $seed4j-lite-invalid-mandatory-parameters-color;
+    background-color: $seed4j-invalid-mandatory-parameters-color;
   }
 
   &.invalid-optional-parameter {
-    background-color: $seed4j-lite-invalid-optional-parameters-color;
+    background-color: $seed4j-invalid-optional-parameters-color;
   }
 
   &.all-valid-parameters {
-    background-color: $seed4j-lite-valid-parameters-color;
+    background-color: $seed4j-valid-parameters-color;
   }
 
   &--type.selected {

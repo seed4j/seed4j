@@ -32,9 +32,7 @@ class AngularModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .projectBaseName("jhiTest")
-      .build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("growth").build();
 
     SeedModule module = factory.buildModule(properties);
 
@@ -90,7 +88,7 @@ class AngularModuleFactoryTest {
       )
       .and()
       .hasFile("src/main/webapp/app/app.ts")
-      .containing("this.appName.set('jhiTest')")
+      .containing("this.appName.set('growth')")
       .and()
       .hasPrefixedFiles(
         "",
@@ -129,7 +127,7 @@ class AngularModuleFactoryTest {
   @Test
   void shouldProxyBeUpdatedWhenServerPortPropertyNotDefault() {
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .projectBaseName("jhiTest")
+      .projectBaseName("growth")
       .put("serverPort", 8081)
       .build();
 
@@ -142,9 +140,7 @@ class AngularModuleFactoryTest {
 
   @Test
   void shouldProxyBeDefaultWhenServerPortPropertyMissing() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .projectBaseName("jhiTest")
-      .build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("growth").build();
 
     SeedModule module = factory.buildModule(properties);
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())

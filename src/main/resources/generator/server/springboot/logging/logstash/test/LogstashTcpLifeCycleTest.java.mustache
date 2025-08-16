@@ -99,11 +99,11 @@ class LogstashTcpLifeCycleTest {
 
   @Test
   void shouldSerializeFields() throws IOException {
-    Map<String, String> fields = Map.of("app_name", "jhipster-lite", "app_port", "8080");
+    Map<String, String> fields = Map.of("app_name", "seed4j", "app_port", "8080");
     LogstashTcpLifeCycle logstashTcpLifeCycle = new LogstashTcpLifeCycle(fields, new LogstashTcpProperties());
 
     ObjectContent<Map<String, String>> parsed = json.parse(logstashTcpLifeCycle.serializedFields());
-    assertThat(parsed).hasFieldOrPropertyWithValue("app_name", "jhipster-lite").hasFieldOrPropertyWithValue("app_port", "8080");
+    assertThat(parsed).hasFieldOrPropertyWithValue("app_name", "seed4j").hasFieldOrPropertyWithValue("app_port", "8080");
   }
 
   @Test

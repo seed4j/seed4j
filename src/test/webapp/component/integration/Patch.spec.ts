@@ -80,7 +80,7 @@ describe('Patch', () => {
     cy.get(dataSelector('spring-cucumber-module-content')).click();
     cy.get(dataSelector('folder-path-field')).clear();
     cy.get(dataSelector('folder-path-field')).type('test');
-    cy.get(dataSelector('parameter-baseName-field')).type('jhipster');
+    cy.get(dataSelector('parameter-baseName-field')).type('seed4j');
     cy.get(dataSelector('parameter-optionalBoolean-field')).select('true');
     cy.get(dataSelector('parameter-optionalInteger-field')).type('42');
     cy.get(dataSelector('module-spring-cucumber-application-button')).click();
@@ -92,7 +92,7 @@ describe('Patch', () => {
         projectFolder: 'test',
         commit: true,
         parameters: {
-          baseName: 'jhipster',
+          baseName: 'seed4j',
           optionalBoolean: true,
           optionalInteger: 42,
         },

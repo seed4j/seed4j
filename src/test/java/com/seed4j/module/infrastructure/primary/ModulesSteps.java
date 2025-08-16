@@ -166,7 +166,7 @@ public class ModulesSteps {
   private void loadGitConfig(Path project) {
     GitTestUtil.execute(project, "init");
     GitTestUtil.execute(project, "config", "init.defaultBranch", "main");
-    GitTestUtil.execute(project, "config", "user.email", "\"test@jhipster.com\"");
+    GitTestUtil.execute(project, "config", "user.email", "\"test@seed4j.com\"");
     GitTestUtil.execute(project, "config", "user.name", "\"Test\"");
   }
 

@@ -18,7 +18,7 @@ class InternationalizedErrorsModuleFactoryTest {
   void shouldBuildModule() {
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
-      .projectBaseName("jhipster")
+      .projectBaseName("seed4j")
       .build();
 
     SeedModule module = factory.buildModule(properties);
@@ -42,45 +42,41 @@ class InternationalizedErrorsModuleFactoryTest {
         "ErrorStatus.java",
         "ErrorKey.java",
         "StandardErrorKey.java",
-        "JhipsterException.java"
+        "Seed4jException.java"
       )
       .hasPrefixedFiles(
         "src/main/java/com/seed4j/growth/shared/error/infrastructure/primary",
         "ArgumentsReplacer.java",
         "AssertionErrorsConfiguration.java",
         "AssertionErrorsHandler.java",
-        "JhipsterErrorsConfiguration.java",
-        "JhipsterErrorsHandler.java"
+        "Seed4jErrorsConfiguration.java",
+        "Seed4jErrorsHandler.java"
       )
       .hasPrefixedFiles(
         "src/main/resources/messages/assertions-errors",
         "assertion-errors-messages.properties",
         "assertion-errors-messages_fr.properties"
       )
-      .hasPrefixedFiles(
-        "src/main/resources/messages/errors",
-        "jhipster-errors-messages.properties",
-        "jhipster-errors-messages_fr.properties"
-      )
+      .hasPrefixedFiles("src/main/resources/messages/errors", "seed4j-errors-messages.properties", "seed4j-errors-messages_fr.properties")
       .hasPrefixedFiles(
         "src/test/java/com/seed4j/growth/shared/error/infrastructure/primary",
-        "JhipsterErrorsHandlerIT.java",
-        "JhipsterErrorsMessagesTest.java",
-        "JhipsterExceptionFactory.java",
+        "Seed4jErrorsHandlerIT.java",
+        "Seed4jErrorsMessagesTest.java",
+        "Seed4jExceptionFactory.java",
         "ArgumentsReplacerTest.java",
         "AssertionErrorMessagesTest.java",
         "AssertionErrorsHandlerIT.java",
         "AssertionErrorsHandlerTest.java"
       )
-      .hasFile("src/test/java/com/seed4j/growth/shared/error/infrastructure/primary/JhipsterErrorsHandlerTest.java")
-      .containing("handler.handleJhipsterException(JhipsterException.internalServerError")
+      .hasFile("src/test/java/com/seed4j/growth/shared/error/infrastructure/primary/Seed4jErrorsHandlerTest.java")
+      .containing("handler.handleSeed4jException(Seed4jException.internalServerError")
       .and()
-      .hasPrefixedFiles("src/test/java/com/seed4j/growth/shared/error/domain", "JhipsterExceptionTest.java", "ErrorKeyTest.java")
+      .hasPrefixedFiles("src/test/java/com/seed4j/growth/shared/error/domain", "Seed4jExceptionTest.java", "ErrorKeyTest.java")
       .hasFiles("src/test/java/com/seed4j/growth/shared/error_generator/domain/NullElementInCollectionExceptionFactory.java")
       .hasPrefixedFiles(
         "src/test/java/com/seed4j/growth/shared/error_generator/infrastructure/primary",
         "AssertionsErrorsResource.java",
-        "JhipsterErrorsResource.java"
+        "Seed4jErrorsResource.java"
       );
   }
 }

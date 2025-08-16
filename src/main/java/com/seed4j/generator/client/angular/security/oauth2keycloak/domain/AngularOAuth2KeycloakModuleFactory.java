@@ -32,7 +32,7 @@ public class AngularOAuth2KeycloakModuleFactory {
   private static final String KEYCLOAK_ENVIRONMENT = """
     keycloak: {
       url: 'http://localhost:9080',
-      realm: 'jhipster',
+      realm: 'seed4j',
       client_id: 'web_app',
     },
     """;
@@ -138,7 +138,7 @@ public class AngularOAuth2KeycloakModuleFactory {
           .add(lineAfterRegex("this.appName.set\\('" + properties.projectBaseName().name() + "'\\);"), INIT_AUTHENTICATION)
           .and()
         .in(path("src/main/webapp/app/app.html"))
-          .add(MENU_NEEDLE, indentation.spaces() + "<jhi-login />")
+          .add(MENU_NEEDLE, indentation.spaces() + "<seed-login />")
           .and()
         .and()
       .build();

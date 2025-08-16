@@ -18,7 +18,7 @@ class JwtAuthenticationModuleFactoryTest {
   void shouldBuildModule() {
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
-      .projectBaseName("jhipster")
+      .projectBaseName("seed4j")
       .build();
 
     SeedModule module = factory.buildModule(properties);
@@ -137,7 +137,7 @@ class JwtAuthenticationModuleFactoryTest {
     String jwtBase64Secret = "Y2EyZjQ2YmNmZjMwMTE5YjcxOTBjYzZiYWVjZjY0NzZlMzNmNjY5MjgwMjUxZDNjOTA3N2M5YjAyYTg3ODEzMA==";
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
-      .projectBaseName("jhipster")
+      .projectBaseName("seed4j")
       .put("jwtBase64Secret", jwtBase64Secret)
       .build();
 

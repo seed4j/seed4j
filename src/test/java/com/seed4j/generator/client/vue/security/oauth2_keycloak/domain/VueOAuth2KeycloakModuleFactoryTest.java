@@ -17,7 +17,7 @@ class VueOAuth2KeycloakModuleFactoryTest {
   @Test
   void shouldBuildVueOAuth2KeycloakModule() {
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .projectBaseName("jhipster")
+      .projectBaseName("seed4j")
       .basePackage("com.seed4j.growth")
       .build();
 
@@ -46,7 +46,7 @@ class VueOAuth2KeycloakModuleFactoryTest {
           const keycloakHttp = new KeycloakHttp(
             new Keycloak({
               url: 'http://localhost:9080',
-              realm: 'jhipster',
+              realm: 'seed4j',
               clientId: 'web_app',
             }),
           );

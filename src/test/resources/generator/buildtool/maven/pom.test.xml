@@ -9,7 +9,7 @@
   <groupId>com.mycompany.myapp</groupId>
   <artifactId>seed4j</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>jhipster</name>
+  <name>seed4j</name>
   <description>Seed4J Project</description>
   <packaging>jar</packaging>
 
@@ -150,11 +150,11 @@
           <configuration>
             <rules>
               <requireMavenVersion>
-                <message>You are running an older version of Maven. JHipster requires at least Maven ${maven.version}</message>
+                <message>You are running an older version of Maven. Seed4J requires at least Maven ${maven.version}</message>
                 <version>[${maven.version},)</version>
               </requireMavenVersion>
               <requireJavaVersion>
-                <message>You are running an incompatible version of Java. JHipster engine supports JDK 21+.</message>
+                <message>You are running an incompatible version of Java. Seed4J engine supports JDK 21+.</message>
                 <version>[21,22)</version>
               </requireJavaVersion>
             </rules>

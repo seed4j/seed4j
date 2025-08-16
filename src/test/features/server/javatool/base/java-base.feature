@@ -10,6 +10,6 @@ Feature: Java base
   Scenario: Should apply java base
     When I apply "java-base" module to default project
       | packageName | com.seed4j.growth |
-      | baseName    | jhipster          |
+      | baseName    | growth            |
     Then I should have files in "src/main/java/com/seed4j/growth/shared/error/domain"
       | Assert.java |

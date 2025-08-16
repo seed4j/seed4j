@@ -26,7 +26,7 @@ class JwtGrantedAuthorityConverterTest {
   void shouldConvert() {
     Jwt jwt = Jwt.withTokenValue("token")
       .header("alg", JwsAlgorithms.RS256)
-      .subject("jhipster")
+      .subject("seed4j")
       .claim("roles", List.of("ROLE_ADMIN"))
       .build();
 
@@ -37,7 +37,7 @@ class JwtGrantedAuthorityConverterTest {
 
   @Test
   void shouldConvertButEmpty() {
-    Jwt jwt = Jwt.withTokenValue("token").header("alg", JwsAlgorithms.RS256).subject("jhipster").build();
+    Jwt jwt = Jwt.withTokenValue("token").header("alg", JwsAlgorithms.RS256).subject("seed4j").build();
 
     Collection<GrantedAuthority> result = jwtGrantedAuthorityConverter.convert(jwt);
 

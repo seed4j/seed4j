@@ -46,7 +46,7 @@ class CustomClaimConverterTest {
 
   private ClientRegistration buildRegistration() {
     return ClientRegistration.withRegistrationId("test")
-      .userInfoUri("http://jhipster.test")
+      .userInfoUri("http://seed4j.test")
       .authorizationGrantType(AuthorizationGrantType.JWT_BEARER)
       .build();
   }
@@ -310,13 +310,13 @@ class CustomClaimConverterTest {
 
   private void mockUser(ObjectNode user) {
     when(
-      rest.exchange(eq("http://jhipster.test"), eq(HttpMethod.GET), any(HttpEntity.class), ArgumentMatchers.<Class<ObjectNode>>any())
+      rest.exchange(eq("http://seed4j.test"), eq(HttpMethod.GET), any(HttpEntity.class), ArgumentMatchers.<Class<ObjectNode>>any())
     ).thenReturn(ResponseEntity.ok(user));
   }
 
   private void mockRestTimeout() {
     when(
-      rest.exchange(eq("http://jhipster.test"), eq(HttpMethod.GET), any(HttpEntity.class), ArgumentMatchers.<Class<ObjectNode>>any())
+      rest.exchange(eq("http://seed4j.test"), eq(HttpMethod.GET), any(HttpEntity.class), ArgumentMatchers.<Class<ObjectNode>>any())
     ).thenThrow(new ResourceAccessException(null, new SocketTimeoutException()));
   }
 }

@@ -34,11 +34,3 @@ Run the migration container:
 docker compose -f src/main/docker/cassandra-migration.yml up -d
 docker logs cassandra-migration --follow
 ```
-
-## Differences with JHipster
-
-This tool is the same that is [used by jhipster project](https://www.jhipster.tech/using-cassandra/), with two differences:
-
-- jhipster-lite doesn't have a CLI to generate entities, so there's no automatic generation of changelog in `resources/cql/changelog` folder
-- a dedicated keyspace, `seed4jMigration` is used to store migration metadata. It allows to not mix jhipster data with your application data
-  - it means that you must explicitly tell which keyspace to use in your `changelog/*.cql` scripts: either by using `USE` directive, or by prepending your table names with keyspace they belong to

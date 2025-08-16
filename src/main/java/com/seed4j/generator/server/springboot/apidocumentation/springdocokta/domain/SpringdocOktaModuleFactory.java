@@ -24,7 +24,7 @@ public class SpringdocOktaModuleFactory {
     return moduleBuilder(properties)
       .springMainProperties(OKTA_SPRING_PROFILE)
         .set(propertyKey("springdoc.swagger-ui.oauth.client-id"), clientId(properties))
-        .set(propertyKey("springdoc.swagger-ui.oauth.realm"), propertyValue("jhipster"))
+        .set(propertyKey("springdoc.swagger-ui.oauth.realm"), propertyValue("seed4j"))
         .set(propertyKey("springdoc.swagger-ui.oauth.scopes"), propertyValue("openid","profile","email"))
         .set(propertyKey("springdoc.oauth2.authorization-url"), authorizationUrl(properties))
         .and()
@@ -41,7 +41,7 @@ public class SpringdocOktaModuleFactory {
       new StringBuilder()
         .append("https://")
         .append(properties.getString(OKTA_DOMAIN_PROPERTY))
-        .append("/oauth2/default/v1/authorize?nonce=\"jhipster\"")
+        .append("/oauth2/default/v1/authorize?nonce=\"seed4j\"")
         .toString()
     );
   }

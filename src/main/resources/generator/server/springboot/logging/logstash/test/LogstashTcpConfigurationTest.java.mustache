@@ -20,7 +20,7 @@ class LogstashTcpConfigurationTest {
 
   @Test
   void shouldAddAppNameOnly() throws IOException {
-    var c = new LogstashTcpConfiguration("jhipster-lite", null, new LogstashTcpProperties());
+    var c = new LogstashTcpConfiguration("seed4j", null, new LogstashTcpProperties());
 
     ObjectContent<Map<String, String>> parsed = json.parse(c.logstashTcpLifeCycle().serializedFields());
     assertThat(parsed.getObject()).hasSize(1);

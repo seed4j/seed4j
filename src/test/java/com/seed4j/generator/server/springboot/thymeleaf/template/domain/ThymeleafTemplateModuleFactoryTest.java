@@ -22,7 +22,7 @@ class ThymeleafTemplateModuleFactoryTest {
   @Test
   void shouldBuildThymeleafTemplateModule() {
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .projectBaseName("jhiTest")
+      .projectBaseName("growth")
       .basePackage("com.seed4j.growth")
       .build();
 
@@ -85,9 +85,7 @@ class ThymeleafTemplateModuleFactoryTest {
 
   @Test
   void shouldBuildTailwindcssModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .projectBaseName("jhipster")
-      .build();
+    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build();
 
     SeedModule module = factory.buildTailwindcssModule(properties);
 
@@ -162,7 +160,7 @@ class ThymeleafTemplateModuleFactoryTest {
   @Test
   void shouldProxyBeUpdatedWhenServerPortPropertyNotDefault() {
     SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .projectBaseName("jhipster")
+      .projectBaseName("seed4j")
       .put("serverPort", 8081)
       .build();
 

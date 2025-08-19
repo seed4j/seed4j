@@ -1,0 +1,7 @@
+{
+  "module": "another-test-module",
+  "date": "2025-12-03T10:15:30Z",
+  "properties": {
+    "key": "first-value"
+  }
+}

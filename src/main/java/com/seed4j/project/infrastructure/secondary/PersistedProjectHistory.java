@@ -4,17 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.seed4j.project.domain.ProjectPath;
 import com.seed4j.project.domain.history.ProjectHistory;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
 
 final class PersistedProjectHistory {
 
-  private final Collection<PersistedProjectAction> actions;
+  static final PersistedProjectHistory EMPTY = new PersistedProjectHistory(List.of());
+  private Collection<PersistedProjectAction> actions;
 
   private PersistedProjectHistory(@JsonProperty("actions") Collection<PersistedProjectAction> actions) {
     this.actions = actions;
-  }
-
-  static PersistedProjectHistory from(ProjectHistory history) {
-    return new PersistedProjectHistory(history.actions().stream().map(PersistedProjectAction::from).toList());
   }
 
   public ProjectHistory toDomain(ProjectPath path) {
@@ -23,5 +22,9 @@ final class PersistedProjectHistory {
 
   public Collection<PersistedProjectAction> getActions() {
     return actions;
+  }
+
+  public void addAll(final Collection<PersistedProjectAction> projectActions) {
+    actions = Stream.concat(actions.stream(), projectActions.stream()).toList();
   }
 }

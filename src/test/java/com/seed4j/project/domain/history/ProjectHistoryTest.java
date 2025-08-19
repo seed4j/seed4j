@@ -13,15 +13,6 @@ import org.junit.jupiter.api.Test;
 class ProjectHistoryTest {
 
   @Test
-  void shouldAddActionToHistory() {
-    ProjectHistory history = projectHistory();
-
-    history.append(firstAction());
-
-    assertThat(history.actions()).usingRecursiveFieldByFieldElementComparator().containsExactly(firstAction(), projectAction());
-  }
-
-  @Test
   void shouldGetMergedProperties() {
     ProjectHistory history = new ProjectHistory(projectPath(), List.of(firstAction(), projectAction()));
 

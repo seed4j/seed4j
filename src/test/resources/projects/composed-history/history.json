@@ -1,0 +1,11 @@
+{
+  "actions": [
+    {
+      "module": "test-module",
+      "date": "2021-12-03T10:15:30Z",
+      "properties": {
+        "key": "value"
+      }
+    }
+  ]
+}

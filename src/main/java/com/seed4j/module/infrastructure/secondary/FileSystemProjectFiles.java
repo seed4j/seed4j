@@ -74,7 +74,7 @@ public class FileSystemProjectFiles implements ProjectFiles {
   @ExcludeFromGeneratedCodeCoverage(reason = "The error handling is an hard to test implementation detail")
   private static byte[] toByteArray(InputStream input) {
     try {
-      return IOUtils.toByteArray(input);
+      return input.readAllBytes();
     } catch (IOException e) {
       throw GeneratorException.technicalError("Error reading file: " + e.getMessage(), e);
     }

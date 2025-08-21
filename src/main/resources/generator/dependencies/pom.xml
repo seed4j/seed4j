@@ -25,7 +25,7 @@
     <neo4j-migrations.version>2.18.2</neo4j-migrations.version>
     <liquibase.version>4.33.0</liquibase.version>
     <reflections.version>0.10.2</reflections.version>
-    <json-web-token.version>0.12.7</json-web-token.version>
+    <json-web-token.version>0.13.0</json-web-token.version>
     <commons-lang3.version>3.18.0</commons-lang3.version>
     <ehcache.version>3.11.0</ehcache.version>
     <thymeleaf-layout-dialect.version>3.4.0</thymeleaf-layout-dialect.version>

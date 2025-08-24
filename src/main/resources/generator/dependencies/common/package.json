@@ -23,7 +23,7 @@
     "browser-sync": "3.0.4",
     "cpy-cli": "6.0.0",
     "cssnano": "7.1.0",
-    "cypress": "14.5.4",
+    "cypress": "15.0.0",
     "eslint": "9.33.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-cypress": "5.1.1",

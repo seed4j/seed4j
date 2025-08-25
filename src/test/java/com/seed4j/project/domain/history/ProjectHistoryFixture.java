@@ -20,4 +20,18 @@ public final class ProjectHistoryFixture {
   public static ProjectAction projectAction() {
     return ProjectAction.builder().module("test-module").date(Instant.parse("2021-12-03T10:15:30.00Z")).parameters(Map.of("key", "value"));
   }
+
+  public static ProjectAction firstProjectAction() {
+    return ProjectAction.builder()
+      .module("another-test-module")
+      .date(Instant.parse("2025-12-03T10:15:30Z"))
+      .parameters(Map.of("key", "first-value"));
+  }
+
+  public static ProjectAction secondProjectAction() {
+    return ProjectAction.builder()
+      .module("another-test-module")
+      .date(Instant.parse("2025-12-03T10:15:31Z"))
+      .parameters(Map.of("key", "second-value"));
+  }
 }

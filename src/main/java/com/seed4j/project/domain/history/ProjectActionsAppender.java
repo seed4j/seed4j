@@ -14,10 +14,6 @@ public class ProjectActionsAppender {
   }
 
   public void append(ProjectActionToAppend actionToAppend) {
-    ProjectHistory history = projects.getHistory(actionToAppend.path());
-
-    history.append(actionToAppend.action());
-
-    projects.save(history);
+    projects.save(actionToAppend.path(), actionToAppend.action());
   }
 }

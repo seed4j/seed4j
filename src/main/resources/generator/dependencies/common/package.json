@@ -22,7 +22,7 @@
     "autoprefixer": "10.4.21",
     "browser-sync": "3.0.4",
     "cpy-cli": "6.0.0",
-    "cssnano": "7.1.0",
+    "cssnano": "7.1.1",
     "cypress": "15.0.0",
     "eslint": "9.33.0",
     "eslint-config-prettier": "10.1.8",

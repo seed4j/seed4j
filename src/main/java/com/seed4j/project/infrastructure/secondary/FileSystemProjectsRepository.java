@@ -5,13 +5,23 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.seed4j.project.domain.ProjectPath;
 import com.seed4j.project.domain.ProjectsRepository;
 import com.seed4j.project.domain.download.Project;
+import com.seed4j.project.domain.history.ProjectAction;
 import com.seed4j.project.domain.history.ProjectHistory;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
+import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.function.Predicate;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,6 +31,12 @@ class FileSystemProjectsRepository implements ProjectsRepository {
 
   private static final String HISTORY_FOLDER = ".seed4j/modules";
   private static final String HISTORY_FILE = "history.json";
+  private static final DateTimeFormatter FILENAME_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.of("UTC"));
+  private static final Comparator<Path> ACTION_FILES_COMPARATOR = Comparator.comparing(path -> {
+    String filename = path.getFileName().toString().toLowerCase(Locale.ROOT);
+
+    return LocalDateTime.parse(filename.substring(0, filename.indexOf("-")), FILENAME_DATE_FORMAT);
+  });
 
   private final ObjectMapper json;
   private final ObjectWriter writer;
@@ -41,37 +57,75 @@ class FileSystemProjectsRepository implements ProjectsRepository {
   }
 
   @Override
-  public void save(ProjectHistory history) {
-    Assert.notNull("history", history);
+  public void save(ProjectPath path, ProjectAction action) {
+    Assert.notNull("action", action);
 
     try {
-      Path historyPath = historyFilePath(history.path());
+      Path historyPath = Path.of(path.get(), HISTORY_FOLDER, moduleActionFilename(action));
 
       Files.createDirectories(historyPath.getParent());
-      Files.write(historyPath, writer.writeValueAsBytes(PersistedProjectHistory.from(history)));
+      Files.write(historyPath, writer.writeValueAsBytes(PersistedProjectAction.from(action)));
     } catch (IOException e) {
-      throw GeneratorException.technicalError("Error saving history: " + e.getMessage(), e);
+      throw GeneratorException.technicalError("Error saving action: " + e.getMessage(), e);
     }
+  }
+
+  private static String moduleActionFilename(final ProjectAction action) {
+    return FILENAME_DATE_FORMAT.format(action.date()) + "-" + action.module().get() + ".json";
   }
 
   @Override
   public ProjectHistory getHistory(ProjectPath path) {
     Assert.notNull(PATH_PARAMETER, path);
 
-    Path historyFilePath = historyFilePath(path);
+    Path historyFilePath = Path.of(path.get(), HISTORY_FOLDER, HISTORY_FILE);
 
+    PersistedProjectHistory projectHistory = initialHistory(historyFilePath);
+    projectHistory.addAll(specificModulesHistory(path));
+
+    return projectHistory.toDomain(path);
+  }
+
+  private PersistedProjectHistory initialHistory(final Path historyFilePath) {
     if (Files.notExists(historyFilePath)) {
-      return ProjectHistory.empty(path);
+      return PersistedProjectHistory.EMPTY;
     }
 
-    try {
-      return json.readValue(Files.readAllBytes(historyFilePath), PersistedProjectHistory.class).toDomain(path);
+    return read(PersistedProjectHistory.class, historyFilePath);
+  }
+
+  @ExcludeFromGeneratedCodeCoverage
+  private Collection<PersistedProjectAction> specificModulesHistory(ProjectPath projectPath) {
+    Path historyFolder = Path.of(projectPath.get(), HISTORY_FOLDER);
+
+    if (Files.notExists(historyFolder)) {
+      return List.of();
+    }
+
+    try (var stream = Files.list(historyFolder)) {
+      return stream
+        .filter(actionHistory())
+        .sorted(ACTION_FILES_COMPARATOR)
+        .map(actionFile -> read(PersistedProjectAction.class, actionFile))
+        .toList();
     } catch (IOException e) {
-      throw GeneratorException.technicalError("Can't read project history: " + e.getMessage(), e);
+      throw GeneratorException.technicalError("Can't read project history files: " + e.getMessage(), e);
     }
   }
 
-  private Path historyFilePath(ProjectPath path) {
-    return Path.of(path.get(), HISTORY_FOLDER, HISTORY_FILE);
+  private static Predicate<Path> actionHistory() {
+    return path -> {
+      String filename = path.toString().toLowerCase(Locale.ROOT);
+
+      return filename.endsWith(".json") && !filename.endsWith(HISTORY_FILE);
+    };
+  }
+
+  private <T> T read(Class<T> clazz, Path historyFilePath) {
+    try {
+      return json.readValue(Files.readAllBytes(historyFilePath), clazz);
+    } catch (IOException e) {
+      throw GeneratorException.technicalError("Can't read project history: " + e.getMessage(), e);
+    }
   }
 }

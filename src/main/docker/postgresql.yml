@@ -1,0 +1,14 @@
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+services:
+  postgresql:
+    image: postgres:17.6
+    # volumes:
+    #   - ~/volumes/seed4j/Seed4J/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=Seed4J
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
+    ports:
+      - '127.0.0.1:5432:5432'

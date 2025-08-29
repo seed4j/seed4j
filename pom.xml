@@ -86,6 +86,7 @@
     <approvaltests.version>25.0.23</approvaltests.version>
     <error-prone.version>2.41.0</error-prone.version>
     <modernizer-maven-plugin.version>3.2.0</modernizer-maven-plugin.version>
+    <liquibase.version>4.33.0</liquibase.version>
   </properties>
 
   <dependencyManagement>
@@ -223,6 +224,33 @@
     </dependency>
 
     <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>${liquibase.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>net.bytebuddy</groupId>
       <artifactId>byte-buddy</artifactId>
       <version>${byte-buddy.version}</version>
@@ -241,31 +269,26 @@
       <version>${archunit-junit5.version}</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-junit-platform-engine</artifactId>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-java</artifactId>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-spring</artifactId>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-suite</artifactId>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>mongodb</artifactId>
@@ -275,6 +298,12 @@
       <groupId>com.approvaltests</groupId>
       <artifactId>approvaltests</artifactId>
       <version>${approvaltests.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${testcontainers.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

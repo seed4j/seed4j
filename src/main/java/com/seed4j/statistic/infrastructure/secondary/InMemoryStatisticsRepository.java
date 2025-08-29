@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@WithoutMongoDB
+@WithoutPersistence
 class InMemoryStatisticsRepository implements StatisticsRepository {
 
   private final Collection<AppliedModule> appliedModules = Collections.newSetFromMap(new ConcurrentHashMap<>());

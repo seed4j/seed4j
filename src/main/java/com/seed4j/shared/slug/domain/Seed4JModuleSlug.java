@@ -21,6 +21,7 @@ public enum Seed4JModuleSlug implements SeedModuleSlugFactory {
   ANGULAR_OAUTH_2("angular-oauth2-keycloak", RANK_C),
   APPLICATION_SERVICE_HEXAGONAL_ARCHITECTURE_DOCUMENTATION("application-service-hexagonal-architecture-documentation", RANK_A),
   APPROVAL_TESTS("approval-tests", RANK_B),
+  ARCH_UNIT_TS("arch-unit-ts", RANK_C),
   CAFFEINE_CACHE("caffeine-cache", RANK_A),
   CASSANDRA("cassandra", RANK_C),
   CASSANDRA_MIGRATION("cassandra-migration", RANK_C),

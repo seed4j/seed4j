@@ -529,6 +529,14 @@ elif [[ $application == 'typescriptapp' ]]; then
     "optional-typescript" \
     "sonarqube-typescript"
 
+elif [[ $application == 'archunitts' ]]; then
+  apply_modules \
+    "init" \
+    "prettier" \
+    "typescript" \
+    "vue-core" \
+    "arch-unit-ts"
+
 elif [[ $application == 'thymeleafapp' ]]; then
   init_server
   spring_boot_mvc

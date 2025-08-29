@@ -48,7 +48,7 @@
     <java.version>21</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <node.version>v22.18.0</node.version>
+    <node.version>v22.19.0</node.version>
     <npm.version>11.5.2</npm.version>
 
     <maven.version>3.6.3</maven.version>

@@ -1,13 +1,8 @@
 package com.seed4j.project.infrastructure.secondary;
 
-import static com.seed4j.project.domain.history.ProjectHistoryFixture.projectAction;
-import static com.seed4j.project.domain.history.ProjectHistoryFixture.projectHistory;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static com.seed4j.project.domain.history.ProjectHistoryFixture.*;
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +23,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import org.junit.jupiter.api.DisplayName;
@@ -142,30 +138,32 @@ class FileSystemProjectsRepositoryTest {
 
       FileSystemProjectsRepository fileSystemProjectsRepository = new FileSystemProjectsRepository(json);
 
-      assertThatThrownBy(() -> fileSystemProjectsRepository.save(projectHistory())).isExactlyInstanceOf(GeneratorException.class);
+      assertThatThrownBy(() -> fileSystemProjectsRepository.save(projectPath(), projectAction())).isExactlyInstanceOf(
+        GeneratorException.class
+      );
     }
 
     @Test
     void shouldSaveHistory() throws IOException {
       ProjectPath path = folder().build();
 
-      projects.save(new ProjectHistory(path, List.of(projectAction())));
+      projects.save(path, projectAction());
 
-      assertThat(Files.readString(Path.of(path.get(), ".seed4j/modules", "history.json"))).isEqualToIgnoringWhitespace(
-          """
-          {
-            "actions" : [
-              {
-                "module" : "test-module",
-                "date" : "2021-12-03T10:15:30Z",
-                "properties" : {
-                  "key" : "value"
-                }
+      try (Stream<Path> files = Files.list(Path.of(path.get(), ".seed4j/modules"))) {
+        Path filepath = files.findFirst().orElseThrow();
+        assertThat(filepath.getFileName().toString()).startsWith("20").endsWith("-test-module.json");
+        assertThat(Files.readString(filepath)).isEqualToIgnoringWhitespace(
+            """
+            {
+              "module" : "test-module",
+              "date" : "2021-12-03T10:15:30Z",
+              "properties" : {
+                "key" : "value"
               }
-            ]
-          }
-          """
-        );
+            }
+            """
+          );
+      }
     }
   }
 
@@ -185,7 +183,7 @@ class FileSystemProjectsRepositoryTest {
     }
 
     @Test
-    void shouldGetEmptyHistoryFromUnknownFile() {
+    void shouldGetEmptyHistoryFromUnknownFiles() {
       ProjectPath path = folder().build();
 
       ProjectHistory history = projects.getHistory(path);
@@ -202,6 +200,42 @@ class FileSystemProjectsRepositoryTest {
 
       assertThat(history.path()).isEqualTo(path);
       assertThat(history.actions()).usingRecursiveFieldByFieldElementComparator().containsExactly(projectAction());
+    }
+
+    @Test
+    void shouldGetExistingHistoryFromOneActionFiles() {
+      ProjectPath path = folder()
+        .add(
+          "src/test/resources/projects/composed-history/20250819203000-another-test-module.json",
+          ".seed4j/modules/20250819203000-another-test-module.json"
+        )
+        .build();
+
+      ProjectHistory history = projects.getHistory(path);
+
+      assertThat(history.actions()).usingRecursiveFieldByFieldElementComparator().containsExactly(firstProjectAction());
+    }
+
+    @Test
+    void shouldGetExistingHistoryFromMultipleFiles() {
+      ProjectPath path = folder()
+        .add("src/test/resources/projects/composed-history/history.json", ".seed4j/modules/history.json")
+        .add(
+          "src/test/resources/projects/composed-history/20250819203000-another-test-module.json",
+          ".seed4j/modules/20250819203000-another-test-module.json"
+        )
+        .add(
+          "src/test/resources/projects/composed-history/20250819203001-another-test-module.json",
+          ".seed4j/modules/20250819203001-another-test-module.json"
+        )
+        .add("src/test/resources/projects/composed-history/dummy.txt", ".seed4j/modules/dummy.txt")
+        .build();
+
+      ProjectHistory history = projects.getHistory(path);
+
+      assertThat(history.actions())
+        .usingRecursiveFieldByFieldElementComparator()
+        .containsExactly(projectAction(), firstProjectAction(), secondProjectAction());
     }
   }
 

@@ -19,6 +19,7 @@
     "@typescript-eslint/eslint-plugin": "8.40.0",
     "@typescript-eslint/parser": "8.40.0",
     "@vitest/coverage-istanbul": "3.2.4",
+    "arch-unit-ts": "1.0.9",
     "autoprefixer": "10.4.21",
     "browser-sync": "3.0.4",
     "cpy-cli": "6.0.0",

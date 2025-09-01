@@ -15,6 +15,7 @@ public enum Seed4JFeatureSlug implements SeedFeatureSlugFactory {
   DOCKERFILE("dockerfile"),
   E2E_TESTS("e2e-tests"),
   FRONTEND_COMPONENT_TESTS("frontend-component-tests"),
+  HEXAGONAL_ARCHITECTURE_TESTS("hexagonal-architecture-tests"),
   FRONTEND_JAVA_BUILD_TOOL_PLUGIN("frontend-java-build-tool-plugin"),
   GITHUB_ACTIONS("github-actions"),
   GITLAB_CI("gitlab-ci"),

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+>
+  <changeSet id="applied_module_schema" author="damnclin">
+    <createTable tableName="applied_module">
+      <column name="id" type="${uuidType}">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="module" type="varchar(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="date" type="timestamp">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+
+    <createIndex indexName="idx_applied_module_date" tableName="applied_module">
+      <column name="date" />
+    </createIndex>
+
+    <createIndex indexName="idx_applied_module_module" tableName="applied_module">
+      <column name="module" />
+    </createIndex>
+  </changeSet>
+</databaseChangeLog>

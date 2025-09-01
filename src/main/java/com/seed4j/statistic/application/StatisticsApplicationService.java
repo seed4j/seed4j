@@ -5,6 +5,7 @@ import com.seed4j.statistic.domain.Statistics;
 import com.seed4j.statistic.domain.StatisticsRepository;
 import com.seed4j.statistic.domain.criteria.StatisticsCriteria;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class StatisticsApplicationService {
@@ -15,10 +16,12 @@ public class StatisticsApplicationService {
     this.statistics = statistics;
   }
 
+  @Transactional
   public void moduleApplied(AppliedModule moduleApplied) {
     statistics.save(moduleApplied);
   }
 
+  @Transactional(readOnly = true)
   public Statistics get(StatisticsCriteria criteria) {
     return statistics.get(criteria);
   }

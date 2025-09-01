@@ -26,6 +26,54 @@
         "endOfLine": "lf",
         "indentSize": 2
       }
+    },
+    {
+      "module": "datasource-postgresql",
+      "date": "2025-08-24T12:08:58.525957999Z",
+      "properties": {
+        "packageName": "com.mycompany.myapp",
+        "projectName": "Seed4J Sample Application",
+        "indentSize": 2,
+        "baseName": "Seed4J",
+        "endOfLine": "lf",
+        "springConfigurationFormat": "yaml"
+      }
+    },
+    {
+      "module": "jpa-postgresql",
+      "date": "2025-08-24T12:09:59.879547811Z",
+      "properties": {
+        "packageName": "com.seed4j.project",
+        "projectName": "Seed4J Sample Application",
+        "indentSize": 2,
+        "baseName": "Seed4J",
+        "endOfLine": "lf",
+        "springConfigurationFormat": "yaml"
+      }
+    },
+    {
+      "module": "liquibase-async",
+      "date": "2025-08-24T13:19:03.836670182Z",
+      "properties": {
+        "packageName": "com.seed4j.project",
+        "projectName": "Seed4J Sample Application",
+        "indentSize": 2,
+        "baseName": "Seed4J",
+        "endOfLine": "lf",
+        "springConfigurationFormat": "yaml"
+      }
+    },
+    {
+      "module": "liquibase",
+      "date": "2025-08-24T13:19:52.270020502Z",
+      "properties": {
+        "packageName": "com.seed4j.project",
+        "projectName": "Seed4J Sample Application",
+        "indentSize": 2,
+        "baseName": "Seed4J",
+        "endOfLine": "lf",
+        "springConfigurationFormat": "yaml"
+      }
     }
   ]
 }

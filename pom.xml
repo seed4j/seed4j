@@ -59,7 +59,6 @@
     <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
     <start-class>com.seed4j.Seed4jApp</start-class>
 
-    <byte-buddy.version>1.17.7</byte-buddy.version>
     <compiler-plugin.version>3.14.0</compiler-plugin.version>
     <surefire-plugin.version>3.5.2</surefire-plugin.version>
     <jacoco.version>0.8.13</jacoco.version>
@@ -248,13 +247,6 @@
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
       <version>${liquibase.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>net.bytebuddy</groupId>
-      <artifactId>byte-buddy</artifactId>
-      <version>${byte-buddy.version}</version>
-      <scope>test</scope>
     </dependency>
 
     <dependency>

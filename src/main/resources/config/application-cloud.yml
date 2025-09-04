@@ -1,8 +1,7 @@
 application:
   cors:
     allowed-origins:
-      - https://lite.jhipster.tech
-      - https://jhipster-lite.ew.r.appspot.com
+      - https://start.seed4j.com
     allowed-methods: '*'
     allowed-headers: '*'
     exposed-headers: 'Authorization,Link,X-Total-Count'
@@ -11,6 +10,3 @@ application:
 
 seed4j:
   forced-project-folder: /tmp/seed4j
-
-server:
-  port: 8080

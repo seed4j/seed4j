@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: 'Setup: checkout project'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup

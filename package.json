@@ -71,7 +71,7 @@
     "@vitest/coverage-istanbul": "3.2.4",
     "@vue/test-utils": "2.4.6",
     "cpy-cli": "6.0.0",
-    "cypress": "15.0.0",
+    "cypress": "15.1.0",
     "eslint": "9.34.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-cypress": "5.1.1",

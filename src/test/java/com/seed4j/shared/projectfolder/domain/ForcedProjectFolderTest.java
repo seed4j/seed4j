@@ -6,6 +6,8 @@ import com.seed4j.UnitTest;
 import java.io.File;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @UnitTest
 class ForcedProjectFolderTest {
@@ -22,6 +24,12 @@ class ForcedProjectFolderTest {
   @Test
   void shouldBeInvalidWithDotDot() {
     assertThat(forcedProjectFolder.isInvalid("/tmp/seed4j/../project")).isTrue();
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = { "/tmp/seed4j", "/tmp/seed4j/" })
+  void shouldBeInvalidWithRootFolder(String rootDir) {
+    assertThat(forcedProjectFolder.isInvalid(rootDir)).isTrue();
   }
 
   @Test

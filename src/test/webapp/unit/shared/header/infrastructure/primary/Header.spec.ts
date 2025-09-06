@@ -30,7 +30,21 @@ const wrap = (options?: Partial<WrapperOptions>): VueWrapper => {
 
 const managementRepositoryStubResolves = (): ManagementRepositoryStub => {
   const management = stubLocalManagementRepository();
-  management.getInfo.mockResolvedValue({ git: { build: { version: '1.0.0' } } });
+  management.getInfo.mockResolvedValue({
+    git: {
+      build: {
+        version: '1.35.1-SNAPSHOT',
+        time: '2025-09-06T02:39:26Z',
+      },
+      commit: {
+        id: {
+          describe: '74a5438',
+          abbrev: '74a5438',
+        },
+      },
+      branch: 'main',
+    },
+  });
 
   return management;
 };

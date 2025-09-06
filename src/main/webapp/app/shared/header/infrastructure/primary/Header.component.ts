@@ -17,17 +17,20 @@ export default defineComponent({
     const management = inject(MANAGEMENT_REPOSITORY);
     const selectorPrefix = 'header';
     const version = ref('');
+    const time = ref('');
 
     management
       .getInfo()
       .then((info: ManagementInfo) => {
         version.value = info?.git?.build?.version;
+        time.value = info?.git?.build?.time;
       })
       .catch(error => console.error(error));
 
     return {
       selectorPrefix,
       version,
+      time,
     };
   },
 });

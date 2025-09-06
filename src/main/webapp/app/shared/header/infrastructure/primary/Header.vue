@@ -4,7 +4,7 @@
       <router-link class="seed4j-logo" to="/">
         <img class="seed4j-logo--icon" src="../../../../../content/seed4j_logo.png" alt="Seed4J logo" width="48" />
         <span class="seed4j-logo--text">Seed4J</span>
-        <span class="seed4j-logo-version--text">{{ version }}</span>
+        <span class="seed4j-logo-version--text">{{ version }} - {{ time }}</span>
       </router-link>
       <ThemeButtonVue />
     </div>

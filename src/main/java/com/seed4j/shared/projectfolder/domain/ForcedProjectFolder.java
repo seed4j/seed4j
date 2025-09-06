@@ -18,7 +18,8 @@ public class ForcedProjectFolder implements ProjectFolder {
   public boolean isInvalid(String folderPath) {
     Assert.notNull("folderPath", folderPath);
 
-    return !folderPath.startsWith(prefix) || folderPath.contains("..");
+    boolean isRootDir = Path.of(prefix).equals(Path.of(folderPath));
+    return !folderPath.startsWith(prefix) || folderPath.contains("..") || isRootDir;
   }
 
   @Override

@@ -62,7 +62,7 @@ Then, you can navigate to http://localhost:1339 in your browser.
 If you have an existing project generated with Seed4J, you can handle breaking changes in latest versions by running the following command:
 
 ```bash
-mvn -U org.openrewrite.maven:rewrite-maven-plugin:run -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-spring:RELEASE,tech.jhipster.lite:jhlite:RELEASE -Drewrite.activeRecipes=tech.jhipster.lite.UpgradeJhipsterLite
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-spring:RELEASE,com.seed4j:seed4j:RELEASE -Drewrite.activeRecipes=com.seed4j.UpgradeSeed4J
 ```
 
 The main interest is for seed4j-extension instances, but it can also be useful if some modules have been renamed: it will update your `.seed4j/modules/history.json` file to use the new module names.

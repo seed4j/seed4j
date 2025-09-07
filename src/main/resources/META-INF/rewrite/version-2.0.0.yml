@@ -1,0 +1,40 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.seed4j.UpgradeSeed4J_2.0.0
+recipeList:
+  - com.seed4j.UpgradeSeed4JJavaApi_2.0.0
+  - org.openrewrite.RenameFile:
+      fileMatcher: '.jhipster'
+      fileName: .seed4j
+  - org.openrewrite.text.FindAndReplace:
+      find: 'seed4j-needle'
+      replace: 'seed4j-needle'
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.seed4j.UpgradeSeed4JJavaApi_2.0.0
+preconditions:
+  - org.openrewrite.java.dependencies.DependencyInsight:
+      groupIdPattern: tech.jhipster.lite
+      artifactIdPattern: jhlite
+recipeList:
+  - org.openrewrite.maven.ChangeDependencyGroupIdAndArtifactId:
+      oldGroupId: tech.jhipster.lite
+      oldArtifactId: jhlite
+      newGroupId: com.seed4j
+      newArtifactId: seed4j
+  - org.openrewrite.maven.ChangeDependencyGroupIdAndArtifactId:
+      oldGroupId: tech.jhipster.lite
+      oldArtifactId: jhlite
+      newGroupId: com.seed4j
+      newArtifactId: seed4j
+      scope: test
+      type: test-jar
+      classifier: tests
+  - org.openrewrite.maven.RenamePropertyKey:
+      oldKey: jhlite.version
+      newKey: seed4j.version
+  - org.openrewrite.maven.ChangePropertyValue:
+      key: seed4j.version
+      newValue: 2.0.0
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: tech.jhipster.lite
+      newPackageName: com.seed4j

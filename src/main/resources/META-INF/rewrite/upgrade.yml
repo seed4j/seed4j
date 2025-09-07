@@ -1,7 +1,8 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: tech.jhipster.lite.UpgradeJhipsterLite
+name: com.seed4j.UpgradeSeed4J
 recipeList:
   - tech.jhipster.lite.UpgradeJhipsterLite_1.20.0
   - tech.jhipster.lite.UpgradeJhipsterLite_1.21.0
   - tech.jhipster.lite.UpgradeJhipsterLite_1.33.0
   - tech.jhipster.lite.UpgradeJhipsterLite_1.34.0
+  - com.seed4j.UpgradeSeed4J_2.0.0

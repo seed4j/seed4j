@@ -1,0 +1,84 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.seed4j.UpgradeSeed4J_2.0.0
+recipeList:
+  - org.openrewrite.MoveFile:
+      folder: .jhipster
+      moveTo: /.seed4j
+  - org.openrewrite.text.FindAndReplace:
+      find: jhipster-needle
+      replace: seed4j-needle
+  - com.seed4j.UpgradeSeed4JJavaApi_2.0.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.seed4j.UpgradeSeed4JJavaApi_2.0.0
+recipeList:
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.JHLiteApp
+      newFullyQualifiedTypeName: com.seed4j.Seed4JApp
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.JHipsterModule
+      newFullyQualifiedTypeName: com.seed4j.module.domain.Seed4JModule
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.file.JHipsterDestination
+      newFullyQualifiedTypeName: com.seed4j.module.domain.file.Seed4JDestination
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.file.JHipsterSource
+      newFullyQualifiedTypeName: com.seed4j.module.domain.file.Seed4JSource
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.resource.JHipsterModuleOrganization
+      newFullyQualifiedTypeName: com.seed4j.module.domain.resource.Seed4JModuleOrganization
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.resource.JHipsterModulePropertiesDefinition
+      newFullyQualifiedTypeName: com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.resource.JHipsterModuleResource
+      newFullyQualifiedTypeName: com.seed4j.module.domain.resource.Seed4JModuleResource
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.resource.JHipsterFeatureSlugFactory
+      newFullyQualifiedTypeName: com.seed4j.module.domain.resource.Seed4JFeatureSlugFactory
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.resource.JHipsterModuleRank
+      newFullyQualifiedTypeName: com.seed4j.module.domain.resource.Seed4JModuleRank
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.resource.JHipsterModuleSlugFactory
+      newFullyQualifiedTypeName: com.seed4j.module.domain.resource.Seed4JModuleSlugFactory
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.properties.JHipsterModuleProperties
+      newFullyQualifiedTypeName: com.seed4j.module.domain.properties.Seed4JModuleProperties
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.domain.JHipsterModulesFixture
+      newFullyQualifiedTypeName: com.seed4j.module.domain.Seed4JModulesFixture
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.infrastructure.secondary.JHipsterModulesAssertions
+      newFullyQualifiedTypeName: com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.module.infrastructure.secondary.TestJHipsterModules
+      newFullyQualifiedTypeName: com.seed4j.module.infrastructure.secondary.TestSeed4JModules
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.shared.slug.domain.JHLiteFeatureSlug
+      newFullyQualifiedTypeName: com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: tech.jhipster.lite.shared.slug.domain.JHLiteModuleSlug
+      newFullyQualifiedTypeName: com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: tech.jhipster.lite
+      newPackageName: com.seed4j
+      recursive: true
+  - org.openrewrite.maven.RenamePropertyKey:
+      oldKey: jhlite.version
+      newKey: seed4j.version
+  - org.openrewrite.maven.ChangeDependencyGroupIdAndArtifactId:
+      oldGroupId: tech.jhipster.lite
+      oldArtifactId: jhlite
+      newGroupId: com.seed4j
+      newArtifactId: seed4j
+      newVersion: 2.0.0
+  # workaround for https://github.com/openrewrite/rewrite/issues/6039
+  - org.openrewrite.text.FindAndReplace:
+      find: '<groupId>tech.jhipster.lite</groupId>'
+      replace: '<groupId>com.seed4j</groupId>'
+      filePattern: 'pom.xml'
+  - org.openrewrite.text.FindAndReplace:
+      find: '<artifactId>jhlite</artifactId>'
+      replace: '<artifactId>seed4j</artifactId>'
+      filePattern: 'pom.xml'

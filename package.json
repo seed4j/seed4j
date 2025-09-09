@@ -91,7 +91,7 @@
     "prettier-plugin-packagejson": "2.5.19",
     "prettier-plugin-sh": "0.18.0",
     "rimraf": "6.0.1",
-    "sass": "1.92.0",
+    "sass": "1.92.1",
     "start-server-and-test": "2.1.0",
     "stylelint": "16.23.1",
     "stylelint-config-concentric-order": "5.2.1",

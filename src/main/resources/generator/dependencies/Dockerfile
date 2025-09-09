@@ -11,6 +11,6 @@ FROM mcr.microsoft.com/mssql/server:2025-latest
 FROM postgres:17.6
 FROM apache/kafka-native:4.1.0
 FROM tchiotludo/akhq:0.26.0
-FROM apachepulsar/pulsar:4.0.6
+FROM apachepulsar/pulsar:4.1.0
 FROM neo4j:2025.08.0-community
 FROM redis:8.2.1

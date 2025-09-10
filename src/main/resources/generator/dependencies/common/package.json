@@ -62,7 +62,7 @@
     "stylelint-config-standard-scss": "15.0.1",
     "stylelint-order": "7.0.0",
     "tailwindcss": "4.1.13",
-    "tikuidoc-tikui": "8.0.1",
+    "tikuidoc-tikui": "9.0.0",
     "ts-jest": "29.4.1",
     "typescript": "5.9.2",
     "typescript-eslint": "8.42.0",

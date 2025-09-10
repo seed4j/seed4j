@@ -81,11 +81,11 @@ public class CypressMergeCoverageModuleFactory {
         .add(
           lineAfterRegex("e2e:"),
           properties.indentation().times(2)
-          + """
-          setupNodeEvents(on, config) {
-                registerCodeCoverageTasks(on, config);
-                return config;
-              },"""
+            + """
+            setupNodeEvents(on, config) {
+                  registerCodeCoverageTasks(on, config);
+                  return config;
+                },"""
         )
         .add(text("supportFile: false"), "supportFile: 'src/test/webapp/component/support/component-tests.ts'");
   }

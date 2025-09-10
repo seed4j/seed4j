@@ -31,12 +31,12 @@ class EndOfFileReplacerTest {
       );
 
     assertThat(updatedContent).isEqualTo(
-        """
-        <root>
-        </root>
-        <element />
-        """
-      );
+      """
+      <root>
+      </root>
+      <element />
+      """
+    );
   }
 
   @Test

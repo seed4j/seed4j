@@ -153,16 +153,16 @@ class FileSystemProjectsRepositoryTest {
         Path filepath = files.findFirst().orElseThrow();
         assertThat(filepath.getFileName().toString()).startsWith("20").endsWith("-test-module.json");
         assertThat(Files.readString(filepath)).isEqualToIgnoringWhitespace(
-            """
-            {
-              "module" : "test-module",
-              "date" : "2021-12-03T10:15:30Z",
-              "properties" : {
-                "key" : "value"
-              }
+          """
+          {
+            "module" : "test-module",
+            "date" : "2021-12-03T10:15:30Z",
+            "properties" : {
+              "key" : "value"
             }
-            """
-          );
+          }
+          """
+        );
       }
     }
   }

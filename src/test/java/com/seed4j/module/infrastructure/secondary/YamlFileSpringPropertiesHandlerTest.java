@@ -34,12 +34,12 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setValue(propertyKey("springdoc.swagger-ui.operationsSorter"), propertyValue("alpha"));
 
       assertThat(content(yamlFile)).contains(
-          """
-          springdoc:
-            swagger-ui:
-              operationsSorter: alpha
-          """
-        );
+        """
+        springdoc:
+          swagger-ui:
+            operationsSorter: alpha
+        """
+      );
     }
 
     @Test
@@ -51,20 +51,20 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setValue(propertyKey("springdoc.swagger-ui.operationsSorter"), propertyValue("alpha"));
 
       assertThat(content(yamlFile)).contains(
-          """
-          spring:
-            application:
-              name: seed4j # This is the name of the application
+        """
+        spring:
+          application:
+            name: seed4j # This is the name of the application
 
-          # Logging
-          logging:
-            level:
-              com.seed4j: INFO
-          springdoc:
-            swagger-ui:
-              operationsSorter: alpha
-          """
-        );
+        # Logging
+        logging:
+          level:
+            com.seed4j: INFO
+        springdoc:
+          swagger-ui:
+            operationsSorter: alpha
+        """
+      );
     }
 
     @Test
@@ -79,23 +79,23 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setValue(propertyKey("spring.datasource.driver-class-name"), propertyValue("org.postgresql.Driver"));
 
       assertThat(content(yamlFile)).contains(
-          """
-          spring:
-            data:
-              jpa:
-                repositories:
-                  bootstrap-mode: deferred
-            datasource:
-              driver-class-name: org.postgresql.Driver
-              hikari:
-                auto-commit: false
-                poolName: Hikari
-              password: ''
-              type: com.zaxxer.hikari.HikariDataSource
-              url: jdbc:postgresql://localhost:5432/myapp
-              username: myapp
-          """
-        );
+        """
+        spring:
+          data:
+            jpa:
+              repositories:
+                bootstrap-mode: deferred
+          datasource:
+            driver-class-name: org.postgresql.Driver
+            hikari:
+              auto-commit: false
+              poolName: Hikari
+            password: ''
+            type: com.zaxxer.hikari.HikariDataSource
+            url: jdbc:postgresql://localhost:5432/myapp
+            username: myapp
+        """
+      );
     }
 
     @Test
@@ -106,12 +106,12 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setValue(propertyKey("springdoc.swagger-ui.operationsSorter"), propertyValue("alpha"));
 
       assertThat(content(yamlFile)).contains(
-          """
-          springdoc:
-              swagger-ui:
-                  operationsSorter: alpha
-          """
-        );
+        """
+        springdoc:
+            swagger-ui:
+                operationsSorter: alpha
+        """
+      );
     }
 
     @Test
@@ -123,11 +123,11 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setValue(propertyKey("springdoc.swagger-ui.operationsSorter"), propertyValue("alpha"));
 
       assertThat(content(yamlFile)).contains(
-          """
-          # Logging
-          logging:
-          """
-        );
+        """
+        # Logging
+        logging:
+        """
+      );
     }
 
     @Test
@@ -166,12 +166,12 @@ class YamlFileSpringPropertiesHandlerTest {
       );
 
       assertThat(content(yamlFile)).contains(
-          """
-          kafka:
-            consumer:
-              '[key.deserializer]': org.apache.kafka.common.serialization.StringDeserializer
-          """
-        );
+        """
+        kafka:
+          consumer:
+            '[key.deserializer]': org.apache.kafka.common.serialization.StringDeserializer
+        """
+      );
     }
 
     @Test
@@ -182,11 +182,11 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setValue(propertyKey("coverage.enabled"), propertyValue(true));
 
       assertThat(content(yamlFile)).contains(
-          """
-          coverage:
-            enabled: true
-          """
-        );
+        """
+        coverage:
+          enabled: true
+        """
+      );
     }
 
     @Test
@@ -197,11 +197,11 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setValue(propertyKey("coverage.count"), propertyValue(10));
 
       assertThat(content(yamlFile)).contains(
-          """
-          coverage:
-            count: 10
-          """
-        );
+        """
+        coverage:
+          count: 10
+        """
+      );
     }
 
     @Test
@@ -212,11 +212,11 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setValue(propertyKey("coverage.count"), propertyValue(10L));
 
       assertThat(content(yamlFile)).contains(
-          """
-          coverage:
-            count: 10
-          """
-        );
+        """
+        coverage:
+          count: 10
+        """
+      );
     }
 
     @Test
@@ -227,11 +227,11 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setValue(propertyKey("coverage.count"), propertyValue(10.5));
 
       assertThat(content(yamlFile)).contains(
-          """
-          coverage:
-            count: 10.5
-          """
-        );
+        """
+        coverage:
+          count: 10.5
+        """
+      );
     }
 
     @Test
@@ -242,11 +242,11 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setValue(propertyKey("coverage.count"), propertyValue(10.5f));
 
       assertThat(content(yamlFile)).contains(
-          """
-          coverage:
-            count: 10.5
-          """
-        );
+        """
+        coverage:
+          count: 10.5
+        """
+      );
     }
 
     @Test
@@ -257,13 +257,13 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setValue(propertyKey("coverage.count"), propertyValue(10, 50));
 
       assertThat(content(yamlFile)).contains(
-          """
-          coverage:
-            count:
-            - 10
-            - 50
-          """
-        );
+        """
+        coverage:
+          count:
+          - 10
+          - 50
+        """
+      );
     }
 
     @Test
@@ -290,13 +290,13 @@ class YamlFileSpringPropertiesHandlerTest {
       handler.setComment(propertyKey("spring.application.name"), new Comment("Application Name"));
 
       assertThat(content(yamlFile)).contains(
-          """
-          spring:
-            application:
-              # Application Name
-              name: seed4j # This is the name of the application
-          """
-        );
+        """
+        spring:
+          application:
+            # Application Name
+            name: seed4j # This is the name of the application
+        """
+      );
     }
 
     @Test
@@ -317,15 +317,15 @@ class YamlFileSpringPropertiesHandlerTest {
       );
 
       assertThat(content(yamlFile)).contains(
-          """
-          spring:
-            application:
-              # This is a
-              # multiline
-              # comment
-              name: seed4j # This is the name of the application
-          """
-        );
+        """
+        spring:
+          application:
+            # This is a
+            # multiline
+            # comment
+            name: seed4j # This is the name of the application
+        """
+      );
     }
   }
 }

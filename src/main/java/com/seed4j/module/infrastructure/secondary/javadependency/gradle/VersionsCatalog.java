@@ -83,10 +83,10 @@ public class VersionsCatalog {
 
   public void removeLibrary(DependencyId dependency) {
     libraryEntriesMatchingDependency(dependency).forEach(libraryConfig -> {
-        tomlConfigFile.remove(List.of(LIBRARIES_TOML_KEY, libraryConfig.getKey()));
+      tomlConfigFile.remove(List.of(LIBRARIES_TOML_KEY, libraryConfig.getKey()));
 
-        removeUnusedVersion(libraryConfig);
-      });
+      removeUnusedVersion(libraryConfig);
+    });
     save();
   }
 
@@ -107,10 +107,10 @@ public class VersionsCatalog {
 
   private void removeUnusedVersion(Entry libraryConfig) {
     VersionSlug.of(versionReference(libraryConfig)).ifPresent(versionSlug -> {
-        if (versionUnused(tomlConfigFile, versionSlug)) {
-          this.removeVersion(versionSlug);
-        }
-      });
+      if (versionUnused(tomlConfigFile, versionSlug)) {
+        this.removeVersion(versionSlug);
+      }
+    });
   }
 
   private static String versionReference(Entry libraryConfig) {

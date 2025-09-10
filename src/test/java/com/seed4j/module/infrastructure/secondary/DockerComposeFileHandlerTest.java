@@ -27,11 +27,11 @@ class DockerComposeFileHandlerTest {
     handler.append(redisDockerComposeFileReference());
 
     assertThat(contentNormalizingNewLines(rootComposeFile)).isEqualTo(
-        """
-        include:
-          - src/main/docker/redis.yml
-        """
-      );
+      """
+      include:
+        - src/main/docker/redis.yml
+      """
+    );
   }
 
   @Test
@@ -43,12 +43,12 @@ class DockerComposeFileHandlerTest {
     handler.append(kafkaDockerComposeFileReference());
 
     assertThat(contentNormalizingNewLines(rootComposeFile)).isEqualTo(
-        """
-        include:
-          - src/main/docker/redis.yml
-          - src/main/docker/kafka.yml
-        """
-      );
+      """
+      include:
+        - src/main/docker/redis.yml
+        - src/main/docker/kafka.yml
+      """
+    );
   }
 
   @Test
@@ -60,11 +60,11 @@ class DockerComposeFileHandlerTest {
     handler.append(redisDockerComposeFileReference());
 
     assertThat(contentNormalizingNewLines(rootComposeFile)).isEqualTo(
-        """
-        include:
-          - src/main/docker/redis.yml
-        """
-      );
+      """
+      include:
+        - src/main/docker/redis.yml
+      """
+    );
   }
 
   @Test
@@ -77,11 +77,11 @@ class DockerComposeFileHandlerTest {
     handler.append(redisDockerComposeFileReference());
 
     assertThat(contentNormalizingNewLines(rootComposeFile)).isEqualTo(
-        """
-        include:
-          - src/main/docker/redis.yml
-        """
-      );
+      """
+      include:
+        - src/main/docker/redis.yml
+      """
+    );
   }
 
   private DockerComposeFile redisDockerComposeFileReference() {

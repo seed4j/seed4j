@@ -11,14 +11,14 @@ final class Awaiter {
 
   static void await(Duration maxTime, ThrowingRunnable assertion) {
     awaiter(maxTime).untilAsserted(() -> {
-        try {
-          assertion.run();
-        } catch (AssertionError e) {
-          CucumberRestTestContext.retry();
+      try {
+        assertion.run();
+      } catch (AssertionError e) {
+        CucumberRestTestContext.retry();
 
-          assertion.run();
-        }
-      });
+        assertion.run();
+      }
+    });
   }
 
   private static ConditionFactory awaiter(Duration maxTime) {

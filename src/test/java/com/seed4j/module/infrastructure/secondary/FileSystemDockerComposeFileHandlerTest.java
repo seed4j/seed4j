@@ -32,11 +32,11 @@ public class FileSystemDockerComposeFileHandlerTest {
     handler.handle(new SeedProjectFolder(folder), dockerComposeFile(redisDockerComposeFileReference()));
 
     assertThat(contentNormalizingNewLines(Path.of(folder, COMPOSE_FILE_NAME))).contains(
-        """
-        include:
-          - src/main/docker/redis.yml
-        """
-      );
+      """
+      include:
+        - src/main/docker/redis.yml
+      """
+    );
   }
 
   @Test
@@ -48,12 +48,12 @@ public class FileSystemDockerComposeFileHandlerTest {
     handler.handle(new SeedProjectFolder(folder), dockerComposeFile(kafkaDockerComposeFileReference()));
 
     assertThat(contentNormalizingNewLines(propertiesFile)).contains(
-        """
-        include:
-          - src/main/docker/redis.yml
-          - src/main/docker/kafka.yml
-        """
-      );
+      """
+      include:
+        - src/main/docker/redis.yml
+        - src/main/docker/kafka.yml
+      """
+    );
   }
 
   private SeedModuleDockerComposeFile dockerComposeFile(DockerComposeFile file) {

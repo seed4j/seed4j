@@ -152,20 +152,20 @@ public final class SeedModulesAssertions {
 
   private static void addFilesToProject(SeedProjectFolder project, ModuleFile... files) {
     Stream.of(files).forEach(file -> {
-        Path destination = Path.of(project.folder()).resolve(file.destination);
+      Path destination = Path.of(project.folder()).resolve(file.destination);
 
-        try {
-          Files.createDirectories(destination.getParent());
-        } catch (IOException e) {
-          throw new AssertionError(e);
-        }
+      try {
+        Files.createDirectories(destination.getParent());
+      } catch (IOException e) {
+        throw new AssertionError(e);
+      }
 
-        try {
-          Files.copy(file.source.getInputStream(), destination);
-        } catch (IOException e) {
-          throw new AssertionError(e);
-        }
-      });
+      try {
+        Files.copy(file.source.getInputStream(), destination);
+      } catch (IOException e) {
+        throw new AssertionError(e);
+      }
+    });
   }
 
   public static final class SeedModuleAsserter {

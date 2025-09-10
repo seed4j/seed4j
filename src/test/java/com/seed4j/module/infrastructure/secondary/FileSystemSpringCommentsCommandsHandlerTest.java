@@ -38,10 +38,10 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     handler.handle(folder(path), commentOnMain("spring.application.name"));
 
     assertThat(content(propertiesFile)).contains(
-        """
-        # This is a comment
-        spring.application.name"""
-      );
+      """
+      # This is a comment
+      spring.application.name"""
+    );
   }
 
   @ParameterizedTest
@@ -54,10 +54,10 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     handler.handle(folder(path), commentOnMainBootstrap("spring.application.name"));
 
     assertThat(content(propertiesFile)).contains(
-        """
-        # This is a comment
-        spring.application.name"""
-      );
+      """
+      # This is a comment
+      spring.application.name"""
+    );
   }
 
   @ParameterizedTest
@@ -70,10 +70,10 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     handler.handle(folder(path), commentOnTest("logging.level.com.seed4j"));
 
     assertThat(content(propertiesFile)).contains(
-        """
-        # This is a comment
-        logging.level.com.seed4j"""
-      );
+      """
+      # This is a comment
+      logging.level.com.seed4j"""
+    );
   }
 
   @ParameterizedTest
@@ -86,10 +86,10 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     handler.handle(folder(path), commentOnTestBootstrap("logging.level.com.seed4j"));
 
     assertThat(content(propertiesFile)).contains(
-        """
-        # This is a comment
-        logging.level.com.seed4j"""
-      );
+      """
+      # This is a comment
+      logging.level.com.seed4j"""
+    );
   }
 
   @Test
@@ -111,10 +111,10 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     handler.handle(folder(path), commentOnMain("springdoc.swagger-ui.operationsSorter"));
 
     assertThat(content(propertiesFile)).doesNotContain(
-        """
-        # This is a comment
-        springdoc.swagger-ui.operationsSorter"""
-      );
+      """
+      # This is a comment
+      springdoc.swagger-ui.operationsSorter"""
+    );
   }
 
   @ParameterizedTest
@@ -128,18 +128,18 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     handler.handle(folder(path), commentOnMain(propertyKey));
 
     assertThat(content(propertiesFile)).doesNotContain(
-        """
+      """
         # This is a comment
         # This is a comment
         """
         + propertyKey
-      );
+    );
     assertThat(content(propertiesFile)).contains(
-        """
+      """
         # This is a comment
         """
         + propertyKey
-      );
+    );
   }
 
   @Test

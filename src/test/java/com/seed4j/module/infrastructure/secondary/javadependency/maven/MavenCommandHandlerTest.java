@@ -116,12 +116,12 @@ class MavenCommandHandlerTest {
         new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new SetBuildProperty(springProfilesActiveProperty()));
 
         assertThat(contentNormalizingNewLines(pom)).contains(
-            """
-              <properties>
-                <spring.profiles.active>local</spring.profiles.active>
-              </properties>
-            """
-          );
+          """
+            <properties>
+              <spring.profiles.active>local</spring.profiles.active>
+            </properties>
+          """
+        );
       }
 
       @Test
@@ -131,12 +131,12 @@ class MavenCommandHandlerTest {
         new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new SetBuildProperty(springProfilesActiveProperty()));
 
         assertThat(contentNormalizingNewLines(pom)).contains(
-            """
-              <properties>
-                <spring.profiles.active>local</spring.profiles.active>
-              </properties>
-            """
-          );
+          """
+            <properties>
+              <spring.profiles.active>local</spring.profiles.active>
+            </properties>
+          """
+        );
       }
 
       @Test
@@ -186,17 +186,17 @@ class MavenCommandHandlerTest {
         new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new SetBuildProperty(springProfilesActiveProperty(), localBuildProfile()));
 
         assertThat(contentNormalizingNewLines(pom)).contains(
-            """
-              <profiles>
-                <profile>
-                  <id>local</id>
-                  <properties>
-                    <spring.profiles.active>local</spring.profiles.active>
-                  </properties>
-                </profile>
-              </profiles>
-            """
-          );
+          """
+            <profiles>
+              <profile>
+                <id>local</id>
+                <properties>
+                  <spring.profiles.active>local</spring.profiles.active>
+                </properties>
+              </profile>
+            </profiles>
+          """
+        );
       }
 
       @Test
@@ -251,13 +251,13 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddJavaBuildProfile(localBuildProfile()));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-              <profile>
-                <id>local</id>
-              </profile>
-            </profiles>
-          """
-        );
+        """
+            <profile>
+              <id>local</id>
+            </profile>
+          </profiles>
+        """
+      );
     }
 
     @Test
@@ -269,17 +269,17 @@ class MavenCommandHandlerTest {
       );
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-            <profiles>
-              <profile>
-                <id>local</id>
-                <activation>
-                  <activeByDefault>true</activeByDefault>
-                </activation>
-              </profile>
-            </profiles>
-          """
-        );
+        """
+          <profiles>
+            <profile>
+              <id>local</id>
+              <activation>
+                <activeByDefault>true</activeByDefault>
+              </activation>
+            </profile>
+          </profiles>
+        """
+      );
     }
 
     @Test
@@ -289,13 +289,13 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddJavaBuildProfile(new BuildProfileId("dev")));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-              <profile>
-                <id>dev</id>
-              </profile>
-            </profiles>
-          """
-        );
+        """
+            <profile>
+              <id>dev</id>
+            </profile>
+          </profiles>
+        """
+      );
     }
 
     @Test
@@ -305,14 +305,14 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddJavaBuildProfile(localBuildProfile()));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-            <profiles>
-              <profile>
-                <id>local</id>
-              </profile>
-            </profiles>
-          """
-        );
+        """
+          <profiles>
+            <profile>
+              <id>local</id>
+            </profile>
+          </profiles>
+        """
+      );
     }
 
     @Test
@@ -324,15 +324,15 @@ class MavenCommandHandlerTest {
       );
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-            <profiles>
-              <profile>
-                <id>local</id>
-                <activation />
-              </profile>
-            </profiles>
-          """
-        );
+        """
+          <profiles>
+            <profile>
+              <id>local</id>
+              <activation />
+            </profile>
+          </profiles>
+        """
+      );
     }
   }
 
@@ -357,18 +357,18 @@ class MavenCommandHandlerTest {
       mavenCommandHandler.handle(new RemoveJavaDependencyManagement(springBootDependencyId()));
 
       assertThat(contentNormalizingNewLines(pom)).doesNotContain(
-          """
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-dependencies</artifactId>
-                  <version>${spring-boot.version}</version>
-                  <scope>import</scope>
-                  <type>pom</type>
-                </dependency>
-              </dependencies>
-            </dependencyManagement>
-          """
-        );
+        """
+              <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+              </dependency>
+            </dependencies>
+          </dependencyManagement>
+        """
+      );
     }
 
     @Test
@@ -569,20 +569,20 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddJavaDependencyManagement(springBootDependencyManagement()));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-            <dependencyManagement>
-              <dependencies>
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-dependencies</artifactId>
-                  <version>${spring-boot.version}</version>
-                  <type>pom</type>
-                  <scope>import</scope>
-                </dependency>
-              </dependencies>
-            </dependencyManagement>
-          """
-        );
+        """
+          <dependencyManagement>
+            <dependencies>
+              <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+              </dependency>
+            </dependencies>
+          </dependencyManagement>
+        """
+      );
     }
 
     @Test
@@ -592,18 +592,18 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddJavaDependencyManagement(springBootDependencyManagement()));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-dependencies</artifactId>
-                  <version>${spring-boot.version}</version>
-                  <type>pom</type>
-                  <scope>import</scope>
-                </dependency>
-              </dependencies>
-            </dependencyManagement>
-          """
-        );
+        """
+              <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+              </dependency>
+            </dependencies>
+          </dependencyManagement>
+        """
+      );
     }
 
     @Test
@@ -613,21 +613,21 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddJavaDependencyManagement(springBootStarterWebDependency()));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-                <dependency>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-web</artifactId>
-                  <exclusions>
-                    <exclusion>
-                      <groupId>org.springframework.boot</groupId>
-                      <artifactId>spring-boot-starter-tomcat</artifactId>
-                    </exclusion>
-                  </exclusions>
-                </dependency>
-              </dependencies>
-            </dependencyManagement>
-          """
-        );
+        """
+              <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <exclusions>
+                  <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                  </exclusion>
+                </exclusions>
+              </dependency>
+            </dependencies>
+          </dependencyManagement>
+        """
+      );
     }
 
     @Test
@@ -639,20 +639,20 @@ class MavenCommandHandlerTest {
       );
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-              <profile>
-                <id>local</id>
-                <dependencyManagement>
-                  <dependencies>
-                    <dependency>
-                      <groupId>org.springframework.boot</groupId>
-                      <artifactId>spring-boot-starter</artifactId>
-                    </dependency>
-                  </dependencies>
-                </dependencyManagement>
-              </profile>
-          """
-        );
+        """
+            <profile>
+              <id>local</id>
+              <dependencyManagement>
+                <dependencies>
+                  <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter</artifactId>
+                  </dependency>
+                </dependencies>
+              </dependencyManagement>
+            </profile>
+        """
+      );
     }
   }
 
@@ -910,19 +910,19 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddDirectJavaDependency(optionalTestDependency()));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-            <dependencies>
-              <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>${spring-boot.version}</version>
-                <classifier>test</classifier>
-                <scope>test</scope>
-                <optional>true</optional>
-              </dependency>
-            </dependencies>
-          """
-        );
+        """
+          <dependencies>
+            <dependency>
+              <groupId>org.junit.jupiter</groupId>
+              <artifactId>junit-jupiter-engine</artifactId>
+              <version>${spring-boot.version}</version>
+              <classifier>test</classifier>
+              <scope>test</scope>
+              <optional>true</optional>
+            </dependency>
+          </dependencies>
+        """
+      );
     }
 
     @Test
@@ -933,18 +933,18 @@ class MavenCommandHandlerTest {
 
       String content = contentNormalizingNewLines(pom);
       assertThat(content).contains(
-          """
-              <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>${spring-boot.version}</version>
-                <classifier>test</classifier>
-                <scope>test</scope>
-                <optional>true</optional>
-              </dependency>
-            </dependencies>
-          """
-        );
+        """
+            <dependency>
+              <groupId>org.junit.jupiter</groupId>
+              <artifactId>junit-jupiter-engine</artifactId>
+              <version>${spring-boot.version}</version>
+              <classifier>test</classifier>
+              <scope>test</scope>
+              <optional>true</optional>
+            </dependency>
+          </dependencies>
+        """
+      );
 
       assertThat(Pattern.compile("^ +$", Pattern.MULTILINE).matcher(content).find()).isFalse();
     }
@@ -957,19 +957,19 @@ class MavenCommandHandlerTest {
 
       String content = contentNormalizingNewLines(pom);
       assertThat(content).contains(
-          """
-              <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <exclusions>
-                  <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                  </exclusion>
-                </exclusions>
-              </dependency>
-          """
-        );
+        """
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-web</artifactId>
+              <exclusions>
+                <exclusion>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+              </exclusions>
+            </dependency>
+        """
+      );
     }
 
     @Test
@@ -979,18 +979,18 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddDirectJavaDependency(defaultVersionDependency()));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-                <artifactId>logstash-logback-encoder</artifactId>
-              </dependency>
+        """
+              <artifactId>logstash-logback-encoder</artifactId>
+            </dependency>
 
-              <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-              </dependency>
-              <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-          """
-        );
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter</artifactId>
+            </dependency>
+            <dependency>
+              <groupId>io.jsonwebtoken</groupId>
+        """
+      );
     }
 
     @Test
@@ -1000,13 +1000,13 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddDirectJavaDependency(defaultVersionDependency()));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-              </dependency>
-            </dependencies>
-          """
-        );
+        """
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter</artifactId>
+            </dependency>
+          </dependencies>
+        """
+      );
     }
 
     @Test
@@ -1016,13 +1016,13 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddDirectJavaDependency(defaultVersionDependency()));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-              </dependency>
-            </dependencies>
-          """
-        );
+        """
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter</artifactId>
+            </dependency>
+          </dependencies>
+        """
+      );
     }
 
     @Test
@@ -1034,18 +1034,18 @@ class MavenCommandHandlerTest {
       );
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-              <profile>
-                <id>local</id>
-                <dependencies>
-                  <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter</artifactId>
-                  </dependency>
-                </dependencies>
-              </profile>
-          """
-        );
+        """
+            <profile>
+              <id>local</id>
+              <dependencies>
+                <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter</artifactId>
+                </dependency>
+              </dependencies>
+            </profile>
+        """
+      );
     }
   }
 
@@ -1718,16 +1718,16 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddMavenBuildExtension(mavenBuildExtensionWithSlug()));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
-          """
-              <extensions>
-                <extension>
-                  <groupId>kr.motd.maven</groupId>
-                  <artifactId>os-maven-plugin</artifactId>
-                  <version>${os-maven-plugin.version}</version>
-                </extension>
-              </extensions>
-          """
-        );
+        """
+            <extensions>
+              <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>${os-maven-plugin.version}</version>
+              </extension>
+            </extensions>
+        """
+      );
     }
 
     @Test
@@ -1738,16 +1738,16 @@ class MavenCommandHandlerTest {
 
       String content = contentNormalizingNewLines(pom);
       assertThat(content).contains(
-          """
-              <extensions>
-                <extension>
-                  <groupId>kr.motd.maven</groupId>
-                  <artifactId>os-maven-plugin</artifactId>
-                  <version>${os-maven-plugin.version}</version>
-                </extension>
-              </extensions>
-          """
-        );
+        """
+            <extensions>
+              <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>${os-maven-plugin.version}</version>
+              </extension>
+            </extensions>
+        """
+      );
 
       assertThat(Pattern.compile("^ +$", Pattern.MULTILINE).matcher(content).find()).isFalse();
     }
@@ -1760,22 +1760,22 @@ class MavenCommandHandlerTest {
 
       String content = contentNormalizingNewLines(pom);
       assertThat(content).contains(
-          """
-            <build>
-              <extensions>
-                <extension>
-                  <groupId>io.opentelemetry.contrib</groupId>
-                  <artifactId>opentelemetry-maven-extension</artifactId>
-                  <version>1.18.0</version>
-                </extension>
-                <extension>
-                  <groupId>kr.motd.maven</groupId>
-                  <artifactId>os-maven-plugin</artifactId>
-                  <version>${os-maven-plugin.version}</version>
-                </extension>
-              </extensions>
-          """
-        );
+        """
+          <build>
+            <extensions>
+              <extension>
+                <groupId>io.opentelemetry.contrib</groupId>
+                <artifactId>opentelemetry-maven-extension</artifactId>
+                <version>1.18.0</version>
+              </extension>
+              <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>${os-maven-plugin.version}</version>
+              </extension>
+            </extensions>
+        """
+      );
 
       assertThat(Pattern.compile("^ +$", Pattern.MULTILINE).matcher(content).find()).isFalse();
     }

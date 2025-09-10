@@ -37,10 +37,10 @@ class ErrorKeyTest {
   void shouldNotGenerateBlankStringKey() {
     KEYS.forEach(key ->
       Stream.of(key.getEnumConstants()).forEach(enumKey ->
-          assertThat(enumKey.get())
-            .as(() -> key + "." + enumKey + " generates a blank key")
-            .isNotBlank()
-        )
+        assertThat(enumKey.get())
+          .as(() -> key + "." + enumKey + " generates a blank key")
+          .isNotBlank()
+      )
     );
   }
 }

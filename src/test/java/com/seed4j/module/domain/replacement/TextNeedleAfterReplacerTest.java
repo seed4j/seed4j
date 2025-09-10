@@ -42,11 +42,11 @@ class TextNeedleAfterReplacerTest {
       );
 
     assertThat(updatedContent).isEqualTo(
-        """
-        <!-- needle !-->
-        <element />
-        """
-      );
+      """
+      <!-- needle !-->
+      <element />
+      """
+    );
   }
 
   @Test
@@ -65,13 +65,13 @@ class TextNeedleAfterReplacerTest {
       );
 
     assertThat(updatedContent).isEqualTo(
-        """
-        <root>
-        <!-- needle !-->
-        <element />
-        </root>
-        """
-      );
+      """
+      <root>
+      <!-- needle !-->
+      <element />
+      </root>
+      """
+    );
   }
 
   @Test
@@ -91,14 +91,14 @@ class TextNeedleAfterReplacerTest {
       );
 
     assertThat(updatedContent).isEqualTo(
-        """
-        <root>
-          <!-- needle !-->
-        <element />
+      """
+      <root>
+        <!-- needle !-->
+      <element />
 
-        </root>
-        """
-      );
+      </root>
+      """
+    );
   }
 
   @Test
@@ -121,19 +121,19 @@ class TextNeedleAfterReplacerTest {
       );
 
     assertThat(updatedContent).isEqualTo(
-        """
-        <root>
-          <!-- needle !-->
-        <element />
+      """
+      <root>
+        <!-- needle !-->
+      <element />
 
 
-          <!-- needle !-->
-        <element />
-          <!-- needle !-->
-        <element /> with trailing text
-        </root>
-        """
-      );
+        <!-- needle !-->
+      <element />
+        <!-- needle !-->
+      <element /> with trailing text
+      </root>
+      """
+    );
   }
 
   @Test

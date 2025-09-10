@@ -49,13 +49,13 @@ class RegexNeedleAfterReplacerTest {
       );
 
     assertThat(updatedContent).isEqualTo(
-        """
-        <root>
-        <!-- needle !-->
-        <element />
-        </root>
-        """
-      );
+      """
+      <root>
+      <!-- needle !-->
+      <element />
+      </root>
+      """
+    );
   }
 
   @Test
@@ -76,16 +76,16 @@ class RegexNeedleAfterReplacerTest {
       );
 
     assertThat(updatedContent).isEqualTo(
-        """
-        <root>
-          <!-- needle !-->
-        <element />
+      """
+      <root>
+        <!-- needle !-->
+      <element />
 
-          <!-- needle !-->
-        <element />
-        </root>
-        """
-      );
+        <!-- needle !-->
+      <element />
+      </root>
+      """
+    );
   }
 
   @Test

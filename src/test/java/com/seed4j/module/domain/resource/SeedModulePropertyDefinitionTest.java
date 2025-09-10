@@ -12,18 +12,18 @@ class SeedModulePropertyDefinitionTest {
   @Test
   void shouldHaveMeaningfulToString() {
     assertThat(projectNameProperty()).hasToString(
-        """
-        SeedModulePropertyDefinition[type=STRING,key=projectName,mandatory=true,description=Project full name,defaultValue=Seed4J Sample Application,order=-200]\
-        """
-      );
+      """
+      SeedModulePropertyDefinition[type=STRING,key=projectName,mandatory=true,description=Project full name,defaultValue=Seed4J Sample Application,order=-200]\
+      """
+    );
   }
 
   @Test
   void shouldHaveMeaningfulToStringForPropertyDefinitionWithMinimalInfos() {
     assertThat(optionalBooleanProperty("foo").build()).hasToString(
-        """
-        SeedModulePropertyDefinition[type=BOOLEAN,key=foo,mandatory=false,description=,defaultValue=,order=0]\
-        """
-      );
+      """
+      SeedModulePropertyDefinition[type=BOOLEAN,key=foo,mandatory=false,description=,defaultValue=,order=0]\
+      """
+    );
   }
 }

@@ -26,10 +26,10 @@ class FileSystemSpringFactoriesCommandsHandlerTest {
     handler.handle(new SeedProjectFolder(folder), properties(springTestFactory()));
 
     assertThat(contentNormalizingNewLines(Path.of(folder, "src/test/resources/META-INF/spring.factories"))).contains(
-        """
-        o.s.c.ApplicationListener=c.m.m.MyListener1,c.m.m.MyListener2
-        """
-      );
+      """
+      o.s.c.ApplicationListener=c.m.m.MyListener1,c.m.m.MyListener2
+      """
+    );
   }
 
   @Test
@@ -41,10 +41,10 @@ class FileSystemSpringFactoriesCommandsHandlerTest {
     handler.handle(new SeedProjectFolder(folder), properties(springTestFactory()));
 
     assertThat(contentNormalizingNewLines(propertiesFile)).contains(
-        """
-        o.s.c.ApplicationListener=c.m.m.MyListener1,c.m.m.MyListener2
-        """
-      );
+      """
+      o.s.c.ApplicationListener=c.m.m.MyListener1,c.m.m.MyListener2
+      """
+    );
   }
 
   private SpringFactories properties(SpringFactory factory) {

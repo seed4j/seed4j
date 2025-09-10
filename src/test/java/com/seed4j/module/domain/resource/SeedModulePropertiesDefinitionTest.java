@@ -26,9 +26,9 @@ class SeedModulePropertiesDefinitionTest {
   void shouldHaveMeaningfulToString() {
     var definition = SeedModulePropertiesDefinition.builder().add(basePackageProperty()).build();
     assertThat(definition).hasToString(
-        """
-        SeedModulePropertiesDefinition[definitions=[SeedModulePropertyDefinition[type=STRING,key=packageName,mandatory=true,description=Base java package,defaultValue=com.mycompany.myapp,order=-300]]]\
-        """
-      );
+      """
+      SeedModulePropertiesDefinition[definitions=[SeedModulePropertyDefinition[type=STRING,key=packageName,mandatory=true,description=Base java package,defaultValue=com.mycompany.myapp,order=-300]]]\
+      """
+    );
   }
 }

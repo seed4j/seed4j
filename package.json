@@ -93,7 +93,7 @@
     "rimraf": "6.0.1",
     "sass": "1.92.1",
     "start-server-and-test": "2.1.0",
-    "stylelint": "16.23.1",
+    "stylelint": "16.24.0",
     "stylelint-config-concentric-order": "5.2.1",
     "stylelint-config-standard-scss": "15.0.1",
     "tikuidoc-tikui": "9.0.0",

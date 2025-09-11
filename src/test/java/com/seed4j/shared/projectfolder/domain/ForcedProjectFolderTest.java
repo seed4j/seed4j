@@ -32,6 +32,16 @@ class ForcedProjectFolderTest {
     assertThat(forcedProjectFolder.isInvalid(rootDir)).isTrue();
   }
 
+  @ParameterizedTest
+  @ValueSource(
+    strings = {
+      "/tmp/seed4j/my-user/21018cf8-9a43-4935-9617-6ea7eab55356", "/tmp/seed4j/sub/folder/directory", "/tmp/seed4j/sub/../directory",
+    }
+  )
+  void shouldBeInvalidWithNestedDirectories(String rootDir) {
+    assertThat(forcedProjectFolder.isInvalid(rootDir)).isTrue();
+  }
+
   @Test
   void shouldBeValid() {
     assertThat(forcedProjectFolder.isInvalid("/tmp/seed4j/project")).isFalse();

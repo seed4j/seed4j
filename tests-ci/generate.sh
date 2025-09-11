@@ -394,6 +394,7 @@ elif [[ $application == 'angularjwtapp' ]]; then
   apply_modules \
     "prettier" \
     "angular-core" \
+    "angular-i18n" \
     "tikui" \
     "cypress-component-tests"
 

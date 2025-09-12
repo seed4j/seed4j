@@ -39,7 +39,7 @@ class ForcedProjectFolderPrefixIT {
   }
 
   @Test
-  void shouldNotHandleProjectWithWrongProjectFolderPrefix() throws Exception {
+  void shouldNotHandleProjectWithWrongProjectFolder() throws Exception {
     mockMvc
       .perform(
         post("/api/modules/init/apply-patch")
@@ -48,23 +48,6 @@ class ForcedProjectFolderPrefixIT {
             """
               {
                 "projectFolder": "/home/my-project"
-              }
-            """
-          )
-      )
-      .andExpect(status().isBadRequest());
-  }
-
-  @Test
-  void shouldNotHandleProjectWithDoubleDotProjectFolderPrefix() throws Exception {
-    mockMvc
-      .perform(
-        post("/api/modules/init/apply-patch")
-          .contentType(MediaType.APPLICATION_JSON)
-          .content(
-            """
-              {
-                "projectFolder": "/tmp/forced/../my-project"
               }
             """
           )

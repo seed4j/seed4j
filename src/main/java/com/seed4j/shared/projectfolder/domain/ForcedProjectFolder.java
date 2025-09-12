@@ -6,24 +6,28 @@ import java.util.UUID;
 
 public class ForcedProjectFolder implements ProjectFolder {
 
-  private final String prefix;
+  private final Path prefix;
 
   public ForcedProjectFolder(String prefix) {
     Assert.notNull("prefix", prefix);
 
-    this.prefix = prefix;
+    this.prefix = Path.of(prefix);
   }
 
   @Override
   public boolean isInvalid(String folderPath) {
     Assert.notNull("folderPath", folderPath);
 
-    boolean isRootDir = Path.of(prefix).equals(Path.of(folderPath));
-    return !folderPath.startsWith(prefix) || folderPath.contains("..") || isRootDir;
+    Path folderAsPath = Path.of(folderPath);
+
+    boolean isRootDir = prefix.equals(folderAsPath);
+    boolean isDirectChild = prefix.equals(folderAsPath.getParent());
+
+    return isRootDir || !isDirectChild;
   }
 
   @Override
   public String generatePath() {
-    return Path.of(prefix).resolve(UUID.randomUUID().toString()).toString();
+    return prefix.resolve(UUID.randomUUID().toString()).toString();
   }
 }

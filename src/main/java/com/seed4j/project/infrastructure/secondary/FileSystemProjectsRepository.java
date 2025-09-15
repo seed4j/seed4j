@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -31,12 +32,16 @@ class FileSystemProjectsRepository implements ProjectsRepository {
 
   private static final String HISTORY_FOLDER = ".seed4j/modules";
   private static final String HISTORY_FILE = "history.json";
-  private static final DateTimeFormatter FILENAME_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.of("UTC"));
-  private static final Comparator<Path> ACTION_FILES_COMPARATOR = Comparator.comparing(path -> {
-    String filename = path.getFileName().toString().toLowerCase(Locale.ROOT);
 
-    return LocalDateTime.parse(filename.substring(0, filename.indexOf("-")), FILENAME_DATE_FORMAT);
-  });
+  private static final DateTimeFormatter FILENAME_DATE_FORMAT_WITHOUT_MS = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(
+    ZoneId.of("UTC")
+  );
+  private static final DateTimeFormatter FILENAME_DATE_FORMAT_WITH_MS = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS").withZone(
+    ZoneId.of("UTC")
+  );
+  private static final Comparator<Path> ACTION_FILES_COMPARATOR = Comparator.comparing(path ->
+    parseFilename(path.getFileName().toString().toLowerCase(Locale.ROOT))
+  );
 
   private final ObjectMapper json;
   private final ObjectWriter writer;
@@ -71,7 +76,7 @@ class FileSystemProjectsRepository implements ProjectsRepository {
   }
 
   private static String moduleActionFilename(final ProjectAction action) {
-    return FILENAME_DATE_FORMAT.format(action.date()) + "-" + action.module().get() + ".json";
+    return FILENAME_DATE_FORMAT_WITH_MS.format(action.date()) + "-" + action.module().get() + ".json";
   }
 
   @Override
@@ -126,6 +131,15 @@ class FileSystemProjectsRepository implements ProjectsRepository {
       return json.readValue(Files.readAllBytes(historyFilePath), clazz);
     } catch (IOException e) {
       throw GeneratorException.technicalError("Can't read project history: " + e.getMessage(), e);
+    }
+  }
+
+  private static LocalDateTime parseFilename(String filename) {
+    String timestamp = filename.substring(0, filename.indexOf("-"));
+    try {
+      return LocalDateTime.parse(timestamp, FILENAME_DATE_FORMAT_WITH_MS);
+    } catch (DateTimeParseException e) {
+      return LocalDateTime.parse(timestamp, FILENAME_DATE_FORMAT_WITHOUT_MS);
     }
   }
 }

@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.javatool.frontendmaven.application;
 
 import com.seed4j.generator.server.javatool.frontendmaven.domain.FrontendJavaBuildToolModuleFactory;
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,19 +15,19 @@ public class FrontendJavaBuildToolApplicationService {
     frontendJavaBuildTool = new FrontendJavaBuildToolModuleFactory(nodeVersions);
   }
 
-  public SeedModule buildFrontendMavenModule(SeedModuleProperties properties) {
+  public Seed4JModule buildFrontendMavenModule(Seed4JModuleProperties properties) {
     return frontendJavaBuildTool.buildFrontendMavenModule(properties);
   }
 
-  public SeedModule buildFrontendGradleModule(SeedModuleProperties properties) {
+  public Seed4JModule buildFrontendGradleModule(Seed4JModuleProperties properties) {
     return frontendJavaBuildTool.buildFrontendGradleModule(properties);
   }
 
-  public SeedModule buildFrontendMavenCacheModule(SeedModuleProperties properties) {
+  public Seed4JModule buildFrontendMavenCacheModule(Seed4JModuleProperties properties) {
     return frontendJavaBuildTool.buildFrontendMavenCacheModule(properties);
   }
 
-  public SeedModule buildMergeCypressCoverageModule(SeedModuleProperties properties) {
+  public Seed4JModule buildMergeCypressCoverageModule(Seed4JModuleProperties properties) {
     return frontendJavaBuildTool.buildMergeCypressCoverageModule(properties);
   }
 }

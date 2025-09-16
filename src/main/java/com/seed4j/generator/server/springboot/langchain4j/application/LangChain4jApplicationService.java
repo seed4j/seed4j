@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.langchain4j.application;
 
 import com.seed4j.generator.server.springboot.langchain4j.domain.LangChain4jModuleFactory;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class LangChain4jApplicationService {
     langChain4j = new LangChain4jModuleFactory();
   }
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     return langChain4j.buildModule(properties);
   }
 }

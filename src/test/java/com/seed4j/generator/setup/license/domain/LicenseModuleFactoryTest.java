@@ -1,12 +1,12 @@
 package com.seed4j.generator.setup.license.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import java.time.Year;
 import java.time.ZoneId;
 import org.junit.jupiter.api.Test;
@@ -18,19 +18,19 @@ class LicenseModuleFactoryTest {
 
   @Test
   void shouldBuildMitModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
     int year = Year.now(ZoneId.systemDefault()).getValue();
 
-    SeedModule module = factory.buildMitModule(properties);
+    Seed4JModule module = factory.buildMitModule(properties);
 
     assertThatModuleWithFiles(module).hasFile("LICENSE.txt").containing("Copyright %d".formatted(year));
   }
 
   @Test
   void shouldBuildApacheModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    SeedModule module = factory.buildApacheModule(properties);
+    Seed4JModule module = factory.buildApacheModule(properties);
 
     assertThatModuleWithFiles(module).hasFile("LICENSE.txt").containing("Apache License");
   }

@@ -1,31 +1,31 @@
 package com.seed4j.generator.server.springboot.docker.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.gradleCommunityPlugin;
-import static com.seed4j.module.domain.SeedModule.mavenPlugin;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.to;
 import static com.seed4j.module.domain.javadependency.JavaDependencyScope.RUNTIME;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPluginConfiguration;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringBootDockerModuleFactory {
 
   private static final String PROPERTIES_FIELD = "properties";
-  private static final SeedSource SOURCE = from("server/springboot/docker");
-  private static final SeedSource JIB_SOURCE = SOURCE.append("jib");
+  private static final Seed4JSource SOURCE = from("server/springboot/docker");
+  private static final Seed4JSource JIB_SOURCE = SOURCE.append("jib");
   private static final String JAVA_DOCKER_IMAGE = "eclipse-temurin:%s-jre-jammy";
 
-  public SeedModule buildJibModule(SeedModuleProperties properties) {
+  public Seed4JModule buildJibModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off
@@ -46,11 +46,11 @@ public class SpringBootDockerModuleFactory {
     // @formatter:on
   }
 
-  private String mainClassName(SeedModuleProperties properties) {
+  private String mainClassName(Seed4JModuleProperties properties) {
     return "%s.%sApp".formatted(properties.basePackage().get(), properties.projectBaseName().capitalized());
   }
 
-  private MavenPlugin mavenJibPlugin(SeedModuleProperties properties) {
+  private MavenPlugin mavenJibPlugin(Seed4JModuleProperties properties) {
     return mavenPlugin()
       .groupId("com.google.cloud.tools")
       .artifactId("jib-maven-plugin")
@@ -59,11 +59,11 @@ public class SpringBootDockerModuleFactory {
       .build();
   }
 
-  private String dockerBaseImage(SeedModuleProperties properties) {
+  private String dockerBaseImage(Seed4JModuleProperties properties) {
     return JAVA_DOCKER_IMAGE.formatted(properties.javaVersion().get());
   }
 
-  private MavenPluginConfiguration jibPluginConfiguration(SeedModuleProperties properties) {
+  private MavenPluginConfiguration jibPluginConfiguration(Seed4JModuleProperties properties) {
     return new MavenPluginConfiguration(
       """
         <from>
@@ -107,7 +107,7 @@ public class SpringBootDockerModuleFactory {
     );
   }
 
-  private GradleMainBuildPlugin gradleJibPlugin(SeedModuleProperties properties) {
+  private GradleMainBuildPlugin gradleJibPlugin(Seed4JModuleProperties properties) {
     return gradleCommunityPlugin()
       .id("com.google.cloud.tools.jib")
       .pluginSlug("jib")
@@ -150,19 +150,19 @@ public class SpringBootDockerModuleFactory {
       .build();
   }
 
-  public SeedModule buildDockerFileMavenModule(SeedModuleProperties properties) {
+  public Seed4JModule buildDockerFileMavenModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     return moduleBuilder(properties).files().add(SOURCE.template("Dockerfile-maven"), to("Dockerfile")).and().build();
   }
 
-  public SeedModule buildDockerFileGradleModule(SeedModuleProperties properties) {
+  public Seed4JModule buildDockerFileGradleModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     return moduleBuilder(properties).files().add(SOURCE.template("Dockerfile-gradle"), to("Dockerfile")).and().build();
   }
 
-  public SeedModule buildSpringBootDockerComposeModule(SeedModuleProperties properties) {
+  public Seed4JModule buildSpringBootDockerComposeModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off

@@ -1,31 +1,31 @@
 package com.seed4j.generator.typescript.core.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.packageName;
-import static com.seed4j.module.domain.SeedModule.runScriptCommandWith;
-import static com.seed4j.module.domain.SeedModule.scriptCommand;
-import static com.seed4j.module.domain.SeedModule.scriptKey;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.packageName;
+import static com.seed4j.module.domain.Seed4JModule.runScriptCommandWith;
+import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
+import static com.seed4j.module.domain.Seed4JModule.scriptKey;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.packagejson.NodeModuleFormat.MODULE;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class TypescriptModuleFactory {
 
-  private static final SeedSource SOURCE = from("typescript");
+  private static final Seed4JSource SOURCE = from("typescript");
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
   public TypescriptModuleFactory(NodeLazyPackagesInstaller nodeLazyPackagesInstaller) {
     this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
   }
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

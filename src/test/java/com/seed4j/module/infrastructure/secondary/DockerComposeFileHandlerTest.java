@@ -3,7 +3,7 @@ package com.seed4j.module.infrastructure.secondary;
 import static com.seed4j.TestFileUtils.contentNormalizingNewLines;
 import static com.seed4j.TestFileUtils.loadDefaultProperties;
 import static com.seed4j.TestFileUtils.tmpDirForTest;
-import static com.seed4j.module.domain.SeedModule.dockerComposeFile;
+import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;

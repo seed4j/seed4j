@@ -1,11 +1,11 @@
 package com.seed4j.generator.client.tikui.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CLIENT_CORE;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.TIKUI;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.CLIENT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.TIKUI;
 
 import com.seed4j.generator.client.tikui.application.TikuiApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,12 +13,12 @@ import org.springframework.context.annotation.Configuration;
 class TikuiModuleConfiguration {
 
   @Bean
-  SeedModuleResource tikuiModule(TikuiApplicationService tikui) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource tikuiModule(TikuiApplicationService tikui) {
+    return Seed4JModuleResource.builder()
       .slug(TIKUI)
       .withoutProperties()
       .apiDoc("Frontend", "Add Tikui, a pattern library to build your styles")
-      .organization(SeedModuleOrganization.builder().addDependency(CLIENT_CORE).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(CLIENT_CORE).build())
       .tags("client", "frontend", "tikui")
       .factory(tikui::buildModule);
   }

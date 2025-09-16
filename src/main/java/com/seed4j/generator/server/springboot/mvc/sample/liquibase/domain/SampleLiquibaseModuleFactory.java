@@ -1,15 +1,15 @@
 package com.seed4j.generator.server.springboot.mvc.sample.liquibase.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.to;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.shared.error.domain.Assert;
 import java.time.Instant;
@@ -20,12 +20,12 @@ public class SampleLiquibaseModuleFactory {
 
   private static final DateTimeFormatter FILE_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC);
 
-  private static final SeedSource SOURCE = from("server/springboot/mvc/sample/liquibase");
-  private static final SeedDestination CHANGELOG_DESTINATION = to("src/main/resources/config/liquibase/changelog");
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/sample/liquibase");
+  private static final Seed4JDestination CHANGELOG_DESTINATION = to("src/main/resources/config/liquibase/changelog");
 
   private static final TextNeedleBeforeReplacer CHANGELOG_NEEDLE = lineBeforeText("<!-- seed4j-needle-liquibase-add-changelog -->");
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     Instant date = properties.getInstantOrDefault("date", Instant.now());

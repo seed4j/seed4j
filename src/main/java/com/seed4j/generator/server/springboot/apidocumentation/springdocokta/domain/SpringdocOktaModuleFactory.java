@@ -1,13 +1,13 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdocokta.domain;
 
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
 
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.javaproperties.SpringProfile;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringdocOktaModuleFactory {
@@ -17,7 +17,7 @@ public class SpringdocOktaModuleFactory {
   private static final String OKTA_CLIENT_ID_PROPERTY = "oktaClientId";
   private static final String OKTA_DOMAIN_PROPERTY = "oktaDomain";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -32,11 +32,11 @@ public class SpringdocOktaModuleFactory {
     // @formatter:on
   }
 
-  private static PropertyValue clientId(SeedModuleProperties properties) {
+  private static PropertyValue clientId(Seed4JModuleProperties properties) {
     return propertyValue(properties.getString(OKTA_CLIENT_ID_PROPERTY));
   }
 
-  private static PropertyValue authorizationUrl(SeedModuleProperties properties) {
+  private static PropertyValue authorizationUrl(Seed4JModuleProperties properties) {
     return propertyValue(
       new StringBuilder()
         .append("https://")

@@ -1,12 +1,12 @@
 package com.seed4j.generator.client.angular.security.oauth2keycloak.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -28,10 +28,10 @@ class AngularOAuth2KeycloakModuleFactoryTest {
       .containing("\"allowedCommonJsDependencies\": [\"dummy.js\", \"base64-js\", \"js-sha256\", \"keycloak-js\"]");
   }
 
-  private static SeedModuleAsserter assertAngularOAuthModule(ModuleFile angularJson) {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+  private static Seed4JModuleAsserter assertAngularOAuthModule(ModuleFile angularJson) {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     return assertThatModuleWithFiles(
       module,

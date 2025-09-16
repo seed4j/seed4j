@@ -1,13 +1,13 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdocauth0.domain;
 
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
 
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.javaproperties.SpringProfile;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringdocAuth0ModuleFactory {
@@ -17,7 +17,7 @@ public class SpringdocAuth0ModuleFactory {
   private static final String AUTH0_CLIENT_ID_PROPERTY = "auth0ClientId";
   private static final String AUTH0_DOMAIN_PROPERTY = "auth0Domain";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -32,11 +32,11 @@ public class SpringdocAuth0ModuleFactory {
     // @formatter:on
   }
 
-  private static PropertyValue clientId(SeedModuleProperties properties) {
+  private static PropertyValue clientId(Seed4JModuleProperties properties) {
     return propertyValue(properties.getString(AUTH0_CLIENT_ID_PROPERTY));
   }
 
-  private static PropertyValue authorizationUrl(SeedModuleProperties properties) {
+  private static PropertyValue authorizationUrl(Seed4JModuleProperties properties) {
     String auth0Domain = properties.getString(AUTH0_DOMAIN_PROPERTY);
     return propertyValue("https://%s/authorize?audience=https://%s/api/v2/".formatted(auth0Domain, auth0Domain));
   }

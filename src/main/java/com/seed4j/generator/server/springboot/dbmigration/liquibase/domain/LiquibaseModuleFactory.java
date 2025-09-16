@@ -1,38 +1,38 @@
 package com.seed4j.generator.server.springboot.dbmigration.liquibase.domain;
 
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.mavenPlugin;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.pluginExecution;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestResources;
-import static com.seed4j.module.domain.SeedModule.versionSlug;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestResources;
+import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 import static com.seed4j.module.domain.properties.SpringConfigurationFormat.PROPERTIES;
 import static com.seed4j.module.domain.properties.SpringConfigurationFormat.YAML;
 
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class LiquibaseModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/dbmigration/liquibase");
+  private static final Seed4JSource SOURCE = from("server/springboot/dbmigration/liquibase");
 
   private static final String LIQUIBASE_SECONDARY = "wire/liquibase/infrastructure/secondary";
 
   private static final String LIQUIBASE = "liquibase";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -60,7 +60,7 @@ public class LiquibaseModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildAsyncModule(SeedModuleProperties properties) {
+  public Seed4JModule buildAsyncModule(Seed4JModuleProperties properties) {
     String packagePath = properties.packagePath();
 
     // @formatter:off
@@ -85,7 +85,7 @@ public class LiquibaseModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildLinterModule(SeedModuleProperties properties) {
+  public Seed4JModule buildLinterModule(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .mavenPlugins()

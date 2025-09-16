@@ -4,25 +4,25 @@ So, you want to create a Seed4J module? Great!
 
 For that, you'll need to provide two main parts:
 
-- `SeedModuleResource`: describe the module organization, it is used to generate the APIs;
-- `SeedModule`: describe the changes done by the module.
+- `Seed4JModuleResource`: describe the module organization, it is used to generate the APIs;
+- `Seed4JModule`: describe the changes done by the module.
 
-You can start with the element you prefer but to create a `SeedModuleResource` you'll need to be able to build a `SeedModule`.
+You can start with the element you prefer but to create a `Seed4JModuleResource` you'll need to be able to build a `Seed4JModule`.
 
 ## Creating a Seed4J module
 
-In fact, you don't just need to create one `SeedModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
+In fact, you don't just need to create one `Seed4JModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
 
 So, as this is the business of Seed4J you probably want to create a `com.seed4j.generator.my_module.domain` package. And you can start with a simple test:
 
 ```java
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -32,11 +32,11 @@ class MyModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .build();
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     assertThatModule(module).hasPrefixedFiles("src/main/java/com/seed4j/growth/my_package", "Dummy.java");
   }
@@ -46,19 +46,19 @@ class MyModuleFactoryTest {
 A few things to note here:
 
 - We are expecting to have a `buildModule(...)` method in `MyModuleFactory`;
-- The `SeedModulesAssertions.assertThatModule(...)` will really apply the module to a project and give you a fluent API to ensure some operations;
+- The `Seed4JModulesAssertions.assertThatModule(...)` will really apply the module to a project and give you a fluent API to ensure some operations;
 - Even if the feedback loops are not perfect on that, they should be short enough to allow a decent TDD implementation of the factory (on eclipse with [infinitest](https://infinitest.github.io/) feedbacks are under a second).
 
 So, now that we have a first test, we can do a simple implementation:
 
 ```java
-import static com.seed4j.module.domain.SeedModule.*;
+import static com.seed4j.module.domain.Seed4JModule.*;
 
 public class MyModuleFactory {
 
-  private static final SeedSource SOURCE = from("my-module");
+  private static final Seed4JSource SOURCE = from("my-module");
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .files()
@@ -85,7 +85,7 @@ public class Dummy {
 
 Those placeholders will be replaced by properties values during module application.
 
-And this is it for this part of the documentation... Of course, you can do a lot more than that in the `SeedModule` but the goal of this documentation is not to go deep in this usage! You have a lot of running examples and you can always ask for help, we'll be really happy to help you provide your implementations!
+And this is it for this part of the documentation... Of course, you can do a lot more than that in the `Seed4JModule` but the goal of this documentation is not to go deep in this usage! You have a lot of running examples and you can always ask for help, we'll be really happy to help you provide your implementations!
 
 ## Add relevant dependencies required for the new module in the Version files
 
@@ -110,9 +110,9 @@ And this is it for this part of the documentation... Of course, you can do a lot
   - Framework specific npm dependencies can be added in the `package.json` of the respective framework folders. For e.g.: `src/main/resources/generator/dependencies/react/package.json`
   - These dependencies are resolved using [FileSystemNpmVersionReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/com/seed4j/module/infrastructure/secondary/npm/FileSystemNpmVersionReader.java), an implementation of the `NpmVersionsReader` bean to read from a local file.
 
-## Creating SeedModuleResource
+## Creating Seed4JModuleResource
 
-As the main goal of a `SeedModuleResource` is to expose a WebService.
+As the main goal of a `Seed4JModuleResource` is to expose a WebService.
 
 Let's start by creating a gherkin scenario for that. So in `src/test/features/my-module.feature` we'll do:
 
@@ -130,17 +130,17 @@ Feature: My module
 
 You can now run `CucumberTest` and ensure that it is failing as expected (with a 404).
 
-To be used by Seed4J, the `SeedModuleResource` needs to be a Spring bean so, let's create a configuration in `com.seed4j.generator.my_module.infrastructure.primary`:
+To be used by Seed4J, the `Seed4JModuleResource` needs to be a Spring bean so, let's create a configuration in `com.seed4j.generator.my_module.infrastructure.primary`:
 
 ```java
 @Configuration
 class MyModuleModuleConfiguration {
 
   @Bean
-  SeedModuleResource myModule(MyModuleApplicationService myModules) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource myModule(MyModuleApplicationService myModules) {
+    return Seed4JModuleResource.builder()
       .slug(Seed4JModuleSlug.MY_MODULE)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addBasePackage().build())
       .apiDoc("Group", "This is my module")
       .standalone()
       .tags("server")
@@ -149,7 +149,7 @@ class MyModuleModuleConfiguration {
 }
 ```
 
-In fact, you don't really have choices here, the `SeedModuleResource.builder()` is fluent and will only let you go to the next possible step.
+In fact, you don't really have choices here, the `Seed4JModuleResource.builder()` is fluent and will only let you go to the next possible step.
 The most confusing one may be the last one `.factory(myModules::buildModule)` which is, in fact, a method called to build the module.
 
 For this to work, we'll need to add a simple orchestration class in `com.seed4j.generator.my_module.application`:
@@ -164,13 +164,13 @@ public class MyModuleApplicationService {
     factory = new MyModuleFactory();
   }
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     return factory.buildModule(properties);
   }
 }
 ```
 
-In your `SeedModuleResource` you can define additional properties and an organization to display your module in the landscape (replacing `.standalone()`). Here again, you have a lot of examples to rely on.
+In your `Seed4JModuleResource` you can define additional properties and an organization to display your module in the landscape (replacing `.standalone()`). Here again, you have a lot of examples to rely on.
 
 ## Applying module in CI
 

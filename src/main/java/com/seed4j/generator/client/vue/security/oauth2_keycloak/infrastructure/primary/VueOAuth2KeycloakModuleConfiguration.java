@@ -1,12 +1,12 @@
 package com.seed4j.generator.client.vue.security.oauth2_keycloak.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.*;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.*;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.*;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.*;
 
 import com.seed4j.generator.client.vue.security.oauth2_keycloak.application.VueOAuth2KeycloakApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,12 +14,12 @@ import org.springframework.context.annotation.Configuration;
 class VueOAuth2KeycloakModuleConfiguration {
 
   @Bean
-  SeedModuleResource vueOAuth2KeycloakModule(VueOAuth2KeycloakApplicationService vueOauth2Keycloak) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource vueOAuth2KeycloakModule(VueOAuth2KeycloakApplicationService vueOauth2Keycloak) {
+    return Seed4JModuleResource.builder()
       .slug(VUE_OAUTH2_KEYCLOAK)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addIndentation().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addIndentation().build())
       .apiDoc("Vue", "Add OAuth2 Keycloak authentication to Vue")
-      .organization(SeedModuleOrganization.builder().feature(VUE_AUTHENTICATION).addDependency(VUE_CORE).build())
+      .organization(Seed4JModuleOrganization.builder().feature(VUE_AUTHENTICATION).addDependency(VUE_CORE).build())
       .tags("client", "vue", "auth", "oauth2", "keycloak")
       .factory(vueOauth2Keycloak::buildModule);
   }

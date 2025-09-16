@@ -1,7 +1,7 @@
 package com.seed4j.project.domain.history;
 
 import com.seed4j.project.domain.ProjectPath;
-import com.seed4j.shared.collection.domain.SeedCollections;
+import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
 
@@ -14,7 +14,7 @@ public class ProjectHistory {
     Assert.notNull("path", path);
 
     this.path = path;
-    this.actions = SeedCollections.immutable(actions);
+    this.actions = Seed4JCollections.immutable(actions);
   }
 
   public ProjectPath path() {

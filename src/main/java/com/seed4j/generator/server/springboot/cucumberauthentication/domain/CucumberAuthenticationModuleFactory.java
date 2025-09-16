@@ -1,37 +1,37 @@
 package com.seed4j.generator.server.springboot.cucumberauthentication.domain;
 
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.text;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
-import static com.seed4j.module.domain.SeedModule.versionSlug;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.text;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class CucumberAuthenticationModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/cucumberauthentication");
-  private static final SeedSource OAUTH2_SOURCE = SOURCE.append("oauth2");
-  private static final SeedSource JWT_SOURCE = SOURCE.append("jwt");
+  private static final Seed4JSource SOURCE = from("server/springboot/cucumberauthentication");
+  private static final Seed4JSource OAUTH2_SOURCE = SOURCE.append("oauth2");
+  private static final Seed4JSource JWT_SOURCE = SOURCE.append("jwt");
 
   private static final GroupId JSON_WEBTOKEN_GROUP = groupId("io.jsonwebtoken");
   private static final VersionSlug JSON_WEBTOKEN_VERSION = versionSlug("json-web-token");
 
   private static final String AUTHENTICATION_STEP = "shared/authentication/infrastructure/primary/AuthenticationSteps.java";
 
-  public SeedModule buildOauth2Module(SeedModuleProperties properties) {
+  public Seed4JModule buildOauth2Module(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String mainClass = properties.projectBaseName().capitalized() + "App";
@@ -71,7 +71,7 @@ public class CucumberAuthenticationModuleFactory {
     return cucumberConfigurationNeedle + ", TestSecurityConfiguration.class, CucumberAuthenticationConfiguration.class";
   }
 
-  private String securityConfigurationImport(SeedModuleProperties properties) {
+  private String securityConfigurationImport(Seed4JModuleProperties properties) {
     return "import " + properties.basePackage().get() + ".shared.authentication.infrastructure.primary.TestSecurityConfiguration;";
   }
 
@@ -84,7 +84,7 @@ public class CucumberAuthenticationModuleFactory {
       .build();
   }
 
-  public SeedModule buildJWTModule(SeedModuleProperties properties) {
+  public Seed4JModule buildJWTModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

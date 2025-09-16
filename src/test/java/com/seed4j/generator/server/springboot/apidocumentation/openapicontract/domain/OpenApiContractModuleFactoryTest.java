@@ -1,13 +1,13 @@
 package com.seed4j.generator.server.springboot.apidocumentation.openapicontract.domain;
 
 import static com.seed4j.TestFileUtils.tmpDirForTest;
-import static com.seed4j.module.domain.SeedModulesFixture.propertiesBuilder;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
+import static com.seed4j.module.domain.Seed4JModulesFixture.propertiesBuilder;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -17,9 +17,9 @@ class OpenApiContractModuleFactoryTest {
 
   @Test
   void shouldBuildOpenApiContractModule() {
-    SeedModuleProperties properties = propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
+    Seed4JModuleProperties properties = propertiesBuilder(tmpDirForTest()).basePackage("com.seed4j.growth").build();
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
@@ -75,9 +75,9 @@ class OpenApiContractModuleFactoryTest {
 
   @Test
   void shouldBuildOpenApiBackwardsCompatibilityCheckModule() {
-    SeedModuleProperties properties = propertiesBuilder(tmpDirForTest()).build();
+    Seed4JModuleProperties properties = propertiesBuilder(tmpDirForTest()).build();
 
-    SeedModule module = factory.buildBackwardsCompatibilityCheckModule(properties);
+    Seed4JModule module = factory.buildBackwardsCompatibilityCheckModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")

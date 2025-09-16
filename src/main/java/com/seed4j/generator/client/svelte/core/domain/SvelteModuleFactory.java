@@ -1,39 +1,39 @@
 package com.seed4j.generator.client.svelte.core.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.packageName;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.preCommitCommands;
-import static com.seed4j.module.domain.SeedModule.runScriptCommandWith;
-import static com.seed4j.module.domain.SeedModule.scriptCommand;
-import static com.seed4j.module.domain.SeedModule.scriptKey;
-import static com.seed4j.module.domain.SeedModule.stagedFilesFilter;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.SVELTE;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.packageName;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.preCommitCommands;
+import static com.seed4j.module.domain.Seed4JModule.runScriptCommandWith;
+import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
+import static com.seed4j.module.domain.Seed4JModule.scriptKey;
+import static com.seed4j.module.domain.Seed4JModule.stagedFilesFilter;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.SVELTE;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SvelteModuleFactory {
 
-  private static final SeedSource SOURCE = from("client/svelte");
+  private static final Seed4JSource SOURCE = from("client/svelte");
 
   private static final String ENGINES_NEEDLE = "  \"engines\":";
 
-  private static final SeedSource PRIMARY_MAIN_SOURCE = SOURCE.append("src/main/webapp/app/common/primary/app");
-  private static final SeedDestination PRIMARY_MAIN_DESTINATION = to("src/main/webapp/app/common/primary/app");
-  private static final SeedSource CLIENT_COMMON = from("client/common");
+  private static final Seed4JSource PRIMARY_MAIN_SOURCE = SOURCE.append("src/main/webapp/app/common/primary/app");
+  private static final Seed4JDestination PRIMARY_MAIN_DESTINATION = to("src/main/webapp/app/common/primary/app");
+  private static final Seed4JSource CLIENT_COMMON = from("client/common");
 
-  private static final SeedSource PRIMARY_TEST_SOURCE = SOURCE.append("src/test/unit/common/primary/app");
-  private static final SeedDestination PRIMARY_TEST_DESTINATION = to("src/test/webapp/unit/common/primary/app");
+  private static final Seed4JSource PRIMARY_TEST_SOURCE = SOURCE.append("src/test/unit/common/primary/app");
+  private static final Seed4JDestination PRIMARY_TEST_DESTINATION = to("src/test/webapp/unit/common/primary/app");
 
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
@@ -41,7 +41,7 @@ public class SvelteModuleFactory {
     this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
   }
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

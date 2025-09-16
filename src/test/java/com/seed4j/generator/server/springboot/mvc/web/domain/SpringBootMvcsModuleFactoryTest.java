@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.mvc.web.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -16,12 +16,12 @@ class SpringBootMvcsModuleFactoryTest {
 
   @Test
   void shouldBuildTomcatMvcModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .put("serverPort", 9000)
       .build();
 
-    SeedModule module = factory.buildTomcatModule(properties);
+    Seed4JModule module = factory.buildTomcatModule(properties);
 
     assertMvcModule(module)
       .hasFile("src/main/resources/logback-spring.xml")
@@ -53,12 +53,12 @@ class SpringBootMvcsModuleFactoryTest {
 
   @Test
   void shouldBuildUndertowModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .put("serverPort", 9000)
       .build();
 
-    SeedModule module = factory.buildUndertowModule(properties);
+    Seed4JModule module = factory.buildUndertowModule(properties);
 
     assertMvcModule(module)
       .hasFile("src/main/resources/logback-spring.xml")
@@ -92,7 +92,7 @@ class SpringBootMvcsModuleFactoryTest {
       );
   }
 
-  private SeedModuleAsserter assertMvcModule(SeedModule module) {
+  private Seed4JModuleAsserter assertMvcModule(Seed4JModule module) {
     return assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile(), readmeFile())
       .hasFile("README.md")
       .containing("- [Local server](http://localhost:9000)")

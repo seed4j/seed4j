@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.broker.pulsar.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_PULSAR;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_PULSAR;
 
 import com.seed4j.generator.server.springboot.broker.pulsar.application.PulsarApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,14 +14,14 @@ import org.springframework.context.annotation.Configuration;
 class PulsarModuleConfiguration {
 
   @Bean
-  SeedModuleResource pulsarModule(PulsarApplicationService pulsar) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource pulsarModule(PulsarApplicationService pulsar) {
+    return Seed4JModuleResource.builder()
       .slug(SPRING_BOOT_PULSAR)
       .propertiesDefinition(
-        SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
+        Seed4JModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
       )
       .apiDoc("Spring Boot - Broker", "Add Pulsar dependencies, with testcontainers")
-      .organization(SeedModuleOrganization.builder().addDependency(SPRING_BOOT).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(SPRING_BOOT).build())
       .tags("server", "spring", "spring-boot", "broker")
       .factory(pulsar::buildModule);
   }

@@ -1,13 +1,13 @@
 package com.seed4j.module.infrastructure.secondary.javadependency;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.SeedModuleContext;
+import com.seed4j.module.domain.Seed4JModuleContext;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.javabuild.ProjectJavaBuildToolRepository;
 import com.seed4j.module.domain.javabuild.command.*;
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.module.infrastructure.secondary.FileSystemReplacer;
-import com.seed4j.module.infrastructure.secondary.FileSystemSeedModuleFiles;
+import com.seed4j.module.infrastructure.secondary.FileSystemSeed4JModuleFiles;
 import com.seed4j.module.infrastructure.secondary.javadependency.gradle.GradleCommandHandler;
 import com.seed4j.module.infrastructure.secondary.javadependency.maven.MavenCommandHandler;
 import com.seed4j.shared.error.domain.Assert;
@@ -18,12 +18,12 @@ import org.springframework.stereotype.Service;
 public class FileSystemJavaBuildCommandsHandler {
 
   private final ProjectJavaBuildToolRepository javaBuildTools;
-  private final FileSystemSeedModuleFiles files;
+  private final FileSystemSeed4JModuleFiles files;
   private final FileSystemReplacer fileReplacer;
 
   public FileSystemJavaBuildCommandsHandler(
     ProjectJavaBuildToolRepository javaBuildTools,
-    FileSystemSeedModuleFiles files,
+    FileSystemSeed4JModuleFiles files,
     FileSystemReplacer fileReplacer
   ) {
     this.javaBuildTools = javaBuildTools;
@@ -31,7 +31,7 @@ public class FileSystemJavaBuildCommandsHandler {
     this.fileReplacer = fileReplacer;
   }
 
-  public void handle(Indentation indentation, SeedProjectFolder projectFolder, SeedModuleContext context, JavaBuildCommands commands) {
+  public void handle(Indentation indentation, Seed4JProjectFolder projectFolder, Seed4JModuleContext context, JavaBuildCommands commands) {
     Assert.notNull("indentation", indentation);
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("context", context);
@@ -48,8 +48,8 @@ public class FileSystemJavaBuildCommandsHandler {
 
   private JavaDependenciesCommandHandler buildCommandHandler(
     Indentation indentation,
-    SeedProjectFolder projectFolder,
-    SeedModuleContext context
+    Seed4JProjectFolder projectFolder,
+    Seed4JModuleContext context
   ) {
     JavaBuildTool javaBuildTool = javaBuildTools
       .detect(projectFolder)

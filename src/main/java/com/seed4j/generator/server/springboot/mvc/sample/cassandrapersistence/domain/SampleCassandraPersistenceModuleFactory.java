@@ -1,27 +1,27 @@
 package com.seed4j.generator.server.springboot.mvc.sample.cassandrapersistence.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcMainResources;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainResources;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SampleCassandraPersistenceModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/mvc/sample/cassandrapersistence");
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/sample/cassandrapersistence");
   private static final String SECONDARY = "infrastructure/secondary";
   private static final String SECONDARY_DESTINATION = "sample/" + SECONDARY;
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
@@ -59,7 +59,7 @@ public class SampleCassandraPersistenceModuleFactory {
     // @formatter:on
   }
 
-  private SeedDestination toSrcMainResourcesCql() {
+  private Seed4JDestination toSrcMainResourcesCql() {
     return toSrcMainResources().append("config").append("cql");
   }
 }

@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.technicaltools.actuator.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_SERVER;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_ACTUATOR;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.SPRING_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_ACTUATOR;
 
 import com.seed4j.generator.server.springboot.technicaltools.actuator.application.SpringBootActuatorApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,14 +14,14 @@ import org.springframework.context.annotation.Configuration;
 class SpringBootActuatorModuleConfiguration {
 
   @Bean
-  SeedModuleResource springBootActuatorModule(SpringBootActuatorApplicationService springBootActuator) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource springBootActuatorModule(SpringBootActuatorApplicationService springBootActuator) {
+    return Seed4JModuleResource.builder()
       .slug(SPRING_BOOT_ACTUATOR)
       .propertiesDefinition(
-        SeedModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addSpringConfigurationFormat().build()
+        Seed4JModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addSpringConfigurationFormat().build()
       )
       .apiDoc("Spring Boot", "Add Spring Boot Actuator to the project")
-      .organization(SeedModuleOrganization.builder().addDependency(SPRING_SERVER).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(SPRING_SERVER).build())
       .tags("server", "spring", "spring-boot")
       .factory(springBootActuator::buildModule);
   }

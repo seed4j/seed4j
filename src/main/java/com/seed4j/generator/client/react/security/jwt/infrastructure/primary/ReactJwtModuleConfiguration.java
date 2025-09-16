@@ -1,12 +1,12 @@
 package com.seed4j.generator.client.react.security.jwt.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.REACT_CORE;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.REACT_JWT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.REACT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.REACT_JWT;
 
 import com.seed4j.generator.client.react.security.jwt.application.ReactJwtApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,12 +14,12 @@ import org.springframework.context.annotation.Configuration;
 class ReactJwtModuleConfiguration {
 
   @Bean
-  SeedModuleResource reactJwtModule(ReactJwtApplicationService reactJwt) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource reactJwtModule(ReactJwtApplicationService reactJwt) {
+    return Seed4JModuleResource.builder()
       .slug(REACT_JWT)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addIndentation().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addIndentation().build())
       .apiDoc("Frontend - React", "Add JWT Login React")
-      .organization(SeedModuleOrganization.builder().addDependency(REACT_CORE).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(REACT_CORE).build())
       .tags("client", "react", "jwt")
       .factory(reactJwt::buildModule);
   }

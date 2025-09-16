@@ -1,15 +1,15 @@
 package com.seed4j.generator.server.springboot.seed4jextension.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.ModuleFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.file;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.ModuleFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.file;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -19,13 +19,13 @@ class Seed4JExtensionModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .put("serverPort", 9000)
       .build();
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     // @formatter:off
     assertThatModuleWithFiles(module, pomFile(), mainAppFile())
@@ -104,8 +104,8 @@ class Seed4JExtensionModuleFactoryTest {
           """)
         .and()
       .hasFile("src/main/java/com/seed4j/growth/MyAppApp.java")
-        .containing("import com.seed4j.Seed4jApp;")
-        .containing("@SpringBootApplication(scanBasePackageClasses = { Seed4jApp.class, MyAppApp.class })")
+        .containing("import com.seed4j.Seed4JApp;")
+        .containing("@SpringBootApplication(scanBasePackageClasses = { Seed4JApp.class, MyAppApp.class })")
         .and()
       .hasPrefixedFiles("documentation", "module-creation.md", "cucumber.md")
       .doNotHaveFiles(

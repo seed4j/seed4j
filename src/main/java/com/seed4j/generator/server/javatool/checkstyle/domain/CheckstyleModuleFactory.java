@@ -1,29 +1,29 @@
 package com.seed4j.generator.server.javatool.checkstyle.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.gradleCorePlugin;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.mavenPlugin;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.pluginExecution;
-import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.gradleCorePlugin;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
+import static com.seed4j.module.domain.Seed4JModule.to;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.VALIDATE;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class CheckstyleModuleFactory {
 
-  private static final SeedSource TEMPLATES_SOURCE = from("server/javatool/checkstyle/main");
+  private static final Seed4JSource TEMPLATES_SOURCE = from("server/javatool/checkstyle/main");
   private static final String CHECKSTYLE = "checkstyle";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

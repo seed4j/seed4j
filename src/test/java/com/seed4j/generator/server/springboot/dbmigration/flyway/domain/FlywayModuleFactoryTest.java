@@ -1,13 +1,13 @@
 package com.seed4j.generator.server.springboot.dbmigration.flyway.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -19,12 +19,12 @@ class FlywayModuleFactoryTest {
 
   @Test
   void shouldBuildModuleInitializationModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .put("date", INVOCATION_DATE)
       .build();
 
-    SeedModule module = factory.buildInitializationModule(properties);
+    Seed4JModule module = factory.buildInitializationModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
@@ -51,9 +51,9 @@ class FlywayModuleFactoryTest {
 
   @Test
   void shouldBuildMysqlDependencyModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    SeedModule module = factory.buildMysqlDependencyModule(properties);
+    Seed4JModule module = factory.buildMysqlDependencyModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
@@ -69,9 +69,9 @@ class FlywayModuleFactoryTest {
 
   @Test
   void shouldBuildPostgreSQLDependencyModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    SeedModule module = factory.buildPostgreSQLDependencyModule(properties);
+    Seed4JModule module = factory.buildPostgreSQLDependencyModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
@@ -87,9 +87,9 @@ class FlywayModuleFactoryTest {
 
   @Test
   void shouldBuildMsSqlServerDependencyModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    SeedModule module = factory.buildMsSqlServerDependencyModule(properties);
+    Seed4JModule module = factory.buildMsSqlServerDependencyModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")

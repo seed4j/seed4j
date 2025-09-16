@@ -1,22 +1,22 @@
 package com.seed4j.generator.client.tools.archunitts.domain;
 
-import static com.seed4j.module.domain.SeedModule.*;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.Seed4JModule.*;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class ArchUnitTsModuleFactory {
 
-  private static final SeedSource SOURCE = from("client/tools/archunitts");
+  private static final Seed4JSource SOURCE = from("client/tools/archunitts");
 
-  private static final SeedDestination APP_DESTINATION = to("src/main/webapp/app/");
-  private static final SeedDestination TEST_DESTINATION = to("src/test/webapp/unit/");
+  private static final Seed4JDestination APP_DESTINATION = to("src/main/webapp/app/");
+  private static final Seed4JDestination TEST_DESTINATION = to("src/test/webapp/unit/");
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

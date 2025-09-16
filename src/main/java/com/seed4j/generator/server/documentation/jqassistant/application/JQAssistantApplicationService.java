@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.documentation.jqassistant.application;
 
 import com.seed4j.generator.server.documentation.jqassistant.domain.JQAssistantModuleFactory;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,15 +14,15 @@ public class JQAssistantApplicationService {
     jqAssistant = new JQAssistantModuleFactory();
   }
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     return jqAssistant.buildModule(properties);
   }
 
-  public SeedModule buildJMoleculesModule(SeedModuleProperties properties) {
+  public Seed4JModule buildJMoleculesModule(Seed4JModuleProperties properties) {
     return jqAssistant.buildJMoleculesModule(properties);
   }
 
-  public SeedModule buildSpringModule(SeedModuleProperties properties) {
+  public Seed4JModule buildSpringModule(Seed4JModuleProperties properties) {
     return jqAssistant.buildSpringModule(properties);
   }
 }

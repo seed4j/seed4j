@@ -1,20 +1,20 @@
 package com.seed4j.generator.server.springboot.localeprofile.domain;
 
-import static com.seed4j.module.domain.SeedModule.buildProfileActivation;
-import static com.seed4j.module.domain.SeedModule.buildPropertyKey;
-import static com.seed4j.module.domain.SeedModule.buildPropertyValue;
-import static com.seed4j.module.domain.SeedModule.mavenPlugin;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.text;
+import static com.seed4j.module.domain.Seed4JModule.buildProfileActivation;
+import static com.seed4j.module.domain.Seed4JModule.buildPropertyKey;
+import static com.seed4j.module.domain.Seed4JModule.buildPropertyValue;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.text;
 
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.buildproperties.PropertyKey;
 import com.seed4j.module.domain.buildproperties.PropertyValue;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class LocalProfileModuleFactory {
@@ -22,7 +22,7 @@ public class LocalProfileModuleFactory {
   private static final String DELIMITER = "@";
   private static final String SPRING_PROFILES_ACTIVE = "spring.profiles.active";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

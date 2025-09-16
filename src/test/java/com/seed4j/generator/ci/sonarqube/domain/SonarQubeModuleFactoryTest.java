@@ -1,22 +1,22 @@
 package com.seed4j.generator.ci.sonarqube.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.SeedModuleAsserter;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.gradleBuildFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.gradleLibsVersionFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.packageJsonFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.readmeFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.Seed4JModuleAsserter;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.gradleBuildFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.gradleLibsVersionFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.readmeFile;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,7 +41,7 @@ class SonarQubeModuleFactoryTest {
     void shouldBuildBackendModule() {
       mockSonarqubeImage();
 
-      SeedModule module = factory.buildBackendModule(properties());
+      Seed4JModule module = factory.buildBackendModule(properties());
 
       assertCommonModule(module)
         .hasFile("sonar-project.properties")
@@ -55,7 +55,7 @@ class SonarQubeModuleFactoryTest {
     void shouldBuildBackendFrontendModule() {
       mockSonarqubeImage();
 
-      SeedModule module = factory.buildBackendFrontendModule(properties());
+      Seed4JModule module = factory.buildBackendFrontendModule(properties());
 
       assertCommonModule(module)
         .hasFile("sonar-project.properties")
@@ -64,7 +64,7 @@ class SonarQubeModuleFactoryTest {
         .containing("sonar.javascript.lcov.reportPaths=target/test-results/lcov.info");
     }
 
-    private SeedModuleAsserter assertCommonModule(SeedModule module) {
+    private Seed4JModuleAsserter assertCommonModule(Seed4JModule module) {
       return assertThatModuleWithFiles(module, pomFile(), readmeFile())
         .hasFile("pom.xml")
         .containing(
@@ -137,7 +137,7 @@ class SonarQubeModuleFactoryTest {
     void shouldBuildBackendModule() {
       mockSonarqubeImage();
 
-      SeedModule module = factory.buildBackendModule(properties());
+      Seed4JModule module = factory.buildBackendModule(properties());
 
       assertCommonModule(module)
         .hasFile("sonar-project.properties")
@@ -149,7 +149,7 @@ class SonarQubeModuleFactoryTest {
     void shouldBuildBackendFrontendModule() {
       mockSonarqubeImage();
 
-      SeedModule module = factory.buildBackendFrontendModule(properties());
+      Seed4JModule module = factory.buildBackendFrontendModule(properties());
 
       assertCommonModule(module)
         .hasFile("sonar-project.properties")
@@ -158,7 +158,7 @@ class SonarQubeModuleFactoryTest {
         .containing("sonar.javascript.lcov.reportPaths=build/test-results/lcov.info");
     }
 
-    private SeedModuleAsserter assertCommonModule(SeedModule module) {
+    private Seed4JModuleAsserter assertCommonModule(Seed4JModule module) {
       return assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile(), readmeFile())
         .hasFile("gradle/libs.versions.toml")
         .containing("sonarqube = \"")
@@ -220,9 +220,9 @@ class SonarQubeModuleFactoryTest {
     void shouldBuildTypescriptModule() {
       mockSonarqubeImage();
 
-      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      SeedModule module = factory.buildTypescriptModule(properties);
+      Seed4JModule module = factory.buildTypescriptModule(properties);
 
       // @formatter:off
       assertThatModuleWithFiles(module, packageJsonFile())
@@ -249,8 +249,8 @@ class SonarQubeModuleFactoryTest {
     when(dockerImages.get("sonarqube")).thenReturn(new DockerImageVersion("sonarqube", "1.1.1"));
   }
 
-  private SeedModuleProperties properties() {
-    return SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+  private Seed4JModuleProperties properties() {
+    return Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();

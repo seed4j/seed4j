@@ -1,10 +1,10 @@
 package com.seed4j.module.infrastructure.primary;
 
-import com.seed4j.module.application.SeedModulesApplicationService;
-import com.seed4j.module.domain.SeedModuleSlug;
-import com.seed4j.module.domain.SeedModuleToApply;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.application.Seed4JModulesApplicationService;
+import com.seed4j.module.domain.Seed4JModuleSlug;
+import com.seed4j.module.domain.Seed4JModuleToApply;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import com.seed4j.shared.projectfolder.domain.ProjectFolder;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,50 +19,50 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 class ModulesResource {
 
-  private final SeedModulesApplicationService modules;
+  private final Seed4JModulesApplicationService modules;
   private final ProjectFolder projectFolder;
 
-  private final RestSeedModules modulesList;
-  private final RestSeedLandscape modulesLandscape;
+  private final RestSeed4JModules modulesList;
+  private final RestSeed4JLandscape modulesLandscape;
 
-  public ModulesResource(SeedModulesApplicationService modules, ProjectFolder projectFolder) {
+  public ModulesResource(Seed4JModulesApplicationService modules, ProjectFolder projectFolder) {
     this.modules = modules;
     this.projectFolder = projectFolder;
 
-    modulesList = RestSeedModules.from(modules.resources());
-    modulesLandscape = RestSeedLandscape.from(modules.landscape());
+    modulesList = RestSeed4JModules.from(modules.resources());
+    modulesLandscape = RestSeed4JLandscape.from(modules.landscape());
   }
 
   @GetMapping("/modules")
   @Operation(summary = "List available modules")
-  public ResponseEntity<RestSeedModules> listModules() {
+  public ResponseEntity<RestSeed4JModules> listModules() {
     return ResponseEntity.ok(modulesList);
   }
 
   @GetMapping("modules-landscape")
   @Operation(summary = "Get a view of the current modules landscape")
-  public ResponseEntity<RestSeedLandscape> modulesLandscape() {
+  public ResponseEntity<RestSeed4JLandscape> modulesLandscape() {
     return ResponseEntity.ok(modulesLandscape);
   }
 
   @PostMapping("apply-patches")
   @Operation(summary = "Apply multiple modules patches")
-  public void applyPatches(@RequestBody @Validated RestSeedModulesToApply modulesToApply) {
+  public void applyPatches(@RequestBody @Validated RestSeed4JModulesToApply modulesToApply) {
     modules.apply(modulesToApply.toDomain(projectFolder));
   }
 
   @Hidden
   @PostMapping("modules/{slug}/apply-patch")
-  public void applyPatch(@RequestBody @Validated RestSeedModuleProperties restProperties, @PathVariable("slug") String slug) {
-    SeedModuleProperties properties = restProperties.toDomain(projectFolder);
-    modules.apply(new SeedModuleToApply(new SeedModuleSlug(slug), properties));
+  public void applyPatch(@RequestBody @Validated RestSeed4JModuleProperties restProperties, @PathVariable("slug") String slug) {
+    Seed4JModuleProperties properties = restProperties.toDomain(projectFolder);
+    modules.apply(new Seed4JModuleToApply(new Seed4JModuleSlug(slug), properties));
   }
 
   @Hidden
   @GetMapping("modules/{slug}")
-  public RestSeedModulePropertiesDefinition propertiesDefinition(@PathVariable("slug") String slug) {
-    SeedModuleResource module = modules.resources().get(new SeedModuleSlug(slug));
-    return RestSeedModulePropertiesDefinition.from(module.propertiesDefinition());
+  public RestSeed4JModulePropertiesDefinition propertiesDefinition(@PathVariable("slug") String slug) {
+    Seed4JModuleResource module = modules.resources().get(new Seed4JModuleSlug(slug));
+    return RestSeed4JModulePropertiesDefinition.from(module.propertiesDefinition());
   }
 
   @Operation(summary = "Get presets configuration")

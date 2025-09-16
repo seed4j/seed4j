@@ -1,22 +1,22 @@
 package com.seed4j.generator.server.documentation.jqassistant.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.mavenPlugin;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.pluginExecution;
-import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
+import static com.seed4j.module.domain.Seed4JModule.to;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.VERIFY;
 
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JQAssistantModuleFactory {
@@ -28,7 +28,7 @@ public class JQAssistantModuleFactory {
   private static final GroupId JQASSISTANT_PLUGIN_GROUP_ID = groupId("org.jqassistant.plugin");
   private static final String PROPERTIES = "properties";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -96,7 +96,7 @@ public class JQAssistantModuleFactory {
       .build();
   }
 
-  public SeedModule buildJMoleculesModule(SeedModuleProperties properties) {
+  public Seed4JModule buildJMoleculesModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -136,7 +136,7 @@ public class JQAssistantModuleFactory {
       .build();
   }
 
-  public SeedModule buildSpringModule(SeedModuleProperties properties) {
+  public Seed4JModule buildSpringModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off

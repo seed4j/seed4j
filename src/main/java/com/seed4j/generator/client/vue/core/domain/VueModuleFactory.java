@@ -3,27 +3,27 @@ package com.seed4j.generator.client.vue.core.domain;
 import static com.seed4j.generator.typescript.common.domain.EslintShortcuts.eslintTypescriptRule;
 import static com.seed4j.generator.typescript.common.domain.TsConfigShortcuts.tsConfigCompilerOption;
 import static com.seed4j.generator.typescript.common.domain.VitestShortcuts.vitestCoverageExclusion;
-import static com.seed4j.module.domain.SeedModule.*;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
+import static com.seed4j.module.domain.Seed4JModule.*;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.VUE;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import java.util.function.Consumer;
 
 public class VueModuleFactory {
 
-  private static final SeedSource SOURCE = from("client/vue");
-  private static final SeedSource APP_SOURCE = from("client/vue/webapp/app");
-  private static final SeedSource PIQURE_SOURCE = from("client/common/piqure");
-  private static final SeedSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
-  private static final SeedSource IMAGE_SOURCE = SOURCE.append("webapp/content/images");
+  private static final Seed4JSource SOURCE = from("client/vue");
+  private static final Seed4JSource APP_SOURCE = from("client/vue/webapp/app");
+  private static final Seed4JSource PIQURE_SOURCE = from("client/common/piqure");
+  private static final Seed4JSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
+  private static final Seed4JSource IMAGE_SOURCE = SOURCE.append("webapp/content/images");
 
-  private static final SeedDestination MAIN_DESTINATION = to("src/main/webapp/app");
-  private static final SeedDestination TEST_DESTINATION = to("src/test/webapp");
+  private static final Seed4JDestination MAIN_DESTINATION = to("src/main/webapp/app");
+  private static final Seed4JDestination TEST_DESTINATION = to("src/test/webapp");
 
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
@@ -31,7 +31,7 @@ public class VueModuleFactory {
     this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
   }
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .preCommitActions(stagedFilesFilter("{src/**/,}*.{ts,vue}"), preCommitCommands("eslint --fix", "prettier --write"))
@@ -93,7 +93,7 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<SeedModuleBuilder> patchEslintConfig(SeedModuleProperties properties) {
+  private Consumer<Seed4JModuleBuilder> patchEslintConfig(Seed4JModuleProperties properties) {
     String vuePluginConfig = """
       \t...vue.configs['flat/recommended'],
       \t{
@@ -120,7 +120,7 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<SeedModuleBuilder> patchTsConfig(SeedModuleProperties properties) {
+  private Consumer<Seed4JModuleBuilder> patchTsConfig(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()
@@ -134,7 +134,7 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<SeedModuleBuilder> patchVitestConfig() {
+  private Consumer<Seed4JModuleBuilder> patchVitestConfig() {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

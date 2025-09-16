@@ -1,23 +1,23 @@
 package com.seed4j.generator.client.tikui.domain;
 
-import static com.seed4j.module.domain.SeedModule.LINE_BREAK;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.lineAfterText;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.packageName;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.preCommitCommands;
-import static com.seed4j.module.domain.SeedModule.scriptCommand;
-import static com.seed4j.module.domain.SeedModule.scriptKey;
-import static com.seed4j.module.domain.SeedModule.stagedFilesFilter;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.Seed4JModule.LINE_BREAK;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineAfterText;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.packageName;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.preCommitCommands;
+import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
+import static com.seed4j.module.domain.Seed4JModule.scriptKey;
+import static com.seed4j.module.domain.Seed4JModule.stagedFilesFilter;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.replacement.RegexNeedleAfterReplacer;
 import com.seed4j.module.domain.replacement.ReplacementCondition;
 import java.util.Collection;
@@ -26,10 +26,10 @@ import java.util.regex.Pattern;
 
 public class TikuiModuleFactory {
 
-  private static final SeedSource SOURCE = from("client/tikui");
-  private static final SeedSource STYLE_SOURCE = SOURCE.append("style");
+  private static final Seed4JSource SOURCE = from("client/tikui");
+  private static final Seed4JSource STYLE_SOURCE = SOURCE.append("style");
 
-  private static final SeedDestination STYLE_DESTINATION = to("src/main/style");
+  private static final Seed4JDestination STYLE_DESTINATION = to("src/main/style");
 
   private static final String ATOM = "atom";
   private static final String ATOM_BUTTON = ATOM + "/button";
@@ -49,7 +49,7 @@ public class TikuiModuleFactory {
   private static final String TEMPLATE_TOASTING = TEMPLATE + "/toasting";
   private static final String QUARK = "quark";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .preCommitActions(stagedFilesFilter("*.pug"), preCommitCommands("prettier --write"))
@@ -184,15 +184,15 @@ public class TikuiModuleFactory {
     );
   }
 
-  private String tikuiLink(SeedModuleProperties properties) {
+  private String tikuiLink(Seed4JModuleProperties properties) {
     return properties.indentation().times(2) + "<link rel=\"stylesheet\" href=\"/style/tikui.css\" />";
   }
 
-  private String pugPlugin(SeedModuleProperties properties) {
+  private String pugPlugin(Seed4JModuleProperties properties) {
     return properties.indentation().times(1) + "- '@prettier/plugin-pug'";
   }
 
-  private static String newProxyForStyle(SeedModuleProperties properties) {
+  private static String newProxyForStyle(Seed4JModuleProperties properties) {
     return new StringBuilder()
       .append(properties.indentation().times(2))
       .append("proxy: {")
@@ -204,7 +204,7 @@ public class TikuiModuleFactory {
       .toString();
   }
 
-  private static String proxyForStyle(SeedModuleProperties properties) {
+  private static String proxyForStyle(Seed4JModuleProperties properties) {
     return """
     {S}{S}{S}'/style': {
     {S}{S}{S}{S}ws: true,
@@ -214,7 +214,7 @@ public class TikuiModuleFactory {
     {S}{S}{S}},""".replace("{S}", properties.indentation().times(1));
   }
 
-  private String styleProxyConf(SeedModuleProperties properties) {
+  private String styleProxyConf(Seed4JModuleProperties properties) {
     return """
     {S}"/style": {
     {S}{S}"target": "http://localhost:9005",

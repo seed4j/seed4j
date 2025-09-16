@@ -1,26 +1,26 @@
 package com.seed4j.generator.prettier.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.packageName;
-import static com.seed4j.module.domain.SeedModule.preCommitCommands;
-import static com.seed4j.module.domain.SeedModule.scriptCommand;
-import static com.seed4j.module.domain.SeedModule.scriptKey;
-import static com.seed4j.module.domain.SeedModule.stagedFilesFilter;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.packageName;
+import static com.seed4j.module.domain.Seed4JModule.preCommitCommands;
+import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
+import static com.seed4j.module.domain.Seed4JModule.scriptKey;
+import static com.seed4j.module.domain.Seed4JModule.stagedFilesFilter;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class PrettierModuleFactory {
 
-  private static final SeedSource SOURCE = from("prettier");
-  private static final SeedDestination DESTINATION = to(".");
+  private static final Seed4JSource SOURCE = from("prettier");
+  private static final Seed4JDestination DESTINATION = to(".");
 
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
@@ -28,7 +28,7 @@ public class PrettierModuleFactory {
     this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
   }
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -61,7 +61,7 @@ public class PrettierModuleFactory {
     // @formatter:on
   }
 
-  private String endOfLine(SeedModuleProperties properties) {
+  private String endOfLine(Seed4JModuleProperties properties) {
     return properties.getOrDefaultString("endOfLine", "lf");
   }
 }

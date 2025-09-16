@@ -1,17 +1,17 @@
 package com.seed4j.generator.ci.sonarqube.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CODE_COVERAGE_JAVA;
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SONARQUBE;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SONARQUBE_JAVA_BACKEND;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SONARQUBE_JAVA_BACKEND_AND_FRONTEND;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SONARQUBE_TYPESCRIPT;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.TYPESCRIPT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.CODE_COVERAGE_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.JAVA_BUILD_TOOL;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.SONARQUBE;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SONARQUBE_JAVA_BACKEND;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SONARQUBE_JAVA_BACKEND_AND_FRONTEND;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SONARQUBE_TYPESCRIPT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.TYPESCRIPT;
 
 import com.seed4j.generator.ci.sonarqube.application.SonarQubeApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,43 +19,43 @@ import org.springframework.context.annotation.Configuration;
 class SonarQubeModuleConfiguration {
 
   @Bean
-  SeedModuleResource sonarqubeBackendModule(SonarQubeApplicationService sonarQube) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource sonarqubeBackendModule(SonarQubeApplicationService sonarQube) {
+    return Seed4JModuleResource.builder()
       .slug(SONARQUBE_JAVA_BACKEND)
       .propertiesDefinition(propertiesDefinition())
       .apiDoc("SonarQube", "Add Sonar configuration for Java Backend to inspect code quality")
       .organization(
-        SeedModuleOrganization.builder().feature(SONARQUBE).addDependency(JAVA_BUILD_TOOL).addDependency(CODE_COVERAGE_JAVA).build()
+        Seed4JModuleOrganization.builder().feature(SONARQUBE).addDependency(JAVA_BUILD_TOOL).addDependency(CODE_COVERAGE_JAVA).build()
       )
       .tags("server", "sonar", "sonarqube")
       .factory(sonarQube::buildBackendModule);
   }
 
   @Bean
-  SeedModuleResource sonarqubeBackendFrontendModule(SonarQubeApplicationService sonarQube) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource sonarqubeBackendFrontendModule(SonarQubeApplicationService sonarQube) {
+    return Seed4JModuleResource.builder()
       .slug(SONARQUBE_JAVA_BACKEND_AND_FRONTEND)
       .propertiesDefinition(propertiesDefinition())
       .apiDoc("SonarQube", "Add Sonar configuration for Java Backend and Frontend to inspect code quality")
       .organization(
-        SeedModuleOrganization.builder().feature(SONARQUBE).addDependency(JAVA_BUILD_TOOL).addDependency(CODE_COVERAGE_JAVA).build()
+        Seed4JModuleOrganization.builder().feature(SONARQUBE).addDependency(JAVA_BUILD_TOOL).addDependency(CODE_COVERAGE_JAVA).build()
       )
       .tags("server", "frontend", "sonar", "sonarqube")
       .factory(sonarQube::buildBackendFrontendModule);
   }
 
   @Bean
-  SeedModuleResource sonarqubeTypescriptModule(SonarQubeApplicationService sonarTypescript) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource sonarqubeTypescriptModule(SonarQubeApplicationService sonarTypescript) {
+    return Seed4JModuleResource.builder()
       .slug(SONARQUBE_TYPESCRIPT)
       .withoutProperties()
       .apiDoc("Typescript", "Add Sonar to project")
-      .organization(SeedModuleOrganization.builder().feature(SONARQUBE).addDependency(TYPESCRIPT).build())
+      .organization(Seed4JModuleOrganization.builder().feature(SONARQUBE).addDependency(TYPESCRIPT).build())
       .tags("typescript")
       .factory(sonarTypescript::buildTypescriptModule);
   }
 
-  private SeedModulePropertiesDefinition propertiesDefinition() {
-    return SeedModulePropertiesDefinition.builder().addProjectName().addProjectBaseName().addIndentation().build();
+  private Seed4JModulePropertiesDefinition propertiesDefinition() {
+    return Seed4JModulePropertiesDefinition.builder().addProjectName().addProjectBaseName().addIndentation().build();
   }
 }

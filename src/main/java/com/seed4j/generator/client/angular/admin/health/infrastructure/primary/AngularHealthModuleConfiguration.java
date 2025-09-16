@@ -1,12 +1,12 @@
 package com.seed4j.generator.client.angular.admin.health.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_CORE;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_HEALTH;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_ACTUATOR;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.ANGULAR_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.ANGULAR_HEALTH;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_ACTUATOR;
 
 import com.seed4j.generator.client.angular.admin.health.application.AngularHealthApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,12 +14,12 @@ import org.springframework.context.annotation.Configuration;
 class AngularHealthModuleConfiguration {
 
   @Bean
-  SeedModuleResource angularHealthModule(AngularHealthApplicationService angularHealth) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource angularHealthModule(AngularHealthApplicationService angularHealth) {
+    return Seed4JModuleResource.builder()
       .slug(ANGULAR_HEALTH)
       .withoutProperties()
       .apiDoc("Frontend - Angular", "Angular Health")
-      .organization(SeedModuleOrganization.builder().addDependency(ANGULAR_CORE).addDependency(SPRING_BOOT_ACTUATOR).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(ANGULAR_CORE).addDependency(SPRING_BOOT_ACTUATOR).build())
       .tags("client", "angular", "health")
       .factory(angularHealth::buildModule);
   }

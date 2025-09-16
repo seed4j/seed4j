@@ -1,12 +1,12 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.SeedModule.packageName;
-import static com.seed4j.module.domain.SeedModule.scriptCommand;
-import static com.seed4j.module.domain.SeedModule.scriptKey;
-import static com.seed4j.module.domain.SeedModulesFixture.emptyModuleBuilder;
-import static com.seed4j.module.domain.SeedModulesFixture.emptyModuleContext;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.ANGULAR;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.Seed4JModule.packageName;
+import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
+import static com.seed4j.module.domain.Seed4JModule.scriptKey;
+import static com.seed4j.module.domain.Seed4JModulesFixture.emptyModuleBuilder;
+import static com.seed4j.module.domain.Seed4JModulesFixture.emptyModuleContext;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.ANGULAR;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.packagejson.NodeModuleFormat.COMMONJS;
 import static com.seed4j.module.domain.packagejson.NodeModuleFormat.MODULE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,9 +22,9 @@ import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.packagejson.SeedModulePackageJson;
-import com.seed4j.module.domain.packagejson.SeedModulePackageJson.SeedModulePackageJsonBuilder;
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.packagejson.Seed4JModulePackageJson;
+import com.seed4j.module.domain.packagejson.Seed4JModulePackageJson.Seed4JModulePackageJsonBuilder;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.module.infrastructure.secondary.file.MustacheTemplateRenderer;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -64,15 +64,15 @@ class FileSystemPackageJsonHandlerTest {
     ).isExactlyInstanceOf(MissingPackageJsonException.class);
   }
 
-  private SeedProjectFolder emptyFolder() {
-    return new SeedProjectFolder(TestFileUtils.tmpDirForTest());
+  private Seed4JProjectFolder emptyFolder() {
+    return new Seed4JProjectFolder(TestFileUtils.tmpDirForTest());
   }
 
   @Test
   void shouldNotAddNotNeededBlock() {
     when(nodeVersions.get("@playwright/test", COMMON.build())).thenReturn(new NodePackageVersion("1.1.1"));
 
-    SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+    Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
     packageJson.handle(
       Indentation.DEFAULT,
@@ -86,7 +86,7 @@ class FileSystemPackageJsonHandlerTest {
 
   @Test
   void shouldNotGreedExistingBlocks() {
-    SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+    Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
     packageJson.handle(
       Indentation.DEFAULT,
@@ -120,7 +120,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldAddTypeToPackageJsonWithoutType() {
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
       packageJson.handle(Indentation.DEFAULT, folder, packageJson(p -> p.type(MODULE)), emptyModuleContext());
 
@@ -135,7 +135,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldReplaceExistingType() {
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(Indentation.DEFAULT, folder, packageJson(p -> p.type(COMMONJS)), emptyModuleContext());
 
@@ -154,7 +154,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldAddScriptToPackageJsonWithoutScriptSection() {
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -176,7 +176,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldAddScriptsToPackageJsonWithScriptSection() {
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -201,7 +201,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldAddScriptsToPackageJsonWithScriptsTemplate() {
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node-template/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node-template/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -222,7 +222,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldReplaceOnlyExistingScript() {
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -245,7 +245,7 @@ class FileSystemPackageJsonHandlerTest {
 
     @Test
     void shouldReplaceExistingScript() {
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node-multiple-scripts/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node-multiple-scripts/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -272,7 +272,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDevDependencyToPackageJsonWithoutDevDependencySection() {
       mockDevVersion();
 
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -296,7 +296,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDevDependencyToPackageJsonWithDevDependencySection() {
       mockDevVersion();
 
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -319,7 +319,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDevDependencyToPackageJsonUsingVersionSourcePackage() {
       when(nodeVersions.get("@angular/core", ANGULAR.build())).thenReturn(new NodePackageVersion("1.1.1"));
 
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -341,7 +341,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldReplaceExistingDevDependency() {
       mockDevVersion();
 
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -364,7 +364,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldRemoveExistingDevDependency() {
       mockDevVersion();
 
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -394,7 +394,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDependencyToPackageJsonWithoutDependencySection() {
       mockVersion();
 
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -418,7 +418,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDependencyToPackageJsonWithDependencySection() {
       mockVersion();
 
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -441,7 +441,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddDependencyToPackageJsonUsingVersionSourcePackage() {
       when(nodeVersions.get("@angular/core", ANGULAR.build())).thenReturn(new NodePackageVersion("1.1.1"));
 
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -463,7 +463,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldReplaceExistingDependency() {
       mockVersion();
 
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -486,7 +486,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldRemoveExistingDependency() {
       mockVersion();
 
-      SeedProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
       packageJson.handle(
         Indentation.DEFAULT,
@@ -510,18 +510,18 @@ class FileSystemPackageJsonHandlerTest {
   }
 
   @SafeVarargs
-  private @NotNull SeedModulePackageJson packageJson(Consumer<SeedModulePackageJsonBuilder>... builderConfigurations) {
-    SeedModulePackageJsonBuilder builder = emptyBuilder();
+  private @NotNull Seed4JModulePackageJson packageJson(Consumer<Seed4JModulePackageJsonBuilder>... builderConfigurations) {
+    Seed4JModulePackageJsonBuilder builder = emptyBuilder();
     Stream.of(builderConfigurations).forEach(configuration -> configuration.accept(builder));
 
     return builder.build();
   }
 
-  private SeedModulePackageJsonBuilder emptyBuilder() {
-    return SeedModulePackageJson.builder(emptyModuleBuilder());
+  private Seed4JModulePackageJsonBuilder emptyBuilder() {
+    return Seed4JModulePackageJson.builder(emptyModuleBuilder());
   }
 
-  private static SeedProjectFolder projectWithPackageJson(String packageJson) {
+  private static Seed4JProjectFolder projectWithPackageJson(String packageJson) {
     String target = TestFileUtils.tmpDirForTest();
 
     try {
@@ -531,10 +531,10 @@ class FileSystemPackageJsonHandlerTest {
       throw new AssertionError(e);
     }
 
-    return new SeedProjectFolder(target);
+    return new Seed4JProjectFolder(target);
   }
 
-  private static void assertPackageJsonContent(SeedProjectFolder folder, String expectedContent) {
+  private static void assertPackageJsonContent(Seed4JProjectFolder folder, String expectedContent) {
     String packageJsonContent = packageJsonContent(folder);
 
     assertThat(packageJsonContent)
@@ -542,7 +542,7 @@ class FileSystemPackageJsonHandlerTest {
       .contains(expectedContent);
   }
 
-  private static String packageJsonContent(SeedProjectFolder folder) {
+  private static String packageJsonContent(Seed4JProjectFolder folder) {
     try {
       return Files.readString(folder.filePath(PACKAGE_JSON)).replace("\r", "");
     } catch (IOException e) {

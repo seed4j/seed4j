@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.springcloud.eureka.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.EUREKA_CLIENT;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_CLOUD;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.EUREKA_CLIENT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_CLOUD;
 
 import com.seed4j.generator.server.springboot.springcloud.eureka.application.EurekaApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,12 +14,12 @@ import org.springframework.context.annotation.Configuration;
 class EurekaModuleConfiguration {
 
   @Bean
-  SeedModuleResource eurekaModule(EurekaApplicationService eureka) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource eurekaModule(EurekaApplicationService eureka) {
+    return Seed4JModuleResource.builder()
       .slug(EUREKA_CLIENT)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addProjectBaseName().addIndentation().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addProjectBaseName().addIndentation().build())
       .apiDoc("Spring Boot - Spring Cloud", "Add Spring Cloud Eureka Client")
-      .organization(SeedModuleOrganization.builder().addDependency(SPRING_CLOUD).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(SPRING_CLOUD).build())
       .tags("server", "spring", "spring-boot", "cloud")
       .factory(eureka::buildModule);
   }

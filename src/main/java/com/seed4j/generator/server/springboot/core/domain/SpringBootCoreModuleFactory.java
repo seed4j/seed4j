@@ -1,25 +1,25 @@
 package com.seed4j.generator.server.springboot.core.domain;
 
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.dependencyId;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.gradleCommunityPlugin;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.mavenPlugin;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.pluginExecution;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
-import static com.seed4j.module.domain.SeedModule.versionSlug;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.dependencyId;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notContaining;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
@@ -27,15 +27,15 @@ import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringBootCoreModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/core");
-  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
-  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
+  private static final Seed4JSource SOURCE = from("server/springboot/core");
+  private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
+  private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
 
   private static final GroupId SPRING_BOOT_GROUP = groupId("org.springframework.boot");
 
@@ -48,15 +48,15 @@ public class SpringBootCoreModuleFactory {
     "</build>"
   );
 
-  private static final SeedDestination MAIN_RESOURCE_DESTINATION = to("src/main/resources");
-  private static final SeedDestination TEST_RESOURCES_DESTINATION = to("src/test/resources");
+  private static final Seed4JDestination MAIN_RESOURCE_DESTINATION = to("src/main/resources");
+  private static final Seed4JDestination TEST_RESOURCES_DESTINATION = to("src/test/resources");
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();
     String packagePath = properties.packagePath();
-    SeedDestination testDestination = toSrcTestJava().append(packagePath);
+    Seed4JDestination testDestination = toSrcTestJava().append(packagePath);
     String fullyQualifiedMainClass = properties.basePackage().get() + "." + baseName + "App";
     String basePackageLoggingLevel = "logging.level.%s".formatted(properties.basePackage().get());
 

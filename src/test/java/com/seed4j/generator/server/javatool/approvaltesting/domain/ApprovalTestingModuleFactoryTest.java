@@ -1,13 +1,13 @@
 package com.seed4j.generator.server.javatool.approvaltesting.domain;
 
 import static com.seed4j.TestFileUtils.tmpDirForTest;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -17,9 +17,9 @@ class ApprovalTestingModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(tmpDirForTest()).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(tmpDirForTest()).build();
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFiles("documentation/approval-testing.md", "src/test/java/com/mycompany/myapp/PackageSettings.java")

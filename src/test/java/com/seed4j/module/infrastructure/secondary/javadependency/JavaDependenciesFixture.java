@@ -19,15 +19,15 @@ public final class JavaDependenciesFixture {
   ) {
     Assert.notNull("customReaders", customReaders);
 
-    return new SeedJavaDependenciesVersionsRepository(
+    return new Seed4JJavaDependenciesVersionsRepository(
       Stream.concat(
         customReaders.stream(),
-        Stream.of(new SeedMavenDependenciesReader(filesReader), new GradleVersionCatalogDependenciesReader(filesReader))
+        Stream.of(new Seed4JMavenDependenciesReader(filesReader), new GradleVersionCatalogDependenciesReader(filesReader))
       ).toList()
     );
   }
 
   public static ProjectJavaDependenciesRepository projectVersionsRepository() {
-    return new SeedJavaDependenciesRepository(List.of(new MavenProjectJavaDependenciesRepository()));
+    return new Seed4JJavaDependenciesRepository(List.of(new MavenProjectJavaDependenciesRepository()));
   }
 }

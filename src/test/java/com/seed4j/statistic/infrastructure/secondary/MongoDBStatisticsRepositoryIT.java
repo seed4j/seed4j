@@ -4,7 +4,7 @@ import static com.seed4j.statistic.domain.AppliedModuleFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.IntegrationTest;
-import com.seed4j.shared.slug.domain.Seed4JModuleSlug;
+import com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug;
 import com.seed4j.statistic.domain.AppliedModule;
 import com.seed4j.statistic.domain.StatisticsRepository;
 import com.seed4j.statistic.domain.criteria.StatisticsCriteria;
@@ -82,7 +82,7 @@ class MongoDBStatisticsRepositoryIT {
   @ParameterizedTest
   @MethodSource("matchingCriteria")
   void shouldGetOneForEachFilteredCriteria(StatisticsCriteria criteria) {
-    AppliedModule appliedModule = appliedModule(Seed4JModuleSlug.ANGULAR_CORE.get());
+    AppliedModule appliedModule = appliedModule(Seed4JCoreModuleSlug.ANGULAR_CORE.get());
     statistics.save(appliedModule);
 
     assertThat(statistics.get(criteria).appliedModules()).isEqualTo(1);

@@ -1,13 +1,13 @@
 package com.seed4j.generator.server.springboot.core.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JAVA_BASE;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.JAVA_BUILD_TOOL;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.JAVA_BASE;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT;
 
 import com.seed4j.generator.server.springboot.core.application.SpringBootApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,11 +15,11 @@ import org.springframework.context.annotation.Configuration;
 class SpringBootCoreModuleConfiguration {
 
   @Bean
-  SeedModuleResource springBootCoreModule(SpringBootApplicationService springBoot) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource springBootCoreModule(SpringBootApplicationService springBoot) {
+    return Seed4JModuleResource.builder()
       .slug(SPRING_BOOT)
       .propertiesDefinition(
-        SeedModulePropertiesDefinition.builder()
+        Seed4JModulePropertiesDefinition.builder()
           .addBasePackage()
           .addProjectBaseName()
           .addIndentation()
@@ -27,7 +27,7 @@ class SpringBootCoreModuleConfiguration {
           .build()
       )
       .apiDoc("Spring Boot", "Init Spring Boot project with dependencies, App, and properties")
-      .organization(SeedModuleOrganization.builder().addDependency(JAVA_BUILD_TOOL).addDependency(JAVA_BASE).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(JAVA_BUILD_TOOL).addDependency(JAVA_BASE).build())
       .tags("server", "spring", "spring-boot")
       .factory(springBoot::buildModule);
   }

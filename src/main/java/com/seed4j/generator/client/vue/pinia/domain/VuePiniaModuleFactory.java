@@ -1,10 +1,10 @@
 package com.seed4j.generator.client.vue.pinia.domain;
 
-import static com.seed4j.module.domain.SeedModule.*;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
+import static com.seed4j.module.domain.Seed4JModule.*;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.VUE;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class VuePiniaModuleFactory {
@@ -21,7 +21,7 @@ public class VuePiniaModuleFactory {
     app.use(pinia);
     """;
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

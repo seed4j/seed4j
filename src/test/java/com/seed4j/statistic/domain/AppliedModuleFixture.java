@@ -1,6 +1,6 @@
 package com.seed4j.statistic.domain;
 
-import com.seed4j.shared.slug.domain.Seed4JModuleSlug;
+import com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -21,6 +21,6 @@ public final class AppliedModuleFixture {
   }
 
   private static Module moduleSlug(String slug) {
-    return Seed4JModuleSlug.fromString(slug).map(Seed4JModuleSlug::get).map(Module::new).orElse(new Module("module"));
+    return Seed4JCoreModuleSlug.fromString(slug).map(Seed4JCoreModuleSlug::get).map(Module::new).orElse(new Module("module"));
   }
 }

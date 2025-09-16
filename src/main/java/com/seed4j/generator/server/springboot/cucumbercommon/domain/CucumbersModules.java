@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.cucumbercommon.domain;
 
-import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 
 public final class CucumbersModules {
 
@@ -15,7 +15,7 @@ public final class CucumbersModules {
 
   private CucumbersModules() {}
 
-  public static SeedModuleBuilder cucumberModuleBuilder(SeedModuleProperties properties) {
+  public static Seed4JModuleBuilder cucumberModuleBuilder(Seed4JModuleProperties properties) {
     return moduleBuilder(properties)
       .javaDependencies()
       .addDependency(cucumberJunitPlatformEngineDependency())

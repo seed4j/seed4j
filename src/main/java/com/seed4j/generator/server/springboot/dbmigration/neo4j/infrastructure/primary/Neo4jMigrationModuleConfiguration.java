@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.dbmigration.neo4j.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.NEO4J;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.NEO4J_MIGRATIONS;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.NEO4J;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.NEO4J_MIGRATIONS;
 
 import com.seed4j.generator.server.springboot.dbmigration.neo4j.application.Neo4jMigrationApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,14 +14,14 @@ import org.springframework.context.annotation.Configuration;
 class Neo4jMigrationModuleConfiguration {
 
   @Bean
-  SeedModuleResource neo4jMigrationsModule(Neo4jMigrationApplicationService neo4jMigrations) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource neo4jMigrationsModule(Neo4jMigrationApplicationService neo4jMigrations) {
+    return Seed4JModuleResource.builder()
       .slug(NEO4J_MIGRATIONS)
       .propertiesDefinition(
-        SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
+        Seed4JModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
       )
       .apiDoc("Spring Boot - Database Migration", "Add neo4j migrations")
-      .organization(SeedModuleOrganization.builder().addDependency(NEO4J).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(NEO4J).build())
       .tags("server", "spring", "spring-boot", "database", "migration", "neo4j")
       .factory(neo4jMigrations::buildModule);
   }

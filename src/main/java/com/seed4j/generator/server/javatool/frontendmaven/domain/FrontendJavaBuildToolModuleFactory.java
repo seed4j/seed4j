@@ -1,27 +1,27 @@
 package com.seed4j.generator.server.javatool.frontendmaven.domain;
 
-import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.SeedModule.buildPropertyKey;
-import static com.seed4j.module.domain.SeedModule.buildPropertyValue;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.gradleCommunityPlugin;
-import static com.seed4j.module.domain.SeedModule.mavenPlugin;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.pluginExecution;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.buildPropertyKey;
+import static com.seed4j.module.domain.Seed4JModule.buildPropertyValue;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.COMPILE;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.GENERATE_RESOURCES;
 import static com.seed4j.module.domain.nodejs.NodePackageManager.NPM;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class FrontendJavaBuildToolModuleFactory {
@@ -30,7 +30,7 @@ public class FrontendJavaBuildToolModuleFactory {
 
   private static final String PROPERTIES_FIELD = "properties";
 
-  private static final SeedSource SOURCE = from("server/springboot/mvc/frontend");
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/frontend");
 
   private static final String REDIRECTION = "wire/frontend";
   private static final String REDIRECTION_PRIMARY = REDIRECTION + "/infrastructure/primary";
@@ -41,10 +41,10 @@ public class FrontendJavaBuildToolModuleFactory {
     this.nodeVersions = nodeVersions;
   }
 
-  public SeedModule buildFrontendMavenModule(SeedModuleProperties properties) {
+  public Seed4JModule buildFrontendMavenModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
-    SeedModuleBuilder moduleBuilder = commonModuleFiles(properties);
+    Seed4JModuleBuilder moduleBuilder = commonModuleFiles(properties);
 
     NodePackageManager nodePackageManager = properties.nodePackageManager();
     if (nodePackageManager == NPM) {
@@ -66,7 +66,7 @@ public class FrontendJavaBuildToolModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildFrontendMavenCacheModule(SeedModuleProperties properties) {
+  public Seed4JModule buildFrontendMavenCacheModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off
@@ -167,7 +167,7 @@ public class FrontendJavaBuildToolModuleFactory {
       .addExecution(MavenFrontendPluginExecutions.testFront(nodePackageManager));
   }
 
-  public SeedModule buildFrontendGradleModule(SeedModuleProperties properties) {
+  public Seed4JModule buildFrontendGradleModule(Seed4JModuleProperties properties) {
     NodePackageManager nodePackageManager = properties.nodePackageManager();
     // @formatter:off
     return commonModuleFiles(properties)
@@ -189,7 +189,7 @@ public class FrontendJavaBuildToolModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildMergeCypressCoverageModule(SeedModuleProperties properties) {
+  public Seed4JModule buildMergeCypressCoverageModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
     // @formatter:off
     return moduleBuilder(properties)
@@ -200,12 +200,12 @@ public class FrontendJavaBuildToolModuleFactory {
     // @formatter:on
   }
 
-  private static SeedModuleBuilder commonModuleFiles(SeedModuleProperties properties) {
+  private static Seed4JModuleBuilder commonModuleFiles(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     String packagePath = properties.packagePath();
 
-    SeedDestination mainDestination = toSrcMainJava().append(packagePath);
+    Seed4JDestination mainDestination = toSrcMainJava().append(packagePath);
     // @formatter:off
     return moduleBuilder(properties)
       .files()

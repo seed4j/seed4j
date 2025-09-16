@@ -1,22 +1,22 @@
 package com.seed4j.generator.buildtool.gradle.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.to;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class GradleModuleFactory {
 
-  private static final SeedSource SOURCE = from("buildtool/gradle");
+  private static final Seed4JSource SOURCE = from("buildtool/gradle");
 
-  public SeedModule buildGradleModule(SeedModuleProperties properties) {
+  public Seed4JModule buildGradleModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -92,7 +92,7 @@ public class GradleModuleFactory {
       .build();
   }
 
-  public SeedModule buildGradleWrapperModule(SeedModuleProperties properties) {
+  public Seed4JModule buildGradleWrapperModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

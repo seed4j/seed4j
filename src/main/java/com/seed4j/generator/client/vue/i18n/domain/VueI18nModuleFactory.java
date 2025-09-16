@@ -1,33 +1,33 @@
 package com.seed4j.generator.client.vue.i18n.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.lineAfterRegex;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.packageName;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineAfterRegex;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.packageName;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.VUE;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class VueI18nModuleFactory {
 
-  private static final SeedSource APP_SOURCE = from("client/common/i18n");
-  private static final SeedSource HOME_CONTEXT_SOURCE = from("client/common/i18n/app");
-  private static final SeedSource ASSETS_SOURCE = from("client/common/i18n/app/locales");
-  private static final SeedSource TEST_SOURCE = from("client/vue/i18n/src/test");
+  private static final Seed4JSource APP_SOURCE = from("client/common/i18n");
+  private static final Seed4JSource HOME_CONTEXT_SOURCE = from("client/common/i18n/app");
+  private static final Seed4JSource ASSETS_SOURCE = from("client/common/i18n/app/locales");
+  private static final Seed4JSource TEST_SOURCE = from("client/vue/i18n/src/test");
 
   private static final String INDEX = "src/main/webapp/app/";
   private static final String INDEX_TEST = "src/test/";
 
   private static final String PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

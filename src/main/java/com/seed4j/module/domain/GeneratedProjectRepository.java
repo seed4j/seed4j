@@ -1,7 +1,7 @@
 package com.seed4j.module.domain;
 
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 
 public interface GeneratedProjectRepository {
-  SeedProjectFilesPaths list(SeedProjectFolder folder, SeedFileMatcher files);
+  Seed4JProjectFilesPaths list(Seed4JProjectFolder folder, Seed4JFileMatcher files);
 }

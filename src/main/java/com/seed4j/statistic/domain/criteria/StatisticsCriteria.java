@@ -2,7 +2,7 @@ package com.seed4j.statistic.domain.criteria;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
-import com.seed4j.module.domain.SeedModuleSlug;
+import com.seed4j.module.domain.Seed4JModuleSlug;
 import java.time.Instant;
 import java.util.Optional;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -14,12 +14,12 @@ public final class StatisticsCriteria {
 
   private final Optional<Instant> startTime;
   private final Optional<Instant> endTime;
-  private final Optional<SeedModuleSlug> moduleSlug;
+  private final Optional<Seed4JModuleSlug> moduleSlug;
 
   private StatisticsCriteria(StatisticsCriteriaBuilder builder) {
     this.startTime = Optional.ofNullable(builder.startTime);
     this.endTime = Optional.ofNullable(builder.endTime);
-    this.moduleSlug = Optional.ofNullable(builder.moduleSlug).map(SeedModuleSlug::new);
+    this.moduleSlug = Optional.ofNullable(builder.moduleSlug).map(Seed4JModuleSlug::new);
   }
 
   public boolean isAnyCriteriaApplied() {
@@ -38,7 +38,7 @@ public final class StatisticsCriteria {
     return endTime;
   }
 
-  public Optional<SeedModuleSlug> moduleSlug() {
+  public Optional<Seed4JModuleSlug> moduleSlug() {
     return moduleSlug;
   }
 
@@ -73,7 +73,7 @@ public final class StatisticsCriteria {
     return new ToStringBuilder(this, SHORT_PREFIX_STYLE)
       .append("startTime", startTime.map(Instant::toString).orElse(""))
       .append("endTime", endTime.map(Instant::toString).orElse(""))
-      .append("moduleSlug", moduleSlug.map(SeedModuleSlug::get).orElse(""))
+      .append("moduleSlug", moduleSlug.map(Seed4JModuleSlug::get).orElse(""))
       .toString();
   }
 }

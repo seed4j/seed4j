@@ -1,12 +1,12 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.SeedModule.*;
+import static com.seed4j.module.domain.Seed4JModule.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedFileMatcher;
-import com.seed4j.module.domain.SeedProjectFilePath;
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.Seed4JFileMatcher;
+import com.seed4j.module.domain.Seed4JProjectFilePath;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.GeneratorException;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class FileSystemGeneratedProjectRepositoryTest {
 
   @Test
   void shouldGracefullyHandleException() {
-    assertThatThrownBy(() -> generatedProject.list(new SeedProjectFolder("unknown"), allMatch())).isExactlyInstanceOf(
+    assertThatThrownBy(() -> generatedProject.list(new Seed4JProjectFolder("unknown"), allMatch())).isExactlyInstanceOf(
       GeneratorException.class
     );
   }
@@ -27,14 +27,14 @@ class FileSystemGeneratedProjectRepositoryTest {
   @Test
   void shouldListFiles() {
     Stream<String> files = generatedProject
-      .list(new SeedProjectFolder(SOURCE), filesWithExtension("java"))
+      .list(new Seed4JProjectFolder(SOURCE), filesWithExtension("java"))
       .stream()
-      .map(SeedProjectFilePath::get);
+      .map(Seed4JProjectFilePath::get);
 
     assertThat(files).containsExactlyInAnyOrder("IntegrationTest.java", "MainApp.java");
   }
 
-  private SeedFileMatcher allMatch() {
+  private Seed4JFileMatcher allMatch() {
     return path -> true;
   }
 }

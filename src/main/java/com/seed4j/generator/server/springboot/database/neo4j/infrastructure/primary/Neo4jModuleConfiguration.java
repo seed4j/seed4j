@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.database.neo4j.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.NEO4J;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.NEO4J;
 
 import com.seed4j.generator.server.springboot.database.neo4j.application.Neo4jApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Configuration;
 class Neo4jModuleConfiguration {
 
   @Bean
-  SeedModuleResource neo4jModule(Neo4jApplicationService neo4j) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource neo4jModule(Neo4jApplicationService neo4j) {
+    return Seed4JModuleResource.builder()
       .slug(NEO4J)
       .propertiesDefinition(
-        SeedModulePropertiesDefinition.builder()
+        Seed4JModulePropertiesDefinition.builder()
           .addBasePackage()
           .addIndentation()
           .addProjectBaseName()
@@ -25,7 +25,7 @@ class Neo4jModuleConfiguration {
           .build()
       )
       .apiDoc("Spring Boot - Database", "Add Neo4j drivers and dependencies, with testcontainers")
-      .organization(SeedModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(Seed4JModuleOrganization.SPRINGBOOT_DEPENDENCY)
       .tags("server", "spring", "spring-boot", "database")
       .factory(neo4j::buildModule);
   }

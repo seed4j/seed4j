@@ -1,24 +1,24 @@
 package com.seed4j.generator.server.javatool.jacoco.domain;
 
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.gradleCorePlugin;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.mavenPlugin;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.pluginExecution;
-import static com.seed4j.module.domain.SeedModule.versionSlug;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.gradleCorePlugin;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
+import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.POST_INTEGRATION_TEST;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.TEST;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.VERIFY;
 
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JacocoModuleFactory {
@@ -28,7 +28,7 @@ public class JacocoModuleFactory {
   private static final ArtifactId JACOCO_ARTIFACT_ID = artifactId("jacoco-maven-plugin");
   private static final VersionSlug JACOCO_VERSION = versionSlug(JACOCO);
 
-  public SeedModule buildJacocoModule(SeedModuleProperties properties) {
+  public Seed4JModule buildJacocoModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -51,7 +51,7 @@ public class JacocoModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildJacocoWithMinCoverageCheckModule(SeedModuleProperties properties) {
+  public Seed4JModule buildJacocoWithMinCoverageCheckModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

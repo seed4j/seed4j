@@ -12,7 +12,7 @@ import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.DependencyId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
@@ -30,7 +30,7 @@ public class VersionsCatalog {
 
   private final FileConfig tomlConfigFile;
 
-  public VersionsCatalog(SeedProjectFolder projectFolder) {
+  public VersionsCatalog(Seed4JProjectFolder projectFolder) {
     this(tomlVersionCatalogPath(projectFolder));
   }
 
@@ -49,7 +49,7 @@ public class VersionsCatalog {
     }
   }
 
-  private static Path tomlVersionCatalogPath(SeedProjectFolder projectFolder) {
+  private static Path tomlVersionCatalogPath(Seed4JProjectFolder projectFolder) {
     return projectFolder.filePath("gradle").resolve("libs.versions.toml");
   }
 

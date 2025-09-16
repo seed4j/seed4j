@@ -1,15 +1,15 @@
 package com.seed4j.generator.server.springboot.mvc.sample.jpapersistence.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.replacement.RegexNeedleBeforeReplacer;
 import com.seed4j.module.domain.replacement.ReplacementCondition;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class SampleJpaPersistenceModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/mvc/sample/jpapersistence");
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/sample/jpapersistence");
 
   private static final String SECONDARY = "infrastructure/secondary";
   private static final String SECONDARY_DESTINATION = "sample/" + SECONDARY;
@@ -43,7 +43,7 @@ public class SampleJpaPersistenceModuleFactory {
     )
   );
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

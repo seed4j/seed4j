@@ -14,7 +14,7 @@ class UnknownNodePackageExceptionTest {
   void shouldGetExceptionInformation() {
     UnknownNodePackageException exception = new UnknownNodePackageException(
       new NodePackageName("package-name"),
-      SeedNodePackagesVersionSource.ANGULAR.build()
+      Seed4JNodePackagesVersionSource.ANGULAR.build()
     );
 
     assertThat(exception.getMessage()).isEqualTo("Can't find package-name version in angular package.json, forgot to add it?");

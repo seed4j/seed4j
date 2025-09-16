@@ -1,12 +1,12 @@
 package com.seed4j.generator.client.tikui.domain;
 
-import static com.seed4j.module.domain.SeedModulesFixture.*;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
+import static com.seed4j.module.domain.Seed4JModulesFixture.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import java.util.Set;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -21,9 +21,9 @@ class TikuiModuleFactoryTest {
 
     @Test
     void shouldBuildModuleWithPugFormat() {
-      SeedModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      Seed4JModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-      SeedModule module = factory.buildModule(properties);
+      Seed4JModule module = factory.buildModule(properties);
 
       assertThatModuleWithFiles(module, packageJsonFile(), prettierConfigFile())
         .hasFile("package.json")
@@ -139,10 +139,10 @@ class TikuiModuleFactoryTest {
     return Set.of("_" + name + ".scss", name + ".code.pug", name + ".md", name + ".mixin.pug", name + ".render.pug").toArray(String[]::new);
   }
 
-  private static SeedModuleAsserter assertThatTikuiModule(ModuleFile proxyFile, ModuleFile indexFile) {
-    SeedModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+  private static Seed4JModuleAsserter assertThatTikuiModule(ModuleFile proxyFile, ModuleFile indexFile) {
+    Seed4JModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     return assertThatModuleWithFiles(module, packageJsonFile(), proxyFile, indexFile)
       .hasFile("package.json")

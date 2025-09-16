@@ -1,16 +1,16 @@
 package com.seed4j.generator.server.springboot.cucumberauthentication.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CUCUMBER_AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_BOOT_CUCUMBER;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CUCUMBER_JWT_AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CUCUMBER_OAUTH_2_AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_JWT;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_OAUTH_2;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.CUCUMBER_AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.SPRING_BOOT_CUCUMBER;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_CUCUMBER_JWT_AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_CUCUMBER_OAUTH_2_AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_JWT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_OAUTH_2;
 
 import com.seed4j.generator.server.springboot.cucumberauthentication.application.CucumberAuthenticationApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,13 +18,13 @@ import org.springframework.context.annotation.Configuration;
 class CucumberAuthenticationModuleConfiguration {
 
   @Bean
-  SeedModuleResource cucumberOAuth2AuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentication) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource cucumberOAuth2AuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentication) {
+    return Seed4JModuleResource.builder()
       .slug(SPRING_BOOT_CUCUMBER_OAUTH_2_AUTHENTICATION)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
       .apiDoc("Spring Boot - Component Tests", "Add OAuth2 authentication steps for cucumber")
       .organization(
-        SeedModuleOrganization.builder()
+        Seed4JModuleOrganization.builder()
           .feature(CUCUMBER_AUTHENTICATION)
           .addDependency(SPRING_BOOT_CUCUMBER)
           .addDependency(SPRING_BOOT_OAUTH_2)
@@ -35,13 +35,13 @@ class CucumberAuthenticationModuleConfiguration {
   }
 
   @Bean
-  SeedModuleResource cucumberJwtAuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentication) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource cucumberJwtAuthenticationModule(CucumberAuthenticationApplicationService cucumberAuthentication) {
+    return Seed4JModuleResource.builder()
       .slug(SPRING_BOOT_CUCUMBER_JWT_AUTHENTICATION)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addBasePackage().build())
       .apiDoc("Spring Boot - Component Tests", "Add JWT authentication steps for cucumber")
       .organization(
-        SeedModuleOrganization.builder()
+        Seed4JModuleOrganization.builder()
           .feature(CUCUMBER_AUTHENTICATION)
           .addDependency(SPRING_BOOT_CUCUMBER)
           .addDependency(SPRING_BOOT_JWT)

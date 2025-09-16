@@ -5,25 +5,25 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import com.seed4j.module.domain.resource.SeedModuleSlugFactory;
-import com.seed4j.module.domain.resource.SeedModuleRank;
+import com.seed4j.module.domain.resource.Seed4JModuleSlugFactory;
+import com.seed4j.module.domain.resource.Seed4JModuleRank;
 import {{packageName}}.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @ExcludeFromGeneratedCodeCoverage
-public enum {{ baseName }}ModuleSlug implements SeedModuleSlugFactory {
+public enum {{ baseName }}ModuleSlug implements Seed4JModuleSlugFactory {
 
   // Add here the slugs of your modules
-  // e.g.: MY_MODULE("my-module", SeedModuleRank.RANK_B),
+  // e.g.: MY_MODULE("my-module", Seed4JModuleRank.RANK_B),
   ;
 
   private static final Map<String, {{ baseName }}ModuleSlug> moduleSlugMap = Stream.of(values()).collect(
     Collectors.toMap({{ baseName }}ModuleSlug::get, Function.identity())
   );
   private final String slug;
-  private final SeedModuleRank rank;
+  private final Seed4JModuleRank rank;
 
   @SuppressWarnings("java:S1144")
-  {{ baseName }}ModuleSlug(String slug, SeedModuleRank rank) {
+  {{ baseName }}ModuleSlug(String slug, Seed4JModuleRank rank) {
     this.slug = slug;
     this.rank = rank;
   }
@@ -34,7 +34,7 @@ public enum {{ baseName }}ModuleSlug implements SeedModuleSlugFactory {
   }
 
   @Override
-  public SeedModuleRank rank() {
+  public Seed4JModuleRank rank() {
     return rank;
   }
 

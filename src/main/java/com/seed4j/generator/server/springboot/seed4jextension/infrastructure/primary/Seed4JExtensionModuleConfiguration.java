@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.seed4jextension.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.*;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.*;
 
 import com.seed4j.generator.server.springboot.seed4jextension.application.Seed4JExtensionApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,18 +13,18 @@ import org.springframework.context.annotation.Configuration;
 class Seed4JExtensionModuleConfiguration {
 
   @Bean
-  SeedModuleResource seed4jExtensionModule(Seed4JExtensionApplicationService seed4jextension) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource seed4jExtensionModule(Seed4JExtensionApplicationService seed4jextension) {
+    return Seed4JModuleResource.builder()
       .slug(SEED4J_EXTENSION)
       .propertiesDefinition(propertiesDefinition())
-      .apiDoc("Seed4j", "Create a Seed4J extension to build custom modules")
-      .organization(SeedModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .apiDoc("Seed4J", "Create a Seed4J extension to build custom modules")
+      .organization(Seed4JModuleOrganization.SPRINGBOOT_DEPENDENCY)
       .tags("server")
       .factory(seed4jextension::buildModule);
   }
 
-  private SeedModulePropertiesDefinition propertiesDefinition() {
-    return SeedModulePropertiesDefinition.builder()
+  private Seed4JModulePropertiesDefinition propertiesDefinition() {
+    return Seed4JModulePropertiesDefinition.builder()
       .addBasePackage()
       .addProjectBaseName()
       .addIndentation()

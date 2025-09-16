@@ -1,27 +1,27 @@
 package com.seed4j.generator.server.springboot.broker.kafka.domain;
 
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.dockerComposeFile;
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.toSrcMainDocker;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
-import static com.seed4j.module.domain.SeedModule.versionSlug;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainDocker;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import java.util.UUID;
 
 public class KafkaModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/broker/kafka");
+  private static final Seed4JSource SOURCE = from("server/springboot/broker/kafka");
   private static final String TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA = "/wire/kafka/infrastructure/config";
   private static final String SAMPLE_INFRASTRUCTURE_SECONDARY_KAFKA_PRODUCER = "sample/infrastructure/secondary/kafka/producer";
   private static final String SAMPLE_INFRASTRUCTURE_PRIMARY_KAFKA_CONSUMER = "sample/infrastructure/primary/kafka/consumer";
@@ -34,7 +34,7 @@ public class KafkaModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public SeedModule buildModuleInit(SeedModuleProperties properties) {
+  public Seed4JModule buildModuleInit(Seed4JModuleProperties properties) {
     String packagePath = properties.packagePath();
     String kafkaClusterId = properties.getOrDefaultString("kafkaClusterId", UUID.randomUUID().toString());
 
@@ -80,7 +80,7 @@ public class KafkaModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildModuleSampleProducerConsumer(SeedModuleProperties properties) {
+  public Seed4JModule buildModuleSampleProducerConsumer(Seed4JModuleProperties properties) {
     String packagePath = properties.packagePath();
 
     // @formatter:off
@@ -101,7 +101,7 @@ public class KafkaModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildModuleAkhq(SeedModuleProperties properties) {
+  public Seed4JModule buildModuleAkhq(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .context()

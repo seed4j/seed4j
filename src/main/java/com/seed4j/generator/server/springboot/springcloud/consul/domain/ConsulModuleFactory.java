@@ -1,33 +1,33 @@
 package com.seed4j.generator.server.springboot.springcloud.consul.domain;
 
-import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.dockerComposeFile;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.toSrcMainDocker;
+import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainDocker;
 
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.base64.domain.Base64Utils;
 import com.seed4j.shared.error.domain.Assert;
 
 public class ConsulModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/springcloud/consul");
+  private static final Seed4JSource SOURCE = from("server/springboot/springcloud/consul");
 
   private static final String JWT_BASE_64_SECRET = "jwtBase64Secret";
   private static final GroupId SPRING_CLOUD_GROUP_ID = groupId("org.springframework.cloud");
@@ -42,7 +42,7 @@ public class ConsulModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().get();
@@ -51,7 +51,7 @@ public class ConsulModuleFactory {
     DockerImageVersion dockerImageConfigLoader = dockerImages.get(DOCKER_IMAGE_CONFIG_LOADER);
 
     // @formatter:off
-    SeedModuleBuilder builder = moduleBuilder(properties)
+    Seed4JModuleBuilder builder = moduleBuilder(properties)
       .context()
         .put("dockerImageConsul", dockerImageConsul.fullName())
         .put("dockerImageConfigLoader", dockerImageConfigLoader.fullName())

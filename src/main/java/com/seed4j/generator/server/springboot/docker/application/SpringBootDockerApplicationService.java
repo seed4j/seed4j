@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.docker.application;
 
 import com.seed4j.generator.server.springboot.docker.domain.SpringBootDockerModuleFactory;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,19 +14,19 @@ public class SpringBootDockerApplicationService {
     springBootDocker = new SpringBootDockerModuleFactory();
   }
 
-  public SeedModule buildJibModule(SeedModuleProperties properties) {
+  public Seed4JModule buildJibModule(Seed4JModuleProperties properties) {
     return springBootDocker.buildJibModule(properties);
   }
 
-  public SeedModule buildDockerFileMavenModule(SeedModuleProperties properties) {
+  public Seed4JModule buildDockerFileMavenModule(Seed4JModuleProperties properties) {
     return springBootDocker.buildDockerFileMavenModule(properties);
   }
 
-  public SeedModule buildDockerFileGradleModule(SeedModuleProperties properties) {
+  public Seed4JModule buildDockerFileGradleModule(Seed4JModuleProperties properties) {
     return springBootDocker.buildDockerFileGradleModule(properties);
   }
 
-  public SeedModule buildSpringBootDockerComposeModule(SeedModuleProperties properties) {
+  public Seed4JModule buildSpringBootDockerComposeModule(Seed4JModuleProperties properties) {
     return springBootDocker.buildSpringBootDockerComposeModule(properties);
   }
 }

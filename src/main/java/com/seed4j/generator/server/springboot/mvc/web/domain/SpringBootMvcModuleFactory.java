@@ -1,29 +1,29 @@
 package com.seed4j.generator.server.springboot.mvc.web.domain;
 
-import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.localEnvironment;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.localEnvironment;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringBootMvcModuleFactory {
@@ -31,12 +31,12 @@ public class SpringBootMvcModuleFactory {
   private static final String PACKAGE_INFO = "package-info.java";
   private static final String CORS = "cors";
 
-  private static final SeedSource SOURCE = from("server/springboot/mvc/web");
-  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
-  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/web");
+  private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
+  private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
 
-  private static final SeedSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
-  private static final SeedSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
+  private static final Seed4JSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
+  private static final Seed4JSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
   private static final String WIRE_JACKSON_CONFIG = "wire/jackson/infrastructure/primary";
 
   private static final GroupId SPRING_BOOT_GROUP = groupId("org.springframework.boot");
@@ -47,11 +47,11 @@ public class SpringBootMvcModuleFactory {
   private static final String CORS_DESTINATION = "wire/security";
   private static final String CORS_PRIMARY = CORS_DESTINATION + "/infrastructure/primary";
 
-  public SeedModule buildEmptyModule(SeedModuleProperties properties) {
+  public Seed4JModule buildEmptyModule(Seed4JModuleProperties properties) {
     return moduleBuilder(properties).build();
   }
 
-  public SeedModule buildTomcatModule(SeedModuleProperties properties) {
+  public Seed4JModule buildTomcatModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -63,7 +63,7 @@ public class SpringBootMvcModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildUndertowModule(SeedModuleProperties properties) {
+  public Seed4JModule buildUndertowModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -84,11 +84,11 @@ public class SpringBootMvcModuleFactory {
       .build();
   }
 
-  private SeedModuleBuilder springMvcBuilder(SeedModuleProperties properties, String loggerName, LogLevel logLevel) {
+  private Seed4JModuleBuilder springMvcBuilder(Seed4JModuleProperties properties, String loggerName, LogLevel logLevel) {
     String packagePath = properties.packagePath();
 
-    SeedDestination mainDestination = toSrcMainJava().append(packagePath);
-    SeedDestination testDestination = toSrcTestJava().append(packagePath);
+    Seed4JDestination mainDestination = toSrcMainJava().append(packagePath);
+    Seed4JDestination testDestination = toSrcTestJava().append(packagePath);
 
     // @formatter:off
     return moduleBuilder(properties)

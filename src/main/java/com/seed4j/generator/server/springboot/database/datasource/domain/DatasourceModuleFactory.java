@@ -1,28 +1,28 @@
 package com.seed4j.generator.server.springboot.database.datasource.domain;
 
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.dockerComposeFile;
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.SeedModule.toSrcMainDocker;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainDocker;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 import static com.seed4j.module.domain.javadependency.JavaDependencyScope.RUNTIME;
 
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.docker.DockerImageName;
 import com.seed4j.module.domain.docker.DockerImageVersion;
 import com.seed4j.module.domain.docker.DockerImages;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
 
@@ -39,7 +39,7 @@ public class DatasourceModuleFactory {
   private static final String SPRING_DATASOURCE_PASSWORD = "spring.datasource.password";
   private static final String SPRING_DATASOURCE_DRIVER_CLASS_NAME = "spring.datasource.driver-class-name";
 
-  private static final SeedSource SOURCE = from("server/springboot/database/datasource");
+  private static final Seed4JSource SOURCE = from("server/springboot/database/datasource");
 
   private final DockerImages dockerImages;
 
@@ -47,7 +47,7 @@ public class DatasourceModuleFactory {
     this.dockerImages = dockerImages;
   }
 
-  public SeedModule buildPostgreSQL(SeedModuleProperties properties) {
+  public Seed4JModule buildPostgreSQL(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     DatasourceProperties datasourceProperties = DatasourceProperties.builder()
@@ -85,7 +85,7 @@ public class DatasourceModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildMariaDB(SeedModuleProperties properties) {
+  public Seed4JModule buildMariaDB(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     DatasourceProperties datasourceProperties = DatasourceProperties.builder()
@@ -110,7 +110,7 @@ public class DatasourceModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildMySQL(SeedModuleProperties properties) {
+  public Seed4JModule buildMySQL(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     DatasourceProperties datasourceProperties = DatasourceProperties.builder()
@@ -135,7 +135,7 @@ public class DatasourceModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildMsSQL(SeedModuleProperties properties) {
+  public Seed4JModule buildMsSQL(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     DatasourceProperties datasourceProperties = DatasourceProperties.builder()
@@ -192,12 +192,12 @@ public class DatasourceModuleFactory {
     // @formatter:on
   }
 
-  public static Consumer<SeedModule.SeedModuleBuilder> declareDockerComposeService(DatasourceProperties datasourceProperties) {
+  public static Consumer<Seed4JModule.Seed4JModuleBuilder> declareDockerComposeService(DatasourceProperties datasourceProperties) {
     return moduleBuilder ->
       moduleBuilder.dockerComposeFile().append(dockerComposeFile("src/main/docker/%s.yml".formatted(datasourceProperties.id())));
   }
 
-  public static Consumer<SeedModule.SeedModuleBuilder> dockerContainer(
+  public static Consumer<Seed4JModule.Seed4JModuleBuilder> dockerContainer(
     DockerImages dockerImages,
     DatasourceProperties datasourceProperties
   ) {
@@ -219,7 +219,7 @@ public class DatasourceModuleFactory {
           .add(SOURCE.append("docker").template(datasourceProperties.id() + ".yml"), toSrcMainDocker().append(datasourceProperties.id() + ".yml"));
   }
 
-  public static Consumer<SeedModule.SeedModuleBuilder> testcontainers(DockerImages dockerImages, SeedModuleProperties moduleProperties, DatasourceProperties datasourceProperties) {
+  public static Consumer<Seed4JModule.Seed4JModuleBuilder> testcontainers(DockerImages dockerImages, Seed4JModuleProperties moduleProperties, DatasourceProperties datasourceProperties) {
     DockerImageVersion dockerImage = dockerImages.get(datasourceProperties.dockerImageName());
 
     // @formatter:off
@@ -241,7 +241,7 @@ public class DatasourceModuleFactory {
         .springTestLogger("org.testcontainers", LogLevel.WARN);
   }
 
-  public static Consumer<SeedModule.SeedModuleBuilder> connectionPool(DatasourceProperties datasourceProperties) {
+  public static Consumer<Seed4JModule.Seed4JModuleBuilder> connectionPool(DatasourceProperties datasourceProperties) {
     // @formatter:off
     return moduleBuilder ->
       moduleBuilder

@@ -3,7 +3,7 @@ package com.seed4j.module.domain.resource;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModuleSlug;
+import com.seed4j.module.domain.Seed4JModuleSlug;
 import com.seed4j.shared.error.domain.ErrorStatus;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ class UnknownSlugExceptionTest {
 
   @Test
   void shouldGetExceptionInformation() {
-    UnknownSlugException exception = new UnknownSlugException(new SeedModuleSlug("unknown-slug"));
+    UnknownSlugException exception = new UnknownSlugException(new Seed4JModuleSlug("unknown-slug"));
 
     assertThat(exception.getMessage()).isEqualTo("Module unknown-slug does not exist");
     assertThat(exception.status()).isEqualTo(ErrorStatus.INTERNAL_SERVER_ERROR);

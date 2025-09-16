@@ -1,6 +1,6 @@
 package com.seed4j.cucumber;
 
-import com.seed4j.Seed4jApp;
+import com.seed4j.Seed4JApp;
 import com.seed4j.cucumber.rest.CucumberRestTestContext;
 import com.seed4j.project.infrastructure.secondary.FakedFileSystemProjectFilesConfiguration;
 import io.cucumber.java.Before;
@@ -22,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 @ActiveProfiles("test")
 @CucumberContextConfiguration
-@SpringBootTest(classes = { Seed4jApp.class, FakedFileSystemProjectFilesConfiguration.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = { Seed4JApp.class, FakedFileSystemProjectFilesConfiguration.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class CucumberConfiguration {
 
   @Autowired

@@ -57,7 +57,7 @@
     <maven-javadoc-plugin.version>3.11.3</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
     <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
-    <start-class>com.seed4j.Seed4jApp</start-class>
+    <start-class>com.seed4j.Seed4JApp</start-class>
 
     <compiler-plugin.version>3.14.0</compiler-plugin.version>
     <surefire-plugin.version>3.5.4</surefire-plugin.version>

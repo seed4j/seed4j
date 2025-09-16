@@ -2,8 +2,8 @@ package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.TestFileUtils.content;
 import static com.seed4j.TestFileUtils.loadDefaultProperties;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 

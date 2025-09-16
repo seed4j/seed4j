@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.replacement;
 
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public record TextNeedleBeforeReplacer(ReplacementCondition condition, String te
         return content;
       }
 
-      String replacementBlock = replacement + SeedModule.LINE_BREAK;
+      String replacementBlock = replacement + Seed4JModule.LINE_BREAK;
       return String.join(replacementBlock, buildBlocks(content, needlesLinesIndexes));
     };
   }
@@ -47,7 +47,7 @@ public record TextNeedleBeforeReplacer(ReplacementCondition condition, String te
   }
 
   private int lineIndex(String content, int textIndex) {
-    int index = content.substring(0, textIndex).lastIndexOf(SeedModule.LINE_BREAK);
+    int index = content.substring(0, textIndex).lastIndexOf(Seed4JModule.LINE_BREAK);
 
     if (index == -1) {
       return 0;

@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.logsspy.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.LOGS_SPY;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.LOGS_SPY;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT;
 
 import com.seed4j.generator.server.springboot.logsspy.application.LogsSpyApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,12 +14,12 @@ import org.springframework.context.annotation.Configuration;
 class LogsSpyModuleConfiguration {
 
   @Bean
-  SeedModuleResource logSpyModule(LogsSpyApplicationService logsSpy) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource logSpyModule(LogsSpyApplicationService logsSpy) {
+    return Seed4JModuleResource.builder()
       .slug(LOGS_SPY)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
       .apiDoc("Spring Boot", "Add LogsSpy JUnit5 extension to project")
-      .organization(SeedModuleOrganization.builder().addDependency(SPRING_BOOT).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(SPRING_BOOT).build())
       .tags("server", "test", "logback", "junit-extension")
       .factory(logsSpy::buildModule);
   }

@@ -1,9 +1,9 @@
 package com.seed4j.generator.typescript.common.domain;
 
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.text;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.text;
 
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.replacement.MandatoryReplacer;
 import java.util.function.Consumer;
 
@@ -11,7 +11,7 @@ public final class VitestShortcuts {
 
   private VitestShortcuts() {}
 
-  public static Consumer<SeedModule.SeedModuleBuilder> vitestCoverageExclusion(String exclusionFilePattern) {
+  public static Consumer<Seed4JModule.Seed4JModuleBuilder> vitestCoverageExclusion(String exclusionFilePattern) {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

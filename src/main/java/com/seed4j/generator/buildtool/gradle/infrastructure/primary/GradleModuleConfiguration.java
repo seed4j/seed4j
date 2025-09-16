@@ -1,15 +1,15 @@
 package com.seed4j.generator.buildtool.gradle.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JAVA_BUILD_TOOL_WRAPPER;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GRADLE_JAVA;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.GRADLE_WRAPPER;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INIT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.JAVA_BUILD_TOOL;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.JAVA_BUILD_TOOL_WRAPPER;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.GRADLE_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.GRADLE_WRAPPER;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.INIT;
 
 import com.seed4j.generator.buildtool.gradle.application.GradleApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,23 +17,23 @@ import org.springframework.context.annotation.Configuration;
 class GradleModuleConfiguration {
 
   @Bean
-  SeedModuleResource gradleModule(GradleApplicationService gradle) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource gradleModule(GradleApplicationService gradle) {
+    return Seed4JModuleResource.builder()
       .slug(GRADLE_JAVA)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addProjectName().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addProjectName().build())
       .apiDoc("Build Tool", "Init Gradle project with kotlin DSL")
-      .organization(SeedModuleOrganization.builder().feature(JAVA_BUILD_TOOL).addDependency(INIT).build())
+      .organization(Seed4JModuleOrganization.builder().feature(JAVA_BUILD_TOOL).addDependency(INIT).build())
       .tags("buildtool", "test")
       .factory(gradle::buildGradleModule);
   }
 
   @Bean
-  SeedModuleResource gradleWrapperModule(GradleApplicationService gradle) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource gradleWrapperModule(GradleApplicationService gradle) {
+    return Seed4JModuleResource.builder()
       .slug(GRADLE_WRAPPER)
       .withoutProperties()
       .apiDoc("Build Tool", "Add gradle wrapper")
-      .organization(SeedModuleOrganization.builder().feature(JAVA_BUILD_TOOL_WRAPPER).addDependency(GRADLE_JAVA).build())
+      .organization(Seed4JModuleOrganization.builder().feature(JAVA_BUILD_TOOL_WRAPPER).addDependency(GRADLE_JAVA).build())
       .tags("buildtool", "test")
       .factory(gradle::buildGradleWrapperModule);
   }

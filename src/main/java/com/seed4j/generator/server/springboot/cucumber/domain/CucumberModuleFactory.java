@@ -1,31 +1,31 @@
 package com.seed4j.generator.server.springboot.cucumber.domain;
 
 import static com.seed4j.generator.server.springboot.cucumbercommon.domain.CucumbersModules.cucumberModuleBuilder;
-import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class CucumberModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/cucumber");
+  private static final Seed4JSource SOURCE = from("server/springboot/cucumber");
 
-  public SeedModule buildInitializationModule(SeedModuleProperties properties) {
+  public Seed4JModule buildInitializationModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();
-    SeedDestination destination = toSrcTestJava().append(properties.packagePath()).append("cucumber");
+    Seed4JDestination destination = toSrcTestJava().append(properties.packagePath()).append("cucumber");
 
     // @formatter:off
-    SeedModuleBuilder builder = cucumberModuleBuilder(properties)
+    Seed4JModuleBuilder builder = cucumberModuleBuilder(properties)
     .context()
       .put("baseName", baseName)
       .and()
@@ -61,7 +61,7 @@ public class CucumberModuleFactory {
     return builder.build();
   }
 
-  public SeedModule buildJpaResetModule(SeedModuleProperties properties) {
+  public Seed4JModule buildJpaResetModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     return moduleBuilder(properties)

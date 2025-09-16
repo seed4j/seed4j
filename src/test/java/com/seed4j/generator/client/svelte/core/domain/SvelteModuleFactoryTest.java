@@ -1,19 +1,19 @@
 package com.seed4j.generator.client.svelte.core.domain;
 
 import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.lintStagedConfigFileWithPrettier;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeScript;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.lintStagedConfigFileWithPrettier;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.packageJsonFile;
 import static org.mockito.Mockito.verify;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,9 +32,9 @@ class SvelteModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     // @formatter:off
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
@@ -95,9 +95,11 @@ class SvelteModuleFactoryTest {
 
   @Test
   void shouldBuildModuleWithPnpm() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).nodePackageManager(PNPM).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .nodePackageManager(PNPM)
+      .build();
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
       .hasFile("package.json")

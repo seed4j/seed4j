@@ -1,30 +1,30 @@
 package com.seed4j.generator.client.tools.cypressmergecoverage.domain;
 
-import static com.seed4j.module.domain.SeedModule.fileStart;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.lineAfterRegex;
-import static com.seed4j.module.domain.SeedModule.packageName;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.regex;
-import static com.seed4j.module.domain.SeedModule.scriptCommand;
-import static com.seed4j.module.domain.SeedModule.scriptKey;
-import static com.seed4j.module.domain.SeedModule.text;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.Seed4JModule.fileStart;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineAfterRegex;
+import static com.seed4j.module.domain.Seed4JModule.packageName;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.regex;
+import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
+import static com.seed4j.module.domain.Seed4JModule.scriptKey;
+import static com.seed4j.module.domain.Seed4JModule.text;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import java.util.function.Consumer;
 
 public class CypressMergeCoverageModuleFactory {
 
-  private static final SeedSource SOURCE = from("client/tools/cypressmergecoverage");
+  private static final Seed4JSource SOURCE = from("client/tools/cypressmergecoverage");
   private static final String CYPRESS_COMPONENT_TESTS = "src/test/webapp/component";
 
-  public SeedModule buildCypressMergeCoverage(SeedModuleProperties properties) {
+  public Seed4JModule buildCypressMergeCoverage(Seed4JModuleProperties properties) {
     // @formatter:off
-    return SeedModule.moduleBuilder(properties)
+    return Seed4JModule.moduleBuilder(properties)
       .packageJson()
         .addDependency(packageName("@cypress/code-coverage"), COMMON)
         .addDependency(packageName("cpy-cli"), COMMON)
@@ -72,7 +72,7 @@ public class CypressMergeCoverageModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<SeedModule.SeedModuleBuilder> patchCypressConfig(SeedModuleProperties properties) {
+  private Consumer<Seed4JModule.Seed4JModuleBuilder> patchCypressConfig(Seed4JModuleProperties properties) {
     return moduleBuilder ->
       moduleBuilder
         .mandatoryReplacements()
@@ -90,7 +90,7 @@ public class CypressMergeCoverageModuleFactory {
         .add(text("supportFile: false"), "supportFile: 'src/test/webapp/component/support/component-tests.ts'");
   }
 
-  private Consumer<SeedModule.SeedModuleBuilder> patchVitestConfig() {
+  private Consumer<Seed4JModule.Seed4JModuleBuilder> patchVitestConfig() {
     return moduleBuilder ->
       moduleBuilder
         .mandatoryReplacements()
@@ -98,7 +98,7 @@ public class CypressMergeCoverageModuleFactory {
         .add(regex("reportsDirectory: '(.*?)/test-results/'"), "reportsDirectory: 'target/frontend-coverage/unit-tests/'");
   }
 
-  private Consumer<SeedModule.SeedModuleBuilder> patchViteConfig() {
+  private Consumer<Seed4JModule.Seed4JModuleBuilder> patchViteConfig() {
     return moduleBuilder ->
       moduleBuilder
         .mandatoryReplacements()

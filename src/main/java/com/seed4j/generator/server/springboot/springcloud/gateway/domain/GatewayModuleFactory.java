@@ -2,33 +2,33 @@ package com.seed4j.generator.server.springboot.springcloud.gateway.domain;
 
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.SPRING_CLOUD_GROUP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.springCloudDependenciesManagement;
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class GatewayModuleFactory {
 
   private static final String GATEWAY_PACKAGE = "wire/gateway/infrastructure/primary";
-  private static final SeedSource SOURCE = from("server/springboot/springcloud/gateway/java");
+  private static final Seed4JSource SOURCE = from("server/springboot/springcloud/gateway/java");
   private static final PropertyValue TRUE_VALUE = propertyValue(true);
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
-    SeedDestination testDestination = toSrcTestJava().append(packagePath).append(GATEWAY_PACKAGE);
-    SeedDestination destination = toSrcMainJava().append(packagePath).append(GATEWAY_PACKAGE);
+    Seed4JDestination testDestination = toSrcTestJava().append(packagePath).append(GATEWAY_PACKAGE);
+    Seed4JDestination destination = toSrcMainJava().append(packagePath).append(GATEWAY_PACKAGE);
 
     // @formatter:off
     return moduleBuilder(properties)

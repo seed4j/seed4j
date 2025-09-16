@@ -225,8 +225,8 @@ class FileSystemProjectsRepositoryTest {
           ".seed4j/modules/20250819203000-another-test-module.json"
         )
         .add(
-          "src/test/resources/projects/composed-history/20250819203001-another-test-module.json",
-          ".seed4j/modules/20250819203001-another-test-module.json"
+          "src/test/resources/projects/composed-history/20250819203001002-another-test-module.json",
+          ".seed4j/modules/20250819203001002-another-test-module.json"
         )
         .add("src/test/resources/projects/composed-history/dummy.txt", ".seed4j/modules/dummy.txt")
         .build();

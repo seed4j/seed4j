@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.SeedModulesFixture.*;
+import static com.seed4j.module.domain.Seed4JModulesFixture.*;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -12,9 +12,9 @@ import com.seed4j.LogsSpyExtension;
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.GeneratedProjectRepository;
-import com.seed4j.module.domain.SeedProjectFilePath;
+import com.seed4j.module.domain.Seed4JProjectFilePath;
 import com.seed4j.module.domain.file.TemplateRenderer;
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.module.domain.replacement.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,10 +34,10 @@ class FileSystemReplacerTest {
 
     assertThatThrownBy(() ->
       replacer.handle(
-        new SeedProjectFolder(path),
+        new Seed4JProjectFolder(path),
         new ContentReplacers(
-          SeedModuleMandatoryReplacementsFactory.builder(emptyModuleBuilder())
-            .in(new SeedProjectFilePath("unknown"))
+          Seed4JModuleMandatoryReplacementsFactory.builder(emptyModuleBuilder())
+            .in(new Seed4JProjectFilePath("unknown"))
             .add(new TextReplacer(always(), "old"), "new")
             .and()
             .build()
@@ -55,14 +55,14 @@ class FileSystemReplacerTest {
 
     assertThatCode(() ->
       replacer.handle(
-        new SeedProjectFolder(path),
+        new Seed4JProjectFolder(path),
         new ContentReplacers(
-          SeedModuleOptionalReplacementsFactory.builder(emptyModuleBuilder())
-            .in(new SeedProjectFilePath("unknown"))
+          Seed4JModuleOptionalReplacementsFactory.builder(emptyModuleBuilder())
+            .in(new Seed4JProjectFilePath("unknown"))
             .add(new TextReplacer(always(), "old"), "new")
             .and()
             .build()
-            .buildReplacers(new SeedProjectFolder("dummy"), mock(GeneratedProjectRepository.class))
+            .buildReplacers(new Seed4JProjectFolder("dummy"), mock(GeneratedProjectRepository.class))
             .toList()
         ),
         emptyModuleContext()

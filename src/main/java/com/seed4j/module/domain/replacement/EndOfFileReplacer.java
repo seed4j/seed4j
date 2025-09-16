@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.replacement;
 
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.function.BiFunction;
@@ -27,7 +27,7 @@ public record EndOfFileReplacer(ReplacementCondition condition) implements Eleme
   @Override
   public BiFunction<String, String, String> replacement() {
     return (content, replacement) ->
-      EOF_PATTERN.matcher(content).replaceAll(result -> escapeSpecialCharacters(replacement) + SeedModule.LINE_BREAK + result.group());
+      EOF_PATTERN.matcher(content).replaceAll(result -> escapeSpecialCharacters(replacement) + Seed4JModule.LINE_BREAK + result.group());
   }
 
   private String escapeSpecialCharacters(String replacement) {

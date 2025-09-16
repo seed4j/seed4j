@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.javatool.protobuf.application;
 
 import com.seed4j.generator.server.javatool.protobuf.domain.ProtobufModuleFactory;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,11 +14,11 @@ public class ProtobufApplicationService {
     protobuf = new ProtobufModuleFactory();
   }
 
-  public SeedModule buildProtobufModule(SeedModuleProperties properties) {
+  public Seed4JModule buildProtobufModule(Seed4JModuleProperties properties) {
     return protobuf.buildProtobufModule(properties);
   }
 
-  public SeedModule buildProtobufBackwardsCompatibilityCheckModule(SeedModuleProperties properties) {
+  public Seed4JModule buildProtobufBackwardsCompatibilityCheckModule(Seed4JModuleProperties properties) {
     return protobuf.buildProtobufBackwardsCompatibilityCheckModule(properties);
   }
 }

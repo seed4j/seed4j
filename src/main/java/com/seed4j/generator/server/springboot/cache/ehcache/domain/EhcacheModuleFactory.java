@@ -1,41 +1,41 @@
 package com.seed4j.generator.server.springboot.cache.ehcache.domain;
 
-import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class EhcacheModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/cache/ehcache");
+  private static final Seed4JSource SOURCE = from("server/springboot/cache/ehcache");
 
-  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
-  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
+  private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
+  private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
 
   private static final String EHCACHE_GROUP = "org.ehcache";
 
   private static final String CACHE_SECONDARY = "wire/cache/infrastructure/secondary";
 
-  public SeedModule buildJavaConfigurationModule(SeedModuleProperties properties) {
+  public Seed4JModule buildJavaConfigurationModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
-    SeedDestination mainDestination = toSrcMainJava().append(packagePath).append(CACHE_SECONDARY);
-    SeedDestination testDestination = toSrcTestJava().append(packagePath).append(CACHE_SECONDARY);
+    Seed4JDestination mainDestination = toSrcMainJava().append(packagePath).append(CACHE_SECONDARY);
+    Seed4JDestination testDestination = toSrcTestJava().append(packagePath).append(CACHE_SECONDARY);
 
     // @formatter:off
     return commonEHCacheModuleBuilder(properties)
@@ -53,7 +53,7 @@ public class EhcacheModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildXmlConfigurationModule(SeedModuleProperties properties) {
+  public Seed4JModule buildXmlConfigurationModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -68,7 +68,7 @@ public class EhcacheModuleFactory {
     // @formatter:on
   }
 
-  private SeedModuleBuilder commonEHCacheModuleBuilder(SeedModuleProperties properties) {
+  private Seed4JModuleBuilder commonEHCacheModuleBuilder(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .javaDependencies()

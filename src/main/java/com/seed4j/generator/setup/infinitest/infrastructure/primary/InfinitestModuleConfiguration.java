@@ -1,9 +1,9 @@
 package com.seed4j.generator.setup.infinitest.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INFINITEST_FILTERS;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.INFINITEST_FILTERS;
 
 import com.seed4j.generator.setup.infinitest.application.InfinitestApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 class InfinitestModuleConfiguration {
 
   @Bean
-  SeedModuleResource infinitestModule(InfinitestApplicationService infinitest) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource infinitestModule(InfinitestApplicationService infinitest) {
+    return Seed4JModuleResource.builder()
       .slug(INFINITEST_FILTERS)
       .withoutProperties()
       .apiDoc("Development environment", "Add filter for infinitest, the continuous test runner")

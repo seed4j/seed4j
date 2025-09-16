@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.localeprofile.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_LOCAL_PROFILE;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_LOCAL_PROFILE;
 
 import com.seed4j.generator.server.springboot.localeprofile.application.LocalProfileApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Configuration;
 class LocalProfileModuleConfiguration {
 
   @Bean
-  SeedModuleResource localProfile(LocalProfileApplicationService localProfile) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource localProfile(LocalProfileApplicationService localProfile) {
+    return Seed4JModuleResource.builder()
       .slug(SPRING_BOOT_LOCAL_PROFILE)
       .propertiesDefinition(
-        SeedModulePropertiesDefinition.builder()
+        Seed4JModulePropertiesDefinition.builder()
           .addBasePackage()
           .addProjectBaseName()
           .addIndentation()
@@ -25,7 +25,7 @@ class LocalProfileModuleConfiguration {
           .build()
       )
       .apiDoc("Spring Boot", "Use Spring local profile by default for development.")
-      .organization(SeedModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(Seed4JModuleOrganization.SPRINGBOOT_DEPENDENCY)
       .tags("server", "spring", "spring-boot", "dx")
       .factory(localProfile::buildModule);
   }

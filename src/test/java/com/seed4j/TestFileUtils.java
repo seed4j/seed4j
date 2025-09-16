@@ -2,7 +2,7 @@ package com.seed4j;
 
 import static java.nio.file.StandardCopyOption.*;
 
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -51,7 +51,7 @@ public final class TestFileUtils {
     }
   }
 
-  public static SeedProjectFolder projectFrom(String sourceProject) {
+  public static Seed4JProjectFolder projectFrom(String sourceProject) {
     Path targetFolder = Path.of(tmpDirForTest());
 
     try {
@@ -66,7 +66,7 @@ public final class TestFileUtils {
       throw new AssertionError(e);
     }
 
-    return new SeedProjectFolder(targetFolder.toString());
+    return new Seed4JProjectFolder(targetFolder.toString());
   }
 
   public static void copyFolder(Path src, Path dest) throws IOException {

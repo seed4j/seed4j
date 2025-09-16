@@ -2,7 +2,7 @@ package com.seed4j.module.infrastructure.secondary.nodejs;
 
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import com.seed4j.shared.npmdetector.infrastructure.secondary.NodePackageManagerInstallationReader;
@@ -28,7 +28,7 @@ class LazyNodePackagesInstaller implements NodeLazyPackagesInstaller {
   private final NodePackageManagerInstallationReader nodePackageManagerInstallationReader = new NodePackageManagerInstallationReader();
 
   @Override
-  public void runInstallIn(SeedProjectFolder folder, NodePackageManager nodePackageManager) {
+  public void runInstallIn(Seed4JProjectFolder folder, NodePackageManager nodePackageManager) {
     Assert.notNull("folder", folder);
 
     String packageLockFile = nodePackageManager.packageLockFile();
@@ -45,7 +45,7 @@ class LazyNodePackagesInstaller implements NodeLazyPackagesInstaller {
     }
   }
 
-  private void execute(NodePackageManager nodePackageManager, SeedProjectFolder path, String... commands) {
+  private void execute(NodePackageManager nodePackageManager, Seed4JProjectFolder path, String... commands) {
     try {
       Process process = new ProcessBuilder(commands).directory(folderFile(path)).start();
 
@@ -71,7 +71,7 @@ class LazyNodePackagesInstaller implements NodeLazyPackagesInstaller {
     }
   }
 
-  private File folderFile(SeedProjectFolder path) {
+  private File folderFile(Seed4JProjectFolder path) {
     return new File(path.get());
   }
 

@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.webflux.web.application;
 
 import com.seed4j.generator.server.springboot.webflux.web.domain.SpringBootWebfluxModuleFactory;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,11 +14,11 @@ public class SpringBootWebfluxApplicationService {
     springBootWebflux = new SpringBootWebfluxModuleFactory();
   }
 
-  public SeedModule buildNettyModule(SeedModuleProperties properties) {
+  public Seed4JModule buildNettyModule(Seed4JModuleProperties properties) {
     return springBootWebflux.buildNettyModule(properties);
   }
 
-  public SeedModule buildEmptyModule(SeedModuleProperties properties) {
+  public Seed4JModule buildEmptyModule(Seed4JModuleProperties properties) {
     return springBootWebflux.buildEmptyModule(properties);
   }
 }

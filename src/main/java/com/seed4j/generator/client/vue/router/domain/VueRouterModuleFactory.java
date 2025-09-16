@@ -1,22 +1,22 @@
 package com.seed4j.generator.client.vue.router.domain;
 
 import static com.seed4j.generator.typescript.common.domain.VitestShortcuts.vitestCoverageExclusion;
-import static com.seed4j.module.domain.SeedModule.*;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.VUE;
+import static com.seed4j.module.domain.Seed4JModule.*;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.VUE;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import java.util.function.Consumer;
 
 public class VueRouterModuleFactory {
 
-  private static final SeedSource SOURCE = from("client/vue");
-  private static final SeedSource APP_SOURCE = from("client/vue/webapp/app");
+  private static final Seed4JSource SOURCE = from("client/vue");
+  private static final Seed4JSource APP_SOURCE = from("client/vue/webapp/app");
 
-  private static final SeedDestination MAIN_DESTINATION = to("src/main/webapp/app");
-  private static final SeedDestination TEST_DESTINATION = to("src/test/webapp");
+  private static final Seed4JDestination MAIN_DESTINATION = to("src/main/webapp/app");
+  private static final Seed4JDestination TEST_DESTINATION = to("src/test/webapp");
 
   private static final String IMPORT_NEEDLE = "// seed4j-needle-main-ts-import";
   private static final String PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
@@ -29,7 +29,7 @@ public class VueRouterModuleFactory {
       };\
     """;
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .packageJson()
@@ -61,7 +61,7 @@ public class VueRouterModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<SeedModuleBuilder> patchVitestConfig() {
+  private Consumer<Seed4JModuleBuilder> patchVitestConfig() {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .apply(vitestCoverageExclusion("src/main/webapp/app/router.ts"));

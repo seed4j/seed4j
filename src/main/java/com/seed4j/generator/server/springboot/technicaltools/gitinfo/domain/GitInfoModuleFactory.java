@@ -1,36 +1,36 @@
 package com.seed4j.generator.server.springboot.technicaltools.gitinfo.domain;
 
-import static com.seed4j.module.domain.SeedModule.comment;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.mavenPlugin;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.pluginExecution;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.comment;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class GitInfoModuleFactory {
 
   private static final String PACKAGE_INFO = "package-info.java";
 
-  private static final SeedSource SOURCE = from("server/springboot/technicaltools/gitinfo");
-  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
+  private static final Seed4JSource SOURCE = from("server/springboot/technicaltools/gitinfo");
+  private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
   private static final String PRIMARY = "/infrastructure/primary";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
-    SeedDestination mainDestination = toSrcMainJava().append(packagePath).append("wire/gitinfo");
+    Seed4JDestination mainDestination = toSrcMainJava().append(packagePath).append("wire/gitinfo");
 
     // @formatter:off
     return moduleBuilder(properties)

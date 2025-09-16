@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.mvc.sample.flyway.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModule;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModule;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -16,11 +16,11 @@ class SampleFlywayModuleFactoryTest {
 
   @Test
   void shouldBuildModuleForPostGreSQL() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .put("date", "2021-12-03T10:15:30.00Z")
       .build();
 
-    SeedModule module = factory.buildPostgreSQLModule(properties);
+    Seed4JModule module = factory.buildPostgreSQLModule(properties);
 
     assertThatModule(module)
       .hasFile("src/main/resources/db/migration/V20211203101531__sample_feature_schema.sql")
@@ -29,11 +29,11 @@ class SampleFlywayModuleFactoryTest {
 
   @Test
   void shouldBuildModuleForNotPostGreSQL() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .put("date", "2021-12-03T10:15:30.00Z")
       .build();
 
-    SeedModule module = factory.buildNotPostgreSQLModule(properties);
+    Seed4JModule module = factory.buildNotPostgreSQLModule(properties);
 
     assertThatModule(module)
       .hasFile("src/main/resources/db/migration/V20211203101531__sample_feature_schema.sql")

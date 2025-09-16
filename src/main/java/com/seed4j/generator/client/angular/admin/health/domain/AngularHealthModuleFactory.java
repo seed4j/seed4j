@@ -1,24 +1,24 @@
 package com.seed4j.generator.client.angular.admin.health.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.to;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedProjectFilePath;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JProjectFilePath;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class AngularHealthModuleFactory {
 
-  private static final SeedSource SOURCE = from("client/angular/admin/src/main/webapp/app");
+  private static final Seed4JSource SOURCE = from("client/angular/admin/src/main/webapp/app");
 
-  private static final SeedProjectFilePath APP_PATH = path("src/main/webapp/app");
-  private static final SeedDestination APP_DESTINATION = to(APP_PATH.get());
+  private static final Seed4JProjectFilePath APP_PATH = path("src/main/webapp/app");
+  private static final Seed4JDestination APP_DESTINATION = to(APP_PATH.get());
 
   private static final String ADMIN_NAVIGATION_TEST = """
       it('should navigate on admin endpoint', () => {
@@ -35,7 +35,7 @@ public class AngularHealthModuleFactory {
       },\
     """;
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

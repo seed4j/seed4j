@@ -1,28 +1,28 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.infrastructure.secondary.FileSystemSeedModulesRepository.*;
+import static com.seed4j.module.infrastructure.secondary.FileSystemSeed4JModulesRepository.*;
 
 import com.seed4j.module.domain.javaproperties.SpringFactories;
 import com.seed4j.module.domain.javaproperties.SpringFactory;
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Path;
 import java.util.function.Consumer;
 
 class FileSystemSpringFactoriesCommandsHandler {
 
-  public void handle(SeedProjectFolder projectFolder, SpringFactories factories) {
+  public void handle(Seed4JProjectFolder projectFolder, SpringFactories factories) {
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("factories", factories);
 
     factories.get().forEach(setProperty(projectFolder));
   }
 
-  private Consumer<SpringFactory> setProperty(SeedProjectFolder projectFolder) {
+  private Consumer<SpringFactory> setProperty(Seed4JProjectFolder projectFolder) {
     return property -> new PropertiesFileSpringFactoriesHandler(getPath(projectFolder, property)).append(property.key(), property.value());
   }
 
-  private static Path getPath(SeedProjectFolder projectFolder, SpringFactory factory) {
+  private static Path getPath(Seed4JProjectFolder projectFolder, SpringFactory factory) {
     return switch (factory.type()) {
       case TEST_FACTORIES -> projectFolder.filePath(TEST_META_INF_FOLDER + "spring.factories");
     };

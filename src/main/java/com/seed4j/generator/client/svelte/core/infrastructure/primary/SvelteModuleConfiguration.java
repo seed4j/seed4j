@@ -1,14 +1,14 @@
 package com.seed4j.generator.client.svelte.core.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.CLIENT_CORE;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.INIT;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.PRETTIER;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SVELTE_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.CLIENT_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.INIT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.PRETTIER;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SVELTE_CORE;
 
 import com.seed4j.generator.client.svelte.core.application.SvelteApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,12 +16,12 @@ import org.springframework.context.annotation.Configuration;
 class SvelteModuleConfiguration {
 
   @Bean
-  SeedModuleResource svelteModule(SvelteApplicationService svelte) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource svelteModule(SvelteApplicationService svelte) {
+    return Seed4JModuleResource.builder()
       .slug(SVELTE_CORE)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addNodePackageManager().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addNodePackageManager().build())
       .apiDoc("Frontend - Svelte", "Add Svelte")
-      .organization(SeedModuleOrganization.builder().feature(CLIENT_CORE).addDependency(INIT).addDependency(PRETTIER).build())
+      .organization(Seed4JModuleOrganization.builder().feature(CLIENT_CORE).addDependency(INIT).addDependency(PRETTIER).build())
       .tags("client", "svelte")
       .factory(svelte::buildModule);
   }

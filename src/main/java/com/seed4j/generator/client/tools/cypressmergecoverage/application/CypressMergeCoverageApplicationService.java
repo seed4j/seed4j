@@ -1,8 +1,8 @@
 package com.seed4j.generator.client.tools.cypressmergecoverage.application;
 
 import com.seed4j.generator.client.tools.cypressmergecoverage.domain.CypressMergeCoverageModuleFactory;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class CypressMergeCoverageApplicationService {
     cypressMergeCoverage = new CypressMergeCoverageModuleFactory();
   }
 
-  public SeedModule buildCypressMergeCoverage(SeedModuleProperties properties) {
+  public Seed4JModule buildCypressMergeCoverage(Seed4JModuleProperties properties) {
     return cypressMergeCoverage.buildCypressMergeCoverage(properties);
   }
 }

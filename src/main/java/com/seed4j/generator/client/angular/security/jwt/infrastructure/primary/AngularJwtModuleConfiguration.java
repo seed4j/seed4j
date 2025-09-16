@@ -1,13 +1,13 @@
 package com.seed4j.generator.client.angular.security.jwt.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.ANGULAR_AUTHENTICATION;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_CORE;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.ANGULAR_JWT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.ANGULAR_AUTHENTICATION;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.ANGULAR_CORE;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.ANGULAR_JWT;
 
 import com.seed4j.generator.client.angular.security.jwt.application.AngularJwtApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,12 +15,12 @@ import org.springframework.context.annotation.Configuration;
 class AngularJwtModuleConfiguration {
 
   @Bean
-  SeedModuleResource angularJwtModule(AngularJwtApplicationService angularJwt) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource angularJwtModule(AngularJwtApplicationService angularJwt) {
+    return Seed4JModuleResource.builder()
       .slug(ANGULAR_JWT)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addProjectBaseName().addIndentation().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addProjectBaseName().addIndentation().build())
       .apiDoc("Frontend - Angular", "Add Angular with authentication JWT")
-      .organization(SeedModuleOrganization.builder().feature(ANGULAR_AUTHENTICATION).addDependency(ANGULAR_CORE).build())
+      .organization(Seed4JModuleOrganization.builder().feature(ANGULAR_AUTHENTICATION).addDependency(ANGULAR_CORE).build())
       .tags("client", "angular")
       .factory(angularJwt::buildModule);
   }

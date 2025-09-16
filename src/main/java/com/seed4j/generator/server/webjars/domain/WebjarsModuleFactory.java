@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.webjars.domain;
 
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.javabuild.GroupId;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class WebjarsModuleFactory {
@@ -15,7 +15,7 @@ public class WebjarsModuleFactory {
   private static final GroupId WEBJARS_GROUP = groupId("org.webjars");
   private static final GroupId WEBJARS_NPM_GROUP = groupId("org.webjars.npm");
 
-  public SeedModule buildWebjarsLocatorModule(SeedModuleProperties properties) {
+  public Seed4JModule buildWebjarsLocatorModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off
@@ -27,7 +27,7 @@ public class WebjarsModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildWebjarsHtmxModule(SeedModuleProperties properties) {
+  public Seed4JModule buildWebjarsHtmxModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
     // @formatter:off
     return moduleBuilder(properties)
@@ -38,7 +38,7 @@ public class WebjarsModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildWebjarsAlpineJSModule(SeedModuleProperties properties) {
+  public Seed4JModule buildWebjarsAlpineJSModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
     // @formatter:off

@@ -1,25 +1,25 @@
 package com.seed4j.generator.server.springboot.thymeleaf.template.domain;
 
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.packageName;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.regex;
-import static com.seed4j.module.domain.SeedModule.runScriptCommandWith;
-import static com.seed4j.module.domain.SeedModule.scriptCommand;
-import static com.seed4j.module.domain.SeedModule.scriptKey;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.SeedModule.toSrcMainResources;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.packageName;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.regex;
+import static com.seed4j.module.domain.Seed4JModule.runScriptCommandWith;
+import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
+import static com.seed4j.module.domain.Seed4JModule.scriptKey;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainResources;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedProjectFilePath;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JProjectFilePath;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.replacement.ElementReplacer;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.regex.Pattern;
@@ -35,13 +35,13 @@ public class ThymeleafTemplateModuleFactory {
   private static final String POSTCSS_CONFIG_JS = "postcss.config.js";
   private static final String TAILWIND_CONFIG_JS = "tailwind.config.js";
 
-  private static final SeedSource SOURCE = from("server/springboot/thymeleaf/template");
-  private static final SeedSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
-  private static final SeedSource RESOURCES_SOURCE = SOURCE.append("src/main/resources");
+  private static final Seed4JSource SOURCE = from("server/springboot/thymeleaf/template");
+  private static final Seed4JSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
+  private static final Seed4JSource RESOURCES_SOURCE = SOURCE.append("src/main/resources");
 
-  private static final SeedProjectFilePath MAIN_RESOURCES_PATH = path("src/main/resources");
-  private static final SeedDestination DESTINATION = to(MAIN_RESOURCES_PATH.get());
-  private static final SeedDestination ROOT_DESTINATION = to(".");
+  private static final Seed4JProjectFilePath MAIN_RESOURCES_PATH = path("src/main/resources");
+  private static final Seed4JDestination DESTINATION = to(MAIN_RESOURCES_PATH.get());
+  private static final Seed4JDestination ROOT_DESTINATION = to(".");
 
   private static final String MAIN_SCRIPT_NEEDLE = "<!-- seed4j-needle-thymeleaf-main-script -->";
   private static final String THYMELEAF_POSTCSS_PLUGINS_NEEDLE = "// seed4j-needle-thymeleaf-postcss-plugins";
@@ -87,7 +87,7 @@ public class ThymeleafTemplateModuleFactory {
     </main>
     """;
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -132,7 +132,7 @@ public class ThymeleafTemplateModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildTailwindcssModule(SeedModuleProperties properties) {
+  public Seed4JModule buildTailwindcssModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -161,7 +161,7 @@ public class ThymeleafTemplateModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildHtmxWebjarsModule(SeedModuleProperties properties) {
+  public Seed4JModule buildHtmxWebjarsModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -175,7 +175,7 @@ public class ThymeleafTemplateModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildAlpineWebjarsModule(SeedModuleProperties properties) {
+  public Seed4JModule buildAlpineWebjarsModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off

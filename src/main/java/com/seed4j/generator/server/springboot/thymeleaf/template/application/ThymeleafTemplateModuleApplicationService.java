@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.thymeleaf.template.application;
 
 import com.seed4j.generator.server.springboot.thymeleaf.template.domain.ThymeleafTemplateModuleFactory;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,19 +14,19 @@ public class ThymeleafTemplateModuleApplicationService {
     thymeleafTemplateFactory = new ThymeleafTemplateModuleFactory();
   }
 
-  public SeedModule buildThymeleafTemplateModule(SeedModuleProperties properties) {
+  public Seed4JModule buildThymeleafTemplateModule(Seed4JModuleProperties properties) {
     return thymeleafTemplateFactory.buildModule(properties);
   }
 
-  public SeedModule buildThymeleafTemplateTailwindcssModule(SeedModuleProperties properties) {
+  public Seed4JModule buildThymeleafTemplateTailwindcssModule(Seed4JModuleProperties properties) {
     return thymeleafTemplateFactory.buildTailwindcssModule(properties);
   }
 
-  public SeedModule buildThymeleafHtmxWebjarsModule(SeedModuleProperties properties) {
+  public Seed4JModule buildThymeleafHtmxWebjarsModule(Seed4JModuleProperties properties) {
     return thymeleafTemplateFactory.buildHtmxWebjarsModule(properties);
   }
 
-  public SeedModule buildThymeleafAlpinejsWebjarsModule(SeedModuleProperties properties) {
+  public Seed4JModule buildThymeleafAlpinejsWebjarsModule(Seed4JModuleProperties properties) {
     return thymeleafTemplateFactory.buildAlpineWebjarsModule(properties);
   }
 }

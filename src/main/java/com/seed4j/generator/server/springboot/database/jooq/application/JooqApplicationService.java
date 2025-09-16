@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.database.jooq.application;
 
 import com.seed4j.generator.server.springboot.database.jooq.domain.JooqModuleFactory;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,19 +14,19 @@ public class JooqApplicationService {
     jooq = new JooqModuleFactory();
   }
 
-  public SeedModule buildPostgreSQL(SeedModuleProperties properties) {
+  public Seed4JModule buildPostgreSQL(Seed4JModuleProperties properties) {
     return jooq.buildPostgreSQL(properties);
   }
 
-  public SeedModule buildMariaDB(SeedModuleProperties properties) {
+  public Seed4JModule buildMariaDB(Seed4JModuleProperties properties) {
     return jooq.buildMariaDB(properties);
   }
 
-  public SeedModule buildMsSQL(SeedModuleProperties properties) {
+  public Seed4JModule buildMsSQL(Seed4JModuleProperties properties) {
     return jooq.buildMsSQL(properties);
   }
 
-  public SeedModule buildMySQL(SeedModuleProperties properties) {
+  public Seed4JModule buildMySQL(Seed4JModuleProperties properties) {
     return jooq.buildMySQL(properties);
   }
 }

@@ -1,29 +1,29 @@
 package com.seed4j.generator.client.vue.security.oauth2_keycloak.domain;
 
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.packageName;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.packageName;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class VueOAuth2KeycloakModuleFactory {
 
-  private static final SeedSource SOURCE = from("client/vue");
-  private static final SeedSource APP_SOURCE = from("client/vue/security/oauth2_keycloak/webapp/app");
-  private static final SeedSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
+  private static final Seed4JSource SOURCE = from("client/vue");
+  private static final Seed4JSource APP_SOURCE = from("client/vue/security/oauth2_keycloak/webapp/app");
+  private static final Seed4JSource DOCUMENTATION_SOURCE = SOURCE.append("documentation");
 
-  private static final SeedDestination MAIN_DESTINATION = to("src/main/webapp/app");
-  private static final SeedDestination TEST_DESTINATION = to("src/test/webapp");
+  private static final Seed4JDestination MAIN_DESTINATION = to("src/main/webapp/app");
+  private static final Seed4JDestination TEST_DESTINATION = to("src/test/webapp");
 
   private static final String MAIN_TS_IMPORT_NEEDLE = "// seed4j-needle-main-ts-import";
   private static final String MAIN_TS_PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
@@ -45,7 +45,7 @@ public class VueOAuth2KeycloakModuleFactory {
     provideForAuth(keycloakHttp);\
     """;
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     Indentation indentation = properties.indentation();

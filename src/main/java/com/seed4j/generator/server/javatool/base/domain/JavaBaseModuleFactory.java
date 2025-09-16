@@ -1,15 +1,15 @@
 package com.seed4j.generator.server.javatool.base.domain;
 
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JavaBaseModuleFactory {
@@ -20,10 +20,10 @@ public class JavaBaseModuleFactory {
   private static final String GENERATION = "generation";
   private static final String COLLECTION = "collection";
 
-  private static final SeedSource SOURCE = from("server/javatool/base");
-  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
-  private static final SeedSource MAIN_GENERATION_SOURCE = MAIN_SOURCE.append(GENERATION);
-  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
+  private static final Seed4JSource SOURCE = from("server/javatool/base");
+  private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
+  private static final Seed4JSource MAIN_GENERATION_SOURCE = MAIN_SOURCE.append(GENERATION);
+  private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
 
   private enum Destination {
     COLLECTION("shared/collection"),
@@ -44,14 +44,14 @@ public class JavaBaseModuleFactory {
     }
   }
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
     String baseName = properties.projectBaseName().capitalized();
 
-    SeedDestination testDestination = toSrcTestJava().append(packagePath);
-    SeedDestination mainDestination = toSrcMainJava().append(packagePath);
+    Seed4JDestination testDestination = toSrcTestJava().append(packagePath);
+    Seed4JDestination mainDestination = toSrcMainJava().append(packagePath);
 
     // @formatter:off
     return moduleBuilder(properties)
@@ -107,15 +107,15 @@ public class JavaBaseModuleFactory {
     // @formatter:on
   }
 
-  private SeedDestination packageInfoDestination(SeedDestination mainDestination, Destination destination) {
+  private Seed4JDestination packageInfoDestination(Seed4JDestination mainDestination, Destination destination) {
     return mainDestination.append(destination.path()).append(PACKAGE_INFO);
   }
 
-  private SeedDestination collectionsDestination(String className, SeedDestination mainDestination) {
+  private Seed4JDestination collectionsDestination(String className, Seed4JDestination mainDestination) {
     return mainDestination.append(Destination.COLLECTION_DOMAIN.path()).append(className + "Collections.java");
   }
 
-  private SeedDestination collectionsTestDestination(String className, SeedDestination testDestination) {
+  private Seed4JDestination collectionsTestDestination(String className, Seed4JDestination testDestination) {
     return testDestination.append(Destination.COLLECTION_DOMAIN.path()).append(className + "CollectionsTest.java");
   }
 }

@@ -1,11 +1,11 @@
 package com.seed4j.module.domain.replacement;
 
-import com.seed4j.module.domain.SeedProjectFilePath;
+import com.seed4j.module.domain.Seed4JProjectFilePath;
 import com.seed4j.shared.error.domain.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public record OptionalFileReplacer(SeedProjectFilePath file, OptionalReplacer replacement) implements ContentReplacer {
+public record OptionalFileReplacer(Seed4JProjectFilePath file, OptionalReplacer replacement) implements ContentReplacer {
   private static final Logger log = LoggerFactory.getLogger(OptionalFileReplacer.class);
 
   public OptionalFileReplacer {

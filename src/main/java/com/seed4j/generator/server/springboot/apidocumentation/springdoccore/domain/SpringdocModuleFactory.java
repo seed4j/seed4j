@@ -1,24 +1,24 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdoccore.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.localEnvironment;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.localEnvironment;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
 
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringdocModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/apidocumentation/springdoccore");
+  private static final Seed4JSource SOURCE = from("server/springboot/apidocumentation/springdoccore");
   private static final String DESTINATION = "wire/springdoc/infrastructure/primary";
 
   private static final PropertyValue ALPHA = propertyValue("alpha");
@@ -26,18 +26,18 @@ public class SpringdocModuleFactory {
 
   private static final String SPRINGDOC_CONFIG_JAVA_FILE = "SpringdocConfiguration.java";
 
-  public SeedModule buildModuleForMvc(SeedModuleProperties moduleProperties) {
+  public Seed4JModule buildModuleForMvc(Seed4JModuleProperties moduleProperties) {
     return buildModule(moduleProperties, SpringdocDependencies.MVC);
   }
 
-  public SeedModule buildModuleForWebflux(SeedModuleProperties moduleProperties) {
+  public Seed4JModule buildModuleForWebflux(Seed4JModuleProperties moduleProperties) {
     return buildModule(moduleProperties, SpringdocDependencies.WEBFLUX);
   }
 
-  private SeedModule buildModule(SeedModuleProperties properties, SpringdocDependencies dependencies) {
+  private Seed4JModule buildModule(Seed4JModuleProperties properties, SpringdocDependencies dependencies) {
     Assert.notNull("properties", properties);
 
-    SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(DESTINATION);
+    Seed4JDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(DESTINATION);
 
     // @formatter:off
     return moduleBuilder(properties)

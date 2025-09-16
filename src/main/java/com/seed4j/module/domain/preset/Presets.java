@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.preset;
 
-import com.seed4j.shared.collection.domain.SeedCollections;
+import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +11,7 @@ public record Presets(Collection<Preset> presets) {
   public Presets(Collection<Preset> presets) {
     Assert.notNull("presets", presets);
 
-    this.presets = SeedCollections.immutable(sortByAlphabeticalOrder(presets));
+    this.presets = Seed4JCollections.immutable(sortByAlphabeticalOrder(presets));
   }
 
   private static Collection<Preset> sortByAlphabeticalOrder(Collection<Preset> presets) {

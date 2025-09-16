@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.database.mongodb.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.MONGODB;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.MONGODB;
 
 import com.seed4j.generator.server.springboot.database.mongodb.application.MongoDbApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,14 +13,14 @@ import org.springframework.context.annotation.Configuration;
 class MongoDbModuleConfiguration {
 
   @Bean
-  SeedModuleResource mongoDbModule(MongoDbApplicationService mongoDb) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource mongoDbModule(MongoDbApplicationService mongoDb) {
+    return Seed4JModuleResource.builder()
       .slug(MONGODB)
       .propertiesDefinition(
-        SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
+        Seed4JModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
       )
       .apiDoc("Spring Boot - Database", "Add MongoDB drivers and dependencies, with testcontainers")
-      .organization(SeedModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(Seed4JModuleOrganization.SPRINGBOOT_DEPENDENCY)
       .tags("server", "spring", "spring-boot", "database")
       .factory(mongoDb::buildModule);
   }

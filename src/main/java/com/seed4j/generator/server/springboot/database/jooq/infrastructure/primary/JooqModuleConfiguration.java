@@ -1,19 +1,19 @@
 package com.seed4j.generator.server.springboot.database.jooq.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JOOQ;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MARIADB;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MSSQL;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_MYSQL;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.DATASOURCE_POSTGRESQL;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JOOQ_MARIADB;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JOOQ_MSSQL;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JOOQ_MYSQL;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.JOOQ_POSTGRESQL;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.JOOQ;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.DATASOURCE_MARIADB;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.DATASOURCE_MSSQL;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.DATASOURCE_MYSQL;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.DATASOURCE_POSTGRESQL;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.JOOQ_MARIADB;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.JOOQ_MSSQL;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.JOOQ_MYSQL;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.JOOQ_POSTGRESQL;
 
 import com.seed4j.generator.server.springboot.database.jooq.application.JooqApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,51 +23,51 @@ class JooqModuleConfiguration {
   private static final String API_DOC_GROUP = "Spring Boot - Database";
 
   @Bean
-  SeedModuleResource jooqPostgreSQLModule(JooqApplicationService postgreSQL) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource jooqPostgreSQLModule(JooqApplicationService postgreSQL) {
+    return Seed4JModuleResource.builder()
       .slug(JOOQ_POSTGRESQL)
       .propertiesDefinition(properties())
       .apiDoc(API_DOC_GROUP, "Add Jooq with PostgreSQL to project")
-      .organization(SeedModuleOrganization.builder().feature(JOOQ).addDependency(DATASOURCE_POSTGRESQL).build())
+      .organization(Seed4JModuleOrganization.builder().feature(JOOQ).addDependency(DATASOURCE_POSTGRESQL).build())
       .tags(tags())
       .factory(postgreSQL::buildPostgreSQL);
   }
 
   @Bean
-  SeedModuleResource jooqMariaDBModule(JooqApplicationService mariaDB) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource jooqMariaDBModule(JooqApplicationService mariaDB) {
+    return Seed4JModuleResource.builder()
       .slug(JOOQ_MARIADB)
       .propertiesDefinition(properties())
       .apiDoc(API_DOC_GROUP, "Add Jooq with MariaDB to project")
-      .organization(SeedModuleOrganization.builder().feature(JOOQ).addDependency(DATASOURCE_MARIADB).build())
+      .organization(Seed4JModuleOrganization.builder().feature(JOOQ).addDependency(DATASOURCE_MARIADB).build())
       .tags(tags())
       .factory(mariaDB::buildMariaDB);
   }
 
   @Bean
-  SeedModuleResource jooqMySQLModule(JooqApplicationService mySQL) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource jooqMySQLModule(JooqApplicationService mySQL) {
+    return Seed4JModuleResource.builder()
       .slug(JOOQ_MYSQL)
       .propertiesDefinition(properties())
       .apiDoc(API_DOC_GROUP, "Add Jooq with MySQL to project")
-      .organization(SeedModuleOrganization.builder().feature(JOOQ).addDependency(DATASOURCE_MYSQL).build())
+      .organization(Seed4JModuleOrganization.builder().feature(JOOQ).addDependency(DATASOURCE_MYSQL).build())
       .tags(tags())
       .factory(mySQL::buildMySQL);
   }
 
   @Bean
-  SeedModuleResource jooqMsSQLModule(JooqApplicationService msSQL) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource jooqMsSQLModule(JooqApplicationService msSQL) {
+    return Seed4JModuleResource.builder()
       .slug(JOOQ_MSSQL)
       .propertiesDefinition(properties())
       .apiDoc(API_DOC_GROUP, "Add Jooq with MsSQL to project")
-      .organization(SeedModuleOrganization.builder().feature(JOOQ).addDependency(DATASOURCE_MSSQL).build())
+      .organization(Seed4JModuleOrganization.builder().feature(JOOQ).addDependency(DATASOURCE_MSSQL).build())
       .tags(tags())
       .factory(msSQL::buildMsSQL);
   }
 
-  private static SeedModulePropertiesDefinition properties() {
-    return SeedModulePropertiesDefinition.builder()
+  private static Seed4JModulePropertiesDefinition properties() {
+    return Seed4JModulePropertiesDefinition.builder()
       .addBasePackage()
       .addIndentation()
       .addProjectBaseName()

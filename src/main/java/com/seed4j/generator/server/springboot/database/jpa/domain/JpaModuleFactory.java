@@ -1,19 +1,19 @@
 package com.seed4j.generator.server.springboot.database.jpa.domain;
 
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
 
 import com.seed4j.module.domain.LogLevel;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JpaModuleFactory {
@@ -22,19 +22,19 @@ public class JpaModuleFactory {
   private static final PropertyValue FALSE = propertyValue(false);
   private static final PropertyValue TRUE = propertyValue(true);
 
-  public SeedModule buildPostgreSQL(SeedModuleProperties properties) {
+  public Seed4JModule buildPostgreSQL(Seed4JModuleProperties properties) {
     return sqlCommonModuleBuilder(properties).build();
   }
 
-  public SeedModule buildMariaDB(SeedModuleProperties properties) {
+  public Seed4JModule buildMariaDB(Seed4JModuleProperties properties) {
     return sqlCommonModuleBuilder(properties).build();
   }
 
-  public SeedModule buildMySQL(SeedModuleProperties properties) {
+  public Seed4JModule buildMySQL(Seed4JModuleProperties properties) {
     return sqlCommonModuleBuilder(properties).build();
   }
 
-  public SeedModule buildMsSQL(SeedModuleProperties properties) {
+  public Seed4JModule buildMsSQL(Seed4JModuleProperties properties) {
     // @formatter:off
     return sqlCommonModuleBuilder(properties)
       .springMainProperties()
@@ -48,11 +48,11 @@ public class JpaModuleFactory {
     // @formatter:on
   }
 
-  public static SeedModule.SeedModuleBuilder sqlCommonModuleBuilder(SeedModuleProperties properties) {
+  public static Seed4JModule.Seed4JModuleBuilder sqlCommonModuleBuilder(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
-    SeedSource jpaSource = from("server/springboot/database/jpa");
-    SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append("wire/database/infrastructure/secondary/");
+    Seed4JSource jpaSource = from("server/springboot/database/jpa");
+    Seed4JDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append("wire/database/infrastructure/secondary/");
 
     // @formatter:off
     return moduleBuilder(properties)

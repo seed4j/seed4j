@@ -1,17 +1,17 @@
 package com.seed4j.generator.server.springboot.cucumber.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.JPA_PERSISTENCE;
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_BOOT_CUCUMBER;
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SPRING_MVC_SERVER;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CUCUMBER_JPA_RESET;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CUCUMBER_MVC;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_CUCUMBER_WEBFLUX;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_WEBFLUX_NETTY;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.JPA_PERSISTENCE;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.SPRING_BOOT_CUCUMBER;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.SPRING_MVC_SERVER;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_CUCUMBER_JPA_RESET;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_CUCUMBER_MVC;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_CUCUMBER_WEBFLUX;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_WEBFLUX_NETTY;
 
 import com.seed4j.generator.server.springboot.cucumber.application.CucumberApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,34 +25,34 @@ class CucumberModuleConfiguration {
   private static final String TEST_TAG = "test";
 
   @Bean
-  SeedModuleResource cucumberMvcInitializationModule(CucumberApplicationService cucumber) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource cucumberMvcInitializationModule(CucumberApplicationService cucumber) {
+    return Seed4JModuleResource.builder()
       .slug(SPRING_BOOT_CUCUMBER_MVC)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addProjectBaseName().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addBasePackage().addIndentation().addProjectBaseName().build())
       .apiDoc(SPRING_BOOT_COMPONENT_TESTS_API_GROUP, "Add Cucumber integration for Spring MVC to project")
-      .organization(SeedModuleOrganization.builder().feature(SPRING_BOOT_CUCUMBER).addDependency(SPRING_MVC_SERVER).build())
+      .organization(Seed4JModuleOrganization.builder().feature(SPRING_BOOT_CUCUMBER).addDependency(SPRING_MVC_SERVER).build())
       .tags(SERVER_TAG, SPRING_TAG, SPRING_BOOT_TAG, TEST_TAG)
       .factory(cucumber::buildInitializationModule);
   }
 
   @Bean
-  SeedModuleResource cucumberWebfluxInitializationModule(CucumberApplicationService cucumber) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource cucumberWebfluxInitializationModule(CucumberApplicationService cucumber) {
+    return Seed4JModuleResource.builder()
       .slug(SPRING_BOOT_CUCUMBER_WEBFLUX)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addProjectBaseName().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addBasePackage().addIndentation().addProjectBaseName().build())
       .apiDoc(SPRING_BOOT_COMPONENT_TESTS_API_GROUP, "Add Cucumber integration for Webflux to project")
-      .organization(SeedModuleOrganization.builder().feature(SPRING_BOOT_CUCUMBER).addDependency(SPRING_BOOT_WEBFLUX_NETTY).build())
+      .organization(Seed4JModuleOrganization.builder().feature(SPRING_BOOT_CUCUMBER).addDependency(SPRING_BOOT_WEBFLUX_NETTY).build())
       .tags(SERVER_TAG, SPRING_TAG, SPRING_BOOT_TAG, TEST_TAG)
       .factory(cucumber::buildInitializationModule);
   }
 
   @Bean
-  SeedModuleResource cucumberJpaResetModule(CucumberApplicationService cucumber) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource cucumberJpaResetModule(CucumberApplicationService cucumber) {
+    return Seed4JModuleResource.builder()
       .slug(SPRING_BOOT_CUCUMBER_JPA_RESET)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addBasePackage().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addBasePackage().build())
       .apiDoc(SPRING_BOOT_COMPONENT_TESTS_API_GROUP, "Add jpa reset for cucumber")
-      .organization(SeedModuleOrganization.builder().addDependency(SPRING_BOOT_CUCUMBER).addDependency(JPA_PERSISTENCE).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(SPRING_BOOT_CUCUMBER).addDependency(JPA_PERSISTENCE).build())
       .tags(SERVER_TAG, SPRING_TAG, SPRING_BOOT_TAG, TEST_TAG)
       .factory(cucumber::buildJpaResetModule);
   }

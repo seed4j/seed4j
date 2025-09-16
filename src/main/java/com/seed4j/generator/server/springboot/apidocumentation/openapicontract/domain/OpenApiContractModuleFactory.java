@@ -1,18 +1,18 @@
 package com.seed4j.generator.server.springboot.apidocumentation.openapicontract.domain;
 
-import static com.seed4j.module.domain.SeedModule.mavenPlugin;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.pluginExecution;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
 
-import com.seed4j.module.domain.SeedModule;
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class OpenApiContractModuleFactory {
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -29,7 +29,7 @@ public class OpenApiContractModuleFactory {
     return mavenPlugin().groupId("io.github.kbuntrock").artifactId("openapi-maven-plugin");
   }
 
-  private MavenPlugin openApiPluginManagement(SeedModuleProperties properties) {
+  private MavenPlugin openApiPluginManagement(Seed4JModuleProperties properties) {
     return openApiPlugin()
       .versionSlug("openapi-maven-plugin")
       .addExecution(pluginExecution().goals("documentation").id("generate-openapi-contract"))
@@ -59,7 +59,7 @@ public class OpenApiContractModuleFactory {
       .build();
   }
 
-  public SeedModule buildBackwardsCompatibilityCheckModule(SeedModuleProperties properties) {
+  public Seed4JModule buildBackwardsCompatibilityCheckModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

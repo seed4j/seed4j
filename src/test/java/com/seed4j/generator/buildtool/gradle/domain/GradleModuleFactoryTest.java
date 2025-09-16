@@ -1,13 +1,13 @@
 package com.seed4j.generator.buildtool.gradle.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModule;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModule;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -17,12 +17,12 @@ class GradleModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myApp")
       .build();
 
-    SeedModule module = factory.buildGradleModule(properties);
+    Seed4JModule module = factory.buildGradleModule(properties);
 
     assertThatModule(module)
       .hasFile(".gitignore")
@@ -62,9 +62,9 @@ class GradleModuleFactoryTest {
 
   @Test
   void shouldBuildGradleWrapperModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    SeedModule module = factory.buildGradleWrapperModule(properties);
+    Seed4JModule module = factory.buildGradleWrapperModule(properties);
 
     assertThatModuleWithFiles(module)
       .hasFile(".gitignore")

@@ -1,12 +1,12 @@
 package com.seed4j.generator.server.springboot.cache.ehcache.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -16,7 +16,7 @@ class EhcacheModuleFactoryTest {
 
   @Test
   void shouldBuildJavaConfigurationModule() {
-    SeedModule module = factory.buildJavaConfigurationModule(properties());
+    Seed4JModule module = factory.buildJavaConfigurationModule(properties());
 
     commonEHCacheModuleAsserter(module)
       .hasFile("src/main/java/com/seed4j/growth/wire/cache/infrastructure/secondary/CacheConfiguration.java")
@@ -42,7 +42,7 @@ class EhcacheModuleFactoryTest {
 
   @Test
   void shouldBuildXmlConfigurationModule() {
-    SeedModule module = factory.buildXmlConfigurationModule(properties());
+    Seed4JModule module = factory.buildXmlConfigurationModule(properties());
 
     commonEHCacheModuleAsserter(module)
       .hasFiles("src/main/resources/config/ehcache/ehcache.xml")
@@ -57,7 +57,7 @@ class EhcacheModuleFactoryTest {
       );
   }
 
-  private SeedModuleAsserter commonEHCacheModuleAsserter(SeedModule module) {
+  private Seed4JModuleAsserter commonEHCacheModuleAsserter(Seed4JModule module) {
     return assertThatModuleWithFiles(module, pomFile(), logbackFile(), testLogbackFile())
       .hasFile("pom.xml")
       .containing(
@@ -86,7 +86,7 @@ class EhcacheModuleFactoryTest {
       .and();
   }
 
-  private SeedModuleProperties properties() {
-    return SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).basePackage("com.seed4j.growth").build();
+  private Seed4JModuleProperties properties() {
+    return Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).basePackage("com.seed4j.growth").build();
   }
 }

@@ -1,45 +1,45 @@
 package com.seed4j.generator.server.javatool.protobuf.domain;
 
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.gradleCommunityPlugin;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.mavenPlugin;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.pluginExecution;
-import static com.seed4j.module.domain.SeedModule.stagedFilesFilter;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
-import static com.seed4j.module.domain.SeedModule.versionSlug;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
+import static com.seed4j.module.domain.Seed4JModule.stagedFilesFilter;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 
 import com.seed4j.module.domain.PreCommitCommands;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginOptionalBuilder;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class ProtobufModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/javatool/protobuf");
-  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
-  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
+  private static final Seed4JSource SOURCE = from("server/javatool/protobuf");
+  private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
+  private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
 
   private static final String PROTOBUF_PACKAGE = "shared/protobuf";
   private static final VersionSlug PROTOBUF_VERSION_SLUG = versionSlug("protobuf");
   private static final GroupId PROTOBUF_GROUP_ID = groupId("com.google.protobuf");
 
-  public SeedModule buildProtobufModule(SeedModuleProperties properties) {
+  public Seed4JModule buildProtobufModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
-    SeedDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(PROTOBUF_PACKAGE);
-    SeedDestination testDestination = toSrcTestJava().append(properties.packagePath()).append(PROTOBUF_PACKAGE);
+    Seed4JDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(PROTOBUF_PACKAGE);
+    Seed4JDestination testDestination = toSrcTestJava().append(properties.packagePath()).append(PROTOBUF_PACKAGE);
 
     // @formatter:off
     return moduleBuilder(properties)
@@ -109,7 +109,7 @@ public class ProtobufModuleFactory {
     return mavenPlugin().groupId("io.github.ascopes").artifactId("protobuf-maven-plugin");
   }
 
-  public SeedModule buildProtobufBackwardsCompatibilityCheckModule(SeedModuleProperties properties) {
+  public Seed4JModule buildProtobufBackwardsCompatibilityCheckModule(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .files()

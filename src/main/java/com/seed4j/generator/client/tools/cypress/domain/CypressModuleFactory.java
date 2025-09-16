@@ -1,34 +1,34 @@
 package com.seed4j.generator.client.tools.cypress.domain;
 
-import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.lineAfterRegex;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.packageName;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.scriptCommand;
-import static com.seed4j.module.domain.SeedModule.scriptKey;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineAfterRegex;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.packageName;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
+import static com.seed4j.module.domain.Seed4JModule.scriptKey;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
 
 public class CypressModuleFactory {
 
-  private static final SeedSource SOURCE = from("client/common/cypress");
+  private static final Seed4JSource SOURCE = from("client/common/cypress");
 
-  private static final SeedDestination CYPRESS_COMPONENT_TESTS = to("src/test/webapp/component");
-  private static final SeedDestination CYPRESS_E2E_TESTS = to("src/test/webapp/e2e");
+  private static final Seed4JDestination CYPRESS_COMPONENT_TESTS = to("src/test/webapp/component");
+  private static final Seed4JDestination CYPRESS_E2E_TESTS = to("src/test/webapp/e2e");
 
   private static final String HOME = "home";
   private static final String UTILS = "utils";
 
-  public SeedModule buildComponentTestsModule(SeedModuleProperties properties) {
+  public Seed4JModule buildComponentTestsModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -49,7 +49,7 @@ public class CypressModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildE2ETestsModule(SeedModuleProperties properties) {
+  public Seed4JModule buildE2ETestsModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -66,7 +66,7 @@ public class CypressModuleFactory {
     // @formatter:on
   }
 
-  private static SeedModuleBuilder commonCypressModuleBuilder(SeedModuleProperties properties, SeedDestination destinationFolder) {
+  private static Seed4JModuleBuilder commonCypressModuleBuilder(Seed4JModuleProperties properties, Seed4JDestination destinationFolder) {
     // @formatter:off
     return moduleBuilder(properties)
       .packageJson()
@@ -89,15 +89,15 @@ public class CypressModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<SeedModuleBuilder> patchEslintPluginCypressE2E(SeedModuleProperties properties) {
+  private Consumer<Seed4JModuleBuilder> patchEslintPluginCypressE2E(Seed4JModuleProperties properties) {
     return patchEslintPluginCypress(properties, "e2e");
   }
 
-  private Consumer<SeedModuleBuilder> patchEslintPluginCypressComponent(SeedModuleProperties properties) {
+  private Consumer<Seed4JModuleBuilder> patchEslintPluginCypressComponent(Seed4JModuleProperties properties) {
     return patchEslintPluginCypress(properties, "component");
   }
 
-  private Consumer<SeedModuleBuilder> patchEslintPluginCypress(SeedModuleProperties properties, String path) {
+  private Consumer<Seed4JModuleBuilder> patchEslintPluginCypress(Seed4JModuleProperties properties, String path) {
     String eslintPluginCypress = """
       \t{
       \t\tfiles: ['src/test/webapp/%s/**/*.ts'],

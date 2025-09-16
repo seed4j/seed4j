@@ -2,19 +2,19 @@ package com.seed4j.generator.init.domain;
 
 import static com.seed4j.module.domain.nodejs.NodePackageManager.NPM;
 import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModule;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModule;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeScript;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodeVersions;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,9 +35,9 @@ class InitModuleFactoryTest {
   void shouldBuildModule() {
     mockNodeVersion();
     mockNodePackageManagerVersion(NPM, "11.9.9");
-    SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).build();
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     assertThatModule(module)
       .hasFile("README.md")
@@ -66,9 +66,9 @@ class InitModuleFactoryTest {
   void shouldBuildModuleForNpm() {
     mockNodeVersion();
     mockNodePackageManagerVersion(NPM, "11.9.9");
-    SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(NPM).build();
+    Seed4JModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(NPM).build();
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     assertThatModule(module)
       .hasFile("README.md")
@@ -82,9 +82,9 @@ class InitModuleFactoryTest {
   void shouldBuildModuleForPnpm() {
     mockNodeVersion();
     mockNodePackageManagerVersion(PNPM, "9.9.9");
-    SeedModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(PNPM).build();
+    Seed4JModuleProperties properties = defaultProperties(TestFileUtils.tmpDirForTest()).nodePackageManager(PNPM).build();
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     assertThatModule(module)
       .hasFile("README.md")
@@ -102,8 +102,8 @@ class InitModuleFactoryTest {
     when(nodeVersions.packageManagerVersion(packageManager)).thenReturn(new NodePackageVersion(version));
   }
 
-  private static SeedModulesFixture.SeedModulePropertiesBuilder defaultProperties(String folder) {
-    return SeedModulesFixture.propertiesBuilder(folder)
+  private static Seed4JModulesFixture.Seed4JModulePropertiesBuilder defaultProperties(String folder) {
+    return Seed4JModulesFixture.propertiesBuilder(folder)
       .projectBaseName("testProject")
       .projectName("Test Project")
       .nodePackageManager(NPM)

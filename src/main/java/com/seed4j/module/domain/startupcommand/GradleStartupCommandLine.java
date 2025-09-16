@@ -2,7 +2,7 @@ package com.seed4j.module.domain.startupcommand;
 
 import com.seed4j.shared.error.domain.Assert;
 
-public record GradleStartupCommandLine(String commandLineParameters) implements SeedStartupCommand {
+public record GradleStartupCommandLine(String commandLineParameters) implements Seed4JStartupCommand {
   public GradleStartupCommandLine {
     Assert.notNull("commandLineParameters", commandLineParameters);
   }

@@ -1,27 +1,27 @@
 package com.seed4j.generator.server.springboot.mvc.sample.langchain4j.domain;
 
-import static com.seed4j.module.domain.SeedModule.*;
+import static com.seed4j.module.domain.Seed4JModule.*;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SampleLangChain4jModuleFactory {
 
   private static final String SAMPLE = "sample";
 
-  private static final SeedSource SOURCE = from("server/springboot/mvc/sample/langchain4j");
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/sample/langchain4j");
 
   private static final String PRIMARY = "infrastructure/primary";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
-    SeedDestination mainDestination = toSrcMainJava().append(packagePath).append(SAMPLE);
-    SeedDestination testDestination = toSrcTestJava().append(packagePath).append(SAMPLE);
+    Seed4JDestination mainDestination = toSrcMainJava().append(packagePath).append(SAMPLE);
+    Seed4JDestination testDestination = toSrcTestJava().append(packagePath).append(SAMPLE);
 
     // @formatter:off
     return moduleBuilder(properties)

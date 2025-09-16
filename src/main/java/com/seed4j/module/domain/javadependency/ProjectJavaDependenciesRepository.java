@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.javadependency;
 
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 
 public interface ProjectJavaDependenciesRepository {
-  ProjectJavaDependencies get(SeedProjectFolder folder);
+  ProjectJavaDependencies get(Seed4JProjectFolder folder);
 }

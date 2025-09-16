@@ -1,20 +1,20 @@
 package com.seed4j.generator.setup.license.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.to;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import java.time.Year;
 import java.time.ZoneId;
 
 public class LicenseModuleFactory {
 
-  private static final SeedSource SOURCE = from("setup").append("license");
+  private static final Seed4JSource SOURCE = from("setup").append("license");
 
-  public SeedModule buildMitModule(SeedModuleProperties properties) {
+  public Seed4JModule buildMitModule(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .context()
@@ -27,7 +27,7 @@ public class LicenseModuleFactory {
     // @formatter:on
   }
 
-  public SeedModule buildApacheModule(SeedModuleProperties properties) {
+  public Seed4JModule buildApacheModule(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .files()

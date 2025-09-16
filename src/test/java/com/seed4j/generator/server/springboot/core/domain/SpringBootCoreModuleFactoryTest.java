@@ -1,19 +1,19 @@
 package com.seed4j.generator.server.springboot.core.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.ModuleFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatTwoModulesWithFiles;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.file;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.gradleBuildFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.gradleLibsVersionFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.ModuleFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatTwoModulesWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.file;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.gradleBuildFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.gradleLibsVersionFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.generator.buildtool.maven.domain.MavenModuleFactory;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -29,10 +29,10 @@ class SpringBootCoreModuleFactoryTest {
 
     @Test
     void shouldBuildModuleOnProjectWithoutDefaultGoal() {
-      SeedModuleProperties properties = properties();
+      Seed4JModuleProperties properties = properties();
 
-      SeedModule mavenModule = mavenFactory.buildMavenModule(properties);
-      SeedModule module = factory.buildModule(properties);
+      Seed4JModule mavenModule = mavenFactory.buildMavenModule(properties);
+      Seed4JModule module = factory.buildModule(properties);
 
       assertThatTwoModulesWithFiles(mavenModule, module, pomFile())
         .hasFile("pom.xml")
@@ -194,9 +194,9 @@ class SpringBootCoreModuleFactoryTest {
 
     @Test
     void shouldBuildModuleOnProjectWithDefaultGoal() {
-      SeedModuleProperties properties = properties();
+      Seed4JModuleProperties properties = properties();
 
-      SeedModule module = factory.buildModule(properties);
+      Seed4JModule module = factory.buildModule(properties);
 
       assertThatModuleWithFiles(module, pomWithDefaultGoal())
         .hasFile("pom.xml")
@@ -214,13 +214,13 @@ class SpringBootCoreModuleFactoryTest {
 
     @Test
     void shouldBuildModule() {
-      SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
         .basePackage("com.seed4j.growth")
         .projectBaseName("myapp")
         .put("serverPort", 9000)
         .build();
 
-      SeedModule module = factory.buildModule(properties);
+      Seed4JModule module = factory.buildModule(properties);
 
       assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
         .hasFile("gradle/libs.versions.toml")
@@ -258,8 +258,8 @@ class SpringBootCoreModuleFactoryTest {
     }
   }
 
-  private SeedModuleProperties properties() {
-    return SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+  private Seed4JModuleProperties properties() {
+    return Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
       .build();

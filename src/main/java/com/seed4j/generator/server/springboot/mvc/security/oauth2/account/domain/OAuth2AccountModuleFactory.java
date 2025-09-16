@@ -1,14 +1,14 @@
 package com.seed4j.generator.server.springboot.mvc.security.oauth2.account.domain;
 
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 
 public class OAuth2AccountModuleFactory {
 
@@ -20,21 +20,21 @@ public class OAuth2AccountModuleFactory {
   private static final String SECONDARY = INFRASTRUCTURE + "/secondary";
   private static final String USER_IDENTITY_DESTINATION = "shared/useridentity";
 
-  private static final SeedSource ACCOUNT_SOURCE = from("server/springboot/mvc/security/oauth2/account");
-  private static final SeedSource ACCOUNT_MAIN_SOURCE = ACCOUNT_SOURCE.append("main");
-  private static final SeedSource ACCOUNT_TEST_SOURCE = ACCOUNT_SOURCE.append("test");
+  private static final Seed4JSource ACCOUNT_SOURCE = from("server/springboot/mvc/security/oauth2/account");
+  private static final Seed4JSource ACCOUNT_MAIN_SOURCE = ACCOUNT_SOURCE.append("main");
+  private static final Seed4JSource ACCOUNT_TEST_SOURCE = ACCOUNT_SOURCE.append("test");
 
-  private static final SeedSource USER_IDENTITY_SOURCE = from("server/springboot/mvc/security/oauth2/useridentity");
-  private static final SeedSource USER_IDENTITY_MAIN_SOURCE = USER_IDENTITY_SOURCE.append("main");
-  private static final SeedSource USER_IDENTITY_TEST_SOURCE = USER_IDENTITY_SOURCE.append("test");
+  private static final Seed4JSource USER_IDENTITY_SOURCE = from("server/springboot/mvc/security/oauth2/useridentity");
+  private static final Seed4JSource USER_IDENTITY_MAIN_SOURCE = USER_IDENTITY_SOURCE.append("main");
+  private static final Seed4JSource USER_IDENTITY_TEST_SOURCE = USER_IDENTITY_SOURCE.append("test");
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     String packagePath = properties.packagePath();
-    SeedDestination accountMainDestination = toSrcMainJava().append(packagePath).append("account");
-    SeedDestination accountTestDestination = toSrcTestJava().append(packagePath).append("account");
+    Seed4JDestination accountMainDestination = toSrcMainJava().append(packagePath).append("account");
+    Seed4JDestination accountTestDestination = toSrcTestJava().append(packagePath).append("account");
 
-    SeedDestination userIdentityMainDestination = toSrcMainJava().append(packagePath).append(USER_IDENTITY_DESTINATION);
-    SeedDestination userIdentityTestDestination = toSrcTestJava().append(packagePath).append(USER_IDENTITY_DESTINATION);
+    Seed4JDestination userIdentityMainDestination = toSrcMainJava().append(packagePath).append(USER_IDENTITY_DESTINATION);
+    Seed4JDestination userIdentityTestDestination = toSrcTestJava().append(packagePath).append(USER_IDENTITY_DESTINATION);
 
     // @formatter:off
     return moduleBuilder(properties)

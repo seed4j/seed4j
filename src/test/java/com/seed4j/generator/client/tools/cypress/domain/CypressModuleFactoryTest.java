@@ -1,12 +1,12 @@
 package com.seed4j.generator.client.tools.cypress.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,9 +18,9 @@ class CypressModuleFactoryTest {
   @Test
   void shouldBuildComponentTestsModule() {
     ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    SeedModule module = factory.buildComponentTestsModule(properties);
+    Seed4JModule module = factory.buildComponentTestsModule(properties);
 
     assertThatModuleWithFiles(module, files)
       .hasFile("package.json")
@@ -54,9 +54,9 @@ class CypressModuleFactoryTest {
   @DisplayName("should build E2E tests module")
   void shouldBuildE2eTestsModule() {
     ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
-    SeedModule module = factory.buildE2ETestsModule(properties);
+    Seed4JModule module = factory.buildE2ETestsModule(properties);
 
     assertThatModuleWithFiles(module, files)
       .hasFile("package.json")

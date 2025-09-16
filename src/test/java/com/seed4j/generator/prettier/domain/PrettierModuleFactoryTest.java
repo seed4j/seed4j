@@ -1,20 +1,20 @@
 package com.seed4j.generator.prettier.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.file;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.lintStagedConfigFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeScript;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.file;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.lintStagedConfigFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.packageJsonFile;
 import static org.mockito.Mockito.verify;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
-import com.seed4j.module.infrastructure.secondary.SeedModulesAssertions;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -34,9 +34,9 @@ class PrettierModuleFactoryTest {
   @Test
   void shouldBuildModuleWithoutPrettierLintStaged() {
     String folder = TestFileUtils.tmpDirForTest();
-    SeedModuleProperties properties = properties(folder);
+    Seed4JModuleProperties properties = properties(folder);
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithoutPrettier())
       .hasFiles(".prettierignore")
@@ -75,9 +75,9 @@ class PrettierModuleFactoryTest {
   @Test
   void shouldBuildModuleWithEmptyLintStaged() {
     String folder = TestFileUtils.tmpDirForTest();
-    SeedModuleProperties properties = properties(folder);
+    Seed4JModuleProperties properties = properties(folder);
 
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFile())
       .hasFile(".lintstagedrc.cjs")
@@ -90,8 +90,8 @@ class PrettierModuleFactoryTest {
       );
   }
 
-  private SeedModuleProperties properties(String folder) {
-    return SeedModulesFixture.propertiesBuilder(folder)
+  private Seed4JModuleProperties properties(String folder) {
+    return Seed4JModulesFixture.propertiesBuilder(folder)
       .projectBaseName("testProject")
       .put("projectName", "Test Project")
       .put("indentSize", 2)
@@ -99,7 +99,7 @@ class PrettierModuleFactoryTest {
       .build();
   }
 
-  public static SeedModulesAssertions.ModuleFile lintStagedConfigFileWithoutPrettier() {
+  public static Seed4JModulesAssertions.ModuleFile lintStagedConfigFileWithoutPrettier() {
     return file("src/test/resources/projects/init/.lintstagedrc.withoutPrettier.cjs", ".lintstagedrc.cjs");
   }
 }

@@ -1,34 +1,34 @@
 package com.seed4j.generator.server.springboot.seed4jextension.domain;
 
 import static com.seed4j.generator.server.springboot.cucumbercommon.domain.CucumbersModules.cucumberModuleBuilder;
-import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.comment;
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.text;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcMainResources;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
-import static com.seed4j.module.domain.SeedModule.versionSlug;
+import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.comment;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.text;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainResources;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedProjectFilePath;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JProjectFilePath;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency.JavaDependencyOptionalValueBuilder;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
 
@@ -40,14 +40,14 @@ public class Seed4JExtensionModuleFactory {
   private static final String SECONDARY = "secondary";
   private static final String DEPENDENCIES = "dependencies";
 
-  private static final SeedSource SOURCE = from("server/springboot/seed4j-extension");
-  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
-  private static final SeedSource SLUG_SOURCE = MAIN_SOURCE.append(SHARED).append("slug");
+  private static final Seed4JSource SOURCE = from("server/springboot/seed4j-extension");
+  private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
+  private static final Seed4JSource SLUG_SOURCE = MAIN_SOURCE.append(SHARED).append("slug");
 
-  private static final SeedSource DEPENDENCIES_MAIN_SOURCE = MAIN_SOURCE.append(SHARED).append(DEPENDENCIES);
-  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
-  private static final SeedSource DEPENDENCIES_TEST_SOURCE = TEST_SOURCE.append(SHARED).append(DEPENDENCIES);
-  private static final SeedSource CUCUMBER_SOURCE = from("server/springboot/cucumber");
+  private static final Seed4JSource DEPENDENCIES_MAIN_SOURCE = MAIN_SOURCE.append(SHARED).append(DEPENDENCIES);
+  private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
+  private static final Seed4JSource DEPENDENCIES_TEST_SOURCE = TEST_SOURCE.append(SHARED).append(DEPENDENCIES);
+  private static final Seed4JSource CUCUMBER_SOURCE = from("server/springboot/cucumber");
 
   private static final String SRC_MAIN_JAVA = "src/main/java";
 
@@ -58,7 +58,7 @@ public class Seed4JExtensionModuleFactory {
   private static final PropertyKey BEAN_DEFINITION_OVERRIDING_PROPERTY_KEY = propertyKey("spring.main.allow-bean-definition-overriding");
   private static final String PACKAGE_INFO_JAVA = "package-info.java";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -75,7 +75,7 @@ public class Seed4JExtensionModuleFactory {
       .mandatoryReplacements()
         .in(mainClassFile(properties))
           .add(text("@SpringBootApplication"), springBootApplicationWithSeed4J(properties))
-          .add(lineBeforeText("import org.springframework.boot.SpringApplication;"), "import com.seed4j.Seed4jApp;")
+          .add(lineBeforeText("import org.springframework.boot.SpringApplication;"), "import com.seed4j.Seed4JApp;")
         .and()
       .and()
       .springMainProperties()
@@ -103,9 +103,9 @@ public class Seed4JExtensionModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<SeedModuleBuilder> cucumberBuilder(SeedModuleProperties properties) {
+  private Consumer<Seed4JModuleBuilder> cucumberBuilder(Seed4JModuleProperties properties) {
     String packagePath = properties.packagePath();
-    SeedDestination cucumberDestination = toSrcTestJava().append(packagePath).append("cucumber");
+    Seed4JDestination cucumberDestination = toSrcTestJava().append(packagePath).append("cucumber");
 
     // @formatter:off
     return builder -> builder
@@ -120,11 +120,11 @@ public class Seed4JExtensionModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<SeedModuleBuilder> dependenciesReadersBuilder(SeedModuleProperties properties) {
+  private Consumer<Seed4JModuleBuilder> dependenciesReadersBuilder(Seed4JModuleProperties properties) {
     String packagePath = properties.packagePath();
     String baseName = properties.projectBaseName().capitalized();
-    SeedDestination npmMainDestination = toSrcMainJava().append(packagePath).append(SHARED).append(DEPENDENCIES);
-    SeedDestination npmTestDestination = toSrcTestJava().append(packagePath).append(SHARED).append(DEPENDENCIES);
+    Seed4JDestination npmMainDestination = toSrcMainJava().append(packagePath).append(SHARED).append(DEPENDENCIES);
+    Seed4JDestination npmTestDestination = toSrcTestJava().append(packagePath).append(SHARED).append(DEPENDENCIES);
 
     // @formatter:off
     return builder -> builder
@@ -169,10 +169,10 @@ public class Seed4JExtensionModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<SeedModuleBuilder> slugBuilder(SeedModuleProperties properties) {
+  private Consumer<Seed4JModuleBuilder> slugBuilder(Seed4JModuleProperties properties) {
     String packagePath = properties.packagePath();
     String baseName = properties.projectBaseName().capitalized();
-    SeedDestination slugDestination = toSrcMainJava().append(packagePath).append(SHARED).append("slug");
+    Seed4JDestination slugDestination = toSrcMainJava().append(packagePath).append(SHARED).append("slug");
 
     // @formatter:off
     return builder -> builder
@@ -195,15 +195,15 @@ public class Seed4JExtensionModuleFactory {
     return javaDependency().groupId("com.seed4j").artifactId("seed4j").versionSlug("seed4j");
   }
 
-  private String springBootApplicationWithSeed4J(SeedModuleProperties properties) {
-    return "@SpringBootApplication(scanBasePackageClasses = { Seed4jApp.class, " + mainClassName(properties) + ".class })";
+  private String springBootApplicationWithSeed4J(Seed4JModuleProperties properties) {
+    return "@SpringBootApplication(scanBasePackageClasses = { Seed4JApp.class, " + mainClassName(properties) + ".class })";
   }
 
-  private SeedProjectFilePath mainClassFile(SeedModuleProperties properties) {
+  private Seed4JProjectFilePath mainClassFile(Seed4JModuleProperties properties) {
     return path(SRC_MAIN_JAVA).append(properties.packagePath()).append(mainClassName(properties) + ".java");
   }
 
-  private String mainClassName(SeedModuleProperties properties) {
+  private String mainClassName(Seed4JModuleProperties properties) {
     return properties.projectBaseName().capitalized() + "App";
   }
 }

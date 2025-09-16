@@ -5,4 +5,4 @@ Feature: Seed4J Extension
       | maven-java       |
       | spring-boot      |
       | seed4j-extension |
-    Then I should have "@SpringBootApplication(scanBasePackageClasses = { Seed4jApp.class, GrowthApp.class })" in "src/main/java/com/seed4j/growth/GrowthApp.java"
+    Then I should have "@SpringBootApplication(scanBasePackageClasses = { Seed4JApp.class, GrowthApp.class })" in "src/main/java/com/seed4j/growth/GrowthApp.java"

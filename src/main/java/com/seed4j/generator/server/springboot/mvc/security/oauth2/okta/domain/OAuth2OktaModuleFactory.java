@@ -1,22 +1,22 @@
 package com.seed4j.generator.server.springboot.mvc.security.oauth2.okta.domain;
 
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.to;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.javaproperties.SpringProfile;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class OAuth2OktaModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/mvc/security/oauth2/okta");
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/security/oauth2/okta");
 
   private static final SpringProfile OKTA_SPRING_PROFILE = new SpringProfile("okta");
 
@@ -24,7 +24,7 @@ public class OAuth2OktaModuleFactory {
   private static final String OKTA_DOMAIN_PROPERTY = "oktaDomain";
   private static final String OKTA_SHELL_SCRIPT = "okta.sh";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off
@@ -46,11 +46,11 @@ public class OAuth2OktaModuleFactory {
     // @formatter:on
   }
 
-  private static PropertyValue issuerUri(SeedModuleProperties properties) {
+  private static PropertyValue issuerUri(Seed4JModuleProperties properties) {
     return propertyValue("https://" + properties.getString(OKTA_DOMAIN_PROPERTY) + "/oauth2/default");
   }
 
-  private static PropertyValue clientId(SeedModuleProperties properties) {
+  private static PropertyValue clientId(Seed4JModuleProperties properties) {
     return propertyValue(properties.getString(OKTA_CLIENT_ID_PROPERTY));
   }
 }

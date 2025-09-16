@@ -1,18 +1,18 @@
 package com.seed4j.generator.client.angular.security.jwt.domain;
 
-import static com.seed4j.module.domain.SeedModule.fileStart;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.lineBeforeText;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.path;
-import static com.seed4j.module.domain.SeedModule.regex;
-import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.Seed4JModule.fileStart;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.regex;
+import static com.seed4j.module.domain.Seed4JModule.to;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.replacement.ElementReplacer;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.shared.error.domain.Assert;
@@ -39,11 +39,11 @@ public class AngularJwtModuleFactory {
     import { authInterceptor } from './app/auth/auth.interceptor';
     """;
 
-  private static final SeedSource SOURCE = from("client/angular/security/jwt/src/main/webapp/app");
+  private static final Seed4JSource SOURCE = from("client/angular/security/jwt/src/main/webapp/app");
 
-  private static final SeedDestination APP_DESTINATION = to("src/main/webapp/app");
+  private static final Seed4JDestination APP_DESTINATION = to("src/main/webapp/app");
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

@@ -2,7 +2,7 @@ package com.seed4j.module.domain.startupcommand;
 
 import com.seed4j.shared.error.domain.Assert;
 
-public record DockerComposeStartupCommandLine(DockerComposeFile dockerComposeFile) implements SeedStartupCommand {
+public record DockerComposeStartupCommandLine(DockerComposeFile dockerComposeFile) implements Seed4JStartupCommand {
   public DockerComposeStartupCommandLine {
     Assert.notNull("dockerComposeFile", dockerComposeFile);
   }

@@ -3,7 +3,7 @@ package com.seed4j.module.infrastructure.secondary;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.ErrorStatus;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ class MissingPackageJsonExceptionTest {
 
   @Test
   void shouldGetExceptionInformation() {
-    MissingPackageJsonException exception = new MissingPackageJsonException(new SeedProjectFolder("folder"));
+    MissingPackageJsonException exception = new MissingPackageJsonException(new Seed4JProjectFolder("folder"));
 
     assertThat(exception.getMessage()).isEqualTo("package.json is missing in folder, can't apply module");
     assertThat(exception.status()).isEqualTo(ErrorStatus.BAD_REQUEST);

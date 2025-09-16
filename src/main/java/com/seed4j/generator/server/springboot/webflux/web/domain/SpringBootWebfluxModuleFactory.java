@@ -1,29 +1,29 @@
 package com.seed4j.generator.server.springboot.webflux.web.domain;
 
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class SpringBootWebfluxModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/webflux/web");
-  private static final SeedSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
-  private static final SeedSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
+  private static final Seed4JSource SOURCE = from("server/springboot/webflux/web");
+  private static final Seed4JSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
+  private static final Seed4JSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
   private static final String WIRE_JACKSON_CONFIG = "wire/jackson/infrastructure/primary";
   private static final PropertyKey SERVER_PORT = propertyKey("server.port");
 
@@ -31,11 +31,11 @@ public class SpringBootWebfluxModuleFactory {
 
   private static final String EXCEPTION_PRIMARY = "shared/error/infrastructure/primary";
 
-  public SeedModule buildEmptyModule(SeedModuleProperties properties) {
+  public Seed4JModule buildEmptyModule(Seed4JModuleProperties properties) {
     return moduleBuilder(properties).build();
   }
 
-  public SeedModule buildNettyModule(SeedModuleProperties properties) {
+  public Seed4JModule buildNettyModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

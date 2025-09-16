@@ -1,20 +1,20 @@
 package com.seed4j.generator.client.react.core.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.eslintConfigFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.lintStagedConfigFileWithPrettier;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.packageJsonFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.tsConfigFile;
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.vitestConfigFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.eslintConfigFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.lintStagedConfigFileWithPrettier;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.tsConfigFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.vitestConfigFile;
 import static org.mockito.Mockito.verify;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -33,8 +33,10 @@ class ReactModuleFactoryTest {
 
   @Test
   void shouldBuildModule() {
-    SeedModuleProperties properties = SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build();
-    SeedModule module = factory.buildModule(properties);
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .projectBaseName("seed4j")
+      .build();
+    Seed4JModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(
       module,
@@ -101,8 +103,8 @@ class ReactModuleFactoryTest {
 
   @Test
   void shouldViteConfigBeUpdatedWhenServerPortPropertyNotDefault() {
-    SeedModule module = factory.buildModule(
-      SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").put("serverPort", 8081).build()
+    Seed4JModule module = factory.buildModule(
+      Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").put("serverPort", 8081).build()
     );
 
     assertThatModuleWithFiles(module, packageJsonFile(), eslintConfigFile(), tsConfigFile(), vitestConfigFile())
@@ -113,8 +115,8 @@ class ReactModuleFactoryTest {
 
   @Test
   void shouldViteConfigBeDefaultWhenServerPortPropertyMissing() {
-    SeedModule module = factory.buildModule(
-      SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build()
+    Seed4JModule module = factory.buildModule(
+      Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build()
     );
 
     assertThatModuleWithFiles(module, packageJsonFile(), eslintConfigFile(), tsConfigFile(), vitestConfigFile())

@@ -1,6 +1,6 @@
 package com.seed4j.project.infrastructure.primary;
 
-import com.seed4j.module.domain.SeedModuleApplied;
+import com.seed4j.module.domain.Seed4JModuleApplied;
 import com.seed4j.project.application.ProjectsApplicationService;
 import com.seed4j.project.domain.ProjectPath;
 import com.seed4j.project.domain.history.ProjectAction;
@@ -17,13 +17,13 @@ public class JavaProjects {
     this.projects = projects;
   }
 
-  public void moduleApplied(SeedModuleApplied moduleApplied) {
+  public void moduleApplied(Seed4JModuleApplied moduleApplied) {
     Assert.notNull("moduleApplied", moduleApplied);
 
     projects.append(projectActionToAdd(moduleApplied));
   }
 
-  private static ProjectActionToAppend projectActionToAdd(SeedModuleApplied moduleApplied) {
+  private static ProjectActionToAppend projectActionToAdd(Seed4JModuleApplied moduleApplied) {
     ProjectPath path = new ProjectPath(moduleApplied.properties().projectFolder().get());
 
     ProjectAction action = ProjectAction.builder()

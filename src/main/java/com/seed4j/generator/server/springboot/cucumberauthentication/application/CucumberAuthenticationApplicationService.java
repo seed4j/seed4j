@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.cucumberauthentication.application;
 
 import com.seed4j.generator.server.springboot.cucumberauthentication.domain.CucumberAuthenticationModuleFactory;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,11 +14,11 @@ public class CucumberAuthenticationApplicationService {
     cucumberAuthentication = new CucumberAuthenticationModuleFactory();
   }
 
-  public SeedModule buildOauth2Module(SeedModuleProperties properties) {
+  public Seed4JModule buildOauth2Module(Seed4JModuleProperties properties) {
     return cucumberAuthentication.buildOauth2Module(properties);
   }
 
-  public SeedModule buildJWTModule(SeedModuleProperties properties) {
+  public Seed4JModule buildJWTModule(Seed4JModuleProperties properties) {
     return cucumberAuthentication.buildJWTModule(properties);
   }
 }

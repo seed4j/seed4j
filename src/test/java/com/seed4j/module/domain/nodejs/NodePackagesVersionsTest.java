@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 @UnitTest
 class NodePackagesVersionsTest {
 
-  private static final NodePackagesVersionSource COMMON = SeedNodePackagesVersionSource.COMMON.build();
-  private static final NodePackagesVersionSource VUE = SeedNodePackagesVersionSource.VUE.build();
+  private static final NodePackagesVersionSource COMMON = Seed4JNodePackagesVersionSource.COMMON.build();
+  private static final NodePackagesVersionSource VUE = Seed4JNodePackagesVersionSource.VUE.build();
 
   @Test
   void shouldNotVersionFromUnknownSource() {

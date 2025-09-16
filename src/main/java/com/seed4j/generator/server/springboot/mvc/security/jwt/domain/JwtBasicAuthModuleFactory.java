@@ -1,42 +1,42 @@
 package com.seed4j.generator.server.springboot.mvc.security.jwt.domain;
 
-import static com.seed4j.module.domain.SeedModule.SeedModuleBuilder;
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
-import com.seed4j.module.domain.javaproperties.SeedModuleSpringProperties.SeedModuleSpringPropertiesBuilder;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.javaproperties.Seed4JModuleSpringProperties.Seed4JModuleSpringPropertiesBuilder;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class JwtBasicAuthModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/mvc/security/jwt/basic-auth");
-  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
-  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/security/jwt/basic-auth");
+  private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
+  private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
 
   private static final String DOMAIN = "domain";
   private static final String ACCOUNT = "account";
   private static final String PRIMARY = "infrastructure/primary";
   private static final String SECONDARY = "infrastructure/secondary";
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();
 
-    SeedDestination mainDestination = toSrcMainJava().append(packagePath).append(ACCOUNT);
-    SeedDestination testDestination = toSrcTestJava().append(packagePath).append(ACCOUNT);
+    Seed4JDestination mainDestination = toSrcMainJava().append(packagePath).append(ACCOUNT);
+    Seed4JDestination testDestination = toSrcTestJava().append(packagePath).append(ACCOUNT);
 
     // @formatter:off
-    SeedModuleBuilder builder = moduleBuilder(properties)
+    Seed4JModuleBuilder builder = moduleBuilder(properties)
       .documentation(documentationTitle("JWT basic auth"), SOURCE.template("jwt-basic-auth.md"))
       .files()
         .add(MAIN_SOURCE.template("package-info.java"), mainDestination.append("package-info.java"))
@@ -78,7 +78,7 @@ public class JwtBasicAuthModuleFactory {
     return builder.build();
   }
 
-  private void appendProperties(SeedModuleSpringPropertiesBuilder builder) {
+  private void appendProperties(Seed4JModuleSpringPropertiesBuilder builder) {
     builder
       .set(propertyKey("application.security.token-validity"), propertyValue("P1D"))
       .set(propertyKey("application.security.remember-me-token-validity"), propertyValue("P365D"))

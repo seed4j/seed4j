@@ -1,11 +1,11 @@
 package com.seed4j.generator.ci.renovate.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.RENOVATE;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.RENOVATE;
 
 import com.seed4j.generator.ci.renovate.application.RenovateApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModuleResource;
-import com.seed4j.shared.slug.domain.Seed4JFeatureSlug;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
+import com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,12 +16,12 @@ class RenovateModuleConfiguration {
   private static final String RENOVATE_TAG = "renovate";
 
   @Bean
-  SeedModuleResource renovateModule(RenovateApplicationService renovate) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource renovateModule(RenovateApplicationService renovate) {
+    return Seed4JModuleResource.builder()
       .slug(RENOVATE)
       .withoutProperties()
       .apiDoc("Dependencies updates", "Add Renovate for automatic dependency updates")
-      .organization(SeedModuleOrganization.builder().feature(Seed4JFeatureSlug.DEPENDENCIES_UPDATES).build())
+      .organization(Seed4JModuleOrganization.builder().feature(Seed4JCoreFeatureSlug.DEPENDENCIES_UPDATES).build())
       .tags(CI_TAG, RENOVATE_TAG)
       .factory(renovate::buildModule);
   }

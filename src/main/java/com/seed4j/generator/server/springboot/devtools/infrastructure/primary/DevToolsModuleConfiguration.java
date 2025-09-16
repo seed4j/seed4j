@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.devtools.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_DEVTOOLS;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_DEVTOOLS;
 
 import com.seed4j.generator.server.springboot.devtools.application.DevToolsApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Configuration;
 class DevToolsModuleConfiguration {
 
   @Bean
-  SeedModuleResource devToolsModule(DevToolsApplicationService devtools) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource devToolsModule(DevToolsApplicationService devtools) {
+    return Seed4JModuleResource.builder()
       .slug(SPRING_BOOT_DEVTOOLS)
       .propertiesDefinition(
-        SeedModulePropertiesDefinition.builder()
+        Seed4JModulePropertiesDefinition.builder()
           .addBasePackage()
           .addProjectBaseName()
           .addIndentation()
@@ -25,7 +25,7 @@ class DevToolsModuleConfiguration {
           .build()
       )
       .apiDoc("Spring Boot - Tools", "Add Spring Boot devtools.")
-      .organization(SeedModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(Seed4JModuleOrganization.SPRINGBOOT_DEPENDENCY)
       .tags("server", "spring", "spring-boot", "devtools")
       .factory(devtools::buildModule);
   }

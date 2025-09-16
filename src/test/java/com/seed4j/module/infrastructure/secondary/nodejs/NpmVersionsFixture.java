@@ -13,8 +13,8 @@ public final class NpmVersionsFixture {
   public static NodeVersions npmVersions(ProjectFiles filesReader, Collection<NodePackagesVersionsReader> customReaders) {
     Assert.notNull("customReaders", customReaders);
 
-    return new SeedNodeVersions(
-      Stream.concat(customReaders.stream(), Stream.of(new SeedFileSystemNodePackagesVersionReader(filesReader))).toList()
+    return new Seed4JNodeVersions(
+      Stream.concat(customReaders.stream(), Stream.of(new Seed4JFileSystemNodePackagesVersionReader(filesReader))).toList()
     );
   }
 }

@@ -2,11 +2,11 @@ package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notContainingReplacement;
 
-import com.seed4j.module.domain.SeedModuleContext;
-import com.seed4j.module.domain.SeedProjectFilePath;
+import com.seed4j.module.domain.Seed4JModuleContext;
+import com.seed4j.module.domain.Seed4JProjectFilePath;
 import com.seed4j.module.domain.gitignore.GitIgnoreEntry;
-import com.seed4j.module.domain.gitignore.SeedModuleGitIgnore;
-import com.seed4j.module.domain.properties.SeedProjectFolder;
+import com.seed4j.module.domain.gitignore.Seed4JModuleGitIgnore;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.module.domain.replacement.*;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
@@ -27,7 +27,7 @@ class FileSystemGitIgnoreHandler {
     this.fileReplacer = fileReplacer;
   }
 
-  public void handle(SeedProjectFolder projectFolder, SeedModuleGitIgnore gitIgnore) {
+  public void handle(Seed4JProjectFolder projectFolder, Seed4JModuleGitIgnore gitIgnore) {
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("gitIgnore", gitIgnore);
 
@@ -38,7 +38,7 @@ class FileSystemGitIgnoreHandler {
   }
 
   @ExcludeFromGeneratedCodeCoverage(reason = "IOException is hard to test")
-  private static void createGitIgnoreFileIfNeeded(SeedProjectFolder projectFolder) {
+  private static void createGitIgnoreFileIfNeeded(Seed4JProjectFolder projectFolder) {
     Path gitIgnoreFilePath = projectFolder.filePath(GIT_IGNORE_FILE_PATH);
 
     if (Files.notExists(gitIgnoreFilePath)) {
@@ -53,13 +53,13 @@ class FileSystemGitIgnoreHandler {
     }
   }
 
-  private Consumer<GitIgnoreEntry> handleIgnorePattern(SeedProjectFolder projectFolder) {
+  private Consumer<GitIgnoreEntry> handleIgnorePattern(Seed4JProjectFolder projectFolder) {
     return gitIgnoreEntry -> {
       MandatoryReplacer replacer = new MandatoryReplacer(new EndOfFileReplacer(notContainingReplacement()), gitIgnoreEntry.get());
       fileReplacer.handle(
         projectFolder,
-        ContentReplacers.of(new MandatoryFileReplacer(new SeedProjectFilePath(GIT_IGNORE_FILE_PATH), replacer)),
-        SeedModuleContext.empty()
+        ContentReplacers.of(new MandatoryFileReplacer(new Seed4JProjectFilePath(GIT_IGNORE_FILE_PATH), replacer)),
+        Seed4JModuleContext.empty()
       );
     };
   }

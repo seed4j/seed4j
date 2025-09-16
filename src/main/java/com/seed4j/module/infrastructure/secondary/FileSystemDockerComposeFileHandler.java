@@ -1,7 +1,7 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import com.seed4j.module.domain.properties.SeedProjectFolder;
-import com.seed4j.module.domain.standalonedocker.SeedModuleDockerComposeFile;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
+import com.seed4j.module.domain.standalonedocker.Seed4JModuleDockerComposeFile;
 import com.seed4j.module.domain.startupcommand.DockerComposeFile;
 import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Path;
@@ -11,18 +11,18 @@ class FileSystemDockerComposeFileHandler {
 
   public static final String COMPOSE_FILE_NAME = "docker-compose.yml";
 
-  public void handle(SeedProjectFolder projectFolder, SeedModuleDockerComposeFile files) {
+  public void handle(Seed4JProjectFolder projectFolder, Seed4JModuleDockerComposeFile files) {
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("files", files);
 
     files.dockerComposeFiles().get().forEach(include(projectFolder));
   }
 
-  private Consumer<DockerComposeFile> include(SeedProjectFolder projectFolder) {
+  private Consumer<DockerComposeFile> include(Seed4JProjectFolder projectFolder) {
     return file -> new DockerComposeFileHandler(getPath(projectFolder)).append(file);
   }
 
-  private static Path getPath(SeedProjectFolder projectFolder) {
+  private static Path getPath(Seed4JProjectFolder projectFolder) {
     return projectFolder.filePath(COMPOSE_FILE_NAME);
   }
 }

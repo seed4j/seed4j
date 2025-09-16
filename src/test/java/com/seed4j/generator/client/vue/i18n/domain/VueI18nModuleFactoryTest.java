@@ -1,11 +1,11 @@
 package com.seed4j.generator.client.vue.i18n.domain;
 
-import static com.seed4j.module.infrastructure.secondary.SeedModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.SeedModulesFixture;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -15,11 +15,11 @@ class VueI18nModuleFactoryTest {
 
   @Test
   void shouldBuildI18nModule() {
-    SeedModule module = factory.buildModule(
-      SeedModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build()
+    Seed4JModule module = factory.buildModule(
+      Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build()
     );
 
-    SeedModuleAsserter asserter = assertThatModuleWithFiles(module, packageJsonFile(), mainFile(), homepage(), vitest());
+    Seed4JModuleAsserter asserter = assertThatModuleWithFiles(module, packageJsonFile(), mainFile(), homepage(), vitest());
     asserter
       .hasFile("package.json")
       .containing(nodeDependency("i18next"))

@@ -1,19 +1,19 @@
 package com.seed4j.generator.server.springboot.mvc.internationalizederrors.domain;
 
-import static com.seed4j.module.domain.SeedModule.documentationTitle;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.javaDependency;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.to;
-import static com.seed4j.module.domain.SeedModule.toSrcMainJava;
-import static com.seed4j.module.domain.SeedModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedDestination;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
 public class InternationalizedErrorsModuleFactory {
@@ -22,30 +22,30 @@ public class InternationalizedErrorsModuleFactory {
   private static final String DOMAIN = "domain";
   private static final String INFRASTRUCTURE_PRIMARY = "infrastructure/primary";
 
-  private static final SeedSource SOURCE = from("server/springboot/mvc/internationalized-errors");
-  private static final SeedSource MAIN_SOURCE = SOURCE.append("main");
-  private static final SeedSource RESOURCES_SOURCE = SOURCE.append("resources");
-  private static final SeedSource TEST_SOURCE = SOURCE.append("test");
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/internationalized-errors");
+  private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
+  private static final Seed4JSource RESOURCES_SOURCE = SOURCE.append("resources");
+  private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
 
-  private static final SeedDestination MESSAGES_DESTINATION = to("src/main/resources/messages");
+  private static final Seed4JDestination MESSAGES_DESTINATION = to("src/main/resources/messages");
 
-  public SeedModule buildModule(SeedModuleProperties properties) {
+  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();
     String baseFileName = properties.projectBaseName().kebabCase();
     String packagePath = properties.packagePath();
 
-    SeedDestination mainErrorDestination = toSrcMainJava().append(packagePath).append(ERROR);
-    SeedDestination mainDomainDestination = mainErrorDestination.append(DOMAIN);
-    SeedDestination mainPrimaryDestination = mainErrorDestination.append(INFRASTRUCTURE_PRIMARY);
+    Seed4JDestination mainErrorDestination = toSrcMainJava().append(packagePath).append(ERROR);
+    Seed4JDestination mainDomainDestination = mainErrorDestination.append(DOMAIN);
+    Seed4JDestination mainPrimaryDestination = mainErrorDestination.append(INFRASTRUCTURE_PRIMARY);
 
-    SeedDestination testErrorDestination = toSrcTestJava().append(packagePath).append(ERROR);
-    SeedDestination testPrimaryDestination = testErrorDestination.append(INFRASTRUCTURE_PRIMARY);
-    SeedDestination testDomainDestination = testErrorDestination.append(DOMAIN);
+    Seed4JDestination testErrorDestination = toSrcTestJava().append(packagePath).append(ERROR);
+    Seed4JDestination testPrimaryDestination = testErrorDestination.append(INFRASTRUCTURE_PRIMARY);
+    Seed4JDestination testDomainDestination = testErrorDestination.append(DOMAIN);
 
-    SeedDestination errorGeneratorDestination = toSrcTestJava().append(packagePath).append("shared/error_generator");
-    SeedDestination errorGeneratorPrimaryDestination = errorGeneratorDestination.append(INFRASTRUCTURE_PRIMARY);
+    Seed4JDestination errorGeneratorDestination = toSrcTestJava().append(packagePath).append("shared/error_generator");
+    Seed4JDestination errorGeneratorPrimaryDestination = errorGeneratorDestination.append(INFRASTRUCTURE_PRIMARY);
 
     // @formatter:off
     return moduleBuilder(properties)

@@ -1,6 +1,6 @@
 package com.seed4j.project.domain.history;
 
-import com.seed4j.shared.collection.domain.SeedCollections;
+import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ public record ModuleParameters(Map<String, Object> parameters) {
   public static final ModuleParameters EMPTY = new ModuleParameters(Map.of());
 
   public ModuleParameters(Map<String, Object> parameters) {
-    this.parameters = SeedCollections.immutable(parameters);
+    this.parameters = Seed4JCollections.immutable(parameters);
   }
 
   public Map<String, Object> get() {

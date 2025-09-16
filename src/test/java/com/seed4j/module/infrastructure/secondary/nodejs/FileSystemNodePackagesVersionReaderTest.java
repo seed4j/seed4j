@@ -9,7 +9,7 @@ import com.seed4j.module.domain.ProjectFiles;
 import com.seed4j.module.domain.nodejs.NodePackageName;
 import com.seed4j.module.domain.nodejs.NodePackageVersion;
 import com.seed4j.module.domain.nodejs.NodePackagesVersionSource;
-import com.seed4j.module.domain.nodejs.SeedNodePackagesVersionSource;
+import com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class FileSystemNodePackagesVersionReaderTest {
 
-  private static final NodePackagesVersionSource COMMON = SeedNodePackagesVersionSource.COMMON.build();
+  private static final NodePackagesVersionSource COMMON = Seed4JNodePackagesVersionSource.COMMON.build();
 
   @Mock
   private ProjectFiles projectFiles;
@@ -30,7 +30,7 @@ class FileSystemNodePackagesVersionReaderTest {
 
   @BeforeEach
   void setup() {
-    reader = new FileSystemNodePackagesVersionReader(projectFiles, List.of(SeedNodePackagesVersionSource.COMMON), "not-used");
+    reader = new FileSystemNodePackagesVersionReader(projectFiles, List.of(Seed4JNodePackagesVersionSource.COMMON), "not-used");
   }
 
   @Test

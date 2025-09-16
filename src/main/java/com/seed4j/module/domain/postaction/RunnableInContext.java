@@ -2,5 +2,5 @@ package com.seed4j.module.domain.postaction;
 
 @FunctionalInterface
 public interface RunnableInContext {
-  void run(SeedModuleExecutionContext context);
+  void run(Seed4JModuleExecutionContext context);
 }

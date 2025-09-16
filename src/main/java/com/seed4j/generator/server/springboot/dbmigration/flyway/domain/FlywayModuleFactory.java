@@ -1,17 +1,17 @@
 package com.seed4j.generator.server.springboot.dbmigration.flyway.domain;
 
-import static com.seed4j.module.domain.SeedModule.artifactId;
-import static com.seed4j.module.domain.SeedModule.from;
-import static com.seed4j.module.domain.SeedModule.groupId;
-import static com.seed4j.module.domain.SeedModule.moduleBuilder;
-import static com.seed4j.module.domain.SeedModule.propertyKey;
-import static com.seed4j.module.domain.SeedModule.propertyValue;
-import static com.seed4j.module.domain.SeedModule.to;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.to;
 
-import com.seed4j.module.domain.SeedModule;
-import com.seed4j.module.domain.file.SeedSource;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javabuild.GroupId;
-import com.seed4j.module.domain.properties.SeedModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.time.Instant;
 import java.time.ZoneOffset;
@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 
 public class FlywayModuleFactory {
 
-  private static final SeedSource SOURCE = from("server/springboot/dbmigration/flyway/resources");
+  private static final Seed4JSource SOURCE = from("server/springboot/dbmigration/flyway/resources");
 
   private static final DateTimeFormatter FILE_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC);
 
@@ -27,7 +27,7 @@ public class FlywayModuleFactory {
 
   private static final String PROPERTIES = "properties";
 
-  public SeedModule buildInitializationModule(SeedModuleProperties properties) {
+  public Seed4JModule buildInitializationModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     Instant date = properties.getInstantOrDefault("date", Instant.now());
@@ -52,13 +52,13 @@ public class FlywayModuleFactory {
     return "V%s__init.sql".formatted(FILE_DATE_FORMAT.format(date));
   }
 
-  public SeedModule buildMysqlDependencyModule(SeedModuleProperties properties) {
+  public Seed4JModule buildMysqlDependencyModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return moduleBuilder(properties).javaDependencies().addDependency(FLYWAY_GROUP_ID, artifactId("flyway-mysql")).and().build();
   }
 
-  public SeedModule buildPostgreSQLDependencyModule(SeedModuleProperties properties) {
+  public Seed4JModule buildPostgreSQLDependencyModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return moduleBuilder(properties)
@@ -68,7 +68,7 @@ public class FlywayModuleFactory {
       .build();
   }
 
-  public SeedModule buildMsSqlServerDependencyModule(SeedModuleProperties properties) {
+  public Seed4JModule buildMsSqlServerDependencyModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     return moduleBuilder(properties).javaDependencies().addDependency(FLYWAY_GROUP_ID, artifactId("flyway-sqlserver")).and().build();

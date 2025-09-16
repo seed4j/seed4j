@@ -1,9 +1,9 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.SeedModule.LINE_BREAK;
+import static com.seed4j.module.domain.Seed4JModule.LINE_BREAK;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.SeedModuleContext;
+import com.seed4j.module.domain.Seed4JModuleContext;
 import com.seed4j.module.domain.file.TemplateRenderer;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import com.seed4j.module.domain.packagejson.NodeModuleFormat;
@@ -12,9 +12,9 @@ import com.seed4j.module.domain.packagejson.PackageJsonDependency;
 import com.seed4j.module.domain.packagejson.PackageName;
 import com.seed4j.module.domain.packagejson.PackageNames;
 import com.seed4j.module.domain.packagejson.Scripts;
-import com.seed4j.module.domain.packagejson.SeedModulePackageJson;
-import com.seed4j.module.domain.properties.SeedProjectFolder;
-import com.seed4j.shared.collection.domain.SeedCollections;
+import com.seed4j.module.domain.packagejson.Seed4JModulePackageJson;
+import com.seed4j.module.domain.properties.Seed4JProjectFolder;
+import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
@@ -52,9 +52,9 @@ class FileSystemPackageJsonHandler {
 
   public void handle(
     Indentation indentation,
-    SeedProjectFolder projectFolder,
-    SeedModulePackageJson packageJson,
-    SeedModuleContext context
+    Seed4JProjectFolder projectFolder,
+    Seed4JModulePackageJson packageJson,
+    Seed4JModuleContext context
   ) {
     Assert.notNull("indentation", indentation);
     Assert.notNull("projectFolder", projectFolder);
@@ -81,7 +81,7 @@ class FileSystemPackageJsonHandler {
     write(file, content);
   }
 
-  private Path getPackageJsonFile(SeedProjectFolder projectFolder) {
+  private Path getPackageJsonFile(Seed4JProjectFolder projectFolder) {
     Path file = projectFolder.filePath("package.json");
 
     if (Files.notExists(file)) {
@@ -91,7 +91,7 @@ class FileSystemPackageJsonHandler {
     return file;
   }
 
-  private String replacePlaceholders(String content, SeedModuleContext context) {
+  private String replacePlaceholders(String content, Seed4JModuleContext context) {
     return templateRenderer.render(content, context);
   }
 
@@ -369,7 +369,7 @@ class FileSystemPackageJsonHandler {
       }
 
       private JsonActionBuilder entries(Collection<JsonEntry> entries) {
-        this.entries = SeedCollections.immutable(entries);
+        this.entries = Seed4JCollections.immutable(entries);
 
         return this;
       }

@@ -1,11 +1,11 @@
 package com.seed4j.generator.server.springboot.database.cassandra.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CASSANDRA;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.CASSANDRA;
 
 import com.seed4j.generator.server.springboot.database.cassandra.application.CassandraApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,14 +13,14 @@ import org.springframework.context.annotation.Configuration;
 class CassandraModuleConfiguration {
 
   @Bean
-  SeedModuleResource cassandraModule(CassandraApplicationService cassandra) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource cassandraModule(CassandraApplicationService cassandra) {
+    return Seed4JModuleResource.builder()
       .slug(CASSANDRA)
       .propertiesDefinition(
-        SeedModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
+        Seed4JModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
       )
       .apiDoc("Spring Boot - Database", "Add Cassandra drivers and dependencies")
-      .organization(SeedModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(Seed4JModuleOrganization.SPRINGBOOT_DEPENDENCY)
       .tags("server", "spring", "spring-boot", "database")
       .factory(cassandra::buildModule);
   }

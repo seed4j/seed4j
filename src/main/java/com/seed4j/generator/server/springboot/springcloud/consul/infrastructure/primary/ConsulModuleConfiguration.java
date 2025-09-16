@@ -1,13 +1,13 @@
 package com.seed4j.generator.server.springboot.springcloud.consul.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JFeatureSlug.SERVICE_DISCOVERY;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.CONSUL;
-import static com.seed4j.shared.slug.domain.Seed4JModuleSlug.SPRING_BOOT_ACTUATOR;
+import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.SERVICE_DISCOVERY;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.CONSUL;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_ACTUATOR;
 
 import com.seed4j.generator.server.springboot.springcloud.consul.application.ConsulApplicationService;
-import com.seed4j.module.domain.resource.SeedModuleOrganization;
-import com.seed4j.module.domain.resource.SeedModulePropertiesDefinition;
-import com.seed4j.module.domain.resource.SeedModuleResource;
+import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
+import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
+import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,12 +15,12 @@ import org.springframework.context.annotation.Configuration;
 class ConsulModuleConfiguration {
 
   @Bean
-  SeedModuleResource consulModule(ConsulApplicationService consul) {
-    return SeedModuleResource.builder()
+  Seed4JModuleResource consulModule(ConsulApplicationService consul) {
+    return Seed4JModuleResource.builder()
       .slug(CONSUL)
-      .propertiesDefinition(SeedModulePropertiesDefinition.builder().addProjectBaseName().build())
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addProjectBaseName().build())
       .apiDoc("Spring Boot - Spring Cloud", "Add Spring Cloud Consul config and discovery")
-      .organization(SeedModuleOrganization.builder().feature(SERVICE_DISCOVERY).addDependency(SPRING_BOOT_ACTUATOR).build())
+      .organization(Seed4JModuleOrganization.builder().feature(SERVICE_DISCOVERY).addDependency(SPRING_BOOT_ACTUATOR).build())
       .tags("server", "spring", "spring-boot", "cloud")
       .factory(consul::buildModule);
   }

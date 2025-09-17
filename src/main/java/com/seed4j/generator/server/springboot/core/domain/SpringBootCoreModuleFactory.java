@@ -55,6 +55,7 @@ public class SpringBootCoreModuleFactory {
     Assert.notNull("properties", properties);
 
     String baseName = properties.projectBaseName().capitalized();
+    String baseNameUncapitalized = properties.projectBaseName().uncapitalized();
     String packagePath = properties.packagePath();
     Seed4JDestination testDestination = toSrcTestJava().append(packagePath);
     String fullyQualifiedMainClass = properties.basePackage().get() + "." + baseName + "App";
@@ -92,7 +93,7 @@ public class SpringBootCoreModuleFactory {
         .add(TEST_SOURCE.template("ApplicationStartupTracesTest.java"), toSrcTestJava().append(packagePath).append("ApplicationStartupTracesTest.java"))
         .and()
       .springMainProperties()
-        .set(propertyKey("spring.application.name"), propertyValue(baseName))
+        .set(propertyKey("spring.application.name"), propertyValue(baseNameUncapitalized))
         .set(propertyKey(basePackageLoggingLevel), propertyValue("INFO"))
         .and()
       .springLocalProperties()

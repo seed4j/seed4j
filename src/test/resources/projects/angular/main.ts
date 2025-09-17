@@ -13,5 +13,9 @@ if (environment.production) {
 }
 
 bootstrapApplication(App, {
-  providers: [provideHttpClient(), provideRouter(routes)],
+  providers: [
+    provideHttpClient(),
+    provideRouter(routes),
+    // seed4j-needle-main-ts-provider
+  ],
 }).catch((err: unknown) => console.error(err));

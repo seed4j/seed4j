@@ -398,6 +398,17 @@ public final class Seed4JModulesAssertions {
       return this;
     }
 
+    public Seed4JModuleFileAsserter<T> containingPattern(String regex) {
+      assertThat(regex).as("Can't check blank regex pattern").isNotBlank();
+
+      Path path = projectFolder.filePath(file);
+      assertThat(contentNormalizingNewLines(path))
+        .as(() -> "Can't find pattern " + regex + " in " + path)
+        .containsPattern(regex);
+
+      return this;
+    }
+
     public Seed4JModuleFileAsserter<T> containingInSequence(CharSequence... values) {
       assertThat(values).as("Can't check blank content").isNotEmpty();
       assertThat(values)

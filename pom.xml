@@ -53,6 +53,7 @@
 
     <maven.version>3.6.3</maven.version>
     <maven-enforcer-plugin.version>3.6.1</maven-enforcer-plugin.version>
+    <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
     <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
     <maven-javadoc-plugin.version>3.11.3</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
@@ -358,12 +359,26 @@
       </plugin>
 
       <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>${maven-dependency-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>generate-dependencies-properties</id>
+            <goals>
+              <goal>properties</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire-plugin.version}</version>
         <configuration>
           <!-- Force alphabetical order to have a reproducible build -->
           <runOrder>alphabetical</runOrder>
+          <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
           <excludes>
             <exclude>**/*IT*</exclude>
             <exclude>**/*CucumberTest*</exclude>
@@ -378,6 +393,7 @@
         <configuration>
           <!-- Force alphabetical order to have a reproducible build -->
           <runOrder>alphabetical</runOrder>
+          <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
           <includes>
             <include>**/*IT*</include>
             <include>**/*CucumberTest*</include>

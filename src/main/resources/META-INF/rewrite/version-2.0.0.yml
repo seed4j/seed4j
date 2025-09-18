@@ -82,3 +82,6 @@ recipeList:
       find: '<artifactId>jhlite</artifactId>'
       replace: '<artifactId>seed4j</artifactId>'
       filePattern: 'pom.xml'
+  - org.openrewrite.java.spring.ChangeSpringPropertyKey:
+      oldPropertyKey: jhlite
+      newPropertyKey: seed4j

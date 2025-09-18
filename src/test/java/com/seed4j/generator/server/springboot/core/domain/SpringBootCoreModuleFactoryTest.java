@@ -163,7 +163,7 @@ class SpringBootCoreModuleFactoryTest {
                   growth: INFO
           spring:
             application:
-              name: Myapp
+              name: myapp
           """
         )
         .and()

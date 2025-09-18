@@ -53,17 +53,16 @@ class AppliedModuleEntity {
 
   @Override
   @ExcludeFromGeneratedCodeCoverage
-  public boolean equals(Object o) {
-    if (this == o) {
+  public boolean equals(Object other) {
+    if (this == other) {
       return true;
     }
 
-    if (o == null || getClass() != o.getClass()) {
+    if (!(other instanceof AppliedModuleEntity otherEntity)) {
       return false;
     }
 
-    AppliedModuleEntity that = (AppliedModuleEntity) o;
-    return new EqualsBuilder().append(id, that.id).isEquals();
+    return new EqualsBuilder().append(id, otherEntity.id).isEquals();
   }
 
   @Override

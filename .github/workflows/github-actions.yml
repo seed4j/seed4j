@@ -86,6 +86,8 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+      - name: 'Init: install wmic'
+        run: choco install wmic -y
       - name: 'Init: install Node.js packages'
         run: npm ci
       - name: 'Test: run backend tests'

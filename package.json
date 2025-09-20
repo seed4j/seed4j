@@ -37,8 +37,8 @@
     "preview": "vite preview",
     "start": "npm run dev",
     "test": "npm run test:watch",
-    "test:component": "start-server-and-test dev http://localhost:9000 'cypress open --e2e --config-file src/test/webapp/component/cypress-config.ts'",
-    "test:component:headless": "start-server-and-test dev http://localhost:9000 'cypress run --headless --config-file src/test/webapp/component/cypress-config.ts'",
+    "test:component": "concurrently -k -s first -n dev,test \"npm run dev\" \"wait-on http://localhost:9000 && cypress open --e2e --config-file src/test/webapp/component/cypress-config.ts\"",
+    "test:component:headless": "concurrently -k -s first -n dev,test \"npm run dev\" \"wait-on http://localhost:9000 && cypress run --headless --config-file src/test/webapp/component/cypress-config.ts\"",
     "test:coverage:check": "npm-run-all test:coverage:clean test:coverage:copy:* test:coverage:merge test:coverage:report",
     "test:coverage:clean": "rimraf target/.nyc_output",
     "test:coverage:copy:component": "cpy --flat target/frontend-coverage/components-tests/coverage-final.json target/.nyc_output/ --rename=component-{{basename}}",
@@ -70,6 +70,7 @@
     "@vitejs/plugin-vue": "6.0.1",
     "@vitest/coverage-istanbul": "3.2.4",
     "@vue/test-utils": "2.4.6",
+    "concurrently": "9.2.1",
     "cpy-cli": "6.0.0",
     "cypress": "15.2.0",
     "eslint": "9.35.0",
@@ -92,7 +93,6 @@
     "prettier-plugin-sh": "0.18.0",
     "rimraf": "6.0.1",
     "sass": "1.92.1",
-    "start-server-and-test": "2.1.2",
     "stylelint": "16.24.0",
     "stylelint-config-concentric-order": "5.2.1",
     "stylelint-config-standard-scss": "16.0.0",
@@ -103,7 +103,8 @@
     "vite-plugin-istanbul": "7.2.0",
     "vitest": "3.2.4",
     "vitest-sonar-reporter": "2.0.4",
-    "vue-tsc": "3.0.7"
+    "vue-tsc": "3.0.7",
+    "wait-on": "8.0.5"
   },
   "engines": {
     "node": ">=20"

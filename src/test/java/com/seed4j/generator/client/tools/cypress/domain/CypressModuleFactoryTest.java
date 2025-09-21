@@ -31,13 +31,13 @@ class CypressModuleFactoryTest {
       .containing(
         nodeScript(
           "test:component",
-          "start-server-and-test dev http://localhost:9000 'cypress open --e2e --config-file src/test/webapp/component/cypress-config.ts'"
+          "concurrently -k -s first -n dev,test \\\"npm run dev\\\" \\\"wait-on http://localhost:9000 && cypress open --e2e --config-file src/test/webapp/component/cypress-config.ts\\\""
         )
       )
       .containing(
         nodeScript(
           "test:component:headless",
-          "start-server-and-test dev http://localhost:9000 'cypress run --headless --config-file src/test/webapp/component/cypress-config.ts'"
+          "concurrently -k -s first -n dev,test \\\"npm run dev\\\" \\\"wait-on http://localhost:9000 && cypress run --headless --config-file src/test/webapp/component/cypress-config.ts\\\""
         )
       )
       .and()

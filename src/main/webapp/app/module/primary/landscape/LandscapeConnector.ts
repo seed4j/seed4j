@@ -38,8 +38,10 @@ export class LandscapeConnector {
       x: firstControlPoint.x,
       y: firstControlPoint.y > secondControlPoint.y ? firstControlPoint.y - CURVE_RADIUS : firstControlPoint.y + CURVE_RADIUS,
     };
-    commands.push(this.buildCommand(LINE_TO_COMMAND, [firstCurveStartPosition]));
-    commands.push(this.buildCommand(CURVE_TO_COMMAND, [firstCurveStartPosition, firstControlPoint, firstCurveEndPosition]));
+    commands.push(
+      this.buildCommand(LINE_TO_COMMAND, [firstCurveStartPosition]),
+      this.buildCommand(CURVE_TO_COMMAND, [firstCurveStartPosition, firstControlPoint, firstCurveEndPosition]),
+    );
 
     const secondCurveStartPosition: LandscapeConnectorPosition = {
       x: secondControlPoint.x,
@@ -49,10 +51,11 @@ export class LandscapeConnector {
       x: secondControlPoint.x + CURVE_RADIUS,
       y: secondControlPoint.y,
     };
-    commands.push(this.buildCommand(LINE_TO_COMMAND, [secondCurveStartPosition]));
-    commands.push(this.buildCommand(CURVE_TO_COMMAND, [secondCurveStartPosition, secondControlPoint, secondCurveEndPosition]));
-
-    commands.push(this.buildCommand(LINE_TO_COMMAND, [this.positions[this.positions.length - 1]]));
+    commands.push(
+      this.buildCommand(LINE_TO_COMMAND, [secondCurveStartPosition]),
+      this.buildCommand(CURVE_TO_COMMAND, [secondCurveStartPosition, secondControlPoint, secondCurveEndPosition]),
+      this.buildCommand(LINE_TO_COMMAND, [this.positions[this.positions.length - 1]]),
+    );
 
     return commands.join(' ');
   }

@@ -168,20 +168,20 @@ export default defineComponent({
         const endingElementSlug = e.endingElement.get();
 
         const startingElementSlugExists = anchorPointModulesMap.value.get(startingElementSlug);
-        if (!startingElementSlugExists) {
-          anchorPointModulesMap.value.set(startingElementSlug, { atStart: true, atEnd: false });
-        } else {
+        if (startingElementSlugExists) {
           anchorPointModulesMap.value.set(startingElementSlug, {
             atStart: true,
             atEnd: startingElementSlugExists.atEnd,
           });
+        } else {
+          anchorPointModulesMap.value.set(startingElementSlug, { atStart: true, atEnd: false });
         }
 
         const endingElementSlugExists = anchorPointModulesMap.value.get(endingElementSlug);
-        if (!endingElementSlugExists) {
-          anchorPointModulesMap.value.set(endingElementSlug, { atStart: false, atEnd: true });
-        } else {
+        if (endingElementSlugExists) {
           anchorPointModulesMap.value.set(endingElementSlug, { atStart: endingElementSlugExists.atStart, atEnd: true });
+        } else {
+          anchorPointModulesMap.value.set(endingElementSlug, { atStart: false, atEnd: true });
         }
       });
     };

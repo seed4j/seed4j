@@ -43,7 +43,7 @@ export default defineComponent({
 
     const removeDataSelectorAttrs = (data: string): string => {
       const regex = /data-testid="[^"]*"/g;
-      return data.replace(regex, '');
+      return data.replaceAll(regex, '');
     };
 
     const getRealScale = (): number => {

@@ -20,7 +20,7 @@ interface Row {
 
 const createCategory = (modulesCount: number): Row => {
   const baseColumns = [createBigColumn(2), createBigColumn(10, true), createNormalEmptyColumn(12), createBigColumn(12)];
-  const additionalColumns = Array(modulesCount - 1).fill(createBigColumn(12));
+  const additionalColumns = new Array(modulesCount - 1).fill(createBigColumn(12));
   const lastColumn = createBigColumn(12, true);
   return createRow(...baseColumns, ...additionalColumns, lastColumn);
 };

@@ -22,6 +22,7 @@
     "arch-unit-ts": "1.0.9",
     "autoprefixer": "10.4.21",
     "browser-sync": "3.0.4",
+    "concurrently": "9.2.1",
     "cpy-cli": "6.0.0",
     "cssnano": "7.1.1",
     "cypress": "15.2.0",
@@ -70,6 +71,7 @@
     "vite-plugin-istanbul": "7.2.0",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.4",
-    "vitest-sonar-reporter": "2.0.4"
+    "vitest-sonar-reporter": "2.0.4",
+    "wait-on": "8.0.5"
   }
 }

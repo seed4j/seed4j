@@ -48,8 +48,7 @@ export default defineComponent({
       const classes: string[] = [];
 
       if (selectedRank.value.isPresent()) {
-        classes.push('-rank-color');
-        classes.push(`-${extractRankLetter(rank).toLowerCase()}`);
+        classes.push('-rank-color', `-${extractRankLetter(rank).toLowerCase()}`);
 
         if (selectedRank.value.filter(r => r !== rank).isPresent()) {
           classes.push('-reduced-attention');

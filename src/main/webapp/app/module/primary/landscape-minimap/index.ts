@@ -1,3 +1,1 @@
-import LandscapeMiniMapVue from './LandscapeMiniMap.vue';
-
-export { LandscapeMiniMapVue };
+export { default as LandscapeMiniMapVue } from './LandscapeMiniMap.vue';

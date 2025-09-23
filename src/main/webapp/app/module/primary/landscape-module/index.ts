@@ -1,3 +1,1 @@
-import LandscapeModuleVue from './LandscapeModule.vue';
-
-export { LandscapeModuleVue };
+export { default as LandscapeModuleVue } from './LandscapeModule.vue';

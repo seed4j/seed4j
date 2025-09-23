@@ -575,12 +575,14 @@ class LandscapeState {
   }
 
   private selectedModuleAfterUnselection(module: LandscapeModule): ModuleId[] {
-    const modulesToUnselect = module
-      .unselectionTree()
-      .elements.filter(element => element instanceof ModuleSlug)
-      .map(element => element.get());
+    const modulesToUnselect = new Set(
+      module
+        .unselectionTree()
+        .elements.filter(element => element instanceof ModuleSlug)
+        .map(element => element.get()),
+    );
 
-    return this.selectedModules.filter(selectedModule => !modulesToUnselect.includes(selectedModule));
+    return this.selectedModules.filter(selectedModule => !modulesToUnselect.has(selectedModule));
   }
 
   isNotSelected(module: ModuleId): boolean {

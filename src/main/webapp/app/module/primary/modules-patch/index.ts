@@ -1,3 +1,1 @@
-import ModulesPatchVue from './ModulesPatch.vue';
-
-export { ModulesPatchVue as ModulesVue };
+export { default as ModulesVue } from './ModulesPatch.vue';

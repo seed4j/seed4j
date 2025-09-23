@@ -24,7 +24,7 @@ export const provideForModule = (rest: AxiosHttp): void => {
   provide(PROJECT_FOLDERS_REPOSITORY, new RestProjectFoldersRepository(rest));
   provide(MANAGEMENT_REPOSITORY, new RestManagementRepository(rest));
   provide(MODULES_REPOSITORY, new RestModulesRepository(rest));
-  provide(THEMES_REPOSITORY, new LocalWindowThemeRepository(window, localStorage));
+  provide(THEMES_REPOSITORY, new LocalWindowThemeRepository(globalThis as unknown as Window, localStorage));
   provide(MODULE_PARAMETERS_REPOSITORY, new LocalStorageModuleParametersRepository(localStorage));
   provide(LANDSCAPE_SCROLLER, new LandscapeScroller());
 };

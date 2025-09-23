@@ -4,7 +4,7 @@ import { WindowApplicationListener } from '@/shared/alert/infrastructure/primary
 import { WindowAction } from '@/WindowAction';
 import { key, piqureWrapper } from 'piqure';
 
-const { provide, inject } = piqureWrapper(window, 'piqure');
+const { provide, inject } = piqureWrapper(globalThis as unknown as Window, 'piqure');
 
 export { inject, provide };
 
@@ -14,6 +14,6 @@ export const CURSOR_UPDATER = key<BodyCursorUpdater>('cursorUpdater');
 
 export const provideWindowsTooling = (): void => {
   provide(GLOBAL_WINDOW, window);
-  provide(APPLICATION_LISTENER, new WindowApplicationListener(window));
-  provide(CURSOR_UPDATER, new BodyCursorUpdater(window));
+  provide(APPLICATION_LISTENER, new WindowApplicationListener(globalThis as unknown as Window));
+  provide(CURSOR_UPDATER, new BodyCursorUpdater(globalThis as unknown as Window));
 };

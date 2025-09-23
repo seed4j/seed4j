@@ -1,4 +1,2 @@
-import IconComponent from './Icon.component';
-import IconVue from './Icon.vue';
-
-export { IconComponent, IconVue };
+export { default as IconComponent } from './Icon.component';
+export { default as IconVue } from './Icon.vue';

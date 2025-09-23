@@ -53,7 +53,7 @@ export default defineComponent({
       link.click();
 
       globalWindow.URL.revokeObjectURL(link.href);
-      globalWindow.document.body.removeChild(link);
+      link.remove();
     };
 
     const startOperation = (): void => {

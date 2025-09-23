@@ -1,4 +1,2 @@
-import HeaderComponent from './Header.component';
-import HeaderVue from './Header.vue';
-
-export { HeaderComponent, HeaderVue };
+export { default as HeaderComponent } from './Header.component';
+export { default as HeaderVue } from './Header.vue';

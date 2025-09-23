@@ -1,3 +1,1 @@
-import ModulesPatchLoaderVue from './ModulesPatchLoader.vue';
-
-export { ModulesPatchLoaderVue };
+export { default as ModulesPatchLoaderVue } from './ModulesPatchLoader.vue';

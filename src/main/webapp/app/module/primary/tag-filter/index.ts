@@ -1,3 +1,1 @@
-import TagFilterVue from './TagFilter.vue';
-
-export { TagFilterVue };
+export { default as TagFilterVue } from './TagFilter.vue';

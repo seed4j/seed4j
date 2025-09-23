@@ -1,4 +1,2 @@
-import AppComponent from './App.component';
-import AppVue from './App.vue';
-
-export { AppComponent, AppVue };
+export { default as AppComponent } from './App.component';
+export { default as AppVue } from './App.vue';

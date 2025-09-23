@@ -12,7 +12,7 @@ import { stubWindow } from '../GlobalWindow.fixture';
 
 interface WrapperOptions {
   folderPath: string;
-  isPrettierButtonEnabled: boolean;
+  isPrettierButtonEnabled?: boolean;
   modules: ModulesRepository;
 }
 
@@ -42,6 +42,7 @@ const stubLink = () => ({
   href: '',
   click: vi.fn(),
   download: '',
+  remove: vi.fn(),
 });
 
 describe('Project actions', () => {
@@ -71,7 +72,7 @@ describe('Project actions', () => {
       expect(windowStub.document.createElement).toHaveBeenCalledOnce();
       expect(windowStub.document.body.appendChild).toHaveBeenCalledOnce();
       expect(windowStub.URL.revokeObjectURL).toHaveBeenCalledOnce();
-      expect(windowStub.document.body.removeChild).toHaveBeenCalledOnce();
+      expect(link.remove).toHaveBeenCalledOnce();
 
       expect(link.download).toBe('seed4j.zip');
       expect(modules.download).toHaveBeenCalledOnce();

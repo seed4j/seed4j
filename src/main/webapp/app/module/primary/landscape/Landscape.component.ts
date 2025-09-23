@@ -163,7 +163,7 @@ export default defineComponent({
     };
 
     const loadAnchorPointModulesMap = (): void => {
-      landscapeConnectors.value.forEach(e => {
+      for (const e of landscapeConnectors.value) {
         const startingElementSlug = e.startingElement.get();
         const endingElementSlug = e.endingElement.get();
 
@@ -183,7 +183,7 @@ export default defineComponent({
         } else {
           anchorPointModulesMap.value.set(endingElementSlug, { atStart: false, atEnd: true });
         }
-      });
+      }
     };
 
     const loadLandscapeRankModuleFilterProperty = (): void => {
@@ -455,15 +455,13 @@ export default defineComponent({
         return;
       }
 
-      landscapeValue()
-        .selectedModules()
-        .forEach(module => {
-          landscape.value.loaded(landscapeValue().toggle(module));
-        });
-
-      preset.modules.forEach(module => {
+      for (const module of landscapeValue().selectedModules()) {
         landscape.value.loaded(landscapeValue().toggle(module));
-      });
+      }
+
+      for (const module of preset.modules) {
+        landscape.value.loaded(landscapeValue().toggle(module));
+      }
     };
 
     const clearPresetSelection = () => (selectedPreset.value = null);
@@ -534,11 +532,11 @@ export default defineComponent({
     const loadProjectHistory = (projectHistory: ProjectHistory): void => {
       landscape.value.loaded(landscapeValue().resetAppliedModules(projectHistory.modules));
 
-      projectHistory.properties.forEach(property => {
+      for (const property of projectHistory.properties) {
         if (unknownProperty(property.key)) {
           moduleParametersValues.value.set(property.key, property.value);
         }
-      });
+      }
       moduleParameters.store(folderPath.value, moduleParametersValues.value);
     };
 
@@ -569,11 +567,11 @@ export default defineComponent({
     const applyModules = (modulesToApply: ModuleSlug[]): void => {
       operationStarted();
 
-      selectedModulesProperties().forEach(property => {
+      for (const property of selectedModulesProperties()) {
         if (unknownProperty(property.key) && property.defaultValue) {
           updateProperty({ key: property.key, value: castValue(property.type, property.defaultValue) });
         }
-      });
+      }
 
       modules
         .applyAll({

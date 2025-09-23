@@ -1,3 +1,1 @@
-import ToggleButtonExpandable from './ToggleButtonExpandable.vue';
-
-export { ToggleButtonExpandable };
+export { default as ToggleButtonExpandable } from './ToggleButtonExpandable.vue';

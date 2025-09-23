@@ -1,3 +1,1 @@
-import ProjectActionsVue from './ProjectActions.vue';
-
-export { ProjectActionsVue };
+export { default as ProjectActionsVue } from './ProjectActions.vue';

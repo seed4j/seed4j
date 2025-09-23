@@ -1,3 +1,1 @@
-import LandscapeRankModuleFilterVue from './LandscapeRankModuleFilter.vue';
-
-export { LandscapeRankModuleFilterVue };
+export { default as LandscapeRankModuleFilterVue } from './LandscapeRankModuleFilter.vue';

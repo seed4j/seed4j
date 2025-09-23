@@ -263,12 +263,12 @@ jobs:
           - java-build-tool: maven
           - spring-config-format: yaml
           - node-package-manager: npm
-          - java-version: 21
+          - java-version: 25
           - node-version: 'lts/*'
           - app: mariadbapp
             spring-config-format: properties
           - app: mongodbapp
-            java-version: 25-ea
+            java-version: 26-ea
           - app: typescriptapp
             node-package-manager: pnpm
           - app: vueoauth2app
@@ -277,6 +277,7 @@ jobs:
             node-version: 'latest'
           - app: fullappgradle
             java-build-tool: gradle
+            java-version: 21
     steps:
       - name: 'Setup: checkout project from main branch'
         if: github.event_name == 'pull_request'

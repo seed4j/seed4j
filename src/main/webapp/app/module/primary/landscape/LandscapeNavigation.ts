@@ -153,15 +153,15 @@ export class LandscapeNavigation {
     const currentModuleHtml = this.getHtmlElement(currentModule.get());
     let [elementIndex, moduleIndex, smallestDistance] = this.setValues(0, 0, Infinity);
 
-    this.level().elements.forEach((element, element_index) => {
-      element.allModules().forEach((module, module_index) => {
+    for (const [element_index, element] of this.level().elements.entries()) {
+      for (const [module_index, module] of element.allModules().entries()) {
         const moduleHtmlElement = this.getHtmlElement(module.slug().get());
         const distance = this.calculateDistance(moduleHtmlElement, currentModuleHtml);
         if (distance < smallestDistance) {
           [smallestDistance, elementIndex, moduleIndex] = this.setValues(distance, element_index, module_index);
         }
-      });
-    });
+      }
+    }
 
     return [elementIndex, moduleIndex];
   }

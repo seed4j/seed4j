@@ -219,11 +219,11 @@ export default defineComponent({
     const applyModule = (module: string): void => {
       operationInProgress.value = true;
 
-      selectedModuleProperties().forEach(property => {
+      for (const property of selectedModuleProperties()) {
         if (unknownProperty(property.key) && property.defaultValue) {
           updateProperty({ key: property.key, value: castValue(property.type, property.defaultValue) });
         }
-      });
+      }
 
       modules
         .apply(new ModuleSlug(module), {
@@ -254,11 +254,11 @@ export default defineComponent({
     const loadProjectHistory = (projectHistory: ProjectHistory): void => {
       appliedModules.value = projectHistory.modules.map(module => module.get());
 
-      projectHistory.properties.forEach(property => {
+      for (const property of projectHistory.properties) {
         if (unknownProperty(property.key)) {
           moduleParametersValues.value.set(property.key, property.value);
         }
-      });
+      }
       moduleParameters.store(folderPath.value, moduleParametersValues.value);
     };
 

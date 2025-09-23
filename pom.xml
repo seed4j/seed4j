@@ -60,7 +60,7 @@
     <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
     <start-class>com.seed4j.Seed4JApp</start-class>
 
-    <compiler-plugin.version>3.14.0</compiler-plugin.version>
+    <compiler-plugin.version>3.14.1</compiler-plugin.version>
     <surefire-plugin.version>3.5.4</surefire-plugin.version>
     <jacoco.version>0.8.13</jacoco.version>
     <jgit.version>7.3.0.202506031305-r</jgit.version>

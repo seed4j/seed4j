@@ -1,3 +1,1 @@
-import ModulePropertiesFormVue from './ModulePropertiesForm.vue';
-
-export { ModulePropertiesFormVue };
+export { default as ModulePropertiesFormVue } from './ModulePropertiesForm.vue';

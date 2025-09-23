@@ -1,4 +1,2 @@
-import ThemeButtonComponent from './ThemeButton.component';
-import ThemeButtonVue from './ThemeButton.vue';
-
-export { ThemeButtonComponent, ThemeButtonVue };
+export { default as ThemeButtonComponent } from './ThemeButton.component';
+export { default as ThemeButtonVue } from './ThemeButton.vue';

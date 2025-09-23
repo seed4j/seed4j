@@ -1,4 +1,2 @@
-import ToastComponent from './Toast.component';
-import ToastVue from './Toast.vue';
-
-export { ToastComponent, ToastVue };
+export { default as ToastComponent } from './Toast.component';
+export { default as ToastVue } from './Toast.vue';

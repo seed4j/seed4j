@@ -1,3 +1,1 @@
-import LandscapeVue from './Landscape.vue';
-
-export { LandscapeVue };
+export { default as LandscapeVue } from './Landscape.vue';

@@ -1,3 +1,1 @@
-import ModuleParametersVue from './ModuleParameters.vue';
-
-export { ModuleParametersVue };
+export { default as ModuleParametersVue } from './ModuleParameters.vue';

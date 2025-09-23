@@ -1,3 +1,1 @@
-import LandscapeLoaderVue from './LandscapeLoader.vue';
-
-export { LandscapeLoaderVue };
+export { default as LandscapeLoaderVue } from './LandscapeLoader.vue';

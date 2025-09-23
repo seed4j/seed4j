@@ -1,3 +1,1 @@
-import LandscapePresetConfigurationVue from './LandscapePresetConfiguration.vue';
-
-export { LandscapePresetConfigurationVue };
+export { default as LandscapePresetConfigurationVue } from './LandscapePresetConfiguration.vue';

@@ -13,7 +13,7 @@ export const APPLICATION_LISTENER = key<ApplicationListener>('applicationListene
 export const CURSOR_UPDATER = key<BodyCursorUpdater>('cursorUpdater');
 
 export const provideWindowsTooling = (): void => {
-  provide(GLOBAL_WINDOW, window);
+  provide(GLOBAL_WINDOW, globalThis as unknown as WindowAction);
   provide(APPLICATION_LISTENER, new WindowApplicationListener(globalThis as unknown as Window));
   provide(CURSOR_UPDATER, new BodyCursorUpdater(globalThis as unknown as Window));
 };

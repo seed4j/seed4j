@@ -54,7 +54,7 @@ export class LandscapeConnector {
     commands.push(
       this.buildCommand(LINE_TO_COMMAND, [secondCurveStartPosition]),
       this.buildCommand(CURVE_TO_COMMAND, [secondCurveStartPosition, secondControlPoint, secondCurveEndPosition]),
-      this.buildCommand(LINE_TO_COMMAND, [this.positions[this.positions.length - 1]]),
+      this.buildCommand(LINE_TO_COMMAND, [this.positions.at(-1)!]),
     );
 
     return commands.join(' ');

@@ -4,7 +4,7 @@ inputs:
   java-version:
     description: 'Java version to use'
     required: true
-    default: '21'
+    default: '25'
   node-version:
     description: 'Node version to use'
     required: true

@@ -5,7 +5,7 @@ import { resolve } from 'path';
 const tsconfig = JSON.parse(readFileSync(resolve('./tsconfig.json'), 'utf-8'))
 
 export default {
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$|dayjs/esm|keycloak-js)'],
+  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$|dayjs/esm|keycloak-js|@jsverse)'],
   transform: {
     '^.+\\.(ts|js|mjs|html|svg)$': [
       'jest-preset-angular',

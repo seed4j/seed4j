@@ -14,7 +14,7 @@
     "@jsverse/transloco": "7.6.1",
     "angular-eslint": "20.3.0",
     "jest-environment-jsdom": "29.7.0",
-    "jest-preset-angular": "14.6.1",
+    "jest-preset-angular": "15.0.1",
     "jest-sonar-reporter": "2.0.0",
     "rxjs": "7.8.2",
     "tslib": "2.8.1",

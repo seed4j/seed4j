@@ -1,4 +1,4 @@
-FROM openjdk:21-slim AS build
+FROM openjdk:25-slim AS build
 COPY . /code/app/
 WORKDIR /code/app/
 RUN chmod +x mvnw \
@@ -9,7 +9,7 @@ RUN chmod +x mvnw \
     -Ddevelocity.cache.remote.enabled=false \
     && mv /code/app/target/*-exec.jar /code/seed4j.jar
 
-FROM openjdk:21-slim
+FROM openjdk:25-slim
 COPY --from=build /code/*.jar /code/
 RUN \
     # configure the "seed4j" user

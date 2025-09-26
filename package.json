@@ -103,7 +103,7 @@
     "vite-plugin-istanbul": "7.2.0",
     "vitest": "3.2.4",
     "vitest-sonar-reporter": "2.0.4",
-    "vue-tsc": "3.0.7",
+    "vue-tsc": "3.0.8",
     "wait-on": "9.0.1"
   },
   "engines": {

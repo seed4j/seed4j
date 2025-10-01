@@ -11,7 +11,6 @@ import com.seed4j.module.infrastructure.secondary.FileSystemSeed4JModuleFiles;
 import com.seed4j.module.infrastructure.secondary.javadependency.gradle.GradleCommandHandler;
 import com.seed4j.module.infrastructure.secondary.javadependency.maven.MavenCommandHandler;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -60,7 +59,6 @@ public class FileSystemJavaBuildCommandsHandler {
     };
   }
 
-  @ExcludeFromGeneratedCodeCoverage(reason = "Jacoco thinks there is a missed branch")
   private void handle(JavaDependenciesCommandHandler handler, JavaBuildCommand command) {
     switch (command) {
       case SetVersion setVersion -> handler.handle(setVersion);

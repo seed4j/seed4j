@@ -24,7 +24,7 @@
   </pluginRepositories>
 
   <properties>
-    <java.version>21</java.version>
+    <java.version>25</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -183,8 +183,8 @@
                 <version>[${maven.version},)</version>
               </requireMavenVersion>
               <requireJavaVersion>
-                <message>You are running an incompatible version of Java. Seed4J engine supports JDK 21+.</message>
-                <version>[21,22)</version>
+                <message>You are running an incompatible version of Java. Seed4J engine supports JDK 25+.</message>
+                <version>[${java.version},)</version>
               </requireJavaVersion>
             </rules>
           </configuration>

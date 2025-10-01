@@ -25,7 +25,7 @@ class AssertionErrorMessagesTest {
       return Files.list(Path.of("src/main/resources/messages/assertions-errors")).collect(
         Collectors.toUnmodifiableMap(Path::toString, toProperties())
       );
-    } catch (IOException e) {
+    } catch (IOException _) {
       throw new AssertionError();
     }
   }
@@ -35,7 +35,7 @@ class AssertionErrorMessagesTest {
       var properties = new Properties();
       try {
         properties.load(Files.newInputStream(file));
-      } catch (IOException e) {
+      } catch (IOException _) {
         throw new AssertionError();
       }
 

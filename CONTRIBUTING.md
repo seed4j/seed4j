@@ -35,7 +35,7 @@ would like to implement a new feature, then consider what kind of change it is:
 
 ## <a name="setup"></a> Generator development setup
 
-Seed4J is a Spring Boot + Vue project, using Java 21.
+Seed4J is a Spring Boot + Vue project, using Java 25.
 
 Here are the most important steps.
 
@@ -43,18 +43,18 @@ Here are the most important steps.
 
 #### Java
 
-You need to have [Java 21](https://openjdk.java.net/projects/jdk/21/):
+You need to have [Java 25](https://openjdk.java.net/projects/jdk/25/):
 
 ```
 $ java -version
-openjdk version "21" 2023-09-19
-OpenJDK Runtime Environment (build 21+35-nixos)
-OpenJDK 64-Bit Server VM (build 21+35-nixos, mixed mode, sharing)
+openjdk version "25" 2025-09-16
+OpenJDK Runtime Environment (build 25+36-3489)
+OpenJDK 64-Bit Server VM (build 25+36-3489, mixed mode, sharing)
 ```
 
 ```
 $ javac -version
-javac 21
+javac 25
 ```
 
 #### Node.js and NPM

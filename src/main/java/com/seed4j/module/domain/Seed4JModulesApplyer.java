@@ -158,9 +158,9 @@ public class Seed4JModulesApplyer {
   private static Predicate<Seed4JStartupCommand> isStartupCommandCompatibleWith(JavaBuildTool javaBuildTool) {
     return startupCommand ->
       switch (startupCommand) {
-        case MavenStartupCommandLine __ -> javaBuildTool == MAVEN;
-        case GradleStartupCommandLine __ -> javaBuildTool == GRADLE;
-        case DockerComposeStartupCommandLine __ -> true;
+        case MavenStartupCommandLine _ -> javaBuildTool == MAVEN;
+        case GradleStartupCommandLine _ -> javaBuildTool == GRADLE;
+        case DockerComposeStartupCommandLine _ -> true;
       };
   }
 

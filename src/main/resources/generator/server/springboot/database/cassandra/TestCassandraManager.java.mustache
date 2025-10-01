@@ -52,7 +52,7 @@ class TestCassandraManager implements ApplicationListener<ApplicationEnvironment
   private String getContainerIpAddress() {
     try {
       return InetAddress.getByName(cassandraContainer.getHost()).getHostAddress();
-    } catch (UnknownHostException e) {
+    } catch (UnknownHostException _) {
       return "127.0.0.1";
     }
   }

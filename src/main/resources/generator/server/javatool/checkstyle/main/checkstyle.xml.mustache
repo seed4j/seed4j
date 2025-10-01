@@ -24,23 +24,14 @@
 
     <!-- Naming Conventions -->
     <module name="CatchParameterName" />
-    <module name="LambdaParameterName">
-      <!-- Allow "_" in anticipation of unnamed variables -->
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$|^[_]*$" />
-    </module>
+    <module name="LambdaParameterName" />
     <module name="LocalFinalVariableName" />
     <module name="LocalVariableName" />
     <module name="MemberName" />
     <module name="MethodName" />
     <module name="PackageName" />
-    <module name="ParameterName">
-      <!-- Allow "_" in anticipation of unnamed variables -->
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$|^[_]*$" />
-    </module>
-    <module name="PatternVariableName">
-      <!-- Allow "_" in anticipation of unnamed variables -->
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$|^[_]*$" />
-    </module>
+    <module name="ParameterName" />
+    <module name="PatternVariableName"/>
     <module name="RecordComponentName" />
     <module name="StaticVariableName" />
     <module name="TypeName" />

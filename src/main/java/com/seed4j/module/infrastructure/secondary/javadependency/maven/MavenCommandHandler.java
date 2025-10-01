@@ -422,7 +422,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
 
   private Function<MavenPluginConfiguration, Xpp3Dom> toMavenConfiguration() {
     return configuration -> {
-      try (Reader reader = new StringReader("<configuration>" + configuration.get() + "</configuration>")) {
+      try (Reader reader = Reader.of("<configuration>" + configuration.get() + "</configuration>")) {
         return Xpp3DomBuilder.build(reader);
       } catch (XmlPullParserException | IOException e) {
         throw new MalformedAdditionalInformationException(e);

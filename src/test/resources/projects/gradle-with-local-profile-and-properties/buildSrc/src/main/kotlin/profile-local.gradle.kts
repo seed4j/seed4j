@@ -3,7 +3,7 @@ plugins {
   // seed4j-needle-gradle-plugins
 }
 
-val javaVersion by extra("21")
+val javaVersion by extra("25")
 // seed4j-needle-gradle-properties
 
 dependencies {

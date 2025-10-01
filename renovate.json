@@ -19,6 +19,11 @@
   },
   "packageRules": [
     {
+      "matchDatasources": ["maven"],
+      "matchPackageNames": ["org.liquibase:liquibase-core"],
+      "allowedVersions": "<5.0.0"
+    },
+    {
       "matchPackageNames": ["node"],
       "allowedVersions": "<23.0.0"
     },

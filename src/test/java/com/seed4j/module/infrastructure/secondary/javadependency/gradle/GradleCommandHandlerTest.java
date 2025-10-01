@@ -141,7 +141,7 @@ class GradleCommandHandlerTest {
 
         assertThat(buildGradleContent(projectFolder)).contains(
           """
-          val javaVersion by extra("21")
+          val javaVersion by extra("25")
           val springProfilesActive by extra("local")
           // seed4j-needle-gradle-properties
           """
@@ -241,7 +241,7 @@ class GradleCommandHandlerTest {
 
         assertThat(scriptPluginContent(projectFolder, localBuildProfile())).contains(
           """
-          val javaVersion by extra("21")
+          val javaVersion by extra("25")
           val springProfilesActive by extra("local")
           // seed4j-needle-gradle-properties
           """
@@ -1510,7 +1510,7 @@ class GradleCommandHandlerTest {
           """
           java {
             toolchain {
-              languageVersion = JavaLanguageVersion.of(21)
+              languageVersion = JavaLanguageVersion.of(25)
             }
           }
 

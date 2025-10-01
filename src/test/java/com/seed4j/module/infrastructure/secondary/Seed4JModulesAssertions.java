@@ -257,7 +257,7 @@ public final class Seed4JModulesAssertions {
   private static String projectFiles(Seed4JProjectFolder projectFolder) {
     try (Stream<Path> files = Files.walk(Path.of(projectFolder.folder()))) {
       return files.filter(Files::isRegularFile).map(Path::toString).collect(Collectors.joining(", "));
-    } catch (IOException e) {
+    } catch (IOException _) {
       return "unreadable folder";
     }
   }

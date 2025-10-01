@@ -12,7 +12,7 @@ import com.seed4j.module.domain.file.TemplateRenderer;
 import com.seed4j.shared.error.domain.GeneratorException;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.io.IOException;
-import java.io.StringReader;
+import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
@@ -31,7 +31,7 @@ public final class MustacheTemplateRenderer implements TemplateRenderer {
       return message;
     }
 
-    Mustache mustache = mustacheFactory.compile(new StringReader(message), "template");
+    Mustache mustache = mustacheFactory.compile(Reader.of(message), "template");
     try {
       StringWriter stringWriter = new StringWriter();
       mustache.execute(stringWriter, context).flush();

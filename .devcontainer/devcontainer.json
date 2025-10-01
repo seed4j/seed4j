@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
-      "version": "21-oracle",
+      "version": "25-oracle",
       "jdkDistro": "oracle"
     },
     "ghcr.io/devcontainers/features/node:1": {},

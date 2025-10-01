@@ -395,6 +395,7 @@ elif [[ $application == 'angularjwtapp' ]]; then
     "prettier" \
     "angular-core" \
     "angular-i18n" \
+    "angular-tailwind" \
     "tikui" \
     "cypress-component-tests"
 

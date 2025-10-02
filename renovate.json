@@ -21,16 +21,6 @@
     {
       "matchPackageNames": ["node"],
       "allowedVersions": "<23.0.0"
-    },
-    {
-      "matchDatasources": ["maven"],
-      "matchPackageNames": [
-        "org.apache.maven.plugins:maven-surefire-plugin",
-        "org.apache.maven.plugins:maven-failsafe-plugin",
-        "surefire-plugin.version",
-        "failsafe-plugin.version"
-      ],
-      "allowedVersions": "<3.5.3 || >3.5.3"
     }
   ]
 }

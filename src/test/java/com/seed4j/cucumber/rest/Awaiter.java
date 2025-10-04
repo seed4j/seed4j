@@ -13,7 +13,7 @@ final class Awaiter {
     awaiter(maxTime).untilAsserted(() -> {
       try {
         assertion.run();
-      } catch (AssertionError e) {
+      } catch (AssertionError _) {
         CucumberRestTestContext.retry();
 
         assertion.run();

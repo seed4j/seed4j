@@ -284,7 +284,7 @@ public class ModulesSteps {
   private String projectFiles() {
     try (Stream<Path> files = Files.walk(Path.of(lastProjectFolder()))) {
       return files.filter(Files::isRegularFile).map(Path::toString).collect(Collectors.joining(", "));
-    } catch (IOException e) {
+    } catch (IOException _) {
       return "unreadable folder";
     }
   }

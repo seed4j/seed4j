@@ -97,7 +97,7 @@
     "stylelint-config-concentric-order": "5.2.1",
     "stylelint-config-standard-scss": "16.0.0",
     "tikuidoc-tikui": "9.0.0",
-    "typescript": "5.9.2",
+    "typescript": "5.9.3",
     "typescript-eslint": "8.45.0",
     "vite": "7.1.7",
     "vite-plugin-istanbul": "7.2.0",

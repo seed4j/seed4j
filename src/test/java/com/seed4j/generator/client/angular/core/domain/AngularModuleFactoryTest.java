@@ -61,6 +61,12 @@ class AngularModuleFactoryTest {
       .containing(nodeDependency("globals"))
       .containing(nodeDependency("typescript-eslint"))
       .containing(nodeDependency("npm-run-all2"))
+      .containing(nodeDependency("vite-tsconfig-paths"))
+      .containing(nodeDependency("@vitest/coverage-istanbul"))
+      .containing(nodeDependency("vitest-sonar-reporter"))
+      .containing(nodeDependency("@analogjs/vite-plugin-angular"))
+      .containing(nodeDependency("@analogjs/vitest-angular"))
+      .containing(nodeDependency("jsdom"))
       .containing(nodeScript("dev", "npm-run-all --parallel dev:*"))
       .containing(nodeScript("dev:ng", "ng serve"))
       .containing(nodeScript("ng", "ng"))
@@ -94,13 +100,14 @@ class AngularModuleFactoryTest {
       .and()
       .hasPrefixedFiles(
         "",
-        "jest.conf.mjs",
         "angular.json",
         "tsconfig.json",
         "tsconfig.app.json",
         "tsconfig.spec.json",
         "proxy.conf.json",
-        "eslint.config.mjs"
+        "eslint.config.mjs",
+        "test-setup.ts",
+        "vitest.config.ts"
       )
       .hasPrefixedFiles("src/main/webapp/app", "app.css", "app.ts", "app.html", "app.spec.ts", "app.route.spec.ts", "app.route.ts")
       .hasPrefixedFiles("src/main/webapp/content/images", "seed4j_logo-name.png", "AngularLogo.svg")

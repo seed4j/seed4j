@@ -2,7 +2,9 @@
   <h3>Properties</h3>
 
   @if (healthDetails) {
-    <table mat-table [dataSource]="healthDetails.details | keyvalue" class="mat-elevation-z8" aria-describedby="Health modal table">
+    <table mat-table [dataSource]="(healthDetails.details | keyvalue) ?? []"
+           class="mat-elevation-z8"
+           aria-describedby="Health modal table">
       <ng-container matColumnDef="key">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let element">{{ element.key }}</td>

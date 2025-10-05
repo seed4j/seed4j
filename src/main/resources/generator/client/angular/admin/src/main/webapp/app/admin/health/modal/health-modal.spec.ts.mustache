@@ -75,5 +75,16 @@ describe('HealthModal', () => {
 
       expect(result).toBe('1234');
     });
+
+    it('should return empty string for undefined values', () => {
+      comp.healthDetails = {
+        key: 'mail',
+        status: 'UP',
+      };
+
+      const result = comp.readableValue(undefined);
+
+      expect(result).toBe('');
+    });
   });
 });

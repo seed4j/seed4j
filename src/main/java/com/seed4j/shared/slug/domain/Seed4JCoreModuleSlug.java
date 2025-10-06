@@ -20,6 +20,7 @@ public enum Seed4JCoreModuleSlug implements Seed4JModuleSlugFactory {
   ANGULAR_JWT("angular-jwt", RANK_C),
   ANGULAR_OAUTH_2("angular-oauth2-keycloak", RANK_C),
   ANGULAR_I18N("angular-i18n", RANK_C),
+  ANGULAR_TAILWIND("angular-tailwind", RANK_C),
   APPLICATION_SERVICE_HEXAGONAL_ARCHITECTURE_DOCUMENTATION("application-service-hexagonal-architecture-documentation", RANK_A),
   APPROVAL_TESTS("approval-tests", RANK_B),
   ARCH_UNIT_TS("arch-unit-ts", RANK_C),

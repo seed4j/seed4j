@@ -26,11 +26,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      {!token ? (
-        <Button data-testid="login-button" variant="shadow" onPress={onPressLoginButton}>
-          Log in
-        </Button>
-      ) : (
+      {token ? (
         <>
           <p>
             Welcome <strong>{username}</strong>!
@@ -39,6 +35,10 @@ const LoginForm = () => {
             Log out
           </Button>
         </>
+      ) : (
+        <Button data-testid="login-button" variant="shadow" onPress={onPressLoginButton}>
+          Log in
+        </Button>
       )}
       <UserInfoContext.Provider value={userInfoContextValues}>
         <LoginModal open={open} onClose={onCloseModal} />

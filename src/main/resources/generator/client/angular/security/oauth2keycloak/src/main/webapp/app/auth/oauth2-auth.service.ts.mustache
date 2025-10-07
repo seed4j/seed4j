@@ -27,7 +27,7 @@ export class Oauth2AuthService {
     return from(this.keycloak.init({ onLoad: 'login-required', checkLoginIframe: false })).pipe(
       tap(authenticated => {
         if (!authenticated) {
-          window.location.reload();
+          globalThis.location.reload();
         } else {
           console.debug('Authenticated');
         }

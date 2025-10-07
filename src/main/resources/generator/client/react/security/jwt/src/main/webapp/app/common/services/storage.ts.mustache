@@ -1,4 +1,4 @@
-export const isWindow = () => typeof window !== 'undefined';
+export const isWindow = () => typeof globalThis !== 'undefined';
 
 export const isLocalStorageEnabled = () => isWindow() && globalThis.localStorage;
 

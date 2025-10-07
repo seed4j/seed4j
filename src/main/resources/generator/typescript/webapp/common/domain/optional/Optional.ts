@@ -1,4 +1,4 @@
-const checkIsNaN = <Value>(value: Value) => typeof value === 'number' && isNaN(value);
+const checkIsNaN = <Value>(value: Value) => typeof value === 'number' && Number.isNaN(value);
 
 export abstract class Optional<Value> {
   static empty<Value>(): Optional<Value> {

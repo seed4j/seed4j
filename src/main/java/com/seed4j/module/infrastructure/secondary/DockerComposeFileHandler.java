@@ -1,5 +1,6 @@
 package com.seed4j.module.infrastructure.secondary;
 
+import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.startupcommand.DockerComposeFile;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
@@ -14,11 +15,14 @@ public class DockerComposeFileHandler {
   private static final String LINE_BREAK = System.lineSeparator();
   private static final String SPACER = " ";
 
+  private final Indentation indentation;
   private final Path file;
 
-  public DockerComposeFileHandler(Path file) {
+  public DockerComposeFileHandler(Indentation indentation, Path file) {
+    Assert.notNull("indentation", indentation);
     Assert.notNull("file", file);
 
+    this.indentation = indentation;
     this.file = file;
   }
 
@@ -54,7 +58,7 @@ public class DockerComposeFileHandler {
   }
 
   private String dockerComposeLine(DockerComposeFile compose) {
-    return SPACER.repeat(2) + DASH + SPACER + compose.path();
+    return indentation.spaces() + DASH + SPACER + compose.path();
   }
 
   private String readOrInitDockerComposeFile() throws IOException {

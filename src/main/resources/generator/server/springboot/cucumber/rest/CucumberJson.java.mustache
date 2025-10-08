@@ -36,7 +36,7 @@ final class CucumberJson {
 
     try {
       return jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonMapper.readValue(json, Object.class));
-    } catch (IOException e) {
+    } catch (IOException _) {
       return json;
     }
   }

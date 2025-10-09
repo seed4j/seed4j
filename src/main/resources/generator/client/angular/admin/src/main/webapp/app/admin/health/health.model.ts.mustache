@@ -14,11 +14,11 @@ export type HealthKey =
 
 export interface HealthModel {
   status: HealthStatus;
-  components: any;
+  components: Record<HealthKey, { status: HealthStatus; details?: object }>;
 }
 
 export interface HealthDetails {
   key: HealthKey;
   status: HealthStatus;
-  details?: any;
+  details?: object;
 }

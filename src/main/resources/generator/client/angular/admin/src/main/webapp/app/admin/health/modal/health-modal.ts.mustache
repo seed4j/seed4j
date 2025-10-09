@@ -16,12 +16,12 @@ import { HealthDetails } from '../health.model';
 export class HealthModal {
   GIGABYTE = 1073741824;
   MEGABYTE = 1048576;
-  displayedColumns: string[] = ['key', 'value'];
+  displayedColumns = ['key', 'value'];
 
   healthDetails: HealthDetails = inject(MAT_DIALOG_DATA);
 
-  readableValue(value: any): string {
-    if (this.healthDetails.key === 'diskSpace') {
+  readableValue(value: unknown): string {
+    if (this.healthDetails.key === 'diskSpace' && typeof value === 'number') {
       // Should display storage space in a human-readable unit
       const val = value / this.GIGABYTE;
       if (val > 1) {
@@ -33,6 +33,11 @@ export class HealthModal {
     if (typeof value === 'object') {
       return JSON.stringify(value);
     }
-    return String(value);
+
+    if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+      return String(value);
+    }
+
+    return '';
   }
 }

@@ -4,7 +4,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 
-import { HealthModel, HealthStatus } from './health.model';
+import { HealthDetails, HealthKey, HealthModel, HealthStatus } from './health.model';
 import { HealthService } from './health.service';
 import { HealthModal } from './modal/health-modal';
 
@@ -16,7 +16,7 @@ import { HealthModal } from './modal/health-modal';
 })
 export default class Health implements OnInit {
   displayedColumns: string[] = ['key', 'value', 'detail'];
-  datasource: any = [];
+  datasource: HealthDetails[] = [];
 
   private readonly dialog = inject(MatDialog);
   private readonly healthService = inject(HealthService);
@@ -35,11 +35,14 @@ export default class Health implements OnInit {
   refresh(): void {
     this.healthService.checkHealth().subscribe({
       next: health => {
-        this.datasource = Object.keys(health.components).map(key => ({
-          key,
-          status: health.components[key].status,
-          details: health.components[key].details,
-        }));
+        this.datasource = Object.keys(health.components).map((key) => {
+          const healthKey = key as HealthKey;
+          return {
+            key: healthKey,
+            status: health.components[healthKey].status,
+            details: health.components[healthKey].details,
+          };
+        });
       },
     });
   }

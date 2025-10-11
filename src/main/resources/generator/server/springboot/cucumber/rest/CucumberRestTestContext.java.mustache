@@ -63,7 +63,7 @@ public final class CucumberRestTestContext {
       Object element;
       try {
         element = JsonPath.read(jsonReader.parse(response), jsonPath);
-      } catch (PathNotFoundException e) {
+      } catch (PathNotFoundException _) {
         return 0;
       }
 
@@ -83,7 +83,7 @@ public final class CucumberRestTestContext {
     return response -> {
       try {
         return JsonPath.read(jsonReader.parse(response), jsonPath);
-      } catch (PathNotFoundException e) {
+      } catch (PathNotFoundException _) {
         return null;
       }
     };
@@ -112,7 +112,7 @@ public final class CucumberRestTestContext {
   private static RestQuery lastQuery() {
     try {
       return queries.getFirst();
-    } catch (NoSuchElementException e) {
+    } catch (NoSuchElementException _) {
       throw new AssertionError("Can't get last query: empty queries");
     }
   }
@@ -147,7 +147,7 @@ public final class CucumberRestTestContext {
     private Optional<String> readResponse(ClientHttpResponse response) {
       try {
         return Optional.of(StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));
-      } catch (Exception e) {
+      } catch (Exception _) {
         return Optional.empty();
       }
     }

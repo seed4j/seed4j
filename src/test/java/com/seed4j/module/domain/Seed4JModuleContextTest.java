@@ -22,7 +22,7 @@ class Seed4JModuleContextTest {
       .containsEntry("packageName", "com.mycompany.myapp")
       .containsEntry("serverPort", 8080)
       .containsEntry("indentSize", 2)
-      .containsEntry("javaVersion", "21")
+      .containsEntry("javaVersion", "25")
       .containsEntry("springConfigurationFormat", "yaml")
       .containsEntry("projectBuildDirectory", "target");
   }

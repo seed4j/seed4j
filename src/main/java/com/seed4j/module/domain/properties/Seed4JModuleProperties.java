@@ -32,7 +32,7 @@ public class Seed4JModuleProperties {
   private final NodePackageManager nodePackageManager;
   private final Seed4JServerPort serverPort;
   private final SpringConfigurationFormat springConfigurationFormat;
-  private final Version javaVersion = new Version("21");
+  private final Version javaVersion = new Version("25");
 
   public Seed4JModuleProperties(String projectFolder, boolean commitModule, Map<String, Object> parameters) {
     this.projectFolder = new Seed4JProjectFolder(projectFolder);
@@ -78,7 +78,7 @@ public class Seed4JModuleProperties {
     String date = getOrDefaultString(key, defaultValue.toString());
     try {
       return Instant.parse(date);
-    } catch (DateTimeParseException ex) {
+    } catch (DateTimeParseException _) {
       throw InvalidPropertyTypeException.builder().key(key).expectedType(Instant.class).actualType(String.class);
     }
   }

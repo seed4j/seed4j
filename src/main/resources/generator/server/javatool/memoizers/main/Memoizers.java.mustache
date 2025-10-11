@@ -13,7 +13,7 @@ public final class Memoizers {
   public static <Result> Supplier<Result> of(Supplier<Result> supplier) {
     Assert.notNull("supplier", supplier);
 
-    return () -> of(__ -> supplier.get()).apply(null);
+    return () -> of(_ -> supplier.get()).apply(null);
   }
 
   public static <Input, Result> Function<Input, Result> of(Function<Input, Result> function) {

@@ -85,7 +85,7 @@ class HexagonalArchTest {
     return path -> {
       try {
         return Class.forName(path).getPackage();
-      } catch (ClassNotFoundException e) {
+      } catch (ClassNotFoundException _) {
         throw new AssertionError();
       }
     };

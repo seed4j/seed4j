@@ -82,6 +82,7 @@ class AngularOAuth2KeycloakModuleFactoryTest {
       .containing("<seed-login />")
       .and()
       .hasFile("src/main/webapp/app/app.spec.ts")
+      .matchingSavedSnapshot()
       .and();
   }
 

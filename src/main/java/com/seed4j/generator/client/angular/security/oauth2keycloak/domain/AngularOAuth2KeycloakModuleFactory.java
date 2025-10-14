@@ -1,13 +1,6 @@
 package com.seed4j.generator.client.angular.security.oauth2keycloak.domain;
 
-import static com.seed4j.module.domain.Seed4JModule.from;
-import static com.seed4j.module.domain.Seed4JModule.lineAfterRegex;
-import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
-import static com.seed4j.module.domain.Seed4JModule.packageName;
-import static com.seed4j.module.domain.Seed4JModule.path;
-import static com.seed4j.module.domain.Seed4JModule.regex;
-import static com.seed4j.module.domain.Seed4JModule.text;
-import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.*;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 
@@ -64,6 +57,16 @@ public class AngularOAuth2KeycloakModuleFactory {
   private static final String OAUTH2_AUTH_SERVICE_IMPORT = """
     import { Oauth2AuthService } from './auth/oauth2-auth.service';
     """;
+
+  private static final String RXJS_OF_IMPORT = "import { of } from 'rxjs';";
+
+  private static final String MOCK_OAUTH2_AUTH_SERVICE = """
+    const mockOauth2AuthService = {
+      initAuthentication: jest.fn().mockReturnValue(of(true)),
+      isAuthenticated: true,
+      token: 'mock-token',
+      logout: jest.fn(),
+    };""";
 
   private static final ElementReplacer APP_NAME_NEEDLE = lineAfterRegex("appName = signal\\(''\\);");
 
@@ -139,6 +142,12 @@ public class AngularOAuth2KeycloakModuleFactory {
           .and()
         .in(path("src/main/webapp/app/app.html"))
           .add(MENU_NEEDLE, indentation.spaces() + "<seed-login />")
+          .and()
+        .in(path("src/main/webapp/app/app.spec.ts"))
+          .add(lineAfterRegex("from '@angular/router';"), RXJS_OF_IMPORT)
+          .add(lineAfterRegex("from './app';"), MOCK_OAUTH2_AUTH_SERVICE)
+          .add(lineAfterRegex("from './app';"), OAUTH2_AUTH_SERVICE_IMPORT)
+          .add(regex("(providers: \\[.*)(\\],)"), "$1, { provide: Oauth2AuthService, useValue: mockOauth2AuthService }$2")
           .and()
         .and()
       .build();

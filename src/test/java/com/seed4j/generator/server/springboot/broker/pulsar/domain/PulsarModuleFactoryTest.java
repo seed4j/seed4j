@@ -50,7 +50,7 @@ class PulsarModuleFactoryTest {
         """
             <dependency>
               <groupId>org.testcontainers</groupId>
-              <artifactId>pulsar</artifactId>
+              <artifactId>testcontainers-pulsar</artifactId>
               <version>${testcontainers.version}</version>
               <scope>test</scope>
             </dependency>

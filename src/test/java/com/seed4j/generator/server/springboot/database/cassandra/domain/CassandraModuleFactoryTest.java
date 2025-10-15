@@ -52,7 +52,7 @@ class CassandraModuleFactoryTest {
         """
             <dependency>
               <groupId>org.testcontainers</groupId>
-              <artifactId>cassandra</artifactId>
+              <artifactId>testcontainers-cassandra</artifactId>
               <version>${testcontainers.version}</version>
               <scope>test</scope>
             </dependency>

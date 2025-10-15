@@ -60,7 +60,7 @@ class MongoDbModuleFactoryTest {
         """
             <dependency>
               <groupId>org.testcontainers</groupId>
-              <artifactId>mongodb</artifactId>
+              <artifactId>testcontainers-mongodb</artifactId>
               <version>${testcontainers.version}</version>
               <scope>test</scope>
             </dependency>

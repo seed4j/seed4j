@@ -83,7 +83,7 @@ public class Neo4jModuleFactory {
   private JavaDependency testContainerDependency() {
     return javaDependency()
       .groupId("org.testcontainers")
-      .artifactId("neo4j")
+      .artifactId("testcontainers-neo4j")
       .versionSlug("testcontainers")
       .scope(JavaDependencyScope.TEST)
       .build();

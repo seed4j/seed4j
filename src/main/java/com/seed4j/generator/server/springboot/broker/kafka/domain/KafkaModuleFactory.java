@@ -50,7 +50,7 @@ public class KafkaModuleFactory {
         .and()
       .javaDependencies()
         .addDependency(groupId("org.apache.kafka"), artifactId("kafka-clients"), versionSlug("kafka-clients.version"))
-        .addDependency(groupId("org.testcontainers"), artifactId("kafka"), versionSlug("testcontainers.version"))
+        .addDependency(groupId("org.testcontainers"), artifactId("testcontainers-kafka"), versionSlug("testcontainers.version"))
         .and()
       .files()
         .add(SOURCE.template("kafka.yml"), toSrcMainDocker().append("kafka.yml"))

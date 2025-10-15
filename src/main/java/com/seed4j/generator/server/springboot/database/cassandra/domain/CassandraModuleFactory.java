@@ -98,7 +98,7 @@ public class CassandraModuleFactory {
   private JavaDependency testContainerDependency() {
     return javaDependency()
       .groupId("org.testcontainers")
-      .artifactId("cassandra")
+      .artifactId("testcontainers-cassandra")
       .versionSlug("testcontainers")
       .scope(JavaDependencyScope.TEST)
       .build();

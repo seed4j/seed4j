@@ -2,12 +2,12 @@ package {{packageName}};
 
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.context.ApplicationListener;
-import org.testcontainers.containers.Neo4jContainer;
+import org.testcontainers.neo4j.Neo4jContainer;
 import org.testcontainers.utility.DockerImageName;
 
 class TestNeo4jManager implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
 
-  private static Neo4jContainer<?> neo4jContainer;
+  private static Neo4jContainer neo4jContainer;
 
   @Override
   @SuppressWarnings("resource")
@@ -16,7 +16,7 @@ class TestNeo4jManager implements ApplicationListener<ApplicationEnvironmentPrep
       return;
     }
 
-    neo4jContainer = new Neo4jContainer<>(DockerImageName.parse("{{neo4jDockerImage}}")).withoutAuthentication();
+    neo4jContainer = new Neo4jContainer(DockerImageName.parse("{{neo4jDockerImage}}")).withoutAuthentication();
 
     neo4jContainer.start();
 

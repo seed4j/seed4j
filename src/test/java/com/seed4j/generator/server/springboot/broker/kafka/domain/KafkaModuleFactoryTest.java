@@ -49,7 +49,7 @@ class KafkaModuleFactoryTest {
     )
       .hasFile("pom.xml")
       .containing("<artifactId>kafka-clients</artifactId>")
-      .containing("<artifactId>kafka</artifactId>")
+      .containing("<artifactId>testcontainers-kafka</artifactId>")
       .and()
       .hasFile("src/main/docker/kafka.yml")
       .containing("image: apache/kafka-native")

@@ -34,6 +34,11 @@ public class DatasourceModuleFactory {
   private static final String MYSQL = "mysql";
   private static final String MARIADB = "mariadb";
 
+  private static final String TESTCONTAINERS_POSTGRESQL = "testcontainers-postgresql";
+  private static final String TESTCONTAINERS_MYSQL = "testcontainers-mysql";
+  private static final String TESTCONTAINERS_MARIADB = "testcontainers-mariadb";
+  private static final String TESTCONTAINERS_MSSQLSERVER = "testcontainers-mssqlserver";
+
   private static final String SPRING_DATASOURCE_URL = "spring.datasource.url";
   private static final String SPRING_DATASOURCE_USERNAME = "spring.datasource.username";
   private static final String SPRING_DATASOURCE_PASSWORD = "spring.datasource.password";
@@ -56,7 +61,7 @@ public class DatasourceModuleFactory {
       .driverDependency(javaDependency().groupId(ORG_POSTGRESQL).artifactId(POSTGRESQL).scope(RUNTIME).build())
       .driverClassName("org.postgresql.Driver")
       .dockerImageName(new DockerImageName("postgres"))
-      .testContainerArtifactId(artifactId(POSTGRESQL));
+      .testContainerArtifactId(artifactId(TESTCONTAINERS_POSTGRESQL));
 
     DockerImageVersion dockerImage = dockerImages.get(datasourceProperties.dockerImageName());
 
@@ -94,7 +99,7 @@ public class DatasourceModuleFactory {
       .driverDependency(javaDependency().groupId("org.mariadb.jdbc").artifactId("mariadb-java-client").scope(RUNTIME).build())
       .driverClassName("org.mariadb.jdbc.Driver")
       .dockerImageName(new DockerImageName(MARIADB))
-      .testContainerArtifactId(artifactId(MARIADB));
+      .testContainerArtifactId(artifactId(TESTCONTAINERS_MARIADB));
 
     // @formatter:off
     return moduleBuilder(properties)
@@ -119,7 +124,7 @@ public class DatasourceModuleFactory {
       .driverDependency(javaDependency().groupId("com.mysql").artifactId("mysql-connector-j").scope(RUNTIME).build())
       .driverClassName("com.mysql.cj.jdbc.Driver")
       .dockerImageName(new DockerImageName(MYSQL))
-      .testContainerArtifactId(artifactId(MYSQL));
+      .testContainerArtifactId(artifactId(TESTCONTAINERS_MYSQL));
 
     // @formatter:off
     return moduleBuilder(properties)
@@ -144,7 +149,7 @@ public class DatasourceModuleFactory {
       .driverDependency(javaDependency().groupId("com.microsoft.sqlserver").artifactId("mssql-jdbc").scope(RUNTIME).build())
       .driverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver")
       .dockerImageName(new DockerImageName("mcr.microsoft.com/mssql/server"))
-      .testContainerArtifactId(artifactId("mssqlserver"));
+      .testContainerArtifactId(artifactId(TESTCONTAINERS_MSSQLSERVER));
 
     // @formatter:off
     return moduleBuilder(properties)

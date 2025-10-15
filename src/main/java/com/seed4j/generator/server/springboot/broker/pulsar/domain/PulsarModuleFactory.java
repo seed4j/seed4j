@@ -76,7 +76,7 @@ public class PulsarModuleFactory {
   private JavaDependency testContainerDependency() {
     return javaDependency()
       .groupId("org.testcontainers")
-      .artifactId("pulsar")
+      .artifactId("testcontainers-pulsar")
       .versionSlug("testcontainers")
       .scope(JavaDependencyScope.TEST)
       .build();

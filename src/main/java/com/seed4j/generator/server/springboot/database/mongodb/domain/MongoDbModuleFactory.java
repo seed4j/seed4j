@@ -95,7 +95,7 @@ public class MongoDbModuleFactory {
   private JavaDependency testContainerDependency() {
     return javaDependency()
       .groupId("org.testcontainers")
-      .artifactId("mongodb")
+      .artifactId("testcontainers-mongodb")
       .versionSlug("testcontainers")
       .scope(JavaDependencyScope.TEST)
       .build();

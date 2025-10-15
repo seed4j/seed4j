@@ -60,7 +60,7 @@ class Neo4jModuleFactoryTest {
         """
             <dependency>
               <groupId>org.testcontainers</groupId>
-              <artifactId>neo4j</artifactId>
+              <artifactId>testcontainers-neo4j</artifactId>
               <version>${testcontainers.version}</version>
               <scope>test</scope>
             </dependency>

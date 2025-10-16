@@ -13,7 +13,7 @@
     "@angular/material": "20.2.8",
     "@jsverse/transloco": "8.1.0",
     "@tailwindcss/postcss": "4.1.14",
-    "angular-eslint": "20.3.0",
+    "angular-eslint": "20.4.0",
     "jest-environment-jsdom": "29.7.0",
     "jest-preset-angular": "14.6.1",
     "jest-sonar-reporter": "2.0.0",

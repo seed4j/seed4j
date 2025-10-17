@@ -51,7 +51,8 @@ public final class Seed4JModulesResourceFixture {
       defaultModuleResourceBuilder().slug("module-c").moduleDependency("module-b").build(),
       defaultModuleResourceBuilder().feature("client-core").slug("module-d").moduleDependency("module-b").build(),
       defaultModuleResourceBuilder().feature("client-core").slug("module-e").moduleDependency("module-b").build(),
-      defaultModuleResourceBuilder().feature("e2e-tests").slug("module-f").featureDependency("client-core").build()
+      defaultModuleResourceBuilder().feature("e2e-tests").slug("module-f").featureDependency("client-core").build(),
+      defaultModuleResourceBuilder().feature("e2e-tests-detail").slug("module-g").featureDependency("e2e-tests").build()
     );
   }
 

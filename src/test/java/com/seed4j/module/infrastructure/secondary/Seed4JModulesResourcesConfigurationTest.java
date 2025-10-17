@@ -54,7 +54,7 @@ class Seed4JModulesResourcesConfigurationTest {
     Seed4JModulesResources resources = configuration.seed4JModulesResources(hiddenResources, moduleNestedFeatureResourcesCollection());
 
     assertThat(resources.stream()).usingRecursiveFieldByFieldElementComparator().containsExactly(defaultModuleResource());
-    logs.shouldHave(Level.INFO, "The following modules are hidden: module-a, module-b, module-c, module-d, module-e, module-f.");
+    logs.shouldHave(Level.INFO, "The following modules are hidden: module-a, module-b, module-c, module-d, module-e, module-f, module-g.");
   }
 
   @Test

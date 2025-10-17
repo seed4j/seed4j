@@ -96,9 +96,31 @@ public class Seed4JModulesResources {
     Collection<Seed4JModuleResource> modulesResources,
     Collection<String> hiddenModuleSlugs
   ) {
-    Set<String> featuresWithHiddenModules = extractFeaturesFromHiddenModules(modulesResources, hiddenModuleSlugs);
-    Collection<String> modulesWithFeatureDependencies = modulesWithFeatureDependencies(modulesResources, featuresWithHiddenModules);
+    Set<String> allFeaturesToHide = findAllFeaturesToHide(modulesResources, hiddenModuleSlugs);
+    Collection<String> modulesWithFeatureDependencies = modulesWithFeatureDependencies(modulesResources, allFeaturesToHide);
     return removeModulesAlreadyHidden(modulesWithFeatureDependencies, hiddenModuleSlugs);
+  }
+
+  private Set<String> findAllFeaturesToHide(Collection<Seed4JModuleResource> modulesResources, Collection<String> hiddenModuleSlugs) {
+    Set<String> featuresToHide = extractFeaturesFromHiddenModules(modulesResources, hiddenModuleSlugs);
+    Set<String> additionalFeatures = findAdditionalFeatureDependencies(modulesResources, featuresToHide);
+
+    while (!additionalFeatures.isEmpty()) {
+      featuresToHide.addAll(additionalFeatures);
+      additionalFeatures = findAdditionalFeatureDependencies(modulesResources, featuresToHide);
+      additionalFeatures.removeAll(featuresToHide);
+    }
+
+    return featuresToHide;
+  }
+
+  private Set<String> findAdditionalFeatureDependencies(Collection<Seed4JModuleResource> modulesResources, Set<String> knownFeatures) {
+    return modulesResources
+      .stream()
+      .filter(resource -> dependsOnHiddenFeature(resource, knownFeatures))
+      .filter(resource -> resource.organization().feature().isPresent())
+      .map(resource -> resource.organization().feature().get().get())
+      .collect(Collectors.toSet());
   }
 
   private Set<String> extractFeaturesFromHiddenModules(

@@ -46,6 +46,18 @@ class Seed4JModulesResourcesConfigurationTest {
   }
 
   @Test
+  void shouldGetAllResourcesWithoutHiddenAndNestedFeatureDependenciesResources() {
+    Seed4JHiddenResourcesProperties hiddenResources = new Seed4JHiddenResourcesProperties();
+    hiddenResources.setSlugs(List.of("module-a"));
+    hiddenResources.setTags(null);
+
+    Seed4JModulesResources resources = configuration.seed4JModulesResources(hiddenResources, moduleNestedFeatureResourcesCollection());
+
+    assertThat(resources.stream()).usingRecursiveFieldByFieldElementComparator().containsExactly(defaultModuleResource());
+    logs.shouldHave(Level.INFO, "The following modules are hidden: module-a, module-b, module-c, module-d, module-e, module-f.");
+  }
+
+  @Test
   void shouldHideResourcesBySlugs() {
     Seed4JHiddenResourcesProperties hiddenResources = new Seed4JHiddenResourcesProperties();
     hiddenResources.setSlugs(List.of("another-module", "yet-another-module"));

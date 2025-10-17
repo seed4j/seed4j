@@ -2,6 +2,7 @@ package com.seed4j.module.domain.resource;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModuleSlug;
+import com.seed4j.module.domain.landscape.Seed4JLandscapeElementType;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
@@ -9,6 +10,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -78,7 +80,9 @@ public class Seed4JModulesResources {
   }
 
   private Collection<String> findNestedDependencies(Collection<Seed4JModuleResource> modulesResources, Seed4JHiddenModules hiddenModules) {
-    return findNestedDependenciesBySlugs(hiddenModules.slugs(), modulesResources);
+    Collection<String> moduleDependencies = findNestedDependenciesBySlugs(hiddenModules.slugs(), modulesResources);
+    Collection<String> featureDependencies = findFeatureDependentModulesNotAlreadyHidden(modulesResources, moduleDependencies);
+    return Stream.concat(moduleDependencies.stream(), featureDependencies.stream()).toList();
   }
 
   private Collection<String> findNestedDependenciesBySlugs(Collection<String> slugs, Collection<Seed4JModuleResource> modulesResources) {
@@ -86,6 +90,51 @@ public class Seed4JModulesResources {
       .stream()
       .flatMap(slug -> allSlugsNestedDependenciesOf(slug, modulesResources))
       .toList();
+  }
+
+  private Collection<String> findFeatureDependentModulesNotAlreadyHidden(
+    Collection<Seed4JModuleResource> modulesResources,
+    Collection<String> hiddenModuleSlugs
+  ) {
+    Set<String> featuresWithHiddenModules = extractFeaturesFromHiddenModules(modulesResources, hiddenModuleSlugs);
+    Collection<String> modulesWithFeatureDependencies = modulesWithFeatureDependencies(modulesResources, featuresWithHiddenModules);
+    return removeModulesAlreadyHidden(modulesWithFeatureDependencies, hiddenModuleSlugs);
+  }
+
+  private Set<String> extractFeaturesFromHiddenModules(
+    Collection<Seed4JModuleResource> modulesResources,
+    Collection<String> hiddenModuleSlugs
+  ) {
+    return modulesResources
+      .stream()
+      .filter(resource -> hiddenModuleSlugs.contains(resource.slug().get()))
+      .filter(resource -> resource.organization().feature().isPresent())
+      .map(resource -> resource.organization().feature().get().get())
+      .collect(Collectors.toSet());
+  }
+
+  private Collection<String> modulesWithFeatureDependencies(Collection<Seed4JModuleResource> modulesResources, Set<String> featuresToHide) {
+    return modulesResources
+      .stream()
+      .filter(resource -> dependsOnHiddenFeature(resource, featuresToHide))
+      .map(resource -> resource.slug().get())
+      .collect(Collectors.toSet());
+  }
+
+  private boolean dependsOnHiddenFeature(Seed4JModuleResource resource, Set<String> featuresToHide) {
+    return resource
+      .organization()
+      .dependencies()
+      .stream()
+      .filter(dependency -> dependency.type() == Seed4JLandscapeElementType.FEATURE)
+      .anyMatch(dependency -> featuresToHide.contains(dependency.slug().get()));
+  }
+
+  private Collection<String> removeModulesAlreadyHidden(Collection<String> modules, Collection<String> hiddenModules) {
+    return modules
+      .stream()
+      .filter(moduleSlug -> !hiddenModules.contains(moduleSlug))
+      .collect(Collectors.toList());
   }
 
   private Stream<String> allSlugsNestedDependenciesOf(String slug, Collection<Seed4JModuleResource> modulesResources) {

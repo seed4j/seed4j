@@ -161,13 +161,13 @@ class LiquibaseModuleFactoryTest {
                     </executions>
                     <configuration>
                       <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
-                      <configurationFile>src/test/resources/liquibase-linter.jsonc</configurationFile>
+                      <configurationFile>src/test/resources/config/liquibase/liquibase-linter.jsonc</configurationFile>
                     </configuration>
                   </plugin>
           """
         )
         .and()
-        .hasFile("src/test/resources/liquibase-linter.jsonc");
+        .hasFile("src/test/resources/config/liquibase/liquibase-linter.jsonc");
     }
   }
 }

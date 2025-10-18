@@ -40,7 +40,7 @@ class {{ baseName }}ErrorsMessagesTest {
       return Files.list(Path.of("src/main/resources/messages/errors")).collect(
         Collectors.toUnmodifiableMap(Path::toString, toProperties())
       );
-    } catch (IOException e) {
+    } catch (IOException _) {
       throw new AssertionError();
     }
   }
@@ -50,7 +50,7 @@ class {{ baseName }}ErrorsMessagesTest {
       var properties = new Properties();
       try {
         properties.load(Files.newInputStream(file));
-      } catch (IOException e) {
+      } catch (IOException _) {
         throw new AssertionError();
       }
 

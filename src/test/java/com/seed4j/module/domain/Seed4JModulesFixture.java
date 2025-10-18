@@ -483,8 +483,8 @@ public final class Seed4JModulesFixture {
             <version>[${maven.version},)</version>
           </requireMavenVersion>
           <requireJavaVersion>
-              <message>You are running an incompatible version of Java. Seed4J engine supports JDK 21+.</message>
-              <version>[21,22)</version>
+              <message>You are running an incompatible version of Java. Seed4J engine supports JDK 25+.</message>
+              <version>[${java.version},)</version>
           </requireJavaVersion>
         </rules>
         """

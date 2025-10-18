@@ -38,7 +38,7 @@ class Seed4JModuleOptionalReplacementsTest {
   private static String readContent(String file) {
     try {
       return Files.readString(Path.of(file));
-    } catch (IOException e) {
+    } catch (IOException _) {
       throw new AssertionError();
     }
   }

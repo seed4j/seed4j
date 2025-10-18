@@ -103,7 +103,7 @@ final class ApplicationStartupTraces {
   private static String hostAddress() {
     try {
       return InetAddress.getLocalHost().getHostAddress();
-    } catch (UnknownHostException e) {
+    } catch (UnknownHostException _) {
       log.warn("The host name could not be determined, using `localhost` as fallback");
     }
 

@@ -31,9 +31,9 @@ public class MavenModuleFactory {
 
     ### Java
 
-    You need to have Java 21:
+    You need to have Java 25:
 
-    - [JDK 21](https://openjdk.java.net/projects/jdk/21/)""";
+    - [JDK 25](https://openjdk.java.net/projects/jdk/25/)""";
 
   public Seed4JModule buildMavenModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);

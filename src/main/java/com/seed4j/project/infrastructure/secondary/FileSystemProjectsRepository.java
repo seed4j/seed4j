@@ -138,7 +138,7 @@ class FileSystemProjectsRepository implements ProjectsRepository {
     String timestamp = filename.substring(0, filename.indexOf("-"));
     try {
       return LocalDateTime.parse(timestamp, FILENAME_DATE_FORMAT_WITH_MS);
-    } catch (DateTimeParseException e) {
+    } catch (DateTimeParseException _) {
       return LocalDateTime.parse(timestamp, FILENAME_DATE_FORMAT_WITHOUT_MS);
     }
   }

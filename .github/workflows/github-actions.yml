@@ -277,7 +277,6 @@ jobs:
             node-version: 'latest'
           - app: fullappgradle
             java-build-tool: gradle
-            java-version: 21
     steps:
       - name: 'Setup: checkout project from main branch'
         if: github.event_name == 'pull_request'

@@ -23,7 +23,7 @@ class AssertionErrorMessagesTest {
   private static Map<String, Properties> loadMessages() {
     try (Stream<Path> files = Files.list(Path.of("src/main/resources/messages/assertions-errors"))) {
       return files.collect(Collectors.toUnmodifiableMap(Path::toString, toProperties()));
-    } catch (IOException e) {
+    } catch (IOException _) {
       throw new AssertionError();
     }
   }
@@ -33,7 +33,7 @@ class AssertionErrorMessagesTest {
       var properties = new Properties();
       try {
         properties.load(Files.newInputStream(file));
-      } catch (IOException e) {
+      } catch (IOException _) {
         throw new AssertionError();
       }
 

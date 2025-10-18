@@ -39,7 +39,7 @@ public final class Enums {
           return Arrays.stream(key.from().getEnumConstants()).collect(
             Collectors.toMap(Function.identity(), source -> Enum.valueOf(key.to(), source.name()))
           );
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException _) {
           throw new UnmappableEnumException(from.getClass(), key.to());
         }
       };

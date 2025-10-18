@@ -38,7 +38,7 @@ class GeneratorErrorsMessagesTest {
   private static Map<String, Properties> loadMessages() {
     try (Stream<Path> files = Files.list(Path.of("src/main/resources/messages/errors"))) {
       return files.collect(Collectors.toUnmodifiableMap(Path::toString, toProperties()));
-    } catch (IOException e) {
+    } catch (IOException _) {
       throw new AssertionError();
     }
   }
@@ -48,7 +48,7 @@ class GeneratorErrorsMessagesTest {
       var properties = new Properties();
       try {
         properties.load(Files.newInputStream(file));
-      } catch (IOException e) {
+      } catch (IOException _) {
         throw new AssertionError();
       }
 

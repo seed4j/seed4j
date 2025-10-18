@@ -1,8 +1,12 @@
 package com.seed4j.generator.server.springboot.dbmigration.liquibase.domain;
 
-import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.properties.SpringConfigurationFormat.*;
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
+import static com.seed4j.TestFileUtils.tmpDirForTest;
+import static com.seed4j.module.domain.properties.SpringConfigurationFormat.PROPERTIES;
+import static com.seed4j.module.domain.properties.SpringConfigurationFormat.YAML;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.logbackFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.testLogbackFile;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Seed4JModule;
@@ -151,7 +155,7 @@ class LiquibaseModuleFactoryTest {
                     <executions>
                       <execution>
                         <goals>
-                          <goal>lint</goal>
+                          <goal>check</goal>
                         </goals>
                       </execution>
                     </executions>

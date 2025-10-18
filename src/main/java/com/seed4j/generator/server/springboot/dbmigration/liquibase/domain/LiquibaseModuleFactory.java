@@ -108,7 +108,7 @@ public class LiquibaseModuleFactory {
         <configurationFile>src/test/resources/liquibase-linter.jsonc</configurationFile>
         """
       )
-      .addExecution(pluginExecution().goals("lint"))
+      .addExecution(pluginExecution().goals("check"))
       .build();
   }
 

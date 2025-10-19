@@ -78,6 +78,24 @@ class MavenProjectJavaDependenciesRepositoryTest {
     assertThat(dependencies.get(DependencyId.of(new GroupId("org.springdoc"), new ArtifactId("springdoc-openapi-ui")))).isEmpty();
   }
 
+  @Test
+  void shouldGetAnnotationProcessorsFromMavenFile() {
+    DependencyId autoServiceDependencyId = DependencyId.builder().groupId("com.google.auto.service").artifactId("auto-service").build();
+
+    assertThat(mavenDependencies().annotationProcessor(autoServiceDependencyId)).hasValueSatisfying(autoService ->
+      assertThat(autoService.version()).contains(new VersionSlug("auto-service"))
+    );
+  }
+
+  @Test
+  void shouldGetAnnotationProcessorsFromDirectPluginsSection() {
+    DependencyId autoServiceDependencyId = DependencyId.builder().groupId("com.google.auto.service").artifactId("auto-service").build();
+
+    assertThat(mavenDirectPluginsDependencies().annotationProcessor(autoServiceDependencyId)).hasValueSatisfying(autoService ->
+      assertThat(autoService.version()).contains(new VersionSlug("auto-service"))
+    );
+  }
+
   private void assertJJWTDependency(JavaDependencies dependencies) {
     JavaDependency jjwt = dependencies
       .get(
@@ -106,5 +124,9 @@ class MavenProjectJavaDependenciesRepositoryTest {
 
   private ProjectJavaDependencies mavenDependencies() {
     return projectDependencies.get(new Seed4JProjectFolder("src/test/resources/projects/maven"));
+  }
+
+  private ProjectJavaDependencies mavenDirectPluginsDependencies() {
+    return projectDependencies.get(new Seed4JProjectFolder("src/test/resources/projects/maven-direct-plugins"));
   }
 }

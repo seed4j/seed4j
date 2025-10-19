@@ -62,6 +62,8 @@ dependencies {
   }
   // seed4j-needle-gradle-implementation-dependencies
   // seed4j-needle-gradle-compile-dependencies
+  annotationProcessor(libs.hibernate.processor)
+  // seed4j-needle-gradle-annotation-processors
   // seed4j-needle-gradle-runtime-dependencies
   testImplementation(libs.commons.lang3)
   testImplementation(libs.reflections)

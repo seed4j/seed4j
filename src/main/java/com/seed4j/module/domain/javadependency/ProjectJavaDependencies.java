@@ -9,25 +9,25 @@ public final class ProjectJavaDependencies {
 
   public static final ProjectJavaDependencies EMPTY = builder()
     .versions(ProjectJavaDependenciesVersions.EMPTY)
-    .dependenciesManagements(JavaDependencies.EMPTY)
-    .dependencies(JavaDependencies.EMPTY);
+    .dependenciesManagement(JavaDependencies.EMPTY)
+    .dependencies(JavaDependencies.EMPTY)
+    .annotationProcessors(JavaAnnotationProcessors.EMPTY);
 
   private final ProjectJavaDependenciesVersions versions;
   private final JavaDependencies dependenciesManagement;
   private final JavaDependencies dependencies;
+  private final JavaAnnotationProcessors annotationProcessors;
 
   private ProjectJavaDependencies(ProjectJavaDependenciesBuilder builder) {
     Assert.notNull("versions", builder.versions);
     Assert.notNull("dependenciesManagement", builder.dependenciesManagement);
     Assert.notNull("dependencies", builder.dependencies);
+    Assert.notNull("annotationProcessors", builder.annotationProcessors);
 
     versions = builder.versions;
     dependenciesManagement = builder.dependenciesManagement;
     dependencies = builder.dependencies;
-  }
-
-  public static ProjectJavaDependenciesVersionsBuilder builder() {
-    return new ProjectJavaDependenciesBuilder();
+    annotationProcessors = builder.annotationProcessors;
   }
 
   public Optional<JavaDependencyVersion> version(VersionSlug slug) {
@@ -40,6 +40,10 @@ public final class ProjectJavaDependencies {
 
   public Optional<JavaDependency> dependencyManagement(DependencyId id) {
     return dependenciesManagement.get(id);
+  }
+
+  public Optional<JavaAnnotationProcessor> annotationProcessor(DependencyId id) {
+    return annotationProcessors.get(id);
   }
 
   public ProjectJavaDependenciesVersions versions() {
@@ -59,20 +63,43 @@ public final class ProjectJavaDependencies {
 
     return builder()
       .versions(versions.merge(other.versions()))
-      .dependenciesManagements(dependenciesManagement.merge(other.dependenciesManagement))
-      .dependencies(dependencies.merge(other.dependencies));
+      .dependenciesManagement(dependenciesManagement.merge(other.dependenciesManagement))
+      .dependencies(dependencies.merge(other.dependencies))
+      .annotationProcessors(annotationProcessors.merge(other.annotationProcessors));
+  }
+
+  public static ProjectJavaDependenciesVersionsBuilder builder() {
+    return new ProjectJavaDependenciesBuilder();
+  }
+
+  public sealed interface ProjectJavaDependenciesVersionsBuilder permits ProjectJavaDependenciesBuilder {
+    ProjectJavaDependenciesDependenciesManagementBuilder versions(ProjectJavaDependenciesVersions versions);
+  }
+
+  public sealed interface ProjectJavaDependenciesDependenciesManagementBuilder permits ProjectJavaDependenciesBuilder {
+    ProjectJavaDependenciesDependenciesBuilder dependenciesManagement(JavaDependencies dependenciesManagement);
+  }
+
+  public sealed interface ProjectJavaDependenciesDependenciesBuilder permits ProjectJavaDependenciesBuilder {
+    ProjectJavaDependenciesAnnotationProcessorsBuilder dependencies(JavaDependencies dependencies);
+  }
+
+  public sealed interface ProjectJavaDependenciesAnnotationProcessorsBuilder permits ProjectJavaDependenciesBuilder {
+    ProjectJavaDependencies annotationProcessors(JavaAnnotationProcessors annotationProcessors);
   }
 
   private static final class ProjectJavaDependenciesBuilder
     implements
       ProjectJavaDependenciesVersionsBuilder,
       ProjectJavaDependenciesDependenciesManagementBuilder,
-      ProjectJavaDependenciesDependenciesBuilder
+      ProjectJavaDependenciesDependenciesBuilder,
+      ProjectJavaDependenciesAnnotationProcessorsBuilder
   {
 
     private @Nullable ProjectJavaDependenciesVersions versions;
     private @Nullable JavaDependencies dependenciesManagement;
     private @Nullable JavaDependencies dependencies;
+    private @Nullable JavaAnnotationProcessors annotationProcessors;
 
     @Override
     public ProjectJavaDependenciesDependenciesManagementBuilder versions(ProjectJavaDependenciesVersions versions) {
@@ -82,29 +109,24 @@ public final class ProjectJavaDependencies {
     }
 
     @Override
-    public ProjectJavaDependenciesDependenciesBuilder dependenciesManagements(JavaDependencies dependenciesManagement) {
+    public ProjectJavaDependenciesDependenciesBuilder dependenciesManagement(JavaDependencies dependenciesManagement) {
       this.dependenciesManagement = dependenciesManagement;
 
       return this;
     }
 
     @Override
-    public ProjectJavaDependencies dependencies(JavaDependencies dependencies) {
+    public ProjectJavaDependenciesAnnotationProcessorsBuilder dependencies(JavaDependencies dependencies) {
       this.dependencies = dependencies;
+
+      return this;
+    }
+
+    @Override
+    public ProjectJavaDependencies annotationProcessors(JavaAnnotationProcessors annotationProcessors) {
+      this.annotationProcessors = annotationProcessors;
 
       return new ProjectJavaDependencies(this);
     }
-  }
-
-  public interface ProjectJavaDependenciesVersionsBuilder {
-    ProjectJavaDependenciesDependenciesManagementBuilder versions(ProjectJavaDependenciesVersions versions);
-  }
-
-  public interface ProjectJavaDependenciesDependenciesManagementBuilder {
-    ProjectJavaDependenciesDependenciesBuilder dependenciesManagements(JavaDependencies dependenciesManagement);
-  }
-
-  public interface ProjectJavaDependenciesDependenciesBuilder {
-    ProjectJavaDependencies dependencies(JavaDependencies dependencies);
   }
 }

@@ -11,18 +11,21 @@ import com.seed4j.module.domain.javabuild.command.AddDirectMavenPlugin;
 import com.seed4j.module.domain.javabuild.command.AddGradleConfiguration;
 import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
 import com.seed4j.module.domain.javabuild.command.AddGradleTasksTestInstruction;
+import com.seed4j.module.domain.javabuild.command.AddJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
 import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
 import com.seed4j.module.domain.javabuild.command.AddMavenBuildExtension;
 import com.seed4j.module.domain.javabuild.command.AddMavenPlugin;
 import com.seed4j.module.domain.javabuild.command.AddMavenPluginManagement;
 import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.RemoveJavaDependencyManagement;
 import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.DependencyId;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessor;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyClassifier;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
@@ -40,6 +43,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -66,6 +70,10 @@ import org.jspecify.annotations.Nullable;
 public class MavenCommandHandler implements JavaDependenciesCommandHandler {
 
   private static final String COMMAND = "command";
+  private static final String ANNOTATION_PROCESSOR_PATHS_NODE = "annotationProcessorPaths";
+  private static final String GROUP_ID = "groupId";
+  private static final String ARTIFACT_ID = "artifactId";
+  private static final String MAVEN_COMPILER_PLUGIN = "maven-compiler-plugin";
 
   private final XMLFormat xmlFormat;
   private final Path pomPath;
@@ -259,6 +267,122 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     extension.setGroupId(mavenBuildExtension.groupId().get());
     mavenBuildExtension.versionSlug().map(VersionSlug::mavenVariable).ifPresent(extension::setVersion);
     return extension;
+  }
+
+  @Override
+  public void handle(AddJavaAnnotationProcessor command) {
+    Assert.notNull(COMMAND, command);
+
+    List<Plugin> managedPlugins = Optional.ofNullable(projectBuild().getPluginManagement())
+      .map(PluginManagement::getPlugins)
+      .orElse(List.of());
+    Plugin compilerPlugin = findCompilerPlugin(managedPlugins)
+      .or(() -> findCompilerPlugin(projectBuild().getPlugins()))
+      .orElseGet(this::addCompilerPlugin);
+
+    Xpp3Dom compilerConfiguration = Optional.ofNullable(compilerPlugin.getConfiguration())
+      .map(Xpp3Dom.class::cast)
+      .orElseGet(() -> new Xpp3Dom("configuration"));
+    compilerPlugin.setConfiguration(compilerConfiguration);
+
+    addAnnotationProcessorPathToCompilerConfiguration(command.annotationProcessor(), compilerConfiguration);
+    writePom();
+  }
+
+  private Optional<Plugin> findCompilerPlugin(List<Plugin> plugins) {
+    return plugins
+      .stream()
+      .filter(plugin -> plugin.getArtifactId().equals(MAVEN_COMPILER_PLUGIN))
+      .findFirst();
+  }
+
+  private Plugin addCompilerPlugin() {
+    // without version, Maven uses the one bound to the lifecycle by default
+    Plugin compilerPlugin = new Plugin();
+    compilerPlugin.setArtifactId(MAVEN_COMPILER_PLUGIN);
+    projectBuild().addPlugin(compilerPlugin);
+
+    return compilerPlugin;
+  }
+
+  private void addAnnotationProcessorPathToCompilerConfiguration(
+    JavaAnnotationProcessor annotationProcessor,
+    Xpp3Dom compilerConfiguration
+  ) {
+    Xpp3Dom annotationProcessorPaths = compilerConfiguration.getChild(ANNOTATION_PROCESSOR_PATHS_NODE);
+    if (annotationProcessorPaths == null) {
+      annotationProcessorPaths = new Xpp3Dom(ANNOTATION_PROCESSOR_PATHS_NODE);
+      compilerConfiguration.addChild(annotationProcessorPaths);
+    }
+    boolean alreadyPresent = Arrays.stream(annotationProcessorPaths.getChildren("path")).anyMatch(
+      path ->
+        annotationProcessor.id().groupId().get().equals(path.getChild(GROUP_ID).getValue())
+        && annotationProcessor.id().artifactId().get().equals(path.getChild(ARTIFACT_ID).getValue())
+    );
+    if (!alreadyPresent) {
+      annotationProcessorPaths.addChild(toAnnotationProcessorPath(annotationProcessor));
+    }
+  }
+
+  private Xpp3Dom toAnnotationProcessorPath(JavaAnnotationProcessor annotationProcessor) {
+    Xpp3Dom path = new Xpp3Dom("path");
+    Xpp3Dom groupId = new Xpp3Dom(GROUP_ID);
+    groupId.setValue(annotationProcessor.id().groupId().get());
+    path.addChild(groupId);
+    Xpp3Dom artifactId = new Xpp3Dom(ARTIFACT_ID);
+    artifactId.setValue(annotationProcessor.id().artifactId().get());
+    path.addChild(artifactId);
+    annotationProcessor
+      .version()
+      .map(VersionSlug::mavenVariable)
+      .ifPresent(versionValue -> {
+        Xpp3Dom version = new Xpp3Dom("version");
+        version.setValue(versionValue);
+        path.addChild(version);
+      });
+    return path;
+  }
+
+  @Override
+  public void handle(RemoveJavaAnnotationProcessor command) {
+    Assert.notNull(COMMAND, command);
+
+    List<Plugin> managedPlugins = Optional.ofNullable(pomModel.getBuild())
+      .map(Build::getPluginManagement)
+      .map(PluginManagement::getPlugins)
+      .orElse(List.of());
+    List<Plugin> directPlugins = Optional.ofNullable(pomModel.getBuild()).map(Build::getPlugins).orElse(List.of());
+    Optional<Plugin> compilerPlugin = findCompilerPlugin(managedPlugins).or(() -> findCompilerPlugin(directPlugins));
+
+    Optional<Xpp3Dom> compilerConfiguration = compilerPlugin.map(Plugin::getConfiguration).map(Xpp3Dom.class::cast);
+
+    Optional<Xpp3Dom> annotationProcessorPaths = compilerConfiguration.map(configuration ->
+      configuration.getChild(ANNOTATION_PROCESSOR_PATHS_NODE)
+    );
+
+    List<Xpp3Dom> pathsToRemove = annotationProcessorPaths
+      .map(paths -> paths.getChildren("path"))
+      .stream()
+      .flatMap(Stream::of)
+      .filter(matchesAnnotationProcessor(command.dependency()))
+      .toList();
+
+    annotationProcessorPaths.ifPresent(annotationProcessors -> {
+      pathsToRemove.forEach(annotationProcessors::removeChild);
+      if (annotationProcessors.getChildCount() == 0) {
+        compilerConfiguration.ifPresent(config -> config.removeChild(annotationProcessors));
+      }
+    });
+
+    writePom();
+  }
+
+  private Predicate<? super Xpp3Dom> matchesAnnotationProcessor(DependencyId dependency) {
+    return annotationProcessorPath -> {
+      String groupId = annotationProcessorPath.getChild(GROUP_ID).getValue();
+      String artifactId = annotationProcessorPath.getChild(ARTIFACT_ID).getValue();
+      return dependency.groupId().get().equals(groupId) && dependency.artifactId().get().equals(artifactId);
+    };
   }
 
   @Override

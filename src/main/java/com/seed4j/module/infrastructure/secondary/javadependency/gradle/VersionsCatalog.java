@@ -10,6 +10,7 @@ import com.seed4j.module.domain.gradleplugin.GradlePluginSlug;
 import com.seed4j.module.domain.javabuild.DependencySlug;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.DependencyId;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessor;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
@@ -27,6 +28,7 @@ public class VersionsCatalog {
   private static final String LIBRARIES_TOML_KEY = "libraries";
   private static final String PLUGINS_TOML_KEY = "plugins";
   private static final String VERSION_REF = "version.ref";
+  private static final String GROUP_ATTRIBUTE = "group";
 
   private final FileConfig tomlConfigFile;
 
@@ -73,7 +75,7 @@ public class VersionsCatalog {
 
   public void addLibrary(JavaDependency dependency) {
     Config libraryConfig = Config.inMemory();
-    libraryConfig.set("group", dependency.id().groupId().get());
+    libraryConfig.set(GROUP_ATTRIBUTE, dependency.id().groupId().get());
     libraryConfig.set("name", dependency.id().artifactId().get());
     dependency.version().ifPresent(versionSlug -> libraryConfig.set(VERSION_REF, versionSlug.slug()));
     String libraryEntryKey = libraryAlias(dependency);
@@ -81,11 +83,42 @@ public class VersionsCatalog {
     save();
   }
 
-  public void removeLibrary(DependencyId dependency) {
-    libraryEntriesMatchingDependency(dependency).forEach(libraryConfig -> {
-      tomlConfigFile.remove(List.of(LIBRARIES_TOML_KEY, libraryConfig.getKey()));
+  public String libraryAlias(JavaAnnotationProcessor annotationProcessor) {
+    return existingLibraryAlias(annotationProcessor.id()).orElseGet(() ->
+      StringUtils.uncapitalize(annotationProcessor.id().artifactId().get())
+    );
+  }
 
-      removeUnusedVersion(libraryConfig);
+  private Optional<String> existingLibraryAlias(DependencyId dependency) {
+    return libraryEntriesMatchingDependency(dependency).stream().map(Entry::getKey).findFirst();
+  }
+
+  public void addLibrary(JavaAnnotationProcessor annotationProcessor) {
+    Optional<String> existingAlias = existingLibraryAlias(annotationProcessor.id());
+    if (existingAlias.isPresent()) {
+      annotationProcessor
+        .version()
+        .ifPresent(versionSlug ->
+          tomlConfigFile.set(List.of(LIBRARIES_TOML_KEY, existingAlias.orElseThrow(), VERSION_REF), versionSlug.slug())
+        );
+    } else {
+      Config libraryConfig = Config.inMemory();
+      libraryConfig.set(GROUP_ATTRIBUTE, annotationProcessor.id().groupId().get());
+      libraryConfig.set("name", annotationProcessor.id().artifactId().get());
+      annotationProcessor.version().ifPresent(versionSlug -> libraryConfig.set(VERSION_REF, versionSlug.slug()));
+      tomlConfigFile.set(List.of(LIBRARIES_TOML_KEY, libraryAlias(annotationProcessor)), libraryConfig);
+    }
+    save();
+  }
+
+  public void removeLibrary(DependencySlug dependencySlug) {
+    Optional.ofNullable(tomlConfigFile.<Config>get(List.of(LIBRARIES_TOML_KEY, dependencySlug.slug()))).ifPresent(libraryConfig -> {
+      tomlConfigFile.remove(List.of(LIBRARIES_TOML_KEY, dependencySlug.slug()));
+      VersionSlug.of(libraryConfig.get(VERSION_REF)).ifPresent(versionSlug -> {
+        if (versionUnused(tomlConfigFile, versionSlug)) {
+          removeVersion(versionSlug);
+        }
+      });
     });
     save();
   }
@@ -103,14 +136,6 @@ public class VersionsCatalog {
       .filter(groupShouldMatch(dependency))
       .filter(nameShouldMatch(dependency))
       .toList();
-  }
-
-  private void removeUnusedVersion(Entry libraryConfig) {
-    VersionSlug.of(versionReference(libraryConfig)).ifPresent(versionSlug -> {
-      if (versionUnused(tomlConfigFile, versionSlug)) {
-        this.removeVersion(versionSlug);
-      }
-    });
   }
 
   private static String versionReference(Entry libraryConfig) {
@@ -132,8 +157,7 @@ public class VersionsCatalog {
 
   private static Predicate<Entry> versionShouldMatch(VersionSlug versionSlug) {
     return libraryConfig -> {
-      Object versionProperty = versionReference(libraryConfig);
-      return versionProperty.equals(versionSlug.slug());
+      return versionSlug.slug().equals(versionReference(libraryConfig));
     };
   }
 
@@ -144,7 +168,7 @@ public class VersionsCatalog {
 
   private static Predicate<Entry> groupShouldMatch(DependencyId dependency) {
     return libraryConfig -> {
-      Object groupProperty = ((Config) libraryConfig.getValue()).get("group");
+      Object groupProperty = ((Config) libraryConfig.getValue()).get(GROUP_ATTRIBUTE);
       return dependency.groupId().get().equals(groupProperty);
     };
   }

@@ -146,6 +146,8 @@ public final class Seed4JModulesFixture {
       .addDependencyManagement(springBootDependencyManagement())
       .addDependencyManagement(springBootDefaultTypeDependencyManagement())
       .removeDependencyManagement(dependencyId("org.springdoc", "springdoc-openapi-ui"))
+      .addAnnotationProcessorDependency(hibernateAnnotationProcessor())
+      .removeAnnotationProcessorDependency(googleAutoServiceAnnotationProcessor().id())
       .and()
     .mavenPlugins()
       .pluginManagement(mavenEnforcerPluginManagement())
@@ -325,6 +327,14 @@ public final class Seed4JModulesFixture {
       .versionSlug("json-web-token")
       .addExclusion(DependencyId.of(new GroupId("com.fasterxml.jackson.core"), new ArtifactId("jackson-databind")))
       .build();
+  }
+
+  public static JavaDependency googleAutoServiceAnnotationProcessor() {
+    return javaDependency().groupId("com.google.auto.service").artifactId("auto-service").versionSlug("google-auto-service").build();
+  }
+
+  public static JavaDependency hibernateAnnotationProcessor() {
+    return javaDependency().groupId("org.hibernate.orm").artifactId("hibernate-processor").build();
   }
 
   public static JavaBuildCommands javaDependenciesCommands() {

@@ -15,7 +15,7 @@
   <properties>
     <seed4j.version>@project.version@</seed4j.version>
     <!-- Dependencies -->
-    <jacoco.version>0.8.13</jacoco.version>
+    <jacoco.version>0.8.14</jacoco.version>
     <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
     <spring-boot.version>3.5.6</spring-boot.version>
     <spring-cloud.version>2025.0.0</spring-cloud.version>

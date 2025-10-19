@@ -16,5 +16,5 @@ Feature: Liquibase
     When I apply "liquibase-linter" module to default project with maven file
       | packageName | com.seed4j.growth |
     Then I should have "<artifactId>liquibase-linter-maven-plugin</artifactId>" in "pom.xml"
-    Then I should have files in "src/test/resources/"
+    Then I should have files in "src/test/resources/config/liquibase"
       | liquibase-linter.jsonc |

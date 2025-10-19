@@ -93,7 +93,7 @@ public class LiquibaseModuleFactory {
         .pluginManagement(liquibaseLinterMavenPluginManagement())
         .and()
       .files()
-        .add(SOURCE.append("liquibase-linter.jsonc"), toSrcTestResources().append("liquibase-linter.jsonc"))
+        .add(SOURCE.append("liquibase-linter.jsonc"), toSrcTestResources().append("config").append(LIQUIBASE).append("liquibase-linter.jsonc"))
         .and()
       .build();
     // @formatter:on
@@ -105,10 +105,10 @@ public class LiquibaseModuleFactory {
       .configuration(
         """
         <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
-        <configurationFile>src/test/resources/liquibase-linter.jsonc</configurationFile>
+        <configurationFile>src/test/resources/config/liquibase/liquibase-linter.jsonc</configurationFile>
         """
       )
-      .addExecution(pluginExecution().goals("lint"))
+      .addExecution(pluginExecution().goals("check"))
       .build();
   }
 

@@ -16,14 +16,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import org.apache.maven.model.Build;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.DependencyManagement;
 import org.apache.maven.model.Model;
+import org.apache.maven.model.Plugin;
+import org.apache.maven.model.PluginContainer;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.springframework.stereotype.Repository;
 
@@ -46,8 +52,9 @@ public class MavenProjectJavaDependenciesRepository implements Seed4JProjectFold
 
       return ProjectJavaDependencies.builder()
         .versions(extractVersions(pomContent))
-        .dependenciesManagements(extractDependencyManagement(pomContent))
-        .dependencies(extractDependencies(pomContent));
+        .dependenciesManagement(extractDependencyManagement(pomContent))
+        .dependencies(extractDependencies(pomContent))
+        .annotationProcessingDependencies(extractAnnotationProcessingDependencies(pomContent));
     } catch (IOException | XmlPullParserException e) {
       throw GeneratorException.technicalError("Error reading pom file: " + e.getMessage(), e);
     }
@@ -89,6 +96,54 @@ public class MavenProjectJavaDependenciesRepository implements Seed4JProjectFold
     List<JavaDependency> mavenDependencies = pomContent.getDependencies().stream().map(toJavaDependency()).toList();
 
     return new JavaDependencies(mavenDependencies);
+  }
+
+  private JavaDependencies extractAnnotationProcessingDependencies(Model pomContent) {
+    Optional<Plugin> compilerPlugin = Optional.ofNullable(pomContent.getBuild())
+      .map(Build::getPluginManagement)
+      .map(PluginContainer::getPlugins)
+      .flatMap(this::findCompilerPlugin)
+      .or(() ->
+        Optional.ofNullable(pomContent.getBuild())
+          .map(Build::getPluginManagement)
+          .map(PluginContainer::getPlugins)
+          .flatMap(this::findCompilerPlugin)
+      );
+
+    List<JavaDependency> dependencies = compilerPlugin
+      .map(Plugin::getConfiguration)
+      .filter(Xpp3Dom.class::isInstance)
+      .map(Xpp3Dom.class::cast)
+      .map(config -> config.getChild("annotationProcessorPaths"))
+      .map(annotationProcessorPaths -> annotationProcessorPaths.getChildren("path"))
+      .stream()
+      .flatMap(Arrays::stream)
+      .map(annotationProcessorPathToDependency())
+      .toList();
+
+    return new JavaDependencies(dependencies);
+  }
+
+  private Function<? super Xpp3Dom, JavaDependency> annotationProcessorPathToDependency() {
+    return domPath -> {
+      String groupId = domPath.getChild("groupId").getValue();
+      String artifactId = domPath.getChild("artifactId").getValue();
+      String version = domPath.getChild("version") != null ? domPath.getChild("version").getValue() : null;
+
+      return JavaDependency.builder()
+        .groupId(groupId)
+        .artifactId(artifactId)
+        .versionSlug(version)
+        .scope(JavaDependencyScope.COMPILE)
+        .build();
+    };
+  }
+
+  private Optional<Plugin> findCompilerPlugin(List<Plugin> plugins) {
+    return plugins
+      .stream()
+      .filter(plugin -> plugin.getArtifactId().equals("maven-compiler-plugin"))
+      .findFirst();
   }
 
   private Function<Dependency, JavaDependency> toJavaDependency() {

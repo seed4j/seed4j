@@ -1,8 +1,13 @@
 package com.seed4j.module.domain.javadependency;
 
-import static com.seed4j.module.domain.Seed4JModule.*;
-import static com.seed4j.module.domain.Seed4JModulesFixture.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.currentJavaDependenciesVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.defaultVersionDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.optionalTestDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.optionalTestDependencyBuilder;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyManagement;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootVersion;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
@@ -41,8 +46,9 @@ class DirectJavaDependencyTest {
   void shouldNotUpdateExistingDefaultVersionDependency() {
     ProjectJavaDependencies projectJavaDependencies = ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(null)
-      .dependencies(new JavaDependencies(List.of(defaultVersionDependency())));
+      .dependenciesManagement(null)
+      .dependencies(new JavaDependencies(List.of(defaultVersionDependency())))
+      .annotationProcessingDependencies(null);
 
     JavaBuildCommands commands = changes().projectDependencies(projectJavaDependencies).build();
 
@@ -53,8 +59,9 @@ class DirectJavaDependencyTest {
   void shouldUpgradeDependencyOptionality() {
     ProjectJavaDependencies projectJavaDependencies = ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(null)
-      .dependencies(new JavaDependencies(List.of(optionalSpringBootDependency())));
+      .dependenciesManagement(null)
+      .dependencies(new JavaDependencies(List.of(optionalSpringBootDependency())))
+      .annotationProcessingDependencies(null);
 
     JavaBuildCommands commands = changes().projectDependencies(projectJavaDependencies).build();
 
@@ -68,8 +75,9 @@ class DirectJavaDependencyTest {
   void shouldNotDowngradeDependencyOptionality() {
     ProjectJavaDependencies projectJavaDependencies = ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(null)
-      .dependencies(new JavaDependencies(List.of(defaultVersionDependency())));
+      .dependenciesManagement(null)
+      .dependencies(new JavaDependencies(List.of(defaultVersionDependency())))
+      .annotationProcessingDependencies(null);
 
     JavaBuildCommands commands = changes().dependency(optionalSpringBootDependency()).projectDependencies(projectJavaDependencies).build();
 
@@ -142,8 +150,9 @@ class DirectJavaDependencyTest {
   private ProjectJavaDependencies projectDependenciesWithoutJunitVersion() {
     return ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(projectDependenciesManagement())
-      .dependencies(noJunitVersionInCurrentProject());
+      .dependenciesManagement(projectDependenciesManagement())
+      .dependencies(noJunitVersionInCurrentProject())
+      .annotationProcessingDependencies(null);
   }
 
   private JavaDependencies noJunitVersionInCurrentProject() {
@@ -164,7 +173,11 @@ class DirectJavaDependencyTest {
   }
 
   private ProjectJavaDependencies projectJavaDependencies() {
-    return ProjectJavaDependencies.builder().versions(projectVersions()).dependenciesManagements(null).dependencies(projectDependencies());
+    return ProjectJavaDependencies.builder()
+      .versions(projectVersions())
+      .dependenciesManagement(null)
+      .dependencies(projectDependencies())
+      .annotationProcessingDependencies(null);
   }
 
   private ProjectJavaDependenciesVersions projectVersions() {

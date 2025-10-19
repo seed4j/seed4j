@@ -61,6 +61,10 @@ bundles = {}
 		[libraries.cassandra-unit.version]
 			ref = "cassandraunit"
 
+	[libraries.hibernate-processor]
+		name = "hibernate-processor"
+		group = "org.hibernate.orm"
+
 	[libraries.gradle-git-properties]
 		name = "gradle-git-properties"
 		group = "com.gorylenko.gradle-git-properties"

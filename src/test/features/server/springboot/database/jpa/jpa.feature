@@ -107,3 +107,8 @@ Feature: JPA modules
       | baseName                  | STRING  | true      |
       | indentSize                | INTEGER | false     |
       | springConfigurationFormat | STRING  | false     |
+
+  Scenario: Should apply JPA metamodel generator module
+    When I apply "jpa-metamodel-generator" module to default project with maven file
+      | packageName | com.seed4j.growth |
+    Then I should have "hibernate-jpamodelgen" in "pom.xml"

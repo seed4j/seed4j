@@ -16,6 +16,7 @@ import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
 import static com.seed4j.module.domain.Seed4JModule.gradleCorePlugin;
 import static com.seed4j.module.domain.Seed4JModule.gradleProfilePlugin;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaAnnotationProcessorDependency;
 import static com.seed4j.module.domain.Seed4JModule.javaDependency;
 import static com.seed4j.module.domain.Seed4JModule.lineBeforeRegex;
 import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
@@ -53,6 +54,7 @@ import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.DependencyId;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency;
 import com.seed4j.module.domain.javadependency.JavaDependenciesVersions;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency.JavaDependencyOptionalValueBuilder;
@@ -146,6 +148,10 @@ public final class Seed4JModulesFixture {
       .addDependencyManagement(springBootDependencyManagement())
       .addDependencyManagement(springBootDefaultTypeDependencyManagement())
       .removeDependencyManagement(dependencyId("org.springdoc", "springdoc-openapi-ui"))
+      .and()
+    .javaCompiler()
+      .addAnnotationProcessor(hibernateAnnotationProcessor())
+      .removeAnnotationProcessor(googleAutoServiceAnnotationProcessor().id())
       .and()
     .mavenPlugins()
       .pluginManagement(mavenEnforcerPluginManagement())
@@ -325,6 +331,18 @@ public final class Seed4JModulesFixture {
       .versionSlug("json-web-token")
       .addExclusion(DependencyId.of(new GroupId("com.fasterxml.jackson.core"), new ArtifactId("jackson-databind")))
       .build();
+  }
+
+  public static JavaAnnotationProcessorDependency googleAutoServiceAnnotationProcessor() {
+    return javaAnnotationProcessorDependency()
+      .groupId("com.google.auto.service")
+      .artifactId("auto-service")
+      .versionSlug("google-auto-service")
+      .build();
+  }
+
+  public static JavaAnnotationProcessorDependency hibernateAnnotationProcessor() {
+    return javaAnnotationProcessorDependency().groupId("org.hibernate.orm").artifactId("hibernate-processor").build();
   }
 
   public static JavaBuildCommands javaDependenciesCommands() {

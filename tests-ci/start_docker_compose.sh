@@ -18,8 +18,8 @@ fi
 cd "$FOLDER_APP"
 if [ -a docker-compose.yml ]; then
   docker compose up -d
-  echo "*** wait 20sec"
-  sleep 20
+  echo "*** wait 40sec"
+  sleep 40
   docker ps -a
 else
   echo "No 'docker-compose.yml' file found — this application does not require containerized components to be launched."

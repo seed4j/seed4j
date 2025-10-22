@@ -25,7 +25,7 @@
     "concurrently": "9.2.1",
     "cpy-cli": "6.0.0",
     "cssnano": "7.1.1",
-    "cypress": "15.4.0",
+    "cypress": "15.5.0",
     "eslint": "9.38.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-cypress": "5.2.0",

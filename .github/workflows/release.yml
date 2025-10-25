@@ -39,7 +39,7 @@ jobs:
           rm target/*${ARTIFACT_VERSION}-tests.jar
           mv target/seed4j-${ARTIFACT_VERSION}-exec.jar target/seed4j-${ARTIFACT_VERSION}.jar
       - name: 'Artifact: upload JAR'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: seed4j-jar
           path: '${{ github.workspace }}/target/*.jar'
@@ -57,7 +57,7 @@ jobs:
       - name: 'Setup: checkout project'
         uses: actions/checkout@v5
       - name: 'Artifact: download JAR'
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: seed4j-jar
           path: ./target/

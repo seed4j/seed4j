@@ -20,12 +20,7 @@ export default defineConfig({
   test: {
     include: ['src/test/webapp/unit/**/*.spec.ts'],
     logHeapUsage: true,
-    poolOptions: {
-      threads: {
-        minThreads: 1,
-        maxThreads: 2,
-      },
-    },
+    maxWorkers: 2,
     environment: 'jsdom',
     cache: false,
     reporters: ['default', 'vitest-sonar-reporter'],
@@ -33,7 +28,7 @@ export default defineConfig({
       'vitest-sonar-reporter': 'target/test-results/TESTS-results-sonar.xml',
     },
     coverage: {
-      all: false,
+      include: ['src/main/webapp/**/*.{ts,vue}'],
       provider: 'istanbul',
       reportsDirectory: 'target/frontend-coverage/unit-tests/',
       reporter: ['html', 'json', 'text-summary'],

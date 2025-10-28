@@ -16,7 +16,7 @@
     <seed4j.version>@project.version@</seed4j.version>
     <!-- Dependencies -->
     <jacoco.version>0.8.14</jacoco.version>
-    <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
+    <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
     <spring-boot.version>3.5.7</spring-boot.version>
     <spring-cloud.version>2025.0.0</spring-cloud.version>
     <spring-cloud-netflix-eureka-client.version>4.3.0</spring-cloud-netflix-eureka-client.version>

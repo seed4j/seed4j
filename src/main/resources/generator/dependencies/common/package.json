@@ -13,7 +13,7 @@
     "@sonar/scan": "4.3.2",
     "@tailwindcss/vite": "4.1.16",
     "@tikui/core": "7.0.0",
-    "@tsconfig/recommended": "1.0.10",
+    "@tsconfig/recommended": "1.0.11",
     "@types/jest": "29.5.14",
     "@types/node": "24.9.2",
     "@typescript-eslint/eslint-plugin": "8.46.2",

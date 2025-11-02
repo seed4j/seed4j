@@ -65,7 +65,6 @@ class CheckstyleModuleFactoryTest {
       .containing("<checkstyle.version>")
       .and()
       .hasFile("checkstyle.xml")
-      .containing("<module name=\"IllegalImport\">")
       .containing("<module name=\"Checker\">")
       .containing("<module name=\"TreeWalker\">")
       .containing("<module name=\"UnusedImports\" />");

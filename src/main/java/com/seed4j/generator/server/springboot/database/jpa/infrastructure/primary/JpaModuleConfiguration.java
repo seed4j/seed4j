@@ -45,7 +45,7 @@ class JpaModuleConfiguration {
   }
 
   @Bean
-  Seed4JModuleResource jpaMmySQLModule(JpaApplicationService mySQL) {
+  Seed4JModuleResource jpaMySQLModule(JpaApplicationService mySQL) {
     return Seed4JModuleResource.builder()
       .slug(JPA_MYSQL)
       .propertiesDefinition(properties())

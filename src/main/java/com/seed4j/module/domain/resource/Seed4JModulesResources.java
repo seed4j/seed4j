@@ -2,6 +2,7 @@ package com.seed4j.module.domain.resource;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModuleSlug;
+import com.seed4j.module.domain.landscape.Seed4JLandscapeElementType;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
@@ -78,13 +79,54 @@ public class Seed4JModulesResources {
   }
 
   private Collection<String> findNestedDependencies(Collection<Seed4JModuleResource> modulesResources, Seed4JHiddenModules hiddenModules) {
-    return findNestedDependenciesBySlugs(hiddenModules.slugs(), modulesResources);
+    Collection<String> moduleDependencies = findNestedDependenciesBySlugs(hiddenModules.slugs(), modulesResources);
+    Collection<String> featureDependencies = findNestedFeatureDependencies(modulesResources, moduleDependencies);
+    return Stream.concat(moduleDependencies.stream(), featureDependencies.stream()).toList();
   }
 
   private Collection<String> findNestedDependenciesBySlugs(Collection<String> slugs, Collection<Seed4JModuleResource> modulesResources) {
     return slugs
       .stream()
       .flatMap(slug -> allSlugsNestedDependenciesOf(slug, modulesResources))
+      .toList();
+  }
+
+  private Collection<String> findNestedFeatureDependencies(
+    Collection<Seed4JModuleResource> modulesResources,
+    Collection<String> hiddenModuleSlugs
+  ) {
+    Collection<String> hiddenFeatures = findFeaturesOfHiddenModules(modulesResources, hiddenModuleSlugs);
+    return findModulesDependingOnFeatures(modulesResources, hiddenFeatures);
+  }
+
+  private Collection<String> findFeaturesOfHiddenModules(
+    Collection<Seed4JModuleResource> modulesResources,
+    Collection<String> hiddenModuleSlugs
+  ) {
+    return modulesResources
+      .stream()
+      .filter(resource -> hiddenModuleSlugs.contains(resource.slug().get()))
+      .filter(resource -> resource.organization().feature().isPresent())
+      .map(resource -> resource.organization().feature().get().get())
+      .toList();
+  }
+
+  private Collection<String> findModulesDependingOnFeatures(
+    Collection<Seed4JModuleResource> modulesResources,
+    Collection<String> hiddenFeatures
+  ) {
+    return modulesResources
+      .stream()
+      .filter(resource ->
+        resource
+          .organization()
+          .dependencies()
+          .stream()
+          .anyMatch(
+            dependency -> dependency.type() == Seed4JLandscapeElementType.FEATURE && hiddenFeatures.contains(dependency.slug().get())
+          )
+      )
+      .map(resource -> resource.slug().get())
       .toList();
   }
 

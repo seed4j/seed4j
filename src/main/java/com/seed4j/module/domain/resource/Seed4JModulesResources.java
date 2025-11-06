@@ -132,7 +132,7 @@ public class Seed4JModulesResources {
       .stream()
       .filter(resource -> hiddenModuleSlugs.contains(resource.slug().get()))
       .filter(resource -> resource.organization().feature().isPresent())
-      .map(resource -> resource.organization().feature().get().get())
+      .map(resource -> resource.organization().feature().orElseThrow().get())
       .toList();
   }
 

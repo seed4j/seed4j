@@ -96,7 +96,21 @@ public class Seed4JModulesResources {
     Collection<String> hiddenModuleSlugs
   ) {
     Collection<String> hiddenFeatures = findFeaturesOfHiddenModules(modulesResources, hiddenModuleSlugs);
-    return findModulesDependingOnFeatures(modulesResources, hiddenFeatures);
+    return findModulesDependingOnFeaturesRecursive(modulesResources, hiddenFeatures);
+  }
+
+  private Collection<String> findModulesDependingOnFeaturesRecursive(
+    Collection<Seed4JModuleResource> modulesResources,
+    Collection<String> hiddenFeatures
+  ) {
+    Collection<String> modulesDependingOnFeatures = findModulesDependingOnFeatures(modulesResources, hiddenFeatures);
+    if (modulesDependingOnFeatures.isEmpty()) {
+      return modulesDependingOnFeatures;
+    }
+
+    Collection<String> featuresOfHiddenModules = findFeaturesOfHiddenModules(modulesResources, modulesDependingOnFeatures);
+    Collection<String> nestedDependencies = findModulesDependingOnFeaturesRecursive(modulesResources, featuresOfHiddenModules);
+    return Stream.concat(modulesDependingOnFeatures.stream(), nestedDependencies.stream()).toList();
   }
 
   private Collection<String> findFeaturesOfHiddenModules(

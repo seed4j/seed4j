@@ -1,4 +1,4 @@
-FROM openjdk:25-slim AS build
+FROM eclipse-temurin:25 AS build
 COPY . /code/app/
 WORKDIR /code/app/
 RUN chmod +x mvnw \
@@ -9,7 +9,7 @@ RUN chmod +x mvnw \
     -Ddevelocity.cache.remote.enabled=false \
     && mv /code/app/target/*-exec.jar /code/seed4j.jar
 
-FROM openjdk:25-slim
+FROM eclipse-temurin:25-jre
 COPY --from=build /code/*.jar /code/
 RUN \
     # configure the "seed4j" user

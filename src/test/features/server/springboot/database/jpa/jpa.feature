@@ -111,4 +111,4 @@ Feature: JPA modules
   Scenario: Should apply JPA metamodel generator module
     When I apply "jpa-metamodel-generator" module to default project with maven file
       | packageName | com.seed4j.growth |
-    Then I should have "hibernate-jpamodelgen" in "pom.xml"
+    Then I should have "hibernate-processor" in "pom.xml"

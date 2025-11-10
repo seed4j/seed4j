@@ -3,6 +3,7 @@ package com.seed4j.generator.server.springboot.database.jpa.domain;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
 import static com.seed4j.module.domain.Seed4JModule.propertyValue;
@@ -89,6 +90,18 @@ public class JpaModuleFactory {
       .springTestLogger("org.hibernate.validator", LogLevel.WARN)
       .springTestLogger(ORG_HIBERNATE, LogLevel.WARN)
       .springTestLogger("org.hibernate.ejb.HibernatePersistence", LogLevel.OFF);
+    // @formatter:on
+  }
+
+  public Seed4JModule buildMetaModelGenerator(Seed4JModuleProperties properties) {
+    Assert.notNull("properties", properties);
+
+    // @formatter:off
+    return moduleBuilder(properties)
+      .javaDependencies()
+        .addAnnotationProcessorDependency(javaDependency().groupId(ORG_HIBERNATE).artifactId("hibernate-jpamodelgen").build())
+        .and()
+      .build();
     // @formatter:on
   }
 }

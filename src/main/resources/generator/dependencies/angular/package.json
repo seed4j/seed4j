@@ -6,11 +6,11 @@
   "dependencies": {
     "@angular-builders/jest": "20.0.0",
     "@angular/build": "20.3.9",
-    "@angular/cdk": "20.2.11",
+    "@angular/cdk": "20.2.12",
     "@angular/cli": "20.3.9",
     "@angular/compiler-cli": "20.3.10",
     "@angular/core": "20.3.10",
-    "@angular/material": "20.2.11",
+    "@angular/material": "20.2.12",
     "@jsverse/transloco": "8.1.0",
     "@tailwindcss/postcss": "4.1.16",
     "angular-eslint": "20.5.1",

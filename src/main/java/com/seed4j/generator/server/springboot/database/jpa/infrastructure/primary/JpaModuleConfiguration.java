@@ -6,6 +6,7 @@ import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.DATASOURCE_MSSQ
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.DATASOURCE_MYSQL;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.DATASOURCE_POSTGRESQL;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.JPA_MARIADB;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.JPA_METAMODEL_GENERATOR;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.JPA_MSSQL;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.JPA_MYSQL;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.JPA_POSTGRESQL;
@@ -73,6 +74,17 @@ class JpaModuleConfiguration {
       .addProjectBaseName()
       .addSpringConfigurationFormat()
       .build();
+  }
+
+  @Bean
+  Seed4JModuleResource metaModelGeneratorModule(JpaApplicationService jpa) {
+    return Seed4JModuleResource.builder()
+      .slug(JPA_METAMODEL_GENERATOR)
+      .propertiesDefinition(Seed4JModulePropertiesDefinition.EMPTY)
+      .apiDoc(API_DOC_GROUP, "Add JPA metamodel generator to project")
+      .organization(Seed4JModuleOrganization.builder().addDependency(JPA_PERSISTENCE).build())
+      .tags(tags())
+      .factory(jpa::buildMetaModelGenerator);
   }
 
   private static String[] tags() {

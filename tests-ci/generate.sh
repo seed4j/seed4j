@@ -135,7 +135,6 @@ elif [[ $application == fullapp* ]]; then
     "infinitest-filters" \
     "pagination-domain" \
     "rest-pagination" \
-    "jpa-metamodel-generator" \
     "jpa-pagination" \
     "spring-boot-async" \
     "spring-boot-devtools" \
@@ -168,6 +167,7 @@ elif [[ $application == fullapp* ]]; then
   apply_modules \
     "datasource-postgresql" \
     "jpa-postgresql" \
+    "jpa-metamodel-generator" \
     "liquibase" \
     "liquibase-linter" \
     "liquibase-async"

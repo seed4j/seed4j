@@ -1,6 +1,6 @@
 [versions]
 checkstyle = "10.21.0"
-jib = "3.4.5"
+jib = "3.5.0"
 git-properties = "2.5.3"
 protobuf-plugin = "0.9.5"
 sonarqube = "6.2.0.5505"

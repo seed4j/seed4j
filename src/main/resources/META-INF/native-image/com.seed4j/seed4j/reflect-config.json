@@ -1,0 +1,13 @@
+[
+  {
+    "name": "org.springdoc.core.providers.SpringWebProvider$$SpringCGLIB$$0",
+    "fields": [
+      {
+        "name": "CGLIB$FACTORY_DATA"
+      },
+      {
+        "name": "CGLIB$CALLBACK_FILTER"
+      }
+    ]
+  }
+]

@@ -18,13 +18,20 @@ import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.containers.MongoDBContainer;
+import org.testcontainers.mongodb.MongoDBContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @IntegrationTest
 @EnabledOnOs(OS.LINUX)
 @ActiveProfiles("mongodb")
+@Import(MongoDBStatisticsRepositoryIT.TestMongoConfig.class)
 class MongoDBStatisticsRepositoryIT {
 
   private static MongoDBContainer mongoDbContainer;
@@ -61,6 +68,15 @@ class MongoDBStatisticsRepositoryIT {
     mongoDbContainer.start();
 
     System.setProperty("TEST_MONGODB_URI", mongoDbContainer.getReplicaSetUrl());
+  }
+
+  @TestConfiguration
+  static class TestMongoConfig {
+
+    @Bean
+    public MongoDatabaseFactory mongoDbFactory(@Value("${spring.data.mongodb.uri}") String connectionString) {
+      return new SimpleMongoClientDatabaseFactory(connectionString + "?uuidRepresentation=STANDARD");
+    }
   }
 
   @AfterAll

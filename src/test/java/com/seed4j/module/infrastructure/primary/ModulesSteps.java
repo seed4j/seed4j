@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 import net.minidev.json.JSONArray;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.SoftAssertions;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.http.*;
 
 public class ModulesSteps {

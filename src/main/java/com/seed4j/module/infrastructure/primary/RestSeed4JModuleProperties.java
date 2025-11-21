@@ -16,11 +16,11 @@ class RestSeed4JModuleProperties {
 
   RestSeed4JModuleProperties(
     @JsonProperty("projectFolder") String projectFolder,
-    @JsonProperty("commit") boolean commit,
+    @JsonProperty("commit") Boolean commit,
     @JsonProperty("parameters") Map<String, Object> parameters
   ) {
     this.projectFolder = projectFolder;
-    this.commit = commit;
+    this.commit = Boolean.TRUE.equals(commit);
     this.parameters = parameters;
   }
 

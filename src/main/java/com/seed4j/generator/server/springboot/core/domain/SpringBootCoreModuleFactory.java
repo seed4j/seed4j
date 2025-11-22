@@ -73,7 +73,7 @@ public class SpringBootCoreModuleFactory {
         .removeDependency(dependencyId(MOCKITO_GROUP, "mockito-junit-jupiter"))
         .addDependencyManagement(springBootBom())
         .addDependency(SPRING_BOOT_GROUP, artifactId("spring-boot-starter"))
-        .addDependency(springBootConfigurationProcessor())
+        .addAnnotationProcessorDependency(springBootConfigurationProcessor())
         .addDependency(groupId("org.apache.commons"), artifactId("commons-lang3"))
         .addDependency(springBootTest())
         .and()

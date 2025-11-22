@@ -66,12 +66,14 @@ class SpringBootCoreModuleFactoryTest {
           """
         )
         .containing(
+          // language=xml
           """
-              <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-configuration-processor</artifactId>
-                <optional>true</optional>
-              </dependency>
+                    <annotationProcessorPaths>
+                      <path>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-configuration-processor</artifactId>
+                      </path>
+                    </annotationProcessorPaths>
           """
         )
         .containing(

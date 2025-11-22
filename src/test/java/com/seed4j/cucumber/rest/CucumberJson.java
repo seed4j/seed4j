@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.IOException;
 import java.util.Arrays;
@@ -22,7 +21,6 @@ final class CucumberJson {
     return JsonMapper.builder()
       .serializationInclusion(JsonInclude.Include.NON_NULL)
       .addModule(new JavaTimeModule())
-      .addModules(new Jdk8Module())
       .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
       .disable(DeserializationFeature.FAIL_ON_MISSING_EXTERNAL_TYPE_ID_PROPERTY)
       .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)

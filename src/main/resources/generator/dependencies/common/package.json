@@ -18,7 +18,7 @@
     "@types/node": "24.10.1",
     "@typescript-eslint/eslint-plugin": "8.46.3",
     "@typescript-eslint/parser": "8.46.3",
-    "@vitest/coverage-istanbul": "4.0.7",
+    "@vitest/coverage-istanbul": "4.0.13",
     "arch-unit-ts": "1.0.9",
     "autoprefixer": "10.4.22",
     "browser-sync": "3.0.4",
@@ -70,7 +70,7 @@
     "vite": "7.2.4",
     "vite-plugin-istanbul": "7.2.0",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "4.0.7",
+    "vitest": "4.0.13",
     "vitest-sonar-reporter": "3.0.0",
     "wait-on": "9.0.1"
   }

@@ -104,7 +104,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 @SuppressWarnings("java:S6539")
 public final class Seed4JModule {
@@ -291,7 +291,7 @@ public final class Seed4JModule {
   }
 
   public static Seed4JFileMatcher filesWithExtension(String extension) {
-    return path -> StringUtils.endsWithIgnoreCase(path.get(), "." + extension);
+    return path -> Strings.CI.endsWith(path.get(), "." + extension);
   }
 
   public static GroupId groupId(String groupId) {

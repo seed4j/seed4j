@@ -20,7 +20,7 @@ final class CucumberJson {
 
   public static ObjectMapper jsonMapper() {
     return JsonMapper.builder()
-      .serializationInclusion(JsonInclude.Include.NON_NULL)
+      .defaultPropertyInclusion(JsonInclude.Value.construct(JsonInclude.Include.NON_NULL, JsonInclude.Include.NON_NULL))
       .addModule(new JavaTimeModule())
       .addModules(new Jdk8Module())
       .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)

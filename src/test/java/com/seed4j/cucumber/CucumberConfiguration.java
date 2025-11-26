@@ -8,9 +8,10 @@ import io.cucumber.spring.CucumberContextConfiguration;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -22,6 +23,7 @@ import org.springframework.web.client.RestTemplate;
 
 @ActiveProfiles("test")
 @CucumberContextConfiguration
+@AutoConfigureTestRestTemplate
 @SpringBootTest(classes = { Seed4JApp.class, FakedFileSystemProjectFilesConfiguration.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class CucumberConfiguration {
 

@@ -5,18 +5,17 @@ import static org.assertj.core.api.InstanceOfAssertFactories.*;
 
 import com.seed4j.UnitTest;
 import com.zaxxer.hikari.HikariDataSource;
-import java.net.URISyntaxException;
 import java.util.Properties;
 import javax.sql.DataSource;
 import liquibase.integration.spring.SpringLiquibase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.autoconfigure.liquibase.DataSourceClosingSpringLiquibase;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.core.io.PathResource;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
+import org.springframework.boot.liquibase.autoconfigure.DataSourceClosingSpringLiquibase;
+import org.springframework.boot.liquibase.autoconfigure.LiquibaseProperties;
+import org.springframework.core.io.ClassPathResource;
 
 @UnitTest
 class SpringLiquibaseUtilTest {
@@ -100,14 +99,8 @@ class SpringLiquibaseUtilTest {
   }
 
   private static Properties testProperties() {
-    try {
-      var yaml = new YamlPropertiesFactoryBean();
-      yaml.setResources(
-        new PathResource(SpringLiquibaseUtilTest.class.getClassLoader().getResource("config/application-postgresql.yml").toURI())
-      );
-      return yaml.getObject();
-    } catch (URISyntaxException exception) {
-      throw new Error(exception);
-    }
+    var yaml = new YamlPropertiesFactoryBean();
+    yaml.setResources(new ClassPathResource("config/application-postgresql.yml"));
+    return yaml.getObject();
   }
 }

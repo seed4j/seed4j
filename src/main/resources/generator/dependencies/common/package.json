@@ -72,6 +72,6 @@
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "4.0.7",
     "vitest-sonar-reporter": "3.0.0",
-    "wait-on": "9.0.1"
+    "wait-on": "9.0.3"
   }
 }

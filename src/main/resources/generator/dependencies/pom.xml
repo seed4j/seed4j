@@ -31,7 +31,7 @@
     <ehcache.version>3.11.1</ehcache.version>
     <thymeleaf-layout-dialect.version>3.4.0</thymeleaf-layout-dialect.version>
     <htmx-webjars.version>2.0.8</htmx-webjars.version>
-    <alpinejs-webjars.version>3.15.1</alpinejs-webjars.version>
+    <alpinejs-webjars.version>3.15.2</alpinejs-webjars.version>
     <protobuf.version>4.33.1</protobuf.version>
     <proto-backwards-compatibility.version>1.0.7</proto-backwards-compatibility.version>
     <jmolecules-bom.version>2023.3.4</jmolecules-bom.version>

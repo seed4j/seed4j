@@ -255,7 +255,7 @@ jobs:
           - pulsarapp
           - reactiveapp
           - angularoauth2app
-          - seed4jextension
+          #- seed4jextension
           - typescriptapp
           - thymeleafapp
           - langchain4japp

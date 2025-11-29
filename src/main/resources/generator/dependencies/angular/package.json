@@ -11,7 +11,7 @@
     "@angular/compiler-cli": "20.3.10",
     "@angular/core": "20.3.10",
     "@angular/material": "20.2.14",
-    "@jsverse/transloco": "8.1.0",
+    "@jsverse/transloco": "8.2.0",
     "@tailwindcss/postcss": "4.1.17",
     "angular-eslint": "20.7.0",
     "jest-environment-jsdom": "29.7.0",

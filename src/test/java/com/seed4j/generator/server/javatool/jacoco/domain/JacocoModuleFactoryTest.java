@@ -1,6 +1,8 @@
 package com.seed4j.generator.server.javatool.jacoco.domain;
 
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.gradleBuildFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
@@ -104,7 +106,9 @@ class JacocoModuleFactoryTest {
 
     @Test
     void shouldBuildJacocoWithMinCoverageCheckModule() {
-      Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+      Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+        .basePackage("com.seed4j.example")
+        .build();
 
       Seed4JModule module = factory.buildJacocoWithMinCoverageCheckModule(properties);
 
@@ -119,6 +123,12 @@ class JacocoModuleFactoryTest {
                         </goals>
                         <configuration>
                           <dataFile>target/jacoco/allTest.exec</dataFile>
+                          <includes>
+                            <include>com/seed4j/example/**</include>
+                          </includes>
+                          <excludes>
+                            <exclude>com/seed4j/example/**/infrastructure/secondary/**/*Entity_.class</exclude>
+                          </excludes>
                           <rules>
                             <rule>
                               <element>CLASS</element>

@@ -1,16 +1,51 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 
-import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.Seed4JModule.*;
-import static com.seed4j.module.domain.Seed4JModulesFixture.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.seed4j.TestFileUtils.contentNormalizingNewLines;
+import static com.seed4j.TestFileUtils.tmpDirForTest;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.dependencyId;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.asciidoctorPlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleGradlePlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.defaultVersionDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.googleAutoServiceAnnotationProcessor;
+import static com.seed4j.module.domain.Seed4JModulesFixture.hibernateAnnotationProcessor;
+import static com.seed4j.module.domain.Seed4JModulesFixture.jsonWebTokenDependencyId;
+import static com.seed4j.module.domain.Seed4JModulesFixture.localBuildProfile;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenBuildExtensionWithSlug;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenEnforcerPlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenEnforcerPluginManagement;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenEnforcerVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.optionalTestDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyId;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyManagement;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootStarterWebDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springProfilesActiveProperty;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.buildproperties.BuildProperty;
 import com.seed4j.module.domain.buildproperties.PropertyKey;
 import com.seed4j.module.domain.buildproperties.PropertyValue;
-import com.seed4j.module.domain.javabuild.command.*;
+import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.AddDirectMavenPlugin;
+import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
+import com.seed4j.module.domain.javabuild.command.AddJavaAnnotationProcessor;
+import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
+import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.AddMavenBuildExtension;
+import com.seed4j.module.domain.javabuild.command.AddMavenPluginManagement;
+import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
+import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.DependencyId;
@@ -901,6 +936,77 @@ class MavenCommandHandlerTest {
   }
 
   @Nested
+  class HandleRemoveAnnotationProcessor {
+
+    @Test
+    void shouldRemoveCompilerAnnotationProcessorPath() {
+      Path pom = projectWithPom("src/test/resources/projects/init-maven/pom.xml");
+      MavenCommandHandler mavenCommandHandler = new MavenCommandHandler(Indentation.DEFAULT, pom);
+      mavenCommandHandler.handle(new AddJavaAnnotationProcessor(googleAutoServiceAnnotationProcessor()));
+      mavenCommandHandler.handle(
+        new AddJavaAnnotationProcessor(javaDependency().groupId("org.hibernate.orm").artifactId("auto-service").build())
+      );
+      mavenCommandHandler.handle(new AddJavaAnnotationProcessor(hibernateAnnotationProcessor()));
+
+      mavenCommandHandler.handle(new RemoveJavaAnnotationProcessor(hibernateAnnotationProcessor().id()));
+
+      assertThat(contentNormalizingNewLines(pom))
+        .contains(
+          // language=XML
+          """
+                      <path>
+                        <groupId>com.google.auto.service</groupId>
+                        <artifactId>auto-service</artifactId>
+                        <version>${google-auto-service.version}</version>
+                      </path>
+          """
+        )
+        .doesNotContain(
+          // language=XML
+          """
+                      <path>
+                        <groupId>org.hibernate.orm</groupId>
+                        <artifactId>hibernate-processor</artifactId>
+                      </path>
+          """
+        );
+    }
+
+    @Test
+    void shouldRemoveCompilerAnnotationProcessorPathsIfTheresNoRemainingAnnotationProcessorPaths() {
+      Path pom = projectWithPom("src/test/resources/projects/init-maven/pom.xml");
+      MavenCommandHandler mavenCommandHandler = new MavenCommandHandler(Indentation.DEFAULT, pom);
+      mavenCommandHandler.handle(new AddJavaAnnotationProcessor(googleAutoServiceAnnotationProcessor()));
+
+      mavenCommandHandler.handle(new RemoveJavaAnnotationProcessor(googleAutoServiceAnnotationProcessor().id()));
+
+      assertThat(contentNormalizingNewLines(pom)).doesNotContain("<annotationProcessorPaths");
+    }
+
+    @Test
+    void shouldRemoveCompilerAnnotationProcessorPathWithVersionToPluginManagementPlugins() {
+      Path pom = projectWithPom("src/test/resources/projects/maven-with-plugin-management-compiler/pom.xml");
+
+      MavenCommandHandler mavenCommandHandler = new MavenCommandHandler(Indentation.DEFAULT, pom);
+      mavenCommandHandler.handle(new AddJavaAnnotationProcessor(googleAutoServiceAnnotationProcessor()));
+
+      mavenCommandHandler.handle(new RemoveJavaAnnotationProcessor(googleAutoServiceAnnotationProcessor().id()));
+
+      assertThat(contentNormalizingNewLines(pom)).doesNotContain(
+        """
+                    <annotationProcessorPaths>
+                      <path>
+                        <groupId>com.google.auto.service</groupId>
+                        <artifactId>auto-service</artifactId>
+                        <version>${google-auto-service.version}</version>
+                      </path>
+                    </annotationProcessorPaths>
+        """
+      );
+    }
+  }
+
+  @Nested
   class HandleAddDirectJavaDependency {
 
     @Test
@@ -1046,6 +1152,100 @@ class MavenCommandHandlerTest {
             </profile>
         """
       );
+    }
+  }
+
+  @Nested
+  class HandleAddAnnotationProcessor {
+
+    @Test
+    void shouldAddCompilerAnnotationProcessorPathWithoutVersionToPlugins() {
+      Path pom = projectWithPom("src/test/resources/projects/init-maven/pom.xml");
+
+      new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddJavaAnnotationProcessor(hibernateAnnotationProcessor()));
+
+      assertThat(contentNormalizingNewLines(pom)).contains(
+        // language=XML
+        """
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
+                <configuration>
+                  <release>${java.version}</release>
+                  <annotationProcessorPaths>
+                    <path>
+                      <groupId>org.hibernate.orm</groupId>
+                      <artifactId>hibernate-processor</artifactId>
+                    </path>
+                  </annotationProcessorPaths>
+                </configuration>
+              </plugin>
+        """
+      );
+    }
+
+    @Test
+    void shouldAddCompilerAnnotationProcessorPathWithVersionToPlugins() {
+      Path pom = projectWithPom("src/test/resources/projects/init-maven/pom.xml");
+
+      new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddJavaAnnotationProcessor(googleAutoServiceAnnotationProcessor()));
+
+      assertThat(contentNormalizingNewLines(pom)).contains(
+        """
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
+                <configuration>
+                  <release>${java.version}</release>
+                  <annotationProcessorPaths>
+                    <path>
+                      <groupId>com.google.auto.service</groupId>
+                      <artifactId>auto-service</artifactId>
+                      <version>${google-auto-service.version}</version>
+                    </path>
+                  </annotationProcessorPaths>
+                </configuration>
+              </plugin>
+        """
+      );
+    }
+
+    @Test
+    void shouldAddCompilerAnnotationProcessorPathWithVersionToPluginManagementPlugins() {
+      Path pom = projectWithPom("src/test/resources/projects/maven-with-plugin-management-compiler/pom.xml");
+
+      new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddJavaAnnotationProcessor(googleAutoServiceAnnotationProcessor()));
+
+      assertThat(contentNormalizingNewLines(pom)).contains(
+        """
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+                  <configuration>
+                    <annotationProcessorPaths>
+                      <path>
+                        <groupId>com.google.auto.service</groupId>
+                        <artifactId>auto-service</artifactId>
+                        <version>${google-auto-service.version}</version>
+                      </path>
+                    </annotationProcessorPaths>
+                  </configuration>
+                  <version>${compiler-plugin.version}</version>
+                </plugin>
+        """
+      );
+    }
+
+    @Test
+    void shouldFailIfCompilerPluginIsNotDeclared() {
+      Path pom = projectWithPom("src/main/resources/generator/buildtool/maven/pom.xml.mustache");
+      MavenCommandHandler mavenCommandHandler = new MavenCommandHandler(Indentation.DEFAULT, pom);
+
+      assertThatThrownBy(() -> mavenCommandHandler.handle(new AddJavaAnnotationProcessor(googleAutoServiceAnnotationProcessor())))
+        .isInstanceOf(GeneratorException.class)
+        .hasMessageContaining("maven-compiler-plugin should already be declared to add annotation processor dependencies");
     }
   }
 

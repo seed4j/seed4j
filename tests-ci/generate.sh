@@ -72,14 +72,6 @@ spring_boot_mvc() {
     "spring-boot-actuator"
 }
 
-spring_boot_undertow() {
-  spring_boot
-
-  apply_modules \
-    "spring-boot-undertow" \
-    "spring-boot-actuator"
-}
-
 spring_boot_webflux() {
   spring_boot
 
@@ -287,29 +279,6 @@ elif [[ $application == 'flywayapp' ]]; then
     "sample-jpa-persistence" \
     "sample-postgresql-flyway-changelog"
 
-elif [[ $application == 'undertowapp' ]]; then
-  init_server
-  spring_boot_undertow
-  sonar_back
-
-  apply_modules \
-    "datasource-mysql" \
-    "jpa-mysql" \
-    "flyway" \
-    "flyway-mysql"
-
-  cucumber_with_jwt
-  apply_modules "spring-boot-cucumber-jpa-reset"
-
-  apply_modules \
-    "kipe-expression" \
-    "kipe-authorization" \
-    "sample-feature" \
-    "sample-jpa-persistence" \
-    "sample-not-postgresql-flyway-changelog"
-
-  apply_modules "spring-boot-cache"
-
 elif [[ $application == 'eurekaapp' ]]; then
   init_server
   spring_boot_mvc
@@ -321,7 +290,7 @@ elif [[ $application == 'eurekaapp' ]]; then
 
 elif [[ $application == 'consulapp' ]]; then
   init_server
-  spring_boot_undertow
+  spring_boot_mvc
   sonar_back
 
   apply_modules "consul"

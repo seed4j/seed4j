@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties;
 import {{packageName}}.wire.gateway.infrastructure.primary.vm.RouteVM;
 import java.net.URI;
 import java.util.function.Predicate;
@@ -16,8 +15,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient;
+import org.springframework.boot.webflux.test.autoconfigure.WebFluxTest;
 import org.springframework.cloud.client.DefaultServiceInstance;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -69,7 +68,7 @@ class GatewayResourceIT {
     );
     when(routeLocator.getRoutes()).thenReturn(routes);
 
-    DefaultServiceInstance serviceInstance = new DefaultServiceInstance();
+    DefaultServiceInstance serviceInstance = new DefaultServiceInstance("APP", "app:7459517c1334fe03658ce69eb959c7bd", "192.168.1.38:8082", 8082, false);
     serviceInstance.setInstanceId("APP");
     serviceInstance.setServiceId("app:7459517c1334fe03658ce69eb959c7bd");
     serviceInstance.setUri(new URI("http://192.168.1.38:8082"));
@@ -128,7 +127,7 @@ class GatewayResourceIT {
   }
 
   private Predicate<ServerWebExchange> getPredicate() {
-    return new PathRoutePredicateFactory(new WebFluxProperties())
+    return new PathRoutePredicateFactory()
       .apply(new PathRoutePredicateFactory.Config().setPatterns(singletonList("'/services/' + serviceId.toLowerCase() +'/**'")));
   }
 }

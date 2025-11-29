@@ -42,43 +42,10 @@ class SpringBootMvcsModuleFactoryTest {
       .containing(
         """
             <dependency>
-              <groupId>org.reflections</groupId>
-              <artifactId>reflections</artifactId>
-              <version>${reflections.version}</version>
-              <scope>test</scope>
-            </dependency>
-        """
-      );
-  }
-
-  @Test
-  void shouldBuildUndertowModule() {
-    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("com.seed4j.growth")
-      .put("serverPort", 9000)
-      .build();
-
-    Seed4JModule module = factory.buildUndertowModule(properties);
-
-    assertMvcModule(module)
-      .hasFile("src/main/resources/logback-spring.xml")
-      .containing("  <logger name=\"io.undertow\" level=\"WARN\" />")
-      .and()
-      .hasFile("src/test/resources/logback.xml")
-      .containing("  <logger name=\"io.undertow\" level=\"WARN\" />")
-      .and()
-      .hasFile("pom.xml")
-      .containing(
-        """
-            <dependency>
               <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-starter-web</artifactId>
-              <exclusions>
-                <exclusion>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-              </exclusions>
+              <artifactId>spring-boot-starter-webmvc-test</artifactId>
+              <version>${spring-boot.version}</version>
+              <scope>test</scope>
             </dependency>
         """
       )
@@ -86,7 +53,17 @@ class SpringBootMvcsModuleFactoryTest {
         """
             <dependency>
               <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-starter-undertow</artifactId>
+              <artifactId>spring-boot-jackson2</artifactId>
+            </dependency>
+        """
+      )
+      .containing(
+        """
+            <dependency>
+              <groupId>org.reflections</groupId>
+              <artifactId>reflections</artifactId>
+              <version>${reflections.version}</version>
+              <scope>test</scope>
             </dependency>
         """
       );

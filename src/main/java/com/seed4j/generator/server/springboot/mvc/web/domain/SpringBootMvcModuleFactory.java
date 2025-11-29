@@ -1,18 +1,6 @@
 package com.seed4j.generator.server.springboot.mvc.web.domain;
 
-import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
-import static com.seed4j.module.domain.Seed4JModule.artifactId;
-import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
-import static com.seed4j.module.domain.Seed4JModule.from;
-import static com.seed4j.module.domain.Seed4JModule.groupId;
-import static com.seed4j.module.domain.Seed4JModule.javaDependency;
-import static com.seed4j.module.domain.Seed4JModule.localEnvironment;
-import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
-import static com.seed4j.module.domain.Seed4JModule.propertyKey;
-import static com.seed4j.module.domain.Seed4JModule.propertyValue;
-import static com.seed4j.module.domain.Seed4JModule.to;
-import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
-import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.*;
 
 import com.seed4j.module.domain.LogLevel;
 import com.seed4j.module.domain.Seed4JModule;
@@ -41,6 +29,7 @@ public class SpringBootMvcModuleFactory {
 
   private static final GroupId SPRING_BOOT_GROUP = groupId("org.springframework.boot");
   private static final ArtifactId STARTER_WEB_ARTIFACT_ID = artifactId("spring-boot-starter-web");
+  private static final ArtifactId STARTER_WEBMVC_TEST_ARTIFACT_ID = artifactId("spring-boot-starter-webmvc-test");
 
   private static final PropertyKey SERVER_PORT = propertyKey("server.port");
 
@@ -58,30 +47,12 @@ public class SpringBootMvcModuleFactory {
     return springMvcBuilder(properties, "org.springframework.web", LogLevel.ERROR)
       .javaDependencies()
         .addDependency(SPRING_BOOT_GROUP, STARTER_WEB_ARTIFACT_ID)
+        .addDependency(SPRING_BOOT_GROUP, artifactId("spring-boot-starter-tomcat"))
+        .addTestDependency(SPRING_BOOT_GROUP, STARTER_WEBMVC_TEST_ARTIFACT_ID, versionSlug("spring-boot"))
+        .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-jackson2"))
         .and()
       .build();
     // @formatter:on
-  }
-
-  public Seed4JModule buildUndertowModule(Seed4JModuleProperties properties) {
-    Assert.notNull("properties", properties);
-
-    // @formatter:off
-    return springMvcBuilder(properties, "io.undertow", LogLevel.WARN)
-      .javaDependencies()
-        .addDependency(springBootWebWithoutTomcatDependency())
-        .addDependency(SPRING_BOOT_GROUP, artifactId("spring-boot-starter-undertow"))
-        .and()
-      .build();
-    // @formatter:on
-  }
-
-  private JavaDependency springBootWebWithoutTomcatDependency() {
-    return javaDependency()
-      .groupId(SPRING_BOOT_GROUP)
-      .artifactId(STARTER_WEB_ARTIFACT_ID)
-      .addExclusion(SPRING_BOOT_GROUP, artifactId("spring-boot-starter-tomcat"))
-      .build();
   }
 
   private Seed4JModuleBuilder springMvcBuilder(Seed4JModuleProperties properties, String loggerName, LogLevel logLevel) {

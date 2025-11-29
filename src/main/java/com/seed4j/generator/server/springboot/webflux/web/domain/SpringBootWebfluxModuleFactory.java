@@ -1,17 +1,10 @@
 package com.seed4j.generator.server.springboot.webflux.web.domain;
 
-import static com.seed4j.module.domain.Seed4JModule.artifactId;
-import static com.seed4j.module.domain.Seed4JModule.from;
-import static com.seed4j.module.domain.Seed4JModule.groupId;
-import static com.seed4j.module.domain.Seed4JModule.javaDependency;
-import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
-import static com.seed4j.module.domain.Seed4JModule.propertyKey;
-import static com.seed4j.module.domain.Seed4JModule.propertyValue;
-import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
-import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.*;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
@@ -26,6 +19,9 @@ public class SpringBootWebfluxModuleFactory {
   private static final Seed4JSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
   private static final String WIRE_JACKSON_CONFIG = "wire/jackson/infrastructure/primary";
   private static final PropertyKey SERVER_PORT = propertyKey("server.port");
+
+  private static final GroupId SPRING_BOOT_GROUP = groupId("org.springframework.boot");
+  private static final ArtifactId STARTER_WEBFLUX_TEST_ARTIFACT_ID = artifactId("spring-boot-starter-webflux-test");
 
   private static final GroupId SPRING_GROUP = groupId("org.springframework.boot");
 
@@ -44,6 +40,7 @@ public class SpringBootWebfluxModuleFactory {
     return moduleBuilder(properties)
       .javaDependencies()
         .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-webflux"))
+        .addTestDependency(SPRING_BOOT_GROUP, STARTER_WEBFLUX_TEST_ARTIFACT_ID, versionSlug("spring-boot"))
         .addDependency(reactorTestDependency())
         .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-validation"))
         .and()

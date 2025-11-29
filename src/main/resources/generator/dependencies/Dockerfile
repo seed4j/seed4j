@@ -13,4 +13,4 @@ FROM apache/kafka-native:4.1.1
 FROM tchiotludo/akhq:0.26.0
 FROM apachepulsar/pulsar:4.1.2
 FROM neo4j:2025.10.1-community
-FROM redis:8.2.3
+FROM redis:8.4.0

@@ -346,7 +346,6 @@ from the main (upstream) repository:
   - mariadbapp
   - mssqlapp
   - flywayapp
-  - undertowapp
   - eurekaapp
   - consulapp
   - gatewayapp

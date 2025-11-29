@@ -63,27 +63,6 @@ public class SpringBootMvcModuleFactory {
     // @formatter:on
   }
 
-  public Seed4JModule buildUndertowModule(Seed4JModuleProperties properties) {
-    Assert.notNull("properties", properties);
-
-    // @formatter:off
-    return springMvcBuilder(properties, "io.undertow", LogLevel.WARN)
-      .javaDependencies()
-        .addDependency(springBootWebWithoutTomcatDependency())
-        .addDependency(SPRING_BOOT_GROUP, artifactId("spring-boot-starter-undertow"))
-        .and()
-      .build();
-    // @formatter:on
-  }
-
-  private JavaDependency springBootWebWithoutTomcatDependency() {
-    return javaDependency()
-      .groupId(SPRING_BOOT_GROUP)
-      .artifactId(STARTER_WEB_ARTIFACT_ID)
-      .addExclusion(SPRING_BOOT_GROUP, artifactId("spring-boot-starter-tomcat"))
-      .build();
-  }
-
   private Seed4JModuleBuilder springMvcBuilder(Seed4JModuleProperties properties, String loggerName, LogLevel logLevel) {
     String packagePath = properties.packagePath();
 

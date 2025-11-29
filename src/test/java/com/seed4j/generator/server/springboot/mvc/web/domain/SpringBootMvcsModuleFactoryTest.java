@@ -1,6 +1,11 @@
 package com.seed4j.generator.server.springboot.mvc.web.domain;
 
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.Seed4JModuleAsserter;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.logbackFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.readmeFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.testLogbackFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
@@ -46,47 +51,6 @@ class SpringBootMvcsModuleFactoryTest {
               <artifactId>reflections</artifactId>
               <version>${reflections.version}</version>
               <scope>test</scope>
-            </dependency>
-        """
-      );
-  }
-
-  @Test
-  void shouldBuildUndertowModule() {
-    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
-      .basePackage("com.seed4j.growth")
-      .put("serverPort", 9000)
-      .build();
-
-    Seed4JModule module = factory.buildUndertowModule(properties);
-
-    assertMvcModule(module)
-      .hasFile("src/main/resources/logback-spring.xml")
-      .containing("  <logger name=\"io.undertow\" level=\"WARN\" />")
-      .and()
-      .hasFile("src/test/resources/logback.xml")
-      .containing("  <logger name=\"io.undertow\" level=\"WARN\" />")
-      .and()
-      .hasFile("pom.xml")
-      .containing(
-        """
-            <dependency>
-              <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-starter-web</artifactId>
-              <exclusions>
-                <exclusion>
-                  <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-              </exclusions>
-            </dependency>
-        """
-      )
-      .containing(
-        """
-            <dependency>
-              <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-starter-undertow</artifactId>
             </dependency>
         """
       );

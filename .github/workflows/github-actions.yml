@@ -239,7 +239,6 @@ jobs:
           - mariadbapp
           - mssqlapp
           - flywayapp
-          - undertowapp
           - eurekaapp
           - consulapp
           - gatewayapp

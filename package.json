@@ -81,7 +81,7 @@
     "fontello-cli": "0.6.2",
     "globals": "16.5.0",
     "husky": "9.1.7",
-    "jsdom": "27.1.0",
+    "jsdom": "27.2.0",
     "lint-staged": "16.2.7",
     "npm-run-all2": "8.0.4",
     "postcss-scss": "4.0.9",

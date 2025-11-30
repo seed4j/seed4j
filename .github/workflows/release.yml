@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: 'Setup: checkout project'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
@@ -55,7 +55,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: 'Setup: checkout project'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: 'Artifact: download JAR'
         uses: actions/download-artifact@v6
         with:

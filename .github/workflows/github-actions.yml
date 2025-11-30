@@ -21,7 +21,7 @@ jobs:
       skip_ci: ${{ steps.check-ci-skip.outputs.skip_ci }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Get the head commit message
@@ -75,7 +75,7 @@ jobs:
       needs.setup.outputs.skip_ci != 'true'
     steps:
       - name: 'Setup: checkout project'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
@@ -103,7 +103,7 @@ jobs:
       needs.setup.outputs.skip_ci != 'true'
     steps:
       - name: 'Setup: checkout project'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: 'Setup: environment'
@@ -163,7 +163,7 @@ jobs:
       github.event_name == 'pull_request'
     steps:
       - name: 'Setup: checkout project'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: 'main'
           fetch-depth: 0
@@ -198,7 +198,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: 'Setup: checkout project'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
@@ -280,7 +280,7 @@ jobs:
     steps:
       - name: 'Setup: checkout project from main branch'
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: 'main'
           path: 'main-branch'
@@ -334,7 +334,7 @@ jobs:
         run: |
           rm -rf /tmp/seed4j/${{ matrix.app }}
       - name: 'Setup: checkout project'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           path: 'current-branch'
       - name: 'Setup: environment (java: ${{ matrix.java-version }}, node: ${{ matrix.node-version }}, node-package-manager: ${{ matrix.node-package-manager }})'

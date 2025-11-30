@@ -31,8 +31,8 @@ class GradleModuleFactoryTest {
         # Gradle
         /.gradle/
         /build/
-        ./buildSrc/.gradle/
-        ./buildSrc/build/\
+        /buildSrc/.gradle/
+        /buildSrc/build/\
         """
       )
       .and()

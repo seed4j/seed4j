@@ -38,6 +38,8 @@ import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javabuildprofile.Seed4JModuleJavaBuildProfiles;
 import com.seed4j.module.domain.javabuildprofile.Seed4JModuleJavaBuildProfiles.Seed4JModuleJavaBuildProfilesBuilder;
 import com.seed4j.module.domain.javadependency.DependencyId;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency.JavaAnnotationProcessorDependencyGroupIdBuilder;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency.JavaDependencyGroupIdBuilder;
 import com.seed4j.module.domain.javadependency.Seed4JModuleJavaDependencies;
@@ -242,6 +244,10 @@ public final class Seed4JModule {
 
   public static JavaDependencyGroupIdBuilder javaDependency() {
     return JavaDependency.builder();
+  }
+
+  public static JavaAnnotationProcessorDependencyGroupIdBuilder javaAnnotationProcessorDependency() {
+    return JavaAnnotationProcessorDependency.builder();
   }
 
   public static MavenBuildExtensionGroupIdBuilder mavenBuildExtension() {

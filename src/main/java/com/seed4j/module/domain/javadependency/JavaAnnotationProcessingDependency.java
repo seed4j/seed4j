@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public final class JavaAnnotationProcessingDependency extends JavaDependencyCommandsCreator {
 
-  JavaAnnotationProcessingDependency(JavaDependency dependency) {
+  JavaAnnotationProcessingDependency(JavaAnnotationProcessorDependency dependency) {
     super(dependency);
   }
 

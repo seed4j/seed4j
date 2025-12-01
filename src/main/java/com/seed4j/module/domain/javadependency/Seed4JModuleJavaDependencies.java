@@ -25,7 +25,7 @@ public final class Seed4JModuleJavaDependencies {
   private final Collection<DependencyId> dependenciesManagementToRemove;
   private final Collection<DirectJavaDependency> dependencies;
   private final Collection<DependencyId> annotationProcessingDependenciesToRemove;
-  private final Collection<JavaAnnotationProcessingDependency> annotationProcessingDependencies;
+  private final Collection<JavaAnnotationProcessorDependency> annotationProcessingDependencies;
 
   private Seed4JModuleJavaDependencies(Seed4JModuleJavaDependenciesBuilder<?> builder) {
     dependenciesToRemove = builder.dependenciesToRemove;
@@ -132,7 +132,7 @@ public final class Seed4JModuleJavaDependencies {
     private final Collection<DirectJavaDependency> dependencies = new ArrayList<>();
     private final Collection<JavaDependencyManagement> dependenciesManagement = new ArrayList<>();
     private final Collection<DependencyId> dependenciesManagementToRemove = new ArrayList<>();
-    private final Collection<JavaAnnotationProcessingDependency> annotationProcessingDependencies = new ArrayList<>();
+    private final Collection<JavaAnnotationProcessorDependency> annotationProcessingDependencies = new ArrayList<>();
     private final Collection<DependencyId> annotationProcessingDependenciesToRemove = new ArrayList<>();
 
     private Seed4JModuleJavaDependenciesBuilder(T parentModuleBuilder) {
@@ -202,10 +202,10 @@ public final class Seed4JModuleJavaDependencies {
       return this;
     }
 
-    public Seed4JModuleJavaDependenciesBuilder<T> addAnnotationProcessorDependency(JavaDependency dependency) {
+    public Seed4JModuleJavaDependenciesBuilder<T> addAnnotationProcessorDependency(JavaAnnotationProcessorDependency dependency) {
       Assert.notNull(DEPENDENCY, dependency);
 
-      annotationProcessingDependencies.add(new JavaAnnotationProcessingDependency(dependency));
+      annotationProcessingDependencies.add(dependency);
 
       return this;
     }

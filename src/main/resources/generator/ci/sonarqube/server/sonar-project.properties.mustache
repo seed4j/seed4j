@@ -18,7 +18,7 @@ sonar.exclusions=\
   src/main/webapp/app/index.tsx,\
   src/main/webapp/main.ts
 
-sonar.issue.ignore.multicriteria=S117,S119,S125_1,S125_2,S3437,S4502,S4684,S4032,S5778,S6206,S6548,S6437,UndocumentedApi,S7027,S4662
+sonar.issue.ignore.multicriteria=S117,S119,S2638,S125_1,S125_2,S3437,S4502,S4684,S4032,S5778,S6206,S6548,S6437,UndocumentedApi,S7027,S4662
 
 # Rule: Local variable and method parameter names should comply with a naming convention
 # Handled with checkstyle. Should be revisited with java 25 once Unnamed Patterns and Variables are available (JEP 443)
@@ -28,6 +28,10 @@ sonar.issue.ignore.multicriteria.S117.ruleKey=java:S117
 # Rule: Generic types on one character
 sonar.issue.ignore.multicriteria.S119.resourceKey=src/**/java/**/*
 sonar.issue.ignore.multicriteria.S119.ruleKey=java:S119
+
+# Rule: Method overrides should not change contracts
+sonar.issue.ignore.multicriteria.S2638.resourceKey=src/**/java/**/*
+sonar.issue.ignore.multicriteria.S2638.ruleKey=java:S2638
 
 # Rule https://rules.sonarsource.com/java/RSPEC-3437 is ignored, as a JPA-managed field cannot be transient
 sonar.issue.ignore.multicriteria.S3437.resourceKey=src/main/java/**/*

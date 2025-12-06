@@ -143,6 +143,7 @@ elif [[ $application == fullapp* ]]; then
     "infinitest-filters" \
     "pagination-domain" \
     "rest-pagination" \
+    "jpa-metamodel-generator" \
     "jpa-pagination" \
     "spring-boot-async" \
     "spring-boot-devtools" \

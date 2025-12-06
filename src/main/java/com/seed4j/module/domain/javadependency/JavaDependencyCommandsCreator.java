@@ -8,7 +8,8 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-abstract sealed class JavaDependencyCommandsCreator permits DirectJavaDependency, JavaDependencyManagement {
+abstract sealed class JavaDependencyCommandsCreator
+  permits DirectJavaDependency, JavaAnnotationProcessingDependency, JavaDependencyManagement {
 
   private final JavaDependency dependency;
 

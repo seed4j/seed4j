@@ -1,6 +1,7 @@
 package com.seed4j.generator.server.springboot.database.jpa.domain;
 
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.fileFromClasspath;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
 
 import com.seed4j.TestFileUtils;
@@ -254,6 +255,27 @@ class JpaModuleFactoryTest {
                 query:
                   fail_on_pagination_over_collection_fetch: true
                   in_clause_parameter_padding: true
+        """
+      );
+  }
+
+  @Test
+  void shouldBuildMetaModelGeneratorModule() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+
+    Seed4JModule module = factory.buildMetaModelGenerator(properties);
+
+    assertThatModuleWithFiles(module, fileFromClasspath("projects/init-maven/pom.xml", "pom.xml"))
+      .hasFile("pom.xml")
+      .containing(
+        // language=xml
+        """
+                  <annotationProcessorPaths>
+                    <path>
+                      <groupId>org.hibernate.orm</groupId>
+                      <artifactId>hibernate-jpamodelgen</artifactId>
+                    </path>
+                  </annotationProcessorPaths>
         """
       );
   }

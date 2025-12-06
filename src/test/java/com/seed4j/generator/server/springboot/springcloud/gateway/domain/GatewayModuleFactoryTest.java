@@ -51,6 +51,7 @@ class GatewayModuleFactoryTest {
             <dependency>
               <groupId>org.springframework.cloud</groupId>
               <artifactId>spring-cloud-starter-gateway</artifactId>
+              <version>${spring-cloud-starter-gateway.version}</version>
             </dependency>
         """
       )
@@ -64,17 +65,19 @@ class GatewayModuleFactoryTest {
             name: myApp
           cloud:
             gateway:
-              discovery:
-                locator:
-                  enabled: true
-                  filters[0]:
-                    args[regexp]: '''/services/'' + serviceId.toLowerCase() + ''/(?<remaining>.*)'''
-                    args[replacement]: '''/${remaining}'''
-                    name: RewritePath
-                  lower-case-service-id: true
-                  predicates[0]:
-                    args[pattern]: '''/services/''+serviceId.toLowerCase()+''/**'''
-                    name: Path
+              server:
+                webflux:
+                  discovery:
+                    locator:
+                      enabled: true
+                      filters[0]:
+                        args[regexp]: '''/services/'' + serviceId.toLowerCase() + ''/(?<remaining>.*)'''
+                        args[replacement]: '''/${remaining}'''
+                        name: RewritePath
+                      lower-case-service-id: true
+                      predicates[0]:
+                        args[pattern]: '''/services/''+serviceId.toLowerCase()+''/**'''
+                        name: Path
         """
       )
       .and()
@@ -87,9 +90,11 @@ class GatewayModuleFactoryTest {
             name: myApp
           cloud:
             gateway:
-              discovery:
-                locator:
-                  enabled: false
+              server:
+                webflux:
+                  discovery:
+                    locator:
+                      enabled: false
         """
       )
       .and()

@@ -39,7 +39,7 @@
     <jqassistant-asciidoctorj-extensions.version>1.1.0</jqassistant-asciidoctorj-extensions.version>
     <jqassistant-context-mapper-plugin.version>2.1.0-M2</jqassistant-context-mapper-plugin.version>
     <jqassistant-jmolecules-plugin.version>2.1.0-M4</jqassistant-jmolecules-plugin.version>
-    <jqassistant-spring-plugin.version>2.3.0</jqassistant-spring-plugin.version>
+    <jqassistant-spring-plugin.version>2.4.0</jqassistant-spring-plugin.version>
     <langchain4j.version>1.7.1-beta14</langchain4j.version>
     <jooq.version>3.20.10</jooq.version>
     <!-- Test dependencies -->

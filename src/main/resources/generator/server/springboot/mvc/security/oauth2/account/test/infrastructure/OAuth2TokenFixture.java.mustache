@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
@@ -45,7 +46,7 @@ public final class OAuth2TokenFixture {
     Instant now = Instant.now();
 
     OidcIdToken token = new OidcIdToken(TOKEN_ID, now, now.plusSeconds(300), claims);
-    List<SimpleGrantedAuthority> authorities = adminAuthorities();
+    List<GrantedAuthority> authorities = adminAuthorities();
     DefaultOidcUser user = new DefaultOidcUser(authorities, token, new OidcUserInfo(claims), "preferred_username");
 
     return new OAuth2AuthenticationToken(user, authorities, "oidc");
@@ -57,7 +58,7 @@ public final class OAuth2TokenFixture {
     return new JwtAuthenticationToken(jwt.build(), adminAuthorities());
   }
 
-  private static List<SimpleGrantedAuthority> adminAuthorities() {
+  public static List<GrantedAuthority> adminAuthorities() {
     return List.of(new SimpleGrantedAuthority(Role.ADMIN.key()));
   }
 }

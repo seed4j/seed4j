@@ -40,7 +40,7 @@ public class SpringBootMvcModuleFactory {
   private static final String WIRE_JACKSON_CONFIG = "wire/jackson/infrastructure/primary";
 
   private static final GroupId SPRING_BOOT_GROUP = groupId("org.springframework.boot");
-  private static final ArtifactId STARTER_WEB_ARTIFACT_ID = artifactId("spring-boot-starter-web");
+  private static final ArtifactId STARTER_WEB_ARTIFACT_ID = artifactId("spring-boot-starter-webmvc");
 
   private static final PropertyKey SERVER_PORT = propertyKey("server.port");
 

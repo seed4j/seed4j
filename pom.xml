@@ -83,7 +83,7 @@
     <frontend-maven-plugin.version>1.15.4</frontend-maven-plugin.version>
     <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
     <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
-    <approvaltests.version>25.10.0</approvaltests.version>
+    <approvaltests.version>26.0.0</approvaltests.version>
     <error-prone.version>2.45.0</error-prone.version>
     <modernizer-maven-plugin.version>3.2.0</modernizer-maven-plugin.version>
     <liquibase.version>4.33.0</liquibase.version>

@@ -1,6 +1,10 @@
 package com.seed4j.generator.server.springboot.database.mongodb.domain;
 
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.logbackFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.readmeFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.testLogbackFile;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
@@ -96,10 +100,11 @@ class MongoDbModuleFactoryTest {
       .containing(
         """
         spring:
-          data:
-            mongodb:
-              database: seed4j
-              uri: mongodb://localhost:27017/seed4j
+          mongodb:
+            database: seed4j
+            representation:
+              uuid: standard
+            uri: mongodb://localhost:27017/seed4j
         """
       )
       .and()
@@ -107,9 +112,8 @@ class MongoDbModuleFactoryTest {
       .containing(
         """
         spring:
-          data:
-            mongodb:
-              uri: ${TEST_MONGODB_URI}
+          mongodb:
+            uri: ${TEST_MONGODB_URI}
         """
       )
       .and()

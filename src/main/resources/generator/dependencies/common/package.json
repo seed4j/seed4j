@@ -35,7 +35,7 @@
     "i18next-browser-languagedetector": "8.2.0",
     "i18next-http-backend": "3.0.2",
     "jest": "29.7.0",
-    "jsdom": "27.2.0",
+    "jsdom": "27.3.0",
     "keycloak-js": "26.2.1",
     "lint-staged": "16.2.7",
     "mkdirp": "3.0.1",

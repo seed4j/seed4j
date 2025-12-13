@@ -1,28 +1,66 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.buildproperties.*;
+import com.seed4j.module.domain.buildproperties.BuildProperty;
+import com.seed4j.module.domain.buildproperties.PropertyKey;
+import com.seed4j.module.domain.buildproperties.PropertyValue;
 import com.seed4j.module.domain.javabuild.MavenBuildExtension;
 import com.seed4j.module.domain.javabuild.VersionSlug;
-import com.seed4j.module.domain.javabuild.command.*;
+import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.AddDirectMavenPlugin;
+import com.seed4j.module.domain.javabuild.command.AddGradleConfiguration;
+import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
+import com.seed4j.module.domain.javabuild.command.AddGradleTasksTestInstruction;
+import com.seed4j.module.domain.javabuild.command.AddJavaAnnotationProcessor;
+import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
+import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.AddMavenBuildExtension;
+import com.seed4j.module.domain.javabuild.command.AddMavenPlugin;
+import com.seed4j.module.domain.javabuild.command.AddMavenPluginManagement;
+import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
+import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
-import com.seed4j.module.domain.javadependency.*;
-import com.seed4j.module.domain.mavenplugin.*;
+import com.seed4j.module.domain.javadependency.DependencyId;
+import com.seed4j.module.domain.javadependency.JavaDependency;
+import com.seed4j.module.domain.javadependency.JavaDependencyClassifier;
+import com.seed4j.module.domain.javadependency.JavaDependencyScope;
+import com.seed4j.module.domain.mavenplugin.MavenBuildPhase;
+import com.seed4j.module.domain.mavenplugin.MavenPluginConfiguration;
+import com.seed4j.module.domain.mavenplugin.MavenPluginExecution;
+import com.seed4j.module.domain.mavenplugin.MavenPluginExecutionGoal;
+import com.seed4j.module.domain.mavenplugin.MavenPluginExecutionId;
 import com.seed4j.module.infrastructure.secondary.javadependency.JavaDependenciesCommandHandler;
 import com.seed4j.shared.enumeration.domain.Enums;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
 import io.fabric8.maven.Maven;
 import io.fabric8.maven.XMLFormat;
-import java.io.*;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-import org.apache.maven.model.*;
+import org.apache.maven.model.Activation;
+import org.apache.maven.model.Build;
+import org.apache.maven.model.BuildBase;
+import org.apache.maven.model.Dependency;
+import org.apache.maven.model.DependencyManagement;
+import org.apache.maven.model.Exclusion;
+import org.apache.maven.model.Extension;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.ModelBase;
+import org.apache.maven.model.Plugin;
+import org.apache.maven.model.PluginExecution;
+import org.apache.maven.model.PluginManagement;
+import org.apache.maven.model.Profile;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -30,6 +68,7 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 public class MavenCommandHandler implements JavaDependenciesCommandHandler {
 
   private static final String COMMAND = "command";
+  private static final String ANNOTATION_PROCESSOR_PATHS_NODE = "annotationProcessorPaths";
 
   private final XMLFormat xmlFormat;
   private final Path pomPath;
@@ -223,6 +262,106 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     extension.setGroupId(mavenBuildExtension.groupId().get());
     mavenBuildExtension.versionSlug().map(VersionSlug::mavenVariable).ifPresent(extension::setVersion);
     return extension;
+  }
+
+  @Override
+  public void handle(AddJavaAnnotationProcessor command) {
+    Assert.notNull(COMMAND, command);
+
+    List<Plugin> managedPlugins = Optional.ofNullable(pomModel.getBuild())
+      .map(Build::getPluginManagement)
+      .map(PluginManagement::getPlugins)
+      .orElse(List.of());
+    Plugin compilerPlugin = findCompilerPlugin(managedPlugins)
+      .or(() -> findCompilerPlugin(pomModel.getBuild().getPlugins()))
+      .orElseThrow(() ->
+        GeneratorException.technicalError("maven-compiler-plugin should already be declared to add annotation processor dependencies")
+      );
+
+    Xpp3Dom compilerConfiguration = Optional.ofNullable(compilerPlugin.getConfiguration())
+      .map(Xpp3Dom.class::cast)
+      .orElseGet(() -> new Xpp3Dom("configuration"));
+    compilerPlugin.setConfiguration(compilerConfiguration);
+
+    addAnnotationProcessorPathToCompilerConfiguration(command.dependency(), compilerConfiguration);
+    writePom();
+  }
+
+  private Optional<Plugin> findCompilerPlugin(List<Plugin> plugins) {
+    return plugins
+      .stream()
+      .filter(plugin -> plugin.getArtifactId().equals("maven-compiler-plugin"))
+      .findFirst();
+  }
+
+  private void addAnnotationProcessorPathToCompilerConfiguration(
+    JavaDependency annotationProcessorDependency,
+    Xpp3Dom compilerConfiguration
+  ) {
+    Xpp3Dom annotationProcessorPaths = compilerConfiguration.getChild(ANNOTATION_PROCESSOR_PATHS_NODE);
+    if (annotationProcessorPaths == null) {
+      annotationProcessorPaths = new Xpp3Dom(ANNOTATION_PROCESSOR_PATHS_NODE);
+      compilerConfiguration.addChild(annotationProcessorPaths);
+    }
+    annotationProcessorPaths.addChild(toAnnotationProcessorPath(annotationProcessorDependency));
+  }
+
+  private Xpp3Dom toAnnotationProcessorPath(JavaDependency annotationProcessorDependency) {
+    Xpp3Dom path = new Xpp3Dom("path");
+    Xpp3Dom groupId = new Xpp3Dom("groupId");
+    groupId.setValue(annotationProcessorDependency.id().groupId().get());
+    path.addChild(groupId);
+    Xpp3Dom artifactId = new Xpp3Dom("artifactId");
+    artifactId.setValue(annotationProcessorDependency.id().artifactId().get());
+    path.addChild(artifactId);
+    annotationProcessorDependency
+      .version()
+      .map(VersionSlug::mavenVariable)
+      .ifPresent(versionValue -> {
+        Xpp3Dom version = new Xpp3Dom("version");
+        version.setValue(versionValue);
+        path.addChild(version);
+      });
+    return path;
+  }
+
+  @Override
+  public void handle(RemoveJavaAnnotationProcessor command) {
+    Assert.notNull(COMMAND, command);
+
+    Optional<Plugin> compilerPlugin = findCompilerPlugin(pomModel.getBuild().getPluginManagement().getPlugins()).or(() ->
+      findCompilerPlugin(pomModel.getBuild().getPlugins())
+    );
+
+    Optional<Xpp3Dom> compilerConfiguration = compilerPlugin.map(Plugin::getConfiguration).map(Xpp3Dom.class::cast);
+
+    Optional<Xpp3Dom> annotationProcessorPaths = compilerConfiguration.map(configuration ->
+      configuration.getChild(ANNOTATION_PROCESSOR_PATHS_NODE)
+    );
+
+    List<Xpp3Dom> pathsToRemove = annotationProcessorPaths
+      .map(paths -> paths.getChildren("path"))
+      .stream()
+      .flatMap(Stream::of)
+      .filter(matchesAnnotationProcessorDependency(command.dependency()))
+      .toList();
+
+    annotationProcessorPaths.ifPresent(annotationProcessors -> {
+      pathsToRemove.forEach(annotationProcessors::removeChild);
+      if (annotationProcessorPaths.orElseThrow().getChildCount() == 0) {
+        compilerConfiguration.orElseThrow().removeChild(annotationProcessorPaths.orElseThrow());
+      }
+    });
+
+    writePom();
+  }
+
+  private Predicate<? super Xpp3Dom> matchesAnnotationProcessorDependency(DependencyId dependency) {
+    return annotationProcessorPath -> {
+      String groupId = annotationProcessorPath.getChild("groupId").getValue();
+      String artifactId = annotationProcessorPath.getChild("artifactId").getValue();
+      return dependency.groupId().get().equals(groupId) && dependency.artifactId().get().equals(artifactId);
+    };
   }
 
   @Override

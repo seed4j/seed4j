@@ -2,13 +2,8 @@ package com.seed4j.generator.server.springboot.springcloud.gateway.domain;
 
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.SPRING_CLOUD_GROUP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.springCloudDependenciesManagement;
-import static com.seed4j.module.domain.Seed4JModule.artifactId;
-import static com.seed4j.module.domain.Seed4JModule.from;
-import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
-import static com.seed4j.module.domain.Seed4JModule.propertyKey;
-import static com.seed4j.module.domain.Seed4JModule.propertyValue;
-import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
-import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.*;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JDestination;
@@ -35,27 +30,28 @@ public class GatewayModuleFactory {
       .javaDependencies()
         .addDependencyManagement(springCloudDependenciesManagement())
         .addDependency(SPRING_CLOUD_GROUP, artifactId("spring-cloud-starter-bootstrap"))
-        .addDependency(SPRING_CLOUD_GROUP, artifactId("spring-cloud-starter-gateway"))
+        .addDependency(SPRING_CLOUD_GROUP, artifactId("spring-cloud-starter-gateway"), versionSlug("spring-cloud-starter-gateway.version"))
+        .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-jackson2"))
         .and()
       .springMainBootstrapProperties()
         .set(propertyKey("spring.application.name"), propertyValue(properties.projectBaseName().get()))
-        .set(propertyKey("spring.cloud.gateway.discovery.locator.enabled"), TRUE_VALUE)
-        .set(propertyKey("spring.cloud.gateway.discovery.locator.lower-case-service-id"), TRUE_VALUE)
-        .set(propertyKey("spring.cloud.gateway.discovery.locator.predicates[0].name"), propertyValue("Path"))
+        .set(propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.enabled"), TRUE_VALUE)
+        .set(propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.lower-case-service-id"), TRUE_VALUE)
+        .set(propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.predicates[0].name"), propertyValue("Path"))
         .set(
-          propertyKey("spring.cloud.gateway.discovery.locator.predicates[0].args[pattern]"),
+          propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.predicates[0].args[pattern]"),
           propertyValue("'/services/'+serviceId.toLowerCase()+'/**'")
         )
-        .set(propertyKey("spring.cloud.gateway.discovery.locator.filters[0].name"), propertyValue("RewritePath"))
+        .set(propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.filters[0].name"), propertyValue("RewritePath"))
         .set(
-          propertyKey("spring.cloud.gateway.discovery.locator.filters[0].args[regexp]"),
+          propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.filters[0].args[regexp]"),
           propertyValue("'/services/' + serviceId.toLowerCase() + '/(?<remaining>.*)'")
         )
-        .set(propertyKey("spring.cloud.gateway.discovery.locator.filters[0].args[replacement]"), propertyValue("'/${remaining}'"))
+        .set(propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.filters[0].args[replacement]"), propertyValue("'/${remaining}'"))
         .and()
       .springTestBootstrapProperties()
         .set(propertyKey("spring.application.name"), propertyValue(properties.projectBaseName().get()))
-        .set(propertyKey("spring.cloud.gateway.discovery.locator.enabled"), propertyValue(false))
+        .set(propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.enabled"), propertyValue(false))
         .and()
       .files()
         .add(SOURCE.template("GatewayResource.java"), destination.append("GatewayResource.java"))

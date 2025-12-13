@@ -48,8 +48,8 @@
     <java.version>25</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <node.version>v24.11.1</node.version>
-    <npm.version>11.6.4</npm.version>
+    <node.version>v24.12.0</node.version>
+    <npm.version>11.7.0</npm.version>
 
     <maven.version>3.6.3</maven.version>
     <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>

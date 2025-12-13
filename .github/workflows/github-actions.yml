@@ -145,7 +145,7 @@ jobs:
         run: |
           rm target/*-javadoc.jar target/*-sources.jar
       - name: 'Artifact: upload JAR'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: seed4j-jar
           path: '${{ github.workspace }}/target/*.jar'
@@ -184,7 +184,7 @@ jobs:
           chmod +x mvnw
           ./mvnw clean package -DskipTests
       - name: 'Artifact: upload JAR'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: seed4j-main-jar
           path: '${{ github.workspace }}/target/*.jar'
@@ -203,7 +203,7 @@ jobs:
         id: setup
         uses: ./.github/actions/setup
       - name: 'Artifact: download JAR'
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: seed4j-jar
           path: ./tests-ci/
@@ -290,7 +290,7 @@ jobs:
         uses: ./main-branch/.github/actions/setup
       - name: 'Artifact: download JAR from main branch'
         if: github.event_name == 'pull_request'
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: seed4j-main-jar
           path: ./main-branch/tests-ci/
@@ -345,7 +345,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           node-package-manager: ${{ matrix.node-package-manager }}
       - name: 'Artifact: download JAR'
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: seed4j-jar
           path: ./current-branch/tests-ci/

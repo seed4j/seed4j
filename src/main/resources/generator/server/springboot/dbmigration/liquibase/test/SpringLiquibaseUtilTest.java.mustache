@@ -5,9 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.InstanceOfAssertFactories.type;
 
 {{#yamlSpringConfigurationFormat}}
-import java.net.URISyntaxException;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
-import org.springframework.core.io.PathResource;
+import org.springframework.core.io.ClassPathResource;
 {{/yamlSpringConfigurationFormat}}
 {{#propertiesSpringConfigurationFormat}}
 import java.io.IOException;
@@ -222,24 +221,21 @@ class SpringLiquibaseUtilTest {
   }
 
   private static Properties testProperties() {
-    try {
 {{#yamlSpringConfigurationFormat}}
-        var yaml = new YamlPropertiesFactoryBean();
-        yaml.setResources(
-          new PathResource(SpringLiquibaseUtilTest.class.getClassLoader().getResource("config/application-test.yml").toURI())
-        );
-        return yaml.getObject();
-    } catch (URISyntaxException exception) {
+    var yaml = new YamlPropertiesFactoryBean();
+    yaml.setResources(new ClassPathResource("config/application-test.yml"));
+    return yaml.getObject();
 {{/yamlSpringConfigurationFormat}}
 {{#propertiesSpringConfigurationFormat}}
+    try {
         var properties = new Properties();
         properties.load(
           SpringLiquibaseUtilTest.class.getClassLoader().getResourceAsStream("config/application-test.properties")
         );
         return properties;
     } catch (IOException exception) {
-{{/propertiesSpringConfigurationFormat}}
       throw new Error(exception);
     }
+{{/propertiesSpringConfigurationFormat}}
   }
 }

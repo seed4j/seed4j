@@ -34,7 +34,7 @@
     <alpinejs-webjars.version>3.15.3</alpinejs-webjars.version>
     <protobuf.version>4.33.2</protobuf.version>
     <proto-backwards-compatibility.version>1.0.7</proto-backwards-compatibility.version>
-    <jmolecules-bom.version>2023.3.4</jmolecules-bom.version>
+    <jmolecules-bom.version>2025.0.2</jmolecules-bom.version>
     <jqassistant.version>2.8.0</jqassistant.version>
     <jqassistant-asciidoctorj-extensions.version>1.1.0</jqassistant-asciidoctorj-extensions.version>
     <jqassistant-context-mapper-plugin.version>2.1.0-M2</jqassistant-context-mapper-plugin.version>

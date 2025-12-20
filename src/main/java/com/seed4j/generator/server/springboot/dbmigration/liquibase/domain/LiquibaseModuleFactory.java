@@ -12,7 +12,6 @@ import static com.seed4j.module.domain.Seed4JModule.to;
 import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
 import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 import static com.seed4j.module.domain.Seed4JModule.toSrcTestResources;
-import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 import static com.seed4j.module.domain.properties.SpringConfigurationFormat.PROPERTIES;
 import static com.seed4j.module.domain.properties.SpringConfigurationFormat.YAML;
 
@@ -38,7 +37,7 @@ public class LiquibaseModuleFactory {
     // @formatter:off
     return moduleBuilder(properties)
       .javaDependencies()
-        .addDependency(groupId("org.liquibase"), artifactId("liquibase-core"), versionSlug(LIQUIBASE))
+        .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-starter-liquibase"))
         .and()
       .springMainProperties()
         .set(propertyKey("spring.liquibase.change-log"), propertyValue("classpath:config/liquibase/master.xml"))

@@ -52,6 +52,8 @@ class CucumberModuleFactoryTest {
       .containing("<artifactId>cucumber-junit-platform-engine</artifactId>")
       .containing("<artifactId>cucumber-java</artifactId>")
       .containing("<artifactId>cucumber-spring</artifactId>")
+      .containing("<artifactId>spring-boot-restclient</artifactId>")
+      .containing("<artifactId>spring-boot-resttestclient</artifactId>")
       .containing("<artifactId>junit-platform-suite</artifactId>")
       .containing("<version>${cucumber.version}</version>")
       .and()

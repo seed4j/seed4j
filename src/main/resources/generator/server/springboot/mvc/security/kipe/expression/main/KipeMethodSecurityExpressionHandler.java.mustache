@@ -3,6 +3,7 @@ package {{packageName}}.shared.kipe.application;
 import java.lang.reflect.Method;
 import java.util.function.Supplier;
 import org.aopalliance.intercept.MethodInvocation;
+import org.jspecify.annotations.Nullable;
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.context.expression.MethodBasedEvaluationContext;
@@ -20,7 +21,7 @@ class KipeMethodSecurityExpressionHandler extends DefaultMethodSecurityExpressio
   }
 
   @Override
-  public EvaluationContext createEvaluationContext(Supplier<Authentication> authentication, MethodInvocation mi) {
+  public EvaluationContext createEvaluationContext(Supplier<? extends @Nullable Authentication> authentication, MethodInvocation mi) {
     MethodSecurityExpressionOperations root = buildExpressionRoot(authentication, mi);
 
     var ctx = new MethodBasedEvaluationContext(
@@ -39,7 +40,10 @@ class KipeMethodSecurityExpressionHandler extends DefaultMethodSecurityExpressio
     return AopUtils.getMostSpecificMethod(mi.getMethod(), AopProxyUtils.ultimateTargetClass(mi.getThis()));
   }
 
-  private MethodSecurityExpressionOperations buildExpressionRoot(Supplier<Authentication> authentication, MethodInvocation invocation) {
+  private MethodSecurityExpressionOperations buildExpressionRoot(
+    Supplier<? extends @Nullable Authentication> authentication,
+    MethodInvocation invocation
+  ) {
     var root = new KipeMethodSecurityExpressionRoot(authentication, evaluator);
 
     root.setThis(invocation.getThis());

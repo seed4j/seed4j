@@ -35,12 +35,6 @@ class JpaModuleFactoryTest {
               <artifactId>spring-boot-starter-data-jpa</artifactId>\
         """
       )
-      .containing(
-        """
-              <groupId>org.hibernate.orm</groupId>
-              <artifactId>hibernate-core</artifactId>\
-        """
-      )
       .and()
       .hasFile("src/main/resources/config/application.yml")
       .containing(
@@ -54,7 +48,7 @@ class JpaModuleFactoryTest {
             hibernate:
               ddl-auto: none
               naming:
-                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+                implicit-strategy: org.springframework.boot.hibernate.SpringImplicitNamingStrategy
                 physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
             open-in-view: false
             properties:
@@ -94,12 +88,6 @@ class JpaModuleFactoryTest {
               <artifactId>spring-boot-starter-data-jpa</artifactId>\
         """
       )
-      .containing(
-        """
-              <groupId>org.hibernate.orm</groupId>
-              <artifactId>hibernate-core</artifactId>\
-        """
-      )
       .and()
       .hasFile("src/main/resources/config/application.yml")
       .containing(
@@ -113,7 +101,7 @@ class JpaModuleFactoryTest {
             hibernate:
               ddl-auto: none
               naming:
-                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+                implicit-strategy: org.springframework.boot.hibernate.SpringImplicitNamingStrategy
                 physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
             open-in-view: false
             properties:
@@ -153,12 +141,6 @@ class JpaModuleFactoryTest {
               <artifactId>spring-boot-starter-data-jpa</artifactId>\
         """
       )
-      .containing(
-        """
-              <groupId>org.hibernate.orm</groupId>
-              <artifactId>hibernate-core</artifactId>\
-        """
-      )
       .and()
       .hasFile("src/main/resources/config/application.yml")
       .containing(
@@ -173,7 +155,7 @@ class JpaModuleFactoryTest {
             hibernate:
               ddl-auto: none
               naming:
-                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+                implicit-strategy: org.springframework.boot.hibernate.SpringImplicitNamingStrategy
                 physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
             open-in-view: false
             properties:
@@ -213,12 +195,6 @@ class JpaModuleFactoryTest {
               <artifactId>spring-boot-starter-data-jpa</artifactId>\
         """
       )
-      .containing(
-        """
-              <groupId>org.hibernate.orm</groupId>
-              <artifactId>hibernate-core</artifactId>\
-        """
-      )
       .and()
       .hasFile("src/main/resources/config/application.yml")
       .containing(
@@ -233,7 +209,7 @@ class JpaModuleFactoryTest {
             hibernate:
               ddl-auto: update
               naming:
-                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+                implicit-strategy: org.springframework.boot.hibernate.SpringImplicitNamingStrategy
                 physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
             open-in-view: false
             properties:

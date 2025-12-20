@@ -61,14 +61,13 @@ public class JpaModuleFactory {
         .and()
       .javaDependencies()
         .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-starter-data-jpa"))
-        .addDependency(groupId(ORG_HIBERNATE), artifactId("hibernate-core"))
         .and()
       .springMainProperties()
         .set(propertyKey("spring.data.jpa.repositories.bootstrap-mode"), propertyValue("deferred"))
         .set(propertyKey("spring.jpa.hibernate.ddl-auto"), propertyValue("none"))
         .set(
           propertyKey("spring.jpa.hibernate.naming.implicit-strategy"),
-          propertyValue("org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy")
+          propertyValue("org.springframework.boot.hibernate.SpringImplicitNamingStrategy")
         )
         .set(
           propertyKey("spring.jpa.hibernate.naming.physical-strategy"),

@@ -17,13 +17,13 @@
     <!-- Dependencies -->
     <jacoco.version>0.8.14</jacoco.version>
     <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
-    <spring-boot.version>3.5.9</spring-boot.version>
+    <spring-boot.version>4.0.1</spring-boot.version>
     <spring-cloud.version>2025.0.0</spring-cloud.version>
     <spring-cloud-netflix-eureka-client.version>4.3.0</spring-cloud-netflix-eureka-client.version>
-    <springdoc-openapi.version>2.8.14</springdoc-openapi.version>
+    <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
     <kafka-clients.version>4.1.1</kafka-clients.version>
     <mongock.version>5.5.1</mongock.version>
-    <neo4j-migrations.version>2.20.1</neo4j-migrations.version>
+    <neo4j-migrations.version>3.1.0</neo4j-migrations.version>
     <reflections.version>0.10.2</reflections.version>
     <json-web-token.version>0.13.0</json-web-token.version>
     <commons-lang3.version>3.20.0</commons-lang3.version>

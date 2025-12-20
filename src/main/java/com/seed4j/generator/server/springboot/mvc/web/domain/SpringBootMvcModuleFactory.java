@@ -40,7 +40,8 @@ public class SpringBootMvcModuleFactory {
   private static final String WIRE_JACKSON_CONFIG = "wire/jackson/infrastructure/primary";
 
   private static final GroupId SPRING_BOOT_GROUP = groupId("org.springframework.boot");
-  private static final ArtifactId STARTER_WEB_ARTIFACT_ID = artifactId("spring-boot-starter-webmvc");
+  private static final ArtifactId STARTER_WEBMVC_ARTIFACT_ID = artifactId("spring-boot-starter-webmvc");
+  private static final ArtifactId STARTER_WEBMVC_TEST_ARTIFACT_ID = artifactId("spring-boot-starter-webmvc-test");
 
   private static final PropertyKey SERVER_PORT = propertyKey("server.port");
 
@@ -57,7 +58,8 @@ public class SpringBootMvcModuleFactory {
     // @formatter:off
     return springMvcBuilder(properties, "org.springframework.web", LogLevel.ERROR)
       .javaDependencies()
-        .addDependency(SPRING_BOOT_GROUP, STARTER_WEB_ARTIFACT_ID)
+        .addDependency(SPRING_BOOT_GROUP, STARTER_WEBMVC_ARTIFACT_ID)
+        .addTestDependency(SPRING_BOOT_GROUP, STARTER_WEBMVC_TEST_ARTIFACT_ID)
         .and()
       .build();
     // @formatter:on

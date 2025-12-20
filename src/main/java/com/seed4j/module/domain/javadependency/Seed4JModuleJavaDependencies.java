@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.javadependency;
 
-import static com.seed4j.module.domain.javadependency.JavaDependencyScope.*;
+import static com.seed4j.module.domain.javadependency.JavaDependencyScope.TEST;
 
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
@@ -130,6 +130,12 @@ public final class Seed4JModuleJavaDependencies {
 
     public Seed4JModuleJavaDependenciesBuilder<T> addDependency(GroupId groupId, ArtifactId artifactId, VersionSlug versionSlug) {
       JavaDependency dependency = JavaDependency.builder().groupId(groupId).artifactId(artifactId).versionSlug(versionSlug).build();
+
+      return addDependency(dependency);
+    }
+
+    public Seed4JModuleJavaDependenciesBuilder<T> addTestDependency(GroupId groupId, ArtifactId artifactId) {
+      JavaDependency dependency = JavaDependency.builder().groupId(groupId).artifactId(artifactId).scope(TEST).build();
 
       return addDependency(dependency);
     }

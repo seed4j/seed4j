@@ -1,6 +1,7 @@
 package com.seed4j.generator.server.springboot.webflux.web.domain;
 
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
@@ -69,10 +70,6 @@ class SpringBootWebfluxModuleFactoryTest {
           port: 0
         """
       )
-      .and()
-      .hasFile("src/main/java/com/seed4j/growth/wire/jackson/infrastructure/primary/JacksonConfiguration.java")
-      .and()
-      .hasFile("src/test/java/com/seed4j/growth/wire/jackson/infrastructure/primary/JacksonConfigurationIT.java")
       .and()
       .hasPrefixedFiles("src/main/java/com/seed4j/growth/shared/error/infrastructure/primary", "HeaderUtil.java", "FieldErrorDTO.java")
       .hasPrefixedFiles(

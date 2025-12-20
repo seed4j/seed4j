@@ -121,10 +121,6 @@ class SpringBootMvcModuleFactoryTest {
             </dependency>
         """
       )
-      .and()
-      .hasFile("src/main/java/com/seed4j/growth/wire/jackson/infrastructure/primary/JacksonConfiguration.java")
-      .and()
-      .hasFile("src/test/java/com/seed4j/growth/wire/jackson/infrastructure/primary/JacksonConfigurationIT.java")
       .and();
   }
 }

@@ -5,8 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.mockito.Mockito.when;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties;
 import {{packageName}}.wire.gateway.infrastructure.primary.vm.RouteVM;
 import java.net.URI;
@@ -31,6 +29,8 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.module.SimpleModule;
 
 @WebFluxTest(GatewayResource.class)
 @AutoConfigureWebTestClient

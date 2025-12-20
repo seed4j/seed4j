@@ -35,10 +35,6 @@ public class SpringBootMvcModuleFactory {
   private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
   private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
 
-  private static final Seed4JSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
-  private static final Seed4JSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
-  private static final String WIRE_JACKSON_CONFIG = "wire/jackson/infrastructure/primary";
-
   private static final GroupId SPRING_BOOT_GROUP = groupId("org.springframework.boot");
   private static final ArtifactId STARTER_WEBMVC_ARTIFACT_ID = artifactId("spring-boot-starter-webmvc");
   private static final ArtifactId STARTER_WEBMVC_TEST_ARTIFACT_ID = artifactId("spring-boot-starter-webmvc-test");
@@ -87,8 +83,6 @@ public class SpringBootMvcModuleFactory {
         .set(SERVER_PORT, propertyValue(0))
         .and()
       .files()
-        .add(JACKSON_MAIN_SOURCE.append(WIRE_JACKSON_CONFIG).template("JacksonConfiguration.java"), toSrcMainJava().append(packagePath).append(WIRE_JACKSON_CONFIG).append("JacksonConfiguration.java"))
-        .add(JACKSON_TEST_SOURCE.append(WIRE_JACKSON_CONFIG).template("JacksonConfigurationIT.java"), toSrcTestJava().append(packagePath).append(WIRE_JACKSON_CONFIG).append("JacksonConfigurationIT.java"))
         .add(SOURCE.file("resources/404.html"), to("src/main/resources/public/error/404.html"))
         .batch(MAIN_SOURCE.append(CORS), mainDestination.append(CORS_PRIMARY))
           .addTemplate("CorsFilterConfiguration.java")

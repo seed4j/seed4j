@@ -1,12 +1,16 @@
 package com.seed4j.project.infrastructure.secondary;
 
-import static com.seed4j.project.domain.history.ProjectHistoryFixture.*;
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static com.seed4j.project.domain.history.ProjectHistoryFixture.firstProjectAction;
+import static com.seed4j.project.domain.history.ProjectHistoryFixture.projectAction;
+import static com.seed4j.project.domain.history.ProjectHistoryFixture.projectPath;
+import static com.seed4j.project.domain.history.ProjectHistoryFixture.secondProjectAction;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import com.seed4j.JsonHelper;
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
@@ -29,6 +33,9 @@ import java.util.zip.ZipInputStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectWriter;
 
 @UnitTest
 class FileSystemProjectsRepositoryTest {
@@ -129,9 +136,9 @@ class FileSystemProjectsRepositoryTest {
   class FileSystemProjectsRepositorySaveHistoryTest {
 
     @Test
-    void shouldHandleSerializationError() throws JsonProcessingException {
+    void shouldHandleSerializationError() throws JacksonException {
       ObjectWriter writer = mock(ObjectWriter.class);
-      when(writer.writeValueAsBytes(any())).thenThrow(JsonProcessingException.class);
+      when(writer.writeValueAsBytes(any())).thenThrow(JacksonException.class);
 
       ObjectMapper json = mock(ObjectMapper.class);
       when(json.writerWithDefaultPrettyPrinter()).thenReturn(writer);
@@ -172,10 +179,10 @@ class FileSystemProjectsRepositoryTest {
   class FileSystemProjectsRepositoryGetHistoryTest {
 
     @Test
-    void shouldHandleDeserializationErrors() throws IOException {
+    void shouldHandleDeserializationErrors() {
       ProjectPath path = folder().add("src/test/resources/projects/history/history.json", ".seed4j/modules/history.json").build();
       ObjectMapper json = mock(ObjectMapper.class);
-      when(json.readValue(any(byte[].class), eq(PersistedProjectHistory.class))).thenThrow(IOException.class);
+      when(json.readValue(any(byte[].class), eq(PersistedProjectHistory.class))).thenThrow(JacksonException.class);
 
       FileSystemProjectsRepository fileSystemProjectsRepository = new FileSystemProjectsRepository(json);
 

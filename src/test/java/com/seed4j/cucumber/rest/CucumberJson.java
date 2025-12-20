@@ -1,16 +1,12 @@
 package com.seed4j.cucumber.rest;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 final class CucumberJson {
 
@@ -20,12 +16,10 @@ final class CucumberJson {
 
   public static ObjectMapper jsonMapper() {
     return JsonMapper.builder()
-      .defaultPropertyInclusion(JsonInclude.Value.construct(JsonInclude.Include.NON_NULL, JsonInclude.Include.NON_NULL))
-      .addModule(new JavaTimeModule())
-      .addModules(new Jdk8Module())
-      .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+      .changeDefaultPropertyInclusion(incl ->
+        incl.withContentInclusion(JsonInclude.Include.NON_NULL).withValueInclusion(JsonInclude.Include.NON_NULL)
+      )
       .disable(DeserializationFeature.FAIL_ON_MISSING_EXTERNAL_TYPE_ID_PROPERTY)
-      .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
       .build();
   }
 
@@ -34,11 +28,7 @@ final class CucumberJson {
       return json;
     }
 
-    try {
-      return jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonMapper.readValue(json, Object.class));
-    } catch (IOException _) {
-      return json;
-    }
+    return jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonMapper.readValue(json, Object.class));
   }
 
   public static String toCamelCase(String value) {

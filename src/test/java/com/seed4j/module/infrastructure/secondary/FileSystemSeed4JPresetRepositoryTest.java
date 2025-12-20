@@ -1,10 +1,14 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static java.nio.charset.StandardCharsets.*;
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.seed4j.JsonHelper;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.ProjectFiles;
@@ -14,9 +18,10 @@ import com.seed4j.module.domain.preset.Preset;
 import com.seed4j.module.domain.preset.PresetName;
 import com.seed4j.module.domain.preset.Presets;
 import com.seed4j.shared.error.domain.GeneratorException;
-import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 @UnitTest
 class FileSystemSeed4JPresetRepositoryTest {
@@ -52,9 +57,9 @@ class FileSystemSeed4JPresetRepositoryTest {
     """;
 
   @Test
-  void shouldHandleDeserializationErrors() throws IOException {
+  void shouldHandleDeserializationErrors() {
     ObjectMapper json = mock(ObjectMapper.class);
-    when(json.readValue(any(byte[].class), eq(PersistedPresets.class))).thenThrow(IOException.class);
+    when(json.readValue(any(byte[].class), eq(PersistedPresets.class))).thenThrow(JacksonException.class);
     FileSystemSeed4JPresetRepository fileSystemSeed4JPresetRepository = new FileSystemSeed4JPresetRepository(
       json,
       mockProjectFilesWithValidPresetJson(),

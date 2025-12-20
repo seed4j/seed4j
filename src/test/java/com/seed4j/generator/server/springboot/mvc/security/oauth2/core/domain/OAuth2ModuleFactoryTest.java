@@ -1,6 +1,10 @@
 package com.seed4j.generator.server.springboot.mvc.security.oauth2.core.domain;
 
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.ModuleFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.file;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.readmeFile;
 import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
@@ -93,7 +97,7 @@ class OAuth2ModuleFactoryTest {
       .hasFile("pom.xml")
       .containing("spring-boot-starter-security")
       .containing("spring-boot-starter-oauth2-client")
-      .containing("spring-security-test")
+      .containing("spring-boot-starter-security-test")
       .containing("spring-boot-starter-oauth2-resource-server")
       .and()
       .hasFile("src/main/resources/config/application.yml")

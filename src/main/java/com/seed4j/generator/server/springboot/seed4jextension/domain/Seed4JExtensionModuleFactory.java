@@ -50,6 +50,7 @@ public class Seed4JExtensionModuleFactory {
   private static final Seed4JSource CUCUMBER_SOURCE = from("server/springboot/cucumber");
 
   private static final String SRC_MAIN_JAVA = "src/main/java";
+  private static final String SRC_TEST_JAVA = "src/test/java";
 
   private static final PropertyKey SERVER_PORT_KEY = propertyKey("server.port");
   private static final PropertyKey JACKSON_INCLUSION_KEY = propertyKey("spring.jackson.default-property-inclusion");
@@ -57,6 +58,7 @@ public class Seed4JExtensionModuleFactory {
   private static final PropertyKey HIDDEN_SLUGS_PROPERTY_KEY = propertyKey("seed4j.hidden-resources.slugs");
   private static final PropertyKey BEAN_DEFINITION_OVERRIDING_PROPERTY_KEY = propertyKey("spring.main.allow-bean-definition-overriding");
   private static final String PACKAGE_INFO_JAVA = "package-info.java";
+  private static final String CUCUMBER_REST_CLIENT_JAVA = "CucumberRestClient.java";
 
   public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
@@ -115,8 +117,12 @@ public class Seed4JExtensionModuleFactory {
           .addTemplate("CucumberTest.java")
           .addTemplate("CucumberConfiguration.java")
         .and()
-        .add(CUCUMBER_SOURCE.append("rest").template("CucumberRestTemplate.java"), cucumberDestination.append("rest").append("CucumberRestTemplate.java"))
-        .add(CUCUMBER_SOURCE.file("gitkeep"), to("src/test/features/.gitkeep"));
+        .add(CUCUMBER_SOURCE.append("rest").template(CUCUMBER_REST_CLIENT_JAVA), cucumberDestination.append("rest").append(CUCUMBER_REST_CLIENT_JAVA))
+        .add(CUCUMBER_SOURCE.file("gitkeep"), to("src/test/features/.gitkeep"))
+        .and()
+      .mandatoryReplacements()
+        .in(cucumberRestClient(properties))
+        .add(lineBeforeText("import org.springframework.http.client.ClientHttpRequestInterceptor;"), "import com.seed4j.cucumber.rest.CucumberRestTestContext;");
     // @formatter:on
   }
 
@@ -197,6 +203,10 @@ public class Seed4JExtensionModuleFactory {
 
   private String springBootApplicationWithSeed4J(Seed4JModuleProperties properties) {
     return "@SpringBootApplication(scanBasePackageClasses = { Seed4JApp.class, " + mainClassName(properties) + ".class })";
+  }
+
+  private Seed4JProjectFilePath cucumberRestClient(Seed4JModuleProperties properties) {
+    return path(SRC_TEST_JAVA).append(properties.packagePath()).append("cucumber").append("rest").append(CUCUMBER_REST_CLIENT_JAVA);
   }
 
   private Seed4JProjectFilePath mainClassFile(Seed4JModuleProperties properties) {

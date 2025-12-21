@@ -7,10 +7,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -18,16 +16,16 @@ import java.util.stream.Stream;
 import javax.crypto.SecretKey;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.boot.resttestclient.TestRestTemplate;
+import {{packageName}}.cucumber.rest.CucumberRestClient;
 import {{packageName}}.shared.authentication.domain.Role;
 
 public class AuthenticationSteps {
 
   private final Map<String, User> users;
-  private final TestRestTemplate rest;
+  private final CucumberRestClient restClient;
 
-  AuthenticationSteps(JwtAuthenticationProperties properties, TestRestTemplate rest) {
-    this.rest = rest;
+  AuthenticationSteps(JwtAuthenticationProperties properties, CucumberRestClient restClient) {
+    this.restClient = restClient;
     users = new UsersBuilder(buildKey(properties)).add("admin", Role.ADMIN).add("user", Role.USER).build();
   }
 
@@ -37,40 +35,30 @@ public class AuthenticationSteps {
 
   @Given("I am logged in as {string}")
   public void authenticateUser(String username) {
-    rest.getRestTemplate().setInterceptors(interceptorsWithAuthentication(username));
+    var userToAuthenticate = users.get(username);
+    assertThat(userToAuthenticate).as(unknownUserMessage(username)).isNotNull();
+    restClient.addRequestInterceptor(authenticateUserInterceptor(userToAuthenticate));
   }
 
-  private List<ClientHttpRequestInterceptor> interceptorsWithAuthentication(String user) {
-    List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>(rest.getRestTemplate().getInterceptors());
-
-    var userToAuthenticate = users.get(user);
-
-    assertThat(userToAuthenticate).as(unknownUserMessage(user)).isNotNull();
-
-    interceptors.add((request, body, execution) -> {
+  private static ClientHttpRequestInterceptor authenticateUserInterceptor(User userToAuthenticate) {
+    return (request, body, execution) -> {
       request.getHeaders().set(HttpHeaders.AUTHORIZATION, "Bearer " + userToAuthenticate.token());
 
       return execution.execute(request, body);
-    });
-
-    return interceptors;
+    };
   }
 
   @Given("I am logged out")
   public void logout() {
-    rest.getRestTemplate().setInterceptors(interceptorsWithoutAuthentication());
+    restClient.addRequestInterceptor(unauthenticateInterceptor());
   }
 
-  private List<ClientHttpRequestInterceptor> interceptorsWithoutAuthentication() {
-    List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>(rest.getRestTemplate().getInterceptors());
-
-    interceptors.add((request, body, execution) -> {
+  private static ClientHttpRequestInterceptor unauthenticateInterceptor() {
+    return (request, body, execution) -> {
       request.getHeaders().remove(HttpHeaders.AUTHORIZATION);
 
       return execution.execute(request, body);
-    });
-
-    return interceptors;
+    };
   }
 
   private String unknownUserMessage(String user) {

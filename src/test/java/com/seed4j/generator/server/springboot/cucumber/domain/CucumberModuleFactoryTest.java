@@ -33,7 +33,7 @@ class CucumberModuleFactoryTest {
         "AsyncResponseAsserter.java",
         "Awaiter.java",
         "CucumberRestAssertions.java",
-        "CucumberRestTemplate.java",
+        "CucumberRestClient.java",
         "CucumberJson.java",
         "CucumberRestTestContext.java",
         "CucumberRestTestContextUnitTest.java",
@@ -52,7 +52,6 @@ class CucumberModuleFactoryTest {
       .containing("<artifactId>cucumber-junit-platform-engine</artifactId>")
       .containing("<artifactId>cucumber-java</artifactId>")
       .containing("<artifactId>cucumber-spring</artifactId>")
-      .containing("<artifactId>spring-boot-starter-restclient</artifactId>")
       .containing("<artifactId>spring-boot-resttestclient</artifactId>")
       .containing("<artifactId>junit-platform-suite</artifactId>")
       .containing("<version>${cucumber.version}</version>")

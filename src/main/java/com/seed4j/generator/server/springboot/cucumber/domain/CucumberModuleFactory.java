@@ -41,7 +41,7 @@ public class CucumberModuleFactory {
         .addTemplate("AsyncResponseAsserter.java")
         .addTemplate("Awaiter.java")
         .addTemplate("CucumberRestAssertions.java")
-        .addTemplate("CucumberRestTemplate.java")
+        .addTemplate("CucumberRestClient.java")
         .addTemplate("CucumberJson.java")
         .addTemplate("CucumberRestTestContext.java")
         .addTemplate("CucumberRestTestContextUnitTest.java")

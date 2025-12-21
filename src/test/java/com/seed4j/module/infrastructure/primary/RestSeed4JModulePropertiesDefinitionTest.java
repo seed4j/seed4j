@@ -1,7 +1,7 @@
 package com.seed4j.module.infrastructure.primary;
 
-import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.propertiesDefinition;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.JsonHelper;
 import com.seed4j.UnitTest;
@@ -16,16 +16,19 @@ class RestSeed4JModulePropertiesDefinitionTest {
   }
 
   static String json() {
+    // language=json
     return (
-      "{\"definitions\":["
-      + "{\"type\":\"STRING\",\"mandatory\":true,\"key\":\"packageName\",\"description\":\"Base java package\",\"defaultValue\":\"com.mycompany.myapp\",\"order\":-300},"
-      + "{\"type\":\"STRING\",\"mandatory\":true,\"key\":\"projectName\",\"description\":\"Project full name\",\"defaultValue\":\"Seed4J Sample Application\",\"order\":-200},"
-      + "{\"type\":\"STRING\",\"mandatory\":true,\"key\":\"baseName\",\"description\":\"Project short name (only letters and numbers)\",\"defaultValue\":\"seed4jSampleApplication\",\"order\":-100},"
-      + "{\"type\":\"BOOLEAN\",\"mandatory\":true,\"key\":\"mandatoryBoolean\",\"order\":0},"
-      + "{\"type\":\"INTEGER\",\"mandatory\":true,\"key\":\"mandatoryInteger\",\"order\":0},"
-      + "{\"type\":\"BOOLEAN\",\"mandatory\":false,\"key\":\"optionalBoolean\",\"order\":0},"
-      + "{\"type\":\"STRING\",\"mandatory\":false,\"key\":\"optionalString\",\"order\":0},"
-      + "{\"type\":\"INTEGER\",\"mandatory\":false,\"key\":\"indentSize\",\"description\":\"Number of spaces in indentation\",\"defaultValue\":\"2\",\"order\":500}]}"
+      """
+      {"definitions":[\
+      {"defaultValue":"com.mycompany.myapp","description":"Base java package","key":"packageName","mandatory":true,"order":-300,"type":"STRING"},\
+      {"defaultValue":"Seed4J Sample Application","description":"Project full name","key":"projectName","mandatory":true,"order":-200,"type":"STRING"},\
+      {"defaultValue":"seed4jSampleApplication","description":"Project short name (only letters and numbers)","key":"baseName","mandatory":true,"order":-100,"type":"STRING"},\
+      {"key":"mandatoryBoolean","mandatory":true,"order":0,"type":"BOOLEAN"},\
+      {"key":"mandatoryInteger","mandatory":true,"order":0,"type":"INTEGER"},\
+      {"key":"optionalBoolean","mandatory":false,"order":0,"type":"BOOLEAN"},\
+      {"key":"optionalString","mandatory":false,"order":0,"type":"STRING"},\
+      {"defaultValue":"2","description":"Number of spaces in indentation","key":"indentSize","mandatory":false,"order":500,"type":"INTEGER"}\
+      ]}"""
     );
   }
 }

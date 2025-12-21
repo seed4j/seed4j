@@ -1,7 +1,5 @@
 package com.seed4j.project.infrastructure.secondary;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import com.seed4j.project.domain.ProjectPath;
 import com.seed4j.project.domain.ProjectsRepository;
 import com.seed4j.project.domain.download.Project;
@@ -24,6 +22,9 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
 import org.springframework.stereotype.Repository;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectWriter;
 
 @Repository
 class FileSystemProjectsRepository implements ProjectsRepository {
@@ -70,7 +71,7 @@ class FileSystemProjectsRepository implements ProjectsRepository {
 
       Files.createDirectories(historyPath.getParent());
       Files.write(historyPath, writer.writeValueAsBytes(PersistedProjectAction.from(action)));
-    } catch (IOException e) {
+    } catch (JacksonException | IOException e) {
       throw GeneratorException.technicalError("Error saving action: " + e.getMessage(), e);
     }
   }
@@ -113,7 +114,7 @@ class FileSystemProjectsRepository implements ProjectsRepository {
         .sorted(ACTION_FILES_COMPARATOR)
         .map(actionFile -> read(PersistedProjectAction.class, actionFile))
         .toList();
-    } catch (IOException e) {
+    } catch (JacksonException | IOException e) {
       throw GeneratorException.technicalError("Can't read project history files: " + e.getMessage(), e);
     }
   }
@@ -129,7 +130,7 @@ class FileSystemProjectsRepository implements ProjectsRepository {
   private <T> T read(Class<T> clazz, Path historyFilePath) {
     try {
       return json.readValue(Files.readAllBytes(historyFilePath), clazz);
-    } catch (IOException e) {
+    } catch (JacksonException | IOException e) {
       throw GeneratorException.technicalError("Can't read project history: " + e.getMessage(), e);
     }
   }

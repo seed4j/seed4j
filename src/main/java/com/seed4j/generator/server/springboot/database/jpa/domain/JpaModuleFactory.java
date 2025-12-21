@@ -40,7 +40,7 @@ public class JpaModuleFactory {
       .springMainProperties()
         .set(propertyKey("spring.jpa.hibernate.ddl-auto"), propertyValue("update"))
         .set(propertyKey("spring.jpa.properties.hibernate.criteria.literal_handling_mode"), propertyValue("BIND"))
-        .set(propertyKey("spring.jpa.properties.hibernate.dialect"), propertyValue("org.hibernate.dialect.SQLServer2012Dialect"))
+        .set(propertyKey("spring.jpa.properties.hibernate.dialect"), propertyValue("org.hibernate.dialect.SQLServerDialect"))
         .set(propertyKey("spring.jpa.properties.hibernate.format_sql"), propertyValue(true))
         .set(propertyKey("spring.jpa.properties.hibernate.jdbc.fetch_size"), propertyValue(150))
         .and()

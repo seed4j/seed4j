@@ -218,7 +218,7 @@ class JpaModuleFactoryTest {
                   provider_disables_autocommit: true
                 criteria:
                   literal_handling_mode: BIND
-                dialect: org.hibernate.dialect.SQLServer2012Dialect
+                dialect: org.hibernate.dialect.SQLServerDialect
                 format_sql: true
                 generate_statistics: false
                 jdbc:

@@ -59,7 +59,7 @@ class SecurityConfiguration {
   }
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+  public SecurityFilterChain filterChain(HttpSecurity http) {
     // @formatter:off
     return http
       .csrf(CsrfConfigurer::disable)

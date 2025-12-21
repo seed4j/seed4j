@@ -6,7 +6,6 @@ import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.LOGS_SPY;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_MVC_EMPTY;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_TOMCAT;
-import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_UNDERTOW;
 
 import com.seed4j.generator.server.springboot.mvc.web.application.SpringBootMvcApplicationService;
 import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
@@ -45,17 +44,6 @@ class SpringBootMvcModuleConfiguration {
       .organization(mvcServerOrganization())
       .tags(SERVER_TAG, SPRING_TAG, SPRING_BOOT_TAG, MVC_TAG, WEB_TAG, "tomcat")
       .factory(springBootMvc::buildTomcatModule);
-  }
-
-  @Bean
-  Seed4JModuleResource springBootUndertowMvcModule(SpringBootMvcApplicationService springBootMvc) {
-    return Seed4JModuleResource.builder()
-      .slug(SPRING_BOOT_UNDERTOW)
-      .propertiesDefinition(properties())
-      .apiDoc(SPRING_BOOT_MVC_API_GROUP, "Add Spring Boot MVC with Undertow")
-      .organization(mvcServerOrganization())
-      .tags(SERVER_TAG, SPRING_TAG, SPRING_BOOT_TAG, MVC_TAG, WEB_TAG, "undertow")
-      .factory(springBootMvc::buildUndertowModule);
   }
 
   private Seed4JModulePropertiesDefinition properties() {

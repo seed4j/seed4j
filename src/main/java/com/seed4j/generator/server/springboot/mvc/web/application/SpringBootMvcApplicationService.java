@@ -18,10 +18,6 @@ public class SpringBootMvcApplicationService {
     return springBootMvcs.buildTomcatModule(properties);
   }
 
-  public Seed4JModule buildUndertowModule(Seed4JModuleProperties properties) {
-    return springBootMvcs.buildUndertowModule(properties);
-  }
-
   public Seed4JModule buildEmptyModule(Seed4JModuleProperties properties) {
     return springBootMvcs.buildEmptyModule(properties);
   }

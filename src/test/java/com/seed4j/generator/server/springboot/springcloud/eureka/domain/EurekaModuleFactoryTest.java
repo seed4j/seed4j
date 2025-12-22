@@ -40,7 +40,6 @@ class EurekaModuleFactoryTest {
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
       .containing("<spring-cloud.version>")
-      .containing("<spring-cloud-netflix-eureka-client.version>")
       .containing(
         """
               <dependency>
@@ -65,7 +64,6 @@ class EurekaModuleFactoryTest {
             <dependency>
               <groupId>org.springframework.cloud</groupId>
               <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-              <version>${spring-cloud-netflix-eureka-client.version}</version>
             </dependency>
         """
       )

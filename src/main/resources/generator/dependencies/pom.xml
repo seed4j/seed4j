@@ -19,7 +19,6 @@
     <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
     <spring-boot.version>4.0.1</spring-boot.version>
     <spring-cloud.version>2025.1.0</spring-cloud.version>
-    <spring-cloud-netflix-eureka-client.version>5.0.0</spring-cloud-netflix-eureka-client.version>
     <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
     <kafka-clients.version>4.1.1</kafka-clients.version>
     <mongock.version>5.5.1</mongock.version>
@@ -146,11 +145,6 @@
         <artifactId>spring-cloud-dependencies</artifactId>
         <version>${spring-cloud.version}</version>
         <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        <version>${spring-cloud-netflix-eureka-client.version}</version>
       </dependency>
       <dependency>
         <groupId>org.testcontainers</groupId>

@@ -97,6 +97,7 @@ class OAuth2ModuleFactoryTest {
       .hasFile("pom.xml")
       .containing("spring-boot-starter-security")
       .containing("spring-boot-starter-oauth2-client")
+      .containing("spring-boot-starter-restclient")
       .containing("spring-boot-starter-security-test")
       .containing("spring-boot-starter-oauth2-resource-server")
       .and()

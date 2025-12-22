@@ -30,7 +30,7 @@ public final class CucumbersModules {
   private static JavaDependency springBootRestClientDependency() {
     return javaDependency()
       .groupId("org.springframework.boot")
-      .artifactId("spring-boot-restclient")
+      .artifactId("spring-boot-starter-restclient")
       .scope(JavaDependencyScope.TEST)
       .build();
   }

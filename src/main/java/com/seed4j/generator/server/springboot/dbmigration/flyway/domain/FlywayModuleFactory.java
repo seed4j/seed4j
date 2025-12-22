@@ -35,7 +35,7 @@ public class FlywayModuleFactory {
     // @formatter:off
     return moduleBuilder(properties)
       .javaDependencies()
-        .addDependency(FLYWAY_GROUP_ID, artifactId("flyway-core"))
+        .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-starter-flyway"))
         .and()
       .files()
         .add(SOURCE.file("V00000000000000__init.sql"), to("src/main/resources/db/migration").append(initFilename(date)))

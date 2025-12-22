@@ -257,7 +257,8 @@ jobs:
           - seed4jextension
           - typescriptapp
           - thymeleafapp
-          - langchain4japp
+          # disabled until compatible with spring-boot-4.0: https://github.com/langchain4j/langchain4j/issues/4268
+          # - langchain4japp
         include:
           - java-build-tool: maven
           - spring-config-format: yaml

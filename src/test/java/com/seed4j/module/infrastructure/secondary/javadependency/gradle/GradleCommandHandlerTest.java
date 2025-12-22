@@ -1,10 +1,37 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.gradle;
 
-import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.Seed4JModule.*;
-import static com.seed4j.module.domain.Seed4JModulesFixture.*;
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.params.provider.EnumSource.Mode.*;
+import static com.seed4j.TestFileUtils.content;
+import static com.seed4j.TestFileUtils.contentNormalizingNewLines;
+import static com.seed4j.TestFileUtils.projectFrom;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.buildProfileId;
+import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleGradlePlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleGradleProfilePlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleToolVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.defaultVersionDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.dependencyWithVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.dependencyWithVersionAndExclusion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.dockerGradlePluginDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.emptyModuleContext;
+import static com.seed4j.module.domain.Seed4JModulesFixture.gitPropertiesGradleProfilePlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.jsonWebTokenDependencyId;
+import static com.seed4j.module.domain.Seed4JModulesFixture.jsonWebTokenVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.localBuildProfile;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenBuildExtensionWithSlug;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenEnforcerPlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.nodeGradlePlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyId;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyManagement;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootStarterWebDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springProfilesActiveProperty;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Indentation;
@@ -13,7 +40,21 @@ import com.seed4j.module.domain.buildproperties.PropertyKey;
 import com.seed4j.module.domain.buildproperties.PropertyValue;
 import com.seed4j.module.domain.file.TemplateRenderer;
 import com.seed4j.module.domain.gradleplugin.GradlePlugin;
-import com.seed4j.module.domain.javabuild.command.*;
+import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.AddDirectMavenPlugin;
+import com.seed4j.module.domain.javabuild.command.AddGradleConfiguration;
+import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
+import com.seed4j.module.domain.javabuild.command.AddGradleTasksTestInstruction;
+import com.seed4j.module.domain.javabuild.command.AddJavaAnnotationProcessor;
+import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
+import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.AddMavenBuildExtension;
+import com.seed4j.module.domain.javabuild.command.AddMavenPluginManagement;
+import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
+import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
@@ -495,6 +536,33 @@ class GradleCommandHandlerTest {
   }
 
   @Nested
+  class HandleAddAnnotationProcessor {
+
+    private final Seed4JProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+
+    @Test
+    void shouldAddAnnotationProcessorDependencyInBuildGradleFile() {
+      JavaDependency dependency = javaDependency()
+        .groupId("com.google.auto.service")
+        .artifactId("auto-service")
+        .versionSlug("auto-service")
+        .build();
+      new GradleCommandHandler(Indentation.DEFAULT, emptyGradleProjectFolder, emptyModuleContext(), files, fileReplacer).handle(
+        new AddJavaAnnotationProcessor(dependency)
+      );
+
+      assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("annotationProcessor(libs.auto.service)");
+      assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
+        """
+        [libraries.auto-service]
+        \t\tname = "auto-service"
+        \t\tgroup = "com.google.auto.service"
+        """
+      );
+    }
+  }
+
+  @Nested
   class HandleAddDirectJavaDependency {
 
     private final Seed4JProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
@@ -702,6 +770,7 @@ class GradleCommandHandlerTest {
           // seed4j-needle-gradle-implementation-dependencies
           compileOnly(libs.junit.jupiter.engine)
           // seed4j-needle-gradle-compile-dependencies
+          // seed4j-needle-gradle-annotation-processors
           runtimeOnly(libs.spring.boot.starter.web)
           // seed4j-needle-gradle-runtime-dependencies
           testImplementation(libs.junit.jupiter.engine)
@@ -729,6 +798,51 @@ class GradleCommandHandlerTest {
         runtimeOnly(libs.findLibrary("spring.boot.starter.web").get())\
         """
       );
+    }
+  }
+
+  @Nested
+  class HandleRemoveAnnotationProcessor {
+
+    private final Seed4JProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+
+    @Test
+    void shouldRemoveEntryInLibrariesSection() {
+      GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
+        Indentation.DEFAULT,
+        emptyGradleProjectFolder,
+        emptyModuleContext(),
+        files,
+        fileReplacer
+      );
+      gradleCommandHandler.handle(new AddJavaAnnotationProcessor(defaultVersionDependency()));
+
+      gradleCommandHandler.handle(new RemoveJavaAnnotationProcessor(defaultVersionDependency().id()));
+
+      assertThat(versionCatalogContent(emptyGradleProjectFolder))
+        .doesNotContain("[libraries.spring-boot-starter]")
+        .doesNotContain(
+          """
+          \t\tname = "spring-boot-starter"
+          \t\tgroup = "org.springframework.boot"
+          """
+        );
+    }
+
+    @Test
+    void shouldRemoveDependencyInBuildGradleFile() {
+      GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
+        Indentation.DEFAULT,
+        emptyGradleProjectFolder,
+        emptyModuleContext(),
+        files,
+        fileReplacer
+      );
+      gradleCommandHandler.handle(new AddJavaAnnotationProcessor(defaultVersionDependency()));
+
+      gradleCommandHandler.handle(new RemoveJavaAnnotationProcessor(defaultVersionDependency().id()));
+
+      assertThat(buildGradleContent(emptyGradleProjectFolder)).doesNotContain("implementation(libs.spring.boot.starter)");
     }
   }
 

@@ -29,4 +29,8 @@ public class JpaApplicationService {
   public Seed4JModule buildMySQL(Seed4JModuleProperties properties) {
     return jpa.buildMySQL(properties);
   }
+
+  public Seed4JModule buildMetaModelGenerator(Seed4JModuleProperties seed4JModuleProperties) {
+    return jpa.buildMetaModelGenerator(seed4JModuleProperties);
+  }
 }

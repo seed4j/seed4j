@@ -58,7 +58,7 @@ public class JacocoModuleFactory {
     return moduleBuilder(properties)
       .mavenPlugins()
         .plugin(mavenJacocoPlugin())
-        .pluginManagement(mavenJacocoWithMinCoverageCheckPluginManagement())
+        .pluginManagement(mavenJacocoWithMinCoverageCheckPluginManagement(properties))
         .and()
       .gradlePlugins()
         .plugin(gradleJacocoWithMinCoverageCheckPlugin())
@@ -82,7 +82,8 @@ public class JacocoModuleFactory {
     return commonMavenJacocoPluginManagement().build();
   }
 
-  private static MavenPlugin mavenJacocoWithMinCoverageCheckPluginManagement() {
+  private static MavenPlugin mavenJacocoWithMinCoverageCheckPluginManagement(Seed4JModuleProperties properties) {
+    String basePackagePath = properties.basePackage().get().replace(".", "/");
     return commonMavenJacocoPluginManagement()
       .addExecution(
         pluginExecution()
@@ -91,6 +92,12 @@ public class JacocoModuleFactory {
           .configuration(
             """
               <dataFile>target/jacoco/allTest.exec</dataFile>
+              <includes>
+                <include>%s/**</include>
+              </includes>
+              <excludes>
+                <exclude>%s/**/infrastructure/secondary/**/*Entity_.class</exclude>
+              </excludes>
               <rules>
                 <rule>
                   <element>CLASS</element>
@@ -108,7 +115,7 @@ public class JacocoModuleFactory {
                   </limits>
                 </rule>
               </rules>
-            """
+            """.formatted(basePackagePath, basePackagePath)
           )
       )
       .build();

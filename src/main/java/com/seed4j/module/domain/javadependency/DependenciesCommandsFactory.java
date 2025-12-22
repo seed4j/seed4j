@@ -1,9 +1,11 @@
 package com.seed4j.module.domain.javadependency;
 
 import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.AddJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.RemoveJavaDependencyManagement;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import java.util.Optional;
@@ -23,6 +25,12 @@ final class DependenciesCommandsFactory {
     AddDirectJavaDependency::new,
     RemoveDirectJavaDependency::new,
     RemoveDirectJavaDependency::new
+  );
+  public static final DependenciesCommandsFactory ANNOTATION_PROCESSING = new DependenciesCommandsFactory(
+    AddJavaAnnotationProcessor::new,
+    AddJavaAnnotationProcessor::new,
+    RemoveJavaAnnotationProcessor::new,
+    RemoveJavaAnnotationProcessor::new
   );
 
   private final Function<JavaDependency, JavaBuildCommand> addDependency;

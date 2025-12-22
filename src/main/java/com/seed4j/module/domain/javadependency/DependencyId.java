@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.javadependency;
 
-import static org.apache.commons.lang3.builder.ToStringStyle.*;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
@@ -122,10 +122,18 @@ public final class DependencyId {
 
   public interface DependencyIdGroupIdBuilder {
     DependencyIdArtifactIdBuilder groupId(GroupId groupId);
+
+    default DependencyIdArtifactIdBuilder groupId(String groupId) {
+      return groupId(new GroupId(groupId));
+    }
   }
 
   public interface DependencyIdArtifactIdBuilder {
     DependencyIdOptionalFieldsBuilder artifactId(ArtifactId artifactId);
+
+    default DependencyIdOptionalFieldsBuilder artifactId(String artifactId) {
+      return artifactId(new ArtifactId(artifactId));
+    }
   }
 
   public interface DependencyIdOptionalFieldsBuilder {

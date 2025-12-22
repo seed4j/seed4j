@@ -78,6 +78,18 @@ class MavenProjectJavaDependenciesRepositoryTest {
     assertThat(dependencies.get(DependencyId.of(new GroupId("org.springdoc"), new ArtifactId("springdoc-openapi-ui")))).isEmpty();
   }
 
+  @Test
+  void shouldGetAnnotationProcessingDependenciesFromMavenFile() {
+    DependencyId autoServiceDependencyId = DependencyId.builder().groupId("com.google.auto.service").artifactId("auto-service").build();
+
+    assertThat(mavenDependencies().annotationProcessor(autoServiceDependencyId)).hasValueSatisfying(autoService -> {
+      assertThat(autoService.version()).contains(new VersionSlug("auto-service"));
+      assertThat(autoService.scope()).isEqualTo(JavaDependencyScope.COMPILE);
+      assertThat(autoService.optional()).isFalse();
+      assertThat(autoService.classifier()).isEmpty();
+    });
+  }
+
   private void assertJJWTDependency(JavaDependencies dependencies) {
     JavaDependency jjwt = dependencies
       .get(

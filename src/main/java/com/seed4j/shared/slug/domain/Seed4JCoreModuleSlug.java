@@ -78,6 +78,7 @@ public enum Seed4JCoreModuleSlug implements Seed4JModuleSlugFactory {
   JOOQ_POSTGRESQL("jooq-postgresql", RANK_C),
   JPA_PAGINATION("jpa-pagination", RANK_A),
   JPA_MARIADB("jpa-mariadb", RANK_B),
+  JPA_METAMODEL_GENERATOR("jpa-metamodel-generator", RANK_A),
   JPA_MSSQL("jpa-mssql", RANK_C),
   JPA_MYSQL("jpa-mysql", RANK_A),
   JPA_POSTGRESQL("jpa-postgresql", RANK_S),

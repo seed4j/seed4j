@@ -69,6 +69,9 @@ seed4j:
   hidden-resources:
     slugs:
       - svelte-core
+      # disabled until compatible with spring-boot-4.0: https://github.com/langchain4j/langchain4j/issues/4268
+      - langchain4j
+      - spring-boot-langchain4j-sample
   preset-folder: presets
 
 server:

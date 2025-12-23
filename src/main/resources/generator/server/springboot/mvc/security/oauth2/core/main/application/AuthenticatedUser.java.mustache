@@ -103,14 +103,12 @@ public final class AuthenticatedUser {
    * @throws UnknownAuthenticationException
    *           if the authentication scheme is unknown
    */
+  @SuppressWarnings("java:S2259")
   public static Map<String, Object> attributes() {
     Authentication token = authentication().orElseThrow(NotAuthenticatedUserException::new);
 
     if (token instanceof OAuth2AuthenticationToken oAuth2AuthenticationToken) {
-      var principal = oAuth2AuthenticationToken.getPrincipal();
-      if (principal != null) {
-        return principal.getAttributes();
-      }
+      return oAuth2AuthenticationToken.getPrincipal().getAttributes();
     }
 
     if (token instanceof JwtAuthenticationToken jwtAuthenticationToken) {

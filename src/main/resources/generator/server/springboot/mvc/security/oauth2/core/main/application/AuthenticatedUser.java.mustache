@@ -107,7 +107,10 @@ public final class AuthenticatedUser {
     Authentication token = authentication().orElseThrow(NotAuthenticatedUserException::new);
 
     if (token instanceof OAuth2AuthenticationToken oAuth2AuthenticationToken) {
-      return oAuth2AuthenticationToken.getPrincipal().getAttributes();
+      var principal = oAuth2AuthenticationToken.getPrincipal();
+      if (principal != null) {
+        return principal.getAttributes();
+      }
     }
 
     if (token instanceof JwtAuthenticationToken jwtAuthenticationToken) {

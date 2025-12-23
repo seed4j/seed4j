@@ -50,7 +50,10 @@ class OAuth2AuthenticationReader {
 
   private Map<String, Object> readAttributes(Authentication authentication) {
     if (authentication instanceof OAuth2AuthenticationToken oauthToken) {
-      return oauthToken.getPrincipal().getAttributes();
+      var principal = oauthToken.getPrincipal();
+      if (principal != null) {
+        return principal.getAttributes();
+      }
     }
 
     if (authentication instanceof JwtAuthenticationToken jwtToken) {

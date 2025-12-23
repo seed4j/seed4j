@@ -16,7 +16,7 @@
     "eslint-plugin-react": "7.37.5",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-hook-form": "7.68.0",
+    "react-hook-form": "7.69.0",
     "react-i18next": "16.5.0"
   }
 }

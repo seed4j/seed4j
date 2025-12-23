@@ -1,15 +1,14 @@
 package {{packageName}}.wire.gateway.infrastructure.primary;
 
-import {{packageName}}.wire.gateway.infrastructure.primary.vm.RouteVM;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 /**
  * REST controller for managing Gateway configuration.
@@ -35,23 +34,12 @@ class GatewayResource {
    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of routes.
    */
   @GetMapping("/routes")
-  public ResponseEntity<List<RouteVM>> activeRoutes() {
-    Flux<Route> routes = routeLocator.getRoutes();
-    List<RouteVM> routeVMs = new ArrayList<>();
-    routes.subscribe(route -> {
-      RouteVM routeVM = new RouteVM();
-      // Manipulate strings to make Gateway routes look like Zuul's
-      String predicate = route.getPredicate().toString();
-      String path = predicate.substring(predicate.indexOf("[") + 1, predicate.indexOf("]"));
-      routeVM.setPath(path);
-      String serviceId = route.getId().substring(route.getId().indexOf("_") + 1).toLowerCase();
-      routeVM.setServiceId(serviceId);
-      // Exclude gateway app from routes
-      if (!serviceId.equalsIgnoreCase(appName)) {
-        routeVM.setServiceInstances(discoveryClient.getInstances(serviceId));
-        routeVMs.add(routeVM);
-      }
-    });
-    return ResponseEntity.ok(routeVMs);
+  public ResponseEntity<Mono<List<RestRoute>>> activeRoutes() {
+    Mono<List<RestRoute>> routes = routeLocator.getRoutes()
+      .map(RestRoute::from)
+      .filter(route -> !route.serviceId().equalsIgnoreCase(appName))
+      .map(route -> route.withInstances(discoveryClient.getInstances(route.serviceId())))
+      .collectList();
+    return ResponseEntity.ok(routes);
   }
 }

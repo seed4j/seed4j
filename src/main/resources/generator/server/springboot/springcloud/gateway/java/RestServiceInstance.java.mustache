@@ -1,0 +1,30 @@
+package {{packageName}}.wire.gateway.infrastructure.primary;
+
+import java.net.URI;
+import java.util.Map;
+import org.jspecify.annotations.Nullable;
+import org.springframework.cloud.client.ServiceInstance;
+
+record RestServiceInstance(
+  String serviceId,
+  String host,
+  int port,
+  boolean secure,
+  Map<String, String> metadata,
+  @Nullable String instanceId,
+  @Nullable URI uri
+) {
+
+  public static RestServiceInstance from(ServiceInstance serviceInstance) {
+    return new RestServiceInstance(
+      serviceInstance.getServiceId(),
+      serviceInstance.getHost(),
+      serviceInstance.getPort(),
+      serviceInstance.isSecure(),
+      serviceInstance.getMetadata(),
+      serviceInstance.getInstanceId(),
+      serviceInstance.getUri()
+    );
+  }
+
+}

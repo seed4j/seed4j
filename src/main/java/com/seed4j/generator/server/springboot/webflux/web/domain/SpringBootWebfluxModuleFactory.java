@@ -3,7 +3,6 @@ package com.seed4j.generator.server.springboot.webflux.web.domain;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
-import static com.seed4j.module.domain.Seed4JModule.javaDependency;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
 import static com.seed4j.module.domain.Seed4JModule.propertyValue;
@@ -13,8 +12,6 @@ import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javabuild.GroupId;
-import com.seed4j.module.domain.javadependency.JavaDependency;
-import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
@@ -41,7 +38,7 @@ public class SpringBootWebfluxModuleFactory {
     return moduleBuilder(properties)
       .javaDependencies()
         .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-webflux"))
-        .addDependency(reactorTestDependency())
+        .addTestDependency(SPRING_GROUP, artifactId("spring-boot-starter-webflux-test"))
         .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-validation"))
         .and()
       .springMainProperties()
@@ -64,9 +61,5 @@ public class SpringBootWebfluxModuleFactory {
         .and()
       .build();
     // @formatter:on
-  }
-
-  private JavaDependency reactorTestDependency() {
-    return javaDependency().groupId("io.projectreactor").artifactId("reactor-test").scope(JavaDependencyScope.TEST).build();
   }
 }

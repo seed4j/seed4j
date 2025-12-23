@@ -37,8 +37,8 @@ class SpringBootWebfluxModuleFactoryTest {
       .containing(
         """
             <dependency>
-              <groupId>io.projectreactor</groupId>
-              <artifactId>reactor-test</artifactId>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-webflux-test</artifactId>
               <scope>test</scope>
             </dependency>
         """

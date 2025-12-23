@@ -57,7 +57,7 @@ dependencies {
   implementation(platform(libs.spring.boot.dependencies))
   implementation(libs.spring.boot.starter)
   implementation(libs.jjwt.api)
-  implementation(libs.spring.boot.starter.web) {
+  implementation(libs.spring.boot.starter.webmvc) {
     exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
   }
   // seed4j-needle-gradle-implementation-dependencies

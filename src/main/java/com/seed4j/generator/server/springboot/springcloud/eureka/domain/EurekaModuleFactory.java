@@ -9,7 +9,6 @@ import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
 import static com.seed4j.module.domain.Seed4JModule.propertyValue;
 import static com.seed4j.module.domain.Seed4JModule.to;
-import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.docker.DockerImages;
@@ -52,8 +51,7 @@ public class EurekaModuleFactory {
         .addDependency(SPRING_CLOUD_GROUP, artifactId("spring-cloud-starter-bootstrap"))
         .addDependency(
           SPRING_CLOUD_GROUP,
-          artifactId("spring-cloud-starter-netflix-eureka-client"),
-          versionSlug("spring-cloud-netflix-eureka-client")
+          artifactId("spring-cloud-starter-netflix-eureka-client")
         )
         .and()
       .files()

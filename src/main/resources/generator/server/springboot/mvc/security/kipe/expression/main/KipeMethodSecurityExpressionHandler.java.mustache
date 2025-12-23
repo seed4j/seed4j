@@ -1,14 +1,17 @@
 package {{packageName}}.shared.kipe.application;
 
 import java.lang.reflect.Method;
+import java.util.Optional;
 import java.util.function.Supplier;
 import org.aopalliance.intercept.MethodInvocation;
+import org.jspecify.annotations.Nullable;
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.context.expression.MethodBasedEvaluationContext;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionOperations;
+import org.springframework.security.authorization.DefaultAuthorizationManagerFactory;
 import org.springframework.security.core.Authentication;
 
 class KipeMethodSecurityExpressionHandler extends DefaultMethodSecurityExpressionHandler {
@@ -20,34 +23,35 @@ class KipeMethodSecurityExpressionHandler extends DefaultMethodSecurityExpressio
   }
 
   @Override
-  public EvaluationContext createEvaluationContext(Supplier<Authentication> authentication, MethodInvocation mi) {
-    MethodSecurityExpressionOperations root = buildExpressionRoot(authentication, mi);
+  public EvaluationContext createEvaluationContext(Supplier<? extends @Nullable Authentication> authentication, MethodInvocation methodInvocation) {
+    MethodSecurityExpressionOperations expressionRoot = buildExpressionRoot(authentication, methodInvocation);
 
-    var ctx = new MethodBasedEvaluationContext(
-      root,
-      getSpecificMethod(mi),
-      mi.getArguments(),
+    var context = new MethodBasedEvaluationContext(
+      expressionRoot,
+      getSpecificMethod(methodInvocation),
+      methodInvocation.getArguments(),
       getParameterNameDiscoverer()
     );
 
-    ctx.setBeanResolver(getBeanResolver());
+    context.setBeanResolver(getBeanResolver());
 
-    return ctx;
+    return context;
   }
 
-  private static Method getSpecificMethod(MethodInvocation mi) {
-    return AopUtils.getMostSpecificMethod(mi.getMethod(), AopProxyUtils.ultimateTargetClass(mi.getThis()));
+  private static Method getSpecificMethod(MethodInvocation methodInvocation) {
+    Class<?> targetClass = Optional.ofNullable(methodInvocation.getThis()).map(AopProxyUtils::ultimateTargetClass).orElse(null);
+    return AopUtils.getMostSpecificMethod(methodInvocation.getMethod(), targetClass);
   }
 
-  private MethodSecurityExpressionOperations buildExpressionRoot(Supplier<Authentication> authentication, MethodInvocation invocation) {
-    var root = new KipeMethodSecurityExpressionRoot(authentication, evaluator);
+  private MethodSecurityExpressionOperations buildExpressionRoot(
+    Supplier<? extends @Nullable Authentication> authentication,
+    MethodInvocation methodInvocation
+  ) {
+    var expressionRoot = new KipeMethodSecurityExpressionRoot(authentication, methodInvocation, evaluator);
 
-    root.setThis(invocation.getThis());
-    root.setPermissionEvaluator(getPermissionEvaluator());
-    root.setTrustResolver(getTrustResolver());
-    root.setRoleHierarchy(getRoleHierarchy());
-    root.setDefaultRolePrefix(getDefaultRolePrefix());
+    expressionRoot.setAuthorizationManagerFactory(new DefaultAuthorizationManagerFactory<>());
+    expressionRoot.setPermissionEvaluator(getPermissionEvaluator());
 
-    return root;
+    return expressionRoot;
   }
 }

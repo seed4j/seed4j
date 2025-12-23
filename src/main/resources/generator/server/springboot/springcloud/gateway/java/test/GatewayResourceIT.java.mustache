@@ -5,19 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.mockito.Mockito.when;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties;
-import {{packageName}}.wire.gateway.infrastructure.primary.vm.RouteVM;
 import java.net.URI;
 import java.util.function.Predicate;
 import org.assertj.core.data.Index;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
+import org.springframework.boot.webflux.autoconfigure.WebFluxProperties;
+import org.springframework.boot.webflux.test.autoconfigure.WebFluxTest;
 import org.springframework.cloud.client.DefaultServiceInstance;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -33,7 +28,6 @@ import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 @WebFluxTest(GatewayResource.class)
-@AutoConfigureWebTestClient
 class GatewayResourceIT {
 
   @MockitoBean
@@ -43,19 +37,10 @@ class GatewayResourceIT {
   private RouteLocator routeLocator;
 
   @Autowired
-  private ObjectMapper objectMapper;
-
-  @Autowired
   private WebTestClient webTestClient;
 
   @Value("${spring.application.name}")
   private String appName;
-
-  @BeforeEach
-  void setUp() {
-    SimpleModule simpleModule = new SimpleModule().addAbstractTypeMapping(ServiceInstance.class, DefaultServiceInstance.class);
-    objectMapper.registerModule(simpleModule);
-  }
 
   @Test
   void shouldGetActiveRoutes() throws Exception {
@@ -69,34 +54,29 @@ class GatewayResourceIT {
     );
     when(routeLocator.getRoutes()).thenReturn(routes);
 
-    DefaultServiceInstance serviceInstance = new DefaultServiceInstance();
-    serviceInstance.setInstanceId("APP");
-    serviceInstance.setServiceId("app:7459517c1334fe03658ce69eb959c7bd");
-    serviceInstance.setUri(new URI("http://192.168.1.38:8082"));
-    serviceInstance.setHost("192.168.1.38");
-    serviceInstance.setPort(8082);
+    ServiceInstance serviceInstance = new DefaultServiceInstance("APP", "app:7459517c1334fe03658ce69eb959c7bd", "192.168.1.38", 8082, false);
     when(discoveryClient.getInstances("my-app")).thenReturn(singletonList(serviceInstance));
 
-    RouteVM route = webTestClient
+    RestRoute route = webTestClient
       .get()
       .uri(new URI("/api/gateway/routes"))
       .exchange()
       .expectStatus()
       .isOk()
-      .returnResult(RouteVM.class)
+      .returnResult(RestRoute.class)
       .getResponseBody()
       .blockFirst();
 
-    assertThat(route.getServiceId()).isEqualTo("my-app");
-    assertThat(route.getPath()).isEqualTo("'/services/' + serviceId.toLowerCase() +'/**'");
-    assertThat(route.getServiceInstances())
+    assertThat(route.serviceId()).isEqualTo("my-app");
+    assertThat(route.path()).isEqualTo("'/services/' + serviceId.toLowerCase() +'/**'");
+    assertThat(route.serviceInstances())
       .hasSize(1)
       .extracting(
-        ServiceInstance::getInstanceId,
-        ServiceInstance::getServiceId,
-        ServiceInstance::getUri,
-        ServiceInstance::getHost,
-        ServiceInstance::getPort
+        RestServiceInstance::instanceId,
+        RestServiceInstance::serviceId,
+        RestServiceInstance::uri,
+        RestServiceInstance::host,
+        RestServiceInstance::port
       )
       .contains(
         tuple("APP", "app:7459517c1334fe03658ce69eb959c7bd", new URI("http://192.168.1.38:8082"), "192.168.1.38", 8082),
@@ -116,15 +96,15 @@ class GatewayResourceIT {
     );
     when(routeLocator.getRoutes()).thenReturn(routes);
 
-    FluxExchangeResult<RouteVM> result = webTestClient
+    FluxExchangeResult<RestRoute> result = webTestClient
       .get()
       .uri(new URI("/api/gateway/routes"))
       .exchange()
       .expectStatus()
       .isOk()
-      .returnResult(RouteVM.class);
+      .returnResult(RestRoute.class);
 
-    StepVerifier.create(result.getResponseBody()).expectComplete();
+    StepVerifier.create(result.getResponseBody()).expectComplete().verify();
   }
 
   private Predicate<ServerWebExchange> getPredicate() {

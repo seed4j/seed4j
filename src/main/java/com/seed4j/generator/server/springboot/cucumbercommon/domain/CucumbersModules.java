@@ -21,8 +21,26 @@ public final class CucumbersModules {
       .addDependency(cucumberJunitPlatformEngineDependency())
       .addDependency(cucumberJavaDependency())
       .addDependency(cucumberSpringDependency())
+      .addDependency(springBootRestClientDependency())
+      .addDependency(springBootRestTestClientDependency())
       .addDependency(junitPlatformSuiteDependency())
       .and();
+  }
+
+  private static JavaDependency springBootRestClientDependency() {
+    return javaDependency()
+      .groupId("org.springframework.boot")
+      .artifactId("spring-boot-starter-restclient")
+      .scope(JavaDependencyScope.TEST)
+      .build();
+  }
+
+  private static JavaDependency springBootRestTestClientDependency() {
+    return javaDependency()
+      .groupId("org.springframework.boot")
+      .artifactId("spring-boot-resttestclient")
+      .scope(JavaDependencyScope.TEST)
+      .build();
   }
 
   private static JavaDependency cucumberJunitPlatformEngineDependency() {

@@ -1,10 +1,17 @@
 package com.seed4j.generator.server.springboot.langchain4j.domain;
 
-import static com.seed4j.module.domain.Seed4JModule.*;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.comment;
+import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JSource;
-import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
@@ -17,9 +24,7 @@ public class LangChain4jModuleFactory {
     "You can temporarily use 'demo' key, which is provided for free for demonstration purposes";
 
   private static final Seed4JSource SOURCE = from("server/springboot/langchain4j");
-  private static final GroupId GROUP_ID = groupId("dev.langchain4j");
-  private static final ArtifactId ARTIFACT_ID = artifactId("langchain4j-spring-boot-starter");
-  private static final ArtifactId OPEN_AI_ARTIFACT_ID = artifactId("langchain4j-open-ai-spring-boot-starter");
+  private static final GroupId LANGCHAIN4J_GROUP_ID = groupId("dev.langchain4j");
   private static final VersionSlug VERSION_SLUG = versionSlug("langchain4j");
 
   private static final String PROPERTIES = "properties";
@@ -32,8 +37,8 @@ public class LangChain4jModuleFactory {
     return moduleBuilder(properties)
       .documentation(documentationTitle("LangChain4j"), SOURCE.template("langchain4j.md"))
       .javaDependencies()
-        .addDependency(GROUP_ID, ARTIFACT_ID, VERSION_SLUG)
-        .addDependency(GROUP_ID, OPEN_AI_ARTIFACT_ID, VERSION_SLUG)
+        .addDependency(LANGCHAIN4J_GROUP_ID, artifactId("langchain4j-spring-boot-starter"), VERSION_SLUG)
+        .addDependency(LANGCHAIN4J_GROUP_ID, artifactId("langchain4j-open-ai-spring-boot-starter"), VERSION_SLUG)
         .and()
       .springMainProperties()
         .set(LANGCHAIN4J_PROPERTY_API_KEY, propertyValue("demo"))

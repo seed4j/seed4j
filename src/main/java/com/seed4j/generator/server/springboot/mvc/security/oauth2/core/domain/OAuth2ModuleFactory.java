@@ -139,6 +139,7 @@ public class OAuth2ModuleFactory {
   private static void appendDependencies(Seed4JModuleBuilder builder) {
     builder
       .javaDependencies()
+      .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-restclient"))
       .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-oauth2-client"))
       .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-oauth2-resource-server"));
   }

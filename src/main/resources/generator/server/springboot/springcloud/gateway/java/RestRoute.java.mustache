@@ -1,0 +1,28 @@
+package {{packageName}}.wire.gateway.infrastructure.primary;
+
+import java.util.List;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.gateway.route.Route;
+
+/**
+ * Route managed by the Gateway.
+ */
+record RestRoute(String path, String serviceId, List<RestServiceInstance> serviceInstances) {
+  public static RestRoute from(Route route) {
+    // Manipulate strings to make Gateway routes look like Zuul's
+    return new RestRoute(extractPath(route), extractServiceId(route), List.of());
+  }
+
+  public RestRoute withInstances(List<ServiceInstance> serviceInstances) {
+    return new RestRoute(path, serviceId, serviceInstances.stream().map(RestServiceInstance::from).toList());
+  }
+
+  private static String extractPath(Route route) {
+    String predicate = route.getPredicate().toString();
+    return predicate.substring(predicate.indexOf("[") + 1, predicate.indexOf("]"));
+  }
+
+  private static String extractServiceId(Route route) {
+    return route.getId().substring(route.getId().indexOf("_") + 1).toLowerCase();
+  }
+}

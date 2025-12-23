@@ -15,7 +15,7 @@ import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class SpringBootMvcsModuleFactoryTest {
+class SpringBootMvcModuleFactoryTest {
 
   private static final SpringBootMvcModuleFactory factory = new SpringBootMvcModuleFactory();
 
@@ -40,7 +40,16 @@ class SpringBootMvcsModuleFactoryTest {
         """
             <dependency>
               <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-starter-web</artifactId>
+              <artifactId>spring-boot-starter-webmvc</artifactId>
+            </dependency>
+        """
+      )
+      .containing(
+        """
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-webmvc-test</artifactId>
+              <scope>test</scope>
             </dependency>
         """
       )
@@ -112,10 +121,6 @@ class SpringBootMvcsModuleFactoryTest {
             </dependency>
         """
       )
-      .and()
-      .hasFile("src/main/java/com/seed4j/growth/wire/jackson/infrastructure/primary/JacksonConfiguration.java")
-      .and()
-      .hasFile("src/test/java/com/seed4j/growth/wire/jackson/infrastructure/primary/JacksonConfigurationIT.java")
       .and();
   }
 }

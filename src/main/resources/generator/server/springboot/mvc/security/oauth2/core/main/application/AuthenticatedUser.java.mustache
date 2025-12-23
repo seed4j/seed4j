@@ -103,6 +103,7 @@ public final class AuthenticatedUser {
    * @throws UnknownAuthenticationException
    *           if the authentication scheme is unknown
    */
+  @SuppressWarnings("java:S2259")
   public static Map<String, Object> attributes() {
     Authentication token = authentication().orElseThrow(NotAuthenticatedUserException::new);
 

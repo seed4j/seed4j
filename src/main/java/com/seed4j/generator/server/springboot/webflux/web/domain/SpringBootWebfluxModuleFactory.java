@@ -3,7 +3,6 @@ package com.seed4j.generator.server.springboot.webflux.web.domain;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
-import static com.seed4j.module.domain.Seed4JModule.javaDependency;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
 import static com.seed4j.module.domain.Seed4JModule.propertyValue;
@@ -13,8 +12,6 @@ import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javabuild.GroupId;
-import com.seed4j.module.domain.javadependency.JavaDependency;
-import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
@@ -22,9 +19,6 @@ import com.seed4j.shared.error.domain.Assert;
 public class SpringBootWebfluxModuleFactory {
 
   private static final Seed4JSource SOURCE = from("server/springboot/webflux/web");
-  private static final Seed4JSource JACKSON_MAIN_SOURCE = from("server/springboot/jackson/main");
-  private static final Seed4JSource JACKSON_TEST_SOURCE = from("server/springboot/jackson/test");
-  private static final String WIRE_JACKSON_CONFIG = "wire/jackson/infrastructure/primary";
   private static final PropertyKey SERVER_PORT = propertyKey("server.port");
 
   private static final GroupId SPRING_GROUP = groupId("org.springframework.boot");
@@ -44,7 +38,7 @@ public class SpringBootWebfluxModuleFactory {
     return moduleBuilder(properties)
       .javaDependencies()
         .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-webflux"))
-        .addDependency(reactorTestDependency())
+        .addTestDependency(SPRING_GROUP, artifactId("spring-boot-starter-webflux-test"))
         .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-validation"))
         .and()
       .springMainProperties()
@@ -55,8 +49,6 @@ public class SpringBootWebfluxModuleFactory {
         .set(SERVER_PORT, propertyValue(0))
         .and()
       .files()
-        .add(JACKSON_MAIN_SOURCE.append(WIRE_JACKSON_CONFIG).template("JacksonConfiguration.java"), toSrcMainJava().append(packagePath).append(WIRE_JACKSON_CONFIG).append("JacksonConfiguration.java"))
-        .add(JACKSON_TEST_SOURCE.append(WIRE_JACKSON_CONFIG).template("JacksonConfigurationIT.java"), toSrcTestJava().append(packagePath).append(WIRE_JACKSON_CONFIG).append("JacksonConfigurationIT.java"))
         .batch(SOURCE.append("main"), toSrcMainJava().append(packagePath).append(EXCEPTION_PRIMARY))
           .addTemplate("FieldErrorDTO.java")
           .addTemplate("HeaderUtil.java")
@@ -69,9 +61,5 @@ public class SpringBootWebfluxModuleFactory {
         .and()
       .build();
     // @formatter:on
-  }
-
-  private JavaDependency reactorTestDependency() {
-    return javaDependency().groupId("io.projectreactor").artifactId("reactor-test").scope(JavaDependencyScope.TEST).build();
   }
 }

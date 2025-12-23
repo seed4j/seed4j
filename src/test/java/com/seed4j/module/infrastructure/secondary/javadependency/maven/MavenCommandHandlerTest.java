@@ -1,16 +1,46 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 
-import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.Seed4JModule.*;
-import static com.seed4j.module.domain.Seed4JModulesFixture.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.seed4j.TestFileUtils.contentNormalizingNewLines;
+import static com.seed4j.TestFileUtils.tmpDirForTest;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.dependencyId;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.asciidoctorPlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleGradlePlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.defaultVersionDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.jsonWebTokenDependencyId;
+import static com.seed4j.module.domain.Seed4JModulesFixture.localBuildProfile;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenBuildExtensionWithSlug;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenEnforcerPlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenEnforcerPluginManagement;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenEnforcerVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.optionalTestDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyId;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyManagement;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootStarterWebDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springProfilesActiveProperty;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.buildproperties.BuildProperty;
 import com.seed4j.module.domain.buildproperties.PropertyKey;
 import com.seed4j.module.domain.buildproperties.PropertyValue;
-import com.seed4j.module.domain.javabuild.command.*;
+import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.AddDirectMavenPlugin;
+import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
+import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
+import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.AddMavenBuildExtension;
+import com.seed4j.module.domain.javabuild.command.AddMavenPluginManagement;
+import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
+import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.DependencyId;
@@ -403,7 +433,9 @@ class MavenCommandHandlerTest {
       Path pom = projectWithPom("src/test/resources/projects/maven-with-multiple-dependencies-management/pom.xml");
       MavenCommandHandler mavenCommandHandler = new MavenCommandHandler(Indentation.DEFAULT, pom);
 
-      mavenCommandHandler.handle(new RemoveJavaDependencyManagement(dependencyId("org.springframework.boot", "spring-boot-starter-web")));
+      mavenCommandHandler.handle(
+        new RemoveJavaDependencyManagement(dependencyId("org.springframework.boot", "spring-boot-starter-webmvc"))
+      );
       mavenCommandHandler.handle(
         new RemoveJavaDependencyManagement(dependencyId("org.junit.jupiter", "junit-jupiter-engine"), localBuildProfile())
       );
@@ -415,7 +447,7 @@ class MavenCommandHandlerTest {
               <dependencies>
                 <dependency>
                   <groupId>org.springframework.boot</groupId>
-                  <artifactId>spring-boot-starter-web</artifactId>
+                  <artifactId>spring-boot-starter-webmvc</artifactId>
                   <version>${spring-boot.version}</version>
                 </dependency>
           """
@@ -461,7 +493,7 @@ class MavenCommandHandlerTest {
 
       mavenCommandHandler.handle(
         new RemoveJavaDependencyManagement(
-          DependencyId.of(groupId("org.springframework.boot"), artifactId("spring-boot-starter-web")),
+          DependencyId.of(groupId("org.springframework.boot"), artifactId("spring-boot-starter-webmvc")),
           localBuildProfile()
         )
       );
@@ -477,7 +509,7 @@ class MavenCommandHandlerTest {
           """
         )
         .doesNotContain("<groupId>org.springframework.boot</groupId>")
-        .doesNotContain("<artifactId>spring-boot-starter-web</artifactId>");
+        .doesNotContain("<artifactId>spring-boot-starter-webmvc</artifactId>");
     }
 
     @Test
@@ -524,7 +556,9 @@ class MavenCommandHandlerTest {
       Path pom = projectWithPom("src/test/resources/projects/maven-with-multiple-dependencies-management/pom.xml");
       MavenCommandHandler mavenCommandHandler = new MavenCommandHandler(Indentation.DEFAULT, pom);
 
-      mavenCommandHandler.handle(new RemoveJavaDependencyManagement(dependencyId("org.springframework.boot", "spring-boot-starter-web")));
+      mavenCommandHandler.handle(
+        new RemoveJavaDependencyManagement(dependencyId("org.springframework.boot", "spring-boot-starter-webmvc"))
+      );
       mavenCommandHandler.handle(
         new RemoveJavaDependencyManagement(dependencyId("org.springframework.boot", "spring-boot-starter-data-jpa"))
       );
@@ -616,7 +650,7 @@ class MavenCommandHandlerTest {
         """
               <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
+                <artifactId>spring-boot-starter-webmvc</artifactId>
                 <exclusions>
                   <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -740,7 +774,7 @@ class MavenCommandHandlerTest {
       Path pom = projectWithPom("src/test/resources/projects/maven-with-multiple-dependencies/pom.xml");
       MavenCommandHandler mavenCommandHandler = new MavenCommandHandler(Indentation.DEFAULT, pom);
 
-      mavenCommandHandler.handle(new RemoveDirectJavaDependency(dependencyId("org.springframework.boot", "spring-boot-starter-web")));
+      mavenCommandHandler.handle(new RemoveDirectJavaDependency(dependencyId("org.springframework.boot", "spring-boot-starter-webmvc")));
       mavenCommandHandler.handle(
         new RemoveDirectJavaDependency(dependencyId("org.junit.jupiter", "junit-jupiter-engine"), localBuildProfile())
       );
@@ -750,7 +784,7 @@ class MavenCommandHandlerTest {
           """
               <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
+                <artifactId>spring-boot-starter-webmvc</artifactId>
                 <version>${spring-boot.version}</version>
               </dependency>
           """
@@ -788,7 +822,7 @@ class MavenCommandHandlerTest {
 
       mavenCommandHandler.handle(
         new RemoveDirectJavaDependency(
-          DependencyId.of(groupId("org.springframework.boot"), artifactId("spring-boot-starter-web")),
+          DependencyId.of(groupId("org.springframework.boot"), artifactId("spring-boot-starter-webmvc")),
           localBuildProfile()
         )
       );
@@ -802,7 +836,7 @@ class MavenCommandHandlerTest {
           """
         )
         .doesNotContain("      <groupId>org.springframework.boot</groupId>")
-        .doesNotContain("      <artifactId>spring-boot-starter-web</artifactId>");
+        .doesNotContain("      <artifactId>spring-boot-starter-webmvc</artifactId>");
     }
 
     @Test
@@ -868,7 +902,7 @@ class MavenCommandHandlerTest {
       Path pom = projectWithPom("src/test/resources/projects/maven-with-multiple-dependencies/pom.xml");
       MavenCommandHandler mavenCommandHandler = new MavenCommandHandler(Indentation.DEFAULT, pom);
 
-      mavenCommandHandler.handle(new RemoveDirectJavaDependency(dependencyId("org.springframework.boot", "spring-boot-starter-web")));
+      mavenCommandHandler.handle(new RemoveDirectJavaDependency(dependencyId("org.springframework.boot", "spring-boot-starter-webmvc")));
       mavenCommandHandler.handle(new RemoveDirectJavaDependency(dependencyId("org.springframework.boot", "spring-boot-starter-data-jpa")));
 
       assertThat(contentNormalizingNewLines(pom))
@@ -877,7 +911,7 @@ class MavenCommandHandlerTest {
             <dependencies>
               <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
+                <artifactId>spring-boot-starter-webmvc</artifactId>
                 <version>${spring-boot.version}</version>
               </dependency>
               <dependency>
@@ -960,7 +994,7 @@ class MavenCommandHandlerTest {
         """
             <dependency>
               <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-starter-web</artifactId>
+              <artifactId>spring-boot-starter-webmvc</artifactId>
               <exclusions>
                 <exclusion>
                   <groupId>org.springframework.boot</groupId>

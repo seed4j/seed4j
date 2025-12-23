@@ -1,13 +1,13 @@
 package {{packageName}}.account.infrastructure.primary;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import tools.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.annotation.JsonPOJOBuilder;
 import {{packageName}}.account.domain.AuthenticationQuery;
 import {{packageName}}.account.infrastructure.primary.RestAuthenticationQuery.RestAuthenticationQueryBuilder;
 import {{packageName}}.shared.authentication.domain.Roles;

@@ -1,0 +1,53 @@
+package {{packageName}}.cucumber.rest;
+
+import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.test.web.servlet.client.RestTestClient;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+
+public class CucumberRestClient {
+
+  private RestTestClient restClient;
+
+  public CucumberRestClient(RestTestClient restClient) {
+    this.restClient = restClient;
+  }
+
+  public void get(String uri) {
+    restClient.get().uri(uri).exchange();
+  }
+
+  public void post(String uri, String content) {
+    restClient.post().uri(uri).accept(APPLICATION_JSON).contentType(APPLICATION_JSON).body(content).exchange();
+  }
+
+  public void put(String uri, String content) {
+    restClient.put().uri(uri).accept(APPLICATION_JSON).contentType(APPLICATION_JSON).body(content).exchange();
+  }
+
+  public void delete(String uri) {
+    restClient.delete().uri(uri).exchange();
+  }
+
+  public void addRequestInterceptor(ClientHttpRequestInterceptor interceptor) {
+    this.restClient = this.restClient.mutate().requestInterceptor(interceptor).build();
+  }
+
+  public void setupRestClient() {
+    this.restClient = this.restClient
+      .mutate()
+      .requestInterceptors(interceptors -> interceptors.add(saveLastResultInterceptor()))
+      .build();
+  }
+
+  private ClientHttpRequestInterceptor saveLastResultInterceptor() {
+    return (request, body, execution) -> {
+      ClientHttpResponse response = execution.execute(request, body);
+
+      CucumberRestTestContext.addResponse(request, response, execution, body);
+
+      return response;
+    };
+  }
+}

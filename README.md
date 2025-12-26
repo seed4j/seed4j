@@ -74,6 +74,7 @@ The main interest is for seed4j-extension instances, but it can also be useful i
 You need to have Java 25:
 
 - [JDK 25](https://openjdk.java.net/projects/jdk/25/)
+- If (SDKMAN)[https://sdkman.io/] is installed you can run `sdk env` at project root.
 
 ### Node.js and NPM
 

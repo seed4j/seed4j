@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.jspecify.annotations.Nullable;
 
 public final class Enums {
 
@@ -13,7 +14,7 @@ public final class Enums {
 
   private Enums() {}
 
-  public static <From extends Enum<From>, To extends Enum<To>> To map(Enum<From> from, Class<To> to) {
+  public static <From extends Enum<From>, To extends Enum<To>> @Nullable To map(@Nullable Enum<From> from, Class<To> to) {
     Assert.notNull("to", to);
 
     if (from == null) {
@@ -28,7 +29,7 @@ public final class Enums {
     private final Map<CacheKey<?, ?>, Map<Enum<?>, Enum<?>>> cache = new ConcurrentHashMap<>();
 
     @SuppressWarnings("unchecked")
-    private <From extends Enum<From>, To extends Enum<To>> To get(Enum<From> from, Class<To> to) {
+    private <From extends Enum<From>, To extends Enum<To>> @Nullable To get(Enum<From> from, Class<To> to) {
       CacheKey<From, To> key = new CacheKey<>(from.getDeclaringClass(), to);
       return (To) cache.computeIfAbsent(key, buildCache(from)).get(from);
     }

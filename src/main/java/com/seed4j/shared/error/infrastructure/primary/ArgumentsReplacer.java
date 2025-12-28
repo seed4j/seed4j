@@ -1,6 +1,7 @@
 package com.seed4j.shared.error.infrastructure.primary;
 
 import java.util.Map;
+import org.jspecify.annotations.Nullable;
 
 final class ArgumentsReplacer {
 
@@ -13,7 +14,7 @@ final class ArgumentsReplacer {
     this.arguments = arguments;
   }
 
-  public static String replaceParameters(String message, Map<String, ?> arguments) {
+  public static @Nullable String replaceParameters(@Nullable String message, @Nullable Map<String, ?> arguments) {
     if (message == null || arguments == null) {
       return message;
     }

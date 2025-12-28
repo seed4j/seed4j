@@ -43,6 +43,7 @@ class HexagonalArchTest {
   private static final Collection<String> commonToolsAndUtilsPackages = List.of(
     "org.slf4j..",
     "org.apache.commons..",
+    "org.jspecify.annotations..",
     "com.google.guava.."
   );
 

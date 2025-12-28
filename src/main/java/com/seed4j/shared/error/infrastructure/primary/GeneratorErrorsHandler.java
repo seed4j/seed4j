@@ -5,6 +5,7 @@ import com.seed4j.shared.error.domain.ErrorKey;
 import com.seed4j.shared.error.domain.GeneratorException;
 import java.util.Locale;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -45,7 +46,7 @@ class GeneratorErrorsHandler {
     return problem;
   }
 
-  private String buildDetail(GeneratorException exception) {
+  private @Nullable String buildDetail(GeneratorException exception) {
     String messageTemplate = getMessage(exception.key(), "detail");
 
     return ArgumentsReplacer.replaceParameters(messageTemplate, exception.parameters());

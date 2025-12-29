@@ -1,6 +1,8 @@
 package com.seed4j.module.domain.javaproperties;
 
 import com.seed4j.shared.error.domain.Assert;
+import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 public final class SpringProperty implements SpringPropertyTypeFileName {
 
@@ -16,15 +18,7 @@ public final class SpringProperty implements SpringPropertyTypeFileName {
     type = builder.type;
     key = builder.key;
     value = builder.value;
-    profile = buildProfile(builder.profile);
-  }
-
-  private SpringProfile buildProfile(SpringProfile profile) {
-    if (profile == null) {
-      return SpringProfile.DEFAULT;
-    }
-
-    return profile;
+    profile = Optional.ofNullable(builder.profile).orElse(SpringProfile.DEFAULT);
   }
 
   public static SpringPropertyKeyBuilder builder(SpringPropertyType type) {
@@ -57,9 +51,9 @@ public final class SpringProperty implements SpringPropertyTypeFileName {
     implements SpringPropertyKeyBuilder, SpringPropertyValueBuilder, SpringPropertyProfileBuilder {
 
     private final SpringPropertyType type;
-    private PropertyKey key;
-    private PropertyValue value;
-    private SpringProfile profile;
+    private @Nullable PropertyKey key;
+    private @Nullable PropertyValue value;
+    private @Nullable SpringProfile profile;
 
     private SpringPropertyBuilder(SpringPropertyType type) {
       Assert.notNull("type", type);

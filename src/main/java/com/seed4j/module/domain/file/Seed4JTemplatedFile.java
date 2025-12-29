@@ -5,6 +5,7 @@ import com.seed4j.module.domain.Seed4JModuleContext;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Path;
+import org.jspecify.annotations.Nullable;
 
 public final class Seed4JTemplatedFile {
 
@@ -45,8 +46,8 @@ public final class Seed4JTemplatedFile {
 
   public static class TemplatedFileBuilder {
 
-    private Seed4JModuleFile file;
-    private Seed4JModuleContext context;
+    private @Nullable Seed4JModuleFile file;
+    private @Nullable Seed4JModuleContext context;
 
     public TemplatedFileBuilder file(Seed4JModuleFile file) {
       this.file = file;

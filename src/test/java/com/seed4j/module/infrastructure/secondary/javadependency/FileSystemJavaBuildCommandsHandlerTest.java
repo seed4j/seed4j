@@ -2,8 +2,12 @@ package com.seed4j.module.infrastructure.secondary.javadependency;
 
 import static com.seed4j.TestFileUtils.content;
 import static com.seed4j.TestFileUtils.projectFrom;
-import static com.seed4j.module.domain.Seed4JModulesFixture.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.seed4j.module.domain.Seed4JModulesFixture.emptyModuleContext;
+import static com.seed4j.module.domain.Seed4JModulesFixture.javaDependenciesCommands;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootVersion;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Indentation;
@@ -11,7 +15,9 @@ import com.seed4j.module.domain.file.TemplateRenderer;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
-import com.seed4j.module.infrastructure.secondary.*;
+import com.seed4j.module.infrastructure.secondary.FileSystemProjectFiles;
+import com.seed4j.module.infrastructure.secondary.FileSystemReplacer;
+import com.seed4j.module.infrastructure.secondary.FileSystemSeed4JModuleFiles;
 import com.seed4j.module.infrastructure.secondary.javabuild.FileSystemProjectJavaBuildToolRepository;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -32,7 +38,7 @@ class FileSystemJavaBuildCommandsHandlerTest {
         Indentation.DEFAULT,
         projectFrom("src/test/resources/projects/empty"),
         emptyModuleContext(),
-        new JavaBuildCommands(null)
+        new JavaBuildCommands(List.of())
       )
     ).doesNotThrowAnyException();
   }

@@ -9,11 +9,6 @@ import org.junit.jupiter.api.Test;
 class Seed4JPropertyExampleTest {
 
   @Test
-  void shouldGetEmptyExampleFromNullExample() {
-    assertThat(Seed4JPropertyExample.of(null)).isEmpty();
-  }
-
-  @Test
   void shouldGetEmptyExampleFromBlankExample() {
     assertThat(Seed4JPropertyExample.of(" ")).isEmpty();
   }

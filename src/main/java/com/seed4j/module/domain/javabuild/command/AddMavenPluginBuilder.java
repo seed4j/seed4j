@@ -6,28 +6,29 @@ import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.function.Function;
+import org.jspecify.annotations.Nullable;
 
 class AddMavenPluginBuilder<T extends AddMavenPlugin> implements AddMavenPluginPluginBuilder<T>, AddMavenPluginOptionalBuilder<T> {
 
   private final Function<AddMavenPluginBuilder<T>, T> factory;
-  private MavenPlugin plugin;
-  private JavaDependencyVersion pluginVersion;
-  private BuildProfileId buildProfile;
+  private @Nullable MavenPlugin plugin;
+  private @Nullable JavaDependencyVersion pluginVersion;
+  private @Nullable BuildProfileId buildProfile;
   private final Collection<JavaDependencyVersion> dependenciesVersions = new LinkedHashSet<>();
 
   AddMavenPluginBuilder(Function<AddMavenPluginBuilder<T>, T> factory) {
     this.factory = factory;
   }
 
-  public MavenPlugin plugin() {
+  public @Nullable MavenPlugin plugin() {
     return plugin;
   }
 
-  public JavaDependencyVersion pluginVersion() {
+  public @Nullable JavaDependencyVersion pluginVersion() {
     return pluginVersion;
   }
 
-  public BuildProfileId buildProfile() {
+  public @Nullable BuildProfileId buildProfile() {
     return buildProfile;
   }
 

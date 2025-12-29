@@ -6,6 +6,7 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 /**
  * This class represents the {@code package.json} configurations for a Seed4J module.
@@ -77,7 +78,7 @@ public final class Seed4JModulePackageJson {
     private final Collection<PackageJsonDependency> devDependencies = new ArrayList<>();
     private final Collection<PackageName> dependenciesToRemove = new ArrayList<>();
     private final Collection<PackageName> devDependenciesToRemove = new ArrayList<>();
-    private NodeModuleFormat nodeModuleFormat;
+    private @Nullable NodeModuleFormat nodeModuleFormat;
 
     private Seed4JModulePackageJsonBuilder(Seed4JModuleBuilder module) {
       Assert.notNull("module", module);

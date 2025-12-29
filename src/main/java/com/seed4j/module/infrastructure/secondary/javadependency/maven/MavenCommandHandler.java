@@ -35,7 +35,6 @@ import com.seed4j.module.infrastructure.secondary.javadependency.JavaDependencie
 import com.seed4j.shared.enumeration.domain.Enums;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import io.fabric8.maven.Maven;
 import io.fabric8.maven.XMLFormat;
 import java.io.IOException;
@@ -63,6 +62,7 @@ import org.apache.maven.model.Profile;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.jspecify.annotations.Nullable;
 
 public class MavenCommandHandler implements JavaDependenciesCommandHandler {
 
@@ -223,7 +223,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     ).flatMap(Function.identity());
   }
 
-  private Stream<Dependency> dependenciesFrom(DependencyManagement dependencyManagement) {
+  private Stream<Dependency> dependenciesFrom(@Nullable DependencyManagement dependencyManagement) {
     return dependencyManagement != null ? dependencyManagement.getDependencies().stream() : Stream.empty();
   }
 
@@ -340,25 +340,13 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     javaDependency.exclusions().stream().map(toMavenExclusion()).forEach(mavenDependency::addExclusion);
 
     if (javaDependency.scope() != JavaDependencyScope.COMPILE) {
-      mavenDependency.setScope(toMavenScope(javaDependency.scope()).key());
+      mavenDependency.setScope(MavenScope.from(javaDependency.scope()).key());
     }
     if (javaDependency.optional()) {
       mavenDependency.setOptional(true);
     }
 
     return mavenDependency;
-  }
-
-  @ExcludeFromGeneratedCodeCoverage(reason = "Pattern matching mapper doesn't need full coverage")
-  private static MavenScope toMavenScope(JavaDependencyScope scope) {
-    return switch (scope) {
-      case COMPILE -> MavenScope.COMPILE;
-      case IMPORT -> MavenScope.IMPORT;
-      case PROVIDED -> MavenScope.PROVIDED;
-      case SYSTEM -> MavenScope.SYSTEM;
-      case RUNTIME -> MavenScope.RUNTIME;
-      case TEST -> MavenScope.TEST;
-    };
   }
 
   private Function<DependencyId, Exclusion> toMavenExclusion() {

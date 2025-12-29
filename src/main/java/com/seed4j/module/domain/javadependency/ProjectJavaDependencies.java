@@ -3,35 +3,27 @@ package com.seed4j.module.domain.javadependency;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 public final class ProjectJavaDependencies {
 
-  public static final ProjectJavaDependencies EMPTY = builder().versions(null).dependenciesManagements(null).dependencies(null);
+  public static final ProjectJavaDependencies EMPTY = builder()
+    .versions(ProjectJavaDependenciesVersions.EMPTY)
+    .dependenciesManagements(JavaDependencies.EMPTY)
+    .dependencies(JavaDependencies.EMPTY);
 
   private final ProjectJavaDependenciesVersions versions;
   private final JavaDependencies dependenciesManagement;
   private final JavaDependencies dependencies;
 
   private ProjectJavaDependencies(ProjectJavaDependenciesBuilder builder) {
-    versions = buildVersions(builder.versions);
-    dependenciesManagement = buildDependencies(builder.dependenciesManagement);
-    dependencies = buildDependencies(builder.dependencies);
-  }
+    Assert.notNull("versions", builder.versions);
+    Assert.notNull("dependenciesManagement", builder.dependenciesManagement);
+    Assert.notNull("dependencies", builder.dependencies);
 
-  private ProjectJavaDependenciesVersions buildVersions(ProjectJavaDependenciesVersions versions) {
-    if (versions == null) {
-      return ProjectJavaDependenciesVersions.EMPTY;
-    }
-
-    return versions;
-  }
-
-  private JavaDependencies buildDependencies(JavaDependencies dependencies) {
-    if (dependencies == null) {
-      return JavaDependencies.EMPTY;
-    }
-
-    return dependencies;
+    versions = builder.versions;
+    dependenciesManagement = builder.dependenciesManagement;
+    dependencies = builder.dependencies;
   }
 
   public static ProjectJavaDependenciesVersionsBuilder builder() {
@@ -77,9 +69,9 @@ public final class ProjectJavaDependencies {
       ProjectJavaDependenciesDependenciesManagementBuilder,
       ProjectJavaDependenciesDependenciesBuilder {
 
-    private ProjectJavaDependenciesVersions versions;
-    private JavaDependencies dependenciesManagement;
-    private JavaDependencies dependencies;
+    private @Nullable ProjectJavaDependenciesVersions versions;
+    private @Nullable JavaDependencies dependenciesManagement;
+    private @Nullable JavaDependencies dependencies;
 
     @Override
     public ProjectJavaDependenciesDependenciesManagementBuilder versions(ProjectJavaDependenciesVersions versions) {

@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.primary;
 
-import static com.seed4j.BeanValidationAssertions.*;
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static com.seed4j.BeanValidationAssertions.assertThatBean;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 import com.seed4j.JsonHelper;
 import com.seed4j.UnitTest;
@@ -42,11 +42,13 @@ class RestSeed4JModulesToApplyTest {
   }
 
   @Test
+  @SuppressWarnings("NullAway")
   void shouldValidateModulesToApplyWithoutAttributes() {
     assertThatBean(new RestSeed4JModulesToApply(null, null)).hasInvalidProperty("modules").and().hasInvalidProperty("properties");
   }
 
   @Test
+  @SuppressWarnings("NullAway")
   void shouldValidateModulesToApplyWithEmptyModules() {
     assertThatBean(new RestSeed4JModulesToApply(List.of(), null)).hasInvalidProperty("modules");
   }

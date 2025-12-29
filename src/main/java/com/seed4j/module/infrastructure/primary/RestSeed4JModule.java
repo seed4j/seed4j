@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.util.ArrayList;
 import java.util.Collection;
+import org.jspecify.annotations.Nullable;
 
 @Schema(name = "Seed4JModule", description = "Information for a Seed4J module")
 final class RestSeed4JModule {
@@ -17,6 +18,10 @@ final class RestSeed4JModule {
   private final Collection<String> tags;
 
   private RestSeed4JModule(RestSeed4JModuleBuilder builder) {
+    Assert.notNull("slug", builder.slug);
+    Assert.notNull("description", builder.description);
+    Assert.notNull("properties", builder.properties);
+
     slug = builder.slug;
     description = builder.description;
     properties = builder.properties;
@@ -54,9 +59,9 @@ final class RestSeed4JModule {
 
   private static final class RestSeed4JModuleBuilder {
 
-    private String slug;
-    private String description;
-    private RestSeed4JModulePropertiesDefinition properties;
+    private @Nullable String slug;
+    private @Nullable String description;
+    private @Nullable RestSeed4JModulePropertiesDefinition properties;
 
     private final Collection<String> tags = new ArrayList<>();
 

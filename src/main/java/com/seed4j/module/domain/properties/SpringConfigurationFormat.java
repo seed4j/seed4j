@@ -19,7 +19,7 @@ public enum SpringConfigurationFormat {
     return Stream.of(values())
       .filter(configFormat -> configFormat.format.equals(input))
       .findFirst()
-      .orElse(null);
+      .orElseThrow(() -> new IllegalArgumentException("Invalid SpringConfigurationFormat: " + input));
   }
 
   public String get() {

@@ -4,6 +4,7 @@ import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.Nullable;
 
 public record VersionSlug(String slug) {
   public static final String SUFFIX = ".version";
@@ -41,7 +42,7 @@ public record VersionSlug(String slug) {
     return slug;
   }
 
-  public static Optional<VersionSlug> of(String versionSlug) {
+  public static Optional<VersionSlug> of(@Nullable String versionSlug) {
     return Optional.ofNullable(versionSlug).filter(StringUtils::isNotBlank).map(VersionSlug::new);
   }
 

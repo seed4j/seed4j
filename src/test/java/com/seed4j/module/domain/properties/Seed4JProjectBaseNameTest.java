@@ -15,11 +15,6 @@ class Seed4JProjectBaseNameTest {
   }
 
   @Test
-  void shouldGetDefaultProjectNameFromNullBaseName() {
-    assertThat(new Seed4JProjectBaseName(null).get()).isEqualTo("seed4j");
-  }
-
-  @Test
   void shouldGetDefaultProjectBaseNameFromBlankName() {
     assertThat(new Seed4JProjectBaseName(" ").get()).isEqualTo("seed4j");
   }

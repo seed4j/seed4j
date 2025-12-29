@@ -3,14 +3,11 @@ package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.JavaDependencies;
 import com.seed4j.module.domain.javadependency.JavaDependency;
-import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependencies;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependenciesVersions;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.module.infrastructure.secondary.javadependency.Seed4JProjectFolderJavaDependenciesReader;
-import com.seed4j.shared.enumeration.domain.Enums;
 import com.seed4j.shared.error.domain.GeneratorException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -99,12 +96,8 @@ public class MavenProjectJavaDependenciesRepository implements Seed4JProjectFold
         .versionSlug(dependency.getVersion())
         .classifier(dependency.getClassifier())
         .optional(dependency.isOptional())
-        .scope(Enums.map(MavenScope.from(dependency.getScope()), JavaDependencyScope.class))
-        .type(
-          MavenType.from(dependency.getType())
-            .map(type -> Enums.map(type, JavaDependencyType.class))
-            .orElse(null)
-        )
+        .scope(MavenScope.from(dependency.getScope()).map(MavenScope::toJavaDependencyScope).orElse(null))
+        .type(MavenType.from(dependency.getType()).map(MavenType::toJavaDependencyType).orElse(null))
         .build();
   }
 }

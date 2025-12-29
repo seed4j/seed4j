@@ -5,6 +5,7 @@ import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 public final class AddGradlePlugin implements JavaBuildCommand {
 
@@ -43,10 +44,10 @@ public final class AddGradlePlugin implements JavaBuildCommand {
 
   private static final class AddGradlePluginBuilder implements AddGradlePluginPluginBuilder, AddGradlePluginOptionalBuilder {
 
-    private GradlePlugin plugin;
-    private JavaDependencyVersion pluginVersion;
-    private JavaDependencyVersion toolVersion;
-    private BuildProfileId buildProfile;
+    private @Nullable GradlePlugin plugin;
+    private @Nullable JavaDependencyVersion pluginVersion;
+    private @Nullable JavaDependencyVersion toolVersion;
+    private @Nullable BuildProfileId buildProfile;
 
     @Override
     public AddGradlePluginBuilder plugin(GradlePlugin plugin) {

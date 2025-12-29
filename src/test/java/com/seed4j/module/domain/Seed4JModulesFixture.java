@@ -380,7 +380,7 @@ public final class Seed4JModulesFixture {
   }
 
   public static Seed4JModuleProperties testModuleProperties() {
-    return new Seed4JModuleProperties(TestFileUtils.tmpDirForTest(), true, null);
+    return new Seed4JModuleProperties(TestFileUtils.tmpDirForTest(), true, Map.of());
   }
 
   public static JavaDependenciesVersions currentJavaDependenciesVersion() {

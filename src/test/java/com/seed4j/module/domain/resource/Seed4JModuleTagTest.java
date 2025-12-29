@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 class Seed4JModuleTagTest {
 
   @Test
+  @SuppressWarnings("NullAway")
   void shouldNotBuildWithoutTag() {
     assertThatThrownBy(() -> new Seed4JModuleTag(null)).isInstanceOf(MissingMandatoryValueException.class);
   }

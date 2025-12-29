@@ -27,10 +27,6 @@ public final class MustacheTemplateRenderer implements TemplateRenderer {
   @Override
   @ExcludeFromGeneratedCodeCoverage(reason = "IOException is hard to test")
   public String render(String message, Map<String, ?> context) {
-    if (message == null || context == null) {
-      return message;
-    }
-
     Mustache mustache = mustacheFactory.compile(Reader.of(message), "template");
     try {
       StringWriter stringWriter = new StringWriter();

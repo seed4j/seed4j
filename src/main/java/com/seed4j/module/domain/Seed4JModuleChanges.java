@@ -16,6 +16,7 @@ import com.seed4j.module.domain.standalonedocker.Seed4JModuleDockerComposeFile;
 import com.seed4j.module.domain.startupcommand.Seed4JStartupCommands;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
+import org.jspecify.annotations.Nullable;
 
 @SuppressWarnings("java:S6539")
 public final class Seed4JModuleChanges {
@@ -41,7 +42,25 @@ public final class Seed4JModuleChanges {
   private final Seed4JModuleDockerComposeFile dockerComposeFile;
 
   private Seed4JModuleChanges(Seed4JModuleChangesBuilder builder) {
-    assertMandatoryFields(builder);
+    Assert.notNull("context", builder.context);
+    Assert.notNull("projectFolder", builder.projectFolder);
+    Assert.notNull("indentation", builder.indentation);
+    Assert.notNull("filesToAdd", builder.filesToAdd);
+    Assert.notNull("filesToMove", builder.filesToMove);
+    Assert.notNull("filesToDelete", builder.filesToDelete);
+    Assert.notNull("replacers", builder.replacers);
+    Assert.notNull("javaBuildCommands", builder.javaBuildCommands);
+    Assert.notNull("preActions", builder.preActions);
+    Assert.notNull("postActions", builder.postActions);
+    Assert.notNull("springFactories", builder.springFactories);
+    Assert.notNull("startupCommands", builder.startupCommands);
+    Assert.notNull("packageJson", builder.packageJson);
+    Assert.notNull("springProperties", builder.springProperties);
+    Assert.notNull("springComments", builder.springComments);
+    Assert.notNull("springYamlProperties", builder.springYamlProperties);
+    Assert.notNull("springYamlComments", builder.springYamlComments);
+    Assert.notNull("gitIgnore", builder.gitIgnore);
+    Assert.notNull("dockerComposeFile", builder.dockerComposeFile);
 
     context = builder.context;
     projectFolder = builder.projectFolder;
@@ -62,20 +81,6 @@ public final class Seed4JModuleChanges {
     springFactories = builder.springFactories;
     gitIgnore = builder.gitIgnore;
     dockerComposeFile = builder.dockerComposeFile;
-  }
-
-  private void assertMandatoryFields(Seed4JModuleChangesBuilder builder) {
-    Assert.notNull("context", builder.context);
-    Assert.notNull("projectFolder", builder.projectFolder);
-    Assert.notNull("indentation", builder.indentation);
-    Assert.notNull("filesToAdd", builder.filesToAdd);
-    Assert.notNull("filesToMove", builder.filesToMove);
-    Assert.notNull("filesToDelete", builder.filesToDelete);
-    Assert.notNull("replacers", builder.replacers);
-    Assert.notNull("javaBuildCommands", builder.javaBuildCommands);
-    Assert.notNull("preActions", builder.preActions);
-    Assert.notNull("postActions", builder.postActions);
-    Assert.notNull("springFactories", builder.springFactories);
   }
 
   public static Seed4JModuleChangesContextBuilder builder() {
@@ -180,25 +185,25 @@ public final class Seed4JModuleChanges {
       Seed4JModuleChangesGitIgnorePatternsBuilder,
       Seed4JModuleChangesDockerComposeFileBuilder {
 
-    private Seed4JModuleContext context;
-    private Seed4JProjectFolder projectFolder;
-    private Seed4JTemplatedFiles filesToAdd;
-    private Seed4JFilesToMove filesToMove;
-    private Seed4JFilesToDelete filesToDelete;
-    private ContentReplacers replacers;
-    private Seed4JStartupCommands startupCommands;
-    private JavaBuildCommands javaBuildCommands;
-    private Seed4JModulePackageJson packageJson;
-    private Indentation indentation;
-    private Seed4JModulePreActions preActions;
-    private Seed4JModulePostActions postActions;
-    private SpringProperties springProperties = SpringProperties.EMPTY;
-    private SpringComments springComments = SpringComments.EMPTY;
-    private SpringProperties springYamlProperties = SpringProperties.EMPTY;
-    private SpringComments springYamlComments = SpringComments.EMPTY;
-    private SpringFactories springFactories;
-    private Seed4JModuleGitIgnore gitIgnore;
-    private Seed4JModuleDockerComposeFile dockerComposeFile;
+    private @Nullable Seed4JModuleContext context;
+    private @Nullable Seed4JProjectFolder projectFolder;
+    private @Nullable Seed4JTemplatedFiles filesToAdd;
+    private @Nullable Seed4JFilesToMove filesToMove;
+    private @Nullable Seed4JFilesToDelete filesToDelete;
+    private @Nullable ContentReplacers replacers;
+    private @Nullable Seed4JStartupCommands startupCommands;
+    private @Nullable JavaBuildCommands javaBuildCommands;
+    private @Nullable Seed4JModulePackageJson packageJson;
+    private @Nullable Indentation indentation;
+    private @Nullable Seed4JModulePreActions preActions;
+    private @Nullable Seed4JModulePostActions postActions;
+    private @Nullable SpringProperties springProperties = SpringProperties.EMPTY;
+    private @Nullable SpringComments springComments = SpringComments.EMPTY;
+    private @Nullable SpringProperties springYamlProperties = SpringProperties.EMPTY;
+    private @Nullable SpringComments springYamlComments = SpringComments.EMPTY;
+    private @Nullable SpringFactories springFactories;
+    private @Nullable Seed4JModuleGitIgnore gitIgnore;
+    private @Nullable Seed4JModuleDockerComposeFile dockerComposeFile;
 
     @Override
     public Seed4JModuleChangesProjectFolderBuilder context(Seed4JModuleContext context) {

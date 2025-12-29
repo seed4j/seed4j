@@ -1,6 +1,7 @@
 package com.seed4j.module.domain.javaproperties;
 
 import com.seed4j.shared.error.domain.Assert;
+import org.jspecify.annotations.Nullable;
 
 public final class SpringFactory {
 
@@ -37,8 +38,8 @@ public final class SpringFactory {
   private static final class SpringFactoryBuilder implements SpringFactoryKeyBuilder, SpringFactoryValueBuilder {
 
     private final SpringFactoryType type;
-    private PropertyKey key;
-    private PropertyValue value;
+    private @Nullable PropertyKey key;
+    private @Nullable PropertyValue value;
 
     private SpringFactoryBuilder(SpringFactoryType type) {
       this.type = type;

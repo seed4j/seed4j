@@ -8,8 +8,10 @@ import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -33,8 +35,9 @@ class FileSystemYamlSpringPropertiesCommandsHandler {
   }
 
   private static Path getPath(Seed4JProjectFolder projectFolder, SpringProperty property) {
-    return PROPERTIES_PATHS.get(property.type())
+    return Optional.ofNullable(PROPERTIES_PATHS.get(property.type()))
       .stream()
+      .flatMap(Collection::stream)
       .map(toFilePath(projectFolder, property))
       .filter(Files::exists)
       .findFirst()

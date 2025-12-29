@@ -39,14 +39,22 @@ public class Seed4JModuleProperties {
     this.commitModule = commitModule;
     this.parameters = new Seed4JModuleParameters(parameters);
 
-    indentation = Indentation.from(this.parameters.getOrDefault(INDENTATION_PARAMETER, null, Integer.class));
-    basePackage = new Seed4JBasePackage(this.parameters.getOrDefault(BASE_PACKAGE_PARAMETER, null, String.class));
-    projectName = new Seed4JProjectName(this.parameters.getOrDefault(PROJECT_NAME_PARAMETER, null, String.class));
-    projectBaseName = new Seed4JProjectBaseName(this.parameters.getOrDefault(PROJECT_BASE_NAME_PARAMETER, null, String.class));
+    indentation = Indentation.from(this.parameters.getOrDefault(INDENTATION_PARAMETER, Indentation.DEFAULT.spacesCount(), Integer.class));
+    basePackage = new Seed4JBasePackage(
+      this.parameters.getOrDefault(BASE_PACKAGE_PARAMETER, Seed4JBasePackage.DEFAULT.basePackage(), String.class)
+    );
+    projectName = new Seed4JProjectName(
+      this.parameters.getOrDefault(PROJECT_NAME_PARAMETER, Seed4JProjectName.DEFAULT.projectName(), String.class)
+    );
+    projectBaseName = new Seed4JProjectBaseName(
+      this.parameters.getOrDefault(PROJECT_BASE_NAME_PARAMETER, Seed4JProjectBaseName.DEFAULT.name(), String.class)
+    );
     nodePackageManager = NodePackageManager.fromPropertyKey(
       this.parameters.getOrDefault(NODE_PACKAGE_MANAGER, NodePackageManager.NPM.propertyKey(), String.class)
     );
-    serverPort = new Seed4JServerPort(this.parameters.getOrDefault(SERVER_PORT_PARAMETER, null, Integer.class));
+    serverPort = new Seed4JServerPort(
+      this.parameters.getOrDefault(SERVER_PORT_PARAMETER, Seed4JServerPort.DEFAULT.serverPort(), Integer.class)
+    );
     springConfigurationFormat = SpringConfigurationFormat.from(
       this.parameters.getOrDefault(SPRING_CONFIGURATION_FORMAT, SpringConfigurationFormat.YAML.get(), String.class)
     );

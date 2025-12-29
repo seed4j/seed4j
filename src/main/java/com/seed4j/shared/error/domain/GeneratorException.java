@@ -81,7 +81,7 @@ public class GeneratorException extends RuntimeException {
     return technicalError(message, null);
   }
 
-  public static GeneratorException technicalError(String message, @Nullable Throwable cause) {
+  public static GeneratorException technicalError(@Nullable String message, @Nullable Throwable cause) {
     return builder(StandardErrorKey.INTERNAL_SERVER_ERROR).message(message).cause(cause).build();
   }
 
@@ -114,7 +114,7 @@ public class GeneratorException extends RuntimeException {
       this.key = key;
     }
 
-    public GeneratorExceptionBuilder message(String message) {
+    public GeneratorExceptionBuilder message(@Nullable String message) {
       this.message = message;
 
       return this;

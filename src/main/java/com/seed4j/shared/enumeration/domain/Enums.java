@@ -1,6 +1,7 @@
 package com.seed4j.shared.enumeration.domain;
 
 import com.seed4j.shared.error.domain.Assert;
+import com.seed4j.shared.nullness.domain.Contract;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,6 +15,7 @@ public final class Enums {
 
   private Enums() {}
 
+  @Contract("!null, _ -> !null")
   public static <From extends Enum<From>, To extends Enum<To>> @Nullable To map(@Nullable Enum<From> from, Class<To> to) {
     Assert.notNull("to", to);
 

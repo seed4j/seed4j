@@ -1,7 +1,9 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.defaultModuleResource;
+import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.moduleNestedResourcesCollection;
+import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.moduleResourcesCollection;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import ch.qos.logback.classic.Level;
 import com.seed4j.Logs;
@@ -25,8 +27,6 @@ class Seed4JModulesResourcesConfigurationTest {
   @Test
   void shouldGetAllResourcesWithoutHiddenResources() {
     Seed4JHiddenResourcesProperties hiddenResources = new Seed4JHiddenResourcesProperties();
-    hiddenResources.setSlugs(null);
-    hiddenResources.setTags(null);
 
     Seed4JModulesResources resources = configuration.seed4JModulesResources(hiddenResources, moduleResourcesCollection());
 
@@ -37,7 +37,6 @@ class Seed4JModulesResourcesConfigurationTest {
   void shouldGetAllResourcesWithoutHiddenAndNestedDependenciesResources() {
     Seed4JHiddenResourcesProperties hiddenResources = new Seed4JHiddenResourcesProperties();
     hiddenResources.setSlugs(List.of("module-a"));
-    hiddenResources.setTags(null);
 
     Seed4JModulesResources resources = configuration.seed4JModulesResources(hiddenResources, moduleNestedResourcesCollection());
 

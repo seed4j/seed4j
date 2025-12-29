@@ -364,6 +364,7 @@
               -XepOpt:NullAway:JSpecifyMode=true
               -XepOpt:NullAway:OnlyNullMarked=true
               -XepOpt:NullAway:CustomContractAnnotations=com.seed4j.shared.nullness.domain.Contract
+              -XepOpt:NullAway:ExcludedFieldAnnotations=com.seed4j.Logs
             </arg>
           </compilerArgs>
           <annotationProcessorPaths>

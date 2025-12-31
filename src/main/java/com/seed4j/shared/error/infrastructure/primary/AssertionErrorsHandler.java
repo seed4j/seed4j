@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -70,7 +71,7 @@ class AssertionErrorsHandler {
     return className -> className.contains(".primary.");
   }
 
-  private String buildDetail(AssertionException exception) {
+  private @Nullable String buildDetail(AssertionException exception) {
     String messageTemplate = getMessage(exception.type(), "detail");
 
     return ArgumentsReplacer.replaceParameters(messageTemplate, parameters(exception));

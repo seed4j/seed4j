@@ -1,6 +1,7 @@
 package com.seed4j.shared.enumeration.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.seed4j.UnitTest;
 import com.seed4j.shared.error.domain.MissingMandatoryValueException;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 class EnumsTest {
 
   @Test
+  @SuppressWarnings("NullAway")
   void shouldNotMapWithoutTo() {
     assertThatThrownBy(() -> Enums.map(Primary.ONE, null))
       .isExactlyInstanceOf(MissingMandatoryValueException.class)

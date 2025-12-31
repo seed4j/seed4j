@@ -1,28 +1,65 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.buildproperties.*;
+import com.seed4j.module.domain.buildproperties.BuildProperty;
+import com.seed4j.module.domain.buildproperties.PropertyKey;
+import com.seed4j.module.domain.buildproperties.PropertyValue;
 import com.seed4j.module.domain.javabuild.MavenBuildExtension;
 import com.seed4j.module.domain.javabuild.VersionSlug;
-import com.seed4j.module.domain.javabuild.command.*;
+import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.AddDirectMavenPlugin;
+import com.seed4j.module.domain.javabuild.command.AddGradleConfiguration;
+import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
+import com.seed4j.module.domain.javabuild.command.AddGradleTasksTestInstruction;
+import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
+import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.AddMavenBuildExtension;
+import com.seed4j.module.domain.javabuild.command.AddMavenPlugin;
+import com.seed4j.module.domain.javabuild.command.AddMavenPluginManagement;
+import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
+import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
-import com.seed4j.module.domain.javadependency.*;
-import com.seed4j.module.domain.mavenplugin.*;
+import com.seed4j.module.domain.javadependency.DependencyId;
+import com.seed4j.module.domain.javadependency.JavaDependency;
+import com.seed4j.module.domain.javadependency.JavaDependencyClassifier;
+import com.seed4j.module.domain.javadependency.JavaDependencyScope;
+import com.seed4j.module.domain.mavenplugin.MavenBuildPhase;
+import com.seed4j.module.domain.mavenplugin.MavenPluginConfiguration;
+import com.seed4j.module.domain.mavenplugin.MavenPluginExecution;
+import com.seed4j.module.domain.mavenplugin.MavenPluginExecutionGoal;
+import com.seed4j.module.domain.mavenplugin.MavenPluginExecutionId;
 import com.seed4j.module.infrastructure.secondary.javadependency.JavaDependenciesCommandHandler;
 import com.seed4j.shared.enumeration.domain.Enums;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
+import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import io.fabric8.maven.Maven;
 import io.fabric8.maven.XMLFormat;
-import java.io.*;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-import org.apache.maven.model.*;
+import org.apache.maven.model.Activation;
+import org.apache.maven.model.Build;
+import org.apache.maven.model.BuildBase;
+import org.apache.maven.model.Dependency;
+import org.apache.maven.model.DependencyManagement;
+import org.apache.maven.model.Exclusion;
+import org.apache.maven.model.Extension;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.ModelBase;
+import org.apache.maven.model.Plugin;
+import org.apache.maven.model.PluginExecution;
+import org.apache.maven.model.PluginManagement;
+import org.apache.maven.model.Profile;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -303,13 +340,25 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     javaDependency.exclusions().stream().map(toMavenExclusion()).forEach(mavenDependency::addExclusion);
 
     if (javaDependency.scope() != JavaDependencyScope.COMPILE) {
-      mavenDependency.setScope(Enums.map(javaDependency.scope(), MavenScope.class).key());
+      mavenDependency.setScope(toMavenScope(javaDependency.scope()).key());
     }
     if (javaDependency.optional()) {
       mavenDependency.setOptional(true);
     }
 
     return mavenDependency;
+  }
+
+  @ExcludeFromGeneratedCodeCoverage(reason = "Pattern matching mapper doesn't need full coverage")
+  private static MavenScope toMavenScope(JavaDependencyScope scope) {
+    return switch (scope) {
+      case COMPILE -> MavenScope.COMPILE;
+      case IMPORT -> MavenScope.IMPORT;
+      case PROVIDED -> MavenScope.PROVIDED;
+      case SYSTEM -> MavenScope.SYSTEM;
+      case RUNTIME -> MavenScope.RUNTIME;
+      case TEST -> MavenScope.TEST;
+    };
   }
 
   private Function<DependencyId, Exclusion> toMavenExclusion() {

@@ -1,4 +1,3 @@
-@SharedKernel
+@com.seed4j.SharedKernel
+@org.jspecify.annotations.NullMarked
 package com.seed4j.shared.enumeration;
-
-import com.seed4j.SharedKernel;

@@ -1,17 +1,12 @@
 package com.seed4j.module.domain.properties;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
 class Seed4JBasePackageTest {
-
-  @Test
-  void shouldGetDefaultPackageFromNullPackage() {
-    assertThat(new Seed4JBasePackage(null).get()).isEqualTo("com.mycompany.myapp");
-  }
 
   @Test
   void shouldGetDefaultPackageFromBlankPackage() {

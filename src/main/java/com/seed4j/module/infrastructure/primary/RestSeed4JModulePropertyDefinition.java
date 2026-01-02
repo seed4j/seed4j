@@ -4,8 +4,10 @@ import com.seed4j.module.domain.properties.Seed4JPropertyDefaultValue;
 import com.seed4j.module.domain.properties.Seed4JPropertyDescription;
 import com.seed4j.module.domain.properties.Seed4JPropertyType;
 import com.seed4j.module.domain.resource.Seed4JModulePropertyDefinition;
+import com.seed4j.shared.error.domain.Assert;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+import org.jspecify.annotations.Nullable;
 
 @Schema(name = "Seed4JModulePropertyDefinition", description = "Definition for a given property")
 final class RestSeed4JModulePropertyDefinition {
@@ -13,11 +15,14 @@ final class RestSeed4JModulePropertyDefinition {
   private final Seed4JPropertyType type;
   private final boolean mandatory;
   private final String key;
-  private final String description;
-  private final String defaultValue;
+  private final @Nullable String description;
+  private final @Nullable String defaultValue;
   private final int order;
 
   private RestSeed4JModulePropertyDefinition(RestSeed4JModulePropertyDefinitionBuilder builder) {
+    Assert.notNull("type", builder.type);
+    Assert.notNull("key", builder.key);
+
     type = builder.type;
     mandatory = builder.mandatory;
     key = builder.key;
@@ -53,12 +58,12 @@ final class RestSeed4JModulePropertyDefinition {
   }
 
   @Schema(description = "Full text description of this property")
-  public String getDescription() {
+  public @Nullable String getDescription() {
     return description;
   }
 
   @Schema(description = "Default value for this property")
-  public String getDefaultValue() {
+  public @Nullable String getDefaultValue() {
     return defaultValue;
   }
 
@@ -69,11 +74,11 @@ final class RestSeed4JModulePropertyDefinition {
 
   private static final class RestSeed4JModulePropertyDefinitionBuilder {
 
-    private Seed4JPropertyType type;
+    private @Nullable Seed4JPropertyType type;
     private boolean mandatory;
-    private String key;
-    private String description;
-    private String defaultValue;
+    private @Nullable String key;
+    private @Nullable String description;
+    private @Nullable String defaultValue;
     private int order;
 
     private RestSeed4JModulePropertyDefinitionBuilder type(Seed4JPropertyType type) {
@@ -94,13 +99,13 @@ final class RestSeed4JModulePropertyDefinition {
       return this;
     }
 
-    private RestSeed4JModulePropertyDefinitionBuilder description(String description) {
+    private RestSeed4JModulePropertyDefinitionBuilder description(@Nullable String description) {
       this.description = description;
 
       return this;
     }
 
-    private RestSeed4JModulePropertyDefinitionBuilder defaultValue(String defaultValue) {
+    private RestSeed4JModulePropertyDefinitionBuilder defaultValue(@Nullable String defaultValue) {
       this.defaultValue = defaultValue;
 
       return this;

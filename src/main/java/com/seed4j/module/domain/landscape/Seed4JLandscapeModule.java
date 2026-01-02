@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.landscape;
 
-import static org.apache.commons.lang3.builder.ToStringStyle.*;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import com.seed4j.module.domain.Seed4JModuleSlug;
 import com.seed4j.module.domain.Seed4JSlug;
@@ -10,24 +10,27 @@ import com.seed4j.module.domain.resource.Seed4JModuleRank;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.jspecify.annotations.Nullable;
 
 public final class Seed4JLandscapeModule implements Seed4JLandscapeElement {
 
   private final Seed4JModuleSlug module;
   private final Seed4JModuleOperation operation;
   private final Seed4JModulePropertiesDefinition propertiesDefinition;
-  private final Optional<Seed4JLandscapeDependencies> dependencies;
   private final Seed4JModuleRank rank;
+  private final Optional<Seed4JLandscapeDependencies> dependencies;
 
   private Seed4JLandscapeModule(Seed4JLandscapeModuleBuilder builder) {
     Assert.notNull("module", builder.module);
     Assert.notNull("operation", builder.operation);
     Assert.notNull("propertiesDefinition", builder.propertiesDefinition);
+    Assert.notNull("rank", builder.rank);
 
     module = builder.module;
     operation = builder.operation;
@@ -112,11 +115,11 @@ public final class Seed4JLandscapeModule implements Seed4JLandscapeElement {
       Seed4JLandscapeModulePropertiesDefinitionBuilder,
       Seed4JLandscapeModuleOptionalBuilder {
 
-    private Seed4JModuleSlug module;
-    private Seed4JModuleOperation operation;
-    private Collection<? extends Seed4JLandscapeDependency> dependencies;
-    private Seed4JModulePropertiesDefinition propertiesDefinition;
-    private Seed4JModuleRank rank;
+    private @Nullable Seed4JModuleSlug module;
+    private @Nullable Seed4JModuleOperation operation;
+    private @Nullable Collection<? extends Seed4JLandscapeDependency> dependencies;
+    private @Nullable Seed4JModulePropertiesDefinition propertiesDefinition;
+    private @Nullable Seed4JModuleRank rank;
 
     @Override
     public Seed4JLandscapeModuleOperationBuilder module(Seed4JModuleSlug module) {
@@ -180,7 +183,7 @@ public final class Seed4JLandscapeModule implements Seed4JLandscapeElement {
     Seed4JLandscapeModule dependencies(Collection<? extends Seed4JLandscapeDependency> dependencies);
 
     default Seed4JLandscapeModule withoutDependencies() {
-      return dependencies(null);
+      return dependencies(List.of());
     }
   }
 }

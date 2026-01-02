@@ -56,6 +56,7 @@ public final class Assert {
    * @throws MissingMandatoryValueException
    *           if the input is blank
    */
+  @Contract("_, null -> fail")
   public static void notBlank(String field, @Nullable String input) {
     field(field, input).notBlank();
   }
@@ -70,6 +71,7 @@ public final class Assert {
    * @throws MissingMandatoryValueException
    *           if the collection is null or empty
    */
+  @Contract("_, null -> fail")
   public static void notEmpty(String field, @Nullable Collection<?> collection) {
     field(field, collection).notEmpty();
   }

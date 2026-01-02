@@ -41,6 +41,7 @@ public class Seed4JDestination {
     return new Seed4JDestination(destination + "/" + element);
   }
 
+  @SuppressWarnings("NullAway")
   public Path folder(Seed4JProjectFolder project) {
     Assert.notNull("project", project);
 

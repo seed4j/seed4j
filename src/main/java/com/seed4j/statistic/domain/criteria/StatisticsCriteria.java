@@ -6,6 +6,7 @@ import com.seed4j.module.domain.Seed4JModuleSlug;
 import java.time.Instant;
 import java.util.Optional;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Criteria class for {@link com.seed4j.statistic.domain.Statistics}.
@@ -44,9 +45,9 @@ public final class StatisticsCriteria {
 
   public static class StatisticsCriteriaBuilder {
 
-    private Instant startTime;
-    private Instant endTime;
-    private String moduleSlug;
+    private @Nullable Instant startTime;
+    private @Nullable Instant endTime;
+    private @Nullable String moduleSlug;
 
     public StatisticsCriteriaBuilder startTime(Instant startTime) {
       this.startTime = startTime;

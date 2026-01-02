@@ -125,7 +125,9 @@ public final class Seed4JModuleJavaDependencies {
     }
 
     public Seed4JModuleJavaDependenciesBuilder<T> addDependency(GroupId groupId, ArtifactId artifactId) {
-      return addDependency(groupId, artifactId, null);
+      JavaDependency dependency = JavaDependency.builder().groupId(groupId).artifactId(artifactId).build();
+
+      return addDependency(dependency);
     }
 
     public Seed4JModuleJavaDependenciesBuilder<T> addDependency(GroupId groupId, ArtifactId artifactId, VersionSlug versionSlug) {

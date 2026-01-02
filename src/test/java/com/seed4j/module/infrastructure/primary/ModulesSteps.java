@@ -1,8 +1,9 @@
 package com.seed4j.module.infrastructure.primary;
 
-import static com.seed4j.TestProjects.*;
+import static com.seed4j.TestProjects.lastProjectFolder;
+import static com.seed4j.TestProjects.newTestFolder;
 import static com.seed4j.cucumber.rest.CucumberRestAssertions.assertThatLastResponse;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.cucumber.rest.CucumberRestTestContext;
 import com.seed4j.module.infrastructure.secondary.git.GitTestUtil;
@@ -22,7 +23,11 @@ import net.minidev.json.JSONArray;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.springframework.boot.resttestclient.TestRestTemplate;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
 public class ModulesSteps {
 
@@ -98,12 +103,12 @@ public class ModulesSteps {
 
   @When("I apply {string} module to default project with package json without parameters")
   public void applyModuleForDefaultProjectWithPackageJson(String moduleSlug) {
-    applyModuleForDefaultProjectWithPackageJson(moduleSlug, null);
+    applyModuleForDefaultProjectWithPackageJson(moduleSlug, Map.of());
   }
 
   @When("I apply {string} module without parameters to last project")
   public void applyModuleForLastProject(String moduleSlug) {
-    post(applyModuleUrl(moduleSlug), buildModuleQuery(lastProjectFolder(), null));
+    post(applyModuleUrl(moduleSlug), buildModuleQuery(lastProjectFolder(), Map.of()));
   }
 
   @When("I apply {string} module with parameters to last project")
@@ -113,7 +118,7 @@ public class ModulesSteps {
 
   @When("I apply {string} module to default project with maven file without parameters")
   public void applyModuleForDefaultProjectWithMavenFileWithoutProperties(String moduleSlug) {
-    applyModuleForDefaultProjectWithMavenFile(moduleSlug, null);
+    applyModuleForDefaultProjectWithMavenFile(moduleSlug, Map.of());
   }
 
   @When("I apply {string} module to default project with maven file")
@@ -138,7 +143,7 @@ public class ModulesSteps {
 
   @When("I apply {string} module to default project without parameters")
   public void applyModuleForDefaultProjectWithoutProperties(String moduleSlug) {
-    applyModuleForDefaultProject(moduleSlug, null);
+    applyModuleForDefaultProject(moduleSlug, Map.of());
   }
 
   @When("I apply and commit {string} module to default project")

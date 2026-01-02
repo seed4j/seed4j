@@ -5,6 +5,7 @@ import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Objects;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 public final class PackageJsonDependency {
 
@@ -64,9 +65,9 @@ public final class PackageJsonDependency {
   private static final class PackageJsonDependencyBuilder
     implements PackageJsonDependencyPackageNameBuilder, PackageJsonDependencyVersionSourceBuilder, PackageJsonDependencyOptionalBuilder {
 
-    private PackageName packageName;
-    private NodePackagesVersionSource versionSource;
-    private PackageName versionPackageName;
+    private @Nullable PackageName packageName;
+    private @Nullable NodePackagesVersionSource versionSource;
+    private @Nullable PackageName versionPackageName;
 
     @Override
     public PackageJsonDependencyVersionSourceBuilder packageName(PackageName packageName) {

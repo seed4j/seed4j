@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;
 import org.junit.jupiter.api.Test;
@@ -9,17 +9,17 @@ import org.junit.jupiter.api.Test;
 class MavenScopeTest {
 
   @Test
-  void shouldGetNullScopeFromNullKey() {
-    assertThat(MavenScope.from(null)).isNull();
+  void shouldGetEmptyScopeFromNullKey() {
+    assertThat(MavenScope.from((String) null)).isEmpty();
   }
 
   @Test
   void shouldGetNullScopeFromUnknownKey() {
-    assertThat(MavenScope.from("unknown")).isNull();
+    assertThat(MavenScope.from("unknown")).isEmpty();
   }
 
   @Test
   void shouldGetScopeFromName() {
-    assertThat(MavenScope.from("test")).isEqualTo(MavenScope.TEST);
+    assertThat(MavenScope.from("test")).hasValue(MavenScope.TEST);
   }
 }

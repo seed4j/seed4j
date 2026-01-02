@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,7 +56,10 @@ public class Seed4JModulesResources {
     Map<Boolean, List<Seed4JModuleResource>> partitionedResources = modulesResources
       .stream()
       .collect(Collectors.partitioningBy(resource -> allowed(resource, hiddenModules, nestedDependenciesSlugs)));
-    return new DisplayHiddenResources(partitionedResources.get(true), partitionedResources.get(false));
+    return new DisplayHiddenResources(
+      Optional.ofNullable(partitionedResources.get(true)).orElse(List.of()),
+      Optional.ofNullable(partitionedResources.get(false)).orElse(List.of())
+    );
   }
 
   private boolean allowed(Seed4JModuleResource resource, Seed4JHiddenModules hiddenModules, Collection<String> nestedDependenciesSlugs) {
@@ -147,6 +151,7 @@ public class Seed4JModulesResources {
     return resources.values().stream();
   }
 
+  @SuppressWarnings("NullAway") // Dataflow analysis limitation
   public Seed4JModuleResource get(Seed4JModuleSlug slug) {
     assertKnownSlug(slug);
 

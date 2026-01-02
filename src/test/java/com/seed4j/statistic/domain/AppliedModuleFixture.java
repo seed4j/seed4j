@@ -9,7 +9,7 @@ public final class AppliedModuleFixture {
   private AppliedModuleFixture() {}
 
   public static AppliedModule appliedModule() {
-    return appliedModule(null);
+    return appliedModule("module");
   }
 
   public static AppliedModule appliedModule(String slug) {

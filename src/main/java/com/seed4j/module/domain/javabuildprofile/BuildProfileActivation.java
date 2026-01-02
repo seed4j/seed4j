@@ -2,6 +2,7 @@ package com.seed4j.module.domain.javabuildprofile;
 
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 public final class BuildProfileActivation {
 
@@ -21,7 +22,7 @@ public final class BuildProfileActivation {
 
   public static final class BuildProfileActivationBuilder {
 
-    private Boolean activeByDefault;
+    private @Nullable Boolean activeByDefault;
 
     private BuildProfileActivationBuilder() {}
 

@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.jspecify.annotations.Nullable;
 
 public final class JavaDependency {
 
@@ -39,6 +40,9 @@ public final class JavaDependency {
   }
 
   private DependencyId buildId(JavaDependencyBuilder builder) {
+    Assert.notNull("groupId", builder.groupId);
+    Assert.notNull("artifactId", builder.artifactId);
+
     return DependencyId.builder()
       .groupId(builder.groupId)
       .artifactId(builder.artifactId)
@@ -137,24 +141,26 @@ public final class JavaDependency {
   }
 
   private JavaDependency merge(JavaDependency other) {
-    return builder()
+    JavaDependencyOptionalValueBuilder builder = builder()
       .groupId(groupId())
       .artifactId(artifactId())
-      .versionSlug(mergeVersionsSlugs(other))
-      .dependencySlug(mergeDependencySlugs(other))
-      .classifier(classifier().orElse(null))
       .scope(mergeScopes(other))
-      .optional(mergeOptionalFlag(other))
-      .type(type().orElse(null))
-      .build();
+      .optional(mergeOptionalFlag(other));
+
+    mergeDependencySlugs(other).ifPresent(builder::dependencySlug);
+    mergeVersionsSlugs(other).ifPresent(builder::versionSlug);
+    classifier().ifPresent(builder::classifier);
+    type().ifPresent(builder::type);
+
+    return builder.build();
   }
 
-  private DependencySlug mergeDependencySlugs(JavaDependency other) {
-    return dependencySlug.orElseGet(() -> other.dependencySlug.orElse(null));
+  private Optional<DependencySlug> mergeDependencySlugs(JavaDependency other) {
+    return dependencySlug.or(() -> other.dependencySlug);
   }
 
-  private VersionSlug mergeVersionsSlugs(JavaDependency other) {
-    return versionSlug.orElseGet(() -> other.versionSlug.orElse(null));
+  private Optional<VersionSlug> mergeVersionsSlugs(JavaDependency other) {
+    return versionSlug.or(() -> other.versionSlug);
   }
 
   private JavaDependencyScope mergeScopes(JavaDependency other) {
@@ -236,14 +242,14 @@ public final class JavaDependency {
   private static final class JavaDependencyBuilder
     implements JavaDependencyGroupIdBuilder, JavaDependencyArtifactIdBuilder, JavaDependencyOptionalValueBuilder {
 
-    private GroupId groupId;
-    private ArtifactId artifactId;
-    private DependencySlug dependencySlug;
-    private VersionSlug versionSlug;
-    private JavaDependencyClassifier classifier;
-    private JavaDependencyScope scope;
+    private @Nullable GroupId groupId;
+    private @Nullable ArtifactId artifactId;
+    private @Nullable DependencySlug dependencySlug;
+    private @Nullable VersionSlug versionSlug;
+    private @Nullable JavaDependencyClassifier classifier;
+    private @Nullable JavaDependencyScope scope;
     private boolean optional;
-    private JavaDependencyType type;
+    private @Nullable JavaDependencyType type;
     private final Collection<DependencyId> exclusions = new ArrayList<>();
 
     @Override
@@ -261,28 +267,28 @@ public final class JavaDependency {
     }
 
     @Override
-    public JavaDependencyOptionalValueBuilder versionSlug(VersionSlug versionSlug) {
+    public JavaDependencyOptionalValueBuilder versionSlug(@Nullable VersionSlug versionSlug) {
       this.versionSlug = versionSlug;
 
       return this;
     }
 
     @Override
-    public JavaDependencyOptionalValueBuilder dependencySlug(DependencySlug dependencySlug) {
+    public JavaDependencyOptionalValueBuilder dependencySlug(@Nullable DependencySlug dependencySlug) {
       this.dependencySlug = dependencySlug;
 
       return this;
     }
 
     @Override
-    public JavaDependencyOptionalValueBuilder classifier(JavaDependencyClassifier classifier) {
+    public JavaDependencyOptionalValueBuilder classifier(@Nullable JavaDependencyClassifier classifier) {
       this.classifier = classifier;
 
       return this;
     }
 
     @Override
-    public JavaDependencyOptionalValueBuilder scope(JavaDependencyScope scope) {
+    public JavaDependencyOptionalValueBuilder scope(@Nullable JavaDependencyScope scope) {
       this.scope = scope;
 
       return this;
@@ -296,7 +302,7 @@ public final class JavaDependency {
     }
 
     @Override
-    public JavaDependencyOptionalValueBuilder type(JavaDependencyType type) {
+    public JavaDependencyOptionalValueBuilder type(@Nullable JavaDependencyType type) {
       this.type = type;
 
       return this;
@@ -334,17 +340,17 @@ public final class JavaDependency {
   }
 
   public interface JavaDependencyOptionalValueBuilder {
-    JavaDependencyOptionalValueBuilder versionSlug(VersionSlug versionSlug);
+    JavaDependencyOptionalValueBuilder versionSlug(@Nullable VersionSlug versionSlug);
 
-    JavaDependencyOptionalValueBuilder dependencySlug(DependencySlug dependencySlug);
+    JavaDependencyOptionalValueBuilder dependencySlug(@Nullable DependencySlug dependencySlug);
 
-    JavaDependencyOptionalValueBuilder classifier(JavaDependencyClassifier classifier);
+    JavaDependencyOptionalValueBuilder classifier(@Nullable JavaDependencyClassifier classifier);
 
-    JavaDependencyOptionalValueBuilder scope(JavaDependencyScope scope);
+    JavaDependencyOptionalValueBuilder scope(@Nullable JavaDependencyScope scope);
 
     JavaDependencyOptionalValueBuilder optional(boolean optional);
 
-    JavaDependencyOptionalValueBuilder type(JavaDependencyType type);
+    JavaDependencyOptionalValueBuilder type(@Nullable JavaDependencyType type);
 
     JavaDependencyOptionalValueBuilder addExclusion(DependencyId dependency);
 

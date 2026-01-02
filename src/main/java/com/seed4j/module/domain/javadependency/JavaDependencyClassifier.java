@@ -3,13 +3,14 @@ package com.seed4j.module.domain.javadependency;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.Nullable;
 
 public record JavaDependencyClassifier(String classifier) {
   public JavaDependencyClassifier {
     Assert.notBlank("classifier", classifier);
   }
 
-  public static Optional<JavaDependencyClassifier> of(String classifier) {
+  public static Optional<JavaDependencyClassifier> of(@Nullable String classifier) {
     return Optional.ofNullable(classifier).filter(StringUtils::isNotBlank).map(JavaDependencyClassifier::new);
   }
 

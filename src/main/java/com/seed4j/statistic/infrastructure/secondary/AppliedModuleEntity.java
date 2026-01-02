@@ -1,6 +1,7 @@
 package com.seed4j.statistic.infrastructure.secondary;
 
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
+import com.seed4j.shared.nullness.domain.Initializer;
 import com.seed4j.statistic.domain.AppliedModule;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +14,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Entity
 @Table(name = "applied_module")
+@SuppressWarnings("NullAway.Init")
 class AppliedModuleEntity {
 
   @Id
@@ -25,6 +27,7 @@ class AppliedModuleEntity {
   @Column(name = "date")
   private Instant date;
 
+  @Initializer
   public static AppliedModuleEntity from(AppliedModule moduleApplied) {
     return new AppliedModuleEntity().id(moduleApplied.id().get()).module(moduleApplied.module().slug()).date(moduleApplied.date());
   }

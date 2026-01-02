@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "applied_module")
+@SuppressWarnings("NullAway.Init")
 @CompoundIndexes(@CompoundIndex(name = "date_moduleSlug", def = "{'date': 1, 'moduleSlug': 1}"))
 class AppliedModuleDocument {
 

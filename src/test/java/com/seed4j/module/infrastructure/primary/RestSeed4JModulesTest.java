@@ -12,29 +12,50 @@ class RestSeed4JModulesTest {
 
   @Test
   void shouldSerializeToJson() {
-    assertThat(JsonHelper.writeAsString(RestSeed4JModules.from(moduleResources()))).isEqualTo(json());
+    assertThat(JsonHelper.writeAsString(RestSeed4JModules.from(moduleResources()))).isEqualToIgnoringWhitespace(json());
   }
 
   private String json() {
     // language=json
     return """
-    {"categories":\
-    [{"modules":[\
-    {"description":"Another operation",\
-    "properties":{MODULE_PROPERTIES},\
-    "slug":"yet-another-module",\
-    "tags":["tag3"]}\
-    ],"name":"Another group"},\
-    {"modules":[\
-    {"description":"operation",\
-    "properties":{MODULE_PROPERTIES},\
-    "slug":"another-module",\
-    "tags":["tag2"]}\
-    ,{"description":"operation",\
-    "properties":{MODULE_PROPERTIES},\
-    "slug":"slug",\
-    "tags":["tag1"]}\
-    ],"name":"group"}]}\
+    {
+      "categories": [
+        {
+          "modules": [
+            {
+              "description": "Another operation",
+              "properties": {MODULE_PROPERTIES},
+              "slug": "yet-another-module",
+              "tags": [
+                "tag3"
+              ]
+            }
+          ],
+          "name": "Another group"
+        },
+        {
+          "modules": [
+            {
+              "description": "operation",
+              "properties": {MODULE_PROPERTIES},
+              "slug": "another-module",
+              "tags": [
+                "tag2"
+              ]
+            },
+            {
+              "description": "operation",
+              "properties": {MODULE_PROPERTIES},
+              "slug": "slug",
+              "tags": [
+                "tag1"
+              ]
+            }
+          ],
+          "name": "Default group"
+        }
+      ]
+    }\
     """.replace("{MODULE_PROPERTIES}", RestSeed4JModulePropertiesDefinitionTest.json());
   }
 }

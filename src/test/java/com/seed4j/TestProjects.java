@@ -13,7 +13,10 @@ public final class TestProjects {
     return lastProjectFolder;
   }
 
-  public static @Nullable String lastProjectFolder() {
+  public static String lastProjectFolder() {
+    if (lastProjectFolder == null) {
+      throw new IllegalStateException("No existing project folder for test");
+    }
     return lastProjectFolder;
   }
 }

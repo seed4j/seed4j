@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.secondary.file;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;
 import java.util.HashMap;
@@ -13,13 +13,8 @@ class MustacheTemplateRendererTest {
   private final MustacheTemplateRenderer renderer = new MustacheTemplateRenderer();
 
   @Test
-  void shouldNotReplaceArgumentsInNullMessage() {
-    assertThat(renderer.render(null, Map.of("key", "value"))).isNull();
-  }
-
-  @Test
   void shouldNotReplaceUnknownArguments() {
-    assertThat(renderer.render("Hey {{ user }}", (Map<String, ?>) null)).isEqualTo("Hey {{ user }}");
+    assertThat(renderer.render("Hey {{ user }}", Map.of())).isEqualTo("Hey {{ user }}");
   }
 
   @Test

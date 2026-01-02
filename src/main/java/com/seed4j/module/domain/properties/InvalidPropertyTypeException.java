@@ -1,6 +1,9 @@
 package com.seed4j.module.domain.properties;
 
+import static java.util.Objects.requireNonNull;
+
 import com.seed4j.shared.error.domain.GeneratorException;
+import org.jspecify.annotations.Nullable;
 
 final class InvalidPropertyTypeException extends GeneratorException {
 
@@ -8,9 +11,9 @@ final class InvalidPropertyTypeException extends GeneratorException {
     super(
       badRequest(PropertiesErrorKey.INVALID_PROPERTY_TYPE)
         .message(buildMessage(builder))
-        .addParameter("propertyKey", builder.key)
-        .addParameter("expectedType", builder.expectedType.getName())
-        .addParameter("actualType", builder.actualType.getName())
+        .addParameter("propertyKey", requireNonNull(builder.key))
+        .addParameter("expectedType", requireNonNull(builder.expectedType).getName())
+        .addParameter("actualType", requireNonNull(builder.actualType).getName())
     );
   }
 
@@ -35,9 +38,9 @@ final class InvalidPropertyTypeException extends GeneratorException {
       InvalidPropertyTypeExceptionExpectedTypeBuilder,
       InvalidPropertyTypeExceptionActualTypeBuilder {
 
-    private String key;
-    private Class<?> expectedType;
-    private Class<?> actualType;
+    private @Nullable String key;
+    private @Nullable Class<?> expectedType;
+    private @Nullable Class<?> actualType;
 
     @Override
     public InvalidPropertyTypeExceptionExpectedTypeBuilder key(String key) {

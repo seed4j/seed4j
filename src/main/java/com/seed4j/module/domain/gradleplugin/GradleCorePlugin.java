@@ -5,6 +5,7 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 public final class GradleCorePlugin implements GradleMainBuildPlugin, GradleProfilePlugin {
 
@@ -46,10 +47,10 @@ public final class GradleCorePlugin implements GradleMainBuildPlugin, GradleProf
 
   private static final class GradleCorePluginBuilder implements GradleCorePluginIdBuilder, GradleCorePluginOptionalBuilder {
 
-    private GradlePluginId id;
+    private @Nullable GradlePluginId id;
     private final Collection<BuildGradleImport> imports = new ArrayList<>();
-    private GradlePluginConfiguration configuration;
-    private VersionSlug toolVersionSlug;
+    private @Nullable GradlePluginConfiguration configuration;
+    private @Nullable VersionSlug toolVersionSlug;
 
     @Override
     public GradleCorePluginOptionalBuilder id(GradlePluginId id) {

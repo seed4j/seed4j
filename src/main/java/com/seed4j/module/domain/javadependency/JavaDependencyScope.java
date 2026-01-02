@@ -1,6 +1,7 @@
 package com.seed4j.module.domain.javadependency;
 
 import com.seed4j.shared.error.domain.Assert;
+import org.jspecify.annotations.Nullable;
 
 public enum JavaDependencyScope {
   COMPILE(6),
@@ -16,7 +17,7 @@ public enum JavaDependencyScope {
     this.priority = priority;
   }
 
-  static JavaDependencyScope from(JavaDependencyScope scope) {
+  static JavaDependencyScope from(@Nullable JavaDependencyScope scope) {
     if (scope == null) {
       return COMPILE;
     }

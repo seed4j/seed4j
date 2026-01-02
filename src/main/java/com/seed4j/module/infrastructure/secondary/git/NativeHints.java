@@ -1,18 +1,22 @@
 package com.seed4j.module.infrastructure.secondary.git;
 
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
-import org.eclipse.jgit.api.*;
+import org.eclipse.jgit.api.MergeCommand;
 import org.eclipse.jgit.diff.DiffAlgorithm;
-import org.eclipse.jgit.internal.*;
-import org.eclipse.jgit.lib.*;
+import org.eclipse.jgit.internal.JGitText;
+import org.eclipse.jgit.lib.CommitConfig;
+import org.eclipse.jgit.lib.CoreConfig;
 import org.eclipse.jgit.util.sha1.SHA1;
-import org.springframework.aot.hint.*;
+import org.jspecify.annotations.Nullable;
+import org.springframework.aot.hint.MemberCategory;
+import org.springframework.aot.hint.RuntimeHints;
+import org.springframework.aot.hint.RuntimeHintsRegistrar;
 
 @ExcludeFromGeneratedCodeCoverage(reason = "Not testing native runtime hints")
 class NativeHints implements RuntimeHintsRegistrar {
 
   @Override
-  public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+  public void registerHints(RuntimeHints hints, @Nullable ClassLoader classLoader) {
     /*
     Mimics quarkus native configuration. See https://github.com/quarkiverse/quarkus-jgit/blob/main/deployment/src/main/java/io/quarkus/jgit/deployment/JGitProcessor.java
     Their calls to

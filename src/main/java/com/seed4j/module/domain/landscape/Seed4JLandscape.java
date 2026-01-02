@@ -101,7 +101,7 @@ public final class Seed4JLandscape {
     Seed4JLandscapeModule module,
     List<Seed4JLandscapeDependency> knownDependencies
   ) {
-    return module.dependencies().map(toDependenciesWithoutNested(knownDependencies)).orElse(null);
+    return module.dependencies().map(toDependenciesWithoutNested(knownDependencies)).orElse(List.of());
   }
 
   private Function<Seed4JLandscapeDependencies, List<Seed4JLandscapeDependency>> toDependenciesWithoutNested(

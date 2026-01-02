@@ -8,6 +8,7 @@ import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -33,8 +34,9 @@ class FileSystemSpringCommentsCommandsHandler {
   }
 
   private static Optional<Path> getPath(Seed4JProjectFolder projectFolder, SpringPropertyTypeFileName springPropertyTypeFileName) {
-    return PROPERTIES_PATHS.get(springPropertyTypeFileName.type())
+    return Optional.ofNullable(PROPERTIES_PATHS.get(springPropertyTypeFileName.type()))
       .stream()
+      .flatMap(Collection::stream)
       .map(toFilePath(projectFolder, springPropertyTypeFileName))
       .filter(Files::exists)
       .findFirst();

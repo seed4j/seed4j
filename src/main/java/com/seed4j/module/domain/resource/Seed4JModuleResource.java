@@ -1,11 +1,12 @@
 package com.seed4j.module.domain.resource;
 
-import static org.apache.commons.lang3.builder.ToStringStyle.*;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import com.seed4j.module.domain.Seed4JModuleFactory;
 import com.seed4j.module.domain.Seed4JModuleSlug;
 import com.seed4j.shared.error.domain.Assert;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.jspecify.annotations.Nullable;
 
 public final class Seed4JModuleResource {
 
@@ -18,7 +19,12 @@ public final class Seed4JModuleResource {
   private final Seed4JModuleFactory factory;
 
   private Seed4JModuleResource(Seed4JModuleResourceBuilder builder) {
-    assertMandatoryFields(builder);
+    Assert.notNull("slug", builder.slug);
+    Assert.notNull("propertiesDefinition", builder.propertiesDefinition);
+    Assert.notNull("apiDoc", builder.apiDoc);
+    Assert.notNull("tags", builder.tags);
+    Assert.notNull("organization", builder.organization);
+    Assert.notNull("factory", builder.factory);
 
     slug = builder.slug.build();
     propertiesDefinition = builder.propertiesDefinition;
@@ -27,15 +33,6 @@ public final class Seed4JModuleResource {
     organization = builder.organization;
     rank = builder.slug.rank();
     factory = builder.factory;
-  }
-
-  private void assertMandatoryFields(Seed4JModuleResourceBuilder builder) {
-    Assert.notNull("slug", builder.slug);
-    Assert.notNull("propertiesDefinition", builder.propertiesDefinition);
-    Assert.notNull("apiDoc", builder.apiDoc);
-    Assert.notNull("tags", builder.tags);
-    Assert.notNull("organization", builder.organization);
-    Assert.notNull("factory", builder.factory);
   }
 
   public static Seed4JModuleResourceSlugBuilder builder() {
@@ -94,13 +91,12 @@ public final class Seed4JModuleResource {
       Seed4JModuleResourceTagsBuilder,
       Seed4JModuleResourceOptionalBuilder {
 
-    private Seed4JModuleSlugFactory slug;
-    private Seed4JModuleApiDoc apiDoc;
-    private Seed4JModuleFactory factory;
-    private Seed4JModulePropertiesDefinition propertiesDefinition;
-
-    private Seed4JModuleTags tags;
-    private Seed4JModuleOrganization organization;
+    private @Nullable Seed4JModuleSlugFactory slug;
+    private @Nullable Seed4JModuleApiDoc apiDoc;
+    private @Nullable Seed4JModuleFactory factory;
+    private @Nullable Seed4JModulePropertiesDefinition propertiesDefinition;
+    private @Nullable Seed4JModuleTags tags;
+    private @Nullable Seed4JModuleOrganization organization;
 
     @Override
     public Seed4JModuleResourcePropertiesDefinitionBuilder slug(Seed4JModuleSlugFactory slug) {

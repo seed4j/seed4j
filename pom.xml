@@ -87,7 +87,7 @@
     <error-prone.version>2.45.0</error-prone.version>
     <modernizer-maven-plugin.version>3.2.0</modernizer-maven-plugin.version>
     <liquibase.version>4.33.0</liquibase.version>
-    <nullaway.version>0.12.7</nullaway.version>
+    <nullaway.version>0.12.15</nullaway.version>
   </properties>
 
   <dependencyManagement>

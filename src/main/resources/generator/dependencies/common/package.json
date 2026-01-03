@@ -61,7 +61,7 @@
     "stylelint": "16.26.1",
     "stylelint-config-concentric-order": "5.2.1",
     "stylelint-config-standard-scss": "16.0.0",
-    "stylelint-order": "7.0.0",
+    "stylelint-order": "7.0.1",
     "tailwindcss": "4.1.18",
     "tikuidoc-tikui": "9.0.0",
     "ts-jest": "29.4.6",

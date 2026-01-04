@@ -1,7 +1,6 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -37,7 +36,13 @@ enum MavenType {
     return Optional.ofNullable(TYPES.get(type));
   }
 
-  @ExcludeFromGeneratedCodeCoverage(reason = "Pattern matching mapper doesn't need full coverage")
+  public static MavenType from(JavaDependencyType javaDependencyType) {
+    return switch (javaDependencyType) {
+      case POM -> POM;
+      case TEST_JAR -> TEST_JAR;
+    };
+  }
+
   public JavaDependencyType toJavaDependencyType() {
     return switch (this) {
       case POM -> JavaDependencyType.POM;

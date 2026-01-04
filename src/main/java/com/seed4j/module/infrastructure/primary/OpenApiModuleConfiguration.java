@@ -9,7 +9,6 @@ import com.seed4j.module.domain.resource.Seed4JModuleApiDoc;
 import com.seed4j.module.domain.resource.Seed4JModulePropertyDefinition;
 import com.seed4j.module.domain.resource.Seed4JModuleResource;
 import com.seed4j.module.domain.resource.Seed4JModulesResources;
-import com.seed4j.shared.enumeration.domain.Enums;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.PathItem;
 import io.swagger.v3.oas.models.Paths;
@@ -143,7 +142,7 @@ class OpenApiModuleConfiguration {
   private Function<Seed4JModulePropertyDefinition, Schema<?>> toPropertySchema() {
     return property ->
       new Schema<>()
-        .type(Enums.map(property.type(), OpenApiFieldType.class).key())
+        .type(OpenApiFieldType.from(property.type()).key())
         .description(property.description().map(Seed4JPropertyDescription::get).orElse(null))
         .example(property.defaultValue().map(Seed4JPropertyDefaultValue::get).orElse(null));
   }

@@ -1,10 +1,9 @@
 package com.seed4j.shared.error.infrastructure.primary;
 
-import com.seed4j.shared.enumeration.domain.Enums;
 import com.seed4j.shared.error.domain.ErrorKey;
+import com.seed4j.shared.error.domain.ErrorStatus;
 import com.seed4j.shared.error.domain.GeneratorException;
 import java.util.Locale;
-import java.util.Optional;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +34,7 @@ class GeneratorErrorsHandler {
 
   @ExceptionHandler(GeneratorException.class)
   ProblemDetail handleGeneratorException(GeneratorException exception) {
-    HttpStatus status = Optional.ofNullable(Enums.map(exception.status(), HttpStatus.class)).orElse(HttpStatus.INTERNAL_SERVER_ERROR);
+    HttpStatus status = toHttpStatus(exception.status());
     var problem = ProblemDetail.forStatusAndDetail(status, buildDetail(exception));
 
     problem.setTitle(getMessage(exception.key(), "title"));
@@ -44,6 +43,13 @@ class GeneratorErrorsHandler {
     logException(exception, status);
 
     return problem;
+  }
+
+  private static HttpStatus toHttpStatus(ErrorStatus errorStatus) {
+    return switch (errorStatus) {
+      case INTERNAL_SERVER_ERROR -> HttpStatus.INTERNAL_SERVER_ERROR;
+      case BAD_REQUEST -> HttpStatus.BAD_REQUEST;
+    };
   }
 
   private @Nullable String buildDetail(GeneratorException exception) {

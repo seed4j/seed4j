@@ -1,7 +1,6 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
@@ -34,7 +33,6 @@ enum MavenScope {
     return name().toLowerCase(Locale.ROOT);
   }
 
-  @ExcludeFromGeneratedCodeCoverage(reason = "Pattern matching mapper doesn't need full coverage")
   public static MavenScope from(JavaDependencyScope scope) {
     return switch (scope) {
       case COMPILE -> COMPILE;
@@ -46,7 +44,6 @@ enum MavenScope {
     };
   }
 
-  @ExcludeFromGeneratedCodeCoverage(reason = "Pattern matching mapper doesn't need full coverage")
   public JavaDependencyScope toJavaDependencyScope() {
     return switch (this) {
       case COMPILE -> JavaDependencyScope.COMPILE;

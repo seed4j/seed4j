@@ -32,7 +32,6 @@ import com.seed4j.module.domain.mavenplugin.MavenPluginExecution;
 import com.seed4j.module.domain.mavenplugin.MavenPluginExecutionGoal;
 import com.seed4j.module.domain.mavenplugin.MavenPluginExecutionId;
 import com.seed4j.module.infrastructure.secondary.javadependency.JavaDependenciesCommandHandler;
-import com.seed4j.shared.enumeration.domain.Enums;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
 import io.fabric8.maven.Maven;
@@ -332,11 +331,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     mavenDependency.setArtifactId(javaDependency.id().artifactId().get());
     javaDependency.version().map(VersionSlug::mavenVariable).ifPresent(mavenDependency::setVersion);
     javaDependency.classifier().map(JavaDependencyClassifier::get).ifPresent(mavenDependency::setClassifier);
-    javaDependency
-      .type()
-      .map(type -> Enums.map(type, MavenType.class))
-      .map(MavenType::key)
-      .ifPresent(mavenDependency::setType);
+    javaDependency.type().map(MavenType::from).map(MavenType::key).ifPresent(mavenDependency::setType);
     javaDependency.exclusions().stream().map(toMavenExclusion()).forEach(mavenDependency::addExclusion);
 
     if (javaDependency.scope() != JavaDependencyScope.COMPILE) {

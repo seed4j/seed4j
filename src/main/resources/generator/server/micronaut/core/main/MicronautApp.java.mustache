@@ -1,0 +1,12 @@
+package {{packageName}};
+
+import io.micronaut.runtime.Micronaut;
+import {{packageName}}.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
+
+@ExcludeFromGeneratedCodeCoverage(reason = "Not testing logs")
+public class {{ baseName }}App {
+
+  public static void main(String[] args) {
+    Micronaut.run({{ baseName }}App.class, args);
+  }
+}

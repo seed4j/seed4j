@@ -98,6 +98,7 @@ public enum Seed4JCoreModuleSlug implements Seed4JModuleSlugFactory {
   CYPRESS_MERGE_COVERAGE("cypress-merge-coverage", RANK_B),
   MAVEN_JAVA("maven-java", RANK_S),
   MAVEN_WRAPPER("maven-wrapper", RANK_S),
+  MICRONAUT("micronaut", RANK_S),
   MODERNIZER("modernizer", RANK_C),
   MONGOCK("mongock", RANK_C),
   MONGODB("mongodb", RANK_C),

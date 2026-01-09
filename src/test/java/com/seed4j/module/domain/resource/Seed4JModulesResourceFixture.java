@@ -45,6 +45,31 @@ public final class Seed4JModulesResourceFixture {
     );
   }
 
+  public static Collection<Seed4JModuleResource> moduleNestedModuleAndFeatureResourcesCollection() {
+    return List.of(
+      defaultModuleResource(),
+      defaultModuleResourceBuilder().slug("module-a").build(),
+      defaultModuleResourceBuilder().slug("module-b").moduleDependency("module-a").build(),
+      defaultModuleResourceBuilder().slug("module-c").moduleDependency("module-b").build(),
+      defaultModuleResourceBuilder().feature("client-core").slug("module-d").moduleDependency("module-b").build(),
+      defaultModuleResourceBuilder().feature("client-core").slug("module-e").moduleDependency("module-b").build(),
+      defaultModuleResourceBuilder().feature("e2e-tests").slug("module-f").featureDependency("client-core").build()
+    );
+  }
+
+  public static Collection<Seed4JModuleResource> moduleNestedFeatureResourcesCollection() {
+    return List.of(
+      defaultModuleResource(),
+      defaultModuleResourceBuilder().slug("module-a").build(),
+      defaultModuleResourceBuilder().slug("module-b").moduleDependency("module-a").build(),
+      defaultModuleResourceBuilder().slug("module-c").moduleDependency("module-b").build(),
+      defaultModuleResourceBuilder().feature("client-core").slug("module-d").moduleDependency("module-b").build(),
+      defaultModuleResourceBuilder().feature("client-core").slug("module-e").moduleDependency("module-b").build(),
+      defaultModuleResourceBuilder().feature("e2e-tests").slug("module-f").featureDependency("client-core").build(),
+      defaultModuleResourceBuilder().feature("e2e-tests-detail").slug("module-g").featureDependency("e2e-tests").build()
+    );
+  }
+
   public static Seed4JModuleResource defaultModuleResource() {
     return defaultModuleResourceBuilder().build();
   }

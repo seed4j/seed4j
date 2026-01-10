@@ -28,7 +28,7 @@
     "cypress": "15.8.1",
     "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-cypress": "5.2.0",
+    "eslint-plugin-cypress": "5.2.1",
     "globals": "17.0.0",
     "husky": "9.1.7",
     "i18next": "25.7.3",

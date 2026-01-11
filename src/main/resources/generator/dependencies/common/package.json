@@ -10,7 +10,7 @@
     "@playwright/test": "1.57.0",
     "@prettier/plugin-pug": "3.4.2",
     "@prettier/plugin-xml": "3.4.2",
-    "@sonar/scan": "4.3.2",
+    "@sonar/scan": "4.3.4",
     "@tailwindcss/vite": "4.1.18",
     "@tikui/core": "7.0.0",
     "@tsconfig/recommended": "1.0.13",

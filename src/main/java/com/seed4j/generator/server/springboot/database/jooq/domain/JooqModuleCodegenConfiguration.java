@@ -84,7 +84,8 @@ final class JooqModuleCodegenConfiguration {
       JooqModuleCodegenConfigurationUserBuilder,
       JooqModuleCodegenConfigurationInputSchemaBuilder,
       JooqModuleCodegenConfigurationJooqMetaDatabaseBuilder,
-      JooqModuleCodegenConfigurationOptionalBuilder {
+      JooqModuleCodegenConfigurationOptionalBuilder
+  {
 
     private String databaseUrl;
     private String user;

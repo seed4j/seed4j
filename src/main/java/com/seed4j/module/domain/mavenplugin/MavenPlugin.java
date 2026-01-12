@@ -64,7 +64,8 @@ public final class MavenPlugin {
   }
 
   private static final class MavenPluginBuilder
-    implements MavenPluginGroupIdBuilder, MavenPluginArtifactIdBuilder, MavenPluginOptionalBuilder {
+    implements MavenPluginGroupIdBuilder, MavenPluginArtifactIdBuilder, MavenPluginOptionalBuilder
+  {
 
     private @Nullable GroupId groupId;
     private @Nullable ArtifactId artifactId;

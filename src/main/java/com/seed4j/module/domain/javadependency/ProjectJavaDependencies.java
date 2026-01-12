@@ -67,7 +67,8 @@ public final class ProjectJavaDependencies {
     implements
       ProjectJavaDependenciesVersionsBuilder,
       ProjectJavaDependenciesDependenciesManagementBuilder,
-      ProjectJavaDependenciesDependenciesBuilder {
+      ProjectJavaDependenciesDependenciesBuilder
+  {
 
     private @Nullable ProjectJavaDependenciesVersions versions;
     private @Nullable JavaDependencies dependenciesManagement;

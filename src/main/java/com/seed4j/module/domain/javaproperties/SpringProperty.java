@@ -48,7 +48,8 @@ public final class SpringProperty implements SpringPropertyTypeFileName {
   }
 
   private static final class SpringPropertyBuilder
-    implements SpringPropertyKeyBuilder, SpringPropertyValueBuilder, SpringPropertyProfileBuilder {
+    implements SpringPropertyKeyBuilder, SpringPropertyValueBuilder, SpringPropertyProfileBuilder
+  {
 
     private final SpringPropertyType type;
     private @Nullable PropertyKey key;

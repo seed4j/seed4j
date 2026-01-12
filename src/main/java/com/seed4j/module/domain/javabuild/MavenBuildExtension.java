@@ -65,7 +65,8 @@ public final class MavenBuildExtension {
   }
 
   private static final class MavenBuildExtensionBuilder
-    implements MavenBuildExtensionGroupIdBuilder, MavenBuildExtensionArtifactIdBuilder, MavenBuildExtensionOptionalValueBuilder {
+    implements MavenBuildExtensionGroupIdBuilder, MavenBuildExtensionArtifactIdBuilder, MavenBuildExtensionOptionalValueBuilder
+  {
 
     private @Nullable GroupId groupId;
     private @Nullable ArtifactId artifactId;

@@ -80,7 +80,8 @@ public final class DependencyId {
   }
 
   private static final class DependencyIdBuilder
-    implements DependencyIdGroupIdBuilder, DependencyIdArtifactIdBuilder, DependencyIdOptionalFieldsBuilder {
+    implements DependencyIdGroupIdBuilder, DependencyIdArtifactIdBuilder, DependencyIdOptionalFieldsBuilder
+  {
 
     private @Nullable GroupId groupId;
     private @Nullable ArtifactId artifactId;

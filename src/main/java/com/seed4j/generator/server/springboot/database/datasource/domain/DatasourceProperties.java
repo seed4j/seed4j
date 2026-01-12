@@ -90,7 +90,8 @@ public final class DatasourceProperties {
       DatasourcePropertiesDriverDependencyBuilder,
       DatasourcePropertiesDriverClassNameBuilder,
       DatasourcePropertiesDockerImageNameBuilder,
-      DatasourcePropertiesTestContainerArtifactIdBuilder {
+      DatasourcePropertiesTestContainerArtifactIdBuilder
+  {
 
     private String id;
     private String databaseName;

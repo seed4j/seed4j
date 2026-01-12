@@ -63,7 +63,8 @@ public final class PackageJsonDependency {
   }
 
   private static final class PackageJsonDependencyBuilder
-    implements PackageJsonDependencyPackageNameBuilder, PackageJsonDependencyVersionSourceBuilder, PackageJsonDependencyOptionalBuilder {
+    implements PackageJsonDependencyPackageNameBuilder, PackageJsonDependencyVersionSourceBuilder, PackageJsonDependencyOptionalBuilder
+  {
 
     private @Nullable PackageName packageName;
     private @Nullable NodePackagesVersionSource versionSource;

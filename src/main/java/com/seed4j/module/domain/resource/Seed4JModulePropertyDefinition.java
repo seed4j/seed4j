@@ -162,7 +162,8 @@ public final class Seed4JModulePropertyDefinition {
       Seed4JModulePropertyDefinitionTypeBuilder,
       Seed4JModulePropertyDefinitionOptionalityBuilder,
       Seed4JModulePropertyDefinitionKeyBuilder,
-      Seed4JModulePropertyDefinitionOptionalFieldsBuilder {
+      Seed4JModulePropertyDefinitionOptionalFieldsBuilder
+  {
 
     private @Nullable Seed4JPropertyType type;
     private boolean mandatory;

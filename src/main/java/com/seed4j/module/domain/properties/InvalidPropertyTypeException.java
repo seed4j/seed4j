@@ -36,7 +36,8 @@ final class InvalidPropertyTypeException extends GeneratorException {
     implements
       InvalidPropertyTypeExceptionKeyBuilder,
       InvalidPropertyTypeExceptionExpectedTypeBuilder,
-      InvalidPropertyTypeExceptionActualTypeBuilder {
+      InvalidPropertyTypeExceptionActualTypeBuilder
+  {
 
     private @Nullable String key;
     private @Nullable Class<?> expectedType;

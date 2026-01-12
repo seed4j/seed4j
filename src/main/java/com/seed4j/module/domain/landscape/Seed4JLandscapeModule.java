@@ -113,7 +113,8 @@ public final class Seed4JLandscapeModule implements Seed4JLandscapeElement {
       Seed4JLandscapeModuleSlugBuilder,
       Seed4JLandscapeModuleOperationBuilder,
       Seed4JLandscapeModulePropertiesDefinitionBuilder,
-      Seed4JLandscapeModuleOptionalBuilder {
+      Seed4JLandscapeModuleOptionalBuilder
+  {
 
     private @Nullable Seed4JModuleSlug module;
     private @Nullable Seed4JModuleOperation operation;

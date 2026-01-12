@@ -5,8 +5,10 @@ import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Optional;
 
-public record AddJavaDependencyManagement(JavaDependency dependency, Optional<BuildProfileId> buildProfile) implements
-  JavaBuildCommand, AddJavaDependency {
+public record AddJavaDependencyManagement(
+  JavaDependency dependency,
+  Optional<BuildProfileId> buildProfile
+) implements JavaBuildCommand, AddJavaDependency {
   public AddJavaDependencyManagement {
     Assert.notNull("dependency", dependency);
     Assert.notNull("buildProfile", buildProfile);

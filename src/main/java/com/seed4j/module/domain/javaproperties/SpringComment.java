@@ -48,7 +48,8 @@ public final class SpringComment implements SpringPropertyTypeFileName {
   }
 
   private static final class SpringCommentBuilder
-    implements SpringCommentPropertyKeyBuilder, SpringCommentCommentBuilder, SpringCommentProfileBuilder {
+    implements SpringCommentPropertyKeyBuilder, SpringCommentCommentBuilder, SpringCommentProfileBuilder
+  {
 
     private final SpringPropertyType type;
     private @Nullable PropertyKey key;

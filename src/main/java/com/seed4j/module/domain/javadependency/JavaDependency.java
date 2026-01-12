@@ -240,7 +240,8 @@ public final class JavaDependency {
   }
 
   private static final class JavaDependencyBuilder
-    implements JavaDependencyGroupIdBuilder, JavaDependencyArtifactIdBuilder, JavaDependencyOptionalValueBuilder {
+    implements JavaDependencyGroupIdBuilder, JavaDependencyArtifactIdBuilder, JavaDependencyOptionalValueBuilder
+  {
 
     private @Nullable GroupId groupId;
     private @Nullable ArtifactId artifactId;

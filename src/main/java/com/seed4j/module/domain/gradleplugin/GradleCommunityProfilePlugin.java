@@ -57,7 +57,10 @@ public final class GradleCommunityProfilePlugin implements GradleProfilePlugin {
 
   private static final class GradleCommunityProfilePluginBuilder
     implements
-      GradleCommunityProfilePluginIdBuilder, GradleCommunityProfilePluginDependencyBuilder, GradleCommunityProfilePluginOptionalBuilder {
+      GradleCommunityProfilePluginIdBuilder,
+      GradleCommunityProfilePluginDependencyBuilder,
+      GradleCommunityProfilePluginOptionalBuilder
+  {
 
     private @Nullable GradlePluginId id;
     private @Nullable GradlePluginDependency dependency;

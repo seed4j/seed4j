@@ -47,7 +47,8 @@ public final class Seed4JModuleOptionalReplacementsFactory extends Seed4JModuleR
     extends Seed4JModuleReplacementsFactoryBuilder<
       Seed4JModuleOptionalReplacementsFactory,
       Seed4JModuleFileOptionalReplacementsFactoryBuilder
-    > {
+    >
+  {
 
     private Seed4JModuleOptionalReplacementsFactoryBuilder(Seed4JModuleBuilder module) {
       super(module);
@@ -68,7 +69,8 @@ public final class Seed4JModuleOptionalReplacementsFactory extends Seed4JModuleR
     extends Seed4JModuleFileReplacementsBuilder<
       Seed4JModuleOptionalReplacementsFactoryBuilder,
       Seed4JModuleFileOptionalReplacementsFactoryBuilder
-    > {
+    >
+  {
 
     private Seed4JModuleFileOptionalReplacementsFactoryBuilder(
       Seed4JModuleOptionalReplacementsFactoryBuilder replacements,

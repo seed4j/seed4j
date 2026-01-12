@@ -183,7 +183,8 @@ public final class Seed4JModuleChanges {
       Seed4JModuleChangesSpringFactoriesBuilder,
       Seed4JModuleChangesSpringYamlCommentsBuilder,
       Seed4JModuleChangesGitIgnorePatternsBuilder,
-      Seed4JModuleChangesDockerComposeFileBuilder {
+      Seed4JModuleChangesDockerComposeFileBuilder
+  {
 
     private @Nullable Seed4JModuleContext context;
     private @Nullable Seed4JProjectFolder projectFolder;

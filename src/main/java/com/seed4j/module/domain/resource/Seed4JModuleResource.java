@@ -89,7 +89,8 @@ public final class Seed4JModuleResource {
       Seed4JModuleResourceApiDocBuilder,
       Seed4JModuleResourceOrganizationBuilder,
       Seed4JModuleResourceTagsBuilder,
-      Seed4JModuleResourceOptionalBuilder {
+      Seed4JModuleResourceOptionalBuilder
+  {
 
     private @Nullable Seed4JModuleSlugFactory slug;
     private @Nullable Seed4JModuleApiDoc apiDoc;

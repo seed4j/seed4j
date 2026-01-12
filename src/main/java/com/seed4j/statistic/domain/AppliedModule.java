@@ -38,7 +38,8 @@ public final class AppliedModule {
   }
 
   private static final class ModuleAppliedBuilder
-    implements ModuleAppliedIdBuilder, ModuleAppliedModuleBuilder, ModuleAppliedApplicationDateBuilder {
+    implements ModuleAppliedIdBuilder, ModuleAppliedModuleBuilder, ModuleAppliedApplicationDateBuilder
+  {
 
     private @Nullable AppliedModuleId id;
     private @Nullable Module module;

@@ -48,7 +48,7 @@
     <testcontainers.version>2.0.3</testcontainers.version>
     <archunit-junit5.version>1.4.1</archunit-junit5.version>
     <cucumber.version>7.33.0</cucumber.version>
-    <approvaltests.version>26.2.0</approvaltests.version>
+    <approvaltests.version>26.3.0</approvaltests.version>
     <jqwik.version>1.9.3</jqwik.version>
     <!-- Maven Plugins -->
     <os-maven-plugin.version>1.7.1</os-maven-plugin.version>

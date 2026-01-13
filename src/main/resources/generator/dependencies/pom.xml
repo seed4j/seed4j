@@ -30,7 +30,7 @@
     <thymeleaf-layout-dialect.version>3.4.0</thymeleaf-layout-dialect.version>
     <htmx-webjars.version>2.0.8</htmx-webjars.version>
     <alpinejs-webjars.version>3.15.3</alpinejs-webjars.version>
-    <protobuf.version>4.33.3</protobuf.version>
+    <protobuf.version>4.33.4</protobuf.version>
     <proto-backwards-compatibility.version>1.0.7</proto-backwards-compatibility.version>
     <jmolecules-bom.version>2025.0.2</jmolecules-bom.version>
     <jqassistant.version>2.8.0</jqassistant.version>

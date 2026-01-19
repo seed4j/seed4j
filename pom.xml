@@ -67,7 +67,7 @@
     <junit-jupiter.version>6.0.2</junit-jupiter.version>
     <archunit-junit5.version>1.4.1</archunit-junit5.version>
     <springdoc-openapi.version>3.0.1</springdoc-openapi.version>
-    <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
+    <properties-maven-plugin.version>1.3.0</properties-maven-plugin.version>
     <sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
     <apache-commons-io.version>2.21.0</apache-commons-io.version>
     <cucumber.version>7.33.0</cucumber.version>

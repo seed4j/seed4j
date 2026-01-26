@@ -12,7 +12,7 @@
     "@prettier/plugin-xml": "3.4.2",
     "@sonar/scan": "4.3.4",
     "@tailwindcss/vite": "4.1.18",
-    "@tikui/core": "7.0.0",
+    "@tikui/core": "7.0.1",
     "@tsconfig/recommended": "1.0.13",
     "@types/jest": "29.5.14",
     "@types/node": "24.10.9",

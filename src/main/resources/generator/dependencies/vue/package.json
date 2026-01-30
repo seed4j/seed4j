@@ -15,6 +15,6 @@
     "pinia-plugin-persistedstate": "4.7.1",
     "vue": "3.5.27",
     "vue-router": "4.6.4",
-    "vue-tsc": "3.2.3"
+    "vue-tsc": "3.2.4"
   }
 }

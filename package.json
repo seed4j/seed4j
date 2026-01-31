@@ -52,7 +52,7 @@
     "watch:tsc": "npm run build:tsc -- --watch"
   },
   "dependencies": {
-    "axios": "1.13.3",
+    "axios": "1.13.4",
     "mitt": "3.0.1",
     "piqure": "2.1.2",
     "placeholder-loading": "0.7.0",

@@ -22,7 +22,7 @@
     <springdoc-openapi.version>3.0.1</springdoc-openapi.version>
     <kafka-clients.version>4.1.1</kafka-clients.version>
     <mongock.version>5.5.1</mongock.version>
-    <neo4j-migrations.version>3.2.0</neo4j-migrations.version>
+    <neo4j-migrations.version>3.2.1</neo4j-migrations.version>
     <reflections.version>0.10.2</reflections.version>
     <json-web-token.version>0.13.0</json-web-token.version>
     <commons-lang3.version>3.20.0</commons-lang3.version>

@@ -67,7 +67,7 @@
     "@tikui/core": "7.0.1",
     "@typescript-eslint/eslint-plugin": "8.54.0",
     "@typescript-eslint/parser": "8.54.0",
-    "@vitejs/plugin-vue": "6.0.3",
+    "@vitejs/plugin-vue": "6.0.4",
     "@vitest/coverage-istanbul": "4.0.18",
     "@vue/test-utils": "2.4.6",
     "concurrently": "9.2.1",

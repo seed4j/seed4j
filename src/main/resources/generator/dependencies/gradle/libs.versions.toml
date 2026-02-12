@@ -1,7 +1,7 @@
 [versions]
 checkstyle = "10.21.0"
 jib = "3.5.3"
-git-properties = "2.5.6"
+git-properties = "2.5.7"
 protobuf-plugin = "0.9.6"
 sonarqube = "6.2.0.5505"
 node-gradle = "7.0.2"

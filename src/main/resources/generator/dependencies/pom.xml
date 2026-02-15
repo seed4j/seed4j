@@ -21,6 +21,7 @@
     <spring-cloud.version>2025.1.1</spring-cloud.version>
     <springdoc-openapi.version>3.0.1</springdoc-openapi.version>
     <kafka-clients.version>4.1.1</kafka-clients.version>
+    <spring-kafka.version>4.0.0</spring-kafka.version>
     <mongock.version>5.5.1</mongock.version>
     <neo4j-migrations.version>3.2.1</neo4j-migrations.version>
     <reflections.version>0.10.2</reflections.version>
@@ -226,6 +227,17 @@
         <groupId>org.apache.kafka</groupId>
         <artifactId>kafka-clients</artifactId>
         <version>${kafka-clients.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.kafka</groupId>
+        <artifactId>spring-kafka</artifactId>
+        <version>${spring-kafka.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.kafka</groupId>
+        <artifactId>spring-kafka-test</artifactId>
+        <version>${spring-kafka.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>

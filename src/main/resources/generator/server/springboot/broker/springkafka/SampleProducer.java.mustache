@@ -1,0 +1,30 @@
+package {{packageName}}.sample.infrastructure.secondary.kafka.producer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.stereotype.Repository;
+
+import java.util.concurrent.CompletableFuture;
+
+@Repository
+public class SampleProducer {
+
+  private static final Logger log = LoggerFactory.getLogger(SampleProducer.class);
+
+  private final KafkaTemplate<String, String> kafkaTemplate;
+
+  private final String topicName;
+
+  public SampleProducer(@Value("${application.kafka.topic.sample}") String topicName, KafkaTemplate<String, String> kafkaTemplate) {
+    this.kafkaTemplate = kafkaTemplate;
+    this.topicName = topicName;
+  }
+
+  public CompletableFuture<SendResult<String, String>> send(final String message) {
+    log.info("Sending asynchronously a String message to topic: '{}'", topicName);
+    return kafkaTemplate.send(topicName, message);
+  }
+}

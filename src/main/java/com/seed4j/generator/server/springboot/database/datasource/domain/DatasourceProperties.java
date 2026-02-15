@@ -6,6 +6,8 @@ import com.seed4j.module.domain.docker.DockerImageName;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
+import com.seed4j.shared.error.domain.Assert;
+import org.jspecify.annotations.Nullable;
 
 public final class DatasourceProperties {
 
@@ -17,6 +19,13 @@ public final class DatasourceProperties {
   private final ArtifactId testContainerArtifactId;
 
   private DatasourceProperties(DatasourcePropertiesBuilder builder) {
+    Assert.notNull("id", builder.id);
+    Assert.notNull("databaseName", builder.databaseName);
+    Assert.notNull("driverDependency", builder.driverDependency);
+    Assert.notNull("driverClassName", builder.driverClassName);
+    Assert.notNull("dockerImageName", builder.dockerImageName);
+    Assert.notNull("testContainerArtifactId", builder.testContainerArtifactId);
+
     this.id = builder.id;
     this.databaseName = builder.databaseName;
     this.driverDependency = builder.driverDependency;
@@ -50,6 +59,8 @@ public final class DatasourceProperties {
   }
 
   public JavaDependency testContainerDependency() {
+    Assert.notNull("testContainerArtifactId", testContainerArtifactId);
+
     return javaDependency()
       .groupId("org.testcontainers")
       .artifactId(testContainerArtifactId)
@@ -93,12 +104,12 @@ public final class DatasourceProperties {
       DatasourcePropertiesTestContainerArtifactIdBuilder
   {
 
-    private String id;
-    private String databaseName;
-    private JavaDependency driverDependency;
-    private String driverClassName;
-    private DockerImageName dockerImageName;
-    private ArtifactId testContainerArtifactId;
+    private @Nullable String id;
+    private @Nullable String databaseName;
+    private @Nullable JavaDependency driverDependency;
+    private @Nullable String driverClassName;
+    private @Nullable DockerImageName dockerImageName;
+    private @Nullable ArtifactId testContainerArtifactId;
 
     @Override
     public DatasourcePropertiesDatabaseNameBuilder id(String id) {

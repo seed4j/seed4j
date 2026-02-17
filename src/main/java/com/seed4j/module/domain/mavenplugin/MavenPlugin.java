@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.mavenplugin;
 
-import static org.apache.commons.lang3.builder.ToStringStyle.*;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
@@ -16,16 +16,19 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.jspecify.annotations.Nullable;
 
 public final class MavenPlugin {
 
   private final DependencyId dependencyId;
-  private final Optional<VersionSlug> versionSlug;
-  private final Optional<MavenPluginConfiguration> configuration;
   private final Collection<MavenPluginExecution> executions;
   private final Collection<JavaDependency> dependencies;
+  private final Optional<VersionSlug> versionSlug;
+  private final Optional<MavenPluginConfiguration> configuration;
 
   private MavenPlugin(MavenPluginBuilder builder) {
+    Assert.notNull("groupId", builder.groupId);
+    Assert.notNull("artifactId", builder.artifactId);
     Assert.notNull("executions", builder.executions);
     Assert.notNull("dependencies", builder.dependencies);
 
@@ -61,12 +64,13 @@ public final class MavenPlugin {
   }
 
   private static final class MavenPluginBuilder
-    implements MavenPluginGroupIdBuilder, MavenPluginArtifactIdBuilder, MavenPluginOptionalBuilder {
+    implements MavenPluginGroupIdBuilder, MavenPluginArtifactIdBuilder, MavenPluginOptionalBuilder
+  {
 
-    private GroupId groupId;
-    private ArtifactId artifactId;
-    private VersionSlug versionSlug;
-    private MavenPluginConfiguration configuration;
+    private @Nullable GroupId groupId;
+    private @Nullable ArtifactId artifactId;
+    private @Nullable VersionSlug versionSlug;
+    private @Nullable MavenPluginConfiguration configuration;
     private final List<MavenPluginExecution> executions = new ArrayList<>();
     private final Collection<JavaDependency> dependencies = new LinkedHashSet<>();
 

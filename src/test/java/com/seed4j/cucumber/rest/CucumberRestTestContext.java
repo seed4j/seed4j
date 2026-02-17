@@ -195,7 +195,7 @@ public final class CucumberRestTestContext {
         Assertions.fail("URI should be the name of a REST resource");
       }
 
-      return this.uri.matches(String.format(URI_MATCHER, uri));
+      return this.uri.matches(URI_MATCHER.formatted(uri));
     }
 
     private void retry() {

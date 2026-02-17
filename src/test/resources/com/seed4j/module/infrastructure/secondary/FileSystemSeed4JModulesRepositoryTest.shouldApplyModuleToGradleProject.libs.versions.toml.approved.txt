@@ -29,10 +29,6 @@ bundles = {}
 		name = "spring-boot-starter"
 		group = "org.springframework.boot"
 
-	[libraries.spring-boot-starter-web]
-		name = "spring-boot-starter-web"
-		group = "org.springframework.boot"
-
 	[libraries.reflections]
 		name = "reflections"
 		group = "org.reflections"
@@ -46,6 +42,10 @@ bundles = {}
 
 		[libraries.spring-boot-dependencies.version]
 			ref = "spring-boot"
+
+	[libraries.spring-boot-starter-webmvc]
+		name = "spring-boot-starter-webmvc"
+		group = "org.springframework.boot"
 
 	[libraries.commons-lang3]
 		name = "commons-lang3"

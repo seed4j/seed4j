@@ -3,6 +3,7 @@ package com.seed4j.module.domain.javadependency;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class JavaDependencies {
 
-  public static final JavaDependencies EMPTY = new JavaDependencies(null);
+  public static final JavaDependencies EMPTY = new JavaDependencies(List.of());
 
   private final Map<DependencyId, JavaDependency> dependencies;
 
@@ -19,10 +20,6 @@ public class JavaDependencies {
   }
 
   private Map<DependencyId, JavaDependency> buildDependencies(Collection<JavaDependency> dependencies) {
-    if (dependencies == null) {
-      return Map.of();
-    }
-
     return dependencies.stream().collect(Collectors.toUnmodifiableMap(JavaDependency::id, Function.identity()));
   }
 

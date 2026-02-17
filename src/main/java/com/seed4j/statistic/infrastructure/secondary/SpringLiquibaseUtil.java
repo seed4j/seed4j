@@ -1,10 +1,12 @@
 package com.seed4j.statistic.infrastructure.secondary;
 
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 import javax.sql.DataSource;
 import liquibase.integration.spring.SpringLiquibase;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
 import org.springframework.boot.liquibase.autoconfigure.DataSourceClosingSpringLiquibase;
@@ -31,9 +33,9 @@ final class SpringLiquibaseUtil {
    * @return a {@link liquibase.integration.spring.SpringLiquibase} object.
    */
   public static SpringLiquibase createSpringLiquibase(
-    DataSource liquibaseDatasource,
+    @Nullable DataSource liquibaseDatasource,
     LiquibaseProperties liquibaseProperties,
-    DataSource dataSource,
+    @Nullable DataSource dataSource,
     DataSourceProperties dataSourceProperties
   ) {
     SpringLiquibase liquibase;
@@ -49,7 +51,11 @@ final class SpringLiquibaseUtil {
   }
 
   @ExcludeFromGeneratedCodeCoverage
-  private static DataSource getDataSource(DataSource liquibaseDataSource, LiquibaseProperties liquibaseProperties, DataSource dataSource) {
+  private static @Nullable DataSource getDataSource(
+    @Nullable DataSource liquibaseDataSource,
+    LiquibaseProperties liquibaseProperties,
+    @Nullable DataSource dataSource
+  ) {
     if (liquibaseDataSource != null) {
       return liquibaseDataSource;
     }
@@ -66,7 +72,7 @@ final class SpringLiquibaseUtil {
     return DataSourceBuilder.create().url(url).username(user).password(password).build();
   }
 
-  private static String getProperty(Supplier<String> property, Supplier<String> defaultValue) {
-    return Optional.of(property).map(Supplier::get).orElseGet(defaultValue);
+  private static String getProperty(Supplier<@Nullable String> property, Supplier<String> defaultValue) {
+    return Optional.of(property).map(Supplier::get).filter(Objects::nonNull).orElseGet(defaultValue);
   }
 }

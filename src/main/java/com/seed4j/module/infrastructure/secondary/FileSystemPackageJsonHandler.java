@@ -30,6 +30,7 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -197,16 +198,19 @@ class FileSystemPackageJsonHandler {
 
   private static final class JsonAction {
 
-    private final String blockName;
-    private final String jsonContent;
-    private final Indentation indentation;
     private final Collection<JsonEntry> entries;
     private final JsonActionType action;
-    private final String blockValue;
+    private final Indentation indentation;
+    private final String blockName;
+    private final String jsonContent;
+    private final @Nullable String blockValue;
 
     private JsonAction(JsonActionBuilder builder) {
       Assert.notNull("action", builder.action);
       Assert.notNull("entries", builder.entries);
+      Assert.notNull("indentation", builder.indentation);
+      Assert.notNull("blockName", builder.blockName);
+      Assert.notNull("jsonContent", builder.jsonContent);
 
       blockName = builder.blockName;
       jsonContent = builder.jsonContent;
@@ -339,12 +343,12 @@ class FileSystemPackageJsonHandler {
 
     private static final class JsonActionBuilder {
 
-      private String blockName;
-      private String jsonContent;
-      private Indentation indentation;
+      private @Nullable String blockName;
+      private @Nullable String jsonContent;
+      private @Nullable Indentation indentation;
       private Collection<JsonEntry> entries = List.of();
       private final JsonActionType action;
-      private String blockValue;
+      private @Nullable String blockValue;
 
       private JsonActionBuilder(JsonActionType action) {
         this.action = action;

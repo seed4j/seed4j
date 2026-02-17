@@ -2,41 +2,33 @@ package {{packageName}}.cucumber;
 
 import io.cucumber.java.Before;
 import io.cucumber.spring.CucumberContextConfiguration;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.client.BufferingClientHttpRequestFactory;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.web.client.RestTemplate;
-import com.seed4j.cucumber.rest.CucumberRestTestContext;
-
+import org.springframework.test.web.servlet.client.RestTestClient;
 import {{packageName}}.{{ baseName }}App;
-import {{packageName}}.cucumber.CucumberConfiguration.CucumberRestTemplateConfiguration;
-import {{packageName}}.cucumber.rest.CucumberRestTemplate;
+import {{packageName}}.cucumber.CucumberConfiguration.CucumberRestClientConfiguration;
+import {{packageName}}.cucumber.rest.CucumberRestClient;
+import com.seed4j.cucumber.rest.CucumberRestTestContext;
 
 @ActiveProfiles("test")
 @CucumberContextConfiguration
+@AutoConfigureRestTestClient
 @SpringBootTest(
   classes = {
     {{ baseName }}App.class,
-    CucumberRestTemplateConfiguration.class
+    CucumberRestClientConfiguration.class
   },
   webEnvironment = WebEnvironment.RANDOM_PORT
 )
 public class CucumberConfiguration {
 
-  private final TestRestTemplate rest;
+  private final CucumberRestClient rest;
 
-  CucumberConfiguration(TestRestTemplate rest) {
+  CucumberConfiguration(CucumberRestClient rest) {
     this.rest = rest;
   }
 
@@ -46,31 +38,16 @@ public class CucumberConfiguration {
   }
 
   @Before
-  public void loadInterceptors() {
-    ClientHttpRequestFactory requestFactory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
-
-    RestTemplate template = rest.getRestTemplate();
-    template.setRequestFactory(requestFactory);
-    template.setInterceptors(List.of(saveLastResultInterceptor()));
-    template.getMessageConverters().addFirst(new StringHttpMessageConverter(StandardCharsets.UTF_8));
-  }
-
-  private ClientHttpRequestInterceptor saveLastResultInterceptor() {
-    return (request, body, execution) -> {
-      ClientHttpResponse response = execution.execute(request, body);
-
-      CucumberRestTestContext.addResponse(request, response, execution, body);
-
-      return response;
-    };
+  public void setupRestClient() {
+    rest.setupRestClient();
   }
 
   @TestConfiguration
-  static class CucumberRestTemplateConfiguration {
+  static class CucumberRestClientConfiguration {
 
     @Bean
-    CucumberRestTemplate cucumberRestTemplate(TestRestTemplate rest) {
-      return new CucumberRestTemplate(rest);
+    CucumberRestClient cucumberRestClient(RestTestClient rest) {
+      return new CucumberRestClient(rest);
     }
   }
 }

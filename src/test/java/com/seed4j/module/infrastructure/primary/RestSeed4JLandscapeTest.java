@@ -1,7 +1,7 @@
 package com.seed4j.module.infrastructure.primary;
 
-import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.defaultModuleResourceBuilder;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.JsonHelper;
 import com.seed4j.UnitTest;
@@ -26,18 +26,48 @@ class RestSeed4JLandscapeTest {
       JsonHelper.writeAsString(
         RestSeed4JLandscape.from(Seed4JLandscape.from(Seed4JLandscapeFixture.moduleResources(firstModule, secondModule)))
       )
-    ).isEqualTo(json());
+    ).isEqualToIgnoringWhitespace(json());
   }
 
   private String json() {
+    // language=json
     return """
-    {\
-    "levels":[\
-    {"elements":[{"type":"MODULE","slug":"first","operation":"operation","properties":{PROPERTIES_DEFINITION},"rank":"RANK_D"}]},\
-    {"elements":[{"type":"FEATURE","slug":"my-feature","modules":\
-    [{"type":"MODULE","slug":"second","operation":"operation","properties":{PROPERTIES_DEFINITION},"dependencies":[{"type":"MODULE","slug":"first"}],"rank":"RANK_D"}]}]}\
-    ]\
-    }\
+    {
+      "levels": [
+        {
+          "elements": [
+            {
+              "type": "MODULE",
+              "slug": "first",
+              "operation": "operation",
+              "properties": {PROPERTIES_DEFINITION},
+              "dependencies": [],
+              "rank": "RANK_D"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "FEATURE",
+              "slug": "my-feature",
+              "modules": [
+                {
+                  "type": "MODULE",
+                  "slug": "second",
+                  "operation": "operation",
+                  "properties": {PROPERTIES_DEFINITION},
+                  "dependencies": [
+                    {"slug":"first","type":"MODULE"}
+                  ],
+                  "rank": "RANK_D"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
     """.replace("{PROPERTIES_DEFINITION}", RestSeed4JModulePropertiesDefinitionTest.json());
   }
 }

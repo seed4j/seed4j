@@ -3,6 +3,7 @@ package com.seed4j.statistic.domain;
 import com.seed4j.shared.error.domain.Assert;
 import java.time.Instant;
 import java.util.UUID;
+import org.jspecify.annotations.Nullable;
 
 public final class AppliedModule {
 
@@ -11,17 +12,13 @@ public final class AppliedModule {
   private final Instant date;
 
   private AppliedModule(ModuleAppliedBuilder builder) {
-    assertMandatoryFields(builder);
+    Assert.notNull("id", builder.id);
+    Assert.notNull("module", builder.module);
+    Assert.notNull("date", builder.date);
 
     id = builder.id;
     module = builder.module;
     date = builder.date;
-  }
-
-  private void assertMandatoryFields(ModuleAppliedBuilder builder) {
-    Assert.notNull("id", builder.id);
-    Assert.notNull("module", builder.module);
-    Assert.notNull("date", builder.date);
   }
 
   public static ModuleAppliedIdBuilder builder() {
@@ -41,11 +38,12 @@ public final class AppliedModule {
   }
 
   private static final class ModuleAppliedBuilder
-    implements ModuleAppliedIdBuilder, ModuleAppliedModuleBuilder, ModuleAppliedApplicationDateBuilder {
+    implements ModuleAppliedIdBuilder, ModuleAppliedModuleBuilder, ModuleAppliedApplicationDateBuilder
+  {
 
-    private AppliedModuleId id;
-    private Module module;
-    private Instant date;
+    private @Nullable AppliedModuleId id;
+    private @Nullable Module module;
+    private @Nullable Instant date;
 
     @Override
     public ModuleAppliedModuleBuilder id(AppliedModuleId id) {

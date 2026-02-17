@@ -7,20 +7,15 @@ import {{packageName}}.shared.authentication.domain.Role;
 import java.util.Collection;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jose.jws.JwsAlgorithms;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @UnitTest
-@ExtendWith(SpringExtension.class)
 class JwtGrantedAuthorityConverterTest {
 
-  @InjectMocks
-  private JwtGrantedAuthorityConverter jwtGrantedAuthorityConverter;
+  private final JwtGrantedAuthorityConverter jwtGrantedAuthorityConverter = new JwtGrantedAuthorityConverter();
 
   @Test
   void shouldConvert() {

@@ -1,6 +1,9 @@
 package com.seed4j.shared.error.domain;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Map;
+import org.jspecify.annotations.Nullable;
 
 public final class StringTooShortException extends AssertionException {
 
@@ -8,7 +11,9 @@ public final class StringTooShortException extends AssertionException {
   private final String currentLength;
 
   private StringTooShortException(StringTooShortExceptionBuilder builder) {
-    super(builder.field, builder.message());
+    super(requireNonNull(builder.field), message(builder));
+    Assert.notNull("value", builder.value);
+    Assert.notNull("minLength", builder.minLength);
     minLength = String.valueOf(builder.minLength);
     currentLength = String.valueOf(builder.value.length());
   }
@@ -19,9 +24,9 @@ public final class StringTooShortException extends AssertionException {
 
   public static final class StringTooShortExceptionBuilder {
 
-    private String value;
+    private @Nullable String value;
     private int minLength;
-    private String field;
+    private @Nullable String field;
 
     private StringTooShortExceptionBuilder() {}
 
@@ -43,20 +48,22 @@ public final class StringTooShortException extends AssertionException {
       return this;
     }
 
-    private String message() {
-      return new StringBuilder()
-        .append("The value in field \"")
-        .append(field)
-        .append("\" must be at least ")
-        .append(minLength)
-        .append(" long but was only ")
-        .append(value.length())
-        .toString();
-    }
-
     public StringTooShortException build() {
       return new StringTooShortException(this);
     }
+  }
+
+  private static String message(StringTooShortExceptionBuilder builder) {
+    Assert.notNull("value", builder.value);
+
+    return new StringBuilder()
+      .append("The value in field \"")
+      .append(builder.field)
+      .append("\" must be at least ")
+      .append(builder.minLength)
+      .append(" long but was only ")
+      .append(builder.value.length())
+      .toString();
   }
 
   @Override

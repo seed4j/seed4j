@@ -48,6 +48,7 @@ class OAuth2AuthenticationReader {
     return authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
   }
 
+  @SuppressWarnings("java:S2259")
   private Map<String, Object> readAttributes(Authentication authentication) {
     if (authentication instanceof OAuth2AuthenticationToken oauthToken) {
       return oauthToken.getPrincipal().getAttributes();

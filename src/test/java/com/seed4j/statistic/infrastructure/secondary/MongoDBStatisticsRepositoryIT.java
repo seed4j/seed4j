@@ -74,7 +74,7 @@ class MongoDBStatisticsRepositoryIT {
   static class TestMongoConfig {
 
     @Bean
-    public MongoDatabaseFactory mongoDbFactory(@Value("${spring.data.mongodb.uri}") String connectionString) {
+    public MongoDatabaseFactory mongoDbFactory(@Value("${spring.mongodb.uri}") String connectionString) {
       return new SimpleMongoClientDatabaseFactory(connectionString + "?uuidRepresentation=STANDARD");
     }
   }

@@ -40,7 +40,7 @@ public class JpaModuleFactory {
       .springMainProperties()
         .set(propertyKey("spring.jpa.hibernate.ddl-auto"), propertyValue("update"))
         .set(propertyKey("spring.jpa.properties.hibernate.criteria.literal_handling_mode"), propertyValue("BIND"))
-        .set(propertyKey("spring.jpa.properties.hibernate.dialect"), propertyValue("org.hibernate.dialect.SQLServer2012Dialect"))
+        .set(propertyKey("spring.jpa.properties.hibernate.dialect"), propertyValue("org.hibernate.dialect.SQLServerDialect"))
         .set(propertyKey("spring.jpa.properties.hibernate.format_sql"), propertyValue(true))
         .set(propertyKey("spring.jpa.properties.hibernate.jdbc.fetch_size"), propertyValue(150))
         .and()
@@ -61,14 +61,13 @@ public class JpaModuleFactory {
         .and()
       .javaDependencies()
         .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-starter-data-jpa"))
-        .addDependency(groupId(ORG_HIBERNATE), artifactId("hibernate-core"))
         .and()
       .springMainProperties()
         .set(propertyKey("spring.data.jpa.repositories.bootstrap-mode"), propertyValue("deferred"))
         .set(propertyKey("spring.jpa.hibernate.ddl-auto"), propertyValue("none"))
         .set(
           propertyKey("spring.jpa.hibernate.naming.implicit-strategy"),
-          propertyValue("org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy")
+          propertyValue("org.springframework.boot.hibernate.SpringImplicitNamingStrategy")
         )
         .set(
           propertyKey("spring.jpa.hibernate.naming.physical-strategy"),

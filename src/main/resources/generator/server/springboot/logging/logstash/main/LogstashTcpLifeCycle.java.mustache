@@ -3,8 +3,6 @@ package {{packageName}}.wire.logstash.infrastructure.secondary;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.pattern.ThrowableHandlingConverter;
 import ch.qos.logback.core.util.Duration;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.InetSocketAddress;
 import java.util.Map;
 import java.util.Optional;
@@ -14,6 +12,8 @@ import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.SmartLifecycle;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 class LogstashTcpLifeCycle implements SmartLifecycle {
 
@@ -92,7 +92,7 @@ class LogstashTcpLifeCycle implements SmartLifecycle {
   protected String serializedFields() {
     try {
       return objectMapper.writeValueAsString(fields);
-    } catch (JsonProcessingException e) {
+    } catch (JacksonException e) {
       throw new IllegalStateException("Unable to serialize custom fields", e);
     }
   }

@@ -5,18 +5,18 @@
   "license": "Apache-2.0",
   "type": "module",
   "dependencies": {
-    "@heroui/react": "2.8.6",
+    "@heroui/react": "2.8.9",
     "@testing-library/dom": "10.4.1",
-    "@testing-library/react": "16.3.1",
+    "@testing-library/react": "16.3.2",
     "@tsconfig/vite-react": "7.0.2",
-    "@types/react": "19.2.7",
+    "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "5.1.2",
-    "axios": "1.13.2",
+    "@vitejs/plugin-react": "5.1.4",
+    "axios": "1.13.5",
     "eslint-plugin-react": "7.37.5",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "react-hook-form": "7.68.0",
-    "react-i18next": "16.5.0"
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-hook-form": "7.71.1",
+    "react-i18next": "16.5.4"
   }
 }

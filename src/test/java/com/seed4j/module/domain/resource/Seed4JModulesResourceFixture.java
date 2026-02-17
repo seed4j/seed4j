@@ -5,6 +5,7 @@ import static com.seed4j.module.domain.resource.Seed4JModulePropertyDefinition.m
 import static com.seed4j.module.domain.resource.Seed4JModulePropertyDefinition.optionalBooleanProperty;
 import static com.seed4j.module.domain.resource.Seed4JModulePropertyDefinition.optionalStringProperty;
 
+import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModuleFactory;
 import com.seed4j.module.domain.resource.Seed4JModuleOrganization.Seed4JModuleOrganizationBuilder;
 import com.seed4j.module.domain.resource.Seed4JModuleTags.Seed4JModuleTagsBuilder;
@@ -12,6 +13,7 @@ import com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public final class Seed4JModulesResourceFixture {
 
@@ -52,11 +54,11 @@ public final class Seed4JModulesResourceFixture {
       .slug("slug")
       .operation("operation")
       .tags(Seed4JModuleTags.builder().add("tag1").build())
-      .factory(properties -> null);
+      .factory(properties -> Seed4JModule.moduleBuilder(properties).build());
   }
 
   public static Seed4JHiddenModules emptyHiddenModules() {
-    return new Seed4JHiddenModules(null, null);
+    return new Seed4JHiddenModules(List.of(), List.of());
   }
 
   public static Seed4JModulePropertiesDefinition propertiesDefinition() {
@@ -74,12 +76,12 @@ public final class Seed4JModulesResourceFixture {
 
   public static final class Seed4JTestModuleResourceBuilder {
 
-    private String slug;
-    private String group = "group";
-    private String operation;
-    private Seed4JModuleFactory factory;
-    private Seed4JModuleTags tags;
-    private String feature;
+    private String slug = "default-slug";
+    private String group = "Default group";
+    private String operation = "Default operation";
+    private Seed4JModuleFactory factory = properties -> Seed4JModule.moduleBuilder(properties).build();
+    private Seed4JModuleTags tags = Seed4JModuleTags.builder().build();
+    private Optional<String> feature = Optional.empty();
 
     private final Collection<Seed4JModuleSlugFactory> moduleDependencies = new ArrayList<>();
     private final Collection<Seed4JFeatureSlugFactory> featureDependencies = new ArrayList<>();
@@ -111,7 +113,7 @@ public final class Seed4JModulesResourceFixture {
     }
 
     public Seed4JTestModuleResourceBuilder feature(String feature) {
-      this.feature = feature;
+      this.feature = Optional.of(feature);
 
       return this;
     }
@@ -145,8 +147,9 @@ public final class Seed4JModulesResourceFixture {
     }
 
     private Seed4JModuleOrganization buildOrganization() {
-      Seed4JModuleOrganizationBuilder builder = Seed4JModuleOrganization.builder().feature(() -> feature);
+      Seed4JModuleOrganizationBuilder builder = Seed4JModuleOrganization.builder();
 
+      feature.ifPresent(feat -> builder.feature(() -> feat));
       moduleDependencies.forEach(builder::addDependency);
       featureDependencies.forEach(builder::addDependency);
 

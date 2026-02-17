@@ -9,12 +9,12 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.2</version>
   </parent>
 
   <groupId>com.seed4j</groupId>
   <artifactId>seed4j</artifactId>
-  <version>2.1.1-SNAPSHOT</version>
+  <version>2.2.1-SNAPSHOT</version>
   <name>seed4j</name>
   <description>seed4j</description>
   <packaging>jar</packaging>
@@ -53,40 +53,41 @@
 
     <maven.version>3.6.3</maven.version>
     <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
-    <maven-dependency-plugin.version>3.9.0</maven-dependency-plugin.version>
+    <maven-dependency-plugin.version>3.10.0</maven-dependency-plugin.version>
     <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
     <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-    <central-publishing-maven-plugin.version>0.9.0</central-publishing-maven-plugin.version>
+    <central-publishing-maven-plugin.version>0.10.0</central-publishing-maven-plugin.version>
     <start-class>com.seed4j.Seed4JApp</start-class>
 
-    <compiler-plugin.version>3.14.1</compiler-plugin.version>
+    <compiler-plugin.version>3.15.0</compiler-plugin.version>
     <surefire-plugin.version>3.5.4</surefire-plugin.version>
     <jacoco.version>0.8.14</jacoco.version>
     <jgit.version>7.5.0.202512021534-r</jgit.version>
-    <junit-jupiter.version>6.0.1</junit-jupiter.version>
+    <junit-jupiter.version>6.0.2</junit-jupiter.version>
     <archunit-junit5.version>1.4.1</archunit-junit5.version>
-    <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
-    <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
+    <springdoc-openapi.version>3.0.1</springdoc-openapi.version>
+    <properties-maven-plugin.version>1.3.0</properties-maven-plugin.version>
     <sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
     <apache-commons-io.version>2.21.0</apache-commons-io.version>
-    <cucumber.version>7.33.0</cucumber.version>
+    <cucumber.version>7.34.2</cucumber.version>
     <maven-model-helper.version>37</maven-model-helper.version>
     <mustache.java.version>0.9.14</mustache.java.version>
     <night-config.version>3.8.3</night-config.version>
     <testcontainers.version>2.0.3</testcontainers.version>
     <mongock.version>5.5.1</mongock.version>
     <git-commit-id-plugin.version>9.0.2</git-commit-id-plugin.version>
-    <checkstyle.version>12.3.0</checkstyle.version>
+    <checkstyle.version>13.2.0</checkstyle.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
 
-    <frontend-maven-plugin.version>1.15.4</frontend-maven-plugin.version>
+    <frontend-maven-plugin.version>2.0.0</frontend-maven-plugin.version>
     <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
     <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
-    <approvaltests.version>26.1.0</approvaltests.version>
-    <error-prone.version>2.45.0</error-prone.version>
+    <approvaltests.version>26.7.1</approvaltests.version>
+    <error-prone.version>2.47.0</error-prone.version>
     <modernizer-maven-plugin.version>3.2.0</modernizer-maven-plugin.version>
     <liquibase.version>4.33.0</liquibase.version>
+    <nullaway.version>0.13.1</nullaway.version>
   </properties>
 
   <dependencyManagement>
@@ -136,13 +137,13 @@
     </dependency>
 
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-jackson2</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
+      <groupId>org.jspecify</groupId>
+      <artifactId>jspecify</artifactId>
     </dependency>
 
     <dependency>
@@ -159,7 +160,7 @@
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
+      <artifactId>spring-boot-starter-webmvc</artifactId>
     </dependency>
 
     <dependency>
@@ -250,12 +251,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.liquibase</groupId>
-      <artifactId>liquibase-core</artifactId>
-      <version>${liquibase.version}</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-liquibase</artifactId>
     </dependency>
@@ -296,6 +291,11 @@
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-suite</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-restclient</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -360,6 +360,11 @@
               -Xep:UnnecessaryLambda:OFF
               -Xep:UnnecessaryStringBuilder:OFF
               -Xep:ImmutableEnumChecker:OFF
+              -Xep:NullAway:ERROR
+              -XepOpt:NullAway:JSpecifyMode=true
+              -XepOpt:NullAway:OnlyNullMarked=true
+              -XepOpt:NullAway:CustomContractAnnotations=com.seed4j.shared.nullness.domain.Contract
+              -XepOpt:NullAway:ExcludedFieldAnnotations=com.seed4j.Logs,org.mockito.Mock
             </arg>
           </compilerArgs>
           <annotationProcessorPaths>
@@ -371,6 +376,11 @@
               <groupId>com.google.errorprone</groupId>
               <artifactId>error_prone_core</artifactId>
               <version>${error-prone.version}</version>
+            </path>
+            <path>
+              <groupId>com.uber.nullaway</groupId>
+              <artifactId>nullaway</artifactId>
+              <version>${nullaway.version}</version>
             </path>
           </annotationProcessorPaths>
         </configuration>

@@ -50,7 +50,7 @@ class GatewayModuleFactoryTest {
         """
             <dependency>
               <groupId>org.springframework.cloud</groupId>
-              <artifactId>spring-cloud-starter-gateway</artifactId>
+              <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
             </dependency>
         """
       )
@@ -64,17 +64,19 @@ class GatewayModuleFactoryTest {
             name: myApp
           cloud:
             gateway:
-              discovery:
-                locator:
-                  enabled: true
-                  filters[0]:
-                    args[regexp]: '''/services/'' + serviceId.toLowerCase() + ''/(?<remaining>.*)'''
-                    args[replacement]: '''/${remaining}'''
-                    name: RewritePath
-                  lower-case-service-id: true
-                  predicates[0]:
-                    args[pattern]: '''/services/''+serviceId.toLowerCase()+''/**'''
-                    name: Path
+              server:
+                webflux:
+                  discovery:
+                    locator:
+                      enabled: true
+                      filters[0]:
+                        args[regexp]: '''/services/'' + serviceId.toLowerCase() + ''/(?<remaining>.*)'''
+                        args[replacement]: '''/${remaining}'''
+                        name: RewritePath
+                      lower-case-service-id: true
+                      predicates[0]:
+                        args[pattern]: '''/services/''+serviceId.toLowerCase()+''/**'''
+                        name: Path
         """
       )
       .and()
@@ -87,15 +89,18 @@ class GatewayModuleFactoryTest {
             name: myApp
           cloud:
             gateway:
-              discovery:
-                locator:
-                  enabled: false
+              server:
+                webflux:
+                  discovery:
+                    locator:
+                      enabled: false
         """
       )
       .and()
       .hasJavaSources(
         "com/seed4j/growth/wire/gateway/infrastructure/primary/GatewayResource.java",
-        "com/seed4j/growth/wire/gateway/infrastructure/primary/vm/RouteVM.java"
+        "com/seed4j/growth/wire/gateway/infrastructure/primary/RestRoute.java",
+        "com/seed4j/growth/wire/gateway/infrastructure/primary/RestServiceInstance.java"
       )
       .hasJavaTests("com/seed4j/growth/wire/gateway/infrastructure/primary/GatewayResourceIT.java");
   }

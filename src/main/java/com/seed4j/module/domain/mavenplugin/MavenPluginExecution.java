@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.mavenplugin;
 
-import static org.apache.commons.lang3.builder.ToStringStyle.*;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.jspecify.annotations.Nullable;
 
 public final class MavenPluginExecution {
 
@@ -48,10 +49,10 @@ public final class MavenPluginExecution {
 
   private static final class MavenPluginExecutionBuilder implements MavenPluginExecutionGoalsBuilder, MavenPluginExecutionOptionalBuilder {
 
-    private MavenPluginExecutionId id;
-    private MavenBuildPhase phase;
-    private List<MavenPluginExecutionGoal> goals;
-    private MavenPluginConfiguration configuration;
+    private @Nullable MavenPluginExecutionId id;
+    private @Nullable MavenBuildPhase phase;
+    private @Nullable List<MavenPluginExecutionGoal> goals;
+    private @Nullable MavenPluginConfiguration configuration;
 
     @Override
     public MavenPluginExecutionOptionalBuilder goals(MavenPluginExecutionGoal... goals) {

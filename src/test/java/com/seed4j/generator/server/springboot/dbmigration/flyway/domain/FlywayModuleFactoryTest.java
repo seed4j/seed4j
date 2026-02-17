@@ -29,10 +29,11 @@ class FlywayModuleFactoryTest {
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
       .containing(
+        // language=xml
         """
             <dependency>
-              <groupId>org.flywaydb</groupId>
-              <artifactId>flyway-core</artifactId>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-flyway</artifactId>
             </dependency>
         """
       )

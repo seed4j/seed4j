@@ -2,6 +2,7 @@ package com.seed4j.generator.server.springboot.database.jooq.domain;
 
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 final class JooqModuleCodegenConfiguration {
 
@@ -84,13 +85,14 @@ final class JooqModuleCodegenConfiguration {
       JooqModuleCodegenConfigurationUserBuilder,
       JooqModuleCodegenConfigurationInputSchemaBuilder,
       JooqModuleCodegenConfigurationJooqMetaDatabaseBuilder,
-      JooqModuleCodegenConfigurationOptionalBuilder {
+      JooqModuleCodegenConfigurationOptionalBuilder
+  {
 
-    private String databaseUrl;
-    private String user;
-    private String inputSchema;
-    private String jooqMetaDatabase;
-    private String password;
+    private @Nullable String databaseUrl;
+    private @Nullable String user;
+    private @Nullable String inputSchema;
+    private @Nullable String jooqMetaDatabase;
+    private @Nullable String password;
 
     @Override
     public JooqModuleCodegenConfigurationUserBuilder databaseUrl(String databaseUrl) {

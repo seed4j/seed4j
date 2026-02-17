@@ -2,11 +2,15 @@ package com.seed4j.module.domain.resource;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
-import com.seed4j.module.domain.properties.*;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.properties.Seed4JPropertyDefaultValue;
+import com.seed4j.module.domain.properties.Seed4JPropertyDescription;
+import com.seed4j.module.domain.properties.Seed4JPropertyKey;
+import com.seed4j.module.domain.properties.Seed4JPropertyType;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Optional;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.jspecify.annotations.Nullable;
 
 public final class Seed4JModulePropertyDefinition {
 
@@ -158,13 +162,14 @@ public final class Seed4JModulePropertyDefinition {
       Seed4JModulePropertyDefinitionTypeBuilder,
       Seed4JModulePropertyDefinitionOptionalityBuilder,
       Seed4JModulePropertyDefinitionKeyBuilder,
-      Seed4JModulePropertyDefinitionOptionalFieldsBuilder {
+      Seed4JModulePropertyDefinitionOptionalFieldsBuilder
+  {
 
-    private Seed4JPropertyType type;
+    private @Nullable Seed4JPropertyType type;
     private boolean mandatory;
-    private String key;
-    private String description;
-    private String defaultValue;
+    private @Nullable String key;
+    private @Nullable String description;
+    private @Nullable String defaultValue;
     private int order;
 
     @Override

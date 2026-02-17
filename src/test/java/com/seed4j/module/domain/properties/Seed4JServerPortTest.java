@@ -12,11 +12,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 class Seed4JServerPortTest {
 
   @Test
-  void shouldGetDefaultServerPortFromNullPort() {
-    assertThat(new Seed4JServerPort(null).get()).isEqualTo(8080);
-  }
-
-  @Test
   void shouldGetServerPortFromPort() {
     assertThat(new Seed4JServerPort(9000).get()).isEqualTo(9000);
   }

@@ -6,7 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.util.List;
 import java.util.Map;
-import {{packageName}}.cucumber.rest.CucumberRestTemplate;
+import {{packageName}}.cucumber.rest.CucumberRestClient;
 import {{packageName}}.cucumber.rest.CucumberRestTestContext;
 
 public class BeersSteps {
@@ -19,9 +19,9 @@ public class BeersSteps {
     }
     """;
 
-  private final CucumberRestTemplate rest;
+  private final CucumberRestClient rest;
 
-  BeersSteps(CucumberRestTemplate rest) {
+  BeersSteps(CucumberRestClient rest) {
     this.rest = rest;
   }
 

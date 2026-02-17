@@ -196,8 +196,8 @@ public final class Seed4JModulesFixture {
           .and()
         .javaDependencies()
           .addTestDependency(groupId("org.cassandraunit"), artifactId("cassandra-unit"), versionSlug("cassandraunit"))
-          .removeDependency(dependencyId("org.springframework.boot", "spring-boot-starter-web"))
-          .removeDependencyManagement(dependencyId("org.springframework.boot", "spring-boot-starter-web"))
+          .removeDependency(dependencyId("org.springframework.boot", "spring-boot-starter-webmvc"))
+          .removeDependencyManagement(dependencyId("org.springframework.boot", "spring-boot-starter-webmvc"))
           .and()
         .and()
       .and()
@@ -277,8 +277,8 @@ public final class Seed4JModulesFixture {
   public static JavaDependency springBootStarterWebDependency() {
     return javaDependency()
       .groupId("org.springframework.boot")
-      .artifactId("spring-boot-starter-web")
-      .dependencySlug("spring-boot-starter-web")
+      .artifactId("spring-boot-starter-webmvc")
+      .dependencySlug("spring-boot-starter-webmvc")
       .addExclusion(groupId("org.springframework.boot"), artifactId("spring-boot-starter-tomcat"))
       .build();
   }
@@ -380,7 +380,7 @@ public final class Seed4JModulesFixture {
   }
 
   public static Seed4JModuleProperties testModuleProperties() {
-    return new Seed4JModuleProperties(TestFileUtils.tmpDirForTest(), true, null);
+    return new Seed4JModuleProperties(TestFileUtils.tmpDirForTest(), true, Map.of());
   }
 
   public static JavaDependenciesVersions currentJavaDependenciesVersion() {

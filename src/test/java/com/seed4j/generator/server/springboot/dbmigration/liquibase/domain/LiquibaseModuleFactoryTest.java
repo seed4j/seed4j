@@ -34,9 +34,8 @@ class LiquibaseModuleFactoryTest {
         .containing(
           """
               <dependency>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-core</artifactId>
-                <version>${liquibase.version}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-liquibase</artifactId>
               </dependency>
           """
         )

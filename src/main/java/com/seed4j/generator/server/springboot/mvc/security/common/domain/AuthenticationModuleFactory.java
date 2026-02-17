@@ -13,8 +13,6 @@ import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javabuild.GroupId;
-import com.seed4j.module.domain.javadependency.JavaDependency;
-import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.shared.error.domain.Assert;
@@ -55,7 +53,7 @@ public final class AuthenticationModuleFactory {
         .and()
       .javaDependencies()
         .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-security"))
-        .addDependency(springSecurityTest())
+        .addTestDependency(SPRING_GROUP, artifactId("spring-boot-starter-security-test"))
         .and()
       .files()
         .add(MAIN_SOURCE.template("package-info.java"), mainDestination.append("package-info.java"))
@@ -87,13 +85,5 @@ public final class AuthenticationModuleFactory {
           .and()
       .and();
     // @formatter:on
-  }
-
-  private static JavaDependency springSecurityTest() {
-    return JavaDependency.builder()
-      .groupId("org.springframework.security")
-      .artifactId("spring-security-test")
-      .scope(JavaDependencyScope.TEST)
-      .build();
   }
 }

@@ -7,6 +7,7 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 public final class GradleCommunityProfilePlugin implements GradleProfilePlugin {
 
@@ -56,13 +57,16 @@ public final class GradleCommunityProfilePlugin implements GradleProfilePlugin {
 
   private static final class GradleCommunityProfilePluginBuilder
     implements
-      GradleCommunityProfilePluginIdBuilder, GradleCommunityProfilePluginDependencyBuilder, GradleCommunityProfilePluginOptionalBuilder {
+      GradleCommunityProfilePluginIdBuilder,
+      GradleCommunityProfilePluginDependencyBuilder,
+      GradleCommunityProfilePluginOptionalBuilder
+  {
 
-    private GradlePluginId id;
-    private GradlePluginDependency dependency;
+    private @Nullable GradlePluginId id;
+    private @Nullable GradlePluginDependency dependency;
     private final Collection<BuildGradleImport> imports = new ArrayList<>();
-    private GradlePluginConfiguration configuration;
-    private VersionSlug versionSlug;
+    private @Nullable GradlePluginConfiguration configuration;
+    private @Nullable VersionSlug versionSlug;
 
     @Override
     public GradleCommunityProfilePluginDependencyBuilder id(GradlePluginId id) {

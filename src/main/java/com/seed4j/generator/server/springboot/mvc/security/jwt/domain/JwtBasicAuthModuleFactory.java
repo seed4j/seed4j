@@ -78,6 +78,7 @@ public class JwtBasicAuthModuleFactory {
     return builder.build();
   }
 
+  @SuppressWarnings("secrets:S8215")
   private void appendProperties(Seed4JModuleSpringPropertiesBuilder builder) {
     builder
       .set(propertyKey("application.security.token-validity"), propertyValue("P1D"))

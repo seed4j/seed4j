@@ -1,7 +1,6 @@
 spring:
-  data:
-    mongodb:
-      uri: ${TEST_MONGODB_URI}
+  mongodb:
+    uri: ${TEST_MONGODB_URI}
 
 mongock:
   migration-scan-package: com.seed4j

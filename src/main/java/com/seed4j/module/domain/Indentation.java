@@ -1,6 +1,8 @@
 package com.seed4j.module.domain;
 
 import com.seed4j.shared.error.domain.Assert;
+import com.seed4j.shared.nullness.domain.Contract;
+import org.jspecify.annotations.Nullable;
 
 public record Indentation(int spacesCount) {
   public static final Indentation DEFAULT = new Indentation(2);
@@ -11,7 +13,7 @@ public record Indentation(int spacesCount) {
     Assert.field("spacesCount", spacesCount).min(1);
   }
 
-  public static Indentation from(Integer spacesCount) {
+  public static Indentation from(@Nullable Integer spacesCount) {
     if (invalidSpacesCount(spacesCount)) {
       return DEFAULT;
     }
@@ -19,7 +21,8 @@ public record Indentation(int spacesCount) {
     return new Indentation(spacesCount);
   }
 
-  private static boolean invalidSpacesCount(Integer spacesCount) {
+  @Contract("null -> true")
+  private static boolean invalidSpacesCount(@Nullable Integer spacesCount) {
     return spacesCount == null || spacesCount < 1;
   }
 

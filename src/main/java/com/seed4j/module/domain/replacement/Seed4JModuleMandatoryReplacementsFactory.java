@@ -22,7 +22,8 @@ public final class Seed4JModuleMandatoryReplacementsFactory extends Seed4JModule
     extends Seed4JModuleReplacementsFactoryBuilder<
       Seed4JModuleMandatoryReplacementsFactory,
       Seed4JModuleFileMandatoryReplacementsFactoryBuilder
-    > {
+    >
+  {
 
     private Seed4JModuleMandatoryReplacementsFactoryBuilder(Seed4JModuleBuilder module) {
       super(module);
@@ -43,7 +44,8 @@ public final class Seed4JModuleMandatoryReplacementsFactory extends Seed4JModule
     extends Seed4JModuleFileReplacementsBuilder<
       Seed4JModuleMandatoryReplacementsFactoryBuilder,
       Seed4JModuleFileMandatoryReplacementsFactoryBuilder
-    > {
+    >
+  {
 
     private Seed4JModuleFileMandatoryReplacementsFactoryBuilder(
       Seed4JModuleMandatoryReplacementsFactoryBuilder replacements,

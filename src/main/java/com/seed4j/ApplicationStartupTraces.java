@@ -6,6 +6,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
@@ -44,15 +45,15 @@ final class ApplicationStartupTraces {
     return "Application '%s' is running!".formatted(applicationName);
   }
 
-  private static String localUrl(Environment environment) {
+  private static @Nullable String localUrl(Environment environment) {
     return url("Local", "localhost", environment);
   }
 
-  private static String externalUrl(Environment environment) {
+  private static @Nullable String externalUrl(Environment environment) {
     return url("External", hostAddress(), environment);
   }
 
-  private static String url(String type, String host, Environment environment) {
+  private static @Nullable String url(String type, String host, Environment environment) {
     if (notWebEnvironment(environment)) {
       return null;
     }
@@ -85,11 +86,11 @@ final class ApplicationStartupTraces {
     return StringUtils.isBlank(environment.getProperty("server.ssl.key-store"));
   }
 
-  private static String port(Environment environment) {
+  private static @Nullable String port(Environment environment) {
     return environment.getProperty("server.port");
   }
 
-  private static String profilesTrace(Environment environment) {
+  private static @Nullable String profilesTrace(Environment environment) {
     String[] profiles = environment.getActiveProfiles();
 
     if (ArrayUtils.isEmpty(profiles)) {
@@ -120,7 +121,7 @@ final class ApplicationStartupTraces {
     return contextPath;
   }
 
-  private static String configServer(Environment environment) {
+  private static @Nullable String configServer(Environment environment) {
     String configServer = environment.getProperty("configserver.status");
 
     if (StringUtils.isBlank(configServer)) {
@@ -142,7 +143,7 @@ final class ApplicationStartupTraces {
       return this;
     }
 
-    private ApplicationStartupTracesBuilder append(String line) {
+    private ApplicationStartupTracesBuilder append(@Nullable String line) {
       if (line == null) {
         return this;
       }

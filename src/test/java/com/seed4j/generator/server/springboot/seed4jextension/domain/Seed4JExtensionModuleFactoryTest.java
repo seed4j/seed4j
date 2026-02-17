@@ -107,6 +107,12 @@ class Seed4JExtensionModuleFactoryTest {
         .containing("import com.seed4j.Seed4JApp;")
         .containing("@SpringBootApplication(scanBasePackageClasses = { Seed4JApp.class, MyAppApp.class })")
         .and()
+      .hasFile("src/test/java/com/seed4j/growth/cucumber/rest/CucumberRestClient.java")
+        .containing("""
+          import com.seed4j.cucumber.rest.CucumberRestTestContext;
+          import org.springframework.http.client.ClientHttpRequestInterceptor;"""
+        )
+        .and()
       .hasPrefixedFiles("documentation", "module-creation.md", "cucumber.md")
       .doNotHaveFiles(
         "src/main/java/com/seed4j/growth/security/infrastructure/primary/CorsFilterConfiguration.java",
@@ -144,7 +150,7 @@ class Seed4JExtensionModuleFactoryTest {
         "my-app/package.json",
         "pom.xml"
       )
-      .hasFiles("src/test/java/com/seed4j/growth/cucumber/rest/CucumberRestTemplate.java")
+      .hasFiles("src/test/java/com/seed4j/growth/cucumber/rest/CucumberRestClient.java")
       .hasFiles("src/test/features/.gitkeep");
     // @formatter:on
   }

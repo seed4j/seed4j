@@ -43,6 +43,7 @@ class HexagonalArchTest {
   private static final Collection<String> commonToolsAndUtilsPackages = List.of(
     "org.slf4j..",
     "org.apache.commons..",
+    "org.jspecify.annotations..",
     "com.google.guava.."
   );
 
@@ -261,6 +262,8 @@ class HexagonalArchTest {
         .haveSimpleName("package-info")
         .and()
         .resideInAPackage(ROOT_PACKAGE.concat(".shared.."))
+        .and()
+        .resideOutsideOfPackages(ROOT_PACKAGE.concat(".shared..domain"), ROOT_PACKAGE.concat(".shared..infrastructure.*"))
         .should()
         .beMetaAnnotatedWith(SharedKernel.class)
         .because(ROOT_PACKAGE + ".shared package should only contain shared kernels")

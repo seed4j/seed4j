@@ -156,7 +156,6 @@ public enum Seed4JCoreModuleSlug implements Seed4JModuleSlugFactory {
   SPRING_BOOT_THYMELEAF("spring-boot-thymeleaf", RANK_C),
   SPRING_BOOT_LANGCHAIN4J_SAMPLE("spring-boot-langchain4j-sample", RANK_D),
   SPRING_BOOT_TOMCAT("spring-boot-tomcat", RANK_S),
-  SPRING_BOOT_UNDERTOW("spring-boot-undertow", RANK_B),
   SPRING_BOOT_WEBFLUX_EMPTY("spring-boot-webflux-empty", RANK_C),
   SPRING_BOOT_WEBFLUX_NETTY("spring-boot-webflux-netty", RANK_C),
   SPRING_CLOUD("spring-cloud", RANK_B),

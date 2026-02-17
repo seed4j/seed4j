@@ -38,7 +38,8 @@ public final class ProjectAction {
   }
 
   private static final class ProjectActionBuilder
-    implements ProjectActionModuleBuilder, ProjectActionDateBuilder, ProjectActionParametersBuilder {
+    implements ProjectActionModuleBuilder, ProjectActionDateBuilder, ProjectActionParametersBuilder
+  {
 
     private ModuleSlug module;
     private Instant date;

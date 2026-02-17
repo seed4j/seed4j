@@ -1,6 +1,6 @@
 package com.seed4j.shared.error.infrastructure.primary;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 import ch.qos.logback.classic.Level;
 import com.seed4j.Logs;
@@ -56,7 +56,7 @@ class BeanValidationErrorsHandlerTest {
   static class ValidatedBean {
 
     @NotNull
-    @SuppressWarnings("unused")
+    @SuppressWarnings({ "unused", "NullAway" })
     private String parameter;
   }
 }

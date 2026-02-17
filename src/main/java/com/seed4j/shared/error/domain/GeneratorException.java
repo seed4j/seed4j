@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+import org.jspecify.annotations.Nullable;
 
 public class GeneratorException extends RuntimeException {
 
@@ -80,11 +81,11 @@ public class GeneratorException extends RuntimeException {
     return technicalError(message, null);
   }
 
-  public static GeneratorException technicalError(String message, Throwable cause) {
+  public static GeneratorException technicalError(@Nullable String message, @Nullable Throwable cause) {
     return builder(StandardErrorKey.INTERNAL_SERVER_ERROR).message(message).cause(cause).build();
   }
 
-  public static GeneratorExceptionBuilder builder(ErrorKey key) {
+  public static GeneratorExceptionBuilder builder(@Nullable ErrorKey key) {
     return new GeneratorExceptionBuilder(key);
   }
 
@@ -102,24 +103,24 @@ public class GeneratorException extends RuntimeException {
 
   public static final class GeneratorExceptionBuilder {
 
-    private final ErrorKey key;
+    private final @Nullable ErrorKey key;
     private final Map<String, String> parameters = new HashMap<>();
 
-    private String message;
-    private Throwable cause;
-    private ErrorStatus status;
+    private @Nullable String message;
+    private @Nullable Throwable cause;
+    private @Nullable ErrorStatus status;
 
-    private GeneratorExceptionBuilder(ErrorKey key) {
+    private GeneratorExceptionBuilder(@Nullable ErrorKey key) {
       this.key = key;
     }
 
-    public GeneratorExceptionBuilder message(String message) {
+    public GeneratorExceptionBuilder message(@Nullable String message) {
       this.message = message;
 
       return this;
     }
 
-    public GeneratorExceptionBuilder cause(Throwable cause) {
+    public GeneratorExceptionBuilder cause(@Nullable Throwable cause) {
       this.cause = cause;
 
       return this;

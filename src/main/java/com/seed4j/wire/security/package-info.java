@@ -1,4 +1,3 @@
-@BusinessContext
+@com.seed4j.BusinessContext
+@org.jspecify.annotations.NullMarked
 package com.seed4j.wire.security;
-
-import com.seed4j.BusinessContext;

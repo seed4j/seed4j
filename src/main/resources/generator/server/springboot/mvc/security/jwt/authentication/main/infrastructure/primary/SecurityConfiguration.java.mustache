@@ -13,8 +13,10 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.FrameOptionsConfig;
+import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,10 +47,10 @@ class SecurityConfiguration {
   }
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+  public SecurityFilterChain filterChain(HttpSecurity http) {
     // @formatter:off
-    http
-      .csrf(AbstractHttpConfigurer::disable)
+    return http
+      .csrf(CsrfConfigurer::disable)
       .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
       .headers(headers -> headers
         .contentSecurityPolicy(csp -> csp.policyDirectives(properties.getContentSecurityPolicy()))
@@ -57,8 +59,8 @@ class SecurityConfiguration {
         .permissionsPolicyHeader(permissions ->
           permissions.policy("camera=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), sync-xhr=()"))
       )
-      .formLogin(AbstractHttpConfigurer::disable)
-      .httpBasic(AbstractHttpConfigurer::disable)
+      .formLogin(FormLoginConfigurer::disable)
+      .httpBasic(HttpBasicConfigurer::disable)
       .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(authz -> authz
         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
@@ -82,11 +84,9 @@ class SecurityConfiguration {
         .requestMatchers(PathPatternRequestMatcher.withDefaults().matcher("/management/prometheus")).permitAll()
         .requestMatchers(PathPatternRequestMatcher.withDefaults().matcher("/management/**")).hasAuthority(Role.ADMIN.key())
         .anyRequest().authenticated()
-      );
-
-      var jwtConfigurer = new JWTConfigurer(authenticationTokenReader());
-      http.with(jwtConfigurer, Customizer.withDefaults());
-      return http.build();
+      )
+      .with(new JWTConfigurer(authenticationTokenReader()), Customizer.withDefaults())
+      .build();
     // @formatter:on
   }
 

@@ -2,6 +2,7 @@ package com.seed4j.module.infrastructure.primary;
 
 import com.seed4j.module.domain.landscape.Seed4JLandscapeElementType;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
+import org.jspecify.annotations.Nullable;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
@@ -10,7 +11,7 @@ import org.springframework.aot.hint.RuntimeHintsRegistrar;
 class NativeHints implements RuntimeHintsRegistrar {
 
   @Override
-  public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+  public void registerHints(RuntimeHints hints, @Nullable ClassLoader classLoader) {
     hints
       .reflection()
       .registerType(RestSeed4JModuleProperties.class, MemberCategory.values())

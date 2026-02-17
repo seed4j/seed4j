@@ -11,6 +11,7 @@ import com.seed4j.module.domain.mavenplugin.Seed4JModuleMavenPlugins;
 import com.seed4j.module.domain.mavenplugin.Seed4JModuleMavenPlugins.Seed4JModuleMavenPluginsBuilder;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 public final class Seed4JModuleJavaBuildProfile {
 
@@ -67,7 +68,7 @@ public final class Seed4JModuleJavaBuildProfile {
 
     private final Seed4JModuleJavaBuildProfilesBuilder profiles;
     private final BuildProfileId buildProfileId;
-    private BuildProfileActivation activation;
+    private @Nullable BuildProfileActivation activation;
     private final Seed4JModuleBuildPropertiesBuilder<Seed4JModuleJavaBuildProfileBuilder> propertiesBuilder =
       Seed4JModuleBuildProperties.builder(this);
     private final Seed4JModuleMavenPluginsBuilder<Seed4JModuleJavaBuildProfileBuilder> mavenPluginsBuilder =

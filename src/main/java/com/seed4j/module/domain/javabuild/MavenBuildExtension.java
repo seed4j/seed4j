@@ -1,9 +1,11 @@
 package com.seed4j.module.domain.javabuild;
 
+import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Optional;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.jspecify.annotations.Nullable;
 
 public final class MavenBuildExtension {
 
@@ -12,6 +14,9 @@ public final class MavenBuildExtension {
   private final Optional<VersionSlug> versionSlug;
 
   private MavenBuildExtension(MavenBuildExtensionBuilder builder) {
+    Assert.notNull("groupId", builder.groupId);
+    Assert.notNull("artifactId", builder.artifactId);
+
     groupId = builder.groupId;
     artifactId = builder.artifactId;
     versionSlug = Optional.ofNullable(builder.versionSlug);
@@ -60,11 +65,12 @@ public final class MavenBuildExtension {
   }
 
   private static final class MavenBuildExtensionBuilder
-    implements MavenBuildExtensionGroupIdBuilder, MavenBuildExtensionArtifactIdBuilder, MavenBuildExtensionOptionalValueBuilder {
+    implements MavenBuildExtensionGroupIdBuilder, MavenBuildExtensionArtifactIdBuilder, MavenBuildExtensionOptionalValueBuilder
+  {
 
-    private GroupId groupId;
-    private ArtifactId artifactId;
-    private VersionSlug versionSlug;
+    private @Nullable GroupId groupId;
+    private @Nullable ArtifactId artifactId;
+    private @Nullable VersionSlug versionSlug;
 
     @Override
     public MavenBuildExtensionArtifactIdBuilder groupId(GroupId groupId) {
@@ -81,7 +87,7 @@ public final class MavenBuildExtension {
     }
 
     @Override
-    public MavenBuildExtensionOptionalValueBuilder versionSlug(VersionSlug versionSlug) {
+    public MavenBuildExtensionOptionalValueBuilder versionSlug(@Nullable VersionSlug versionSlug) {
       this.versionSlug = versionSlug;
 
       return this;
@@ -110,7 +116,7 @@ public final class MavenBuildExtension {
   }
 
   public interface MavenBuildExtensionOptionalValueBuilder {
-    MavenBuildExtensionOptionalValueBuilder versionSlug(VersionSlug versionSlug);
+    MavenBuildExtensionOptionalValueBuilder versionSlug(@Nullable VersionSlug versionSlug);
 
     MavenBuildExtension build();
 

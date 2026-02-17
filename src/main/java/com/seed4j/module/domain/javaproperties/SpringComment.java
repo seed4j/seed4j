@@ -1,6 +1,8 @@
 package com.seed4j.module.domain.javaproperties;
 
 import com.seed4j.shared.error.domain.Assert;
+import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 public final class SpringComment implements SpringPropertyTypeFileName {
 
@@ -16,15 +18,7 @@ public final class SpringComment implements SpringPropertyTypeFileName {
     type = builder.type;
     this.key = builder.key;
     this.comment = builder.comment;
-    profile = buildProfile(builder.profile);
-  }
-
-  private SpringProfile buildProfile(SpringProfile profile) {
-    if (profile == null) {
-      return SpringProfile.DEFAULT;
-    }
-
-    return profile;
+    profile = Optional.ofNullable(builder.profile).orElse(SpringProfile.DEFAULT);
   }
 
   public static SpringCommentPropertyKeyBuilder builder(SpringPropertyType type) {
@@ -54,12 +48,13 @@ public final class SpringComment implements SpringPropertyTypeFileName {
   }
 
   private static final class SpringCommentBuilder
-    implements SpringCommentPropertyKeyBuilder, SpringCommentCommentBuilder, SpringCommentProfileBuilder {
+    implements SpringCommentPropertyKeyBuilder, SpringCommentCommentBuilder, SpringCommentProfileBuilder
+  {
 
     private final SpringPropertyType type;
-    private PropertyKey key;
-    private Comment comment;
-    private SpringProfile profile;
+    private @Nullable PropertyKey key;
+    private @Nullable Comment comment;
+    private @Nullable SpringProfile profile;
 
     private SpringCommentBuilder(SpringPropertyType type) {
       Assert.notNull("type", type);

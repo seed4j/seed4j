@@ -1,0 +1,2 @@
+@org.jspecify.annotations.NullMarked
+package com.seed4j.shared.projectfolder.domain;

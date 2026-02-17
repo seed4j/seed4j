@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.javadependency;
 
-import static org.apache.commons.lang3.builder.ToStringStyle.*;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.jspecify.annotations.Nullable;
 
 public final class DependencyId {
 
@@ -79,12 +80,13 @@ public final class DependencyId {
   }
 
   private static final class DependencyIdBuilder
-    implements DependencyIdGroupIdBuilder, DependencyIdArtifactIdBuilder, DependencyIdOptionalFieldsBuilder {
+    implements DependencyIdGroupIdBuilder, DependencyIdArtifactIdBuilder, DependencyIdOptionalFieldsBuilder
+  {
 
-    private GroupId groupId;
-    private ArtifactId artifactId;
-    private JavaDependencyClassifier classifier;
-    private JavaDependencyType type;
+    private @Nullable GroupId groupId;
+    private @Nullable ArtifactId artifactId;
+    private @Nullable JavaDependencyClassifier classifier;
+    private @Nullable JavaDependencyType type;
 
     @Override
     public DependencyIdArtifactIdBuilder groupId(GroupId groupId) {
@@ -101,14 +103,14 @@ public final class DependencyId {
     }
 
     @Override
-    public DependencyIdOptionalFieldsBuilder classifier(JavaDependencyClassifier classifier) {
+    public DependencyIdOptionalFieldsBuilder classifier(@Nullable JavaDependencyClassifier classifier) {
       this.classifier = classifier;
 
       return this;
     }
 
     @Override
-    public DependencyIdOptionalFieldsBuilder type(JavaDependencyType type) {
+    public DependencyIdOptionalFieldsBuilder type(@Nullable JavaDependencyType type) {
       this.type = type;
 
       return this;
@@ -129,9 +131,9 @@ public final class DependencyId {
   }
 
   public interface DependencyIdOptionalFieldsBuilder {
-    DependencyIdOptionalFieldsBuilder classifier(JavaDependencyClassifier classifier);
+    DependencyIdOptionalFieldsBuilder classifier(@Nullable JavaDependencyClassifier classifier);
 
-    DependencyIdOptionalFieldsBuilder type(JavaDependencyType type);
+    DependencyIdOptionalFieldsBuilder type(@Nullable JavaDependencyType type);
 
     DependencyId build();
   }

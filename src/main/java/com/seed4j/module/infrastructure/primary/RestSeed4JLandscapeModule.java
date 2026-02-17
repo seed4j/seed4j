@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.seed4j.module.domain.landscape.Seed4JLandscapeElementType;
 import com.seed4j.module.domain.landscape.Seed4JLandscapeModule;
 import com.seed4j.module.domain.resource.Seed4JModuleRank;
+import com.seed4j.shared.error.domain.Assert;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.util.Collection;
 import java.util.List;
+import org.jspecify.annotations.Nullable;
 
 @JsonPropertyOrder({ "type", "slug", "operation", "properties", "dependencies", "rank" })
 @Schema(name = "Seed4JLandscapeModule", description = "Module in a landscape")
@@ -20,6 +22,11 @@ final class RestSeed4JLandscapeModule implements RestSeed4JLandscapeElement {
   private final Seed4JModuleRank rank;
 
   private RestSeed4JLandscapeModule(RestSeed4JLandscapeModuleBuilder builder) {
+    Assert.notNull("slug", builder.slug);
+    Assert.notNull("operation", builder.operation);
+    Assert.notNull("properties", builder.properties);
+    Assert.notNull("rank", builder.rank);
+
     slug = builder.slug;
     operation = builder.operation;
     properties = builder.properties;
@@ -41,7 +48,7 @@ final class RestSeed4JLandscapeModule implements RestSeed4JLandscapeElement {
     return module
       .dependencies()
       .map(dependencies -> dependencies.stream().map(RestSeed4JLandscapeDependency::from).toList())
-      .orElse(null);
+      .orElse(List.of());
   }
 
   @Override
@@ -77,11 +84,11 @@ final class RestSeed4JLandscapeModule implements RestSeed4JLandscapeElement {
 
   private static final class RestSeed4JLandscapeModuleBuilder {
 
-    private String slug;
-    private String operation;
-    private RestSeed4JModulePropertiesDefinition properties;
-    private List<RestSeed4JLandscapeDependency> dependencies;
-    private Seed4JModuleRank rank;
+    private @Nullable String slug;
+    private @Nullable String operation;
+    private @Nullable RestSeed4JModulePropertiesDefinition properties;
+    private List<RestSeed4JLandscapeDependency> dependencies = List.of();
+    private @Nullable Seed4JModuleRank rank;
 
     private RestSeed4JLandscapeModuleBuilder slug(String slug) {
       this.slug = slug;

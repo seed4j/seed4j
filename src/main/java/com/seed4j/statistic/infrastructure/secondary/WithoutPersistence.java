@@ -8,5 +8,5 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE, ElementType.METHOD })
-@ConditionalOnExpression("'${spring.data.mongodb.uri:}' == '' && '${spring.datasource.url:}' == ''")
+@ConditionalOnExpression("'${spring.mongodb.uri:}' == '' && '${spring.datasource.url:}' == ''")
 @interface WithoutPersistence {}

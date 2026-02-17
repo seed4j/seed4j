@@ -1,10 +1,37 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.gradle;
 
-import static com.seed4j.TestFileUtils.*;
-import static com.seed4j.module.domain.Seed4JModule.*;
-import static com.seed4j.module.domain.Seed4JModulesFixture.*;
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.params.provider.EnumSource.Mode.*;
+import static com.seed4j.TestFileUtils.content;
+import static com.seed4j.TestFileUtils.contentNormalizingNewLines;
+import static com.seed4j.TestFileUtils.projectFrom;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.buildProfileId;
+import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleGradlePlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleGradleProfilePlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleToolVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.defaultVersionDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.dependencyWithVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.dependencyWithVersionAndExclusion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.dockerGradlePluginDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.emptyModuleContext;
+import static com.seed4j.module.domain.Seed4JModulesFixture.gitPropertiesGradleProfilePlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.jsonWebTokenDependencyId;
+import static com.seed4j.module.domain.Seed4JModulesFixture.jsonWebTokenVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.localBuildProfile;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenBuildExtensionWithSlug;
+import static com.seed4j.module.domain.Seed4JModulesFixture.mavenEnforcerPlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.nodeGradlePlugin;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyId;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyManagement;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootStarterWebDependency;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springBootVersion;
+import static com.seed4j.module.domain.Seed4JModulesFixture.springProfilesActiveProperty;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Indentation;
@@ -13,7 +40,19 @@ import com.seed4j.module.domain.buildproperties.PropertyKey;
 import com.seed4j.module.domain.buildproperties.PropertyValue;
 import com.seed4j.module.domain.file.TemplateRenderer;
 import com.seed4j.module.domain.gradleplugin.GradlePlugin;
-import com.seed4j.module.domain.javabuild.command.*;
+import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.AddDirectMavenPlugin;
+import com.seed4j.module.domain.javabuild.command.AddGradleConfiguration;
+import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
+import com.seed4j.module.domain.javabuild.command.AddGradleTasksTestInstruction;
+import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
+import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.AddMavenBuildExtension;
+import com.seed4j.module.domain.javabuild.command.AddMavenPluginManagement;
+import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
+import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
@@ -507,8 +546,8 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        [libraries.spring-boot-starter-web]
-        \t\tname = "spring-boot-starter-web"
+        [libraries.spring-boot-starter-webmvc]
+        \t\tname = "spring-boot-starter-webmvc"
         \t\tgroup = "org.springframework.boot"
         """
       );
@@ -523,16 +562,19 @@ class GradleCommandHandlerTest {
         files,
         fileReplacer
       );
-      JavaDependency initialDependency = javaDependency().groupId("org.springframework.boot").artifactId("spring-boot-starter-web").build();
+      JavaDependency initialDependency = javaDependency()
+        .groupId("org.springframework.boot")
+        .artifactId("spring-boot-starter-webmvc")
+        .build();
       gradleCommandHandler.handle(new AddDirectJavaDependency(initialDependency));
 
-      JavaDependency updatedDependency = javaDependency().groupId("org.spring.boot").artifactId("spring-boot-starter-web").build();
+      JavaDependency updatedDependency = javaDependency().groupId("org.spring.boot").artifactId("spring-boot-starter-webmvc").build();
       gradleCommandHandler.handle(new AddDirectJavaDependency(updatedDependency));
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        [libraries.spring-boot-starter-web]
-        \t\tname = "spring-boot-starter-web"
+        [libraries.spring-boot-starter-webmvc]
+        \t\tname = "spring-boot-starter-webmvc"
         \t\tgroup = "org.spring.boot"
         """
       );
@@ -550,14 +592,14 @@ class GradleCommandHandlerTest {
 
       JavaDependency dependency = javaDependency()
         .groupId("org.spring.boot")
-        .artifactId("spring-boot-starter-web")
+        .artifactId("spring-boot-starter-webmvc")
         .versionSlug("spring-boot")
         .build();
       gradleCommandHandler.handle(new AddDirectJavaDependency(dependency));
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        [libraries.spring-boot-starter-web.version]
+        [libraries.spring-boot-starter-webmvc.version]
         \t\t\tref = "spring-boot"
         """
       );
@@ -589,40 +631,40 @@ class GradleCommandHandlerTest {
     @EnumSource(value = JavaDependencyScope.class, mode = EXCLUDE, names = { "TEST", "RUNTIME", "PROVIDED", "IMPORT" })
     @ParameterizedTest
     void shouldAddImplementationDependencyInBuildGradleFileForScope(JavaDependencyScope scope) {
-      JavaDependency dependency = javaDependency().groupId("org.spring.boot").artifactId("spring-boot-starter-web").scope(scope).build();
+      JavaDependency dependency = javaDependency().groupId("org.spring.boot").artifactId("spring-boot-starter-webmvc").scope(scope).build();
       new GradleCommandHandler(Indentation.DEFAULT, emptyGradleProjectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new AddDirectJavaDependency(dependency)
       );
 
-      assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("implementation(libs.spring.boot.starter.web)");
+      assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("implementation(libs.spring.boot.starter.webmvc)");
     }
 
     @Test
     void shouldAddRuntimeOnlyDependencyInBuildGradleFileForRuntimeScope() {
       JavaDependency dependency = javaDependency()
         .groupId("org.spring.boot")
-        .artifactId("spring-boot-starter-web")
+        .artifactId("spring-boot-starter-webmvc")
         .scope(JavaDependencyScope.RUNTIME)
         .build();
       new GradleCommandHandler(Indentation.DEFAULT, emptyGradleProjectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new AddDirectJavaDependency(dependency)
       );
 
-      assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("runtimeOnly(libs.spring.boot.starter.web)");
+      assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("runtimeOnly(libs.spring.boot.starter.webmvc)");
     }
 
     @Test
     void shouldAddCompileOnlyDependencyInBuildGradleFileForProvidedScope() {
       JavaDependency dependency = javaDependency()
         .groupId("org.spring.boot")
-        .artifactId("spring-boot-starter-web")
+        .artifactId("spring-boot-starter-webmvc")
         .scope(JavaDependencyScope.PROVIDED)
         .build();
       new GradleCommandHandler(Indentation.DEFAULT, emptyGradleProjectFolder, emptyModuleContext(), files, fileReplacer).handle(
         new AddDirectJavaDependency(dependency)
       );
 
-      assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("compileOnly(libs.spring.boot.starter.web)");
+      assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("compileOnly(libs.spring.boot.starter.webmvc)");
     }
 
     @Test
@@ -643,7 +685,7 @@ class GradleCommandHandlerTest {
     void shouldAddDependencyExclusionsInBuildGradleFile() {
       JavaDependency dependency = javaDependency()
         .groupId("org.springframework.boot")
-        .artifactId("spring-boot-starter-web")
+        .artifactId("spring-boot-starter-webmvc")
         .addExclusion(groupId("org.springframework.boot"), artifactId("spring-boot-starter-tomcat"))
         .addExclusion(groupId("org.springframework.boot"), artifactId("spring-boot-starter-json"))
         .build();
@@ -653,7 +695,7 @@ class GradleCommandHandlerTest {
 
       assertThat(buildGradleContent(emptyGradleProjectFolder)).contains(
         """
-          implementation(libs.spring.boot.starter.web) {
+          implementation(libs.spring.boot.starter.webmvc) {
             exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
             exclude(group = "org.springframework.boot", module = "spring-boot-starter-json")
           }
@@ -680,7 +722,7 @@ class GradleCommandHandlerTest {
 
       JavaDependency dependencyRuntime = javaDependency()
         .groupId("org.springframework.boot")
-        .artifactId("spring-boot-starter-web")
+        .artifactId("spring-boot-starter-webmvc")
         .scope(JavaDependencyScope.RUNTIME)
         .build();
       gradleCommandHandler.handle(new AddDirectJavaDependency(dependencyRuntime));
@@ -702,7 +744,7 @@ class GradleCommandHandlerTest {
           // seed4j-needle-gradle-implementation-dependencies
           compileOnly(libs.junit.jupiter.engine)
           // seed4j-needle-gradle-compile-dependencies
-          runtimeOnly(libs.spring.boot.starter.web)
+          runtimeOnly(libs.spring.boot.starter.webmvc)
           // seed4j-needle-gradle-runtime-dependencies
           testImplementation(libs.junit.jupiter.engine)
           // seed4j-needle-gradle-test-dependencies
@@ -716,7 +758,7 @@ class GradleCommandHandlerTest {
       Seed4JProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-with-local-profile");
       JavaDependency dependency = javaDependency()
         .groupId("org.spring.boot")
-        .artifactId("spring-boot-starter-web")
+        .artifactId("spring-boot-starter-webmvc")
         .scope(JavaDependencyScope.RUNTIME)
         .build();
 
@@ -726,7 +768,7 @@ class GradleCommandHandlerTest {
 
       assertThat(scriptPluginContent(projectFolder, localBuildProfile())).contains(
         """
-        runtimeOnly(libs.findLibrary("spring.boot.starter.web").get())\
+        runtimeOnly(libs.findLibrary("spring.boot.starter.webmvc").get())\
         """
       );
     }
@@ -803,7 +845,7 @@ class GradleCommandHandlerTest {
       gradleCommandHandler.handle(new SetVersion(springBootVersion()));
       JavaDependency starterWebDependency = javaDependency()
         .groupId("org.springframework.boot")
-        .artifactId("spring-boot-starter-web")
+        .artifactId("spring-boot-starter-webmvc")
         .versionSlug("spring-boot")
         .build();
       gradleCommandHandler.handle(new AddDirectJavaDependency(starterWebDependency));
@@ -817,7 +859,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder))
         .contains("spring-boot = ")
-        .doesNotContain("[libraries.spring-boot-starter-web]")
+        .doesNotContain("[libraries.spring-boot-starter-webmvc]")
         .contains("[libraries.spring-boot-starter-data-jpa]");
     }
 
@@ -1016,7 +1058,7 @@ class GradleCommandHandlerTest {
       gradleCommandHandler.handle(new SetVersion(springBootVersion()));
       JavaDependency starterWebDependency = javaDependency()
         .groupId("org.springframework.boot")
-        .artifactId("spring-boot-starter-web")
+        .artifactId("spring-boot-starter-webmvc")
         .versionSlug("spring-boot")
         .build();
       gradleCommandHandler.handle(new AddDirectJavaDependency(starterWebDependency));
@@ -1035,7 +1077,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(projectFolder))
         .contains("spring-boot = ")
-        .doesNotContain("[libraries.spring-boot-starter-web]")
+        .doesNotContain("[libraries.spring-boot-starter-webmvc]")
         .contains("[libraries.spring-boot-starter-data-jpa]");
     }
   }
@@ -1080,7 +1122,7 @@ class GradleCommandHandlerTest {
     void shouldAddDependencyExclusionsInBuildGradleFile() {
       JavaDependency dependency = javaDependency()
         .groupId("org.springframework.boot")
-        .artifactId("spring-boot-starter-web")
+        .artifactId("spring-boot-starter-webmvc")
         .scope(JavaDependencyScope.IMPORT)
         .addExclusion(groupId("org.springframework.boot"), artifactId("spring-boot-starter-tomcat"))
         .addExclusion(groupId("org.springframework.boot"), artifactId("spring-boot-starter-json"))
@@ -1091,7 +1133,7 @@ class GradleCommandHandlerTest {
 
       assertThat(buildGradleContent(emptyGradleProjectFolder)).contains(
         """
-          implementation(platform(libs.spring.boot.starter.web)) {
+          implementation(platform(libs.spring.boot.starter.webmvc)) {
             exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
             exclude(group = "org.springframework.boot", module = "spring-boot-starter-json")
           }

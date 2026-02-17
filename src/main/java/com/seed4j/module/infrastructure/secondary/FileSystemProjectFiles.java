@@ -5,6 +5,7 @@ import com.seed4j.module.domain.ProjectFiles;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
+import com.seed4j.shared.nullness.domain.Contract;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 import org.apache.commons.io.IOUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,11 +40,12 @@ public class FileSystemProjectFiles implements ProjectFiles {
     }
   }
 
-  private InputStream getInputStream(String path) {
+  private @Nullable InputStream getInputStream(String path) {
     return FileSystemProjectFiles.class.getResourceAsStream(path.replace("\\", SLASH));
   }
 
-  private void assertFileExist(String path, InputStream input) {
+  @Contract("_, null -> fail")
+  private void assertFileExist(String path, @Nullable InputStream input) {
     if (input == null) {
       throw GeneratorException.technicalError("Can't find file: " + path);
     }
@@ -103,7 +106,8 @@ public class FileSystemProjectFiles implements ProjectFiles {
     }
   }
 
-  private void assertFolderExist(String path, URL url) {
+  @Contract("_, null -> fail")
+  private void assertFolderExist(String path, @Nullable URL url) {
     if (url == null) {
       throw GeneratorException.technicalError("Can't find folder: " + path);
     }

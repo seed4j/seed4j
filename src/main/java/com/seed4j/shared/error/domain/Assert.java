@@ -1,5 +1,7 @@
 package com.seed4j.shared.error.domain;
 
+import com.seed4j.shared.nullness.domain.Contract;
+import com.seed4j.shared.nullness.domain.EnsuresNonNull;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Collection;
@@ -8,6 +10,7 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
+import org.jspecify.annotations.Nullable;
 
 /**
  * This class provides utilities for input assertions.
@@ -36,7 +39,8 @@ public final class Assert {
    * @throws MissingMandatoryValueException
    *           if the input is null
    */
-  public static void notNull(String field, Object input) {
+  @Contract("_, null -> fail")
+  public static void notNull(String field, @Nullable Object input) {
     if (input == null) {
       throw MissingMandatoryValueException.forNullValue(field);
     }
@@ -52,7 +56,8 @@ public final class Assert {
    * @throws MissingMandatoryValueException
    *           if the input is blank
    */
-  public static void notBlank(String field, String input) {
+  @Contract("_, null -> fail")
+  public static void notBlank(String field, @Nullable String input) {
     field(field, input).notBlank();
   }
 
@@ -66,7 +71,8 @@ public final class Assert {
    * @throws MissingMandatoryValueException
    *           if the collection is null or empty
    */
-  public static void notEmpty(String field, Collection<?> collection) {
+  @Contract("_, null -> fail")
+  public static void notEmpty(String field, @Nullable Collection<?> collection) {
     field(field, collection).notEmpty();
   }
 
@@ -80,7 +86,7 @@ public final class Assert {
    * @throws MissingMandatoryValueException
    *           if the array is null or empty
    */
-  public static <T> void notEmpty(String field, T[] array) {
+  public static <T> void notEmpty(String field, @Nullable T[] array) {
     field(field, array).notEmpty();
   }
 
@@ -94,7 +100,7 @@ public final class Assert {
    * @throws MissingMandatoryValueException
    *           if the input contains whitespace
    */
-  public static void noWhitespace(String field, String input) {
+  public static void noWhitespace(String field, @Nullable String input) {
     field(field, input).noWhitespace();
   }
 
@@ -119,7 +125,7 @@ public final class Assert {
    *          string to check
    * @return A {@link StringAsserter} for this field and value
    */
-  public static StringAsserter field(String field, String input) {
+  public static StringAsserter field(String field, @Nullable String input) {
     return new StringAsserter(field, input);
   }
 
@@ -144,7 +150,7 @@ public final class Assert {
    *          value to check
    * @return An {@link IntegerAsserter} for this field and value
    */
-  public static IntegerAsserter field(String field, Integer input) {
+  public static IntegerAsserter field(String field, @Nullable Integer input) {
     return new IntegerAsserter(field, input);
   }
 
@@ -169,7 +175,7 @@ public final class Assert {
    *          value to check
    * @return An {@link LongAsserter} for this field and value
    */
-  public static LongAsserter field(String field, Long input) {
+  public static LongAsserter field(String field, @Nullable Long input) {
     return new LongAsserter(field, input);
   }
 
@@ -194,7 +200,7 @@ public final class Assert {
    *          value to check
    * @return An {@link DoubleAsserter} for this field and value
    */
-  public static FloatAsserter field(String field, Float input) {
+  public static FloatAsserter field(String field, @Nullable Float input) {
     return new FloatAsserter(field, input);
   }
 
@@ -219,7 +225,7 @@ public final class Assert {
    *          value to check
    * @return An {@link DoubleAsserter} for this field and value
    */
-  public static DoubleAsserter field(String field, Double input) {
+  public static DoubleAsserter field(String field, @Nullable Double input) {
     return new DoubleAsserter(field, input);
   }
 
@@ -244,7 +250,7 @@ public final class Assert {
    *          value to check
    * @return An {@link BigDecimalAsserter} for this field and value
    */
-  public static BigDecimalAsserter field(String field, BigDecimal input) {
+  public static BigDecimalAsserter field(String field, @Nullable BigDecimal input) {
     return new BigDecimalAsserter(field, input);
   }
 
@@ -269,7 +275,7 @@ public final class Assert {
    *          collection to check
    * @return A {@link CollectionAsserter} for this field and value
    */
-  public static <T> CollectionAsserter<T> field(String field, Collection<T> input) {
+  public static <T> CollectionAsserter<T> field(String field, @Nullable Collection<T> input) {
     return new CollectionAsserter<>(field, input);
   }
 
@@ -294,7 +300,7 @@ public final class Assert {
    *          array to check
    * @return A {@link ArrayAsserter} for this field and value
    */
-  public static <T> ArrayAsserter<T> field(String field, T[] input) {
+  public static <T> ArrayAsserter<T> field(String field, @Nullable T[] input) {
     return new ArrayAsserter<>(field, input);
   }
 
@@ -319,7 +325,7 @@ public final class Assert {
    *          value to check
    * @return An {@link InstantAsserter} for this field and value
    */
-  public static InstantAsserter field(String field, Instant input) {
+  public static InstantAsserter field(String field, @Nullable Instant input) {
     return new InstantAsserter(field, input);
   }
 
@@ -330,9 +336,9 @@ public final class Assert {
 
     public static final Pattern PATTERN_SPACE = Pattern.compile("\\s");
     private final String field;
-    private final String value;
+    private final @Nullable String value;
 
-    private StringAsserter(String field, String value) {
+    private StringAsserter(String field, @Nullable String value) {
       this.field = field;
       this.value = value;
     }
@@ -344,6 +350,7 @@ public final class Assert {
      * @throws MissingMandatoryValueException
      *           if the value is null
      */
+    @EnsuresNonNull("value")
     public StringAsserter notNull() {
       Assert.notNull(field, value);
 
@@ -473,9 +480,9 @@ public final class Assert {
   public static final class IntegerAsserter {
 
     private final String field;
-    private final Integer value;
+    private final @Nullable Integer value;
 
-    private IntegerAsserter(String field, Integer value) {
+    private IntegerAsserter(String field, @Nullable Integer value) {
       this.field = field;
       this.value = value;
     }
@@ -542,9 +549,9 @@ public final class Assert {
   public static final class LongAsserter {
 
     private final String field;
-    private final Long value;
+    private final @Nullable Long value;
 
-    private LongAsserter(String field, Long value) {
+    private LongAsserter(String field, @Nullable Long value) {
       this.field = field;
       this.value = value;
     }
@@ -611,9 +618,9 @@ public final class Assert {
   public static final class FloatAsserter {
 
     private final String field;
-    private final Float value;
+    private final @Nullable Float value;
 
-    private FloatAsserter(String field, Float value) {
+    private FloatAsserter(String field, @Nullable Float value) {
       this.field = field;
       this.value = value;
     }
@@ -743,9 +750,9 @@ public final class Assert {
   public static final class DoubleAsserter {
 
     private final String field;
-    private final Double value;
+    private final @Nullable Double value;
 
-    private DoubleAsserter(String field, Double value) {
+    private DoubleAsserter(String field, @Nullable Double value) {
       this.field = field;
       this.value = value;
     }
@@ -875,9 +882,9 @@ public final class Assert {
   public static final class BigDecimalAsserter {
 
     private final String field;
-    private final BigDecimal value;
+    private final @Nullable BigDecimal value;
 
-    private BigDecimalAsserter(String field, BigDecimal value) {
+    private BigDecimalAsserter(String field, @Nullable BigDecimal value) {
       this.field = field;
       this.value = value;
     }
@@ -983,6 +990,7 @@ public final class Assert {
     }
 
     private NumberValueTooLowException tooLow(BigDecimal floor) {
+      notNull();
       return NumberValueTooLowException.builder().field(field).minValue(String.valueOf(floor)).value(value.toPlainString()).build();
     }
 
@@ -1061,6 +1069,7 @@ public final class Assert {
     }
 
     private NumberValueTooHighException tooHigh(BigDecimal ceil) {
+      notNull();
       return NumberValueTooHighException.builder().field(field).maxValue(String.valueOf(ceil)).value(value.toPlainString()).build();
     }
 
@@ -1071,6 +1080,7 @@ public final class Assert {
      * @throws MissingMandatoryValueException
      *           if the input value is null
      */
+    @EnsuresNonNull("value")
     public BigDecimalAsserter notNull() {
       Assert.notNull(field, value);
 
@@ -1084,9 +1094,9 @@ public final class Assert {
   public static final class CollectionAsserter<T> {
 
     private final String field;
-    private final Collection<T> value;
+    private final @Nullable Collection<T> value;
 
-    private CollectionAsserter(String field, Collection<T> value) {
+    private CollectionAsserter(String field, @Nullable Collection<T> value) {
       this.field = field;
       this.value = value;
     }
@@ -1098,6 +1108,7 @@ public final class Assert {
      * @throws MissingMandatoryValueException
      *           if the value is null
      */
+    @EnsuresNonNull("value")
     public CollectionAsserter<T> notNull() {
       Assert.notNull(field, value);
 
@@ -1172,9 +1183,9 @@ public final class Assert {
   public static final class ArrayAsserter<T> {
 
     private final String field;
-    private final T[] value;
+    private final @Nullable T[] value;
 
-    private ArrayAsserter(String field, T[] value) {
+    private ArrayAsserter(String field, @Nullable T[] value) {
       this.field = field;
       this.value = value;
     }
@@ -1186,6 +1197,7 @@ public final class Assert {
      * @throws MissingMandatoryValueException
      *           if the value is null
      */
+    @EnsuresNonNull("value")
     public ArrayAsserter<T> notNull() {
       Assert.notNull(field, value);
 
@@ -1262,9 +1274,9 @@ public final class Assert {
     private static final String OTHER_FIELD_NAME = "other";
 
     private final String field;
-    private final Instant value;
+    private final @Nullable Instant value;
 
-    private InstantAsserter(String field, Instant value) {
+    private InstantAsserter(String field, @Nullable Instant value) {
       this.field = field;
       this.value = value;
     }
@@ -1390,6 +1402,7 @@ public final class Assert {
      * @throws MissingMandatoryValueException
      *           if the instant is null
      */
+    @EnsuresNonNull("value")
     public InstantAsserter notNull() {
       Assert.notNull(field, value);
 

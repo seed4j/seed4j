@@ -1,6 +1,11 @@
 package com.seed4j.generator.server.springboot.mvc.security.jwt.domain;
 
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.ModuleFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.file;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.logbackFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.testLogbackFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
@@ -65,8 +70,8 @@ class JwtAuthenticationModuleFactoryTest {
       .containing(
         """
             <dependency>
-              <groupId>org.springframework.security</groupId>
-              <artifactId>spring-security-test</artifactId>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-security-test</artifactId>
               <scope>test</scope>
             </dependency>
         """

@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "type": "module",
   "dependencies": {
-    "@heroui/react": "2.8.8",
+    "@heroui/react": "2.8.9",
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.2",
     "@tsconfig/vite-react": "7.0.2",

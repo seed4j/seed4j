@@ -17,6 +17,7 @@
     <!-- Dependencies -->
     <jacoco.version>0.8.14</jacoco.version>
     <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
+    <micronaut.version>4.10.1</micronaut.version>
     <spring-boot.version>4.0.2</spring-boot.version>
     <spring-cloud.version>2025.1.1</spring-cloud.version>
     <springdoc-openapi.version>3.0.1</springdoc-openapi.version>

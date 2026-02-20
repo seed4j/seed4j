@@ -1,0 +1,22 @@
+package {{packageName}}.wire.kafka.infrastructure.config;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import {{packageName}}.IntegrationTest;
+
+@IntegrationTest
+class KafkaPropertiesTest {
+
+  @Autowired
+  private KafkaProperties kafkaProperties;
+
+  @Test
+  void shouldGetProperties() {
+    assertThat(kafkaProperties.getBootstrapServers()).isNotEmpty();
+    assertThat(kafkaProperties.getConsumer().getGroupId()).isNotNull();
+    assertThat(kafkaProperties.getProducer().getKeySerializer()).isNotNull();
+  }
+}

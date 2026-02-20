@@ -1,0 +1,28 @@
+package {{packageName}}.sample.infrastructure.primary.kafka.consumer;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import {{packageName}}.UnitTest;
+
+@UnitTest
+class SampleConsumerTest {
+
+  private SampleConsumer sampleConsumer;
+
+  @BeforeEach
+  void setUp() {
+    sampleConsumer = new SampleConsumer();
+  }
+
+  @Test
+  void shouldConsumeMessage() {
+    sampleConsumer.consume("sample message");
+    // No exception thrown, message processed successfully
+  }
+
+  @Test
+  void shouldHandleNullMessage() {
+    sampleConsumer.consume(null);
+    // Should log error but not throw exception
+  }
+}

@@ -1,0 +1,23 @@
+package {{packageName}}.sample.infrastructure.secondary.kafka.producer;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.concurrent.CompletableFuture;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.support.SendResult;
+import {{packageName}}.IntegrationTest;
+
+@IntegrationTest
+class SampleProducerIT {
+
+  @Autowired
+  private SampleProducer sampleProducer;
+
+  @Test
+  void shouldSend() {
+    final CompletableFuture<SendResult<String, String>> result = sampleProducer.send("sample");
+
+    assertThat(result).isNotNull();
+  }
+}

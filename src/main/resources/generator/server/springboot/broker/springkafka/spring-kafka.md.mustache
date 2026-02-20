@@ -1,0 +1,95 @@
+# Spring Kafka
+
+This module adds [Spring Kafka](https://spring.io/projects/spring-kafka) integration to your project.
+
+Spring Kafka provides a high-level abstraction for building Kafka-based messaging solutions with Spring Boot. It brings several advantages:
+
+## Features
+
+- **Spring Boot Auto-configuration**: Automatic configuration through `application.properties` or `application.yml`
+- **High-Level Abstractions**: Use `@KafkaListener` for consumers and `KafkaTemplate` for producers
+- **Observability**: Built-in support for metrics and health checks
+- **Spring Integration**: Seamless integration with Spring's dependency injection and configuration management
+- **Testcontainers Support**: Easy integration testing with Testcontainers
+
+## Configuration
+
+The module uses Spring Boot's standard Kafka properties with the `spring.kafka.*` prefix:
+
+```yaml
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: myapp
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+```
+
+## Kafka with Docker Compose
+
+The module provides a Docker Compose configuration to run Kafka locally:
+
+```bash
+docker compose -f src/main/docker/kafka.yml up -d
+```
+
+## Producer Example
+
+```java
+@Repository
+public class SampleProducer {
+  private final KafkaTemplate<String, String> kafkaTemplate;
+  
+  public CompletableFuture<SendResult<String, String>> send(String message) {
+    return kafkaTemplate.send(topicName, message);
+  }
+}
+```
+
+## Consumer Example
+
+```java
+@Service
+public class SampleConsumer {
+  @KafkaListener(topics = "${application.kafka.topic.sample}", 
+                 groupId = "${spring.kafka.consumer.group-id}")
+  public void consume(String message) {
+    // Handle message
+  }
+}
+```
+
+## Testing
+
+The module includes Testcontainers support for integration testing:
+
+```java
+@IntegrationTest
+class SampleProducerIT {
+  @Autowired
+  private SampleProducer sampleProducer;
+  
+  @Test
+  void shouldSend() {
+    CompletableFuture<SendResult<String, String>> result = sampleProducer.send("test");
+    assertThat(result).isNotNull();
+  }
+}
+```
+
+## AKHQ (Kafka UI)
+
+You can add AKHQ (previously known as KafkaHQ), a web UI for Apache Kafka, by applying the `spring-boot-spring-kafka-akhq` module.
+
+AKHQ will be available at: http://localhost:8080 (when running the docker-compose)
+
+## Resources
+
+- [Spring Kafka Documentation](https://spring.io/projects/spring-kafka)
+- [Apache Kafka](https://kafka.apache.org/)
+- [AKHQ](https://akhq.io/)

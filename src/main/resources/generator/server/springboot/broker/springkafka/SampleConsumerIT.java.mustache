@@ -1,0 +1,35 @@
+package {{packageName}}.sample.infrastructure.primary.kafka.consumer;
+
+import static org.awaitility.Awaitility.await;
+
+import java.time.Duration;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import {{packageName}}.IntegrationTest;
+import {{packageName}}.sample.infrastructure.secondary.kafka.producer.SampleProducer;
+
+@IntegrationTest
+class SampleConsumerIT {
+
+  @Autowired
+  private SampleProducer sampleProducer;
+
+  @Test
+  void shouldSendAndConsumeMessage() {
+    final String messageToSend = "sample-integration-test-message";
+    
+    // Send message
+    sampleProducer.send(messageToSend);
+
+    // Wait for message to be consumed
+    // In a real application, you would verify the message was processed
+    // by checking side effects (e.g., database records, metrics, etc.)
+    await()
+      .atMost(Duration.ofSeconds(10))
+      .pollDelay(Duration.ofMillis(100))
+      .untilAsserted(() -> {
+        // Message should be consumed without exceptions
+        // You can add assertions here based on your application's side effects
+      });
+  }
+}

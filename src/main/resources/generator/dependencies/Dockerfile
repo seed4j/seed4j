@@ -2,7 +2,7 @@ FROM sonarqube:26.2.0.119303-community
 FROM consul:1.15.4
 FROM jhipster/consul-config-loader:v0.4.1
 FROM jhipster/jhipster-registry:v7.5.0
-FROM quay.io/keycloak/keycloak:26.5.3
+FROM quay.io/keycloak/keycloak:26.5.4
 FROM mariadb:12.2.2
 FROM mongo:8.2.5
 FROM mysql:9.6.0

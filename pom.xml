@@ -61,7 +61,7 @@
     <start-class>com.seed4j.Seed4JApp</start-class>
 
     <compiler-plugin.version>3.15.0</compiler-plugin.version>
-    <surefire-plugin.version>3.5.4</surefire-plugin.version>
+    <surefire-plugin.version>3.5.5</surefire-plugin.version>
     <jacoco.version>0.8.14</jacoco.version>
     <jgit.version>7.5.0.202512021534-r</jgit.version>
     <junit-jupiter.version>6.0.3</junit-jupiter.version>

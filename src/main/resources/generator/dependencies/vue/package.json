@@ -9,7 +9,7 @@
     "@vue/test-utils": "2.4.6",
     "@vue/tsconfig": "0.8.1",
     "axios": "1.13.5",
-    "eslint-plugin-vue": "10.7.0",
+    "eslint-plugin-vue": "10.8.0",
     "i18next-vue": "5.4.0",
     "pinia": "3.0.4",
     "pinia-plugin-persistedstate": "4.7.1",

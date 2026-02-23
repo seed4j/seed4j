@@ -20,7 +20,7 @@
     <spring-boot.version>4.0.3</spring-boot.version>
     <spring-cloud.version>2025.1.1</spring-cloud.version>
     <springdoc-openapi.version>3.0.1</springdoc-openapi.version>
-    <kafka-clients.version>4.1.1</kafka-clients.version>
+    <kafka-clients.version>4.2.0</kafka-clients.version>
     <mongock.version>5.5.1</mongock.version>
     <neo4j-migrations.version>3.2.1</neo4j-migrations.version>
     <reflections.version>0.10.2</reflections.version>

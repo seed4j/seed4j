@@ -6,7 +6,7 @@
   "dependencies": {
     "@babel/cli": "7.28.6",
     "@cypress/code-coverage": "3.14.7",
-    "@eslint/js": "9.39.2",
+    "@eslint/js": "9.39.3",
     "@playwright/test": "1.58.2",
     "@prettier/plugin-pug": "3.4.2",
     "@prettier/plugin-xml": "3.4.2",
@@ -26,7 +26,7 @@
     "cpy-cli": "6.0.0",
     "cssnano": "7.1.2",
     "cypress": "15.10.0",
-    "eslint": "9.39.2",
+    "eslint": "9.39.3",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-cypress": "5.3.0",
     "globals": "17.3.0",

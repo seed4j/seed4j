@@ -39,8 +39,12 @@ public class Seed4JModulesResources {
     Collection<Seed4JModuleResource> modulesResources,
     Seed4JHiddenModules hiddenModules
   ) {
-    Collection<Seed4JModuleSlug> nestedDependenciesSlugs = findNestedDependencies(modulesResources, hiddenModules);
-    DisplayHiddenResources displayHiddenResources = findDisplayAndHiddenResources(modulesResources, hiddenModules, nestedDependenciesSlugs);
+    Collection<Seed4JModuleSlug> hiddenNestedDependenciesSlugs = computeHiddenNestedDependencies(modulesResources, hiddenModules.slugs());
+    DisplayHiddenResources displayHiddenResources = findDisplayAndHiddenResources(
+      modulesResources,
+      hiddenModules,
+      hiddenNestedDependenciesSlugs
+    );
     if (displayHiddenResources.hasHiddenResources()) {
       String hiddenModulesSlugs = displayHiddenResources.hiddenSlugs();
       log.info("The following modules are hidden: {}.", hiddenModulesSlugs);
@@ -51,11 +55,11 @@ public class Seed4JModulesResources {
   private DisplayHiddenResources findDisplayAndHiddenResources(
     Collection<Seed4JModuleResource> modulesResources,
     Seed4JHiddenModules hiddenModules,
-    Collection<Seed4JModuleSlug> nestedDependenciesSlugs
+    Collection<Seed4JModuleSlug> hiddenNestedDependenciesSlugs
   ) {
     Map<Boolean, List<Seed4JModuleResource>> partitionedResources = modulesResources
       .stream()
-      .collect(Collectors.partitioningBy(resource -> allowed(resource, hiddenModules, nestedDependenciesSlugs)));
+      .collect(Collectors.partitioningBy(resource -> allowed(resource, hiddenModules, hiddenNestedDependenciesSlugs)));
     return new DisplayHiddenResources(
       Optional.ofNullable(partitionedResources.get(true)).orElse(List.of()),
       Optional.ofNullable(partitionedResources.get(false)).orElse(List.of())
@@ -65,17 +69,17 @@ public class Seed4JModulesResources {
   private boolean allowed(
     Seed4JModuleResource resource,
     Seed4JHiddenModules hiddenModules,
-    Collection<Seed4JModuleSlug> nestedDependenciesSlugs
+    Collection<Seed4JModuleSlug> hiddenNestedDependenciesSlugs
   ) {
-    return notExcludedSlug(resource, hiddenModules, nestedDependenciesSlugs) && noExcludedTag(resource, hiddenModules);
+    return notExcludedSlug(resource, hiddenModules, hiddenNestedDependenciesSlugs) && noExcludedTag(resource, hiddenModules);
   }
 
   private boolean notExcludedSlug(
     Seed4JModuleResource resource,
     Seed4JHiddenModules hiddenModules,
-    Collection<Seed4JModuleSlug> nestedDependenciesSlugs
+    Collection<Seed4JModuleSlug> hiddenNestedDependenciesSlugs
   ) {
-    return !hiddenModules.slugs().contains(resource.slug()) && !nestedDependenciesSlugs.contains(resource.slug());
+    return !hiddenModules.slugs().contains(resource.slug()) && !hiddenNestedDependenciesSlugs.contains(resource.slug());
   }
 
   private boolean noExcludedTag(Seed4JModuleResource resource, Seed4JHiddenModules hiddenModules) {
@@ -85,18 +89,11 @@ public class Seed4JModulesResources {
       .noneMatch(tag -> resource.tags().contains(tag));
   }
 
-  private Collection<Seed4JModuleSlug> findNestedDependencies(
+  private Collection<Seed4JModuleSlug> computeHiddenNestedDependencies(
     Collection<Seed4JModuleResource> modulesResources,
-    Seed4JHiddenModules hiddenModules
+    Collection<Seed4JModuleSlug> hiddenModulesSlugs
   ) {
-    return findNestedDependenciesBySlugs(hiddenModules.slugs(), modulesResources);
-  }
-
-  private Collection<Seed4JModuleSlug> findNestedDependenciesBySlugs(
-    Collection<Seed4JModuleSlug> slugs,
-    Collection<Seed4JModuleResource> modulesResources
-  ) {
-    return slugs
+    return hiddenModulesSlugs
       .stream()
       .flatMap(slug -> allSlugsNestedDependenciesOf(slug, modulesResources))
       .toList();

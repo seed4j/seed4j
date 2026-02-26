@@ -2,6 +2,7 @@ package com.seed4j.module.domain.resource;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModuleSlug;
+import com.seed4j.module.domain.landscape.Seed4JLandscapeElementType;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
@@ -35,6 +36,16 @@ public class Seed4JModulesResources {
     );
   }
 
+  private void assertUniqueSlugs(Collection<Seed4JModuleResource> modulesResources) {
+    if (duplicatedSlug(modulesResources)) {
+      throw new DuplicatedSlugException();
+    }
+  }
+
+  private boolean duplicatedSlug(Collection<Seed4JModuleResource> modulesResources) {
+    return modulesResources.stream().map(Seed4JModuleResource::slug).collect(Collectors.toSet()).size() != modulesResources.size();
+  }
+
   private Stream<Seed4JModuleResource> removeHiddenModules(
     Collection<Seed4JModuleResource> modulesResources,
     Seed4JHiddenModules hiddenModules
@@ -46,6 +57,117 @@ public class Seed4JModulesResources {
       log.info("The following modules are hidden: {}.", hiddenModulesSlugs);
     }
     return displayHiddenResources.displayedStream();
+  }
+
+  private Collection<String> findNestedDependencies(Collection<Seed4JModuleResource> modulesResources, Seed4JHiddenModules hiddenModules) {
+    Collection<String> moduleDependencies = findNestedDependenciesBySlugs(hiddenModules.slugs(), modulesResources);
+    Collection<String> featureDependencies = findNestedFeatureDependencies(modulesResources, moduleDependencies);
+    return Stream.concat(moduleDependencies.stream(), featureDependencies.stream()).toList();
+  }
+
+  private Collection<String> findNestedDependenciesBySlugs(Collection<String> slugs, Collection<Seed4JModuleResource> modulesResources) {
+    return slugs
+      .stream()
+      .flatMap(slug -> allSlugsNestedDependenciesOf(slug, modulesResources))
+      .toList();
+  }
+
+  private Stream<String> allSlugsNestedDependenciesOf(String slug, Collection<Seed4JModuleResource> modulesResources) {
+    return allResourcesNestedDependenciesOf(new Seed4JModuleSlug(slug), modulesResources).map(moduleResource ->
+      moduleResource.slug().get()
+    );
+  }
+
+  private Stream<Seed4JModuleResource> allResourcesNestedDependenciesOf(
+    Seed4JModuleSlug slug,
+    Collection<Seed4JModuleResource> modulesResources
+  ) {
+    Collection<Seed4JModuleResource> childrenDependencies = this.getChildrenDependencies(slug, modulesResources);
+    if (noMoreNestedResource(childrenDependencies)) {
+      return Stream.of();
+    }
+    return Stream.concat(childrenDependencies.stream(), childrenDependencies.stream().flatMap(moveToNextNestedResource(modulesResources)));
+  }
+
+  private Collection<Seed4JModuleResource> getChildrenDependencies(
+    Seed4JModuleSlug slug,
+    Collection<Seed4JModuleResource> modulesResources
+  ) {
+    return modulesResources
+      .stream()
+      .filter(moduleResource -> isChildrenOf(slug, moduleResource))
+      .toList();
+  }
+
+  private boolean isChildrenOf(Seed4JModuleSlug slug, Seed4JModuleResource moduleResource) {
+    return moduleResource
+      .organization()
+      .dependencies()
+      .stream()
+      .anyMatch(dependency -> dependency.slug().equals(slug));
+  }
+
+  private boolean noMoreNestedResource(Collection<Seed4JModuleResource> childrenDependencies) {
+    return childrenDependencies.isEmpty();
+  }
+
+  private Function<Seed4JModuleResource, Stream<Seed4JModuleResource>> moveToNextNestedResource(
+    Collection<Seed4JModuleResource> modulesResources
+  ) {
+    return resource -> this.allResourcesNestedDependenciesOf(resource.slug(), modulesResources);
+  }
+
+  private Collection<String> findNestedFeatureDependencies(
+    Collection<Seed4JModuleResource> modulesResources,
+    Collection<String> hiddenModuleSlugs
+  ) {
+    Collection<String> hiddenFeatures = findFeaturesOfHiddenModules(modulesResources, hiddenModuleSlugs);
+    return findModulesDependingOnFeaturesRecursive(modulesResources, hiddenFeatures);
+  }
+
+  private Collection<String> findFeaturesOfHiddenModules(
+    Collection<Seed4JModuleResource> modulesResources,
+    Collection<String> hiddenModuleSlugs
+  ) {
+    return modulesResources
+      .stream()
+      .filter(resource -> hiddenModuleSlugs.contains(resource.slug().get()))
+      .filter(resource -> resource.organization().feature().isPresent())
+      .map(resource -> resource.organization().feature().orElseThrow().get())
+      .toList();
+  }
+
+  private Collection<String> findModulesDependingOnFeaturesRecursive(
+    Collection<Seed4JModuleResource> modulesResources,
+    Collection<String> hiddenFeatures
+  ) {
+    Collection<String> modulesDependingOnFeatures = findModulesDependingOnFeatures(modulesResources, hiddenFeatures);
+    if (modulesDependingOnFeatures.isEmpty()) {
+      return modulesDependingOnFeatures;
+    }
+
+    Collection<String> featuresOfHiddenModules = findFeaturesOfHiddenModules(modulesResources, modulesDependingOnFeatures);
+    Collection<String> nestedDependencies = findModulesDependingOnFeaturesRecursive(modulesResources, featuresOfHiddenModules);
+    return Stream.concat(modulesDependingOnFeatures.stream(), nestedDependencies.stream()).toList();
+  }
+
+  private Collection<String> findModulesDependingOnFeatures(
+    Collection<Seed4JModuleResource> modulesResources,
+    Collection<String> hiddenFeatures
+  ) {
+    return modulesResources
+      .stream()
+      .filter(resource ->
+        resource
+          .organization()
+          .dependencies()
+          .stream()
+          .anyMatch(
+            dependency -> dependency.type() == Seed4JLandscapeElementType.FEATURE && hiddenFeatures.contains(dependency.slug().get())
+          )
+      )
+      .map(resource -> resource.slug().get())
+      .toList();
   }
 
   private DisplayHiddenResources findDisplayAndHiddenResources(
@@ -79,72 +201,6 @@ public class Seed4JModulesResources {
       .tags()
       .stream()
       .noneMatch(tag -> resource.tags().contains(tag));
-  }
-
-  private Collection<String> findNestedDependencies(Collection<Seed4JModuleResource> modulesResources, Seed4JHiddenModules hiddenModules) {
-    return findNestedDependenciesBySlugs(hiddenModules.slugs(), modulesResources);
-  }
-
-  private Collection<String> findNestedDependenciesBySlugs(Collection<String> slugs, Collection<Seed4JModuleResource> modulesResources) {
-    return slugs
-      .stream()
-      .flatMap(slug -> allSlugsNestedDependenciesOf(slug, modulesResources))
-      .toList();
-  }
-
-  private Stream<String> allSlugsNestedDependenciesOf(String slug, Collection<Seed4JModuleResource> modulesResources) {
-    return allResourcesNestedDependenciesOf(new Seed4JModuleSlug(slug), modulesResources).map(moduleResource ->
-      moduleResource.slug().get()
-    );
-  }
-
-  private Stream<Seed4JModuleResource> allResourcesNestedDependenciesOf(
-    Seed4JModuleSlug slug,
-    Collection<Seed4JModuleResource> modulesResources
-  ) {
-    Collection<Seed4JModuleResource> childrenDependencies = this.getChildrenDependencies(slug, modulesResources);
-    if (noMoreNestedResource(childrenDependencies)) {
-      return Stream.of();
-    }
-    return Stream.concat(childrenDependencies.stream(), childrenDependencies.stream().flatMap(moveToNextNestedResource(modulesResources)));
-  }
-
-  private boolean noMoreNestedResource(Collection<Seed4JModuleResource> childrenDependencies) {
-    return childrenDependencies.isEmpty();
-  }
-
-  private Function<Seed4JModuleResource, Stream<Seed4JModuleResource>> moveToNextNestedResource(
-    Collection<Seed4JModuleResource> modulesResources
-  ) {
-    return resource -> this.allResourcesNestedDependenciesOf(resource.slug(), modulesResources);
-  }
-
-  private Collection<Seed4JModuleResource> getChildrenDependencies(
-    Seed4JModuleSlug slug,
-    Collection<Seed4JModuleResource> modulesResources
-  ) {
-    return modulesResources
-      .stream()
-      .filter(moduleResource -> isChildrenOf(slug, moduleResource))
-      .toList();
-  }
-
-  private boolean isChildrenOf(Seed4JModuleSlug slug, Seed4JModuleResource moduleResource) {
-    return moduleResource
-      .organization()
-      .dependencies()
-      .stream()
-      .anyMatch(dependency -> dependency.slug().equals(slug));
-  }
-
-  private void assertUniqueSlugs(Collection<Seed4JModuleResource> modulesResources) {
-    if (duplicatedSlug(modulesResources)) {
-      throw new DuplicatedSlugException();
-    }
-  }
-
-  private boolean duplicatedSlug(Collection<Seed4JModuleResource> modulesResources) {
-    return modulesResources.stream().map(Seed4JModuleResource::slug).collect(Collectors.toSet()).size() != modulesResources.size();
   }
 
   public Stream<Seed4JModuleResource> stream() {

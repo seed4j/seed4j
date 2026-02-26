@@ -1,5 +1,6 @@
 package com.seed4j.module.domain.resource;
 
+import com.seed4j.module.domain.Seed4JModuleSlug;
 import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Collection;
@@ -9,19 +10,23 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Seed4JHiddenModules {
 
-  private final Collection<String> slugs;
+  private final Collection<Seed4JModuleSlug> slugs;
   private final Collection<Seed4JModuleTag> tags;
 
   public Seed4JHiddenModules(Collection<String> slugs, Collection<String> tags) {
-    this.slugs = Seed4JCollections.immutable(slugs);
+    this.slugs = buildSlugs(slugs);
     this.tags = buildTags(tags);
+  }
+
+  private List<Seed4JModuleSlug> buildSlugs(Collection<String> slugs) {
+    return Seed4JCollections.immutable(slugs).stream().map(Seed4JModuleSlug::new).toList();
   }
 
   private List<Seed4JModuleTag> buildTags(Collection<String> tags) {
     return Seed4JCollections.immutable(tags).stream().map(Seed4JModuleTag::new).toList();
   }
 
-  public Collection<String> slugs() {
+  public Collection<Seed4JModuleSlug> slugs() {
     return slugs;
   }
 

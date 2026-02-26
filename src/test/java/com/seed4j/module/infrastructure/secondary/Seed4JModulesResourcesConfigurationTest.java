@@ -1,6 +1,7 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.defaultModuleResource;
+import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.moduleNestedModuleAndFeatureResourcesCollection;
 import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.moduleNestedResourcesCollection;
 import static com.seed4j.module.domain.resource.Seed4JModulesResourceFixture.moduleResourcesCollection;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,6 +43,20 @@ class Seed4JModulesResourcesConfigurationTest {
 
     assertThat(resources.stream()).usingRecursiveFieldByFieldElementComparator().containsExactly(defaultModuleResource());
     logs.shouldHave(Level.INFO, "The following modules are hidden: module-a, module-b, module-c.");
+  }
+
+  @Test
+  void shouldGetAllResourcesWithoutHiddenAndNestedModuleAndFeatureDependenciesResources() {
+    Seed4JHiddenResourcesProperties hiddenResources = new Seed4JHiddenResourcesProperties();
+    hiddenResources.setSlugs(List.of("module-a"));
+
+    Seed4JModulesResources resources = configuration.seed4JModulesResources(
+      hiddenResources,
+      moduleNestedModuleAndFeatureResourcesCollection()
+    );
+
+    assertThat(resources.stream()).usingRecursiveFieldByFieldElementComparator().containsExactly(defaultModuleResource());
+    logs.shouldHave(Level.INFO, "The following modules are hidden: module-a, module-b, module-c, module-d, module-e, module-f.");
   }
 
   @Test

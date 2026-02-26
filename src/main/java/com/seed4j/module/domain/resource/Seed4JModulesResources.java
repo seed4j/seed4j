@@ -1,16 +1,22 @@
 package com.seed4j.module.domain.resource;
 
+import com.seed4j.module.domain.Seed4JFeatureSlug;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModuleSlug;
+import com.seed4j.module.domain.landscape.Seed4JFeatureDependency;
+import com.seed4j.module.domain.landscape.Seed4JModuleDependency;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.slf4j.Logger;
@@ -93,53 +99,98 @@ public class Seed4JModulesResources {
     Collection<Seed4JModuleResource> modulesResources,
     Collection<Seed4JModuleSlug> hiddenModulesSlugs
   ) {
-    return hiddenModulesSlugs
-      .stream()
-      .flatMap(slug -> allSlugsNestedDependenciesOf(slug, modulesResources))
-      .toList();
+    return derivedHiddenModuleSlugs(
+      computeHiddenDependencies(
+        initialHiddenState(hiddenModulesSlugs),
+        moduleFeatures(modulesResources),
+        moduleDependents(modulesResources),
+        featureDependentModules(modulesResources)
+      ),
+      hiddenModulesSlugs
+    );
   }
 
-  private Stream<Seed4JModuleSlug> allSlugsNestedDependenciesOf(Seed4JModuleSlug slug, Collection<Seed4JModuleResource> modulesResources) {
-    return allResourcesNestedDependenciesOf(slug, modulesResources).map(Seed4JModuleResource::slug);
+  private Map<Seed4JModuleSlug, Optional<Seed4JFeatureSlug>> moduleFeatures(Collection<Seed4JModuleResource> modulesResources) {
+    return modulesResources.stream().collect(Collectors.toMap(Seed4JModuleResource::slug, resource -> resource.organization().feature()));
   }
 
-  private Stream<Seed4JModuleResource> allResourcesNestedDependenciesOf(
-    Seed4JModuleSlug slug,
-    Collection<Seed4JModuleResource> modulesResources
-  ) {
-    Collection<Seed4JModuleResource> childrenDependencies = this.getChildrenDependencies(slug, modulesResources);
-    if (noMoreNestedResource(childrenDependencies)) {
-      return Stream.of();
-    }
-    return Stream.concat(childrenDependencies.stream(), childrenDependencies.stream().flatMap(moveToNextNestedResource(modulesResources)));
-  }
-
-  private boolean noMoreNestedResource(Collection<Seed4JModuleResource> childrenDependencies) {
-    return childrenDependencies.isEmpty();
-  }
-
-  private Function<Seed4JModuleResource, Stream<Seed4JModuleResource>> moveToNextNestedResource(
-    Collection<Seed4JModuleResource> modulesResources
-  ) {
-    return resource -> this.allResourcesNestedDependenciesOf(resource.slug(), modulesResources);
-  }
-
-  private Collection<Seed4JModuleResource> getChildrenDependencies(
-    Seed4JModuleSlug slug,
-    Collection<Seed4JModuleResource> modulesResources
-  ) {
+  private Map<Seed4JModuleSlug, Set<Seed4JModuleSlug>> moduleDependents(Collection<Seed4JModuleResource> modulesResources) {
     return modulesResources
       .stream()
-      .filter(moduleResource -> isChildrenOf(slug, moduleResource))
-      .toList();
+      .flatMap(resource ->
+        resource
+          .organization()
+          .dependencies()
+          .stream()
+          .filter(Seed4JModuleDependency.class::isInstance)
+          .map(Seed4JModuleDependency.class::cast)
+          .map(dependency -> Map.entry(dependency.module(), resource.slug()))
+      )
+      .collect(
+        Collectors.groupingBy(
+          Map.Entry::getKey,
+          LinkedHashMap::new,
+          Collectors.mapping(Map.Entry::getValue, Collectors.toCollection(LinkedHashSet::new))
+        )
+      );
   }
 
-  private boolean isChildrenOf(Seed4JModuleSlug slug, Seed4JModuleResource moduleResource) {
-    return moduleResource
-      .organization()
-      .dependencies()
+  private Map<Seed4JFeatureSlug, Set<Seed4JModuleSlug>> featureDependentModules(Collection<Seed4JModuleResource> modulesResources) {
+    return modulesResources
       .stream()
-      .anyMatch(dependency -> dependency.slug().equals(slug));
+      .flatMap(resource ->
+        resource
+          .organization()
+          .dependencies()
+          .stream()
+          .filter(Seed4JFeatureDependency.class::isInstance)
+          .map(Seed4JFeatureDependency.class::cast)
+          .map(dependency -> Map.entry(dependency.feature(), resource.slug()))
+      )
+      .collect(
+        Collectors.groupingBy(
+          Map.Entry::getKey,
+          LinkedHashMap::new,
+          Collectors.mapping(Map.Entry::getValue, Collectors.toCollection(LinkedHashSet::new))
+        )
+      );
+  }
+
+  private HiddenDependenciesState initialHiddenState(Collection<Seed4JModuleSlug> slugs) {
+    return new HiddenDependenciesState(new LinkedHashSet<>(slugs), new LinkedHashSet<>(), new LinkedHashSet<>(slugs));
+  }
+
+  private HiddenDependenciesState computeHiddenDependencies(
+    HiddenDependenciesState state,
+    Map<Seed4JModuleSlug, Optional<Seed4JFeatureSlug>> moduleFeatures,
+    Map<Seed4JModuleSlug, Set<Seed4JModuleSlug>> moduleDependents,
+    Map<Seed4JFeatureSlug, Set<Seed4JModuleSlug>> featureDependentModules
+  ) {
+    if (state.hiddenCandidateSlugs().isEmpty()) {
+      return state;
+    }
+
+    return computeHiddenDependencies(
+      state.advanceWith(moduleFeatures, moduleDependents, featureDependentModules),
+      moduleFeatures,
+      moduleDependents,
+      featureDependentModules
+    );
+  }
+
+  private Collection<Seed4JModuleSlug> derivedHiddenModuleSlugs(
+    HiddenDependenciesState finalState,
+    Collection<Seed4JModuleSlug> initialSlugs
+  ) {
+    return finalState
+      .hiddenModuleSlugs()
+      .stream()
+      .filter(notInitiallyHidden(initialSlugs))
+      .collect(Collectors.toCollection(LinkedHashSet::new));
+  }
+
+  private static Predicate<Seed4JModuleSlug> notInitiallyHidden(Collection<Seed4JModuleSlug> initialSlugs) {
+    return slug -> !initialSlugs.contains(slug);
   }
 
   private void assertUniqueSlugs(Collection<Seed4JModuleResource> modulesResources) {
@@ -192,6 +243,92 @@ public class Seed4JModulesResources {
         .stream()
         .map(hidden -> hidden.slug().get())
         .collect(Collectors.joining(", "));
+    }
+  }
+
+  private record HiddenDependenciesState(
+    Set<Seed4JModuleSlug> hiddenModuleSlugs,
+    Set<Seed4JFeatureSlug> hiddenFeatureSlugs,
+    Set<Seed4JModuleSlug> hiddenCandidateSlugs
+  ) {
+    private HiddenDependenciesState {
+      Assert.notNull("hiddenModuleSlugs", hiddenModuleSlugs);
+      Assert.notNull("hiddenFeatureSlugs", hiddenFeatureSlugs);
+      Assert.notNull("hiddenCandidateSlugs", hiddenCandidateSlugs);
+
+      hiddenModuleSlugs = Collections.unmodifiableSet(new LinkedHashSet<>(hiddenModuleSlugs));
+      hiddenFeatureSlugs = Collections.unmodifiableSet(new LinkedHashSet<>(hiddenFeatureSlugs));
+      hiddenCandidateSlugs = Collections.unmodifiableSet(new LinkedHashSet<>(hiddenCandidateSlugs));
+    }
+
+    private HiddenDependenciesState advanceWith(
+      Map<Seed4JModuleSlug, Optional<Seed4JFeatureSlug>> moduleFeatures,
+      Map<Seed4JModuleSlug, Set<Seed4JModuleSlug>> moduleDependents,
+      Map<Seed4JFeatureSlug, Set<Seed4JModuleSlug>> featureDependentModules
+    ) {
+      Set<Seed4JFeatureSlug> nextHiddenFeatureSlugs = mergePreservingOrder(
+        hiddenFeatureSlugs(),
+        hiddenFeatureSlugsFrom(hiddenCandidateSlugs(), moduleFeatures)
+      );
+
+      Set<Seed4JModuleSlug> nextHiddenCandidateSlugs = computeHiddenCandidateSlugs(
+        hiddenModuleSlugs(),
+        moduleDependentsFrom(hiddenCandidateSlugs(), moduleDependents),
+        featureDependentModulesFrom(nextHiddenFeatureSlugs, featureDependentModules)
+      );
+
+      Set<Seed4JModuleSlug> nextHiddenModuleSlugs = mergePreservingOrder(hiddenModuleSlugs(), nextHiddenCandidateSlugs);
+
+      return new HiddenDependenciesState(nextHiddenModuleSlugs, nextHiddenFeatureSlugs, nextHiddenCandidateSlugs);
+    }
+
+    private static <T> Set<T> mergePreservingOrder(Set<T> current, Set<T> additions) {
+      return Stream.concat(current.stream(), additions.stream()).collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    private static Set<Seed4JFeatureSlug> hiddenFeatureSlugsFrom(
+      Set<Seed4JModuleSlug> hiddenCandidateSlugs,
+      Map<Seed4JModuleSlug, Optional<Seed4JFeatureSlug>> moduleFeatures
+    ) {
+      return hiddenCandidateSlugs
+        .stream()
+        .map(slug -> moduleFeatures.getOrDefault(slug, Optional.empty()))
+        .flatMap(Optional::stream)
+        .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    private static Set<Seed4JModuleSlug> computeHiddenCandidateSlugs(
+      Set<Seed4JModuleSlug> hiddenModuleSlugs,
+      Set<Seed4JModuleSlug> moduleDependents,
+      Set<Seed4JModuleSlug> featureDependentModules
+    ) {
+      return Stream.concat(moduleDependents.stream(), featureDependentModules.stream())
+        .filter(notAlreadyHidden(hiddenModuleSlugs))
+        .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    private static Predicate<Seed4JModuleSlug> notAlreadyHidden(Set<Seed4JModuleSlug> hiddenModuleSlugs) {
+      return slug -> !hiddenModuleSlugs.contains(slug);
+    }
+
+    private static Set<Seed4JModuleSlug> moduleDependentsFrom(
+      Set<Seed4JModuleSlug> hiddenCandidateSlugs,
+      Map<Seed4JModuleSlug, Set<Seed4JModuleSlug>> moduleDependents
+    ) {
+      return hiddenCandidateSlugs
+        .stream()
+        .flatMap(slug -> moduleDependents.getOrDefault(slug, Set.of()).stream())
+        .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    private static Set<Seed4JModuleSlug> featureDependentModulesFrom(
+      Set<Seed4JFeatureSlug> hiddenFeatureSlugs,
+      Map<Seed4JFeatureSlug, Set<Seed4JModuleSlug>> featureDependentModules
+    ) {
+      return hiddenFeatureSlugs
+        .stream()
+        .flatMap(feature -> featureDependentModules.getOrDefault(feature, Set.of()).stream())
+        .collect(Collectors.toCollection(LinkedHashSet::new));
     }
   }
 }

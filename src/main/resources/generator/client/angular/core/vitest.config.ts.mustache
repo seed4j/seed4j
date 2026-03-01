@@ -1,0 +1,38 @@
+/// <reference types="vitest" />
+
+import tsconfigPaths from 'vite-tsconfig-paths';
+import { configDefaults, defineConfig } from 'vitest/config';
+import angular from '@analogjs/vite-plugin-angular';
+
+export default defineConfig({
+  plugins: [tsconfigPaths(), angular()],
+  test: {
+    reporters: ['verbose', 'vitest-sonar-reporter'],
+    outputFile: {
+      'vitest-sonar-reporter': '{{projectBuildDirectory}}/test-results/TESTS-results-sonar.xml',
+    },
+    setupFiles: ['test-setup.ts'],
+    globals: true,
+    logHeapUsage: true,
+    poolOptions: {
+      threads: {
+        minThreads: 1,
+        maxThreads: 2,
+      },
+    },
+    environment: 'jsdom',
+    cache: false,
+    include: ['src/main/webapp/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
+    coverage: {
+      thresholds: {
+        perFile: true,
+        autoUpdate: true,
+      },
+      include: ['src/main/webapp/**/*.ts?(x)'],
+      exclude: [...(configDefaults.coverage.exclude as string[])],
+      provider: 'istanbul',
+      reportsDirectory: '{{projectBuildDirectory}}/test-results/',
+      reporter: ['html', 'json', 'json-summary', 'text', 'text-summary', 'lcov', 'clover'],
+    },
+  },
+});

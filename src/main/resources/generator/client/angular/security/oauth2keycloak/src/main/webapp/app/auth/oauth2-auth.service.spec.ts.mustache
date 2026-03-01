@@ -1,16 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import Keycloak, { KeycloakConfig, KeycloakInitOptions } from 'keycloak-js';
 import { lastValueFrom } from 'rxjs';
+import { describe, it, expect, beforeEach, afterEach, vi, type MockInstance } from 'vitest';
 import { environment } from '../../environments/environment';
 import { Oauth2AuthService } from './oauth2-auth.service';
-import SpyInstance = jest.SpyInstance;
 
-jest.mock('keycloak-js', () => ({
-  __esModule: true,
-  default: jest.fn().mockReturnValue({
-    init: jest.fn().mockReturnValue(Promise.resolve(true) as unknown as Promise<boolean>),
-    updateToken: jest.fn().mockReturnValue(Promise.resolve(true) as unknown as Promise<boolean>),
-    logout: jest.fn().mockReturnValue(Promise.resolve(null) as unknown as Promise<void>),
+vi.mock('keycloak-js', () => ({
+  default: vi.fn().mockReturnValue({
+    init: vi.fn().mockReturnValue(Promise.resolve(true) as unknown as Promise<boolean>),
+    updateToken: vi.fn().mockReturnValue(Promise.resolve(true) as unknown as Promise<boolean>),
+    logout: vi.fn().mockReturnValue(Promise.resolve(null) as unknown as Promise<void>),
     idToken: 'idTokenValue',
     token: 'tokenValue',
     tokenParsed: {
@@ -20,7 +19,7 @@ jest.mock('keycloak-js', () => ({
   } as unknown as Keycloak),
 }));
 
-jest.mock('../../environments/environment', () => ({
+vi.mock('../../environments/environment', () => ({
   environment: {
     production: false,
     keycloak: {
@@ -41,8 +40,8 @@ describe('Oauth2 Auth Service', () => {
   let service: Oauth2AuthService;
   let keycloakInstance: Keycloak;
 
-  let consoleDebugMock: SpyInstance;
-  let consoleErrorMock: SpyInstance;
+  let consoleDebugMock: MockInstance;
+  let consoleErrorMock: MockInstance;
 
   const config: KeycloakConfig = {
     url: environment.keycloak.url,
@@ -54,26 +53,30 @@ describe('Oauth2 Auth Service', () => {
     service = TestBed.inject(Oauth2AuthService);
     keycloakInstance = new Keycloak(config);
 
-    consoleDebugMock = jest.spyOn(console, 'debug').mockImplementation();
-    consoleErrorMock = jest.spyOn(console, 'error').mockImplementation();
+    consoleDebugMock = vi.spyOn(console, 'debug').mockImplementation(vi.fn());
+    consoleErrorMock = vi.spyOn(console, 'error').mockImplementation(vi.fn());
   });
 
   afterEach(() => {
     consoleDebugMock.mockRestore();
     consoleErrorMock.mockRestore();
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 
   describe('init authentication', () => {
     beforeEach(() => {
       Object.defineProperty(window, 'location', {
         value: {
-          reload: jest.fn(),
+          reload: vi.fn(),
         },
+        writable: true,
+        configurable: true,
       });
     });
 
     it('should init refresh token and return true when the user is authenticated', async () => {
-      jest.spyOn(keycloakInstance, 'init').mockReturnValue(Promise.resolve(true).then() as unknown as Promise<boolean>);
+      vi.spyOn(keycloakInstance, 'init').mockReturnValue(Promise.resolve(true).then() as unknown as Promise<boolean>);
 
       const authenticated = await lastValueFrom(service.initAuthentication());
 
@@ -90,7 +93,7 @@ describe('Oauth2 Auth Service', () => {
     });
 
     it('should reload window and return false when the user is not authenticated', async () => {
-      jest.spyOn(keycloakInstance, 'init').mockReturnValue(Promise.resolve(false).then() as unknown as Promise<boolean>);
+      vi.spyOn(keycloakInstance, 'init').mockReturnValue(Promise.resolve(false).then() as unknown as Promise<boolean>);
 
       const authenticated = await lastValueFrom(service.initAuthentication());
 
@@ -108,7 +111,7 @@ describe('Oauth2 Auth Service', () => {
 
   describe('Update token', () => {
     beforeEach(() => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
     });
 
     it('should call update token and log debug validity time message when token is valid', async () => {
@@ -116,14 +119,14 @@ describe('Oauth2 Auth Service', () => {
         exp: 1651319001, // 2022-04-30 13:43:21
       };
       keycloakInstance.timeSkew = 3;
-      jest.spyOn(Date, 'now').mockReturnValue(1651318847714); // 2022-04-30 13:40:47
+      vi.spyOn(Date, 'now').mockReturnValue(1651318847714); // 2022-04-30 13:40:47
 
       const updateTokenPromise = Promise.resolve(false);
-      jest.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise as unknown as Promise<boolean>);
+      vi.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise as unknown as Promise<boolean>);
 
       await lastValueFrom(service.initAuthentication());
 
-      jest.advanceTimersByTime(UPDATE_TOKEN_INTERVAL_MS);
+      vi.advanceTimersByTime(UPDATE_TOKEN_INTERVAL_MS);
       await updateTokenPromise;
 
       expect(keycloakInstance.updateToken).toHaveBeenCalledWith(70);
@@ -132,11 +135,11 @@ describe('Oauth2 Auth Service', () => {
 
     it('should call update token and log debug "refreshed" message when token is refreshed', async () => {
       const updateTokenPromise = Promise.resolve(true);
-      jest.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise as unknown as Promise<boolean>);
+      vi.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise as unknown as Promise<boolean>);
 
       await lastValueFrom(service.initAuthentication());
 
-      jest.advanceTimersByTime(UPDATE_TOKEN_INTERVAL_MS);
+      vi.advanceTimersByTime(UPDATE_TOKEN_INTERVAL_MS);
       await updateTokenPromise;
 
       expect(keycloakInstance.updateToken).toHaveBeenCalledWith(70);
@@ -145,11 +148,11 @@ describe('Oauth2 Auth Service', () => {
 
     it('should call update token and log error message on error', async () => {
       const updateTokenPromise = Promise.reject(new Error('unknown error'));
-      jest.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise as unknown as Promise<boolean>);
+      vi.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise as unknown as Promise<boolean>);
 
       await lastValueFrom(service.initAuthentication());
 
-      jest.advanceTimersByTime(UPDATE_TOKEN_INTERVAL_MS);
+      vi.advanceTimersByTime(UPDATE_TOKEN_INTERVAL_MS);
 
       expect(keycloakInstance.updateToken).toHaveBeenCalledWith(70);
 
@@ -190,10 +193,10 @@ describe('Oauth2 Auth Service', () => {
         configurable: true,
       });
 
-      expect(service.token).toBeTruthy();
+      expect(service.isAuthenticated).toBeTruthy();
     });
 
-    it('should return false when the user is authenticated', () => {
+    it('should return false when the user is not authenticated', () => {
       Object.defineProperty(keycloakInstance, 'authenticated', {
         value: false,
         configurable: true,

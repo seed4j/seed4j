@@ -25,7 +25,7 @@ describe('Auth Interceptor', () => {
   describe('intercept', () => {
     it('should add authorization header with localStorageService', () => {
       const token = 'azerty';
-      Storage.prototype.getItem = jest.fn(() => token);
+      Storage.prototype.getItem = vi.fn(() => token);
 
       service.login({ username: 'John', password: '123' }).subscribe();
 

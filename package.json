@@ -60,7 +60,7 @@
     "vue-router": "5.0.3"
   },
   "devDependencies": {
-    "@cypress/code-coverage": "4.0.0",
+    "@cypress/code-coverage": "4.0.1",
     "@eslint/js": "9.39.3",
     "@prettier/plugin-pug": "3.4.2",
     "@prettier/plugin-xml": "3.4.2",

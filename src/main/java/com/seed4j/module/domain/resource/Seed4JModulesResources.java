@@ -103,6 +103,7 @@ public class Seed4JModulesResources {
       computeHiddenDependencies(
         initialHiddenState(hiddenModulesSlugs),
         moduleFeatures(modulesResources),
+        featureGroupedModules(modulesResources),
         moduleDependents(modulesResources),
         featureDependentModules(modulesResources)
       ),
@@ -112,6 +113,19 @@ public class Seed4JModulesResources {
 
   private Map<Seed4JModuleSlug, Optional<Seed4JFeatureSlug>> moduleFeatures(Collection<Seed4JModuleResource> modulesResources) {
     return modulesResources.stream().collect(Collectors.toMap(Seed4JModuleResource::slug, resource -> resource.organization().feature()));
+  }
+
+  private Map<Seed4JFeatureSlug, Set<Seed4JModuleSlug>> featureGroupedModules(Collection<Seed4JModuleResource> modulesResources) {
+    return modulesResources
+      .stream()
+      .filter(resource -> resource.organization().feature().isPresent())
+      .collect(
+        Collectors.groupingBy(
+          resource -> resource.organization().feature().orElseThrow(),
+          LinkedHashMap::new,
+          Collectors.mapping(Seed4JModuleResource::slug, Collectors.toCollection(LinkedHashSet::new))
+        )
+      );
   }
 
   private Map<Seed4JModuleSlug, Set<Seed4JModuleSlug>> moduleDependents(Collection<Seed4JModuleResource> modulesResources) {
@@ -163,6 +177,7 @@ public class Seed4JModulesResources {
   private HiddenDependenciesState computeHiddenDependencies(
     HiddenDependenciesState state,
     Map<Seed4JModuleSlug, Optional<Seed4JFeatureSlug>> moduleFeatures,
+    Map<Seed4JFeatureSlug, Set<Seed4JModuleSlug>> featureGroupedModules,
     Map<Seed4JModuleSlug, Set<Seed4JModuleSlug>> moduleDependents,
     Map<Seed4JFeatureSlug, Set<Seed4JModuleSlug>> featureDependentModules
   ) {
@@ -171,8 +186,9 @@ public class Seed4JModulesResources {
     }
 
     return computeHiddenDependencies(
-      state.advanceWith(moduleFeatures, moduleDependents, featureDependentModules),
+      state.advanceWith(moduleFeatures, featureGroupedModules, moduleDependents, featureDependentModules),
       moduleFeatures,
+      featureGroupedModules,
       moduleDependents,
       featureDependentModules
     );
@@ -263,12 +279,13 @@ public class Seed4JModulesResources {
 
     private HiddenDependenciesState advanceWith(
       Map<Seed4JModuleSlug, Optional<Seed4JFeatureSlug>> moduleFeatures,
+      Map<Seed4JFeatureSlug, Set<Seed4JModuleSlug>> featureGroupedModules,
       Map<Seed4JModuleSlug, Set<Seed4JModuleSlug>> moduleDependents,
       Map<Seed4JFeatureSlug, Set<Seed4JModuleSlug>> featureDependentModules
     ) {
       Set<Seed4JFeatureSlug> nextHiddenFeatureSlugs = mergePreservingOrder(
         hiddenFeatureSlugs(),
-        hiddenFeatureSlugsFrom(hiddenCandidateSlugs(), moduleFeatures)
+        hiddenFeatureSlugsFrom(hiddenModuleSlugs(), hiddenCandidateSlugs(), moduleFeatures, featureGroupedModules)
       );
 
       Set<Seed4JModuleSlug> nextHiddenCandidateSlugs = computeHiddenCandidateSlugs(
@@ -287,14 +304,27 @@ public class Seed4JModulesResources {
     }
 
     private static Set<Seed4JFeatureSlug> hiddenFeatureSlugsFrom(
+      Set<Seed4JModuleSlug> hiddenModuleSlugs,
       Set<Seed4JModuleSlug> hiddenCandidateSlugs,
-      Map<Seed4JModuleSlug, Optional<Seed4JFeatureSlug>> moduleFeatures
+      Map<Seed4JModuleSlug, Optional<Seed4JFeatureSlug>> moduleFeatures,
+      Map<Seed4JFeatureSlug, Set<Seed4JModuleSlug>> featureGroupedModules
     ) {
       return hiddenCandidateSlugs
         .stream()
         .map(slug -> moduleFeatures.getOrDefault(slug, Optional.empty()))
         .flatMap(Optional::stream)
+        .filter(featureCompletelyHidden(hiddenModuleSlugs, featureGroupedModules))
         .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    private static Predicate<Seed4JFeatureSlug> featureCompletelyHidden(
+      Set<Seed4JModuleSlug> hiddenModuleSlugs,
+      Map<Seed4JFeatureSlug, Set<Seed4JModuleSlug>> featureGroupedModules
+    ) {
+      return feature -> {
+        Set<Seed4JModuleSlug> modules = featureGroupedModules.getOrDefault(feature, Set.of());
+        return hiddenModuleSlugs.containsAll(modules);
+      };
     }
 
     private static Set<Seed4JModuleSlug> computeHiddenCandidateSlugs(

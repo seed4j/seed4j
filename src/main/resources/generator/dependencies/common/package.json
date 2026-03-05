@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@babel/cli": "7.28.6",
-    "@cypress/code-coverage": "3.14.7",
+    "@cypress/code-coverage": "4.0.1",
     "@eslint/js": "9.39.3",
     "@playwright/test": "1.58.2",
     "@prettier/plugin-pug": "3.4.2",

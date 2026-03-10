@@ -18,10 +18,10 @@
     <jacoco.version>0.8.14</jacoco.version>
     <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
     <micronaut.version>4.10.1</micronaut.version>
-    <spring-boot.version>4.0.2</spring-boot.version>
+    <spring-boot.version>4.0.3</spring-boot.version>
     <spring-cloud.version>2025.1.1</spring-cloud.version>
-    <springdoc-openapi.version>3.0.1</springdoc-openapi.version>
-    <kafka-clients.version>4.1.1</kafka-clients.version>
+    <springdoc-openapi.version>3.0.2</springdoc-openapi.version>
+    <kafka-clients.version>4.2.0</kafka-clients.version>
     <mongock.version>5.5.1</mongock.version>
     <neo4j-migrations.version>3.2.1</neo4j-migrations.version>
     <reflections.version>0.10.2</reflections.version>
@@ -31,10 +31,10 @@
     <thymeleaf-layout-dialect.version>3.4.0</thymeleaf-layout-dialect.version>
     <htmx-webjars.version>2.0.8</htmx-webjars.version>
     <alpinejs-webjars.version>3.15.8</alpinejs-webjars.version>
-    <protobuf.version>4.33.5</protobuf.version>
+    <protobuf.version>4.34.0</protobuf.version>
     <proto-backwards-compatibility.version>1.0.7</proto-backwards-compatibility.version>
     <jmolecules-bom.version>2025.0.2</jmolecules-bom.version>
-    <jqassistant.version>2.9.0</jqassistant.version>
+    <jqassistant.version>2.9.1</jqassistant.version>
     <jqassistant-asciidoctorj-extensions.version>1.1.0</jqassistant-asciidoctorj-extensions.version>
     <jqassistant-context-mapper-plugin.version>2.1.0-M2</jqassistant-context-mapper-plugin.version>
     <jqassistant-jmolecules-plugin.version>2.1.0-M4</jqassistant-jmolecules-plugin.version>
@@ -42,14 +42,14 @@
     <langchain4j.version>1.7.1-beta14</langchain4j.version>
     <jooq.version>3.20.11</jooq.version>
     <!-- Test dependencies -->
-    <junit-jupiter.version>6.0.2</junit-jupiter.version>
+    <junit-jupiter.version>6.0.3</junit-jupiter.version>
     <assertj.version>3.27.7</assertj.version>
-    <mockito.version>5.21.0</mockito.version>
+    <mockito.version>5.22.0</mockito.version>
     <cassandraunit.version>4.3.1.0</cassandraunit.version>
     <testcontainers.version>2.0.3</testcontainers.version>
     <archunit-junit5.version>1.4.1</archunit-junit5.version>
-    <cucumber.version>7.34.2</cucumber.version>
-    <approvaltests.version>26.7.1</approvaltests.version>
+    <cucumber.version>7.34.3</cucumber.version>
+    <approvaltests.version>28.0.0</approvaltests.version>
     <jqwik.version>1.9.3</jqwik.version>
     <!-- Maven Plugins -->
     <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
@@ -66,8 +66,8 @@
     <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
     <jib-maven-plugin.version>3.5.1</jib-maven-plugin.version>
     <compiler-plugin.version>3.15.0</compiler-plugin.version>
-    <surefire-plugin.version>3.5.4</surefire-plugin.version>
-    <failsafe-plugin.version>3.5.4</failsafe-plugin.version>
+    <surefire-plugin.version>3.5.5</surefire-plugin.version>
+    <failsafe-plugin.version>3.5.5</failsafe-plugin.version>
     <asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
     <openapi-maven-plugin.version>0.0.29</openapi-maven-plugin.version>
     <openapi-backwards-compat-maven-plugin.version>1.0.3</openapi-backwards-compat-maven-plugin.version>

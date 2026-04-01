@@ -1,6 +1,7 @@
 import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
+import Keycloak from 'keycloak-js';
 import { Oauth2AuthService } from '../auth/oauth2-auth.service';
 import Login from './login';
 
@@ -11,7 +12,10 @@ describe('Login', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
+      providers: [
+        { provide: ComponentFixtureAutoDetect, useValue: true },
+        { provide: Keycloak, useValue: {} },
+      ],
     }).compileComponents();
   });
 

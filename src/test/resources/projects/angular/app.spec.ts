@@ -1,4 +1,4 @@
-import { ComponentFixture, ComponentFixtureAutoDetect, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
 import { App } from './app';
@@ -7,15 +7,16 @@ describe('App Component', () => {
   let comp: App;
   let fixture: ComponentFixture<App>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [App],
       providers: [provideRouter([]), { provide: ComponentFixtureAutoDetect, useValue: true }],
-      declarations: [App],
     }).compileComponents();
-  }));
+  });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
     comp = fixture.componentInstance;
   });
 

@@ -90,6 +90,20 @@ public class AngularOAuth2KeycloakModuleFactory {
 
   private static final Seed4JDestination APP_DESTINATION = to("src/main/webapp/app");
 
+  private static final String PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
+  private static final String APP_KEYCLOAK_IMPORTS = "import Keycloak from 'keycloak-js';";
+  private static final String APP_KEYCLOAK_CONFIG = """
+        {
+          provide: Keycloak,
+          useFactory: () =>
+            new Keycloak({
+              url: environment.keycloak.url,
+              realm: environment.keycloak.realm,
+              clientId: environment.keycloak.client_id,
+            }),
+        },
+    """;
+
   public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
@@ -131,6 +145,8 @@ public class AngularOAuth2KeycloakModuleFactory {
         .in(path("src/main/webapp/main.ts"))
           .add(EXISTING_PROVIDE_HTTP_CLIENT_NEEDLE, "provideHttpClient(withInterceptors([httpAuthInterceptor])),")
           .add(lineAfterRegex("from '@angular/router';"), HTTP_AUTH_INTERCEPTOR_IMPORT)
+          .add(fileStart(), APP_KEYCLOAK_IMPORTS)
+          .add(lineAfterText(PROVIDER_NEEDLE), APP_KEYCLOAK_CONFIG)
           .and()
         .in(path("src/main/webapp/app/app.ts"))
           .add(FILLED_STANDALONE_NEEDLE, "$1, Login]")

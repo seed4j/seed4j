@@ -1,19 +1,12 @@
-import { Injectable } from '@angular/core';
-import Keycloak, { KeycloakConfig } from 'keycloak-js';
+import { inject, Injectable } from '@angular/core';
+import Keycloak from 'keycloak-js';
 import { from, Observable, tap } from 'rxjs';
-import { environment } from '../../environments/environment';
 
 const MIN_TOKEN_VALIDITY_SECONDS = 70;
 
 @Injectable({ providedIn: 'root' })
 export class Oauth2AuthService {
-  config: KeycloakConfig = {
-    url: environment.keycloak.url,
-    realm: environment.keycloak.realm,
-    clientId: environment.keycloak.client_id,
-  };
-
-  private readonly keycloak = new Keycloak(this.config);
+  private readonly keycloak: Keycloak = inject(Keycloak);
 
   get token(): string | undefined {
     return this.keycloak.token;

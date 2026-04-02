@@ -1,7 +1,7 @@
 import { HttpClient, HttpRequest, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-
+import Keycloak from 'keycloak-js';
 import { httpAuthInterceptor } from './http-auth.interceptor';
 import { Oauth2AuthService } from './oauth2-auth.service';
 
@@ -23,7 +23,12 @@ describe('httpAuthInterceptor', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(withInterceptors([httpAuthInterceptor])), provideHttpClientTesting(), Oauth2AuthService],
+      providers: [
+        provideHttpClient(withInterceptors([httpAuthInterceptor])),
+        provideHttpClientTesting(),
+        Oauth2AuthService,
+        { provide: Keycloak, useValue: {} },
+      ],
     });
     httpTestingController = TestBed.inject(HttpTestingController);
     httpClient = TestBed.inject(HttpClient);

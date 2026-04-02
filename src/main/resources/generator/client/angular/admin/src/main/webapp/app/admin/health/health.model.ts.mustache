@@ -14,7 +14,7 @@ export type HealthKey =
 
 export interface HealthModel {
   status: HealthStatus;
-  components: Record<HealthKey, { status: HealthStatus; details?: object }>;
+  components: Partial<Record<HealthKey, { status: HealthStatus; details?: object }>>;
 }
 
 export interface HealthDetails {

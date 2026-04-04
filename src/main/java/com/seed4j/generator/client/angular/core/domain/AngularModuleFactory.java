@@ -113,7 +113,6 @@ public class AngularModuleFactory {
           .addTemplate("environment.local.ts")
           .addTemplate("environment.local.spec.ts")
           .addTemplate("environment.ts")
-          .addTemplate("environment.spec.ts")
           .and()
         .batch(SOURCE.file("src/main/webapp"), to("src/main/webapp"))
           .addTemplate("index.html")

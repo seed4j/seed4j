@@ -81,10 +81,8 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "configPath": "jest.conf.mjs"
-          }
+          "builder": "@angular/build:unit-test",
+          "options": { "runnerConfig": "vitest.config.ts" }
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",

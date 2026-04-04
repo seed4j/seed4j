@@ -30,9 +30,9 @@ describe('Login Service', () => {
 
   describe('login', () => {
     it('should login', () => {
-      mockAccountService.identity = jest.fn(() => of(null));
+      mockAccountService.identity = vi.fn(() => of(null));
       const login = new Subject<void>();
-      authServerProvider.login = jest.fn(() => login.asObservable());
+      authServerProvider.login = vi.fn(() => login.asObservable());
 
       const credentials = {
         username: 'admin',
@@ -49,7 +49,7 @@ describe('Login Service', () => {
 
   describe('logout', () => {
     it('should logout', () => {
-      authServerProvider.logout = jest.fn(() => of());
+      authServerProvider.logout = vi.fn(() => of());
 
       service.logout();
 

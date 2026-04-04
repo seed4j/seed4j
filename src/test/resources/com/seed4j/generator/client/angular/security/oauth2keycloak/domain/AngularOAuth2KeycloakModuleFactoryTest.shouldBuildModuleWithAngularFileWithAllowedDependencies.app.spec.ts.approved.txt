@@ -6,10 +6,10 @@ import { App } from './app';
 import { Oauth2AuthService } from './auth/oauth2-auth.service';
 
 const mockOauth2AuthService = {
-  initAuthentication: jest.fn().mockReturnValue(of(true)),
+  initAuthentication: vi.fn().mockReturnValue(of(true)),
   isAuthenticated: true,
   token: 'mock-token',
-  logout: jest.fn(),
+  logout: vi.fn(),
 };
 
 describe('App Component', () => {

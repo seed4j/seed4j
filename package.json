@@ -95,7 +95,7 @@
     "sass": "1.98.0",
     "stylelint": "16.26.1",
     "stylelint-config-concentric-order": "5.5.0",
-    "stylelint-config-standard-scss": "16.0.0",
+    "stylelint-config-standard-scss": "17.0.0",
     "tikuidoc-tikui": "9.0.1",
     "typescript": "5.9.3",
     "typescript-eslint": "8.58.0",

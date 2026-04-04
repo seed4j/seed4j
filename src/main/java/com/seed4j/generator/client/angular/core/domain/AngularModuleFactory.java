@@ -54,7 +54,6 @@ public class AngularModuleFactory {
         .addDependency(packageName("@angular/router"), ANGULAR, ANGULAR_CORE_PACKAGE)
         .addDependency(packageName("rxjs"), ANGULAR)
         .addDependency(packageName("tslib"), ANGULAR)
-        .addDependency(packageName("zone.js"), ANGULAR)
         .addDevDependency(packageName("@typescript-eslint/eslint-plugin"), COMMON)
         .addDevDependency(packageName("@typescript-eslint/parser"), COMMON)
         .addDevDependency(packageName("eslint"), COMMON)

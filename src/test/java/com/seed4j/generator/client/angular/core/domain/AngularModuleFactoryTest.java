@@ -73,7 +73,6 @@ class AngularModuleFactoryTest {
       .containing(nodeScript("watch:test", "ng test --watch"))
       .containing(nodeScript("test:coverage", "ng test --coverage"))
       .containing(nodeScript("lint", "eslint ."))
-      .containing("  \"jestSonar\": {\n    \"reportPath\": \"target/test-results\",\n    \"reportFile\": \"TESTS-results-sonar.xml\"\n  }")
       .and()
       .hasFile(".gitignore")
       .containing(".angular/")
@@ -94,7 +93,7 @@ class AngularModuleFactoryTest {
       .and()
       .hasPrefixedFiles(
         "",
-        "jest.conf.mjs",
+        "vitest.config.ts",
         "angular.json",
         "tsconfig.json",
         "tsconfig.app.json",

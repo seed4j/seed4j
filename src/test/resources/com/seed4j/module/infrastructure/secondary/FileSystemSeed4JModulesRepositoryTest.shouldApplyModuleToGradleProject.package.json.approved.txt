@@ -5,11 +5,6 @@
   "description": "Seed4J Project",
   "license": "UNLICENSED",
   "packageManager": "{{ nodePackageManagerPackage }}@{{ nodePackageManagerVersion }}",
-  "jestSonar": {
-    "reportPath": "build/test-results",
-    "reportFile": "TESTS-results-sonar.xml"
-  },
-
   "engines": {
     "node": ">={{ nodeMajorVersion }}"
   },

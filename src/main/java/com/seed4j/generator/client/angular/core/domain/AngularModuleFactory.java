@@ -1,11 +1,8 @@
 package com.seed4j.generator.client.angular.core.domain;
 
-import static com.seed4j.module.domain.Seed4JModule.LINE_BREAK;
 import static com.seed4j.module.domain.Seed4JModule.from;
-import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.packageName;
-import static com.seed4j.module.domain.Seed4JModule.path;
 import static com.seed4j.module.domain.Seed4JModule.preCommitCommands;
 import static com.seed4j.module.domain.Seed4JModule.runScriptCommandWith;
 import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
@@ -15,7 +12,6 @@ import static com.seed4j.module.domain.Seed4JModule.to;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.ANGULAR;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 
-import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
@@ -27,7 +23,6 @@ public class AngularModuleFactory {
 
   private static final Seed4JSource SOURCE = from("client/angular/core");
 
-  private static final String ENGINES_NEEDLE = "  \"engines\":";
   private static final PackageName ANGULAR_CORE_PACKAGE = packageName("@angular/core");
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
@@ -59,23 +54,20 @@ public class AngularModuleFactory {
         .addDependency(packageName("@angular/router"), ANGULAR, ANGULAR_CORE_PACKAGE)
         .addDependency(packageName("rxjs"), ANGULAR)
         .addDependency(packageName("tslib"), ANGULAR)
-        .addDependency(packageName("zone.js"), ANGULAR)
         .addDevDependency(packageName("@typescript-eslint/eslint-plugin"), COMMON)
         .addDevDependency(packageName("@typescript-eslint/parser"), COMMON)
         .addDevDependency(packageName("eslint"), COMMON)
-        .addDevDependency(packageName("@angular-builders/jest"), ANGULAR)
         .addDevDependency(packageName("@angular/build"), ANGULAR)
         .addDevDependency(packageName("@angular/cli"), ANGULAR)
         .addDevDependency(packageName("@angular/compiler-cli"), ANGULAR, ANGULAR_CORE_PACKAGE)
         .addDevDependency(packageName("@types/node"), COMMON)
-        .addDevDependency(packageName("@types/jest"), COMMON)
         .addDevDependency(packageName("angular-eslint"), ANGULAR)
         .addDevDependency(packageName("globals"), COMMON)
-        .addDevDependency(packageName("jest"), COMMON)
-        .addDevDependency(packageName("jest-environment-jsdom"), ANGULAR)
-        .addDevDependency(packageName("ts-jest"), COMMON)
-        .addDevDependency(packageName("jest-preset-angular"), ANGULAR)
-        .addDevDependency(packageName("jest-sonar-reporter"), ANGULAR)
+        .addDevDependency(packageName("vite-tsconfig-paths"), COMMON)
+        .addDevDependency(packageName("vitest"), COMMON)
+        .addDevDependency(packageName("vitest-sonar-reporter"), COMMON)
+        .addDevDependency(packageName("@vitest/coverage-istanbul"), COMMON)
+        .addDevDependency(packageName("jsdom"), COMMON)
         .addDevDependency(packageName("typescript"), ANGULAR)
         .addDevDependency(packageName("typescript-eslint"), COMMON)
         .addDevDependency(packageName("npm-run-all2"), COMMON)
@@ -102,7 +94,7 @@ public class AngularModuleFactory {
         .batch(SOURCE, to("."))
           .addTemplate("eslint.config.mjs")
           .addTemplate("proxy.conf.json")
-          .addTemplate("jest.conf.mjs")
+          .addTemplate("vitest.config.ts")
           .addTemplate("tsconfig.spec.json")
           .and()
         .batch(SOURCE.file("src/main/webapp/app"), to("src/main/webapp/app"))
@@ -121,36 +113,14 @@ public class AngularModuleFactory {
           .addTemplate("environment.local.ts")
           .addTemplate("environment.local.spec.ts")
           .addTemplate("environment.ts")
-          .addTemplate("environment.spec.ts")
           .and()
         .batch(SOURCE.file("src/main/webapp"), to("src/main/webapp"))
           .addTemplate("index.html")
           .addTemplate("styles.css")
           .addTemplate("main.ts")
           .and()
-        .and()
-      .mandatoryReplacements()
-        .in(path("package.json"))
-          .add(lineBeforeText(ENGINES_NEEDLE), jestSonar(properties.indentation()))
-        .and()
       .and()
       .build();
     // @formatter:on
-  }
-
-  private static String jestSonar(Indentation indentation) {
-    return new StringBuilder()
-      .append(indentation.spaces())
-      .append("\"jestSonar\": {")
-      .append(LINE_BREAK)
-      .append(indentation.times(2))
-      .append("\"reportPath\": \"{{projectBuildDirectory}}/test-results\",")
-      .append(LINE_BREAK)
-      .append(indentation.times(2))
-      .append("\"reportFile\": \"TESTS-results-sonar.xml\"")
-      .append(LINE_BREAK)
-      .append(indentation.spaces())
-      .append("},")
-      .toString();
   }
 }

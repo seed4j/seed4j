@@ -71,7 +71,7 @@ jobs:
           echo "artifact_asset_path=${ARTIFACT_PATHNAME}" >> $GITHUB_OUTPUT
           echo "artifact_version=${ARTIFACT_VERSION}" >> $GITHUB_OUTPUT
       - name: 'Release: publish release drafter'
-        uses: release-drafter/release-drafter@v6
+        uses: release-drafter/release-drafter@v7
         id: release-drafter-final
         with:
           publish: true

@@ -82,7 +82,7 @@ public class AngularI18nModuleFactory {
           .and()
         .in(path(INDEX_CLIENT + "app/app.spec.ts"))
           .add(fileStart(), "import { getTranslocoModule } from './transloco-testing-module';\n")
-          .add(regex("(\\s+)(providers: \\[provideRouter\\(\\[\\]\\), \\{ provide: ComponentFixtureAutoDetect, useValue: true \\}\\],)"), "$1imports: [getTranslocoModule()],\n$1$2")
+          .add(regex("(imports: \\[.*)(\\],)"), "$1, getTranslocoModule()$2")
           .and()
         .and()
       .build();

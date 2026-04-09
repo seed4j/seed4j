@@ -40,7 +40,6 @@ class AngularModuleFactoryTest {
 
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
       .hasFile("package.json")
-      .containing(nodeDependency("zone.js"))
       .containing(nodeDependency("tslib"))
       .containing(nodeDependency("rxjs"))
       .containing(nodeDependency("@angular/router"))

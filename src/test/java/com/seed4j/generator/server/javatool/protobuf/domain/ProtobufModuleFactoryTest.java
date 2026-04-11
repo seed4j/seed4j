@@ -1,6 +1,10 @@
 package com.seed4j.generator.server.javatool.protobuf.domain;
 
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.gradleBuildFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.gradleLibsVersionFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.lintStagedConfigFileWithPrettier;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
@@ -73,11 +77,12 @@ class ProtobufModuleFactoryTest {
                       </execution>
                     </executions>
                     <configuration>
-                      <protocVersion>${protobuf.version}</protocVersion>
+                      <protoc>${protobuf.version}</protoc>
                       <sourceDirectories>
                         <sourceDirectory>src/main/proto</sourceDirectory>
                       </sourceDirectories>
                       <failOnMissingSources>false</failOnMissingSources>
+                      <ignoreProjectDependencies>true</ignoreProjectDependencies>
                     </configuration>
                   </plugin>
           """

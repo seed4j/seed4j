@@ -94,11 +94,12 @@ public class ProtobufModuleFactory {
       .versionSlug("protobuf-maven-plugin")
       .configuration(
         """
-        <protocVersion>${protobuf.version}</protocVersion>
+        <protoc>${protobuf.version}</protoc>
         <sourceDirectories>
           <sourceDirectory>src/main/proto</sourceDirectory>
         </sourceDirectories>
         <failOnMissingSources>false</failOnMissingSources>
+        <ignoreProjectDependencies>true</ignoreProjectDependencies>
         """
       )
       .addExecution(pluginExecution().goals("generate"))

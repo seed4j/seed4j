@@ -19,9 +19,8 @@ describe('Health', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting()],
-    })
-      .overrideTemplate(Health, '')
-      .compileComponents();
+    }).compileComponents();
+
     fixture = TestBed.createComponent(Health);
     await fixture.whenStable();
     comp = fixture.componentInstance;

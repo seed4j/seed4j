@@ -20,6 +20,7 @@ describe('Auth Interceptor', () => {
 
   afterEach(() => {
     httpMock.verify();
+    jest.restoreAllMocks();
   });
 
   describe('intercept', () => {
@@ -30,7 +31,16 @@ describe('Auth Interceptor', () => {
       service.login({ username: 'John', password: '123' }).subscribe();
 
       const httpReq = httpMock.expectOne('api/authenticate');
-      expect(httpReq.request.headers.has('Authorization')).toBe(true);
+      expect(httpReq.request.headers.get('Authorization')).toBe(`Bearer ${token}`);
+    });
+
+    it('should skip authorization header when missing in localStorageService', () => {
+      Storage.prototype.getItem = jest.fn(() => null);
+
+      service.login({ username: 'John', password: '123' }).subscribe();
+
+      const httpReq = httpMock.expectOne('api/authenticate');
+      expect(httpReq.request.headers.has('Authorization')).toBe(false);
     });
   });
 });

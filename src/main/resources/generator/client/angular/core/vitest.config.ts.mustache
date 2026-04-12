@@ -15,15 +15,12 @@ export default defineConfig({
     maxWorkers: 2,
     environment: 'jsdom',
     cache: false,
-    // include: ['src/test/webapp/unit/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
-    exclude: [...configDefaults.exclude, "**/webapp/{e2e,component}/**"],
     coverage: {
       thresholds: {
         perFile: true,
         autoUpdate: true,
         100: true,
       },
-      // include: ['src/main/webapp/**/*.ts?(x)'],
       exclude: [...configDefaults.exclude, "*.html"],
       provider: 'istanbul',
       reportsDirectory: '{{projectBuildDirectory}}/test-results/',

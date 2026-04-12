@@ -81,7 +81,7 @@
         },
         "test": {
           "builder": "@angular/build:unit-test",
-          "options": { "runnerConfig": "vitest.config.ts" }
+          "options": { "runnerConfig": "vitest.config.ts", "exclude": ["**/webapp/{e2e,component}/**"] }
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",

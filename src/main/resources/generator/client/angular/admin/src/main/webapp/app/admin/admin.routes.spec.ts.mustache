@@ -17,8 +17,9 @@ describe('AdminRoutes', () => {
     expect(routes).toBeDefined();
   });
 
-  it('should navigate on health endpoint', () => {
-    router.navigateByUrl('/health');
+  it('should navigate on health endpoint', async () => {
+    const result = await router.navigateByUrl('/health');
+    expect(result).toBe(true);
   });
   // seed4j-needle-angular-menu
 });

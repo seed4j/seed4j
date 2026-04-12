@@ -40,7 +40,6 @@ class AngularModuleFactoryTest {
 
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
       .hasFile("package.json")
-      .containing(nodeDependency("zone.js"))
       .containing(nodeDependency("tslib"))
       .containing(nodeDependency("rxjs"))
       .containing(nodeDependency("@angular/router"))
@@ -73,7 +72,6 @@ class AngularModuleFactoryTest {
       .containing(nodeScript("watch:test", "ng test --watch"))
       .containing(nodeScript("test:coverage", "ng test --coverage"))
       .containing(nodeScript("lint", "eslint ."))
-      .containing("  \"jestSonar\": {\n    \"reportPath\": \"target/test-results\",\n    \"reportFile\": \"TESTS-results-sonar.xml\"\n  }")
       .and()
       .hasFile(".gitignore")
       .containing(".angular/")
@@ -94,7 +92,7 @@ class AngularModuleFactoryTest {
       .and()
       .hasPrefixedFiles(
         "",
-        "jest.conf.mjs",
+        "vitest.config.ts",
         "angular.json",
         "tsconfig.json",
         "tsconfig.app.json",
@@ -104,13 +102,7 @@ class AngularModuleFactoryTest {
       )
       .hasPrefixedFiles("src/main/webapp/app", "app.css", "app.ts", "app.html", "app.spec.ts", "app.route.spec.ts", "app.route.ts")
       .hasPrefixedFiles("src/main/webapp/content/images", "seed4j_logo-name.png", "AngularLogo.svg")
-      .hasPrefixedFiles(
-        "src/main/webapp/environments",
-        "environment.ts",
-        "environment.local.ts",
-        "environment.local.spec.ts",
-        "environment.spec.ts"
-      )
+      .hasPrefixedFiles("src/main/webapp/environments", "environment.ts", "environment.local.ts", "environment.local.spec.ts")
       .hasPrefixedFiles("src/main/webapp", "index.html", "main.ts", "styles.css");
     verify(nodeLazyPackagesInstaller).runInstallIn(properties.projectFolder(), properties.nodePackageManager());
   }

@@ -31,14 +31,12 @@ describe('Login Component', () => {
         {
           provide: LoginService,
           useValue: {
-            login: jest.fn(() => of({})),
-            logout: jest.fn(() => of({})),
+            login: vi.fn(() => of({})),
+            logout: vi.fn(() => of({})),
           },
         },
       ],
-    })
-      .overrideTemplate(Login, '')
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(async () => {
@@ -52,7 +50,7 @@ describe('Login Component', () => {
   describe('ngOnInit', () => {
     it('should check authentication', () => {
       const authenticationState = new Subject<Account | null>();
-      mockAccountService.getAuthenticationState = jest.fn(() => authenticationState.asObservable());
+      mockAccountService.getAuthenticationState = vi.fn(() => authenticationState.asObservable());
 
       comp.ngOnInit();
 
@@ -87,13 +85,16 @@ describe('Login Component', () => {
       expect(mockLoginService.login).toHaveBeenCalledWith(credentials);
     });
 
-    it('should not authenticate the user', () => {
-      const err = { status: 403 };
-      jest.spyOn(mockLoginService, 'login').mockReturnValue(throwError(() => err));
+    it.each([
+      { status: 403, expected: 'Authentication failed' },
+      { status: 500, expected: '' },
+    ])('should not authenticate the user', ({ status, expected }) => {
+      const err = { status };
+      vi.spyOn(mockLoginService, 'login').mockReturnValue(throwError(() => err));
 
       comp.login();
 
-      expect(comp.errorMessage()).toBe('Authentication failed');
+      expect(comp.errorMessage()).toBe(expected);
     });
   });
 

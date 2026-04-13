@@ -249,7 +249,7 @@ class JpaModuleFactoryTest {
                   <annotationProcessorPaths>
                     <path>
                       <groupId>org.hibernate.orm</groupId>
-                      <artifactId>hibernate-jpamodelgen</artifactId>
+                      <artifactId>hibernate-processor</artifactId>
                     </path>
                   </annotationProcessorPaths>
         """

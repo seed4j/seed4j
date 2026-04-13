@@ -98,7 +98,7 @@ public class JpaModuleFactory {
     // @formatter:off
     return moduleBuilder(properties)
       .javaCompiler()
-        .addAnnotationProcessor(javaAnnotationProcessorDependency().groupId(ORG_HIBERNATE).artifactId("hibernate-jpamodelgen").build())
+        .addAnnotationProcessor(javaAnnotationProcessorDependency().groupId(ORG_HIBERNATE).artifactId("hibernate-processor").build())
         .and()
       .build();
     // @formatter:on

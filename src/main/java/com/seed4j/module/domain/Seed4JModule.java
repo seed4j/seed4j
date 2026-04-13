@@ -42,6 +42,8 @@ import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency
 import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency.JavaAnnotationProcessorDependencyGroupIdBuilder;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency.JavaDependencyGroupIdBuilder;
+import com.seed4j.module.domain.javadependency.Seed4JModuleJavaCompiler;
+import com.seed4j.module.domain.javadependency.Seed4JModuleJavaCompiler.Seed4JModuleJavaCompilerBuilder;
 import com.seed4j.module.domain.javadependency.Seed4JModuleJavaDependencies;
 import com.seed4j.module.domain.javadependency.Seed4JModuleJavaDependencies.Seed4JModuleJavaDependenciesBuilder;
 import com.seed4j.module.domain.javaproperties.Comment;
@@ -120,6 +122,7 @@ public final class Seed4JModule {
   private final Seed4JModuleStartupCommands startupCommands;
   private final Seed4JModuleContext context;
   private final Seed4JModuleJavaDependencies javaDependencies;
+  private final Seed4JModuleJavaCompiler javaCompiler;
   private final Seed4JModuleBuildProperties javaBuildProperties;
   private final Seed4JModuleJavaBuildProfiles javaBuildProfiles;
   private final Seed4JModuleMavenPlugins mavenPlugins;
@@ -144,6 +147,7 @@ public final class Seed4JModule {
     startupCommands = builder.startupCommands.build();
     context = builder.context.build();
     javaDependencies = builder.javaDependencies.build();
+    javaCompiler = builder.javaCompiler.build();
     javaBuildProperties = builder.javaBuildProperties.build();
     javaBuildProfiles = builder.javaBuildProfiles.build();
     mavenPlugins = builder.mavenPlugins.build();
@@ -170,6 +174,7 @@ public final class Seed4JModule {
     startupCommands = source.startupCommands;
     context = source.context;
     javaDependencies = source.javaDependencies;
+    javaCompiler = source.javaCompiler;
     javaBuildProperties = source.javaBuildProperties;
     javaBuildProfiles = source.javaBuildProfiles;
     mavenPlugins = source.mavenPlugins;
@@ -496,6 +501,10 @@ public final class Seed4JModule {
     return javaDependencies;
   }
 
+  public Seed4JModuleJavaCompiler javaCompiler() {
+    return javaCompiler;
+  }
+
   public Seed4JModuleBuildProperties javaBuildProperties() {
     return javaBuildProperties;
   }
@@ -567,6 +576,7 @@ public final class Seed4JModule {
     );
     private final Seed4JModuleStartupCommandsBuilder startupCommands = Seed4JModuleStartupCommands.builder(this);
     private final Seed4JModuleJavaDependenciesBuilder<Seed4JModuleBuilder> javaDependencies = Seed4JModuleJavaDependencies.builder(this);
+    private final Seed4JModuleJavaCompilerBuilder<Seed4JModuleBuilder> javaCompiler = Seed4JModuleJavaCompiler.builder(this);
     private final Seed4JModuleBuildPropertiesBuilder<Seed4JModuleBuilder> javaBuildProperties = Seed4JModuleBuildProperties.builder(this);
     private final Seed4JModuleJavaBuildProfilesBuilder javaBuildProfiles = Seed4JModuleJavaBuildProfiles.builder(this);
     private final Seed4JModuleMavenPluginsBuilder<Seed4JModuleBuilder> mavenPlugins = Seed4JModuleMavenPlugins.builder(this);
@@ -663,6 +673,10 @@ public final class Seed4JModule {
 
     public Seed4JModuleJavaDependenciesBuilder<Seed4JModuleBuilder> javaDependencies() {
       return javaDependencies;
+    }
+
+    public Seed4JModuleJavaCompilerBuilder<Seed4JModuleBuilder> javaCompiler() {
+      return javaCompiler;
     }
 
     public Seed4JModuleBuildPropertiesBuilder<Seed4JModuleBuilder> javaBuildProperties() {

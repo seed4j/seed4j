@@ -8,7 +8,6 @@ import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
-import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.RemoveJavaDependencyManagement;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.shared.error.domain.Assert;
@@ -24,16 +23,12 @@ public final class Seed4JModuleJavaDependencies {
   private final Collection<JavaDependencyManagement> dependenciesManagement;
   private final Collection<DependencyId> dependenciesManagementToRemove;
   private final Collection<DirectJavaDependency> dependencies;
-  private final Collection<DependencyId> annotationProcessingDependenciesToRemove;
-  private final Collection<JavaAnnotationProcessorDependency> annotationProcessingDependencies;
 
   private Seed4JModuleJavaDependencies(Seed4JModuleJavaDependenciesBuilder<?> builder) {
     dependenciesToRemove = builder.dependenciesToRemove;
     dependenciesManagement = builder.dependenciesManagement;
     dependenciesManagementToRemove = builder.dependenciesManagementToRemove;
     dependencies = builder.dependencies;
-    annotationProcessingDependenciesToRemove = builder.annotationProcessingDependenciesToRemove;
-    annotationProcessingDependencies = builder.annotationProcessingDependencies;
   }
 
   public static <M> Seed4JModuleJavaDependenciesBuilder<M> builder(M module) {
@@ -65,9 +60,7 @@ public final class Seed4JModuleJavaDependencies {
       dependenciesToRemoveCommands(buildProfile),
       dependenciesManagementChanges(versions, projectDependencies, buildProfile),
       dependenciesManagementToRemoveCommands(buildProfile),
-      dependenciesChanges(versions, projectDependencies, buildProfile),
-      annotationProcessingDependenciesToRemoveCommands(),
-      annotationProcessingDependenciesChanges(versions, projectDependencies, buildProfile)
+      dependenciesChanges(versions, projectDependencies, buildProfile)
     )
       .flatMap(Function.identity())
       .reduce(JavaBuildCommands.EMPTY, JavaBuildCommands::merge);
@@ -107,22 +100,6 @@ public final class Seed4JModuleJavaDependencies {
     return dependencies.stream().map(dependency -> dependency.changeCommands(currentVersions, projectDependencies, buildProfile));
   }
 
-  private Stream<JavaBuildCommands> annotationProcessingDependenciesChanges(
-    JavaDependenciesVersions currentVersions,
-    ProjectJavaDependencies projectDependencies,
-    Optional<BuildProfileId> buildProfile
-  ) {
-    return annotationProcessingDependencies
-      .stream()
-      .map(dependency -> dependency.changeCommands(currentVersions, projectDependencies, buildProfile));
-  }
-
-  private Stream<JavaBuildCommands> annotationProcessingDependenciesToRemoveCommands() {
-    return Stream.of(
-      new JavaBuildCommands(annotationProcessingDependenciesToRemove.stream().map(RemoveJavaAnnotationProcessor::new).toList())
-    );
-  }
-
   public static final class Seed4JModuleJavaDependenciesBuilder<T> {
 
     private static final String DEPENDENCY = "dependency";
@@ -132,8 +109,6 @@ public final class Seed4JModuleJavaDependencies {
     private final Collection<DirectJavaDependency> dependencies = new ArrayList<>();
     private final Collection<JavaDependencyManagement> dependenciesManagement = new ArrayList<>();
     private final Collection<DependencyId> dependenciesManagementToRemove = new ArrayList<>();
-    private final Collection<JavaAnnotationProcessorDependency> annotationProcessingDependencies = new ArrayList<>();
-    private final Collection<DependencyId> annotationProcessingDependenciesToRemove = new ArrayList<>();
 
     private Seed4JModuleJavaDependenciesBuilder(T parentModuleBuilder) {
       Assert.notNull("module", parentModuleBuilder);
@@ -198,22 +173,6 @@ public final class Seed4JModuleJavaDependencies {
       Assert.notNull(DEPENDENCY, dependency);
 
       dependenciesManagementToRemove.add(dependency);
-
-      return this;
-    }
-
-    public Seed4JModuleJavaDependenciesBuilder<T> addAnnotationProcessorDependency(JavaAnnotationProcessorDependency dependency) {
-      Assert.notNull(DEPENDENCY, dependency);
-
-      annotationProcessingDependencies.add(dependency);
-
-      return this;
-    }
-
-    public Seed4JModuleJavaDependenciesBuilder<T> removeAnnotationProcessorDependency(DependencyId dependency) {
-      Assert.notNull(DEPENDENCY, dependency);
-
-      annotationProcessingDependenciesToRemove.add(dependency);
 
       return this;
     }

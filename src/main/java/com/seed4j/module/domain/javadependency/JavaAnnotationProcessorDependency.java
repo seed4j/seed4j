@@ -8,7 +8,6 @@ import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
-import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
@@ -50,15 +49,11 @@ public final class JavaAnnotationProcessorDependency {
     return new JavaAnnotationProcessorDependencyBuilder();
   }
 
-  public JavaBuildCommands changeCommands(
-    JavaDependenciesVersions currentVersions,
-    ProjectJavaDependencies projectDependencies,
-    Optional<BuildProfileId> buildProfile
-  ) {
+  public JavaBuildCommands changeCommands(JavaDependenciesVersions currentVersions, ProjectJavaDependencies projectDependencies) {
     Assert.notNull("currentVersion", currentVersions);
     Assert.notNull("projectDependencies", projectDependencies);
 
-    Collection<JavaBuildCommand> depCommands = dependencyCommands(projectDependencies.annotationProcessor(id), buildProfile);
+    Collection<JavaBuildCommand> depCommands = dependencyCommands(projectDependencies.annotationProcessor(id));
     Collection<JavaBuildCommand> verCommands = versionCommands(currentVersions, projectDependencies, depCommands);
 
     return new JavaBuildCommands(Stream.of(depCommands, verCommands).flatMap(Collection::stream).toList());
@@ -119,7 +114,7 @@ public final class JavaAnnotationProcessorDependency {
     return SetVersion::new;
   }
 
-  Collection<JavaBuildCommand> dependencyCommands(Optional<JavaDependency> projectDependency, Optional<BuildProfileId> buildProfile) {
+  private Collection<JavaBuildCommand> dependencyCommands(Optional<JavaDependency> projectDependency) {
     return projectDependency.map(toDependenciesCommands()).orElseGet(() -> List.of(new AddJavaAnnotationProcessor(this)));
   }
 

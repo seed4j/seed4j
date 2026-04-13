@@ -61,7 +61,7 @@ public class JacocoModuleFactory {
         .pluginManagement(mavenJacocoWithMinCoverageCheckPluginManagement(properties))
         .and()
       .gradlePlugins()
-        .plugin(gradleJacocoWithMinCoverageCheckPlugin())
+        .plugin(gradleJacocoWithMinCoverageCheckPlugin(properties))
         .and()
       .gradleConfigurations()
         .addTasksTestInstruction(
@@ -186,7 +186,8 @@ public class JacocoModuleFactory {
       .build();
   }
 
-  private static GradleMainBuildPlugin gradleJacocoWithMinCoverageCheckPlugin() {
+  private static GradleMainBuildPlugin gradleJacocoWithMinCoverageCheckPlugin(Seed4JModuleProperties properties) {
+    String basePackagePath = properties.basePackage().get().replace(".", "/");
     return gradleCorePlugin()
       .id(JACOCO)
       .toolVersionSlug(JACOCO)
@@ -202,11 +203,23 @@ public class JacocoModuleFactory {
             xml.required.set(true)
             html.required.set(true)
           }
+          classDirectories.setFrom(
+            fileTree(layout.buildDirectory.dir("classes")) {
+              include("%s/**")
+              exclude("%s/**/infrastructure/secondary/**/*Entity_*")
+            }
+          )
           executionData.setFrom(fileTree(layout.buildDirectory).include("**/jacoco/test.exec", "**/jacoco/integrationTest.exec"))
         }
 
         tasks.jacocoTestCoverageVerification {
           dependsOn("jacocoTestReport")
+          classDirectories.setFrom(
+            fileTree(layout.buildDirectory.dir("classes")) {
+              include("%s/**")
+              exclude("%s/**/infrastructure/secondary/**/*Entity_*")
+            }
+          )
           violationRules {
 
               rule {
@@ -227,7 +240,7 @@ public class JacocoModuleFactory {
           }
           executionData.setFrom(fileTree(layout.buildDirectory).include("**/jacoco/test.exec", "**/jacoco/integrationTest.exec"))
         }
-        """
+        """.formatted(basePackagePath, basePackagePath, basePackagePath, basePackagePath)
       )
       .build();
   }

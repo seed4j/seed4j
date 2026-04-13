@@ -202,7 +202,9 @@ class JacocoModuleFactoryTest {
 
   @Test
   void shouldBuildJacocoWithMinCoverageCheckModule() {
-    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .basePackage("com.seed4j.example")
+      .build();
 
     Seed4JModule module = factory.buildJacocoWithMinCoverageCheckModule(properties);
 
@@ -226,11 +228,23 @@ class JacocoModuleFactoryTest {
             xml.required.set(true)
             html.required.set(true)
           }
+          classDirectories.setFrom(
+            fileTree(layout.buildDirectory.dir("classes")) {
+              include("com/seed4j/example/**")
+              exclude("com/seed4j/example/**/infrastructure/secondary/**/*Entity_*")
+            }
+          )
           executionData.setFrom(fileTree(layout.buildDirectory).include("**/jacoco/test.exec", "**/jacoco/integrationTest.exec"))
         }
 
         tasks.jacocoTestCoverageVerification {
           dependsOn("jacocoTestReport")
+          classDirectories.setFrom(
+            fileTree(layout.buildDirectory.dir("classes")) {
+              include("com/seed4j/example/**")
+              exclude("com/seed4j/example/**/infrastructure/secondary/**/*Entity_*")
+            }
+          )
           violationRules {
 
               rule {

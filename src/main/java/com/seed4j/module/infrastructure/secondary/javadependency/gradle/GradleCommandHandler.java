@@ -372,6 +372,14 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
       command.buildProfile().isPresent(),
       gradleDependencyScope(command.dependency())
     );
+    if (command.dependency().scope() == JavaDependencyScope.IMPORT && command.buildProfile().isEmpty()) {
+      addDependencyToBuildGradle(
+        command.dependency(),
+        buildGradleFile(Optional.empty()),
+        false,
+        GradleDependencyScope.ANNOTATION_PROCESSING
+      );
+    }
   }
 
   @Override

@@ -10,6 +10,7 @@ import com.seed4j.module.domain.gradleplugin.GradlePluginSlug;
 import com.seed4j.module.domain.javabuild.DependencySlug;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.DependencyId;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
@@ -72,6 +73,20 @@ public class VersionsCatalog {
   }
 
   public void addLibrary(JavaDependency dependency) {
+    Config libraryConfig = Config.inMemory();
+    libraryConfig.set("group", dependency.id().groupId().get());
+    libraryConfig.set("name", dependency.id().artifactId().get());
+    dependency.version().ifPresent(versionSlug -> libraryConfig.set(VERSION_REF, versionSlug.slug()));
+    String libraryEntryKey = libraryAlias(dependency);
+    tomlConfigFile.set(List.of(LIBRARIES_TOML_KEY, libraryEntryKey), libraryConfig);
+    save();
+  }
+
+  public static String libraryAlias(JavaAnnotationProcessorDependency dependency) {
+    return StringUtils.uncapitalize(dependency.id().artifactId().get());
+  }
+
+  public void addLibrary(JavaAnnotationProcessorDependency dependency) {
     Config libraryConfig = Config.inMemory();
     libraryConfig.set("group", dependency.id().groupId().get());
     libraryConfig.set("name", dependency.id().artifactId().get());

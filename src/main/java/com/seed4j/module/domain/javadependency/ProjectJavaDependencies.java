@@ -9,9 +9,9 @@ public final class ProjectJavaDependencies {
 
   public static final ProjectJavaDependencies EMPTY = builder()
     .versions(ProjectJavaDependenciesVersions.EMPTY)
-    .dependenciesManagements(JavaDependencies.EMPTY)
+    .dependenciesManagement(JavaDependencies.EMPTY)
     .dependencies(JavaDependencies.EMPTY)
-    .annotationProcessingDependencies(null);
+    .annotationProcessingDependencies(JavaDependencies.EMPTY);
 
   private final ProjectJavaDependenciesVersions versions;
   private final JavaDependencies dependenciesManagement;
@@ -27,6 +27,7 @@ public final class ProjectJavaDependencies {
     versions = builder.versions;
     dependenciesManagement = builder.dependenciesManagement;
     dependencies = builder.dependencies;
+    annotationProcessingDependencies = builder.annotationProcessingDependencies;
   }
 
   public Optional<JavaDependencyVersion> version(VersionSlug slug) {
@@ -91,14 +92,14 @@ public final class ProjectJavaDependencies {
     implements
       ProjectJavaDependenciesVersionsBuilder,
       ProjectJavaDependenciesDependenciesManagementBuilder,
-      ProjectJavaDependenciesDependenciesBuilder
- ,
-      ProjectJavaDependenciesAnnotationProcessingDependenciesBuilder {
+      ProjectJavaDependenciesDependenciesBuilder,
+      ProjectJavaDependenciesAnnotationProcessingDependenciesBuilder
+  {
 
     private @Nullable ProjectJavaDependenciesVersions versions;
     private @Nullable JavaDependencies dependenciesManagement;
     private @Nullable JavaDependencies dependencies;
-    private JavaDependencies annotationProcessingDependencies;
+    private @Nullable JavaDependencies annotationProcessingDependencies;
 
     @Override
     public ProjectJavaDependenciesDependenciesManagementBuilder versions(ProjectJavaDependenciesVersions versions) {

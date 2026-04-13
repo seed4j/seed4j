@@ -5,7 +5,7 @@ import static com.seed4j.TestFileUtils.tmpDirForTest;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dependencyId;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
-import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.javaAnnotationProcessorDependency;
 import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
 import static com.seed4j.module.domain.Seed4JModulesFixture.asciidoctorPlugin;
 import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleGradlePlugin;
@@ -948,7 +948,7 @@ class MavenCommandHandlerTest {
       MavenCommandHandler mavenCommandHandler = new MavenCommandHandler(Indentation.DEFAULT, pom);
       mavenCommandHandler.handle(new AddJavaAnnotationProcessor(googleAutoServiceAnnotationProcessor()));
       mavenCommandHandler.handle(
-        new AddJavaAnnotationProcessor(javaDependency().groupId("org.hibernate.orm").artifactId("auto-service").build())
+        new AddJavaAnnotationProcessor(javaAnnotationProcessorDependency().groupId("org.hibernate.orm").artifactId("auto-service").build())
       );
       mavenCommandHandler.handle(new AddJavaAnnotationProcessor(hibernateAnnotationProcessor()));
 

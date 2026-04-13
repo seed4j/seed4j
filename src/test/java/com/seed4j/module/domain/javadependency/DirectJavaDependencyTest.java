@@ -49,7 +49,7 @@ class DirectJavaDependencyTest {
       .versions(projectVersions())
       .dependenciesManagement(JavaDependencies.EMPTY)
       .dependencies(new JavaDependencies(List.of(defaultVersionDependency())))
-      .annotationProcessingDependencies(null);
+      .annotationProcessingDependencies(JavaDependencies.EMPTY);
 
     JavaBuildCommands commands = changes().projectDependencies(projectJavaDependencies).build();
 
@@ -62,7 +62,7 @@ class DirectJavaDependencyTest {
       .versions(projectVersions())
       .dependenciesManagement(JavaDependencies.EMPTY)
       .dependencies(new JavaDependencies(List.of(optionalSpringBootDependency())))
-      .annotationProcessingDependencies(null);
+      .annotationProcessingDependencies(JavaDependencies.EMPTY);
 
     JavaBuildCommands commands = changes().projectDependencies(projectJavaDependencies).build();
 
@@ -78,7 +78,7 @@ class DirectJavaDependencyTest {
       .versions(projectVersions())
       .dependenciesManagement(JavaDependencies.EMPTY)
       .dependencies(new JavaDependencies(List.of(defaultVersionDependency())))
-      .annotationProcessingDependencies(null);
+      .annotationProcessingDependencies(JavaDependencies.EMPTY);
 
     JavaBuildCommands commands = changes().dependency(optionalSpringBootDependency()).projectDependencies(projectJavaDependencies).build();
 
@@ -153,7 +153,7 @@ class DirectJavaDependencyTest {
       .versions(projectVersions())
       .dependenciesManagement(projectDependenciesManagement())
       .dependencies(noJunitVersionInCurrentProject())
-      .annotationProcessingDependencies(null);
+      .annotationProcessingDependencies(JavaDependencies.EMPTY);
   }
 
   private JavaDependencies noJunitVersionInCurrentProject() {
@@ -178,7 +178,7 @@ class DirectJavaDependencyTest {
       .versions(projectVersions())
       .dependenciesManagement(JavaDependencies.EMPTY)
       .dependencies(projectDependencies())
-      .annotationProcessingDependencies(null);
+      .annotationProcessingDependencies(JavaDependencies.EMPTY);
   }
 
   private ProjectJavaDependenciesVersions projectVersions() {

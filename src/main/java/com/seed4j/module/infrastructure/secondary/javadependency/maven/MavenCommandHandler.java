@@ -25,6 +25,7 @@ import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.DependencyId;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyClassifier;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
@@ -295,7 +296,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private void addAnnotationProcessorPathToCompilerConfiguration(
-    JavaDependency annotationProcessorDependency,
+    JavaAnnotationProcessorDependency annotationProcessorDependency,
     Xpp3Dom compilerConfiguration
   ) {
     Xpp3Dom annotationProcessorPaths = compilerConfiguration.getChild(ANNOTATION_PROCESSOR_PATHS_NODE);
@@ -306,7 +307,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     annotationProcessorPaths.addChild(toAnnotationProcessorPath(annotationProcessorDependency));
   }
 
-  private Xpp3Dom toAnnotationProcessorPath(JavaDependency annotationProcessorDependency) {
+  private Xpp3Dom toAnnotationProcessorPath(JavaAnnotationProcessorDependency annotationProcessorDependency) {
     Xpp3Dom path = new Xpp3Dom("path");
     Xpp3Dom groupId = new Xpp3Dom("groupId");
     groupId.setValue(annotationProcessorDependency.id().groupId().get());

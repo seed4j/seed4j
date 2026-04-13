@@ -43,6 +43,7 @@ import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
@@ -161,7 +162,40 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
     Assert.notNull(COMMAND, command);
 
     versionsCatalog.addLibrary(command.dependency());
-    addDependencyToBuildGradle(command.dependency(), buildGradleFile(Optional.empty()), false, GradleDependencyScope.ANNOTATION_PROCESSING);
+    addAnnotationProcessorToBuildGradle(command.dependency());
+  }
+
+  private void addAnnotationProcessorToBuildGradle(JavaAnnotationProcessorDependency dependency) {
+    String catalogRef = "libs.%s".formatted(applyVersionCatalogReferenceConvention(libraryAlias(dependency)));
+    StringBuilder dependencyDeclaration = new StringBuilder()
+      .append(indentation.times(1))
+      .append(GradleDependencyScope.ANNOTATION_PROCESSING.command())
+      .append("(")
+      .append(catalogRef)
+      .append(")");
+    if (!dependency.exclusions().isEmpty()) {
+      dependencyDeclaration.append(" {");
+      for (var exclusion : dependency.exclusions()) {
+        dependencyDeclaration.append(LINE_BREAK);
+        dependencyDeclaration
+          .append(indentation.times(2))
+          .append("exclude(group = \"%s\", module = \"%s\")".formatted(exclusion.groupId(), exclusion.artifactId()));
+      }
+      dependencyDeclaration.append(LINE_BREAK);
+      dependencyDeclaration.append(indentation.times(1)).append("}");
+    }
+    MandatoryReplacer replacer = new MandatoryReplacer(
+      new RegexNeedleBeforeReplacer(
+        (contentBeforeReplacement, newText) -> !contentBeforeReplacement.contains(newText),
+        GRADLE_ANNOTATION_PROCESSING_DEPENDENCY_NEEDLE
+      ),
+      dependencyDeclaration.toString()
+    );
+    fileReplacer.handle(
+      projectFolder,
+      ContentReplacers.of(new MandatoryFileReplacer(projectFolderRelativePathFrom(buildGradleFile(Optional.empty())), replacer)),
+      context
+    );
   }
 
   @Override

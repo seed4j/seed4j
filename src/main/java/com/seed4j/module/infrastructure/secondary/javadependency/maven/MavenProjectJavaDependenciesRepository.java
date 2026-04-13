@@ -3,6 +3,7 @@ package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.JavaDependencies;
 import com.seed4j.module.domain.javadependency.JavaDependency;
+import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependencies;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependenciesVersions;
@@ -130,7 +131,7 @@ public class MavenProjectJavaDependenciesRepository implements Seed4JProjectFold
       return JavaDependency.builder()
         .groupId(groupId)
         .artifactId(artifactId)
-        .versionSlug(version)
+        .versionSlug(VersionSlug.of(version).orElse(null))
         .scope(JavaDependencyScope.COMPILE)
         .build();
     };

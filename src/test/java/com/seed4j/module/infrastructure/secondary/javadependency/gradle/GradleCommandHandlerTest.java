@@ -7,6 +7,7 @@ import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.buildProfileId;
 import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaAnnotationProcessorDependency;
 import static com.seed4j.module.domain.Seed4JModule.javaDependency;
 import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleGradlePlugin;
 import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleGradleProfilePlugin;
@@ -57,6 +58,7 @@ import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
@@ -542,7 +544,7 @@ class GradleCommandHandlerTest {
 
     @Test
     void shouldAddAnnotationProcessorDependencyInBuildGradleFile() {
-      JavaDependency dependency = javaDependency()
+      JavaAnnotationProcessorDependency dependency = javaAnnotationProcessorDependency()
         .groupId("com.google.auto.service")
         .artifactId("auto-service")
         .versionSlug("auto-service")
@@ -818,7 +820,11 @@ class GradleCommandHandlerTest {
         files,
         fileReplacer
       );
-      gradleCommandHandler.handle(new AddJavaAnnotationProcessor(defaultVersionDependency()));
+      gradleCommandHandler.handle(
+        new AddJavaAnnotationProcessor(
+          javaAnnotationProcessorDependency().groupId("org.springframework.boot").artifactId("spring-boot-starter").build()
+        )
+      );
 
       gradleCommandHandler.handle(new RemoveJavaAnnotationProcessor(defaultVersionDependency().id()));
 
@@ -841,7 +847,11 @@ class GradleCommandHandlerTest {
         files,
         fileReplacer
       );
-      gradleCommandHandler.handle(new AddJavaAnnotationProcessor(defaultVersionDependency()));
+      gradleCommandHandler.handle(
+        new AddJavaAnnotationProcessor(
+          javaAnnotationProcessorDependency().groupId("org.springframework.boot").artifactId("spring-boot-starter").build()
+        )
+      );
 
       gradleCommandHandler.handle(new RemoveJavaAnnotationProcessor(defaultVersionDependency().id()));
 

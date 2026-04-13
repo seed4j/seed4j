@@ -3,9 +3,10 @@ package com.seed4j.module.domain.javadependency;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
-import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
-import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
+import com.seed4j.module.domain.javabuild.command.AddJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
+import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.shared.collection.domain.Seed4JCollections;
@@ -16,8 +17,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Stream;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.jspecify.annotations.Nullable;
 
 public final class JavaAnnotationProcessorDependency {
 
@@ -32,6 +35,9 @@ public final class JavaAnnotationProcessorDependency {
   }
 
   private DependencyId buildId(JavaAnnotationProcessorDependencyBuilder builder) {
+    Assert.notNull("groupId", builder.groupId);
+    Assert.notNull("artifactId", builder.artifactId);
+
     return DependencyId.builder()
       .groupId(builder.groupId)
       .artifactId(builder.artifactId)
@@ -42,6 +48,20 @@ public final class JavaAnnotationProcessorDependency {
 
   public static JavaAnnotationProcessorDependencyGroupIdBuilder builder() {
     return new JavaAnnotationProcessorDependencyBuilder();
+  }
+
+  public JavaBuildCommands changeCommands(
+    JavaDependenciesVersions currentVersions,
+    ProjectJavaDependencies projectDependencies,
+    Optional<BuildProfileId> buildProfile
+  ) {
+    Assert.notNull("currentVersion", currentVersions);
+    Assert.notNull("projectDependencies", projectDependencies);
+
+    Collection<JavaBuildCommand> depCommands = dependencyCommands(projectDependencies.annotationProcessor(id), buildProfile);
+    Collection<JavaBuildCommand> verCommands = versionCommands(currentVersions, projectDependencies, depCommands);
+
+    return new JavaBuildCommands(Stream.of(depCommands, verCommands).flatMap(Collection::stream).toList());
   }
 
   Collection<JavaBuildCommand> versionCommands(
@@ -92,55 +112,41 @@ public final class JavaAnnotationProcessorDependency {
   }
 
   private static boolean hasNoDependencyToAdd(Collection<JavaBuildCommand> dependencyCommands) {
-    return dependencyCommands
-      .stream()
-      .noneMatch(
-        dependencyCommand ->
-          dependencyCommand instanceof AddDirectJavaDependency || dependencyCommand instanceof AddJavaDependencyManagement
-      );
+    return dependencyCommands.stream().noneMatch(dependencyCommand -> dependencyCommand instanceof AddJavaAnnotationProcessor);
   }
 
   private Function<JavaDependencyVersion, JavaBuildCommand> toSetVersionCommand() {
     return SetVersion::new;
   }
 
-  Collection<JavaBuildCommand> dependencyCommands(
-    DependenciesCommandsFactory commands,
-    Optional<JavaAnnotationProcessorDependency> projectDependency,
-    Optional<BuildProfileId> buildProfile
-  ) {
-    return projectDependency
-      .map(toDependenciesCommands(commands, buildProfile))
-      .orElseGet(() -> List.of(commands.addDependency(this, buildProfile)));
+  Collection<JavaBuildCommand> dependencyCommands(Optional<JavaDependency> projectDependency, Optional<BuildProfileId> buildProfile) {
+    return projectDependency.map(toDependenciesCommands()).orElseGet(() -> List.of(new AddJavaAnnotationProcessor(this)));
   }
 
-  private Function<JavaAnnotationProcessorDependency, Collection<JavaBuildCommand>> toDependenciesCommands(
-    DependenciesCommandsFactory commands,
-    Optional<BuildProfileId> buildProfile
-  ) {
+  private Function<JavaDependency, Collection<JavaBuildCommand>> toDependenciesCommands() {
     return projectDependency -> {
-      JavaAnnotationProcessorDependency resultingDependency = merge(projectDependency);
+      Optional<VersionSlug> mergedVersion = versionSlug.or(projectDependency::version);
+      Optional<JavaDependencyClassifier> mergedClassifier = classifier().or(projectDependency::classifier);
+      Optional<JavaDependencyType> mergedType = type().or(projectDependency::type);
 
-      if (resultingDependency.equals(projectDependency)) {
+      if (
+        mergedVersion.equals(projectDependency.version())
+        && mergedClassifier.equals(projectDependency.classifier())
+        && mergedType.equals(projectDependency.type())
+      ) {
         return List.of();
       }
 
-      return List.of(commands.removeDependency(id(), buildProfile), commands.addDependency(resultingDependency, buildProfile));
+      JavaAnnotationProcessorDependency resultingDependency = builder()
+        .groupId(groupId())
+        .artifactId(artifactId())
+        .versionSlug(mergedVersion.orElse(null))
+        .classifier(mergedClassifier.orElse(null))
+        .type(mergedType.orElse(null))
+        .build();
+
+      return List.of(new RemoveJavaAnnotationProcessor(id()), new AddJavaAnnotationProcessor(resultingDependency));
     };
-  }
-
-  private JavaAnnotationProcessorDependency merge(JavaAnnotationProcessorDependency other) {
-    return builder()
-      .groupId(groupId())
-      .artifactId(artifactId())
-      .versionSlug(mergeVersionsSlugs(other))
-      .classifier(classifier().orElse(null))
-      .type(type().orElse(null))
-      .build();
-  }
-
-  private VersionSlug mergeVersionsSlugs(JavaAnnotationProcessorDependency other) {
-    return versionSlug.orElseGet(() -> other.versionSlug.orElse(null));
   }
 
   public DependencyId id() {
@@ -197,13 +203,14 @@ public final class JavaAnnotationProcessorDependency {
     implements
       JavaAnnotationProcessorDependencyGroupIdBuilder,
       JavaAnnotationProcessorDependencyArtifactIdBuilder,
-      JavaAnnotationProcessorDependencyOptionalValueBuilder {
+      JavaAnnotationProcessorDependencyOptionalValueBuilder
+  {
 
-    private GroupId groupId;
-    private ArtifactId artifactId;
-    private VersionSlug versionSlug;
-    private JavaDependencyClassifier classifier;
-    private JavaDependencyType type;
+    private @Nullable GroupId groupId;
+    private @Nullable ArtifactId artifactId;
+    private @Nullable VersionSlug versionSlug;
+    private @Nullable JavaDependencyClassifier classifier;
+    private @Nullable JavaDependencyType type;
     private final Collection<DependencyId> exclusions = new ArrayList<>();
 
     @Override
@@ -221,21 +228,21 @@ public final class JavaAnnotationProcessorDependency {
     }
 
     @Override
-    public JavaAnnotationProcessorDependencyOptionalValueBuilder versionSlug(VersionSlug versionSlug) {
+    public JavaAnnotationProcessorDependencyOptionalValueBuilder versionSlug(@Nullable VersionSlug versionSlug) {
       this.versionSlug = versionSlug;
 
       return this;
     }
 
     @Override
-    public JavaAnnotationProcessorDependencyOptionalValueBuilder classifier(JavaDependencyClassifier classifier) {
+    public JavaAnnotationProcessorDependencyOptionalValueBuilder classifier(@Nullable JavaDependencyClassifier classifier) {
       this.classifier = classifier;
 
       return this;
     }
 
     @Override
-    public JavaAnnotationProcessorDependencyOptionalValueBuilder type(JavaDependencyType type) {
+    public JavaAnnotationProcessorDependencyOptionalValueBuilder type(@Nullable JavaDependencyType type) {
       this.type = type;
 
       return this;
@@ -273,15 +280,11 @@ public final class JavaAnnotationProcessorDependency {
   }
 
   public interface JavaAnnotationProcessorDependencyOptionalValueBuilder {
-    JavaAnnotationProcessorDependencyOptionalValueBuilder versionSlug(VersionSlug versionSlug);
+    JavaAnnotationProcessorDependencyOptionalValueBuilder versionSlug(@Nullable VersionSlug versionSlug);
 
-    JavaAnnotationProcessorDependencyOptionalValueBuilder classifier(JavaDependencyClassifier classifier);
+    JavaAnnotationProcessorDependencyOptionalValueBuilder classifier(@Nullable JavaDependencyClassifier classifier);
 
-    JavaAnnotationProcessorDependencyOptionalValueBuilder scope(JavaDependencyScope scope);
-
-    JavaAnnotationProcessorDependencyOptionalValueBuilder optional(boolean optional);
-
-    JavaAnnotationProcessorDependencyOptionalValueBuilder type(JavaDependencyType type);
+    JavaAnnotationProcessorDependencyOptionalValueBuilder type(@Nullable JavaDependencyType type);
 
     JavaAnnotationProcessorDependencyOptionalValueBuilder addExclusion(DependencyId dependency);
 

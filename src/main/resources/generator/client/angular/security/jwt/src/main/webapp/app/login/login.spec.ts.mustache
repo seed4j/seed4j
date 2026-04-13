@@ -36,9 +36,7 @@ describe('Login Component', () => {
           },
         },
       ],
-    })
-      .overrideTemplate(Login, '')
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(async () => {
@@ -87,13 +85,16 @@ describe('Login Component', () => {
       expect(mockLoginService.login).toHaveBeenCalledWith(credentials);
     });
 
-    it('should not authenticate the user', () => {
-      const err = { status: 403 };
+    it.each([
+      { status: 403, expected: 'Authentication failed' },
+      { status: 500, expected: '' },
+    ])('should not authenticate the user', ({ status, expected }) => {
+      const err = { status };
       jest.spyOn(mockLoginService, 'login').mockReturnValue(throwError(() => err));
 
       comp.login();
 
-      expect(comp.errorMessage()).toBe('Authentication failed');
+      expect(comp.errorMessage()).toBe(expected);
     });
   });
 

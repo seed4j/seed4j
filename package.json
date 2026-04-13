@@ -75,7 +75,7 @@
     "cypress": "15.13.1",
     "eslint": "9.39.4",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-cypress": "6.2.3",
+    "eslint-plugin-cypress": "6.3.0",
     "eslint-plugin-pug": "1.2.7",
     "eslint-plugin-vue": "10.8.0",
     "fontello-cli": "0.6.2",

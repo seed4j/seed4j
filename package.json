@@ -99,7 +99,7 @@
     "tikuidoc-tikui": "9.0.1",
     "typescript": "5.9.3",
     "typescript-eslint": "8.58.1",
-    "vite": "7.3.2",
+    "vite": "8.0.8",
     "vite-plugin-istanbul": "8.0.0",
     "vitest": "4.1.4",
     "vitest-sonar-reporter": "3.0.0",

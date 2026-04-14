@@ -43,6 +43,7 @@ import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
+import com.seed4j.module.domain.javadependency.DependencyId;
 import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
@@ -173,17 +174,7 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
       .append("(")
       .append(catalogRef)
       .append(")");
-    if (!dependency.exclusions().isEmpty()) {
-      dependencyDeclaration.append(" {");
-      for (var exclusion : dependency.exclusions()) {
-        dependencyDeclaration.append(LINE_BREAK);
-        dependencyDeclaration
-          .append(indentation.times(2))
-          .append("exclude(group = \"%s\", module = \"%s\")".formatted(exclusion.groupId(), exclusion.artifactId()));
-      }
-      dependencyDeclaration.append(LINE_BREAK);
-      dependencyDeclaration.append(indentation.times(1)).append("}");
-    }
+    appendExclusionBlock(dependencyDeclaration, dependency.exclusions());
     MandatoryReplacer replacer = new MandatoryReplacer(
       new RegexNeedleBeforeReplacer(
         (contentBeforeReplacement, newText) -> !contentBeforeReplacement.contains(newText),
@@ -254,9 +245,15 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
     }
     dependencyDeclaration.append(")");
 
-    if (!dependency.exclusions().isEmpty()) {
+    appendExclusionBlock(dependencyDeclaration, dependency.exclusions());
+
+    return dependencyDeclaration.toString();
+  }
+
+  private void appendExclusionBlock(StringBuilder dependencyDeclaration, java.util.Collection<DependencyId> exclusions) {
+    if (!exclusions.isEmpty()) {
       dependencyDeclaration.append(" {");
-      for (var exclusion : dependency.exclusions()) {
+      for (var exclusion : exclusions) {
         dependencyDeclaration.append(LINE_BREAK);
         dependencyDeclaration
           .append(indentation.times(2))
@@ -265,8 +262,6 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
       dependencyDeclaration.append(LINE_BREAK);
       dependencyDeclaration.append(indentation.times(1)).append("}");
     }
-
-    return dependencyDeclaration.toString();
   }
 
   private static String versionCatalogReferenceForBuildProfile(JavaDependency dependency) {

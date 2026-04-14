@@ -330,9 +330,12 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   public void handle(RemoveJavaAnnotationProcessor command) {
     Assert.notNull(COMMAND, command);
 
-    Optional<Plugin> compilerPlugin = findCompilerPlugin(pomModel.getBuild().getPluginManagement().getPlugins()).or(() ->
-      findCompilerPlugin(pomModel.getBuild().getPlugins())
-    );
+    List<Plugin> managedPlugins = Optional.ofNullable(pomModel.getBuild())
+      .map(Build::getPluginManagement)
+      .map(PluginManagement::getPlugins)
+      .orElse(List.of());
+    List<Plugin> directPlugins = Optional.ofNullable(pomModel.getBuild()).map(Build::getPlugins).orElse(List.of());
+    Optional<Plugin> compilerPlugin = findCompilerPlugin(managedPlugins).or(() -> findCompilerPlugin(directPlugins));
 
     Optional<Xpp3Dom> compilerConfiguration = compilerPlugin.map(Plugin::getConfiguration).map(Xpp3Dom.class::cast);
 
@@ -349,8 +352,8 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
 
     annotationProcessorPaths.ifPresent(annotationProcessors -> {
       pathsToRemove.forEach(annotationProcessors::removeChild);
-      if (annotationProcessorPaths.orElseThrow().getChildCount() == 0) {
-        compilerConfiguration.orElseThrow().removeChild(annotationProcessorPaths.orElseThrow());
+      if (annotationProcessors.getChildCount() == 0) {
+        compilerConfiguration.ifPresent(config -> config.removeChild(annotationProcessors));
       }
     });
 

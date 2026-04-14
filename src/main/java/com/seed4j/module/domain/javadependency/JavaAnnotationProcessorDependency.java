@@ -52,10 +52,10 @@ public final class JavaAnnotationProcessorDependency {
     Assert.notNull("currentVersion", currentVersions);
     Assert.notNull("projectDependencies", projectDependencies);
 
-    Collection<JavaBuildCommand> depCommands = dependencyCommands(projectDependencies.annotationProcessor(id));
-    Collection<JavaBuildCommand> verCommands = versionCommands(currentVersions, projectDependencies, depCommands);
+    Collection<JavaBuildCommand> dependenciesCommands = dependencyCommands(projectDependencies.annotationProcessor(id));
+    Collection<JavaBuildCommand> versionCommands = versionCommands(currentVersions, projectDependencies, dependenciesCommands);
 
-    return new JavaBuildCommands(Stream.of(depCommands, verCommands).flatMap(Collection::stream).toList());
+    return new JavaBuildCommands(Stream.of(dependenciesCommands, versionCommands).flatMap(Collection::stream).toList());
   }
 
   Collection<JavaBuildCommand> versionCommands(

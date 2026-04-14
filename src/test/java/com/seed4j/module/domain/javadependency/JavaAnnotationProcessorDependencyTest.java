@@ -7,6 +7,8 @@ import static com.seed4j.module.domain.Seed4JModulesFixture.springBootVersion;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;
+import com.seed4j.module.domain.javabuild.ArtifactId;
+import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.command.AddJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
@@ -16,6 +18,28 @@ import org.junit.jupiter.api.Test;
 
 @UnitTest
 class JavaAnnotationProcessorDependencyTest {
+
+  @Test
+  void shouldBuildWithStringClassifier() {
+    JavaAnnotationProcessorDependency dependency = javaAnnotationProcessorDependency()
+      .groupId("org.hibernate.orm")
+      .artifactId("hibernate-processor")
+      .classifier("tests")
+      .build();
+
+    assertThat(dependency.classifier()).contains(new JavaDependencyClassifier("tests"));
+  }
+
+  @Test
+  void shouldBuildWithExclusion() {
+    JavaAnnotationProcessorDependency dependency = javaAnnotationProcessorDependency()
+      .groupId("org.hibernate.orm")
+      .artifactId("hibernate-processor")
+      .addExclusion(new GroupId("com.example"), new ArtifactId("excluded-lib"))
+      .build();
+
+    assertThat(dependency.exclusions()).containsExactly(DependencyId.of(new GroupId("com.example"), new ArtifactId("excluded-lib")));
+  }
 
   @Test
   void shouldAddUnknownAnnotationProcessorDependency() {

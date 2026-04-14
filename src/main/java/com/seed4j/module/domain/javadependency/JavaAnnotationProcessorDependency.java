@@ -75,14 +75,8 @@ public final class JavaAnnotationProcessorDependency {
   private Function<JavaAnnotationProcessorDependency, Collection<JavaBuildCommand>> toDependenciesCommands() {
     return projectDependency -> {
       Optional<VersionSlug> mergedVersion = versionSlug.or(projectDependency::version);
-      Optional<JavaDependencyClassifier> mergedClassifier = classifier().or(projectDependency::classifier);
-      Optional<JavaDependencyType> mergedType = type().or(projectDependency::type);
 
-      if (
-        mergedVersion.equals(projectDependency.version())
-        && mergedClassifier.equals(projectDependency.classifier())
-        && mergedType.equals(projectDependency.type())
-      ) {
+      if (mergedVersion.equals(projectDependency.version())) {
         return List.of();
       }
 
@@ -90,8 +84,8 @@ public final class JavaAnnotationProcessorDependency {
         .groupId(groupId())
         .artifactId(artifactId())
         .versionSlug(mergedVersion.orElse(null))
-        .classifier(mergedClassifier.orElse(null))
-        .type(mergedType.orElse(null))
+        .classifier(classifier().orElse(null))
+        .type(type().orElse(null))
         .build();
 
       return List.of(new RemoveJavaAnnotationProcessor(id()), new AddJavaAnnotationProcessor(resultingDependency));

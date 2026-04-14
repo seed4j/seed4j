@@ -562,6 +562,47 @@ class GradleCommandHandlerTest {
         """
       );
     }
+
+    @Test
+    void shouldAddAnnotationProcessorDependencyWithExclusionsInBuildGradleFile() {
+      JavaAnnotationProcessorDependency dependency = javaAnnotationProcessorDependency()
+        .groupId("com.google.auto.service")
+        .artifactId("auto-service")
+        .addExclusion(groupId("com.google.guava"), artifactId("guava"))
+        .build();
+      new GradleCommandHandler(Indentation.DEFAULT, emptyGradleProjectFolder, emptyModuleContext(), files, fileReplacer).handle(
+        new AddJavaAnnotationProcessor(dependency)
+      );
+
+      assertThat(buildGradleContent(emptyGradleProjectFolder)).contains(
+        """
+          annotationProcessor(libs.auto.service) {
+            exclude(group = "com.google.guava", module = "guava")
+          }
+        """
+      );
+    }
+
+    @Test
+    void shouldNotDuplicateAnnotationProcessorDependencyInBuildGradleFile() {
+      JavaAnnotationProcessorDependency dependency = javaAnnotationProcessorDependency()
+        .groupId("com.google.auto.service")
+        .artifactId("auto-service")
+        .versionSlug("auto-service")
+        .build();
+      GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
+        Indentation.DEFAULT,
+        emptyGradleProjectFolder,
+        emptyModuleContext(),
+        files,
+        fileReplacer
+      );
+      AddJavaAnnotationProcessor command = new AddJavaAnnotationProcessor(dependency);
+      gradleCommandHandler.handle(command);
+      gradleCommandHandler.handle(command);
+
+      assertThat(buildGradleContent(emptyGradleProjectFolder)).containsOnlyOnce("annotationProcessor(libs.auto.service)");
+    }
   }
 
   @Nested

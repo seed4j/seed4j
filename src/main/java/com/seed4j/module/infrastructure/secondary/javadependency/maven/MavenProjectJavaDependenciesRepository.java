@@ -1,9 +1,10 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 
 import com.seed4j.module.domain.javabuild.VersionSlug;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependencies;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencies;
 import com.seed4j.module.domain.javadependency.JavaDependency;
-import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependencies;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependenciesVersions;
@@ -96,7 +97,7 @@ public class MavenProjectJavaDependenciesRepository implements Seed4JProjectFold
     return new JavaDependencies(mavenDependencies);
   }
 
-  private JavaDependencies extractAnnotationProcessingDependencies(Model pomContent) {
+  private JavaAnnotationProcessorDependencies extractAnnotationProcessingDependencies(Model pomContent) {
     Optional<Plugin> compilerPlugin = Optional.ofNullable(pomContent.getBuild())
       .map(Build::getPluginManagement)
       .map(PluginContainer::getPlugins)
@@ -108,7 +109,7 @@ public class MavenProjectJavaDependenciesRepository implements Seed4JProjectFold
           .flatMap(this::findCompilerPlugin)
       );
 
-    List<JavaDependency> dependencies = compilerPlugin
+    List<JavaAnnotationProcessorDependency> dependencies = compilerPlugin
       .map(Plugin::getConfiguration)
       .filter(Xpp3Dom.class::isInstance)
       .map(Xpp3Dom.class::cast)
@@ -119,20 +120,19 @@ public class MavenProjectJavaDependenciesRepository implements Seed4JProjectFold
       .map(annotationProcessorPathToDependency())
       .toList();
 
-    return new JavaDependencies(dependencies);
+    return new JavaAnnotationProcessorDependencies(dependencies);
   }
 
-  private Function<? super Xpp3Dom, JavaDependency> annotationProcessorPathToDependency() {
+  private Function<? super Xpp3Dom, JavaAnnotationProcessorDependency> annotationProcessorPathToDependency() {
     return domPath -> {
       String groupId = domPath.getChild("groupId").getValue();
       String artifactId = domPath.getChild("artifactId").getValue();
       String version = domPath.getChild("version") != null ? domPath.getChild("version").getValue() : null;
 
-      return JavaDependency.builder()
+      return JavaAnnotationProcessorDependency.builder()
         .groupId(groupId)
         .artifactId(artifactId)
         .versionSlug(VersionSlug.of(version).orElse(null))
-        .scope(JavaDependencyScope.COMPILE)
         .build();
     };
   }

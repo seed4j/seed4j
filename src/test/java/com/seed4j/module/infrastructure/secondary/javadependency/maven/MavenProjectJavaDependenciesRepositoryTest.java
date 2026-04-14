@@ -84,8 +84,6 @@ class MavenProjectJavaDependenciesRepositoryTest {
 
     assertThat(mavenDependencies().annotationProcessor(autoServiceDependencyId)).hasValueSatisfying(autoService -> {
       assertThat(autoService.version()).contains(new VersionSlug("auto-service"));
-      assertThat(autoService.scope()).isEqualTo(JavaDependencyScope.COMPILE);
-      assertThat(autoService.optional()).isFalse();
       assertThat(autoService.classifier()).isEmpty();
     });
   }

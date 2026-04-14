@@ -7,13 +7,11 @@ import static com.seed4j.module.domain.Seed4JModulesFixture.springBootVersion;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javabuild.command.AddJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import java.util.List;
-import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -58,7 +56,11 @@ class JavaAnnotationProcessorDependencyTest {
     JavaDependencyVersion updatedVersion = new JavaDependencyVersion("spring-boot", "2.0.0");
     JavaDependenciesVersions currentVersions = new JavaDependenciesVersions(List.of(updatedVersion));
 
-    JavaDependency existingWithVersion = javaDependencyWithVersion(VersionSlug.of("spring-boot").orElseThrow());
+    JavaAnnotationProcessorDependency existingWithVersion = javaAnnotationProcessorDependency()
+      .groupId("org.hibernate.orm")
+      .artifactId("hibernate-processor")
+      .versionSlug("spring-boot")
+      .build();
     JavaBuildCommands commands = changes()
       .dependency(withVersion)
       .currentVersions(currentVersions)
@@ -72,7 +74,11 @@ class JavaAnnotationProcessorDependencyTest {
   void shouldKeepVersionFromProject() {
     JavaAnnotationProcessorDependency withoutVersion = hibernateAnnotationProcessor();
 
-    JavaDependency existingWithVersion = javaDependencyWithVersion(VersionSlug.of("spring-boot").orElseThrow());
+    JavaAnnotationProcessorDependency existingWithVersion = javaAnnotationProcessorDependency()
+      .groupId("org.hibernate.orm")
+      .artifactId("hibernate-processor")
+      .versionSlug("spring-boot")
+      .build();
     JavaBuildCommands commands = changes()
       .dependency(withoutVersion)
       .projectDependencies(projectWithAnnotationProcessor(existingWithVersion))
@@ -89,7 +95,7 @@ class JavaAnnotationProcessorDependencyTest {
       .versionSlug("spring-boot")
       .build();
 
-    JavaDependency existingWithoutVersion = javaDependencyWithVersion((VersionSlug) null);
+    JavaAnnotationProcessorDependency existingWithoutVersion = hibernateAnnotationProcessor();
     JavaBuildCommands commands = changes()
       .dependency(withNewVersion)
       .projectDependencies(projectWithAnnotationProcessor(existingWithoutVersion))
@@ -102,32 +108,12 @@ class JavaAnnotationProcessorDependencyTest {
     );
   }
 
-  private JavaDependency javaDependencyWithVersion(@Nullable VersionSlug versionSlug) {
-    return JavaDependency.builder().groupId("org.hibernate.orm").artifactId("hibernate-processor").versionSlug(versionSlug).build();
-  }
-
   private ProjectJavaDependencies projectWithAnnotationProcessor(JavaAnnotationProcessorDependency dep) {
-    return projectWithAnnotationProcessors(new JavaDependencies(List.of(toDependency(dep))));
-  }
-
-  private ProjectJavaDependencies projectWithAnnotationProcessor(JavaDependency dep) {
-    return projectWithAnnotationProcessors(new JavaDependencies(List.of(dep)));
-  }
-
-  private ProjectJavaDependencies projectWithAnnotationProcessors(JavaDependencies deps) {
     return ProjectJavaDependencies.builder()
       .versions(new ProjectJavaDependenciesVersions(List.of(springBootVersion())))
       .dependenciesManagement(JavaDependencies.EMPTY)
       .dependencies(JavaDependencies.EMPTY)
-      .annotationProcessingDependencies(deps);
-  }
-
-  private JavaDependency toDependency(JavaAnnotationProcessorDependency dep) {
-    return JavaDependency.builder()
-      .groupId(dep.id().groupId())
-      .artifactId(dep.id().artifactId())
-      .versionSlug(dep.version().orElse(null))
-      .build();
+      .annotationProcessingDependencies(new JavaAnnotationProcessorDependencies(List.of(dep)));
   }
 
   private static ChangesBuilder changes() {

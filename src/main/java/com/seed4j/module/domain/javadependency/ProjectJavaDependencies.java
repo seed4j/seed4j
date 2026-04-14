@@ -11,12 +11,12 @@ public final class ProjectJavaDependencies {
     .versions(ProjectJavaDependenciesVersions.EMPTY)
     .dependenciesManagement(JavaDependencies.EMPTY)
     .dependencies(JavaDependencies.EMPTY)
-    .annotationProcessingDependencies(JavaDependencies.EMPTY);
+    .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
   private final ProjectJavaDependenciesVersions versions;
   private final JavaDependencies dependenciesManagement;
   private final JavaDependencies dependencies;
-  private final JavaDependencies annotationProcessingDependencies;
+  private final JavaAnnotationProcessorDependencies annotationProcessingDependencies;
 
   private ProjectJavaDependencies(ProjectJavaDependenciesBuilder builder) {
     Assert.notNull("versions", builder.versions);
@@ -42,7 +42,7 @@ public final class ProjectJavaDependencies {
     return dependenciesManagement.get(id);
   }
 
-  public Optional<JavaDependency> annotationProcessor(DependencyId id) {
+  public Optional<JavaAnnotationProcessorDependency> annotationProcessor(DependencyId id) {
     return annotationProcessingDependencies.get(id);
   }
 
@@ -85,7 +85,7 @@ public final class ProjectJavaDependencies {
   }
 
   public sealed interface ProjectJavaDependenciesAnnotationProcessingDependenciesBuilder permits ProjectJavaDependenciesBuilder {
-    ProjectJavaDependencies annotationProcessingDependencies(JavaDependencies annotationProcessingDependencies);
+    ProjectJavaDependencies annotationProcessingDependencies(JavaAnnotationProcessorDependencies annotationProcessingDependencies);
   }
 
   private static final class ProjectJavaDependenciesBuilder
@@ -99,7 +99,7 @@ public final class ProjectJavaDependencies {
     private @Nullable ProjectJavaDependenciesVersions versions;
     private @Nullable JavaDependencies dependenciesManagement;
     private @Nullable JavaDependencies dependencies;
-    private @Nullable JavaDependencies annotationProcessingDependencies;
+    private @Nullable JavaAnnotationProcessorDependencies annotationProcessingDependencies;
 
     @Override
     public ProjectJavaDependenciesDependenciesManagementBuilder versions(ProjectJavaDependenciesVersions versions) {
@@ -123,7 +123,7 @@ public final class ProjectJavaDependencies {
     }
 
     @Override
-    public ProjectJavaDependencies annotationProcessingDependencies(JavaDependencies annotationProcessingDependencies) {
+    public ProjectJavaDependencies annotationProcessingDependencies(JavaAnnotationProcessorDependencies annotationProcessingDependencies) {
       this.annotationProcessingDependencies = annotationProcessingDependencies;
 
       return new ProjectJavaDependencies(this);

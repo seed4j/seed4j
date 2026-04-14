@@ -68,11 +68,11 @@ public final class JavaAnnotationProcessorDependency {
     );
   }
 
-  private Collection<JavaBuildCommand> dependencyCommands(Optional<JavaDependency> projectDependency) {
+  private Collection<JavaBuildCommand> dependencyCommands(Optional<JavaAnnotationProcessorDependency> projectDependency) {
     return projectDependency.map(toDependenciesCommands()).orElseGet(() -> List.of(new AddJavaAnnotationProcessor(this)));
   }
 
-  private Function<JavaDependency, Collection<JavaBuildCommand>> toDependenciesCommands() {
+  private Function<JavaAnnotationProcessorDependency, Collection<JavaBuildCommand>> toDependenciesCommands() {
     return projectDependency -> {
       Optional<VersionSlug> mergedVersion = versionSlug.or(projectDependency::version);
       Optional<JavaDependencyClassifier> mergedClassifier = classifier().or(projectDependency::classifier);

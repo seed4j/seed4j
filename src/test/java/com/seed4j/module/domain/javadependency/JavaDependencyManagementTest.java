@@ -53,7 +53,7 @@ class JavaDependencyManagementTest {
       .versions(projectVersions())
       .dependenciesManagement(new JavaDependencies(List.of(defaultVersionDependency())))
       .dependencies(JavaDependencies.EMPTY)
-      .annotationProcessingDependencies(JavaDependencies.EMPTY);
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands commands = changes().projectDependencies(projectJavaDependencies).build();
 
@@ -66,7 +66,7 @@ class JavaDependencyManagementTest {
       .versions(projectVersions())
       .dependenciesManagement(new JavaDependencies(List.of(optionalSpringBootDependency())))
       .dependencies(JavaDependencies.EMPTY)
-      .annotationProcessingDependencies(JavaDependencies.EMPTY);
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands commands = changes().projectDependencies(projectJavaDependencies).build();
 
@@ -82,7 +82,7 @@ class JavaDependencyManagementTest {
       .versions(projectVersions())
       .dependenciesManagement(new JavaDependencies(List.of(defaultVersionDependency())))
       .dependencies(JavaDependencies.EMPTY)
-      .annotationProcessingDependencies(JavaDependencies.EMPTY);
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands commands = changes().dependency(optionalSpringBootDependency()).projectDependencies(projectJavaDependencies).build();
 
@@ -157,7 +157,7 @@ class JavaDependencyManagementTest {
       .versions(projectVersions())
       .dependenciesManagement(noJunitVersionInCurrentProject())
       .dependencies(JavaDependencies.EMPTY)
-      .annotationProcessingDependencies(JavaDependencies.EMPTY);
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
   }
 
   private JavaDependencies noJunitVersionInCurrentProject() {
@@ -179,7 +179,7 @@ class JavaDependencyManagementTest {
       .versions(projectVersions())
       .dependenciesManagement(new JavaDependencies(List.of(springBootDependencyManagement())))
       .dependencies(JavaDependencies.EMPTY)
-      .annotationProcessingDependencies(JavaDependencies.EMPTY);
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands changes = changes().dependency(springBootDependencyManagement()).projectDependencies(projectDependencies).build();
 
@@ -194,7 +194,7 @@ class JavaDependencyManagementTest {
       .versions(projectVersions())
       .dependenciesManagement(new JavaDependencies(List.of(noTypeDependencyManagement)))
       .dependencies(JavaDependencies.EMPTY)
-      .annotationProcessingDependencies(JavaDependencies.EMPTY);
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands changes = changes().dependency(springBootDependencyManagement()).projectDependencies(projectDependencies).build();
 
@@ -212,7 +212,7 @@ class JavaDependencyManagementTest {
       .versions(projectVersions())
       .dependenciesManagement(new JavaDependencies(List.of(differentClassifier)))
       .dependencies(JavaDependencies.EMPTY)
-      .annotationProcessingDependencies(JavaDependencies.EMPTY);
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands changes = changes().dependency(optionalTestDependency()).projectDependencies(projectDependencies).build();
 
@@ -231,7 +231,7 @@ class JavaDependencyManagementTest {
       .versions(projectVersions())
       .dependenciesManagement(projectDependenciesManagement())
       .dependencies(JavaDependencies.EMPTY)
-      .annotationProcessingDependencies(JavaDependencies.EMPTY);
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
   }
 
   private ProjectJavaDependenciesVersions projectVersions() {

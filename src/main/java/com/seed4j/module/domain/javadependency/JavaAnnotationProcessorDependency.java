@@ -7,7 +7,6 @@ import com.seed4j.module.domain.javabuild.command.AddJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
-import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
@@ -64,54 +63,9 @@ public final class JavaAnnotationProcessorDependency {
     ProjectJavaDependencies projectDependencies,
     Collection<JavaBuildCommand> dependencyCommands
   ) {
-    return version()
-      .flatMap(toVersion(currentVersions, projectDependencies, dependencyCommands))
-      .map(toSetVersionCommand())
-      .map(List::of)
-      .orElse(List.of());
-  }
-
-  public static Function<VersionSlug, Optional<JavaDependencyVersion>> toVersion(
-    JavaDependenciesVersions currentVersions,
-    ProjectJavaDependencies projectDependencies
-  ) {
-    return toVersion(currentVersions, projectDependencies, List.of());
-  }
-
-  private static Function<VersionSlug, Optional<JavaDependencyVersion>> toVersion(
-    JavaDependenciesVersions currentVersions,
-    ProjectJavaDependencies projectDependencies,
-    Collection<JavaBuildCommand> dependencyCommands
-  ) {
-    return slug -> {
-      JavaDependencyVersion currentVersion = currentVersions.get(slug);
-
-      return projectDependencies
-        .version(slug)
-        .map(toVersionToUse(currentVersion, dependencyCommands))
-        .orElseGet(() -> Optional.of(currentVersion));
-    };
-  }
-
-  private static Function<JavaDependencyVersion, Optional<JavaDependencyVersion>> toVersionToUse(
-    JavaDependencyVersion currentVersion,
-    Collection<JavaBuildCommand> dependencyCommands
-  ) {
-    return version -> {
-      if (version.equals(currentVersion) && hasNoDependencyToAdd(dependencyCommands)) {
-        return Optional.empty();
-      }
-
-      return Optional.of(currentVersion);
-    };
-  }
-
-  private static boolean hasNoDependencyToAdd(Collection<JavaBuildCommand> dependencyCommands) {
-    return dependencyCommands.stream().noneMatch(dependencyCommand -> dependencyCommand instanceof AddJavaAnnotationProcessor);
-  }
-
-  private Function<JavaDependencyVersion, JavaBuildCommand> toSetVersionCommand() {
-    return SetVersion::new;
+    return JavaDependencyVersionCommands.build(version(), currentVersions, projectDependencies, dependencyCommands, cmd ->
+      cmd instanceof AddJavaAnnotationProcessor
+    );
   }
 
   private Collection<JavaBuildCommand> dependencyCommands(Optional<JavaDependency> projectDependency) {

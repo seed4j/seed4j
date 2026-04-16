@@ -7,6 +7,7 @@ import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.LIQUIBASE_ASYNC
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.LIQUIBASE_LINTER;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.LOGS_SPY;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.MAVEN_JAVA;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_ASYNC;
 
 import com.seed4j.generator.server.springboot.dbmigration.liquibase.application.LiquibaseApplicationService;
 import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
@@ -43,7 +44,9 @@ class LiquibaseModuleConfiguration {
         Seed4JModulePropertiesDefinition.builder().addIndentation().addBasePackage().addSpringConfigurationFormat().build()
       )
       .apiDoc(SPRING_BOOT_DATABASE_MIGRATION, "Support updating the database asynchronously with Liquibase")
-      .organization(Seed4JModuleOrganization.builder().addDependency(LIQUIBASE).addDependency(LOGS_SPY).build())
+      .organization(
+        Seed4JModuleOrganization.builder().addDependency(LIQUIBASE).addDependency(LOGS_SPY).addDependency(SPRING_BOOT_ASYNC).build()
+      )
       .tags(liquibaseTags())
       .factory(liquibase::buildAsyncModule);
   }

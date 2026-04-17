@@ -20,7 +20,7 @@
     "@typescript-eslint/parser": "8.58.1",
     "@vitest/coverage-istanbul": "4.1.4",
     "arch-unit-ts": "1.0.9",
-    "autoprefixer": "10.4.27",
+    "autoprefixer": "10.5.0",
     "browser-sync": "3.0.4",
     "concurrently": "9.2.1",
     "cpy-cli": "7.0.0",

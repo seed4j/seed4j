@@ -60,7 +60,7 @@
     "start-server-and-test": "3.0.2",
     "stylelint": "16.26.1",
     "stylelint-config-concentric-order": "5.5.0",
-    "stylelint-config-standard-scss": "16.0.0",
+    "stylelint-config-standard-scss": "17.0.0",
     "stylelint-order": "8.1.1",
     "tailwindcss": "4.2.2",
     "tikuidoc-tikui": "9.0.1",

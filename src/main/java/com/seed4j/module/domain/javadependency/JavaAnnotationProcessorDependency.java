@@ -63,8 +63,12 @@ public final class JavaAnnotationProcessorDependency {
     ProjectJavaDependencies projectDependencies,
     Collection<JavaBuildCommand> dependencyCommands
   ) {
-    return JavaDependencyVersionCommands.build(version(), currentVersions, projectDependencies, dependencyCommands, cmd ->
-      cmd instanceof AddJavaAnnotationProcessor
+    return JavaDependencyVersionCommands.build(
+      version(),
+      currentVersions,
+      projectDependencies,
+      dependencyCommands,
+      AddJavaAnnotationProcessor.class::isInstance
     );
   }
 
@@ -81,8 +85,8 @@ public final class JavaAnnotationProcessorDependency {
       }
 
       JavaAnnotationProcessorDependency resultingDependency = builder()
-        .groupId(groupId())
-        .artifactId(artifactId())
+        .groupId(id.groupId())
+        .artifactId(id.artifactId())
         .versionSlug(mergedVersion.orElse(null))
         .classifier(classifier().orElse(null))
         .type(type().orElse(null))
@@ -110,14 +114,6 @@ public final class JavaAnnotationProcessorDependency {
 
   public Collection<DependencyId> exclusions() {
     return exclusions;
-  }
-
-  private GroupId groupId() {
-    return id.groupId();
-  }
-
-  private ArtifactId artifactId() {
-    return id.artifactId();
   }
 
   @Override

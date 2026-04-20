@@ -46,7 +46,7 @@
     <mockito.version>5.23.0</mockito.version>
     <cassandraunit.version>4.3.1.0</cassandraunit.version>
     <testcontainers.version>2.0.4</testcontainers.version>
-    <archunit-junit5.version>1.4.1</archunit-junit5.version>
+    <archunit-junit5.version>1.4.2</archunit-junit5.version>
     <cucumber.version>7.34.3</cucumber.version>
     <approvaltests.version>30.1.0</approvaltests.version>
     <jqwik.version>1.9.3</jqwik.version>

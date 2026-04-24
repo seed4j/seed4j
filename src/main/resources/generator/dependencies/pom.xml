@@ -17,7 +17,7 @@
     <!-- Dependencies -->
     <jacoco.version>0.8.14</jacoco.version>
     <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
-    <spring-boot.version>4.0.5</spring-boot.version>
+    <spring-boot.version>4.0.6</spring-boot.version>
     <spring-cloud.version>2025.1.1</spring-cloud.version>
     <springdoc-openapi.version>3.0.3</springdoc-openapi.version>
     <kafka-clients.version>4.2.0</kafka-clients.version>

@@ -13,7 +13,7 @@
     "i18next-vue": "5.4.0",
     "pinia": "3.0.4",
     "pinia-plugin-persistedstate": "4.7.1",
-    "vue": "3.5.32",
+    "vue": "3.5.33",
     "vue-router": "5.0.4",
     "vue-tsc": "3.2.7"
   }

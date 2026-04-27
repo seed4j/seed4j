@@ -7,6 +7,7 @@ import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.buildProfileId;
 import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaAnnotationProcessorDependency;
 import static com.seed4j.module.domain.Seed4JModule.javaDependency;
 import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleGradlePlugin;
 import static com.seed4j.module.domain.Seed4JModulesFixture.checkstyleGradleProfilePlugin;
@@ -45,16 +46,19 @@ import com.seed4j.module.domain.javabuild.command.AddDirectMavenPlugin;
 import com.seed4j.module.domain.javabuild.command.AddGradleConfiguration;
 import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
 import com.seed4j.module.domain.javabuild.command.AddGradleTasksTestInstruction;
+import com.seed4j.module.domain.javabuild.command.AddJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
 import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
 import com.seed4j.module.domain.javabuild.command.AddMavenBuildExtension;
 import com.seed4j.module.domain.javabuild.command.AddMavenPluginManagement;
 import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.RemoveJavaDependencyManagement;
 import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
@@ -534,6 +538,74 @@ class GradleCommandHandlerTest {
   }
 
   @Nested
+  class HandleAddAnnotationProcessor {
+
+    private final Seed4JProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+
+    @Test
+    void shouldAddAnnotationProcessorDependencyInBuildGradleFile() {
+      JavaAnnotationProcessorDependency dependency = javaAnnotationProcessorDependency()
+        .groupId("com.google.auto.service")
+        .artifactId("auto-service")
+        .versionSlug("auto-service")
+        .build();
+      new GradleCommandHandler(Indentation.DEFAULT, emptyGradleProjectFolder, emptyModuleContext(), files, fileReplacer).handle(
+        new AddJavaAnnotationProcessor(dependency)
+      );
+
+      assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("annotationProcessor(libs.auto.service)");
+      assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
+        """
+        [libraries.auto-service]
+        \t\tname = "auto-service"
+        \t\tgroup = "com.google.auto.service"
+        """
+      );
+    }
+
+    @Test
+    void shouldAddAnnotationProcessorDependencyWithExclusionsInBuildGradleFile() {
+      JavaAnnotationProcessorDependency dependency = javaAnnotationProcessorDependency()
+        .groupId("com.google.auto.service")
+        .artifactId("auto-service")
+        .addExclusion(groupId("com.google.guava"), artifactId("guava"))
+        .build();
+      new GradleCommandHandler(Indentation.DEFAULT, emptyGradleProjectFolder, emptyModuleContext(), files, fileReplacer).handle(
+        new AddJavaAnnotationProcessor(dependency)
+      );
+
+      assertThat(buildGradleContent(emptyGradleProjectFolder)).contains(
+        """
+          annotationProcessor(libs.auto.service) {
+            exclude(group = "com.google.guava", module = "guava")
+          }
+        """
+      );
+    }
+
+    @Test
+    void shouldNotDuplicateAnnotationProcessorDependencyInBuildGradleFile() {
+      JavaAnnotationProcessorDependency dependency = javaAnnotationProcessorDependency()
+        .groupId("com.google.auto.service")
+        .artifactId("auto-service")
+        .versionSlug("auto-service")
+        .build();
+      GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
+        Indentation.DEFAULT,
+        emptyGradleProjectFolder,
+        emptyModuleContext(),
+        files,
+        fileReplacer
+      );
+      AddJavaAnnotationProcessor command = new AddJavaAnnotationProcessor(dependency);
+      gradleCommandHandler.handle(command);
+      gradleCommandHandler.handle(command);
+
+      assertThat(buildGradleContent(emptyGradleProjectFolder)).containsOnlyOnce("annotationProcessor(libs.auto.service)");
+    }
+  }
+
+  @Nested
   class HandleAddDirectJavaDependency {
 
     private final Seed4JProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
@@ -744,6 +816,7 @@ class GradleCommandHandlerTest {
           // seed4j-needle-gradle-implementation-dependencies
           compileOnly(libs.junit.jupiter.engine)
           // seed4j-needle-gradle-compile-dependencies
+          // seed4j-needle-gradle-annotation-processors
           runtimeOnly(libs.spring.boot.starter.webmvc)
           // seed4j-needle-gradle-runtime-dependencies
           testImplementation(libs.junit.jupiter.engine)
@@ -771,6 +844,59 @@ class GradleCommandHandlerTest {
         runtimeOnly(libs.findLibrary("spring.boot.starter.webmvc").get())\
         """
       );
+    }
+  }
+
+  @Nested
+  class HandleRemoveAnnotationProcessor {
+
+    private final Seed4JProjectFolder emptyGradleProjectFolder = projectFrom("src/test/resources/projects/empty-gradle");
+
+    @Test
+    void shouldRemoveEntryInLibrariesSection() {
+      GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
+        Indentation.DEFAULT,
+        emptyGradleProjectFolder,
+        emptyModuleContext(),
+        files,
+        fileReplacer
+      );
+      gradleCommandHandler.handle(
+        new AddJavaAnnotationProcessor(
+          javaAnnotationProcessorDependency().groupId("org.springframework.boot").artifactId("spring-boot-starter").build()
+        )
+      );
+
+      gradleCommandHandler.handle(new RemoveJavaAnnotationProcessor(defaultVersionDependency().id()));
+
+      assertThat(versionCatalogContent(emptyGradleProjectFolder))
+        .doesNotContain("[libraries.spring-boot-starter]")
+        .doesNotContain(
+          """
+          \t\tname = "spring-boot-starter"
+          \t\tgroup = "org.springframework.boot"
+          """
+        );
+    }
+
+    @Test
+    void shouldRemoveDependencyInBuildGradleFile() {
+      GradleCommandHandler gradleCommandHandler = new GradleCommandHandler(
+        Indentation.DEFAULT,
+        emptyGradleProjectFolder,
+        emptyModuleContext(),
+        files,
+        fileReplacer
+      );
+      gradleCommandHandler.handle(
+        new AddJavaAnnotationProcessor(
+          javaAnnotationProcessorDependency().groupId("org.springframework.boot").artifactId("spring-boot-starter").build()
+        )
+      );
+
+      gradleCommandHandler.handle(new RemoveJavaAnnotationProcessor(defaultVersionDependency().id()));
+
+      assertThat(buildGradleContent(emptyGradleProjectFolder)).doesNotContain("implementation(libs.spring.boot.starter)");
     }
   }
 

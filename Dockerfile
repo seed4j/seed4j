@@ -9,7 +9,7 @@ RUN chmod +x mvnw \
     -Ddevelocity.cache.remote.enabled=false \
     && mv /code/app/target/*-exec.jar /code/seed4j.jar
 
-FROM eclipse-temurin:25.0.2_10-jre
+FROM eclipse-temurin:25.0.3_9-jre
 COPY --from=build /code/*.jar /code/
 RUN \
     # configure the "seed4j" user

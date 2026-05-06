@@ -4,7 +4,7 @@ FROM jhipster/consul-config-loader:v0.4.1
 FROM jhipster/jhipster-registry:v7.5.0
 FROM quay.io/keycloak/keycloak:26.6.1
 FROM mariadb:12.2.2
-FROM mongo:8.2.7
+FROM mongo:8.3.1
 FROM mysql:9.7.0
 FROM cassandra:5.0.8
 FROM mcr.microsoft.com/mssql/server:2025-latest

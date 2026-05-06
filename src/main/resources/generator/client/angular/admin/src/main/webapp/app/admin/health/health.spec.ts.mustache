@@ -34,7 +34,7 @@ describe('Health', () => {
   describe('refresh', () => {
     it('should call refresh on init', () => {
       const health: HealthModel = { status: 'UP', components: { mail: { status: 'UP', details: { mailDetail: 'mail' } } } };
-      jest.spyOn(service, 'checkHealth').mockReturnValue(of(health));
+      vi.spyOn(service, 'checkHealth').mockReturnValue(of(health));
 
       comp.ngOnInit();
 
@@ -47,7 +47,7 @@ describe('Health', () => {
 
     it('should call checkHealth on refresh', () => {
       const health: HealthModel = { status: 'UP', components: { mail: { status: 'UP', details: { mailDetail: 'mail' } } } };
-      jest.spyOn(service, 'checkHealth').mockImplementation(() => of(health));
+      vi.spyOn(service, 'checkHealth').mockImplementation(() => of(health));
 
       comp.refresh();
 

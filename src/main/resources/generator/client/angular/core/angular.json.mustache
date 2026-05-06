@@ -18,7 +18,6 @@
             },
             "index": "src/main/webapp/index.html",
             "browser": "src/main/webapp/main.ts",
-            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/main/webapp/content",
@@ -81,10 +80,8 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "configPath": "jest.conf.mjs"
-          }
+          "builder": "@angular/build:unit-test",
+          "options": { "runnerConfig": "vitest.config.ts", "exclude": ["**/webapp/{e2e,component}/**"] }
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",

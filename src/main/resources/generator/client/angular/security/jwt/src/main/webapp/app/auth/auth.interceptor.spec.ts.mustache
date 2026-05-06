@@ -20,13 +20,13 @@ describe('Auth Interceptor', () => {
 
   afterEach(() => {
     httpMock.verify();
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   describe('intercept', () => {
     it('should add authorization header with localStorageService', () => {
       const token = 'azerty';
-      Storage.prototype.getItem = jest.fn(() => token);
+      Storage.prototype.getItem = vi.fn(() => token);
 
       service.login({ username: 'John', password: '123' }).subscribe();
 
@@ -35,7 +35,7 @@ describe('Auth Interceptor', () => {
     });
 
     it('should skip authorization header when missing in localStorageService', () => {
-      Storage.prototype.getItem = jest.fn(() => null);
+      Storage.prototype.getItem = vi.fn(() => null);
 
       service.login({ username: 'John', password: '123' }).subscribe();
 

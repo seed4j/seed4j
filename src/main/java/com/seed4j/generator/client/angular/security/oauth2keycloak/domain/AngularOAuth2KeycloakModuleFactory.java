@@ -62,10 +62,10 @@ public class AngularOAuth2KeycloakModuleFactory {
 
   private static final String MOCK_OAUTH2_AUTH_SERVICE = """
     const mockOauth2AuthService = {
-      initAuthentication: jest.fn().mockReturnValue(of(true)),
+      initAuthentication: vi.fn().mockReturnValue(of(true)),
       isAuthenticated: true,
       token: 'mock-token',
-      logout: jest.fn(),
+      logout: vi.fn(),
     };""";
 
   private static final ElementReplacer APP_NAME_NEEDLE = lineAfterRegex("appName = signal\\(''\\);");

@@ -5,10 +5,9 @@
     "forceConsistentCasingInFileNames": true,
     "composite": false,
     "types": ["vitest/globals"],
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/main/webapp/app/*"],
-      "@assets/*": ["src/main/webapp/assets/*"]
+      "@/*": ["./src/main/webapp/app/*"],
+      "@assets/*": ["./src/main/webapp/assets/*"]
     }
   },
   "include": ["src/main/webapp/**/*", "src/test/webapp/unit/**/*"]

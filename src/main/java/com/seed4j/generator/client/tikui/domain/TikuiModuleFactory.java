@@ -17,6 +17,7 @@ import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.CO
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.replacement.RegexNeedleAfterReplacer;
 import com.seed4j.module.domain.replacement.ReplacementCondition;
@@ -49,6 +50,12 @@ public class TikuiModuleFactory {
   private static final String TEMPLATE_TOASTING = TEMPLATE + "/toasting";
   private static final String QUARK = "quark";
 
+  private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
+
+  public TikuiModuleFactory(NodeLazyPackagesInstaller nodeLazyPackagesInstaller) {
+    this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
+  }
+
   public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
@@ -65,6 +72,9 @@ public class TikuiModuleFactory {
         .addDevDependency(packageName("tikuidoc-tikui"), COMMON)
         .addScript(scriptKey("build:tikui"), scriptCommand("tikui-core build"))
         .addScript(scriptKey("dev:tikui"), scriptCommand("tikui-core serve"))
+        .and()
+      .postActions()
+        .add(context -> nodeLazyPackagesInstaller.runInstallIn(context.projectFolder(), properties.nodePackageManager()))
         .and()
       .files()
         .add(SOURCE.template("tikuiconfig.json"), to("tikuiconfig.json"))

@@ -6,15 +6,25 @@ import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import java.util.Set;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @UnitTest
+@ExtendWith(MockitoExtension.class)
 class TikuiModuleFactoryTest {
 
-  private static final TikuiModuleFactory factory = new TikuiModuleFactory();
+  @InjectMocks
+  private TikuiModuleFactory factory;
+
+  @Mock
+  private NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
   @Nested
   class Prettier {
@@ -139,7 +149,7 @@ class TikuiModuleFactoryTest {
     return Set.of("_" + name + ".scss", name + ".code.pug", name + ".md", name + ".mixin.pug", name + ".render.pug").toArray(String[]::new);
   }
 
-  private static Seed4JModuleAsserter assertThatTikuiModule(ModuleFile proxyFile, ModuleFile indexFile) {
+  private Seed4JModuleAsserter assertThatTikuiModule(ModuleFile proxyFile, ModuleFile indexFile) {
     Seed4JModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     Seed4JModule module = factory.buildModule(properties);

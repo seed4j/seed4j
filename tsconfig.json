@@ -3,7 +3,7 @@
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
@@ -11,9 +11,8 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client"],
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/main/webapp/app/*"]
+      "@/*": ["./src/main/webapp/app/*"]
     }
   },
   "include": [

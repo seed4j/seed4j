@@ -2,9 +2,8 @@
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "types": ["vitest/globals"],
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/main/webapp/app/*"]
+      "@/*": ["./src/main/webapp/app/*"]
     }
   },
   "include": ["src/main/webapp/**/*", "src/test/webapp/unit/**/*"]

@@ -395,8 +395,8 @@ jobs:
             echo "Hashes are different - will run tests"
             echo "execute_tests=true" >> $GITHUB_OUTPUT
           else
-            echo "Hashes are identical - will skip tests"
-            echo "execute_tests=false" >> $GITHUB_OUTPUT
+            echo "Hashes are identical - will NOT skip tests"
+            echo "execute_tests=true" >> $GITHUB_OUTPUT
           fi
       - name: 'Test: list ${{ matrix.app }}'
         if: |

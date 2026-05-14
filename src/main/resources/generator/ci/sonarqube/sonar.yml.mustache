@@ -15,6 +15,7 @@ services:
     build:
       context: .
       dockerfile: sonar/Dockerfile
+    image: seed4j-sonar-token:latest
     container_name: sonar-token
     environment:
       - SEED4J_SONAR_URL=http://sonar:9000

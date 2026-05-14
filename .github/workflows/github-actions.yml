@@ -395,8 +395,8 @@ jobs:
             echo "Hashes are different - will run tests"
             echo "execute_tests=true" >> $GITHUB_OUTPUT
           else
-            echo "Hashes are identical - will skip tests"
-            echo "execute_tests=false" >> $GITHUB_OUTPUT
+            echo "Hashes are identical - will NOT skip tests"
+            echo "execute_tests=true" >> $GITHUB_OUTPUT
           fi
       - name: 'Test: list ${{ matrix.app }}'
         if: |
@@ -447,6 +447,40 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.java-build-tool }}-${{ matrix.app }}-${{ steps.cache_gradle_md5sum.outputs.md5sum }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.java-build-tool }}-
+      - name: 'Init: extract Sonar image version'
+        if: steps.tests-requirement-check.outputs.execute_tests == 'true'
+        id: sonar-image
+        run: |
+          SONAR_YML="/tmp/seed4j/${{ matrix.app }}/src/main/docker/sonar.yml"
+          if [ -f "$SONAR_YML" ]; then
+            echo "name=$(grep 'image:' "$SONAR_YML" | head -1 | awk '{print $2}')" >> $GITHUB_OUTPUT
+          else
+            echo "name=none" >> $GITHUB_OUTPUT
+          fi
+      - name: 'Init: restore Docker image cache (Sonar)'
+        if: steps.tests-requirement-check.outputs.execute_tests == 'true'
+        id: cache-docker-sonar
+        uses: actions/cache@v5
+        with:
+          path: /tmp/docker-images/sonarqube.tar
+          key: ${{ runner.os }}-docker-${{ steps.sonar-image.outputs.name }}
+      - name: 'Init: load Docker image (Sonar) from cache'
+        if: >-
+          steps.tests-requirement-check.outputs.execute_tests == 'true' &&
+          steps.cache-docker-sonar.outputs.cache-hit == 'true'
+        run: docker load --input /tmp/docker-images/sonarqube.tar
+      - name: 'Init: restore Docker image cache (sonar-token)'
+        if: steps.tests-requirement-check.outputs.execute_tests == 'true'
+        id: cache-docker-sonar-token
+        uses: actions/cache@v5
+        with:
+          path: /tmp/docker-images/sonar-token.tar
+          key: ${{ runner.os }}-docker-sonar-token-${{ hashFiles('current-branch/src/main/resources/generator/ci/sonarqube/sonar/Dockerfile', 'current-branch/src/main/resources/generator/ci/sonarqube/sonar/sonar_generate_token.sh') }}
+      - name: 'Init: load Docker image (sonar-token) from cache'
+        if: >-
+          steps.tests-requirement-check.outputs.execute_tests == 'true' &&
+          steps.cache-docker-sonar-token.outputs.cache-hit == 'true'
+        run: docker load --input /tmp/docker-images/sonar-token.tar
       - name: 'Test: starting Sonar'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         working-directory: /tmp/seed4j/${{ matrix.app }}/
@@ -455,6 +489,24 @@ jobs:
             docker compose -f src/main/docker/sonar.yml up -d \
               && docker logs -f sonar-token && SONAR_TOKEN=$(docker logs sonar-token)
             docker ps -a
+          fi
+      - name: 'Init: save Docker image cache (Sonar)'
+        if: >-
+          steps.tests-requirement-check.outputs.execute_tests == 'true' &&
+          steps.cache-docker-sonar.outputs.cache-hit != 'true'
+        run: |
+          if docker image inspect "${{ steps.sonar-image.outputs.name }}" > /dev/null 2>&1; then
+            mkdir -p /tmp/docker-images
+            docker save "${{ steps.sonar-image.outputs.name }}" --output /tmp/docker-images/sonarqube.tar
+          fi
+      - name: 'Init: save Docker image cache (sonar-token)'
+        if: >-
+          steps.tests-requirement-check.outputs.execute_tests == 'true' &&
+          steps.cache-docker-sonar-token.outputs.cache-hit != 'true'
+        run: |
+          if docker image inspect seed4j-sonar-token:latest > /dev/null 2>&1; then
+            mkdir -p /tmp/docker-images
+            docker save seed4j-sonar-token:latest --output /tmp/docker-images/sonar-token.tar
           fi
       - name: 'Install seed4j snapshot jar in local maven repository'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'

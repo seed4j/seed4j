@@ -447,6 +447,12 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.java-build-tool }}-${{ matrix.app }}-${{ steps.cache_gradle_md5sum.outputs.md5sum }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.java-build-tool }}-
+      - name: 'Init: cache Playwright'
+        if: steps.tests-requirement-check.outputs.execute_tests == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright
       - name: 'Test: starting Sonar'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         working-directory: /tmp/seed4j/${{ matrix.app }}/

@@ -469,6 +469,18 @@ jobs:
           steps.tests-requirement-check.outputs.execute_tests == 'true' &&
           steps.cache-docker-sonar.outputs.cache-hit == 'true'
         run: docker load --input /tmp/docker-images/sonarqube.tar
+      - name: 'Init: restore Docker image cache (sonar-token)'
+        if: steps.tests-requirement-check.outputs.execute_tests == 'true'
+        id: cache-docker-sonar-token
+        uses: actions/cache@v5
+        with:
+          path: /tmp/docker-images/sonar-token.tar
+          key: ${{ runner.os }}-docker-sonar-token-${{ hashFiles('current-branch/src/main/resources/generator/ci/sonarqube/sonar/Dockerfile', 'current-branch/src/main/resources/generator/ci/sonarqube/sonar/sonar_generate_token.sh') }}
+      - name: 'Init: load Docker image (sonar-token) from cache'
+        if: >-
+          steps.tests-requirement-check.outputs.execute_tests == 'true' &&
+          steps.cache-docker-sonar-token.outputs.cache-hit == 'true'
+        run: docker load --input /tmp/docker-images/sonar-token.tar
       - name: 'Test: starting Sonar'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         working-directory: /tmp/seed4j/${{ matrix.app }}/
@@ -486,6 +498,15 @@ jobs:
           if docker image inspect "${{ steps.sonar-image.outputs.name }}" > /dev/null 2>&1; then
             mkdir -p /tmp/docker-images
             docker save "${{ steps.sonar-image.outputs.name }}" --output /tmp/docker-images/sonarqube.tar
+          fi
+      - name: 'Init: save Docker image cache (sonar-token)'
+        if: >-
+          steps.tests-requirement-check.outputs.execute_tests == 'true' &&
+          steps.cache-docker-sonar-token.outputs.cache-hit != 'true'
+        run: |
+          if docker image inspect seed4j-sonar-token:latest > /dev/null 2>&1; then
+            mkdir -p /tmp/docker-images
+            docker save seed4j-sonar-token:latest --output /tmp/docker-images/sonar-token.tar
           fi
       - name: 'Install seed4j snapshot jar in local maven repository'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'

@@ -447,6 +447,18 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.java-build-tool }}-${{ matrix.app }}-${{ steps.cache_gradle_md5sum.outputs.md5sum }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.java-build-tool }}-
+      - name: 'Init: restore Docker image cache (Sonar)'
+        if: steps.tests-requirement-check.outputs.execute_tests == 'true'
+        id: cache-docker-sonar
+        uses: actions/cache@v5
+        with:
+          path: /tmp/docker-images/sonarqube.tar
+          key: ${{ runner.os }}-docker-sonarqube-${{ hashFiles('current-branch/src/main/resources/generator/dependencies/Dockerfile') }}
+      - name: 'Init: load Docker image (Sonar) from cache'
+        if: >-
+          steps.tests-requirement-check.outputs.execute_tests == 'true' &&
+          steps.cache-docker-sonar.outputs.cache-hit == 'true'
+        run: docker load --input /tmp/docker-images/sonarqube.tar
       - name: 'Test: starting Sonar'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         working-directory: /tmp/seed4j/${{ matrix.app }}/
@@ -455,6 +467,15 @@ jobs:
             docker compose -f src/main/docker/sonar.yml up -d \
               && docker logs -f sonar-token && SONAR_TOKEN=$(docker logs sonar-token)
             docker ps -a
+          fi
+      - name: 'Init: save Docker image cache (Sonar)'
+        if: >-
+          steps.tests-requirement-check.outputs.execute_tests == 'true' &&
+          steps.cache-docker-sonar.outputs.cache-hit != 'true'
+        run: |
+          if docker image inspect sonarqube:26.2.0.119303-community > /dev/null 2>&1; then
+            mkdir -p /tmp/docker-images
+            docker save sonarqube:26.2.0.119303-community --output /tmp/docker-images/sonarqube.tar
           fi
       - name: 'Install seed4j snapshot jar in local maven repository'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'

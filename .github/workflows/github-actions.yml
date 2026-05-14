@@ -473,9 +473,13 @@ jobs:
           steps.tests-requirement-check.outputs.execute_tests == 'true' &&
           steps.cache-docker-sonar.outputs.cache-hit != 'true'
         run: |
-          if docker image inspect sonarqube:26.2.0.119303-community > /dev/null 2>&1; then
-            mkdir -p /tmp/docker-images
-            docker save sonarqube:26.2.0.119303-community --output /tmp/docker-images/sonarqube.tar
+          SONAR_YML="/tmp/seed4j/${{ matrix.app }}/src/main/docker/sonar.yml"
+          if [ -f "$SONAR_YML" ]; then
+            SONAR_IMAGE=$(grep 'image:' "$SONAR_YML" | head -1 | awk '{print $2}')
+            if docker image inspect "$SONAR_IMAGE" > /dev/null 2>&1; then
+              mkdir -p /tmp/docker-images
+              docker save "$SONAR_IMAGE" --output /tmp/docker-images/sonarqube.tar
+            fi
           fi
       - name: 'Install seed4j snapshot jar in local maven repository'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'

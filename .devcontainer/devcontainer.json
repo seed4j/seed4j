@@ -6,7 +6,7 @@
       "version": "25-oracle",
       "jdkDistro": "oracle"
     },
-    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/node:2": {},
     "docker-in-docker": "latest",
     "github-cli": "latest",
     "terraform": "latest"

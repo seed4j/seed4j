@@ -1,11 +1,10 @@
-FROM ubuntu:26.04
+FROM alpine:3.22.4
 RUN \
-  apt update && \
-  apt --no-install-recommends install -y curl jq && \
-  groupadd seed4j && \
-  useradd seed4j -s /bin/bash -m -g seed4j -G sudo && \
-  echo 'seed4j:seed4j'|chpasswd && \
-  apt clean
+  apk update && \
+  apk add --no-cache curl jq && \
+  addgroup -S seed4j && \
+  adduser -S -s /bin/ash -D -H -G seed4j seed4j && \
+  echo 'seed4j:seed4j'|chpasswd
 ENV \
   SEED4J_SONAR_URL=http://sonar:9000 \
   SEED4J_SONAR_PASSWORD=Seed4J-1339-Project \

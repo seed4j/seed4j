@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ash
 
 until [[ "$(curl -s $SEED4J_SONAR_URL/api/system/status | jq -r .status)" = "UP" ]]; do
   sleep 5

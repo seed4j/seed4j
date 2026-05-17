@@ -107,3 +107,14 @@ Feature: JPA modules
       | baseName                  | STRING  | true      |
       | indentSize                | INTEGER | false     |
       | springConfigurationFormat | STRING  | false     |
+
+  Scenario: Should apply JPA metamodel generator module
+    When I apply "jpa-metamodel-generator" module to default project with maven file
+      | packageName | com.seed4j.growth |
+    Then I should have "hibernate-processor" in "pom.xml"
+
+  Scenario: Should apply JPA metamodel generator module with gradle
+    When I apply "jpa-metamodel-generator" module to default project with gradle build
+      | packageName | com.seed4j.growth |
+    Then I should have "annotationProcessor(libs.hibernate.processor)" in "build.gradle.kts"
+    Then I should have "[libraries.hibernate-processor]" in "gradle/libs.versions.toml"

@@ -150,6 +150,7 @@ public enum Seed4JCoreModuleSlug implements Seed4JModuleSlugFactory {
   SPRING_BOOT_OAUTH_2_ACCOUNT("spring-boot-oauth2-account", RANK_B),
   SPRING_BOOT_OAUTH_2_AUTH_0("spring-boot-oauth2-auth0", RANK_D),
   SPRING_BOOT_OAUTH_2_OKTA("spring-boot-oauth2-okta", RANK_D),
+  SPRING_BOOT_PROMETHEUS("spring-boot-prometheus", RANK_B),
   SPRING_BOOT_PULSAR("spring-boot-pulsar", RANK_D),
   SPRING_BOOT_MVC_EMPTY("spring-boot-mvc-empty", RANK_S),
   SPRING_BOOT_THYMELEAF("spring-boot-thymeleaf", RANK_C),

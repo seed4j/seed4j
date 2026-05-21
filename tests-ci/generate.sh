@@ -145,6 +145,7 @@ elif [[ $application == fullapp* ]]; then
     "dockerfile-${java_build_tool}" \
     "java-archunit" \
     "git-information" \
+    "spring-boot-prometheus" \
     "github-codespaces" \
     "gitpod" \
     "java-memoizers" \

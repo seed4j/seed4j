@@ -4,9 +4,8 @@
     "allowJs": true,
     "sourceMap": true,
     "types": ["vite/client", "vitest/globals"],
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/main/webapp/app/*"]
+      "@/*": ["./src/main/webapp/app/*"]
     }
   },
   "include": ["src/main/webapp/**/*", "src/test/webapp/unit/**/*"]

@@ -48,7 +48,7 @@ public class ReactModuleFactory {
   private static final Seed4JDestination PRIMARY_APP_DESTINATION = APP_DESTINATION.append(PRIMARY_APP);
 
   private static final String TEST_PRIMARY = "src/test/webapp/unit/home/infrastructure/primary";
-  private static final String DEFAULT_TSCONFIG_PATH = "\"@/*\": [\"src/main/webapp/app/*\"]";
+  private static final String DEFAULT_TSCONFIG_PATH = "\"@/*\": [\"./src/main/webapp/app/*\"]";
 
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
@@ -163,7 +163,7 @@ public class ReactModuleFactory {
 
   private Consumer<Seed4JModuleBuilder> patchTsConfig(Seed4JModuleProperties properties) {
     String pathsReplacement =
-      DEFAULT_TSCONFIG_PATH + "," + LINE_BREAK + properties.indentation().times(3) + "\"@assets/*\": [\"src/main/webapp/assets/*\"]";
+      DEFAULT_TSCONFIG_PATH + "," + LINE_BREAK + properties.indentation().times(3) + "\"@assets/*\": [\"./src/main/webapp/assets/*\"]";
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

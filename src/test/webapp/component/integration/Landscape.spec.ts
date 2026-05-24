@@ -5,6 +5,7 @@ describe('Landscape', () => {
   beforeEach(() => cy.intercept({ path: '/api/project-folders' }, { body: '/tmp/seed4j/1234' }));
 
   it('should change theme after toggle switch theme button', () => {
+    const result = interceptForever({ path: '/api/modules-landscape' }, { fixture: 'landscape.json' });
     cy.visit('/landscape', {
       // see https://www.cypress.io/blog/2019/12/13/test-your-web-app-in-dark-mode/
       onBeforeLoad(win) {
@@ -12,18 +13,25 @@ describe('Landscape', () => {
       },
     });
 
-    const themeSwitchButton = dataSelector('theme-switch-button');
+    cy.get(dataSelector('landscape-loader'))
+      .should('be.visible')
+      .then(() => {
+        result.send();
+        cy.get(dataSelector('landscape-loader')).should('not.exist');
 
-    cy.get(themeSwitchButton).should('exist').should('not.be.visible').should('not.be.checked');
-    cy.get('[aria-label="dark-theme"]').should('exist');
+        const themeSwitchButton = dataSelector('theme-switch-button');
 
-    cy.get(themeSwitchButton).click({ force: true });
-    cy.get(themeSwitchButton).should('be.checked');
-    cy.get('[aria-label="light-theme"]').should('exist');
+        cy.get(themeSwitchButton).should('exist').should('not.be.visible').should('not.be.checked');
+        cy.get('[aria-label="dark-theme"]').should('exist');
 
-    cy.get(themeSwitchButton).click({ force: true });
-    cy.get(themeSwitchButton).should('not.be.checked');
-    cy.get('[aria-label="dark-theme"]').should('exist');
+        cy.get(themeSwitchButton).click({ force: true });
+        cy.get(themeSwitchButton).should('be.checked');
+        cy.get('[aria-label="light-theme"]').should('exist');
+
+        cy.get(themeSwitchButton).click({ force: true });
+        cy.get(themeSwitchButton).should('not.be.checked');
+        cy.get('[aria-label="dark-theme"]').should('exist');
+      });
   });
 
   it('should display landscape as default page', () => {

@@ -8,7 +8,8 @@ inputs:
   node-version:
     description: 'Node version to use'
     required: true
-    default: 'lts/*'
+    default: '24.15.0'
+    # Pinned to 24.15.0 until https://github.com/cypress-io/cypress/pull/33887 is released. Then 'lts/*' can be used again
   node-package-manager:
     description: 'Package manager to use for installing node dependencies'
     required: true

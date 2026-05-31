@@ -476,7 +476,7 @@
         <executions>
           <execution>
             <id>modernizer</id>
-            <phase>verify</phase>
+            <phase>test</phase>
             <goals>
               <goal>modernizer</goal>
             </goals>

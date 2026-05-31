@@ -115,7 +115,8 @@ class ThymeleafTemplateModuleFactoryTest {
         )
         .and()
       .hasFile("postcss.config.js")
-        .containing(",require('tailwindcss')")
+        .containing("import tailwindcss from '@tailwindcss/postcss';")
+        .containing("    tailwindcss,")
         .and()
       .hasFile("src/main/resources/static/css/application.css")
         .containing(

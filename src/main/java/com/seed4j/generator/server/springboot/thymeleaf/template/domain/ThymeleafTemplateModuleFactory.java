@@ -1,6 +1,7 @@
 package com.seed4j.generator.server.springboot.thymeleaf.template.domain;
 
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
+import static com.seed4j.module.domain.Seed4JModule.fileStart;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
@@ -54,7 +55,7 @@ public class ThymeleafTemplateModuleFactory {
     WELCOME_THYMELEAF_MESSAGE_PATTERN
   );
 
-  private static final String TAILWINDCSS_REQUIRE = "            ,require('tailwindcss')";
+  private static final String TAILWINDCSS_REQUIRE = "    tailwindcss,";
   private static final String TAILWINDCSS_SETUP = """
     /*! @import */
     @tailwind base;
@@ -139,11 +140,13 @@ public class ThymeleafTemplateModuleFactory {
     return moduleBuilder(properties)
       .packageJson()
         .addDevDependency(packageName("tailwindcss"), COMMON)
+        .addDevDependency(packageName("@tailwindcss/postcss"), COMMON)
         .addScript(scriptKey("watch:html"), scriptCommand("onchange 'src/main/resources/templates/**/*.html' -- npm-run-all --serial build:css build:html"))
         .addScript(scriptKey("watch:serve"), scriptCommand("browser-sync start --no-inject-changes --proxy localhost:%s --files '{{projectBuildDirectory}}/classes/templates' '{{projectBuildDirectory}}/classes/static'".formatted(properties.serverPort().get())))
         .and()
       .mandatoryReplacements()
         .in(path(POSTCSS_CONFIG_JS))
+          .add(fileStart(), "import tailwindcss from '@tailwindcss/postcss';")
           .add(lineBeforeText(THYMELEAF_POSTCSS_PLUGINS_NEEDLE), TAILWINDCSS_REQUIRE)
           .and()
         .in(path("src/main/resources/static/css/application.css"))

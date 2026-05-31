@@ -1,6 +1,11 @@
+import tailwindcss from '@tailwindcss/postcss';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+
 const postcssConfig = {
   plugins: [
-    require('autoprefixer'),
+    autoprefixer,
+    tailwindcss,
     // seed4j-needle-thymeleaf-postcss-plugins
   ],
 };
@@ -8,12 +13,10 @@ const postcssConfig = {
 // If we are in production mode, then add cssnano
 if (process.env.NODE_ENV === 'production') {
   postcssConfig.plugins.push(
-    require('cssnano')({
-      // use the safe preset so that it doesn't
-      // mutate or remove code from our css
-      preset: 'default',
-    }),
+    // use the safe preset so that it doesn't
+    // mutate or remove code from our css
+    cssnano({ preset: 'default' }),
   );
 }
 
-module.exports = postcssConfig;
+export default postcssConfig;

@@ -11,6 +11,7 @@
     "@prettier/plugin-pug": "3.4.2",
     "@prettier/plugin-xml": "3.4.2",
     "@sonar/scan": "4.3.6",
+    "@tailwindcss/postcss": "4.3.0",
     "@tailwindcss/vite": "4.3.0",
     "@tikui/core": "7.0.1",
     "@tsconfig/recommended": "1.0.13",

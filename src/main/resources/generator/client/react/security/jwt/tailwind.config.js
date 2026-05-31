@@ -1,14 +1,12 @@
-const { heroui } = require('@heroui/react');
+import { heroui } from '@heroui/react';
 
-module.exports = {
-  content: [
-    './src/main/webapp/index.html',
-    './src/main/webapp/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
-  ],
-  theme: {
-    extend: {},
-  },
-  darkMode: 'class',
-  plugins: [heroui()],
+export const content = [
+  './src/main/webapp/index.html',
+  './src/main/webapp/**/*.{js,ts,jsx,tsx}',
+  './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
+];
+export const theme = {
+  extend: {},
 };
+export const darkMode = 'class';
+export const plugins = [heroui()];

@@ -2,7 +2,6 @@ package {{packageName}}.shared.authentication.infrastructure.primary;
 
 import {{packageName}}.shared.memoizer.domain.Memoizers;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -39,7 +38,7 @@ class CustomClaimConverter implements Converter<Map<String, Object>, Map<String,
   private static final List<ClaimAppender> CLAIM_APPENDERS = buildAppenders();
 
   private final BearerTokenResolver bearerTokenResolver = new DefaultBearerTokenResolver();
-  private final MappedJwtClaimSetConverter delegate = MappedJwtClaimSetConverter.withDefaults(Collections.emptyMap());
+  private final MappedJwtClaimSetConverter delegate = MappedJwtClaimSetConverter.withDefaults(Map.of());
   private final Function<SubAttributes, ObjectNode> users;
 
   public CustomClaimConverter(ClientRegistration registration, RestTemplate restTemplate) {

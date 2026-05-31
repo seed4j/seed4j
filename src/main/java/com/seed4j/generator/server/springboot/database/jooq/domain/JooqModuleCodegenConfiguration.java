@@ -30,31 +30,24 @@ final class JooqModuleCodegenConfiguration {
   }
 
   public String getConfiguration() {
-    return String.format(
-      """
-      <jdbc>
-        <url>%s</url>
-        <user>%s</user>
-        <password>%s</password>
-      </jdbc>
-      <generator>
-        <database>
-          <name>%s</name>
-          <includes>.*</includes>
-          <inputSchema>%s</inputSchema>
-        </database>
-        <target>
-          <packageName>org.jooq.codegen</packageName>
-          <directory>target/generated-sources/jooq</directory>
-        </target>
-      </generator>
-      """,
-      databaseUrl,
-      user,
-      password,
-      jooqMetaDatabase,
-      inputSchema
-    );
+    return """
+    <jdbc>
+      <url>%s</url>
+      <user>%s</user>
+      <password>%s</password>
+    </jdbc>
+    <generator>
+      <database>
+        <name>%s</name>
+        <includes>.*</includes>
+        <inputSchema>%s</inputSchema>
+      </database>
+      <target>
+        <packageName>org.jooq.codegen</packageName>
+        <directory>target/generated-sources/jooq</directory>
+      </target>
+    </generator>
+    """.formatted(databaseUrl, user, password, jooqMetaDatabase, inputSchema);
   }
 
   public sealed interface JooqModuleCodegenConfigurationDatabaseUrlBuilder permits JooqModuleCodegenConfigurationBuilder {

@@ -7,10 +7,10 @@ import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import com.seed4j.shared.npmdetector.infrastructure.secondary.NodePackageManagerInstallationReader;
 import com.seed4j.shared.npmdetector.infrastructure.secondary.NodePackageManagerInstallationType;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -47,7 +47,7 @@ class LazyNodePackagesInstaller implements NodeLazyPackagesInstaller {
 
   private void execute(NodePackageManager nodePackageManager, Seed4JProjectFolder path, String... commands) {
     try {
-      Process process = new ProcessBuilder(commands).directory(folderFile(path)).start();
+      Process process = new ProcessBuilder(commands).directory(folderPath(path).toFile()).start();
 
       if (failedExecution(process)) {
         throw new NodePackagesInstallException(
@@ -71,8 +71,8 @@ class LazyNodePackagesInstaller implements NodeLazyPackagesInstaller {
     }
   }
 
-  private File folderFile(Seed4JProjectFolder path) {
-    return new File(path.get());
+  private Path folderPath(Seed4JProjectFolder path) {
+    return Path.of(path.get());
   }
 
   private boolean failedExecution(Process process) throws InterruptedException {

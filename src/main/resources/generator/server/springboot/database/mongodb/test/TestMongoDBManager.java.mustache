@@ -1,6 +1,6 @@
 package {{packageName}};
 
-import java.util.Collections;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
@@ -23,7 +23,7 @@ public class TestMongoDBManager implements ApplicationListener<ApplicationEnviro
     }
 
     mongoDbContainer = new MongoDBContainer(DockerImageName.parse("{{mongodbDockerImage}}"))
-      .withTmpFs(Collections.singletonMap("/testtmpfs", "rw"))
+      .withTmpFs(Map.of("/testtmpfs", "rw"))
       .withLogConsumer(new Slf4jLogConsumer(log))
       .withReuse(true);
 

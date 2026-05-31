@@ -1,12 +1,12 @@
 package {{packageName}}.wire.gateway.infrastructure.primary;
 
-import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.mockito.Mockito.when;
 
 import java.net.URI;
 import java.util.function.Predicate;
+import java.util.List;
 import org.assertj.core.data.Index;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,7 @@ class GatewayResourceIT {
     when(routeLocator.getRoutes()).thenReturn(routes);
 
     ServiceInstance serviceInstance = new DefaultServiceInstance("APP", "app:7459517c1334fe03658ce69eb959c7bd", "192.168.1.38", 8082, false);
-    when(discoveryClient.getInstances("my-app")).thenReturn(singletonList(serviceInstance));
+    when(discoveryClient.getInstances("my-app")).thenReturn(List.of(serviceInstance));
 
     RestRoute route = webTestClient
       .get()
@@ -109,6 +109,6 @@ class GatewayResourceIT {
 
   private Predicate<ServerWebExchange> getPredicate() {
     return new PathRoutePredicateFactory(new WebFluxProperties())
-      .apply(new PathRoutePredicateFactory.Config().setPatterns(singletonList("'/services/' + serviceId.toLowerCase() +'/**'")));
+      .apply(new PathRoutePredicateFactory.Config().setPatterns(List.of("'/services/' + serviceId.toLowerCase() +'/**'")));
   }
 }

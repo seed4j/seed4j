@@ -1,7 +1,13 @@
 package com.seed4j.generator.client.tikui.domain;
 
-import static com.seed4j.module.domain.Seed4JModulesFixture.*;
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
+import static com.seed4j.module.domain.Seed4JModulesFixture.propertiesBuilder;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.ModuleFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.Seed4JModuleAsserter;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.file;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.packageJsonFile;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
@@ -20,11 +26,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class TikuiModuleFactoryTest {
 
-  @InjectMocks
-  private TikuiModuleFactory factory;
-
   @Mock
   private NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
+
+  @InjectMocks
+  private TikuiModuleFactory factory;
 
   @Nested
   class Prettier {

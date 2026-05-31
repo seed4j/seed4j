@@ -210,7 +210,9 @@ public class Seed4JExtensionModuleFactory {
   }
 
   private Seed4JProjectFilePath mainClassFile(Seed4JModuleProperties properties) {
-    return path(SRC_MAIN_JAVA).append(properties.packagePath()).append(mainClassName(properties) + ".java");
+    return path(SRC_MAIN_JAVA)
+      .append(properties.packagePath())
+      .append(mainClassName(properties) + ".java");
   }
 
   private String mainClassName(Seed4JModuleProperties properties) {

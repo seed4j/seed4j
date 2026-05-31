@@ -85,31 +85,28 @@ public class JacocoModuleFactory {
   private static MavenPlugin mavenJacocoWithMinCoverageCheckPluginManagement() {
     return commonMavenJacocoPluginManagement()
       .addExecution(
-        pluginExecution()
-          .goals("check")
-          .id("check")
-          .configuration(
-            """
-              <dataFile>target/jacoco/allTest.exec</dataFile>
-              <rules>
-                <rule>
-                  <element>CLASS</element>
-                  <limits>
-                    <limit>
-                      <counter>BRANCH</counter>
-                      <value>MISSEDCOUNT</value>
-                      <maximum>0</maximum>
-                    </limit>
-                    <limit>
-                      <counter>LINE</counter>
-                      <value>MISSEDCOUNT</value>
-                      <maximum>0</maximum>
-                    </limit>
-                  </limits>
-                </rule>
-              </rules>
-            """
-          )
+        pluginExecution().goals("check").id("check").configuration(
+          """
+            <dataFile>target/jacoco/allTest.exec</dataFile>
+            <rules>
+              <rule>
+                <element>CLASS</element>
+                <limits>
+                  <limit>
+                    <counter>BRANCH</counter>
+                    <value>MISSEDCOUNT</value>
+                    <maximum>0</maximum>
+                  </limit>
+                  <limit>
+                    <counter>LINE</counter>
+                    <value>MISSEDCOUNT</value>
+                    <maximum>0</maximum>
+                  </limit>
+                </limits>
+              </rule>
+            </rules>
+          """
+        )
       )
       .build();
   }
@@ -124,35 +121,27 @@ public class JacocoModuleFactory {
       .addExecution(pluginExecution().goals("prepare-agent-integration").id("pre-integration-tests"))
       .addExecution(pluginExecution().goals("report-integration").id("post-integration-tests").phase(POST_INTEGRATION_TEST))
       .addExecution(
-        pluginExecution()
-          .goals("merge")
-          .id("merge")
-          .phase(VERIFY)
-          .configuration(
-            """
-              <fileSets>
-              <fileSet implementation="org.apache.maven.shared.model.fileset.FileSet">
-                <directory>${project.basedir}</directory>
-                <includes>
-                  <include>**/*.exec</include>
-                </includes>
-              </fileSet>
-            </fileSets>
-            <destFile>target/jacoco/allTest.exec</destFile>
-            """
-          )
+        pluginExecution().goals("merge").id("merge").phase(VERIFY).configuration(
+          """
+            <fileSets>
+            <fileSet implementation="org.apache.maven.shared.model.fileset.FileSet">
+              <directory>${project.basedir}</directory>
+              <includes>
+                <include>**/*.exec</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+          <destFile>target/jacoco/allTest.exec</destFile>
+          """
+        )
       )
       .addExecution(
-        pluginExecution()
-          .goals("report")
-          .id("post-merge-report")
-          .phase(VERIFY)
-          .configuration(
-            """
-              <dataFile>target/jacoco/allTest.exec</dataFile>
-              <outputDirectory>target/jacoco/</outputDirectory>
-            """
-          )
+        pluginExecution().goals("report").id("post-merge-report").phase(VERIFY).configuration(
+          """
+            <dataFile>target/jacoco/allTest.exec</dataFile>
+            <outputDirectory>target/jacoco/</outputDirectory>
+          """
+        )
       );
   }
 

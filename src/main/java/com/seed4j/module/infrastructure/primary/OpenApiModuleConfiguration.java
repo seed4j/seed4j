@@ -136,7 +136,10 @@ class OpenApiModuleConfiguration {
 
   @SuppressWarnings("rawtypes")
   private Map<String, Schema> moduleProperties(Seed4JModuleResource module) {
-    return module.propertiesDefinition().stream().collect(Collectors.toMap(property -> property.key().get(), toPropertySchema()));
+    return module
+      .propertiesDefinition()
+      .stream()
+      .collect(Collectors.toMap(property -> property.key().get(), toPropertySchema()));
   }
 
   private Function<Seed4JModulePropertyDefinition, Schema<?>> toPropertySchema() {

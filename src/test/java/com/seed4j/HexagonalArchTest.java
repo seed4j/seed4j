@@ -72,7 +72,9 @@ class HexagonalArchTest {
   }
 
   private static Path rootPackagePath() {
-    return Stream.of(ROOT_PACKAGE.split("\\.")).map(Path::of).reduce(Path.of("src", "main", "java"), Path::resolve);
+    return Stream.of(ROOT_PACKAGE.split("\\."))
+      .map(Path::of)
+      .reduce(Path.of("src", "main", "java"), Path::resolve);
   }
 
   private static Function<Path, String> toPackageName() {

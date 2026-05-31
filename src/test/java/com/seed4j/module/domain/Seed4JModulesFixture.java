@@ -449,17 +449,14 @@ public final class Seed4JModulesFixture {
       .addDependency(groupId("io.jsonwebtoken"), artifactId("jjwt-jackson"), versionSlug("json-web-token"))
       .addExecution(pluginExecution().goals("enforce").id("enforce-versions"))
       .addExecution(
-        pluginExecution()
-          .goals("enforce")
-          .id("enforce-dependencyConvergence")
-          .configuration(
-            """
-            <rules>
-              <DependencyConvergence/>
-            </rules>
-            <fail>false</fail>
-            """
-          )
+        pluginExecution().goals("enforce").id("enforce-dependencyConvergence").configuration(
+          """
+          <rules>
+            <DependencyConvergence/>
+          </rules>
+          <fail>false</fail>
+          """
+        )
       )
       .configuration(
         """

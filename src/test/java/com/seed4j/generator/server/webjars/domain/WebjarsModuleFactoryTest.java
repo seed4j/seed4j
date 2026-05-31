@@ -24,16 +24,14 @@ class WebjarsModuleFactoryTest {
 
     Seed4JModule module = factory.buildWebjarsLocatorModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile())
-      .hasFile("pom.xml")
-      .containing(
-        """
-            <dependency>
-              <groupId>org.webjars</groupId>
-              <artifactId>webjars-locator-lite</artifactId>
-            </dependency>
-        """
-      );
+    assertThatModuleWithFiles(module, pomFile()).hasFile("pom.xml").containing(
+      """
+          <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator-lite</artifactId>
+          </dependency>
+      """
+    );
   }
 
   @Test
@@ -45,17 +43,15 @@ class WebjarsModuleFactoryTest {
 
     Seed4JModule module = factory.buildWebjarsHtmxModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile())
-      .hasFile("pom.xml")
-      .containing(
-        """
-            <dependency>
-              <groupId>org.webjars.npm</groupId>
-              <artifactId>htmx.org</artifactId>
-              <version>${htmx-webjars.version}</version>
-            </dependency>
-        """
-      );
+    assertThatModuleWithFiles(module, pomFile()).hasFile("pom.xml").containing(
+      """
+          <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>htmx.org</artifactId>
+            <version>${htmx-webjars.version}</version>
+          </dependency>
+      """
+    );
   }
 
   @Test
@@ -67,16 +63,14 @@ class WebjarsModuleFactoryTest {
 
     Seed4JModule module = factory.buildWebjarsAlpineJSModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile())
-      .hasFile("pom.xml")
-      .containing(
-        """
-            <dependency>
-              <groupId>org.webjars.npm</groupId>
-              <artifactId>alpinejs</artifactId>
-              <version>${alpinejs-webjars.version}</version>
-            </dependency>
-        """
-      );
+    assertThatModuleWithFiles(module, pomFile()).hasFile("pom.xml").containing(
+      """
+          <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>alpinejs</artifactId>
+            <version>${alpinejs-webjars.version}</version>
+          </dependency>
+      """
+    );
   }
 }

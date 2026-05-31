@@ -15,7 +15,9 @@ class ElementAssertions {
   public ElementAssertions(String jsonPath) {
     this.jsonPath = buildJsonPath(jsonPath);
 
-    assertThat(CucumberRestTestContext.getElement(this.jsonPath)).as("Can't find " + this.jsonPath + " in response").isNotNull();
+    assertThat(CucumberRestTestContext.getElement(this.jsonPath))
+      .as("Can't find " + this.jsonPath + " in response")
+      .isNotNull();
   }
 
   private String buildJsonPath(String jsonPath) {

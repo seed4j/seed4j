@@ -216,7 +216,9 @@ class JavaDependencyManagementTest {
   }
 
   private JavaDependency junitWithoutVersion() {
-    return optionalTestDependencyBuilder().versionSlug((VersionSlug) null).build();
+    return optionalTestDependencyBuilder()
+      .versionSlug((VersionSlug) null)
+      .build();
   }
 
   private ProjectJavaDependencies projectJavaDependencies() {

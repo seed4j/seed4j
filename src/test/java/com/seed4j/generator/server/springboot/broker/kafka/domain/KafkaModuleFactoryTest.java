@@ -156,16 +156,12 @@ class KafkaModuleFactoryTest {
 
     Seed4JModule module = factory.buildModuleAkhq(properties);
 
-    assertThatModuleWithFiles(module, pomFile(), readmeFile())
-      .hasFile("src/main/docker/akhq.yml")
-      .and()
-      .hasFile("README.md")
-      .containing(
-        """
-        ```bash
-        docker compose -f src/main/docker/akhq.yml up -d
-        ```
-        """
-      );
+    assertThatModuleWithFiles(module, pomFile(), readmeFile()).hasFile("src/main/docker/akhq.yml").and().hasFile("README.md").containing(
+      """
+      ```bash
+      docker compose -f src/main/docker/akhq.yml up -d
+      ```
+      """
+    );
   }
 }

@@ -267,13 +267,11 @@ class FrontendJavaBuildToolModuleFactoryTest {
     void shouldBuildFrontendMavenCacheModuleWithPnpm() {
       Seed4JModule module = factory.buildFrontendMavenCacheModule(defaultProperties().nodePackageManager(PNPM).build());
 
-      assertThatModuleWithFiles(module, pomFile())
-        .hasFile("pom.xml")
-        .containing(
-          """
-                          <condition else="false" property="skip.corepack" value="true">
-          """
-        );
+      assertThatModuleWithFiles(module, pomFile()).hasFile("pom.xml").containing(
+        """
+                        <condition else="false" property="skip.corepack" value="true">
+        """
+      );
     }
 
     @Test

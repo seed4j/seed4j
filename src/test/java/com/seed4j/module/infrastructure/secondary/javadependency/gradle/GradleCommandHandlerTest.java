@@ -792,14 +792,12 @@ class GradleCommandHandlerTest {
 
       gradleCommandHandler.handle(new RemoveDirectJavaDependency(defaultVersionDependency().id()));
 
-      assertThat(versionCatalogContent(emptyGradleProjectFolder))
-        .doesNotContain("[libraries.spring-boot-starter]")
-        .doesNotContain(
-          """
-          \t\tname = "spring-boot-starter"
-          \t\tgroup = "org.springframework.boot"
-          """
-        );
+      assertThat(versionCatalogContent(emptyGradleProjectFolder)).doesNotContain("[libraries.spring-boot-starter]").doesNotContain(
+        """
+        \t\tname = "spring-boot-starter"
+        \t\tgroup = "org.springframework.boot"
+        """
+      );
     }
 
     @Test
@@ -1003,14 +1001,12 @@ class GradleCommandHandlerTest {
 
       gradleCommandHandler.handle(new RemoveDirectJavaDependency(dependency.id(), localBuildProfile()));
 
-      assertThat(versionCatalogContent(projectFolder))
-        .contains("[libraries.junit-jupiter-engine]")
-        .contains(
-          """
-          \t\tname = "junit-jupiter-engine"
-          \t\tgroup = "org.junit.jupiter"
-          """
-        );
+      assertThat(versionCatalogContent(projectFolder)).contains("[libraries.junit-jupiter-engine]").contains(
+        """
+        \t\tname = "junit-jupiter-engine"
+        \t\tgroup = "org.junit.jupiter"
+        """
+      );
     }
 
     @Test
@@ -1175,14 +1171,12 @@ class GradleCommandHandlerTest {
 
       gradleCommandHandler.handle(new RemoveJavaDependencyManagement(springBootDependencyManagement().id()));
 
-      assertThat(versionCatalogContent(emptyGradleProjectFolder))
-        .doesNotContain("[libraries.spring-boot-dependencies]")
-        .doesNotContain(
-          """
-          \t\tname = "spring-boot-dependencies"
-          \t\tgroup = "org.springframework.boot"
-          """
-        );
+      assertThat(versionCatalogContent(emptyGradleProjectFolder)).doesNotContain("[libraries.spring-boot-dependencies]").doesNotContain(
+        """
+        \t\tname = "spring-boot-dependencies"
+        \t\tgroup = "org.springframework.boot"
+        """
+      );
     }
 
     @Test
@@ -1316,14 +1310,12 @@ class GradleCommandHandlerTest {
 
       gradleCommandHandler.handle(new RemoveJavaDependencyManagement(springBootDependencyManagement().id(), localBuildProfile()));
 
-      assertThat(versionCatalogContent(projectFolder))
-        .contains("[libraries.spring-boot-dependencies]")
-        .contains(
-          """
-          \t\tname = "spring-boot-dependencies"
-          \t\tgroup = "org.springframework.boot"
-          """
-        );
+      assertThat(versionCatalogContent(projectFolder)).contains("[libraries.spring-boot-dependencies]").contains(
+        """
+        \t\tname = "spring-boot-dependencies"
+        \t\tgroup = "org.springframework.boot"
+        """
+      );
     }
 
     @Test

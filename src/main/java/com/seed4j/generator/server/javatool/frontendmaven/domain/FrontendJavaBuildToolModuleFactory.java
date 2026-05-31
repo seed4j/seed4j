@@ -86,15 +86,11 @@ public class FrontendJavaBuildToolModuleFactory {
       .versionSlug("checksum-maven-plugin")
       .addExecution(pluginExecution().goals("files").id("create-pre-compiled-webapp-checksum").phase(GENERATE_RESOURCES))
       .addExecution(
-        pluginExecution()
-          .goals("files")
-          .id("create-compiled-webapp-checksum")
-          .phase(COMPILE)
-          .configuration(
-            """
-            <csvSummaryFile>checksums.csv.old</csvSummaryFile>
-            """
-          )
+        pluginExecution().goals("files").id("create-compiled-webapp-checksum").phase(COMPILE).configuration(
+          """
+          <csvSummaryFile>checksums.csv.old</csvSummaryFile>
+          """
+        )
       )
       .configuration(
         """
@@ -133,24 +129,20 @@ public class FrontendJavaBuildToolModuleFactory {
       .artifactId("maven-antrun-plugin")
       .versionSlug("maven-antrun-plugin")
       .addExecution(
-        pluginExecution()
-          .goals("run")
-          .id("eval-frontend-checksum")
-          .phase(GENERATE_RESOURCES)
-          .configuration(
-            """
-            <target>
-              <condition property="%s" value="true" else="false">
-                <and>
-                  <available file="checksums.csv" filepath="${project.build.directory}" />
-                  <available file="checksums.csv.old" filepath="${project.build.directory}" />
-                  <filesmatch file1="${project.build.directory}/checksums.csv" file2="${project.build.directory}/checksums.csv.old" />
-                </and>
-              </condition>
-            </target>
-            <exportAntProperties>true</exportAntProperties>
-            """.formatted(skipProperty)
-          )
+        pluginExecution().goals("run").id("eval-frontend-checksum").phase(GENERATE_RESOURCES).configuration(
+          """
+          <target>
+            <condition property="%s" value="true" else="false">
+              <and>
+                <available file="checksums.csv" filepath="${project.build.directory}" />
+                <available file="checksums.csv.old" filepath="${project.build.directory}" />
+                <filesmatch file1="${project.build.directory}/checksums.csv" file2="${project.build.directory}/checksums.csv.old" />
+              </and>
+            </condition>
+          </target>
+          <exportAntProperties>true</exportAntProperties>
+          """.formatted(skipProperty)
+        )
       )
       .build();
   }
@@ -264,7 +256,8 @@ public class FrontendJavaBuildToolModuleFactory {
               into("BOOT-INF/classes/static")
           }
         }
-        """.replace("{{nodePackageManager}}", nodePackageManager.command())
+        """
+          .replace("{{nodePackageManager}}", nodePackageManager.command())
           .replace("{{nodePackageManagerCapitalized}}", capitalize(nodePackageManager.command()))
       )
       .build();

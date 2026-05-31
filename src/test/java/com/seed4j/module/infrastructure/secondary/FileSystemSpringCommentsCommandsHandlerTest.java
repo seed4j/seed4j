@@ -129,16 +129,14 @@ class FileSystemSpringCommentsCommandsHandlerTest {
 
     assertThat(content(propertiesFile)).doesNotContain(
       """
-        # This is a comment
-        # This is a comment
-        """
-        + propertyKey
+      # This is a comment
+      # This is a comment
+      """ + propertyKey
     );
     assertThat(content(propertiesFile)).contains(
       """
-        # This is a comment
-        """
-        + propertyKey
+      # This is a comment
+      """ + propertyKey
     );
   }
 

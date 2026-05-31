@@ -26,7 +26,9 @@ class NodePackagesVersionsTest {
 
   @Test
   void shouldNotGetUnknownPackageVersion() {
-    NodePackagesVersions versions = NodePackagesVersions.builder().put(COMMON, List.of(new NodePackage("vue", "1.2.3"))).build();
+    NodePackagesVersions versions = NodePackagesVersions.builder()
+      .put(COMMON, List.of(new NodePackage("vue", "1.2.3")))
+      .build();
 
     assertThatThrownBy(() -> versions.get(new NodePackageName("unknown"), COMMON))
       .isExactlyInstanceOf(UnknownNodePackageException.class)
@@ -53,8 +55,12 @@ class NodePackagesVersionsTest {
 
     @Test
     void shouldMergePackagesInSameSource() {
-      NodePackagesVersions first = NodePackagesVersions.builder().put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.0.0"))).build();
-      NodePackagesVersions second = NodePackagesVersions.builder().put(COMMON, List.of(new NodePackage(PRETTIER, "2.0.0"))).build();
+      NodePackagesVersions first = NodePackagesVersions.builder()
+        .put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.0.0")))
+        .build();
+      NodePackagesVersions second = NodePackagesVersions.builder()
+        .put(COMMON, List.of(new NodePackage(PRETTIER, "2.0.0")))
+        .build();
 
       assertThat(first.merge(second).get(TYPESCRIPT, COMMON)).isEqualTo(new NodePackageVersion("1.0.0"));
       assertThat(first.merge(second).get(PRETTIER, COMMON)).isEqualTo(new NodePackageVersion("2.0.0"));
@@ -65,8 +71,12 @@ class NodePackagesVersionsTest {
 
     @Test
     void shouldMergeDifferentVersionsInSameSource() {
-      NodePackagesVersions first = NodePackagesVersions.builder().put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.2.3"))).build();
-      NodePackagesVersions second = NodePackagesVersions.builder().put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.2.6"))).build();
+      NodePackagesVersions first = NodePackagesVersions.builder()
+        .put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.2.3")))
+        .build();
+      NodePackagesVersions second = NodePackagesVersions.builder()
+        .put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.2.6")))
+        .build();
 
       assertThat(first.merge(second).get(TYPESCRIPT, COMMON)).isEqualTo(new NodePackageVersion("1.2.3"));
       assertThat(second.merge(first).get(TYPESCRIPT, COMMON)).isEqualTo(new NodePackageVersion("1.2.6"));
@@ -74,8 +84,12 @@ class NodePackagesVersionsTest {
 
     @Test
     void shouldNotMuteOperands() {
-      NodePackagesVersions versions = NodePackagesVersions.builder().put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.2.3"))).build();
-      NodePackagesVersions other = NodePackagesVersions.builder().put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.2.6"))).build();
+      NodePackagesVersions versions = NodePackagesVersions.builder()
+        .put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.2.3")))
+        .build();
+      NodePackagesVersions other = NodePackagesVersions.builder()
+        .put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.2.6")))
+        .build();
 
       versions.merge(other);
       assertThat(versions.get(TYPESCRIPT, COMMON)).isEqualTo(new NodePackageVersion("1.2.3"));
@@ -84,8 +98,12 @@ class NodePackagesVersionsTest {
 
     @Test
     void shouldNotMergeWhenSourceIsDistinct() {
-      NodePackagesVersions versions = NodePackagesVersions.builder().put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.2.3"))).build();
-      NodePackagesVersions other = NodePackagesVersions.builder().put(VUE, List.of(new NodePackage(TYPESCRIPT, "1.2.6"))).build();
+      NodePackagesVersions versions = NodePackagesVersions.builder()
+        .put(COMMON, List.of(new NodePackage(TYPESCRIPT, "1.2.3")))
+        .build();
+      NodePackagesVersions other = NodePackagesVersions.builder()
+        .put(VUE, List.of(new NodePackage(TYPESCRIPT, "1.2.6")))
+        .build();
 
       NodePackagesVersions merged = versions.merge(other);
 

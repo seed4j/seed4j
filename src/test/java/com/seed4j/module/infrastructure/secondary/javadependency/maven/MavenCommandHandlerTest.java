@@ -878,23 +878,20 @@ class MavenCommandHandlerTest {
 
       mavenCommandHandler.handle(new RemoveDirectJavaDependency(dependencyId("org.junit.jupiter", "junit-jupiter-engine")));
 
-      assertThat(contentNormalizingNewLines(pom))
-        .contains("<spring-boot.version>")
-        .contains("</spring-boot.version>")
-        .contains(
-          """
-                <dependencies>
-                  <dependency>
-                    <groupId>org.junit.jupiter</groupId>
-                    <artifactId>junit-jupiter-engine</artifactId>
-                    <version>${spring-boot.version}</version>
-                    <classifier>test</classifier>
-                    <scope>test</scope>
-                    <optional>true</optional>
-                  </dependency>
-                </dependencies>
-          """
-        );
+      assertThat(contentNormalizingNewLines(pom)).contains("<spring-boot.version>").contains("</spring-boot.version>").contains(
+        """
+              <dependencies>
+                <dependency>
+                  <groupId>org.junit.jupiter</groupId>
+                  <artifactId>junit-jupiter-engine</artifactId>
+                  <version>${spring-boot.version}</version>
+                  <classifier>test</classifier>
+                  <scope>test</scope>
+                  <optional>true</optional>
+                </dependency>
+              </dependencies>
+        """
+      );
     }
 
     @Test
@@ -1140,14 +1137,12 @@ class MavenCommandHandlerTest {
 
         addMavenEnforcerPlugin(pom);
 
-        assertThat(contentNormalizingNewLines(pom))
-          .contains(pluginManagement())
-          .doesNotContain(
-            """
-              <build>
-              </build>
-            """
-          );
+        assertThat(contentNormalizingNewLines(pom)).contains(pluginManagement()).doesNotContain(
+          """
+            <build>
+            </build>
+          """
+        );
       }
 
       @Test
@@ -1156,16 +1151,14 @@ class MavenCommandHandlerTest {
 
         addMavenEnforcerPlugin(pom);
 
-        assertThat(contentNormalizingNewLines(pom))
-          .contains(pluginManagement())
-          .doesNotContain(
-            """
-              <build>
-                <pluginManagement>
-                </pluginManagement>
-              </build>
-            """
-          );
+        assertThat(contentNormalizingNewLines(pom)).contains(pluginManagement()).doesNotContain(
+          """
+            <build>
+              <pluginManagement>
+              </pluginManagement>
+            </build>
+          """
+        );
       }
 
       @Test
@@ -1467,14 +1460,12 @@ class MavenCommandHandlerTest {
 
         addMavenEnforcerPlugin(pom);
 
-        assertThat(contentNormalizingNewLines(pom))
-          .contains(plugins())
-          .doesNotContain(
-            """
-              <build>
-              </build>
-            """
-          );
+        assertThat(contentNormalizingNewLines(pom)).contains(plugins()).doesNotContain(
+          """
+            <build>
+            </build>
+          """
+        );
       }
 
       @Test
@@ -1483,18 +1474,16 @@ class MavenCommandHandlerTest {
 
         addMavenEnforcerPlugin(pom);
 
-        assertThat(contentNormalizingNewLines(pom))
-          .contains(plugins())
-          .doesNotContain(
-            """
-                <plugins>
-                  <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                  </plugin>
-                </plugins>
-            """
-          );
+        assertThat(contentNormalizingNewLines(pom)).contains(plugins()).doesNotContain(
+          """
+              <plugins>
+                <plugin>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+              </plugins>
+          """
+        );
       }
 
       @Test

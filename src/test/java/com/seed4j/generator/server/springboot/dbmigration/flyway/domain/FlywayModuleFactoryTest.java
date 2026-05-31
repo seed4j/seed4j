@@ -56,16 +56,14 @@ class FlywayModuleFactoryTest {
 
     Seed4JModule module = factory.buildMysqlDependencyModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile())
-      .hasFile("pom.xml")
-      .containing(
-        """
-            <dependency>
-              <groupId>org.flywaydb</groupId>
-              <artifactId>flyway-mysql</artifactId>
-            </dependency>
-        """
-      );
+    assertThatModuleWithFiles(module, pomFile()).hasFile("pom.xml").containing(
+      """
+          <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+          </dependency>
+      """
+    );
   }
 
   @Test
@@ -74,16 +72,14 @@ class FlywayModuleFactoryTest {
 
     Seed4JModule module = factory.buildPostgreSQLDependencyModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile())
-      .hasFile("pom.xml")
-      .containing(
-        """
-            <dependency>
-              <groupId>org.flywaydb</groupId>
-              <artifactId>flyway-database-postgresql</artifactId>
-            </dependency>
-        """
-      );
+    assertThatModuleWithFiles(module, pomFile()).hasFile("pom.xml").containing(
+      """
+          <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+          </dependency>
+      """
+    );
   }
 
   @Test
@@ -92,15 +88,13 @@ class FlywayModuleFactoryTest {
 
     Seed4JModule module = factory.buildMsSqlServerDependencyModule(properties);
 
-    assertThatModuleWithFiles(module, pomFile())
-      .hasFile("pom.xml")
-      .containing(
-        """
-            <dependency>
-              <groupId>org.flywaydb</groupId>
-              <artifactId>flyway-sqlserver</artifactId>
-            </dependency>
-        """
-      );
+    assertThatModuleWithFiles(module, pomFile()).hasFile("pom.xml").containing(
+      """
+          <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-sqlserver</artifactId>
+          </dependency>
+      """
+    );
   }
 }

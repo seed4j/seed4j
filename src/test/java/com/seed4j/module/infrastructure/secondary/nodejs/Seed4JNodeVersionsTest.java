@@ -46,7 +46,9 @@ class Seed4JNodeVersionsTest {
   @Test
   void shouldReadFirstReadableVersion() {
     NodePackagesVersionsReader firstReader = () ->
-      NodePackagesVersions.builder().put(COMMON, packages(new NodePackage("vue", "1.2.3"))).build();
+      NodePackagesVersions.builder()
+        .put(COMMON, packages(new NodePackage("vue", "1.2.3")))
+        .build();
     NodePackagesVersionsReader secondReader = () ->
       NodePackagesVersions.builder()
         .put(COMMON, packages(new NodePackage("vue", "1.2.7")))

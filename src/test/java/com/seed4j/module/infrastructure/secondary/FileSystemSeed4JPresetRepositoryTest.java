@@ -72,7 +72,9 @@ class FileSystemSeed4JPresetRepositoryTest {
   @Test
   void shouldNotReturnPresetFromUnknownFolder() {
     ProjectFiles projectFiles = mock(ProjectFiles.class);
-    lenient().when(projectFiles.findRecursivelyInPath("/%s".formatted(DEFAULT_PRESET_FOLDER))).thenThrow(GeneratorException.class);
+    lenient()
+      .when(projectFiles.findRecursivelyInPath("/%s".formatted(DEFAULT_PRESET_FOLDER)))
+      .thenThrow(GeneratorException.class);
     FileSystemSeed4JPresetRepository fileSystemSeed4JPresetRepository = new FileSystemSeed4JPresetRepository(
       JsonHelper.jsonMapper(),
       projectFiles,

@@ -11,7 +11,9 @@ class HeaderAssertions {
   HeaderAssertions(String header) {
     this.header = header;
 
-    assertThat(CucumberRestTestContext.getResponseHeader(header)).as("Can't find header " + header).isNotEmpty();
+    assertThat(CucumberRestTestContext.getResponseHeader(header))
+      .as("Can't find header " + header)
+      .isNotEmpty();
   }
 
   public void containing(String value) {

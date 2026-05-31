@@ -79,15 +79,13 @@ class PrettierModuleFactoryTest {
 
     Seed4JModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFile())
-      .hasFile(".lintstagedrc.cjs")
-      .containing(
-        """
-        module.exports = {
-          '*.{md,json*,yml,html,css,scss,java,xml,feature}': ['prettier --write'],
-        };
-        """
-      );
+    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFile()).hasFile(".lintstagedrc.cjs").containing(
+      """
+      module.exports = {
+        '*.{md,json*,yml,html,css,scss,java,xml,feature}': ['prettier --write'],
+      };
+      """
+    );
   }
 
   private Seed4JModuleProperties properties(String folder) {

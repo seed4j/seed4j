@@ -191,17 +191,14 @@ public class MavenModuleFactory {
       .versionSlug("maven-enforcer-plugin")
       .addExecution(pluginExecution().goals("enforce").id("enforce-versions"))
       .addExecution(
-        pluginExecution()
-          .goals("enforce")
-          .id("enforce-dependencyConvergence")
-          .configuration(
-            """
-            <rules>
-              <DependencyConvergence />
-            </rules>
-            <fail>false</fail>
-            """
-          )
+        pluginExecution().goals("enforce").id("enforce-dependencyConvergence").configuration(
+          """
+          <rules>
+            <DependencyConvergence />
+          </rules>
+          <fail>false</fail>
+          """
+        )
       )
       .configuration(
         """

@@ -111,17 +111,13 @@ public class SonarQubeModuleFactory {
     return propertiesPluginBuilder()
       .versionSlug("properties-maven-plugin")
       .addExecution(
-        pluginExecution()
-          .goals("read-project-properties")
-          .id("default-cli")
-          .phase(INITIALIZE)
-          .configuration(
-            """
-            <files>
-              <file>sonar-project.properties</file>
-            </files>
-            """
-          )
+        pluginExecution().goals("read-project-properties").id("default-cli").phase(INITIALIZE).configuration(
+          """
+          <files>
+            <file>sonar-project.properties</file>
+          </files>
+          """
+        )
       )
       .build();
   }

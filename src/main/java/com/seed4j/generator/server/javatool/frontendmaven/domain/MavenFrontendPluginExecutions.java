@@ -17,23 +17,17 @@ final class MavenFrontendPluginExecutions {
 
   static MavenPluginExecution.MavenPluginExecutionOptionalBuilder installNode(NodePackageManager nodePackageManager) {
     return switch (nodePackageManager) {
-      case NPM -> pluginExecution()
-        .goals("install-node-and-npm")
-        .id("install-node-and-npm")
-        .configuration(
-          """
-          <nodeVersion>${node.version}</nodeVersion>
-          <npmVersion>${npm.version}</npmVersion>
-          """
-        );
-      case PNPM -> pluginExecution()
-        .goals("install-node-and-corepack")
-        .id("install-node-and-corepack")
-        .configuration(
-          """
-          <nodeVersion>${node.version}</nodeVersion>
-          """
-        );
+      case NPM -> pluginExecution().goals("install-node-and-npm").id("install-node-and-npm").configuration(
+        """
+        <nodeVersion>${node.version}</nodeVersion>
+        <npmVersion>${npm.version}</npmVersion>
+        """
+      );
+      case PNPM -> pluginExecution().goals("install-node-and-corepack").id("install-node-and-corepack").configuration(
+        """
+        <nodeVersion>${node.version}</nodeVersion>
+        """
+      );
     };
   }
 
@@ -46,31 +40,23 @@ final class MavenFrontendPluginExecutions {
 
   static MavenPluginExecution.MavenPluginExecutionOptionalBuilder buildFront(NodePackageManager nodePackageManager) {
     return switch (nodePackageManager) {
-      case NPM -> pluginExecution()
-        .goals(NPM)
-        .id("build front")
-        .phase(GENERATE_RESOURCES)
-        .configuration(
-          """
-          <arguments>run build</arguments>
-          <environmentVariables>
-            <APP_VERSION>${project.version}</APP_VERSION>
-          </environmentVariables>
-          <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
-          """
-        );
-      case PNPM -> pluginExecution()
-        .goals(COREPACK)
-        .id("build front")
-        .phase(GENERATE_RESOURCES)
-        .configuration(
-          """
-          <arguments>pnpm build</arguments>
-          <environmentVariables>
-            <APP_VERSION>${project.version}</APP_VERSION>
-          </environmentVariables>
-          """
-        );
+      case NPM -> pluginExecution().goals(NPM).id("build front").phase(GENERATE_RESOURCES).configuration(
+        """
+        <arguments>run build</arguments>
+        <environmentVariables>
+          <APP_VERSION>${project.version}</APP_VERSION>
+        </environmentVariables>
+        <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
+        """
+      );
+      case PNPM -> pluginExecution().goals(COREPACK).id("build front").phase(GENERATE_RESOURCES).configuration(
+        """
+        <arguments>pnpm build</arguments>
+        <environmentVariables>
+          <APP_VERSION>${project.version}</APP_VERSION>
+        </environmentVariables>
+        """
+      );
     };
   }
 
@@ -92,16 +78,12 @@ final class MavenFrontendPluginExecutions {
     String pluginExecutionId
   ) {
     return switch (nodePackageManager) {
-      case NPM -> pluginExecution()
-        .goals(NPM)
-        .id(pluginExecutionId)
-        .phase(TEST)
-        .configuration(
-          """
-          <arguments>run %s</arguments>
-          <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
-          """.formatted(nodeScriptName)
-        );
+      case NPM -> pluginExecution().goals(NPM).id(pluginExecutionId).phase(TEST).configuration(
+        """
+        <arguments>run %s</arguments>
+        <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
+        """.formatted(nodeScriptName)
+      );
       case PNPM -> pluginExecution()
         .goals(COREPACK)
         .id(pluginExecutionId)

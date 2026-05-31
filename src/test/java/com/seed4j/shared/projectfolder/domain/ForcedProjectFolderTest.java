@@ -35,7 +35,9 @@ class ForcedProjectFolderTest {
   @ParameterizedTest
   @ValueSource(
     strings = {
-      "/tmp/seed4j/my-user/21018cf8-9a43-4935-9617-6ea7eab55356", "/tmp/seed4j/sub/folder/directory", "/tmp/seed4j/sub/../directory",
+      "/tmp/seed4j/my-user/21018cf8-9a43-4935-9617-6ea7eab55356",
+      "/tmp/seed4j/sub/folder/directory",
+      "/tmp/seed4j/sub/../directory",
     }
   )
   void shouldBeInvalidWithNestedDirectories(String rootDir) {
@@ -49,6 +51,8 @@ class ForcedProjectFolderTest {
 
   @Test
   void shouldGetValidPath() {
-    assertThat(forcedProjectFolder.generatePath()).startsWith(Path.of("/tmp/seed4j") + File.separator).matches(ENDING_BY_UUID_REGEX);
+    assertThat(forcedProjectFolder.generatePath())
+      .startsWith(Path.of("/tmp/seed4j") + File.separator)
+      .matches(ENDING_BY_UUID_REGEX);
   }
 }

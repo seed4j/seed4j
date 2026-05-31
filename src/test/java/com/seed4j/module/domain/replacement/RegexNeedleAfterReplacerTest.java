@@ -37,16 +37,14 @@ class RegexNeedleAfterReplacerTest {
   void shouldReplaceLineEndNeedle() {
     RegexNeedleAfterReplacer replacer = new RegexNeedleAfterReplacer(always(), Pattern.compile("ne{1,2}dle !-->$", Pattern.MULTILINE));
 
-    String updatedContent = replacer
-      .replacement()
-      .apply(
-        """
-        <root>
-        <!-- needle !-->
-        </root>
-        """,
-        "<element />"
-      );
+    String updatedContent = replacer.replacement().apply(
+      """
+      <root>
+      <!-- needle !-->
+      </root>
+      """,
+      "<element />"
+    );
 
     assertThat(updatedContent).isEqualTo(
       """
@@ -62,18 +60,16 @@ class RegexNeedleAfterReplacerTest {
   void shouldReplaceLinePartNeedle() {
     RegexNeedleAfterReplacer replacer = new RegexNeedleAfterReplacer(always(), Pattern.compile("<!-- ne{1,2}dle", Pattern.MULTILINE));
 
-    String updatedContent = replacer
-      .replacement()
-      .apply(
-        """
-        <root>
-          <!-- needle !-->
+    String updatedContent = replacer.replacement().apply(
+      """
+      <root>
+        <!-- needle !-->
 
-          <!-- needle !-->
-        </root>
-        """,
-        "<element />"
-      );
+        <!-- needle !-->
+      </root>
+      """,
+      "<element />"
+    );
 
     assertThat(updatedContent).isEqualTo(
       """

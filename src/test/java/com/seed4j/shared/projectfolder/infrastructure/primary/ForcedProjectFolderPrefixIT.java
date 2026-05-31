@@ -25,15 +25,13 @@ class ForcedProjectFolderPrefixIT {
   void shouldHandleProjectWithValidProjectFolder() throws Exception {
     mockMvc
       .perform(
-        post("/api/modules/init/apply-patch")
-          .contentType(MediaType.APPLICATION_JSON)
-          .content(
-            """
-              {
-                "projectFolder": "/tmp/forced/my-project"
-              }
-            """
-          )
+        post("/api/modules/init/apply-patch").contentType(MediaType.APPLICATION_JSON).content(
+          """
+            {
+              "projectFolder": "/tmp/forced/my-project"
+            }
+          """
+        )
       )
       .andExpect(status().isOk());
   }
@@ -42,15 +40,13 @@ class ForcedProjectFolderPrefixIT {
   void shouldNotHandleProjectWithWrongProjectFolder() throws Exception {
     mockMvc
       .perform(
-        post("/api/modules/init/apply-patch")
-          .contentType(MediaType.APPLICATION_JSON)
-          .content(
-            """
-              {
-                "projectFolder": "/home/my-project"
-              }
-            """
-          )
+        post("/api/modules/init/apply-patch").contentType(MediaType.APPLICATION_JSON).content(
+          """
+            {
+              "projectFolder": "/home/my-project"
+            }
+          """
+        )
       )
       .andExpect(status().isBadRequest());
   }

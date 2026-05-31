@@ -16,6 +16,7 @@ class RestSeed4JModulePropertiesDefinitionTest {
   }
 
   static String json() {
+    // @formatter:off
     // language=json
     return (
       """
@@ -30,5 +31,6 @@ class RestSeed4JModulePropertiesDefinitionTest {
       {"defaultValue":"2","description":"Number of spaces in indentation","key":"indentSize","mandatory":false,"order":500,"type":"INTEGER"}\
       ]}"""
     );
+    // @formatter:on
   }
 }

@@ -32,14 +32,12 @@ class TextNeedleBeforeReplacerTest {
   void shouldInsertTextLineBeforeFirstLineNeedle() {
     TextNeedleBeforeReplacer replacer = new TextNeedleBeforeReplacer(always(), "<!-- needle !-->");
 
-    String updatedContent = replacer
-      .replacement()
-      .apply(
-        """
-        <!-- needle !-->
-        """,
-        "<element />"
-      );
+    String updatedContent = replacer.replacement().apply(
+      """
+      <!-- needle !-->
+      """,
+      "<element />"
+    );
 
     assertThat(updatedContent).isEqualTo(
       """
@@ -53,16 +51,14 @@ class TextNeedleBeforeReplacerTest {
   void shouldInsertTextLineBeforeNeedleLine() {
     TextNeedleBeforeReplacer replacer = new TextNeedleBeforeReplacer(always(), "<!-- needle !-->");
 
-    String updatedContent = replacer
-      .replacement()
-      .apply(
-        """
-        <root>
-        <!-- needle !-->
-        </root>
-        """,
-        "<element />"
-      );
+    String updatedContent = replacer.replacement().apply(
+      """
+      <root>
+      <!-- needle !-->
+      </root>
+      """,
+      "<element />"
+    );
 
     assertThat(updatedContent).isEqualTo(
       """
@@ -78,17 +74,15 @@ class TextNeedleBeforeReplacerTest {
   void shouldInsertTextLineBeforeNeedleLinePart() {
     TextNeedleBeforeReplacer replacer = new TextNeedleBeforeReplacer(always(), "<!-- needle !-->");
 
-    String updatedContent = replacer
-      .replacement()
-      .apply(
-        """
-        <root>
-          <!-- needle !-->
+    String updatedContent = replacer.replacement().apply(
+      """
+      <root>
+        <!-- needle !-->
 
-        </root>
-        """,
-        "<element />"
-      );
+      </root>
+      """,
+      "<element />"
+    );
 
     assertThat(updatedContent).isEqualTo(
       """
@@ -105,20 +99,18 @@ class TextNeedleBeforeReplacerTest {
   void shouldReplaceMultipleNeedles() {
     TextNeedleBeforeReplacer replacer = new TextNeedleBeforeReplacer(always(), "<!-- needle !-->");
 
-    String updatedContent = replacer
-      .replacement()
-      .apply(
-        """
-        <root>
-          <!-- needle !-->
+    String updatedContent = replacer.replacement().apply(
+      """
+      <root>
+        <!-- needle !-->
 
 
-          <!-- needle !-->
-          <!-- needle !--> with trailing text
-        </root>
-        """,
-        "<element />"
-      );
+        <!-- needle !-->
+        <!-- needle !--> with trailing text
+      </root>
+      """,
+      "<element />"
+    );
 
     assertThat(updatedContent).isEqualTo(
       """

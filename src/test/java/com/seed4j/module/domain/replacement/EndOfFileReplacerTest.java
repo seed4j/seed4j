@@ -20,15 +20,13 @@ class EndOfFileReplacerTest {
   void shouldReplaceLineEnd() {
     EndOfFileReplacer replacer = new EndOfFileReplacer(always());
 
-    String updatedContent = replacer
-      .replacement()
-      .apply(
-        """
-        <root>
-        </root>
-        """,
-        "<element />"
-      );
+    String updatedContent = replacer.replacement().apply(
+      """
+      <root>
+      </root>
+      """,
+      "<element />"
+    );
 
     assertThat(updatedContent).isEqualTo(
       """

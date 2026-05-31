@@ -108,40 +108,38 @@ class JacocoModuleFactoryTest {
 
       Seed4JModule module = factory.buildJacocoWithMinCoverageCheckModule(properties);
 
-      assertThatModuleWithFiles(module, pomFile())
-        .hasFile("pom.xml")
-        .containing(
-          """
-                      <execution>
-                        <id>check</id>
-                        <goals>
-                          <goal>check</goal>
-                        </goals>
-                        <configuration>
-                          <dataFile>target/jacoco/allTest.exec</dataFile>
-                          <rules>
-                            <rule>
-                              <element>CLASS</element>
-                              <limits>
-                                <limit>
-                                  <counter>BRANCH</counter>
-                                  <value>MISSEDCOUNT</value>
-                                  <maximum>0</maximum>
-                                </limit>
-                                <limit>
-                                  <counter>LINE</counter>
-                                  <value>MISSEDCOUNT</value>
-                                  <maximum>0</maximum>
-                                </limit>
-                              </limits>
-                            </rule>
-                          </rules>
-                        </configuration>
-                      </execution>
-                    </executions>
-                  </plugin>
-          """
-        );
+      assertThatModuleWithFiles(module, pomFile()).hasFile("pom.xml").containing(
+        """
+                    <execution>
+                      <id>check</id>
+                      <goals>
+                        <goal>check</goal>
+                      </goals>
+                      <configuration>
+                        <dataFile>target/jacoco/allTest.exec</dataFile>
+                        <rules>
+                          <rule>
+                            <element>CLASS</element>
+                            <limits>
+                              <limit>
+                                <counter>BRANCH</counter>
+                                <value>MISSEDCOUNT</value>
+                                <maximum>0</maximum>
+                              </limit>
+                              <limit>
+                                <counter>LINE</counter>
+                                <value>MISSEDCOUNT</value>
+                                <maximum>0</maximum>
+                              </limit>
+                            </limits>
+                          </rule>
+                        </rules>
+                      </configuration>
+                    </execution>
+                  </executions>
+                </plugin>
+        """
+      );
     }
   }
 

@@ -3,7 +3,7 @@ FROM consul:1.15.4
 FROM jhipster/consul-config-loader:v0.4.1
 FROM jhipster/jhipster-registry:v7.5.0
 FROM quay.io/keycloak/keycloak:26.6.2
-FROM mariadb:12.2.2
+FROM mariadb:12.3.2
 FROM mongo:8.3.2
 FROM mysql:9.7.0
 FROM cassandra:5.0.8

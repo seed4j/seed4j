@@ -1,5 +1,7 @@
 package com.seed4j.module.infrastructure.secondary;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.errorprone.annotations.MustBeClosed;
 import com.seed4j.module.domain.ProjectFiles;
 import com.seed4j.shared.error.domain.Assert;
@@ -10,14 +12,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
-import org.apache.commons.io.IOUtils;
 import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +54,7 @@ public class FileSystemProjectFiles implements ProjectFiles {
   @ExcludeFromGeneratedCodeCoverage(reason = "The error handling is an hard to test implementation detail")
   private static String toString(InputStream input) {
     try {
-      return IOUtils.toString(input, StandardCharsets.UTF_8);
+      return new String(input.readAllBytes(), UTF_8);
     } catch (IOException e) {
       throw GeneratorException.technicalError("Error reading file: " + e.getMessage(), e);
     }

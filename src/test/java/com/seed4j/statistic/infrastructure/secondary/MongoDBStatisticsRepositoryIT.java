@@ -1,14 +1,14 @@
 package com.seed4j.statistic.infrastructure.secondary;
 
-import static com.seed4j.statistic.domain.AppliedModuleFixture.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.seed4j.statistic.domain.AppliedModuleFixture.appliedModule;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.IntegrationTest;
 import com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug;
 import com.seed4j.statistic.domain.AppliedModule;
 import com.seed4j.statistic.domain.StatisticsRepository;
 import com.seed4j.statistic.domain.criteria.StatisticsCriteria;
-import java.util.Collections;
+import java.util.Map;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -43,7 +43,7 @@ class MongoDBStatisticsRepositoryIT {
   @SuppressWarnings("resource")
   static void startMongo() {
     mongoDbContainer = new MongoDBContainer(DockerImageName.parse("mongo:5.0.11"))
-      .withTmpFs(Collections.singletonMap("/testtmpfs", "rw"))
+      .withTmpFs(Map.of("/testtmpfs", "rw"))
       .withCommand(
         """
         --wiredTigerCacheSizeGB 0.25 \

@@ -80,7 +80,7 @@
     <checkstyle.version>13.5.0</checkstyle.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
 
-    <frontend-maven-plugin.version>2.0.0</frontend-maven-plugin.version>
+    <frontend-maven-plugin.version>2.0.1</frontend-maven-plugin.version>
     <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
     <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
     <approvaltests.version>30.1.1</approvaltests.version>

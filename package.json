@@ -68,7 +68,7 @@
     "@typescript-eslint/eslint-plugin": "8.58.2",
     "@typescript-eslint/parser": "8.58.2",
     "@vitejs/plugin-vue": "6.0.7",
-    "@vitest/coverage-istanbul": "4.1.8",
+    "@vitest/coverage-istanbul": "4.1.9",
     "@vue/test-utils": "2.4.11",
     "concurrently": "10.0.3",
     "cpy-cli": "7.0.0",
@@ -101,7 +101,7 @@
     "typescript-eslint": "8.58.2",
     "vite": "8.0.16",
     "vite-plugin-istanbul": "8.0.0",
-    "vitest": "4.1.8",
+    "vitest": "4.1.9",
     "vitest-sonar-reporter": "3.0.0",
     "vue-tsc": "3.3.5",
     "wait-on": "9.0.10"

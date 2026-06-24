@@ -9,7 +9,7 @@ FROM mysql:9.7.1
 FROM cassandra:5.0.8
 FROM mcr.microsoft.com/mssql/server:2025-latest
 FROM postgres:18.4
-FROM apache/kafka-native:4.3.0
+FROM apache/kafka-native:4.3.1
 FROM tchiotludo/akhq:0.27.1
 FROM apachepulsar/pulsar:4.2.2
 FROM neo4j:2026.05.0-community

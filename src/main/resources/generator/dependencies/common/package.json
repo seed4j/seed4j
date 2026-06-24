@@ -36,7 +36,7 @@
     "i18next-http-backend": "4.0.0",
     "jsdom": "29.1.1",
     "keycloak-js": "26.2.4",
-    "lint-staged": "17.0.7",
+    "lint-staged": "17.0.8",
     "mkdirp": "3.0.1",
     "node": "24.17.0",
     "npm": "11.17.0",

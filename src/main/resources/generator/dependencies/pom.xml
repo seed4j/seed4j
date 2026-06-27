@@ -47,7 +47,7 @@
     <cassandraunit.version>4.3.1.0</cassandraunit.version>
     <testcontainers.version>2.0.5</testcontainers.version>
     <archunit-junit5.version>1.4.2</archunit-junit5.version>
-    <cucumber.version>7.34.3</cucumber.version>
+    <cucumber.version>7.34.4</cucumber.version>
     <approvaltests.version>31.0.0</approvaltests.version>
     <jqwik.version>1.10.1</jqwik.version>
     <!-- Maven Plugins -->

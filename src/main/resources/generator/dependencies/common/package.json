@@ -48,7 +48,7 @@
     "pnpm": "10.34.4",
     "postcss": "8.5.15",
     "postcss-cli": "11.0.1",
-    "prettier": "3.8.5",
+    "prettier": "3.9.1",
     "prettier-plugin-gherkin": "4.0.0",
     "prettier-plugin-java": "2.8.1",
     "prettier-plugin-organize-imports": "4.3.0",

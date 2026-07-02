@@ -51,8 +51,9 @@ class JavaDependencyManagementTest {
   void shouldNotUpdateExistingDefaultVersionDependency() {
     ProjectJavaDependencies projectJavaDependencies = ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(new JavaDependencies(List.of(defaultVersionDependency())))
-      .dependencies(JavaDependencies.EMPTY);
+      .dependenciesManagement(new JavaDependencies(List.of(defaultVersionDependency())))
+      .dependencies(JavaDependencies.EMPTY)
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands commands = changes().projectDependencies(projectJavaDependencies).build();
 
@@ -63,8 +64,9 @@ class JavaDependencyManagementTest {
   void shouldUpgradeDependencyOptionality() {
     ProjectJavaDependencies projectJavaDependencies = ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(new JavaDependencies(List.of(optionalSpringBootDependency())))
-      .dependencies(JavaDependencies.EMPTY);
+      .dependenciesManagement(new JavaDependencies(List.of(optionalSpringBootDependency())))
+      .dependencies(JavaDependencies.EMPTY)
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands commands = changes().projectDependencies(projectJavaDependencies).build();
 
@@ -78,8 +80,9 @@ class JavaDependencyManagementTest {
   void shouldNotDowngradeDependencyOptionality() {
     ProjectJavaDependencies projectJavaDependencies = ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(new JavaDependencies(List.of(defaultVersionDependency())))
-      .dependencies(JavaDependencies.EMPTY);
+      .dependenciesManagement(new JavaDependencies(List.of(defaultVersionDependency())))
+      .dependencies(JavaDependencies.EMPTY)
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands commands = changes().dependency(optionalSpringBootDependency()).projectDependencies(projectJavaDependencies).build();
 
@@ -152,8 +155,9 @@ class JavaDependencyManagementTest {
   private ProjectJavaDependencies projectDependenciesWithoutJunitVersion() {
     return ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(noJunitVersionInCurrentProject())
-      .dependencies(JavaDependencies.EMPTY);
+      .dependenciesManagement(noJunitVersionInCurrentProject())
+      .dependencies(JavaDependencies.EMPTY)
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
   }
 
   private JavaDependencies noJunitVersionInCurrentProject() {
@@ -173,8 +177,9 @@ class JavaDependencyManagementTest {
   void shouldNotUpdateDependencyWithSameType() {
     ProjectJavaDependencies projectDependencies = ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(new JavaDependencies(List.of(springBootDependencyManagement())))
-      .dependencies(JavaDependencies.EMPTY);
+      .dependenciesManagement(new JavaDependencies(List.of(springBootDependencyManagement())))
+      .dependencies(JavaDependencies.EMPTY)
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands changes = changes().dependency(springBootDependencyManagement()).projectDependencies(projectDependencies).build();
 
@@ -187,8 +192,9 @@ class JavaDependencyManagementTest {
 
     ProjectJavaDependencies projectDependencies = ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(new JavaDependencies(List.of(noTypeDependencyManagement)))
-      .dependencies(JavaDependencies.EMPTY);
+      .dependenciesManagement(new JavaDependencies(List.of(noTypeDependencyManagement)))
+      .dependencies(JavaDependencies.EMPTY)
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands changes = changes().dependency(springBootDependencyManagement()).projectDependencies(projectDependencies).build();
 
@@ -204,8 +210,9 @@ class JavaDependencyManagementTest {
 
     ProjectJavaDependencies projectDependencies = ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(new JavaDependencies(List.of(differentClassifier)))
-      .dependencies(JavaDependencies.EMPTY);
+      .dependenciesManagement(new JavaDependencies(List.of(differentClassifier)))
+      .dependencies(JavaDependencies.EMPTY)
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
 
     JavaBuildCommands changes = changes().dependency(optionalTestDependency()).projectDependencies(projectDependencies).build();
 
@@ -222,8 +229,9 @@ class JavaDependencyManagementTest {
   private ProjectJavaDependencies projectJavaDependencies() {
     return ProjectJavaDependencies.builder()
       .versions(projectVersions())
-      .dependenciesManagements(projectDependenciesManagement())
-      .dependencies(JavaDependencies.EMPTY);
+      .dependenciesManagement(projectDependenciesManagement())
+      .dependencies(JavaDependencies.EMPTY)
+      .annotationProcessingDependencies(JavaAnnotationProcessorDependencies.EMPTY);
   }
 
   private ProjectJavaDependenciesVersions projectVersions() {

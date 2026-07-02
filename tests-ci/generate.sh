@@ -149,7 +149,6 @@ elif [[ $application == fullapp* ]]; then
     "github-codespaces" \
     "gitpod" \
     "java-memoizers" \
-    "java-enums" \
     "spring-boot-local-profile" \
     "internationalized-errors" \
     "spring-boot-cache" \

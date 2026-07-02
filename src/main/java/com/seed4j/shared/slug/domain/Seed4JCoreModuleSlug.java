@@ -68,7 +68,6 @@ public enum Seed4JCoreModuleSlug implements Seed4JModuleSlugFactory {
   JACOCO_WITH_MIN_COVERAGE_CHECK("jacoco-with-min-coverage-check", RANK_A),
   JAVA_ARCHUNIT("java-archunit", RANK_A),
   JAVA_BASE("java-base", RANK_S),
-  JAVA_ENUMS("java-enums", RANK_B),
   JAVA_MEMOIZERS("java-memoizers", RANK_B),
   JIB("jib", RANK_B),
   JMOLECULES("jmolecules", RANK_B),

@@ -17,12 +17,7 @@ class InternationalizedErrorsModuleConfiguration {
       .slug(Seed4JCoreModuleSlug.INTERNATIONALIZED_ERRORS)
       .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().build())
       .apiDoc("Spring Boot", "Add internationalization for application errors")
-      .organization(
-        Seed4JModuleOrganization.builder()
-          .addDependency(Seed4JCoreModuleSlug.JAVA_ENUMS)
-          .addDependency(Seed4JCoreModuleSlug.SPRING_BOOT_MVC_EMPTY)
-          .build()
-      )
+      .organization(Seed4JModuleOrganization.builder().addDependency(Seed4JCoreModuleSlug.SPRING_BOOT_MVC_EMPTY).build())
       .tags("server", "spring")
       .factory(internationalizedErrors::buildModule);
   }

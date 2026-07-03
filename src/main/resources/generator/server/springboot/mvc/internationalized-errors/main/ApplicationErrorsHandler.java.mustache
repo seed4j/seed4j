@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import {{ packageName }}.shared.enumeration.domain.Enums;
 import {{ packageName }}.shared.error.domain.ErrorKey;
 import {{ packageName }}.shared.error.domain.{{ baseName }}Exception;
 
@@ -34,7 +33,9 @@ class {{ baseName }}ErrorsHandler {
 
   @ExceptionHandler({{ baseName }}Exception.class)
   ProblemDetail handle{{ baseName }}Exception({{ baseName }}Exception exception) {
-    HttpStatus status = Optional.ofNullable(Enums.map(exception.status(), HttpStatus.class)).orElse(HttpStatus.INTERNAL_SERVER_ERROR);
+    HttpStatus status = Optional.ofNullable(exception.status())
+      .map(errorStatus -> HttpStatus.valueOf(errorStatus.name()))
+      .orElse(HttpStatus.INTERNAL_SERVER_ERROR);
     var problem = ProblemDetail.forStatusAndDetail(status, buildDetail(exception));
 
     problem.setTitle(getMessage(exception.key(), "title"));

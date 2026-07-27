@@ -63,6 +63,7 @@ class SyncElementAsserter implements ElementAsserter<SyncResponseAsserter> {
     return this;
   }
 
+  @Override
   public SyncResponseAsserter and() {
     return responseAsserter;
   }

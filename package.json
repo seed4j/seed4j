@@ -108,5 +108,8 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "allowScripts": {
+    "cypress": true
   }
 }

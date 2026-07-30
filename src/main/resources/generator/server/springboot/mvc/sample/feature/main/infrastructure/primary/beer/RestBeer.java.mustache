@@ -47,25 +47,25 @@ final class RestBeer {
     private String name;
     private BigDecimal unitPrice;
 
-    public RestBeerBuilder id(UUID id) {
+    private RestBeerBuilder id(UUID id) {
       this.id = id;
 
       return this;
     }
 
-    public RestBeerBuilder name(String name) {
+    private RestBeerBuilder name(String name) {
       this.name = name;
 
       return this;
     }
 
-    public RestBeerBuilder unitPrice(BigDecimal unitPrice) {
+    private RestBeerBuilder unitPrice(BigDecimal unitPrice) {
       this.unitPrice = unitPrice;
 
       return this;
     }
 
-    public RestBeer build() {
+    private RestBeer build() {
       return new RestBeer(this);
     }
   }

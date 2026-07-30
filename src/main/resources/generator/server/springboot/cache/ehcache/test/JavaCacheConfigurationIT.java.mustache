@@ -9,14 +9,10 @@ import org.ehcache.config.ResourceType;
 import org.ehcache.jsr107.Eh107Configuration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import {{packageName}}.IntegrationTest;
 
 @IntegrationTest(properties = { "application.cache.ehcache.max-entries=1000", "application.cache.ehcache.time-to-live-seconds=86400" })
 class CacheConfigurationIT {
-
-  @Autowired
-  private ApplicationContext applicationContext;
 
   @Autowired
   private CacheConfiguration cacheConfiguration;
@@ -37,6 +33,6 @@ class CacheConfigurationIT {
 
     assertThat(config.getResourcePools().getPoolForResource(ResourceType.Core.HEAP).getSize()).isEqualTo(1000);
 
-    assertThat(config.getExpiryPolicy().getExpiryForCreation(42L, "entry").getSeconds()).isEqualTo(86400);
+    assertThat(config.getExpiryPolicy().getExpiryForCreation(42L, "entry").toSeconds()).isEqualTo(86400);
   }
 }

@@ -81,11 +81,9 @@ class BeerEntity {
       return true;
     }
 
-    if (obj == null || getClass() != obj.getClass()) {
+    if (!(obj instanceof BeerEntity other)) {
       return false;
     }
-
-    BeerEntity other = (BeerEntity) obj;
 
     return new EqualsBuilder().append(id, other.id).isEquals();
   }

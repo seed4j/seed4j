@@ -126,11 +126,11 @@ class AsyncSpringLiquibaseTest {
     }
   }
 
-  private static class TestAsyncSpringLiquibase extends AsyncSpringLiquibase {
+  private static final class TestAsyncSpringLiquibase extends AsyncSpringLiquibase {
 
     private Duration fakeDuration = Duration.ZERO;
 
-    public TestAsyncSpringLiquibase(
+    private TestAsyncSpringLiquibase(
       Executor executor,
       Environment environment,
       LiquibaseProperties liquibaseProperties,
@@ -139,7 +139,7 @@ class AsyncSpringLiquibaseTest {
       super(executor, environment, liquibaseProperties, slownessThreshold);
     }
 
-    public void setFakeDuration(Duration fakeDuration) {
+    private void setFakeDuration(Duration fakeDuration) {
       this.fakeDuration = fakeDuration;
     }
 

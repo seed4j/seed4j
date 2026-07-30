@@ -119,13 +119,13 @@ public final class Accesses {
   }
 
   private record Access(Action action, String resource, boolean global) {
-    public static Access allAuthorized(Action action, Resource resource) {
+    static Access allAuthorized(Action action, Resource resource) {
       Assert.notNull("resource", resource);
 
       return new Access(action, resource.key(), true);
     }
 
-    public static Access specificAuthorized(Action action, Resource resource) {
+    static Access specificAuthorized(Action action, Resource resource) {
       Assert.notNull("resource", resource);
 
       return new Access(action, resource.key(), false);

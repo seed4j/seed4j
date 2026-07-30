@@ -41,10 +41,7 @@ public final class CassandraJSR310DateConverters {
 
     @Override
     public TupleValue convert(@Nonnull ZonedDateTime source) {
-      TupleValue tupleValue = type.newValue();
-      tupleValue.setInstant(0, source.toInstant());
-      tupleValue.setString(1, source.getZone().toString());
-      return tupleValue;
+      return type.newValue().setInstant(0, source.toInstant()).setString(1, source.getZone().toString());
     }
   }
 }

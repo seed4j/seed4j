@@ -1,5 +1,6 @@
 package {{packageName}}.shared.useridentity.domain;
 
+import java.util.Locale;
 import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import {{packageName}}.shared.error.domain.Assert;
@@ -8,7 +9,7 @@ public record Lastname(String lastname) implements Comparable<Lastname> {
   public Lastname(String lastname) {
     Assert.field("lastname", lastname).notBlank().maxLength(150);
 
-    this.lastname = lastname.trim().toUpperCase();
+    this.lastname = lastname.trim().toUpperCase(Locale.ROOT);
   }
 
   public static Optional<Lastname> of(String birthName) {

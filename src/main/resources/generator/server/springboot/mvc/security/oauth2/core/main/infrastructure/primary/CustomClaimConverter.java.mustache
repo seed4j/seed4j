@@ -57,6 +57,7 @@ class CustomClaimConverter implements Converter<Map<String, Object>, Map<String,
     );
   }
 
+  @Override
   public Map<String, Object> convert(Map<String, Object> claims) {
     Map<String, Object> convertedClaims = this.delegate.convert(claims);
 
@@ -107,11 +108,11 @@ class CustomClaimConverter implements Converter<Map<String, Object>, Map<String,
     void append(Map<String, Object> claim, ObjectNode user);
   }
 
-  private static class StandardClaimAppender implements ClaimAppender {
+  private static final class StandardClaimAppender implements ClaimAppender {
 
     private final String key;
 
-    public StandardClaimAppender(String key) {
+    private StandardClaimAppender(String key) {
       this.key = key;
     }
 
@@ -129,7 +130,7 @@ class CustomClaimConverter implements Converter<Map<String, Object>, Map<String,
     public void append(Map<String, Object> claim, ObjectNode user) {
       // Allow full name in a name claim - happens with Auth0
       if (user.has(NAME)) {
-        String[] name = user.get(NAME).asString().split("\\s+");
+        String[] name = user.get(NAME).asString().split("\\s+", 0);
 
         if (name.length > 0) {
           claim.put(GIVEN_NAME, name[0]);

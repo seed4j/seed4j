@@ -57,31 +57,31 @@ final class RestAccount {
     private String email;
     private Collection<String> roles;
 
-    public RestAccountBuilder username(String username) {
+    private RestAccountBuilder username(String username) {
       this.username = username;
 
       return this;
     }
 
-    public RestAccountBuilder name(String name) {
+    private RestAccountBuilder name(String name) {
       this.name = name;
 
       return this;
     }
 
-    public RestAccountBuilder email(String email) {
+    private RestAccountBuilder email(String email) {
       this.email = email;
 
       return this;
     }
 
-    public RestAccountBuilder roles(Collection<String> roles) {
+    private RestAccountBuilder roles(Collection<String> roles) {
       this.roles = roles;
 
       return this;
     }
 
-    public RestAccount build() {
+    private RestAccount build() {
       return new RestAccount(this);
     }
   }

@@ -61,22 +61,22 @@ public class AuthenticationSteps {
 
     private Map<String, User> users = new ConcurrentHashMap<>();
 
-    public UsersBuilder add(String username, Role... roles) {
+    private UsersBuilder add(String username, Role... roles) {
       users.put(username, new User(username, roles));
 
       return this;
     }
 
-    public Map<String, User> build() {
+    private Map<String, User> build() {
       return Collections.unmodifiableMap(users);
     }
   }
 
-  private static class User {
+  private static final class User {
 
     private final Map<String, Object> claims;
 
-    public User(String username, Role[] roles) {
+    private User(String username, Role[] roles) {
       claims = Map.of("preferred_username", username, "roles", Stream.of(roles).map(Role::key).toList());
     }
 

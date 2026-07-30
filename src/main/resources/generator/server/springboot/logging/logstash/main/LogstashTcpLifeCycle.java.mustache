@@ -71,7 +71,7 @@ class LogstashTcpLifeCycle implements SmartLifecycle {
       logstashAppender.setRingBufferSize(properties.getRingBufferSize());
     }
     if (properties.getShutdownGracePeriod() != null) {
-      logstashAppender.setShutdownGracePeriod(Duration.buildByMilliseconds((double) properties.getShutdownGracePeriod().toMillis()));
+      logstashAppender.setShutdownGracePeriod(Duration.buildByMilliseconds(properties.getShutdownGracePeriod().toMillis()));
     }
     return logstashAppender;
   }

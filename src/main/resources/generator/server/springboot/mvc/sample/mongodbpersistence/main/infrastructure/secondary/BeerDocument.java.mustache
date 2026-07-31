@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "beers")
-class BeerDocument {
+final class BeerDocument {
 
   @Id
   @Field(name = "id")

@@ -249,31 +249,31 @@ class CustomClaimConverterTest {
       user = json.createObjectNode();
     }
 
-    public UserBuilder username(String username) {
+    private UserBuilder username(String username) {
       user.put("preferred_username", username);
 
       return this;
     }
 
-    public UserBuilder givenName(String givenName) {
+    private UserBuilder givenName(String givenName) {
       user.put("given_name", givenName);
 
       return this;
     }
 
-    public UserBuilder familyName(String familyName) {
+    private UserBuilder familyName(String familyName) {
       user.put("family_name", familyName);
 
       return this;
     }
 
-    public UserBuilder email(String email) {
+    private UserBuilder email(String email) {
       user.put("email", email);
 
       return this;
     }
 
-    public UserBuilder groups(String... groups) {
+    private UserBuilder groups(String... groups) {
       ArrayNode userGroups = user.putArray("groups");
 
       Arrays.asList(groups).forEach(userGroups::add);
@@ -281,7 +281,7 @@ class CustomClaimConverterTest {
       return this;
     }
 
-    public UserBuilder namespaceRoles(String... roles) {
+    private UserBuilder namespaceRoles(String... roles) {
       ArrayNode userRoles = user.putArray(Claims.CLAIMS_NAMESPACE + "roles");
 
       Arrays.asList(roles).forEach(userRoles::add);
@@ -289,7 +289,7 @@ class CustomClaimConverterTest {
       return this;
     }
 
-    public UserBuilder roles(String... roles) {
+    private UserBuilder roles(String... roles) {
       ArrayNode userRoles = user.putArray("dummyroles");
 
       Arrays.asList(roles).forEach(userRoles::add);
@@ -297,13 +297,13 @@ class CustomClaimConverterTest {
       return this;
     }
 
-    public UserBuilder name(String name) {
+    private UserBuilder name(String name) {
       user.put("name", name);
 
       return this;
     }
 
-    public void mock() {
+    private void mock() {
       mockUser(user);
     }
   }

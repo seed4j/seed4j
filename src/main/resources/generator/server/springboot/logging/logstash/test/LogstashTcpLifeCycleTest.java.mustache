@@ -7,6 +7,7 @@ import static {{packageName}}.wire.logstash.infrastructure.secondary.LogstashTcp
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.pattern.ThrowableHandlingConverter;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.time.Duration;
 import java.util.HashMap;
@@ -67,7 +68,7 @@ class LogstashTcpLifeCycleTest {
 
     var logstashTcpSocketAppender = logstashTcpLifeCycle.logstashTcpSocketAppender(context);
 
-    assertThat(logstashTcpSocketAppender.getDestinations()).contains(new InetSocketAddress("127.0.0.1", 50000));
+    assertThat(logstashTcpSocketAppender.getDestinations()).contains(new InetSocketAddress(InetAddress.getLoopbackAddress(), 50000));
     assertThat(logstashTcpSocketAppender.getContext()).isEqualTo(context);
     assertThat(logstashTcpSocketAppender.getRingBufferSize()).isEqualTo(4096);
     assertThat(logstashTcpSocketAppender.getShutdownGracePeriod().getMilliseconds()).isEqualTo(100);

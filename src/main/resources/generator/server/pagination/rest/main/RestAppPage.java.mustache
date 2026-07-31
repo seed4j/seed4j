@@ -91,43 +91,43 @@ public final class Rest{{baseName}}Page<T> {
       this.content = content;
     }
 
-    public Rest{{baseName}}PageBuilder<T> pageSize(int pageSize) {
+    private Rest{{baseName}}PageBuilder<T> pageSize(int pageSize) {
       this.pageSize = pageSize;
 
       return this;
     }
 
-    public Rest{{baseName}}PageBuilder<T> currentPage(int currentPage) {
+    private Rest{{baseName}}PageBuilder<T> currentPage(int currentPage) {
       this.currentPage = currentPage;
 
       return this;
     }
 
-    public Rest{{baseName}}PageBuilder<T> totalElementsCount(long totalElementsCount) {
+    private Rest{{baseName}}PageBuilder<T> totalElementsCount(long totalElementsCount) {
       this.totalElementsCount = totalElementsCount;
 
       return this;
     }
 
-    public Rest{{baseName}}PageBuilder<T> pageCount(int pageCount) {
+    private Rest{{baseName}}PageBuilder<T> pageCount(int pageCount) {
       this.pageCount = pageCount;
 
       return this;
     }
 
-    public Rest{{baseName}}PageBuilder<T> hasPrevious(boolean hasPrevious) {
+    private Rest{{baseName}}PageBuilder<T> hasPrevious(boolean hasPrevious) {
       this.hasPrevious = hasPrevious;
 
       return this;
     }
 
-    public Rest{{baseName}}PageBuilder<T> hasNext(boolean hasNext) {
+    private Rest{{baseName}}PageBuilder<T> hasNext(boolean hasNext) {
       this.hasNext = hasNext;
 
       return this;
     }
 
-    public Rest{{baseName}}Page<T> build() {
+    private Rest{{baseName}}Page<T> build() {
       return new Rest{{baseName}}Page<>(this);
     }
   }

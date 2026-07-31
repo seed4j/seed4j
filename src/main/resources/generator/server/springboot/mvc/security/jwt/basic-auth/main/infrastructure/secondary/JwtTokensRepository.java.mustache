@@ -27,6 +27,7 @@ class JwtTokensRepository implements TokensRepository {
     rememberMeValidityDuration = properties.getRememberMeTokenValidity().toSeconds();
   }
 
+  @Override
   public Token buildToken(AuthenticationQuery query) {
     Assert.notNull("query", query);
 

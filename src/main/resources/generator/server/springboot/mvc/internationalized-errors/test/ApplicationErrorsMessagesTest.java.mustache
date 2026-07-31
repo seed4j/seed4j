@@ -36,10 +36,8 @@ class {{ baseName }}ErrorsMessagesTest {
   private static final Map<String, Properties> ALL_ASSERTION_MESSAGES = loadMessages();
 
   private static Map<String, Properties> loadMessages() {
-    try {
-      return Files.list(Path.of("src/main/resources/messages/errors")).collect(
-        Collectors.toUnmodifiableMap(Path::toString, toProperties())
-      );
+    try (Stream<Path> files = Files.list(Path.of("src/main/resources/messages/errors"))) {
+      return files.collect(Collectors.toUnmodifiableMap(Path::toString, toProperties()));
     } catch (IOException _) {
       throw new AssertionError();
     }

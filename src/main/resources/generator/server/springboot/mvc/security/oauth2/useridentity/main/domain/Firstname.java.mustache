@@ -1,5 +1,6 @@
 package {{packageName}}.shared.useridentity.domain;
 
+import java.util.Locale;
 import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
@@ -21,7 +22,7 @@ public record Firstname(String firstname) implements Comparable<Firstname> {
   }
 
   private Function<MatchResult, String> toCapitalizedWord() {
-    return result -> StringUtils.capitalize(result.group(1).toLowerCase()) + result.group(2);
+    return result -> StringUtils.capitalize(result.group(1).toLowerCase(Locale.ROOT)) + result.group(2);
   }
 
   public String get() {

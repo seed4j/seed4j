@@ -7,6 +7,7 @@ import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.encoder.Encoder;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.encoder.LogstashEncoder;
@@ -51,7 +52,7 @@ class LogstashTcpConfigurationIT {
 
       var logstashTcpSocketAppender = (LogstashTcpSocketAppender) appender;
 
-      assertThat(logstashTcpSocketAppender.getDestinations()).contains(new InetSocketAddress("127.0.0.1", 50000));
+      assertThat(logstashTcpSocketAppender.getDestinations()).contains(new InetSocketAddress(InetAddress.getLoopbackAddress(), 50000));
       assertThat(logstashTcpSocketAppender.getRingBufferSize()).isEqualTo(4096);
       assertThat(logstashTcpSocketAppender.getShutdownGracePeriod().getMilliseconds()).isEqualTo(1000);
 

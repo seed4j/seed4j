@@ -90,25 +90,25 @@ class AuthenticationResourceIT {
     private String password = "admin";
     private boolean rememberMe;
 
-    public TestAuthenticationQueryBuilder username(String username) {
+    private TestAuthenticationQueryBuilder username(String username) {
       this.username = username;
 
       return this;
     }
 
-    public TestAuthenticationQueryBuilder password(String password) {
+    private TestAuthenticationQueryBuilder password(String password) {
       this.password = password;
 
       return this;
     }
 
-    public TestAuthenticationQueryBuilder rememberMe(boolean rememberMe) {
+    private TestAuthenticationQueryBuilder rememberMe(boolean rememberMe) {
       this.rememberMe = rememberMe;
 
       return this;
     }
 
-    public String build() {
+    private String build() {
       return AUTHENTICATION_TEMPLATE.replace("{USER}", username)
         .replace("{PASSWORD}", password)
         .replace("{REMEMBER_ME}", String.valueOf(rememberMe));

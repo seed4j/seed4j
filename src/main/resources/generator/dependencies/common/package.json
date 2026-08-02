@@ -22,7 +22,7 @@
     "arch-unit-ts": "1.0.12",
     "autoprefixer": "10.5.4",
     "browser-sync": "3.0.4",
-    "concurrently": "10.0.3",
+    "concurrently": "10.0.4",
     "cpy-cli": "7.0.0",
     "cssnano": "8.0.2",
     "cypress": "15.18.0",

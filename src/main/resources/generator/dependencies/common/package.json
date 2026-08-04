@@ -46,7 +46,7 @@
     "path-exists-cli": "2.0.0",
     "piqure": "2.2.1",
     "pnpm": "10.34.4",
-    "postcss": "8.5.18",
+    "postcss": "8.5.23",
     "postcss-cli": "11.0.1",
     "prettier": "3.9.4",
     "prettier-plugin-gherkin": "4.0.0",

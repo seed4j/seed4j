@@ -8,7 +8,7 @@ FROM mongo:8.3.8
 FROM mysql:9.7.2
 FROM cassandra:5.0.9
 FROM mcr.microsoft.com/mssql/server:2025-latest
-FROM postgres:18.4
+FROM postgres:18.6
 FROM apache/kafka-native:4.3.1
 FROM tchiotludo/akhq:0.28.0
 FROM apachepulsar/pulsar:4.2.4

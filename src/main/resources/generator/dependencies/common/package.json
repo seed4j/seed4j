@@ -44,7 +44,7 @@
     "nyc": "18.0.0",
     "onchange": "7.1.0",
     "path-exists-cli": "2.0.0",
-    "piqure": "2.2.1",
+    "piqure": "2.3.0",
     "pnpm": "10.34.5",
     "postcss": "8.5.26",
     "postcss-cli": "11.0.1",

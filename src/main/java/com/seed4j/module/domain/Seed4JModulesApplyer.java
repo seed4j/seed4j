@@ -88,6 +88,7 @@ public class Seed4JModulesApplyer {
       .startupCommands(buildStartupCommands(module))
       .javaBuildCommands(
         buildDependenciesChanges(module)
+          .merge(buildJavaCompilerChanges(module))
           .merge(buildPluginsChanges(module))
           .merge(buildMavenBuildExtensionsChanges(module))
           .merge(buildPropertiesChanges(module))
@@ -192,6 +193,10 @@ public class Seed4JModulesApplyer {
 
   private JavaBuildCommands buildDependenciesChanges(Seed4JModule module) {
     return module.javaDependencies().buildChanges(javaVersions.get(), projectDependencies.get(module.projectFolder()));
+  }
+
+  private JavaBuildCommands buildJavaCompilerChanges(Seed4JModule module) {
+    return module.javaCompiler().buildChanges(javaVersions.get(), projectDependencies.get(module.projectFolder()));
   }
 
   private JavaBuildCommands buildPropertiesChanges(Seed4JModule module) {

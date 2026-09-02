@@ -45,7 +45,7 @@
     "onchange": "7.1.0",
     "path-exists-cli": "2.0.0",
     "piqure": "2.3.0",
-    "pnpm": "10.34.5",
+    "pnpm": "11.25.0",
     "postcss": "8.5.26",
     "postcss-cli": "11.0.1",
     "prettier": "3.9.6",

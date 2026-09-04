@@ -33,7 +33,7 @@ jobs:
             return hasLabelsResult;
       - name: Label issues and PRs
         if: steps.check-issue-pr-labels.outputs.result == 'false'
-        uses: github/issue-labeler@v3.4
+        uses: github/issue-labeler@v3.5
         with:
           configuration-path: .github/labeler.yml
           enable-versioned-regex: 0

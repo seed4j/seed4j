@@ -5,11 +5,11 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@angular/build": "21.2.22",
-    "@angular/cdk": "21.2.14",
+    "@angular/cdk": "22.1.5",
     "@angular/cli": "21.2.22",
     "@angular/compiler-cli": "21.2.22",
     "@angular/core": "21.2.22",
-    "@angular/material": "21.2.14",
+    "@angular/material": "22.1.5",
     "@jsverse/transloco": "8.4.0",
     "@tailwindcss/postcss": "4.3.3",
     "angular-eslint": "21.4.0",

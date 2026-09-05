@@ -64,7 +64,7 @@
     "@eslint/js": "9.39.5",
     "@prettier/plugin-pug": "3.4.2",
     "@prettier/plugin-xml": "3.4.2",
-    "@tikui/core": "7.0.1",
+    "@tikui/core": "8.0.0",
     "@typescript-eslint/eslint-plugin": "8.58.2",
     "@typescript-eslint/parser": "8.58.2",
     "@vitejs/plugin-vue": "6.0.8",

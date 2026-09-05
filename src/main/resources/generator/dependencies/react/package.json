@@ -11,7 +11,7 @@
     "@tsconfig/vite-react": "7.0.2",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
-    "@vitejs/plugin-react": "6.0.5",
+    "@vitejs/plugin-react": "6.1.1",
     "axios": "1.19.0",
     "eslint-plugin-react": "7.37.5",
     "react": "19.2.8",

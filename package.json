@@ -72,7 +72,7 @@
     "@vue/test-utils": "2.5.0",
     "concurrently": "10.0.5",
     "cpy-cli": "7.0.0",
-    "cypress": "15.20.1",
+    "cypress": "15.21.1",
     "eslint": "9.39.5",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-cypress": "6.4.4",

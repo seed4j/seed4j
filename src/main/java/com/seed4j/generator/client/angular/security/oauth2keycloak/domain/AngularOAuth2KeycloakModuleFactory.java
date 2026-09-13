@@ -23,12 +23,12 @@ public class AngularOAuth2KeycloakModuleFactory {
 
   private static final ElementReplacer ENVIRONMENT_NEEDLE = lineAfterRegex("export const environment *= *\\{");
   private static final String KEYCLOAK_ENVIRONMENT = """
-    keycloak: {
-      url: 'http://localhost:9080',
-      realm: 'seed4j',
-      client_id: 'web_app',
-    },
-    """;
+  keycloak: {
+    url: 'http://localhost:9080',
+    realm: 'seed4j',
+    client_id: 'web_app',
+  },
+  """;
 
   private static final Pattern EMPTY_ALLOWED_COMMON_DEPENDENCIES_PATTERN = Pattern.compile("(\"allowedCommonJsDependencies\": *\\[\\s*)]");
   private static final ElementReplacer EMPTY_ALLOWED_COMMON_DEPENDENCIES_NEEDLE = regex(
@@ -55,32 +55,32 @@ public class AngularOAuth2KeycloakModuleFactory {
   private static final String LOGIN_IMPORT = "import Login from './login/login';";
 
   private static final String OAUTH2_AUTH_SERVICE_IMPORT = """
-    import { Oauth2AuthService } from './auth/oauth2-auth.service';
-    """;
+  import { Oauth2AuthService } from './auth/oauth2-auth.service';
+  """;
 
   private static final String RXJS_OF_IMPORT = "import { of } from 'rxjs';";
 
   private static final String MOCK_OAUTH2_AUTH_SERVICE = """
-    const mockOauth2AuthService = {
-      initAuthentication: vi.fn().mockReturnValue(of(true)),
-      isAuthenticated: true,
-      token: 'mock-token',
-      logout: vi.fn(),
-    };""";
+  const mockOauth2AuthService = {
+    initAuthentication: vi.fn().mockReturnValue(of(true)),
+    isAuthenticated: true,
+    token: 'mock-token',
+    logout: vi.fn(),
+  };""";
 
   private static final ElementReplacer APP_NAME_NEEDLE = lineAfterRegex("appName = signal\\(''\\);");
 
   private static final String INJECT_OAUTH2_AUTH_SERVICE = """
-      private readonly oauth2AuthService = inject(Oauth2AuthService);\
-    """;
+    private readonly oauth2AuthService = inject(Oauth2AuthService);\
+  """;
 
   private static final String INIT_AUTHENTICATION = """
-        this.oauth2AuthService.initAuthentication();\
-    """;
+      this.oauth2AuthService.initAuthentication();\
+  """;
 
   private static final String INJECT_IMPORT = """
-    import { Component, inject, OnInit, signal } from '@angular/core';
-    """;
+  import { Component, inject, OnInit, signal } from '@angular/core';
+  """;
 
   private static final ElementReplacer INJECT_NEEDLE = text("import { Component, OnInit, signal } from '@angular/core';");
 
@@ -93,16 +93,16 @@ public class AngularOAuth2KeycloakModuleFactory {
   private static final String PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
   private static final String APP_KEYCLOAK_IMPORTS = "import Keycloak from 'keycloak-js';";
   private static final String APP_KEYCLOAK_CONFIG = """
-        {
-          provide: Keycloak,
-          useFactory: () =>
-            new Keycloak({
-              url: environment.keycloak.url,
-              realm: environment.keycloak.realm,
-              clientId: environment.keycloak.client_id,
-            }),
-        },
-    """;
+      {
+        provide: Keycloak,
+        useFactory: () =>
+          new Keycloak({
+            url: environment.keycloak.url,
+            realm: environment.keycloak.realm,
+            clientId: environment.keycloak.client_id,
+          }),
+      },
+  """;
 
   public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);

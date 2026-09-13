@@ -12,14 +12,14 @@ public class VuePiniaModuleFactory {
   private static final String IMPORT_NEEDLE = "// seed4j-needle-main-ts-import";
   private static final String PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
   private static final String PINIA_IMPORTS = """
-    import { createPinia } from 'pinia';
-    import piniaPersist from 'pinia-plugin-persistedstate';
-    """;
+  import { createPinia } from 'pinia';
+  import piniaPersist from 'pinia-plugin-persistedstate';
+  """;
   private static final String PINIA_PROVIDER = """
-    const pinia = createPinia();
-    pinia.use(piniaPersist);
-    app.use(pinia);
-    """;
+  const pinia = createPinia();
+  pinia.use(piniaPersist);
+  app.use(pinia);
+  """;
 
   public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);

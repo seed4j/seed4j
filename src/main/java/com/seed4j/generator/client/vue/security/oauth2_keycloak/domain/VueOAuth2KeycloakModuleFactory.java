@@ -29,21 +29,21 @@ public class VueOAuth2KeycloakModuleFactory {
   private static final String MAIN_TS_PROVIDER_NEEDLE = "// seed4j-needle-main-ts-provider";
 
   private static final String KEYCLOAK_IMPORT = """
-    import { provideForAuth } from '@/auth/application/AuthProvider';
-    import { KeycloakHttp } from '@/auth/infrastructure/secondary/KeycloakHttp';
-    import Keycloak from 'keycloak-js';\
-    """;
+  import { provideForAuth } from '@/auth/application/AuthProvider';
+  import { KeycloakHttp } from '@/auth/infrastructure/secondary/KeycloakHttp';
+  import Keycloak from 'keycloak-js';\
+  """;
   private static final String KEYCLOAK_SETUP = """
-    const keycloakHttp = new KeycloakHttp(
-    %snew Keycloak({
-    %surl: 'http://localhost:9080',
-    %srealm: 'seed4j',
-    %sclientId: 'web_app',
-    %s}),
-    );
+  const keycloakHttp = new KeycloakHttp(
+  %snew Keycloak({
+  %surl: 'http://localhost:9080',
+  %srealm: 'seed4j',
+  %sclientId: 'web_app',
+  %s}),
+  );
 
-    provideForAuth(keycloakHttp);\
-    """;
+  provideForAuth(keycloakHttp);\
+  """;
 
   public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);

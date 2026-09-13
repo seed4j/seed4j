@@ -20,10 +20,10 @@ class FileSystemStartupCommandsReadmeCommandsHandler {
     "\n<!-- seed4j-needle-startupCommand -->"
   );
   private static final String BASH_TEMPLATE = """
-    ```bash
-    {{command}}
-    ```
-    """;
+  ```bash
+  {{command}}
+  ```
+  """;
   private final FileSystemReplacer fileReplacer;
 
   public FileSystemStartupCommandsReadmeCommandsHandler(FileSystemReplacer fileReplacer) {

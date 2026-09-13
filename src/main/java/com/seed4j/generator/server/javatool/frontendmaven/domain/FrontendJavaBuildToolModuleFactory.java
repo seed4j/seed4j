@@ -264,7 +264,8 @@ public class FrontendJavaBuildToolModuleFactory {
               into("BOOT-INF/classes/static")
           }
         }
-        """.replace("{{nodePackageManager}}", nodePackageManager.command())
+        """
+          .replace("{{nodePackageManager}}", nodePackageManager.command())
           .replace("{{nodePackageManagerCapitalized}}", capitalize(nodePackageManager.command()))
       )
       .build();

@@ -29,15 +29,15 @@ public class AngularJwtModuleFactory {
   private static final TextNeedleBeforeReplacer ROUTE_NEEDLE = lineBeforeText("// seed4j-needle-angular-route");
 
   private static final String LOGIN_MODULE_ROUTE = """
-      {
-        path: '',
-        loadComponent: () => import('./login/login'),
-      },\
-    """;
+    {
+      path: '',
+      loadComponent: () => import('./login/login'),
+    },\
+  """;
 
   private static final String AUTH_INTERCEPTOR_IMPORT = """
-    import { authInterceptor } from './app/auth/auth.interceptor';
-    """;
+  import { authInterceptor } from './app/auth/auth.interceptor';
+  """;
 
   private static final Seed4JSource SOURCE = from("client/angular/security/jwt/src/main/webapp/app");
 

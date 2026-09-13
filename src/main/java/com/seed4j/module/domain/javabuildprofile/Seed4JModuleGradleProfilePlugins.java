@@ -33,7 +33,12 @@ public final class Seed4JModuleGradleProfilePlugins {
     Assert.notNull("versions", versions);
     Assert.notNull("buildProfile", buildProfile);
 
-    return new JavaBuildCommands(plugins.stream().map(toCommands(versions, Optional.of(buildProfile))).toList());
+    return new JavaBuildCommands(
+      plugins
+        .stream()
+        .map(toCommands(versions, Optional.of(buildProfile)))
+        .toList()
+    );
   }
 
   private Function<GradleProfilePlugin, JavaBuildCommand> toCommands(

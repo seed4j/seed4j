@@ -79,7 +79,9 @@ Sometimes you may want to access the last response content without asserting it,
 
 ```java
 CucumberRestTestContext.getElement("$.path");
+
 CucumberRestTestContext.getElement("uri-path", "$.path");
+
 CucumberRestTestContext.countEntries("$.path");
 ```
 

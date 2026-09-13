@@ -63,7 +63,10 @@ final class Seed4JModuleShortcuts {
     Assert.notNull("level", level);
 
     return builder ->
-      builder.optionalReplacements().in(SPRING_TEST_LOG_FILE).add(logConfigurationEntry(name, level, builder.indentation()));
+      builder
+        .optionalReplacements()
+        .in(SPRING_TEST_LOG_FILE)
+        .add(logConfigurationEntry(name, level, builder.indentation()));
   }
 
   static Consumer<Seed4JModuleBuilder> springMainLogger(String name, LogLevel level) {
@@ -71,7 +74,10 @@ final class Seed4JModuleShortcuts {
     Assert.notNull("level", level);
 
     return builder ->
-      builder.optionalReplacements().in(SPRING_MAIN_LOG_FILE).add(logConfigurationEntry(name, level, builder.indentation()));
+      builder
+        .optionalReplacements()
+        .in(SPRING_MAIN_LOG_FILE)
+        .add(logConfigurationEntry(name, level, builder.indentation()));
   }
 
   private static OptionalReplacer logConfigurationEntry(String name, LogLevel level, Indentation indentation) {

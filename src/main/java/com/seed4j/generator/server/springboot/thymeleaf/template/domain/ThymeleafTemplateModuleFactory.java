@@ -57,36 +57,36 @@ public class ThymeleafTemplateModuleFactory {
 
   private static final String TAILWINDCSS_REQUIRE = "    tailwindcss,";
   private static final String TAILWINDCSS_SETUP = """
-    /*! @import */
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-    """;
+  /*! @import */
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  """;
   private static final String TAILWINDCSS_WELCOME_THYMELEAF_MESSAGE = """
-    <main class="flex flex-col min-h-screen w-full justify-center">
-      <section
-        class="flex flex-col w-full py-16 md:py-24 border-2 border-dashed border-green-500"
+  <main class="flex flex-col min-h-screen w-full justify-center">
+    <section
+      class="flex flex-col w-full py-16 md:py-24 border-2 border-dashed border-green-500"
+    >
+      <div
+        class="flex flex-col w-full max-w-7xl mx-auto px-4 md:px-8 xl:px-20 gap-8"
       >
-        <div
-          class="flex flex-col w-full max-w-7xl mx-auto px-4 md:px-8 xl:px-20 gap-8"
-        >
-          <div class="flex justify-center items-center gap-2">
-            <img
-              class="w-36 h-36"
-              th:src="@{/images/ThymeleafLogo.png}"
-              alt="Thymeleaf Logo"
-            />
-            <h1 class="text-6xl font-bold">Thymeleaf</h1>
-          </div>
-          <div class="flex justify-center">
-            <div class="text-lg">
-              Welcome to your Spring Boot with Thymeleaf project!
-            </div>
+        <div class="flex justify-center items-center gap-2">
+          <img
+            class="w-36 h-36"
+            th:src="@{/images/ThymeleafLogo.png}"
+            alt="Thymeleaf Logo"
+          />
+          <h1 class="text-6xl font-bold">Thymeleaf</h1>
+        </div>
+        <div class="flex justify-center">
+          <div class="text-lg">
+            Welcome to your Spring Boot with Thymeleaf project!
           </div>
         </div>
-      </section>
-    </main>
-    """;
+      </div>
+    </section>
+  </main>
+  """;
 
   public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);

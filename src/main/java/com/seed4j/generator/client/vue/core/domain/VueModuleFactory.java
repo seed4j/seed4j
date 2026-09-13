@@ -95,15 +95,15 @@ public class VueModuleFactory {
 
   private Consumer<Seed4JModuleBuilder> patchEslintConfig(Seed4JModuleProperties properties) {
     String vuePluginConfig = """
-      \t...vue.configs['flat/recommended'],
-      \t{
-      \t\tfiles: ['**/*.vue'],
-      \t\tlanguageOptions: {
-      \t\t\tparserOptions: { parser: '@typescript-eslint/parser' },
-      \t\t\tglobals: { ...globals.browser },
-      \t\t},
-      \t},\
-      """.replace("\t", properties.indentation().spaces());
+    \t...vue.configs['flat/recommended'],
+    \t{
+    \t\tfiles: ['**/*.vue'],
+    \t\tlanguageOptions: {
+    \t\t\tparserOptions: { parser: '@typescript-eslint/parser' },
+    \t\t\tglobals: { ...globals.browser },
+    \t\t},
+    \t},\
+    """.replace("\t", properties.indentation().spaces());
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

@@ -29,32 +29,32 @@ class FileSystemSeed4JPresetRepositoryTest {
   private static final String DEFAULT_PRESET_FOLDER = "presets";
 
   private static final String PRESET_JSON_TEMPLATE = """
-    {
-      "presets": [
-        {
-          "name": "%s",
-          "modules": [
-            %s
-          ]
-        }
-      ]
-    }
-    """;
+  {
+    "presets": [
+      {
+        "name": "%s",
+        "modules": [
+          %s
+        ]
+      }
+    ]
+  }
+  """;
   private static final String PRESET_JSON_MULTIPLE_TEMPLATE = """
-    {
-      "presets": [
-        %s
-      ]
-    }
-    """;
+  {
+    "presets": [
+      %s
+    ]
+  }
+  """;
   private static final String PRESET_ENTRY_TEMPLATE = """
-    {
-      "name": "%s",
-      "modules": [
-        %s
-      ]
-    }
-    """;
+  {
+    "name": "%s",
+    "modules": [
+      %s
+    ]
+  }
+  """;
 
   @Test
   void shouldHandleDeserializationErrors() {
@@ -72,7 +72,9 @@ class FileSystemSeed4JPresetRepositoryTest {
   @Test
   void shouldNotReturnPresetFromUnknownFolder() {
     ProjectFiles projectFiles = mock(ProjectFiles.class);
-    lenient().when(projectFiles.findRecursivelyInPath("/%s".formatted(DEFAULT_PRESET_FOLDER))).thenThrow(GeneratorException.class);
+    lenient()
+      .when(projectFiles.findRecursivelyInPath("/%s".formatted(DEFAULT_PRESET_FOLDER)))
+      .thenThrow(GeneratorException.class);
     FileSystemSeed4JPresetRepository fileSystemSeed4JPresetRepository = new FileSystemSeed4JPresetRepository(
       JsonHelper.jsonMapper(),
       projectFiles,

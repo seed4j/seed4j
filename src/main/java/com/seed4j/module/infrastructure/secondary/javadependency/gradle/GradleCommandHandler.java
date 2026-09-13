@@ -106,15 +106,15 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
   );
   private static final Pattern GRADLE_TASKS_TEST_NEEDLE = Pattern.compile("^\\s+// seed4j-needle-gradle-tasks-test$", Pattern.MULTILINE);
   private static final String PROFILE_CONDITIONAL_TEMPLATE = """
-    if (profiles.contains("%s")) {
-      apply(plugin = "profile-%s")
-    }\
-    """;
+  if (profiles.contains("%s")) {
+    apply(plugin = "profile-%s")
+  }\
+  """;
   private static final String PROFILE_DEFAULT_ACTIVATION_CONDITIONAL_TEMPLATE = """
-    if (profiles.isEmpty() || profiles.contains("%s")) {
-      apply(plugin = "profile-%s")
-    }\
-    """;
+  if (profiles.isEmpty() || profiles.contains("%s")) {
+    apply(plugin = "profile-%s")
+  }\
+  """;
   private static final String BUILD_GRADLE_PROFILE_PATH_TEMPLATE = "buildSrc/src/main/kotlin/profile-%s.gradle.kts";
 
   private final Indentation indentation;

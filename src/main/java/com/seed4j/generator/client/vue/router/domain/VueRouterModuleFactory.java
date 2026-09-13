@@ -24,10 +24,10 @@ public class VueRouterModuleFactory {
   private static final String ROUTER_PROVIDER = "app.use(router);";
 
   private static final String EXPORT_DEFAULT_APP_VUE = """
-      export default {
-        name: 'AppVue',
-      };\
-    """;
+    export default {
+      name: 'AppVue',
+    };\
+  """;
 
   public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     // @formatter:off

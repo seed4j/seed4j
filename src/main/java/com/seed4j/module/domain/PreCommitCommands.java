@@ -24,7 +24,11 @@ public record PreCommitCommands(String commands) {
       }
       return new PreCommitCommands(withQuotes(command));
     }
-    return new PreCommitCommands(Stream.of(commands).map(PreCommitCommands::withQuotes).collect(joining(", ", "[", "]")));
+    return new PreCommitCommands(
+      Stream.of(commands)
+        .map(PreCommitCommands::withQuotes)
+        .collect(joining(", ", "[", "]"))
+    );
   }
 
   private static String withQuotes(String command) {

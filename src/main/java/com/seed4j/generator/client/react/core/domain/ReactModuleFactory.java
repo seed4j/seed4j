@@ -118,14 +118,14 @@ public class ReactModuleFactory {
 
   private Consumer<Seed4JModuleBuilder> patchEslintConfig(Seed4JModuleProperties properties) {
     String reactConfig = """
-      \t\tfiles: ['src/main/webapp/**/*.{ts,tsx}', 'src/test/webapp/unit/**/*.{ts,tsx}'],
-      \t\textends: [...typescript.configs.recommendedTypeChecked, react],
-      \t\tsettings: {
-      \t\t\treact: {
-      \t\t\t\tversion: 'detect',
-      \t\t\t},
-      \t\t},\
-      """.replace("\t", properties.indentation().spaces());
+    \t\tfiles: ['src/main/webapp/**/*.{ts,tsx}', 'src/test/webapp/unit/**/*.{ts,tsx}'],
+    \t\textends: [...typescript.configs.recommendedTypeChecked, react],
+    \t\tsettings: {
+    \t\t\treact: {
+    \t\t\t\tversion: 'detect',
+    \t\t\t},
+    \t\t},\
+    """.replace("\t", properties.indentation().spaces());
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()

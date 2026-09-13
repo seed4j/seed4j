@@ -100,19 +100,20 @@ public class CypressModuleFactory {
 
   private Consumer<Seed4JModuleBuilder> patchEslintPluginCypress(Seed4JModuleProperties properties, String path) {
     String eslintPluginCypress = """
-      \t{
-      \t\tfiles: ['src/test/webapp/%s/**/*.ts'],
-      \t\textends: [...typescript.configs.recommendedTypeChecked, cypress.configs.recommended],
-      \t\tlanguageOptions: {
-        \t\tparserOptions: {
-          \t\tproject: ['src/test/webapp/%s/tsconfig.json'],
-        \t\t},
+    \t{
+    \t\tfiles: ['src/test/webapp/%s/**/*.ts'],
+    \t\textends: [...typescript.configs.recommendedTypeChecked, cypress.configs.recommended],
+    \t\tlanguageOptions: {
+      \t\tparserOptions: {
+        \t\tproject: ['src/test/webapp/%s/tsconfig.json'],
       \t\t},
-      \t\trules: {
-        \t\t'@typescript-eslint/no-unsafe-assignment': 'off',
-      \t\t},
-      \t},\
-      """.formatted(path, path)
+    \t\t},
+    \t\trules: {
+      \t\t'@typescript-eslint/no-unsafe-assignment': 'off',
+    \t\t},
+    \t},\
+    """
+      .formatted(path, path)
       .replace("\t", properties.indentation().spaces());
     // @formatter:off
     return moduleBuilder -> moduleBuilder

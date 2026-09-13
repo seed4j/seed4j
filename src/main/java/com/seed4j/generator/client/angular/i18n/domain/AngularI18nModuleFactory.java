@@ -12,22 +12,22 @@ import com.seed4j.shared.error.domain.Assert;
 public class AngularI18nModuleFactory {
 
   private static final String I18N_MAIN_IMPORTS = """
-      import { TranslocoHttpLoader } from './transloco-loader';
-      import { provideTransloco } from '@jsverse/transloco';
-    """;
+    import { TranslocoHttpLoader } from './transloco-loader';
+    import { provideTransloco } from '@jsverse/transloco';
+  """;
 
   private static final String I18N_MAIN_CONFIG = """
-      provideTransloco({
-        config: {
-          availableLangs: ['en', 'fr'],
-          defaultLang: 'en',
-            // Remove this option if your application doesn't support changing language in runtime.
-            reRenderOnLangChange: true,
-            prodMode: !isDevMode(),
-        },
-        loader: TranslocoHttpLoader
-      })
-    """;
+    provideTransloco({
+      config: {
+        availableLangs: ['en', 'fr'],
+        defaultLang: 'en',
+          // Remove this option if your application doesn't support changing language in runtime.
+          reRenderOnLangChange: true,
+          prodMode: !isDevMode(),
+      },
+      loader: TranslocoHttpLoader
+    })
+  """;
 
   private static final Seed4JSource APP_SOURCE = from("client/angular/i18n");
   private static final Seed4JSource HOME_CONTEXT_SOURCE = from("client/angular/i18n/src/main/webapp");

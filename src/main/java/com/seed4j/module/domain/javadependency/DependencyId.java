@@ -124,10 +124,18 @@ public final class DependencyId {
 
   public interface DependencyIdGroupIdBuilder {
     DependencyIdArtifactIdBuilder groupId(GroupId groupId);
+
+    default DependencyIdArtifactIdBuilder groupId(String groupId) {
+      return groupId(new GroupId(groupId));
+    }
   }
 
   public interface DependencyIdArtifactIdBuilder {
     DependencyIdOptionalFieldsBuilder artifactId(ArtifactId artifactId);
+
+    default DependencyIdOptionalFieldsBuilder artifactId(String artifactId) {
+      return artifactId(new ArtifactId(artifactId));
+    }
   }
 
   public interface DependencyIdOptionalFieldsBuilder {

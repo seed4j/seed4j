@@ -31,7 +31,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -510,7 +509,7 @@ class FileSystemPackageJsonHandlerTest {
   }
 
   @SafeVarargs
-  private @NotNull Seed4JModulePackageJson packageJson(Consumer<Seed4JModulePackageJsonBuilder>... builderConfigurations) {
+  private Seed4JModulePackageJson packageJson(Consumer<Seed4JModulePackageJsonBuilder>... builderConfigurations) {
     Seed4JModulePackageJsonBuilder builder = emptyBuilder();
     Stream.of(builderConfigurations).forEach(configuration -> configuration.accept(builder));
 

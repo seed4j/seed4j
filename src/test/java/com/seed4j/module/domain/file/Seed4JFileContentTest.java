@@ -45,14 +45,18 @@ class Seed4JFileContentTest {
   void shouldReadNotTemplatedContent() {
     Seed4JFileContent content = content("/generator/content/no-template.txt");
 
-    assertThat(content.read(files, context(), templateRenderer)).asString(UTF_8).isEqualTo("This is my content");
+    assertThat(content.read(files, context(), templateRenderer))
+      .asString(UTF_8)
+      .isEqualTo("This is my content");
   }
 
   @Test
   void shouldReadTemplatedContent() {
     Seed4JFileContent content = content("/generator/content/template.txt.mustache");
 
-    assertThat(content.read(files, context(), templateRenderer)).asString(UTF_8).isEqualTo("This is com.test.myapp");
+    assertThat(content.read(files, context(), templateRenderer))
+      .asString(UTF_8)
+      .isEqualTo("This is com.test.myapp");
   }
 
   @Test

@@ -21,19 +21,19 @@ public class AngularHealthModuleFactory {
   private static final Seed4JDestination APP_DESTINATION = to(APP_PATH.get());
 
   private static final String ADMIN_NAVIGATION_TEST = """
-      it('should navigate on admin endpoint', () => {
-        router.navigateByUrl('/admin');
-      });\
-    """;
+    it('should navigate on admin endpoint', () => {
+      router.navigateByUrl('/admin');
+    });\
+  """;
 
   private static final String HEALTH_LINK = "    <a routerLink=\"admin/health\" mat-menu-item><span>Health</span></a>";
 
   private static final String ADMIN_ROUTING = """
-      {
-        path: 'admin',
-        loadChildren: () => import('./admin/admin.routes'),
-      },\
-    """;
+    {
+      path: 'admin',
+      loadChildren: () => import('./admin/admin.routes'),
+    },\
+  """;
 
   public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);

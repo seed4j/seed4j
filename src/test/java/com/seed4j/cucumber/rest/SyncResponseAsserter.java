@@ -33,7 +33,9 @@ class SyncResponseAsserter implements ResponseAsserter {
   public SyncResponseAsserter doNotHaveElement(String jsonPath) {
     int elementsCount = CucumberRestTestContext.countEntries(jsonPath);
 
-    assertThat(elementsCount).as("Expecting " + jsonPath + " to not exist " + CucumberRestAssertions.callContext()).isZero();
+    assertThat(elementsCount)
+      .as("Expecting " + jsonPath + " to not exist " + CucumberRestAssertions.callContext())
+      .isZero();
 
     return this;
   }

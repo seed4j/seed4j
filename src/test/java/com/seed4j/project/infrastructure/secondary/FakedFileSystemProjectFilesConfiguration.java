@@ -25,19 +25,19 @@ public class FakedFileSystemProjectFilesConfiguration {
 
   private static void mockPresetJson(FileSystemProjectFiles fileSystemProjectFiles) {
     String presetJsonContent = """
-      {
-        "presets": [
-          {
-            "name": "test preset one",
-            "modules": ["test-module-one", "test-module-two"]
-          },
-          {
-            "name": "test preset two",
-            "modules": ["test-module-three", "test-module-four"]
-          }
-        ]
-      }
-      """;
+    {
+      "presets": [
+        {
+          "name": "test preset one",
+          "modules": ["test-module-one", "test-module-two"]
+        },
+        {
+          "name": "test preset two",
+          "modules": ["test-module-three", "test-module-four"]
+        }
+      ]
+    }
+    """;
 
     lenient().when(fileSystemProjectFiles.findRecursivelyInPath("/presets")).thenReturn(List.of("/presets/preset-maven.json"));
     lenient()

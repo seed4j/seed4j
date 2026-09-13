@@ -24,7 +24,8 @@ public class Seed4JModuleMavenBuildExtensions {
   public JavaBuildCommands buildChanges(JavaDependenciesVersions versions) {
     Assert.notNull("versions", versions);
 
-    List<JavaBuildCommand> addBuildExtensions = this.buildExtensions.stream()
+    List<JavaBuildCommand> addBuildExtensions = this.buildExtensions
+      .stream()
       .flatMap(toCommands(versions, AddMavenBuildExtension::new))
       .toList();
 

@@ -17,12 +17,10 @@ class Seed4JServerPortTest {
   }
 
   @ParameterizedTest
-  @CsvSource(
-    {
-      "-90000,com.seed4j.shared.error.domain.NumberValueTooLowException",
-      "90000,com.seed4j.shared.error.domain.NumberValueTooHighException",
-    }
-  )
+  @CsvSource({
+    "-90000,com.seed4j.shared.error.domain.NumberValueTooLowException",
+    "90000,com.seed4j.shared.error.domain.NumberValueTooHighException",
+  })
   void shouldValidatePortNumbers(int port, Class<Exception> exceptionClass) {
     assertThatExceptionOfType(exceptionClass).isThrownBy(() -> new Seed4JServerPort(port));
   }

@@ -88,7 +88,11 @@ public final class MavenPluginExecution {
     MavenPluginExecutionOptionalBuilder goals(MavenPluginExecutionGoal... goals);
 
     default MavenPluginExecutionOptionalBuilder goals(String... goals) {
-      return goals(Stream.of(goals).map(MavenPluginExecutionGoal::new).toArray(MavenPluginExecutionGoal[]::new));
+      return goals(
+        Stream.of(goals)
+          .map(MavenPluginExecutionGoal::new)
+          .toArray(MavenPluginExecutionGoal[]::new)
+      );
     }
   }
 

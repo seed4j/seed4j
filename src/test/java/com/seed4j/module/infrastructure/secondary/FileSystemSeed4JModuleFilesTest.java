@@ -1,9 +1,10 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.Seed4JModule.*;
 import static com.seed4j.module.domain.Seed4JModule.from;
-import static com.seed4j.module.domain.Seed4JModulesFixture.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModulesFixture.context;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import ch.qos.logback.classic.Level;
 import com.seed4j.Logs;
@@ -27,7 +28,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -71,7 +71,6 @@ class FileSystemSeed4JModuleFilesTest {
     logs.shouldHave(Level.DEBUG, "MainApp.java");
   }
 
-  @NotNull
   private static Seed4JTemplatedFiles templatedFilesFrom(Seed4JModule module) {
     Assert.notEmpty("module.filesToAdd", module.filesToAdd());
     return new Seed4JTemplatedFiles(

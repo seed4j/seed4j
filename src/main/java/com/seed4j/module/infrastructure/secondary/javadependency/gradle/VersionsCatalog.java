@@ -10,6 +10,7 @@ import com.seed4j.module.domain.gradleplugin.GradlePluginSlug;
 import com.seed4j.module.domain.javabuild.DependencySlug;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javadependency.DependencyId;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessorDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
@@ -27,6 +28,7 @@ public class VersionsCatalog {
   private static final String LIBRARIES_TOML_KEY = "libraries";
   private static final String PLUGINS_TOML_KEY = "plugins";
   private static final String VERSION_REF = "version.ref";
+  private static final String GROUP_ATTRIBUTE = "group";
 
   private final FileConfig tomlConfigFile;
 
@@ -73,7 +75,21 @@ public class VersionsCatalog {
 
   public void addLibrary(JavaDependency dependency) {
     Config libraryConfig = Config.inMemory();
-    libraryConfig.set("group", dependency.id().groupId().get());
+    libraryConfig.set(GROUP_ATTRIBUTE, dependency.id().groupId().get());
+    libraryConfig.set("name", dependency.id().artifactId().get());
+    dependency.version().ifPresent(versionSlug -> libraryConfig.set(VERSION_REF, versionSlug.slug()));
+    String libraryEntryKey = libraryAlias(dependency);
+    tomlConfigFile.set(List.of(LIBRARIES_TOML_KEY, libraryEntryKey), libraryConfig);
+    save();
+  }
+
+  public static String libraryAlias(JavaAnnotationProcessorDependency dependency) {
+    return StringUtils.uncapitalize(dependency.id().artifactId().get());
+  }
+
+  public void addLibrary(JavaAnnotationProcessorDependency dependency) {
+    Config libraryConfig = Config.inMemory();
+    libraryConfig.set(GROUP_ATTRIBUTE, dependency.id().groupId().get());
     libraryConfig.set("name", dependency.id().artifactId().get());
     dependency.version().ifPresent(versionSlug -> libraryConfig.set(VERSION_REF, versionSlug.slug()));
     String libraryEntryKey = libraryAlias(dependency);
@@ -144,7 +160,7 @@ public class VersionsCatalog {
 
   private static Predicate<Entry> groupShouldMatch(DependencyId dependency) {
     return libraryConfig -> {
-      Object groupProperty = ((Config) libraryConfig.getValue()).get("group");
+      Object groupProperty = ((Config) libraryConfig.getValue()).get(GROUP_ATTRIBUTE);
       return dependency.groupId().get().equals(groupProperty);
     };
   }

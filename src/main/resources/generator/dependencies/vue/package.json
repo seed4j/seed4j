@@ -4,7 +4,7 @@
   "description": "Seed4J : used for Vite+Vue3 dependencies",
   "license": "Apache-2.0",
   "dependencies": {
-    "@pinia/testing": "1.0.3",
+    "@pinia/testing": "2.0.1",
     "@vitejs/plugin-vue": "6.0.9",
     "@vue/test-utils": "2.5.0",
     "@vue/tsconfig": "0.9.1",

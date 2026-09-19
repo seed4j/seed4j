@@ -7,7 +7,6 @@ import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
 import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
-import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
@@ -60,59 +59,20 @@ public final class JavaDependency {
     ProjectJavaDependencies projectDependencies,
     Collection<JavaBuildCommand> dependencyCommands
   ) {
-    return version()
-      .flatMap(toVersion(currentVersions, projectDependencies, dependencyCommands))
-      .map(toSetVersionCommand())
-      .map(List::of)
-      .orElse(List.of());
+    return JavaDependencyVersionCommands.build(
+      version(),
+      currentVersions,
+      projectDependencies,
+      dependencyCommands,
+      cmd -> cmd instanceof AddDirectJavaDependency || cmd instanceof AddJavaDependencyManagement
+    );
   }
 
   public static Function<VersionSlug, Optional<JavaDependencyVersion>> toVersion(
     JavaDependenciesVersions currentVersions,
     ProjectJavaDependencies projectDependencies
   ) {
-    return toVersion(currentVersions, projectDependencies, List.of());
-  }
-
-  private static Function<VersionSlug, Optional<JavaDependencyVersion>> toVersion(
-    JavaDependenciesVersions currentVersions,
-    ProjectJavaDependencies projectDependencies,
-    Collection<JavaBuildCommand> dependencyCommands
-  ) {
-    return slug -> {
-      JavaDependencyVersion currentVersion = currentVersions.get(slug);
-
-      return projectDependencies
-        .version(slug)
-        .map(toVersionToUse(currentVersion, dependencyCommands))
-        .orElseGet(() -> Optional.of(currentVersion));
-    };
-  }
-
-  private static Function<JavaDependencyVersion, Optional<JavaDependencyVersion>> toVersionToUse(
-    JavaDependencyVersion currentVersion,
-    Collection<JavaBuildCommand> dependencyCommands
-  ) {
-    return version -> {
-      if (version.equals(currentVersion) && hasNoDependencyToAdd(dependencyCommands)) {
-        return Optional.empty();
-      }
-
-      return Optional.of(currentVersion);
-    };
-  }
-
-  private static boolean hasNoDependencyToAdd(Collection<JavaBuildCommand> dependencyCommands) {
-    return dependencyCommands
-      .stream()
-      .noneMatch(
-        dependencyCommand ->
-          dependencyCommand instanceof AddDirectJavaDependency || dependencyCommand instanceof AddJavaDependencyManagement
-      );
-  }
-
-  private Function<JavaDependencyVersion, JavaBuildCommand> toSetVersionCommand() {
-    return SetVersion::new;
+    return JavaDependencyVersionCommands.toVersion(currentVersions, projectDependencies);
   }
 
   Collection<JavaBuildCommand> dependencyCommands(

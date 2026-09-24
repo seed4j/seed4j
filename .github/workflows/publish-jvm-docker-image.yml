@@ -12,7 +12,7 @@ on:
 jobs:
   build_jvm_docker_image:
     name: Build JVM-based Docker image
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     env:
       DOCKER_IMAGE_NAME: '${{ github.repository_owner }}/seed4j'
 

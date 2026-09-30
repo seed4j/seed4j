@@ -65,7 +65,7 @@ Go into the generated project and detect the build tool:
 | ---------------------------------- | ------------------------------------------ |
 | `mvnw` exists                      | `./mvnw clean verify`                      |
 | `gradlew` exists                   | `./gradlew build`                          |
-| Neither, but `package.json` exists | `npm install && npm test`                  |
+| Neither, but `package.json` exists | `npm i && npm test:coverage` (or `pnpm`)   |
 | None of the above                  | Tell the user: cannot determine build tool |
 
 Run the detected command from inside `/tmp/seed4j/<app-name>`.

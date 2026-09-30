@@ -15,6 +15,10 @@ import java.util.regex.Pattern;
 
 public class AngularOAuth2KeycloakModuleFactory {
 
+  public static final String REALM_NAME = "keycloakRealmName";
+  public static final String DEFAULT_REALM_NAME = "seed4j";
+  private static final Pattern NAME_FORMAT = Pattern.compile("^[a-z0-9-]+$");
+
   private static final Pattern PROVIDE_HTTP_CLIENT = Pattern.compile("provideHttpClient\\(\\),");
   private static final ElementReplacer EXISTING_PROVIDE_HTTP_CLIENT_NEEDLE = regex(
     notMatchingRegex(PROVIDE_HTTP_CLIENT),
@@ -25,7 +29,7 @@ public class AngularOAuth2KeycloakModuleFactory {
   private static final String KEYCLOAK_ENVIRONMENT = """
   keycloak: {
     url: 'http://localhost:9080',
-    realm: 'seed4j',
+    realm: '%s',
     client_id: 'web_app',
   },
   """;
@@ -108,6 +112,8 @@ public class AngularOAuth2KeycloakModuleFactory {
     Assert.notNull("properties", properties);
 
     Indentation indentation = properties.indentation();
+    String realmName = properties.getOrDefaultString(REALM_NAME, DEFAULT_REALM_NAME);
+    Assert.field(REALM_NAME, realmName).notNull().matchesPattern(NAME_FORMAT).maxLength(30);
 
     // @formatter:off
     return moduleBuilder(properties)
@@ -129,10 +135,10 @@ public class AngularOAuth2KeycloakModuleFactory {
         .and()
       .mandatoryReplacements()
         .in(path("src/main/webapp/environments/environment.ts"))
-          .add(ENVIRONMENT_NEEDLE, keycloakEnvironment(indentation))
+          .add(ENVIRONMENT_NEEDLE, keycloakEnvironment(indentation, realmName))
           .and()
         .in(path("src/main/webapp/environments/environment.local.ts"))
-          .add(ENVIRONMENT_NEEDLE, keycloakEnvironment(indentation))
+          .add(ENVIRONMENT_NEEDLE, keycloakEnvironment(indentation, realmName))
           .and()
         .in(path("angular.json"))
           .add(FILLED_ALLOWED_COMMON_DEPENDENCIES_NEEDLE, "$1, \"base64-js\"]")
@@ -170,8 +176,8 @@ public class AngularOAuth2KeycloakModuleFactory {
     // @formatter:on
   }
 
-  private String keycloakEnvironment(Indentation indentation) {
-    String keycloakEnvironmentIndent = KEYCLOAK_ENVIRONMENT.indent(indentation.spacesCount());
+  private String keycloakEnvironment(Indentation indentation, String realmName) {
+    String keycloakEnvironmentIndent = KEYCLOAK_ENVIRONMENT.formatted(realmName).indent(indentation.spacesCount());
     return keycloakEnvironmentIndent.substring(0, keycloakEnvironmentIndent.length() - 1);
   }
 }

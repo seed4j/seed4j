@@ -15,8 +15,13 @@ import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
+import java.util.regex.Pattern;
 
 public class VueOAuth2KeycloakModuleFactory {
+
+  public static final String REALM_NAME = "keycloakRealmName";
+  public static final String DEFAULT_REALM_NAME = "seed4j";
+  private static final Pattern NAME_FORMAT = Pattern.compile("^[a-z0-9-]+$");
 
   private static final Seed4JSource SOURCE = from("client/vue");
   private static final Seed4JSource APP_SOURCE = from("client/vue/security/oauth2_keycloak/webapp/app");
@@ -37,7 +42,7 @@ public class VueOAuth2KeycloakModuleFactory {
   const keycloakHttp = new KeycloakHttp(
   %snew Keycloak({
   %surl: 'http://localhost:9080',
-  %srealm: 'seed4j',
+  %srealm: '%s',
   %sclientId: 'web_app',
   %s}),
   );
@@ -49,6 +54,8 @@ public class VueOAuth2KeycloakModuleFactory {
     Assert.notNull("properties", properties);
 
     Indentation indentation = properties.indentation();
+    String realmName = properties.getOrDefaultString(REALM_NAME, DEFAULT_REALM_NAME);
+    Assert.field(REALM_NAME, realmName).notNull().matchesPattern(NAME_FORMAT).maxLength(30);
 
     // @formatter:off
     return moduleBuilder(properties)
@@ -82,6 +89,7 @@ public class VueOAuth2KeycloakModuleFactory {
             KEYCLOAK_SETUP.formatted(indentation.spaces(),
                           indentation.times(2),
                           indentation.times(2),
+                          realmName,
                           indentation.times(2),
                           indentation.spaces())
           )

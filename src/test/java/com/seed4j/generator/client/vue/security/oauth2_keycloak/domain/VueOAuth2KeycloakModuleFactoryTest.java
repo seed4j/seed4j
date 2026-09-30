@@ -64,6 +64,20 @@ class VueOAuth2KeycloakModuleFactoryTest {
     // @formatter:on
   }
 
+  @Test
+  void shouldBuildVueOAuth2KeycloakModuleWithCustomRealmName() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .put("keycloakRealmName", "my-realm")
+      .build();
+
+    Seed4JModule module = factory.buildModule(properties);
+
+    assertThatModuleWithFiles(module, packageJsonFile(), mainFile())
+      .hasFile("src/main/webapp/app/main.ts")
+      .containing("realm: 'my-realm',")
+      .notContaining("realm: 'seed4j',");
+  }
+
   private static ModuleFile mainFile() {
     return file("src/test/resources/projects/vue/main.ts.mustache", "src/main/webapp/app/main.ts");
   }

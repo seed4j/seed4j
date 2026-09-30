@@ -56,6 +56,7 @@ public class MavenModuleFactory {
         .and()
       .mavenPlugins()
         .plugin(mavenCompilerPlugin())
+        .plugin(dependencyPlugin())
         .plugin(surefirePlugin())
         .plugin(failsafePlugin())
         .plugin(enforcerPlugin())
@@ -139,6 +140,15 @@ public class MavenModuleFactory {
       .build();
   }
 
+  private MavenPlugin dependencyPlugin() {
+    return mavenPlugin()
+      .groupId(APACHE_PLUGINS_GROUP)
+      .artifactId("maven-dependency-plugin")
+      .versionSlug("maven-dependency-plugin")
+      .addExecution(pluginExecution().goals("properties").id("generate-dependencies-properties"))
+      .build();
+  }
+
   private MavenPlugin surefirePlugin() {
     return mavenPlugin()
       .groupId(APACHE_PLUGINS_GROUP)
@@ -148,6 +158,8 @@ public class MavenModuleFactory {
         """
         <!-- Force alphabetical order to have a reproducible build -->
         <runOrder>alphabetical</runOrder>
+        <!-- Load Mockito as a Java agent to avoid the dynamic agent loading warning on JDK 21+ -->
+        <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
         <excludes>
           <exclude>**/*IT*</exclude>
           <exclude>**/*CucumberTest*</exclude>
@@ -169,6 +181,8 @@ public class MavenModuleFactory {
           <classesDirectory>${project.build.outputDirectory}</classesDirectory>
           <!-- Force alphabetical order to have a reproducible build -->
           <runOrder>alphabetical</runOrder>
+          <!-- Load Mockito as a Java agent to avoid the dynamic agent loading warning on JDK 21+ -->
+          <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
           <includes>
             <include>**/*IT*</include>
             <include>**/*CucumberTest*</include>

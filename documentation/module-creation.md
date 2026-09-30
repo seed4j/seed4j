@@ -184,6 +184,4 @@ Note: `tests-ci/generate.sh` accepts optional parameters to customize the genera
 
 Defaults when the optional parameters are omitted are: `java-build-tool` = `maven`, `spring-configuration-format` = `yaml`, `node-package-manager` = `npm`.
 
-If your app launches a docker container, you must edit [start_docker_compose.sh](../tests-ci/start_docker_compose.sh).
-
 Finally, append your app name in [github-actions.yml](../.github/workflows/github-actions.yml), in `generation` pipeline.

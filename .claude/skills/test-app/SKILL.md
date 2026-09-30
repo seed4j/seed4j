@@ -44,10 +44,15 @@ rm -rf /tmp/seed4j/<app-name>
 
 ### Step 3 — Generate the project
 
-Run from the repository root:
+Run from the repository root. `generate.sh` accepts optional parameters to control the generated project's build tool, Spring configuration format, and front-end package manager. Syntax and defaults:
 
 ```bash
+# Usage: ./tests-ci/generate.sh <app-name> [<java-build-tool> <spring-configuration-format> <node-package-manager>]
+# Defaults (when omitted): <java-build-tool>=maven  <spring-configuration-format>=yaml  <node-package-manager>=npm
+
 ./tests-ci/generate.sh <app-name>
+# or with all parameters:
+./tests-ci/generate.sh <app-name> maven yaml npm
 ```
 
 The script calls the Seed4J REST API to apply each module in sequence and writes files to `/tmp/seed4j/<app-name>`. If it exits with a non-zero code, show the error and stop.

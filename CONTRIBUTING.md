@@ -337,6 +337,7 @@ from the main (upstream) repository:
   - the **application-name**: this is the type of project you would like to generate.
   - the **java-build-tool**: this is the build tool for the project.
   - the **spring-configuration-format**: this is the format of spring configuration files.
+  - the **node-package-manager**: this is the package manager for the front-end project.
 - Below is the list of applications that can be generated for testing (supported input params for the generate.sh script):
   - spring-boot
   - fullstack
@@ -371,6 +372,9 @@ from the main (upstream) repository:
 - Below is the list of formats that can be used for testing (supported input params for the generate.sh script):
   - properties
   - yaml
+- Below is the list of node package managers that can be used for testing (supported input params for the generate.sh script):
+  - npm
+  - pnpm
 
 ### Generate project builds locally
 
@@ -380,13 +384,13 @@ from the main (upstream) repository:
   ```
 - Run the generate.sh script with the desired project build name.
   ```shell
-  ./tests-ci/generate.sh <application> <java-build-tool> <spring-configuration-format>
+  ./tests-ci/generate.sh <application> <java-build-tool> <spring-configuration-format> <node-package-manager>
   ```
 - This will generate the project in `/tmp/seed4j/<application>`. Then, you can test it.
 - The project location of the generated build is configured in the `test-ci/modulePayload.json`.
 
 - For example,
-  - Running `./tests-ci/generate.sh fullapp maven yaml` will generate a Spring Boot project `fullapp` in the directory`/tmp/seed4j/`
+  - Running `./tests-ci/generate.sh fullapp maven yaml npm` will generate a Spring Boot project `fullapp` in the directory`/tmp/seed4j/`
   - The generated project will have support for maven, sonar, postgresql, liquibase, ehcache, vue-core and a lot more capabilities required for a Spring Boot + Vue application.
 
 ## <a name="rules"></a> Coding Rules

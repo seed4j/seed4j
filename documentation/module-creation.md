@@ -176,6 +176,14 @@ In your `Seed4JModuleResource` you can define additional properties and an organ
 
 Now that you are confident about your module's action you can add it to the Seed4J Continuous Integration by adding it in the `fullapp` application in [generate.sh](../tests-ci/generate.sh), so it will be compiled and analyzed by SonarQube. You can also create a brand new app if needed.
 
+Note: `tests-ci/generate.sh` accepts optional parameters to customize the generated project. Full syntax:
+
+```
+./tests-ci/generate.sh <application> [<java-build-tool> <spring-configuration-format> <node-package-manager>]
+```
+
+Defaults when the optional parameters are omitted are: `java-build-tool` = `maven`, `spring-configuration-format` = `yaml`, `node-package-manager` = `npm`.
+
 If your app launches a docker container, you must edit [start_docker_compose.sh](../tests-ci/start_docker_compose.sh).
 
 Finally, append your app name in [github-actions.yml](../.github/workflows/github-actions.yml), in `generation` pipeline.

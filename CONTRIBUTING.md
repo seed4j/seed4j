@@ -237,7 +237,7 @@ Before you submit your pull request, consider the following guidelines:
   ./mvnw spring-boot:run
   ```
 
-- You can generate our Continuous Integration (with GitHub Actions and Azure Pipelines) by following [this](#local-build)
+- You can generate our Continuous Integration with GitHub Actions by following [this](#local-build)
 
 - Commit your changes using a descriptive commit message that follows our
   [commit message conventions](#commit-message-format).
@@ -366,6 +366,8 @@ from the main (upstream) repository:
   - typescriptapp
   - thymeleafapp
   - langchain4japp
+  - svelteapp
+  - archunitts
 - Below is the list of build tools that can be used for testing (supported input params for the generate.sh script):
   - gradle
   - maven
@@ -384,10 +386,15 @@ from the main (upstream) repository:
   ```
 - Run the generate.sh script with the desired project build name.
   ```shell
-  ./tests-ci/generate.sh <application> <java-build-tool> <spring-configuration-format> <node-package-manager>
+  # Usage: ./tests-ci/generate.sh <application> [<java-build-tool> <spring-configuration-format> <node-package-manager>]
+  # Note: either 1 or 4 args are accepted; 2 or 3 args will show a usage error.
+  # Defaults (when omitted): <java-build-tool>=maven  <spring-configuration-format>=yaml  <node-package-manager>=npm
+  ./tests-ci/generate.sh <application>
+  # or with all parameters:
+  ./tests-ci/generate.sh <application> maven yaml npm
   ```
 - This will generate the project in `/tmp/seed4j/<application>`. Then, you can test it.
-- The project location of the generated build is configured in the `test-ci/modulePayload.json`.
+- The project location of the generated build is configured in the `tests-ci/modulePayload.json`.
 
 - For example,
   - Running `./tests-ci/generate.sh fullapp maven yaml npm` will generate a Spring Boot project `fullapp` in the directory`/tmp/seed4j/`

@@ -24,7 +24,7 @@ If no argument is given, ask the user which application they want to test.
 Check if the application responds on port 1339:
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}" http://localhost:1339/actuator/health
+curl -s -o /dev/null -w "%{http_code}" http://localhost:1339/management/health
 ```
 
 - If status is 200: proceed to step 2.
@@ -34,7 +34,7 @@ curl -s -o /dev/null -w "%{http_code}" http://localhost:1339/actuator/health
 ./mvnw spring-boot:run &
 ```
 
-Poll `http://localhost:1339/actuator/health` every 5 seconds, up to 60 seconds. Stop and inform the user if it never becomes healthy.
+Poll `http://localhost:1339/management/health` every 5 seconds, up to 60 seconds. Stop and inform the user if it never becomes healthy.
 
 ### Step 2 — Clean up any previous generated project
 

@@ -103,19 +103,16 @@ Behind the scene, your last service will be recalled until the assertions are OK
 
 ## Mocking beans
 
-You may need to mock beans for your component tests, but you won't be able to do it in a "classic" way (using `@MockBean`) since the application context will be already loaded. A way to achieve that is to overload beans to have mocks:
+You may need to mock beans for your component tests, but you won't be able to do it in a "classic" way (using `@MockBean`) since the application context will be already loaded. A way to achieve that is to overload beans to have mocks in `CucumberConfiguration`:
 
 ```java
-@Suite(failIfNoTests = false)
-@ComponentTest
-@IncludeEngines("cucumber")
-@SelectDirectories("src/test/features")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.seed4j")
-@ConfigurationParameter(
-  key = PLUGIN_PROPERTY_NAME,
-  value = "pretty, json:target/cucumber/cucumber.json, html:target/cucumber/cucumber.htm, junit:target/cucumber/TEST-cucumber.xml"
+@ActiveProfiles("test")
+@CucumberContextConfiguration
+@SpringBootTest(
+  classes = { TestApplication.class, CucumberConfiguration.CucumberMocksConfiguration.class },
+  webEnvironment = WebEnvironment.RANDOM_PORT
 )
-public class CucumberTest {
+public class CucumberConfiguration {
 
   @TestConfiguration
   public static class CucumberMocksConfiguration {

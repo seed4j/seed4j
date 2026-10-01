@@ -61,12 +61,12 @@ The script calls the Seed4J REST API to apply each module in sequence and writes
 
 Go into the generated project and detect the build tool:
 
-| Condition                          | Command to run                             |
-| ---------------------------------- | ------------------------------------------ |
-| `mvnw` exists                      | `./mvnw clean verify`                      |
-| `gradlew` exists                   | `./gradlew build`                          |
-| Neither, but `package.json` exists | `npm i && npm test:coverage` (or `pnpm`)   |
-| None of the above                  | Tell the user: cannot determine build tool |
+| Condition                          | Command to run                                                       |
+| ---------------------------------- | -------------------------------------------------------------------- |
+| `mvnw` exists                      | `./mvnw clean verify`                                                |
+| `gradlew` exists                   | `./gradlew build`                                                    |
+| Neither, but `package.json` exists | `npm i && npm run test:coverage` (or `pnpm i && pnpm test:coverage`) |
+| None of the above                  | Tell the user: cannot determine build tool                           |
 
 Run the detected command from inside `/tmp/seed4j/<app-name>`.
 

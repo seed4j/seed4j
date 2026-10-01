@@ -113,7 +113,7 @@ Vue 3 + TypeScript, built with Vite. Unit tests use Vitest; E2E/component tests 
 ```bash
 npm run test:unit:coverage # Vitest with coverage
 npm run e2e:headless       # Cypress E2E headless
-npm run tikui:serve        # Pattern library at http://localhost:9005
+npm run dev:tikui          # Pattern library at http://localhost:9005
 ```
 
 ### Test Annotations

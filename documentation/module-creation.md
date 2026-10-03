@@ -108,7 +108,7 @@ And this is it for this part of the documentation... Of course, you can do a lot
 - **NPM versions**
   - Common npm dependencies can be added in the `src/main/resources/generator/dependencies/common/package.json`
   - Framework specific npm dependencies can be added in the `package.json` of the respective framework folders. For e.g.: `src/main/resources/generator/dependencies/react/package.json`
-  - These dependencies are resolved using [FileSystemNpmVersionReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/com/seed4j/module/infrastructure/secondary/npm/FileSystemNpmVersionReader.java), an implementation of the `NpmVersionsReader` bean to read from a local file.
+  - These dependencies are resolved using [FileSystemNodePackagesVersionReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/com/seed4j/module/infrastructure/secondary/nodejs/FileSystemNodePackagesVersionReader.java), an implementation of the `NodePackagesVersionsReader` bean to read from a local file.
 
 ## Creating Seed4JModuleResource
 
@@ -176,6 +176,12 @@ In your `Seed4JModuleResource` you can define additional properties and an organ
 
 Now that you are confident about your module's action you can add it to the Seed4J Continuous Integration by adding it in the `fullapp` application in [generate.sh](../tests-ci/generate.sh), so it will be compiled and analyzed by SonarQube. You can also create a brand new app if needed.
 
-If your app launches a docker container, you must edit [start_docker_compose.sh](../tests-ci/start_docker_compose.sh).
+Note: `tests-ci/generate.sh` accepts optional parameters to customize the generated project. Full syntax:
+
+```
+./tests-ci/generate.sh <application> [<java-build-tool> <spring-configuration-format> <node-package-manager>]
+```
+
+Defaults when the optional parameters are omitted are: `java-build-tool` = `maven`, `spring-configuration-format` = `yaml`, `node-package-manager` = `npm`.
 
 Finally, append your app name in [github-actions.yml](../.github/workflows/github-actions.yml), in `generation` pipeline.

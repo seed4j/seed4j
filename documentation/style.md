@@ -4,7 +4,7 @@
 
 Component styles (CSS, HTML) are designed under `src/main/style` using [Tikui][tikui].
 
-You can start Tikui with `npm run tikui:serve`, this will open the Pattern Library on [http://localhost:9005](http://localhost:9005).
+You can start Tikui with `npm run dev:tikui`, this will open the Pattern Library on [http://localhost:9005](http://localhost:9005).
 
 To add a new component, you may like to install `tikui` command with `npm i -g @tikui/cli`.
 

@@ -74,7 +74,7 @@ The main interest is for seed4j-extension instances, but it can also be useful i
 You need to have Java 25:
 
 - [JDK 25](https://openjdk.java.net/projects/jdk/25/)
-- If (SDKMAN)[https://sdkman.io/] is installed you can run `sdk env` at project root.
+- If [SDKMAN](https://sdkman.io/) is installed you can run `sdk env` at project root.
 
 ### Node.js and NPM
 
@@ -131,7 +131,7 @@ docker run -p 1339:1339 --rm docker.io/library/seed4j:<VERSION>
 Use this option if you want to explore more options such as running your tests in a native image.
 The GraalVM native-image compiler should be installed and configured on your machine.
 
-NOTE: GraalVM 22.3+ is required.
+NOTE: GraalVM for JDK 25+ is required.
 
 To create the executable, run the following goal:
 

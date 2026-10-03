@@ -24,7 +24,7 @@ If no argument is given, ask the user which application they want to test.
 Check if the application responds on port 1339:
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}" http://localhost:1339/actuator/health
+curl -s -o /dev/null -w "%{http_code}" http://localhost:1339/management/health
 ```
 
 - If status is 200: proceed to step 2.
@@ -34,7 +34,7 @@ curl -s -o /dev/null -w "%{http_code}" http://localhost:1339/actuator/health
 ./mvnw spring-boot:run &
 ```
 
-Poll `http://localhost:1339/actuator/health` every 5 seconds, up to 60 seconds. Stop and inform the user if it never becomes healthy.
+Poll `http://localhost:1339/management/health` every 5 seconds, up to 60 seconds. Stop and inform the user if it never becomes healthy.
 
 ### Step 2 — Clean up any previous generated project
 
@@ -44,10 +44,15 @@ rm -rf /tmp/seed4j/<app-name>
 
 ### Step 3 — Generate the project
 
-Run from the repository root:
+Run from the repository root. `generate.sh` accepts optional parameters to control the generated project's build tool, Spring configuration format, and front-end package manager. Syntax and defaults:
 
 ```bash
+# Usage: ./tests-ci/generate.sh <app-name> [<java-build-tool> <spring-configuration-format> <node-package-manager>]
+# Defaults (when omitted): <java-build-tool>=maven  <spring-configuration-format>=yaml  <node-package-manager>=npm
+
 ./tests-ci/generate.sh <app-name>
+# or with all parameters:
+./tests-ci/generate.sh <app-name> maven yaml npm
 ```
 
 The script calls the Seed4J REST API to apply each module in sequence and writes files to `/tmp/seed4j/<app-name>`. If it exits with a non-zero code, show the error and stop.
@@ -56,12 +61,12 @@ The script calls the Seed4J REST API to apply each module in sequence and writes
 
 Go into the generated project and detect the build tool:
 
-| Condition                          | Command to run                             |
-| ---------------------------------- | ------------------------------------------ |
-| `mvnw` exists                      | `./mvnw clean verify`                      |
-| `gradlew` exists                   | `./gradlew build`                          |
-| Neither, but `package.json` exists | `npm install && npm test`                  |
-| None of the above                  | Tell the user: cannot determine build tool |
+| Condition                          | Command to run                                                       |
+| ---------------------------------- | -------------------------------------------------------------------- |
+| `mvnw` exists                      | `./mvnw clean verify`                                                |
+| `gradlew` exists                   | `./gradlew build`                                                    |
+| Neither, but `package.json` exists | `npm i && npm run test:coverage` (or `pnpm i && pnpm test:coverage`) |
+| None of the above                  | Tell the user: cannot determine build tool                           |
 
 Run the detected command from inside `/tmp/seed4j/<app-name>`.
 

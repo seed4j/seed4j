@@ -4,7 +4,8 @@ enum GradleDependencyScope {
   IMPLEMENTATION("implementation"),
   COMPILE_ONLY("compileOnly"),
   RUNTIME_ONLY("runtimeOnly"),
-  TEST_IMPLEMENTATION("testImplementation");
+  TEST_IMPLEMENTATION("testImplementation"),
+  ANNOTATION_PROCESSING("annotationProcessor");
 
   private final String command;
 

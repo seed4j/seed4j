@@ -11,6 +11,7 @@
     <json-web-token.version>[version]</json-web-token.version>
     <logstash-logback-encoder.version>[version]</logstash-logback-encoder.version>
     <spring-boot.version>[version]</spring-boot.version>
+    <auto-service.version>[version]</auto-service.version>
     <commons-lang3.version>[version]</commons-lang3.version>
     <reflections.version>[version]</reflections.version>
     <maven-enforcer-plugin.version>[version]</maven-enforcer-plugin.version>
@@ -112,6 +113,21 @@
     </plugins>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${compiler-plugin.version}</version>
+          <configuration>
+            <annotationProcessorPaths>
+              <path>
+                <groupId>org.hibernate.orm</groupId>
+                <artifactId>hibernate-processor</artifactId>
+                
+              </path>
+              
+            </annotationProcessorPaths>
+          </configuration>
+        </plugin>
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>

@@ -42,6 +42,27 @@ class GradleModuleFactoryTest {
       .containing("testImplementation(libs.junit.params)")
       .containing("testImplementation(libs.assertj)")
       .containing("testImplementation(libs.mockito)")
+      .containing(
+        """
+        val mockitoAgent = configurations.create("mockitoAgent") {
+          shouldResolveConsistentlyWith(configurations.testRuntimeClasspath.get())
+        }
+        """
+      )
+      .containing(
+        """
+          mockitoAgent("org.mockito:mockito-core") {
+            isTransitive = false
+          }
+        """
+      )
+      .containing(
+        """
+        tasks.withType<Test>().configureEach {
+          jvmArgumentProviders.add(CommandLineArgumentProvider { listOf("-javaagent:${mockitoAgent.singleFile}") })
+        }
+        """
+      )
       .and()
       .hasFile("settings.gradle.kts")
       .containing("my-app")

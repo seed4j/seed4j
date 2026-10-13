@@ -28,6 +28,34 @@ class AngularOAuth2KeycloakModuleFactoryTest {
       .containing("\"allowedCommonJsDependencies\": [\"dummy.js\", \"base64-js\", \"js-sha256\", \"keycloak-js\"]");
   }
 
+  @Test
+  void shouldBuildModuleWithCustomRealmName() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .put("keycloakRealmName", "my-realm")
+      .build();
+
+    Seed4JModule module = factory.buildModule(properties);
+
+    assertThatModuleWithFiles(
+      module,
+      packageJsonFile(),
+      environmentFile(),
+      prodEnvironmentFile(),
+      emptyAngularJsonFile(),
+      appComponentHtmlFile(),
+      appComponentFile(),
+      appComponentSpecFile(),
+      mainFile()
+    )
+      .hasFile("src/main/webapp/environments/environment.ts")
+      .containing("realm: 'my-realm',")
+      .notContaining("realm: 'seed4j',")
+      .and()
+      .hasFile("src/main/webapp/environments/environment.local.ts")
+      .containing("realm: 'my-realm',")
+      .notContaining("realm: 'seed4j',");
+  }
+
   private static Seed4JModuleAsserter assertAngularOAuthModule(ModuleFile angularJson) {
     Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 

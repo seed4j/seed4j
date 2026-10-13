@@ -76,6 +76,7 @@ seed4j:
 
 server:
   port: 1339
+  forward-headers-strategy: framework
 
 spring:
   threads:

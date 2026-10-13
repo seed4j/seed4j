@@ -23,7 +23,7 @@ runs:
       with:
         version: 10
     - name: 'Setup: Node.js'
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@v7
       with:
         node-version: '${{ inputs.node-version }}'
         check-latest: true

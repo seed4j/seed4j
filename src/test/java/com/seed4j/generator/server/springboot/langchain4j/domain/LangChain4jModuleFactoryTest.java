@@ -31,7 +31,7 @@ class LangChain4jModuleFactoryTest {
         """
             <dependency>
               <groupId>dev.langchain4j</groupId>
-              <artifactId>langchain4j-spring-boot-starter</artifactId>
+              <artifactId>langchain4j-spring-boot4-starter</artifactId>
               <version>${langchain4j.version}</version>
             </dependency>
         """
@@ -40,7 +40,7 @@ class LangChain4jModuleFactoryTest {
         """
             <dependency>
               <groupId>dev.langchain4j</groupId>
-              <artifactId>langchain4j-open-ai-spring-boot-starter</artifactId>
+              <artifactId>langchain4j-open-ai-spring-boot4-starter</artifactId>
               <version>${langchain4j.version}</version>
             </dependency>
         """

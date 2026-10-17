@@ -70,7 +70,7 @@
     "@vitejs/plugin-vue": "6.0.9",
     "@vitest/coverage-istanbul": "4.1.11",
     "@vue/test-utils": "2.5.1",
-    "concurrently": "10.0.5",
+    "concurrently": "10.0.6",
     "cpy-cli": "7.0.0",
     "cypress": "15.21.1",
     "eslint": "9.39.5",

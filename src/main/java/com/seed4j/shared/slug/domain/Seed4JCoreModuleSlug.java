@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Seed4JCoreModuleSlug implements Seed4JModuleSlugFactory {
+  AI_CONTEXT("ai-context", RANK_D),
   ANGULAR_CORE("angular-core", RANK_A),
   ANGULAR_HEALTH("angular-health", RANK_C),
   ANGULAR_JWT("angular-jwt", RANK_C),

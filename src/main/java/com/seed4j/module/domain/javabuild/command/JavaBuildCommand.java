@@ -2,16 +2,18 @@ package com.seed4j.module.domain.javabuild.command;
 
 public sealed interface JavaBuildCommand
   permits
-    AddMavenPluginManagement,
-    AddDirectMavenPlugin,
     AddDirectJavaDependency,
+    AddDirectMavenPlugin,
+    AddGradleConfiguration,
     AddGradlePlugin,
+    AddGradleTasksTestInstruction,
+    AddJavaAnnotationProcessor,
     AddJavaBuildProfile,
     AddJavaDependencyManagement,
     AddMavenBuildExtension,
+    AddMavenPluginManagement,
     RemoveDirectJavaDependency,
+    RemoveJavaAnnotationProcessor,
     RemoveJavaDependencyManagement,
     SetBuildProperty,
-    SetVersion,
-    AddGradleConfiguration,
-    AddGradleTasksTestInstruction {}
+    SetVersion {}

@@ -1,0 +1,41 @@
+---
+name: tdd-domain
+description: Write business code test-first, from the domain to the adapters, following the project's test conventions and 100 % coverage. Use when implementing a validated model or changing business code.
+---
+
+# Skill: test-first, domain first
+
+Use this loop to write the code of a validated model (see [`hexagonal-feature`](../hexagonal-feature/SKILL.md)). Conventions are in [`../../context.md`](../../context.md).
+
+## The loop
+
+For each business rule of the validated model, in this order: value objects, aggregates, domain services, then application services and adapters.
+
+1. **Red**: write the test named after the rule (`shouldNotBorrowMoreThanThreeBooks`) and run it: it must fail for the expected reason.
+2. **Green**: write the simplest code that makes it pass, in the right layer.
+3. **Refactor**: improve names and structure with the tests green. Run the tests of the layer before moving on.
+
+The domain is done when every rule has its test; adapters only translate and must not hide business rules.
+
+## Writing the tests
+
+- Pure unit tests are annotated `@{{packageName}}.UnitTest`; tests with a Spring context use `@{{packageName}}.IntegrationTest` and end with `IT`.
+- AssertJ (`assertThat`, `assertThatThrownBy(...).isExactlyInstanceOf(...)`); Mockito for ports when a hand-written fake is not simpler.
+- One `<Aggregates>Fixture` per aggregate in the test `domain` package, with meaningful sample values and fixed dates.
+- Test both sides of every boundary: day 14 and day 15, exactly 10 € and 10.50 €, one minute before the start and at the start.
+- Time-dependent rules receive the current date or time as a parameter: tests use fixed values, never `now()`.
+- REST resources: an integration test with `MockMvc` for each endpoint's happy path and each error mapping (404, 409, 400). In-memory repositories keep their state for the whole Spring context: use unique data (random emails, numbers…) in each test.
+- Logging adapters: check the message with the generated `@Logs LogsSpy`.
+
+## Coverage
+
+When `jacoco-with-min-coverage-check` is applied, every class needs 100 % of lines and branches, unit and integration tests combined:
+
+- every `orElseThrow(() -> new UnknownXxxException(id))` needs a test where the element is missing;
+- every `if`, `&&` and `||` needs both outcomes;
+- every accessor must be used somewhere (REST mapping and integration tests usually cover them);
+- don't add code "just in case": unused code breaks the build.
+
+## Done means green
+
+Run `./mvnw clean verify` (or `./gradlew build`). Fix the code, never the checks: don't delete or weaken a test, an ArchUnit rule, a Checkstyle rule or the coverage limit to make the build pass. If a check looks wrong, ask the user.

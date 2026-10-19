@@ -612,7 +612,7 @@ export default defineComponent({
     const highlightModule = (query: string) => {
       if (!query) {
         highlightedModule.value = Optional.empty();
-        nextTick().then(resetLandscapeContainerPosition);
+        void nextTick().then(resetLandscapeContainerPosition);
         return;
       }
 

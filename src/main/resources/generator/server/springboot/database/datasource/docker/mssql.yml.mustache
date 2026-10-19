@@ -9,9 +9,8 @@ services:
       - SA_PASSWORD=yourStrong(!)Password
       - MSSQL_DATABASE={{baseName}}
       - MSSQL_PID=Express
-      - MSSQL_SLEEP=60
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:
       - '127.0.0.1:1433:1433'
-    command: /bin/bash -c '/opt/mssql/bin/sqlservr & echo "wait $$MSSQL_SLEEP sec for DB to start "; sleep $$MSSQL_SLEEP; /opt/mssql-tools/bin/sqlcmd -U sa -P $$SA_PASSWORD -d tempdb -q "EXIT(CREATE DATABASE $$MSSQL_DATABASE)"; wait;'
+    command: /bin/bash -c '/opt/mssql/bin/sqlservr & until /opt/mssql-tools18/bin/sqlcmd -C -U sa -P "$$SA_PASSWORD" -d tempdb -Q "SELECT 1" > /dev/null 2>&1; do echo "waiting for DB to start"; sleep 2; done; /opt/mssql-tools18/bin/sqlcmd -C -U sa -P "$$SA_PASSWORD" -d tempdb -Q "IF DB_ID(N'"'"'$$MSSQL_DATABASE'"'"') IS NULL CREATE DATABASE [$$MSSQL_DATABASE]"; wait'

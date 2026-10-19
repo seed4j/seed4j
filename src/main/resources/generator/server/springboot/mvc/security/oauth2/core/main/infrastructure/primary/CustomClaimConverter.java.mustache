@@ -4,6 +4,7 @@ import {{packageName}}.shared.memoizer.domain.Memoizers;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.StreamSupport;
 import org.springframework.core.convert.converter.Converter;
@@ -42,7 +43,12 @@ class CustomClaimConverter implements Converter<Map<String, Object>, Map<String,
   private final Function<SubAttributes, ObjectNode> users;
 
   public CustomClaimConverter(ClientRegistration registration, RestTemplate restTemplate) {
-    this.users = Memoizers.of(subAttributes -> loadUser(registration, restTemplate, subAttributes));
+    String userInfoUri = Objects.requireNonNull(
+      registration.getProviderDetails().getUserInfoEndpoint().getUri(),
+      "User info endpoint URI should be configured"
+    );
+
+    this.users = Memoizers.of(subAttributes -> loadUser(userInfoUri, restTemplate, subAttributes));
   }
 
   private static List<ClaimAppender> buildAppenders() {
@@ -74,12 +80,12 @@ class CustomClaimConverter implements Converter<Map<String, Object>, Map<String,
     return users.apply(new SubAttributes(claims.get(SUB).toString(), attributes));
   }
 
-  private ObjectNode loadUser(ClientRegistration registration, RestTemplate restTemplate, SubAttributes subAttributes) {
+  private ObjectNode loadUser(String userInfoUri, RestTemplate restTemplate, SubAttributes subAttributes) {
     var headers = new HttpHeaders();
     headers.set(HttpHeaders.AUTHORIZATION, buildBearer(getToken(subAttributes.attributes)));
 
     ResponseEntity<ObjectNode> userInfo = restTemplate.exchange(
-      registration.getProviderDetails().getUserInfoEndpoint().getUri(),
+      userInfoUri,
       HttpMethod.GET,
       new HttpEntity<String>(headers),
       ObjectNode.class

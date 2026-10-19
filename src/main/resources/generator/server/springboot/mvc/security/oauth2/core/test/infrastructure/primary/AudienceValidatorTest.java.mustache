@@ -25,6 +25,14 @@ class AudienceValidatorTest {
   }
 
   @Test
+  void shouldInvalidMissingAudience() {
+    Jwt jwtWithoutAudience = mock(Jwt.class);
+    when(jwtWithoutAudience.getAudience()).thenReturn(null);
+
+    assertThat(validator.validate(jwtWithoutAudience).hasErrors()).isTrue();
+  }
+
+  @Test
   void shouldValidAudience() {
     Jwt jwt = mock(Jwt.class);
     when(jwt.getAudience()).thenReturn(List.of("api://default"));

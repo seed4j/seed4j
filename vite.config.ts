@@ -24,6 +24,10 @@ export default defineConfig({
     outDir: '../../../target/classes/static',
   },
   root: 'src/main/webapp',
+  // Keep the cache out of node_modules: `tikui-core serve` runs `sass --watch -I node_modules`,
+  // which crashes when Vite creates then renames its deps_temp_* folder there.
+  // See https://github.com/tikui/tikui-core/issues/602
+  cacheDir: path.resolve(__dirname, 'target/vite-cache'),
   server: {
     port: 9000,
     proxy: {

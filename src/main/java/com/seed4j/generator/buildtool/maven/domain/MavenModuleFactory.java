@@ -34,9 +34,10 @@ public class MavenModuleFactory {
   You need to have Java 25:
 
   - [JDK 25](https://openjdk.java.net/projects/jdk/25/)""";
+  private static final String PROPERTIES = "properties";
 
   public Seed4JModule buildMavenModule(Seed4JModuleProperties properties) {
-    Assert.notNull("properties", properties);
+    Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
     return moduleBuilder(properties)
@@ -103,7 +104,7 @@ public class MavenModuleFactory {
   }
 
   public Seed4JModule buildMavenWrapperModule(Seed4JModuleProperties properties) {
-    Assert.notNull("properties", properties);
+    Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
     return moduleBuilder(properties)
@@ -145,7 +146,7 @@ public class MavenModuleFactory {
       .groupId(APACHE_PLUGINS_GROUP)
       .artifactId("maven-dependency-plugin")
       .versionSlug("maven-dependency-plugin")
-      .addExecution(pluginExecution().goals("properties").id("generate-dependencies-properties"))
+      .addExecution(pluginExecution().goals(PROPERTIES).id("generate-dependencies-properties"))
       .build();
   }
 

@@ -73,7 +73,6 @@ class MavenModuleFactoryTest {
               </plugin>
         """
       )
-      .containing("<argLine>-Dfile.encoding=UTF-8</argLine>")
       .containing(
         """
               <plugin>

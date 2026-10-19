@@ -16,9 +16,9 @@ describe('Oauth2 Auth Service', () => {
 
   beforeEach(() => {
     keycloakInstance = {
-      init: vi.fn().mockReturnValue(Promise.resolve(true) as unknown as Promise<boolean>),
-      updateToken: vi.fn().mockReturnValue(Promise.resolve(true) as unknown as Promise<boolean>),
-      logout: vi.fn().mockReturnValue(Promise.resolve(null) as unknown as Promise<void>),
+      init: vi.fn().mockReturnValue(Promise.resolve(true)),
+      updateToken: vi.fn().mockReturnValue(Promise.resolve(true)),
+      logout: vi.fn().mockReturnValue(Promise.resolve(null)),
       idToken: 'idTokenValue',
       token: 'tokenValue',
       tokenParsed: {
@@ -56,7 +56,7 @@ describe('Oauth2 Auth Service', () => {
     });
 
     it('should init refresh token and return true when the user is authenticated', async () => {
-      vi.spyOn(keycloakInstance, 'init').mockReturnValue(Promise.resolve(true).then() as unknown as Promise<boolean>);
+      vi.spyOn(keycloakInstance, 'init').mockReturnValue(Promise.resolve(true).then());
 
       const authenticated = await lastValueFrom(service.initAuthentication());
 
@@ -69,7 +69,7 @@ describe('Oauth2 Auth Service', () => {
     });
 
     it('should reload window and return false when the user is not authenticated', async () => {
-      vi.spyOn(keycloakInstance, 'init').mockReturnValue(Promise.resolve(false).then() as unknown as Promise<boolean>);
+      vi.spyOn(keycloakInstance, 'init').mockReturnValue(Promise.resolve(false).then());
 
       const authenticated = await lastValueFrom(service.initAuthentication());
 
@@ -94,7 +94,7 @@ describe('Oauth2 Auth Service', () => {
       vi.spyOn(Date, 'now').mockReturnValue(1651318847714); // 2022-04-30 13:40:47
 
       const updateTokenPromise = Promise.resolve(false);
-      vi.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise as unknown as Promise<boolean>);
+      vi.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise);
 
       await lastValueFrom(service.initAuthentication());
 
@@ -107,7 +107,7 @@ describe('Oauth2 Auth Service', () => {
 
     it('should call update token and log debug "refreshed" message when token is refreshed', async () => {
       const updateTokenPromise = Promise.resolve(true);
-      vi.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise as unknown as Promise<boolean>);
+      vi.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise);
 
       await lastValueFrom(service.initAuthentication());
 
@@ -120,7 +120,7 @@ describe('Oauth2 Auth Service', () => {
 
     it('should call update token and log error message on error', async () => {
       const updateTokenPromise = Promise.reject(new Error('unknown error'));
-      vi.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise as unknown as Promise<boolean>);
+      vi.spyOn(keycloakInstance, 'updateToken').mockReturnValue(updateTokenPromise);
 
       await lastValueFrom(service.initAuthentication());
 

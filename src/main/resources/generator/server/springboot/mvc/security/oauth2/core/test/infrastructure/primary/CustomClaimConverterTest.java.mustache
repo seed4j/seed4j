@@ -57,6 +57,15 @@ class CustomClaimConverterTest {
   }
 
   @Test
+  void shouldNotBuildWithoutUserInfoUri() {
+    ClientRegistration registration = ClientRegistration.withRegistrationId("test")
+      .authorizationGrantType(AuthorizationGrantType.JWT_BEARER)
+      .build();
+
+    assertThatThrownBy(() -> new CustomClaimConverter(registration, rest)).isExactlyInstanceOf(NullPointerException.class);
+  }
+
+  @Test
   void shouldGetClaimFromInputClaimWithoutRequestAttributes() {
     Map<String, Object> convertedClaims = converter.convert(simpleClaim());
 

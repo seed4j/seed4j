@@ -260,6 +260,7 @@ jobs:
           - typescriptapp
           - thymeleafapp
           - langchain4japp
+          - micronautapp
         include:
           - java-build-tool: maven
           - spring-config-format: yaml

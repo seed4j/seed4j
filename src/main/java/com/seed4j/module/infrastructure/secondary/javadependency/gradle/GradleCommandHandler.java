@@ -31,16 +31,20 @@ import com.seed4j.module.domain.javabuild.command.AddDirectMavenPlugin;
 import com.seed4j.module.domain.javabuild.command.AddGradleConfiguration;
 import com.seed4j.module.domain.javabuild.command.AddGradlePlugin;
 import com.seed4j.module.domain.javabuild.command.AddGradleTasksTestInstruction;
+import com.seed4j.module.domain.javabuild.command.AddJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.AddJavaBuildProfile;
 import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
 import com.seed4j.module.domain.javabuild.command.AddMavenBuildExtension;
 import com.seed4j.module.domain.javabuild.command.AddMavenPluginManagement;
 import com.seed4j.module.domain.javabuild.command.RemoveDirectJavaDependency;
+import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.RemoveJavaDependencyManagement;
 import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
+import com.seed4j.module.domain.javadependency.DependencyId;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessor;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
@@ -60,6 +64,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -95,6 +100,10 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
     "^\\s+// seed4j-needle-gradle-test-dependencies$",
     Pattern.MULTILINE
   );
+  private static final Pattern GRADLE_ANNOTATION_PROCESSOR_DEPENDENCY_NEEDLE = Pattern.compile(
+    "^\\s+// seed4j-needle-gradle-annotation-processors$",
+    Pattern.MULTILINE
+  );
   private static final Pattern GRADLE_PROFILE_ACTIVATION_NEEDLE = Pattern.compile(
     "^// seed4j-needle-profile-activation$",
     Pattern.MULTILINE
@@ -116,6 +125,10 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
   }\
   """;
   private static final String BUILD_GRADLE_PROFILE_PATH_TEMPLATE = "buildSrc/src/main/kotlin/profile-%s.gradle.kts";
+  private static final String BUILD_GRADLE_PROFILES_FOLDER = "buildSrc/src/main/kotlin";
+  private static final Collection<GradleDependencyScope> DEPENDENCY_SCOPES = Stream.of(GradleDependencyScope.values())
+    .filter(scope -> scope != GradleDependencyScope.ANNOTATION_PROCESSOR)
+    .toList();
 
   private final Indentation indentation;
   private final Seed4JProjectFolder projectFolder;
@@ -151,17 +164,53 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   @Override
+  public void handle(AddJavaAnnotationProcessor command) {
+    Assert.notNull(COMMAND, command);
+
+    versionsCatalog.addLibrary(command.annotationProcessor());
+    addAnnotationProcessorToBuildGradle(command.annotationProcessor());
+  }
+
+  private void addAnnotationProcessorToBuildGradle(JavaAnnotationProcessor annotationProcessor) {
+    String dependencyDeclaration = "%s%s(libs.%s)".formatted(
+      indentation.times(1),
+      GradleDependencyScope.ANNOTATION_PROCESSOR.command(),
+      applyVersionCatalogReferenceConvention(versionsCatalog.libraryAlias(annotationProcessor))
+    );
+    MandatoryReplacer replacer = new MandatoryReplacer(
+      new RegexNeedleBeforeReplacer(
+        (contentBeforeReplacement, newText) -> !contentBeforeReplacement.contains(newText),
+        GRADLE_ANNOTATION_PROCESSOR_DEPENDENCY_NEEDLE
+      ),
+      dependencyDeclaration
+    );
+    fileReplacer.handle(
+      projectFolder,
+      ContentReplacers.of(new MandatoryFileReplacer(projectFolderRelativePathFrom(buildGradleFile(Optional.empty())), replacer)),
+      context
+    );
+  }
+
+  @Override
   public void handle(AddDirectJavaDependency command) {
     Assert.notNull(COMMAND, command);
 
     versionsCatalog.addLibrary(command.dependency());
-    addDependencyToBuildGradle(command.dependency(), buildGradleFile(command.buildProfile()), command.buildProfile().isPresent());
+    addDependencyToBuildGradle(
+      command.dependency(),
+      buildGradleFile(command.buildProfile()),
+      command.buildProfile().isPresent(),
+      gradleDependencyScope(command.dependency())
+    );
   }
 
-  private void addDependencyToBuildGradle(JavaDependency dependency, Path buildGradleFile, boolean forBuildProfile) {
-    GradleDependencyScope gradleScope = gradleDependencyScope(dependency);
-
-    String dependencyDeclaration = dependencyDeclaration(dependency, forBuildProfile);
+  private void addDependencyToBuildGradle(
+    JavaDependency dependency,
+    Path buildGradleFile,
+    boolean forBuildProfile,
+    GradleDependencyScope gradleScope
+  ) {
+    String dependencyDeclaration = dependencyDeclaration(dependency, gradleScope, forBuildProfile);
     MandatoryReplacer replacer = new MandatoryReplacer(
       new RegexNeedleBeforeReplacer(
         (contentBeforeReplacement, newText) -> !contentBeforeReplacement.contains(newText),
@@ -182,14 +231,12 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
       case GradleDependencyScope.COMPILE_ONLY -> GRADLE_COMPILE_DEPENDENCY_NEEDLE;
       case GradleDependencyScope.RUNTIME_ONLY -> GRADLE_RUNTIME_DEPENDENCY_NEEDLE;
       case GradleDependencyScope.TEST_IMPLEMENTATION -> GRADLE_TEST_DEPENDENCY_NEEDLE;
+      case GradleDependencyScope.ANNOTATION_PROCESSOR -> GRADLE_ANNOTATION_PROCESSOR_DEPENDENCY_NEEDLE;
     };
   }
 
-  private String dependencyDeclaration(JavaDependency dependency, boolean forBuildProfile) {
-    StringBuilder dependencyDeclaration = new StringBuilder()
-      .append(indentation.times(1))
-      .append(gradleDependencyScope(dependency).command())
-      .append("(");
+  private String dependencyDeclaration(JavaDependency dependency, GradleDependencyScope gradleScope, boolean forBuildProfile) {
+    StringBuilder dependencyDeclaration = new StringBuilder().append(indentation.times(1)).append(gradleScope.command()).append("(");
     var versionCatalogReference = forBuildProfile
       ? versionCatalogReferenceForBuildProfile(dependency)
       : versionCatalogReference(dependency);
@@ -232,27 +279,68 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
       case TEST -> GradleDependencyScope.TEST_IMPLEMENTATION;
       case PROVIDED -> GradleDependencyScope.COMPILE_ONLY;
       case RUNTIME -> GradleDependencyScope.RUNTIME_ONLY;
-      default -> GradleDependencyScope.IMPLEMENTATION;
+      case COMPILE, IMPORT, SYSTEM -> GradleDependencyScope.IMPLEMENTATION;
     };
   }
 
   @Override
   public void handle(RemoveDirectJavaDependency command) {
+    removeDependency(command.dependency(), command.buildProfile(), DEPENDENCY_SCOPES);
+  }
+
+  private void removeDependency(DependencyId dependency, Optional<BuildProfileId> buildProfile, Collection<GradleDependencyScope> scopes) {
     versionsCatalog
-      .retrieveDependencySlugsFrom(command.dependency())
+      .retrieveDependencySlugsFrom(dependency)
       .stream()
-      .filter(dependencyExistsFrom(command.buildProfile()))
+      .filter(dependencyExistsFrom(buildProfile, scopes))
       .forEach(dependencySlug -> {
-        removeDependencyFromBuildGradle(dependencySlug, command.buildProfile());
-        versionsCatalog.removeLibrary(command.dependency());
+        removeDependencyFromBuildGradle(dependencySlug, buildProfile, scopes);
+        if (!libraryReferenced(dependencySlug)) {
+          versionsCatalog.removeLibrary(dependencySlug);
+        }
       });
   }
 
-  private Predicate<DependencySlug> dependencyExistsFrom(Optional<BuildProfileId> buildProfile) {
+  private Predicate<DependencySlug> dependencyExistsFrom(Optional<BuildProfileId> buildProfile, Collection<GradleDependencyScope> scopes) {
     return dependencySlug -> {
       String buildGradleFileContent = readContent(buildGradleFile(buildProfile));
-      return dependencyLinePattern(dependencySlug, buildProfile).matcher(buildGradleFileContent).find();
+      return dependencyLinePattern(dependencySlug, buildProfile, scopes).matcher(buildGradleFileContent).find();
     };
+  }
+
+  private boolean libraryReferenced(DependencySlug dependencySlug) {
+    Pattern libraryReference = Pattern.compile(
+      "libs\\.%s(?![\\w.])|libs\\.findLibrary\\(\"%s\"\\)".formatted(
+        applyVersionCatalogReferenceConvention(dependencySlug.slug()).replace(".", "\\."),
+        Pattern.quote(dependencySlug.slug())
+      )
+    );
+
+    return gradleScripts()
+      .map(this::readContent)
+      .anyMatch(content -> libraryReference.matcher(content).find());
+  }
+
+  private Stream<Path> gradleScripts() {
+    Path profilesFolder = projectFolder.filePath(BUILD_GRADLE_PROFILES_FOLDER);
+    Stream<Path> profileScripts = Files.isDirectory(profilesFolder) ? listGradleScripts(profilesFolder) : Stream.empty();
+
+    return Stream.concat(
+      Stream.of(projectFolder.filePath(BUILD_GRADLE_FILE), projectFolder.filePath(PLUGIN_BUILD_GRADLE_FILE)).filter(Files::exists),
+      profileScripts
+    );
+  }
+
+  @ExcludeFromGeneratedCodeCoverage(reason = "IOException is hard to test")
+  private static Stream<Path> listGradleScripts(Path folder) {
+    try (Stream<Path> files = Files.list(folder)) {
+      return files
+        .filter(file -> file.getFileName().toString().endsWith(".gradle.kts"))
+        .toList()
+        .stream();
+    } catch (IOException e) {
+      throw GeneratorException.technicalError("Error listing files in " + folder + ": " + e.getMessage(), e);
+    }
   }
 
   @ExcludeFromGeneratedCodeCoverage(reason = "IOException is hard to test")
@@ -264,9 +352,13 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
     }
   }
 
-  private void removeDependencyFromBuildGradle(DependencySlug dependencySlug, Optional<BuildProfileId> buildProfile) {
+  private void removeDependencyFromBuildGradle(
+    DependencySlug dependencySlug,
+    Optional<BuildProfileId> buildProfile,
+    Collection<GradleDependencyScope> scopes
+  ) {
     MandatoryReplacer replacer = new MandatoryReplacer(
-      new RegexReplacer(always(), dependencyLinePattern(dependencySlug, buildProfile)),
+      new RegexReplacer(always(), dependencyLinePattern(dependencySlug, buildProfile, scopes)),
       ""
     );
     fileReplacer.handle(
@@ -276,8 +368,13 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
     );
   }
 
-  private Pattern dependencyLinePattern(DependencySlug dependencySlug, Optional<BuildProfileId> buildProfile) {
-    String scopePattern = Stream.of(GradleDependencyScope.values())
+  private Pattern dependencyLinePattern(
+    DependencySlug dependencySlug,
+    Optional<BuildProfileId> buildProfile,
+    Collection<GradleDependencyScope> scopes
+  ) {
+    String scopePattern = scopes
+      .stream()
       .map(GradleDependencyScope::command)
       .collect(Collectors.joining("|", "(?:", ")"));
 
@@ -293,21 +390,35 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   @Override
+  public void handle(RemoveJavaAnnotationProcessor command) {
+    Assert.notNull(COMMAND, command);
+
+    removeDependency(command.dependency(), Optional.empty(), List.of(GradleDependencyScope.ANNOTATION_PROCESSOR));
+  }
+
+  @Override
   public void handle(RemoveJavaDependencyManagement command) {
-    versionsCatalog
-      .retrieveDependencySlugsFrom(command.dependency())
-      .stream()
-      .filter(dependencyExistsFrom(command.buildProfile()))
-      .forEach(dependencySlug -> {
-        removeDependencyFromBuildGradle(dependencySlug, command.buildProfile());
-        versionsCatalog.removeLibrary(command.dependency());
-      });
+    // a BOM is declared on both dependencies and annotation processors configurations
+    removeDependency(command.dependency(), command.buildProfile(), List.of(GradleDependencyScope.values()));
   }
 
   @Override
   public void handle(AddJavaDependencyManagement command) {
     versionsCatalog.addLibrary(command.dependency());
-    addDependencyToBuildGradle(command.dependency(), buildGradleFile(command.buildProfile()), command.buildProfile().isPresent());
+    addDependencyToBuildGradle(
+      command.dependency(),
+      buildGradleFile(command.buildProfile()),
+      command.buildProfile().isPresent(),
+      gradleDependencyScope(command.dependency())
+    );
+    if (command.dependency().scope() == JavaDependencyScope.IMPORT && command.buildProfile().isEmpty()) {
+      addDependencyToBuildGradle(
+        command.dependency(),
+        buildGradleFile(Optional.empty()),
+        false,
+        GradleDependencyScope.ANNOTATION_PROCESSOR
+      );
+    }
   }
 
   @Override
@@ -479,7 +590,12 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
           command.buildProfile()
         );
         versionsCatalog.addLibrary(dependencyFrom(plugin));
-        addDependencyToBuildGradle(dependencyFrom(plugin), projectFolder.filePath(PLUGIN_BUILD_GRADLE_FILE), false);
+        addDependencyToBuildGradle(
+          dependencyFrom(plugin),
+          projectFolder.filePath(PLUGIN_BUILD_GRADLE_FILE),
+          false,
+          gradleDependencyScope(dependencyFrom(plugin))
+        );
       }
     }
     command

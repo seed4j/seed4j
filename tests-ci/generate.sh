@@ -167,6 +167,7 @@ elif [[ $application == fullapp* ]]; then
   apply_modules \
     "datasource-postgresql" \
     "jpa-postgresql" \
+    "jpa-metamodel-generator" \
     "liquibase" \
     "liquibase-linter" \
     "liquibase-async"

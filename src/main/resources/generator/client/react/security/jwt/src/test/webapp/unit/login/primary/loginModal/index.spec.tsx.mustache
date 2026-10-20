@@ -5,6 +5,9 @@ import { describe, expect, it } from 'vitest';
 import { UserInfoContext } from '@/login/primary/loginForm';
 import LoginModal from '@/login/primary/loginModal';
 
+// jsdom does not implement CSS.escape, which is used by react-aria
+vi.stubGlobal('CSS', { escape: (value: string) => value });
+
 const setUsername = vi.fn();
 const setToken = vi.fn();
 

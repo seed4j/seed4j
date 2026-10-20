@@ -4,15 +4,19 @@ import static com.seed4j.TestFileUtils.content;
 import static com.seed4j.TestFileUtils.loadDefaultProperties;
 import static com.seed4j.module.domain.Seed4JModule.comment;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModulesFixture.MAIN_BOOTSTRAP_PROPERTIES_FILE;
+import static com.seed4j.module.domain.Seed4JModulesFixture.MAIN_PROPERTIES_FILE;
+import static com.seed4j.module.domain.Seed4JModulesFixture.TEST_BOOTSTRAP_PROPERTIES_FILE;
+import static com.seed4j.module.domain.Seed4JModulesFixture.TEST_PROPERTIES_FILE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Indentation;
+import com.seed4j.module.domain.javaproperties.ApplicationPropertiesFile;
 import com.seed4j.module.domain.javaproperties.ApplicationPropertyComment;
 import com.seed4j.module.domain.javaproperties.ApplicationPropertyComments;
-import com.seed4j.module.domain.javaproperties.SpringPropertyType;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -37,7 +41,7 @@ class FileSystemYamlApplicationPropertyCommentsCommandsHandlerTest {
     Path propertiesFile = Path.of(path, propertiesPath);
     loadDefaultProperties(EXISTING_SPRING_CONFIGURATION, propertiesFile);
 
-    handler.handle(Indentation.DEFAULT, folder(path), commentOn(SpringPropertyType.MAIN_PROPERTIES, "spring.application.name"));
+    handler.handle(Indentation.DEFAULT, folder(path), commentOn(MAIN_PROPERTIES_FILE, "spring.application.name"));
 
     assertThat(content(propertiesFile)).contains(
       """
@@ -54,7 +58,7 @@ class FileSystemYamlApplicationPropertyCommentsCommandsHandlerTest {
     Path propertiesFile = Path.of(path, propertiesPath);
     loadDefaultProperties(EXISTING_SPRING_CONFIGURATION, propertiesFile);
 
-    handler.handle(Indentation.DEFAULT, folder(path), commentOn(SpringPropertyType.MAIN_BOOTSTRAP_PROPERTIES, "spring.application.name"));
+    handler.handle(Indentation.DEFAULT, folder(path), commentOn(MAIN_BOOTSTRAP_PROPERTIES_FILE, "spring.application.name"));
 
     assertThat(content(propertiesFile)).contains(
       """
@@ -71,7 +75,7 @@ class FileSystemYamlApplicationPropertyCommentsCommandsHandlerTest {
     Path propertiesFile = Path.of(path, propertiesPath);
     loadDefaultProperties(EXISTING_SPRING_CONFIGURATION, propertiesFile);
 
-    handler.handle(Indentation.DEFAULT, folder(path), commentOn(SpringPropertyType.TEST_PROPERTIES, "spring.application.name"));
+    handler.handle(Indentation.DEFAULT, folder(path), commentOn(TEST_PROPERTIES_FILE, "spring.application.name"));
 
     assertThat(content(propertiesFile)).contains(
       """
@@ -88,7 +92,7 @@ class FileSystemYamlApplicationPropertyCommentsCommandsHandlerTest {
     Path propertiesFile = Path.of(path, propertiesPath);
     loadDefaultProperties(EXISTING_SPRING_CONFIGURATION, propertiesFile);
 
-    handler.handle(Indentation.DEFAULT, folder(path), commentOn(SpringPropertyType.TEST_BOOTSTRAP_PROPERTIES, "spring.application.name"));
+    handler.handle(Indentation.DEFAULT, folder(path), commentOn(TEST_BOOTSTRAP_PROPERTIES_FILE, "spring.application.name"));
 
     assertThat(content(propertiesFile)).contains(
       """
@@ -102,7 +106,7 @@ class FileSystemYamlApplicationPropertyCommentsCommandsHandlerTest {
   void shouldNotCommentWhenFileNotExists() {
     String path = TestFileUtils.tmpDirForTest();
 
-    handler.handle(Indentation.DEFAULT, folder(path), commentOn(SpringPropertyType.MAIN_PROPERTIES, "spring.application.name"));
+    handler.handle(Indentation.DEFAULT, folder(path), commentOn(MAIN_PROPERTIES_FILE, "spring.application.name"));
 
     Throwable thrown = catchThrowable(() -> content(Path.of(path, "src/main/resources/config/application.yml")));
     assertThat(thrown).hasCauseInstanceOf(NoSuchFileException.class);
@@ -114,11 +118,7 @@ class FileSystemYamlApplicationPropertyCommentsCommandsHandlerTest {
     Path propertiesFile = Path.of(path, "src/main/resources/config/application.yml");
     loadDefaultProperties(EXISTING_SPRING_CONFIGURATION, propertiesFile);
 
-    handler.handle(
-      Indentation.DEFAULT,
-      folder(path),
-      commentOn(SpringPropertyType.MAIN_PROPERTIES, "springdoc.swagger-ui.operationsSorter")
-    );
+    handler.handle(Indentation.DEFAULT, folder(path), commentOn(MAIN_PROPERTIES_FILE, "springdoc.swagger-ui.operationsSorter"));
 
     assertThat(content(propertiesFile)).doesNotContain(
       """
@@ -134,8 +134,8 @@ class FileSystemYamlApplicationPropertyCommentsCommandsHandlerTest {
     Path propertiesFile = Path.of(path, "src/main/resources/config/application.yml");
     loadDefaultProperties(EXISTING_SPRING_CONFIGURATION, propertiesFile);
 
-    handler.handle(Indentation.DEFAULT, folder(path), commentOn(SpringPropertyType.MAIN_PROPERTIES, "spring.application.name"));
-    handler.handle(Indentation.DEFAULT, folder(path), commentOn(SpringPropertyType.MAIN_PROPERTIES, "spring.application.name"));
+    handler.handle(Indentation.DEFAULT, folder(path), commentOn(MAIN_PROPERTIES_FILE, "spring.application.name"));
+    handler.handle(Indentation.DEFAULT, folder(path), commentOn(MAIN_PROPERTIES_FILE, "spring.application.name"));
 
     assertThat(content(propertiesFile)).doesNotContain(
       """
@@ -170,11 +170,9 @@ class FileSystemYamlApplicationPropertyCommentsCommandsHandlerTest {
     return new Seed4JProjectFolder(path);
   }
 
-  private ApplicationPropertyComments commentOn(SpringPropertyType springPropertyType, String propertyKey) {
+  private ApplicationPropertyComments commentOn(ApplicationPropertiesFile file, String propertyKey) {
     return new ApplicationPropertyComments(
-      List.of(
-        ApplicationPropertyComment.builder(springPropertyType).key(propertyKey(propertyKey)).comment(comment("This is a comment")).build()
-      )
+      List.of(new ApplicationPropertyComment(file, propertyKey(propertyKey), comment("This is a comment")))
     );
   }
 

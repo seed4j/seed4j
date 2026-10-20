@@ -1,22 +1,17 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import com.seed4j.module.domain.*;
-import com.seed4j.module.domain.javaproperties.SpringPropertyType;
 import com.seed4j.module.domain.landscape.Seed4JLandscape;
 import com.seed4j.module.domain.postaction.Seed4JModuleExecutionContext;
 import com.seed4j.module.domain.resource.Seed4JModulesResources;
 import com.seed4j.module.infrastructure.secondary.javadependency.FileSystemJavaBuildCommandsHandler;
 import com.seed4j.project.infrastructure.primary.JavaProjects;
 import com.seed4j.shared.error.domain.Assert;
-import java.util.List;
-import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 @Repository
 class FileSystemSeed4JModulesRepository implements Seed4JModulesRepository {
 
-  public static final String DEFAULT_MAIN_FOLDER = "src/main/resources/config/";
-  public static final String DEFAULT_TEST_FOLDER = "src/test/resources/config/";
   public static final String TEST_META_INF_FOLDER = "src/test/resources/META-INF/";
 
   private final JavaProjects projects;
@@ -62,19 +57,6 @@ class FileSystemSeed4JModulesRepository implements Seed4JModulesRepository {
     this.packageJson = packageJson;
     this.replacer = fileReplacer;
     this.startupCommands = startupCommands;
-  }
-
-  public static Map<SpringPropertyType, List<String>> buildPaths() {
-    return Map.of(
-      SpringPropertyType.MAIN_PROPERTIES,
-      List.of(DEFAULT_MAIN_FOLDER, "src/main/resources/"),
-      SpringPropertyType.MAIN_BOOTSTRAP_PROPERTIES,
-      List.of(DEFAULT_MAIN_FOLDER, "src/main/resources/"),
-      SpringPropertyType.TEST_PROPERTIES,
-      List.of(DEFAULT_TEST_FOLDER, "src/test/resources/"),
-      SpringPropertyType.TEST_BOOTSTRAP_PROPERTIES,
-      List.of(DEFAULT_TEST_FOLDER, "src/test/resources/")
-    );
   }
 
   @Override

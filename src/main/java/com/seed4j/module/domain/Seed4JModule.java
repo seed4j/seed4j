@@ -630,27 +630,43 @@ public final class Seed4JModule {
       return properties;
     }
 
-    public Seed4JModuleBuilder apply(Consumer<Seed4JModuleBuilder> builderCustomizer) {
+    /**
+     * Add a reusable part of a module, typically a shortcut from a shared kernel, for example
+     * {@code .with(springTestLogger("org.hibernate", LogLevel.WARN))}.
+     *
+     * @param builderCustomizer
+     *          customization of this module builder
+     * @return this module builder
+     */
+    public Seed4JModuleBuilder with(Consumer<Seed4JModuleBuilder> builderCustomizer) {
       Assert.notNull("builderCustomizer", builderCustomizer);
       builderCustomizer.accept(this);
 
       return this;
     }
 
+    /**
+     * @deprecated use {@link #with(Consumer)} instead
+     */
+    @Deprecated(since = "2.3.0", forRemoval = true)
+    public Seed4JModuleBuilder apply(Consumer<Seed4JModuleBuilder> builderCustomizer) {
+      return with(builderCustomizer);
+    }
+
     public Seed4JModuleBuilder documentation(DocumentationTitle title, Seed4JSource source) {
-      apply(Seed4JModuleShortcuts.documentation(title, source));
+      with(Seed4JModuleShortcuts.documentation(title, source));
 
       return this;
     }
 
     public Seed4JModuleBuilder localEnvironment(LocalEnvironment localEnvironment) {
-      apply(Seed4JModuleShortcuts.localEnvironment(localEnvironment));
+      with(Seed4JModuleShortcuts.localEnvironment(localEnvironment));
 
       return this;
     }
 
     public Seed4JModuleBuilder preCommitActions(StagedFilesFilter stagedFilesFilter, PreCommitCommands preCommitCommands) {
-      apply(Seed4JModuleShortcuts.preCommitActions(stagedFilesFilter, preCommitCommands));
+      with(Seed4JModuleShortcuts.preCommitActions(stagedFilesFilter, preCommitCommands));
 
       return this;
     }
@@ -660,7 +676,7 @@ public final class Seed4JModule {
     }
 
     public Seed4JModuleBuilder prerequisites(String prerequisites) {
-      apply(Seed4JModuleShortcuts.prerequisites(prerequisites));
+      with(Seed4JModuleShortcuts.prerequisites(prerequisites));
 
       return this;
     }
@@ -678,19 +694,19 @@ public final class Seed4JModule {
     }
 
     public Seed4JModuleBuilder springTestLogger(String name, LogLevel level) {
-      apply(Seed4JModuleShortcuts.springTestLogger(name, level));
+      with(Seed4JModuleShortcuts.springTestLogger(name, level));
 
       return this;
     }
 
     public Seed4JModuleBuilder springMainLogger(String name, LogLevel level) {
-      apply(Seed4JModuleShortcuts.springMainLogger(name, level));
+      with(Seed4JModuleShortcuts.springMainLogger(name, level));
 
       return this;
     }
 
     public Seed4JModuleBuilder integrationTestExtension(String extensionClass) {
-      apply(Seed4JModuleShortcuts.integrationTestExtension(extensionClass));
+      with(Seed4JModuleShortcuts.integrationTestExtension(extensionClass));
 
       return this;
     }

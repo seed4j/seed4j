@@ -10,8 +10,10 @@
   overflow-wrap: anywhere;
   font-weight: 700;
 
-  @include placeholder.placeholder-alternative {
-    max-width: 20rem;
-    min-height: 3rem;
+  &.-placeholder {
+    @include placeholder.placeholder-alternative {
+      max-width: 20rem;
+      min-height: 3rem;
+    }
   }
 }

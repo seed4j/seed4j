@@ -7,7 +7,9 @@
   font-family: var(--font-family);
   font-size: var(--font-size);
 
-  @include placeholder.placeholder-alternative {
-    min-height: var(--font-size);
+  &.-placeholder {
+    @include placeholder.placeholder-alternative {
+      min-height: var(--font-size);
+    }
   }
 }

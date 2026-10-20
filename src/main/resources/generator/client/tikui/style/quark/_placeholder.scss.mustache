@@ -16,11 +16,9 @@
 }
 
 @mixin placeholder-alternative {
-  &.-placeholder {
-    @include placeholder-background;
-    @include placeholder-border;
-    @include placeholder-animation;
+  @include placeholder-background;
+  @include placeholder-border;
+  @include placeholder-animation;
 
-    @content;
-  }
+  @content;
 }

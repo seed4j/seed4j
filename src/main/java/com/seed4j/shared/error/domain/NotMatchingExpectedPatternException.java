@@ -1,7 +1,5 @@
 package com.seed4j.shared.error.domain;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Map;
 import java.util.regex.Pattern;
 import org.jspecify.annotations.Nullable;
@@ -11,8 +9,10 @@ public final class NotMatchingExpectedPatternException extends AssertionExceptio
   private final String pattern;
 
   private NotMatchingExpectedPatternException(NotMatchingExpectedPatternExceptionBuilder builder) {
-    super(requireNonNull(builder.field), builder.message());
+    Assert.notNull("field", builder.field);
     Assert.notNull("pattern", builder.pattern);
+
+    super(builder.field, builder.message());
     pattern = builder.pattern;
   }
 

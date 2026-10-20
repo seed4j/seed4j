@@ -49,6 +49,7 @@ public class ReactJwtModuleFactory {
         .addDevDependency(packageName("sass"), COMMON)
         .addDevDependency(packageName("@tailwindcss/vite"), COMMON)
         .addDevDependency(packageName("tailwindcss"), COMMON)
+        .denyInstallScripts(packageName("@parcel/watcher"))
         .and()
       .files()
         .add(APP_SOURCE.template("common/services/storage.ts"), COMMON_DESTINATION.append("services/storage.ts"))

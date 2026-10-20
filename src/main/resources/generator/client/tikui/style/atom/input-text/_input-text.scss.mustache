@@ -18,8 +18,10 @@
     --input-text-border-color: var(--color-primary);
   }
 
-  @include placeholder.placeholder-alternative {
-    cursor: default;
-    pointer-events: none;
+  &.-placeholder {
+    @include placeholder.placeholder-alternative {
+      cursor: default;
+      pointer-events: none;
+    }
   }
 }

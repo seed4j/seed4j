@@ -96,7 +96,7 @@ public class ReactJwtModuleFactory {
           )
           .and()
         .in(path("src/main/webapp/app/index.css"))
-          .add(lineBeforeText("body {"), "@config '../../../../tailwind.config.js';" + LINE_BREAK + "@import 'tailwindcss';" + LINE_BREAK)
+          .add(lineBeforeText("body {"), "@import 'tailwindcss';" + LINE_BREAK + "@config '../../../../tailwind.config.js';" + LINE_BREAK)
         .and()
       .and()
       .optionalReplacements()

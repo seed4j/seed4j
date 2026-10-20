@@ -40,8 +40,9 @@ class CustomClaimConverterTest {
   private CustomClaimConverter converter;
 
   @BeforeEach
-  void loadConverter() {
+  void setUp() {
     converter = new CustomClaimConverter(buildRegistration(), rest);
+    RequestContextHolder.resetRequestAttributes();
   }
 
   private ClientRegistration buildRegistration() {
@@ -49,11 +50,6 @@ class CustomClaimConverterTest {
       .userInfoUri("http://seed4j.test")
       .authorizationGrantType(AuthorizationGrantType.JWT_BEARER)
       .build();
-  }
-
-  @BeforeEach
-  void cleanRequestAttributes() {
-    RequestContextHolder.resetRequestAttributes();
   }
 
   @Test

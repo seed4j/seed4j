@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.dbmigration.flyway.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
@@ -40,7 +41,7 @@ public class FlywayModuleFactory {
       .files()
         .add(SOURCE.file("V00000000000000__init.sql"), to("src/main/resources/db/migration").append(initFilename(date)))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.flyway.enabled"), propertyValue(true))
         .set(propertyKey("spring.flyway.locations"), propertyValue("classpath:db/migration"))
         .and()

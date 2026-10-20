@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.dbmigration.neo4j.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
 import static com.seed4j.module.domain.Seed4JModule.from;
@@ -27,7 +28,7 @@ public class Neo4jMigrationModuleFactory {
         .addDependency(groupId("eu.michael-simons.neo4j"), artifactId("neo4j-migrations-spring-boot-starter"), versionSlug("neo4j-migrations"))
         .and()
       .documentation(documentationTitle("Neo4j Migrations"), SOURCE.append("neo4j-migrations.md"))
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("org.neo4j.migrations.check-location"), propertyValue(false))
         .and()
       .build();

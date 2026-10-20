@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.database.datasource.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -71,11 +73,11 @@ public class DatasourceModuleFactory {
       .apply(declareDockerComposeService(datasourceProperties))
       .apply(connectionPool(datasourceProperties))
       .apply(testcontainers(dockerImages, properties, datasourceProperties))
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey(SPRING_DATASOURCE_URL), propertyValue("jdbc:postgresql://localhost:5432/" + properties.projectBaseName().name()))
         .set(propertyKey(SPRING_DATASOURCE_USERNAME), propertyValue(properties.projectBaseName().name()))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(
           propertyKey(SPRING_DATASOURCE_URL),
           propertyValue(
@@ -107,7 +109,7 @@ public class DatasourceModuleFactory {
       .apply(declareDockerComposeService(datasourceProperties))
       .apply(connectionPool( datasourceProperties))
       .apply(testcontainers(dockerImages,  properties, datasourceProperties))
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey(SPRING_DATASOURCE_URL), propertyValue("jdbc:mariadb://localhost:3306/" + properties.projectBaseName().name()))
         .set(propertyKey(SPRING_DATASOURCE_USERNAME), propertyValue("root"))
         .and()
@@ -132,7 +134,7 @@ public class DatasourceModuleFactory {
       .apply(declareDockerComposeService(datasourceProperties))
       .apply(connectionPool( datasourceProperties))
       .apply(testcontainers(dockerImages,  properties, datasourceProperties))
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey(SPRING_DATASOURCE_URL), propertyValue("jdbc:mysql://localhost:3306/" + properties.projectBaseName().name()))
         .set(propertyKey(SPRING_DATASOURCE_USERNAME), propertyValue("root"))
         .and()
@@ -164,7 +166,7 @@ public class DatasourceModuleFactory {
           toSrcTestJava().append(properties.basePackage().path()).append("MsSQLTestContainerExtension.java")
         )
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(
           propertyKey(SPRING_DATASOURCE_URL),
           propertyValue("jdbc:sqlserver://localhost:1433;database=" + properties.projectBaseName().name() + ";trustServerCertificate=true")
@@ -172,7 +174,7 @@ public class DatasourceModuleFactory {
         .set(propertyKey(SPRING_DATASOURCE_USERNAME), propertyValue("SA"))
         .set(propertyKey(SPRING_DATASOURCE_PASSWORD), propertyValue("yourStrong(!)Password"))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(
           propertyKey(SPRING_DATASOURCE_URL),
           propertyValue(
@@ -233,7 +235,7 @@ public class DatasourceModuleFactory {
         .javaDependencies()
           .addDependency(datasourceProperties.testContainerDependency())
           .and()
-        .springTestProperties()
+        .applicationProperties(SPRING_TEST)
           .set(
             propertyKey(SPRING_DATASOURCE_URL),
             propertyValue("jdbc:tc:" + dockerImage.fullName() + ":///" + moduleProperties.projectBaseName().name())
@@ -254,14 +256,14 @@ public class DatasourceModuleFactory {
           .addDependency(datasourceProperties.driverDependency())
           .addDependency(groupId("com.zaxxer"), artifactId("HikariCP"))
           .and()
-        .springMainProperties()
+        .applicationProperties(SPRING_MAIN)
           .set(propertyKey(SPRING_DATASOURCE_PASSWORD), propertyValue(""))
           .set(propertyKey("spring.datasource.type"), propertyValue("com.zaxxer.hikari.HikariDataSource"))
           .set(propertyKey("spring.datasource.hikari.poolName"), propertyValue("Hikari"))
           .set(propertyKey("spring.datasource.hikari.auto-commit"), propertyValue(false))
           .set(propertyKey(SPRING_DATASOURCE_DRIVER_CLASS_NAME), propertyValue(datasourceProperties.driverClassName()))
           .and()
-        .springTestProperties()
+        .applicationProperties(SPRING_TEST)
           .set(propertyKey("spring.datasource.hikari.maximum-pool-size"), propertyValue(2));
   }
 }

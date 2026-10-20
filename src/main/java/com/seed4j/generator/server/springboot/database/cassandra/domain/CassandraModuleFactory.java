@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.database.cassandra.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.comment;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
@@ -69,14 +71,14 @@ public class CassandraModuleFactory {
         .add(SOURCE.template("TestCassandraManager.java"), toSrcTestJava().append(packagePath).append("TestCassandraManager.java"))
         .add(SOURCE.template("CassandraKeyspaceIT.java"), toSrcTestJava().append(packagePath).append("CassandraKeyspaceIT.java"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.cassandra.contact-points"), propertyValue("127.0.0.1"))
         .comment(LOCAL_DATACENTER_PROPERTY, comment("keyspace-name: yourKeyspace"))
         .set(propertyKey("spring.cassandra.port"), propertyValue(9042))
         .set(LOCAL_DATACENTER_PROPERTY, propertyValue(DC))
         .set(propertyKey("spring.cassandra.schema-action"), propertyValue("none"))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(propertyKey("spring.cassandra.port"), propertyValue("${TEST_CASSANDRA_PORT}"))
         .set(propertyKey("spring.cassandra.contact-points"), propertyValue("${TEST_CASSANDRA_CONTACT_POINT}"))
         .set(LOCAL_DATACENTER_PROPERTY, propertyValue("${TEST_CASSANDRA_DC}"))

@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.database.neo4j.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -59,11 +61,11 @@ public class Neo4jModuleFactory {
         .and()
         .add(SOURCE.template("TestNeo4jManager.java"), toSrcTestJava().append(packagePath).append("TestNeo4jManager.java"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.neo4j.uri"), propertyValue("bolt://localhost:7687"))
         .set(propertyKey("spring.neo4j.pool.metrics-enabled"), propertyValue(true))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(propertyKey("spring.neo4j.uri"), propertyValue("${TEST_NEO4J_URI}"))
         .and()
       .springTestFactories()

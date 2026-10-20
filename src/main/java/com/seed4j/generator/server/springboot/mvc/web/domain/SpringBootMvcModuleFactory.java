@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.mvc.web.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -75,11 +77,11 @@ public class SpringBootMvcModuleFactory {
         .addDependency(SPRING_BOOT_GROUP, artifactId("spring-boot-starter-validation"))
         .addDependency(reflectionsDependency())
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(SERVER_PORT, propertyValue(properties.serverPort().get()))
         .set(propertyKey("spring.jackson.default-property-inclusion"), propertyValue("non_absent"))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(SERVER_PORT, propertyValue(0))
         .and()
       .files()

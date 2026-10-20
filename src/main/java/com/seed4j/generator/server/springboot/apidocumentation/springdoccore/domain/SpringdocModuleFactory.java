@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdoccore.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.localEnvironment;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
@@ -56,7 +57,7 @@ public class SpringdocModuleFactory {
       .files()
         .add(SOURCE.template(SPRINGDOC_CONFIG_JAVA_FILE), mainDestination.append(SPRINGDOC_CONFIG_JAVA_FILE))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("springdoc.swagger-ui.operationsSorter"), ALPHA)
         .set(propertyKey("springdoc.swagger-ui.tagsSorter"), ALPHA)
         .set(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), TRUE)

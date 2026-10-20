@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.technicaltools.prometheus.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
@@ -23,7 +24,7 @@ public class SpringBootPrometheusModuleFactory {
       .javaDependencies()
         .addDependency(MICROMETER_GROUP, artifactId("micrometer-registry-prometheus"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(
           propertyKey("management.endpoints.web.exposure.include"),
           propertyValue("configprops", "env", "health", "info", "logfile", "loggers", "prometheus", "threaddump")

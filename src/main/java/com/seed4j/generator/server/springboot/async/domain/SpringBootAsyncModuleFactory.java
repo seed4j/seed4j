@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.async.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
@@ -27,7 +28,7 @@ public class SpringBootAsyncModuleFactory {
       .files()
         .add(SOURCE.template("AsyncConfiguration.java"), mainDestination.append("AsyncConfiguration.java"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.task.execution.pool.keep-alive"), propertyValue("10s"))
         .set(propertyKey("spring.task.execution.pool.max-size"), propertyValue(16))
         .set(propertyKey("spring.task.execution.pool.queue-capacity"), propertyValue(100))

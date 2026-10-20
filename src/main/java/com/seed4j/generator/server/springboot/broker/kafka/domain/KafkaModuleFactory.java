@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.broker.kafka.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -60,7 +62,7 @@ public class KafkaModuleFactory {
         .add(SOURCE.template("KafkaConfiguration.java"), toSrcMainJava().append(packagePath + "/" + TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA + "/KafkaConfiguration.java"))
         .and()
       .integrationTestExtension("KafkaTestContainerExtension")
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("kafka.bootstrap-servers"), propertyValue("localhost:9092"))
         .set(propertyKey("kafka.consumer.'[key.deserializer]'"), propertyValue(STRING_DESERIALIZER))
         .set(propertyKey("kafka.consumer.'[value.deserializer]'"), propertyValue(STRING_DESERIALIZER))
@@ -73,7 +75,7 @@ public class KafkaModuleFactory {
       .dockerComposeFile()
         .append(dockerComposeFile("src/main/docker/kafka.yml"))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(propertyKey("kafka.bootstrap-servers"), propertyValue("localhost:9092"))
         .and()
       .build();
@@ -85,7 +87,7 @@ public class KafkaModuleFactory {
 
     // @formatter:off
     return moduleBuilder(properties)
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("kafka.topic.sample"), propertyValue("queue." + properties.projectBaseName().name() + ".sample"))
         .and()
       .files()

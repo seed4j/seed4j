@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.database.mongodb.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -69,12 +71,12 @@ public class MongoDbModuleFactory {
             )
         .add(TEST_SOURCE.template("TestMongoDBManager.java"), toSrcTestJava().append(packagePath).append("TestMongoDBManager.java"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.mongodb.database"), propertyValue(properties.projectBaseName().get()))
         .set(propertyKey("spring.mongodb.uri"), propertyValue("mongodb://localhost:27017/" + properties.projectBaseName().get()))
         .set(propertyKey("spring.mongodb.representation.uuid"), propertyValue("standard"))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(propertyKey("spring.mongodb.uri"), propertyValue("${TEST_MONGODB_URI}"))
         .and()
       .springTestFactories()

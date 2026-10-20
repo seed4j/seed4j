@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.localeprofile.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.buildProfileActivation;
 import static com.seed4j.module.domain.Seed4JModule.buildPropertyKey;
 import static com.seed4j.module.domain.Seed4JModule.buildPropertyValue;
@@ -59,7 +60,7 @@ public class LocalProfileModuleFactory {
       .mavenPlugins()
         .pluginManagement(resourcesPlugin())
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey(SPRING_PROFILES_ACTIVE), propertyValue(DELIMITER + springActiveProfileProperty().get() + DELIMITER))
         .and()
       .optionalReplacements()

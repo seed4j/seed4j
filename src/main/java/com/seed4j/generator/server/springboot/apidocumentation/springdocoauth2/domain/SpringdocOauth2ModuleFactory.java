@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdocoauth2.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
@@ -36,7 +38,7 @@ public class SpringdocOauth2ModuleFactory {
             .append("wire/springdoc/infrastructure/primary/SpringdocOAuth2Configuration.java")
         )
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("springdoc.swagger-ui.oauth.client-id"), propertyValue("web_app"))
         .set(propertyKey("springdoc.swagger-ui.oauth.realm"), propertyValue(realmName))
         .set(
@@ -44,7 +46,7 @@ public class SpringdocOauth2ModuleFactory {
           propertyValue("http://localhost:9080/realms/" + realmName + "/protocol/openid-connect/auth")
         )
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(propertyKey("springdoc.swagger-ui.oauth.client-id"), propertyValue("web_app"))
         .set(propertyKey("springdoc.swagger-ui.oauth.realm"), propertyValue(realmName))
         .set(

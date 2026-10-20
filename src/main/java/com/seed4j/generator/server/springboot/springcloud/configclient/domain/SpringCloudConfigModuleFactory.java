@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.springcloud.configclient.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN_BOOTSTRAP;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST_BOOTSTRAP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.SPRING_CLOUD_GROUP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.springCloudDependenciesManagement;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
@@ -8,7 +10,6 @@ import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
 import static com.seed4j.module.domain.Seed4JModule.propertyValue;
-import static com.seed4j.module.domain.Seed4JModule.springProfile;
 import static com.seed4j.module.domain.Seed4JModule.toSrcMainDocker;
 
 import com.seed4j.module.domain.Seed4JModule;
@@ -41,18 +42,18 @@ public class SpringCloudConfigModuleFactory {
 
     Seed4JModuleBuilder builder = initBuilder(properties);
 
-    appendCommonProperties(builder.springMainBootstrapProperties(), baseNameValue);
-    appendCommonProperties(builder.springMainBootstrapProperties(springProfile("local")), baseNameValue);
+    appendCommonProperties(builder.applicationProperties(SPRING_MAIN_BOOTSTRAP), baseNameValue);
+    appendCommonProperties(builder.applicationProperties(SPRING_MAIN_BOOTSTRAP.profile("local")), baseNameValue);
 
     // @formatter:off
     return builder
-      .springMainBootstrapProperties()
+      .applicationProperties(SPRING_MAIN_BOOTSTRAP)
         .set(propertyKey("spring.cloud.config.fail-fast"), propertyValue(true))
         .and()
-      .springMainBootstrapProperties(springProfile("local"))
+      .applicationProperties(SPRING_MAIN_BOOTSTRAP.profile("local"))
         .set(propertyKey("spring.cloud.config.fail-fast"), FALSE_VALUE)
         .and()
-      .springTestBootstrapProperties()
+      .applicationProperties(SPRING_TEST_BOOTSTRAP)
         .set(propertyKey("spring.application.name"), baseNameValue)
         .set(propertyKey("spring.cloud.config.enabled"), FALSE_VALUE)
         .and()

@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.devtools.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_LOCAL;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
 import static com.seed4j.module.domain.Seed4JModule.from;
@@ -31,11 +33,11 @@ public class DevToolsModuleFactory {
       .javaDependencies()
         .addDependency(springBootDevtoolsDependency())
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.devtools.livereload.enabled"), propertyValue(false))
         .set(propertyKey("spring.devtools.restart.enabled"), propertyValue(false))
         .and()
-      .springLocalProperties()
+      .applicationProperties(SPRING_LOCAL)
         .set(propertyKey("spring.devtools.livereload.enabled"), propertyValue(true))
         .set(propertyKey("spring.devtools.restart.enabled"), propertyValue(true))
         .and()

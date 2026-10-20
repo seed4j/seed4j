@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.technicaltools.actuator.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_LOCAL;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
@@ -23,7 +25,7 @@ public class SpringBootActuatorModuleFactory {
       .javaDependencies()
         .addDependency(SPRING_GROUP, artifactId("spring-boot-starter-actuator"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("management.endpoints.web.base-path"), propertyValue("/management"))
         .set(
           propertyKey("management.endpoints.web.exposure.include"),
@@ -35,7 +37,7 @@ public class SpringBootActuatorModuleFactory {
         .set(propertyKey("management.endpoints.access.default"), propertyValue("none"))
         .set(propertyKey("management.endpoints.jmx.exposure.exclude"), propertyValue("*"))
         .and()
-      .springLocalProperties()
+      .applicationProperties(SPRING_LOCAL)
         .set(propertyKey("management.endpoints.web.exposure.include"), propertyValue("*"))
         .set(propertyKey("management.endpoints.access.default"), propertyValue("unrestricted"))
         .and()

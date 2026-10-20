@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.springcloud.gateway.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN_BOOTSTRAP;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST_BOOTSTRAP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.SPRING_CLOUD_GROUP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.springCloudDependenciesManagement;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
@@ -37,7 +39,7 @@ public class GatewayModuleFactory {
         .addDependency(SPRING_CLOUD_GROUP, artifactId("spring-cloud-starter-bootstrap"))
         .addDependency(SPRING_CLOUD_GROUP, artifactId("spring-cloud-starter-gateway-server-webflux"))
         .and()
-      .springMainBootstrapProperties()
+      .applicationProperties(SPRING_MAIN_BOOTSTRAP)
         .set(propertyKey("spring.application.name"), propertyValue(properties.projectBaseName().get()))
         .set(propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.enabled"), TRUE_VALUE)
         .set(propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.lower-case-service-id"), TRUE_VALUE)
@@ -53,7 +55,7 @@ public class GatewayModuleFactory {
         )
         .set(propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.filters[0].args[replacement]"), propertyValue("'/${remaining}'"))
         .and()
-      .springTestBootstrapProperties()
+      .applicationProperties(SPRING_TEST_BOOTSTRAP)
         .set(propertyKey("spring.application.name"), propertyValue(properties.projectBaseName().get()))
         .set(propertyKey("spring.cloud.gateway.server.webflux.discovery.locator.enabled"), propertyValue(false))
         .and()

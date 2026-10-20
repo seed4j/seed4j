@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.mvc.security.jwt.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.generator.server.springboot.mvc.security.common.domain.AuthenticationModuleFactory.authenticationModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
@@ -76,10 +78,10 @@ public class JwtAuthenticationModuleFactory {
           .addTemplate("JwtReaderTest.java")
           .and()
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(BASE_SECRET_64_PROPERTY_KEY, propertyValue(mainJwtBase64secret))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(BASE_SECRET_64_PROPERTY_KEY, propertyValue(testJwtBase64secret))
         .and()
       .springMainLogger(SPRING_SECURITY_PACKAGE, LogLevel.WARN)

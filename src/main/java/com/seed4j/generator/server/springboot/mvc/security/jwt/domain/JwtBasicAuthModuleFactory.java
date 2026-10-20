@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.mvc.security.jwt.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
 import static com.seed4j.module.domain.Seed4JModule.from;
@@ -73,7 +74,7 @@ public class JwtBasicAuthModuleFactory {
         .and();
     // @formatter:on
 
-    appendProperties(builder.springMainProperties());
+    appendProperties(builder.applicationProperties(SPRING_MAIN));
 
     return builder.build();
   }

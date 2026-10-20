@@ -25,6 +25,13 @@
     {
       "matchPackageNames": ["net.jqwik:jqwik"],
       "allowedVersions": "1.9.3"
+    },
+    {
+      "description": "Angular packages have strict peer dependencies on each other: major upgrades must be done together",
+      "matchFileNames": ["src/main/resources/generator/dependencies/angular/package.json"],
+      "matchPackageNames": ["@angular/**", "angular-eslint"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "angular major"
     }
   ]
 }

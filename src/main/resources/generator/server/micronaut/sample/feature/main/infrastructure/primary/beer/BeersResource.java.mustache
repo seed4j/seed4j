@@ -1,0 +1,48 @@
+package {{packageName}}.sample.infrastructure.primary.beer;
+
+import io.micronaut.http.HttpResponse;
+import io.micronaut.http.annotation.Body;
+import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Delete;
+import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.PathVariable;
+import io.micronaut.http.annotation.Post;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import java.util.UUID;
+import {{packageName}}.sample.application.BeersApplicationService;
+import {{packageName}}.sample.domain.BeerId;
+
+@Controller("/api/beers")
+@Tag(name = "Beers")
+class BeersResource {
+
+  private final BeersApplicationService beers;
+
+  BeersResource(BeersApplicationService beers) {
+    this.beers = beers;
+  }
+
+  @Post
+  @Operation(summary = "Add a beer to the catalog")
+  @ApiResponse(description = "Beer added to the catalog", responseCode = "201")
+  HttpResponse<RestBeer> addBeer(@Valid @Body RestBeerToCreate beerToCreate) {
+    return HttpResponse.created(RestBeer.from(beers.create(beerToCreate.toDomain())));
+  }
+
+  @Get
+  @Operation(summary = "Get all available beers")
+  @ApiResponse(description = "Beers catalog", responseCode = "200")
+  RestBeers getBeers() {
+    return RestBeers.from(beers.catalog());
+  }
+
+  @Delete("/{beerId}")
+  @Operation(summary = "Remove beer from catalog")
+  @ApiResponse(description = "Beer removed from the catalog", responseCode = "200")
+  void removeBeer(@PathVariable UUID beerId) {
+    beers.remove(new BeerId(beerId));
+  }
+}

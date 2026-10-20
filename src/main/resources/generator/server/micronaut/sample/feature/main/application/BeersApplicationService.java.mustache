@@ -1,0 +1,37 @@
+package {{packageName}}.sample.application;
+
+import jakarta.inject.Singleton;
+import {{packageName}}.sample.domain.BeerId;
+import {{packageName}}.sample.domain.beer.Beer;
+import {{packageName}}.sample.domain.beer.BeerToCreate;
+import {{packageName}}.sample.domain.beer.Beers;
+import {{packageName}}.sample.domain.beer.BeersCreator;
+import {{packageName}}.sample.domain.beer.BeersRemover;
+import {{packageName}}.sample.domain.beer.BeersRepository;
+
+@Singleton
+public class BeersApplicationService {
+
+  private final BeersRepository beers;
+  private final BeersCreator creator;
+  private final BeersRemover remover;
+
+  public BeersApplicationService(BeersRepository beers) {
+    this.beers = beers;
+
+    creator = new BeersCreator(beers);
+    remover = new BeersRemover(beers);
+  }
+
+  public Beer create(BeerToCreate beerToCreate) {
+    return creator.create(beerToCreate);
+  }
+
+  public void remove(BeerId beer) {
+    remover.remove(beer);
+  }
+
+  public Beers catalog() {
+    return beers.catalog();
+  }
+}

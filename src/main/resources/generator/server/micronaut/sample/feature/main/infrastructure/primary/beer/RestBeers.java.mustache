@@ -1,0 +1,17 @@
+package {{packageName}}.sample.infrastructure.primary.beer;
+
+import io.micronaut.core.annotation.Introspected;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.Collection;
+import {{packageName}}.sample.domain.beer.Beers;
+import {{packageName}}.shared.error.domain.Assert;
+
+@Introspected
+@Schema(name = "beers", description = "Some beers")
+record RestBeers(Collection<RestBeer> beers) {
+  static RestBeers from(Beers beers) {
+    Assert.notNull("beers", beers);
+
+    return new RestBeers(beers.stream().map(RestBeer::from).toList());
+  }
+}

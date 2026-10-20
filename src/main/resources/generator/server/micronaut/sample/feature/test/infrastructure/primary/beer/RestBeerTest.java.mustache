@@ -1,0 +1,29 @@
+package {{packageName}}.sample.infrastructure.primary.beer;
+
+import static org.assertj.core.api.Assertions.*;
+import static {{packageName}}.sample.domain.beer.BeersFixture.*;
+
+import io.micronaut.json.JsonMapper;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import org.junit.jupiter.api.Test;
+
+@MicronautTest(startApplication = false)
+class RestBeerTest {
+
+  @Test
+  void shouldSerializeToJson(JsonMapper json) throws IOException {
+    assertThat(new String(json.writeValueAsBytes(RestBeer.from(beer())), StandardCharsets.UTF_8)).isEqualTo(json());
+  }
+
+  static String json() {
+    return """
+    {\
+    "id":"5ea9bbb1-3a55-4701-9006-3bbd2878f241",\
+    "name":"Cloak of feathers",\
+    "unitPrice":8.53\
+    }\
+    """;
+  }
+}

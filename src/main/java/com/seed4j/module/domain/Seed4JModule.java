@@ -880,7 +880,10 @@ public final class Seed4JModule {
       return properties.basePackage().path();
     }
 
-    Indentation indentation() {
+    /**
+     * @return the indentation of the generated project, for shortcuts building content to insert in files
+     */
+    public Indentation indentation() {
       return properties.indentation();
     }
 

@@ -9,7 +9,7 @@ public enum LogLevel {
   TRACE,
   ALL;
 
-  String value() {
+  public String value() {
     return name();
   }
 }

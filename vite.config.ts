@@ -1,7 +1,24 @@
 import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import istanbul from 'vite-plugin-istanbul';
+
+type TransformHook = Exclude<Plugin['transform'], { handler: unknown } | undefined>;
+
+// vite-plugin-istanbul v9 instruments Vue SFC script chunks with an approximate source map (every mapping at column 0).
+// For `<script src="./X.component.ts">`, coverage of X.component.ts then no longer matches the one of unit tests and
+// statements are counted twice when merged. Instrument these external scripts as plain TS modules instead.
+// See https://github.com/iFaxity/vite-plugin-istanbul/issues/435
+const istanbulWithExternalVueScripts = (): Plugin => {
+  const plugin = istanbul();
+  const transform = plugin.transform as TransformHook;
+  return {
+    ...plugin,
+    transform(code, id, options) {
+      return transform.call(this, code, id.replace(/\?vue&type=script&src=true.*$/, ''), options);
+    },
+  };
+};
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -18,7 +35,7 @@ export default defineConfig({
         },
       },
     }),
-    istanbul(),
+    istanbulWithExternalVueScripts(),
   ],
   build: {
     outDir: '../../../target/classes/static',

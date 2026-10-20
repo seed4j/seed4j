@@ -32,6 +32,11 @@
       "matchPackageNames": ["@angular/**", "angular-eslint"],
       "matchUpdateTypes": ["major"],
       "groupName": "angular major"
+    },
+    {
+      "description": "Major updates get an additional label so they appear in release notes",
+      "matchUpdateTypes": ["major"],
+      "addLabels": ["area: major dependencies"]
     }
   ]
 }

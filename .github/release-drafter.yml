@@ -7,10 +7,13 @@ exclude-contributors:
   - 'dependabot'
   - 'dependabot[bot]'
   - 'github-actions[bot]'
-exclude-labels:
-  - 'area: dependencies'
 change-template: '- $TITLE - [#$NUMBER]($URL) by @$AUTHOR'
 categories:
+  # Exclude PRs labelled only with 'area: dependencies' (minor/patch updates)
+  - type: pre-exclude
+    when:
+      labels: ['area: dependencies']
+      labels-mode: only
   - title: ⭐ Important fixes and improvements
     labels:
       - 'theme: important'
@@ -54,3 +57,6 @@ categories:
     labels:
       - 'area: invalid'
       - 'area: spam'
+  - title: 📦 Major dependency updates
+    when:
+      labels: ['area: major dependencies']

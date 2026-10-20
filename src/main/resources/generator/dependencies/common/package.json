@@ -7,7 +7,7 @@
     "@babel/cli": "8.0.6",
     "@cypress/code-coverage": "4.0.3",
     "@eslint/js": "9.39.5",
-    "@playwright/test": "1.63.0",
+    "@playwright/test": "1.64.1",
     "@prettier/plugin-pug": "3.6.0",
     "@prettier/plugin-xml": "3.4.2",
     "@sonar/scan": "5.0.2",

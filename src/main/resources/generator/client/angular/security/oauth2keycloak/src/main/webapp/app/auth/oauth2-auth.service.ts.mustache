@@ -32,7 +32,7 @@ export class Oauth2AuthService {
   }
 
   logout(): void {
-    this.keycloak.logout();
+    void this.keycloak.logout();
   }
 
   private initUpdateTokenRefresh(): void {

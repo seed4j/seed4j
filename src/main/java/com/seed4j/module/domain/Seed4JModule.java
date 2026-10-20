@@ -693,12 +693,20 @@ public final class Seed4JModule {
       return mandatoryReplacements;
     }
 
+    /**
+     * @deprecated use {@link #with(Consumer)} with {@code SpringBootLoggers.springTestLogger(name, level)}
+     */
+    @Deprecated(since = "2.3.0", forRemoval = true)
     public Seed4JModuleBuilder springTestLogger(String name, LogLevel level) {
       with(Seed4JModuleShortcuts.springTestLogger(name, level));
 
       return this;
     }
 
+    /**
+     * @deprecated use {@link #with(Consumer)} with {@code SpringBootLoggers.springMainLogger(name, level)}
+     */
+    @Deprecated(since = "2.3.0", forRemoval = true)
     public Seed4JModuleBuilder springMainLogger(String name, LogLevel level) {
       with(Seed4JModuleShortcuts.springMainLogger(name, level));
 

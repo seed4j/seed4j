@@ -7,8 +7,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.javaproperties.SpringProperties;
-import com.seed4j.module.domain.javaproperties.SpringProperty;
+import com.seed4j.module.domain.javaproperties.ApplicationProperties;
+import com.seed4j.module.domain.javaproperties.ApplicationProperty;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import java.nio.file.Path;
 import java.util.List;
@@ -17,12 +17,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @UnitTest
-class FileSystemSpringPropertiesCommandsHandlerTest {
+class FileSystemApplicationPropertiesCommandsHandlerTest {
 
   public static final Path EXISTING_SPRING_PROPERTIES = Path.of(
     "src/test/resources/projects/project-with-spring-application-properties/application.properties"
   );
-  private static final FileSystemSpringPropertiesCommandsHandler handler = new FileSystemSpringPropertiesCommandsHandler();
+  private static final FileSystemApplicationPropertiesCommandsHandler handler = new FileSystemApplicationPropertiesCommandsHandler();
 
   @Test
   void shouldCreateDefaultMainPropertiesForProjectWithoutProperties() {
@@ -81,7 +81,7 @@ class FileSystemSpringPropertiesCommandsHandlerTest {
     assertThat(content(propertiesFile)).contains("springdoc.swagger-ui.operationsSorter=alpha,beta");
   }
 
-  private static SpringProperties properties(SpringProperty property) {
-    return new SpringProperties(List.of(property));
+  private static ApplicationProperties properties(ApplicationProperty property) {
+    return new ApplicationProperties(List.of(property));
   }
 }

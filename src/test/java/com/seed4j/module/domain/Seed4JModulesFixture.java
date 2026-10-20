@@ -61,7 +61,7 @@ import com.seed4j.module.domain.javadependency.JavaDependency.JavaDependencyOpti
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
-import com.seed4j.module.domain.javaproperties.SpringProperty;
+import com.seed4j.module.domain.javaproperties.ApplicationProperty;
 import com.seed4j.module.domain.javaproperties.SpringPropertyType;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
@@ -436,23 +436,23 @@ public final class Seed4JModulesFixture {
     return new Seed4JModulePropertiesBuilder(projectFolder);
   }
 
-  public static SpringProperty springLocalMainProperty() {
-    return SpringProperty.builder(SpringPropertyType.MAIN_PROPERTIES)
+  public static ApplicationProperty springLocalMainProperty() {
+    return ApplicationProperty.builder(SpringPropertyType.MAIN_PROPERTIES)
       .key(propertyKey("springdoc.swagger-ui.operationsSorter"))
       .value(propertyValue("alpha", "beta"))
       .profile(springProfile("local"))
       .build();
   }
 
-  public static SpringProperty springMainProperty() {
-    return SpringProperty.builder(SpringPropertyType.MAIN_PROPERTIES)
+  public static ApplicationProperty springMainProperty() {
+    return ApplicationProperty.builder(SpringPropertyType.MAIN_PROPERTIES)
       .key(propertyKey("springdoc.swagger-ui.operationsSorter"))
       .value(propertyValue("alpha", "beta"))
       .build();
   }
 
-  public static SpringProperty springTestProperty() {
-    return SpringProperty.builder(SpringPropertyType.TEST_PROPERTIES)
+  public static ApplicationProperty springTestProperty() {
+    return ApplicationProperty.builder(SpringPropertyType.TEST_PROPERTIES)
       .key(propertyKey("springdoc.swagger-ui.operationsSorter"))
       .value(propertyValue("alpha", "beta"))
       .build();

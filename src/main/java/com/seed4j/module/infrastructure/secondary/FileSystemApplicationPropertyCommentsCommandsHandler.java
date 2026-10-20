@@ -1,8 +1,7 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.javaproperties.SpringComment;
-import com.seed4j.module.domain.javaproperties.SpringComments;
+import com.seed4j.module.domain.javaproperties.ApplicationPropertyComment;
+import com.seed4j.module.domain.javaproperties.ApplicationPropertyComments;
 import com.seed4j.module.domain.javaproperties.SpringPropertyType;
 import com.seed4j.module.domain.javaproperties.SpringPropertyTypeFileName;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
@@ -18,21 +17,21 @@ import java.util.function.Function;
 import org.springframework.stereotype.Service;
 
 @Service
-class FileSystemYamlSpringCommentsCommandsHandler {
+class FileSystemApplicationPropertyCommentsCommandsHandler {
 
   private static final Map<SpringPropertyType, List<String>> PROPERTIES_PATHS = FileSystemSeed4JModulesRepository.buildPaths();
 
-  public void handle(Indentation indentation, Seed4JProjectFolder projectFolder, SpringComments comments) {
+  public void handle(Seed4JProjectFolder projectFolder, ApplicationPropertyComments comments) {
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("comments", comments);
 
-    comments.get().forEach(setComment(indentation, projectFolder));
+    comments.get().forEach(setComment(projectFolder));
   }
 
-  private Consumer<SpringComment> setComment(Indentation indentation, Seed4JProjectFolder projectFolder) {
+  private Consumer<ApplicationPropertyComment> setComment(Seed4JProjectFolder projectFolder) {
     return comment ->
-      getPath(projectFolder, comment).ifPresent(value ->
-        new YamlFileSpringPropertiesHandler(value, indentation).setComment(comment.key(), comment.value())
+      getPath(projectFolder, comment).ifPresent(path ->
+        new PropertiesFileApplicationPropertyCommentsHandler(path).set(comment.key(), comment.value())
       );
   }
 
@@ -49,10 +48,10 @@ class FileSystemYamlSpringCommentsCommandsHandler {
     Seed4JProjectFolder projectFolder,
     SpringPropertyTypeFileName springPropertyTypeFileName
   ) {
-    return folder -> projectFolder.filePath(folder + yamlFilename(springPropertyTypeFileName));
+    return folder -> projectFolder.filePath(folder + propertiesFilename(springPropertyTypeFileName));
   }
 
-  private static String yamlFilename(SpringPropertyTypeFileName springPropertyTypeFileName) {
-    return springPropertyTypeFileName.filename() + ".yml";
+  private static String propertiesFilename(SpringPropertyTypeFileName springPropertyTypeFileName) {
+    return springPropertyTypeFileName.filename() + ".properties";
   }
 }

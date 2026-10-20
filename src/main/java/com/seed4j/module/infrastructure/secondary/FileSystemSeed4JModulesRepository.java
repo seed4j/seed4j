@@ -24,10 +24,10 @@ class FileSystemSeed4JModulesRepository implements Seed4JModulesRepository {
 
   private final FileSystemSeed4JModuleFiles files;
   private final FileSystemJavaBuildCommandsHandler javaBuild;
-  private final FileSystemSpringPropertiesCommandsHandler springProperties;
-  private final FileSystemYamlSpringPropertiesCommandsHandler yamlSpringProperties;
-  private final FileSystemYamlSpringCommentsCommandsHandler yamlSpringComments;
-  private final FileSystemSpringCommentsCommandsHandler springComments;
+  private final FileSystemApplicationPropertiesCommandsHandler applicationProperties;
+  private final FileSystemYamlApplicationPropertiesCommandsHandler yamlApplicationProperties;
+  private final FileSystemYamlApplicationPropertyCommentsCommandsHandler yamlApplicationPropertyComments;
+  private final FileSystemApplicationPropertyCommentsCommandsHandler applicationPropertyComments;
   private final FileSystemSpringFactoriesCommandsHandler springFactories;
   private final FileSystemPackageJsonHandler packageJson;
   private final FileSystemGitIgnoreHandler gitIgnore;
@@ -53,10 +53,10 @@ class FileSystemSeed4JModulesRepository implements Seed4JModulesRepository {
     this.files = files;
     this.javaBuild = javaBuild;
     this.dockerComposeFile = new FileSystemDockerComposeFileHandler();
-    this.springProperties = new FileSystemSpringPropertiesCommandsHandler();
-    this.springComments = new FileSystemSpringCommentsCommandsHandler();
-    this.yamlSpringProperties = new FileSystemYamlSpringPropertiesCommandsHandler();
-    this.yamlSpringComments = new FileSystemYamlSpringCommentsCommandsHandler();
+    this.applicationProperties = new FileSystemApplicationPropertiesCommandsHandler();
+    this.applicationPropertyComments = new FileSystemApplicationPropertyCommentsCommandsHandler();
+    this.yamlApplicationProperties = new FileSystemYamlApplicationPropertiesCommandsHandler();
+    this.yamlApplicationPropertyComments = new FileSystemYamlApplicationPropertyCommentsCommandsHandler();
     this.springFactories = new FileSystemSpringFactoriesCommandsHandler();
     this.gitIgnore = gitIgnore;
     this.packageJson = packageJson;
@@ -87,10 +87,10 @@ class FileSystemSeed4JModulesRepository implements Seed4JModulesRepository {
     files.move(changes.projectFolder(), changes.filesToMove());
     files.delete(changes.projectFolder(), changes.filesToDelete());
     javaBuild.handle(changes.indentation(), changes.projectFolder(), changes.context(), changes.javaBuildCommands());
-    springProperties.handle(changes.projectFolder(), changes.springProperties());
-    springComments.handle(changes.projectFolder(), changes.springComments());
-    yamlSpringProperties.handle(changes.indentation(), changes.projectFolder(), changes.springYamlProperties());
-    yamlSpringComments.handle(changes.indentation(), changes.projectFolder(), changes.springYamlComments());
+    applicationProperties.handle(changes.projectFolder(), changes.applicationProperties());
+    applicationPropertyComments.handle(changes.projectFolder(), changes.applicationPropertyComments());
+    yamlApplicationProperties.handle(changes.indentation(), changes.projectFolder(), changes.yamlApplicationProperties());
+    yamlApplicationPropertyComments.handle(changes.indentation(), changes.projectFolder(), changes.yamlApplicationPropertyComments());
     springFactories.handle(changes.projectFolder(), changes.springFactories());
     gitIgnore.handle(changes.projectFolder(), changes.gitIgnore());
     packageJson.handle(changes.indentation(), changes.projectFolder(), changes.packageJson(), changes.context());

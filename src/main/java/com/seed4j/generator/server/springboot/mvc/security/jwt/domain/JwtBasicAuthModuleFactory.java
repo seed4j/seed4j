@@ -12,7 +12,7 @@ import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
-import com.seed4j.module.domain.javaproperties.Seed4JModuleSpringProperties.Seed4JModuleSpringPropertiesBuilder;
+import com.seed4j.module.domain.javaproperties.Seed4JModuleApplicationProperties.Seed4JModuleApplicationPropertiesBuilder;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
@@ -79,7 +79,7 @@ public class JwtBasicAuthModuleFactory {
   }
 
   @SuppressWarnings("secrets:S8215")
-  private void appendProperties(Seed4JModuleSpringPropertiesBuilder builder) {
+  private void appendProperties(Seed4JModuleApplicationPropertiesBuilder builder) {
     builder
       .set(propertyKey("application.security.token-validity"), propertyValue("P1D"))
       .set(propertyKey("application.security.remember-me-token-validity"), propertyValue("P365D"))

@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import com.seed4j.module.domain.Indentation;
-import com.seed4j.module.domain.javaproperties.SpringProperties;
-import com.seed4j.module.domain.javaproperties.SpringProperty;
+import com.seed4j.module.domain.javaproperties.ApplicationProperties;
+import com.seed4j.module.domain.javaproperties.ApplicationProperty;
 import com.seed4j.module.domain.javaproperties.SpringPropertyType;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
@@ -18,23 +18,23 @@ import java.util.function.Supplier;
 import org.springframework.stereotype.Service;
 
 @Service
-class FileSystemYamlSpringPropertiesCommandsHandler {
+class FileSystemYamlApplicationPropertiesCommandsHandler {
 
   private static final Map<SpringPropertyType, List<String>> PROPERTIES_PATHS = FileSystemSeed4JModulesRepository.buildPaths();
 
-  public void handle(Indentation indentation, Seed4JProjectFolder projectFolder, SpringProperties properties) {
+  public void handle(Indentation indentation, Seed4JProjectFolder projectFolder, ApplicationProperties properties) {
     Assert.notNull("projectFolder", projectFolder);
     Assert.notNull("properties", properties);
 
     properties.get().forEach(setProperty(indentation, projectFolder));
   }
 
-  private Consumer<SpringProperty> setProperty(Indentation indentation, Seed4JProjectFolder projectFolder) {
+  private Consumer<ApplicationProperty> setProperty(Indentation indentation, Seed4JProjectFolder projectFolder) {
     return property ->
-      new YamlFileSpringPropertiesHandler(getPath(projectFolder, property), indentation).setValue(property.key(), property.value());
+      new YamlFileApplicationPropertiesHandler(getPath(projectFolder, property), indentation).setValue(property.key(), property.value());
   }
 
-  private static Path getPath(Seed4JProjectFolder projectFolder, SpringProperty property) {
+  private static Path getPath(Seed4JProjectFolder projectFolder, ApplicationProperty property) {
     return Optional.ofNullable(PROPERTIES_PATHS.get(property.type()))
       .stream()
       .flatMap(Collection::stream)
@@ -44,11 +44,11 @@ class FileSystemYamlSpringPropertiesCommandsHandler {
       .orElseGet(defaultPropertiesFile(projectFolder, property));
   }
 
-  private static Function<String, Path> toFilePath(Seed4JProjectFolder projectFolder, SpringProperty property) {
+  private static Function<String, Path> toFilePath(Seed4JProjectFolder projectFolder, ApplicationProperty property) {
     return folder -> projectFolder.filePath(folder + yamlFilename(property));
   }
 
-  private static Supplier<Path> defaultPropertiesFile(Seed4JProjectFolder projectFolder, SpringProperty property) {
+  private static Supplier<Path> defaultPropertiesFile(Seed4JProjectFolder projectFolder, ApplicationProperty property) {
     return switch (property.type()) {
       case MAIN_PROPERTIES, MAIN_BOOTSTRAP_PROPERTIES -> () ->
         projectFolder.filePath(FileSystemSeed4JModulesRepository.DEFAULT_MAIN_FOLDER + yamlFilename(property));
@@ -57,7 +57,7 @@ class FileSystemYamlSpringPropertiesCommandsHandler {
     };
   }
 
-  private static String yamlFilename(SpringProperty property) {
+  private static String yamlFilename(ApplicationProperty property) {
     return property.filename() + ".yml";
   }
 }

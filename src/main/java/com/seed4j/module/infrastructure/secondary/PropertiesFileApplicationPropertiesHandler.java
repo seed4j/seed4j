@@ -12,14 +12,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Collectors;
 
-class PropertiesFileSpringPropertiesHandler {
+class PropertiesFileApplicationPropertiesHandler {
 
   private static final String EQUAL = "=";
   private static final String COLLECTION_SEPARATOR = ",";
 
   private final Path file;
 
-  public PropertiesFileSpringPropertiesHandler(Path file) {
+  public PropertiesFileApplicationPropertiesHandler(Path file) {
     Assert.notNull("file", file);
 
     this.file = file;

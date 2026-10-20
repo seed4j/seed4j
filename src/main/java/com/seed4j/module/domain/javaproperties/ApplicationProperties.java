@@ -4,14 +4,14 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
 import java.util.List;
 
-public record SpringProperties(Collection<SpringProperty> properties) {
-  public static final SpringProperties EMPTY = new SpringProperties(List.of());
+public record ApplicationProperties(Collection<ApplicationProperty> properties) {
+  public static final ApplicationProperties EMPTY = new ApplicationProperties(List.of());
 
-  public SpringProperties {
+  public ApplicationProperties {
     Assert.field("properties", properties).notNull().noNullElement();
   }
 
-  public Collection<SpringProperty> get() {
+  public Collection<ApplicationProperty> get() {
     return properties();
   }
 }

@@ -13,14 +13,14 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 
-class PropertiesFileSpringCommentsHandler {
+class PropertiesFileApplicationPropertyCommentsHandler {
 
   private static final String HASH = "#";
   private static final String BLANK_SPACE = " ";
 
   private final Path file;
 
-  public PropertiesFileSpringCommentsHandler(Path file) {
+  public PropertiesFileApplicationPropertyCommentsHandler(Path file) {
     Assert.notNull("file", file);
 
     this.file = file;

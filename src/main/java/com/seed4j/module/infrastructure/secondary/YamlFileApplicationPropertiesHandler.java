@@ -37,7 +37,7 @@ import org.yaml.snakeyaml.nodes.SequenceNode;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
-class YamlFileSpringPropertiesHandler {
+class YamlFileApplicationPropertiesHandler {
 
   private static final Map<Class<?>, Tag> TAG_BY_JAVA_TYPE = buildTagByJavaType();
 
@@ -45,7 +45,7 @@ class YamlFileSpringPropertiesHandler {
   private final Indentation indentation;
   private final Yaml yaml;
 
-  public YamlFileSpringPropertiesHandler(Path file, Indentation indentation) {
+  public YamlFileApplicationPropertiesHandler(Path file, Indentation indentation) {
     this.indentation = indentation;
     Assert.notNull("file", file);
 

@@ -4,14 +4,14 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.Optional;
 import org.jspecify.annotations.Nullable;
 
-public final class SpringProperty implements SpringPropertyTypeFileName {
+public final class ApplicationProperty implements SpringPropertyTypeFileName {
 
   private final SpringPropertyType type;
   private final PropertyKey key;
   private final PropertyValue value;
   private final SpringProfile profile;
 
-  private SpringProperty(SpringPropertyBuilder builder) {
+  private ApplicationProperty(ApplicationPropertyBuilder builder) {
     Assert.notNull("key", builder.key);
     Assert.notNull("value", builder.value);
 
@@ -21,8 +21,8 @@ public final class SpringProperty implements SpringPropertyTypeFileName {
     profile = Optional.ofNullable(builder.profile).orElse(SpringProfile.DEFAULT);
   }
 
-  public static SpringPropertyKeyBuilder builder(SpringPropertyType type) {
-    return new SpringPropertyBuilder(type);
+  public static ApplicationPropertyKeyBuilder builder(SpringPropertyType type) {
+    return new ApplicationPropertyBuilder(type);
   }
 
   @Override
@@ -47,8 +47,8 @@ public final class SpringProperty implements SpringPropertyTypeFileName {
     return type.filePrefix() + "-" + profile.get();
   }
 
-  private static final class SpringPropertyBuilder
-    implements SpringPropertyKeyBuilder, SpringPropertyValueBuilder, SpringPropertyProfileBuilder
+  private static final class ApplicationPropertyBuilder
+    implements ApplicationPropertyKeyBuilder, ApplicationPropertyValueBuilder, ApplicationPropertyProfileBuilder
   {
 
     private final SpringPropertyType type;
@@ -56,50 +56,50 @@ public final class SpringProperty implements SpringPropertyTypeFileName {
     private @Nullable PropertyValue value;
     private @Nullable SpringProfile profile;
 
-    private SpringPropertyBuilder(SpringPropertyType type) {
+    private ApplicationPropertyBuilder(SpringPropertyType type) {
       Assert.notNull("type", type);
 
       this.type = type;
     }
 
     @Override
-    public SpringPropertyValueBuilder key(PropertyKey key) {
+    public ApplicationPropertyValueBuilder key(PropertyKey key) {
       this.key = key;
 
       return this;
     }
 
     @Override
-    public SpringPropertyProfileBuilder value(PropertyValue value) {
+    public ApplicationPropertyProfileBuilder value(PropertyValue value) {
       this.value = value;
 
       return this;
     }
 
     @Override
-    public SpringPropertyProfileBuilder profile(SpringProfile profile) {
+    public ApplicationPropertyProfileBuilder profile(SpringProfile profile) {
       this.profile = profile;
 
       return this;
     }
 
     @Override
-    public SpringProperty build() {
-      return new SpringProperty(this);
+    public ApplicationProperty build() {
+      return new ApplicationProperty(this);
     }
   }
 
-  public interface SpringPropertyKeyBuilder {
-    SpringPropertyValueBuilder key(PropertyKey key);
+  public interface ApplicationPropertyKeyBuilder {
+    ApplicationPropertyValueBuilder key(PropertyKey key);
   }
 
-  public interface SpringPropertyValueBuilder {
-    SpringPropertyProfileBuilder value(PropertyValue value);
+  public interface ApplicationPropertyValueBuilder {
+    ApplicationPropertyProfileBuilder value(PropertyValue value);
   }
 
-  public interface SpringPropertyProfileBuilder {
-    SpringPropertyProfileBuilder profile(SpringProfile profile);
+  public interface ApplicationPropertyProfileBuilder {
+    ApplicationPropertyProfileBuilder profile(SpringProfile profile);
 
-    SpringProperty build();
+    ApplicationProperty build();
   }
 }

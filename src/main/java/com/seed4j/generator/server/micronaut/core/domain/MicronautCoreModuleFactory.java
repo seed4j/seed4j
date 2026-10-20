@@ -3,6 +3,7 @@ package com.seed4j.generator.server.micronaut.core.domain;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaAnnotationProcessor;
 import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
@@ -16,6 +17,7 @@ import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessor;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
@@ -57,9 +59,11 @@ public class MicronautCoreModuleFactory {
       .addDependency(micronautTestJUnit5())
       .addDependency(micronautHttpClient())
       .and()
+      .javaCompiler()
+      .addAnnotationProcessor(micronautInjectJava())
+      .and()
       .mavenPlugins()
       .plugin(micronautMavenPlugin())
-      .plugin(micronautCompilerPlugin())
       .and()
       .files()
       .add(
@@ -80,22 +84,8 @@ public class MicronautCoreModuleFactory {
     return mavenPlugin().groupId("io.micronaut.maven").artifactId("micronaut-maven-plugin").versionSlug(MICRONAUT_VERSION_SLUG).build();
   }
 
-  private MavenPlugin micronautCompilerPlugin() {
-    return mavenPlugin()
-      .groupId("org.apache.maven.plugins")
-      .artifactId("maven-compiler-plugin")
-      .configuration(
-        """
-        <annotationProcessorPaths>
-          <path>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-inject-java</artifactId>
-            <version>${micronaut.version}</version>
-          </path>
-        </annotationProcessorPaths>
-        """
-      )
-      .build();
+  private JavaAnnotationProcessor micronautInjectJava() {
+    return javaAnnotationProcessor().groupId(MICRONAUT_GROUP).artifactId("micronaut-inject-java").build();
   }
 
   private JavaDependency micronautBom() {

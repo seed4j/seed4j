@@ -92,7 +92,16 @@ class MicronautCoreModuleFactoryTest {
       .containing("<artifactId>micronaut-http-server-netty</artifactId>")
       .containing("<artifactId>micronaut-http-client</artifactId>")
       .containing("<artifactId>micronaut-maven-plugin</artifactId>")
-      .containing("<artifactId>micronaut-inject-java</artifactId>")
+      .containing(
+        """
+                  <annotationProcessorPaths>
+                    <path>
+                      <groupId>io.micronaut</groupId>
+                      <artifactId>micronaut-inject-java</artifactId>
+                    </path>
+                  </annotationProcessorPaths>
+        """
+      )
       .and()
       .hasFile("src/main/java/com/seed4j/growth/MyappApp.java")
       .containing("class MyappApp")

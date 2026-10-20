@@ -30,8 +30,7 @@ class ReactJwtModuleFactoryTest {
       viteReactConfigFile(),
       eslintConfigFile(),
       tsConfigFile(),
-      vitestConfigFile(),
-      tailwindConfigFile()
+      vitestConfigFile()
     );
 
     assertReactApp(asserter);
@@ -47,14 +46,11 @@ class ReactJwtModuleFactoryTest {
         """
       )
       .and()
-      .hasFile("src/main/webapp/app/index.tsx")
+      .hasFile("src/main/webapp/app/index.css")
       .containing(
         """
-          <React.StrictMode>
-            <HeroUIProvider>
-              <HomePage />
-            </HeroUIProvider>
-          </React.StrictMode>,
+        @import 'tailwindcss';
+        @import '@heroui/styles';
         """
       )
       .and()
@@ -68,9 +64,6 @@ class ReactJwtModuleFactoryTest {
       .matchingSavedSnapshot()
       .and()
       .hasFile("vite.config.ts")
-      .matchingSavedSnapshot()
-      .and()
-      .hasFile("tailwind.config.js")
       .matchingSavedSnapshot();
   }
 
@@ -92,10 +85,6 @@ class ReactJwtModuleFactoryTest {
 
   private Seed4JModuleProperties properties() {
     return Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
-  }
-
-  private ModuleFile tailwindConfigFile() {
-    return file("src/main/resources/generator/client/react/security/jwt/tailwind.config.js", "tailwind.config.js");
   }
 
   private void assertReactApp(Seed4JModuleAsserter asserter) {

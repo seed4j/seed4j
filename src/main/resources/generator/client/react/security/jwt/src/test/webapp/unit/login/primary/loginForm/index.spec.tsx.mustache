@@ -4,6 +4,9 @@ import { describe, expect, it, vi } from 'vitest';
 import LoginForm from '@/login/primary/loginForm/index';
 import { act, fireEvent, render } from '@testing-library/react';
 
+// jsdom does not implement CSS.escape, which is used by react-aria
+vi.stubGlobal('CSS', { escape: (value: string) => value });
+
 const mockPost = () => {
   const spy = vi.spyOn(axios, 'post');
   spy.mockImplementationOnce((): Promise<any> => Promise.resolve({ data: { id_token: 123 } }));

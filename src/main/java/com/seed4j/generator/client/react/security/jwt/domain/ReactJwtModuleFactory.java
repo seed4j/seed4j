@@ -51,9 +51,6 @@ public class ReactJwtModuleFactory {
         .addDevDependency(packageName("tailwindcss"), COMMON)
         .and()
       .files()
-        .batch(ROOT, to("."))
-          .addFile("tailwind.config.js")
-          .and()
         .add(APP_SOURCE.template("common/services/storage.ts"), COMMON_DESTINATION.append("services/storage.ts"))
         .add(APP_SOURCE.append("login/primary/loginForm").template("index.tsx"), APP_DESTINATION.append("login/primary/loginForm/index.tsx"))
         .batch(APP_SOURCE.append("login/primary/loginModal"), APP_DESTINATION.append("login/primary/loginModal/"))
@@ -84,19 +81,8 @@ public class ReactJwtModuleFactory {
           .add(lineBeforeText("function HomePage() {"), "import LoginForm from '@/login/primary/loginForm';" + LINE_BREAK)
           .add(LOGIN_FORM_MATCHER, properties.indentation().times(4) + "<LoginForm />")
           .and()
-        .in(path("src/main/webapp/app/index.tsx"))
-          .add(lineBeforeText("import React from 'react';"), "import { HeroUIProvider } from '@heroui/react';")
-          .add(regex("\\s+<HomePage />"),
-                """
-
-              \t\t<HeroUIProvider>
-              \t\t\t<HomePage />
-              \t\t</HeroUIProvider>\
-              """.replace("\t", properties.indentation().spaces())
-          )
-          .and()
         .in(path("src/main/webapp/app/index.css"))
-          .add(lineBeforeText("body {"), "@import 'tailwindcss';" + LINE_BREAK + "@config '../../../../tailwind.config.js';" + LINE_BREAK)
+          .add(lineBeforeText("body {"), "@import 'tailwindcss';" + LINE_BREAK + "@import '@heroui/styles';" + LINE_BREAK)
         .and()
       .and()
       .optionalReplacements()

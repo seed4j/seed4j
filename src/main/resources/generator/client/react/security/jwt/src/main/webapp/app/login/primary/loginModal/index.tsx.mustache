@@ -1,4 +1,4 @@
-import { Button, Input, Modal, ModalBody, ModalContent, ModalHeader, Spacer } from '@heroui/react';
+import { Button, InputGroup, Modal } from '@heroui/react';
 import { useCallback, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -34,64 +34,63 @@ const LoginModal = ({ open, onClose }: LoginModalType) => {
   }, []);
 
   return (
-    <Modal backdrop="blur" isOpen={open} onClose={handleClose} aria-labelledby="modal-login">
-      <ModalContent>
-        <ModalHeader>
-          <span>Connect</span>
-          <Spacer x={1} />
-          <span>Seed4J</span>
-        </ModalHeader>
-        <ModalBody>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              isClearable
-              fullWidth
-              aria-label="modal-login-username"
-              data-testid="modal-login-username"
-              color="primary"
-              size="lg"
-              placeholder="Username"
-              type="text"
-              {...register('username')}
-            />
-            <Spacer y={1} />
-            <Input
-              fullWidth
-              aria-label="modal-login-password"
-              data-testid="modal-login-password"
-              color="primary"
-              size="lg"
-              placeholder="Password"
-              type={isVisible ? 'text' : 'password'}
-              endContent={
-                <button data-testid="display-password" className="focus:outline-none" type="button" onClick={toggleVisibility}>
-                  {isVisible ? (
-                    <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                  ) : (
-                    <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                  )}
-                </button>
-              }
-              {...register('password')}
-            />
-            <Spacer y={1} />
-            {error && (
-              <p data-testid="error-message" color="error">
-                Please complete the fields above
-              </p>
-            )}
-            <Spacer y={1} />
-            <div className="flex gap-2">
-              <input type="checkbox" {...register('rememberMe')} />
-              <span>Remember me</span>
-            </div>
-            <Spacer y={1} />
-            <Button data-testid="submit-button" className="submit-button" type="submit" variant="shadow">
-              Log in
-            </Button>
-          </form>
-        </ModalBody>
-      </ModalContent>
+    <Modal isOpen={open} onOpenChange={handleClose}>
+      <Modal.Backdrop variant="blur">
+        <Modal.Container>
+          <Modal.Dialog aria-labelledby="modal-login">
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading id="modal-login" className="flex gap-1">
+                <span>Connect</span>
+                <span>Seed4J</span>
+              </Modal.Heading>
+            </Modal.Header>
+            <Modal.Body>
+              <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+                <InputGroup fullWidth>
+                  <InputGroup.Input
+                    aria-label="modal-login-username"
+                    data-testid="modal-login-username"
+                    placeholder="Username"
+                    type="text"
+                    {...register('username')}
+                  />
+                </InputGroup>
+                <InputGroup fullWidth>
+                  <InputGroup.Input
+                    aria-label="modal-login-password"
+                    data-testid="modal-login-password"
+                    placeholder="Password"
+                    type={isVisible ? 'text' : 'password'}
+                    {...register('password')}
+                  />
+                  <InputGroup.Suffix>
+                    <button data-testid="display-password" className="focus:outline-none" type="button" onClick={toggleVisibility}>
+                      {isVisible ? (
+                        <EyeSlashFilledIcon className="text-2xl text-muted pointer-events-none" />
+                      ) : (
+                        <EyeFilledIcon className="text-2xl text-muted pointer-events-none" />
+                      )}
+                    </button>
+                  </InputGroup.Suffix>
+                </InputGroup>
+                {error && (
+                  <p data-testid="error-message" color="error">
+                    Please complete the fields above
+                  </p>
+                )}
+                <div className="flex gap-2">
+                  <input type="checkbox" {...register('rememberMe')} />
+                  <span>Remember me</span>
+                </div>
+                <Button data-testid="submit-button" className="submit-button" type="submit" variant="primary">
+                  Log in
+                </Button>
+              </form>
+            </Modal.Body>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
     </Modal>
   );
 };

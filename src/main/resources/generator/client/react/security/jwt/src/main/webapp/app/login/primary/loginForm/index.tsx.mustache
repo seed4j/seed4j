@@ -31,12 +31,12 @@ const LoginForm = () => {
           <p>
             Welcome <strong>{username}</strong>!
           </p>
-          <Button variant="shadow" onPress={onPressLogoutButton}>
+          <Button variant="primary" onPress={onPressLogoutButton}>
             Log out
           </Button>
         </>
       ) : (
-        <Button data-testid="login-button" variant="shadow" onPress={onPressLoginButton}>
+        <Button data-testid="login-button" variant="primary" onPress={onPressLoginButton}>
           Log in
         </Button>
       )}

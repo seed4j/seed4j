@@ -1,10 +1,9 @@
 package com.seed4j.generator.server.micronaut.openapi.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.MICRONAUT;
+import static com.seed4j.generator.server.micronaut.common.domain.MicronautModuleSlug.MICRONAUT;
+import static com.seed4j.generator.server.micronaut.common.domain.MicronautModuleSlug.MICRONAUT_OPENAPI;
 
 import com.seed4j.generator.server.micronaut.openapi.application.MicronautOpenApiApplicationService;
-import com.seed4j.generator.server.micronaut.shared.MicronautModuleSlug;
 import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
 import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
 import com.seed4j.module.domain.resource.Seed4JModuleResource;
@@ -17,7 +16,7 @@ class MicronautOpenApiModuleConfiguration {
   @Bean
   Seed4JModuleResource micronautOpenApiModule(MicronautOpenApiApplicationService openApi) {
     return Seed4JModuleResource.builder()
-      .slug(new MicronautModuleSlug("micronaut-openapi"))
+      .slug(MICRONAUT_OPENAPI)
       .propertiesDefinition(
         Seed4JModulePropertiesDefinition.builder()
           .addBasePackage()
@@ -27,7 +26,7 @@ class MicronautOpenApiModuleConfiguration {
           .build()
       )
       .apiDoc("Micronaut OpenAPI", "Add OpenAPI/Swagger documentation for Micronaut")
-      .organization(Seed4JModuleOrganization.builder().addDependency(JAVA_BUILD_TOOL).addDependency(MICRONAUT).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(MICRONAUT).build())
       .tags("server", "micronaut", "documentation", "openapi", "swagger")
       .factory(openApi::buildModule);
   }

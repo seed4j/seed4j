@@ -1,10 +1,9 @@
 package com.seed4j.generator.server.micronaut.management.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.MICRONAUT;
+import static com.seed4j.generator.server.micronaut.common.domain.MicronautModuleSlug.MICRONAUT;
+import static com.seed4j.generator.server.micronaut.common.domain.MicronautModuleSlug.MICRONAUT_MANAGEMENT;
 
 import com.seed4j.generator.server.micronaut.management.application.MicronautManagementApplicationService;
-import com.seed4j.generator.server.micronaut.shared.MicronautModuleSlug;
 import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
 import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
 import com.seed4j.module.domain.resource.Seed4JModuleResource;
@@ -17,7 +16,7 @@ class MicronautManagementModuleConfiguration {
   @Bean
   Seed4JModuleResource micronautManagementModule(MicronautManagementApplicationService management) {
     return Seed4JModuleResource.builder()
-      .slug(new MicronautModuleSlug("micronaut-management"))
+      .slug(MICRONAUT_MANAGEMENT)
       .propertiesDefinition(
         Seed4JModulePropertiesDefinition.builder()
           .addBasePackage()
@@ -27,7 +26,7 @@ class MicronautManagementModuleConfiguration {
           .build()
       )
       .apiDoc("Micronaut Management", "Add management endpoints (health, info, etc.) for Micronaut")
-      .organization(Seed4JModuleOrganization.builder().addDependency(JAVA_BUILD_TOOL).addDependency(MICRONAUT).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(MICRONAUT).build())
       .tags("server", "micronaut", "management", "monitoring")
       .factory(management::buildModule);
   }

@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.micronaut.core.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.JAVA_BUILD_TOOL;
+import static com.seed4j.generator.server.micronaut.common.domain.MicronautModuleSlug.MICRONAUT;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.JAVA_BASE;
-import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.MICRONAUT;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.MAVEN_JAVA;
 
 import com.seed4j.generator.server.micronaut.core.application.MicronautApplicationService;
 import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
@@ -27,7 +27,7 @@ class MicronautCoreModuleConfiguration {
           .build()
       )
       .apiDoc("Micronaut", "Init Micronaut project with dependencies, App, and properties")
-      .organization(Seed4JModuleOrganization.builder().addDependency(JAVA_BUILD_TOOL).addDependency(JAVA_BASE).build())
+      .organization(Seed4JModuleOrganization.builder().addDependency(MAVEN_JAVA).addDependency(JAVA_BASE).build())
       .tags("server", "micronaut")
       .factory(micronaut::buildModule);
   }

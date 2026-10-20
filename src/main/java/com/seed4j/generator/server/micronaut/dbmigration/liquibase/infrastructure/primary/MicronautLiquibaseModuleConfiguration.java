@@ -1,10 +1,10 @@
 package com.seed4j.generator.server.micronaut.dbmigration.liquibase.infrastructure.primary;
 
-import static com.seed4j.shared.slug.domain.Seed4JCoreFeatureSlug.JAVA_BUILD_TOOL;
-import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.MICRONAUT;
+import static com.seed4j.generator.server.micronaut.common.domain.MicronautFeatureSlug.MICRONAUT_DATABASE_MIGRATION;
+import static com.seed4j.generator.server.micronaut.common.domain.MicronautModuleSlug.MICRONAUT;
+import static com.seed4j.generator.server.micronaut.common.domain.MicronautModuleSlug.MICRONAUT_LIQUIBASE;
 
 import com.seed4j.generator.server.micronaut.dbmigration.liquibase.application.MicronautLiquibaseApplicationService;
-import com.seed4j.generator.server.micronaut.shared.MicronautModuleSlug;
 import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
 import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
 import com.seed4j.module.domain.resource.Seed4JModuleResource;
@@ -17,7 +17,7 @@ class MicronautLiquibaseModuleConfiguration {
   @Bean
   Seed4JModuleResource micronautLiquibaseModule(MicronautLiquibaseApplicationService liquibase) {
     return Seed4JModuleResource.builder()
-      .slug(new MicronautModuleSlug("micronaut-liquibase"))
+      .slug(MICRONAUT_LIQUIBASE)
       .propertiesDefinition(
         Seed4JModulePropertiesDefinition.builder()
           .addBasePackage()
@@ -27,7 +27,7 @@ class MicronautLiquibaseModuleConfiguration {
           .build()
       )
       .apiDoc("Micronaut Liquibase", "Add Liquibase database migration support for Micronaut")
-      .organization(Seed4JModuleOrganization.builder().addDependency(JAVA_BUILD_TOOL).addDependency(MICRONAUT).build())
+      .organization(Seed4JModuleOrganization.builder().feature(MICRONAUT_DATABASE_MIGRATION).addDependency(MICRONAUT).build())
       .tags("server", "micronaut", "database", "migration", "liquibase")
       .factory(liquibase::buildModule);
   }

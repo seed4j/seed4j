@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.langchain4j.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.comment;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -40,14 +42,14 @@ public class LangChain4jModuleFactory {
         .addDependency(LANGCHAIN4J_GROUP_ID, artifactId("langchain4j-spring-boot4-starter"), VERSION_SLUG)
         .addDependency(LANGCHAIN4J_GROUP_ID, artifactId("langchain4j-open-ai-spring-boot4-starter"), VERSION_SLUG)
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(LANGCHAIN4J_PROPERTY_API_KEY, propertyValue("demo"))
           .comment(LANGCHAIN4J_PROPERTY_API_KEY, comment(API_KEY_DEMO_COMMENT))
         .set(propertyKey("langchain4j.open-ai.chat-model.model-name"), propertyValue("gpt-4o-mini"))
         .set(propertyKey("langchain4j.open-ai.chat-model.log-requests"), propertyValue("true"))
         .set(propertyKey("langchain4j.open-ai.chat-model.log-responses"), propertyValue("true"))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(LANGCHAIN4J_PROPERTY_API_KEY, propertyValue("seed4j"))
         .and()
       .build();

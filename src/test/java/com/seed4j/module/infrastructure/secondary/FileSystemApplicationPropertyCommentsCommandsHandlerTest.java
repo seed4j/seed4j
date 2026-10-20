@@ -4,14 +4,17 @@ import static com.seed4j.TestFileUtils.content;
 import static com.seed4j.TestFileUtils.loadDefaultProperties;
 import static com.seed4j.module.domain.Seed4JModule.comment;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModulesFixture.MAIN_BOOTSTRAP_PROPERTIES_FILE;
+import static com.seed4j.module.domain.Seed4JModulesFixture.MAIN_PROPERTIES_FILE;
+import static com.seed4j.module.domain.Seed4JModulesFixture.TEST_BOOTSTRAP_PROPERTIES_FILE;
+import static com.seed4j.module.domain.Seed4JModulesFixture.TEST_PROPERTIES_FILE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.javaproperties.SpringComment;
-import com.seed4j.module.domain.javaproperties.SpringComments;
-import com.seed4j.module.domain.javaproperties.SpringPropertyType;
+import com.seed4j.module.domain.javaproperties.ApplicationPropertyComment;
+import com.seed4j.module.domain.javaproperties.ApplicationPropertyComments;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -21,12 +24,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @UnitTest
-class FileSystemSpringCommentsCommandsHandlerTest {
+class FileSystemApplicationPropertyCommentsCommandsHandlerTest {
 
   public static final Path EXISTING_SPRING_PROPERTIES = Path.of(
     "src/test/resources/projects/project-with-spring-application-properties/application.properties"
   );
-  private static final FileSystemSpringCommentsCommandsHandler handler = new FileSystemSpringCommentsCommandsHandler();
+  private static final FileSystemApplicationPropertyCommentsCommandsHandler handler =
+    new FileSystemApplicationPropertyCommentsCommandsHandler();
 
   @ParameterizedTest
   @ValueSource(strings = { "src/main/resources/config/application.properties", "src/main/resources/application.properties" })
@@ -144,7 +148,7 @@ class FileSystemSpringCommentsCommandsHandlerTest {
   void shouldNotOrganizePropertiesWhenFileNotExists() {
     String path = TestFileUtils.tmpDirForTest();
 
-    handler.handle(folder(path), emptySpringComments());
+    handler.handle(folder(path), emptyApplicationPropertyComments());
 
     Throwable thrown = catchThrowable(() -> content(Path.of(path, "src/main/resources/config/application.properties")));
     assertThat(thrown).hasCauseInstanceOf(NoSuchFileException.class);
@@ -154,51 +158,31 @@ class FileSystemSpringCommentsCommandsHandlerTest {
     return new Seed4JProjectFolder(path);
   }
 
-  private SpringComments commentOnMain(String propertyKey) {
-    return new SpringComments(
-      List.of(
-        SpringComment.builder(SpringPropertyType.MAIN_PROPERTIES)
-          .key(propertyKey(propertyKey))
-          .comment(comment("This is a comment"))
-          .build()
-      )
+  private ApplicationPropertyComments commentOnMain(String propertyKey) {
+    return new ApplicationPropertyComments(
+      List.of(new ApplicationPropertyComment(MAIN_PROPERTIES_FILE, propertyKey(propertyKey), comment("This is a comment")))
     );
   }
 
-  private SpringComments commentOnMainBootstrap(String propertyKey) {
-    return new SpringComments(
-      List.of(
-        SpringComment.builder(SpringPropertyType.MAIN_BOOTSTRAP_PROPERTIES)
-          .key(propertyKey(propertyKey))
-          .comment(comment("This is a comment"))
-          .build()
-      )
+  private ApplicationPropertyComments commentOnMainBootstrap(String propertyKey) {
+    return new ApplicationPropertyComments(
+      List.of(new ApplicationPropertyComment(MAIN_BOOTSTRAP_PROPERTIES_FILE, propertyKey(propertyKey), comment("This is a comment")))
     );
   }
 
-  private SpringComments commentOnTest(String propertyKey) {
-    return new SpringComments(
-      List.of(
-        SpringComment.builder(SpringPropertyType.TEST_PROPERTIES)
-          .key(propertyKey(propertyKey))
-          .comment(comment("This is a comment"))
-          .build()
-      )
+  private ApplicationPropertyComments commentOnTest(String propertyKey) {
+    return new ApplicationPropertyComments(
+      List.of(new ApplicationPropertyComment(TEST_PROPERTIES_FILE, propertyKey(propertyKey), comment("This is a comment")))
     );
   }
 
-  private SpringComments commentOnTestBootstrap(String propertyKey) {
-    return new SpringComments(
-      List.of(
-        SpringComment.builder(SpringPropertyType.TEST_BOOTSTRAP_PROPERTIES)
-          .key(propertyKey(propertyKey))
-          .comment(comment("This is a comment"))
-          .build()
-      )
+  private ApplicationPropertyComments commentOnTestBootstrap(String propertyKey) {
+    return new ApplicationPropertyComments(
+      List.of(new ApplicationPropertyComment(TEST_BOOTSTRAP_PROPERTIES_FILE, propertyKey(propertyKey), comment("This is a comment")))
     );
   }
 
-  private SpringComments emptySpringComments() {
-    return new SpringComments(List.of());
+  private ApplicationPropertyComments emptyApplicationPropertyComments() {
+    return new ApplicationPropertyComments(List.of());
   }
 }

@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class PropertiesFileSpringPropertiesHandlerTest {
+class PropertiesFileApplicationPropertiesHandlerTest {
 
   public static final Path EXISTING_SPRING_PROPERTIES = Path.of(
     "src/test/resources/projects/project-with-spring-application-properties/application.properties"
@@ -20,7 +20,7 @@ class PropertiesFileSpringPropertiesHandlerTest {
   @Test
   void shouldCreateUnknownFile() {
     Path propertiesFile = Path.of(TestFileUtils.tmpDirForTest(), "src/main/resources/application.properties");
-    PropertiesFileSpringPropertiesHandler handler = new PropertiesFileSpringPropertiesHandler(propertiesFile);
+    PropertiesFileApplicationPropertiesHandler handler = new PropertiesFileApplicationPropertiesHandler(propertiesFile);
 
     handler.set(propertyKey("springdoc.swagger-ui.operationsSorter"), propertyValue("alpha", "beta"));
 
@@ -31,7 +31,7 @@ class PropertiesFileSpringPropertiesHandlerTest {
   void shouldAppendPropertyToFileWithProperties() {
     Path propertiesFile = Path.of(TestFileUtils.tmpDirForTest(), "src/main/resources/application.properties");
     loadDefaultProperties(EXISTING_SPRING_PROPERTIES, propertiesFile);
-    PropertiesFileSpringPropertiesHandler handler = new PropertiesFileSpringPropertiesHandler(propertiesFile);
+    PropertiesFileApplicationPropertiesHandler handler = new PropertiesFileApplicationPropertiesHandler(propertiesFile);
 
     handler.set(propertyKey("springdoc.swagger-ui.operationsSorter"), propertyValue("alpha", "beta"));
 
@@ -44,7 +44,7 @@ class PropertiesFileSpringPropertiesHandlerTest {
   void shouldReplaceExistingProperty() {
     Path propertiesFile = Path.of(TestFileUtils.tmpDirForTest(), "src/main/resources/application.properties");
     loadDefaultProperties(EXISTING_SPRING_PROPERTIES, propertiesFile);
-    PropertiesFileSpringPropertiesHandler handler = new PropertiesFileSpringPropertiesHandler(propertiesFile);
+    PropertiesFileApplicationPropertiesHandler handler = new PropertiesFileApplicationPropertiesHandler(propertiesFile);
 
     handler.set(propertyKey("spring.application.name"), propertyValue("alpha"));
 

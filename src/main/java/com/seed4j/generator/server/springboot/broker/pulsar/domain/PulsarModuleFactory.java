@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.broker.pulsar.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
@@ -59,10 +61,10 @@ public class PulsarModuleFactory {
       .startupCommands()
         .dockerCompose("src/main/docker/pulsar.yml")
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("pulsar.client.service-url"), propertyValue("pulsar://localhost:6650"))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(propertyKey("pulsar.client.num-io-threads"), propertyValue(8))
         .set(propertyKey("pulsar.producer.topic-name"), propertyValue("test-topic"))
         .set(propertyKey("pulsar.consumer.topic-names[0]"), propertyValue("test-topic"))

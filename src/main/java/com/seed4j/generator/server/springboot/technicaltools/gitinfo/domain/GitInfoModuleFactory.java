@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.technicaltools.gitinfo.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.comment;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
@@ -41,7 +42,7 @@ public class GitInfoModuleFactory {
         )
         .add(MAIN_SOURCE.template(PACKAGE_INFO), mainDestination.append(PACKAGE_INFO))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .comment(propertyKey("management.info.git"), comment("Git Information"))
         .set(propertyKey("management.info.git.mode"), propertyValue("full"))
         .set(propertyKey("management.info.git.enabled"), propertyValue(true))

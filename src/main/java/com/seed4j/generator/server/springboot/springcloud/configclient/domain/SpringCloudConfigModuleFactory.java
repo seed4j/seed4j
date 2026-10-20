@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.springcloud.configclient.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN_BOOTSTRAP;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST_BOOTSTRAP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.SPRING_CLOUD_GROUP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.springCloudDependenciesManagement;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
@@ -8,14 +10,13 @@ import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
 import static com.seed4j.module.domain.Seed4JModule.propertyValue;
-import static com.seed4j.module.domain.Seed4JModule.springProfile;
 import static com.seed4j.module.domain.Seed4JModule.toSrcMainDocker;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
-import com.seed4j.module.domain.javaproperties.Seed4JModuleSpringProperties.Seed4JModuleSpringPropertiesBuilder;
+import com.seed4j.module.domain.javaproperties.Seed4JModuleApplicationProperties.Seed4JModuleApplicationPropertiesBuilder;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.base64.domain.Base64Utils;
 import com.seed4j.shared.error.domain.Assert;
@@ -41,18 +42,18 @@ public class SpringCloudConfigModuleFactory {
 
     Seed4JModuleBuilder builder = initBuilder(properties);
 
-    appendCommonProperties(builder.springMainBootstrapProperties(), baseNameValue);
-    appendCommonProperties(builder.springMainBootstrapProperties(springProfile("local")), baseNameValue);
+    appendCommonProperties(builder.applicationProperties(SPRING_MAIN_BOOTSTRAP), baseNameValue);
+    appendCommonProperties(builder.applicationProperties(SPRING_MAIN_BOOTSTRAP.profile("local")), baseNameValue);
 
     // @formatter:off
     return builder
-      .springMainBootstrapProperties()
+      .applicationProperties(SPRING_MAIN_BOOTSTRAP)
         .set(propertyKey("spring.cloud.config.fail-fast"), propertyValue(true))
         .and()
-      .springMainBootstrapProperties(springProfile("local"))
+      .applicationProperties(SPRING_MAIN_BOOTSTRAP.profile("local"))
         .set(propertyKey("spring.cloud.config.fail-fast"), FALSE_VALUE)
         .and()
-      .springTestBootstrapProperties()
+      .applicationProperties(SPRING_TEST_BOOTSTRAP)
         .set(propertyKey("spring.application.name"), baseNameValue)
         .set(propertyKey("spring.cloud.config.enabled"), FALSE_VALUE)
         .and()
@@ -84,7 +85,7 @@ public class SpringCloudConfigModuleFactory {
     // @formatter:on
   }
 
-  private void appendCommonProperties(Seed4JModuleSpringPropertiesBuilder builder, PropertyValue baseNameValue) {
+  private void appendCommonProperties(Seed4JModuleApplicationPropertiesBuilder builder, PropertyValue baseNameValue) {
     builder
       .set(propertyKey("spring.application.name"), baseNameValue)
       .set(propertyKey("jhipster.registry.password"), propertyValue("admin"))

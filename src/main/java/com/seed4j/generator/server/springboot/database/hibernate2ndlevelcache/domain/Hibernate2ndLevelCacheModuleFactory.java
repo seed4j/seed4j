@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.database.hibernate2ndlevelcache.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
@@ -40,7 +41,7 @@ public class Hibernate2ndLevelCacheModuleFactory {
             .build()
         )
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.jpa.properties.hibernate.cache.use_second_level_cache"), propertyValue(true))
         .and()
       .files()

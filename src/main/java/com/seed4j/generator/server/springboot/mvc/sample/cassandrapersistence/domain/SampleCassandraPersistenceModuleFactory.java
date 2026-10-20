@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.mvc.sample.cassandrapersistence.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.path;
@@ -52,7 +53,7 @@ public class SampleCassandraPersistenceModuleFactory {
         .delete(path("src/main/java").append(packagePath).append(SECONDARY_DESTINATION).append("InMemoryBeersRepository.java"))
         .delete(path("src/test/java").append(packagePath).append(SECONDARY_DESTINATION).append("InMemoryBeersResetter.java"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.cassandra.keyspace-name"), propertyValue(packageName))
         .and()
       .build();

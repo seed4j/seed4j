@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.seed4jextension.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.generator.server.springboot.cucumbercommon.domain.CucumbersModules.cucumberModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
@@ -80,13 +82,13 @@ public class Seed4JExtensionModuleFactory {
           .add(lineBeforeText("import org.springframework.boot.SpringApplication;"), "import com.seed4j.Seed4JApp;")
         .and()
       .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(SERVER_PORT_KEY, propertyValue(properties.serverPort().get()))
         .set(JACKSON_INCLUSION_KEY, propertyValue("non_null"))
         .comment(HIDDEN_SLUGS_PROPERTY_KEY, comment("Disable the modules and its dependencies by slugs"))
         .set(HIDDEN_SLUGS_PROPERTY_KEY, propertyValue("seed4j-extension"))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(SERVER_PORT_KEY, propertyValue(0))
         .set(BEAN_DEFINITION_OVERRIDING_PROPERTY_KEY, propertyValue(true))
         .and()

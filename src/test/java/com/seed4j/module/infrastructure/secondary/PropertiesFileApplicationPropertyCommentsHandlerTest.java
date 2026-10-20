@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
-class PropertiesFileSpringCommentsHandlerTest {
+class PropertiesFileApplicationPropertyCommentsHandlerTest {
 
   public static final Path EXISTING_SPRING_PROPERTIES = Path.of(
     "src/test/resources/projects/project-with-spring-application-properties/application.properties"
@@ -23,7 +23,10 @@ class PropertiesFileSpringCommentsHandlerTest {
     String path = tmpDirForTest();
     Path propertiesFile = Path.of(path, "src/main/resources/config/application.properties");
 
-    new PropertiesFileSpringCommentsHandler(propertiesFile).set(propertyKey("spring.application.name"), comment("This is a comment"));
+    new PropertiesFileApplicationPropertyCommentsHandler(propertiesFile).set(
+      propertyKey("spring.application.name"),
+      comment("This is a comment")
+    );
 
     Throwable thrown = catchThrowable(() -> content(Path.of(path, "src/main/resources/config/application.properties")));
     assertThat(thrown).hasCauseInstanceOf(NoSuchFileException.class);
@@ -34,7 +37,7 @@ class PropertiesFileSpringCommentsHandlerTest {
     Path propertiesFile = Path.of(tmpDirForTest(), "src/main/resources/application.properties");
     loadDefaultProperties(EXISTING_SPRING_PROPERTIES, propertiesFile);
 
-    new PropertiesFileSpringCommentsHandler(propertiesFile).set(propertyKey("foo.bar"), comment("This is a comment"));
+    new PropertiesFileApplicationPropertyCommentsHandler(propertiesFile).set(propertyKey("foo.bar"), comment("This is a comment"));
 
     assertThat(content(propertiesFile)).doesNotContain("This is a comment");
   }
@@ -44,7 +47,10 @@ class PropertiesFileSpringCommentsHandlerTest {
     Path propertiesFile = Path.of(tmpDirForTest(), "src/main/resources/application.properties");
     loadDefaultProperties(EXISTING_SPRING_PROPERTIES, propertiesFile);
 
-    new PropertiesFileSpringCommentsHandler(propertiesFile).set(propertyKey("logging.level"), comment("Logging configuration"));
+    new PropertiesFileApplicationPropertyCommentsHandler(propertiesFile).set(
+      propertyKey("logging.level"),
+      comment("Logging configuration")
+    );
 
     assertThat(content(propertiesFile)).contains(
       """
@@ -58,7 +64,10 @@ class PropertiesFileSpringCommentsHandlerTest {
     Path propertiesFile = Path.of(tmpDirForTest(), "src/main/resources/application.properties");
     loadDefaultProperties(EXISTING_SPRING_PROPERTIES, propertiesFile);
 
-    new PropertiesFileSpringCommentsHandler(propertiesFile).set(propertyKey("spring.application.name"), comment("This is a comment"));
+    new PropertiesFileApplicationPropertyCommentsHandler(propertiesFile).set(
+      propertyKey("spring.application.name"),
+      comment("This is a comment")
+    );
 
     assertThat(contentNormalizingNewLines(propertiesFile)).contains(
       """
@@ -73,7 +82,7 @@ class PropertiesFileSpringCommentsHandlerTest {
     Path propertiesFile = Path.of(tmpDirForTest(), "src/main/resources/application.properties");
     loadDefaultProperties(EXISTING_SPRING_PROPERTIES, propertiesFile);
 
-    new PropertiesFileSpringCommentsHandler(propertiesFile).set(
+    new PropertiesFileApplicationPropertyCommentsHandler(propertiesFile).set(
       propertyKey("spring.application.name"),
       comment(
         """

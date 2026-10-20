@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.cache.ehcache.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
@@ -45,7 +46,7 @@ public class EhcacheModuleFactory {
         .add(TEST_SOURCE.template("JavaCacheConfigurationIT.java"), testDestination.append("CacheConfigurationIT.java"))
         .add(TEST_SOURCE.template("CacheConfigurationTest.java"), testDestination.append("CacheConfigurationTest.java"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("application.cache.ehcache.max-entries"), propertyValue(100))
         .set(propertyKey("application.cache.ehcache.time-to-live-seconds"), propertyValue(3600))
         .and()
@@ -61,7 +62,7 @@ public class EhcacheModuleFactory {
       .files()
         .add(SOURCE.file("resources/ehcache.xml"), to("src/main/resources/config/ehcache/ehcache.xml"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.cache.jcache.config"), propertyValue("classpath:config/ehcache/ehcache.xml"))
         .and()
       .build();

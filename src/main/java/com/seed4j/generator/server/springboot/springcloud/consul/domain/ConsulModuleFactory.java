@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.springcloud.consul.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN_BOOTSTRAP;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST_BOOTSTRAP;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
@@ -70,7 +72,7 @@ public class ConsulModuleFactory {
       .startupCommands()
         .dockerCompose("src/main/docker/consul.yml")
         .and()
-      .springMainBootstrapProperties()
+      .applicationProperties(SPRING_MAIN_BOOTSTRAP)
         .set(propertyKey("spring.application.name"), propertyValue(baseName))
         .set(propertyKey("spring.cloud.consul.host"), propertyValue("localhost"))
         .set(propertyKey("spring.cloud.consul.port"), propertyValue(8500))
@@ -89,7 +91,7 @@ public class ConsulModuleFactory {
         .set(propertyKey("spring.cloud.consul.discovery.service-name"), propertyValue(baseName))
         .set(propertyKey("spring.cloud.consul.discovery.prefer-ip-address"), TRUE_VALUE)
         .and()
-      .springTestBootstrapProperties()
+      .applicationProperties(SPRING_TEST_BOOTSTRAP)
         .set(propertyKey("spring.cloud.consul.enabled"), FALSE_VALUE)
         .set(propertyKey("spring.cloud.compatibility-verifier.enabled"), FALSE_VALUE)
         .and()

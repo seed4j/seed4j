@@ -46,22 +46,22 @@ import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependency.JavaDependencyGroupIdBuilder;
 import com.seed4j.module.domain.javadependency.Seed4JModuleJavaDependencies;
 import com.seed4j.module.domain.javadependency.Seed4JModuleJavaDependencies.Seed4JModuleJavaDependenciesBuilder;
+import com.seed4j.module.domain.javaproperties.ApplicationProperties;
+import com.seed4j.module.domain.javaproperties.ApplicationPropertiesFile;
+import com.seed4j.module.domain.javaproperties.ApplicationProperty;
+import com.seed4j.module.domain.javaproperties.ApplicationPropertyComment;
+import com.seed4j.module.domain.javaproperties.ApplicationPropertyComments;
 import com.seed4j.module.domain.javaproperties.Comment;
 import com.seed4j.module.domain.javaproperties.PropertyKey;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
+import com.seed4j.module.domain.javaproperties.Seed4JModuleApplicationProperties;
+import com.seed4j.module.domain.javaproperties.Seed4JModuleApplicationProperties.Seed4JModuleApplicationPropertiesBuilder;
 import com.seed4j.module.domain.javaproperties.Seed4JModuleSpringFactories;
 import com.seed4j.module.domain.javaproperties.Seed4JModuleSpringFactories.Seed4JModuleSpringFactoriesBuilder;
-import com.seed4j.module.domain.javaproperties.Seed4JModuleSpringProperties;
-import com.seed4j.module.domain.javaproperties.Seed4JModuleSpringProperties.Seed4JModuleSpringPropertiesBuilder;
-import com.seed4j.module.domain.javaproperties.SpringComment;
-import com.seed4j.module.domain.javaproperties.SpringComments;
 import com.seed4j.module.domain.javaproperties.SpringFactories;
 import com.seed4j.module.domain.javaproperties.SpringFactory;
 import com.seed4j.module.domain.javaproperties.SpringFactoryType;
 import com.seed4j.module.domain.javaproperties.SpringProfile;
-import com.seed4j.module.domain.javaproperties.SpringProperties;
-import com.seed4j.module.domain.javaproperties.SpringProperty;
-import com.seed4j.module.domain.javaproperties.SpringPropertyType;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin.MavenPluginGroupIdBuilder;
 import com.seed4j.module.domain.mavenplugin.MavenPluginExecution;
@@ -104,6 +104,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -132,8 +133,8 @@ public final class Seed4JModule {
   private final Seed4JModulePackageJson packageJson;
   private final Seed4JModulePreActions preActions;
   private final Seed4JModulePostActions postActions;
-  private final SpringProperties springProperties;
-  private final SpringComments springComments;
+  private final ApplicationProperties applicationProperties;
+  private final ApplicationPropertyComments applicationPropertyComments;
   private final SpringFactories springFactories;
   private final Seed4JModuleGitIgnore gitIgnore;
   private final Seed4JModuleDockerComposeFile dockerComposeFile;
@@ -157,8 +158,8 @@ public final class Seed4JModule {
     packageJson = builder.packageJson.build();
     preActions = builder.preActions.build();
     postActions = builder.postActions.build();
-    springProperties = buildSpringProperties(builder);
-    springComments = buildSpringComments(builder);
+    applicationProperties = buildApplicationProperties(builder);
+    applicationPropertyComments = buildApplicationPropertyComments(builder);
     springFactories = buildSpringFactories(builder);
     gitIgnore = builder.gitIgnore.build();
     dockerComposeFile = builder.dockerComposeFile.build();
@@ -184,49 +185,50 @@ public final class Seed4JModule {
     packageJson = source.packageJson;
     preActions = source.preActions;
     postActions = source.postActions;
-    springProperties = source.springProperties;
-    springComments = source.springComments;
+    applicationProperties = source.applicationProperties;
+    applicationPropertyComments = source.applicationPropertyComments;
     springFactories = source.springFactories;
     gitIgnore = source.gitIgnore;
     dockerComposeFile = source.dockerComposeFile;
   }
 
-  private SpringProperties buildSpringProperties(Seed4JModuleBuilder builder) {
-    return new SpringProperties(builder.springProperties.entrySet().stream().flatMap(toSpringProperties()).toList());
+  private ApplicationProperties buildApplicationProperties(Seed4JModuleBuilder builder) {
+    return new ApplicationProperties(builder.applicationProperties.entrySet().stream().flatMap(toApplicationProperties()).toList());
   }
 
-  private Function<Entry<PropertiesKey, Seed4JModuleSpringPropertiesBuilder>, Stream<SpringProperty>> toSpringProperties() {
-    return inputProperties -> inputProperties.getValue().build().properties().entrySet().stream().map(toSpringProperty(inputProperties));
+  private Function<
+    Entry<ApplicationPropertiesFile, Seed4JModuleApplicationPropertiesBuilder>,
+    Stream<ApplicationProperty>
+  > toApplicationProperties() {
+    return inputProperties ->
+      inputProperties.getValue().build().properties().entrySet().stream().map(toApplicationProperty(inputProperties));
   }
 
-  private Function<Entry<PropertyKey, PropertyValue>, SpringProperty> toSpringProperty(
-    Entry<PropertiesKey, Seed4JModuleSpringPropertiesBuilder> inputProperties
+  private Function<Entry<PropertyKey, PropertyValue>, ApplicationProperty> toApplicationProperty(
+    Entry<ApplicationPropertiesFile, Seed4JModuleApplicationPropertiesBuilder> inputProperties
   ) {
-    return property ->
-      SpringProperty.builder(inputProperties.getKey().type())
-        .key(property.getKey())
-        .value(property.getValue())
-        .profile(inputProperties.getKey().profile())
-        .build();
+    return property -> new ApplicationProperty(inputProperties.getKey(), property.getKey(), property.getValue());
   }
 
-  private SpringComments buildSpringComments(Seed4JModuleBuilder builder) {
-    return new SpringComments(builder.springProperties.entrySet().stream().flatMap(toSpringComments()).toList());
+  private ApplicationPropertyComments buildApplicationPropertyComments(Seed4JModuleBuilder builder) {
+    return new ApplicationPropertyComments(
+      builder.applicationProperties.entrySet().stream().flatMap(toApplicationPropertyComments()).toList()
+    );
   }
 
-  private Function<Entry<PropertiesKey, Seed4JModuleSpringPropertiesBuilder>, Stream<SpringComment>> toSpringComments() {
-    return inputProperties -> inputProperties.getValue().build().comments().entrySet().stream().map(toSpringComment(inputProperties));
+  private Function<
+    Entry<ApplicationPropertiesFile, Seed4JModuleApplicationPropertiesBuilder>,
+    Stream<ApplicationPropertyComment>
+  > toApplicationPropertyComments() {
+    return inputProperties ->
+      inputProperties.getValue().build().comments().entrySet().stream().map(toApplicationPropertyComment(inputProperties));
   }
 
-  private Function<Entry<PropertyKey, Comment>, SpringComment> toSpringComment(
-    Entry<PropertiesKey, Seed4JModuleSpringPropertiesBuilder> inputProperties
+  private Function<Entry<PropertyKey, Comment>, ApplicationPropertyComment> toApplicationPropertyComment(
+    Entry<ApplicationPropertiesFile, Seed4JModuleApplicationPropertiesBuilder> inputProperties
   ) {
     return propertyComment ->
-      SpringComment.builder(inputProperties.getKey().type())
-        .key(propertyComment.getKey())
-        .comment(propertyComment.getValue())
-        .profile(inputProperties.getKey().profile())
-        .build();
+      new ApplicationPropertyComment(inputProperties.getKey(), propertyComment.getKey(), propertyComment.getValue());
   }
 
   private SpringFactories buildSpringFactories(Seed4JModuleBuilder builder) {
@@ -393,6 +395,10 @@ public final class Seed4JModule {
     return PropertyValue.of(values);
   }
 
+  /**
+   * @deprecated use {@link ApplicationPropertiesFile#profile(String)} instead
+   */
+  @Deprecated(since = "2.3.0", forRemoval = true)
   public static SpringProfile springProfile(String profile) {
     return new SpringProfile(profile);
   }
@@ -541,12 +547,12 @@ public final class Seed4JModule {
     return postActions;
   }
 
-  public SpringComments springComments() {
-    return springComments;
+  public ApplicationPropertyComments applicationPropertyComments() {
+    return applicationPropertyComments;
   }
 
-  public SpringProperties springProperties() {
-    return springProperties;
+  public ApplicationProperties applicationProperties() {
+    return applicationProperties;
   }
 
   public SpringFactories springFactories() {
@@ -564,6 +570,28 @@ public final class Seed4JModule {
   public static final class Seed4JModuleBuilder {
 
     private static final String PROFILE = "profile";
+
+    // Spring Boot locations, kept here only for the deprecated spring*Properties() methods: use SpringBootProperties instead
+    private static final String SPRING_MAIN_CONFIG_FOLDER = "src/main/resources/config/";
+    private static final String SPRING_MAIN_RESOURCES_FOLDER = "src/main/resources/";
+    private static final String SPRING_TEST_CONFIG_FOLDER = "src/test/resources/config/";
+    private static final String SPRING_TEST_RESOURCES_FOLDER = "src/test/resources/";
+    private static final ApplicationPropertiesFile SPRING_MAIN_PROPERTIES = ApplicationPropertiesFile.named("application").in(
+      SPRING_MAIN_CONFIG_FOLDER,
+      SPRING_MAIN_RESOURCES_FOLDER
+    );
+    private static final ApplicationPropertiesFile SPRING_MAIN_BOOTSTRAP_PROPERTIES = ApplicationPropertiesFile.named("bootstrap").in(
+      SPRING_MAIN_CONFIG_FOLDER,
+      SPRING_MAIN_RESOURCES_FOLDER
+    );
+    private static final ApplicationPropertiesFile SPRING_TEST_PROPERTIES = ApplicationPropertiesFile.named("application").in(
+      SPRING_TEST_CONFIG_FOLDER,
+      SPRING_TEST_RESOURCES_FOLDER
+    );
+    private static final ApplicationPropertiesFile SPRING_TEST_BOOTSTRAP_PROPERTIES = ApplicationPropertiesFile.named("bootstrap").in(
+      SPRING_TEST_CONFIG_FOLDER,
+      SPRING_TEST_RESOURCES_FOLDER
+    );
 
     private final Seed4JModuleProperties properties;
     private final Seed4JModuleContextBuilder context;
@@ -586,7 +614,7 @@ public final class Seed4JModule {
     private final Seed4JModulePackageJsonBuilder packageJson = Seed4JModulePackageJson.builder(this);
     private final Seed4JModulePreActionsBuilder preActions = Seed4JModulePreActions.builder(this);
     private final Seed4JModulePostActionsBuilder postActions = Seed4JModulePostActions.builder(this);
-    private final Map<PropertiesKey, Seed4JModuleSpringPropertiesBuilder> springProperties = new HashMap<>();
+    private final Map<ApplicationPropertiesFile, Seed4JModuleApplicationPropertiesBuilder> applicationProperties = new HashMap<>();
     private final Map<SpringFactoryType, Seed4JModuleSpringFactoriesBuilder> springFactories = new EnumMap<>(SpringFactoryType.class);
     private final Seed4JModuleGitIgnoreBuilder gitIgnore = Seed4JModuleGitIgnore.builder(this);
     private final Seed4JModuleDockerComposeFileBuilder dockerComposeFile = Seed4JModuleDockerComposeFile.builder(this);
@@ -724,50 +752,97 @@ public final class Seed4JModule {
       return postActions;
     }
 
-    public Seed4JModuleSpringPropertiesBuilder springMainProperties() {
-      return springMainProperties(SpringProfile.DEFAULT);
+    /**
+     * Add properties to an application configuration file (for example {@code application.yml}).
+     *
+     * @param file
+     *          logical file to write to, its extension (and format) depends on the project configuration format
+     * @return a builder to set the properties and comments of this file
+     */
+    public Seed4JModuleApplicationPropertiesBuilder applicationProperties(ApplicationPropertiesFile file) {
+      Assert.notNull("file", file);
+
+      return applicationProperties.computeIfAbsent(file, key -> Seed4JModuleApplicationProperties.builder(this));
     }
 
-    public Seed4JModuleSpringPropertiesBuilder springLocalProperties() {
-      return springMainProperties(SpringProfile.LOCAL);
+    /**
+     * @deprecated use {@link #applicationProperties(ApplicationPropertiesFile)} with {@code SpringBootProperties.SPRING_MAIN}
+     */
+    @Deprecated(since = "2.3.0", forRemoval = true)
+    public Seed4JModuleApplicationPropertiesBuilder springMainProperties() {
+      return applicationProperties(SPRING_MAIN_PROPERTIES);
     }
 
-    public Seed4JModuleSpringPropertiesBuilder springMainBootstrapProperties() {
-      return springMainBootstrapProperties(SpringProfile.DEFAULT);
+    /**
+     * @deprecated use {@link #applicationProperties(ApplicationPropertiesFile)} with {@code SpringBootProperties.SPRING_LOCAL}
+     */
+    @Deprecated(since = "2.3.0", forRemoval = true)
+    public Seed4JModuleApplicationPropertiesBuilder springLocalProperties() {
+      return applicationProperties(SPRING_MAIN_PROPERTIES.profile("local"));
     }
 
-    public Seed4JModuleSpringPropertiesBuilder springMainBootstrapProperties(SpringProfile profile) {
+    /**
+     * @deprecated use {@link #applicationProperties(ApplicationPropertiesFile)} with {@code SpringBootProperties.SPRING_MAIN_BOOTSTRAP}
+     */
+    @Deprecated(since = "2.3.0", forRemoval = true)
+    public Seed4JModuleApplicationPropertiesBuilder springMainBootstrapProperties() {
+      return applicationProperties(SPRING_MAIN_BOOTSTRAP_PROPERTIES);
+    }
+
+    /**
+     * @deprecated use {@link #applicationProperties(ApplicationPropertiesFile)} with
+     *             {@code SpringBootProperties.SPRING_MAIN_BOOTSTRAP.profile(...)}
+     */
+    @Deprecated(since = "2.3.0", forRemoval = true)
+    public Seed4JModuleApplicationPropertiesBuilder springMainBootstrapProperties(SpringProfile profile) {
       Assert.notNull(PROFILE, profile);
 
-      return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.MAIN_BOOTSTRAP_PROPERTIES), key ->
-        Seed4JModuleSpringProperties.builder(this)
-      );
+      return applicationProperties(withProfile(SPRING_MAIN_BOOTSTRAP_PROPERTIES, profile));
     }
 
-    public Seed4JModuleSpringPropertiesBuilder springMainProperties(SpringProfile profile) {
+    /**
+     * @deprecated use {@link #applicationProperties(ApplicationPropertiesFile)} with {@code SpringBootProperties.SPRING_MAIN.profile(...)}
+     */
+    @Deprecated(since = "2.3.0", forRemoval = true)
+    public Seed4JModuleApplicationPropertiesBuilder springMainProperties(SpringProfile profile) {
       Assert.notNull(PROFILE, profile);
 
-      return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.MAIN_PROPERTIES), key ->
-        Seed4JModuleSpringProperties.builder(this)
-      );
+      return applicationProperties(withProfile(SPRING_MAIN_PROPERTIES, profile));
     }
 
-    public Seed4JModuleSpringPropertiesBuilder springTestProperties() {
-      return springTestProperties(SpringProfile.TEST);
+    /**
+     * @deprecated use {@link #applicationProperties(ApplicationPropertiesFile)} with {@code SpringBootProperties.SPRING_TEST}
+     */
+    @Deprecated(since = "2.3.0", forRemoval = true)
+    public Seed4JModuleApplicationPropertiesBuilder springTestProperties() {
+      return applicationProperties(SPRING_TEST_PROPERTIES.profile("test"));
     }
 
-    public Seed4JModuleSpringPropertiesBuilder springTestBootstrapProperties() {
-      return springProperties.computeIfAbsent(new PropertiesKey(SpringProfile.DEFAULT, SpringPropertyType.TEST_BOOTSTRAP_PROPERTIES), key ->
-        Seed4JModuleSpringProperties.builder(this)
-      );
+    /**
+     * @deprecated use {@link #applicationProperties(ApplicationPropertiesFile)} with {@code SpringBootProperties.SPRING_TEST_BOOTSTRAP}
+     */
+    @Deprecated(since = "2.3.0", forRemoval = true)
+    public Seed4JModuleApplicationPropertiesBuilder springTestBootstrapProperties() {
+      return applicationProperties(SPRING_TEST_BOOTSTRAP_PROPERTIES);
     }
 
-    public Seed4JModuleSpringPropertiesBuilder springTestProperties(SpringProfile profile) {
+    /**
+     * @deprecated use {@link #applicationProperties(ApplicationPropertiesFile)} with {@code SpringBootProperties.SPRING_TEST.profile(...)}
+     */
+    @Deprecated(since = "2.3.0", forRemoval = true)
+    public Seed4JModuleApplicationPropertiesBuilder springTestProperties(SpringProfile profile) {
       Assert.notNull(PROFILE, profile);
 
-      return springProperties.computeIfAbsent(new PropertiesKey(profile, SpringPropertyType.TEST_PROPERTIES), key ->
-        Seed4JModuleSpringProperties.builder(this)
-      );
+      return applicationProperties(withProfile(SPRING_TEST_PROPERTIES, profile));
+    }
+
+    @SuppressWarnings("removal")
+    private static ApplicationPropertiesFile withProfile(ApplicationPropertiesFile file, SpringProfile profile) {
+      if (profile.isDefault()) {
+        return file;
+      }
+
+      return file.profile(Objects.requireNonNull(profile.get()));
     }
 
     public Seed4JModuleSpringFactoriesBuilder springTestFactories() {
@@ -797,6 +872,4 @@ public final class Seed4JModule {
       return new Seed4JModule(this);
     }
   }
-
-  private record PropertiesKey(SpringProfile profile, SpringPropertyType type) {}
 }

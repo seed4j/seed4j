@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.database.jpa.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
@@ -38,7 +39,7 @@ public class JpaModuleFactory {
   public Seed4JModule buildMsSQL(Seed4JModuleProperties properties) {
     // @formatter:off
     return sqlCommonModuleBuilder(properties)
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.jpa.hibernate.ddl-auto"), propertyValue("update"))
         .set(propertyKey("spring.jpa.properties.hibernate.criteria.literal_handling_mode"), propertyValue("BIND"))
         .set(propertyKey("spring.jpa.properties.hibernate.format_sql"), propertyValue(true))
@@ -62,7 +63,7 @@ public class JpaModuleFactory {
       .javaDependencies()
         .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-starter-data-jpa"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.data.jpa.repositories.bootstrap-mode"), propertyValue("deferred"))
         .set(propertyKey("spring.jpa.hibernate.ddl-auto"), propertyValue("none"))
         .set(

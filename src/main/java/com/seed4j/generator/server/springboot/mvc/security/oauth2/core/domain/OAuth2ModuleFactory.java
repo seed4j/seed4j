@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.mvc.security.oauth2.core.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.generator.server.springboot.mvc.security.common.domain.AuthenticationModuleFactory.authenticationModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
@@ -146,7 +148,7 @@ public class OAuth2ModuleFactory {
 
   private static void appendSpringProperties(Seed4JModuleBuilder builder, String realmName) {
     builder
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
       .set(
         propertyKey("spring.security.oauth2.client.provider.oidc.issuer-uri"),
         propertyValue("http://localhost:9080/realms/" + realmName)
@@ -157,7 +159,7 @@ public class OAuth2ModuleFactory {
       .set(propertyKey("application.security.oauth2.audience"), propertyValue("account,api://default"));
 
     builder
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
       .set(propertyKey("spring.main.allow-bean-definition-overriding"), propertyValue(true))
       .set(
         propertyKey("spring.security.oauth2.client.provider.oidc.issuer-uri"),

@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.logging.logstash.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.*;
 
 import com.seed4j.module.domain.LogLevel;
@@ -37,7 +38,7 @@ public class LogstashModuleFactory {
           .addTemplate("LogstashTcpPropertiesTest.java")
           .and()
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("application.logging.logstash.tcp.enabled"), propertyValue(false))
         .set(propertyKey("application.logging.logstash.tcp.host"), propertyValue("localhost"))
         .set(propertyKey("application.logging.logstash.tcp.port"), propertyValue(5000))

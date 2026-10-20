@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.docker.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
 import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
@@ -170,7 +171,7 @@ public class SpringBootDockerModuleFactory {
       .javaDependencies()
         .addDependency(springBootDockerComposeIntegration())
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(propertyKey("spring.docker.compose.enabled"), propertyValue(false))
         .and()
       .build();

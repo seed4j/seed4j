@@ -31,7 +31,6 @@ import static com.seed4j.module.domain.Seed4JModule.propertyValue;
 import static com.seed4j.module.domain.Seed4JModule.regex;
 import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
 import static com.seed4j.module.domain.Seed4JModule.scriptKey;
-import static com.seed4j.module.domain.Seed4JModule.springProfile;
 import static com.seed4j.module.domain.Seed4JModule.text;
 import static com.seed4j.module.domain.Seed4JModule.to;
 import static com.seed4j.module.domain.Seed4JModule.versionSlug;
@@ -61,8 +60,8 @@ import com.seed4j.module.domain.javadependency.JavaDependency.JavaDependencyOpti
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
-import com.seed4j.module.domain.javaproperties.SpringProperty;
-import com.seed4j.module.domain.javaproperties.SpringPropertyType;
+import com.seed4j.module.domain.javaproperties.ApplicationPropertiesFile;
+import com.seed4j.module.domain.javaproperties.ApplicationProperty;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
@@ -75,6 +74,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class Seed4JModulesFixture {
+
+  public static final ApplicationPropertiesFile MAIN_PROPERTIES_FILE = ApplicationPropertiesFile.named("application").in(
+    "src/main/resources/config/",
+    "src/main/resources/"
+  );
+  public static final ApplicationPropertiesFile MAIN_BOOTSTRAP_PROPERTIES_FILE = ApplicationPropertiesFile.named("bootstrap").in(
+    "src/main/resources/config/",
+    "src/main/resources/"
+  );
+  public static final ApplicationPropertiesFile TEST_PROPERTIES_FILE = ApplicationPropertiesFile.named("application").in(
+    "src/test/resources/config/",
+    "src/test/resources/"
+  );
+  public static final ApplicationPropertiesFile TEST_BOOTSTRAP_PROPERTIES_FILE = ApplicationPropertiesFile.named("bootstrap").in(
+    "src/test/resources/config/",
+    "src/test/resources/"
+  );
 
   private static final Logger log = LoggerFactory.getLogger(Seed4JModulesFixture.class);
 
@@ -221,19 +237,19 @@ public final class Seed4JModulesFixture {
       .add(() -> log.debug("Fixture module applied"))
       .add(context -> log.debug("Applied on {}", context.projectFolder().get()))
       .and()
-    .springMainProperties()
+    .applicationProperties(MAIN_PROPERTIES_FILE)
       .comment(propertyKey("springdoc.swagger-ui.operationsSorter"), comment("This is a comment"))
       .set(propertyKey("springdoc.swagger-ui.operationsSorter"), propertyValue("alpha"))
       .and()
-    .springLocalProperties()
+    .applicationProperties(MAIN_PROPERTIES_FILE.profile("local"))
       .comment(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), comment("This is a comment"))
       .set(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), propertyValue("false"))
       .and()
-    .springTestProperties()
+    .applicationProperties(TEST_PROPERTIES_FILE.profile("test"))
       .comment(propertyKey("springdoc.swagger-ui.operationsSorter"), comment("This is a comment"))
       .set(propertyKey("springdoc.swagger-ui.operationsSorter"), propertyValue("test"))
       .and()
-    .springTestProperties(springProfile("local"))
+    .applicationProperties(TEST_PROPERTIES_FILE.profile("local"))
       .comment(propertyKey("springdoc.swagger-ui"), comment("Swagger properties"))
       .comment(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), comment("This is a comment"))
       .set(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), propertyValue("test"))
@@ -436,26 +452,28 @@ public final class Seed4JModulesFixture {
     return new Seed4JModulePropertiesBuilder(projectFolder);
   }
 
-  public static SpringProperty springLocalMainProperty() {
-    return SpringProperty.builder(SpringPropertyType.MAIN_PROPERTIES)
-      .key(propertyKey("springdoc.swagger-ui.operationsSorter"))
-      .value(propertyValue("alpha", "beta"))
-      .profile(springProfile("local"))
-      .build();
+  public static ApplicationProperty springLocalMainProperty() {
+    return new ApplicationProperty(
+      MAIN_PROPERTIES_FILE.profile("local"),
+      propertyKey("springdoc.swagger-ui.operationsSorter"),
+      propertyValue("alpha", "beta")
+    );
   }
 
-  public static SpringProperty springMainProperty() {
-    return SpringProperty.builder(SpringPropertyType.MAIN_PROPERTIES)
-      .key(propertyKey("springdoc.swagger-ui.operationsSorter"))
-      .value(propertyValue("alpha", "beta"))
-      .build();
+  public static ApplicationProperty springMainProperty() {
+    return new ApplicationProperty(
+      MAIN_PROPERTIES_FILE,
+      propertyKey("springdoc.swagger-ui.operationsSorter"),
+      propertyValue("alpha", "beta")
+    );
   }
 
-  public static SpringProperty springTestProperty() {
-    return SpringProperty.builder(SpringPropertyType.TEST_PROPERTIES)
-      .key(propertyKey("springdoc.swagger-ui.operationsSorter"))
-      .value(propertyValue("alpha", "beta"))
-      .build();
+  public static ApplicationProperty springTestProperty() {
+    return new ApplicationProperty(
+      TEST_PROPERTIES_FILE,
+      propertyKey("springdoc.swagger-ui.operationsSorter"),
+      propertyValue("alpha", "beta")
+    );
   }
 
   public static MavenPlugin mavenEnforcerPluginManagement() {

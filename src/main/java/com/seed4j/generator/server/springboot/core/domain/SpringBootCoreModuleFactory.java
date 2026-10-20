@@ -1,5 +1,8 @@
 package com.seed4j.generator.server.springboot.core.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_LOCAL;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dependencyId;
 import static com.seed4j.module.domain.Seed4JModule.from;
@@ -96,14 +99,14 @@ public class SpringBootCoreModuleFactory {
         .add(TEST_SOURCE.template("logback.xml"), TEST_RESOURCES_DESTINATION.append("logback.xml"))
         .add(TEST_SOURCE.template("ApplicationStartupTracesTest.java"), toSrcTestJava().append(packagePath).append("ApplicationStartupTracesTest.java"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.application.name"), propertyValue(baseNameUncapitalized))
         .set(propertyKey(basePackageLoggingLevel), propertyValue("INFO"))
         .and()
-      .springLocalProperties()
+      .applicationProperties(SPRING_LOCAL)
         .set(propertyKey(basePackageLoggingLevel), propertyValue("DEBUG"))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(propertyKey("spring.main.banner-mode"), propertyValue("off"))
         .set(propertyKey("logging.config"), propertyValue("classpath:logback.xml"))
         .and()

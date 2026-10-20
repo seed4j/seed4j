@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.database.redis.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -67,11 +69,11 @@ public class RedisModuleFactory {
             )
         .add(SOURCE.template("TestRedisManager.java"), toSrcTestJava().append(packagePath).append("TestRedisManager.java"))
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.data.redis.database"), propertyValue(0))
         .set(propertyKey("spring.data.redis.url"), propertyValue("redis://localhost:6379"))
         .and()
-      .springTestProperties()
+      .applicationProperties(SPRING_TEST)
         .set(propertyKey("spring.data.redis.url"), propertyValue("${TEST_REDIS_URL}"))
         .and()
       .springTestFactories()

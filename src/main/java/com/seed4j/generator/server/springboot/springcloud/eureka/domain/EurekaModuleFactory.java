@@ -1,5 +1,7 @@
 package com.seed4j.generator.server.springboot.springcloud.eureka.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN_BOOTSTRAP;
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST_BOOTSTRAP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.SPRING_CLOUD_GROUP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.springCloudDependenciesManagement;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
@@ -61,7 +63,7 @@ public class EurekaModuleFactory {
             to("src/main/docker/central-server-config/localhost-config/application.properties")
         )
         .and()
-      .springMainBootstrapProperties()
+      .applicationProperties(SPRING_MAIN_BOOTSTRAP)
         .set(propertyKey("spring.application.name"), propertyValue(baseName))
         .set(propertyKey("spring.cloud.compatibility-verifier.enabled"), FALSE_VALUE)
         .set(propertyKey("eureka.client.service-url.defaultZone"), propertyValue("http://admin:admin@localhost:8761/eureka"))
@@ -78,7 +80,7 @@ public class EurekaModuleFactory {
         .set(propertyKey("eureka.instance.status-page-url-path"), propertyValue("${management.endpoints.web.base-path}/info"))
         .set(propertyKey("eureka.instance.health-check-url-path"), propertyValue("${management.endpoints.web.base-path}/health"))
         .and()
-      .springTestBootstrapProperties()
+      .applicationProperties(SPRING_TEST_BOOTSTRAP)
         .set(propertyKey("spring.application.name"), propertyValue(baseName))
         .set(propertyKey("eureka.client.enabled"), FALSE_VALUE)
         .set(propertyKey("spring.cloud.compatibility-verifier.enabled"), FALSE_VALUE)

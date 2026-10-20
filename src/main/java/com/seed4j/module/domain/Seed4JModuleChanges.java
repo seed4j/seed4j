@@ -5,9 +5,9 @@ import com.seed4j.module.domain.file.Seed4JFilesToMove;
 import com.seed4j.module.domain.file.Seed4JTemplatedFiles;
 import com.seed4j.module.domain.gitignore.Seed4JModuleGitIgnore;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
-import com.seed4j.module.domain.javaproperties.SpringComments;
+import com.seed4j.module.domain.javaproperties.ApplicationProperties;
+import com.seed4j.module.domain.javaproperties.ApplicationPropertyComments;
 import com.seed4j.module.domain.javaproperties.SpringFactories;
-import com.seed4j.module.domain.javaproperties.SpringProperties;
 import com.seed4j.module.domain.packagejson.Seed4JModulePackageJson;
 import com.seed4j.module.domain.postaction.Seed4JModulePostActions;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
@@ -33,10 +33,10 @@ public final class Seed4JModuleChanges {
   private final Seed4JModulePackageJson packageJson;
   private final Seed4JModulePreActions preActions;
   private final Seed4JModulePostActions postActions;
-  private final SpringProperties springProperties;
-  private final SpringComments springComments;
-  private final SpringProperties springYamlProperties;
-  private final SpringComments springYamlComments;
+  private final ApplicationProperties applicationProperties;
+  private final ApplicationPropertyComments applicationPropertyComments;
+  private final ApplicationProperties yamlApplicationProperties;
+  private final ApplicationPropertyComments yamlApplicationPropertyComments;
   private final SpringFactories springFactories;
   private final Seed4JModuleGitIgnore gitIgnore;
   private final Seed4JModuleDockerComposeFile dockerComposeFile;
@@ -55,10 +55,10 @@ public final class Seed4JModuleChanges {
     Assert.notNull("springFactories", builder.springFactories);
     Assert.notNull("startupCommands", builder.startupCommands);
     Assert.notNull("packageJson", builder.packageJson);
-    Assert.notNull("springProperties", builder.springProperties);
-    Assert.notNull("springComments", builder.springComments);
-    Assert.notNull("springYamlProperties", builder.springYamlProperties);
-    Assert.notNull("springYamlComments", builder.springYamlComments);
+    Assert.notNull("applicationProperties", builder.applicationProperties);
+    Assert.notNull("applicationPropertyComments", builder.applicationPropertyComments);
+    Assert.notNull("yamlApplicationProperties", builder.yamlApplicationProperties);
+    Assert.notNull("yamlApplicationPropertyComments", builder.yamlApplicationPropertyComments);
     Assert.notNull("gitIgnore", builder.gitIgnore);
     Assert.notNull("dockerComposeFile", builder.dockerComposeFile);
 
@@ -74,10 +74,10 @@ public final class Seed4JModuleChanges {
     packageJson = builder.packageJson;
     preActions = builder.preActions;
     postActions = builder.postActions;
-    springProperties = builder.springProperties;
-    springComments = builder.springComments;
-    springYamlProperties = builder.springYamlProperties;
-    springYamlComments = builder.springYamlComments;
+    applicationProperties = builder.applicationProperties;
+    applicationPropertyComments = builder.applicationPropertyComments;
+    yamlApplicationProperties = builder.yamlApplicationProperties;
+    yamlApplicationPropertyComments = builder.yamlApplicationPropertyComments;
     springFactories = builder.springFactories;
     gitIgnore = builder.gitIgnore;
     dockerComposeFile = builder.dockerComposeFile;
@@ -139,21 +139,21 @@ public final class Seed4JModuleChanges {
     return postActions;
   }
 
-  public SpringProperties springYamlProperties() {
-    return springYamlProperties;
+  public ApplicationProperties yamlApplicationProperties() {
+    return yamlApplicationProperties;
   }
 
   @ExcludeFromGeneratedCodeCoverage(reason = "Handling YAML comments is not yet implemented")
-  public SpringComments springYamlComments() {
-    return springYamlComments;
+  public ApplicationPropertyComments yamlApplicationPropertyComments() {
+    return yamlApplicationPropertyComments;
   }
 
-  public SpringProperties springProperties() {
-    return springProperties;
+  public ApplicationProperties applicationProperties() {
+    return applicationProperties;
   }
 
-  public SpringComments springComments() {
-    return springComments;
+  public ApplicationPropertyComments applicationPropertyComments() {
+    return applicationPropertyComments;
   }
 
   public SpringFactories springFactories() {
@@ -178,10 +178,10 @@ public final class Seed4JModuleChanges {
       Seed4JModuleChangesPackageJsonBuilder,
       Seed4JModuleChangesPreActionsBuilder,
       Seed4JModuleChangesPostActionsBuilder,
-      Seed4JModuleChangesSpringPropertiesBuilder,
-      Seed4JModuleChangesSpringCommentsBuilder,
+      Seed4JModuleChangesApplicationPropertiesBuilder,
+      Seed4JModuleChangesApplicationPropertyCommentsBuilder,
       Seed4JModuleChangesSpringFactoriesBuilder,
-      Seed4JModuleChangesSpringYamlCommentsBuilder,
+      Seed4JModuleChangesYamlApplicationPropertyCommentsBuilder,
       Seed4JModuleChangesGitIgnorePatternsBuilder,
       Seed4JModuleChangesDockerComposeFileBuilder
   {
@@ -198,10 +198,10 @@ public final class Seed4JModuleChanges {
     private @Nullable Indentation indentation;
     private @Nullable Seed4JModulePreActions preActions;
     private @Nullable Seed4JModulePostActions postActions;
-    private @Nullable SpringProperties springProperties = SpringProperties.EMPTY;
-    private @Nullable SpringComments springComments = SpringComments.EMPTY;
-    private @Nullable SpringProperties springYamlProperties = SpringProperties.EMPTY;
-    private @Nullable SpringComments springYamlComments = SpringComments.EMPTY;
+    private @Nullable ApplicationProperties applicationProperties = ApplicationProperties.EMPTY;
+    private @Nullable ApplicationPropertyComments applicationPropertyComments = ApplicationPropertyComments.EMPTY;
+    private @Nullable ApplicationProperties yamlApplicationProperties = ApplicationProperties.EMPTY;
+    private @Nullable ApplicationPropertyComments yamlApplicationPropertyComments = ApplicationPropertyComments.EMPTY;
     private @Nullable SpringFactories springFactories;
     private @Nullable Seed4JModuleGitIgnore gitIgnore;
     private @Nullable Seed4JModuleDockerComposeFile dockerComposeFile;
@@ -305,35 +305,37 @@ public final class Seed4JModuleChanges {
     }
 
     @Override
-    public Seed4JModuleChangesSpringYamlCommentsBuilder springYamlProperties(SpringProperties springProperties) {
-      this.springYamlProperties = springProperties;
+    public Seed4JModuleChangesYamlApplicationPropertyCommentsBuilder yamlApplicationProperties(
+      ApplicationProperties applicationProperties
+    ) {
+      this.yamlApplicationProperties = applicationProperties;
 
       return this;
     }
 
     @Override
-    public Seed4JModuleChangesSpringCommentsBuilder springProperties(SpringProperties springProperties) {
-      this.springProperties = springProperties;
+    public Seed4JModuleChangesApplicationPropertyCommentsBuilder applicationProperties(ApplicationProperties applicationProperties) {
+      this.applicationProperties = applicationProperties;
 
       return this;
     }
 
     @Override
-    public Seed4JModuleChanges springYamlComments(SpringComments springComments) {
-      this.springYamlComments = springComments;
+    public Seed4JModuleChanges yamlApplicationPropertyComments(ApplicationPropertyComments applicationPropertyComments) {
+      this.yamlApplicationPropertyComments = applicationPropertyComments;
 
       return new Seed4JModuleChanges(this);
     }
 
     @Override
-    public Seed4JModuleChanges springComments(SpringComments springComments) {
-      this.springComments = springComments;
+    public Seed4JModuleChanges applicationPropertyComments(ApplicationPropertyComments applicationPropertyComments) {
+      this.applicationPropertyComments = applicationPropertyComments;
 
       return new Seed4JModuleChanges(this);
     }
 
     @Override
-    public Seed4JModuleChangesSpringPropertiesBuilder springFactories(SpringFactories springFactories) {
+    public Seed4JModuleChangesApplicationPropertiesBuilder springFactories(SpringFactories springFactories) {
       this.springFactories = springFactories;
 
       return this;
@@ -397,19 +399,19 @@ public final class Seed4JModuleChanges {
   }
 
   public interface Seed4JModuleChangesSpringFactoriesBuilder {
-    Seed4JModuleChangesSpringPropertiesBuilder springFactories(SpringFactories springFactories);
+    Seed4JModuleChangesApplicationPropertiesBuilder springFactories(SpringFactories springFactories);
   }
 
-  public interface Seed4JModuleChangesSpringPropertiesBuilder {
-    Seed4JModuleChangesSpringYamlCommentsBuilder springYamlProperties(SpringProperties springProperties);
-    Seed4JModuleChangesSpringCommentsBuilder springProperties(SpringProperties springProperties);
+  public interface Seed4JModuleChangesApplicationPropertiesBuilder {
+    Seed4JModuleChangesYamlApplicationPropertyCommentsBuilder yamlApplicationProperties(ApplicationProperties applicationProperties);
+    Seed4JModuleChangesApplicationPropertyCommentsBuilder applicationProperties(ApplicationProperties applicationProperties);
   }
 
-  public interface Seed4JModuleChangesSpringYamlCommentsBuilder {
-    Seed4JModuleChanges springYamlComments(SpringComments springComments);
+  public interface Seed4JModuleChangesYamlApplicationPropertyCommentsBuilder {
+    Seed4JModuleChanges yamlApplicationPropertyComments(ApplicationPropertyComments applicationPropertyComments);
   }
 
-  public interface Seed4JModuleChangesSpringCommentsBuilder {
-    Seed4JModuleChanges springComments(SpringComments springComments);
+  public interface Seed4JModuleChangesApplicationPropertyCommentsBuilder {
+    Seed4JModuleChanges applicationPropertyComments(ApplicationPropertyComments applicationPropertyComments);
   }
 }

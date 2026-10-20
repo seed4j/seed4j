@@ -106,9 +106,13 @@ public class Seed4JModulesApplyer {
 
     Seed4JModuleChanges changes;
     if (moduleToApply.properties().springConfigurationFormat() == PROPERTIES) {
-      changes = builder.springProperties(module.springProperties()).springComments(module.springComments());
+      changes = builder
+        .applicationProperties(module.applicationProperties())
+        .applicationPropertyComments(module.applicationPropertyComments());
     } else {
-      changes = builder.springYamlProperties(module.springProperties()).springYamlComments(module.springComments());
+      changes = builder
+        .yamlApplicationProperties(module.applicationProperties())
+        .yamlApplicationPropertyComments(module.applicationPropertyComments());
     }
 
     modules.apply(changes);

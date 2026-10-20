@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.dbmigration.mongock.domain;
 
+import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
 import static com.seed4j.module.domain.Seed4JModule.from;
@@ -46,7 +47,7 @@ public class MongockModuleFactory {
           toSrcMainJava().append(packagePath).append(MONGOCK_SECONDARY).append("MongockDatabaseConfiguration.java")
         )
         .and()
-      .springMainProperties()
+      .applicationProperties(SPRING_MAIN)
         .set(propertyKey("mongock.migration-scan-package"), propertyValue(properties.basePackage().get()))
         .and()
       .build();

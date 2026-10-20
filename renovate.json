@@ -23,6 +23,11 @@
       "allowedVersions": "<25.0.0"
     },
     {
+      "description": "TypeScript 7 is not supported yet by the ecosystem (typescript-eslint, etc.)",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<7.0.0"
+    },
+    {
       "matchPackageNames": ["net.jqwik:jqwik"],
       "allowedVersions": "1.9.3"
     },

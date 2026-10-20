@@ -1,7 +1,7 @@
 package com.seed4j.shared.error.domain;
 
-import com.seed4j.shared.nullness.domain.Contract;
-import com.seed4j.shared.nullness.domain.EnsuresNonNull;
+import com.uber.nullaway.annotations.Contract;
+import com.uber.nullaway.annotations.EnsuresNonNull;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Collection;

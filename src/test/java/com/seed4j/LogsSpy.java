@@ -6,7 +6,7 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
-import com.seed4j.shared.nullness.domain.Initializer;
+import com.uber.nullaway.annotations.Initializer;
 import java.util.function.Predicate;
 import org.slf4j.LoggerFactory;
 

@@ -7,7 +7,7 @@ import com.seed4j.module.domain.ProjectFiles;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
-import com.seed4j.shared.nullness.domain.Contract;
+import com.uber.nullaway.annotations.Contract;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;

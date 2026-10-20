@@ -2,6 +2,8 @@ package com.seed4j.generator.server.springboot.database.mongodb.domain;
 
 import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -85,12 +87,12 @@ public class MongoDbModuleFactory {
       .dockerComposeFile()
         .append(dockerComposeFile("src/main/docker/mongodb.yml"))
         .and()
-      .springMainLogger(REFLECTIONS_GROUP, LogLevel.WARN)
-      .springMainLogger("org.mongodb.driver", LogLevel.WARN)
-      .springTestLogger(REFLECTIONS_GROUP, LogLevel.WARN)
-      .springTestLogger("org.mongodb.driver", LogLevel.WARN)
-      .springTestLogger("com.github.dockerjava", LogLevel.WARN)
-      .springTestLogger("org.testcontainers", LogLevel.WARN)
+      .with(springMainLogger(REFLECTIONS_GROUP, LogLevel.WARN))
+      .with(springMainLogger("org.mongodb.driver", LogLevel.WARN))
+      .with(springTestLogger(REFLECTIONS_GROUP, LogLevel.WARN))
+      .with(springTestLogger("org.mongodb.driver", LogLevel.WARN))
+      .with(springTestLogger("com.github.dockerjava", LogLevel.WARN))
+      .with(springTestLogger("org.testcontainers", LogLevel.WARN))
       .build();
     // @formatter:on
   }

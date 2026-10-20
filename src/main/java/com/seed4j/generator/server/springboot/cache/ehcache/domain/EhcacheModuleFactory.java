@@ -1,6 +1,8 @@
 package com.seed4j.generator.server.springboot.cache.ehcache.domain;
 
 import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
@@ -76,8 +78,8 @@ public class EhcacheModuleFactory {
         .addDependency(groupId("javax.cache"), artifactId("cache-api"))
         .addDependency(javaDependency().groupId(EHCACHE_GROUP).artifactId("ehcache").classifier("jakarta").build())
         .and()
-      .springMainLogger(EHCACHE_GROUP, LogLevel.WARN)
-      .springTestLogger(EHCACHE_GROUP, LogLevel.WARN);
+      .with(springMainLogger(EHCACHE_GROUP, LogLevel.WARN))
+      .with(springTestLogger(EHCACHE_GROUP, LogLevel.WARN));
     // @formatter:on
   }
 }

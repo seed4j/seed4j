@@ -1,6 +1,8 @@
 package com.seed4j.generator.server.springboot.database.jpa.domain;
 
 import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
@@ -84,11 +86,11 @@ public class JpaModuleFactory {
         .set(propertyKey("spring.jpa.properties.hibernate.query.fail_on_pagination_over_collection_fetch"), TRUE)
         .set(propertyKey("spring.jpa.properties.hibernate.query.in_clause_parameter_padding"), TRUE)
         .and()
-      .springMainLogger(ORG_HIBERNATE, LogLevel.WARN)
-      .springMainLogger("org.hibernate.ejb.HibernatePersistence", LogLevel.OFF)
-      .springTestLogger("org.hibernate.validator", LogLevel.WARN)
-      .springTestLogger(ORG_HIBERNATE, LogLevel.WARN)
-      .springTestLogger("org.hibernate.ejb.HibernatePersistence", LogLevel.OFF);
+      .with(springMainLogger(ORG_HIBERNATE, LogLevel.WARN))
+      .with(springMainLogger("org.hibernate.ejb.HibernatePersistence", LogLevel.OFF))
+      .with(springTestLogger("org.hibernate.validator", LogLevel.WARN))
+      .with(springTestLogger(ORG_HIBERNATE, LogLevel.WARN))
+      .with(springTestLogger("org.hibernate.ejb.HibernatePersistence", LogLevel.OFF));
     // @formatter:on
   }
 

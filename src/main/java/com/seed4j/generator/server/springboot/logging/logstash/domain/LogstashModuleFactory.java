@@ -1,6 +1,7 @@
 package com.seed4j.generator.server.springboot.logging.logstash.domain;
 
 import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
 import static com.seed4j.module.domain.Seed4JModule.*;
 
 import com.seed4j.module.domain.LogLevel;
@@ -45,8 +46,8 @@ public class LogstashModuleFactory {
         .set(propertyKey("application.logging.logstash.tcp.ring-buffer-size"), propertyValue(8192))
         .set(propertyKey("application.logging.logstash.tcp.shutdown_grace_period"), propertyValue("PT1M"))
         .and()
-      .springTestLogger("net.logstash.logback", LogLevel.ERROR)
-      .springTestLogger("org.jboss.logging", LogLevel.WARN)
+      .with(springTestLogger("net.logstash.logback", LogLevel.ERROR))
+      .with(springTestLogger("org.jboss.logging", LogLevel.WARN))
       .build();
     // @formatter:on
   }

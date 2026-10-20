@@ -2,6 +2,8 @@ package com.seed4j.generator.server.springboot.springcloud.consul.domain;
 
 import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN_BOOTSTRAP;
 import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST_BOOTSTRAP;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
@@ -98,8 +100,8 @@ public class ConsulModuleFactory {
       .dockerComposeFile()
         .append(dockerComposeFile("src/main/docker/consul.yml"))
         .and()
-      .springMainLogger("org.apache", LogLevel.ERROR)
-      .springTestLogger("org.apache", LogLevel.ERROR);
+      .with(springMainLogger("org.apache", LogLevel.ERROR))
+      .with(springTestLogger("org.apache", LogLevel.ERROR));
     // @formatter:on
 
     return builder.build();

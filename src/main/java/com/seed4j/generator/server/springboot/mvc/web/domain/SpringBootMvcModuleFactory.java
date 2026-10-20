@@ -2,6 +2,8 @@ package com.seed4j.generator.server.springboot.mvc.web.domain;
 
 import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -110,8 +112,8 @@ public class SpringBootMvcModuleFactory {
           .addTemplate("RestMandatoryParameter.java")
           .and()
       .and()
-      .springTestLogger(loggerName, logLevel)
-      .springMainLogger(loggerName, logLevel);
+      .with(springTestLogger(loggerName, logLevel))
+      .with(springMainLogger(loggerName, logLevel));
     // @formatter:on
   }
 

@@ -2,6 +2,8 @@ package com.seed4j.generator.server.springboot.database.redis.domain;
 
 import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -82,12 +84,12 @@ public class RedisModuleFactory {
       .dockerComposeFile()
         .append(dockerComposeFile("src/main/docker/redis.yml"))
         .and()
-      .springMainLogger(REFLECTIONS_GROUP, LogLevel.WARN)
-      .springMainLogger("org.springframework.data.redis", LogLevel.WARN)
-      .springTestLogger(REFLECTIONS_GROUP, LogLevel.WARN)
-      .springTestLogger("redis.clients.jedis", LogLevel.WARN)
-      .springTestLogger("com.github.dockerjava", LogLevel.WARN)
-      .springTestLogger("org.testcontainers", LogLevel.WARN)
+      .with(springMainLogger(REFLECTIONS_GROUP, LogLevel.WARN))
+      .with(springMainLogger("org.springframework.data.redis", LogLevel.WARN))
+      .with(springTestLogger(REFLECTIONS_GROUP, LogLevel.WARN))
+      .with(springTestLogger("redis.clients.jedis", LogLevel.WARN))
+      .with(springTestLogger("com.github.dockerjava", LogLevel.WARN))
+      .with(springTestLogger("org.testcontainers", LogLevel.WARN))
       .build();
     // @formatter:on
   }

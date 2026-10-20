@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.javatool.archunit.domain;
 
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.javaDependency;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
@@ -36,7 +37,7 @@ public class ArchUnitModuleFactory {
       .javaDependencies()
         .addDependency(archUnitDependency())
         .and()
-      .springTestLogger("com.tngtech.archunit", LogLevel.WARN)
+      .with(springTestLogger("com.tngtech.archunit", LogLevel.WARN))
       .build();
     // @formatter:on
   }

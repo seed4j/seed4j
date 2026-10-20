@@ -100,9 +100,9 @@ public class Seed4JExtensionModuleFactory {
           .addExecutable("stop.sh")
           .and()
         .and()
-      .apply(cucumberBuilder(properties))
-      .apply(dependenciesReadersBuilder(properties))
-      .apply(slugBuilder(properties))
+      .with(cucumberBuilder(properties))
+      .with(dependenciesReadersBuilder(properties))
+      .with(slugBuilder(properties))
       .build();
     // @formatter:on
   }

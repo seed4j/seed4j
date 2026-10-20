@@ -109,9 +109,9 @@ public class ReactModuleFactory {
           .addFile("ReactLogo.png")
           .and()
         .and()
-      .apply(patchEslintConfig(properties))
-      .apply(patchTsConfig(properties))
-      .apply(patchVitestConfig())
+      .with(patchEslintConfig(properties))
+      .with(patchTsConfig(properties))
+      .with(patchVitestConfig())
       .build();
     // @formatter:on
   }
@@ -154,10 +154,10 @@ public class ReactModuleFactory {
             )
           .and()
         .and()
-      .apply(eslintTypescriptRule("'@typescript-eslint/consistent-type-imports': 'error'", properties.indentation()))
-      .apply(eslintTypescriptRule("'@typescript-eslint/await-thenable': 'off'", properties.indentation()))
-      .apply(eslintTypescriptRule("'@typescript-eslint/no-explicit-any': 'off'", properties.indentation()))
-      .apply(eslintTypescriptRule("'react/react-in-jsx-scope': 'off'", properties.indentation()));
+      .with(eslintTypescriptRule("'@typescript-eslint/consistent-type-imports': 'error'", properties.indentation()))
+      .with(eslintTypescriptRule("'@typescript-eslint/await-thenable': 'off'", properties.indentation()))
+      .with(eslintTypescriptRule("'@typescript-eslint/no-explicit-any': 'off'", properties.indentation()))
+      .with(eslintTypescriptRule("'react/react-in-jsx-scope': 'off'", properties.indentation()));
     // @formatter:on
   }
 
@@ -172,9 +172,9 @@ public class ReactModuleFactory {
           .add(text(DEFAULT_TSCONFIG_PATH), pathsReplacement)
           .and()
       .and()
-      .apply(tsConfigCompilerOption("composite", false, properties.indentation()))
-      .apply(tsConfigCompilerOption("forceConsistentCasingInFileNames", true, properties.indentation()))
-      .apply(tsConfigCompilerOption("allowSyntheticDefaultImports", true, properties.indentation()));
+      .with(tsConfigCompilerOption("composite", false, properties.indentation()))
+      .with(tsConfigCompilerOption("forceConsistentCasingInFileNames", true, properties.indentation()))
+      .with(tsConfigCompilerOption("allowSyntheticDefaultImports", true, properties.indentation()));
     // @formatter:on
   }
 
@@ -188,8 +188,8 @@ public class ReactModuleFactory {
           .add(text("environment: 'node',"), "environment: 'jsdom',")
           .and()
       .and()
-      .apply(vitestCoverageExclusion("src/main/webapp/app/index.tsx"))
-      .apply(vitestCoverageExclusion("src/main/webapp/app/injections.ts"));
+      .with(vitestCoverageExclusion("src/main/webapp/app/index.tsx"))
+      .with(vitestCoverageExclusion("src/main/webapp/app/injections.ts"));
     // @formatter:on
   }
 }

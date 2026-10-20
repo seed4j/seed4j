@@ -69,10 +69,10 @@ public class DatasourceModuleFactory {
 
     // @formatter:off
     return moduleBuilder(properties)
-      .apply(dockerContainer(dockerImages, datasourceProperties))
-      .apply(declareDockerComposeService(datasourceProperties))
-      .apply(connectionPool(datasourceProperties))
-      .apply(testcontainers(dockerImages, properties, datasourceProperties))
+      .with(dockerContainer(dockerImages, datasourceProperties))
+      .with(declareDockerComposeService(datasourceProperties))
+      .with(connectionPool(datasourceProperties))
+      .with(testcontainers(dockerImages, properties, datasourceProperties))
       .applicationProperties(SPRING_MAIN)
         .set(propertyKey(SPRING_DATASOURCE_URL), propertyValue("jdbc:postgresql://localhost:5432/" + properties.projectBaseName().name()))
         .set(propertyKey(SPRING_DATASOURCE_USERNAME), propertyValue(properties.projectBaseName().name()))
@@ -105,10 +105,10 @@ public class DatasourceModuleFactory {
 
     // @formatter:off
     return moduleBuilder(properties)
-      .apply(dockerContainer(dockerImages, datasourceProperties))
-      .apply(declareDockerComposeService(datasourceProperties))
-      .apply(connectionPool( datasourceProperties))
-      .apply(testcontainers(dockerImages,  properties, datasourceProperties))
+      .with(dockerContainer(dockerImages, datasourceProperties))
+      .with(declareDockerComposeService(datasourceProperties))
+      .with(connectionPool( datasourceProperties))
+      .with(testcontainers(dockerImages,  properties, datasourceProperties))
       .applicationProperties(SPRING_MAIN)
         .set(propertyKey(SPRING_DATASOURCE_URL), propertyValue("jdbc:mariadb://localhost:3306/" + properties.projectBaseName().name()))
         .set(propertyKey(SPRING_DATASOURCE_USERNAME), propertyValue("root"))
@@ -130,10 +130,10 @@ public class DatasourceModuleFactory {
 
     // @formatter:off
     return moduleBuilder(properties)
-      .apply(dockerContainer(dockerImages, datasourceProperties))
-      .apply(declareDockerComposeService(datasourceProperties))
-      .apply(connectionPool( datasourceProperties))
-      .apply(testcontainers(dockerImages,  properties, datasourceProperties))
+      .with(dockerContainer(dockerImages, datasourceProperties))
+      .with(declareDockerComposeService(datasourceProperties))
+      .with(connectionPool( datasourceProperties))
+      .with(testcontainers(dockerImages,  properties, datasourceProperties))
       .applicationProperties(SPRING_MAIN)
         .set(propertyKey(SPRING_DATASOURCE_URL), propertyValue("jdbc:mysql://localhost:3306/" + properties.projectBaseName().name()))
         .set(propertyKey(SPRING_DATASOURCE_USERNAME), propertyValue("root"))
@@ -155,10 +155,10 @@ public class DatasourceModuleFactory {
 
     // @formatter:off
     return moduleBuilder(properties)
-      .apply(dockerContainer(dockerImages, datasourceProperties))
-      .apply(declareDockerComposeService(datasourceProperties))
-      .apply(connectionPool(datasourceProperties))
-      .apply(testcontainers(dockerImages,  properties, datasourceProperties))
+      .with(dockerContainer(dockerImages, datasourceProperties))
+      .with(declareDockerComposeService(datasourceProperties))
+      .with(connectionPool(datasourceProperties))
+      .with(testcontainers(dockerImages,  properties, datasourceProperties))
       .files()
         .add(SOURCE.append("docker").template("container-license-acceptance.txt"), to("src/test/resources/container-license-acceptance.txt"))
         .add(

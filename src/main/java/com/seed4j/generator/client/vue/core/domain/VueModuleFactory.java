@@ -86,9 +86,9 @@ public class VueModuleFactory {
         .add(APP_SOURCE.template("test/webapp/unit/shared/http/infrastructure/secondary/AxiosHttp.spec.ts.mustache"), TEST_DESTINATION.append("unit/shared/http/infrastructure/secondary/AxiosHttp.spec.ts"))
         .add(APP_SOURCE.template("test/webapp/unit/shared/http/infrastructure/secondary/AxiosStub.ts.mustache"), TEST_DESTINATION.append("unit/shared/http/infrastructure/secondary/AxiosStub.ts"))
         .and()
-      .apply(patchEslintConfig(properties))
-      .apply(patchTsConfig(properties))
-      .apply(patchVitestConfig())
+      .with(patchEslintConfig(properties))
+      .with(patchTsConfig(properties))
+      .with(patchVitestConfig())
       .build();
     // @formatter:on
   }
@@ -113,10 +113,10 @@ public class VueModuleFactory {
           .add(text("files: ['src/*/webapp/**/*.ts']"), "files: ['src/*/webapp/**/*.vue', 'src/*/webapp/**/*.ts']")
           .and()
         .and()
-      .apply(eslintTypescriptRule("'vue/html-self-closing': 'off'", properties.indentation()))
-      .apply(eslintTypescriptRule("'@typescript-eslint/no-explicit-any': 'off'", properties.indentation()))
-      .apply(eslintTypescriptRule("'@typescript-eslint/no-empty-object-type': 'off'", properties.indentation()))
-      .apply(eslintTypescriptRule("'@typescript-eslint/consistent-type-imports': 'error'", properties.indentation()));
+      .with(eslintTypescriptRule("'vue/html-self-closing': 'off'", properties.indentation()))
+      .with(eslintTypescriptRule("'@typescript-eslint/no-explicit-any': 'off'", properties.indentation()))
+      .with(eslintTypescriptRule("'@typescript-eslint/no-empty-object-type': 'off'", properties.indentation()))
+      .with(eslintTypescriptRule("'@typescript-eslint/consistent-type-imports': 'error'", properties.indentation()));
     // @formatter:on
   }
 
@@ -129,8 +129,8 @@ public class VueModuleFactory {
           .add(text("\"types\": ["), "\"types\": [\"vite/client\", ")
           .and()
         .and()
-      .apply(tsConfigCompilerOption("sourceMap", true, properties.indentation()))
-      .apply(tsConfigCompilerOption("allowJs", true, properties.indentation()));
+      .with(tsConfigCompilerOption("sourceMap", true, properties.indentation()))
+      .with(tsConfigCompilerOption("allowJs", true, properties.indentation()));
     // @formatter:on
   }
 
@@ -144,9 +144,9 @@ public class VueModuleFactory {
           .add(text("environment: 'node',"), "environment: 'jsdom',")
         .and()
       .and()
-      .apply(vitestCoverageExclusion("src/main/webapp/**/*.component.ts"))
-      .apply(vitestCoverageExclusion("src/main/webapp/app/injections.ts"))
-      .apply(vitestCoverageExclusion("src/main/webapp/app/main.ts"));
+      .with(vitestCoverageExclusion("src/main/webapp/**/*.component.ts"))
+      .with(vitestCoverageExclusion("src/main/webapp/app/injections.ts"))
+      .with(vitestCoverageExclusion("src/main/webapp/app/main.ts"));
     // @formatter:on
   }
 }

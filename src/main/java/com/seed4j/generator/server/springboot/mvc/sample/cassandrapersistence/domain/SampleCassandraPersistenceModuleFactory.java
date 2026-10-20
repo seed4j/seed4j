@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.mvc.sample.cassandrapersistence.domain;
 
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.path;

@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.docker.domain;
 
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
 import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;

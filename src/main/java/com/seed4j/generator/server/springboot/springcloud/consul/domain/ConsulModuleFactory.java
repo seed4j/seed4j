@@ -1,9 +1,9 @@
 package com.seed4j.generator.server.springboot.springcloud.consul.domain;
 
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN_BOOTSTRAP;
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST_BOOTSTRAP;
 import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
 import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN_BOOTSTRAP;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST_BOOTSTRAP;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;

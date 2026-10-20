@@ -97,6 +97,13 @@ class ReactJwtModuleFactoryTest {
       .containing(nodeDependency("axios"))
       .containing(nodeDependency("@heroui/react"))
       .containing(nodeDependency("sass"))
+      .containing(
+        """
+          "allowScripts": {
+            "@parcel/watcher": false
+          }
+        """
+      )
       .and()
       .hasPrefixedFiles(
         "src/main/webapp",

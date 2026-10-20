@@ -310,6 +310,50 @@ class FileSystemPackageJsonHandlerTest {
         """
       );
     }
+
+    @Test
+    void shouldAddDeniedInstallScriptToPackageJsonWithNpm() {
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        NPM,
+        packageJson(p -> p.denyInstallScripts(packageName("es5-ext"))),
+        emptyModuleContext()
+      );
+
+      assertPackageJsonContent(
+        folder,
+        """
+          "allowScripts": {
+            "es5-ext": false
+          }
+        """
+      );
+    }
+
+    @Test
+    void shouldDenyBuildInPnpmWorkspaceWithPnpm() {
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        PNPM,
+        packageJson(p -> p.allowInstallScripts(packageName("cypress")).denyInstallScripts(packageName("@parcel/watcher"))),
+        emptyModuleContext()
+      );
+
+      assertThat(contentNormalizingNewLines(folder.filePath(PNPM_WORKSPACE))).isEqualTo(
+        """
+        allowBuilds:
+          cypress: true
+          '@parcel/watcher': false
+        """
+      );
+      assertThat(packageJsonContent(folder)).doesNotContain("allowScripts");
+    }
   }
 
   @Nested

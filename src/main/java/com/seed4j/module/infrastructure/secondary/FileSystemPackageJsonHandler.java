@@ -81,7 +81,7 @@ class FileSystemPackageJsonHandler {
     content = removeDependencies(indentation, packageJson.dependenciesToRemove(), content);
     content = removeDevDependencies(indentation, packageJson.devDependenciesToRemove(), content);
     if (nodePackageManager == NodePackageManager.NPM) {
-      content = replaceAllowedInstallScripts(indentation, packageJson.allowedInstallScripts(), content);
+      content = replaceInstallScripts(indentation, packageJson, content);
     }
 
     content = replacePlaceholders(content, context);
@@ -90,20 +90,25 @@ class FileSystemPackageJsonHandler {
     write(file, content);
 
     if (nodePackageManager == NodePackageManager.PNPM) {
-      allowPnpmBuilds(indentation, projectFolder, packageJson.allowedInstallScripts());
+      configurePnpmBuilds(indentation, projectFolder, packageJson);
     }
   }
 
-  private void allowPnpmBuilds(Indentation indentation, Seed4JProjectFolder projectFolder, PackageNames allowedInstallScripts) {
+  private void configurePnpmBuilds(Indentation indentation, Seed4JProjectFolder projectFolder, Seed4JModulePackageJson packageJson) {
     YamlFileApplicationPropertiesHandler pnpmWorkspace = new YamlFileApplicationPropertiesHandler(
       projectFolder.filePath("pnpm-workspace.yaml"),
       indentation
     );
 
-    allowedInstallScripts
+    setPnpmBuilds(pnpmWorkspace, packageJson.allowedInstallScripts(), true);
+    setPnpmBuilds(pnpmWorkspace, packageJson.deniedInstallScripts(), false);
+  }
+
+  private static void setPnpmBuilds(YamlFileApplicationPropertiesHandler pnpmWorkspace, PackageNames packageNames, boolean allowed) {
+    packageNames
       .stream()
       .forEach(packageName ->
-        pnpmWorkspace.setValue(new PropertyKey("allowBuilds." + packageName.get()), PropertyValue.of(new Boolean[] { true }))
+        pnpmWorkspace.setValue(new PropertyKey("allowBuilds." + packageName.get()), PropertyValue.of(new Boolean[] { allowed }))
       );
   }
 
@@ -172,19 +177,24 @@ class FileSystemPackageJsonHandler {
       .apply();
   }
 
-  private String replaceAllowedInstallScripts(Indentation indentation, PackageNames allowedInstallScripts, String content) {
+  private String replaceInstallScripts(Indentation indentation, Seed4JModulePackageJson packageJson, String content) {
     return JsonAction.replace()
       .blockName("allowScripts")
       .jsonContent(content)
       .indentation(indentation)
-      .entries(allowedInstallScriptsEntries(allowedInstallScripts))
+      .entries(
+        Seed4JCollections.concat(
+          installScriptsEntries(packageJson.allowedInstallScripts(), true),
+          installScriptsEntries(packageJson.deniedInstallScripts(), false)
+        )
+      )
       .apply();
   }
 
-  private List<JsonEntry> allowedInstallScriptsEntries(PackageNames allowedInstallScripts) {
-    return allowedInstallScripts
+  private List<JsonEntry> installScriptsEntries(PackageNames packageNames, boolean allowed) {
+    return packageNames
       .stream()
-      .map(packageName -> JsonEntry.raw(packageName.get(), "true"))
+      .map(packageName -> JsonEntry.raw(packageName.get(), String.valueOf(allowed)))
       .toList();
   }
 

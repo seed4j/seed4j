@@ -70,6 +70,8 @@ public class TikuiModuleFactory {
         .addDevDependency(packageName("stylelint-config-standard-scss"), COMMON)
         .addDevDependency(packageName("stylelint-order"), COMMON)
         .addDevDependency(packageName("tikuidoc-tikui"), COMMON)
+        .denyInstallScripts(packageName("@parcel/watcher"))
+        .denyInstallScripts(packageName("es5-ext"))
         .addScript(scriptKey("build:tikui"), scriptCommand("tikui-core build"))
         .addScript(scriptKey("dev:tikui"), scriptCommand("tikui-core serve"))
         .and()

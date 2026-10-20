@@ -1,6 +1,7 @@
 package com.seed4j.generator.client.tikui.domain;
 
 import static com.seed4j.module.domain.Seed4JModulesFixture.propertiesBuilder;
+import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.ModuleFile;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.Seed4JModuleAsserter;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
@@ -57,6 +58,30 @@ class TikuiModuleFactoryTest {
       return """
         - '@prettier/plugin-pug'
       """;
+    }
+  }
+
+  @Nested
+  class InstallScripts {
+
+    @Test
+    void shouldDenyBuildsInPnpmWorkspaceWithPnpm() {
+      Seed4JModuleProperties properties = propertiesBuilder(TestFileUtils.tmpDirForTest()).nodePackageManager(PNPM).build();
+
+      Seed4JModule module = factory.buildModule(properties);
+
+      assertThatModuleWithFiles(module, packageJsonFile())
+        .hasFile("pnpm-workspace.yaml")
+        .containing(
+          """
+          allowBuilds:
+            '@parcel/watcher': false
+            es5-ext: false
+          """
+        )
+        .and()
+        .hasFile("package.json")
+        .notContaining("allowScripts");
     }
   }
 
@@ -170,6 +195,14 @@ class TikuiModuleFactoryTest {
       .containing(nodeDependency("tikuidoc-tikui"))
       .containing(nodeScript("build:tikui", "tikui-core build"))
       .containing(nodeScript("dev:tikui", "tikui-core serve"))
+      .containing(
+        """
+          "allowScripts": {
+            "@parcel/watcher": false,
+            "es5-ext": false
+          }
+        """
+      )
       .and()
       .hasFiles("tikuiconfig.json", ".stylelintrc.json")
       .hasFile(".gitignore")

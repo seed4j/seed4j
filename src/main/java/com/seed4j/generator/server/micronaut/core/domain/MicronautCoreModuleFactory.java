@@ -6,6 +6,7 @@ import static com.seed4j.module.domain.Seed4JModule.groupId;
 import static com.seed4j.module.domain.Seed4JModule.javaAnnotationProcessor;
 import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
 import static com.seed4j.module.domain.Seed4JModule.propertyValue;
 import static com.seed4j.module.domain.Seed4JModule.to;
@@ -21,6 +22,7 @@ import com.seed4j.module.domain.javadependency.JavaAnnotationProcessor;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
+import com.seed4j.module.domain.mavenplugin.MavenBuildPhase;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
@@ -43,6 +45,7 @@ public class MicronautCoreModuleFactory {
     String baseName = properties.projectBaseName().capitalized();
     String baseNameUncapitalized = properties.projectBaseName().uncapitalized();
     String packagePath = properties.packagePath();
+    String fullyQualifiedMainClass = properties.basePackage().get() + "." + baseName + "App";
 
     return moduleBuilder(properties)
       .context()
@@ -64,6 +67,7 @@ public class MicronautCoreModuleFactory {
       .and()
       .mavenPlugins()
       .plugin(micronautMavenPlugin())
+      .plugin(mavenShadePlugin(fullyQualifiedMainClass))
       .and()
       .files()
       .add(
@@ -76,12 +80,46 @@ public class MicronautCoreModuleFactory {
       .and()
       .springMainProperties()
       .set(propertyKey("micronaut.application.name"), propertyValue(baseNameUncapitalized))
+      .set(propertyKey("micronaut.server.port"), propertyValue(properties.serverPort().get()))
       .and()
       .build();
   }
 
   private MavenPlugin micronautMavenPlugin() {
-    return mavenPlugin().groupId("io.micronaut.maven").artifactId("micronaut-maven-plugin").versionSlug(MICRONAUT_VERSION_SLUG).build();
+    return mavenPlugin().groupId("io.micronaut.maven").artifactId("micronaut-maven-plugin").versionSlug("micronaut-maven-plugin").build();
+  }
+
+  private MavenPlugin mavenShadePlugin(String fullyQualifiedMainClass) {
+    return mavenPlugin()
+      .groupId("org.apache.maven.plugins")
+      .artifactId("maven-shade-plugin")
+      .versionSlug("maven-shade-plugin")
+      .addExecution(pluginExecution().goals("shade").phase(MavenBuildPhase.PACKAGE))
+      .configuration(
+        """
+        <createDependencyReducedPom>false</createDependencyReducedPom>
+        <shadedArtifactAttached>true</shadedArtifactAttached>
+        <shadedClassifierName>exec</shadedClassifierName>
+        <transformers>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+            <mainClass>%s</mainClass>
+          </transformer>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+        </transformers>
+        <filters>
+          <filter>
+            <artifact>*:*</artifact>
+            <excludes>
+              <exclude>META-INF/*.SF</exclude>
+              <exclude>META-INF/*.DSA</exclude>
+              <exclude>META-INF/*.RSA</exclude>
+              <exclude>module-info.class</exclude>
+            </excludes>
+          </filter>
+        </filters>
+        """.formatted(fullyQualifiedMainClass)
+      )
+      .build();
   }
 
   private JavaAnnotationProcessor micronautInjectJava() {
@@ -90,8 +128,8 @@ public class MicronautCoreModuleFactory {
 
   private JavaDependency micronautBom() {
     return JavaDependency.builder()
-      .groupId(MICRONAUT_GROUP)
-      .artifactId("micronaut-bom")
+      .groupId("io.micronaut.platform")
+      .artifactId("micronaut-platform")
       .versionSlug(MICRONAUT_VERSION_SLUG)
       .type(JavaDependencyType.POM)
       .scope(JavaDependencyScope.IMPORT)

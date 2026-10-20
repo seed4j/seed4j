@@ -32,8 +32,8 @@ class MicronautCoreModuleFactoryTest {
       .containing(
         """
               <dependency>
-                <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-bom</artifactId>
+                <groupId>io.micronaut.platform</groupId>
+                <artifactId>micronaut-platform</artifactId>
                 <version>${micronaut.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -91,7 +91,18 @@ class MicronautCoreModuleFactoryTest {
       )
       .containing("<artifactId>micronaut-http-server-netty</artifactId>")
       .containing("<artifactId>micronaut-http-client</artifactId>")
-      .containing("<artifactId>micronaut-maven-plugin</artifactId>")
+      .containing(
+        """
+              <plugin>
+                <groupId>io.micronaut.maven</groupId>
+                <artifactId>micronaut-maven-plugin</artifactId>
+                <version>${micronaut-maven-plugin.version}</version>
+              </plugin>
+        """
+      )
+      .containing("<artifactId>maven-shade-plugin</artifactId>")
+      .containing("<shadedClassifierName>exec</shadedClassifierName>")
+      .containing("<mainClass>com.seed4j.growth.MyappApp</mainClass>")
       .containing(
         """
                   <annotationProcessorPaths>
@@ -116,6 +127,8 @@ class MicronautCoreModuleFactoryTest {
         micronaut:
           application:
             name: myapp
+          server:
+            port: 8080
         """
       );
   }

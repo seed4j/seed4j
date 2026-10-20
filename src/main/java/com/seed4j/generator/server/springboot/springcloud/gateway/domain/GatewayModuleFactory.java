@@ -1,7 +1,7 @@
 package com.seed4j.generator.server.springboot.springcloud.gateway.domain;
 
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN_BOOTSTRAP;
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST_BOOTSTRAP;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN_BOOTSTRAP;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST_BOOTSTRAP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.SPRING_CLOUD_GROUP;
 import static com.seed4j.generator.server.springboot.springcloud.common.domain.SpringCloudModuleDependencies.springCloudDependenciesManagement;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;

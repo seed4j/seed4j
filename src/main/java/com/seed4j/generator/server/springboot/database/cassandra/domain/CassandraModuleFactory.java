@@ -1,7 +1,9 @@
 package com.seed4j.generator.server.springboot.database.cassandra.domain;
 
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.comment;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
@@ -90,9 +92,9 @@ public class CassandraModuleFactory {
       .dockerComposeFile()
         .append(dockerComposeFile("src/main/docker/cassandra.yml"))
         .and()
-      .springMainLogger("com.datastax", LogLevel.WARN)
-      .springTestLogger("com.datastax", LogLevel.WARN)
-      .springTestLogger("org.testcontainers", LogLevel.WARN)
+      .with(springMainLogger("com.datastax", LogLevel.WARN))
+      .with(springTestLogger("com.datastax", LogLevel.WARN))
+      .with(springTestLogger("org.testcontainers", LogLevel.WARN))
       .build();
     // @formatter:on
   }

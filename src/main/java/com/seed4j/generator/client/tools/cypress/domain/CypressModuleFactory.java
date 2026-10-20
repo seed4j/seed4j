@@ -45,7 +45,7 @@ public class CypressModuleFactory {
       .context()
         .put("cypressTestDirectory", "component")
         .and()
-      .apply(patchEslintPluginCypressComponent(properties))
+      .with(patchEslintPluginCypressComponent(properties))
       .build();
     // @formatter:on
   }
@@ -62,7 +62,7 @@ public class CypressModuleFactory {
       .context()
         .put("cypressTestDirectory", "e2e")
         .and()
-      .apply(patchEslintPluginCypressE2E(properties))
+      .with(patchEslintPluginCypressE2E(properties))
       .build();
     // @formatter:on
   }

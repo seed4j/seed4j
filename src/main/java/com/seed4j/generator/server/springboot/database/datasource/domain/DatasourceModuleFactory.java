@@ -1,7 +1,9 @@
 package com.seed4j.generator.server.springboot.database.datasource.domain;
 
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -69,10 +71,10 @@ public class DatasourceModuleFactory {
 
     // @formatter:off
     return moduleBuilder(properties)
-      .apply(dockerContainer(dockerImages, datasourceProperties))
-      .apply(declareDockerComposeService(datasourceProperties))
-      .apply(connectionPool(datasourceProperties))
-      .apply(testcontainers(dockerImages, properties, datasourceProperties))
+      .with(dockerContainer(dockerImages, datasourceProperties))
+      .with(declareDockerComposeService(datasourceProperties))
+      .with(connectionPool(datasourceProperties))
+      .with(testcontainers(dockerImages, properties, datasourceProperties))
       .applicationProperties(SPRING_MAIN)
         .set(propertyKey(SPRING_DATASOURCE_URL), propertyValue("jdbc:postgresql://localhost:5432/" + properties.projectBaseName().name()))
         .set(propertyKey(SPRING_DATASOURCE_USERNAME), propertyValue(properties.projectBaseName().name()))
@@ -85,9 +87,9 @@ public class DatasourceModuleFactory {
           )
         )
         .and()
-      .springMainLogger(ORG_POSTGRESQL, LogLevel.WARN)
-      .springTestLogger(ORG_POSTGRESQL, LogLevel.WARN)
-      .springTestLogger("org.jboss.logging", LogLevel.WARN)
+      .with(springMainLogger(ORG_POSTGRESQL, LogLevel.WARN))
+      .with(springTestLogger(ORG_POSTGRESQL, LogLevel.WARN))
+      .with(springTestLogger("org.jboss.logging", LogLevel.WARN))
       .build();
     // @formatter:on
   }
@@ -105,10 +107,10 @@ public class DatasourceModuleFactory {
 
     // @formatter:off
     return moduleBuilder(properties)
-      .apply(dockerContainer(dockerImages, datasourceProperties))
-      .apply(declareDockerComposeService(datasourceProperties))
-      .apply(connectionPool( datasourceProperties))
-      .apply(testcontainers(dockerImages,  properties, datasourceProperties))
+      .with(dockerContainer(dockerImages, datasourceProperties))
+      .with(declareDockerComposeService(datasourceProperties))
+      .with(connectionPool( datasourceProperties))
+      .with(testcontainers(dockerImages,  properties, datasourceProperties))
       .applicationProperties(SPRING_MAIN)
         .set(propertyKey(SPRING_DATASOURCE_URL), propertyValue("jdbc:mariadb://localhost:3306/" + properties.projectBaseName().name()))
         .set(propertyKey(SPRING_DATASOURCE_USERNAME), propertyValue("root"))
@@ -130,10 +132,10 @@ public class DatasourceModuleFactory {
 
     // @formatter:off
     return moduleBuilder(properties)
-      .apply(dockerContainer(dockerImages, datasourceProperties))
-      .apply(declareDockerComposeService(datasourceProperties))
-      .apply(connectionPool( datasourceProperties))
-      .apply(testcontainers(dockerImages,  properties, datasourceProperties))
+      .with(dockerContainer(dockerImages, datasourceProperties))
+      .with(declareDockerComposeService(datasourceProperties))
+      .with(connectionPool( datasourceProperties))
+      .with(testcontainers(dockerImages,  properties, datasourceProperties))
       .applicationProperties(SPRING_MAIN)
         .set(propertyKey(SPRING_DATASOURCE_URL), propertyValue("jdbc:mysql://localhost:3306/" + properties.projectBaseName().name()))
         .set(propertyKey(SPRING_DATASOURCE_USERNAME), propertyValue("root"))
@@ -155,10 +157,10 @@ public class DatasourceModuleFactory {
 
     // @formatter:off
     return moduleBuilder(properties)
-      .apply(dockerContainer(dockerImages, datasourceProperties))
-      .apply(declareDockerComposeService(datasourceProperties))
-      .apply(connectionPool(datasourceProperties))
-      .apply(testcontainers(dockerImages,  properties, datasourceProperties))
+      .with(dockerContainer(dockerImages, datasourceProperties))
+      .with(declareDockerComposeService(datasourceProperties))
+      .with(connectionPool(datasourceProperties))
+      .with(testcontainers(dockerImages,  properties, datasourceProperties))
       .files()
         .add(SOURCE.append("docker").template("container-license-acceptance.txt"), to("src/test/resources/container-license-acceptance.txt"))
         .add(
@@ -193,8 +195,8 @@ public class DatasourceModuleFactory {
           .add(lineBeforeText("public @interface"), "@ExtendWith(MsSQLTestContainerExtension.class)")
           .and()
         .and()
-      .springMainLogger("com.microsoft.sqlserver", LogLevel.WARN)
-      .springMainLogger("org.reflections", LogLevel.WARN)
+      .with(springMainLogger("com.microsoft.sqlserver", LogLevel.WARN))
+      .with(springMainLogger("org.reflections", LogLevel.WARN))
       .build();
     // @formatter:on
   }
@@ -244,8 +246,8 @@ public class DatasourceModuleFactory {
           .set(propertyKey(SPRING_DATASOURCE_PASSWORD), propertyValue(""))
           .set(propertyKey(SPRING_DATASOURCE_DRIVER_CLASS_NAME), propertyValue("org.testcontainers.jdbc.ContainerDatabaseDriver"))
           .and()
-        .springTestLogger("com.github.dockerjava", LogLevel.WARN)
-        .springTestLogger("org.testcontainers", LogLevel.WARN);
+        .with(springTestLogger("com.github.dockerjava", LogLevel.WARN))
+        .with(springTestLogger("org.testcontainers", LogLevel.WARN));
   }
 
   public static Consumer<Seed4JModule.Seed4JModuleBuilder> connectionPool(DatasourceProperties datasourceProperties) {

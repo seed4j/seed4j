@@ -1,8 +1,8 @@
 package com.seed4j.generator.server.springboot.core.domain;
 
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_LOCAL;
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_LOCAL;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dependencyId;
 import static com.seed4j.module.domain.Seed4JModule.from;

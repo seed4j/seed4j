@@ -1,7 +1,9 @@
 package com.seed4j.generator.server.springboot.dbmigration.liquibase.domain;
 
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
@@ -51,12 +53,12 @@ public class LiquibaseModuleFactory {
         .add(SOURCE.file("resources/master.xml"), to("src/main/resources/config/liquibase/master.xml"))
         .add(SOURCE.file("resources/0000000000_example.xml"), to("src/main/resources/config/liquibase/changelog/0000000000_example.xml"))
         .and()
-      .springMainLogger(LIQUIBASE, LogLevel.WARN)
-      .springMainLogger("LiquibaseSchemaResolver", LogLevel.INFO)
-      .springMainLogger("com.zaxxer.hikari", LogLevel.WARN)
-      .springTestLogger(LIQUIBASE, LogLevel.WARN)
-      .springTestLogger("LiquibaseSchemaResolver", LogLevel.INFO)
-      .springTestLogger("com.zaxxer.hikari", LogLevel.WARN)
+      .with(springMainLogger(LIQUIBASE, LogLevel.WARN))
+      .with(springMainLogger("LiquibaseSchemaResolver", LogLevel.INFO))
+      .with(springMainLogger("com.zaxxer.hikari", LogLevel.WARN))
+      .with(springTestLogger(LIQUIBASE, LogLevel.WARN))
+      .with(springTestLogger("LiquibaseSchemaResolver", LogLevel.INFO))
+      .with(springTestLogger("com.zaxxer.hikari", LogLevel.WARN))
       .build();
     // @formatter:on
   }

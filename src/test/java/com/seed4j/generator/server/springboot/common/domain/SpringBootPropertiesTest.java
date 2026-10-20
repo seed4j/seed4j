@@ -1,4 +1,4 @@
-package com.seed4j.generator.server.springboot.common;
+package com.seed4j.generator.server.springboot.common.domain;
 
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;

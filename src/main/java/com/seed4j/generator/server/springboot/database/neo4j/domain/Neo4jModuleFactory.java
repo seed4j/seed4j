@@ -1,7 +1,9 @@
 package com.seed4j.generator.server.springboot.database.neo4j.domain;
 
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_TEST;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
@@ -74,10 +76,10 @@ public class Neo4jModuleFactory {
       .dockerComposeFile()
         .append(dockerComposeFile("src/main/docker/neo4j.yml"))
         .and()
-      .springMainLogger("org.neo4j.driver", LogLevel.WARN)
-      .springTestLogger("org.neo4j.driver", LogLevel.WARN)
-      .springTestLogger("com.github.dockerjava", LogLevel.WARN)
-      .springTestLogger("org.testcontainers", LogLevel.WARN)
+      .with(springMainLogger("org.neo4j.driver", LogLevel.WARN))
+      .with(springTestLogger("org.neo4j.driver", LogLevel.WARN))
+      .with(springTestLogger("com.github.dockerjava", LogLevel.WARN))
+      .with(springTestLogger("org.testcontainers", LogLevel.WARN))
       .build();
     // @formatter:on
   }

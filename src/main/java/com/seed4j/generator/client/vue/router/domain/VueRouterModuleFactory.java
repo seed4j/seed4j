@@ -56,7 +56,7 @@ public class VueRouterModuleFactory {
             .add(text("import HomepageVue from './home/infrastructure/primary/HomepageVue.vue'"), EXPORT_DEFAULT_APP_VUE)
             .and()
           .and()
-      .apply(patchVitestConfig())
+      .with(patchVitestConfig())
       .build();
     // @formatter:on
   }
@@ -64,7 +64,7 @@ public class VueRouterModuleFactory {
   private Consumer<Seed4JModuleBuilder> patchVitestConfig() {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
-      .apply(vitestCoverageExclusion("src/main/webapp/app/router.ts"));
+      .with(vitestCoverageExclusion("src/main/webapp/app/router.ts"));
     // @formatter:on
   }
 }

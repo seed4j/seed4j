@@ -1,6 +1,6 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdocauth0.domain;
 
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
 import static com.seed4j.module.domain.Seed4JModule.propertyValue;

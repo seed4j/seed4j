@@ -1,4 +1,4 @@
-package com.seed4j.generator.server.springboot.common;
+package com.seed4j.generator.server.springboot.common.domain;
 
 import com.seed4j.module.domain.javaproperties.ApplicationPropertiesFile;
 

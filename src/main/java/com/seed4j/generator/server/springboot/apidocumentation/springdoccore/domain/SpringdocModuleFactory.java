@@ -1,6 +1,8 @@
 package com.seed4j.generator.server.springboot.apidocumentation.springdoccore.domain;
 
-import static com.seed4j.generator.server.springboot.common.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.localEnvironment;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
@@ -63,8 +65,8 @@ public class SpringdocModuleFactory {
         .set(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), TRUE)
         .set(propertyKey("springdoc.enable-native-support"), TRUE)
         .and()
-      .springMainLogger("io.swagger.v3.core.converter.ModelConverterContextImpl", LogLevel.WARN)
-      .springTestLogger("io.swagger.v3.core.converter.ModelConverterContextImpl", LogLevel.WARN)
+      .with(springMainLogger("io.swagger.v3.core.converter.ModelConverterContextImpl", LogLevel.WARN))
+      .with(springTestLogger("io.swagger.v3.core.converter.ModelConverterContextImpl", LogLevel.WARN))
       .build();
     // @formatter:on
   }

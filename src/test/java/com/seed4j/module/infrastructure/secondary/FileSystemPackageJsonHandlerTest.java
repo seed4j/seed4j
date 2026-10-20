@@ -1,10 +1,13 @@
 package com.seed4j.module.infrastructure.secondary;
 
+import static com.seed4j.TestFileUtils.contentNormalizingNewLines;
 import static com.seed4j.module.domain.Seed4JModule.packageName;
 import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
 import static com.seed4j.module.domain.Seed4JModule.scriptKey;
 import static com.seed4j.module.domain.Seed4JModulesFixture.emptyModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModulesFixture.emptyModuleContext;
+import static com.seed4j.module.domain.nodejs.NodePackageManager.NPM;
+import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.ANGULAR;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.packagejson.NodeModuleFormat.COMMONJS;
@@ -39,6 +42,7 @@ import org.junit.jupiter.api.Test;
 class FileSystemPackageJsonHandlerTest {
 
   private static final String PACKAGE_JSON = "package.json";
+  private static final String PNPM_WORKSPACE = "pnpm-workspace.yaml";
 
   private final NodeVersions nodeVersions = mock(NodeVersions.class);
 
@@ -47,7 +51,7 @@ class FileSystemPackageJsonHandlerTest {
   @Test
   void shouldHandleEmptyPackageJsonCommandsOnProjectWithoutPackageJson() {
     assertThatCode(() ->
-      packageJson.handle(Indentation.DEFAULT, emptyFolder(), packageJson(), emptyModuleContext())
+      packageJson.handle(Indentation.DEFAULT, emptyFolder(), NPM, packageJson(), emptyModuleContext())
     ).doesNotThrowAnyException();
   }
 
@@ -57,6 +61,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         emptyFolder(),
+        NPM,
         packageJson(p -> p.addScript(scriptKey("key"), scriptCommand("value"))),
         emptyModuleContext()
       )
@@ -76,6 +81,7 @@ class FileSystemPackageJsonHandlerTest {
     packageJson.handle(
       Indentation.DEFAULT,
       folder,
+      NPM,
       packageJson(p -> p.addDevDependency(packageName("@playwright/test"), COMMON)),
       emptyModuleContext()
     );
@@ -90,6 +96,7 @@ class FileSystemPackageJsonHandlerTest {
     packageJson.handle(
       Indentation.DEFAULT,
       folder,
+      NPM,
       packageJson(p -> p.addScript(scriptKey("@prettier/plugin-xml"), scriptCommand("test"))),
       emptyModuleContext()
     );
@@ -121,7 +128,7 @@ class FileSystemPackageJsonHandlerTest {
     void shouldAddTypeToPackageJsonWithoutType() {
       Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
 
-      packageJson.handle(Indentation.DEFAULT, folder, packageJson(p -> p.type(MODULE)), emptyModuleContext());
+      packageJson.handle(Indentation.DEFAULT, folder, NPM, packageJson(p -> p.type(MODULE)), emptyModuleContext());
 
       assertPackageJsonContent(
         folder,
@@ -136,13 +143,170 @@ class FileSystemPackageJsonHandlerTest {
     void shouldReplaceExistingType() {
       Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
 
-      packageJson.handle(Indentation.DEFAULT, folder, packageJson(p -> p.type(COMMONJS)), emptyModuleContext());
+      packageJson.handle(Indentation.DEFAULT, folder, NPM, packageJson(p -> p.type(COMMONJS)), emptyModuleContext());
 
       assertPackageJsonContent(
         folder,
         """
           "type": "commonjs"
         }
+        """
+      );
+    }
+  }
+
+  @Nested
+  class AllowScripts {
+
+    @Test
+    void shouldAddAllowedInstallScriptToPackageJsonWithoutAllowScriptsSection() {
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        NPM,
+        packageJson(p -> p.allowInstallScripts(packageName("cypress"))),
+        emptyModuleContext()
+      );
+
+      assertPackageJsonContent(
+        folder,
+        """
+          "allowScripts": {
+            "cypress": true
+          }
+        }
+        """
+      );
+    }
+
+    @Test
+    void shouldAddAllowedInstallScriptToPackageJsonWithAllowScriptsSection() {
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        NPM,
+        packageJson(p -> p.allowInstallScripts(packageName("esbuild"))),
+        emptyModuleContext()
+      );
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        NPM,
+        packageJson(p -> p.allowInstallScripts(packageName("cypress"))),
+        emptyModuleContext()
+      );
+
+      assertPackageJsonContent(
+        folder,
+        """
+          "allowScripts": {
+            "cypress": true,
+            "esbuild": true
+          }
+        """
+      );
+    }
+
+    @Test
+    void shouldNotDuplicateExistingAllowedInstallScript() {
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/node/package.json");
+
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        NPM,
+        packageJson(p -> p.allowInstallScripts(packageName("cypress"))),
+        emptyModuleContext()
+      );
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        NPM,
+        packageJson(p -> p.allowInstallScripts(packageName("cypress"))),
+        emptyModuleContext()
+      );
+
+      assertPackageJsonContent(
+        folder,
+        """
+          "allowScripts": {
+            "cypress": true
+          }
+        """
+      );
+    }
+
+    @Test
+    void shouldNotCreatePnpmWorkspaceWithNpm() {
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        NPM,
+        packageJson(p -> p.allowInstallScripts(packageName("cypress"))),
+        emptyModuleContext()
+      );
+
+      assertThat(folder.filePath(PNPM_WORKSPACE)).doesNotExist();
+    }
+
+    @Test
+    void shouldAllowBuildInPnpmWorkspaceWithPnpm() {
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        PNPM,
+        packageJson(p -> p.allowInstallScripts(packageName("cypress"))),
+        emptyModuleContext()
+      );
+
+      assertThat(contentNormalizingNewLines(folder.filePath(PNPM_WORKSPACE))).isEqualTo(
+        """
+        allowBuilds:
+          cypress: true
+        """
+      );
+      assertThat(packageJsonContent(folder)).doesNotContain("allowScripts");
+    }
+
+    @Test
+    void shouldAddAllowedBuildToExistingPnpmWorkspaceWithoutDuplicate() {
+      Seed4JProjectFolder folder = projectWithPackageJson("src/test/resources/projects/empty-node/package.json");
+
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        PNPM,
+        packageJson(p -> p.allowInstallScripts(packageName("esbuild"))),
+        emptyModuleContext()
+      );
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        PNPM,
+        packageJson(p -> p.allowInstallScripts(packageName("cypress"))),
+        emptyModuleContext()
+      );
+      packageJson.handle(
+        Indentation.DEFAULT,
+        folder,
+        PNPM,
+        packageJson(p -> p.allowInstallScripts(packageName("cypress"))),
+        emptyModuleContext()
+      );
+
+      assertThat(contentNormalizingNewLines(folder.filePath(PNPM_WORKSPACE))).isEqualTo(
+        """
+        allowBuilds:
+          esbuild: true
+          cypress: true
         """
       );
     }
@@ -158,6 +322,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addScript(scriptKey("key"), scriptCommand("value"))),
         emptyModuleContext()
       );
@@ -180,6 +345,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(
           p -> p.addScript(scriptKey("key"), scriptCommand("value")),
           p -> p.addScript(scriptKey("key2"), scriptCommand("value2"))
@@ -205,6 +371,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addScript(scriptKey("key"), scriptCommand("value"))),
         emptyModuleContext()
       );
@@ -226,6 +393,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addScript(scriptKey("build"), scriptCommand("test"))),
         emptyModuleContext()
       );
@@ -249,6 +417,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addScript(scriptKey("build"), scriptCommand("test"))),
         emptyModuleContext()
       );
@@ -276,6 +445,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addDevDependency(packageName("@prettier/plugin-xmll"), COMMON)),
         emptyModuleContext()
       );
@@ -300,6 +470,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addDevDependency(packageName("@prettier/plugin-xmll"), COMMON)),
         emptyModuleContext()
       );
@@ -323,6 +494,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addDevDependency(packageName("@angular/animations"), ANGULAR, packageName("@angular/core"))),
         emptyModuleContext()
       );
@@ -345,6 +517,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addDevDependency(packageName("@prettier/plugin-xml"), COMMON)),
         emptyModuleContext()
       );
@@ -368,6 +541,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.removeDevDependency(packageName("@prettier/plugin-xml"))),
         emptyModuleContext()
       );
@@ -398,6 +572,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addDependency(packageName("@fortawesome/fontawesome-svg-core"), COMMON)),
         emptyModuleContext()
       );
@@ -422,6 +597,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addDependency(packageName("@fortawesome/fontawesome-svg-coree"), COMMON)),
         emptyModuleContext()
       );
@@ -445,6 +621,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addDependency(packageName("@angular/animations"), ANGULAR, packageName("@angular/core"))),
         emptyModuleContext()
       );
@@ -467,6 +644,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.addDependency(packageName("@fortawesome/fontawesome-svg-core"), COMMON)),
         emptyModuleContext()
       );
@@ -490,6 +668,7 @@ class FileSystemPackageJsonHandlerTest {
       packageJson.handle(
         Indentation.DEFAULT,
         folder,
+        NPM,
         packageJson(p -> p.removeDependency(packageName("@fortawesome/fontawesome-svg-core"))),
         emptyModuleContext()
       );

@@ -73,6 +73,7 @@ public class CypressModuleFactory {
       .packageJson()
         .addDevDependency(packageName("cypress"), COMMON)
         .addDevDependency(packageName("eslint-plugin-cypress"), COMMON)
+        .allowInstallScripts(packageName("cypress"))
         .and()
       .files()
         .batch(SOURCE, destinationFolder)

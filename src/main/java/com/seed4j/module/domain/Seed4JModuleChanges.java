@@ -8,6 +8,7 @@ import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javaproperties.ApplicationProperties;
 import com.seed4j.module.domain.javaproperties.ApplicationPropertyComments;
 import com.seed4j.module.domain.javaproperties.SpringFactories;
+import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.packagejson.Seed4JModulePackageJson;
 import com.seed4j.module.domain.postaction.Seed4JModulePostActions;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
@@ -30,6 +31,7 @@ public final class Seed4JModuleChanges {
   private final ContentReplacers replacers;
   private final Seed4JStartupCommands startupCommands;
   private final JavaBuildCommands javaBuildCommands;
+  private final NodePackageManager nodePackageManager;
   private final Seed4JModulePackageJson packageJson;
   private final Seed4JModulePreActions preActions;
   private final Seed4JModulePostActions postActions;
@@ -50,6 +52,7 @@ public final class Seed4JModuleChanges {
     Assert.notNull("filesToDelete", builder.filesToDelete);
     Assert.notNull("replacers", builder.replacers);
     Assert.notNull("javaBuildCommands", builder.javaBuildCommands);
+    Assert.notNull("nodePackageManager", builder.nodePackageManager);
     Assert.notNull("preActions", builder.preActions);
     Assert.notNull("postActions", builder.postActions);
     Assert.notNull("springFactories", builder.springFactories);
@@ -71,6 +74,7 @@ public final class Seed4JModuleChanges {
     replacers = builder.replacers;
     startupCommands = builder.startupCommands;
     javaBuildCommands = builder.javaBuildCommands;
+    nodePackageManager = builder.nodePackageManager;
     packageJson = builder.packageJson;
     preActions = builder.preActions;
     postActions = builder.postActions;
@@ -121,6 +125,10 @@ public final class Seed4JModuleChanges {
 
   public JavaBuildCommands javaBuildCommands() {
     return javaBuildCommands;
+  }
+
+  public NodePackageManager nodePackageManager() {
+    return nodePackageManager;
   }
 
   public Seed4JModulePackageJson packageJson() {
@@ -175,6 +183,7 @@ public final class Seed4JModuleChanges {
       Seed4JModuleChangesReplacersBuilder,
       Seed4JModuleChangesStartupCommandsBuilder,
       Seed4JModuleChangesJavaBuildCommandsBuilder,
+      Seed4JModuleChangesNodePackageManagerBuilder,
       Seed4JModuleChangesPackageJsonBuilder,
       Seed4JModuleChangesPreActionsBuilder,
       Seed4JModuleChangesPostActionsBuilder,
@@ -194,6 +203,7 @@ public final class Seed4JModuleChanges {
     private @Nullable ContentReplacers replacers;
     private @Nullable Seed4JStartupCommands startupCommands;
     private @Nullable JavaBuildCommands javaBuildCommands;
+    private @Nullable NodePackageManager nodePackageManager;
     private @Nullable Seed4JModulePackageJson packageJson;
     private @Nullable Indentation indentation;
     private @Nullable Seed4JModulePreActions preActions;
@@ -263,8 +273,15 @@ public final class Seed4JModuleChanges {
     }
 
     @Override
-    public Seed4JModuleChangesPackageJsonBuilder javaBuildCommands(JavaBuildCommands javaDependencies) {
+    public Seed4JModuleChangesNodePackageManagerBuilder javaBuildCommands(JavaBuildCommands javaDependencies) {
       this.javaBuildCommands = javaDependencies;
+
+      return this;
+    }
+
+    @Override
+    public Seed4JModuleChangesPackageJsonBuilder nodePackageManager(NodePackageManager nodePackageManager) {
+      this.nodePackageManager = nodePackageManager;
 
       return this;
     }
@@ -375,7 +392,11 @@ public final class Seed4JModuleChanges {
   }
 
   public interface Seed4JModuleChangesJavaBuildCommandsBuilder {
-    Seed4JModuleChangesPackageJsonBuilder javaBuildCommands(JavaBuildCommands javaBuildCommands);
+    Seed4JModuleChangesNodePackageManagerBuilder javaBuildCommands(JavaBuildCommands javaBuildCommands);
+  }
+
+  public interface Seed4JModuleChangesNodePackageManagerBuilder {
+    Seed4JModuleChangesPackageJsonBuilder nodePackageManager(NodePackageManager nodePackageManager);
   }
 
   public interface Seed4JModuleChangesPackageJsonBuilder {

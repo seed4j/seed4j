@@ -1,5 +1,6 @@
 package com.seed4j.generator.client.tools.cypress.domain;
 
+import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
 
 import com.seed4j.TestFileUtils;
@@ -26,6 +27,13 @@ class CypressModuleFactoryTest {
       .hasFile("package.json")
       .containing(nodeDependency("cypress"))
       .containing(nodeDependency("eslint-plugin-cypress"))
+      .containing(
+        """
+          "allowScripts": {
+            "cypress": true
+          }
+        """
+      )
       .notContaining(nodeScript("e2e"))
       .notContaining(nodeScript("e2e:headless"))
       .containing(
@@ -51,6 +59,28 @@ class CypressModuleFactoryTest {
   }
 
   @Test
+  void shouldAllowCypressBuildInPnpmWorkspaceWithPnpm() {
+    ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .nodePackageManager(PNPM)
+      .build();
+
+    Seed4JModule module = factory.buildComponentTestsModule(properties);
+
+    assertThatModuleWithFiles(module, files)
+      .hasFile("pnpm-workspace.yaml")
+      .containing(
+        """
+        allowBuilds:
+          cypress: true
+        """
+      )
+      .and()
+      .hasFile("package.json")
+      .notContaining("allowScripts");
+  }
+
+  @Test
   @DisplayName("should build E2E tests module")
   void shouldBuildE2eTestsModule() {
     ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
@@ -62,6 +92,13 @@ class CypressModuleFactoryTest {
       .hasFile("package.json")
       .containing(nodeDependency("cypress"))
       .containing(nodeDependency("eslint-plugin-cypress"))
+      .containing(
+        """
+          "allowScripts": {
+            "cypress": true
+          }
+        """
+      )
       .notContaining(nodeScript("test:component"))
       .notContaining(nodeScript("test:component:headless"))
       .containing(nodeScript("e2e", "cypress open --e2e --config-file src/test/webapp/e2e/cypress-config.ts"))

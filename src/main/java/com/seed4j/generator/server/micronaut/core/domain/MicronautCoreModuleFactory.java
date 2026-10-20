@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.micronaut.core.domain;
 
+import static com.seed4j.generator.server.micronaut.common.domain.MicronautProperties.MICRONAUT_MAIN;
 import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
@@ -14,6 +15,7 @@ import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
 import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 
 import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javabuild.GroupId;
@@ -25,7 +27,9 @@ import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.mavenplugin.MavenBuildPhase;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.properties.SpringConfigurationFormat;
 import com.seed4j.shared.error.domain.Assert;
+import java.util.function.Consumer;
 
 public class MicronautCoreModuleFactory {
 
@@ -77,12 +81,27 @@ public class MicronautCoreModuleFactory {
           .append(baseName + "App.java")
       )
       .add(MAIN_SOURCE.template("logback.xml"), MAIN_RESOURCE_DESTINATION.append("logback.xml"))
+      .add(TEST_SOURCE.template("logback-test.xml"), TEST_RESOURCES_DESTINATION.append("logback-test.xml"))
       .and()
-      .springMainProperties()
+      .applicationProperties(MICRONAUT_MAIN)
       .set(propertyKey("micronaut.application.name"), propertyValue(baseNameUncapitalized))
       .set(propertyKey("micronaut.server.port"), propertyValue(properties.serverPort().get()))
       .and()
+      .with(yamlConfigurationSupport(properties))
       .build();
+  }
+
+  private static Consumer<Seed4JModuleBuilder> yamlConfigurationSupport(Seed4JModuleProperties properties) {
+    return builder -> {
+      if (properties.springConfigurationFormat() == SpringConfigurationFormat.YAML) {
+        // Micronaut doesn't bring a YAML parser anymore: it is needed to read application.yml
+        builder.javaDependencies().addDependency(snakeYaml());
+      }
+    };
+  }
+
+  private static JavaDependency snakeYaml() {
+    return JavaDependency.builder().groupId("org.yaml").artifactId("snakeyaml").scope(JavaDependencyScope.RUNTIME).build();
   }
 
   private MavenPlugin micronautMavenPlugin() {

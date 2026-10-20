@@ -18,7 +18,14 @@ class MicronautCoreModuleConfiguration {
   Seed4JModuleResource micronautCoreModule(MicronautApplicationService micronaut) {
     return Seed4JModuleResource.builder()
       .slug(MICRONAUT)
-      .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addBasePackage().addProjectBaseName().addIndentation().build())
+      .propertiesDefinition(
+        Seed4JModulePropertiesDefinition.builder()
+          .addBasePackage()
+          .addProjectBaseName()
+          .addIndentation()
+          .addSpringConfigurationFormat()
+          .build()
+      )
       .apiDoc("Micronaut", "Init Micronaut project with dependencies, App, and properties")
       .organization(Seed4JModuleOrganization.builder().addDependency(JAVA_BUILD_TOOL).addDependency(JAVA_BASE).build())
       .tags("server", "micronaut")

@@ -4,7 +4,7 @@
     <button mat-flat-button color="primary" (click)="refresh()"><mat-icon>refresh</mat-icon> Refresh</button>
   </h2>
 
-  <table mat-table [dataSource]="datasource" class="mat-elevation-z8" aria-describedby="Health table">
+  <table mat-table [dataSource]="datasource()" class="mat-elevation-z8" aria-describedby="Health table">
     <ng-container matColumnDef="key">
       <th mat-header-cell *matHeaderCellDef>Service name</th>
       <td mat-cell *matCellDef="let element">{{ element.key }}</td>

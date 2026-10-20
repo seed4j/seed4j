@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,7 +16,7 @@ import { HealthModal } from './modal/health-modal';
 })
 export default class Health implements OnInit {
   displayedColumns: string[] = ['key', 'value', 'detail'];
-  datasource: HealthDetails[] = [];
+  datasource = signal<HealthDetails[]>([]);
 
   private readonly dialog = inject(MatDialog);
   private readonly healthService = inject(HealthService);
@@ -35,13 +35,15 @@ export default class Health implements OnInit {
   refresh(): void {
     this.healthService.checkHealth().subscribe({
       next: health => {
-        this.datasource = Object.entries(health.components).map(([key, value]) => {
-          const healthKey = key as HealthKey;
-          return {
-            key: healthKey,
-            ...value,
-          };
-        });
+        this.datasource.set(
+          Object.entries(health.components).map(([key, value]) => {
+            const healthKey = key as HealthKey;
+            return {
+              key: healthKey,
+              ...value,
+            };
+          }),
+        );
       },
     });
   }

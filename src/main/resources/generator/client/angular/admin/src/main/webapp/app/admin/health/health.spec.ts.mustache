@@ -41,7 +41,7 @@ describe('Health', () => {
       expect(service.checkHealth).toHaveBeenCalled();
 
       service.checkHealth().subscribe(() => {
-        expect(comp.datasource).toEqual([{ details: { mailDetail: 'mail' }, key: 'mail', status: 'UP' }]);
+        expect(comp.datasource()).toEqual([{ details: { mailDetail: 'mail' }, key: 'mail', status: 'UP' }]);
       });
     });
 

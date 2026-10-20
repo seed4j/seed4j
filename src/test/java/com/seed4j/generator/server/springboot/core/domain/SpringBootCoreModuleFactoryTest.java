@@ -67,11 +67,12 @@ class SpringBootCoreModuleFactoryTest {
         )
         .containing(
           """
-              <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-configuration-processor</artifactId>
-                <optional>true</optional>
-              </dependency>
+                    <annotationProcessorPaths>
+                      <path>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-configuration-processor</artifactId>
+                      </path>
+                    </annotationProcessorPaths>
           """
         )
         .containing(
@@ -251,6 +252,8 @@ class SpringBootCoreModuleFactoryTest {
           """
         )
         .containing("testImplementation(libs.spring.boot.starter.test)")
+        .containing("annotationProcessor(libs.spring.boot.configuration.processor)")
+        .notContaining("implementation(libs.spring.boot.configuration.processor)")
         .notContaining("testImplementation(libs.junit.engine)")
         .notContaining("testImplementation(libs.junit.params)")
         .notContaining("testImplementation(libs.assertj)")

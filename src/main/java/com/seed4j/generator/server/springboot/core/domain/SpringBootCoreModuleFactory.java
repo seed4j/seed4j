@@ -5,6 +5,7 @@ import static com.seed4j.module.domain.Seed4JModule.dependencyId;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaAnnotationProcessor;
 import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.path;
@@ -23,6 +24,7 @@ import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.VersionSlug;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessor;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.javadependency.JavaDependencyType;
@@ -73,9 +75,11 @@ public class SpringBootCoreModuleFactory {
         .removeDependency(dependencyId(MOCKITO_GROUP, "mockito-junit-jupiter"))
         .addDependencyManagement(springBootBom())
         .addDependency(SPRING_BOOT_GROUP, artifactId("spring-boot-starter"))
-        .addDependency(springBootConfigurationProcessor())
         .addDependency(groupId("org.apache.commons"), artifactId("commons-lang3"))
         .addDependency(springBootTest())
+        .and()
+      .javaCompiler()
+        .addAnnotationProcessor(springBootConfigurationProcessor())
         .and()
       .mavenPlugins()
         .pluginManagement(springBootPluginManagement(fullyQualifiedMainClass))
@@ -139,8 +143,8 @@ public class SpringBootCoreModuleFactory {
       .build();
   }
 
-  private JavaDependency springBootConfigurationProcessor() {
-    return JavaDependency.builder().groupId(SPRING_BOOT_GROUP).artifactId("spring-boot-configuration-processor").optional().build();
+  private JavaAnnotationProcessor springBootConfigurationProcessor() {
+    return javaAnnotationProcessor().groupId(SPRING_BOOT_GROUP).artifactId("spring-boot-configuration-processor").build();
   }
 
   private JavaDependency springBootTest() {

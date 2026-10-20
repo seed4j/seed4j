@@ -5,6 +5,9 @@ import static com.seed4j.module.domain.Seed4JModule.LINE_BREAK;
 import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.Seed4JModuleContext;
 import com.seed4j.module.domain.file.TemplateRenderer;
+import com.seed4j.module.domain.javaproperties.PropertyKey;
+import com.seed4j.module.domain.javaproperties.PropertyValue;
+import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import com.seed4j.module.domain.packagejson.NodeModuleFormat;
 import com.seed4j.module.domain.packagejson.PackageJsonDependencies;
@@ -54,11 +57,13 @@ class FileSystemPackageJsonHandler {
   public void handle(
     Indentation indentation,
     Seed4JProjectFolder projectFolder,
+    NodePackageManager nodePackageManager,
     Seed4JModulePackageJson packageJson,
     Seed4JModuleContext context
   ) {
     Assert.notNull("indentation", indentation);
     Assert.notNull("projectFolder", projectFolder);
+    Assert.notNull("nodePackageManager", nodePackageManager);
     Assert.notNull("packageJson", packageJson);
     Assert.notNull("context", context);
 
@@ -75,11 +80,31 @@ class FileSystemPackageJsonHandler {
     content = replaceDependencies(indentation, packageJson.dependencies(), content);
     content = removeDependencies(indentation, packageJson.dependenciesToRemove(), content);
     content = removeDevDependencies(indentation, packageJson.devDependenciesToRemove(), content);
+    if (nodePackageManager == NodePackageManager.NPM) {
+      content = replaceAllowedInstallScripts(indentation, packageJson.allowedInstallScripts(), content);
+    }
 
     content = replacePlaceholders(content, context);
     content = cleanupLineBreaks(indentation, content);
 
     write(file, content);
+
+    if (nodePackageManager == NodePackageManager.PNPM) {
+      allowPnpmBuilds(indentation, projectFolder, packageJson.allowedInstallScripts());
+    }
+  }
+
+  private void allowPnpmBuilds(Indentation indentation, Seed4JProjectFolder projectFolder, PackageNames allowedInstallScripts) {
+    YamlFileApplicationPropertiesHandler pnpmWorkspace = new YamlFileApplicationPropertiesHandler(
+      projectFolder.filePath("pnpm-workspace.yaml"),
+      indentation
+    );
+
+    allowedInstallScripts
+      .stream()
+      .forEach(packageName ->
+        pnpmWorkspace.setValue(new PropertyKey("allowBuilds." + packageName.get()), PropertyValue.of(new Boolean[] { true }))
+      );
   }
 
   private Path getPackageJsonFile(Seed4JProjectFolder projectFolder) {
@@ -107,7 +132,7 @@ class FileSystemPackageJsonHandler {
   private List<JsonEntry> scriptEntries(Scripts scripts) {
     return scripts
       .stream()
-      .map(script -> new JsonEntry(script.key().get(), script.command().get()))
+      .map(script -> JsonEntry.string(script.key().get(), script.command().get()))
       .toList();
   }
 
@@ -147,6 +172,22 @@ class FileSystemPackageJsonHandler {
       .apply();
   }
 
+  private String replaceAllowedInstallScripts(Indentation indentation, PackageNames allowedInstallScripts, String content) {
+    return JsonAction.replace()
+      .blockName("allowScripts")
+      .jsonContent(content)
+      .indentation(indentation)
+      .entries(allowedInstallScriptsEntries(allowedInstallScripts))
+      .apply();
+  }
+
+  private List<JsonEntry> allowedInstallScriptsEntries(PackageNames allowedInstallScripts) {
+    return allowedInstallScripts
+      .stream()
+      .map(packageName -> JsonEntry.raw(packageName.get(), "true"))
+      .toList();
+  }
+
   private String replaceType(Indentation indentation, Optional<NodeModuleFormat> nodeModuleFormat, String content) {
     if (nodeModuleFormat.isEmpty()) {
       return content;
@@ -162,14 +203,14 @@ class FileSystemPackageJsonHandler {
   private List<JsonEntry> dependenciesEntries(PackageJsonDependencies dependencies) {
     return dependencies
       .stream()
-      .map(dependency -> new JsonEntry(dependency.packageName().get(), getNpmVersion(dependency)))
+      .map(dependency -> JsonEntry.string(dependency.packageName().get(), getNpmVersion(dependency)))
       .toList();
   }
 
   private Collection<JsonEntry> dependenciesEntries(PackageNames packageNames) {
     return packageNames
       .stream()
-      .map(packageName -> new JsonEntry(packageName.get(), ""))
+      .map(packageName -> JsonEntry.string(packageName.get(), ""))
       .toList();
   }
 
@@ -325,7 +366,7 @@ class FileSystemPackageJsonHandler {
           .append(blockName)
           .append("\"\\s*:\\s*\\{)([^}]*)(\"")
           .append(entry.key())
-          .append("\"\\s*:\\s*\"[^\\r\\n]+[\\r\\n]{1,2}(\\s{")
+          .append("\"\\s*:\\s*[^\\r\\n]+[\\r\\n]{1,2}(\\s{")
           .append(indentation.spacesCount() * 2)
           .append("})?)")
           .toString();
@@ -395,7 +436,15 @@ class FileSystemPackageJsonHandler {
     REMOVE,
   }
 
-  private record JsonEntry(String key, String value) {
+  private record JsonEntry(String key, String jsonValue) {
+    static JsonEntry string(String key, String value) {
+      return new JsonEntry(key, QUOTE + value + QUOTE);
+    }
+
+    static JsonEntry raw(String key, String jsonValue) {
+      return new JsonEntry(key, jsonValue);
+    }
+
     String toJson(Indentation indentation) {
       return new StringBuilder()
         .append(indentation.times(2))
@@ -403,9 +452,7 @@ class FileSystemPackageJsonHandler {
         .append(key())
         .append(QUOTE)
         .append(": ")
-        .append(QUOTE)
-        .append(value())
-        .append(QUOTE)
+        .append(jsonValue())
         .toString();
     }
   }

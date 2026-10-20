@@ -10,8 +10,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * This class represents the {@code package.json} configurations for a Seed4J module.
- * It includes scripts, dependencies, development dependencies, and configurations
- * for removing unnecessary dependencies.
+ * It includes scripts, dependencies, development dependencies, configurations
+ * for removing unnecessary dependencies and packages allowed to run install scripts.
  */
 public final class Seed4JModulePackageJson {
 
@@ -20,6 +20,7 @@ public final class Seed4JModulePackageJson {
   private final PackageNames dependenciesToRemove;
   private final PackageJsonDependencies devDependencies;
   private final PackageNames devDependenciesToRemove;
+  private final PackageNames allowedInstallScripts;
   private final Optional<NodeModuleFormat> nodeModuleFormat;
 
   private Seed4JModulePackageJson(Seed4JModulePackageJsonBuilder builder) {
@@ -28,6 +29,7 @@ public final class Seed4JModulePackageJson {
     dependenciesToRemove = new PackageNames(builder.dependenciesToRemove);
     devDependencies = new PackageJsonDependencies(builder.devDependencies);
     devDependenciesToRemove = new PackageNames(builder.devDependenciesToRemove);
+    allowedInstallScripts = new PackageNames(builder.allowedInstallScripts);
     nodeModuleFormat = Optional.ofNullable(builder.nodeModuleFormat);
   }
 
@@ -43,6 +45,7 @@ public final class Seed4JModulePackageJson {
       && devDependencies.isEmpty()
       && dependenciesToRemove.isEmpty()
       && devDependenciesToRemove.isEmpty()
+      && allowedInstallScripts.isEmpty()
     );
   }
 
@@ -66,6 +69,10 @@ public final class Seed4JModulePackageJson {
     return dependenciesToRemove;
   }
 
+  public PackageNames allowedInstallScripts() {
+    return allowedInstallScripts;
+  }
+
   public Optional<NodeModuleFormat> nodeModuleFormat() {
     return nodeModuleFormat;
   }
@@ -78,6 +85,7 @@ public final class Seed4JModulePackageJson {
     private final Collection<PackageJsonDependency> devDependencies = new ArrayList<>();
     private final Collection<PackageName> dependenciesToRemove = new ArrayList<>();
     private final Collection<PackageName> devDependenciesToRemove = new ArrayList<>();
+    private final Collection<PackageName> allowedInstallScripts = new ArrayList<>();
     private @Nullable NodeModuleFormat nodeModuleFormat;
 
     private Seed4JModulePackageJsonBuilder(Seed4JModuleBuilder module) {
@@ -193,6 +201,19 @@ public final class Seed4JModulePackageJson {
      */
     public Seed4JModulePackageJsonBuilder removeDevDependency(PackageName packageName) {
       devDependenciesToRemove.add(packageName);
+
+      return this;
+    }
+
+    /**
+     * Allow a package to run its install scripts (e.g. {@code postinstall}),
+     * which recent package managers block by default.
+     *
+     * @param packageName the name of the package
+     * @return the builder itself
+     */
+    public Seed4JModulePackageJsonBuilder allowInstallScripts(PackageName packageName) {
+      allowedInstallScripts.add(packageName);
 
       return this;
     }

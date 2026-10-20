@@ -75,7 +75,13 @@ class FileSystemSeed4JModulesRepository implements Seed4JModulesRepository {
     yamlApplicationPropertyComments.handle(changes.indentation(), changes.projectFolder(), changes.yamlApplicationPropertyComments());
     springFactories.handle(changes.projectFolder(), changes.springFactories());
     gitIgnore.handle(changes.projectFolder(), changes.gitIgnore());
-    packageJson.handle(changes.indentation(), changes.projectFolder(), changes.packageJson(), changes.context());
+    packageJson.handle(
+      changes.indentation(),
+      changes.projectFolder(),
+      changes.nodePackageManager(),
+      changes.packageJson(),
+      changes.context()
+    );
     replacer.handle(changes.projectFolder(), changes.replacers(), changes.context());
     startupCommands.handle(changes.projectFolder(), changes.startupCommands(), changes.context());
     dockerComposeFile.handle(changes.indentation(), changes.projectFolder(), changes.dockerComposeFile());

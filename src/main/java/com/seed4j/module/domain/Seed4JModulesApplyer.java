@@ -96,6 +96,7 @@ public class Seed4JModulesApplyer {
           .merge(buildGradlePluginsChanges(module))
           .merge(buildGradleConfigurationsChanges(module))
       )
+      .nodePackageManager(moduleToApply.properties().nodePackageManager())
       .packageJson(module.packageJson())
       .gitIgnore(module.gitIgnore())
       .dockerComposeFile(module.dockerComposeFile())

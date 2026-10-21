@@ -65,6 +65,7 @@ public class RedisModuleFactory {
           .addTemplate("RedisDatabaseConfiguration.java")
           .addTemplate("JSR310DateConverters.java")
           .and()
+          .nullMarkedJavaPackage(toSrcMainJava().append(packagePath).append(REDIS_SECONDARY))
         .add(
               SOURCE.template("JSR310DateConvertersTest.java"),
               toSrcTestJava().append(packagePath).append(REDIS_SECONDARY).append("JSR310DateConvertersTest.java")

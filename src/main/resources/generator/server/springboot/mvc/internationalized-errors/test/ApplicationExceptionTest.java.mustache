@@ -11,8 +11,15 @@ import {{ packageName }}.shared.error.infrastructure.primary.{{ baseName }}Excep
 class {{ baseName }}ExceptionTest {
 
   @Test
+  void shouldNotBuildWithoutKey() {
+    assertThatThrownBy(() -> {{ baseName }}Exception.builder(null))
+      .isExactlyInstanceOf(MissingMandatoryValueException.class)
+      .hasMessageContaining("key");
+  }
+
+  @Test
   void shouldGetMinimal{{ baseName }}ExceptionFromDomain() {
-    {{ baseName }}Exception exception = {{ baseName }}Exception.builder(null).build();
+    {{ baseName }}Exception exception = {{ baseName }}Exception.builder(StandardErrorKey.INTERNAL_SERVER_ERROR).build();
 
     assertThat(exception.key()).isEqualTo(StandardErrorKey.INTERNAL_SERVER_ERROR);
     assertThat(exception.status()).isEqualTo(ErrorStatus.INTERNAL_SERVER_ERROR);

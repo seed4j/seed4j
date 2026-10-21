@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+import org.jspecify.annotations.Nullable;
 
 public class {{ baseName }}Exception extends RuntimeException {
 
@@ -14,7 +15,7 @@ public class {{ baseName }}Exception extends RuntimeException {
 
   protected {{ baseName }}Exception({{ baseName }}ExceptionBuilder builder) {
     super(buildMessage(builder), builder.cause);
-    key = buildKey(builder);
+    key = builder.key;
     status = buildStatus(builder);
     parameters = Collections.unmodifiableMap(builder.parameters);
   }
@@ -27,14 +28,6 @@ public class {{ baseName }}Exception extends RuntimeException {
     }
 
     return builder.message;
-  }
-
-  private ErrorKey buildKey({{ baseName }}ExceptionBuilder builder) {
-    if (builder.key == null) {
-      return StandardErrorKey.INTERNAL_SERVER_ERROR;
-    }
-
-    return builder.key;
   }
 
   private ErrorStatus buildStatus({{ baseName }}ExceptionBuilder builder) {
@@ -80,7 +73,7 @@ public class {{ baseName }}Exception extends RuntimeException {
     return technicalError(message, null);
   }
 
-  public static {{ baseName }}Exception technicalError(String message, Throwable cause) {
+  public static {{ baseName }}Exception technicalError(String message, @Nullable Throwable cause) {
     return builder(StandardErrorKey.INTERNAL_SERVER_ERROR).message(message).cause(cause).build();
   }
 
@@ -105,11 +98,13 @@ public class {{ baseName }}Exception extends RuntimeException {
     private final ErrorKey key;
     private final Map<String, String> parameters = new HashMap<>();
 
-    private String message;
-    private Throwable cause;
-    private ErrorStatus status;
+    private @Nullable String message;
+    private @Nullable Throwable cause;
+    private @Nullable ErrorStatus status;
 
     private {{ baseName }}ExceptionBuilder(ErrorKey key) {
+      Assert.notNull("key", key);
+
       this.key = key;
     }
 
@@ -119,7 +114,7 @@ public class {{ baseName }}Exception extends RuntimeException {
       return this;
     }
 
-    public {{ baseName }}ExceptionBuilder cause(Throwable cause) {
+    public {{ baseName }}ExceptionBuilder cause(@Nullable Throwable cause) {
       this.cause = cause;
 
       return this;

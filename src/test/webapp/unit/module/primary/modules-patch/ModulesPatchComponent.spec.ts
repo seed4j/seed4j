@@ -180,7 +180,7 @@ describe('Modules', () => {
       const wrapper = await componentWithModules();
 
       await selectModule(wrapper);
-      wrapper.find(wrappedElement('spring-cucumber-module-content')).trigger('click');
+      await wrapper.find(wrappedElement('spring-cucumber-module-content')).trigger('click');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('parameter-baseName-field')).exists()).toBe(false);
@@ -197,8 +197,8 @@ describe('Modules', () => {
       const wrapper = await componentWithModules();
       await selectModule(wrapper);
 
-      wrapper.find(wrappedElement('folder-path-field')).setValue('');
-      wrapper.find(wrappedElement('parameter-baseName-field')).setValue('test');
+      await wrapper.find(wrappedElement('folder-path-field')).setValue('');
+      await wrapper.find(wrappedElement('parameter-baseName-field')).setValue('test');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-button')).attributes('disabled')).toBeDefined();
@@ -208,7 +208,7 @@ describe('Modules', () => {
       const wrapper = await componentWithModulesAndNonDefaultProperties();
       await selectModule(wrapper);
 
-      wrapper.find(wrappedElement('folder-path-field')).setValue('test');
+      await wrapper.find(wrappedElement('folder-path-field')).setValue('test');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-button')).attributes('disabled')).toBeDefined();
@@ -218,8 +218,8 @@ describe('Modules', () => {
       const wrapper = await componentWithModulesAndNonDefaultProperties();
       await selectModule(wrapper);
 
-      wrapper.find(wrappedElement('folder-path-field')).setValue('test');
-      wrapper.find(wrappedElement('parameter-mandatoryBoolean-field')).setValue('false');
+      await wrapper.find(wrappedElement('folder-path-field')).setValue('test');
+      await wrapper.find(wrappedElement('parameter-mandatoryBoolean-field')).setValue('false');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-button')).attributes('disabled')).toBeUndefined();
@@ -229,9 +229,9 @@ describe('Modules', () => {
       const wrapper = await componentWithModulesAndNonDefaultProperties();
       await selectModule(wrapper);
 
-      wrapper.find(wrappedElement('folder-path-field')).setValue('test');
-      wrapper.find(wrappedElement('parameter-baseName-field')).setValue('baseName');
-      wrapper.find(wrappedElement('parameter-mandatoryBoolean-field')).setValue('');
+      await wrapper.find(wrappedElement('folder-path-field')).setValue('test');
+      await wrapper.find(wrappedElement('parameter-baseName-field')).setValue('baseName');
+      await wrapper.find(wrappedElement('parameter-mandatoryBoolean-field')).setValue('');
 
       await flushForm(wrapper);
 
@@ -242,8 +242,8 @@ describe('Modules', () => {
       const wrapper = await componentWithModules();
       await selectModule(wrapper);
 
-      wrapper.find(wrappedElement('folder-path-field')).setValue('test');
-      wrapper.find(wrappedElement('parameter-baseName-field')).setValue('test');
+      await wrapper.find(wrappedElement('folder-path-field')).setValue('test');
+      await wrapper.find(wrappedElement('parameter-baseName-field')).setValue('test');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-button')).attributes('disabled')).toBeUndefined();
@@ -253,10 +253,10 @@ describe('Modules', () => {
       const wrapper = await componentWithModules();
       await selectModule(wrapper);
 
-      wrapper.find(wrappedElement('folder-path-field')).setValue('test');
-      wrapper.find(wrappedElement('parameter-baseName-field')).setValue('test');
-      wrapper.find(wrappedElement('parameter-optionalBoolean-field')).setValue('true');
-      wrapper.find(wrappedElement('parameter-optionalInteger-field')).setValue('42');
+      await wrapper.find(wrappedElement('folder-path-field')).setValue('test');
+      await wrapper.find(wrappedElement('parameter-baseName-field')).setValue('test');
+      await wrapper.find(wrappedElement('parameter-optionalBoolean-field')).setValue('true');
+      await wrapper.find(wrappedElement('parameter-optionalInteger-field')).setValue('42');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-baseName-parameter-value')).text()).toBe('test');
@@ -277,7 +277,7 @@ describe('Modules', () => {
       const wrapper = await componentWithModules();
       await selectModule(wrapper);
 
-      wrapper.find(wrappedElement('parameter-optionalBoolean-field')).setValue('false');
+      await wrapper.find(wrappedElement('parameter-optionalBoolean-field')).setValue('false');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-optionalBoolean-parameter-value')).text()).toBe('false');
@@ -287,9 +287,9 @@ describe('Modules', () => {
       const wrapper = await componentWithModules();
       await selectModule(wrapper);
 
-      wrapper.find(wrappedElement('parameter-optionalBoolean-field')).setValue('true');
+      await wrapper.find(wrappedElement('parameter-optionalBoolean-field')).setValue('true');
       await flushForm(wrapper);
-      wrapper.find(wrappedElement('parameter-optionalBoolean-field')).setValue('');
+      await wrapper.find(wrappedElement('parameter-optionalBoolean-field')).setValue('');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-optionalBoolean-parameter-value')).text()).toBe('');
@@ -299,9 +299,9 @@ describe('Modules', () => {
       const wrapper = await componentWithModules();
       await selectModule(wrapper);
 
-      wrapper.find(wrappedElement('parameter-optionalInteger-field')).setValue('42');
+      await wrapper.find(wrappedElement('parameter-optionalInteger-field')).setValue('42');
       await flushForm(wrapper);
-      wrapper.find(wrappedElement('parameter-optionalInteger-field')).setValue('');
+      await wrapper.find(wrappedElement('parameter-optionalInteger-field')).setValue('');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-optionalInteger-parameter-value')).text()).toBe('');
@@ -317,11 +317,11 @@ describe('Modules', () => {
       await flushPromises();
       await selectModule(wrapper);
 
-      wrapper.find(wrappedElement('folder-path-field')).setValue('test');
-      wrapper.find(wrappedElement('parameter-baseName-field')).setValue('test');
+      await wrapper.find(wrappedElement('folder-path-field')).setValue('test');
+      await wrapper.find(wrappedElement('parameter-baseName-field')).setValue('test');
       await flushForm(wrapper);
 
-      wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
+      await wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
 
       await flushPromises();
 
@@ -341,11 +341,11 @@ describe('Modules', () => {
       await flushPromises();
       await selectModule(wrapper);
 
-      wrapper.find(wrappedElement('folder-path-field')).setValue('test');
-      wrapper.find(wrappedElement('parameter-mandatoryBoolean-field')).setValue('true');
+      await wrapper.find(wrappedElement('folder-path-field')).setValue('test');
+      await wrapper.find(wrappedElement('parameter-mandatoryBoolean-field')).setValue('true');
       await flushForm(wrapper);
 
-      wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
+      await wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
 
       await flushPromises();
 
@@ -360,7 +360,7 @@ describe('Modules', () => {
       modules.apply.mockReturnValue(new Promise(resolve => setTimeout(resolve, 500)));
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
+      await wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-button')).attributes('disabled')).toBeDefined();
@@ -371,7 +371,7 @@ describe('Modules', () => {
       modules.apply.mockResolvedValue(undefined);
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
+      await wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
       await flushForm(wrapper);
 
       await flushPromises();
@@ -384,7 +384,7 @@ describe('Modules', () => {
       modules.apply.mockRejectedValue('this is an error');
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
+      await wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
       await flushForm(wrapper);
 
       await flushPromises();
@@ -397,8 +397,8 @@ describe('Modules', () => {
       modules.apply.mockResolvedValue(undefined);
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('commit-module-application')).trigger('click');
-      wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
+      await wrapper.find(wrappedElement('commit-module-application')).trigger('click');
+      await wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
       await flushForm(wrapper);
       await flushPromises();
 
@@ -415,7 +415,7 @@ describe('Modules', () => {
       modules.apply.mockResolvedValue(undefined);
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
+      await wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
       await flushForm(wrapper);
 
       await flushPromises();
@@ -428,7 +428,7 @@ describe('Modules', () => {
       modules.apply.mockRejectedValue(new Error('Module application error'));
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
+      await wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
       await flushForm(wrapper);
 
       await flushPromises();
@@ -443,7 +443,7 @@ describe('Modules', () => {
       modules.history.mockResolvedValue(defaultProjectHistory());
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('folder-path-field')).trigger('blur');
+      await wrapper.find(wrappedElement('folder-path-field')).trigger('blur');
 
       await flushPromises();
 
@@ -461,11 +461,11 @@ describe('Modules', () => {
       modules.apply.mockResolvedValue(undefined);
 
       const wrapper = await filledModuleForm(modules);
-      wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
+      await wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
       await flushForm(wrapper);
       await flushPromises();
 
-      wrapper.find(wrappedElement('folder-path-field')).trigger('blur');
+      await wrapper.find(wrappedElement('folder-path-field')).trigger('blur');
       await flushPromises();
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-icon')).classes()).toEqual([
@@ -479,7 +479,7 @@ describe('Modules', () => {
       modules.apply.mockResolvedValue(undefined);
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
+      await wrapper.find(wrappedElement('module-spring-cucumber-application-button')).trigger('click');
       await flushForm(wrapper);
 
       await flushPromises();
@@ -505,7 +505,7 @@ describe('Modules', () => {
       modules.history.mockResolvedValue(defaultProjectHistory());
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('folder-path-field')).trigger('blur');
+      await wrapper.find(wrappedElement('folder-path-field')).trigger('blur');
       await flushPromises();
 
       const baseNameField = wrapper.find(wrappedElement('parameter-baseName-field')).element as HTMLInputElement;
@@ -518,7 +518,7 @@ describe('Modules', () => {
       const modules = repositoryWithModules();
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('modules-filter-field')).setValue('spring-cucumber');
+      await wrapper.find(wrappedElement('modules-filter-field')).setValue('spring-cucumber');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(false);
@@ -533,7 +533,7 @@ describe('Modules', () => {
       const modules = repositoryWithModules();
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('modules-filter-field')).setValue('Add cucumber');
+      await wrapper.find(wrappedElement('modules-filter-field')).setValue('Add cucumber');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(false);
@@ -544,7 +544,7 @@ describe('Modules', () => {
       const modules = repositoryWithModules();
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('modules-filter-field')).setValue('server');
+      await wrapper.find(wrappedElement('modules-filter-field')).setValue('server');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(false);
@@ -555,7 +555,7 @@ describe('Modules', () => {
       const modules = repositoryWithModules();
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('modules-filter-field')).setValue('spring-cucumber add application');
+      await wrapper.find(wrappedElement('modules-filter-field')).setValue('spring-cucumber add application');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(false);
@@ -566,7 +566,7 @@ describe('Modules', () => {
       const modules = repositoryWithModules();
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('modules-filter-field')).setValue('hello');
+      await wrapper.find(wrappedElement('modules-filter-field')).setValue('hello');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(false);
@@ -589,7 +589,7 @@ describe('Modules', () => {
       const wrapper = wrap({ modules: repository });
       await flushForm(wrapper);
 
-      wrapper.find(wrappedElement(`${tag}-tag-filter`)).trigger('click');
+      await wrapper.find(wrappedElement(`${tag}-tag-filter`)).trigger('click');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement(`module-${tag}-slug-application-button`)).exists()).toBe(true);
@@ -600,7 +600,7 @@ describe('Modules', () => {
       const modules = repositoryWithModules();
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('server-tag-filter')).trigger('click');
+      await wrapper.find(wrappedElement('server-tag-filter')).trigger('click');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(false);
@@ -612,8 +612,8 @@ describe('Modules', () => {
       const modules = repositoryWithModules();
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('server-tag-filter')).trigger('click');
-      wrapper.find(wrappedElement('modules-filter-field')).setValue('cucumber');
+      await wrapper.find(wrappedElement('server-tag-filter')).trigger('click');
+      await wrapper.find(wrappedElement('modules-filter-field')).setValue('cucumber');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(false);
@@ -624,9 +624,9 @@ describe('Modules', () => {
       const modules = repositoryWithModules();
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('server-tag-filter')).trigger('click');
+      await wrapper.find(wrappedElement('server-tag-filter')).trigger('click');
       await flushForm(wrapper);
-      wrapper.find(wrappedElement('server-tag-filter')).trigger('click');
+      await wrapper.find(wrappedElement('server-tag-filter')).trigger('click');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-banner-application-button')).exists()).toBe(true);
@@ -641,7 +641,7 @@ describe('Modules', () => {
       modules.download.mockReturnValue(new Promise(resolve => setTimeout(resolve, 500)));
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('download-button')).trigger('click');
+      await wrapper.find(wrappedElement('download-button')).trigger('click');
       await flushForm(wrapper);
 
       expect(wrapper.find(wrappedElement('module-spring-cucumber-application-button')).attributes('disabled')).toBeDefined();
@@ -652,7 +652,7 @@ describe('Modules', () => {
       modules.download.mockResolvedValue(undefined);
       const wrapper = await filledModuleForm(modules);
 
-      wrapper.find(wrappedElement('download-button')).trigger('click');
+      await wrapper.find(wrappedElement('download-button')).trigger('click');
       await flushForm(wrapper);
       await flushPromises();
 
@@ -684,7 +684,7 @@ const componentWithModulesAndNonDefaultProperties = async (): Promise<VueWrapper
 };
 
 const selectModule = async (wrapper: VueWrapper, trigger = 'click') => {
-  wrapper.find(wrappedElement('spring-cucumber-module-content')).trigger(trigger);
+  await wrapper.find(wrappedElement('spring-cucumber-module-content')).trigger(trigger);
   await flushForm(wrapper);
 };
 
@@ -698,8 +698,8 @@ const filledModuleForm = async (modules: ModulesRepository): Promise<VueWrapper>
   await flushPromises();
   await selectModule(wrapper);
 
-  wrapper.find(wrappedElement('folder-path-field')).setValue('test');
-  wrapper.find(wrappedElement('parameter-baseName-field')).setValue('test');
+  await wrapper.find(wrappedElement('folder-path-field')).setValue('test');
+  await wrapper.find(wrappedElement('parameter-baseName-field')).setValue('test');
   await flushForm(wrapper);
 
   return wrapper;
@@ -753,8 +753,8 @@ const updatePath = async (wrapper: VueWrapper): Promise<void> => {
   await flushPromises();
   await selectModule(wrapper);
 
-  wrapper.find(wrappedElement('folder-path-field')).setValue('test');
-  wrapper.find(wrappedElement('folder-path-field')).trigger('blur');
+  await wrapper.find(wrappedElement('folder-path-field')).setValue('test');
+  await wrapper.find(wrappedElement('folder-path-field')).trigger('blur');
   await flushForm(wrapper);
   await flushPromises();
 };

@@ -40,7 +40,7 @@ npm run lint    # auto-fix JS/TS/SCSS
 ### Lint (Java + Frontend)
 
 ```bash
-npm run lint:ci # Oxlint + Prettier check
+npm run lint:ci # Oxlint + typecheck (app and tests) + Prettier check
 npm run lint    # Oxlint + Prettier + Stylelint with auto-fix
 ```
 

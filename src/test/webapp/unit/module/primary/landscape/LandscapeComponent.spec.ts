@@ -16,7 +16,7 @@ import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller'
 import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
 import { ApplicationListener } from '@/shared/alert/infrastructure/primary/ApplicationListener';
 import { DOMWrapper, VueWrapper, flushPromises, mount } from '@vue/test-utils';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { type MockedFunction, beforeEach, describe, expect, it, vi } from 'vitest';
 import { stubAlertBus } from '../../../shared/alert/domain/AlertBus.fixture';
 import { wrappedElement } from '../../../WrappedElement';
 import { defaultLandscape } from '../../domain/landscape/Landscape.fixture';
@@ -26,13 +26,13 @@ import { ProjectFoldersRepositoryStub, stubProjectFoldersRepository } from '../.
 import { stubWindow } from '../GlobalWindow.fixture';
 
 interface ApplicationListenerStub extends ApplicationListener {
-  addEventListener: vi.fn;
-  removeEventListener: vi.fn;
+  addEventListener: MockedFunction<ApplicationListener['addEventListener']>;
+  removeEventListener: MockedFunction<ApplicationListener['removeEventListener']>;
 }
 
 interface BodyCursorUpdaterStub extends BodyCursorUpdater {
-  set: vi.fn;
-  reset: vi.fn;
+  set: MockedFunction<BodyCursorUpdater['set']>;
+  reset: MockedFunction<BodyCursorUpdater['reset']>;
 }
 
 const stubBodyCursorUpdater = (): BodyCursorUpdaterStub =>
@@ -46,11 +46,18 @@ const stubApplicationListener = (): ApplicationListenerStub => ({
   removeEventListener: vi.fn(),
 });
 
-const stubLandscapeScroller = (): LandscapeScroller => ({
-  scroll: vi.fn(),
-  scrollSmooth: vi.fn(),
-  scrollIntoView: vi.fn(),
-});
+interface LandscapeScrollerStub extends LandscapeScroller {
+  scroll: MockedFunction<LandscapeScroller['scroll']>;
+  scrollSmooth: MockedFunction<LandscapeScroller['scrollSmooth']>;
+  scrollIntoView: MockedFunction<LandscapeScroller['scrollIntoView']>;
+}
+
+const stubLandscapeScroller = (): LandscapeScrollerStub =>
+  ({
+    scroll: vi.fn(),
+    scrollSmooth: vi.fn(),
+    scrollIntoView: vi.fn(),
+  }) as LandscapeScrollerStub;
 
 interface WrapperOptions {
   cursorUpdater: BodyCursorUpdater;
@@ -240,7 +247,7 @@ describe('Landscape', () => {
     it('should switch to compacted mode', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('compacted-mode-button')).trigger('click');
+      await wrapper.find(wrappedElement('compacted-mode-button')).trigger('click');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('compacted-mode-button')).classes()).toContain('-selected');
@@ -251,7 +258,7 @@ describe('Landscape', () => {
     it('should switch to extended mode', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
+      await wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('compacted-mode-button')).classes()).toContain('-not-selected');
@@ -264,7 +271,7 @@ describe('Landscape', () => {
     it('should highlight compacted selectable module and dependencies', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
 
       const vueClasses = wrapper.find(wrappedElement('vue-module')).classes();
@@ -280,10 +287,10 @@ describe('Landscape', () => {
 
     it('should highlight extended selectable module and dependencies', async () => {
       const wrapper = await componentWithLandscape();
-      wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
+      await wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
       await wrapper.vm.$nextTick();
 
-      wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
 
       const vueClasses = wrapper.find(wrappedElement('vue-module')).classes();
@@ -300,7 +307,7 @@ describe('Landscape', () => {
     it('should highlight dependant feature', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('sample-feature-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('sample-feature-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
 
       const sampleFeatureClasses = wrapper.find(wrappedElement('sample-feature-module')).classes();
@@ -318,7 +325,7 @@ describe('Landscape', () => {
 
       await clickModule('maven', wrapper);
 
-      wrapper.find(wrappedElement('liquibase-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('liquibase-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('java-build-tools-feature')).classes()).toContain('-selectable-highlighted');
@@ -331,9 +338,9 @@ describe('Landscape', () => {
     it('should un-highlight single module and dependencies', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('java-base-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('java-base-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
-      wrapper.find(wrappedElement('java-base-module')).trigger('mouseleave');
+      await wrapper.find(wrappedElement('java-base-module')).trigger('mouseleave');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('java-base-module')).classes()).not.toContain('-selectable-highlighted');
@@ -344,9 +351,9 @@ describe('Landscape', () => {
     it('should un-highlight featured module and dependencies', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
-      wrapper.find(wrappedElement('vue-module')).trigger('mouseleave');
+      await wrapper.find(wrappedElement('vue-module')).trigger('mouseleave');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('vue-module')).classes()).not.toContain('-selectable-highlighted');
@@ -360,7 +367,7 @@ describe('Landscape', () => {
       await clickModule('maven', wrapper);
       await clickModule('spring-boot', wrapper);
 
-      wrapper.find(wrappedElement('init-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('init-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('maven-module')).classes()).toContain('-highlighted-unselection');
@@ -371,11 +378,11 @@ describe('Landscape', () => {
     it('should put not emphasized in background', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('infinitest-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('infinitest-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
       expect(wrapper.find(wrappedElement('landscape-container')).classes()).toContain('has-emphasized-module');
 
-      wrapper.find(wrappedElement('infinitest-module')).trigger('mouseleave');
+      await wrapper.find(wrappedElement('infinitest-module')).trigger('mouseleave');
       await wrapper.vm.$nextTick();
       expect(wrapper.find(wrappedElement('landscape-container')).classes()).not.toContain('has-emphasized-module');
     });
@@ -396,7 +403,7 @@ describe('Landscape', () => {
 
     it('should mark extended root modules as selectable', async () => {
       const wrapper = await componentWithLandscape();
-      wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
+      await wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
       await wrapper.vm.$nextTick();
 
       const initClasses = wrapper.find(wrappedElement('init-module')).classes();
@@ -693,7 +700,7 @@ describe('Landscape', () => {
       await wrapper.find(wrappedElement('parameter-baseName-field')).setValue('base');
       await wrapper.find(wrappedElement('commit-module-application')).trigger('click');
 
-      wrapper.find(wrappedElement('modules-apply-all-button')).trigger('click');
+      await wrapper.find(wrappedElement('modules-apply-all-button')).trigger('click');
 
       await flushPromises();
 
@@ -806,7 +813,7 @@ describe('Landscape', () => {
       await flushPromises();
 
       await updatePath(wrapper);
-      wrapper.find(wrappedElement('download-button')).trigger('click');
+      await wrapper.find(wrappedElement('download-button')).trigger('click');
       await flushPromises();
 
       expect(wrapper.find(wrappedElement('modules-apply-all-button')).attributes('disabled')).toBeUndefined();
@@ -964,7 +971,7 @@ describe('Landscape', () => {
 
     it('should call blur if input field has focus and click on a module', async () => {
       const wrapper = await componentWithLandscape();
-      vi.spyOn(wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement, 'blur');
+      const blur = vi.spyOn(wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement, 'blur');
 
       Object.defineProperty(document, 'activeElement', {
         value: wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement,
@@ -975,7 +982,7 @@ describe('Landscape', () => {
       await flushPromises();
       await wrapper.vm.$nextTick();
 
-      expect((wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement).blur).toHaveBeenCalled();
+      expect(blur).toHaveBeenCalled();
     });
 
     it('should not navigate when an input field has focus', async () => {
@@ -1121,7 +1128,7 @@ describe('Landscape', () => {
     it('should retain module selection state when preset option is deselected', async () => {
       const { presetComponent, initModuleElement } = await setupAndSelectPreset('init-maven');
 
-      selectPresetOption(presetComponent, '');
+      await selectPresetOption(presetComponent, '');
 
       const classes = initModuleElement.classes();
       ['-selected', '-compacted'].forEach(expectedClass => {
@@ -1178,7 +1185,7 @@ describe('Landscape', () => {
     const setupAndSelectPreset = async (presetValue: string) => {
       const { wrapper, presetComponent } = await setupPresetTest();
 
-      selectPresetOption(presetComponent, presetValue);
+      await selectPresetOption(presetComponent, presetValue);
 
       const initModuleElement = wrapper.find(wrappedElement('init-module'));
 
@@ -1192,10 +1199,10 @@ describe('Landscape', () => {
       return { wrapper, presetComponent };
     };
 
-    const selectPresetOption = (presetComponent: VueWrapper<InstanceType<typeof LandscapePresetConfigurationVue>>, value: string) => {
+    const selectPresetOption = async (presetComponent: VueWrapper<InstanceType<typeof LandscapePresetConfigurationVue>>, value: string) => {
       const presetDropdown = presetComponent.find('select');
-      presetDropdown.setValue(value);
-      presetDropdown.trigger('change');
+      await presetDropdown.setValue(value);
+      await presetDropdown.trigger('change');
     };
   });
 

@@ -1,8 +1,8 @@
 import { Emitter } from 'mitt';
-import { vi } from 'vitest';
+import { type MockedFunction, vi } from 'vitest';
 
 interface EmitterStub extends Emitter<any> {
-  emit: vi.fn;
+  emit: MockedFunction<Emitter<any>['emit']>;
 }
 
 export const stubEmitter = (): EmitterStub =>

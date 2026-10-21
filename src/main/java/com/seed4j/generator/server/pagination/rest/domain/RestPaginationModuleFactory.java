@@ -37,6 +37,7 @@ public class RestPaginationModuleFactory {
       .files()
         .add(MAIN_SOURCE.template("RestAppPage.java"), mainDestination.append("Rest" + baseName + "Page.java"))
         .add(MAIN_SOURCE.template("RestAppPageable.java"), mainDestination.append("Rest" + baseName + "Pageable.java"))
+        .nullMarkedJavaPackage(mainDestination)
         .add(TEST_SOURCE.template("RestAppPageTest.java"), testDestination.append("Rest" + baseName + "PageTest.java"))
         .add(TEST_SOURCE.template("RestAppPageableTest.java"), testDestination.append("Rest" + baseName + "PageableTest.java"))
         .and()

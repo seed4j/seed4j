@@ -60,6 +60,7 @@ public class KafkaModuleFactory {
         .add(SOURCE.template("KafkaPropertiesTest.java"), toSrcTestJava().append(packagePath + "/" + TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA + "/KafkaPropertiesTest.java"))
         .add(SOURCE.template("KafkaProperties.java"), toSrcMainJava().append(packagePath + "/" + TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA + "/KafkaProperties.java"))
         .add(SOURCE.template("KafkaConfiguration.java"), toSrcMainJava().append(packagePath + "/" + TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA + "/KafkaConfiguration.java"))
+        .nullMarkedJavaPackage(toSrcMainJava().append(packagePath + TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA))
         .and()
       .integrationTestExtension("KafkaTestContainerExtension")
       .applicationProperties(SPRING_MAIN)
@@ -98,6 +99,8 @@ public class KafkaModuleFactory {
         .add(SOURCE.template("SampleConsumer.java"), toSrcMainJava().append(packagePath).append(SAMPLE_INFRASTRUCTURE_PRIMARY_KAFKA_CONSUMER).append("/SampleConsumer.java"))
         .add(SOURCE.template("SampleConsumerTest.java"), toSrcTestJava().append(packagePath).append(SAMPLE_INFRASTRUCTURE_PRIMARY_KAFKA_CONSUMER).append("/SampleConsumerTest.java"))
         .add(SOURCE.template("SampleConsumerIT.java"), toSrcTestJava().append(packagePath).append(SAMPLE_INFRASTRUCTURE_PRIMARY_KAFKA_CONSUMER).append("/SampleConsumerIT.java"))
+        .nullMarkedJavaPackage(toSrcMainJava().append(packagePath).append(SAMPLE_INFRASTRUCTURE_SECONDARY_KAFKA_PRODUCER))
+        .nullMarkedJavaPackage(toSrcMainJava().append(packagePath).append(SAMPLE_INFRASTRUCTURE_PRIMARY_KAFKA_CONSUMER))
         .and()
       .build();
     // @formatter:on

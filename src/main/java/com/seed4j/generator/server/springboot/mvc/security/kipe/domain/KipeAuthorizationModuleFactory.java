@@ -36,6 +36,8 @@ public class KipeAuthorizationModuleFactory {
       .documentation(documentationTitle("Kipe authorization"), SOURCE.template("kipe-authorization.md"))
       .files()
         .add(MAIN_SOURCE.template("package-info.java"), mainDestination.append("package-info.java"))
+        .nullMarkedJavaPackage(mainDestination.append(APPLICATION))
+        .nullMarkedJavaPackage(mainDestination.append("domain"))
         .add(MAIN_SOURCE.template("ApplicationAuthorizations.java"), mainDestination.append(APPLICATION).append(baseName + "Authorizations.java"))
         .batch(MAIN_SOURCE, mainDestination.append("domain"))
           .addTemplate("Accesses.java")

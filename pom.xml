@@ -147,6 +147,12 @@
     </dependency>
 
     <dependency>
+      <groupId>com.uber.nullaway</groupId>
+      <artifactId>nullaway-annotations</artifactId>
+      <version>${nullaway.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>${apache-commons-io.version}</version>
@@ -363,8 +369,7 @@
               -Xep:NullAway:ERROR
               -XepOpt:NullAway:JSpecifyMode=true
               -XepOpt:NullAway:OnlyNullMarked=true
-              -XepOpt:NullAway:CustomContractAnnotations=com.seed4j.shared.nullness.domain.Contract
-              -XepOpt:NullAway:ExcludedFieldAnnotations=com.seed4j.Logs,org.mockito.Mock
+              -XepOpt:NullAway:ExcludedFieldAnnotations=com.seed4j.Logs
             </arg>
           </compilerArgs>
           <annotationProcessorPaths>

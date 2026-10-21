@@ -1,7 +1,5 @@
 package com.seed4j.shared.error.domain;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Map;
 import org.jspecify.annotations.Nullable;
 
@@ -11,9 +9,11 @@ public final class NumberValueTooLowException extends AssertionException {
   private final String value;
 
   private NumberValueTooLowException(NumberValueTooLowExceptionBuilder builder) {
-    super(requireNonNull(builder.field), builder.message());
-    Assert.notNull("max", builder.minValue);
+    Assert.notNull("field", builder.field);
+    Assert.notNull("min", builder.minValue);
     Assert.notNull("value", builder.value);
+
+    super(builder.field, builder.message());
     min = builder.minValue;
     value = builder.value;
   }

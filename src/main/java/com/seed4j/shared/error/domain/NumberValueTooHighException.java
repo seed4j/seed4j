@@ -1,7 +1,5 @@
 package com.seed4j.shared.error.domain;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Map;
 import org.jspecify.annotations.Nullable;
 
@@ -11,9 +9,11 @@ public final class NumberValueTooHighException extends AssertionException {
   private final String value;
 
   private NumberValueTooHighException(NumberValueTooHighExceptionBuilder builder) {
-    super(requireNonNull(builder.field), builder.message());
+    Assert.notNull("field", builder.field);
     Assert.notNull("max", builder.maxValue);
     Assert.notNull("value", builder.value);
+
+    super(builder.field, builder.message());
     max = builder.maxValue;
     value = builder.value;
   }

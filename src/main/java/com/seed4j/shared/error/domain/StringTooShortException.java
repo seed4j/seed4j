@@ -1,7 +1,5 @@
 package com.seed4j.shared.error.domain;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Map;
 import org.jspecify.annotations.Nullable;
 
@@ -11,9 +9,11 @@ public final class StringTooShortException extends AssertionException {
   private final String currentLength;
 
   private StringTooShortException(StringTooShortExceptionBuilder builder) {
-    super(requireNonNull(builder.field), message(builder));
+    Assert.notNull("field", builder.field);
     Assert.notNull("value", builder.value);
     Assert.notNull("minLength", builder.minLength);
+
+    super(builder.field, message(builder));
     minLength = String.valueOf(builder.minLength);
     currentLength = String.valueOf(builder.value.length());
   }

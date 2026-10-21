@@ -1,7 +1,7 @@
 package com.seed4j.module.domain;
 
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.nullness.domain.Contract;
+import com.uber.nullaway.annotations.Contract;
 import org.jspecify.annotations.Nullable;
 
 public record Indentation(int spacesCount) {

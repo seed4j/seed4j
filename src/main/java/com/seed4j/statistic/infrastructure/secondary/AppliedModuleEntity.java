@@ -1,8 +1,8 @@
 package com.seed4j.statistic.infrastructure.secondary;
 
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
-import com.seed4j.shared.nullness.domain.Initializer;
 import com.seed4j.statistic.domain.AppliedModule;
+import com.uber.nullaway.annotations.Initializer;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

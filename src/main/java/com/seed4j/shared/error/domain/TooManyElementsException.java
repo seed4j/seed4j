@@ -1,7 +1,5 @@
 package com.seed4j.shared.error.domain;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Map;
 import org.jspecify.annotations.Nullable;
 
@@ -11,7 +9,9 @@ public final class TooManyElementsException extends AssertionException {
   private final String currentSize;
 
   private TooManyElementsException(TooManyElementsExceptionBuilder builder) {
-    super(requireNonNull(builder.field), builder.message());
+    Assert.notNull("field", builder.field);
+
+    super(builder.field, builder.message());
     maxSize = String.valueOf(builder.maxSize);
     currentSize = String.valueOf(builder.size);
   }

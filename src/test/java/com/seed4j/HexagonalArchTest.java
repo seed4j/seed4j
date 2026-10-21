@@ -44,6 +44,7 @@ class HexagonalArchTest {
     "org.slf4j..",
     "org.apache.commons..",
     "org.jspecify.annotations..",
+    "com.uber.nullaway.annotations..",
     "com.google.guava.."
   );
 

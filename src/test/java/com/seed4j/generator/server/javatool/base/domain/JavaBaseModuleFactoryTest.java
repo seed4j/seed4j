@@ -1,6 +1,7 @@
 package com.seed4j.generator.server.javatool.base.domain;
 
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.readmeFile;
 
 import com.seed4j.TestFileUtils;
@@ -24,7 +25,7 @@ class JavaBaseModuleFactoryTest {
 
     Seed4JModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, readmeFile())
+    assertThatModuleWithFiles(module, pomFile(), readmeFile())
       .hasPrefixedFiles("src/main/java/com/seed4j/growth", "BusinessContext.java", "SharedKernel.java")
       .hasPrefixedFiles(
         "src/main/java/com/seed4j/growth/shared/error/domain",
@@ -66,6 +67,36 @@ class JavaBaseModuleFactoryTest {
         "src/main/java/com/seed4j/growth/shared/generation/package-info.java",
         "src/main/java/com/seed4j/growth/shared/generation/domain/ExcludeFromGeneratedCodeCoverage.java"
       )
+      .hasFile("pom.xml")
+      .containing("<artifactId>jspecify</artifactId>")
+      .containing("<artifactId>nullaway-annotations</artifactId>")
+      .containing("${jspecify.version}")
+      .containing("${nullaway.version}")
+      .and()
+      .hasFile("src/main/java/com/seed4j/growth/package-info.java")
+      .containing("@org.jspecify.annotations.NullMarked\npackage com.seed4j.growth;")
+      .and()
+      .hasFile("src/main/java/com/seed4j/growth/shared/error/domain/package-info.java")
+      .containing("@org.jspecify.annotations.NullMarked\npackage com.seed4j.growth.shared.error.domain;")
+      .and()
+      .hasFile("src/main/java/com/seed4j/growth/shared/collection/domain/package-info.java")
+      .containing("@org.jspecify.annotations.NullMarked\npackage com.seed4j.growth.shared.collection.domain;")
+      .and()
+      .hasFile("src/main/java/com/seed4j/growth/shared/generation/domain/package-info.java")
+      .containing("@org.jspecify.annotations.NullMarked\npackage com.seed4j.growth.shared.generation.domain;")
+      .and()
+      .hasFile("src/main/java/com/seed4j/growth/shared/error/package-info.java")
+      .containing("@com.seed4j.growth.SharedKernel\n@org.jspecify.annotations.NullMarked\npackage com.seed4j.growth.shared.error;")
+      .and()
+      .hasFile("src/main/java/com/seed4j/growth/shared/collection/package-info.java")
+      .containing("@com.seed4j.growth.SharedKernel\n@org.jspecify.annotations.NullMarked\npackage com.seed4j.growth.shared.collection;")
+      .and()
+      .hasFile("src/main/java/com/seed4j/growth/shared/generation/package-info.java")
+      .containing("@com.seed4j.growth.SharedKernel\n@org.jspecify.annotations.NullMarked\npackage com.seed4j.growth.shared.generation;")
+      .and()
+      .hasFile("src/main/java/com/seed4j/growth/shared/error/domain/Assert.java")
+      .containing("@Contract(\"_, null -> fail\")\n  public static void notNull(String field, @Nullable Object input)")
+      .and()
       .hasFile("src/main/java/com/seed4j/growth/shared/collection/domain/MyappCollections.java")
       .containing("class MyappCollections")
       .and()

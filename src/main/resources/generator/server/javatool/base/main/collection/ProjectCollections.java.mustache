@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Null safe utility class to manage collections
@@ -22,7 +23,7 @@ public final class {{ baseName }}Collections {
    *          input collection
    * @return An immutable collection
    */
-  public static <T> Collection<T> immutable(Collection<? extends T> collection) {
+  public static <T> Collection<T> immutable(@Nullable Collection<? extends T> collection) {
     if (collection == null) {
       return Set.of();
     }
@@ -39,7 +40,7 @@ public final class {{ baseName }}Collections {
    *          input set
    * @return An immutable set
    */
-  public static <T> Set<T> immutable(Set<? extends T> set) {
+  public static <T> Set<T> immutable(@Nullable Set<? extends T> set) {
     if (set == null) {
       return Set.of();
     }
@@ -56,7 +57,7 @@ public final class {{ baseName }}Collections {
    *          input list
    * @return An immutable list
    */
-  public static <T> List<T> immutable(List<? extends T> list) {
+  public static <T> List<T> immutable(@Nullable List<? extends T> list) {
     if (list == null) {
       return List.of();
     }
@@ -71,7 +72,7 @@ public final class {{ baseName }}Collections {
    * @param <V> value type of this map
    * @return An immutable map
    */
-  public static <K, V> Map<K, V> immutable(Map<? extends K, ? extends V> map) {
+  public static <K, V> Map<K, V> immutable(@Nullable Map<? extends K, ? extends V> map) {
     if (map == null) {
       return Map.of();
     }

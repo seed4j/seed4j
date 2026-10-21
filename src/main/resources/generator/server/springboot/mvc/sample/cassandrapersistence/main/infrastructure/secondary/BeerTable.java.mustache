@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Table("beer")
+@SuppressWarnings("NullAway.Init") // fields are set by Spring Data
 final class BeerTable {
 
   @PrimaryKey("id")

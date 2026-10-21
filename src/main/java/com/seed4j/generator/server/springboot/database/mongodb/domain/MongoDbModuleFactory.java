@@ -67,6 +67,7 @@ public class MongoDbModuleFactory {
           .addTemplate("MongodbDatabaseConfiguration.java")
           .addTemplate("JSR310DateConverters.java")
           .and()
+          .nullMarkedJavaPackage(toSrcMainJava().append(packagePath).append(MONGO_SECONDARY))
         .add(
               TEST_SOURCE.template("JSR310DateConvertersTest.java"),
               toSrcTestJava().append(packagePath).append(MONGO_SECONDARY).append("JSR310DateConvertersTest.java")

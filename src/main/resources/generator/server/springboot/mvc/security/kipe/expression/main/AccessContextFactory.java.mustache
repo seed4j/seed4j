@@ -1,12 +1,13 @@
 package {{packageName}}.shared.kipe.application;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.Authentication;
 
 final class AccessContextFactory {
 
   private AccessContextFactory() {}
 
-  static <T> AccessContext<T> of(Authentication authentication, String action, T element) {
+  static <T> AccessContext<T> of(Authentication authentication, String action, @Nullable T element) {
     if (element == null) {
       return new NullElementAccessContext<>(authentication, action);
     }

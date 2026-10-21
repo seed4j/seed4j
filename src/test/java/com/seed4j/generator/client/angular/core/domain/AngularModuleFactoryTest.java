@@ -56,6 +56,7 @@ class AngularModuleFactoryTest {
       .containing(nodeDependency("@typescript-eslint/eslint-plugin"))
       .containing(nodeDependency("@typescript-eslint/parser"))
       .containing(nodeDependency("angular-eslint"))
+      .containing(nodeDependency("@eslint/js"))
       .containing(nodeDependency("eslint"))
       .containing(nodeDependency("globals"))
       .containing(nodeDependency("typescript-eslint"))

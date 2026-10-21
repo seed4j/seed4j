@@ -29,6 +29,7 @@ public class SampleLangChain4jModuleFactory {
         .batch(SOURCE.append("main").append(PRIMARY), mainDestination.append(PRIMARY))
           .addTemplate("ChatResource.java")
           .and()
+          .nullMarkedJavaPackage(mainDestination.append(PRIMARY))
         .batch(SOURCE.append("test").append(SAMPLE).append(PRIMARY), testDestination.append(PRIMARY))
           .addTemplate("ChatResourceTest.java")
           .and()

@@ -70,15 +70,16 @@ public class ReactI18nModuleFactory {
           .and()
         .in(path(INDEX_TEST + "webapp/unit/home/infrastructure/primary/HomePage.spec.tsx"))
           .add(append(), LINE_BREAK + """
+           vi.mock('react-i18next', () => ({
+             useTranslation: () => {
+               return {
+                 t: vi.fn().mockImplementation(() => 'Internationalization enabled'),
+               };
+             },
+           }));
+
            describe('Home I18next', () => {
              it('should render with translation', () => {
-               vi.mock('react-i18next', () => ({
-                 useTranslation: () => {
-                   return {
-                     t: vi.fn().mockImplementation(() => 'Internationalization enabled'),
-                   };
-                 },
-               }));
                const { getAllByText } = render(<HomePage />);
                const title = getAllByText('Internationalization enabled');
                expect(title).toBeTruthy();

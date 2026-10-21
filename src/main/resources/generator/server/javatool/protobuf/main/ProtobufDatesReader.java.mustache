@@ -2,12 +2,13 @@ package {{packageName}}.shared.protobuf.infrastructure.primary;
 
 import com.google.protobuf.Timestamp;
 import java.time.Instant;
+import org.jspecify.annotations.Nullable;
 
 public final class ProtobufDatesReader {
 
   private ProtobufDatesReader() {}
 
-  public static Instant readInstant(Timestamp timestamp) {
+  public static @Nullable Instant readInstant(@Nullable Timestamp timestamp) {
     if (timestamp == null || timestamp.getSeconds() == 0) {
       return null;
     }

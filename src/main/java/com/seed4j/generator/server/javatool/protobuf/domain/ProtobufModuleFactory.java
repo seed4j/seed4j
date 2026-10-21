@@ -45,6 +45,8 @@ public class ProtobufModuleFactory {
     return moduleBuilder(properties)
       .files()
         .add(MAIN_SOURCE.template("package-info.java"), mainDestination.append("package-info.java"))
+        .nullMarkedJavaPackage(mainDestination.append("infrastructure/primary"))
+        .nullMarkedJavaPackage(mainDestination.append("infrastructure/secondary"))
         .add(MAIN_SOURCE.template("ProtobufDatesReader.java"), mainDestination.append("infrastructure/primary/ProtobufDatesReader.java"))
         .add(MAIN_SOURCE.template("ProtobufDatesWriter.java"), mainDestination.append("infrastructure/secondary/ProtobufDatesWriter.java"))
         .add(MAIN_SOURCE.append(".gitkeep"), to("src/main/proto/.gitkeep"))

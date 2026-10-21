@@ -30,7 +30,7 @@ public class AuthenticationSteps {
   }
 
   private SecretKey buildKey(JwtAuthenticationProperties properties) {
-    return Keys.hmacShaKeyFor(properties.getJwtBase64Secret().getBytes(StandardCharsets.UTF_8));
+    return Keys.hmacShaKeyFor(properties.jwtBase64Secret().getBytes(StandardCharsets.UTF_8));
   }
 
   @Given("I am logged in as {string}")

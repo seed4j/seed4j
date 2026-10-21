@@ -53,7 +53,7 @@ class SecurityConfiguration {
       .csrf(CsrfConfigurer::disable)
       .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
       .headers(headers -> headers
-        .contentSecurityPolicy(csp -> csp.policyDirectives(properties.getContentSecurityPolicy()))
+        .contentSecurityPolicy(csp -> csp.policyDirectives(properties.contentSecurityPolicy()))
         .frameOptions(FrameOptionsConfig::deny)
         .referrerPolicy(referrer -> referrer.policy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN))
         .permissionsPolicyHeader(permissions ->
@@ -97,6 +97,6 @@ class SecurityConfiguration {
   }
 
   private SecretKey signingKey() {
-    return Keys.hmacShaKeyFor(properties.getJwtBase64Secret().getBytes(StandardCharsets.UTF_8));
+    return Keys.hmacShaKeyFor(properties.jwtBase64Secret().getBytes(StandardCharsets.UTF_8));
   }
 }

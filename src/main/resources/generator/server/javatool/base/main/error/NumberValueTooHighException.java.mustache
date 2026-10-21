@@ -9,13 +9,9 @@ public final class NumberValueTooHighException extends AssertionException {
   private final String value;
 
   private NumberValueTooHighException(NumberValueTooHighExceptionBuilder builder) {
-    Assert.notNull("field", builder.field);
-    Assert.notNull("max", builder.maxValue);
-    Assert.notNull("value", builder.value);
-
-    super(builder.field, builder.message());
-    max = builder.maxValue;
-    value = builder.value;
+    super(builder.field(), builder.message());
+    max = builder.maxValue();
+    value = builder.value();
   }
 
   public static NumberValueTooHighExceptionBuilder builder() {
@@ -44,6 +40,24 @@ public final class NumberValueTooHighException extends AssertionException {
       this.value = value;
 
       return this;
+    }
+
+    private String field() {
+      Assert.notNull("field", field);
+
+      return field;
+    }
+
+    private String maxValue() {
+      Assert.notNull("max", maxValue);
+
+      return maxValue;
+    }
+
+    private String value() {
+      Assert.notNull("value", value);
+
+      return value;
     }
 
     public String message() {

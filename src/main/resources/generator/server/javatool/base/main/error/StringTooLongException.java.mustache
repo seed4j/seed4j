@@ -9,12 +9,9 @@ public final class StringTooLongException extends AssertionException {
   private final String currentLength;
 
   private StringTooLongException(StringTooLongExceptionBuilder builder) {
-    Assert.notNull("field", builder.field);
-    Assert.notNull("value", builder.value);
-
-    super(builder.field, builder.message());
+    super(builder.field(), builder.message());
     maxLength = String.valueOf(builder.maxLength);
-    currentLength = String.valueOf(builder.value.length());
+    currentLength = String.valueOf(builder.value().length());
   }
 
   public static StringTooLongExceptionBuilder builder() {
@@ -45,6 +42,18 @@ public final class StringTooLongException extends AssertionException {
       this.maxLength = maxLength;
 
       return this;
+    }
+
+    private String field() {
+      Assert.notNull("field", field);
+
+      return field;
+    }
+
+    private String value() {
+      Assert.notNull("value", value);
+
+      return value;
     }
 
     private String message() {

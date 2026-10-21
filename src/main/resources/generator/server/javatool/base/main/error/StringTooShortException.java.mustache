@@ -9,12 +9,9 @@ public final class StringTooShortException extends AssertionException {
   private final String currentLength;
 
   private StringTooShortException(StringTooShortExceptionBuilder builder) {
-    Assert.notNull("field", builder.field);
-    Assert.notNull("value", builder.value);
-
-    super(builder.field, builder.message());
+    super(builder.field(), builder.message());
     minLength = String.valueOf(builder.minLength);
-    currentLength = String.valueOf(builder.value.length());
+    currentLength = String.valueOf(builder.value().length());
   }
 
   public static StringTooShortExceptionBuilder builder() {
@@ -45,6 +42,18 @@ public final class StringTooShortException extends AssertionException {
       this.minLength = minLength;
 
       return this;
+    }
+
+    private String field() {
+      Assert.notNull("field", field);
+
+      return field;
+    }
+
+    private String value() {
+      Assert.notNull("value", value);
+
+      return value;
     }
 
     private String message() {

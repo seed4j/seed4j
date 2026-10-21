@@ -9,9 +9,7 @@ public class TooManyElementsException extends AssertionException {
   private final String currentSize;
 
   public TooManyElementsException(TooManyElementsExceptionBuilder builder) {
-    Assert.notNull("field", builder.field);
-
-    super(builder.field, builder.message());
+    super(builder.field(), builder.message());
     maxSize = String.valueOf(builder.maxSize);
     currentSize = String.valueOf(builder.size);
   }
@@ -42,6 +40,12 @@ public class TooManyElementsException extends AssertionException {
       this.size = size;
 
       return this;
+    }
+
+    private String field() {
+      Assert.notNull("field", field);
+
+      return field;
     }
 
     private String message() {

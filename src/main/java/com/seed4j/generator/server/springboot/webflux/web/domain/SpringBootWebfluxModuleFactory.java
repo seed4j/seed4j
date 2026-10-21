@@ -55,6 +55,7 @@ public class SpringBootWebfluxModuleFactory {
           .addTemplate("FieldErrorDTO.java")
           .addTemplate("HeaderUtil.java")
           .and()
+        .nullMarkedJavaPackage(toSrcMainJava().append(packagePath).append(EXCEPTION_PRIMARY))
         .batch(SOURCE.append("test"), toSrcTestJava().append(packagePath).append(EXCEPTION_PRIMARY))
           .addTemplate("HeaderUtilTest.java")
           .addTemplate("FieldErrorDTOTest.java")

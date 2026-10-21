@@ -58,6 +58,7 @@ public class SpringdocModuleFactory {
         .and()
       .files()
         .add(SOURCE.template(SPRINGDOC_CONFIG_JAVA_FILE), mainDestination.append(SPRINGDOC_CONFIG_JAVA_FILE))
+        .nullMarkedJavaPackage(mainDestination)
         .and()
       .applicationProperties(SPRING_MAIN)
         .set(propertyKey("springdoc.swagger-ui.operationsSorter"), ALPHA)

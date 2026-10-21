@@ -475,7 +475,7 @@ export class Landscape {
 
     return Optional.of(feature.modules)
       .map(this.updateModulesVisibility(rank))
-      .filter(this.hasVisibleModules)
+      .filter(modules => this.hasVisibleModules(modules))
       .map(modules => new LandscapeFeature(feature.slug(), modules, true))
       .orElse(new LandscapeFeature(feature.slug(), feature.modules, false));
   }

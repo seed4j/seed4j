@@ -16,7 +16,7 @@ import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller'
 import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
 import { ApplicationListener } from '@/shared/alert/infrastructure/primary/ApplicationListener';
 import { DOMWrapper, VueWrapper, flushPromises, mount } from '@vue/test-utils';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { type Mock, beforeEach, describe, expect, it, vi } from 'vitest';
 import { stubAlertBus } from '../../../shared/alert/domain/AlertBus.fixture';
 import { wrappedElement } from '../../../WrappedElement';
 import { defaultLandscape } from '../../domain/landscape/Landscape.fixture';
@@ -46,11 +46,18 @@ const stubApplicationListener = (): ApplicationListenerStub => ({
   removeEventListener: vi.fn(),
 });
 
-const stubLandscapeScroller = (): LandscapeScroller => ({
-  scroll: vi.fn(),
-  scrollSmooth: vi.fn(),
-  scrollIntoView: vi.fn(),
-});
+interface LandscapeScrollerStub extends LandscapeScroller {
+  scroll: Mock<LandscapeScroller['scroll']>;
+  scrollSmooth: Mock<LandscapeScroller['scrollSmooth']>;
+  scrollIntoView: Mock<LandscapeScroller['scrollIntoView']>;
+}
+
+const stubLandscapeScroller = (): LandscapeScrollerStub =>
+  ({
+    scroll: vi.fn(),
+    scrollSmooth: vi.fn(),
+    scrollIntoView: vi.fn(),
+  }) as LandscapeScrollerStub;
 
 interface WrapperOptions {
   cursorUpdater: BodyCursorUpdater;
@@ -964,7 +971,7 @@ describe('Landscape', () => {
 
     it('should call blur if input field has focus and click on a module', async () => {
       const wrapper = await componentWithLandscape();
-      vi.spyOn(wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement, 'blur');
+      const blur = vi.spyOn(wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement, 'blur');
 
       Object.defineProperty(document, 'activeElement', {
         value: wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement,
@@ -975,7 +982,7 @@ describe('Landscape', () => {
       await flushPromises();
       await wrapper.vm.$nextTick();
 
-      expect((wrapper.find(wrappedElement('folder-path-field')).element as HTMLElement).blur).toHaveBeenCalled();
+      expect(blur).toHaveBeenCalled();
     });
 
     it('should not navigate when an input field has focus', async () => {

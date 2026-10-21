@@ -37,7 +37,7 @@
     "typescript/no-useless-default-assignment": "off",
     "typescript/require-array-sort-compare": "off",
     "typescript/restrict-template-expressions": "off",
-    "typescript/unbound-method": "off",
+    "typescript/unbound-method": ["error", { "ignoreStatic": true }],
     "typescript/ban-ts-comment": "error",
     "typescript/no-namespace": "error",
     "typescript/no-require-imports": "error",
@@ -98,8 +98,7 @@
         "typescript/prefer-promise-reject-errors": "error",
         "typescript/require-await": "error",
         "typescript/restrict-plus-operands": "error",
-        "typescript/restrict-template-expressions": "error",
-        "typescript/unbound-method": "error"
+        "typescript/restrict-template-expressions": "error"
       }
     }
   ]

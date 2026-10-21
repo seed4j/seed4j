@@ -27,7 +27,8 @@ const buildLandscapeContainer = (): HTMLDivElement => {
 describe('MiniMap component', () => {
   it('should scroll the landscape container if minimapViewer position has changed', async () => {
     const landscapeContainer = buildLandscapeContainer();
-    landscapeContainer.scroll = vi.fn();
+    const scroll = vi.fn();
+    landscapeContainer.scroll = scroll;
 
     const wrapper = mount(LandscapeMiniMapVue, {
       props: { landscapeContainer },
@@ -49,13 +50,14 @@ describe('MiniMap component', () => {
     await wrapper.vm.$nextTick();
     await minimapViewer.trigger('mouseleave');
 
-    expect(landscapeContainer.scroll).toHaveBeenCalled();
+    expect(scroll).toHaveBeenCalled();
   });
 
   it('should not scroll the landscape container if minimapViewer is not being grabbed', async () => {
     const landscapeContainer = buildLandscapeContainer();
 
-    landscapeContainer.scroll = vi.fn();
+    const scroll = vi.fn();
+    landscapeContainer.scroll = scroll;
 
     const wrapper = mount(LandscapeMiniMapVue, {
       props: { landscapeContainer },
@@ -66,13 +68,13 @@ describe('MiniMap component', () => {
     await minimapViewer.trigger('mousemove');
     await wrapper.vm.$nextTick();
 
-    expect(landscapeContainer.scroll).not.toHaveBeenCalled();
+    expect(scroll).not.toHaveBeenCalled();
   });
 
   it('should track the scroller position of the landscape container', () => {
     const landscapeContainer = buildLandscapeContainer();
 
-    vi.spyOn(landscapeContainer, 'addEventListener');
+    const addEventListener = vi.spyOn(landscapeContainer, 'addEventListener');
 
     mount(LandscapeMiniMapVue, {
       props: { landscapeContainer },
@@ -80,7 +82,7 @@ describe('MiniMap component', () => {
 
     landscapeContainer.dispatchEvent(new Event('scroll'));
 
-    expect(landscapeContainer.addEventListener).toBeCalled();
+    expect(addEventListener).toBeCalled();
   });
 
   it('should open and close the minimap', async () => {

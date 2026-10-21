@@ -31,6 +31,7 @@ public class JavaMemoizersModuleFactory {
     return moduleBuilder(properties)
       .files()
         .add(SOURCE.template("package-info.java"), mainDestination.append("package-info.java"))
+        .nullMarkedJavaPackage(mainDestination.append("domain"))
         .add(MAIN_SOURCE.template("Memoizers.java"), mainDestination.append("domain").append("Memoizers.java"))
         .add(TEST_SOURCE.template("MemoizersTest.java"), testDestination.append("domain").append("MemoizersTest.java"))
         .and()

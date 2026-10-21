@@ -61,6 +61,7 @@ public class JpaModuleFactory {
     return moduleBuilder(properties)
       .files()
         .add(jpaSource.template("DatabaseConfiguration.java"), mainDestination.append("DatabaseConfiguration.java"))
+        .nullMarkedJavaPackage(toSrcMainJava().append(properties.packagePath()).append("wire/database/infrastructure/secondary"))
         .and()
       .javaDependencies()
         .addDependency(groupId("org.springframework.boot"), artifactId("spring-boot-starter-data-jpa"))

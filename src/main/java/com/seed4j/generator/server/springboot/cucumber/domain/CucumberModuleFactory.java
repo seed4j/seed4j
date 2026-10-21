@@ -31,6 +31,8 @@ public class CucumberModuleFactory {
       .and()
     .documentation(documentationTitle("Cucumber"), SOURCE.template("cucumber.md"))
     .files()
+      .nullMarkedJavaPackage(destination)
+      .nullMarkedJavaPackage(destination.append("rest"))
       .batch(SOURCE, destination)
         .addTemplate("CucumberConfiguration.java")
         .addTemplate("CucumberTest.java")

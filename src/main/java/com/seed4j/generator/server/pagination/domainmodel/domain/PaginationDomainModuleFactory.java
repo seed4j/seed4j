@@ -42,6 +42,7 @@ public class PaginationDomainModuleFactory {
         .and()
       .files()
         .add(SOURCE.template("package-info.java.mustache"), mainDestination.append("package-info.java"))
+        .nullMarkedJavaPackage(mainDomainDestination)
         .add(MAIN_SOURCE.template("AppPage.java"), mainDomainDestination.append(baseName + "Page.java"))
         .add(MAIN_SOURCE.template("AppPageable.java"), mainDomainDestination.append(baseName + "Pageable.java"))
         .add(TEST_SOURCE.template("AppPageTest.java"), testDomainDestination.append(baseName + "PageTest.java"))

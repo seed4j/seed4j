@@ -167,11 +167,6 @@ infinitest.filters
 !.mvn/wrapper/maven-wrapper.jar
 
 ######################
-# ESLint
-######################
-.eslintcache
-
-######################
 # Angular
 ######################
 .angular/

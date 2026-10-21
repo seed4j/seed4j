@@ -157,7 +157,7 @@ To run your existing tests in a native image, run the following goal:
 
 We use multiple linters check and lint your code:
 
-- [ESLint](https://eslint.org/) for JavaScript/TypeScript
+- [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) for JavaScript/TypeScript
 - [Prettier](https://github.com/prettier/prettier) for the format
   - [prettier-java](https://github.com/jhipster/prettier-java) for Java
 - [Stylelint](https://stylelint.io/) for style

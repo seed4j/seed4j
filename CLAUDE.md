@@ -40,8 +40,8 @@ npm run lint    # auto-fix JS/TS/SCSS
 ### Lint (Java + Frontend)
 
 ```bash
-npm run lint:ci # ESLint + Prettier + Stylelint check
-npm run lint    # ESLint + Prettier + Stylelint with auto-fix
+npm run lint:ci # Oxlint + Prettier check
+npm run lint    # Oxlint + Prettier + Stylelint with auto-fix
 ```
 
 Prettier also formats Java via `prettier-java`. Java style is additionally enforced by Checkstyle (runs as part of `mvn verify`).

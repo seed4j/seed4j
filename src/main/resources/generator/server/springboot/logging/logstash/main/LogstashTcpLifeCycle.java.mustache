@@ -9,9 +9,11 @@ import java.util.Optional;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.encoder.LogstashEncoder;
 import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.SmartLifecycle;
+import {{packageName}}.shared.error.domain.Assert;
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.ObjectMapper;
 
@@ -31,7 +33,7 @@ class LogstashTcpLifeCycle implements SmartLifecycle {
     this(fields, properties, null);
   }
 
-  public LogstashTcpLifeCycle(Map<String, String> fields, LogstashTcpProperties properties, ObjectMapper objectMapper) {
+  public LogstashTcpLifeCycle(Map<String, String> fields, LogstashTcpProperties properties, @Nullable ObjectMapper objectMapper) {
     this.fields = fields;
     this.properties = properties;
     this.objectMapper = Optional.ofNullable(objectMapper).orElse(new ObjectMapper());
@@ -63,15 +65,19 @@ class LogstashTcpLifeCycle implements SmartLifecycle {
   protected LogstashTcpSocketAppender logstashTcpSocketAppender(LoggerContext context) {
     // Documentation is available at: https://github.com/logfellow/logstash-logback-encoder
     var logstashAppender = new LogstashTcpSocketAppender();
-    logstashAppender.addDestinations(new InetSocketAddress(properties.getHost(), properties.getPort()));
+    var host = properties.getHost();
+    Assert.notBlank("host", host);
+    logstashAppender.addDestinations(new InetSocketAddress(host, properties.getPort()));
     logstashAppender.setContext(context);
     logstashAppender.setEncoder(logstashEncoder());
     logstashAppender.setName(ASYNC_LOGSTASH_APPENDER_NAME);
-    if (properties.getRingBufferSize() != null) {
-      logstashAppender.setRingBufferSize(properties.getRingBufferSize());
+    var ringBufferSize = properties.getRingBufferSize();
+    if (ringBufferSize != null) {
+      logstashAppender.setRingBufferSize(ringBufferSize);
     }
-    if (properties.getShutdownGracePeriod() != null) {
-      logstashAppender.setShutdownGracePeriod(Duration.buildByMilliseconds(properties.getShutdownGracePeriod().toMillis()));
+    var shutdownGracePeriod = properties.getShutdownGracePeriod();
+    if (shutdownGracePeriod != null) {
+      logstashAppender.setShutdownGracePeriod(Duration.buildByMilliseconds(shutdownGracePeriod.toMillis()));
     }
     return logstashAppender;
   }

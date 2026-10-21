@@ -18,49 +18,28 @@ final class BeerDocument {
 
   @Id
   @Field(name = "id")
-  private UUID id;
+  private final UUID id;
 
   @Field(name = "name")
-  private String name;
+  private final String name;
 
   @Field(name = "unit_price")
-  private BigDecimal unitPrice;
+  private final BigDecimal unitPrice;
 
   @Field(name = "selling_state")
-  private BeerSellingState sellingState;
+  private final BeerSellingState sellingState;
+
+  private BeerDocument(UUID id, String name, BigDecimal unitPrice, BeerSellingState sellingState) {
+    this.id = id;
+    this.name = name;
+    this.unitPrice = unitPrice;
+    this.sellingState = sellingState;
+  }
 
   public static BeerDocument from(Beer beer) {
     Assert.notNull("beer", beer);
 
-    return new BeerDocument()
-      .id(beer.id().get())
-      .name(beer.name().get())
-      .unitPrice(beer.unitPrice().get())
-      .sellingState(beer.sellingState());
-  }
-
-  private BeerDocument id(UUID id) {
-    this.id = id;
-
-    return this;
-  }
-
-  private BeerDocument name(String name) {
-    this.name = name;
-
-    return this;
-  }
-
-  private BeerDocument unitPrice(BigDecimal unitPrice) {
-    this.unitPrice = unitPrice;
-
-    return this;
-  }
-
-  private BeerDocument sellingState(BeerSellingState sellingState) {
-    this.sellingState = sellingState;
-
-    return this;
+    return new BeerDocument(beer.id().get(), beer.name().get(), beer.unitPrice().get(), beer.sellingState());
   }
 
   public Beer toDomain() {

@@ -41,6 +41,7 @@ public class GitInfoModuleFactory {
           mainDestination.append(PRIMARY).append("GitInfoConfiguration.java")
         )
         .add(MAIN_SOURCE.template(PACKAGE_INFO), mainDestination.append(PACKAGE_INFO))
+        .nullMarkedJavaPackage(mainDestination.append("infrastructure/primary"))
         .and()
       .applicationProperties(SPRING_MAIN)
         .comment(propertyKey("management.info.git"), comment("Git Information"))

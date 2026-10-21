@@ -66,6 +66,7 @@ public class GatewayModuleFactory {
           .addTemplate("RestServiceInstance.java")
         .and()
         .add(SOURCE.template("test/GatewayResourceIT.java"), testDestination.append("GatewayResourceIT.java"))
+        .nullMarkedJavaPackage(destination)
         .and()
       .build();
     // @formatter:on

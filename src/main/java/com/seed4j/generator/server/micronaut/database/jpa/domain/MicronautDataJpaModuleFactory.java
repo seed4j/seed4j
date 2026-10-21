@@ -85,6 +85,7 @@ public class MicronautDataJpaModuleFactory {
     return moduleBuilder(properties)
       .files()
       .add(jpaSource.template("DatabaseConfiguration.java"), mainDestination.append("DatabaseConfiguration.java"))
+      .nullMarkedJavaPackage(toSrcMainJava().append(properties.packagePath()).append("wire/database/infrastructure/secondary"))
       .and()
       .javaDependencies()
       .addDependency(MICRONAUT_DATA_GROUP, artifactId("micronaut-data-hibernate-jpa"))

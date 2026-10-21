@@ -3,6 +3,7 @@ package {{packageName}}.shared.useridentity.domain;
 import java.util.Locale;
 import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.Nullable;
 import {{packageName}}.shared.error.domain.Assert;
 
 public record Lastname(String lastname) implements Comparable<Lastname> {
@@ -12,7 +13,7 @@ public record Lastname(String lastname) implements Comparable<Lastname> {
     this.lastname = lastname.trim().toUpperCase(Locale.ROOT);
   }
 
-  public static Optional<Lastname> of(String birthName) {
+  public static Optional<Lastname> of(@Nullable String birthName) {
     return Optional.ofNullable(birthName).filter(StringUtils::isNotBlank).map(Lastname::new);
   }
 
@@ -21,7 +22,7 @@ public record Lastname(String lastname) implements Comparable<Lastname> {
   }
 
   @Override
-  public int compareTo(Lastname other) {
+  public int compareTo(@Nullable Lastname other) {
     if (other == null) {
       return -1;
     }

@@ -1,6 +1,7 @@
 package {{packageName}}.shared.useridentity.domain;
 
 import java.util.Comparator;
+import org.jspecify.annotations.Nullable;
 import {{packageName}}.shared.error.domain.Assert;
 
 public record Name(Firstname firstname, Lastname lastname) implements Comparable<Name> {
@@ -20,7 +21,7 @@ public record Name(Firstname firstname, Lastname lastname) implements Comparable
   }
 
   @Override
-  public int compareTo(Name other) {
+  public int compareTo(@Nullable Name other) {
     if (other == null) {
       return -1;
     }

@@ -2,6 +2,7 @@ package {{packageName}}.account.domain;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
+import org.jspecify.annotations.Nullable;
 import {{packageName}}.shared.authentication.domain.Role;
 import {{packageName}}.shared.authentication.domain.Roles;
 import {{packageName}}.shared.authentication.domain.Username;
@@ -22,6 +23,7 @@ public final class Account {
     Assert.notNull("username", builder.username);
     Assert.notNull("firstname", builder.firstname);
     Assert.notNull("lastname", builder.lastname);
+    Assert.notNull("email", builder.email);
     Assert.notNull("roles", builder.roles);
 
     username = builder.username;
@@ -59,11 +61,11 @@ public final class Account {
       AccountRolesBuilder,
       AccountOptionalFieldBuilder {
 
-    private Username username;
-    private Firstname firstname;
-    private Lastname lastname;
-    private Email email;
-    private Roles roles;
+    private @Nullable Username username;
+    private @Nullable Firstname firstname;
+    private @Nullable Lastname lastname;
+    private @Nullable Email email;
+    private @Nullable Roles roles;
 
     private UserBuilder() {}
 

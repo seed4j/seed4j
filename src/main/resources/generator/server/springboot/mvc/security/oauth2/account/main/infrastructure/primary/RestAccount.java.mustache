@@ -3,8 +3,10 @@ package {{packageName}}.account.infrastructure.primary;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.util.Collection;
+import org.jspecify.annotations.Nullable;
 import {{packageName}}.account.domain.Account;
 import {{packageName}}.shared.authentication.domain.Role;
+import {{packageName}}.shared.error.domain.Assert;
 
 @Schema(name = "user", description = "Information for an user")
 final class RestAccount {
@@ -15,6 +17,11 @@ final class RestAccount {
   private final Collection<String> roles;
 
   private RestAccount(RestAccountBuilder builder) {
+    Assert.notNull("username", builder.username);
+    Assert.notNull("name", builder.name);
+    Assert.notNull("email", builder.email);
+    Assert.notNull("roles", builder.roles);
+
     username = builder.username;
     name = builder.name;
     email = builder.email;
@@ -52,10 +59,10 @@ final class RestAccount {
 
   private static final class RestAccountBuilder {
 
-    private String username;
-    private String name;
-    private String email;
-    private Collection<String> roles;
+    private @Nullable String username;
+    private @Nullable String name;
+    private @Nullable String email;
+    private @Nullable Collection<String> roles;
 
     private RestAccountBuilder username(String username) {
       this.username = username;

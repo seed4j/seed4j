@@ -103,6 +103,7 @@ public enum Seed4JCoreModuleSlug implements Seed4JModuleSlugFactory {
   MONGODB("mongodb", RANK_C),
   NEO4J("neo4j", RANK_C),
   NEO4J_MIGRATIONS("neo4j-migrations", RANK_C),
+  NULLAWAY("nullaway", RANK_D),
   OPENAPI_CONTRACT("openapi-contract", RANK_B),
   OPENAPI_BACKWARDS_COMPATIBILITY_CHECK("openapi-backwards-compatibility-check", RANK_B),
   OPTIONAL_TYPESCRIPT("optional-typescript", RANK_B),

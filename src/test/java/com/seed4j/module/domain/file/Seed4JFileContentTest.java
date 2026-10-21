@@ -10,6 +10,7 @@ import com.seed4j.module.domain.ProjectFiles;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +27,14 @@ class Seed4JFileContentTest {
 
   private final TemplateRenderer templateRenderer = (message, context) ->
     message.replace("{{ packageName }}", (CharSequence) context.get("packageName"));
+
+  private final TemplateRenderer allKeysRenderer = (message, context) -> {
+    String rendered = message;
+    for (Map.Entry<String, ?> entry : context.entrySet()) {
+      rendered = rendered.replace("{{ " + entry.getKey() + " }}", String.valueOf(entry.getValue()));
+    }
+    return rendered;
+  };
 
   @BeforeEach
   void loadFiles() {
@@ -57,6 +66,31 @@ class Seed4JFileContentTest {
     assertThat(content.read(files, context(), templateRenderer))
       .asString(UTF_8)
       .isEqualTo("This is com.test.myapp");
+  }
+
+  @Test
+  void shouldReadTemplatedContentWithFileContext() {
+    Seed4JFileContent content = new Seed4JFileContent(
+      new Seed4JSource(Path.of("/generator/content/file-context.txt.mustache")),
+      Map.of("javaPackageName", "com.test.myapp.shared")
+    );
+
+    assertThat(content.read(files, context(), allKeysRenderer))
+      .asString(UTF_8)
+      .isEqualTo("com.test.myapp / com.test.myapp.shared");
+  }
+
+  @Test
+  void shouldOverrideModuleContextWithFileContext() {
+    Seed4JFileContent content = new Seed4JFileContent(
+      new Seed4JSource(Path.of("/generator/content/file-context.txt.mustache")),
+      Map.of("packageName", "overridden", "javaPackageName", "x")
+    );
+
+    assertThat(content.read(files, context(), allKeysRenderer))
+      .asString(UTF_8)
+      .isEqualTo("overridden / x");
+    assertThat(context().get()).containsEntry("packageName", "com.test.myapp");
   }
 
   @Test

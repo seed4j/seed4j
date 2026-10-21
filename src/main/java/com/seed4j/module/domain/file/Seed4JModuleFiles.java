@@ -1,5 +1,7 @@
 package com.seed4j.module.domain.file;
 
+import static com.seed4j.module.domain.Seed4JModule.from;
+
 import com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import com.seed4j.module.domain.Seed4JModuleUpgrade;
 import com.seed4j.module.domain.Seed4JProjectFilePath;
@@ -8,6 +10,8 @@ import com.seed4j.shared.error.domain.Assert;
 import java.util.*;
 
 public final class Seed4JModuleFiles {
+
+  private static final Seed4JSource NULL_MARKED_PACKAGE_INFO = from("module/nullmarked").template("package-info.java");
 
   private final Collection<Seed4JModuleFile> filesToAdd;
   private final Seed4JFilesToDelete filesToDelete;
@@ -75,6 +79,18 @@ public final class Seed4JModuleFiles {
 
     public Seed4JModuleFilesBuilder addExecutable(Seed4JSource source, Seed4JDestination destination) {
       filesToAdd.add(new Seed4JModuleFile(new Seed4JFileContent(source), destination, true));
+
+      return this;
+    }
+
+    public Seed4JModuleFilesBuilder nullMarkedJavaPackage(Seed4JDestination packageFolder) {
+      Assert.notNull("packageFolder", packageFolder);
+
+      Seed4JFileContent content = new Seed4JFileContent(
+        NULL_MARKED_PACKAGE_INFO,
+        Map.of("javaPackageName", packageFolder.javaPackageName())
+      );
+      filesToAdd.add(new Seed4JModuleFile(content, packageFolder.append("package-info.java"), false));
 
       return this;
     }

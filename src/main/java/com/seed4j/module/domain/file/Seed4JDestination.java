@@ -4,6 +4,7 @@ import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.nio.file.Path;
+import java.util.regex.Pattern;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -16,6 +17,10 @@ public class Seed4JDestination {
   public static final Seed4JDestination SRC_TEST_RESOURCES = new Seed4JDestination("src/test/resources");
 
   private static final String MUSTACHE_EXTENSION = ".mustache";
+
+  private static final Pattern JAVA_PACKAGE_FOLDER_PATTERN = Pattern.compile(
+    "^src/(?:main|test)/java/([A-Za-z_]\\w*+(?:/[A-Za-z_]\\w*+)*+)$"
+  );
 
   private final String destination;
 
@@ -39,6 +44,12 @@ public class Seed4JDestination {
 
   public Seed4JDestination append(String element) {
     return new Seed4JDestination(destination + "/" + element);
+  }
+
+  public String javaPackageName() {
+    Assert.field("destination", destination).matchesPattern(JAVA_PACKAGE_FOLDER_PATTERN);
+
+    return destination.substring(destination.indexOf("/java/") + "/java/".length()).replace('/', '.');
   }
 
   @SuppressWarnings("NullAway")

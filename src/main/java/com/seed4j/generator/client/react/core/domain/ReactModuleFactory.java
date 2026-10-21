@@ -71,7 +71,7 @@ public class ReactModuleFactory {
         .addDevDependency(packageName("@types/react-dom"), REACT)
         .addDevDependency(packageName("@tsconfig/vite-react"), REACT)
         .addDevDependency(packageName("@vitejs/plugin-react"), REACT)
-        .addDevDependency(packageName("eslint-plugin-react"), REACT)
+        .addDevDependency(packageName("@eslint-react/eslint-plugin"), REACT)
         .addDevDependency(packageName("jsdom"), COMMON)
         .addDevDependency(packageName("vite"), COMMON)
         .addDependency(packageName("react"), REACT)
@@ -119,18 +119,13 @@ public class ReactModuleFactory {
   private Consumer<Seed4JModuleBuilder> patchEslintConfig(Seed4JModuleProperties properties) {
     String reactConfig = """
     \t\tfiles: ['src/main/webapp/**/*.{ts,tsx}', 'src/test/webapp/unit/**/*.{ts,tsx}'],
-    \t\textends: [...typescript.configs.recommendedTypeChecked, react],
-    \t\tsettings: {
-    \t\t\treact: {
-    \t\t\t\tversion: 'detect',
-    \t\t\t},
-    \t\t},\
+    \t\textends: [...typescript.configs.recommendedTypeChecked, eslintReact.configs['recommended-type-checked']],\
     """.replace("\t", properties.indentation().spaces());
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()
         .in(path("eslint.config.js"))
-          .add(lineAfterRegex("from 'typescript-eslint'"), "import react from 'eslint-plugin-react/configs/recommended.js';")
+          .add(lineAfterRegex("from 'typescript-eslint'"), "import eslintReact from '@eslint-react/eslint-plugin';")
             .add(regex(always(), "\\s+\\.\\.\\.typescript\\.configs\\.recommended.*"), "")
             .add(regex("[ \\t]+files: \\['src/\\*/webapp/\\*\\*\\/\\*\\.ts'],"), reactConfig)
             .add(
@@ -156,8 +151,7 @@ public class ReactModuleFactory {
         .and()
       .with(eslintTypescriptRule("'@typescript-eslint/consistent-type-imports': 'error'", properties.indentation()))
       .with(eslintTypescriptRule("'@typescript-eslint/await-thenable': 'off'", properties.indentation()))
-      .with(eslintTypescriptRule("'@typescript-eslint/no-explicit-any': 'off'", properties.indentation()))
-      .with(eslintTypescriptRule("'react/react-in-jsx-scope': 'off'", properties.indentation()));
+      .with(eslintTypescriptRule("'@typescript-eslint/no-explicit-any': 'off'", properties.indentation()));
     // @formatter:on
   }
 

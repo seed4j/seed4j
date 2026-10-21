@@ -56,6 +56,7 @@ public class AngularModuleFactory {
         .addDependency(packageName("tslib"), ANGULAR)
         .addDevDependency(packageName("@typescript-eslint/eslint-plugin"), COMMON)
         .addDevDependency(packageName("@typescript-eslint/parser"), COMMON)
+        .addDevDependency(packageName("@eslint/js"), COMMON)
         .addDevDependency(packageName("eslint"), COMMON)
         .addDevDependency(packageName("@angular/build"), ANGULAR)
         .addDevDependency(packageName("@angular/cli"), ANGULAR)

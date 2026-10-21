@@ -240,7 +240,7 @@ describe('Landscape', () => {
     it('should switch to compacted mode', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('compacted-mode-button')).trigger('click');
+      await wrapper.find(wrappedElement('compacted-mode-button')).trigger('click');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('compacted-mode-button')).classes()).toContain('-selected');
@@ -251,7 +251,7 @@ describe('Landscape', () => {
     it('should switch to extended mode', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
+      await wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('compacted-mode-button')).classes()).toContain('-not-selected');
@@ -264,7 +264,7 @@ describe('Landscape', () => {
     it('should highlight compacted selectable module and dependencies', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
 
       const vueClasses = wrapper.find(wrappedElement('vue-module')).classes();
@@ -280,10 +280,10 @@ describe('Landscape', () => {
 
     it('should highlight extended selectable module and dependencies', async () => {
       const wrapper = await componentWithLandscape();
-      wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
+      await wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
       await wrapper.vm.$nextTick();
 
-      wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
 
       const vueClasses = wrapper.find(wrappedElement('vue-module')).classes();
@@ -300,7 +300,7 @@ describe('Landscape', () => {
     it('should highlight dependant feature', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('sample-feature-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('sample-feature-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
 
       const sampleFeatureClasses = wrapper.find(wrappedElement('sample-feature-module')).classes();
@@ -318,7 +318,7 @@ describe('Landscape', () => {
 
       await clickModule('maven', wrapper);
 
-      wrapper.find(wrappedElement('liquibase-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('liquibase-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('java-build-tools-feature')).classes()).toContain('-selectable-highlighted');
@@ -331,9 +331,9 @@ describe('Landscape', () => {
     it('should un-highlight single module and dependencies', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('java-base-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('java-base-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
-      wrapper.find(wrappedElement('java-base-module')).trigger('mouseleave');
+      await wrapper.find(wrappedElement('java-base-module')).trigger('mouseleave');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('java-base-module')).classes()).not.toContain('-selectable-highlighted');
@@ -344,9 +344,9 @@ describe('Landscape', () => {
     it('should un-highlight featured module and dependencies', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('vue-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
-      wrapper.find(wrappedElement('vue-module')).trigger('mouseleave');
+      await wrapper.find(wrappedElement('vue-module')).trigger('mouseleave');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('vue-module')).classes()).not.toContain('-selectable-highlighted');
@@ -360,7 +360,7 @@ describe('Landscape', () => {
       await clickModule('maven', wrapper);
       await clickModule('spring-boot', wrapper);
 
-      wrapper.find(wrappedElement('init-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('init-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
 
       expect(wrapper.find(wrappedElement('maven-module')).classes()).toContain('-highlighted-unselection');
@@ -371,11 +371,11 @@ describe('Landscape', () => {
     it('should put not emphasized in background', async () => {
       const wrapper = await componentWithLandscape();
 
-      wrapper.find(wrappedElement('infinitest-module')).trigger('mouseover');
+      await wrapper.find(wrappedElement('infinitest-module')).trigger('mouseover');
       await wrapper.vm.$nextTick();
       expect(wrapper.find(wrappedElement('landscape-container')).classes()).toContain('has-emphasized-module');
 
-      wrapper.find(wrappedElement('infinitest-module')).trigger('mouseleave');
+      await wrapper.find(wrappedElement('infinitest-module')).trigger('mouseleave');
       await wrapper.vm.$nextTick();
       expect(wrapper.find(wrappedElement('landscape-container')).classes()).not.toContain('has-emphasized-module');
     });
@@ -396,7 +396,7 @@ describe('Landscape', () => {
 
     it('should mark extended root modules as selectable', async () => {
       const wrapper = await componentWithLandscape();
-      wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
+      await wrapper.find(wrappedElement('extended-mode-button')).trigger('click');
       await wrapper.vm.$nextTick();
 
       const initClasses = wrapper.find(wrappedElement('init-module')).classes();
@@ -693,7 +693,7 @@ describe('Landscape', () => {
       await wrapper.find(wrappedElement('parameter-baseName-field')).setValue('base');
       await wrapper.find(wrappedElement('commit-module-application')).trigger('click');
 
-      wrapper.find(wrappedElement('modules-apply-all-button')).trigger('click');
+      await wrapper.find(wrappedElement('modules-apply-all-button')).trigger('click');
 
       await flushPromises();
 
@@ -806,7 +806,7 @@ describe('Landscape', () => {
       await flushPromises();
 
       await updatePath(wrapper);
-      wrapper.find(wrappedElement('download-button')).trigger('click');
+      await wrapper.find(wrappedElement('download-button')).trigger('click');
       await flushPromises();
 
       expect(wrapper.find(wrappedElement('modules-apply-all-button')).attributes('disabled')).toBeUndefined();
@@ -1121,7 +1121,7 @@ describe('Landscape', () => {
     it('should retain module selection state when preset option is deselected', async () => {
       const { presetComponent, initModuleElement } = await setupAndSelectPreset('init-maven');
 
-      selectPresetOption(presetComponent, '');
+      await selectPresetOption(presetComponent, '');
 
       const classes = initModuleElement.classes();
       ['-selected', '-compacted'].forEach(expectedClass => {
@@ -1178,7 +1178,7 @@ describe('Landscape', () => {
     const setupAndSelectPreset = async (presetValue: string) => {
       const { wrapper, presetComponent } = await setupPresetTest();
 
-      selectPresetOption(presetComponent, presetValue);
+      await selectPresetOption(presetComponent, presetValue);
 
       const initModuleElement = wrapper.find(wrappedElement('init-module'));
 
@@ -1192,10 +1192,10 @@ describe('Landscape', () => {
       return { wrapper, presetComponent };
     };
 
-    const selectPresetOption = (presetComponent: VueWrapper<InstanceType<typeof LandscapePresetConfigurationVue>>, value: string) => {
+    const selectPresetOption = async (presetComponent: VueWrapper<InstanceType<typeof LandscapePresetConfigurationVue>>, value: string) => {
       const presetDropdown = presetComponent.find('select');
-      presetDropdown.setValue(value);
-      presetDropdown.trigger('change');
+      await presetDropdown.setValue(value);
+      await presetDropdown.trigger('change');
     };
   });
 

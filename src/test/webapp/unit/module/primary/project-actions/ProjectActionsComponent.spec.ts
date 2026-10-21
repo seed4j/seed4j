@@ -63,7 +63,7 @@ describe('Project actions', () => {
       modules.download.mockResolvedValue(defaultProject());
       const wrapper = wrap({ modules });
 
-      wrapper.find(wrappedElement('download-button')).trigger('click');
+      await wrapper.find(wrappedElement('download-button')).trigger('click');
       await flushForm(wrapper);
       await flushPromises();
 
@@ -83,7 +83,7 @@ describe('Project actions', () => {
       modules.download.mockRejectedValue(new Error("Project can't be downloaded"));
       const wrapper = wrap({ modules });
 
-      wrapper.find(wrappedElement('download-button')).trigger('click');
+      await wrapper.find(wrappedElement('download-button')).trigger('click');
       await flushForm(wrapper);
 
       await flushPromises();

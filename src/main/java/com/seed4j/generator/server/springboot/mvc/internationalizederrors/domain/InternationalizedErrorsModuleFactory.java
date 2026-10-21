@@ -110,6 +110,9 @@ public class InternationalizedErrorsModuleFactory {
           TEST_SOURCE.template("ApplicationErrorsResource.java"),
           errorGeneratorPrimaryDestination.append(baseName + "ErrorsResource.java")
         )
+        .nullMarkedJavaPackage(mainPrimaryDestination)
+        .nullMarkedJavaPackage(errorGeneratorDestination.append(DOMAIN))
+        .nullMarkedJavaPackage(errorGeneratorPrimaryDestination)
         .and()
       .build();
     // @formatter:on

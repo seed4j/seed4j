@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+import org.jspecify.annotations.Nullable;
 
 public class {{ baseName }}Exception extends RuntimeException {
 
@@ -80,11 +81,11 @@ public class {{ baseName }}Exception extends RuntimeException {
     return technicalError(message, null);
   }
 
-  public static {{ baseName }}Exception technicalError(String message, Throwable cause) {
+  public static {{ baseName }}Exception technicalError(String message, @Nullable Throwable cause) {
     return builder(StandardErrorKey.INTERNAL_SERVER_ERROR).message(message).cause(cause).build();
   }
 
-  public static {{ baseName }}ExceptionBuilder builder(ErrorKey key) {
+  public static {{ baseName }}ExceptionBuilder builder(@Nullable ErrorKey key) {
     return new {{ baseName }}ExceptionBuilder(key);
   }
 
@@ -102,14 +103,14 @@ public class {{ baseName }}Exception extends RuntimeException {
 
   public static final class {{ baseName }}ExceptionBuilder {
 
-    private final ErrorKey key;
+    private final @Nullable ErrorKey key;
     private final Map<String, String> parameters = new HashMap<>();
 
-    private String message;
-    private Throwable cause;
-    private ErrorStatus status;
+    private @Nullable String message;
+    private @Nullable Throwable cause;
+    private @Nullable ErrorStatus status;
 
-    private {{ baseName }}ExceptionBuilder(ErrorKey key) {
+    private {{ baseName }}ExceptionBuilder(@Nullable ErrorKey key) {
       this.key = key;
     }
 
@@ -119,7 +120,7 @@ public class {{ baseName }}Exception extends RuntimeException {
       return this;
     }
 
-    public {{ baseName }}ExceptionBuilder cause(Throwable cause) {
+    public {{ baseName }}ExceptionBuilder cause(@Nullable Throwable cause) {
       this.cause = cause;
 
       return this;

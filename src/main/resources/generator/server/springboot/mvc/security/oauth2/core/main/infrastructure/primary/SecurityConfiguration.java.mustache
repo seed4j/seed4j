@@ -4,6 +4,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 import java.time.Duration;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.restclient.RestTemplateBuilder;
@@ -19,9 +20,11 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.FrameOptionsConfig;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -35,6 +38,7 @@ import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWrite
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 import {{packageName}}.shared.authentication.domain.Role;
+import {{packageName}}.shared.error.domain.Assert;
 import {{packageName}}.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 @Configuration
@@ -121,7 +125,10 @@ class SecurityConfiguration {
         // Check for OidcUserAuthority because Spring Security 5.2 returns
         // each scope as a GrantedAuthority, which we don't care about.
         if (authority instanceof OidcUserAuthority oidcUserAuthority) {
-          mappedAuthorities.addAll(Claims.extractAuthorityFromClaims(oidcUserAuthority.getUserInfo().getClaims()));
+          Optional.ofNullable(oidcUserAuthority.getUserInfo())
+            .map(OidcUserInfo::getClaims)
+            .map(Claims::extractAuthorityFromClaims)
+            .ifPresent(mappedAuthorities::addAll);
         }
       });
       return mappedAuthorities;
@@ -138,9 +145,13 @@ class SecurityConfiguration {
     OAuth2TokenValidator<Jwt> withAudience = new DelegatingOAuth2TokenValidator<>(withIssuer, audienceValidator);
 
     jwtDecoder.setJwtValidator(withAudience);
+
+    ClientRegistration clientRegistration = clientRegistrationRepository.findByRegistrationId("oidc");
+    Assert.notNull("clientRegistration", clientRegistration);
+
     jwtDecoder.setClaimSetConverter(
       new CustomClaimConverter(
-        clientRegistrationRepository.findByRegistrationId("oidc"),
+        clientRegistration,
         restTemplateBuilder.connectTimeout(Duration.ofMillis(TIMEOUT)).readTimeout(Duration.ofMillis(TIMEOUT)).build()
       )
     );

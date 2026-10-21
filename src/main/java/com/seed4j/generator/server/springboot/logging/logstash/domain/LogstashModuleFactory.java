@@ -32,6 +32,7 @@ public class LogstashModuleFactory {
           .addTemplate("LogstashTcpLifeCycle.java")
           .addTemplate("LogstashTcpProperties.java")
         .and()
+        .nullMarkedJavaPackage(toSrcMainJava().append(packagePath).append(LOGSTASH_SECONDARY))
         .batch(SOURCE.append("test"), toSrcTestJava().append(packagePath).append(LOGSTASH_SECONDARY))
           .addTemplate("LogstashTcpConfigurationIT.java")
           .addTemplate("LogstashTcpConfigurationTest.java")

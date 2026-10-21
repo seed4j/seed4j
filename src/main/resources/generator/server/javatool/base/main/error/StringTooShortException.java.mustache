@@ -1,6 +1,7 @@
 package {{packageName}}.shared.error.domain;
 
 import java.util.Map;
+import org.jspecify.annotations.Nullable;
 
 public final class StringTooShortException extends AssertionException {
 
@@ -8,6 +9,9 @@ public final class StringTooShortException extends AssertionException {
   private final String currentLength;
 
   private StringTooShortException(StringTooShortExceptionBuilder builder) {
+    Assert.notNull("field", builder.field);
+    Assert.notNull("value", builder.value);
+
     super(builder.field, builder.message());
     minLength = String.valueOf(builder.minLength);
     currentLength = String.valueOf(builder.value.length());
@@ -19,9 +23,9 @@ public final class StringTooShortException extends AssertionException {
 
   static final class StringTooShortExceptionBuilder {
 
-    private String value;
+    private @Nullable String value;
     private int minLength;
-    private String field;
+    private @Nullable String field;
 
     private StringTooShortExceptionBuilder() {}
 
@@ -44,6 +48,8 @@ public final class StringTooShortException extends AssertionException {
     }
 
     private String message() {
+      Assert.notNull("value", value);
+
       return "The value \"%s\" in field \"%s\" must be at least %d long but was only %d".formatted(value, field, minLength, value.length());
     }
 

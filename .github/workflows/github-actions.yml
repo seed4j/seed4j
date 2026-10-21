@@ -232,6 +232,7 @@ jobs:
       (needs.generate-main-branch-jar.result == 'success' ||
       needs.generate-main-branch-jar.result == 'skipped')
     strategy:
+      fail-fast: false
       matrix:
         app:
           - fullappmaven

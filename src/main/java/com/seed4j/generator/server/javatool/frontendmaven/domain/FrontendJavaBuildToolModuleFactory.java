@@ -214,6 +214,7 @@ public class FrontendJavaBuildToolModuleFactory {
           mainDestination.append(REDIRECTION_PRIMARY).append("RedirectionResource.java")
         )
         .add(SOURCE.template(PACKAGE_INFO), mainDestination.append(REDIRECTION).append(PACKAGE_INFO))
+        .nullMarkedJavaPackage(mainDestination.append(REDIRECTION_PRIMARY))
         .and();
     // @formatter:on
   }

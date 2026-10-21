@@ -50,6 +50,7 @@ import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.DependencyId;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
+import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.shared.error.domain.GeneratorException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -1300,6 +1301,28 @@ class MavenCommandHandlerTest {
       }
 
       @Test
+      void shouldAddBuildPluginManagementWithExtensions() {
+        Path pom = projectWithPom("src/test/resources/projects/empty-maven/pom.xml");
+
+        new MavenCommandHandler(Indentation.DEFAULT, pom).handle(
+          AddMavenPluginManagement.builder().plugin(mavenPluginWithExtensions()).build()
+        );
+
+        assertThat(contentNormalizingNewLines(pom)).contains(
+          """
+              <pluginManagement>
+                <plugins>
+                  <plugin>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <extensions>true</extensions>
+                  </plugin>
+                </plugins>
+              </pluginManagement>\
+          """
+        );
+      }
+
+      @Test
       void shouldAddBuildPluginManagementToEmptyPom() {
         Path pom = projectWithPom("src/test/resources/projects/empty-maven/pom.xml");
 
@@ -1633,6 +1656,35 @@ class MavenCommandHandlerTest {
         addMavenEnforcerPlugin(pom);
 
         assertThat(contentNormalizingNewLines(pom)).contains(plugins());
+      }
+
+      @Test
+      void shouldAddBuildPluginWithExtensions() {
+        Path pom = projectWithPom("src/test/resources/projects/empty-maven/pom.xml");
+
+        new MavenCommandHandler(Indentation.DEFAULT, pom).handle(
+          AddDirectMavenPlugin.builder().plugin(mavenPluginWithExtensions()).build()
+        );
+
+        assertThat(contentNormalizingNewLines(pom)).contains(
+          """
+              <plugins>
+                <plugin>
+                  <artifactId>maven-enforcer-plugin</artifactId>
+                  <extensions>true</extensions>
+                </plugin>
+              </plugins>\
+          """
+        );
+      }
+
+      @Test
+      void shouldNotAddExtensionsByDefault() {
+        Path pom = projectWithPom("src/test/resources/projects/empty-maven/pom.xml");
+
+        addMavenEnforcerPlugin(pom);
+
+        assertThat(contentNormalizingNewLines(pom)).doesNotContain("<extensions>");
       }
 
       @Test
@@ -2039,5 +2091,9 @@ class MavenCommandHandlerTest {
     }
 
     return pomPath;
+  }
+
+  private static MavenPlugin mavenPluginWithExtensions() {
+    return mavenPlugin().groupId("org.apache.maven.plugins").artifactId("maven-enforcer-plugin").extensions().build();
   }
 }

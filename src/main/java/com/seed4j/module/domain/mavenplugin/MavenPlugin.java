@@ -25,6 +25,7 @@ public final class MavenPlugin {
   private final Collection<JavaDependency> dependencies;
   private final Optional<VersionSlug> versionSlug;
   private final Optional<MavenPluginConfiguration> configuration;
+  private final boolean extensions;
 
   private MavenPlugin(MavenPluginBuilder builder) {
     Assert.notNull("groupId", builder.groupId);
@@ -35,6 +36,7 @@ public final class MavenPlugin {
     dependencyId = DependencyId.of(builder.groupId, builder.artifactId);
     versionSlug = Optional.ofNullable(builder.versionSlug);
     configuration = Optional.ofNullable(builder.configuration);
+    extensions = builder.extensions;
     executions = builder.executions;
     dependencies = builder.dependencies;
   }
@@ -49,6 +51,10 @@ public final class MavenPlugin {
 
   public Optional<MavenPluginConfiguration> configuration() {
     return configuration;
+  }
+
+  public boolean extensions() {
+    return extensions;
   }
 
   public Collection<MavenPluginExecution> executions() {
@@ -71,6 +77,7 @@ public final class MavenPlugin {
     private @Nullable ArtifactId artifactId;
     private @Nullable VersionSlug versionSlug;
     private @Nullable MavenPluginConfiguration configuration;
+    private boolean extensions;
     private final List<MavenPluginExecution> executions = new ArrayList<>();
     private final Collection<JavaDependency> dependencies = new LinkedHashSet<>();
 
@@ -98,6 +105,12 @@ public final class MavenPlugin {
     @Override
     public MavenPluginOptionalBuilder configuration(MavenPluginConfiguration configuration) {
       this.configuration = configuration;
+      return this;
+    }
+
+    @Override
+    public MavenPluginOptionalBuilder extensions() {
+      this.extensions = true;
       return this;
     }
 
@@ -150,6 +163,8 @@ public final class MavenPlugin {
       return configuration(new MavenPluginConfiguration(configuration));
     }
 
+    MavenPluginOptionalBuilder extensions();
+
     MavenPluginOptionalBuilder addExecution(MavenPluginExecution executions);
 
     default MavenPluginOptionalBuilder addExecution(MavenPluginExecutionOptionalBuilder builder) {
@@ -171,6 +186,7 @@ public final class MavenPlugin {
       .append("dependencyId", dependencyId)
       .append("versionSlug", versionSlug.map(VersionSlug::toString).orElse(""))
       .append("configuration", configuration.map(MavenPluginConfiguration::toString).orElse(""))
+      .append("extensions", extensions)
       .append("executions", executions)
       .append("dependencies", dependencies);
     return builder.toString();

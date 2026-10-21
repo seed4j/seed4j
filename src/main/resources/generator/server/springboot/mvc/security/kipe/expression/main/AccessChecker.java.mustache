@@ -1,5 +1,6 @@
 package {{packageName}}.shared.kipe.application;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.Authentication;
 
 /**
@@ -12,7 +13,7 @@ public interface AccessChecker<T> {
   boolean can(AccessContext<T> access);
 
   @SuppressWarnings("unchecked")
-  default boolean canOnObject(Authentication authentication, String action, Object element) {
+  default boolean canOnObject(Authentication authentication, String action, @Nullable Object element) {
     return can(AccessContextFactory.of(authentication, action, (T) element));
   }
 }

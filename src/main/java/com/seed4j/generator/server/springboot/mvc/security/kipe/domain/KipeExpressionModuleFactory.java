@@ -31,6 +31,7 @@ public class KipeExpressionModuleFactory {
       .documentation(documentationTitle("Kipe expression"), SOURCE.template("kipe-expression.md"))
       .files()
         .add(MAIN_SOURCE.template("package-info.java"), mainDestination.append("package-info.java"))
+        .nullMarkedJavaPackage(mainDestination.append("application"))
         .batch(MAIN_SOURCE, mainDestination.append("application"))
           .addTemplate("AccessChecker.java")
           .addTemplate("AccessContext.java")

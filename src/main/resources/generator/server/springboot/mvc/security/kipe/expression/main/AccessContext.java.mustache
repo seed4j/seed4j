@@ -1,5 +1,6 @@
 package {{packageName}}.shared.kipe.application;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.Authentication;
 
 public interface AccessContext<T> {
@@ -7,9 +8,10 @@ public interface AccessContext<T> {
 
   String action();
 
+  @Nullable
   T element();
 
-  static <T> AccessContext<T> of(Authentication authentication, String action, T element) {
+  static <T> AccessContext<T> of(Authentication authentication, String action, @Nullable T element) {
     return AccessContextFactory.of(authentication, action, element);
   }
 }

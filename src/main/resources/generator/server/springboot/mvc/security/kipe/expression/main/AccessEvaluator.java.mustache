@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -32,8 +33,10 @@ class AccessEvaluator {
       log.info("Authorized types: {}", evaluators.keySet().stream().map(Class::getName).collect(Collectors.joining(", ")));
     }
 
-    defaultEvaluator = evaluators.get(Object.class);
-    Assert.notNull("defaultEvaluator", defaultEvaluator);
+    AccessChecker<?> objectEvaluator = evaluators.get(Object.class);
+    Assert.notNull("defaultEvaluator", objectEvaluator);
+
+    defaultEvaluator = objectEvaluator;
   }
 
   private Class<?> getCheckerResourceClass(AccessChecker<?> checker) {
@@ -49,7 +52,7 @@ class AccessEvaluator {
     return Arrays.stream(checkerClass.getGenericInterfaces()).filter(ParameterizedType.class::isInstance);
   }
 
-  public boolean can(Authentication authentication, String action, Object item) {
+  public boolean can(Authentication authentication, String action, @Nullable Object item) {
     if (item == null) {
       return defaultEvaluator.canOnObject(authentication, action, null);
     }
@@ -68,6 +71,9 @@ class AccessEvaluator {
 
     log.info("Using {} evaluator for {}", matchingClass, itemClass);
 
-    return evaluators.get(matchingClass);
+    AccessChecker<?> checker = evaluators.get(matchingClass);
+    Assert.notNull("checker", checker);
+
+    return checker;
   }
 }

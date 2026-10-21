@@ -469,7 +469,7 @@ export default defineComponent({
     const toggleModule = (module: ModuleSlug): void => {
       // Remove the focus on input field
       if (isInputActiveElement()) {
-        (document?.activeElement as HTMLElement).blur();
+        (document.activeElement as HTMLElement).blur();
       }
       landscape.value.loaded(landscapeValue().toggle(module));
 

@@ -31,7 +31,7 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: tag => /^x-/.test(tag),
+          isCustomElement: tag => tag.startsWith('x-'),
         },
       },
     }),

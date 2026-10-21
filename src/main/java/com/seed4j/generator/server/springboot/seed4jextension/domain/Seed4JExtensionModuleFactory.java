@@ -115,6 +115,8 @@ public class Seed4JExtensionModuleFactory {
     return builder -> builder
       .documentation(documentationTitle("Cucumber"), CUCUMBER_SOURCE.template("cucumber.md"))
       .files()
+        .nullMarkedJavaPackage(cucumberDestination)
+        .nullMarkedJavaPackage(cucumberDestination.append("rest"))
         .batch(TEST_SOURCE, cucumberDestination)
           .addTemplate("CucumberTest.java")
           .addTemplate("CucumberConfiguration.java")
@@ -142,6 +144,8 @@ public class Seed4JExtensionModuleFactory {
           .and()
         .files()
           .add(DEPENDENCIES_MAIN_SOURCE.template(PACKAGE_INFO_JAVA), npmMainDestination.append(PACKAGE_INFO_JAVA))
+          .nullMarkedJavaPackage(npmMainDestination.append(DOMAIN))
+          .nullMarkedJavaPackage(npmMainDestination.append(INFRASTRUCTURE).append(SECONDARY))
           .add(
             DEPENDENCIES_MAIN_SOURCE.append(DOMAIN).template("NodePackagesVersionSource.java"),
             npmMainDestination.append(DOMAIN).append(baseName + "NodePackagesVersionSource.java")
@@ -186,6 +190,7 @@ public class Seed4JExtensionModuleFactory {
     return builder -> builder
         .files()
           .add(SLUG_SOURCE.template(PACKAGE_INFO_JAVA), slugDestination.append(PACKAGE_INFO_JAVA))
+          .nullMarkedJavaPackage(slugDestination.append(DOMAIN))
           .add(SLUG_SOURCE.append(DOMAIN).template("FeatureSlug.java"), slugDestination.append(DOMAIN).append(baseName + "FeatureSlug.java"))
           .add(SLUG_SOURCE.append(DOMAIN).template("ModuleSlug.java"), slugDestination.append(DOMAIN).append(baseName + "ModuleSlug.java"));
     // @formatter:on

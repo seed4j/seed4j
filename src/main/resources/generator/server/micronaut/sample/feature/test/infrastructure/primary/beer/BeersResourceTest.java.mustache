@@ -1,0 +1,61 @@
+package {{packageName}}.sample.infrastructure.primary.beer;
+
+import static org.assertj.core.api.Assertions.*;
+
+import io.micronaut.http.HttpRequest;
+import io.micronaut.http.HttpResponse;
+import io.micronaut.http.HttpStatus;
+import io.micronaut.http.MutableHttpRequest;
+import io.micronaut.http.client.BlockingHttpClient;
+import io.micronaut.http.client.HttpClient;
+import io.micronaut.http.client.annotation.Client;
+import io.micronaut.http.client.exceptions.HttpClientResponseException;
+import io.micronaut.security.authentication.Authentication;
+import io.micronaut.security.token.generator.TokenGenerator;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import java.math.BigDecimal;
+import org.junit.jupiter.api.Test;
+
+@MicronautTest
+class BeersResourceTest {
+
+  @Test
+  void shouldAddBeerToCatalog(@Client("/") HttpClient client, TokenGenerator tokens) {
+    BlockingHttpClient http = client.toBlocking();
+
+    HttpResponse<RestBeer> created = http.exchange(
+      authenticated(HttpRequest.POST("/api/beers", new RestBeerToCreate("Cloak of feathers", new BigDecimal("8.53"))), tokens),
+      RestBeer.class
+    );
+
+    assertThat(created.code()).isEqualTo(HttpStatus.CREATED.getCode());
+    RestBeer beer = created.body();
+    assertThat(beer.name()).isEqualTo("Cloak of feathers");
+    assertThat(http.retrieve(authenticated(HttpRequest.GET("/api/beers"), tokens), RestBeers.class).beers()).contains(beer);
+  }
+
+  @Test
+  void shouldRemoveBeerFromCatalog(@Client("/") HttpClient client, TokenGenerator tokens) {
+    BlockingHttpClient http = client.toBlocking();
+    RestBeer beer = http.retrieve(
+      authenticated(HttpRequest.POST("/api/beers", new RestBeerToCreate("Anchor", new BigDecimal("6.40"))), tokens),
+      RestBeer.class
+    );
+
+    http.exchange(authenticated(HttpRequest.DELETE("/api/beers/" + beer.id()), tokens));
+
+    assertThat(http.retrieve(authenticated(HttpRequest.GET("/api/beers"), tokens), RestBeers.class).beers()).doesNotContain(beer);
+  }
+
+  @Test
+  void shouldNotAddInvalidBeer(@Client("/") HttpClient client, TokenGenerator tokens) {
+    assertThatThrownBy(() -> client.toBlocking().exchange(authenticated(HttpRequest.POST("/api/beers", "{}"), tokens)))
+      .isInstanceOfSatisfying(HttpClientResponseException.class, exception ->
+        assertThat(exception.code()).isEqualTo(HttpStatus.BAD_REQUEST.getCode())
+      );
+  }
+
+  private static <T> MutableHttpRequest<T> authenticated(MutableHttpRequest<T> request, TokenGenerator tokens) {
+    return request.bearerAuth(tokens.generateToken(Authentication.build("user"), 60).orElseThrow());
+  }
+}

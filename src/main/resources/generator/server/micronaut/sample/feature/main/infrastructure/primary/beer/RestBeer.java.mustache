@@ -1,0 +1,23 @@
+package {{packageName}}.sample.infrastructure.primary.beer;
+
+import io.micronaut.core.annotation.Introspected;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+import java.math.BigDecimal;
+import java.util.UUID;
+import {{packageName}}.sample.domain.beer.Beer;
+import {{packageName}}.shared.error.domain.Assert;
+
+@Introspected
+@Schema(name = "beer", description = "A beer")
+record RestBeer(
+  @Schema(description = "ID of this beer", requiredMode = RequiredMode.REQUIRED) UUID id,
+  @Schema(description = "Name of this beer", requiredMode = RequiredMode.REQUIRED) String name,
+  @Schema(description = "Unit price (in euro) of this beer", requiredMode = RequiredMode.REQUIRED) BigDecimal unitPrice
+) {
+  static RestBeer from(Beer beer) {
+    Assert.notNull("beer", beer);
+
+    return new RestBeer(beer.id().get(), beer.name().get(), beer.unitPrice().get());
+  }
+}

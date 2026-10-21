@@ -1,0 +1,21 @@
+package {{packageName}}.sample.infrastructure.primary.beer;
+
+import io.micronaut.core.annotation.Introspected;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import {{packageName}}.sample.domain.Amount;
+import {{packageName}}.sample.domain.beer.BeerName;
+import {{packageName}}.sample.domain.beer.BeerToCreate;
+
+@Introspected
+@Schema(name = "beerToCreate", description = "A beer to create")
+record RestBeerToCreate(
+  @NotNull @Schema(description = "Name of this beer", requiredMode = RequiredMode.REQUIRED) String name,
+  @NotNull @Schema(description = "Unit price (in euros) of this beer", requiredMode = RequiredMode.REQUIRED) BigDecimal unitPrice
+) {
+  BeerToCreate toDomain() {
+    return new BeerToCreate(new BeerName(name), new Amount(unitPrice));
+  }
+}

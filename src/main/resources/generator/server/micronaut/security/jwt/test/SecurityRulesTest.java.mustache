@@ -1,0 +1,57 @@
+package {{packageName}}.shared.authentication.infrastructure.primary;
+
+import static org.assertj.core.api.Assertions.*;
+
+import io.micronaut.http.HttpRequest;
+import io.micronaut.http.HttpStatus;
+import io.micronaut.http.client.HttpClient;
+import io.micronaut.http.client.annotation.Client;
+import io.micronaut.http.client.exceptions.HttpClientResponseException;
+import io.micronaut.security.authentication.Authentication;
+import io.micronaut.security.token.generator.TokenGenerator;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+@MicronautTest
+class SecurityRulesTest {
+
+  private static final Authentication USER = Authentication.build("user");
+  private static final Authentication ADMIN = Authentication.build("admin", List.of("ROLE_ADMIN"));
+
+  @Test
+  void shouldRejectAnonymousApiCall(@Client("/") HttpClient client) {
+    assertThat(statusOf(client, HttpRequest.GET("/api/security-test"))).isEqualTo(HttpStatus.UNAUTHORIZED.getCode());
+  }
+
+  @Test
+  void shouldAllowAuthenticatedApiCall(@Client("/") HttpClient client, TokenGenerator tokens) {
+    assertThat(statusOf(client, HttpRequest.GET("/api/security-test").bearerAuth(token(tokens, USER)))).isEqualTo(HttpStatus.OK.getCode());
+  }
+
+  @Test
+  void shouldForbidAdminApiCallToUser(@Client("/") HttpClient client, TokenGenerator tokens) {
+    assertThat(statusOf(client, HttpRequest.GET("/api/admin/security-test").bearerAuth(token(tokens, USER)))).isEqualTo(
+      HttpStatus.FORBIDDEN.getCode()
+    );
+  }
+
+  @Test
+  void shouldAllowAdminApiCallToAdmin(@Client("/") HttpClient client, TokenGenerator tokens) {
+    assertThat(statusOf(client, HttpRequest.GET("/api/admin/security-test").bearerAuth(token(tokens, ADMIN)))).isEqualTo(
+      HttpStatus.OK.getCode()
+    );
+  }
+
+  private static String token(TokenGenerator tokens, Authentication authentication) {
+    return tokens.generateToken(authentication, 60).orElseThrow();
+  }
+
+  private static int statusOf(HttpClient client, HttpRequest<?> request) {
+    try {
+      return client.toBlocking().exchange(request, String.class).code();
+    } catch (HttpClientResponseException exception) {
+      return exception.code();
+    }
+  }
+}

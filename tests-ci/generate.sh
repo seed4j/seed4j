@@ -531,6 +531,23 @@ elif [[ $application == 'langchain4japp' ]]; then
     "langchain4j" \
     "spring-boot-langchain4j-sample"
 
+elif [[ $application == 'micronautapp' ]]; then
+  init_server
+
+  apply_modules \
+    "github-actions-${java_build_tool}" \
+    "java-base" \
+    "checkstyle" \
+    "jacoco-with-min-coverage-check" \
+    "micronaut" \
+    "micronaut-management" \
+    "micronaut-openapi" \
+    "micronaut-jwt" \
+    "micronaut-cache-caffeine" \
+    "micronaut-sample-feature"
+
+  sonar_back
+
 else
   echo "*** Unknown configuration..." "$application"
   exit 1

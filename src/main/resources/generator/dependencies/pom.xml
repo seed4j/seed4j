@@ -17,6 +17,7 @@
     <!-- Dependencies -->
     <jacoco.version>0.8.15</jacoco.version>
     <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
+    <micronaut.version>5.2.2</micronaut.version>
     <spring-boot.version>4.1.1</spring-boot.version>
     <spring-cloud.version>2025.1.3</spring-cloud.version>
     <springdoc-openapi.version>3.1.1</springdoc-openapi.version>
@@ -52,6 +53,8 @@
     <jqwik.version>1.9.3</jqwik.version>
     <!-- Maven Plugins -->
     <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
+    <micronaut-maven-plugin.version>5.0.2</micronaut-maven-plugin.version>
+    <maven-shade-plugin.version>3.6.2</maven-shade-plugin.version>
     <protobuf-maven-plugin.version>5.1.11</protobuf-maven-plugin.version>
     <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
     <checkstyle.version>14.3.0</checkstyle.version>
@@ -114,6 +117,12 @@
         <groupId>net.logstash.logback</groupId>
         <artifactId>logstash-logback-encoder</artifactId>
         <version>${logstash-logback-encoder.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.micronaut.platform</groupId>
+        <artifactId>micronaut-platform</artifactId>
+        <version>${micronaut.version}</version>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.springdoc</groupId>
@@ -316,6 +325,16 @@
         <groupId>io.github.ascopes</groupId>
         <artifactId>protobuf-maven-plugin</artifactId>
         <version>${protobuf-maven-plugin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.micronaut.maven</groupId>
+        <artifactId>micronaut-maven-plugin</artifactId>
+        <version>${micronaut-maven-plugin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>${maven-shade-plugin.version}</version>
       </dependency>
       <dependency>
         <groupId>com.salesforce.servicelibs</groupId>

@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.mvc.sample.feature.domain;
 
+import static com.seed4j.generator.server.sample.common.domain.BeersDomainShortcuts.beersDomain;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
@@ -24,12 +25,10 @@ public class SampleFeatureModuleFactory {
   private static final Seed4JSource SAMPLE_TEST_SOURCE = TEST_SOURCE.append(SAMPLE);
 
   private static final String APPLICATION = "application";
-  private static final String DOMAIN = "domain";
   private static final String PRIMARY = "infrastructure/primary";
   private static final String SECONDARY = "infrastructure/secondary";
 
   private static final String BEER = "beer";
-  private static final String ORDER = "order";
 
   public Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
@@ -44,36 +43,14 @@ public class SampleFeatureModuleFactory {
         .put("baseName", properties.projectBaseName().capitalized())
         .and()
       .documentation(documentationTitle("Sample"), SOURCE.file("sample.md"))
+      .with(beersDomain(properties))
       .files()
-        .batch(MAIN_SOURCE, mainDestination)
-          .addTemplate("package-info.java")
-          .and()
         .batch(MAIN_SOURCE.append(APPLICATION), mainDestination.append(APPLICATION))
           .addTemplate("BeersApplicationService.java")
           .addTemplate("BeerIdAccessChecker.java")
           .addTemplate("BeerResource.java")
           .addTemplate("BeersAccessesConfiguration.java")
           .addTemplate("BeerToCreateAccessChecker.java")
-          .and()
-        .batch(MAIN_SOURCE.append(DOMAIN).append(BEER), mainDestination.append(DOMAIN).append(BEER))
-          .addTemplate("Beer.java")
-          .addTemplate("BeerName.java")
-          .addTemplate("Beers.java")
-          .addTemplate("BeersCreator.java")
-          .addTemplate("BeerSellingState.java")
-          .addTemplate("BeersRemover.java")
-          .addTemplate("BeersRepository.java")
-          .addTemplate("BeerToCreate.java")
-          .addTemplate("UnknownBeerException.java")
-          .and()
-        .batch(MAIN_SOURCE.append(DOMAIN).append(ORDER), mainDestination.append(DOMAIN).append(ORDER))
-          .addTemplate("BeerOrder.java")
-          .addTemplate("BeerOrderLine.java")
-          .addTemplate("OrderedBeer.java")
-          .and()
-        .batch(MAIN_SOURCE.append(DOMAIN), mainDestination.append(DOMAIN))
-          .addTemplate("Amount.java")
-          .addTemplate("BeerId.java")
           .and()
         .batch(MAIN_SOURCE.append(PRIMARY).append(BEER), mainDestination.append(PRIMARY).append(BEER))
           .addTemplate("BeersResource.java")
@@ -88,19 +65,6 @@ public class SampleFeatureModuleFactory {
         .batch(SAMPLE_TEST_SOURCE.append(APPLICATION), testDestination.append(APPLICATION))
           .addTemplate("BeerIdAccessCheckerTest.java")
           .addTemplate("BeerToCreateAccessCheckerTest.java")
-          .and()
-        .batch(SAMPLE_TEST_SOURCE.append(DOMAIN), testDestination.append(DOMAIN))
-          .addTemplate("AmountTest.java")
-          .addTemplate("BeersIdentityFixture.java")
-          .and()
-        .batch(SAMPLE_TEST_SOURCE.append(DOMAIN).append(BEER), testDestination.append(DOMAIN).append(BEER))
-          .addTemplate("BeersFixture.java")
-          .addTemplate("BeersRemoverTest.java")
-          .addTemplate("BeersTest.java")
-          .and()
-        .batch(SAMPLE_TEST_SOURCE.append(DOMAIN).append(ORDER), testDestination.append(DOMAIN).append(ORDER))
-          .addTemplate("BeerOrderFixture.java")
-          .addTemplate("BeerOrderTest.java")
           .and()
         .batch(SAMPLE_TEST_SOURCE.append(PRIMARY).append(BEER), testDestination.append(PRIMARY).append(BEER))
           .addTemplate("BeersSteps.java")

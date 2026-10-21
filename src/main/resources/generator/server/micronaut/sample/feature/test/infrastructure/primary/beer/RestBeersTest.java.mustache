@@ -1,0 +1,23 @@
+package {{packageName}}.sample.infrastructure.primary.beer;
+
+import static org.assertj.core.api.Assertions.*;
+
+import io.micronaut.json.JsonMapper;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import {{packageName}}.sample.domain.beer.Beers;
+import {{packageName}}.sample.domain.beer.BeersFixture;
+
+@MicronautTest(startApplication = false)
+class RestBeersTest {
+
+  @Test
+  void shouldSerializeToJson(JsonMapper json) throws IOException {
+    RestBeers beers = RestBeers.from(new Beers(List.of(BeersFixture.beer())));
+
+    assertThat(new String(json.writeValueAsBytes(beers), StandardCharsets.UTF_8)).isEqualTo("{\"beers\":[" + RestBeerTest.json() + "]}");
+  }
+}

@@ -1,0 +1,35 @@
+package {{packageName}}.sample.infrastructure.primary.beer;
+
+import static org.assertj.core.api.Assertions.*;
+
+import io.micronaut.json.JsonMapper;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import jakarta.validation.Validator;
+import java.io.IOException;
+import org.junit.jupiter.api.Test;
+import {{packageName}}.sample.domain.beer.BeersFixture;
+
+@MicronautTest(startApplication = false)
+class RestBeerToCreateTest {
+
+  @Test
+  void shouldDeserializeFromJson(JsonMapper json) throws IOException {
+    assertThat(json.readValue(json(), RestBeerToCreate.class).toDomain()).usingRecursiveComparison().isEqualTo(BeersFixture.beerToCreate());
+  }
+
+  private String json() {
+    return """
+    {
+      "name": "Cloak of feathers",
+      "unitPrice": 8.53
+    }
+    """;
+  }
+
+  @Test
+  void shouldNotValidateEmptyBean(Validator validator) {
+    assertThat(validator.validate(new RestBeerToCreate(null, null)))
+      .extracting(violation -> violation.getPropertyPath().toString())
+      .containsExactlyInAnyOrder("name", "unitPrice");
+  }
+}

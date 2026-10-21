@@ -1,0 +1,18 @@
+package {{packageName}}.shared.authentication.infrastructure.primary;
+
+import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Get;
+
+@Controller("/api")
+class SecuredTestResource {
+
+  @Get("/security-test")
+  String authenticated() {
+    return "authenticated";
+  }
+
+  @Get("/admin/security-test")
+  String admin() {
+    return "admin";
+  }
+}

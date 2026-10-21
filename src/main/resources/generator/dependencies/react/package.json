@@ -17,6 +17,6 @@
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-hook-form": "7.90.0",
-    "react-i18next": "17.0.21"
+    "react-i18next": "17.1.0"
   }
 }

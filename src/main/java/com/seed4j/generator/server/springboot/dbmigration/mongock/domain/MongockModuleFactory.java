@@ -46,6 +46,7 @@ public class MongockModuleFactory {
           SOURCE.template("MongockDatabaseConfiguration.java"),
           toSrcMainJava().append(packagePath).append(MONGOCK_SECONDARY).append("MongockDatabaseConfiguration.java")
         )
+        .nullMarkedJavaPackage(toSrcMainJava().append(packagePath).append(MONGOCK_SECONDARY))
         .and()
       .applicationProperties(SPRING_MAIN)
         .set(propertyKey("mongock.migration-scan-package"), propertyValue(properties.basePackage().get()))

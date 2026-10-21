@@ -45,6 +45,7 @@ class ReactI18nModuleFactoryTest {
       .and()
       .hasPrefixedFiles("src/main/webapp/app/home/locales", "en.ts", "fr.ts")
       .hasFile("src/test/webapp/unit/home/infrastructure/primary/HomePage.spec.tsx")
+      .containing("\nvi.mock('react-i18next', () => ({")
       .containing("describe('Home I18next', () => {");
   }
 

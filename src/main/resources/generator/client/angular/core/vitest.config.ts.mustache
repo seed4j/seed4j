@@ -18,7 +18,7 @@ export default defineConfig({
         autoUpdate: true,
         100: true,
       },
-      exclude: [...configDefaults.exclude, "*.html"],
+      exclude: [...configDefaults.exclude, "**/*.html"],
       provider: 'istanbul',
       reportsDirectory: '{{projectBuildDirectory}}/test-results/',
       reporter: ['html', 'json', 'json-summary', 'text', 'text-summary', 'lcov', 'clover'],

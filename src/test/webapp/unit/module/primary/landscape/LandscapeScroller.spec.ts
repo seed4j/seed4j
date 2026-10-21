@@ -1,9 +1,9 @@
 import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { type MockedFunction, beforeEach, describe, expect, it, vi } from 'vitest';
 
 interface HTMLElementStub extends HTMLElement {
-  scroll: vi.fn;
-  scrollIntoView: vi.fn;
+  scroll: MockedFunction<HTMLElement['scroll']>;
+  scrollIntoView: MockedFunction<HTMLElement['scrollIntoView']>;
 }
 const stubHtmlElement = (): HTMLElementStub =>
   ({

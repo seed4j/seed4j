@@ -3,22 +3,22 @@ import { describe, expect, it, vi } from 'vitest';
 
 describe('WindowApplicationListener', () => {
   it('should add event listener on window', () => {
-    vi.spyOn(window, 'addEventListener');
+    const addEventListener = vi.spyOn(window, 'addEventListener');
 
     const windowApplicationListener = new WindowApplicationListener(window);
 
-    windowApplicationListener.addEventListener('success', vi.fn());
+    windowApplicationListener.addEventListener('success', vi.fn<EventListener>());
 
-    expect(window.addEventListener).toHaveBeenCalledOnce();
+    expect(addEventListener).toHaveBeenCalledOnce();
   });
 
   it('should remove event listener on window', () => {
-    vi.spyOn(window, 'removeEventListener');
+    const removeEventListener = vi.spyOn(window, 'removeEventListener');
 
     const windowApplicationListener = new WindowApplicationListener(window);
 
-    windowApplicationListener.removeEventListener('success', vi.fn());
+    windowApplicationListener.removeEventListener('success', vi.fn<EventListener>());
 
-    expect(window.removeEventListener).toHaveBeenCalledOnce();
+    expect(removeEventListener).toHaveBeenCalledOnce();
   });
 });

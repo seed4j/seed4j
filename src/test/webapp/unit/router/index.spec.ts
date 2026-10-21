@@ -21,7 +21,7 @@ import { ApplicationListener } from '@/shared/alert/infrastructure/primary/Appli
 import { TIMEOUT } from '@/shared/toast/application/ToastProvider';
 import { TimeoutListener } from '@/shared/toast/domain/Timeout';
 import { VueWrapper, flushPromises, mount } from '@vue/test-utils';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { type MockedFunction, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Router, createRouter, createWebHistory } from 'vue-router';
 import { defaultLandscape } from '../module/domain/landscape/Landscape.fixture';
 import { ManagementRepositoryStub, stubLocalManagementRepository } from '../module/domain/ManagementRepository.fixture';
@@ -42,13 +42,13 @@ import { stubAlertListener } from '../shared/alert/domain/AlertListener.fixture'
 import { stubTimeout } from '../shared/toast/domain/Timeout.fixture';
 
 interface ApplicationListenerStub extends ApplicationListener {
-  addEventListener: vi.fn;
-  removeEventListener: vi.fn;
+  addEventListener: MockedFunction<ApplicationListener['addEventListener']>;
+  removeEventListener: MockedFunction<ApplicationListener['removeEventListener']>;
 }
 
 interface BodyCursorUpdaterStub extends BodyCursorUpdater {
-  set: vi.fn;
-  reset: vi.fn;
+  set: MockedFunction<BodyCursorUpdater['set']>;
+  reset: MockedFunction<BodyCursorUpdater['reset']>;
 }
 
 const stubBodyCursorUpdater = (): BodyCursorUpdaterStub =>
@@ -207,7 +207,7 @@ const repositoryWithModuleParameters = (): ModuleParametersRepositoryStub => {
 };
 
 describe('Router', () => {
-  describe.for([['/'], ['/landscape']])('Navigation on LandscapeVue', url => {
+  describe.for(['/', '/landscape'])('Navigation on LandscapeVue', url => {
     it(`should navigate on LandscapeVue when the URL is ${url}`, async () => {
       await router.push(url);
 

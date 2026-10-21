@@ -16,7 +16,7 @@ import { LandscapeScroller } from '@/module/primary/landscape/LandscapeScroller'
 import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
 import { ApplicationListener } from '@/shared/alert/infrastructure/primary/ApplicationListener';
 import { DOMWrapper, VueWrapper, flushPromises, mount } from '@vue/test-utils';
-import { type Mock, beforeEach, describe, expect, it, vi } from 'vitest';
+import { type MockedFunction, beforeEach, describe, expect, it, vi } from 'vitest';
 import { stubAlertBus } from '../../../shared/alert/domain/AlertBus.fixture';
 import { wrappedElement } from '../../../WrappedElement';
 import { defaultLandscape } from '../../domain/landscape/Landscape.fixture';
@@ -26,13 +26,13 @@ import { ProjectFoldersRepositoryStub, stubProjectFoldersRepository } from '../.
 import { stubWindow } from '../GlobalWindow.fixture';
 
 interface ApplicationListenerStub extends ApplicationListener {
-  addEventListener: vi.fn;
-  removeEventListener: vi.fn;
+  addEventListener: MockedFunction<ApplicationListener['addEventListener']>;
+  removeEventListener: MockedFunction<ApplicationListener['removeEventListener']>;
 }
 
 interface BodyCursorUpdaterStub extends BodyCursorUpdater {
-  set: vi.fn;
-  reset: vi.fn;
+  set: MockedFunction<BodyCursorUpdater['set']>;
+  reset: MockedFunction<BodyCursorUpdater['reset']>;
 }
 
 const stubBodyCursorUpdater = (): BodyCursorUpdaterStub =>
@@ -47,9 +47,9 @@ const stubApplicationListener = (): ApplicationListenerStub => ({
 });
 
 interface LandscapeScrollerStub extends LandscapeScroller {
-  scroll: Mock<LandscapeScroller['scroll']>;
-  scrollSmooth: Mock<LandscapeScroller['scrollSmooth']>;
-  scrollIntoView: Mock<LandscapeScroller['scrollIntoView']>;
+  scroll: MockedFunction<LandscapeScroller['scroll']>;
+  scrollSmooth: MockedFunction<LandscapeScroller['scrollSmooth']>;
+  scrollIntoView: MockedFunction<LandscapeScroller['scrollIntoView']>;
 }
 
 const stubLandscapeScroller = (): LandscapeScrollerStub =>

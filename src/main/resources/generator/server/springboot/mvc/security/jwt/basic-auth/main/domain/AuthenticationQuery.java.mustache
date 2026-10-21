@@ -3,6 +3,7 @@ package {{packageName}}.account.domain;
 import {{packageName}}.shared.authentication.domain.Roles;
 import {{packageName}}.shared.authentication.domain.Username;
 import {{packageName}}.shared.error.domain.Assert;
+import org.jspecify.annotations.Nullable;
 
 public final class AuthenticationQuery {
 
@@ -38,8 +39,8 @@ public final class AuthenticationQuery {
   private static final class AuthenticationQueryBuilder
     implements AuthenticationQueryUsernameBuilder, AuthenticationQueryRolesBuilder, AuthenticationQueryRememberMeBuilder {
 
-    private Username username;
-    private Roles roles;
+    private @Nullable Username username;
+    private @Nullable Roles roles;
     private boolean rememberMe;
 
     private AuthenticationQueryBuilder() {}

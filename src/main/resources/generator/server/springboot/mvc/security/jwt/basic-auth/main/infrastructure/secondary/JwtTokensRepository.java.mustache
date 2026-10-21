@@ -22,9 +22,9 @@ class JwtTokensRepository implements TokensRepository {
   private final long rememberMeValidityDuration;
 
   public JwtTokensRepository(JwtTokensProperties properties) {
-    key = Keys.hmacShaKeyFor(properties.getJwtBase64Secret().getBytes(StandardCharsets.UTF_8));
-    validityDuration = properties.getTokenValidity().toSeconds();
-    rememberMeValidityDuration = properties.getRememberMeTokenValidity().toSeconds();
+    key = Keys.hmacShaKeyFor(properties.jwtBase64Secret().getBytes(StandardCharsets.UTF_8));
+    validityDuration = properties.tokenValidity().toSeconds();
+    rememberMeValidityDuration = properties.rememberMeTokenValidity().toSeconds();
   }
 
   @Override

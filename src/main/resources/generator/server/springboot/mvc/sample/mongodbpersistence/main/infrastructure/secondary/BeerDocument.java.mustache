@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "beers")
+@SuppressWarnings("NullAway.Init") // fields are set by Spring Data
 final class BeerDocument {
 
   @Id

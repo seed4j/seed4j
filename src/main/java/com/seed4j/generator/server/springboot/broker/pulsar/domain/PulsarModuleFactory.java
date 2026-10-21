@@ -56,6 +56,7 @@ public class PulsarModuleFactory {
           .addTemplate("PulsarProperties.java")
           .addTemplate("PulsarConfiguration.java")
           .and()
+          .nullMarkedJavaPackage(toSrcMainJava().append(packagePath).append(PULSAR_CONFIG))
         .add(SOURCE.template("PulsarConfigurationIT.java"), testDestination.append(PULSAR_CONFIG).append("PulsarConfigurationIT.java"))
         .and()
       .startupCommands()

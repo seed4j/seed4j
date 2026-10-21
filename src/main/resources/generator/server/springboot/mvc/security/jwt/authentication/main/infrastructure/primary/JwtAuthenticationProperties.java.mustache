@@ -6,6 +6,7 @@ import org.springframework.validation.annotation.Validated;
 
 @Validated
 @ConfigurationProperties("application.security")
+@SuppressWarnings("NullAway.Init") // fields are bound and validated by Spring
 class JwtAuthenticationProperties {
 
   private String contentSecurityPolicy =

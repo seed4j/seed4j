@@ -261,6 +261,7 @@ jobs:
           - thymeleafapp
           - langchain4japp
           - micronautapp
+          - nullawayapp
         include:
           - java-build-tool: maven
           - spring-config-format: yaml

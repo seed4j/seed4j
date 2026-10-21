@@ -28,7 +28,7 @@
     "glyph:build": "rimraf .fontello-session && fontello-cli install --config src/main/glyph/config.json --font src/main/glyph/font --css src/main/glyph/css",
     "glyph:open": "rimraf .fontello-session && fontello-cli open --config src/main/glyph/config.json",
     "lint": "oxlint --fix && npm run lint:sass && npm run prettier:format",
-    "lint:ci": "oxlint && npm run prettier:check",
+    "lint:ci": "oxlint && npm run typecheck && npm run prettier:check",
     "lint:ci:sass": "stylelint '**/*.{css,scss}'",
     "lint:sass": "npm run lint:ci:sass -- --fix",
     "prepare": "husky",
@@ -47,6 +47,7 @@
     "test:coverage:report": "nyc report",
     "test:unit:coverage": "vitest run --coverage",
     "test:watch": "vitest --",
+    "typecheck": "vue-tsc -p tsconfig.json --noEmit && vue-tsc -p src/test/webapp/component/tsconfig.json --noEmit && vue-tsc -p src/test/webapp/e2e/tsconfig.json --noEmit",
     "watch:": "npm-run-all --parallel watch:*",
     "watch:test": "npm run test:watch",
     "watch:tsc": "npm run build:tsc -- --watch"

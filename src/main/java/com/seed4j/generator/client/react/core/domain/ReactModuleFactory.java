@@ -7,6 +7,7 @@ import static com.seed4j.module.domain.Seed4JModule.LINE_BREAK;
 import static com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.lineAfterRegex;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.packageName;
 import static com.seed4j.module.domain.Seed4JModule.path;
@@ -111,7 +112,7 @@ public class ReactModuleFactory {
         .and()
       .with(patchEslintConfig(properties))
       .with(patchTsConfig(properties))
-      .with(patchVitestConfig())
+      .with(patchVitestConfig(properties))
       .build();
     // @formatter:on
   }
@@ -172,13 +173,13 @@ public class ReactModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<Seed4JModuleBuilder> patchVitestConfig() {
+  private Consumer<Seed4JModuleBuilder> patchVitestConfig(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()
         .in(path("vitest.config.ts"))
           .add(lineAfterRegex("from 'vitest/config';"), "import react from '@vitejs/plugin-react';")
-          .add(text("plugins: ["), "plugins: [react(), ")
+          .add(lineBeforeText("resolve: {"), properties.indentation().spaces() + "plugins: [react()],")
           .add(text("environment: 'node',"), "environment: 'jsdom',")
           .and()
       .and()

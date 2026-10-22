@@ -88,7 +88,7 @@ public class VueModuleFactory {
         .and()
       .with(patchEslintConfig(properties))
       .with(patchTsConfig(properties))
-      .with(patchVitestConfig())
+      .with(patchVitestConfig(properties))
       .build();
     // @formatter:on
   }
@@ -134,13 +134,13 @@ public class VueModuleFactory {
     // @formatter:on
   }
 
-  private Consumer<Seed4JModuleBuilder> patchVitestConfig() {
+  private Consumer<Seed4JModuleBuilder> patchVitestConfig(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()
         .in(path("vitest.config.ts"))
           .add(lineAfterRegex("from 'vitest/config';"), "import vue from '@vitejs/plugin-vue';")
-          .add(text("plugins: ["), "plugins: [vue(), ")
+          .add(lineBeforeText("resolve: {"), properties.indentation().spaces() + "plugins: [vue()],")
           .add(text("environment: 'node',"), "environment: 'jsdom',")
         .and()
       .and()

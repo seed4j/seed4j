@@ -48,7 +48,6 @@ class TypescriptModuleFactoryTest {
       .containing(nodeDependency("@eslint/js"))
       .containing(nodeDependency("globals"))
       .containing(nodeDependency("typescript-eslint"))
-      .containing(nodeDependency("vite-tsconfig-paths"))
       .containing(nodeDependency("vitest"))
       .containing(nodeDependency("vitest-sonar-reporter"))
       .containing(nodeScript("test", "npm run watch:test"))

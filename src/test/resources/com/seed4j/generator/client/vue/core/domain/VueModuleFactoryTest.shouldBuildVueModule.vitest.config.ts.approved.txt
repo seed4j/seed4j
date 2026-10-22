@@ -1,11 +1,13 @@
 /// <reference types="vitest" />
 
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { configDefaults, defineConfig } from 'vitest/config';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
-  plugins: [vue(), tsconfigPaths()],
+  plugins: [vue()],
+  resolve: {
+    tsconfigPaths: true,
+  },
   test: {
     reporters: ['verbose', 'vitest-sonar-reporter'],
     outputFile: {

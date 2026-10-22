@@ -43,7 +43,6 @@ public class TypescriptModuleFactory {
         .addDevDependency(packageName("globals"), COMMON)
         .addDevDependency(packageName("npm-run-all2"), COMMON)
         .addDevDependency(packageName("typescript-eslint"), COMMON)
-        .addDevDependency(packageName("vite-tsconfig-paths"), COMMON)
         .addDevDependency(packageName("vitest"), COMMON)
         .addDevDependency(packageName("vitest-sonar-reporter"), COMMON)
         .addScript(scriptKey("lint"), scriptCommand("eslint ."))

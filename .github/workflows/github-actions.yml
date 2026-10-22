@@ -468,12 +468,27 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.java-build-tool }}-${{ matrix.app }}-${{ steps.cache_gradle_md5sum.outputs.md5sum }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.java-build-tool }}-
-      - name: 'Init: cache Playwright'
+      - name: 'Test: detect Playwright component tests for ${{ matrix.app }}'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
-        uses: actions/cache@v6
+        id: playwright
+        working-directory: /tmp/seed4j/${{ matrix.app }}/
+        # Only component tests run in CI: apps with Playwright e2e tests alone do not need browsers
+        run: |
+          if [ -f 'package.json' ] && node -e "process.exit(/\bplaywright test\b/.test(require('./package.json').scripts?.['test:component:headless'] ?? '') ? 0 : 1)"; then
+            PLAYWRIGHT_VERSION=$(node -p "require('./package.json').devDependencies['@playwright/test']")
+            echo "Playwright component tests found, using @playwright/test ${PLAYWRIGHT_VERSION}"
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "version=${PLAYWRIGHT_VERSION}" >> $GITHUB_OUTPUT
+          else
+            echo "No Playwright component tests found"
+          fi
+      - name: 'Init: restore Playwright browsers'
+        if: steps.playwright.outputs.enabled == 'true'
+        id: restore-playwright-cache
+        uses: actions/cache/restore@v6
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwright.outputs.version }}
       - name: 'Test: starting Sonar'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         working-directory: /tmp/seed4j/${{ matrix.app }}/
@@ -519,13 +534,25 @@ jobs:
         working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           if grep -q "test:component" package.json; then
-            if grep -q "playwright" package.json; then
+            if [[ "${{ steps.playwright.outputs.enabled }}" == "true" ]]; then
+              # Azure apt mirrors sometimes stall: give up idle connections and retry instead of hanging until the job timeout
+              printf 'Acquire::Retries "3";\nAcquire::http::Timeout "20";\nAcquire::https::Timeout "20";\n' \
+                | sudo tee /etc/apt/apt.conf.d/99-ci-network > /dev/null
               npx playwright install --with-deps
             fi
             ${{ matrix.node-package-manager }} run test:component:headless
           else
             echo "No frontend component tests found, skipping step."
           fi
+      - name: 'Save Playwright browsers'
+        if: |
+          steps.playwright.outputs.enabled == 'true' &&
+          steps.restore-playwright-cache.outputs.cache-hit != 'true' &&
+          github.ref == 'refs/heads/main'
+        uses: actions/cache/save@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ steps.restore-playwright-cache.outputs.cache-primary-key }}
       - name: 'Test: check local Sonar Analysis'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         run: |

@@ -9,9 +9,13 @@ public final class NumberValueTooLowException extends AssertionException {
   private final String value;
 
   private NumberValueTooLowException(NumberValueTooLowExceptionBuilder builder) {
-    super(builder.field(), builder.message());
-    min = builder.minValue();
-    value = builder.value();
+    Assert.notNull("field", builder.field);
+    Assert.notNull("min", builder.minValue);
+    Assert.notNull("value", builder.value);
+
+    super(builder.field, builder.message());
+    min = builder.minValue;
+    value = builder.value;
   }
 
   public static NumberValueTooLowExceptionBuilder builder() {
@@ -40,24 +44,6 @@ public final class NumberValueTooLowException extends AssertionException {
       this.value = value;
 
       return this;
-    }
-
-    private String field() {
-      Assert.notNull("field", field);
-
-      return field;
-    }
-
-    private String minValue() {
-      Assert.notNull("min", minValue);
-
-      return minValue;
-    }
-
-    private String value() {
-      Assert.notNull("value", value);
-
-      return value;
     }
 
     public String message() {

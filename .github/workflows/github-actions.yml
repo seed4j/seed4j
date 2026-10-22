@@ -262,7 +262,6 @@ jobs:
           - thymeleafapp
           - langchain4japp
           - micronautapp
-          - nullawayapp
         include:
           - java-build-tool: maven
           - spring-config-format: yaml
@@ -524,8 +523,7 @@ jobs:
         run: |
           ./start_docker_compose.sh /tmp/seed4j/${{ matrix.app }}/
       - name: 'Test: start the application'
-        # nullawayapp is not a runnable application (java-base only)
-        if: steps.tests-requirement-check.outputs.execute_tests == 'true' && matrix.app != 'nullawayapp'
+        if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           if [ -f 'mvnw' ] || [ -f 'gradlew' ]; then

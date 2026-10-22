@@ -557,13 +557,6 @@ elif [[ $application == 'micronautapp' ]]; then
   nullaway
   sonar_back
 
-elif [[ $application == 'nullawayapp' ]]; then
-  init_server
-  apply_modules \
-    "java-base" \
-    "nullaway"
-  sonar_back
-
 else
   echo "*** Unknown configuration..." "$application"
   exit 1

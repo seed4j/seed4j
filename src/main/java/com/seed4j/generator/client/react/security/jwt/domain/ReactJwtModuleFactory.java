@@ -76,7 +76,7 @@ public class ReactJwtModuleFactory {
       .mandatoryReplacements()
         .in(path("vite.config.ts"))
           .add(lineAfterRegex("from 'vite';"), "import tailwindcss from '@tailwindcss/vite';")
-          .add(text("plugins: [react(), "), "plugins: [react(), tailwindcss(), ")
+          .add(text("plugins: [react()"), "plugins: [react(), tailwindcss()")
           .and()
         .in(path("src/main/webapp/app/home/infrastructure/primary/HomePage.tsx"))
           .add(lineBeforeText("function HomePage() {"), "import LoginForm from '@/login/primary/loginForm';" + LINE_BREAK)

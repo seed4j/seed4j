@@ -64,7 +64,6 @@ public class AngularModuleFactory {
         .addDevDependency(packageName("@types/node"), COMMON)
         .addDevDependency(packageName("angular-eslint"), ANGULAR)
         .addDevDependency(packageName("globals"), COMMON)
-        .addDevDependency(packageName("vite-tsconfig-paths"), COMMON)
         .addDevDependency(packageName("vitest"), COMMON)
         .addDevDependency(packageName("vitest-sonar-reporter"), COMMON)
         .addDevDependency(packageName("@vitest/coverage-istanbul"), COMMON)

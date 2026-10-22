@@ -256,7 +256,11 @@ class HexagonalArchTest {
         .and()
         .resideInAPackage(SHARED_PACKAGES)
         .and()
-        .resideOutsideOfPackages(ROOT_PACKAGE.concat(".shared..domain"), ROOT_PACKAGE.concat(".shared..infrastructure.*"))
+        .resideOutsideOfPackages(
+          ROOT_PACKAGE.concat(".shared..domain"),
+          ROOT_PACKAGE.concat(".shared..application"),
+          ROOT_PACKAGE.concat(".shared..infrastructure.*")
+        )
         .should()
         .beMetaAnnotatedWith(SharedKernel.class)
         .because(ROOT_PACKAGE + ".shared package should only contain shared kernels")

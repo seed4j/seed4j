@@ -24,6 +24,7 @@ class OpenApiContractModuleFactoryTest {
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
       .containing(
+        // prettier-ignore
         // language=xml
         """
               <plugin>
@@ -33,6 +34,7 @@ class OpenApiContractModuleFactoryTest {
         """
       )
       .containing(
+        // prettier-ignore
         // language=xml
         """
                 <plugin>
@@ -82,6 +84,7 @@ class OpenApiContractModuleFactoryTest {
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
       .containing(
+        // prettier-ignore
         // language=xml
         """
               <plugin>
@@ -91,6 +94,7 @@ class OpenApiContractModuleFactoryTest {
         """
       )
       .containing(
+        // prettier-ignore
         // language=xml
         """
                 <plugin>

@@ -57,6 +57,7 @@ class GatewayModuleFactoryTest {
       .and()
       .hasFile("src/main/resources/config/bootstrap.yml")
       .containing(
+        // prettier-ignore
         // language=yaml
         """
         spring:

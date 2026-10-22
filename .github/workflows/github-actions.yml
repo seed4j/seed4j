@@ -474,8 +474,8 @@ jobs:
         working-directory: /tmp/seed4j/${{ matrix.app }}/
         # Only component tests run in CI: apps with Playwright e2e tests alone do not need browsers
         run: |
-          if [ -f 'package.json' ] && node -e "process.exit(/\bplaywright test\b/.test(require('./package.json').scripts?.['test:component:headless'] ?? '') ? 0 : 1)"; then
-            PLAYWRIGHT_VERSION=$(node -p "require('./package.json').devDependencies['@playwright/test']")
+          if [ -f 'package.json' ] && jq -e '.scripts["test:component:headless"] // "" | test("\\bplaywright test\\b")' package.json > /dev/null; then
+            PLAYWRIGHT_VERSION=$(jq -r '.devDependencies["@playwright/test"]' package.json)
             echo "Playwright component tests found, using @playwright/test ${PLAYWRIGHT_VERSION}"
             echo "enabled=true" >> $GITHUB_OUTPUT
             echo "version=${PLAYWRIGHT_VERSION}" >> $GITHUB_OUTPUT

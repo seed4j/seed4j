@@ -21,9 +21,9 @@ public final class GradleCommunityPlugin implements GradleMainBuildPlugin {
     id = builder.id;
     imports = new GradlePluginImports(builder.imports);
     configuration = Optional.ofNullable(builder.configuration);
+    toolVersionSlug = Optional.ofNullable(builder.toolVersionSlug);
     versionSlug = Optional.ofNullable(builder.versionSlug);
     pluginSlug = Optional.ofNullable(builder.pluginSlug);
-    toolVersionSlug = Optional.ofNullable(builder.toolVersionSlug);
   }
 
   @Override

@@ -523,7 +523,8 @@ jobs:
         run: |
           ./start_docker_compose.sh /tmp/seed4j/${{ matrix.app }}/
       - name: 'Test: start the application'
-        if: steps.tests-requirement-check.outputs.execute_tests == 'true'
+        # nullawayapp is not a runnable application (java-base only)
+        if: steps.tests-requirement-check.outputs.execute_tests == 'true' && matrix.app != 'nullawayapp'
         working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           if [ -f 'mvnw' ] || [ -f 'gradlew' ]; then

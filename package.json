@@ -58,7 +58,7 @@
     "piqure": "2.3.0",
     "placeholder-loading": "0.7.0",
     "vue": "3.5.44",
-    "vue-router": "5.3.1"
+    "vue-router": "5.4.0"
   },
   "devDependencies": {
     "@cypress/code-coverage": "4.0.3",

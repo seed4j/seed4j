@@ -47,6 +47,7 @@ public final class Seed4JModuleGradlePlugins {
   private JavaBuildCommand mapCommunityPlugin(GradleCommunityPlugin plugin, JavaDependenciesVersions versions) {
     AddGradlePluginOptionalBuilder commandBuilder = AddGradlePlugin.builder().plugin(plugin);
     plugin.versionSlug().map(versions::get).ifPresent(commandBuilder::pluginVersion);
+    plugin.toolVersionSlug().map(versions::get).ifPresent(commandBuilder::toolVersion);
     return commandBuilder.build();
   }
 

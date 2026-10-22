@@ -14,6 +14,7 @@ public final class GradleCommunityPlugin implements GradleMainBuildPlugin {
   private final Optional<GradlePluginConfiguration> configuration;
   private final Optional<VersionSlug> versionSlug;
   private final Optional<GradlePluginSlug> pluginSlug;
+  private final Optional<VersionSlug> toolVersionSlug;
 
   private GradleCommunityPlugin(GradleCommunityPluginBuilder builder) {
     Assert.notNull("id", builder.id);
@@ -22,6 +23,7 @@ public final class GradleCommunityPlugin implements GradleMainBuildPlugin {
     configuration = Optional.ofNullable(builder.configuration);
     versionSlug = Optional.ofNullable(builder.versionSlug);
     pluginSlug = Optional.ofNullable(builder.pluginSlug);
+    toolVersionSlug = Optional.ofNullable(builder.toolVersionSlug);
   }
 
   @Override
@@ -47,6 +49,10 @@ public final class GradleCommunityPlugin implements GradleMainBuildPlugin {
     return pluginSlug;
   }
 
+  public Optional<VersionSlug> toolVersionSlug() {
+    return toolVersionSlug;
+  }
+
   public static GradleCommunityPluginIdBuilder builder() {
     return new GradleCommunityPluginBuilder();
   }
@@ -58,6 +64,7 @@ public final class GradleCommunityPlugin implements GradleMainBuildPlugin {
     private @Nullable GradlePluginConfiguration configuration;
     private @Nullable VersionSlug versionSlug;
     private @Nullable GradlePluginSlug pluginSlug;
+    private @Nullable VersionSlug toolVersionSlug;
 
     @Override
     public GradleCommunityPluginOptionalBuilder id(GradlePluginId id) {
@@ -90,6 +97,13 @@ public final class GradleCommunityPlugin implements GradleMainBuildPlugin {
     @Override
     public GradleCommunityPluginOptionalBuilder pluginSlug(GradlePluginSlug pluginSlug) {
       this.pluginSlug = pluginSlug;
+
+      return this;
+    }
+
+    @Override
+    public GradleCommunityPluginOptionalBuilder toolVersionSlug(VersionSlug toolVersionSlug) {
+      this.toolVersionSlug = toolVersionSlug;
 
       return this;
     }
@@ -131,6 +145,12 @@ public final class GradleCommunityPlugin implements GradleMainBuildPlugin {
 
     default GradleCommunityPluginOptionalBuilder pluginSlug(String pluginSlug) {
       return pluginSlug(new GradlePluginSlug(pluginSlug));
+    }
+
+    GradleCommunityPluginOptionalBuilder toolVersionSlug(VersionSlug toolVersionSlug);
+
+    default GradleCommunityPluginOptionalBuilder toolVersionSlug(String toolVersionSlug) {
+      return toolVersionSlug(new VersionSlug(toolVersionSlug));
     }
 
     GradleCommunityPlugin build();

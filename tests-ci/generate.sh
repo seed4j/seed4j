@@ -54,6 +54,12 @@ init_server() {
     "modernizer"
 }
 
+nullaway() {
+  if [[ $java_build_tool == 'maven' ]]; then
+    apply_modules "nullaway"
+  fi
+}
+
 spring_boot() {
   apply_modules \
     "github-actions-${java_build_tool}" \
@@ -62,6 +68,8 @@ spring_boot() {
     "jacoco-with-min-coverage-check" \
     "spring-boot" \
     "logs-spy"
+
+  nullaway
 }
 
 spring_boot_mvc() {
@@ -546,6 +554,7 @@ elif [[ $application == 'micronautapp' ]]; then
     "micronaut-cache-caffeine" \
     "micronaut-sample-feature"
 
+  nullaway
   sonar_back
 
 else

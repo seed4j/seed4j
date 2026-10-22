@@ -5,6 +5,8 @@ protobuf-plugin = "0.10.0"
 sonarqube = "6.2.0.5505"
 node-gradle = "7.0.2"
 modernizer = "1.15.0"
+gradle-errorprone-plugin = "5.1.1"
+gradle-nullaway-plugin = "3.3.0"
 
 [plugins]
 [plugins.jib]
@@ -22,3 +24,11 @@ version.ref = "protobuf-plugin"
 [plugins.modernizer]
 id = "com.github.andygoossens.modernizer"
 version.ref = "modernizer"
+
+[plugins.errorprone]
+id = "net.ltgt.errorprone"
+version.ref = "gradle-errorprone-plugin"
+
+[plugins.nullaway]
+id = "net.ltgt.nullaway"
+version.ref = "gradle-nullaway-plugin"

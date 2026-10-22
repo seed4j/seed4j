@@ -16,13 +16,8 @@ class NullAwayModuleConfiguration {
     return Seed4JModuleResource.builder()
       .slug(Seed4JCoreModuleSlug.NULLAWAY)
       .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().build())
-      .apiDoc("Java", "Add NullAway (via nullability-maven-plugin) to check nullness of JSpecify annotated code at compile time")
-      .organization(
-        Seed4JModuleOrganization.builder()
-          .addDependency(Seed4JCoreModuleSlug.MAVEN_JAVA)
-          .addDependency(Seed4JCoreModuleSlug.JAVA_BASE)
-          .build()
-      )
+      .apiDoc("Java", "Add NullAway to check nullness of JSpecify annotated code at compile time")
+      .organization(Seed4JModuleOrganization.builder().addDependency(Seed4JCoreModuleSlug.JAVA_BASE).build())
       .tags("server", "quality")
       .factory(nullAway::buildModule);
   }

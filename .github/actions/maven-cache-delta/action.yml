@@ -1,0 +1,40 @@
+name: 'Maven cache: upload delta'
+description: >-
+  Upload, as a workflow artifact, the Maven files downloaded since maven-cache-restore ran.
+  The maven-cache job merges every delta into the next global Maven cache.
+inputs:
+  name:
+    description: 'Unique suffix of the delta artifact'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Maven cache: collect delta'
+      id: delta
+      shell: bash
+      run: |
+        cd ~/.m2
+        dirs=()
+        for dir in repository wrapper; do
+          [[ -d "$dir" ]] && dirs+=("$dir")
+        done
+        if [[ ${#dirs[@]} -eq 0 ]]; then
+          echo "No Maven directory found"
+          exit 0
+        fi
+        # Seed4J snapshot jars are installed by the CI itself: they must never be cached
+        find "${dirs[@]}" -type f -newer "$RUNNER_TEMP/m2-cache-marker" -not -path 'repository/com/seed4j/*' > "$RUNNER_TEMP/m2-delta.txt"
+        count=$(wc -l < "$RUNNER_TEMP/m2-delta.txt")
+        echo "$count new or updated files since cache restore"
+        if [[ "$count" -gt 0 ]]; then
+          tar -cf "$RUNNER_TEMP/m2-delta.tar" -T "$RUNNER_TEMP/m2-delta.txt"
+          echo "found=true" >> "$GITHUB_OUTPUT"
+        fi
+    - name: 'Maven cache: upload delta'
+      if: steps.delta.outputs.found == 'true'
+      uses: actions/upload-artifact@v7
+      with:
+        name: m2-delta-${{ inputs.name }}
+        path: ${{ runner.temp }}/m2-delta.tar
+        retention-days: 1
+        compression-level: 1

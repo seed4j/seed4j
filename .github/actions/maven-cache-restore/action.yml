@@ -1,0 +1,40 @@
+name: 'Maven cache: restore'
+description: >-
+  Restore the weekly global Maven cache shared by Seed4J and every generated application.
+  Files downloaded afterwards can be collected with the maven-cache-delta action.
+inputs:
+  week:
+    description: 'ISO week (e.g. 2026-W43) of the cache generation to restore'
+    required: true
+  fallback-week:
+    description: 'Optional older ISO week to restore from when the current week has no cache yet (read-only jobs only)'
+    required: false
+    default: ''
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Maven cache: compute keys'
+      id: keys
+      shell: bash
+      run: |
+        prefix="${{ runner.os }}-m2-global-"
+        echo "primary=${prefix}${{ inputs.week }}-" >> "$GITHUB_OUTPUT"
+        {
+          echo 'restore-keys<<EOF'
+          echo "${prefix}${{ inputs.week }}-"
+          if [[ -n "${{ inputs.fallback-week }}" ]]; then
+            echo "${prefix}${{ inputs.fallback-week }}-"
+          fi
+          echo 'EOF'
+        } >> "$GITHUB_OUTPUT"
+    - name: 'Maven cache: restore'
+      uses: actions/cache/restore@v6
+      with:
+        path: |
+          ~/.m2/repository
+          ~/.m2/wrapper
+        key: ${{ steps.keys.outputs.primary }}
+        restore-keys: ${{ steps.keys.outputs.restore-keys }}
+    - name: 'Maven cache: mark restore time'
+      shell: bash
+      run: touch "$RUNNER_TEMP/m2-cache-marker"

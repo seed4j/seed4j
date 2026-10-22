@@ -18,7 +18,9 @@ public class Seed4JDestination {
 
   private static final String MUSTACHE_EXTENSION = ".mustache";
 
-  private static final Pattern JAVA_PACKAGE_FOLDER_PATTERN = Pattern.compile("^src/(?:main|test)/java/([A-Za-z_]\\w*(?:/[A-Za-z_]\\w*)*)$");
+  private static final Pattern JAVA_PACKAGE_FOLDER_PATTERN = Pattern.compile(
+    "^src/(?:main|test)/java/([A-Za-z_]\\w*+(?:/[A-Za-z_]\\w*+)*+)$"
+  );
 
   private final String destination;
 

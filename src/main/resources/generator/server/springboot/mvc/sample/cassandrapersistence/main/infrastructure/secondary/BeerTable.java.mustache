@@ -18,49 +18,28 @@ import java.util.UUID;
 final class BeerTable {
 
   @PrimaryKey("id")
-  private UUID id;
+  private final UUID id;
 
   @Column("name")
-  private String name;
+  private final String name;
 
   @Column("unit_price")
-  private BigDecimal unitPrice;
+  private final BigDecimal unitPrice;
 
   @Column("selling_state")
-  private BeerSellingState sellingState;
+  private final BeerSellingState sellingState;
+
+  private BeerTable(UUID id, String name, BigDecimal unitPrice, BeerSellingState sellingState) {
+    this.id = id;
+    this.name = name;
+    this.unitPrice = unitPrice;
+    this.sellingState = sellingState;
+  }
 
   public static BeerTable from(Beer beer) {
     Assert.notNull("beer", beer);
 
-    return new BeerTable()
-      .id(beer.id().get())
-      .name(beer.name().get())
-      .unitPrice(beer.unitPrice().get())
-      .sellingState(beer.sellingState());
-  }
-
-  private BeerTable id(UUID id) {
-    this.id = id;
-
-    return this;
-  }
-
-  private BeerTable name(String name) {
-    this.name = name;
-
-    return this;
-  }
-
-  private BeerTable unitPrice(BigDecimal unitPrice) {
-    this.unitPrice = unitPrice;
-
-    return this;
-  }
-
-  private BeerTable sellingState(BeerSellingState sellingState) {
-    this.sellingState = sellingState;
-
-    return this;
+    return new BeerTable(beer.id().get(), beer.name().get(), beer.unitPrice().get(), beer.sellingState());
   }
 
   public Beer toDomain() {

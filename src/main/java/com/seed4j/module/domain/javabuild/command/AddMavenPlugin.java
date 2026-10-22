@@ -21,6 +21,10 @@ public interface AddMavenPlugin {
     return plugin().configuration();
   }
 
+  default boolean extensions() {
+    return plugin().extensions();
+  }
+
   default Collection<MavenPluginExecution> executions() {
     return plugin().executions();
   }

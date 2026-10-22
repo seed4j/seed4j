@@ -38,6 +38,7 @@ public class JpaPaginationModuleFactory {
       .documentation(documentationTitle("Jpa pages"), SOURCE.template("jpa-pages.md"))
       .files()
         .add(MAIN_SOURCE.template("AppPages.java"), mainDestination.append(baseName + "Pages.java"))
+        .nullMarkedJavaPackage(mainDestination)
         .add(TEST_SOURCE.template("AppPagesTest.java"), testDestination.append(baseName + "PagesTest.java"))
         .and()
       .build();

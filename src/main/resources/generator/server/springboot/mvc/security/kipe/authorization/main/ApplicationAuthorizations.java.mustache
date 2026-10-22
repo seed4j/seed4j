@@ -11,6 +11,7 @@ import {{packageName}}.shared.authentication.application.AuthenticatedUser;
 import {{packageName}}.shared.authentication.domain.Role;
 import {{packageName}}.shared.authentication.domain.Roles;
 import {{packageName}}.shared.authentication.domain.Username;
+import {{packageName}}.shared.error.domain.Assert;
 import {{packageName}}.shared.kipe.domain.Action;
 import {{packageName}}.shared.kipe.domain.Resource;
 import {{packageName}}.shared.kipe.domain.RolesAccesses;
@@ -33,7 +34,10 @@ public class {{ baseName }}Authorizations {
   }
 
   public Username getUsername(Authentication authentication) {
-    return new Username(AuthenticatedUser.readPrincipal(authentication));
+    String principal = AuthenticatedUser.readPrincipal(authentication);
+    Assert.notNull("principal", principal);
+
+    return new Username(principal);
   }
 
   public boolean specificAuthorized(Authentication authentication, String action, Resource resource) {

@@ -41,6 +41,10 @@ public class JwtBasicAuthModuleFactory {
       .documentation(documentationTitle("JWT basic auth"), SOURCE.template("jwt-basic-auth.md"))
       .files()
         .add(MAIN_SOURCE.template("package-info.java"), mainDestination.append("package-info.java"))
+        .nullMarkedJavaPackage(mainDestination.append("application"))
+        .nullMarkedJavaPackage(mainDestination.append(DOMAIN))
+        .nullMarkedJavaPackage(mainDestination.append(PRIMARY))
+        .nullMarkedJavaPackage(mainDestination.append(SECONDARY))
         .add(
           MAIN_SOURCE.template("application/AccountApplicationService.java"),
           mainDestination.append("application/AccountApplicationService.java")

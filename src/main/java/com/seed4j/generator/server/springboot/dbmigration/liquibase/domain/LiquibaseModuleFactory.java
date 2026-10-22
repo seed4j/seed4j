@@ -78,6 +78,7 @@ public class LiquibaseModuleFactory {
           .addTemplate("LiquibaseConfiguration.java")
           .addTemplate("SpringLiquibaseUtil.java")
           .and()
+          .nullMarkedJavaPackage(toSrcMainJava().append(packagePath).append(LIQUIBASE_SECONDARY))
         .batch(SOURCE.append("test"), toSrcTestJava().append(packagePath).append(LIQUIBASE_SECONDARY))
           .addTemplate("AsyncSpringLiquibaseTest.java")
           .addTemplate("LiquibaseConfigurationIT.java")

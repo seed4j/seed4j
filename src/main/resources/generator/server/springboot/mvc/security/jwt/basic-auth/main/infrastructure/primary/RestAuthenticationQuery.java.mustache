@@ -54,6 +54,7 @@ final class RestAuthenticationQuery {
   }
 
   @JsonPOJOBuilder(withPrefix = "")
+  @SuppressWarnings("NullAway.Init") // fields are set by Jackson and validated with bean validation
   static class RestAuthenticationQueryBuilder {
 
     private String username;

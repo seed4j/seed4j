@@ -61,6 +61,7 @@ public class MicronautSecurityJwtModuleFactory {
           .addTemplate("SecurityRulesTest.java")
           .addTemplate("SecuredTestResource.java")
           .and()
+          .nullMarkedJavaPackage(testDestination)
         .and()
       .applicationProperties(MICRONAUT_MAIN)
         .set(propertyKey("micronaut.security.authentication"), propertyValue("bearer"))

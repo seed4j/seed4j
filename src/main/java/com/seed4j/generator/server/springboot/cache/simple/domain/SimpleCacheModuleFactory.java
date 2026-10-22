@@ -30,6 +30,7 @@ public class SimpleCacheModuleFactory {
           SOURCE.template("CacheConfiguration.java"),
           toSrcMainJava().append(properties.packagePath()).append(CACHE_SECONDARY).append("CacheConfiguration.java")
         )
+        .nullMarkedJavaPackage(toSrcMainJava().append(properties.packagePath()).append(CACHE_SECONDARY))
         .and()
       .build();
     // @formatter:on

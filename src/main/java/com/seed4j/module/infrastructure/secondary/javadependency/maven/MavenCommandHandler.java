@@ -560,6 +560,9 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
     mavenPlugin.setGroupId(command.dependencyId().groupId().get());
     command.versionSlug().map(VersionSlug::mavenVariable).ifPresent(mavenPlugin::setVersion);
     command.configuration().map(toMavenConfiguration()).ifPresent(mavenPlugin::setConfiguration);
+    if (command.extensions()) {
+      mavenPlugin.setExtensions(true);
+    }
     command.executions().stream().map(toMavenExecution()).forEach(mavenPlugin::addExecution);
     command.dependencies().stream().map(this::toMavenDependency).forEach(mavenPlugin::addDependency);
     return mavenPlugin;

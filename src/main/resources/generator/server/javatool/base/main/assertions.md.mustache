@@ -23,3 +23,5 @@ Assert.field("name", name)
   .notBlank()
   .maxLength(150);
 ```
+
+The `Assert` methods are annotated with `@Nullable` and `@Contract` so that NullAway understands that a value is non-null after an assertion.

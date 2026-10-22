@@ -13,9 +13,9 @@ class KipeMethodSecurityExpressionRoot extends SecurityExpressionRoot<MethodInvo
 
   private final AccessEvaluator evaluator;
 
-  private Object filterObject;
-  private Object returnObject;
-  private final Object target;
+  private @Nullable Object filterObject;
+  private @Nullable Object returnObject;
+  private final @Nullable Object target;
 
   public KipeMethodSecurityExpressionRoot(Supplier<? extends @Nullable Authentication> authentication, MethodInvocation methodInvocation, AccessEvaluator evaluator) {
     super(authentication, methodInvocation);
@@ -24,31 +24,31 @@ class KipeMethodSecurityExpressionRoot extends SecurityExpressionRoot<MethodInvo
   }
 
   @Override
-  public void setFilterObject(Object filterObject) {
+  public void setFilterObject(@Nullable Object filterObject) {
     this.filterObject = filterObject;
   }
 
   @Override
-  public Object getFilterObject() {
+  public @Nullable Object getFilterObject() {
     return filterObject;
   }
 
   @Override
-  public void setReturnObject(Object returnObject) {
+  public void setReturnObject(@Nullable Object returnObject) {
     this.returnObject = returnObject;
   }
 
   @Override
-  public Object getReturnObject() {
+  public @Nullable Object getReturnObject() {
     return returnObject;
   }
 
   @Override
-  public Object getThis() {
+  public @Nullable Object getThis() {
     return target;
   }
 
-  public boolean can(String action, Object item) {
+  public boolean can(String action, @Nullable Object item) {
     return evaluator.can(getAuthentication(), action, item);
   }
 }

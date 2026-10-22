@@ -1,6 +1,7 @@
 package {{packageName}}.wire.logstash.infrastructure.secondary;
 
 import java.time.Duration;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,7 +17,7 @@ class LogstashTcpProperties {
   /**
    * Host name
    */
-  private String host;
+  private @Nullable String host;
 
   /**
    * Port number
@@ -24,14 +25,14 @@ class LogstashTcpProperties {
   private int port;
 
   /**
-   * Sets the size of the RingBuffer. Must be a positive power of 2.
+   * Sets the size of the RingBuffer. Must be a positive power of 2. Uses the appender default when not set.
    */
-  private Integer ringBufferSize;
+  private @Nullable Integer ringBufferSize;
 
   /**
-   * How long to wait for in-flight events during shutdown.
+   * How long to wait for in-flight events during shutdown. Uses the appender default when not set.
    */
-  private Duration shutdownGracePeriod;
+  private @Nullable Duration shutdownGracePeriod;
 
   public boolean isEnabled() {
     return enabled;
@@ -41,11 +42,11 @@ class LogstashTcpProperties {
     this.enabled = enabled;
   }
 
-  public String getHost() {
+  public @Nullable String getHost() {
     return host;
   }
 
-  public void setHost(String host) {
+  public void setHost(@Nullable String host) {
     this.host = host;
   }
 
@@ -57,19 +58,19 @@ class LogstashTcpProperties {
     this.port = port;
   }
 
-  public Integer getRingBufferSize() {
+  public @Nullable Integer getRingBufferSize() {
     return ringBufferSize;
   }
 
-  public void setRingBufferSize(Integer ringBufferSize) {
+  public void setRingBufferSize(@Nullable Integer ringBufferSize) {
     this.ringBufferSize = ringBufferSize;
   }
 
-  public Duration getShutdownGracePeriod() {
+  public @Nullable Duration getShutdownGracePeriod() {
     return shutdownGracePeriod;
   }
 
-  public void setShutdownGracePeriod(Duration shutdownGracePeriod) {
+  public void setShutdownGracePeriod(@Nullable Duration shutdownGracePeriod) {
     this.shutdownGracePeriod = shutdownGracePeriod;
   }
 }

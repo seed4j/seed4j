@@ -10,7 +10,7 @@ record RestServiceInstance(
   String host,
   int port,
   boolean secure,
-  Map<String, String> metadata,
+  @Nullable Map<String, String> metadata,
   @Nullable String instanceId,
   @Nullable URI uri
 ) {

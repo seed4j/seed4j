@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -58,7 +59,7 @@ public final class AuthenticatedUser {
    * @throws UnknownAuthenticationException
    *           if the authentication can't be read (unknown token type)
    */
-  public static String readPrincipal(Authentication authentication) {
+  public static @Nullable String readPrincipal(Authentication authentication) {
     Assert.notNull("authentication", authentication);
 
     if (authentication.getPrincipal() instanceof UserDetails details) {
@@ -66,11 +67,11 @@ public final class AuthenticatedUser {
     }
 
     if (authentication instanceof JwtAuthenticationToken token) {
-      return (String) token.getToken().getClaims().get(PREFERRED_USERNAME);
+      return readPreferredUsername(token.getToken().getClaims());
     }
 
     if (authentication.getPrincipal() instanceof DefaultOidcUser oidcUser) {
-      return (String) oidcUser.getAttributes().get(PREFERRED_USERNAME);
+      return readPreferredUsername(oidcUser.getAttributes());
     }
 
     if (authentication.getPrincipal() instanceof String principal) {
@@ -78,6 +79,10 @@ public final class AuthenticatedUser {
     }
 
     throw new UnknownAuthenticationException();
+  }
+
+  private static @Nullable String readPreferredUsername(Map<String, Object> claims) {
+    return (String) claims.get(PREFERRED_USERNAME);
   }
 
   /**

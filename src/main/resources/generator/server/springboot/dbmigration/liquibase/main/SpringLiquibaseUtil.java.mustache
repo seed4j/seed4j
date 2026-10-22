@@ -5,6 +5,7 @@ import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 import javax.sql.DataSource;
 import liquibase.integration.spring.SpringLiquibase;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
 import org.springframework.boot.liquibase.autoconfigure.DataSourceClosingSpringLiquibase;
 import org.springframework.boot.liquibase.autoconfigure.LiquibaseProperties;
@@ -32,9 +33,9 @@ final class SpringLiquibaseUtil {
    * @return a {@link liquibase.integration.spring.SpringLiquibase} object.
    */
   public static SpringLiquibase createSpringLiquibase(
-    DataSource liquibaseDatasource,
+    @Nullable DataSource liquibaseDatasource,
     LiquibaseProperties liquibaseProperties,
-    DataSource dataSource,
+    @Nullable DataSource dataSource,
     DataSourceProperties dataSourceProperties
   ) {
     SpringLiquibase liquibase;
@@ -63,9 +64,9 @@ final class SpringLiquibaseUtil {
   public static AsyncSpringLiquibase createAsyncSpringLiquibase(
     Environment env,
     Executor executor,
-    DataSource liquibaseDatasource,
+    @Nullable DataSource liquibaseDatasource,
     LiquibaseProperties liquibaseProperties,
-    DataSource dataSource,
+    @Nullable DataSource dataSource,
     DataSourceProperties dataSourceProperties
   ) {
     var liquibase = new AsyncSpringLiquibase(executor, env, liquibaseProperties);
@@ -79,7 +80,11 @@ final class SpringLiquibaseUtil {
     return liquibase;
   }
 
-  private static DataSource getDataSource(DataSource liquibaseDataSource, LiquibaseProperties liquibaseProperties, DataSource dataSource) {
+  private static @Nullable DataSource getDataSource(
+    @Nullable DataSource liquibaseDataSource,
+    LiquibaseProperties liquibaseProperties,
+    @Nullable DataSource dataSource
+  ) {
     if (liquibaseDataSource != null) {
       return liquibaseDataSource;
     }

@@ -93,6 +93,7 @@ public class SpringBootMvcModuleFactory {
           .addTemplate("CorsProperties.java")
           .and()
         .add(MAIN_SOURCE.append(CORS).template(PACKAGE_INFO), mainDestination.append(CORS_DESTINATION).append(PACKAGE_INFO))
+        .nullMarkedJavaPackage(mainDestination.append(CORS_PRIMARY))
         .add(
           TEST_SOURCE.append(CORS).template("CorsFilterConfigurationIT.java"),
           testDestination.append(CORS_PRIMARY).append("CorsFilterConfigurationIT.java")
@@ -103,6 +104,7 @@ public class SpringBootMvcModuleFactory {
           .addTemplate("BeanValidationTest.java")
         .and()
         .add(MAIN_SOURCE.template("BeanValidationErrorsHandler.java"), mainDestination.append("shared/error/infrastructure/primary/BeanValidationErrorsHandler.java"))
+        .nullMarkedJavaPackage(mainDestination.append("shared/error/infrastructure/primary"))
         .batch(TEST_SOURCE, testDestination.append("shared/error/infrastructure/primary"))
           .addTemplate("BeanValidationErrorsHandlerIT.java")
           .addTemplate("BeanValidationErrorsHandlerTest.java")
@@ -111,6 +113,7 @@ public class SpringBootMvcModuleFactory {
           .addTemplate("BeanValidationErrorsResource.java")
           .addTemplate("RestMandatoryParameter.java")
           .and()
+        .nullMarkedJavaPackage(testDestination.append("shared/error_generator/infrastructure/primary"))
       .and()
       .with(springTestLogger(loggerName, logLevel))
       .with(springMainLogger(loggerName, logLevel));

@@ -1,6 +1,7 @@
 package {{packageName}}.account.infrastructure.secondary;
 
 import {{packageName}}.account.domain.Account;
+import {{packageName}}.shared.error.domain.Assert;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -28,20 +29,27 @@ class OAuth2AuthenticationReader {
     Map<String, Object> attributes = readAttributes(authentication);
 
     return Account.builder()
-      .username((String) attributes.get("preferred_username"))
+      .username(readAttribute(attributes, "preferred_username"))
       .firstname(readFirstname(attributes))
-      .lastname((String) attributes.get("family_name"))
-      .email((String) attributes.get("email"))
+      .lastname(readAttribute(attributes, "family_name"))
+      .email(readAttribute(attributes, "email"))
       .roles(buildRoles(authentication))
       .build();
   }
 
   private String readFirstname(Map<String, Object> attributes) {
     if (attributes.containsKey(GIVEN_NAME)) {
-      return (String) attributes.get(GIVEN_NAME);
+      return readAttribute(attributes, GIVEN_NAME);
     }
 
-    return (String) attributes.get("name");
+    return readAttribute(attributes, "name");
+  }
+
+  private static String readAttribute(Map<String, Object> attributes, String attribute) {
+    String value = (String) attributes.get(attribute);
+    Assert.notNull(attribute, value);
+
+    return value;
   }
 
   private List<String> buildRoles(Authentication authentication) {

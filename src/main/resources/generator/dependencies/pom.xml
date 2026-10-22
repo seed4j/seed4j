@@ -75,6 +75,10 @@
     <openapi-backwards-compat-maven-plugin.version>1.0.3</openapi-backwards-compat-maven-plugin.version>
     <liquibase-linter-maven-plugin.version>1.1.0</liquibase-linter-maven-plugin.version>
     <modernizer-maven-plugin.version>3.5.0</modernizer-maven-plugin.version>
+    <error-prone.version>2.50.0</error-prone.version>
+    <nullability-maven-plugin.version>0.5.2</nullability-maven-plugin.version>
+    <jspecify.version>1.0.1</jspecify.version>
+    <nullaway.version>0.14.2</nullaway.version>
   </properties>
 
   <dependencyManagement>
@@ -435,6 +439,26 @@
         <groupId>org.gaul</groupId>
         <artifactId>modernizer-maven-plugin</artifactId>
         <version>${modernizer-maven-plugin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.errorprone</groupId>
+        <artifactId>error_prone_core</artifactId>
+        <version>${error-prone.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>am.ik.maven</groupId>
+        <artifactId>nullability-maven-plugin</artifactId>
+        <version>${nullability-maven-plugin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspecify</groupId>
+        <artifactId>jspecify</artifactId>
+        <version>${jspecify.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.uber.nullaway</groupId>
+        <artifactId>nullaway-annotations</artifactId>
+        <version>${nullaway.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

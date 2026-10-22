@@ -1,10 +1,13 @@
 package com.seed4j.generator.server.javatool.base.domain;
 
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.documentationTitle;
 import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
 import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.versionSlug;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JDestination;
@@ -60,7 +63,15 @@ public class JavaBaseModuleFactory {
         .and()
       .documentation(documentationTitle("Package types"), MAIN_SOURCE.template("package-types.md"))
       .documentation(documentationTitle("Assertions"), MAIN_SOURCE.template("assertions.md"))
+      .javaDependencies()
+        .addDependency(groupId("org.jspecify"), artifactId("jspecify"), versionSlug("jspecify"))
+        .addDependency(groupId("com.uber.nullaway"), artifactId("nullaway-annotations"), versionSlug("nullaway"))
+        .and()
       .files()
+        .nullMarkedJavaPackage(mainDestination)
+        .nullMarkedJavaPackage(mainDestination.append(Destination.ERROR_DOMAIN.path()))
+        .nullMarkedJavaPackage(mainDestination.append(Destination.COLLECTION_DOMAIN.path()))
+        .nullMarkedJavaPackage(mainDestination.append(Destination.GENERATION_DOMAIN.path()))
         .batch(MAIN_SOURCE, mainDestination)
           .addTemplate("BusinessContext.java")
           .addTemplate("SharedKernel.java")

@@ -27,6 +27,7 @@ public class SpringBootAsyncModuleFactory {
     return moduleBuilder(properties)
       .files()
         .add(SOURCE.template("AsyncConfiguration.java"), mainDestination.append("AsyncConfiguration.java"))
+        .nullMarkedJavaPackage(mainDestination)
         .and()
       .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.task.execution.pool.keep-alive"), propertyValue("10s"))

@@ -23,6 +23,7 @@ import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.ObjectContent;
 import tools.jackson.databind.ObjectMapper;
 import {{packageName}}.UnitTest;
+import {{packageName}}.shared.error.domain.MissingMandatoryValueException;
 
 @UnitTest
 @JsonTest
@@ -72,6 +73,13 @@ class LogstashTcpLifeCycleTest {
     assertThat(logstashTcpSocketAppender.getContext()).isEqualTo(context);
     assertThat(logstashTcpSocketAppender.getRingBufferSize()).isEqualTo(4096);
     assertThat(logstashTcpSocketAppender.getShutdownGracePeriod().getMilliseconds()).isEqualTo(100);
+  }
+
+  @Test
+  void shouldNotStartWithoutHost() {
+    LogstashTcpLifeCycle logstashTcpLifeCycle = new LogstashTcpLifeCycle(null, new LogstashTcpProperties(), new ObjectMapper());
+
+    assertThatThrownBy(logstashTcpLifeCycle::start).isExactlyInstanceOf(MissingMandatoryValueException.class).hasMessageContaining("host");
   }
 
   @Test

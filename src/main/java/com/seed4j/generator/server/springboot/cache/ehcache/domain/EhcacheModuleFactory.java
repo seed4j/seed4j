@@ -45,6 +45,7 @@ public class EhcacheModuleFactory {
       .files()
         .add(MAIN_SOURCE.template("JavaCacheConfiguration.java"), mainDestination.append("CacheConfiguration.java"))
         .add(MAIN_SOURCE.template("EhcacheProperties.java"), mainDestination.append("EhcacheProperties.java"))
+        .nullMarkedJavaPackage(mainDestination)
         .add(TEST_SOURCE.template("JavaCacheConfigurationIT.java"), testDestination.append("CacheConfigurationIT.java"))
         .add(TEST_SOURCE.template("CacheConfigurationTest.java"), testDestination.append("CacheConfigurationTest.java"))
         .and()

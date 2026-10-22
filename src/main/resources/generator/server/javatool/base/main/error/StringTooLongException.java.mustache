@@ -1,6 +1,7 @@
 package {{packageName}}.shared.error.domain;
 
 import java.util.Map;
+import org.jspecify.annotations.Nullable;
 
 public final class StringTooLongException extends AssertionException {
 
@@ -8,6 +9,9 @@ public final class StringTooLongException extends AssertionException {
   private final String currentLength;
 
   private StringTooLongException(StringTooLongExceptionBuilder builder) {
+    Assert.notNull("field", builder.field);
+    Assert.notNull("value", builder.value);
+
     super(builder.field, builder.message());
     maxLength = String.valueOf(builder.maxLength);
     currentLength = String.valueOf(builder.value.length());
@@ -19,9 +23,9 @@ public final class StringTooLongException extends AssertionException {
 
   static final class StringTooLongExceptionBuilder {
 
-    private String value;
+    private @Nullable String value;
     private int maxLength;
-    private String field;
+    private @Nullable String field;
 
     private StringTooLongExceptionBuilder() {}
 
@@ -44,6 +48,8 @@ public final class StringTooLongException extends AssertionException {
     }
 
     private String message() {
+      Assert.notNull("value", value);
+
       return "The value \"%s\" in field \"%s\" must be at most %d long but was %d".formatted(value, field, maxLength, value.length());
     }
 

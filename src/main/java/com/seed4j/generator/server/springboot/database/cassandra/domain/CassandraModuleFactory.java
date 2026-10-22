@@ -65,6 +65,7 @@ public class CassandraModuleFactory {
           .addTemplate("CassandraDatabaseConfiguration.java")
           .addTemplate("CassandraJSR310DateConverters.java")
           .and()
+          .nullMarkedJavaPackage(toSrcMainJava().append(packagePath).append(CASSANDRA_SECONDARY))
         .add(
           SOURCE.template("CassandraJSR310DateConvertersTest.java"),
           toSrcTestJava().append(packagePath).append(CASSANDRA_SECONDARY).append("CassandraJSR310DateConvertersTest.java")

@@ -6,6 +6,7 @@ import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.Nullable;
 import {{packageName}}.shared.error.domain.Assert;
 
 public record Firstname(String firstname) implements Comparable<Firstname> {
@@ -30,7 +31,7 @@ public record Firstname(String firstname) implements Comparable<Firstname> {
   }
 
   @Override
-  public int compareTo(Firstname other) {
+  public int compareTo(@Nullable Firstname other) {
     if (other == null) {
       return -1;
     }

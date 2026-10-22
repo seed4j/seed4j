@@ -1,6 +1,7 @@
 package {{packageName}}.shared.error.domain;
 
 import java.util.Map;
+import org.jspecify.annotations.Nullable;
 
 public class TooManyElementsException extends AssertionException {
 
@@ -8,6 +9,8 @@ public class TooManyElementsException extends AssertionException {
   private final String currentSize;
 
   public TooManyElementsException(TooManyElementsExceptionBuilder builder) {
+    Assert.notNull("field", builder.field);
+
     super(builder.field, builder.message());
     maxSize = String.valueOf(builder.maxSize);
     currentSize = String.valueOf(builder.size);
@@ -19,7 +22,7 @@ public class TooManyElementsException extends AssertionException {
 
   public static class TooManyElementsExceptionBuilder {
 
-    private String field;
+    private @Nullable String field;
     private int maxSize;
     private int size;
 

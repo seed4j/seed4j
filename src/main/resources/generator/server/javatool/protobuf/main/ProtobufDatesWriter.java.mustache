@@ -2,12 +2,13 @@ package {{packageName}}.shared.protobuf.infrastructure.secondary;
 
 import com.google.protobuf.Timestamp;
 import java.time.Instant;
+import org.jspecify.annotations.Nullable;
 
 public final class ProtobufDatesWriter {
 
   private ProtobufDatesWriter() {}
 
-  public static Timestamp buildTimestamp(Instant instant) {
+  public static @Nullable Timestamp buildTimestamp(@Nullable Instant instant) {
     if (instant == null) {
       return null;
     }

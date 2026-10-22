@@ -47,6 +47,9 @@ public class MicronautSampleFeatureModuleFactory {
         .addAnnotationProcessor(javaAnnotationProcessor().groupId(MICRONAUT_VALIDATION_GROUP).artifactId("micronaut-validation-processor").build())
         .and()
       .files()
+        .nullMarkedJavaPackage(mainDestination.append(APPLICATION))
+        .nullMarkedJavaPackage(mainDestination.append(PRIMARY).append(BEER))
+        .nullMarkedJavaPackage(mainDestination.append(SECONDARY))
         .add(
           MAIN_SOURCE.append(APPLICATION).template("BeersApplicationService.java"),
           mainDestination.append(APPLICATION).append("BeersApplicationService.java")

@@ -22,8 +22,9 @@ runs:
           echo "No Maven directory found"
           exit 0
         fi
+        # Maven keeps the remote Last-Modified date as file mtime, so downloads are detected by inode change time (ctime)
         # Seed4J snapshot jars are installed by the CI itself: they must never be cached
-        find "${dirs[@]}" -type f -newer "$RUNNER_TEMP/m2-cache-marker" -not -path 'repository/com/seed4j/*' > "$RUNNER_TEMP/m2-delta.txt"
+        find "${dirs[@]}" -type f -cnewer "$RUNNER_TEMP/m2-cache-marker" -not -path 'repository/com/seed4j/*' > "$RUNNER_TEMP/m2-delta.txt"
         count=$(wc -l < "$RUNNER_TEMP/m2-delta.txt")
         echo "$count new or updated files since cache restore"
         if [[ "$count" -gt 0 ]]; then

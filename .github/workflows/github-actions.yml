@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       skip_ci: ${{ steps.check-ci-skip.outputs.skip_ci }}
+      maven_cache_week: ${{ steps.maven-cache-week.outputs.week }}
+      maven_cache_previous_week: ${{ steps.maven-cache-week.outputs.previous_week }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -63,6 +65,12 @@ jobs:
             echo "No ci skip tag found."
             echo "skip_ci=false" >> $GITHUB_OUTPUT
           fi
+      - name: Compute Maven cache week
+        id: maven-cache-week
+        # The global Maven cache is rebuilt from scratch every ISO week, so outdated dependencies expire
+        run: |
+          echo "week=$(date -u +%G-W%V)" >> $GITHUB_OUTPUT
+          echo "previous_week=$(date -u -d '7 days ago' +%G-W%V)" >> $GITHUB_OUTPUT
   #--------------------------------------------------
   # Build and Tests the project on Windows
   #--------------------------------------------------
@@ -79,8 +87,9 @@ jobs:
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
-      - name: 'Init: cache local Maven repository'
-        uses: actions/cache@v6
+      - name: 'Init: restore local Maven repository'
+        id: restore-maven-cache
+        uses: actions/cache/restore@v6
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -91,6 +100,12 @@ jobs:
       - name: 'Test: run backend tests'
         run: |
           ./mvnw clean verify
+      - name: 'Save local Maven repository'
+        if: github.ref == 'refs/heads/main' && steps.restore-maven-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: ~/.m2/repository
+          key: ${{ steps.restore-maven-cache.outputs.cache-primary-key }}
   #--------------------------------------------------
   # Build and Tests the project on Linux
   #--------------------------------------------------
@@ -109,13 +124,11 @@ jobs:
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
-      - name: 'Init: cache local Maven repository'
-        uses: actions/cache@v6
+      - name: 'Init: restore global Maven cache'
+        uses: ./.github/actions/maven-cache-restore
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          week: ${{ needs.setup.outputs.maven_cache_week }}
+          fallback-week: ${{ github.event_name == 'pull_request' && needs.setup.outputs.maven_cache_previous_week || '' }}
       - name: 'Init: install Node.js packages'
         run: npm ci
       - name: 'Lint: check'
@@ -150,6 +163,11 @@ jobs:
           name: seed4j-jar
           path: '${{ github.workspace }}/target/*.jar'
           retention-days: 1
+      - name: 'Maven cache: upload downloaded dependencies'
+        if: ${{ !cancelled() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
+        uses: ./.github/actions/maven-cache-delta
+        with:
+          name: seed4j
   #------------------------------------------------------
   # Build and Upload *.jar from main branch on Linux
   #------------------------------------------------------
@@ -170,13 +188,17 @@ jobs:
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
-      - name: 'Init: cache local Maven repository'
-        uses: actions/cache@v6
+      # Local actions come from the main branch checkout here, so the global cache restore is inlined
+      - name: 'Init: restore global Maven cache'
+        uses: actions/cache/restore@v6
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          path: |
+            ~/.m2/repository
+            ~/.m2/wrapper
+          key: Linux-m2-global-${{ needs.setup.outputs.maven_cache_week }}-
           restore-keys: |
-            ${{ runner.os }}-maven-
+            Linux-m2-global-${{ needs.setup.outputs.maven_cache_week }}-
+            Linux-m2-global-${{ needs.setup.outputs.maven_cache_previous_week }}-
       - name: 'Init: install Node.js packages'
         run: npm ci
       - name: 'Build application JAR'
@@ -404,23 +426,19 @@ jobs:
         if: |
           steps.tests-requirement-check.outputs.execute_tests == 'true' &&
           matrix.java-build-tool == 'maven'
-        id: cache_maven_md5sum
+        id: maven-project
         working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           ls -al
-          MD5SUM_POM_XML=$(md5sum pom.xml | cut -d ' ' -f 1)
-          echo $MD5SUM_POM_XML
-          echo "md5sum_pom_xml=${MD5SUM_POM_XML}" >> $GITHUB_OUTPUT
-      - name: 'Init: cache local Maven repository'
-        if: |
-          steps.tests-requirement-check.outputs.execute_tests == 'true' &&
-          matrix.java-build-tool == 'maven'
-        uses: actions/cache@v6
+          if [ -f 'pom.xml' ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          fi
+      - name: 'Init: restore global Maven cache'
+        if: steps.maven-project.outputs.exists == 'true'
+        uses: ./current-branch/.github/actions/maven-cache-restore
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-${{ matrix.java-build-tool }}-${{ matrix.app }}-${{ steps.cache_maven_md5sum.outputs.md5sum_pom_xml }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.java-build-tool }}-
+          week: ${{ needs.setup.outputs.maven_cache_week }}
+          fallback-week: ${{ github.event_name == 'pull_request' && needs.setup.outputs.maven_cache_previous_week || '' }}
       - name: 'Test: list ${{ matrix.app }}'
         if: |
           steps.tests-requirement-check.outputs.execute_tests == 'true' &&
@@ -437,11 +455,12 @@ jobs:
             | md5sum | head -n1 | cut -d " " -f1)
           echo $GRADLE_DEPS_MD5
           echo "md5sum=${GRADLE_DEPS_MD5}" >> $GITHUB_OUTPUT
-      - name: 'Init: cache local Gradle repository'
+      - name: 'Init: restore local Gradle repository'
         if: |
           steps.tests-requirement-check.outputs.execute_tests == 'true' &&
           matrix.java-build-tool == 'gradle'
-        uses: actions/cache@v6
+        id: restore-gradle-cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ~/.gradle/caches
@@ -528,6 +547,93 @@ jobs:
           if [ -f 'mvnw' ] || [ -f 'gradlew' ]; then
             ./start.sh
           fi
+      - name: 'Maven cache: upload downloaded dependencies'
+        if: |
+          !cancelled() &&
+          steps.maven-project.outputs.exists == 'true' &&
+          github.event_name != 'pull_request' &&
+          github.ref == 'refs/heads/main'
+        uses: ./current-branch/.github/actions/maven-cache-delta
+        with:
+          name: ${{ matrix.app }}
+      - name: 'Save local Gradle repository'
+        if: |
+          steps.restore-gradle-cache.outcome == 'success' &&
+          steps.restore-gradle-cache.outputs.cache-hit != 'true' &&
+          github.ref == 'refs/heads/main'
+        uses: actions/cache/save@v6
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ steps.restore-gradle-cache.outputs.cache-primary-key }}
+
+  #--------------------------------------------------
+  # Merge downloaded dependencies into the global Maven cache
+  #--------------------------------------------------
+  maven-cache:
+    name: maven-cache
+    needs: [setup, tests-linux, generation]
+    if: >-
+      !cancelled() &&
+      needs.setup.outputs.skip_ci != 'true' &&
+      github.event_name != 'pull_request' &&
+      github.ref == 'refs/heads/main'
+    permissions:
+      actions: write
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      CACHE_PREFIX: Linux-m2-global-
+    steps:
+      - name: 'List Maven cache deltas'
+        id: deltas
+        run: |
+          gh api --paginate "repos/$GH_REPO/actions/runs/${{ github.run_id }}/artifacts?per_page=100" \
+            --jq '.artifacts[] | select(.name | startswith("m2-delta-")) | .name' > "$RUNNER_TEMP/m2-deltas.txt"
+          cat "$RUNNER_TEMP/m2-deltas.txt"
+          if [ -s "$RUNNER_TEMP/m2-deltas.txt" ]; then
+            echo "found=true" >> $GITHUB_OUTPUT
+          else
+            echo "No new Maven dependency downloaded: keeping current cache"
+          fi
+      - name: 'Restore global Maven cache'
+        if: steps.deltas.outputs.found == 'true'
+        uses: actions/cache/restore@v6
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.m2/wrapper
+          key: ${{ env.CACHE_PREFIX }}${{ needs.setup.outputs.maven_cache_week }}-
+      - name: 'Merge Maven cache deltas'
+        if: steps.deltas.outputs.found == 'true'
+        # Deltas are downloaded one at a time: on a cold week they hold whole repositories
+        run: |
+          mkdir -p ~/.m2
+          while read -r name; do
+            gh run download ${{ github.run_id }} --name "$name" --dir "$RUNNER_TEMP/$name"
+            tar -xf "$RUNNER_TEMP/$name/m2-delta.tar" -C ~/.m2
+            rm -rf "${RUNNER_TEMP:?}/$name"
+          done < "$RUNNER_TEMP/m2-deltas.txt"
+          du -sh ~/.m2/repository ~/.m2/wrapper || true
+      - name: 'Save global Maven cache'
+        if: steps.deltas.outputs.found == 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.m2/wrapper
+          key: ${{ env.CACHE_PREFIX }}${{ needs.setup.outputs.maven_cache_week }}-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: 'Delete outdated global Maven caches'
+        if: steps.deltas.outputs.found == 'true'
+        run: |
+          current_key="${CACHE_PREFIX}${{ needs.setup.outputs.maven_cache_week }}-${{ github.run_id }}-${{ github.run_attempt }}"
+          gh cache list --key "$CACHE_PREFIX" --limit 100 --json id,key \
+            --jq ".[] | select(.key != \"$current_key\") | .id" \
+            | xargs -r -n1 gh cache delete
 
   #--------------------------------------------------
   # Configuration for Status checks that are required

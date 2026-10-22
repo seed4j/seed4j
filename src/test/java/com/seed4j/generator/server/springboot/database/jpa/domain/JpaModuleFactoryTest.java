@@ -243,6 +243,7 @@ class JpaModuleFactoryTest {
     assertThatModuleWithFiles(module, fileFromClasspath("projects/init-maven/pom.xml", "pom.xml"))
       .hasFile("pom.xml")
       .containing(
+        // prettier-ignore
         // language=xml
         """
                   <annotationProcessorPaths>

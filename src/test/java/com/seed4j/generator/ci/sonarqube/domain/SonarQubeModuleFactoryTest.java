@@ -68,6 +68,7 @@ class SonarQubeModuleFactoryTest {
       return assertThatModuleWithFiles(module, pomFile(), readmeFile())
         .hasFile("pom.xml")
         .containing(
+          // prettier-ignore
           // language=xml
           """
                 <plugin>
@@ -77,6 +78,7 @@ class SonarQubeModuleFactoryTest {
           """
         )
         .containing(
+          // prettier-ignore
           // language=xml
           """
                   <plugin>

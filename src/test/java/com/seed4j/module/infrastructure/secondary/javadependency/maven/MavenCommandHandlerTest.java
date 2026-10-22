@@ -957,6 +957,7 @@ class MavenCommandHandlerTest {
 
       assertThat(contentNormalizingNewLines(pom))
         .contains(
+          // prettier-ignore
           // language=XML
           """
                       <path>
@@ -967,6 +968,7 @@ class MavenCommandHandlerTest {
           """
         )
         .doesNotContain(
+          // prettier-ignore
           // language=XML
           """
                       <path>
@@ -1170,6 +1172,7 @@ class MavenCommandHandlerTest {
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddJavaAnnotationProcessor(hibernateAnnotationProcessor()));
 
       assertThat(contentNormalizingNewLines(pom)).contains(
+        // prettier-ignore
         // language=XML
         """
               <plugin>
@@ -1263,6 +1266,7 @@ class MavenCommandHandlerTest {
       assertThat(contentNormalizingNewLines(pom))
         .doesNotContain("compiler-plugin.version")
         .contains(
+          // prettier-ignore
           // language=xml
           """
                 <plugin>
@@ -1418,6 +1422,7 @@ class MavenCommandHandlerTest {
 
         assertThat(contentNormalizingNewLines(pom))
           .doesNotContain(
+            // prettier-ignore
             // language=xml
             """
                     <plugin>
@@ -1426,6 +1431,7 @@ class MavenCommandHandlerTest {
             """
           )
           .containsOnlyOnce(
+            // prettier-ignore
             // language=xml
             """
                     <plugin>
@@ -1451,6 +1457,7 @@ class MavenCommandHandlerTest {
 
         assertThat(contentNormalizingNewLines(pom))
           .doesNotContain(
+            // prettier-ignore
             // language=xml
             """
                     <plugin>
@@ -1470,6 +1477,7 @@ class MavenCommandHandlerTest {
             """
           )
           .containsOnlyOnce(
+            // prettier-ignore
             // language=xml
             """
                     <plugin>
@@ -1768,6 +1776,7 @@ class MavenCommandHandlerTest {
 
         assertThat(contentNormalizingNewLines(pom))
           .doesNotContain(
+            // prettier-ignore
             // language=xml
             """
                   <plugin>
@@ -1776,6 +1785,7 @@ class MavenCommandHandlerTest {
             """
           )
           .containsOnlyOnce(
+            // prettier-ignore
             // language=xml
             """
                   <plugin>
@@ -1800,6 +1810,7 @@ class MavenCommandHandlerTest {
 
         assertThat(contentNormalizingNewLines(pom))
           .doesNotContain(
+            // prettier-ignore
             // language=xml
             """
                   <plugin>
@@ -1819,6 +1830,7 @@ class MavenCommandHandlerTest {
             """
           )
           .containsOnlyOnce(
+            // prettier-ignore
             // language=xml
             """
                   <plugin>

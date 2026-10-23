@@ -188,17 +188,11 @@ jobs:
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
-      # Local actions come from the main branch checkout here, so the global cache restore is inlined
       - name: 'Init: restore global Maven cache'
-        uses: actions/cache/restore@v6
+        uses: ./.github/actions/maven-cache-restore
         with:
-          path: |
-            ~/.m2/repository
-            ~/.m2/wrapper
-          key: Linux-m2-global-${{ needs.setup.outputs.maven_cache_week }}-
-          restore-keys: |
-            Linux-m2-global-${{ needs.setup.outputs.maven_cache_week }}-
-            Linux-m2-global-${{ needs.setup.outputs.maven_cache_previous_week }}-
+          week: ${{ needs.setup.outputs.maven_cache_week }}
+          fallback-week: ${{ needs.setup.outputs.maven_cache_previous_week }}
       - name: 'Init: install Node.js packages'
         run: npm ci
       - name: 'Build application JAR'

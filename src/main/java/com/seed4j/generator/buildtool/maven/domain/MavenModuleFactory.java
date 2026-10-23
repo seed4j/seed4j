@@ -34,9 +34,10 @@ public class MavenModuleFactory {
   You need to have Java 25:
 
   - [JDK 25](https://openjdk.java.net/projects/jdk/25/)""";
+  private static final String PROPERTIES = "properties";
 
   public Seed4JModule buildMavenModule(Seed4JModuleProperties properties) {
-    Assert.notNull("properties", properties);
+    Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
     return moduleBuilder(properties)
@@ -56,6 +57,7 @@ public class MavenModuleFactory {
         .and()
       .mavenPlugins()
         .plugin(mavenCompilerPlugin())
+        .plugin(dependencyPlugin())
         .plugin(surefirePlugin())
         .plugin(failsafePlugin())
         .plugin(enforcerPlugin())
@@ -102,7 +104,7 @@ public class MavenModuleFactory {
   }
 
   public Seed4JModule buildMavenWrapperModule(Seed4JModuleProperties properties) {
-    Assert.notNull("properties", properties);
+    Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
     return moduleBuilder(properties)
@@ -139,6 +141,15 @@ public class MavenModuleFactory {
       .build();
   }
 
+  private MavenPlugin dependencyPlugin() {
+    return mavenPlugin()
+      .groupId(APACHE_PLUGINS_GROUP)
+      .artifactId("maven-dependency-plugin")
+      .versionSlug("maven-dependency-plugin")
+      .addExecution(pluginExecution().goals(PROPERTIES).id("generate-dependencies-properties"))
+      .build();
+  }
+
   private MavenPlugin surefirePlugin() {
     return mavenPlugin()
       .groupId(APACHE_PLUGINS_GROUP)
@@ -148,6 +159,8 @@ public class MavenModuleFactory {
         """
         <!-- Force alphabetical order to have a reproducible build -->
         <runOrder>alphabetical</runOrder>
+        <!-- Load Mockito as a Java agent to avoid the dynamic agent loading warning on JDK 21+ -->
+        <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
         <excludes>
           <exclude>**/*IT*</exclude>
           <exclude>**/*CucumberTest*</exclude>
@@ -169,6 +182,8 @@ public class MavenModuleFactory {
           <classesDirectory>${project.build.outputDirectory}</classesDirectory>
           <!-- Force alphabetical order to have a reproducible build -->
           <runOrder>alphabetical</runOrder>
+          <!-- Load Mockito as a Java agent to avoid the dynamic agent loading warning on JDK 21+ -->
+          <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
           <includes>
             <include>**/*IT*</include>
             <include>**/*CucumberTest*</include>

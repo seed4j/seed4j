@@ -29,15 +29,27 @@ val profiles = (project.findProperty("profiles") as String? ?: "")
   .filter { it.isNotEmpty() }
 // seed4j-needle-profile-activation
 
+// Load Mockito as a Java agent to avoid the dynamic agent loading warning on JDK 21+
+val mockitoAgent = configurations.create("mockitoAgent") {
+  shouldResolveConsistentlyWith(configurations.testRuntimeClasspath.get())
+}
+
 dependencies {
   // seed4j-needle-gradle-implementation-dependencies
   // seed4j-needle-gradle-compile-dependencies
   // seed4j-needle-gradle-annotation-processors
   // seed4j-needle-gradle-runtime-dependencies
   // seed4j-needle-gradle-test-dependencies
+  mockitoAgent("org.mockito:mockito-core") {
+    isTransitive = false
+  }
 }
 
 // seed4j-needle-gradle-free-configuration-blocks
+
+tasks.withType<Test>().configureEach {
+  jvmArgumentProviders.add(CommandLineArgumentProvider { listOf("-javaagent:${mockitoAgent.singleFile}") })
+}
 
 tasks.test {
   filter {

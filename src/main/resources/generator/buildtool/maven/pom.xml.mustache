@@ -19,6 +19,8 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <maven.version>3.6.3</maven.version>
+    <!-- Default value required by @{argLine} in surefire/failsafe, JaCoCo prepends its agent to it -->
+    <argLine />
   </properties>
 
   <build>

@@ -53,6 +53,11 @@ if (profiles.contains("local")) {
 }
 // seed4j-needle-profile-activation
 
+// Load Mockito as a Java agent to avoid the dynamic agent loading warning on JDK 21+
+val mockitoAgent = configurations.create("mockitoAgent") {
+  shouldResolveConsistentlyWith(configurations.testRuntimeClasspath.get())
+}
+
 dependencies {
   implementation(platform(libs.spring.boot.dependencies))
   implementation(libs.spring.boot.starter)
@@ -70,6 +75,9 @@ dependencies {
   testImplementation(libs.reflections)
   testImplementation(libs.junit.jupiter.engine)
   // seed4j-needle-gradle-test-dependencies
+  mockitoAgent("org.mockito:mockito-core") {
+    isTransitive = false
+  }
 }
 
 
@@ -86,6 +94,10 @@ tasks.processResources {
 }
 
 // seed4j-needle-gradle-free-configuration-blocks
+
+tasks.withType<Test>().configureEach {
+  jvmArgumentProviders.add(CommandLineArgumentProvider { listOf("-javaagent:${mockitoAgent.singleFile}") })
+}
 
 tasks.test {
   filter {

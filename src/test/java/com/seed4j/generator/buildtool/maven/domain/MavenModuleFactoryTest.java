@@ -76,10 +76,27 @@ class MavenModuleFactoryTest {
       .containing(
         """
               <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin.version}</version>
+                <executions>
+                  <execution>
+                    <id>generate-dependencies-properties</id>
+                    <goals>
+                      <goal>properties</goal>
+                    </goals>
+                  </execution>
+                </executions>
+              </plugin>
+        """
+      )
+      .containing(
+        """
+              <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire-plugin.version}</version>
                 <configuration>
                   <runOrder>alphabetical</runOrder>
+                  <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
                   <excludes>
                     <exclude>**/*IT*</exclude>
                     <exclude>**/*CucumberTest*</exclude>
@@ -110,6 +127,7 @@ class MavenModuleFactoryTest {
                 <configuration>
                   <classesDirectory>${project.build.outputDirectory}</classesDirectory>
                   <runOrder>alphabetical</runOrder>
+                  <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
                   <includes>
                     <include>**/*IT*</include>
                     <include>**/*CucumberTest*</include>

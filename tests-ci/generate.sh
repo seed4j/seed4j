@@ -55,9 +55,7 @@ init_server() {
 }
 
 nullaway() {
-  if [[ $java_build_tool == 'maven' ]]; then
-    apply_modules "nullaway"
-  fi
+  apply_modules "nullaway"
 }
 
 spring_boot() {

@@ -1,6 +1,8 @@
 package com.seed4j.generator.server.javatool.nullaway.domain;
 
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.gradleBuildFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.gradleLibsVersionFile;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
 
 import com.seed4j.TestFileUtils;
@@ -16,14 +18,14 @@ class NullAwayModuleFactoryTest {
   private final NullAwayModuleFactory factory = new NullAwayModuleFactory();
 
   @Test
-  void shouldBuildModule() {
+  void shouldBuildModuleForMaven() {
     Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     Seed4JModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, pomFile())
       .hasFile("pom.xml")
-      .containing("<error-prone.version>")
+      .notContaining("error-prone")
       .containing(
         """
                 <plugin>
@@ -39,7 +41,6 @@ class NullAwayModuleFactoryTest {
                     </execution>
                   </executions>
                   <configuration>
-                    <errorProneVersion>${error-prone.version}</errorProneVersion>
                     <nullAwayVersion>${nullaway.version}</nullAwayVersion>
                     <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
                     <testOutputDirectory>${project.basedir}/src/test/java</testOutputDirectory>
@@ -53,6 +54,82 @@ class NullAwayModuleFactoryTest {
                 <groupId>am.ik.maven</groupId>
                 <artifactId>nullability-maven-plugin</artifactId>
               </plugin>\
+        """
+      );
+  }
+
+  @Test
+  void shouldBuildModuleForGradle() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+
+    Seed4JModule module = factory.buildModule(properties);
+
+    assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
+      .hasFile("gradle/libs.versions.toml")
+      .containing("\tnullaway = \"")
+      .containing("\terror-prone = \"")
+      .containing(
+        """
+        \t[plugins.errorprone]
+        \t\tid = "net.ltgt.errorprone"
+
+        \t\t[plugins.errorprone.version]
+        \t\t\tref = "gradle-errorprone-plugin"
+        """
+      )
+      .containing(
+        """
+        \t[plugins.nullaway]
+        \t\tid = "net.ltgt.nullaway"
+
+        \t\t[plugins.nullaway.version]
+        \t\t\tref = "gradle-nullaway-plugin"
+        """
+      )
+      .and()
+      .hasFile("build.gradle.kts")
+      .notContaining("implementation(libs.error")
+      .containing("import net.ltgt.gradle.errorprone.errorprone")
+      .containing("import net.ltgt.gradle.nullaway.nullaway")
+      .containing(
+        """
+          alias(libs.plugins.errorprone)
+          alias(libs.plugins.nullaway)
+        """
+      )
+      .containing(
+        """
+        dependencies {
+          errorprone("com.uber.nullaway:nullaway:${libs.versions.nullaway.get()}")
+        }
+
+        nullaway {
+          error()
+          requireExplicitNullMarking { error() }
+          onlyNullMarked = true
+          jspecifyMode = true
+        }
+        """
+      )
+      .containing(
+        """
+        dependencies {
+          errorprone("com.google.errorprone:error_prone_core:${libs.versions.error.prone.get()}")
+        }
+
+        tasks.compileJava {
+          options.errorprone {
+            disableAllChecks = true
+            excludedPaths = ".*/build/generated/.*"
+            nullaway {
+              checkContracts = true
+            }
+          }
+        }
+
+        tasks.compileTestJava {
+          options.errorprone.enabled = false
+        }
         """
       );
   }

@@ -188,17 +188,11 @@ jobs:
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
-      # Local actions come from the main branch checkout here, so the global cache restore is inlined
       - name: 'Init: restore global Maven cache'
-        uses: actions/cache/restore@v6
+        uses: ./.github/actions/maven-cache-restore
         with:
-          path: |
-            ~/.m2/repository
-            ~/.m2/wrapper
-          key: Linux-m2-global-${{ needs.setup.outputs.maven_cache_week }}-
-          restore-keys: |
-            Linux-m2-global-${{ needs.setup.outputs.maven_cache_week }}-
-            Linux-m2-global-${{ needs.setup.outputs.maven_cache_previous_week }}-
+          week: ${{ needs.setup.outputs.maven_cache_week }}
+          fallback-week: ${{ needs.setup.outputs.maven_cache_previous_week }}
       - name: 'Init: install Node.js packages'
         run: npm ci
       - name: 'Build application JAR'
@@ -535,10 +529,19 @@ jobs:
         run: |
           if grep -q "test:component" package.json; then
             if [[ "${{ steps.playwright.outputs.enabled }}" == "true" ]]; then
-              # Azure apt mirrors sometimes stall: give up idle connections and retry instead of hanging until the job timeout
-              printf 'Acquire::Retries "3";\nAcquire::http::Timeout "20";\nAcquire::https::Timeout "20";\n' \
-                | sudo tee /etc/apt/apt.conf.d/99-ci-network > /dev/null
-              npx playwright install --with-deps
+              # apt sometimes hangs on Azure mirrors before downloading anything: bound each attempt and retry
+              for attempt in 1 2 3; do
+                if timeout 180 npx playwright install-deps; then
+                  break
+                fi
+                if [[ $attempt -eq 3 ]]; then
+                  echo "Playwright system dependencies installation failed after $attempt attempts"
+                  exit 1
+                fi
+                echo "Playwright system dependencies installation attempt $attempt failed, retrying"
+                sudo dpkg --configure -a
+              done
+              npx playwright install
             fi
             ${{ matrix.node-package-manager }} run test:component:headless
           else

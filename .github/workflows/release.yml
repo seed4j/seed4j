@@ -17,13 +17,13 @@ jobs:
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
-      - name: 'Init: cache local Maven repository'
-        uses: actions/cache@v6
+      - name: 'Init: compute Maven cache week'
+        id: maven-cache-week
+        run: echo "week=$(date -u +%G-W%V)" >> $GITHUB_OUTPUT
+      - name: 'Init: restore global Maven cache'
+        uses: ./.github/actions/maven-cache-restore
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          week: ${{ steps.maven-cache-week.outputs.week }}
       - name: 'Init: install Node.js packages'
         run: npm ci
       - name: 'Lint: check'

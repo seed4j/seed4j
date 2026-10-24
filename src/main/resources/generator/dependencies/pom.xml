@@ -79,7 +79,7 @@
     <error-prone.version>2.51.0</error-prone.version>
     <nullability-maven-plugin.version>0.5.2</nullability-maven-plugin.version>
     <jspecify.version>1.0.1</jspecify.version>
-    <nullaway.version>0.14.2</nullaway.version>
+    <nullaway.version>0.14.3</nullaway.version>
   </properties>
 
   <dependencyManagement>

@@ -30,6 +30,7 @@ public class SpringBootAsyncModuleFactory {
         .nullMarkedJavaPackage(mainDestination)
         .and()
       .applicationProperties(SPRING_MAIN)
+        .set(propertyKey("spring.task.execution.pool.core-size"), propertyValue(8))
         .set(propertyKey("spring.task.execution.pool.keep-alive"), propertyValue("10s"))
         .set(propertyKey("spring.task.execution.pool.max-size"), propertyValue(16))
         .set(propertyKey("spring.task.execution.pool.queue-capacity"), propertyValue(100))

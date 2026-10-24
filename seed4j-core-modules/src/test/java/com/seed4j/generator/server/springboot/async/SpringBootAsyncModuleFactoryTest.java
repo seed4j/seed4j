@@ -32,6 +32,7 @@ class SpringBootAsyncModuleFactoryTest {
           task:
             execution:
               pool:
+                core-size: 8
                 keep-alive: 10s
                 max-size: 16
                 queue-capacity: 100

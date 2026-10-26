@@ -1,4 +1,4 @@
-package com.seed4j.generator.server.springboot.broker.kafka.domain;
+package com.seed4j.generator.server.springboot.broker.kafka;
 
 import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST;
@@ -19,9 +19,10 @@ import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.resource.Seed4JModuleServices;
 import java.util.UUID;
 
-public class KafkaModuleFactory {
+class KafkaModuleFactory {
 
   private static final Seed4JSource SOURCE = from("server/springboot/broker/kafka");
   private static final String TECHNICAL_INFRASTRUCTURE_CONFIG_KAFKA = "/wire/kafka/infrastructure/config";
@@ -32,11 +33,11 @@ public class KafkaModuleFactory {
 
   private final DockerImages dockerImages;
 
-  public KafkaModuleFactory(DockerImages dockerImages) {
-    this.dockerImages = dockerImages;
+  KafkaModuleFactory(Seed4JModuleServices services) {
+    this.dockerImages = services.dockerImages();
   }
 
-  public Seed4JModule buildModuleInit(Seed4JModuleProperties properties) {
+  Seed4JModule buildModuleInit(Seed4JModuleProperties properties) {
     String packagePath = properties.packagePath();
     String kafkaClusterId = properties.getOrDefaultString("kafkaClusterId", UUID.randomUUID().toString());
 
@@ -83,7 +84,7 @@ public class KafkaModuleFactory {
     // @formatter:on
   }
 
-  public Seed4JModule buildModuleSampleProducerConsumer(Seed4JModuleProperties properties) {
+  Seed4JModule buildModuleSampleProducerConsumer(Seed4JModuleProperties properties) {
     String packagePath = properties.packagePath();
 
     // @formatter:off
@@ -106,7 +107,7 @@ public class KafkaModuleFactory {
     // @formatter:on
   }
 
-  public Seed4JModule buildModuleAkhq(Seed4JModuleProperties properties) {
+  Seed4JModule buildModuleAkhq(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .context()

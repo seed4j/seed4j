@@ -1,35 +1,27 @@
-package com.seed4j.generator.server.springboot.broker.kafka.domain;
+package com.seed4j.generator.server.springboot.broker.kafka;
 
 import static com.seed4j.TestFileUtils.tmpDirForTest;
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
-import static org.mockito.Mockito.when;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.ModuleFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.readmeFile;
 
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModulesFixture;
-import com.seed4j.module.domain.docker.DockerImageVersion;
-import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.resource.FakeSeed4JModuleServices;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 @UnitTest
-@ExtendWith(MockitoExtension.class)
 class KafkaModuleFactoryTest {
 
-  @Mock
-  private DockerImages dockerImages;
-
-  @InjectMocks
-  private KafkaModuleFactory factory;
+  private final FakeSeed4JModuleServices seed4JModuleServices = new FakeSeed4JModuleServices();
+  private final KafkaModuleFactory factory = new KafkaModuleFactory(seed4JModuleServices);
 
   @Test
   void shouldBuildKafkaModuleInit() {
-    when(dockerImages.get("apache/kafka-native")).thenReturn(new DockerImageVersion("apache/kafka-native", "1.0.0"));
-
+    seed4JModuleServices.dockerImages().put("apache/kafka-native", "1.0.0");
     Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")
@@ -147,8 +139,7 @@ class KafkaModuleFactoryTest {
 
   @Test
   void shouldBuildKafkaModuleAkhq() {
-    when(dockerImages.get("tchiotludo/akhq")).thenReturn(new DockerImageVersion("tchiotludo/akhq", "1.0.0"));
-
+    seed4JModuleServices.dockerImages().put("tchiotludo/akhq", "1.0.0");
     Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(tmpDirForTest())
       .basePackage("com.seed4j.growth")
       .projectBaseName("myapp")

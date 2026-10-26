@@ -1,34 +1,24 @@
-package com.seed4j.generator.server.springboot.broker.pulsar.domain;
+package com.seed4j.generator.server.springboot.broker.pulsar;
 
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
-import static org.mockito.Mockito.when;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModulesFixture;
-import com.seed4j.module.domain.docker.DockerImageVersion;
-import com.seed4j.module.domain.docker.DockerImages;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.resource.FakeSeed4JModuleServices;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 @UnitTest
-@ExtendWith(MockitoExtension.class)
 class PulsarModuleFactoryTest {
 
-  @Mock
-  private DockerImages dockerImages;
-
-  @InjectMocks
-  private PulsarModuleFactory factory;
+  private final FakeSeed4JModuleServices seed4JModuleServices = new FakeSeed4JModuleServices();
+  private final PulsarModuleFactory factory = new PulsarModuleFactory(seed4JModuleServices);
 
   @Test
   void shouldBuildModule() {
-    when(dockerImages.get("apachepulsar/pulsar")).thenReturn(new DockerImageVersion("apachepulsar/pulsar", "1.1.1"));
+    seed4JModuleServices.dockerImages().put("apachepulsar/pulsar", "1.1.1");
 
     Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .basePackage("com.seed4j.growth")

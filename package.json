@@ -78,7 +78,7 @@
     "lint-staged": "17.6.0",
     "npm-run-all2": "9.0.4",
     "oxlint": "1.89.0",
-    "oxlint-tsgolint": "7.0.2004",
+    "oxlint-tsgolint": "7.0.2005",
     "postcss-scss": "4.0.9",
     "prettier": "3.9.10",
     "prettier-plugin-gherkin": "4.0.0",

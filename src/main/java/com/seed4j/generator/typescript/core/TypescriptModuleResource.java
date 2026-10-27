@@ -1,31 +1,31 @@
-package com.seed4j.generator.typescript.core.infrastructure.primary;
+package com.seed4j.generator.typescript.core;
 
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.INIT;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.PRETTIER;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.TYPESCRIPT;
 
-import com.seed4j.generator.typescript.core.application.TypescriptApplicationService;
+import com.google.auto.service.AutoService;
 import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
 import com.seed4j.module.domain.resource.Seed4JModulePropertiesDefinition;
 import com.seed4j.module.domain.resource.Seed4JModuleResource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import com.seed4j.module.domain.resource.Seed4JModuleResourceProvider;
+import com.seed4j.module.domain.resource.Seed4JModuleServices;
 
-@Configuration
-class TypescriptModuleConfiguration {
+@AutoService(Seed4JModuleResourceProvider.class)
+public class TypescriptModuleResource implements Seed4JModuleResourceProvider {
 
-  @Bean
-  Seed4JModuleResource typescriptModule(TypescriptApplicationService typescript) {
+  @Override
+  public Seed4JModuleResource get(Seed4JModuleServices services) {
     return Seed4JModuleResource.builder()
       .slug(TYPESCRIPT)
       .propertiesDefinition(propertiesDefinition())
       .apiDoc("Typescript", "Init Typescript project")
       .organization(Seed4JModuleOrganization.builder().addDependency(INIT).addDependency(PRETTIER).build())
       .tags("typescript")
-      .factory(typescript::buildModule);
+      .factory(new TypescriptModuleFactory(services)::buildModule);
   }
 
-  private Seed4JModulePropertiesDefinition propertiesDefinition() {
+  private static Seed4JModulePropertiesDefinition propertiesDefinition() {
     return Seed4JModulePropertiesDefinition.builder().addNodePackageManager().build();
   }
 }

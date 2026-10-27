@@ -1,4 +1,4 @@
-package com.seed4j.generator.typescript.optional.domain;
+package com.seed4j.generator.typescript.optional;
 
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
 

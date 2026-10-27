@@ -1,25 +1,25 @@
-package com.seed4j.generator.typescript.optional.infrastructure.primary;
+package com.seed4j.generator.typescript.optional;
 
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.OPTIONAL_TYPESCRIPT;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.TYPESCRIPT;
 
-import com.seed4j.generator.typescript.optional.application.OptionalTypescriptApplicationService;
+import com.google.auto.service.AutoService;
 import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
 import com.seed4j.module.domain.resource.Seed4JModuleResource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import com.seed4j.module.domain.resource.Seed4JModuleResourceProvider;
+import com.seed4j.module.domain.resource.Seed4JModuleServices;
 
-@Configuration
-class OptionalTypescriptModuleConfiguration {
+@AutoService(Seed4JModuleResourceProvider.class)
+public class OptionalTypescriptModuleResource implements Seed4JModuleResourceProvider {
 
-  @Bean
-  Seed4JModuleResource optionalTypescriptModule(OptionalTypescriptApplicationService optionalTypescript) {
+  @Override
+  public Seed4JModuleResource get(Seed4JModuleServices services) {
     return Seed4JModuleResource.builder()
       .slug(OPTIONAL_TYPESCRIPT)
       .withoutProperties()
       .apiDoc("Typescript", "Add Optional class domain to project")
       .organization(Seed4JModuleOrganization.builder().addDependency(TYPESCRIPT).build())
       .tags("typescript")
-      .factory(optionalTypescript::buildModule);
+      .factory(new OptionalTypescriptModuleFactory()::buildModule);
   }
 }

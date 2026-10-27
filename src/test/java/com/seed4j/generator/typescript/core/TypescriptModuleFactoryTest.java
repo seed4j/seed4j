@@ -1,33 +1,26 @@
-package com.seed4j.generator.typescript.core.domain;
+package com.seed4j.generator.typescript.core;
 
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeDependency;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeScript;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.packageJsonFile;
-import static org.mockito.Mockito.verify;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModulesFixture;
-import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.resource.FakeSeed4JModuleServices;
+import com.seed4j.module.domain.resource.FakeSeed4JModuleServices.FakeNodeLazyPackagesInstaller.Installation;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 @UnitTest
-@ExtendWith(MockitoExtension.class)
 class TypescriptModuleFactoryTest {
 
-  @InjectMocks
-  private TypescriptModuleFactory factory;
-
-  @Mock
-  private NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
+  private final FakeSeed4JModuleServices seed4JModuleServices = new FakeSeed4JModuleServices();
+  private final TypescriptModuleFactory factory = new TypescriptModuleFactory(seed4JModuleServices);
 
   @Test
   void shouldBuildModule() {
@@ -58,7 +51,9 @@ class TypescriptModuleFactoryTest {
       .containing(nodeScript("lint", "eslint ."))
       .and()
       .hasPrefixedFiles("", "eslint.config.js", "tsconfig.json");
-    verify(nodeLazyPackagesInstaller).runInstallIn(properties.projectFolder(), properties.nodePackageManager());
+    assertThat(seed4JModuleServices.nodeLazyPackagesInstaller().installations()).containsExactly(
+      new Installation(properties.projectFolder(), properties.nodePackageManager())
+    );
   }
 
   @Test

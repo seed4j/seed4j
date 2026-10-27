@@ -1,4 +1,4 @@
-package com.seed4j.generator.typescript.core.domain;
+package com.seed4j.generator.typescript.core;
 
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
@@ -14,18 +14,19 @@ import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.resource.Seed4JModuleServices;
 import com.seed4j.shared.error.domain.Assert;
 
-public class TypescriptModuleFactory {
+class TypescriptModuleFactory {
 
   private static final Seed4JSource SOURCE = from("typescript");
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
-  public TypescriptModuleFactory(NodeLazyPackagesInstaller nodeLazyPackagesInstaller) {
-    this.nodeLazyPackagesInstaller = nodeLazyPackagesInstaller;
+  TypescriptModuleFactory(Seed4JModuleServices services) {
+    this.nodeLazyPackagesInstaller = services.nodeLazyPackagesInstaller();
   }
 
-  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
+  Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     // @formatter:off

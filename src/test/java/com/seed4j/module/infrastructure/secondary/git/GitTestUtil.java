@@ -4,6 +4,7 @@ import com.seed4j.module.domain.git.GitRepository;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -11,16 +12,35 @@ public final class GitTestUtil {
 
   private GitTestUtil() {}
 
-  public static String getCommits(Path project) {
+  public static List<String> getCommits(Path project) {
     Process process = execute(project, "log", "--pretty=format:%s");
 
-    return readCommandResult(process);
+    return readCommandResultLines(process);
+  }
+
+  public static List<String> getTrackedFiles(Path project, String folder) {
+    Process process = execute(project, "ls-files", "--", folder);
+
+    return readCommandResultLines(process);
+  }
+
+  public static List<String> getUncommittedChanges(Path project, String folder) {
+    Process process = execute(project, "status", "--porcelain", "--untracked-files=all", "--", folder);
+
+    return readCommandResultLines(process);
   }
 
   public static String getCurrentBranch(Path project) {
     Process process = execute(project, "rev-parse", "--abbrev-ref", "HEAD");
 
     return readCommandResult(process);
+  }
+
+  private static List<String> readCommandResultLines(Process process) {
+    return readCommandResult(process)
+      .lines()
+      .filter(line -> !line.isBlank())
+      .toList();
   }
 
   private static String readCommandResult(Process process) throws AssertionError {

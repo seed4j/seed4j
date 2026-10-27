@@ -107,6 +107,14 @@ public class ProjectsSteps {
     assertThat(GitTestUtil.getCommits(lastProjectPath())).contains(commitMessage);
   }
 
+  @Then("I should have committed files in {string}")
+  public void shouldHaveCommittedFiles(String folder) {
+    assertThatLastResponse().hasOkStatus();
+
+    assertThat(GitTestUtil.getTrackedFiles(lastProjectPath(), folder)).isNotEmpty();
+    assertThat(GitTestUtil.getUncommittedChanges(lastProjectPath(), folder)).isEmpty();
+  }
+
   @Then("I should not have any commit")
   public void shouldNotHaveCommits() {
     assertThatLastResponse().hasOkStatus();

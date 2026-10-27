@@ -1,5 +1,6 @@
 package com.seed4j.project.infrastructure.primary;
 
+import com.seed4j.module.domain.AppliedModulesHistory;
 import com.seed4j.module.domain.Seed4JModuleApplied;
 import com.seed4j.project.application.ProjectsApplicationService;
 import com.seed4j.project.domain.ProjectPath;
@@ -9,7 +10,7 @@ import com.seed4j.shared.error.domain.Assert;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JavaProjects {
+public class JavaProjects implements AppliedModulesHistory {
 
   private final ProjectsApplicationService projects;
 
@@ -17,7 +18,8 @@ public class JavaProjects {
     this.projects = projects;
   }
 
-  public void moduleApplied(Seed4JModuleApplied moduleApplied) {
+  @Override
+  public void append(Seed4JModuleApplied moduleApplied) {
     Assert.notNull("moduleApplied", moduleApplied);
 
     projects.append(projectActionToAdd(moduleApplied));

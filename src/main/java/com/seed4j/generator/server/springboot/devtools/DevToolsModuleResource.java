@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.devtools;
 
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_DEVTOOLS;
 
 import com.google.auto.service.AutoService;
@@ -25,7 +26,7 @@ public class DevToolsModuleResource implements Seed4JModuleResourceProvider {
           .build()
       )
       .apiDoc("Spring Boot - Tools", "Add Spring Boot devtools.")
-      .organization(Seed4JModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(Seed4JModuleOrganization.builder().addDependency(SPRING_BOOT).build())
       .tags("server", "spring", "spring-boot", "devtools")
       .factory(new DevToolsModuleFactory()::buildModule);
   }

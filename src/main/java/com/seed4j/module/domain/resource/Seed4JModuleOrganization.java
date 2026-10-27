@@ -3,11 +3,11 @@ package com.seed4j.module.domain.resource;
 import static org.apache.commons.lang3.builder.ToStringStyle.*;
 
 import com.seed4j.module.domain.Seed4JFeatureSlug;
+import com.seed4j.module.domain.Seed4JModuleSlug;
 import com.seed4j.module.domain.landscape.Seed4JFeatureDependency;
 import com.seed4j.module.domain.landscape.Seed4JLandscapeDependency;
 import com.seed4j.module.domain.landscape.Seed4JModuleDependency;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
@@ -16,7 +16,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public final class Seed4JModuleOrganization {
 
   public static final Seed4JModuleOrganization STANDALONE = builder().build();
-  public static final Seed4JModuleOrganization SPRINGBOOT_DEPENDENCY = builder().addDependency(Seed4JCoreModuleSlug.SPRING_BOOT).build();
+
+  /**
+   * @deprecated declare the dependency of the module instead: {@code builder().addDependency(SPRING_BOOT).build()}
+   */
+  @Deprecated(since = "2.3.0", forRemoval = true)
+  public static final Seed4JModuleOrganization SPRINGBOOT_DEPENDENCY = builder().addDependency(new Seed4JModuleSlug("spring-boot")).build();
 
   private final Optional<Seed4JFeatureSlug> feature;
   private final Collection<Seed4JLandscapeDependency> dependencies;
@@ -62,7 +67,11 @@ public final class Seed4JModuleOrganization {
     public Seed4JModuleOrganizationBuilder addDependency(Seed4JModuleSlugFactory module) {
       Assert.notNull("module", module);
 
-      dependencies.add(new Seed4JModuleDependency(module.build()));
+      return addDependency(module.build());
+    }
+
+    private Seed4JModuleOrganizationBuilder addDependency(Seed4JModuleSlug module) {
+      dependencies.add(new Seed4JModuleDependency(module));
 
       return this;
     }

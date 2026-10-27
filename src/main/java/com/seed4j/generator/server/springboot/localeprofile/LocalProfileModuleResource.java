@@ -1,5 +1,6 @@
 package com.seed4j.generator.server.springboot.localeprofile;
 
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT;
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT_LOCAL_PROFILE;
 
 import com.google.auto.service.AutoService;
@@ -25,7 +26,7 @@ public class LocalProfileModuleResource implements Seed4JModuleResourceProvider 
           .build()
       )
       .apiDoc("Spring Boot", "Use Spring local profile by default for development.")
-      .organization(Seed4JModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(Seed4JModuleOrganization.builder().addDependency(SPRING_BOOT).build())
       .tags("server", "spring", "spring-boot", "dx")
       .factory(new LocalProfileModuleFactory()::buildModule);
   }

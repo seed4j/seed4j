@@ -1,6 +1,7 @@
 package com.seed4j.generator.server.springboot.seed4jextension;
 
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.*;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT;
 
 import com.google.auto.service.AutoService;
 import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
@@ -18,7 +19,7 @@ public class Seed4JExtensionModuleResource implements Seed4JModuleResourceProvid
       .slug(SEED4J_EXTENSION)
       .propertiesDefinition(propertiesDefinition())
       .apiDoc("Seed4J", "Create a Seed4J extension to build custom modules")
-      .organization(Seed4JModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(Seed4JModuleOrganization.builder().addDependency(SPRING_BOOT).build())
       .tags("server")
       .factory(new Seed4JExtensionModuleFactory()::buildModule);
   }

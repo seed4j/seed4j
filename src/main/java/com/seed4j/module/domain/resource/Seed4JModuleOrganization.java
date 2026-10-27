@@ -7,7 +7,6 @@ import com.seed4j.module.domain.landscape.Seed4JFeatureDependency;
 import com.seed4j.module.domain.landscape.Seed4JLandscapeDependency;
 import com.seed4j.module.domain.landscape.Seed4JModuleDependency;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
@@ -16,7 +15,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public final class Seed4JModuleOrganization {
 
   public static final Seed4JModuleOrganization STANDALONE = builder().build();
-  public static final Seed4JModuleOrganization SPRINGBOOT_DEPENDENCY = builder().addDependency(Seed4JCoreModuleSlug.SPRING_BOOT).build();
 
   private final Optional<Seed4JFeatureSlug> feature;
   private final Collection<Seed4JLandscapeDependency> dependencies;

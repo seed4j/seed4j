@@ -1,6 +1,7 @@
 package com.seed4j.generator.server.springboot.logging.logstash;
 
 import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.LOGSTASH;
+import static com.seed4j.shared.slug.domain.Seed4JCoreModuleSlug.SPRING_BOOT;
 
 import com.google.auto.service.AutoService;
 import com.seed4j.module.domain.resource.Seed4JModuleOrganization;
@@ -20,7 +21,7 @@ public class LogstashModuleResource implements Seed4JModuleResourceProvider {
         Seed4JModulePropertiesDefinition.builder().addBasePackage().addIndentation().addSpringConfigurationFormat().build()
       )
       .apiDoc("Spring Boot", "Add Logstash TCP appender")
-      .organization(Seed4JModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(Seed4JModuleOrganization.builder().addDependency(SPRING_BOOT).build())
       .tags("server", "logstash", "spring", "spring-boot")
       .factory(new LogstashModuleFactory()::buildModule);
   }

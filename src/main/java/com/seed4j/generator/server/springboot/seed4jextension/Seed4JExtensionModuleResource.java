@@ -18,7 +18,7 @@ public class Seed4JExtensionModuleResource implements Seed4JModuleResourceProvid
       .slug(SEED4J_EXTENSION)
       .propertiesDefinition(propertiesDefinition())
       .apiDoc("Seed4J", "Create a Seed4J extension to build custom modules")
-      .organization(Seed4JModuleOrganization.SPRINGBOOT_DEPENDENCY)
+      .organization(Seed4JModuleOrganization.builder().addDependency(SPRING_BOOT).build())
       .tags("server")
       .factory(new Seed4JExtensionModuleFactory()::buildModule);
   }

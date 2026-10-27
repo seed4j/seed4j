@@ -1,11 +1,11 @@
 ######################
 # Project Specific
 ######################
-/target/classes/static/**
-/src/test/webapp/coverage/
+/seed4j-server/target/classes/static/**
+/seed4j-server/src/test/webapp/coverage/
 
-!/src/main/resources/generator/buildtool/gradle/gradle/wrapper/gradle-wrapper.jar
-!/src/main/resources/generator/buildtool/maven/.mvn/wrapper/maven-wrapper.jar
+!/seed4j-server/src/main/resources/generator/buildtool/gradle/gradle/wrapper/gradle-wrapper.jar
+!/seed4j-server/src/main/resources/generator/buildtool/maven/.mvn/wrapper/maven-wrapper.jar
 /tests-ci/.pid-seed4j
 /roadmap/*.png
 !/roadmap/spring_boot_project.png
@@ -13,7 +13,7 @@
 ######################
 # Node
 ######################
-/node/
+/seed4j-server/node/
 node_tmp/
 node_modules/
 npm-debug.log.*
@@ -28,12 +28,12 @@ npm-debug.log.*
 ######################
 # Tikui cache
 ######################
-/.tikui-cache/
+/seed4j-server/.tikui-cache/
 
 ######################
 # Fontello
 ######################
-/.fontello-session
+/seed4j-server/.fontello-session
 
 ######################
 # Eclipse
@@ -52,7 +52,7 @@ local.properties
 .settings/
 .loadpath
 .factorypath
-/src/main/resources/rebel.xml
+/seed4j-server/src/main/resources/rebel.xml
 
 # External tool builders
 .externalToolBuilders/**
@@ -95,8 +95,8 @@ out/
 ######################
 # Maven
 ######################
-/log/
-/target/
+log/
+target/
 
 ######################
 # Gradle
@@ -180,7 +180,7 @@ dist/
 ######################
 # Spring personal profile
 ######################
-src/main/resources/config/application-perso.*
+/seed4j-server/src/main/resources/config/application-perso.*
 
 ######################
 # Gradle Develocity Settings
@@ -188,10 +188,10 @@ src/main/resources/config/application-perso.*
 .mvn/.develocity/develocity-workspace-id
 
 # Approvals testing
-src/test/resources/**/*.received.txt
+**/src/test/resources/**/*.received.txt
 .approval_tests_temp/
 
 ######################
 # Personal Presets Definitions
 ######################
-src/main/resources/presets/personal/
+/seed4j-server/src/main/resources/presets/personal/

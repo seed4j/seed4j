@@ -32,17 +32,17 @@ jobs:
         run: |
           chmod +x mvnw
           ./mvnw clean verify
-          ARTIFACT_VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
-          rm target/*${ARTIFACT_VERSION}.jar
-          rm target/*${ARTIFACT_VERSION}-javadoc.jar
-          rm target/*${ARTIFACT_VERSION}-sources.jar
-          rm target/*${ARTIFACT_VERSION}-tests.jar
-          mv target/seed4j-${ARTIFACT_VERSION}-exec.jar target/seed4j-${ARTIFACT_VERSION}.jar
+          ARTIFACT_VERSION=$(./mvnw -N help:evaluate -Dexpression=project.version -q -DforceStdout)
+          rm seed4j-server/target/*${ARTIFACT_VERSION}.jar
+          rm seed4j-server/target/*${ARTIFACT_VERSION}-javadoc.jar
+          rm seed4j-server/target/*${ARTIFACT_VERSION}-sources.jar
+          rm seed4j-server/target/*${ARTIFACT_VERSION}-tests.jar
+          mv seed4j-server/target/seed4j-${ARTIFACT_VERSION}-exec.jar seed4j-server/target/seed4j-${ARTIFACT_VERSION}.jar
       - name: 'Artifact: upload JAR'
         uses: actions/upload-artifact@v7
         with:
           name: seed4j-jar
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/seed4j-server/target/*.jar'
           retention-days: 1
   #--------------------------------------------------
   # Release
@@ -66,7 +66,7 @@ jobs:
         run: |
           ARTIFACT_PATHNAME=$(ls target/*.jar | head -n 1)
           ARTIFACT_NAME=$(basename $ARTIFACT_PATHNAME)
-          ARTIFACT_VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
+          ARTIFACT_VERSION=$(./mvnw -N help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "artifact_asset_name=${ARTIFACT_NAME}" >> $GITHUB_OUTPUT
           echo "artifact_asset_path=${ARTIFACT_PATHNAME}" >> $GITHUB_OUTPUT
           echo "artifact_version=${ARTIFACT_VERSION}" >> $GITHUB_OUTPUT

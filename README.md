@@ -117,7 +117,7 @@ Docker should be installed and configured on your machine prior to creating the 
 To create the image, run the following goal:
 
 ```bash
-./mvnw spring-boot:build-image -Pnative
+./mvnw -pl seed4j-server spring-boot:build-image -Pnative
 ```
 
 Then, you can run the app like any other container:
@@ -136,13 +136,13 @@ NOTE: GraalVM for JDK 25+ is required.
 To create the executable, run the following goal:
 
 ```bash
-./mvnw native:compile -Pnative -DskipTests
+./mvnw -pl seed4j-server native:compile -Pnative -DskipTests
 ```
 
 Then, you can run the app as follows:
 
 ```bash
-./target/seed4j
+./seed4j-server/target/seed4j
 ```
 
 You can also run your existing tests suite in a native image. This is an efficient way to validate the compatibility of your application.
@@ -150,7 +150,7 @@ You can also run your existing tests suite in a native image. This is an efficie
 To run your existing tests in a native image, run the following goal:
 
 ```bash
-./mvnw test -PnativeTest
+./mvnw -pl seed4j-server test -PnativeTest
 ```
 
 ## Lint
@@ -180,7 +180,7 @@ npm run lint
 To launch local Sonar Analysis:
 
 ```bash
-docker compose -f src/main/docker/sonar.yml up -d
+docker compose -f seed4j-server/src/main/docker/sonar.yml up -d
 ```
 
 You need to wait for Sonar to be up before getting the Sonar token:
@@ -198,7 +198,7 @@ Then:
 You can use a single command:
 
 ```bash
-docker compose -f src/main/docker/sonar.yml up -d \
+docker compose -f seed4j-server/src/main/docker/sonar.yml up -d \
   && docker logs -f sonar-token && SONAR_TOKEN=$(docker logs sonar-token) \
   && ./mvnw clean verify sonar:sonar -Dsonar.token=$SONAR_TOKEN
 ```
@@ -222,7 +222,7 @@ Or, first, you can package as jar:
 Then, run:
 
 ```bash
-java -jar target/*.jar
+java -jar seed4j-server/target/*.jar
 ```
 
 So you can navigate to http://localhost:1339 in your browser.
@@ -242,7 +242,7 @@ For example, you can run:
 or
 
 ```bash
-java -jar target/*.jar --spring.profiles.active=vue
+java -jar seed4j-server/target/*.jar --spring.profiles.active=vue
 ```
 
 ## Docker/Podman Quickstart
@@ -266,13 +266,13 @@ Then, go to [http://localhost:1339](http://localhost:1339)
 You need to run the project first. Then, you can run the end-to-end tests:
 
 ```bash
-npm run e2e
+npm run e2e --workspace seed4j-server
 ```
 
 Or in headless mode:
 
 ```bash
-npm run e2e:headless
+npm run e2e:headless --workspace seed4j-server
 ```
 
 ## Generate your project

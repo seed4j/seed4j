@@ -134,7 +134,7 @@ jobs:
       - name: 'Lint: check'
         run: npm run lint:ci
       - name: 'Start local Sonar'
-        run: docker compose -f src/main/docker/sonar.yml up -d
+        run: docker compose -f seed4j-server/src/main/docker/sonar.yml up -d
       - name: 'Test: run backend tests'
         run: |
           chmod +x mvnw
@@ -156,12 +156,12 @@ jobs:
         run: ./mvnw initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=seed4j_seed4j -Dsonar.organization=seed4j
       - name: 'Artifact: remove unused JARs'
         run: |
-          rm target/*-javadoc.jar target/*-sources.jar
+          rm seed4j-server/target/*-javadoc.jar seed4j-server/target/*-sources.jar
       - name: 'Artifact: upload JAR'
         uses: actions/upload-artifact@v7
         with:
           name: seed4j-jar
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/seed4j-server/target/*.jar'
           retention-days: 1
       - name: 'Maven cache: upload downloaded dependencies'
         if: ${{ !cancelled() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
@@ -203,7 +203,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: seed4j-main-jar
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/seed4j-server/target/*.jar'
           retention-days: 1
   #--------------------------------------------------
   # Cypress
@@ -230,7 +230,7 @@ jobs:
         run: |
           ./start.sh 1339
       - name: 'Test: launch Cypress'
-        run: npm run e2e:headless
+        run: npm run e2e:headless --workspace seed4j-server
 
   #--------------------------------------------------
   # Tests generated projects

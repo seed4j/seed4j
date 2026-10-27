@@ -1,0 +1,43 @@
+{
+  "name": "seed4j-workspace",
+  "version": "2.2.1-SNAPSHOT",
+  "private": true,
+  "description": "seed4j workspace",
+  "homepage": "https://seed4j.com/",
+  "bugs": "https://github.com/seed4j/seed4j/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/seed4j/seed4j.git"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "workspaces": [
+    "seed4j-server"
+  ],
+  "scripts": {
+    "format": "npm run prettier:format",
+    "lint": "npm run lint --workspaces && npm run prettier:format",
+    "lint:ci": "npm run lint:ci --workspaces && npm run prettier:check",
+    "prepare": "husky",
+    "prettier:check": "prettier --check .",
+    "prettier:format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@prettier/plugin-pug": "3.6.0",
+    "@prettier/plugin-xml": "3.4.2",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.0",
+    "prettier": "3.9.10",
+    "prettier-plugin-gherkin": "4.0.0",
+    "prettier-plugin-java": "2.11.0",
+    "prettier-plugin-organize-imports": "4.3.0",
+    "prettier-plugin-packagejson": "3.0.2",
+    "prettier-plugin-sh": "0.20.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "allowScripts": {
+    "cypress": true
+  }
+}

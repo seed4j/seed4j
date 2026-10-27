@@ -12,7 +12,7 @@ show_syntax() {
   exit 1
 }
 
-currentVersion=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
+currentVersion=$(./mvnw -N help:evaluate -Dexpression=project.version -q -DforceStdout)
 releaseVersion=${currentVersion//-SNAPSHOT/}
 
 checkGit=$(git status --porcelain | wc -l)
@@ -56,10 +56,10 @@ else
 fi
 
 echo "*** calculate release version..."
-releaseVersion=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
+releaseVersion=$(./mvnw -N help:evaluate -Dexpression=project.version -q -DforceStdout)
 
 echo "*** update version in package.json"
-npm version "${releaseVersion}" --no-git-tag-version
+npm version "${releaseVersion}" --no-git-tag-version --workspaces --include-workspace-root
 
 echo "*** git: commit, tag and push tag..."
 git add . && git commit -m "Release v${releaseVersion}"
@@ -79,7 +79,7 @@ rm ~/.m2/settings.xml
 mv ~/.m2/settings.xml.save ~/.m2/settings.xml 2> /dev/null
 
 echo "*** git: commit, push to $GIT_MAIN_BRANCH..."
-nextVersion=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
-npm version "${nextVersion}" --no-git-tag-version
+nextVersion=$(./mvnw -N help:evaluate -Dexpression=project.version -q -DforceStdout)
+npm version "${nextVersion}" --no-git-tag-version --workspaces --include-workspace-root
 git add . && git commit -m "Update to next version v${nextVersion}"
 git push $GIT_REMOTE $GIT_MAIN_BRANCH

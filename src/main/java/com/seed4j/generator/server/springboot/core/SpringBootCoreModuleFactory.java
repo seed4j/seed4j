@@ -1,0 +1,174 @@
+package com.seed4j.generator.server.springboot.core;
+
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_LOCAL;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.dependencyId;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.gradleCommunityPlugin;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaAnnotationProcessor;
+import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.versionSlug;
+import static com.seed4j.module.domain.replacement.ReplacementCondition.notContaining;
+
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.gradleplugin.GradleMainBuildPlugin;
+import com.seed4j.module.domain.javabuild.GroupId;
+import com.seed4j.module.domain.javabuild.VersionSlug;
+import com.seed4j.module.domain.javadependency.JavaAnnotationProcessor;
+import com.seed4j.module.domain.javadependency.JavaDependency;
+import com.seed4j.module.domain.javadependency.JavaDependencyScope;
+import com.seed4j.module.domain.javadependency.JavaDependencyType;
+import com.seed4j.module.domain.mavenplugin.MavenPlugin;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
+import com.seed4j.shared.error.domain.Assert;
+
+class SpringBootCoreModuleFactory {
+
+  private static final Seed4JSource SOURCE = from("server/springboot/core");
+  private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
+  private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
+
+  private static final GroupId SPRING_BOOT_GROUP = groupId("org.springframework.boot");
+
+  private static final String JUNIT_GROUP = "org.junit.jupiter";
+  private static final String MOCKITO_GROUP = "org.mockito";
+  private static final VersionSlug SPRING_BOOT_VERSION_SLUG = versionSlug("spring-boot");
+
+  private static final TextNeedleBeforeReplacer DEFAULT_GOAL_REPLACER = new TextNeedleBeforeReplacer(
+    notContaining("<defaultGoal>"),
+    "</build>"
+  );
+
+  private static final Seed4JDestination MAIN_RESOURCE_DESTINATION = to("src/main/resources");
+  private static final Seed4JDestination TEST_RESOURCES_DESTINATION = to("src/test/resources");
+
+  Seed4JModule buildModule(Seed4JModuleProperties properties) {
+    Assert.notNull("properties", properties);
+
+    String baseName = properties.projectBaseName().capitalized();
+    String baseNameUncapitalized = properties.projectBaseName().uncapitalized();
+    String packagePath = properties.packagePath();
+    Seed4JDestination testDestination = toSrcTestJava().append(packagePath);
+    String fullyQualifiedMainClass = properties.basePackage().get() + "." + baseName + "App";
+    String basePackageLoggingLevel = "logging.level.%s".formatted(properties.basePackage().get());
+
+    // @formatter:off
+    return moduleBuilder(properties)
+      .context()
+        .put("baseName", baseName)
+        .and()
+      .javaDependencies()
+        .removeDependency(dependencyId(JUNIT_GROUP, "junit-jupiter-engine"))
+        .removeDependency(dependencyId(JUNIT_GROUP, "junit-jupiter-params"))
+        .removeDependency(dependencyId("org.assertj", "assertj-core"))
+        .removeDependency(dependencyId(MOCKITO_GROUP, "mockito-junit-jupiter"))
+        .addDependencyManagement(springBootBom())
+        .addDependency(SPRING_BOOT_GROUP, artifactId("spring-boot-starter"))
+        .addDependency(groupId("org.apache.commons"), artifactId("commons-lang3"))
+        .addDependency(springBootTest())
+        .and()
+      .javaCompiler()
+        .addAnnotationProcessor(springBootConfigurationProcessor())
+        .and()
+      .mavenPlugins()
+        .pluginManagement(springBootPluginManagement(fullyQualifiedMainClass))
+        .plugin(springBootMavenPlugin())
+        .and()
+      .gradlePlugins()
+        .plugin(springBootGradlePlugin(fullyQualifiedMainClass))
+        .and()
+      .files()
+        .add(MAIN_SOURCE.template("MainApp.java"), toSrcMainJava().append(packagePath).append(baseName + "App.java"))
+        .add(MAIN_SOURCE.template("ApplicationStartupTraces.java"), toSrcMainJava().append(packagePath).append("ApplicationStartupTraces.java"))
+        .add(TEST_SOURCE.template("IntegrationTest.java"), testDestination.append("IntegrationTest.java"))
+        .add(MAIN_SOURCE.template("logback-spring.xml"), MAIN_RESOURCE_DESTINATION.append("logback-spring.xml"))
+        .add(TEST_SOURCE.template("logback.xml"), TEST_RESOURCES_DESTINATION.append("logback.xml"))
+        .add(TEST_SOURCE.template("ApplicationStartupTracesTest.java"), toSrcTestJava().append(packagePath).append("ApplicationStartupTracesTest.java"))
+        .and()
+      .applicationProperties(SPRING_MAIN)
+        .set(propertyKey("spring.application.name"), propertyValue(baseNameUncapitalized))
+        .set(propertyKey(basePackageLoggingLevel), propertyValue("INFO"))
+        .and()
+      .applicationProperties(SPRING_LOCAL)
+        .set(propertyKey(basePackageLoggingLevel), propertyValue("DEBUG"))
+        .and()
+      .applicationProperties(SPRING_TEST)
+        .set(propertyKey("spring.main.banner-mode"), propertyValue("off"))
+        .set(propertyKey("logging.config"), propertyValue("classpath:logback.xml"))
+        .and()
+      .optionalReplacements()
+        .in(path("pom.xml"))
+          .add(DEFAULT_GOAL_REPLACER, properties.indentation().times(2) + "<defaultGoal>spring-boot:run</defaultGoal>")
+          .and()
+        .and()
+      .build();
+    // @formatter:on
+  }
+
+  private GradleMainBuildPlugin springBootGradlePlugin(String fullyQualifiedMainClass) {
+    return gradleCommunityPlugin()
+      .id("org.springframework.boot")
+      .pluginSlug("spring-boot")
+      .versionSlug(SPRING_BOOT_VERSION_SLUG)
+      .configuration(
+        """
+        defaultTasks("bootRun")
+
+        springBoot {
+          mainClass = "%s"
+        }
+        """.formatted(fullyQualifiedMainClass)
+      )
+      .build();
+  }
+
+  private JavaDependency springBootBom() {
+    return JavaDependency.builder()
+      .groupId(SPRING_BOOT_GROUP)
+      .artifactId("spring-boot-dependencies")
+      .versionSlug(SPRING_BOOT_VERSION_SLUG)
+      .type(JavaDependencyType.POM)
+      .scope(JavaDependencyScope.IMPORT)
+      .build();
+  }
+
+  private JavaAnnotationProcessor springBootConfigurationProcessor() {
+    return javaAnnotationProcessor().groupId(SPRING_BOOT_GROUP).artifactId("spring-boot-configuration-processor").build();
+  }
+
+  private JavaDependency springBootTest() {
+    return JavaDependency.builder()
+      .groupId(SPRING_BOOT_GROUP)
+      .artifactId("spring-boot-starter-test")
+      .scope(JavaDependencyScope.TEST)
+      .build();
+  }
+
+  private MavenPlugin springBootPluginManagement(String fullyQualifiedMainClass) {
+    return MavenPlugin.builder()
+      .groupId(SPRING_BOOT_GROUP)
+      .artifactId("spring-boot-maven-plugin")
+      .versionSlug(SPRING_BOOT_VERSION_SLUG)
+      .addExecution(pluginExecution().goals("repackage"))
+      .configuration("<mainClass>%s</mainClass>".formatted(fullyQualifiedMainClass))
+      .build();
+  }
+
+  private MavenPlugin springBootMavenPlugin() {
+    return mavenPlugin().groupId(SPRING_BOOT_GROUP).artifactId("spring-boot-maven-plugin").build();
+  }
+}

@@ -1,0 +1,112 @@
+package com.seed4j.generator.server.springboot.mvc.security.jwt;
+
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST;
+import static com.seed4j.generator.server.springboot.mvc.security.common.domain.AuthenticationModuleFactory.authenticationModuleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.artifactId;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.groupId;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+import static com.seed4j.module.domain.Seed4JModule.versionSlug;
+
+import com.seed4j.module.domain.LogLevel;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.javabuild.GroupId;
+import com.seed4j.module.domain.javabuild.VersionSlug;
+import com.seed4j.module.domain.javadependency.JavaDependency;
+import com.seed4j.module.domain.javadependency.JavaDependencyScope;
+import com.seed4j.module.domain.javaproperties.PropertyKey;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.shared.base64.domain.Base64Utils;
+import com.seed4j.shared.error.domain.Assert;
+
+class JwtAuthenticationModuleFactory {
+
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/security/jwt/authentication");
+  private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
+  private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
+
+  private static final GroupId JJWT_GROUP = groupId("io.jsonwebtoken");
+  private static final VersionSlug JJWT_VERSION = versionSlug("json-web-token");
+
+  private static final String APPLICATION = "application";
+  private static final String PRIMARY = "infrastructure/primary";
+  private static final String AUTHENTICATION_DESTINATION = "shared/authentication";
+
+  private static final PropertyKey BASE_SECRET_64_PROPERTY_KEY = propertyKey("application.security.jwt-base64-secret");
+  private static final String JWT_BASE_64_SECRET = "jwtBase64Secret";
+
+  private static final String SPRING_SECURITY_PACKAGE = "org.springframework.security";
+
+  Seed4JModule buildModule(Seed4JModuleProperties properties) {
+    Assert.notNull("properties", properties);
+
+    String packagePath = properties.packagePath();
+
+    String mainJwtBase64secret = properties.getOrDefaultString(JWT_BASE_64_SECRET, Base64Utils.getBase64Secret());
+    String testJwtBase64secret = properties.getOrDefaultString(JWT_BASE_64_SECRET, Base64Utils.getBase64Secret());
+
+    Seed4JDestination mainDestination = toSrcMainJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
+    Seed4JDestination testDestination = toSrcTestJava().append(packagePath).append(AUTHENTICATION_DESTINATION);
+
+    // @formatter:off
+    return authenticationModuleBuilder(properties)
+      .javaDependencies()
+        .addDependency(JJWT_GROUP, artifactId("jjwt-api"), JJWT_VERSION)
+        .addDependency(jjwtImplDependency())
+        .addDependency(jjwtJacksonDependency())
+        .and()
+      .files()
+        .add(MAIN_SOURCE.append(APPLICATION).template("AuthenticatedUser.java"), mainDestination.append(APPLICATION).append("AuthenticatedUser.java"))
+        .batch(MAIN_SOURCE.append(PRIMARY), mainDestination.append(PRIMARY))
+          .addTemplate("AuthenticationTokenReader.java")
+          .addTemplate("JwtAuthenticationProperties.java")
+          .addTemplate("JWTConfigurer.java")
+          .addTemplate("JWTFilter.java")
+          .addTemplate("JwtReader.java")
+          .addTemplate("SecurityConfiguration.java")
+          .and()
+        .add(TEST_SOURCE.append(APPLICATION).template("AuthenticatedUserTest.java"), testDestination.append(APPLICATION).append("AuthenticatedUserTest.java"))
+        .batch(TEST_SOURCE.append(PRIMARY), testDestination.append(PRIMARY))
+          .addTemplate("JWTFilterTest.java")
+          .addTemplate("JwtReaderTest.java")
+          .and()
+        .and()
+      .applicationProperties(SPRING_MAIN)
+        .set(BASE_SECRET_64_PROPERTY_KEY, propertyValue(mainJwtBase64secret))
+        .and()
+      .applicationProperties(SPRING_TEST)
+        .set(BASE_SECRET_64_PROPERTY_KEY, propertyValue(testJwtBase64secret))
+        .and()
+      .with(springMainLogger(SPRING_SECURITY_PACKAGE, LogLevel.WARN))
+      .with(springTestLogger(SPRING_SECURITY_PACKAGE, LogLevel.WARN))
+      .build();
+    // @formatter:on
+  }
+
+  private JavaDependency jjwtImplDependency() {
+    return javaDependency()
+      .groupId(JJWT_GROUP)
+      .artifactId("jjwt-impl")
+      .versionSlug(JJWT_VERSION)
+      .scope(JavaDependencyScope.RUNTIME)
+      .build();
+  }
+
+  private JavaDependency jjwtJacksonDependency() {
+    return javaDependency()
+      .groupId(JJWT_GROUP)
+      .artifactId("jjwt-jackson")
+      .versionSlug(JJWT_VERSION)
+      .scope(JavaDependencyScope.RUNTIME)
+      .build();
+  }
+}

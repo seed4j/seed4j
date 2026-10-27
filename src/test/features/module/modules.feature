@@ -5,6 +5,11 @@ Feature: Modules
       | projectName | Test project |
     Then I should have commit "Apply module: init"
 
+  Scenario: Should commit module history with applied module
+    When I apply and commit "init" module to default project
+      | projectName | Test project |
+    Then I should have committed files in ".seed4j/modules"
+
   Scenario: Should apply module without commit
     When I apply "init" module to default project
       | projectName | Test project |

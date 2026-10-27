@@ -5,7 +5,6 @@ import com.seed4j.module.domain.landscape.Seed4JLandscape;
 import com.seed4j.module.domain.postaction.Seed4JModuleExecutionContext;
 import com.seed4j.module.domain.resource.Seed4JModulesResources;
 import com.seed4j.module.infrastructure.secondary.javadependency.FileSystemJavaBuildCommandsHandler;
-import com.seed4j.project.infrastructure.primary.JavaProjects;
 import com.seed4j.shared.error.domain.Assert;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +13,7 @@ class FileSystemSeed4JModulesRepository implements Seed4JModulesRepository {
 
   public static final String TEST_META_INF_FOLDER = "src/test/resources/META-INF/";
 
-  private final JavaProjects projects;
+  private final AppliedModulesHistory history;
   private final Seed4JModulesResources resources;
 
   private final FileSystemSeed4JModuleFiles files;
@@ -32,7 +31,7 @@ class FileSystemSeed4JModulesRepository implements Seed4JModulesRepository {
   private final Seed4JLandscape landscape;
 
   public FileSystemSeed4JModulesRepository(
-    JavaProjects projects,
+    AppliedModulesHistory history,
     Seed4JModulesResources resources,
     FileSystemSeed4JModuleFiles files,
     FileSystemReplacer fileReplacer,
@@ -41,7 +40,7 @@ class FileSystemSeed4JModulesRepository implements Seed4JModulesRepository {
     FileSystemPackageJsonHandler packageJson,
     FileSystemStartupCommandsReadmeCommandsHandler startupCommands
   ) {
-    this.projects = projects;
+    this.history = history;
     this.resources = resources;
     this.landscape = Seed4JLandscape.from(resources);
 
@@ -90,7 +89,7 @@ class FileSystemSeed4JModulesRepository implements Seed4JModulesRepository {
 
   @Override
   public void applied(Seed4JModuleApplied moduleApplied) {
-    projects.moduleApplied(moduleApplied);
+    history.append(moduleApplied);
   }
 
   @Override

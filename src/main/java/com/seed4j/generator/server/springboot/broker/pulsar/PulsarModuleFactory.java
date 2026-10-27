@@ -1,4 +1,4 @@
-package com.seed4j.generator.server.springboot.broker.pulsar.domain;
+package com.seed4j.generator.server.springboot.broker.pulsar;
 
 import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
 import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_TEST;
@@ -20,9 +20,10 @@ import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyScope;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.resource.Seed4JModuleServices;
 import com.seed4j.shared.error.domain.Assert;
 
-public class PulsarModuleFactory {
+class PulsarModuleFactory {
 
   private static final Seed4JSource SOURCE = from("server/springboot/broker/pulsar");
 
@@ -30,11 +31,11 @@ public class PulsarModuleFactory {
 
   private final DockerImages dockerImages;
 
-  public PulsarModuleFactory(DockerImages dockerImages) {
-    this.dockerImages = dockerImages;
+  PulsarModuleFactory(Seed4JModuleServices services) {
+    this.dockerImages = services.dockerImages();
   }
 
-  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
+  Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
 
     String packagePath = properties.packagePath();

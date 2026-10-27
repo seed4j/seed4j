@@ -1,0 +1,115 @@
+package com.seed4j.generator.client.tools.cypress;
+
+import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
+
+import com.seed4j.TestFileUtils;
+import com.seed4j.UnitTest;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+@UnitTest
+class CypressModuleFactoryTest {
+
+  private static final CypressModuleFactory factory = new CypressModuleFactory();
+
+  @Test
+  void shouldBuildComponentTestsModule() {
+    ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+
+    Seed4JModule module = factory.buildComponentTestsModule(properties);
+
+    assertThatModuleWithFiles(module, files)
+      .hasFile("package.json")
+      .containing(nodeDependency("cypress"))
+      .containing(nodeDependency("eslint-plugin-cypress"))
+      .containing(
+        """
+          "allowScripts": {
+            "cypress": true
+          }
+        """
+      )
+      .notContaining(nodeScript("e2e"))
+      .notContaining(nodeScript("e2e:headless"))
+      .containing(
+        nodeScript(
+          "test:component",
+          "concurrently -k -s first -n dev,test \\\"npm run dev\\\" \\\"wait-on http://localhost:9000 && cypress open --e2e --config-file src/test/webapp/component/cypress-config.ts\\\""
+        )
+      )
+      .containing(
+        nodeScript(
+          "test:component:headless",
+          "concurrently -k -s first -n dev,test \\\"npm run dev\\\" \\\"wait-on http://localhost:9000 && cypress run --headless --config-file src/test/webapp/component/cypress-config.ts\\\""
+        )
+      )
+      .and()
+      .hasFile("src/test/webapp/component/cypress-config.ts")
+      .containing("baseUrl: 'http://localhost:9000',")
+      .containing("specPattern: 'src/test/webapp/component/**/*.(spec|cy).ts',")
+      .and()
+      .hasPrefixedFiles("src/test/webapp/component", "tsconfig.json")
+      .hasFiles("src/test/webapp/component/home/Home.spec.ts")
+      .hasPrefixedFiles("src/test/webapp/component/utils", "Interceptor.ts", "DataSelector.ts");
+  }
+
+  @Test
+  void shouldAllowCypressBuildInPnpmWorkspaceWithPnpm() {
+    ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .nodePackageManager(PNPM)
+      .build();
+
+    Seed4JModule module = factory.buildComponentTestsModule(properties);
+
+    assertThatModuleWithFiles(module, files)
+      .hasFile("pnpm-workspace.yaml")
+      .containing(
+        """
+        allowBuilds:
+          cypress: true
+        """
+      )
+      .and()
+      .hasFile("package.json")
+      .notContaining("allowScripts");
+  }
+
+  @Test
+  @DisplayName("should build E2E tests module")
+  void shouldBuildE2eTestsModule() {
+    ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+
+    Seed4JModule module = factory.buildE2ETestsModule(properties);
+
+    assertThatModuleWithFiles(module, files)
+      .hasFile("package.json")
+      .containing(nodeDependency("cypress"))
+      .containing(nodeDependency("eslint-plugin-cypress"))
+      .containing(
+        """
+          "allowScripts": {
+            "cypress": true
+          }
+        """
+      )
+      .notContaining(nodeScript("test:component"))
+      .notContaining(nodeScript("test:component:headless"))
+      .containing(nodeScript("e2e", "cypress open --e2e --config-file src/test/webapp/e2e/cypress-config.ts"))
+      .containing(nodeScript("e2e:headless", "cypress run --headless --config-file src/test/webapp/e2e/cypress-config.ts"))
+      .and()
+      .hasFile("src/test/webapp/e2e/cypress-config.ts")
+      .containing("baseUrl: 'http://localhost:9000',")
+      .containing("specPattern: 'src/test/webapp/e2e/**/*.(spec|cy).ts',")
+      .and()
+      .hasPrefixedFiles("src/test/webapp/e2e", "tsconfig.json")
+      .hasFiles("src/test/webapp/e2e/home/Home.spec.ts")
+      .hasPrefixedFiles("src/test/webapp/e2e/utils", "Interceptor.ts", "DataSelector.ts");
+  }
+}

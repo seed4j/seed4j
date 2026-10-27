@@ -5,18 +5,20 @@ import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.generator.buildtool.maven.MavenModuleFactory;
+import com.seed4j.generator.buildtool.maven.MavenModuleResources;
 import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModuleFactory;
 import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.properties.SpringConfigurationFormat;
+import com.seed4j.module.domain.resource.FakeSeed4JModuleServices;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
 class MicronautCoreModuleFactoryTest {
 
   private static final MicronautCoreModuleFactory factory = new MicronautCoreModuleFactory();
-  private static final MavenModuleFactory mavenFactory = new MavenModuleFactory();
+  private static final Seed4JModuleFactory mavenFactory = new MavenModuleResources.Java().get(new FakeSeed4JModuleServices()).factory();
 
   @Test
   void shouldBuildModule() {
@@ -25,7 +27,7 @@ class MicronautCoreModuleFactoryTest {
       .projectBaseName("myapp")
       .build();
 
-    Seed4JModule mavenModule = mavenFactory.buildMavenModule(properties);
+    Seed4JModule mavenModule = mavenFactory.create(properties);
     Seed4JModule module = factory.buildModule(properties);
 
     assertThatTwoModulesWithFiles(mavenModule, module, pomFile())
@@ -156,7 +158,7 @@ class MicronautCoreModuleFactoryTest {
 
     Seed4JModule module = factory.buildModule(properties);
 
-    assertThatTwoModulesWithFiles(mavenFactory.buildMavenModule(properties), module, pomFile())
+    assertThatTwoModulesWithFiles(mavenFactory.create(properties), module, pomFile())
       .hasFile("pom.xml")
       .notContaining("snakeyaml")
       .and()

@@ -20,7 +20,7 @@ import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
 
-public class MavenModuleFactory {
+class MavenModuleFactory {
 
   private static final Seed4JSource SOURCE = from("buildtool/maven");
 
@@ -36,7 +36,7 @@ public class MavenModuleFactory {
   - [JDK 25](https://openjdk.java.net/projects/jdk/25/)""";
   private static final String PROPERTIES = "properties";
 
-  public Seed4JModule buildMavenModule(Seed4JModuleProperties properties) {
+  Seed4JModule buildMavenModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off
@@ -103,7 +103,7 @@ public class MavenModuleFactory {
       .build();
   }
 
-  public Seed4JModule buildMavenWrapperModule(Seed4JModuleProperties properties) {
+  Seed4JModule buildMavenWrapperModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES, properties);
 
     // @formatter:off

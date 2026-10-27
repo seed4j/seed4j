@@ -17,7 +17,6 @@ import com.seed4j.module.infrastructure.secondary.javadependency.JavaDependencie
 import com.seed4j.module.infrastructure.secondary.javadependency.JavaDependenciesReader;
 import com.seed4j.module.infrastructure.secondary.nodejs.NodePackagesVersionsReader;
 import com.seed4j.module.infrastructure.secondary.nodejs.NpmVersionsFixture;
-import com.seed4j.project.infrastructure.primary.JavaProjects;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -76,7 +75,7 @@ public final class TestSeed4JModules {
       FileSystemSeed4JModuleFiles files = new FileSystemSeed4JModuleFiles(filesReader, templateRenderer);
 
       FileSystemSeed4JModulesRepository modulesRepository = new FileSystemSeed4JModulesRepository(
-        mock(JavaProjects.class),
+        mock(AppliedModulesHistory.class),
         new Seed4JModulesResources(
           List.of(
             defaultModuleResourceBuilder()

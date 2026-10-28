@@ -30,7 +30,6 @@
     <springdoc-openapi.version>3.2.0</springdoc-openapi.version>
     <properties-maven-plugin.version>1.3.1</properties-maven-plugin.version>
     <sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
-    <cucumber.version>8.0.4</cucumber.version>
     <testcontainers.version>2.0.5</testcontainers.version>
     <mongock.version>5.5.1</mongock.version>
     <git-commit-id-plugin.version>10.0.1</git-commit-id-plugin.version>
@@ -47,13 +46,6 @@
         <groupId>io.mongock</groupId>
         <artifactId>mongock-bom</artifactId>
         <version>${mongock.version}</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>io.cucumber</groupId>
-        <artifactId>cucumber-bom</artifactId>
-        <version>${cucumber.version}</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
@@ -200,26 +192,6 @@
     <dependency>
       <groupId>com.tngtech.archunit</groupId>
       <artifactId>archunit-junit5-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-junit-platform-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-java</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-spring</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-suite</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -394,7 +366,7 @@
                   <executiondata>
                     <fileset dir="${project.build.directory}" includes="jacoco.exec,jacoco-it.exec" />
                     <fileset dir="${project.basedir}/../seed4j-engine/target" includes="jacoco.exec" />
-                    <fileset dir="${project.basedir}/../seed4j-core-modules/target" includes="jacoco.exec" />
+                    <fileset dir="${project.basedir}/../seed4j-core-modules/target" includes="jacoco.exec,jacoco-it.exec" />
                   </executiondata>
                   <structure name="seed4j">
                     <group name="seed4j-api">

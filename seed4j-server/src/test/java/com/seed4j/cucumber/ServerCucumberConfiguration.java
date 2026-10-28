@@ -25,7 +25,7 @@ import org.springframework.web.client.RestTemplate;
 @CucumberContextConfiguration
 @AutoConfigureTestRestTemplate
 @SpringBootTest(classes = { Seed4JApp.class, FakedFileSystemProjectFilesConfiguration.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
-public class CucumberConfiguration {
+public class ServerCucumberConfiguration {
 
   @Autowired
   private TestRestTemplate rest;

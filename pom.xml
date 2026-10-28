@@ -71,6 +71,7 @@
     <equalsverifier.version>4.5.2</equalsverifier.version>
     <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
     <archunit.version>1.5.1</archunit.version>
+    <cucumber.version>8.0.4</cucumber.version>
     <jspecify.version>1.0.1</jspecify.version>
     <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
@@ -93,6 +94,13 @@
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
         <version>${junit-jupiter.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-bom</artifactId>
+        <version>${cucumber.version}</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>

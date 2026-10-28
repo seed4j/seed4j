@@ -2,10 +2,10 @@ package com.seed4j.module.domain.replacement;
 
 import com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import com.seed4j.module.domain.Seed4JProjectFilePath;
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public abstract class Seed4JModuleReplacementsFactory {
 
@@ -15,13 +15,13 @@ public abstract class Seed4JModuleReplacementsFactory {
     Assert.notNull("builder", builder);
     Assert.notNull("replacers", builder.replacers);
 
-    this.replacers = Seed4JCollections.immutable(builder.replacers);
+    this.replacers = List.copyOf(builder.replacers);
   }
 
   protected Seed4JModuleReplacementsFactory(Collection<? extends ContentReplacer> replacers) {
     Assert.notNull("replacers", replacers);
 
-    this.replacers = Seed4JCollections.immutable(replacers);
+    this.replacers = List.copyOf(replacers);
   }
 
   protected Collection<ContentReplacer> getReplacers() {

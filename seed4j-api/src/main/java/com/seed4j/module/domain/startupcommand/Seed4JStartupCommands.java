@@ -1,11 +1,11 @@
 package com.seed4j.module.domain.startupcommand;
 
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import java.util.Collection;
+import java.util.List;
 
 public record Seed4JStartupCommands(Collection<? extends Seed4JStartupCommand> commands) {
   public Seed4JStartupCommands(Collection<? extends Seed4JStartupCommand> commands) {
-    this.commands = Seed4JCollections.immutable(commands);
+    this.commands = List.copyOf(commands);
   }
 
   @SuppressWarnings("unchecked")

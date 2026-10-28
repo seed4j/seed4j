@@ -3,9 +3,10 @@ package com.seed4j.module.domain;
 import com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public final class Seed4JModuleContext {
   private final Map<String, Object> context;
 
   private Seed4JModuleContext(Map<String, Object> context) {
-    this.context = Seed4JCollections.immutable(context);
+    this.context = Collections.unmodifiableMap(new LinkedHashMap<>(context));
   }
 
   public static Seed4JModuleContext empty() {
@@ -28,7 +29,10 @@ public final class Seed4JModuleContext {
       Seed4JModuleProperties.PROJECT_BUILD_DIRECTORY,
       javaBuildTool.buildDirectory().get()
     );
-    return new Seed4JModuleContext(Seed4JCollections.concat(context, additionalValues));
+    Map<String, Object> mergedContext = new LinkedHashMap<>(context);
+    mergedContext.putAll(additionalValues);
+
+    return new Seed4JModuleContext(mergedContext);
   }
 
   public static Seed4JModuleContextBuilder builder(Seed4JModuleBuilder module) {

@@ -1,10 +1,9 @@
-package com.seed4j.project.infrastructure.secondary;
+package com.seed4j.history.infrastructure.secondary;
 
-import com.seed4j.project.domain.ProjectPath;
-import com.seed4j.project.domain.ProjectsRepository;
-import com.seed4j.project.domain.download.Project;
-import com.seed4j.project.domain.history.ProjectAction;
-import com.seed4j.project.domain.history.ProjectHistory;
+import com.seed4j.history.domain.ProjectAction;
+import com.seed4j.history.domain.ProjectHistory;
+import com.seed4j.history.domain.ProjectHistoryRepository;
+import com.seed4j.history.domain.ProjectPath;
 import com.seed4j.shared.error.domain.Assert;
 import com.seed4j.shared.error.domain.GeneratorException;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
@@ -19,7 +18,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.function.Predicate;
 import org.springframework.stereotype.Repository;
 import tools.jackson.core.JacksonException;
@@ -27,7 +25,7 @@ import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.ObjectWriter;
 
 @Repository
-class FileSystemProjectsRepository implements ProjectsRepository {
+class FileSystemProjectHistoryRepository implements ProjectHistoryRepository {
 
   private static final String PATH_PARAMETER = "path";
 
@@ -46,20 +44,11 @@ class FileSystemProjectsRepository implements ProjectsRepository {
 
   private final ObjectMapper json;
   private final ObjectWriter writer;
-  private final FileSystemProjectDownloader downloader;
 
-  public FileSystemProjectsRepository(ObjectMapper json) {
+  public FileSystemProjectHistoryRepository(ObjectMapper json) {
     this.json = json;
 
     writer = json.writerWithDefaultPrettyPrinter();
-    downloader = new FileSystemProjectDownloader();
-  }
-
-  @Override
-  public Optional<Project> get(ProjectPath path) {
-    Assert.notNull(PATH_PARAMETER, path);
-
-    return downloader.download(path);
   }
 
   @Override
@@ -81,7 +70,7 @@ class FileSystemProjectsRepository implements ProjectsRepository {
   }
 
   @Override
-  public ProjectHistory getHistory(ProjectPath path) {
+  public ProjectHistory get(ProjectPath path) {
     Assert.notNull(PATH_PARAMETER, path);
 
     Path historyFilePath = Path.of(path.get(), HISTORY_FOLDER, HISTORY_FILE);

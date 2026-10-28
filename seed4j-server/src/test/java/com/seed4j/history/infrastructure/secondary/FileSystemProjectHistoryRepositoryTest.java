@@ -1,9 +1,9 @@
-package com.seed4j.project.infrastructure.secondary;
+package com.seed4j.history.infrastructure.secondary;
 
-import static com.seed4j.project.domain.history.ProjectHistoryFixture.firstProjectAction;
-import static com.seed4j.project.domain.history.ProjectHistoryFixture.projectAction;
-import static com.seed4j.project.domain.history.ProjectHistoryFixture.projectPath;
-import static com.seed4j.project.domain.history.ProjectHistoryFixture.secondProjectAction;
+import static com.seed4j.history.domain.ProjectHistoryFixture.firstProjectAction;
+import static com.seed4j.history.domain.ProjectHistoryFixture.projectAction;
+import static com.seed4j.history.domain.ProjectHistoryFixture.projectPath;
+import static com.seed4j.history.domain.ProjectHistoryFixture.secondProjectAction;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.any;
@@ -14,22 +14,13 @@ import static org.mockito.Mockito.when;
 import com.seed4j.JsonHelper;
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
-import com.seed4j.project.domain.ProjectPath;
-import com.seed4j.project.domain.download.Project;
-import com.seed4j.project.domain.download.ProjectName;
-import com.seed4j.project.domain.history.ProjectHistory;
+import com.seed4j.history.domain.ProjectHistory;
+import com.seed4j.history.domain.ProjectPath;
 import com.seed4j.shared.error.domain.GeneratorException;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.stream.Stream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -38,102 +29,13 @@ import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.ObjectWriter;
 
 @UnitTest
-class FileSystemProjectsRepositoryTest {
+class FileSystemProjectHistoryRepositoryTest {
 
-  private static final FileSystemProjectsRepository projects = new FileSystemProjectsRepository(JsonHelper.jsonMapper());
-
-  @Nested
-  @DisplayName("Download")
-  class FileSystemProjectsRepositoryDownloadTest {
-
-    @Test
-    void shouldGetEmptyProjectFromUnknownFolder() {
-      assertThat(projects.get(new ProjectPath(TestFileUtils.tmpDirForTest()))).isEmpty();
-    }
-
-    @Test
-    void shouldGetEmptyProjectFromEmptyFolder() throws IOException {
-      String folder = TestFileUtils.tmpDirForTest();
-      Files.createDirectories(Path.of(folder));
-
-      assertThat(projects.get(new ProjectPath(folder))).isEmpty();
-    }
-
-    @Test
-    void shouldGetEmptyProjectFromFile() {
-      ProjectPath path = folder().add("src/test/resources/projects/maven/pom.xml").build();
-
-      ProjectPath filePath = new ProjectPath(path.get() + "/pom.xml");
-
-      assertThat(projects.get(filePath)).isEmpty();
-    }
-
-    @Test
-    void shouldGetZippedProjectFromFolderWithoutPackageJson() {
-      ProjectPath path = folder().add("src/test/resources/projects/maven/pom.xml").build();
-
-      Project project = projects.get(path).orElseThrow();
-
-      assertThat(project.name()).isEqualTo(ProjectName.DEFAULT);
-      assertThat(zippedFiles(project.content())).containsExactly("pom.xml");
-    }
-
-    @Test
-    void shouldGetZippedProjectFromFolderEmptyPackageJson() {
-      ProjectPath path = folder().add("src/test/resources/projects/empty-package-json/package.json").build();
-
-      Project project = projects.get(path).orElseThrow();
-
-      assertThat(project.name()).isEqualTo(ProjectName.DEFAULT);
-      assertThat(zippedFiles(project.content())).containsExactly("package.json");
-    }
-
-    @Test
-    void shouldGetZippedProjectFromFolderPackageJsonWithProjectName() {
-      ProjectPath path = folder().add("src/test/resources/projects/package-json/package.json").build();
-
-      Project project = projects.get(path).orElseThrow();
-
-      assertThat(project.name()).isEqualTo(new ProjectName("seed4j-project"));
-      assertThat(zippedFiles(project.content())).containsExactly("package.json");
-    }
-
-    @Test
-    void shouldNotGetNodeModulesInZipFile() {
-      ProjectPath path = folder()
-        .add("src/test/resources/projects/node/package.json", "beer.json")
-        .add("src/test/resources/projects/node/package.json", "dummy/beer.json")
-        .add("src/test/resources/projects/node/package.json", "node_modules/package.json")
-        .build();
-
-      Project project = projects.get(path).orElseThrow();
-
-      assertThat(zippedFiles(project.content()))
-        .doesNotContain("node_modules", "node_modules/package.json")
-        .contains("beer.json", "dummy" + FileSystems.getDefault().getSeparator() + "beer.json");
-    }
-
-    private Collection<String> zippedFiles(byte[] content) {
-      try (ZipInputStream zip = new ZipInputStream(new ByteArrayInputStream(content))) {
-        ZipEntry entry = zip.getNextEntry();
-
-        List<String> result = new ArrayList<>();
-        while (entry != null) {
-          result.add(entry.getName());
-
-          entry = zip.getNextEntry();
-        }
-
-        return result;
-      } catch (IOException e) {
-        throw new AssertionError(e);
-      }
-    }
-  }
+  private static final FileSystemProjectHistoryRepository histories = new FileSystemProjectHistoryRepository(JsonHelper.jsonMapper());
 
   @Nested
   @DisplayName("Save history")
-  class FileSystemProjectsRepositorySaveHistoryTest {
+  class FileSystemProjectHistoryRepositorySaveTest {
 
     @Test
     void shouldHandleSerializationError() throws JacksonException {
@@ -143,18 +45,16 @@ class FileSystemProjectsRepositoryTest {
       ObjectMapper json = mock(ObjectMapper.class);
       when(json.writerWithDefaultPrettyPrinter()).thenReturn(writer);
 
-      FileSystemProjectsRepository fileSystemProjectsRepository = new FileSystemProjectsRepository(json);
+      FileSystemProjectHistoryRepository repository = new FileSystemProjectHistoryRepository(json);
 
-      assertThatThrownBy(() -> fileSystemProjectsRepository.save(projectPath(), projectAction())).isExactlyInstanceOf(
-        GeneratorException.class
-      );
+      assertThatThrownBy(() -> repository.save(projectPath(), projectAction())).isExactlyInstanceOf(GeneratorException.class);
     }
 
     @Test
     void shouldSaveHistory() throws IOException {
       ProjectPath path = folder().build();
 
-      projects.save(path, projectAction());
+      histories.save(path, projectAction());
 
       try (Stream<Path> files = Files.list(Path.of(path.get(), ".seed4j/modules"))) {
         Path filepath = files.findFirst().orElseThrow();
@@ -176,7 +76,7 @@ class FileSystemProjectsRepositoryTest {
 
   @Nested
   @DisplayName("Get history")
-  class FileSystemProjectsRepositoryGetHistoryTest {
+  class FileSystemProjectHistoryRepositoryGetTest {
 
     @Test
     void shouldHandleDeserializationErrors() {
@@ -184,16 +84,16 @@ class FileSystemProjectsRepositoryTest {
       ObjectMapper json = mock(ObjectMapper.class);
       when(json.readValue(any(byte[].class), eq(PersistedProjectHistory.class))).thenThrow(JacksonException.class);
 
-      FileSystemProjectsRepository fileSystemProjectsRepository = new FileSystemProjectsRepository(json);
+      FileSystemProjectHistoryRepository repository = new FileSystemProjectHistoryRepository(json);
 
-      assertThatThrownBy(() -> fileSystemProjectsRepository.getHistory(path)).isExactlyInstanceOf(GeneratorException.class);
+      assertThatThrownBy(() -> repository.get(path)).isExactlyInstanceOf(GeneratorException.class);
     }
 
     @Test
     void shouldGetEmptyHistoryFromUnknownFiles() {
       ProjectPath path = folder().build();
 
-      ProjectHistory history = projects.getHistory(path);
+      ProjectHistory history = histories.get(path);
 
       assertThat(history.path()).isEqualTo(path);
       assertThat(history.actions()).isEmpty();
@@ -203,7 +103,7 @@ class FileSystemProjectsRepositoryTest {
     void shouldGetExistingHistory() {
       ProjectPath path = folder().add("src/test/resources/projects/history/history.json", ".seed4j/modules/history.json").build();
 
-      ProjectHistory history = projects.getHistory(path);
+      ProjectHistory history = histories.get(path);
 
       assertThat(history.path()).isEqualTo(path);
       assertThat(history.actions()).usingRecursiveFieldByFieldElementComparator().containsExactly(projectAction());
@@ -218,7 +118,7 @@ class FileSystemProjectsRepositoryTest {
         )
         .build();
 
-      ProjectHistory history = projects.getHistory(path);
+      ProjectHistory history = histories.get(path);
 
       assertThat(history.actions()).usingRecursiveFieldByFieldElementComparator().containsExactly(firstProjectAction());
     }
@@ -238,7 +138,7 @@ class FileSystemProjectsRepositoryTest {
         .add("src/test/resources/projects/composed-history/dummy.txt", ".seed4j/modules/dummy.txt")
         .build();
 
-      ProjectHistory history = projects.getHistory(path);
+      ProjectHistory history = histories.get(path);
 
       assertThat(history.actions())
         .usingRecursiveFieldByFieldElementComparator()
@@ -266,10 +166,6 @@ class FileSystemProjectsRepositoryTest {
       } catch (IOException e) {
         throw new AssertionError(e);
       }
-    }
-
-    private FolderBuilder add(String source) {
-      return add(source, Path.of(source).getFileName().toString());
     }
 
     private FolderBuilder add(String source, String destination) {

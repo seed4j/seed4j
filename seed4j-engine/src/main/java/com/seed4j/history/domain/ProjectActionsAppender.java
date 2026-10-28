@@ -1,13 +1,12 @@
-package com.seed4j.project.domain.history;
+package com.seed4j.history.domain;
 
-import com.seed4j.project.domain.ProjectsRepository;
 import com.seed4j.shared.error.domain.Assert;
 
 public class ProjectActionsAppender {
 
-  private final ProjectsRepository projects;
+  private final ProjectHistoryRepository projects;
 
-  public ProjectActionsAppender(ProjectsRepository projects) {
+  public ProjectActionsAppender(ProjectHistoryRepository projects) {
     Assert.notNull("projects", projects);
 
     this.projects = projects;

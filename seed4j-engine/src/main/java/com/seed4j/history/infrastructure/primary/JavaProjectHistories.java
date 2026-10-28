@@ -1,28 +1,29 @@
-package com.seed4j.project.infrastructure.primary;
+package com.seed4j.history.infrastructure.primary;
 
+import com.seed4j.history.application.ProjectHistoryApplicationService;
+import com.seed4j.history.domain.ProjectAction;
+import com.seed4j.history.domain.ProjectActionToAppend;
+import com.seed4j.history.domain.ProjectHistory;
+import com.seed4j.history.domain.ProjectPath;
 import com.seed4j.module.domain.AppliedModulesHistory;
 import com.seed4j.module.domain.Seed4JModuleApplied;
-import com.seed4j.project.application.ProjectsApplicationService;
-import com.seed4j.project.domain.ProjectPath;
-import com.seed4j.project.domain.history.ProjectAction;
-import com.seed4j.project.domain.history.ProjectActionToAppend;
 import com.seed4j.shared.error.domain.Assert;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JavaProjects implements AppliedModulesHistory {
+public class JavaProjectHistories implements AppliedModulesHistory {
 
-  private final ProjectsApplicationService projects;
+  private final ProjectHistoryApplicationService histories;
 
-  public JavaProjects(ProjectsApplicationService projects) {
-    this.projects = projects;
+  public JavaProjectHistories(ProjectHistoryApplicationService histories) {
+    this.histories = histories;
   }
 
   @Override
   public void append(Seed4JModuleApplied moduleApplied) {
     Assert.notNull("moduleApplied", moduleApplied);
 
-    projects.append(projectActionToAdd(moduleApplied));
+    histories.append(projectActionToAdd(moduleApplied));
   }
 
   private static ProjectActionToAppend projectActionToAdd(Seed4JModuleApplied moduleApplied) {
@@ -34,5 +35,18 @@ public class JavaProjects implements AppliedModulesHistory {
       .parameters(moduleApplied.properties().getParameters());
 
     return new ProjectActionToAppend(path, action);
+  }
+
+  public ProjectHistorySummary get(String projectPath) {
+    ProjectHistory history = histories.get(new ProjectPath(projectPath));
+
+    return new ProjectHistorySummary(
+      history
+        .actions()
+        .stream()
+        .map(action -> action.module().get())
+        .toList(),
+      history.latestProperties().get()
+    );
   }
 }

@@ -16,7 +16,9 @@ class Seed4JDependenciesCatalogsTest {
   @Test
   void shouldNotDeclareGradleCatalogVersionsAlsoDeclaredInMavenCatalog() {
     JavaDependenciesVersions mavenVersions = new Seed4JMavenDependenciesReader(new FileSystemProjectFiles()).get();
-    VersionsCatalog gradleCatalog = new VersionsCatalog(Path.of("src/main/resources/generator/dependencies/gradle/libs.versions.toml"));
+    VersionsCatalog gradleCatalog = new VersionsCatalog(
+      Path.of("../seed4j-core-modules/src/main/resources/generator/dependencies/gradle/libs.versions.toml")
+    );
 
     assertThat(gradleCatalog.retrieveVersions())
       .map(JavaDependencyVersion::slug)

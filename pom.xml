@@ -249,6 +249,7 @@
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>${jacoco.version}</version>
+          <!-- only the execution data: seed4j-server reports and checks the coverage of all the modules -->
           <executions>
             <execution>
               <id>pre-unit-tests</id>
@@ -256,56 +257,11 @@
                 <goal>prepare-agent</goal>
               </goals>
             </execution>
-            <!-- Ensures that the code coverage report for unit tests is created after unit tests have been run -->
-            <execution>
-              <id>post-unit-test</id>
-              <phase>test</phase>
-              <goals>
-                <goal>report</goal>
-              </goals>
-            </execution>
             <execution>
               <id>pre-integration-tests</id>
               <goals>
                 <goal>prepare-agent-integration</goal>
               </goals>
-            </execution>
-            <!-- Ensures that the code coverage report for integration tests is created after integration tests have been run -->
-            <execution>
-              <id>post-integration-tests</id>
-              <phase>post-integration-test</phase>
-              <goals>
-                <goal>report-integration</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>merge</id>
-              <phase>verify</phase>
-              <goals>
-                <goal>merge</goal>
-              </goals>
-              <configuration>
-                <fileSets>
-                  <fileSet implementation="org.apache.maven.shared.model.fileset.FileSet">
-                    <directory>${project.basedir}</directory>
-                    <includes>
-                      <include>**/*.exec</include>
-                    </includes>
-                  </fileSet>
-                </fileSets>
-                <destFile>target/jacoco/allTest.exec</destFile>
-              </configuration>
-            </execution>
-            <execution>
-              <id>post-merge-report</id>
-              <phase>verify</phase>
-              <goals>
-                <goal>report</goal>
-              </goals>
-              <configuration>
-                <dataFile>target/jacoco/allTest.exec</dataFile>
-                <outputDirectory>target/jacoco/</outputDirectory>
-              </configuration>
             </execution>
           </executions>
         </plugin>

@@ -75,5 +75,22 @@ class FileSystemProjectFilesTest {
         "/generator/init/package.json.mustache"
       );
     }
+
+    @Test
+    void shouldFindFilesRelativePathsInJar() {
+      Collection<String> paths = files.findRecursivelyInPath("/org/apache/commons/lang3/builder");
+
+      assertThat(paths).contains(
+        "/org/apache/commons/lang3/builder/ToStringBuilder.class",
+        "/org/apache/commons/lang3/builder/EqualsBuilder.class"
+      );
+    }
+
+    @Test
+    void shouldNotBeFileInJar() {
+      assertThatThrownBy(() -> files.findRecursivelyInPath("/org/apache/commons/lang3/StringUtils.class")).isExactlyInstanceOf(
+        GeneratorException.class
+      );
+    }
   }
 }

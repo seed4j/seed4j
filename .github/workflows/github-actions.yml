@@ -495,14 +495,11 @@ jobs:
               && docker logs -f sonar-token && SONAR_TOKEN=$(docker logs sonar-token)
             docker ps -a
           fi
-      - name: 'Install seed4j snapshot jar in local maven repository'
-        if: steps.tests-requirement-check.outputs.execute_tests == 'true'
+      - name: 'Install seed4j snapshot in local maven repository'
+        # the generated extension depends on com.seed4j:seed4j, which needs the other seed4j modules with their poms
+        if: steps.tests-requirement-check.outputs.execute_tests == 'true' && matrix.app == 'seed4jextension'
         working-directory: ./current-branch/
-        run: |
-          export SEED4J_VERSION=$(find tests-ci -maxdepth 1 -name "*-tests.jar" | sed -e 's/.*seed4j-\(.*\)-tests\.jar/\1/')
-          echo "SEED4J_VERSION=${SEED4J_VERSION}"
-          ./mvnw install:install-file -Dfile=tests-ci/seed4j-${SEED4J_VERSION}.jar -DgroupId=com.seed4j -DartifactId=seed4j -Dversion=${SEED4J_VERSION}
-          ./mvnw install:install-file -Dfile=tests-ci/seed4j-${SEED4J_VERSION}-tests.jar -DgroupId=com.seed4j -DartifactId=seed4j -Dversion=${SEED4J_VERSION} -Dclassifier=tests
+        run: ./mvnw install -DskipTests -Dskip.npm
       - name: 'Test: verify ${{ matrix.app }}'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         working-directory: /tmp/seed4j/${{ matrix.app }}/

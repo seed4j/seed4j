@@ -26,7 +26,7 @@ class FileSystemMavenDependenciesReaderTest {
   }
 
   private Answer<String> fileContent() {
-    return invocation -> Files.readString(Path.of("src/main/resources/" + invocation.getArgument(0, String.class)));
+    return invocation -> Files.readString(Path.of("../seed4j-core-modules/src/main/resources/" + invocation.getArgument(0, String.class)));
   }
 
   @Test

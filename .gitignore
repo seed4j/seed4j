@@ -4,8 +4,8 @@
 /seed4j-server/target/classes/static/**
 /seed4j-server/src/test/webapp/coverage/
 
-!/seed4j-server/src/main/resources/generator/buildtool/gradle/gradle/wrapper/gradle-wrapper.jar
-!/seed4j-server/src/main/resources/generator/buildtool/maven/.mvn/wrapper/maven-wrapper.jar
+!/seed4j-core-modules/src/main/resources/generator/buildtool/gradle/gradle/wrapper/gradle-wrapper.jar
+!/seed4j-core-modules/src/main/resources/generator/buildtool/maven/.mvn/wrapper/maven-wrapper.jar
 /tests-ci/.pid-seed4j
 /roadmap/*.png
 !/roadmap/spring_boot_project.png

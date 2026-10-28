@@ -10,7 +10,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Maven reactor (`pom.xml` at the root is `seed4j-parent`) and npm workspaces (root `package.json`):
 
-- `seed4j-server/`: the Seed4J application (Java sources, modules, Vue frontend), published as `com.seed4j:seed4j`.
+- `seed4j-engine/`: the engine applying modules to projects (`com.seed4j.module` without its REST adapters, engine shared kernels).
+- `seed4j-core-modules/`: the official modules (`com.seed4j.generator`, slugs) and their templates and dependency versions.
+- `seed4j-server/`: the Seed4J application (REST API, Vue frontend, projects, statistics), published as `com.seed4j:seed4j`. All the tests,
+  including the ones of the engine and the official modules, run here for now, with an aggregated coverage check.
 - Root: global tooling shared by all modules (Prettier, lint-staged/husky, Checkstyle, Renovate).
 
 Commands below are run from the root.
@@ -67,7 +70,7 @@ docker logs -f sonar-token && SONAR_TOKEN=$(docker logs sonar-token)
 
 ### Hexagonal Architecture (Application Service Flavor)
 
-Every bounded context in `seed4j-server/src/main/java/com/seed4j/` follows this package structure:
+Every bounded context in `com.seed4j` follows this package structure:
 
 ```
 my_context/
@@ -80,7 +83,7 @@ my_context/
 
 **Rule:** `domain` depends on nothing. `application` depends on `domain`. `infrastructure` depends on both but not the other way around.
 
-### Top-Level Bounded Contexts (`seed4j-server/src/main/java/com/seed4j/`)
+### Top-Level Bounded Contexts (`com.seed4j`)
 
 | Package      | Responsibility                                                                                                                                                   |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -95,7 +98,7 @@ my_context/
 
 1. **Domain factory** in `com.seed4j.generator.my_module.domain`:
    - Class `MyModuleFactory` with `buildModule(Seed4JModuleProperties)` returning `Seed4JModule`.
-   - Templates go in `seed4j-server/src/main/resources/generator/my-module/` as `*.mustache` files.
+   - Templates go in `seed4j-core-modules/src/main/resources/generator/my-module/` as `*.mustache` files.
    - Start with `Seed4JModulesAssertions.assertThatModule(module).hasPrefixedFiles(...)` in a `@UnitTest`.
 
 2. **Application service** in `com.seed4j.generator.my_module.application`:
@@ -109,9 +112,9 @@ my_context/
    - One scenario asserting that the module produces a key file (not a duplicate of the unit test).
 
 5. **Dependencies** for the generated project:
-   - Java deps → `seed4j-server/src/main/resources/generator/dependencies/pom.xml`
-   - NPM deps → `seed4j-server/src/main/resources/generator/dependencies/common/package.json` (or framework-specific folder)
-   - Docker images → `seed4j-server/src/main/resources/generator/dependencies/Dockerfile`
+   - Java deps → `seed4j-core-modules/src/main/resources/generator/dependencies/pom.xml`
+   - NPM deps → `seed4j-core-modules/src/main/resources/generator/dependencies/common/package.json` (or framework-specific folder)
+   - Docker images → `seed4j-core-modules/src/main/resources/generator/dependencies/Dockerfile`
 
 6. **CI integration**: add the module to `tests-ci/generate.sh` and `.github/workflows/github-actions.yml`.
 
@@ -136,4 +139,4 @@ npm run dev:tikui --workspace seed4j-server          # Pattern library at http:/
 - **Types Driven Development**: create dedicated value types for each business concept (e.g. `Firstname`, not `String`). Compilation catches mis-ordering of parameters.
 - **No business logic in `application`**: it only orchestrates; all rules belong in `domain`.
 - **100% coverage expected** — the project targets zero code smells and no coverage gaps.
-- **Dependency versions for generated code** are managed centrally under `seed4j-server/src/main/resources/generator/dependencies/` and updated automatically by Renovate/Dependabot — do not hardcode versions in module templates.
+- **Dependency versions for generated code** are managed centrally under `seed4j-core-modules/src/main/resources/generator/dependencies/` and updated automatically by Renovate/Dependabot — do not hardcode versions in module templates.

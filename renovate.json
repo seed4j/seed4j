@@ -13,7 +13,7 @@
   ],
   "prConcurrentLimit": 20,
   "prHourlyLimit": 20,
-  "ignorePaths": ["**/node_modules/**", "**/test/**", "seed4j-server/src/main/resources/generator/dependencies/svelte/**"],
+  "ignorePaths": ["**/node_modules/**", "**/test/**", "seed4j-core-modules/src/main/resources/generator/dependencies/svelte/**"],
   "docker-compose": {
     "fileMatch": ["^seed4j-server/src/main/docker/[^/]*\\.ya?ml$"]
   },
@@ -33,7 +33,7 @@
     },
     {
       "description": "Angular packages have strict peer dependencies on each other: major upgrades must be done together",
-      "matchFileNames": ["seed4j-server/src/main/resources/generator/dependencies/angular/package.json"],
+      "matchFileNames": ["seed4j-core-modules/src/main/resources/generator/dependencies/angular/package.json"],
       "matchPackageNames": ["@angular/**", "angular-eslint"],
       "matchUpdateTypes": ["major"],
       "groupName": "angular major"

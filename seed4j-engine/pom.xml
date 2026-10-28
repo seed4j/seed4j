@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.seed4j</groupId>
+    <artifactId>seed4j-parent</artifactId>
+    <version>2.2.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>seed4j-engine</artifactId>
+  <name>seed4j-engine</name>
+  <description>seed4j engine: applies modules to projects</description>
+  <packaging>jar</packaging>
+
+  <properties>
+    <apache-commons-io.version>2.22.0</apache-commons-io.version>
+    <jgit.version>7.8.0.202609011348-r</jgit.version>
+    <maven-model-helper.version>42</maven-model-helper.version>
+    <night-config.version>3.9.0</night-config.version>
+    <mustache.java.version>0.9.14</mustache.java.version>
+    <!-- covered by the aggregated report of seed4j-server, where all the tests run -->
+    <sonar.coverage.jacoco.xmlReportPaths>${seed4j.coverage-report}</sonar.coverage.jacoco.xmlReportPaths>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>tools.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${apache-commons-io.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jspecify</groupId>
+      <artifactId>jspecify</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.uber.nullaway</groupId>
+      <artifactId>nullaway-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.errorprone</groupId>
+      <artifactId>error_prone_annotations</artifactId>
+      <version>${error-prone.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jgit</groupId>
+      <artifactId>org.eclipse.jgit</artifactId>
+      <version>${jgit.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>maven-model-helper</artifactId>
+      <version>${maven-model-helper.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.electronwill.night-config</groupId>
+      <artifactId>toml</artifactId>
+      <version>${night-config.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.spullara.mustache.java</groupId>
+      <artifactId>compiler</artifactId>
+      <version>${mustache.java.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.gaul</groupId>
+        <artifactId>modernizer-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>

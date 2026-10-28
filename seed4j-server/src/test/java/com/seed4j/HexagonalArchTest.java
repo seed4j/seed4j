@@ -8,6 +8,7 @@ import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.library.Architectures;
+import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.nio.file.Files;
@@ -27,6 +28,11 @@ class HexagonalArchTest {
   private static final String ROOT_PACKAGE = "com.seed4j";
   private static final String GENERATION_SHARED_KERNEL_PACKAGES = ROOT_PACKAGE.concat(".shared.generation..");
   private static final String WIRE_PACKAGES = ROOT_PACKAGE.concat(".wire..");
+
+  // all the tests run in this module, for the classes of all the modules
+  private static final List<Path> SOURCE_ROOTS = Stream.of(".", "../seed4j-engine", "../seed4j-core-modules")
+    .map(module -> Path.of(module, "src", "main", "java"))
+    .toList();
 
   private static final JavaClasses classes = new ClassFileImporter()
     .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
@@ -56,33 +62,24 @@ class HexagonalArchTest {
   }
 
   private static Collection<String> packagesWithAnnotation(Class<? extends Annotation> annotationClass) throws AssertionError {
-    try (Stream<Path> files = Files.walk(rootPackagePath())) {
+    return SOURCE_ROOTS.stream()
+      .flatMap(HexagonalArchTest::packageInfos)
+      .map(toPackage())
+      .filter(pack -> pack.getAnnotation(annotationClass) != null)
+      .map(Package::getName)
+      .toList();
+  }
+
+  private static Stream<String> packageInfos(Path sourceRoot) {
+    try (Stream<Path> files = Files.walk(sourceRoot.resolve(ROOT_PACKAGE.replace('.', File.separatorChar)))) {
       return files
-        .filter(path -> path.toString().endsWith("package-info.java"))
-        .map(toPackageName())
-        .map(path -> path.replaceAll("[/]", "."))
-        .map(path -> path.replaceAll("[\\\\]", "."))
-        .map(path -> path.replace("src.main.java.", ""))
-        .map(toPackage())
-        .filter(pack -> pack.getAnnotation(annotationClass) != null)
-        .map(Package::getName)
-        .toList();
+        .filter(path -> path.getFileName().toString().equals("package-info.java"))
+        .map(path -> sourceRoot.relativize(path.getParent()).toString().replace(File.separatorChar, '.') + ".package-info")
+        .toList()
+        .stream();
     } catch (IOException e) {
       throw new AssertionError(e);
     }
-  }
-
-  private static Path rootPackagePath() {
-    return Stream.of(ROOT_PACKAGE.split("\\."))
-      .map(Path::of)
-      .reduce(Path.of("src", "main", "java"), Path::resolve);
-  }
-
-  private static Function<Path, String> toPackageName() {
-    return path -> {
-      var stringPath = path.toString();
-      return stringPath.substring(0, stringPath.lastIndexOf("."));
-    };
   }
 
   private static Function<String, Package> toPackage() {

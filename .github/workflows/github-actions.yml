@@ -144,7 +144,7 @@ jobs:
           docker logs sonar
           docker logs sonar-token
           SONAR_TOKEN=$(docker logs sonar-token)
-          ./mvnw initialize sonar:sonar -Dsonar.token=$SONAR_TOKEN
+          ./mvnw test-compile sonar:sonar -Dskip.npm -Dsonar.token=$SONAR_TOKEN
           ./tests-ci/sonar.sh
       - name: 'Analysis: see results'
         run: ./tests-ci/sonar.sh
@@ -153,7 +153,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=seed4j_seed4j -Dsonar.organization=seed4j
+        run: ./mvnw test-compile sonar:sonar -Dskip.npm -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=seed4j_seed4j -Dsonar.organization=seed4j
       - name: 'Artifact: remove unused JARs'
         run: |
           rm seed4j-server/target/*-javadoc.jar seed4j-server/target/*-sources.jar
@@ -203,7 +203,10 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: seed4j-main-jar
-          path: '${{ github.workspace }}/seed4j-server/target/*.jar'
+          # main may still have the single module layout (target/): remove it once the maven modules are merged
+          path: |
+            ${{ github.workspace }}/seed4j-server/target/*.jar
+            ${{ github.workspace }}/target/*.jar
           retention-days: 1
   #--------------------------------------------------
   # Cypress

@@ -1,6 +1,5 @@
-package com.seed4j.project.domain.history;
+package com.seed4j.history.domain;
 
-import com.seed4j.project.domain.ModuleSlug;
 import com.seed4j.shared.error.domain.Assert;
 import java.time.Instant;
 import java.util.Map;

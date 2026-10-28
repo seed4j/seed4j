@@ -1,6 +1,5 @@
-package com.seed4j.project.domain.history;
+package com.seed4j.history.domain;
 
-import com.seed4j.project.domain.ProjectPath;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;

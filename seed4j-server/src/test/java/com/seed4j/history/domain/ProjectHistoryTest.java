@@ -1,6 +1,6 @@
-package com.seed4j.project.domain.history;
+package com.seed4j.history.domain;
 
-import static com.seed4j.project.domain.history.ProjectHistoryFixture.*;
+import static com.seed4j.history.domain.ProjectHistoryFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import com.seed4j.UnitTest;

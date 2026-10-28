@@ -1,6 +1,5 @@
-package com.seed4j.project.domain.history;
+package com.seed4j.history.domain;
 
-import com.seed4j.project.domain.ProjectPath;
 import com.seed4j.shared.error.domain.Assert;
 
 public record ProjectActionToAppend(ProjectPath path, ProjectAction action) {

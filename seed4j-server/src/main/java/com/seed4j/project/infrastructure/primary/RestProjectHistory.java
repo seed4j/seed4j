@@ -17,7 +17,7 @@ final class RestProjectHistory {
   }
 
   public static RestProjectHistory from(ProjectHistory history) {
-    return new RestProjectHistory(history.actions().stream().map(RestAppliedModule::from).toList(), history.latestProperties().get());
+    return new RestProjectHistory(history.modules().stream().map(RestAppliedModule::from).toList(), history.properties().get());
   }
 
   @Schema(description = "Modules applied for the project")

@@ -1,8 +1,8 @@
-package com.seed4j.project.infrastructure.secondary;
+package com.seed4j.history.infrastructure.secondary;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.seed4j.project.domain.ProjectPath;
-import com.seed4j.project.domain.history.ProjectHistory;
+import com.seed4j.history.domain.ProjectHistory;
+import com.seed4j.history.domain.ProjectPath;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;

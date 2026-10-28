@@ -1,7 +1,7 @@
-package com.seed4j.project.infrastructure.secondary;
+package com.seed4j.history.infrastructure.secondary;
 
-import com.seed4j.project.domain.history.ProjectAction;
-import com.seed4j.project.domain.history.ProjectHistory;
+import com.seed4j.history.domain.ProjectAction;
+import com.seed4j.history.domain.ProjectHistory;
 import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;

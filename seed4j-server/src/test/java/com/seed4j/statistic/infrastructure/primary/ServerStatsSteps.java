@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class StatsSteps {
+public class ServerStatsSteps {
 
   @Autowired
   private TestRestTemplate rest;

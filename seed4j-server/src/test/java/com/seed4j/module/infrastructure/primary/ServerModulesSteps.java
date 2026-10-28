@@ -1,6 +1,5 @@
 package com.seed4j.module.infrastructure.primary;
 
-import static com.seed4j.TestProjects.lastProjectFolder;
 import static com.seed4j.TestProjects.newTestFolder;
 import static com.seed4j.cucumber.rest.CucumberRestAssertions.assertThatLastResponse;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,13 +14,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import net.minidev.json.JSONArray;
 import org.apache.commons.lang3.StringUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -29,7 +24,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-public class ModulesSteps {
+public class ServerModulesSteps {
 
   private static final String MODULE_APPLICATION_TEMPLATE = """
   {
@@ -64,7 +59,7 @@ public class ModulesSteps {
 
   private final TestRestTemplate rest;
 
-  public ModulesSteps(TestRestTemplate rest) {
+  public ServerModulesSteps(TestRestTemplate rest) {
     this.rest = rest;
   }
 
@@ -90,55 +85,6 @@ public class ModulesSteps {
   @When("I get module {string} properties definition")
   public void getModulePropertiesDefinition(String moduleSlug) {
     rest.getForEntity(moduleUrl(moduleSlug), Void.class);
-  }
-
-  @When("I apply {string} module to default project with package json")
-  public void applyModuleForDefaultProjectWithPackageJson(String moduleSlug, Map<String, String> parameters) {
-    String projectFolder = newTestFolder();
-
-    post(applyModuleUrl("init"), buildModuleQuery(projectFolder, parameters));
-
-    post(applyModuleUrl(moduleSlug), buildModuleQuery(projectFolder, parameters));
-  }
-
-  @When("I apply {string} module to default project with package json without parameters")
-  public void applyModuleForDefaultProjectWithPackageJson(String moduleSlug) {
-    applyModuleForDefaultProjectWithPackageJson(moduleSlug, Map.of());
-  }
-
-  @When("I apply {string} module without parameters to last project")
-  public void applyModuleForLastProject(String moduleSlug) {
-    post(applyModuleUrl(moduleSlug), buildModuleQuery(lastProjectFolder(), Map.of()));
-  }
-
-  @When("I apply {string} module with parameters to last project")
-  public void applyModuleForLastProject(String moduleSlug, Map<String, String> parameters) {
-    post(applyModuleUrl(moduleSlug), buildModuleQuery(lastProjectFolder(), parameters));
-  }
-
-  @When("I apply {string} module to default project with maven file without parameters")
-  public void applyModuleForDefaultProjectWithMavenFileWithoutProperties(String moduleSlug) {
-    applyModuleForDefaultProjectWithMavenFile(moduleSlug, Map.of());
-  }
-
-  @When("I apply {string} module to default project with maven file")
-  public void applyModuleForDefaultProjectWithMavenFile(String moduleSlug, Map<String, String> parameters) {
-    String projectFolder = newTestFolder();
-
-    post(applyModuleUrl("init"), buildModuleQuery(projectFolder, parameters));
-    post(applyModuleUrl("maven-java"), buildModuleQuery(projectFolder, parameters));
-
-    post(applyModuleUrl(moduleSlug), buildModuleQuery(projectFolder, parameters));
-  }
-
-  @When("I apply {string} module to default project with gradle build")
-  public void applyModuleForDefaultProjectWithGradle(String moduleSlug, Map<String, String> parameters) {
-    String projectFolder = newTestFolder();
-
-    post(applyModuleUrl("init"), buildModuleQuery(projectFolder, parameters));
-    post(applyModuleUrl("gradle-java"), buildModuleQuery(projectFolder, parameters));
-
-    post(applyModuleUrl(moduleSlug), buildModuleQuery(projectFolder, parameters));
   }
 
   @When("I apply {string} module to default project without parameters")
@@ -242,58 +188,6 @@ public class ModulesSteps {
     return headers;
   }
 
-  @Then("I should have files in {string}")
-  public void shouldHaveFiles(String basePath, List<String> files) {
-    assertThatLastResponse().hasOkStatus();
-
-    SoftAssertions assertions = new SoftAssertions();
-
-    files
-      .stream()
-      .map(file -> Path.of(lastProjectFolder(), basePath, file))
-      .forEach(assertFileExist(assertions));
-
-    assertions.assertAll();
-  }
-
-  private Consumer<Path> assertFileExist(SoftAssertions assertions) {
-    return path -> assertions.assertThat(Files.exists(path)).as(fileNotFoundMessage(path)).isTrue();
-  }
-
-  private Supplier<String> fileNotFoundMessage(Path path) {
-    return () -> "Can't find file " + path + " in project folder, found " + projectFiles();
-  }
-
-  @Then("I should not have files in {string}")
-  public void shouldNotHaveFiles(String basePath, List<String> files) {
-    assertThatLastResponse().hasHttpStatusIn(200, 201);
-
-    SoftAssertions assertions = new SoftAssertions();
-
-    files
-      .stream()
-      .map(file -> Path.of(lastProjectFolder(), basePath, file))
-      .forEach(assertFileNotExist(assertions));
-
-    assertions.assertAll();
-  }
-
-  private Consumer<Path> assertFileNotExist(SoftAssertions assertions) {
-    return path -> assertions.assertThat(!Files.exists(path)).as(fileFoundMessage(path)).isTrue();
-  }
-
-  private Supplier<String> fileFoundMessage(Path path) {
-    return () -> "Can find file " + path + " in project folder, found " + projectFiles();
-  }
-
-  private String projectFiles() {
-    try (Stream<Path> files = Files.walk(Path.of(lastProjectFolder()))) {
-      return files.filter(Files::isRegularFile).map(Path::toString).collect(Collectors.joining(", "));
-    } catch (IOException _) {
-      return "unreadable folder";
-    }
-  }
-
   @Then("I should have properties definitions")
   public void shouldHaveModulePropertiesDefinitions(List<Map<String, Object>> propertiesDefinition) {
     assertThatLastResponse().hasOkStatus().hasElement("$.definitions").containingExactly(propertiesDefinition);
@@ -310,16 +204,6 @@ public class ModulesSteps {
 
       assertThat(types.getFirst()).isEqualTo(element.get("Type"));
     });
-  }
-
-  @Then("I should have {int} file in {string}")
-  @Then("I should have {int} files in {string}")
-  public void shouldHaveFilesCountInDirectory(int filesCount, String directory) throws IOException {
-    assertThatLastResponse().hasOkStatus();
-
-    try (Stream<Path> files = Files.list(Path.of(lastProjectFolder(), directory))) {
-      assertThat(files.count()).isEqualTo(filesCount);
-    }
   }
 
   @Then("I should have unknown slug {string} error message")

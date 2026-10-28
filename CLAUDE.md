@@ -118,7 +118,8 @@ my_context/
    - `@Configuration` class exposing a `Seed4JModuleResource` bean via the fluent builder.
    - Register the module slug in `Seed4JModuleSlug`.
 
-4. **Cucumber integration test** in `seed4j-server/src/test/features/my-module.feature`:
+4. **Cucumber integration test** in `seed4j-core-modules/src/test/features/my-module.feature` (steps provided by `seed4j-test`, package
+   `com.seed4j.test.cucumber`):
    - One scenario asserting that the module produces a key file (not a duplicate of the unit test).
 
 5. **Dependencies** for the generated project:
@@ -142,7 +143,8 @@ npm run dev:tikui --workspace seed4j-server          # Pattern library at http:/
 
 - `@UnitTest` — marks pure unit tests (no Spring context).
 - `@IntegrationTest` — marks tests that spin up a Spring context.
-- Cucumber tests live in `seed4j-server/src/test/features/` and run via `CucumberTest`.
+- Cucumber tests run via `CucumberTest`: the modules scenarios live in `seed4j-core-modules/src/test/features/` and apply the modules
+  with the engine, the server scenarios live in `seed4j-server/src/test/features/` and go through the REST API.
 
 ## Key Conventions
 

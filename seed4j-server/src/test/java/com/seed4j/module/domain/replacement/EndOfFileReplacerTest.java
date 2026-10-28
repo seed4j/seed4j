@@ -10,10 +10,11 @@ import org.junit.jupiter.api.Test;
 class EndOfFileReplacerTest {
 
   @Test
-  void shouldMatchMatchingRegex() {
+  void shouldAlwaysMatch() {
     EndOfFileReplacer replacer = new EndOfFileReplacer(always());
 
     assertThat(replacer.notMatchIn("content")).isFalse();
+    assertThat(replacer.notMatchIn("")).isFalse();
   }
 
   @Test

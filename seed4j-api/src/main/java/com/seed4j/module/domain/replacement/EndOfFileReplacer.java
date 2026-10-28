@@ -2,7 +2,6 @@ package com.seed4j.module.domain.replacement;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 
@@ -15,13 +14,12 @@ public record EndOfFileReplacer(ReplacementCondition condition) implements Eleme
 
   public EndOfFileReplacer {
     Assert.notNull("condition", condition);
-    Assert.notNull("pattern", EOF_PATTERN);
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage(reason = "Pattern always matches")
   public boolean notMatchIn(String content) {
-    return !EOF_PATTERN.matcher(content).find();
+    // any content, even empty, has an end
+    return false;
   }
 
   @Override

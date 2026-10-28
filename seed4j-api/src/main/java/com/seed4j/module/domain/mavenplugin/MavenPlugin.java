@@ -9,7 +9,6 @@ import com.seed4j.module.domain.javadependency.DependencyId;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.mavenplugin.MavenPluginExecution.MavenPluginExecutionOptionalBuilder;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -180,7 +179,6 @@ public final class MavenPlugin {
 
   @Override
   @SuppressWarnings("java:S1192")
-  @ExcludeFromGeneratedCodeCoverage
   public String toString() {
     ToStringBuilder builder = new ToStringBuilder(this, SHORT_PREFIX_STYLE)
       .append("dependencyId", dependencyId)

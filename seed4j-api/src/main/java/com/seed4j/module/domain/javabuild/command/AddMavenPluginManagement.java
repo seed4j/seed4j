@@ -6,7 +6,6 @@ import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Collection;
 import java.util.Optional;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -50,7 +49,6 @@ public final class AddMavenPluginManagement implements JavaBuildCommand, AddMave
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public String toString() {
     ToStringBuilder builder = new ToStringBuilder(this, SHORT_PREFIX_STYLE)
       .append("plugin", plugin)

@@ -1,7 +1,6 @@
 package com.seed4j.module.domain;
 
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -42,13 +41,11 @@ public abstract sealed class Seed4JSlug implements Comparable<Seed4JSlug> permit
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public final int hashCode() {
     return new HashCodeBuilder().append(slug).hashCode();
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public final boolean equals(Object obj) {
     if (this == obj) {
       return true;

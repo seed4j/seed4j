@@ -8,7 +8,6 @@ import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -94,13 +93,11 @@ public final class JavaAnnotationProcessor {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public int hashCode() {
     return new HashCodeBuilder().append(id).append(versionSlug).hashCode();
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public boolean equals(Object obj) {
     if (this == obj) {
       return true;

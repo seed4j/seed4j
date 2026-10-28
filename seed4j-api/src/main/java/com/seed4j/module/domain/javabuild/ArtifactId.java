@@ -1,7 +1,6 @@
 package com.seed4j.module.domain.javabuild;
 
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 public record ArtifactId(String artifactId) {
   public ArtifactId {
@@ -13,7 +12,6 @@ public record ArtifactId(String artifactId) {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public String toString() {
     return artifactId();
   }

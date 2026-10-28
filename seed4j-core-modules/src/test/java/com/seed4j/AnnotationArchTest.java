@@ -15,7 +15,7 @@ class AnnotationArchTest {
     .importPackages("com.seed4j");
 
   @Test
-  void shouldHaveUnitTestAnnotation() {
+  void shouldHaveUnitTestOrComponentTestAnnotation() {
     classes()
       .that()
       .haveSimpleNameEndingWith("Test")
@@ -25,6 +25,8 @@ class AnnotationArchTest {
       .areNotAnnotations()
       .should()
       .beMetaAnnotatedWith(UnitTest.class)
+      .orShould()
+      .beMetaAnnotatedWith(ComponentTest.class)
       .check(tests);
   }
 }

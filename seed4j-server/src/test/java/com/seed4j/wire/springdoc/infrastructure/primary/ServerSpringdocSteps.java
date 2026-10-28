@@ -7,7 +7,7 @@ import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 
-public class SpringdocSteps {
+public class ServerSpringdocSteps {
 
   @Autowired
   private TestRestTemplate rest;

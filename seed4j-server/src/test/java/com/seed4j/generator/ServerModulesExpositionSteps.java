@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 
-public class ModulesExpositionSteps {
+public class ServerModulesExpositionSteps {
 
   @Autowired
   private TestRestTemplate rest;

@@ -46,3 +46,9 @@ Feature: Modules
       | test-module-two   |
       | test-module-three |
       | test-module-four  |
+
+  Scenario: Should get module properties definition
+    When I get module "consul" properties definition
+    Then I should have properties definitions
+      | Key      | Type   | Mandatory |
+      | baseName | STRING | true      |

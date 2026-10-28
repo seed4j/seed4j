@@ -161,7 +161,6 @@
                 <include>com/seed4j/module/domain/landscape/Seed4JLandscapeFixture*.class</include>
                 <include>com/seed4j/module/domain/resource/Seed4JModulesResourceFixture*.class</include>
                 <include>com/seed4j/module/domain/resource/FakeSeed4JModuleSlugFactory*.class</include>
-                <include>com/seed4j/module/infrastructure/secondary/git/GitTestUtil*.class</include>
                 <include>com/seed4j/history/domain/ProjectHistoryFixture*.class</include>
               </includes>
             </configuration>

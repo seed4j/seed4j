@@ -18,11 +18,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 
-public class ProjectsSteps {
+public class ServerProjectsSteps {
 
   private final TestRestTemplate rest;
 
-  public ProjectsSteps(TestRestTemplate rest) {
+  public ServerProjectsSteps(TestRestTemplate rest) {
     this.rest = rest;
   }
 
@@ -40,11 +40,6 @@ public class ProjectsSteps {
     return headers;
   }
 
-  @When("I format the created project")
-  public void formatCreatedProject() {
-    rest.postForEntity("/api/format-project?path=" + lastProjectFolder(), null, Void.class);
-  }
-
   @When("I get the created project information")
   public void getCreatedProjectInformation() {
     rest.exchange("/api/projects?path=" + lastProjectFolder(), HttpMethod.GET, new HttpEntity<>(jsonHeaders()), Void.class);
@@ -59,6 +54,10 @@ public class ProjectsSteps {
     return headers;
   }
 
+  // Steps of the extensions scenarios through the REST API, kept for the existing extensions: use the steps of seed4j-test
+  // (com.seed4j.test.cucumber) instead.
+
+  @Deprecated(since = "2.3.0", forRemoval = true)
   @Then("I should have {string} in {string}")
   public void shouldHaveFileContent(String content, String file) throws IOException {
     assertThatLastResponse().hasHttpStatusIn(200, 201);
@@ -66,6 +65,7 @@ public class ProjectsSteps {
     assertThat(Files.readString(Path.of(lastProjectFolder(), file))).contains(content);
   }
 
+  @Deprecated(since = "2.3.0", forRemoval = true)
   @Then("I should not have {string} in {string}")
   public void shouldNotHaveFileContent(String content, String file) throws IOException {
     assertThatLastResponse().hasHttpStatusIn(200, 201);
@@ -73,9 +73,11 @@ public class ProjectsSteps {
     assertThat(Files.readString(Path.of(lastProjectFolder(), file))).doesNotContain(content);
   }
 
+  @Deprecated(since = "2.3.0", forRemoval = true)
   @Then("I should have entries in {string}")
   public void shouldHaveStringsInFile(String file, List<String> values) throws IOException {
     assertThatLastResponse().hasHttpStatusIn(200, 201);
+
     assertThat(Files.readString(Path.of(lastProjectFolder(), file))).contains(values);
   }
 

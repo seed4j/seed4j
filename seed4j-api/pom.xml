@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.seed4j</groupId>
+    <artifactId>seed4j-parent</artifactId>
+    <version>2.2.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>seed4j-api</artifactId>
+  <name>seed4j-api</name>
+  <description>seed4j API: what a module is made of</description>
+  <packaging>jar</packaging>
+
+  <properties>
+    <apache-commons-io.version>2.22.0</apache-commons-io.version>
+    <!-- covered by the aggregated report of seed4j-server, where all the tests run -->
+    <sonar.coverage.jacoco.xmlReportPaths>${seed4j.coverage-report}</sonar.coverage.jacoco.xmlReportPaths>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${apache-commons-io.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jspecify</groupId>
+      <artifactId>jspecify</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.uber.nullaway</groupId>
+      <artifactId>nullaway-annotations</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.gaul</groupId>
+        <artifactId>modernizer-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>

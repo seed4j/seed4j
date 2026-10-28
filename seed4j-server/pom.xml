@@ -73,6 +73,10 @@
   <dependencies>
     <dependency>
       <groupId>com.seed4j</groupId>
+      <artifactId>seed4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.seed4j</groupId>
       <artifactId>seed4j-engine</artifactId>
     </dependency>
     <dependency>
@@ -390,6 +394,14 @@
                     <fileset dir="${project.build.directory}" includes="jacoco.exec,jacoco-it.exec" />
                   </executiondata>
                   <structure name="seed4j">
+                    <group name="seed4j-api">
+                      <classfiles>
+                        <fileset dir="${project.basedir}/../seed4j-api/target/classes" />
+                      </classfiles>
+                      <sourcefiles>
+                        <fileset dir="${project.basedir}/../seed4j-api/src/main/java" />
+                      </sourcefiles>
+                    </group>
                     <group name="seed4j-engine">
                       <classfiles>
                         <fileset dir="${project.basedir}/../seed4j-engine/target/classes" />

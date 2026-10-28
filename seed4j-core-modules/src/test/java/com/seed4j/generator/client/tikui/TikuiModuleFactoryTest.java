@@ -43,7 +43,7 @@ class TikuiModuleFactoryTest {
     }
 
     private static ModuleFile prettierConfigFile() {
-      return file("../seed4j-core-modules/src/main/resources/generator/prettier/.prettierrc.mustache", ".prettierrc");
+      return file("src/main/resources/generator/prettier/.prettierrc.mustache", ".prettierrc");
     }
 
     private static String prettierConfig() {
@@ -100,14 +100,11 @@ class TikuiModuleFactoryTest {
     }
 
     public static ModuleFile viteConfigFile() {
-      return file("../seed4j-core-modules/src/main/resources/generator/client/vue/vite.config.ts.mustache", "vite.config.ts");
+      return file("src/main/resources/generator/client/vue/vite.config.ts.mustache", "vite.config.ts");
     }
 
     private static ModuleFile indexFile() {
-      return file(
-        "../seed4j-core-modules/src/main/resources/generator/client/vue/webapp/index.html.mustache",
-        "src/main/webapp/index.html"
-      );
+      return file("src/main/resources/generator/client/vue/webapp/index.html.mustache", "src/main/webapp/index.html");
     }
   }
 
@@ -137,14 +134,11 @@ class TikuiModuleFactoryTest {
     }
 
     public static ModuleFile viteConfigFile() {
-      return file("../seed4j-core-modules/src/main/resources/generator/client/react/core/vite.config.ts.mustache", "vite.config.ts");
+      return file("src/main/resources/generator/client/react/core/vite.config.ts.mustache", "vite.config.ts");
     }
 
     private static ModuleFile indexFile() {
-      return file(
-        "../seed4j-core-modules/src/main/resources/generator/client/react/core/src/main/webapp/index.html.mustache",
-        "src/main/webapp/index.html"
-      );
+      return file("src/main/resources/generator/client/react/core/src/main/webapp/index.html.mustache", "src/main/webapp/index.html");
     }
   }
 
@@ -157,14 +151,11 @@ class TikuiModuleFactoryTest {
     }
 
     public static ModuleFile proxyConfFile() {
-      return file("../seed4j-core-modules/src/main/resources/generator/client/angular/core/proxy.conf.json.mustache", "proxy.conf.json");
+      return file("src/main/resources/generator/client/angular/core/proxy.conf.json.mustache", "proxy.conf.json");
     }
 
     private static ModuleFile indexFile() {
-      return file(
-        "../seed4j-core-modules/src/main/resources/generator/client/angular/core/src/main/webapp/index.html.mustache",
-        "src/main/webapp/index.html"
-      );
+      return file("src/main/resources/generator/client/angular/core/src/main/webapp/index.html.mustache", "src/main/webapp/index.html");
     }
 
     private String styleProxy() {

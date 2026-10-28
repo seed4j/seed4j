@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.seed4j.growth</groupId>
+  <artifactId>myapp</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>myapp</name>
+  <description>My App</description>
+  <packaging>jar</packaging>
+
+  <!-- seed4j-needle-maven-parent -->
+
+  <repositories>
+    <!-- seed4j-needle-maven-repository -->
+  </repositories>
+
+  <pluginRepositories>
+    <!-- seed4j-needle-maven-plugin-repository -->
+  </pluginRepositories>
+
+  <properties>
+    <java.version>25</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <maven.version>3.6.3</maven.version>
+    <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
+
+    <junit-jupiter.version>5.8.2</junit-jupiter.version>
+    <assertj.version>3.27.7</assertj.version>
+    <mockito.version>4.2.0</mockito.version>
+    <compiler-plugin.version>3.8.1</compiler-plugin.version>
+    <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+    <!-- seed4j-needle-maven-property -->
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- seed4j-needle-maven-add-dependency-management -->
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- seed4j-needle-maven-add-dependency -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit-jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>${junit-jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-inline</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- seed4j-needle-maven-add-dependency-test -->
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>config/*.properties</include>
+          <include>config/*.yml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+        <excludes>
+          <exclude>config/*.properties</exclude>
+          <exclude>config/*.yml</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${compiler-plugin.version}</version>
+        <configuration>
+          <release>${java.version}</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire-plugin.version}</version>
+        <configuration>
+          <!-- Force alphabetical order to have a reproducible build -->
+          <runOrder>alphabetical</runOrder>
+          <excludes>
+            <exclude>**/*IT*</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${surefire-plugin.version}</version>
+        <configuration>
+          <!-- Due to spring-boot repackage, without adding this property test classes are not found
+               See https://github.com/spring-projects/spring-boot/issues/6254 -->
+          <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+          <!-- Force alphabetical order to have a reproducible build -->
+          <runOrder>alphabetical</runOrder>
+          <includes>
+            <include>**/*IT*</include>
+          </includes>
+        </configuration>
+        <executions>
+          <execution>
+            <id>integration-test</id>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>verify</id>
+            <goals>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- seed4j-needle-maven-add-plugin -->
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven-enforcer-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>enforce-versions</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>enforce-dependencyConvergence</id>
+              <configuration>
+                <rules>
+                  <DependencyConvergence />
+                </rules>
+                <fail>false</fail>
+              </configuration>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <rules>
+              <requireMavenVersion>
+                <message>You are running an older version of Maven. Seed4J requires at least Maven ${maven.version}</message>
+                <version>[${maven.version},)</version>
+              </requireMavenVersion>
+              <requireJavaVersion>
+                <message>You are running an incompatible version of Java. Seed4J engine supports JDK 25+.</message>
+                <version>[${java.version},)</version>
+              </requireJavaVersion>
+            </rules>
+          </configuration>
+        </plugin>
+        <!-- seed4j-needle-maven-add-plugin-management -->
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

@@ -41,6 +41,16 @@
       <version>${auto-service.version}</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.seed4j</groupId>
+      <artifactId>seed4j-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -60,6 +70,10 @@
       </resource>
     </resources>
     <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
       <plugin>
         <groupId>org.gaul</groupId>
         <artifactId>modernizer-maven-plugin</artifactId>

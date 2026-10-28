@@ -17,6 +17,10 @@
   <description>seed4j test tools: apply a module and assert the generated project</description>
   <packaging>jar</packaging>
 
+  <properties>
+    <approvaltests.version>31.0.0</approvaltests.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.seed4j</groupId>
@@ -33,6 +37,7 @@
     <dependency>
       <groupId>com.approvaltests</groupId>
       <artifactId>approvaltests</artifactId>
+      <version>${approvaltests.version}</version>
     </dependency>
   </dependencies>
 

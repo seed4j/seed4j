@@ -17,16 +17,11 @@ import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 @UnitTest
-@ExtendWith(MockitoExtension.class)
 class CypressMergeCoverageModuleFactoryTest {
 
-  @InjectMocks
-  private CypressMergeCoverageModuleFactory factory;
+  private final CypressMergeCoverageModuleFactory factory = new CypressMergeCoverageModuleFactory();
 
   @Test
   void shouldBuildCypressMergeCoverageModule() {

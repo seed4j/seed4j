@@ -166,9 +166,6 @@ class JQAssistantModuleFactoryTest {
   }
 
   private Seed4JModulesAssertions.ModuleFile jQAssistantYmlFile() {
-    return file(
-      "../seed4j-core-modules/src/main/resources/generator/server/documentation/jqassistant/.jqassistant.yml",
-      ".jqassistant.yml"
-    );
+    return file("src/main/resources/generator/server/documentation/jqassistant/.jqassistant.yml", ".jqassistant.yml");
   }
 }

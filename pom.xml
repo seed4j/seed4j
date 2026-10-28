@@ -72,6 +72,8 @@
     <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
     <archunit.version>1.5.1</archunit.version>
     <cucumber.version>8.0.4</cucumber.version>
+    <sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
+    <properties-maven-plugin.version>1.3.1</properties-maven-plugin.version>
     <jspecify.version>1.0.1</jspecify.version>
     <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
@@ -167,6 +169,11 @@
     <defaultGoal>spring-boot:run</defaultGoal>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>${sonar-maven-plugin.version}</version>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -323,6 +330,25 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+        <version>${properties-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>read-global-sonar-properties</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>read-project-properties</goal>
+            </goals>
+            <configuration>
+              <files>
+                <file>${maven.multiModuleProjectDirectory}/sonar-project.properties</file>
+              </files>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>

@@ -17,6 +17,12 @@
   <description>seed4j test tools: apply a module and assert the generated project</description>
   <packaging>jar</packaging>
 
+  <properties>
+    <!-- test tools: analyzed as test code, without coverage -->
+    <sonar.sources>pom.xml</sonar.sources>
+    <sonar.tests>src/main/java</sonar.tests>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.seed4j</groupId>

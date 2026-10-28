@@ -17,8 +17,12 @@ Maven reactor (`pom.xml` at the root is `seed4j-parent`) and npm workspaces (roo
 - `seed4j-test/`: test tools for modules (`assertThatModule`, `propertiesBuilder`, `FakeSeed4JModuleServices`), the test
   dependency of the official modules and the extensions.
 - `seed4j-core-modules/`: the official modules (`com.seed4j.generator`, slugs) and their templates and dependency versions.
-- `seed4j-server/`: the Seed4J application (REST API, Vue frontend, projects, statistics), published as `com.seed4j:seed4j`. All the tests,
-  including the ones of the engine and the official modules, run here for now, with an aggregated coverage check.
+- `seed4j-server/`: the Seed4J application (REST API, Vue frontend, projects, statistics), published as `com.seed4j:seed4j`.
+
+Each module runs its own tests: the api is tested by the engine tests, which are autonomous (frozen copies of the official
+templates and catalogs they need, in `seed4j-engine/src/test/resources`). The coverage is global: `seed4j-server` checks 100%
+coverage of all the modules (except `seed4j-test`) with the execution data of every module.
+
 - Root: global tooling shared by all modules (Prettier, lint-staged/husky, Checkstyle, Renovate).
 
 Commands below are run from the root.

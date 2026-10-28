@@ -25,7 +25,7 @@
   <dependencies>
     <dependency>
       <groupId>com.seed4j</groupId>
-      <artifactId>seed4j-engine</artifactId>
+      <artifactId>seed4j-api</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>

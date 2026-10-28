@@ -47,6 +47,7 @@
   </scm>
 
   <modules>
+    <module>seed4j-api</module>
     <module>seed4j-engine</module>
     <module>seed4j-core-modules</module>
     <module>seed4j-server</module>
@@ -99,6 +100,11 @@
         <groupId>com.uber.nullaway</groupId>
         <artifactId>nullaway-annotations</artifactId>
         <version>${nullaway.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.seed4j</groupId>
+        <artifactId>seed4j-api</artifactId>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>com.seed4j</groupId>

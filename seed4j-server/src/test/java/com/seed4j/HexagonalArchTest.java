@@ -2,7 +2,6 @@ package com.seed4j;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
-import static java.util.function.Predicate.not;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
@@ -26,17 +25,20 @@ import org.springframework.stereotype.Controller;
 class HexagonalArchTest {
 
   private static final String ROOT_PACKAGE = "com.seed4j";
-  private static final String GENERATION_SHARED_KERNEL_PACKAGES = ROOT_PACKAGE.concat(".shared.generation..");
   private static final String WIRE_PACKAGES = ROOT_PACKAGE.concat(".wire..");
 
-  // all the tests run in this module, for the classes of all the modules
-  private static final List<Path> SOURCE_ROOTS = Stream.of(".", "../seed4j-engine", "../seed4j-core-modules")
-    .map(module -> Path.of(module, "src", "main", "java"))
-    .toList();
+  // only the engine and the server are made of business contexts and shared kernels
+  private static final List<Path> CONTEXTS_MODULES = Stream.of(".", "../seed4j-engine").map(Path::of).toList();
 
   private static final JavaClasses classes = new ClassFileImporter()
     .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
     .importPackages(ROOT_PACKAGE);
+
+  private static final JavaClasses contextsModulesClasses = new ClassFileImporter().importPaths(
+    CONTEXTS_MODULES.stream()
+      .map(module -> module.resolve("target").resolve("classes"))
+      .toList()
+  );
 
   private static final Collection<String> businessContexts = packagesWithAnnotation(BusinessContext.class);
   private static final Collection<String> businessContextsPackages = buildPackagesPatterns(businessContexts);
@@ -62,7 +64,8 @@ class HexagonalArchTest {
   }
 
   private static Collection<String> packagesWithAnnotation(Class<? extends Annotation> annotationClass) throws AssertionError {
-    return SOURCE_ROOTS.stream()
+    return CONTEXTS_MODULES.stream()
+      .map(module -> module.resolve("src").resolve("main").resolve("java"))
       .flatMap(HexagonalArchTest::packageInfos)
       .map(toPackage())
       .filter(pack -> pack.getAnnotation(annotationClass) != null)
@@ -267,7 +270,7 @@ class HexagonalArchTest {
         .should()
         .beMetaAnnotatedWith(SharedKernel.class)
         .because(ROOT_PACKAGE + ".shared package should only contain shared kernels")
-        .check(classes);
+        .check(contextsModulesClasses);
     }
   }
 
@@ -301,7 +304,6 @@ class HexagonalArchTest {
     private static String[] businessContextsOrSharedKernelsPackages() {
       return Stream.of(businessContextsPackages, sharedKernelsPackages)
         .flatMap(Collection::stream)
-        .filter(not(GENERATION_SHARED_KERNEL_PACKAGES::equals))
         .toArray(String[]::new);
     }
 

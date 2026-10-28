@@ -10,6 +10,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Maven reactor (`pom.xml` at the root is `seed4j-parent`) and npm workspaces (root `package.json`):
 
+- `seed4j-api/`: what a module is made of (`Seed4JModule` and its building blocks, error and collection utilities), the
+  only dependency of the official modules and the extensions. Plain Java, without Spring.
 - `seed4j-engine/`: the engine applying modules to projects (`com.seed4j.module` without its REST adapters), the history of the
   generated projects (`com.seed4j.history`) and the engine shared kernels.
 - `seed4j-core-modules/`: the official modules (`com.seed4j.generator`, slugs) and their templates and dependency versions.

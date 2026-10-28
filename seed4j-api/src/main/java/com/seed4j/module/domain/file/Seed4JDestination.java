@@ -2,7 +2,6 @@ package com.seed4j.module.domain.file;
 
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.nio.file.Path;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -66,13 +65,11 @@ public final class Seed4JDestination {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public int hashCode() {
     return new HashCodeBuilder().append(destination).toHashCode();
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public boolean equals(Object obj) {
     if (this == obj) {
       return true;

@@ -1,7 +1,6 @@
 package com.seed4j.module.domain.nodejs;
 
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.stream.Stream;
 
 public enum NodePackageManager {
@@ -49,7 +48,6 @@ public enum NodePackageManager {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public String toString() {
     return command();
   }

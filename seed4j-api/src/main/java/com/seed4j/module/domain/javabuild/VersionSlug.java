@@ -1,7 +1,6 @@
 package com.seed4j.module.domain.javabuild;
 
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.jspecify.annotations.Nullable;
@@ -55,7 +54,6 @@ public record VersionSlug(String slug) {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public String toString() {
     return slug();
   }

@@ -12,6 +12,7 @@ import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javabuild.command.RemoveJavaAnnotationProcessor;
 import com.seed4j.module.domain.javabuild.command.SetVersion;
 import java.util.List;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -147,5 +148,10 @@ class JavaAnnotationProcessorTest {
     private JavaBuildCommands build() {
       return dependency.changeCommands(currentVersions, projectDependencies);
     }
+  }
+
+  @Test
+  void shouldRespectEqualsContract() {
+    EqualsVerifier.forClass(JavaAnnotationProcessor.class).verify();
   }
 }

@@ -1,0 +1,55 @@
+package com.seed4j.generator.server.springboot.mvc.sample.liquibase;
+
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.to;
+
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
+import com.seed4j.shared.error.domain.Assert;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+
+class SampleLiquibaseModuleFactory {
+
+  private static final DateTimeFormatter FILE_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC);
+
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/sample/liquibase");
+  private static final Seed4JDestination CHANGELOG_DESTINATION = to("src/main/resources/config/liquibase/changelog");
+
+  private static final TextNeedleBeforeReplacer CHANGELOG_NEEDLE = lineBeforeText("<!-- seed4j-needle-liquibase-add-changelog -->");
+
+  Seed4JModule buildModule(Seed4JModuleProperties properties) {
+    Assert.notNull("properties", properties);
+
+    Instant date = properties.getInstantOrDefault("date", Instant.now());
+    String changelogFilename = changelogFilename(date);
+
+    // @formatter:off
+    return moduleBuilder(properties)
+      .files()
+        .add(SOURCE.file("00000000000_sample_feature_schema.xml"), CHANGELOG_DESTINATION.append(changelogFilename))
+        .and()
+      .mandatoryReplacements()
+        .in(path("src/main/resources/config/liquibase/master.xml"))
+          .add(CHANGELOG_NEEDLE, changelogLine(changelogFilename))
+          .and()
+        .and()
+      .build();
+    // @formatter:on
+  }
+
+  private String changelogFilename(Instant date) {
+    return FILE_DATE_FORMAT.format(date) + "_sample_feature_schema.xml";
+  }
+
+  private String changelogLine(String changelogFilename) {
+    return "<include file=\"config/liquibase/changelog/%s\" relativeToChangelogFile=\"false\"/>".formatted(changelogFilename);
+  }
+}

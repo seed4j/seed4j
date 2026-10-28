@@ -1,0 +1,25 @@
+package com.seed4j.generator.typescript.optional;
+
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.to;
+
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.shared.error.domain.Assert;
+
+class OptionalTypescriptModuleFactory {
+
+  Seed4JModule buildModule(Seed4JModuleProperties properties) {
+    Assert.notNull("properties", properties);
+
+    // @formatter:off
+    return moduleBuilder(properties)
+      .files()
+        .add(from("typescript/webapp/common/domain/optional/").file("Optional.ts"), to("src/main/webapp/app/common/domain/Optional.ts"))
+        .add(from("typescript/test/webapp/unit/common/domain/optional/").file("Optional.spec.ts"), to("src/test/webapp/unit/common/domain/Optional.spec.ts"))
+      .and()
+      .build();
+    // @formatter:on
+  }
+}

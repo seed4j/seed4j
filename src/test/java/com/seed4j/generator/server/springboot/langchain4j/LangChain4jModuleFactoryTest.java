@@ -1,0 +1,73 @@
+package com.seed4j.generator.server.springboot.langchain4j;
+
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.pomFile;
+
+import com.seed4j.TestFileUtils;
+import com.seed4j.UnitTest;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import org.junit.jupiter.api.Test;
+
+@UnitTest
+class LangChain4jModuleFactoryTest {
+
+  private static final LangChain4jModuleFactory factory = new LangChain4jModuleFactory();
+
+  @Test
+  void shouldBuildModule() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .projectBaseName("myApp")
+      .build();
+
+    Seed4JModule module = factory.buildModule(properties);
+
+    assertThatModuleWithFiles(module, pomFile())
+      .hasFiles("documentation/langchain4j.md")
+      .hasFile("pom.xml")
+      .containing("<langchain4j.version>")
+      .containing(
+        """
+            <dependency>
+              <groupId>dev.langchain4j</groupId>
+              <artifactId>langchain4j-spring-boot4-starter</artifactId>
+              <version>${langchain4j.version}</version>
+            </dependency>
+        """
+      )
+      .containing(
+        """
+            <dependency>
+              <groupId>dev.langchain4j</groupId>
+              <artifactId>langchain4j-open-ai-spring-boot4-starter</artifactId>
+              <version>${langchain4j.version}</version>
+            </dependency>
+        """
+      )
+      .and()
+      .hasFile("src/main/resources/config/application.yml")
+      .containing(
+        """
+        langchain4j:
+          open-ai:
+            chat-model:
+              # You can temporarily use 'demo' key, which is provided for free for demonstration purposes
+              api-key: demo
+              log-requests: 'true'
+              log-responses: 'true'
+              model-name: gpt-4o-mini
+        """
+      )
+      .and()
+      .hasFile("src/test/resources/config/application-test.yml")
+      .containing(
+        """
+        langchain4j:
+          open-ai:
+            chat-model:
+              api-key: seed4j
+        """
+      );
+  }
+}

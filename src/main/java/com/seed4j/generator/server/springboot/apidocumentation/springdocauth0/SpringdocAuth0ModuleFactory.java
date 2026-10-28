@@ -1,0 +1,44 @@
+package com.seed4j.generator.server.springboot.apidocumentation.springdocauth0;
+
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.javaproperties.ApplicationPropertiesFile;
+import com.seed4j.module.domain.javaproperties.PropertyValue;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.shared.error.domain.Assert;
+
+class SpringdocAuth0ModuleFactory {
+
+  private static final ApplicationPropertiesFile AUTH0_PROPERTIES = SPRING_MAIN.profile("auth0");
+
+  private static final String AUTH0_CLIENT_ID_PROPERTY = "auth0ClientId";
+  private static final String AUTH0_DOMAIN_PROPERTY = "auth0Domain";
+
+  Seed4JModule buildModule(Seed4JModuleProperties properties) {
+    Assert.notNull("properties", properties);
+
+    // @formatter:off
+    return moduleBuilder(properties)
+      .applicationProperties(AUTH0_PROPERTIES)
+        .set(propertyKey("springdoc.swagger-ui.oauth.client-id"), clientId(properties))
+        .set(propertyKey("springdoc.swagger-ui.oauth.realm"), propertyValue("seed4j"))
+        .set(propertyKey("springdoc.swagger-ui.oauth.scopes"), propertyValue("openid","profile","email"))
+        .set(propertyKey("springdoc.oauth2.authorization-url"), authorizationUrl(properties))
+        .and()
+      .build();
+    // @formatter:on
+  }
+
+  private static PropertyValue clientId(Seed4JModuleProperties properties) {
+    return propertyValue(properties.getString(AUTH0_CLIENT_ID_PROPERTY));
+  }
+
+  private static PropertyValue authorizationUrl(Seed4JModuleProperties properties) {
+    String auth0Domain = properties.getString(AUTH0_DOMAIN_PROPERTY);
+    return propertyValue("https://%s/authorize?audience=https://%s/api/v2/".formatted(auth0Domain, auth0Domain));
+  }
+}

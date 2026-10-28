@@ -1,0 +1,144 @@
+package com.seed4j.generator.client.angular.core;
+
+import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.lintStagedConfigFileWithPrettier;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeDependency;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeScript;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.packageJsonFile;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.seed4j.TestFileUtils;
+import com.seed4j.UnitTest;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.resource.FakeSeed4JModuleServices;
+import com.seed4j.module.domain.resource.FakeSeed4JModuleServices.FakeNodeLazyPackagesInstaller.Installation;
+import org.junit.jupiter.api.Test;
+
+@UnitTest
+class AngularModuleFactoryTest {
+
+  private final FakeSeed4JModuleServices seed4JModuleServices = new FakeSeed4JModuleServices();
+  private final AngularModuleFactory factory = new AngularModuleFactory(seed4JModuleServices);
+
+  @Test
+  void shouldBuildModule() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .projectBaseName("growth")
+      .build();
+
+    Seed4JModule module = factory.buildModule(properties);
+
+    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
+      .hasFile("package.json")
+      .containing(nodeDependency("tslib"))
+      .containing(nodeDependency("rxjs"))
+      .containing(nodeDependency("@angular/router"))
+      .containing(nodeDependency("@angular/platform-browser-dynamic"))
+      .containing(nodeDependency("@angular/platform-browser"))
+      .containing(nodeDependency("@angular/forms"))
+      .containing(nodeDependency("@angular/material"))
+      .containing(nodeDependency("@angular/core"))
+      .containing(nodeDependency("@angular/compiler"))
+      .containing(nodeDependency("@angular/common"))
+      .containing(nodeDependency("@angular/cdk"))
+      .containing(nodeDependency("@angular/animations"))
+      .containing(nodeDependency("@angular/build"))
+      .containing(nodeDependency("@typescript-eslint/eslint-plugin"))
+      .containing(nodeDependency("@typescript-eslint/parser"))
+      .containing(nodeDependency("angular-eslint"))
+      .containing(nodeDependency("@eslint/js"))
+      .containing(nodeDependency("eslint"))
+      .containing(nodeDependency("globals"))
+      .containing(nodeDependency("typescript-eslint"))
+      .containing(nodeDependency("npm-run-all2"))
+      .containing(nodeScript("dev", "npm-run-all --parallel dev:*"))
+      .containing(nodeScript("dev:ng", "ng serve"))
+      .containing(nodeScript("ng", "ng"))
+      .containing(nodeScript("watch", "npm-run-all --parallel watch:*"))
+      .containing(nodeScript("watch:ng", "ng build --watch --configuration development"))
+      .containing(nodeScript("start", "ng serve"))
+      .containing(nodeScript("build", "npm-run-all build:*"))
+      .containing(nodeScript("build:ng", "ng build"))
+      .containing(nodeScript("test", "npm run watch:test"))
+      .containing(nodeScript("watch:test", "ng test --watch"))
+      .containing(nodeScript("test:coverage", "ng test --coverage"))
+      .containing(nodeScript("lint", "eslint ."))
+      .and()
+      .hasFile(".gitignore")
+      .containing(".angular/")
+      .containing(".nx/")
+      .and()
+      .hasFile(".lintstagedrc.cjs")
+      .containing(
+        """
+        module.exports = {
+          '{src/**/,}*.ts': ['eslint --fix', 'prettier --write'],
+          '*.{md,json,yml,html,css,scss,java,xml,feature}': ['prettier --write'],
+        };
+        """
+      )
+      .and()
+      .hasFile("src/main/webapp/app/app.ts")
+      .containing("this.appName.set('growth')")
+      .and()
+      .hasPrefixedFiles(
+        "",
+        "vitest.config.ts",
+        "angular.json",
+        "tsconfig.json",
+        "tsconfig.app.json",
+        "tsconfig.spec.json",
+        "proxy.conf.json",
+        "eslint.config.mjs"
+      )
+      .hasPrefixedFiles("src/main/webapp/app", "app.css", "app.ts", "app.html", "app.spec.ts", "app.route.spec.ts", "app.route.ts")
+      .hasPrefixedFiles("src/main/webapp/content/images", "seed4j_logo-name.png", "AngularLogo.svg")
+      .hasPrefixedFiles("src/main/webapp/environments", "environment.ts", "environment.local.ts", "environment.local.spec.ts")
+      .hasPrefixedFiles("src/main/webapp", "index.html", "main.ts", "styles.css");
+    assertThat(seed4JModuleServices.nodeLazyPackagesInstaller().installations()).containsExactly(
+      new Installation(properties.projectFolder(), properties.nodePackageManager())
+    );
+  }
+
+  @Test
+  void shouldBuildModuleWithPnpm() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .nodePackageManager(PNPM)
+      .build();
+
+    Seed4JModule module = factory.buildModule(properties);
+
+    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
+      .hasFile("package.json")
+      .containing(nodeScript("test", "pnpm run watch:test"));
+  }
+
+  @Test
+  void shouldProxyBeUpdatedWhenServerPortPropertyNotDefault() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .projectBaseName("growth")
+      .put("serverPort", 8081)
+      .build();
+
+    Seed4JModule module = factory.buildModule(properties);
+    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
+      .hasFile("proxy.conf.json")
+      .containing("\"target\": \"http://localhost:8081\"")
+      .notContaining("\"target\": \"http://localhost:8080\"");
+  }
+
+  @Test
+  void shouldProxyBeDefaultWhenServerPortPropertyMissing() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .projectBaseName("growth")
+      .build();
+
+    Seed4JModule module = factory.buildModule(properties);
+    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
+      .hasFile("proxy.conf.json")
+      .containing("\"target\": \"http://localhost:8080\"");
+  }
+}

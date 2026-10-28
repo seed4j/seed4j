@@ -1,0 +1,66 @@
+package com.seed4j.generator.server.springboot.mvc.sample.cassandrapersistence;
+
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.path;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainResources;
+import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
+
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.shared.error.domain.Assert;
+
+class SampleCassandraPersistenceModuleFactory {
+
+  private static final Seed4JSource SOURCE = from("server/springboot/mvc/sample/cassandrapersistence");
+  private static final String SECONDARY = "infrastructure/secondary";
+  private static final String SECONDARY_DESTINATION = "sample/" + SECONDARY;
+
+  Seed4JModule buildModule(Seed4JModuleProperties properties) {
+    Assert.notNull("properties", properties);
+
+    String packagePath = properties.packagePath();
+    String packageName = properties.projectBaseName().get();
+
+    // @formatter:off
+    return moduleBuilder(properties)
+      .files()
+        .batch(SOURCE.append("main").append(SECONDARY), toSrcMainJava().append(packagePath).append(SECONDARY_DESTINATION))
+          .addTemplate("BeerCatalogTable.java")
+          .addTemplate("BeerTable.java")
+          .addTemplate("CassandraBeerCatalogRepository.java")
+          .addTemplate("CassandraBeerRepository.java")
+          .addTemplate("SpringDataBeersRepository.java")
+          .and()
+        .batch(SOURCE.append("test").append(SECONDARY), toSrcTestJava().append(packagePath).append(SECONDARY_DESTINATION))
+          .addTemplate("BeerCatalogTableTest.java")
+          .addTemplate("BeerTableTest.java")
+          .addTemplate("CassandraBeerCatalogRepositoryIT.java")
+          .addTemplate("CassandraBeerRepositoryIT.java")
+          .addTemplate("CassandraBeersResetter.java")
+          .addTemplate("SpringDataRepositoryIT.java")
+          .and()
+        .batch(SOURCE.append("cql"), toSrcMainResourcesCql().append("changelog"))
+          .addTemplate("00000000000000_create-keyspace.cql")
+          .addTemplate("00000000000001_create-tables.cql")
+          .and()
+        .delete(path("src/main/java").append(packagePath).append(SECONDARY_DESTINATION).append("InMemoryBeersRepository.java"))
+        .delete(path("src/test/java").append(packagePath).append(SECONDARY_DESTINATION).append("InMemoryBeersResetter.java"))
+        .and()
+      .applicationProperties(SPRING_MAIN)
+        .set(propertyKey("spring.cassandra.keyspace-name"), propertyValue(packageName))
+        .and()
+      .build();
+    // @formatter:on
+  }
+
+  private Seed4JDestination toSrcMainResourcesCql() {
+    return toSrcMainResources().append("config").append("cql");
+  }
+}

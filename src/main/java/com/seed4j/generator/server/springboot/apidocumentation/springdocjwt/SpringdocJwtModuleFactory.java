@@ -1,0 +1,33 @@
+package com.seed4j.generator.server.springboot.apidocumentation.springdocjwt;
+
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.shared.error.domain.Assert;
+
+class SpringdocJwtModuleFactory {
+
+  private static final Seed4JSource SOURCE = from("server/springboot/apidocumentation/springdocjwt");
+
+  Seed4JModule buildModule(Seed4JModuleProperties properties) {
+    Assert.notNull("properties", properties);
+
+    // @formatter:off
+    return moduleBuilder(properties)
+      .files()
+        .add(
+          SOURCE.template("SpringdocJWTConfiguration.java"),
+          toSrcMainJava()
+            .append(properties.packagePath())
+            .append("wire/springdoc/infrastructure/primary")
+            .append("SpringdocJWTConfiguration.java")
+        )
+        .and()
+      .build();
+    // @formatter:on
+  }
+}

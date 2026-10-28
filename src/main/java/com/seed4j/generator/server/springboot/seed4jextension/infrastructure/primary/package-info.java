@@ -1,2 +1,0 @@
-@org.jspecify.annotations.NullMarked
-package com.seed4j.generator.server.springboot.seed4jextension.infrastructure.primary;

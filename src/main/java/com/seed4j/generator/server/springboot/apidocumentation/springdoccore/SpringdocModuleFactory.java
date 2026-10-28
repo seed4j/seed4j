@@ -1,0 +1,106 @@
+package com.seed4j.generator.server.springboot.apidocumentation.springdoccore;
+
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springMainLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootLoggers.springTestLogger;
+import static com.seed4j.generator.server.springboot.common.domain.SpringBootProperties.SPRING_MAIN;
+import static com.seed4j.module.domain.Seed4JModule.from;
+import static com.seed4j.module.domain.Seed4JModule.localEnvironment;
+import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
+import static com.seed4j.module.domain.Seed4JModule.propertyKey;
+import static com.seed4j.module.domain.Seed4JModule.propertyValue;
+import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
+
+import com.seed4j.module.domain.LogLevel;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
+import com.seed4j.module.domain.file.Seed4JSource;
+import com.seed4j.module.domain.javadependency.JavaDependency;
+import com.seed4j.module.domain.javaproperties.PropertyValue;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.shared.error.domain.Assert;
+
+class SpringdocModuleFactory {
+
+  private static final Seed4JSource SOURCE = from("server/springboot/apidocumentation/springdoccore");
+  private static final String DESTINATION = "wire/springdoc/infrastructure/primary";
+
+  private static final PropertyValue ALPHA = propertyValue("alpha");
+  private static final PropertyValue TRUE = propertyValue(true);
+
+  private static final String SPRINGDOC_CONFIG_JAVA_FILE = "SpringdocConfiguration.java";
+
+  Seed4JModule buildModuleForMvc(Seed4JModuleProperties moduleProperties) {
+    return buildModule(moduleProperties, SpringdocDependencies.MVC);
+  }
+
+  Seed4JModule buildModuleForWebflux(Seed4JModuleProperties moduleProperties) {
+    return buildModule(moduleProperties, SpringdocDependencies.WEBFLUX);
+  }
+
+  private Seed4JModule buildModule(Seed4JModuleProperties properties, SpringdocDependencies dependencies) {
+    Assert.notNull("properties", properties);
+
+    Seed4JDestination mainDestination = toSrcMainJava().append(properties.packagePath()).append(DESTINATION);
+
+    // @formatter:off
+    return moduleBuilder(properties)
+      .localEnvironment(localEnvironment("- [Local API doc](http://localhost:" + properties.serverPort().get() + "/swagger-ui.html)"))
+      .context()
+        .put("baseNameLowercase", properties.projectBaseName().uncapitalized())
+        .put("apiTitle", "Project API")
+        .put("apiDescription", "Project description API")
+        .put("apiLicenseName", "No license")
+        .put("apiExternalDocDescription", "Project Documentation")
+        .and()
+      .javaDependencies()
+        .addDependency(dependencies.ui())
+        .addDependency(dependencies.api())
+        .and()
+      .files()
+        .add(SOURCE.template(SPRINGDOC_CONFIG_JAVA_FILE), mainDestination.append(SPRINGDOC_CONFIG_JAVA_FILE))
+        .nullMarkedJavaPackage(mainDestination)
+        .and()
+      .applicationProperties(SPRING_MAIN)
+        .set(propertyKey("springdoc.swagger-ui.operationsSorter"), ALPHA)
+        .set(propertyKey("springdoc.swagger-ui.tagsSorter"), ALPHA)
+        .set(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), TRUE)
+        .set(propertyKey("springdoc.enable-native-support"), TRUE)
+        .and()
+      .with(springMainLogger("io.swagger.v3.core.converter.ModelConverterContextImpl", LogLevel.WARN))
+      .with(springTestLogger("io.swagger.v3.core.converter.ModelConverterContextImpl", LogLevel.WARN))
+      .build();
+    // @formatter:on
+  }
+
+  private record SpringdocDependencies(JavaDependency ui, JavaDependency api) {
+    private static final String SPRINGDOC_GROUP_ID = "org.springdoc";
+    private static final String SPRINGDOC_OPENAPI_VERSION_KEY = "springdoc-openapi";
+
+    private static final JavaDependency MVC_UI_DEPENDENCY = JavaDependency.builder()
+      .groupId(SPRINGDOC_GROUP_ID)
+      .artifactId("springdoc-openapi-starter-webmvc-ui")
+      .versionSlug(SPRINGDOC_OPENAPI_VERSION_KEY)
+      .build();
+
+    private static final JavaDependency MVC_API_DEPENDENCY = JavaDependency.builder()
+      .groupId(SPRINGDOC_GROUP_ID)
+      .artifactId("springdoc-openapi-starter-webmvc-api")
+      .versionSlug(SPRINGDOC_OPENAPI_VERSION_KEY)
+      .build();
+
+    private static final JavaDependency WEBFLUX_UI_DEPENDENCY = JavaDependency.builder()
+      .groupId(SPRINGDOC_GROUP_ID)
+      .artifactId("springdoc-openapi-starter-webflux-ui")
+      .versionSlug(SPRINGDOC_OPENAPI_VERSION_KEY)
+      .build();
+
+    private static final JavaDependency WEBFLUX_API_DEPENDENCY = JavaDependency.builder()
+      .groupId(SPRINGDOC_GROUP_ID)
+      .artifactId("springdoc-openapi-starter-webflux-api")
+      .versionSlug(SPRINGDOC_OPENAPI_VERSION_KEY)
+      .build();
+
+    private static final SpringdocDependencies MVC = new SpringdocDependencies(MVC_UI_DEPENDENCY, MVC_API_DEPENDENCY);
+    private static final SpringdocDependencies WEBFLUX = new SpringdocDependencies(WEBFLUX_UI_DEPENDENCY, WEBFLUX_API_DEPENDENCY);
+  }
+}

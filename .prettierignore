@@ -6,5 +6,5 @@ Dockerfile
 mvnw
 gradlew
 .husky/_/
-src/test/resources/**/*.approved.txt
+**/src/test/resources/**/*.approved.txt
 *.properties

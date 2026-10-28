@@ -1,0 +1,46 @@
+package com.seed4j.generator.client.vue.pinia;
+
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
+
+import com.seed4j.TestFileUtils;
+import com.seed4j.UnitTest;
+import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import org.junit.jupiter.api.Test;
+
+@UnitTest
+class VuePiniaModuleFactoryTest {
+
+  private final VuePiniaModuleFactory factory = new VuePiniaModuleFactory();
+
+  @Test
+  void shouldBuildPiniaModule() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .basePackage("com.seed4j.growth")
+      .build();
+
+    Seed4JModule module = factory.buildModule(properties);
+
+    assertThatModuleWithFiles(
+      module,
+      packageJsonFile(),
+      new ModuleFile("src/test/resources/projects/vue/main.ts.mustache", "src/main/webapp/app/main.ts")
+    )
+      .hasFile("package.json")
+      .containing(nodeDependency("pinia"))
+      .containing(nodeDependency("pinia-plugin-persistedstate"))
+      .containing(nodeDependency("@pinia/testing"))
+      .and()
+      .hasFile("src/main/webapp/app/main.ts")
+      .containing("import { createPinia } from 'pinia';")
+      .containing("import piniaPersist from 'pinia-plugin-persistedstate';")
+      .containing(
+        """
+        const pinia = createPinia();
+        pinia.use(piniaPersist);
+        app.use(pinia);
+        """
+      );
+  }
+}

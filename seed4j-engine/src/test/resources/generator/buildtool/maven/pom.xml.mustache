@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>{{packageName}}</groupId>
+  <artifactId>{{dasherizedBaseName}}</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>{{baseName}}</name>
+  <description>{{projectName}}</description>
+  <packaging>jar</packaging>
+
+  <properties>
+    <java.version>{{javaVersion}}</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <maven.version>3.6.3</maven.version>
+    <!-- Default value required by @{argLine} in surefire/failsafe, JaCoCo prepends its agent to it -->
+    <argLine />
+  </properties>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>config/*.properties</include>
+          <include>config/*.yml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+        <excludes>
+          <exclude>config/*.properties</exclude>
+          <exclude>config/*.yml</exclude>
+        </excludes>
+      </resource>
+    </resources>
+  </build>
+</project>

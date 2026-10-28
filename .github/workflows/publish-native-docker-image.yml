@@ -43,7 +43,8 @@ jobs:
 
       - name: Build application with Buildpacks
         run: |
-          ./mvnw -Pnative -DskipTests clean spring-boot:build-image -Dspring-boot.build-image.imageName=${{ env.DOCKER_IMAGE_NAME }}
+          ./mvnw -DskipTests -pl seed4j-core-modules,seed4j-test -am install
+          ./mvnw -Pnative -DskipTests -pl seed4j-server clean spring-boot:build-image -Dspring-boot.build-image.imageName=${{ env.DOCKER_IMAGE_NAME }}
 
       - name: Test native image
         working-directory: tests-ci

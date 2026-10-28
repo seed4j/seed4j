@@ -1,4 +1,4 @@
-package com.seed4j.project.domain.history;
+package com.seed4j.history.domain;
 
 import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;

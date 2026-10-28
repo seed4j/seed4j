@@ -1,7 +1,7 @@
-package com.seed4j.project.infrastructure.secondary;
+package com.seed4j.history.infrastructure.secondary;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.seed4j.project.domain.history.ProjectAction;
+import com.seed4j.history.domain.ProjectAction;
 import java.time.Instant;
 import java.util.Map;
 

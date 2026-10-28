@@ -10,7 +10,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Maven reactor (`pom.xml` at the root is `seed4j-parent`) and npm workspaces (root `package.json`):
 
-- `seed4j-engine/`: the engine applying modules to projects (`com.seed4j.module` without its REST adapters, engine shared kernels).
+- `seed4j-engine/`: the engine applying modules to projects (`com.seed4j.module` without its REST adapters), the history of the
+  generated projects (`com.seed4j.history`) and the engine shared kernels.
 - `seed4j-core-modules/`: the official modules (`com.seed4j.generator`, slugs) and their templates and dependency versions.
 - `seed4j-server/`: the Seed4J application (REST API, Vue frontend, projects, statistics), published as `com.seed4j:seed4j`. All the tests,
   including the ones of the engine and the official modules, run here for now, with an aggregated coverage check.
@@ -89,7 +90,8 @@ my_context/
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `generator/` | One sub-package per technology module (e.g. `springboot`, `vue`, `angular`). Each module has its own `domain/`, `application/`, `infrastructure/` sub-structure. |
 | `module/`    | Core module management: applying modules to projects, module landscape, history.                                                                                 |
-| `project/`   | Generated-project lifecycle and file I/O.                                                                                                                        |
+| `history/`   | History of the modules applied to a generated project (engine).                                                                                                  |
+| `project/`   | Generated-project download and history exposure (server), reading the history through the engine.                                                                |
 | `shared/`    | Cross-cutting value types and utilities (`error`, `slug`, `collection`, etc.).                                                                                   |
 | `statistic/` | Analytics/statistics tracking.                                                                                                                                   |
 | `wire/`      | Spring wiring for frontend, security, springdoc, git info.                                                                                                       |

@@ -1,6 +1,6 @@
 package com.seed4j.project.infrastructure.primary;
 
-import com.seed4j.project.domain.history.ProjectAction;
+import com.seed4j.project.domain.ModuleSlug;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 
@@ -13,8 +13,8 @@ final class RestAppliedModule {
     this.slug = slug;
   }
 
-  static RestAppliedModule from(ProjectAction action) {
-    return new RestAppliedModule(action.module().get());
+  static RestAppliedModule from(ModuleSlug module) {
+    return new RestAppliedModule(module.get());
   }
 
   @Schema(description = "Slug of the applied module", requiredMode = RequiredMode.REQUIRED)

@@ -24,6 +24,7 @@ class ArtifactBoundariesArchTest {
       .resideInAnyPackage(
         "com.seed4j.module.application..",
         "com.seed4j.module.infrastructure..",
+        "com.seed4j.history..",
         "com.seed4j.project..",
         "com.seed4j.statistic..",
         "com.seed4j.wire.."
@@ -36,7 +37,7 @@ class ArtifactBoundariesArchTest {
   void engineShouldNotDependOnModulesNorServer() {
     noClasses()
       .that()
-      .resideInAPackage("com.seed4j.module..")
+      .resideInAnyPackage("com.seed4j.module..", "com.seed4j.history..")
       .should()
       .dependOnClassesThat()
       .resideInAnyPackage(

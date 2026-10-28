@@ -6,7 +6,7 @@ import static org.mockito.Mockito.mock;
 
 import com.seed4j.JsonHelper;
 import com.seed4j.UnitTest;
-import com.seed4j.module.domain.Seed4JModulesFixture;
+import com.seed4j.module.domain.Seed4JEngineFixture;
 import com.seed4j.shared.projectfolder.domain.ProjectFolder;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class RestSeed4JModulesToApplyTest {
   void shouldDeserializeFromJson() {
     assertThat(JsonHelper.readFromJson(json(), RestSeed4JModulesToApply.class).toDomain(projectFolder))
       .usingRecursiveComparison()
-      .isEqualTo(Seed4JModulesFixture.modulesToApply());
+      .isEqualTo(Seed4JEngineFixture.modulesToApply());
   }
 
   private static String json() {

@@ -1,8 +1,8 @@
 package com.seed4j.module.infrastructure.secondary.javadependency.maven;
 
-import static com.seed4j.module.domain.Seed4JModulesFixture.jsonWebTokenDependencyId;
-import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyId;
-import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyManagement;
+import static com.seed4j.module.domain.Seed4JEngineFixture.jsonWebTokenDependencyId;
+import static com.seed4j.module.domain.Seed4JEngineFixture.springBootDependencyId;
+import static com.seed4j.module.domain.Seed4JEngineFixture.springBootDependencyManagement;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -30,8 +31,12 @@ class HexagonalArchTest {
   // only the engine and the server are made of business contexts and shared kernels
   private static final List<Path> CONTEXTS_MODULES = Stream.of(".", "../seed4j-engine").map(Path::of).toList();
 
+  // seed4j-test holds test tools, not business contexts
+  private static final Pattern SEED4J_TEST_CLASSES = Pattern.compile(".*/seed4j-test(/target/classes/|-[^/]*\\.jar!/).*");
+
   private static final JavaClasses classes = new ClassFileImporter()
     .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
+    .withImportOption(location -> !location.matches(SEED4J_TEST_CLASSES))
     .importPackages(ROOT_PACKAGE);
 
   private static final JavaClasses contextsModulesClasses = new ClassFileImporter().importPaths(

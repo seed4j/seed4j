@@ -1,7 +1,7 @@
 package com.seed4j.module.domain.javadependency;
 
-import static com.seed4j.module.domain.Seed4JModulesFixture.googleAutoServiceAnnotationProcessor;
-import static com.seed4j.module.domain.Seed4JModulesFixture.hibernateAnnotationProcessor;
+import static com.seed4j.module.domain.Seed4JEngineFixture.googleAutoServiceAnnotationProcessor;
+import static com.seed4j.module.domain.Seed4JEngineFixture.hibernateAnnotationProcessor;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;

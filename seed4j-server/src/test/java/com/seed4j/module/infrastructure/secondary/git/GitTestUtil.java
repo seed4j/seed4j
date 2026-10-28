@@ -1,6 +1,5 @@
 package com.seed4j.module.infrastructure.secondary.git;
 
-import com.seed4j.module.domain.git.GitRepository;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -67,9 +66,5 @@ public final class GitTestUtil {
 
       throw new AssertionError(e.getMessage(), e);
     }
-  }
-
-  public static GitRepository gitRepository() {
-    return new JGitGitRepository();
   }
 }

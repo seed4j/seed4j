@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.mavenplugin;
 
-import static com.seed4j.module.domain.Seed4JModulesFixture.mavenEnforcerPluginManagement;
+import static com.seed4j.module.domain.Seed4JEngineFixture.mavenEnforcerPluginManagement;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;

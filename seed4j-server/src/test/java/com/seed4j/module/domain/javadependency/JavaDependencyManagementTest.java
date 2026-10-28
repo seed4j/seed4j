@@ -1,13 +1,13 @@
 package com.seed4j.module.domain.javadependency;
 
+import static com.seed4j.module.domain.Seed4JEngineFixture.currentJavaDependenciesVersion;
+import static com.seed4j.module.domain.Seed4JEngineFixture.defaultVersionDependency;
+import static com.seed4j.module.domain.Seed4JEngineFixture.optionalTestDependency;
+import static com.seed4j.module.domain.Seed4JEngineFixture.optionalTestDependencyBuilder;
+import static com.seed4j.module.domain.Seed4JEngineFixture.springBootDefaultTypeDependencyManagement;
+import static com.seed4j.module.domain.Seed4JEngineFixture.springBootDependencyManagement;
+import static com.seed4j.module.domain.Seed4JEngineFixture.springBootVersion;
 import static com.seed4j.module.domain.Seed4JModule.javaDependency;
-import static com.seed4j.module.domain.Seed4JModulesFixture.currentJavaDependenciesVersion;
-import static com.seed4j.module.domain.Seed4JModulesFixture.defaultVersionDependency;
-import static com.seed4j.module.domain.Seed4JModulesFixture.optionalTestDependency;
-import static com.seed4j.module.domain.Seed4JModulesFixture.optionalTestDependencyBuilder;
-import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDefaultTypeDependencyManagement;
-import static com.seed4j.module.domain.Seed4JModulesFixture.springBootDependencyManagement;
-import static com.seed4j.module.domain.Seed4JModulesFixture.springBootVersion;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;

@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
-class JGitGitRepository implements GitRepository {
+public class JGitGitRepository implements GitRepository {
 
   private static final Logger log = LoggerFactory.getLogger(JGitGitRepository.class);
 

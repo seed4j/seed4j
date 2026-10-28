@@ -174,7 +174,7 @@ public final class JavaDependency {
   @Override
   @ExcludeFromGeneratedCodeCoverage
   public int hashCode() {
-    return new HashCodeBuilder().append(id).append(versionSlug).append(scope).append(optional).hashCode();
+    return new HashCodeBuilder().append(id).append(dependencySlug).append(versionSlug).append(scope).append(optional).hashCode();
   }
 
   @Override

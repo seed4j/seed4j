@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Seed4JDestination {
+public final class Seed4JDestination {
 
   public static final Seed4JDestination SRC_MAIN_JAVA = new Seed4JDestination("src/main/java");
   public static final Seed4JDestination SRC_TEST_JAVA = new Seed4JDestination("src/test/java");

@@ -55,7 +55,7 @@ public final class AddMavenPluginManagement implements JavaBuildCommand, AddMave
     ToStringBuilder builder = new ToStringBuilder(this, SHORT_PREFIX_STYLE)
       .append("plugin", plugin)
       .append("pluginVersion", pluginVersion.map(JavaDependencyVersion::toString).orElse(""))
-      .append("dependenciesVersions", pluginVersion.map(JavaDependencyVersion::toString).orElse(""));
+      .append("dependenciesVersions", dependenciesVersions);
     return builder.toString();
   }
 }

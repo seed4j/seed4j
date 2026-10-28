@@ -28,6 +28,7 @@
     <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
     <start-class>com.seed4j.Seed4JApp</start-class>
 
+    <equalsverifier.version>4.5.2</equalsverifier.version>
     <archunit-junit5.version>1.5.1</archunit-junit5.version>
     <springdoc-openapi.version>3.2.0</springdoc-openapi.version>
     <properties-maven-plugin.version>1.3.1</properties-maven-plugin.version>
@@ -189,6 +190,12 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>nl.jqno.equalsverifier</groupId>
+      <artifactId>equalsverifier</artifactId>
+      <version>${equalsverifier.version}</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>com.tngtech.archunit</groupId>
       <artifactId>archunit-junit5-api</artifactId>

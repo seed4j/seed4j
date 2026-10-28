@@ -1,0 +1,22 @@
+{
+  "name": "seed4j-dependencies",
+  "version": "0.0.0",
+  "description": "Seed4J : used for Vite+React dependencies",
+  "license": "Apache-2.0",
+  "type": "module",
+  "dependencies": {
+    "@eslint-react/eslint-plugin": "5.28.8",
+    "@heroui/react": "3.2.6",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/react": "16.3.3",
+    "@tsconfig/vite-react": "8.1.1",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "axios": "1.20.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-hook-form": "7.91.0",
+    "react-i18next": "17.1.8"
+  }
+}

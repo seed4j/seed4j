@@ -2,14 +2,16 @@ package com.seed4j.module.domain.file;
 
 import com.seed4j.module.domain.Seed4JProjectFilePath;
 import com.seed4j.module.domain.Seed4JProjectFilesPaths;
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Stream;
 
 public record Seed4JFilesToDelete(Collection<Seed4JProjectFilePath> files) {
   public Seed4JFilesToDelete(Collection<Seed4JProjectFilePath> files) {
-    this.files = Seed4JCollections.immutable(files);
+    Assert.field("files", files).notNull().noNullElement();
+
+    this.files = List.copyOf(files);
   }
 
   public Stream<Seed4JProjectFilePath> stream() {

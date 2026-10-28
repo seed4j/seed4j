@@ -5,7 +5,6 @@ import static com.seed4j.module.domain.Seed4JModule.from;
 import com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
 import com.seed4j.module.domain.Seed4JModuleUpgrade;
 import com.seed4j.module.domain.Seed4JProjectFilePath;
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.*;
 
@@ -18,7 +17,7 @@ public final class Seed4JModuleFiles {
   private final Seed4JFilesToMove filesToMove;
 
   private Seed4JModuleFiles(Seed4JModuleFilesBuilder builder) {
-    filesToAdd = Seed4JCollections.immutable(builder.filesToAdd);
+    filesToAdd = List.copyOf(builder.filesToAdd);
     filesToMove = new Seed4JFilesToMove(builder.filesToMove);
     filesToDelete = new Seed4JFilesToDelete(builder.filesToDelete);
   }

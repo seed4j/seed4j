@@ -1,13 +1,14 @@
 package com.seed4j.module.domain.properties;
 
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
 record Seed4JModuleParameters(Map<String, Object> parameters) {
   public Seed4JModuleParameters(Map<String, Object> parameters) {
-    this.parameters = Seed4JCollections.immutable(parameters);
+    this.parameters = Collections.unmodifiableMap(new LinkedHashMap<>(parameters));
   }
 
   <T> T getOrDefault(String key, T defaultValue, Class<T> clazz) {

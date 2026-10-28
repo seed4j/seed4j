@@ -8,7 +8,6 @@ import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
 import com.seed4j.module.domain.javabuild.command.AddJavaDependencyManagement;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,7 +33,7 @@ public final class JavaDependency {
     dependencySlug = Optional.ofNullable(builder.dependencySlug);
     scope = JavaDependencyScope.from(builder.scope);
     optional = builder.optional;
-    exclusions = Seed4JCollections.immutable(builder.exclusions);
+    exclusions = List.copyOf(builder.exclusions);
   }
 
   private DependencyId buildId(JavaDependencyBuilder builder) {

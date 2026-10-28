@@ -4,9 +4,10 @@ import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javabuild.command.SetBuildProperty;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -15,7 +16,7 @@ public final class Seed4JModuleBuildProperties {
   private final Map<PropertyKey, PropertyValue> properties;
 
   private Seed4JModuleBuildProperties(Seed4JModuleBuildPropertiesBuilder<?> builder) {
-    properties = Seed4JCollections.immutable(builder.properties);
+    properties = Collections.unmodifiableMap(new LinkedHashMap<>(builder.properties));
   }
 
   public static <T> Seed4JModuleBuildPropertiesBuilder<T> builder(T parent) {

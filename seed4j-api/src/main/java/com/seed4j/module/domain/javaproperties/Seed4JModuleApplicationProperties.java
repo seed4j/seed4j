@@ -1,7 +1,6 @@
 package com.seed4j.module.domain.javaproperties;
 
 import com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.*;
 
@@ -11,8 +10,8 @@ public final class Seed4JModuleApplicationProperties {
   private final Map<PropertyKey, Comment> comments;
 
   private Seed4JModuleApplicationProperties(Seed4JModuleApplicationPropertiesBuilder builder) {
-    properties = Seed4JCollections.immutable(builder.properties);
-    comments = Seed4JCollections.immutable(builder.comments);
+    properties = Collections.unmodifiableMap(new LinkedHashMap<>(builder.properties));
+    comments = Collections.unmodifiableMap(new LinkedHashMap<>(builder.comments));
   }
 
   public static Seed4JModuleApplicationPropertiesBuilder builder(Seed4JModuleBuilder module) {

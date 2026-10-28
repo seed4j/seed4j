@@ -2,9 +2,9 @@ package com.seed4j.module.infrastructure.secondary.javadependency;
 
 import static com.seed4j.TestFileUtils.content;
 import static com.seed4j.TestFileUtils.projectFrom;
-import static com.seed4j.module.domain.Seed4JModulesFixture.emptyModuleContext;
-import static com.seed4j.module.domain.Seed4JModulesFixture.javaDependenciesCommands;
-import static com.seed4j.module.domain.Seed4JModulesFixture.springBootVersion;
+import static com.seed4j.module.domain.Seed4JEngineFixture.emptyModuleContext;
+import static com.seed4j.module.domain.Seed4JEngineFixture.javaDependenciesCommands;
+import static com.seed4j.module.domain.Seed4JEngineFixture.springBootVersion;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

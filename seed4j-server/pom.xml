@@ -41,7 +41,6 @@
     <frontend-maven-plugin.version>2.0.2</frontend-maven-plugin.version>
     <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
     <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
-    <approvaltests.version>31.0.0</approvaltests.version>
     <liquibase.version>4.33.0</liquibase.version>
   </properties>
 
@@ -191,6 +190,11 @@
     </dependency>
 
     <dependency>
+      <groupId>com.seed4j</groupId>
+      <artifactId>seed4j-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>nl.jqno.equalsverifier</groupId>
       <artifactId>equalsverifier</artifactId>
       <version>${equalsverifier.version}</version>
@@ -242,7 +246,6 @@
     <dependency>
       <groupId>com.approvaltests</groupId>
       <artifactId>approvaltests</artifactId>
-      <version>${approvaltests.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

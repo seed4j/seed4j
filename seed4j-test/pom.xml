@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.seed4j</groupId>
+    <artifactId>seed4j-parent</artifactId>
+    <version>2.2.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>seed4j-test</artifactId>
+  <name>seed4j-test</name>
+  <description>seed4j test tools: apply a module and assert the generated project</description>
+  <packaging>jar</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.seed4j</groupId>
+      <artifactId>seed4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.seed4j</groupId>
+      <artifactId>seed4j-engine</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.approvaltests</groupId>
+      <artifactId>approvaltests</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.gaul</groupId>
+        <artifactId>modernizer-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>

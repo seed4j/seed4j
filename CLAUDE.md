@@ -14,6 +14,8 @@ Maven reactor (`pom.xml` at the root is `seed4j-parent`) and npm workspaces (roo
   only dependency of the official modules and the extensions. Plain Java, without Spring.
 - `seed4j-engine/`: the engine applying modules to projects (`com.seed4j.module` without its REST adapters), the history of the
   generated projects (`com.seed4j.history`) and the engine shared kernels.
+- `seed4j-test/`: test tools for modules (`assertThatModule`, `propertiesBuilder`, `FakeSeed4JModuleServices`), the test
+  dependency of the official modules and the extensions.
 - `seed4j-core-modules/`: the official modules (`com.seed4j.generator`, slugs) and their templates and dependency versions.
 - `seed4j-server/`: the Seed4J application (REST API, Vue frontend, projects, statistics), published as `com.seed4j:seed4j`. All the tests,
   including the ones of the engine and the official modules, run here for now, with an aggregated coverage check.
@@ -103,7 +105,7 @@ my_context/
 1. **Domain factory** in `com.seed4j.generator.my_module.domain`:
    - Class `MyModuleFactory` with `buildModule(Seed4JModuleProperties)` returning `Seed4JModule`.
    - Templates go in `seed4j-core-modules/src/main/resources/generator/my-module/` as `*.mustache` files.
-   - Start with `Seed4JModulesAssertions.assertThatModule(module).hasPrefixedFiles(...)` in a `@UnitTest`.
+   - Start with `Seed4JModulesAssertions.assertThatModule(module).hasPrefixedFiles(...)` (from `seed4j-test`) in a `@UnitTest`.
 
 2. **Application service** in `com.seed4j.generator.my_module.application`:
    - Thin `@Service` class — just delegates to the factory.

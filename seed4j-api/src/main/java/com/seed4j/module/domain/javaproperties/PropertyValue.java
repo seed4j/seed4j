@@ -2,7 +2,6 @@ package com.seed4j.module.domain.javaproperties;
 
 import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -51,7 +50,6 @@ public final class PropertyValue {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   @SuppressWarnings("UndefinedEquals")
   public boolean equals(Object obj) {
     if (obj == this) {
@@ -66,13 +64,11 @@ public final class PropertyValue {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public int hashCode() {
     return Objects.hash(values);
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public String toString() {
     return "PropertyValue[" + "values=" + values + ']';
   }

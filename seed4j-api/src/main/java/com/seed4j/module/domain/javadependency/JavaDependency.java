@@ -10,7 +10,6 @@ import com.seed4j.module.domain.javabuild.command.JavaBuildCommand;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -172,13 +171,11 @@ public final class JavaDependency {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public int hashCode() {
     return new HashCodeBuilder().append(id).append(dependencySlug).append(versionSlug).append(scope).append(optional).hashCode();
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public boolean equals(Object obj) {
     if (this == obj) {
       return true;

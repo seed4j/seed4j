@@ -1,7 +1,6 @@
 package com.seed4j.module.domain.javabuild;
 
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Optional;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -39,13 +38,11 @@ public final class MavenBuildExtension {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public int hashCode() {
     return new HashCodeBuilder().append(groupId).append(artifactId).append(versionSlug).hashCode();
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public boolean equals(Object obj) {
     if (this == obj) {
       return true;

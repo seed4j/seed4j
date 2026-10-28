@@ -1,7 +1,6 @@
 package com.seed4j.module.domain.nodejs;
 
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 
 public record NodePackageVersion(String version) {
   public NodePackageVersion {
@@ -17,7 +16,6 @@ public record NodePackageVersion(String version) {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public String toString() {
     return version;
   }

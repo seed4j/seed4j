@@ -4,7 +4,6 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -116,7 +115,6 @@ public final class MavenPluginExecution {
 
   @Override
   @SuppressWarnings("java:S1192")
-  @ExcludeFromGeneratedCodeCoverage
   public String toString() {
     ToStringBuilder builder = new ToStringBuilder(this, SHORT_PREFIX_STYLE)
       .append("goals", goals)

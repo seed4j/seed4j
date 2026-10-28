@@ -5,7 +5,6 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 import com.seed4j.module.domain.javabuild.ArtifactId;
 import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Optional;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -54,13 +53,11 @@ public final class DependencyId {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public int hashCode() {
     return new HashCodeBuilder().append(artifactId).append(classifier).append(groupId).append(type).hashCode();
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public boolean equals(Object obj) {
     if (this == obj) {
       return true;
@@ -147,7 +144,6 @@ public final class DependencyId {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public String toString() {
     ToStringBuilder builder = new ToStringBuilder(this, SHORT_PREFIX_STYLE)
       .append("groupId", groupId)

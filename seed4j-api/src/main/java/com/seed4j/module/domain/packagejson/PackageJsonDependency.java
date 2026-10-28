@@ -2,7 +2,6 @@ package com.seed4j.module.domain.packagejson;
 
 import com.seed4j.module.domain.nodejs.NodePackagesVersionSource;
 import com.seed4j.shared.error.domain.Assert;
-import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import java.util.Objects;
 import java.util.Optional;
 import org.jspecify.annotations.Nullable;
@@ -34,7 +33,6 @@ public final class PackageJsonDependency {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public boolean equals(Object obj) {
     if (obj == this) {
       return true;
@@ -51,13 +49,11 @@ public final class PackageJsonDependency {
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public int hashCode() {
     return Objects.hash(packageName, versionSource, versionPackageName);
   }
 
   @Override
-  @ExcludeFromGeneratedCodeCoverage
   public String toString() {
     return (
       "PackageJsonDependency["

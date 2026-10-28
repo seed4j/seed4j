@@ -7,6 +7,7 @@ import com.seed4j.shared.projectfolder.domain.ProjectFolder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.util.Map;
+import org.jspecify.annotations.Nullable;
 
 class RestSeed4JModuleProperties {
 
@@ -17,11 +18,11 @@ class RestSeed4JModuleProperties {
   RestSeed4JModuleProperties(
     @JsonProperty("projectFolder") String projectFolder,
     @JsonProperty("commit") Boolean commit,
-    @JsonProperty("parameters") Map<String, Object> parameters
+    @JsonProperty("parameters") @Nullable Map<String, Object> parameters
   ) {
     this.projectFolder = projectFolder;
     this.commit = Boolean.TRUE.equals(commit);
-    this.parameters = parameters;
+    this.parameters = parameters == null ? Map.of() : parameters;
   }
 
   public Seed4JModuleProperties toDomain(ProjectFolder projectFolder) {

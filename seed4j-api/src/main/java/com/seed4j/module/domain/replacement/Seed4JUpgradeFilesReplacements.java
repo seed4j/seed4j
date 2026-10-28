@@ -2,15 +2,15 @@ package com.seed4j.module.domain.replacement;
 
 import com.seed4j.module.domain.GeneratedProjectRepository;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
 public record Seed4JUpgradeFilesReplacements(Collection<Seed4JUpgradeFilesReplacement> replacements) {
   public Seed4JUpgradeFilesReplacements(Collection<Seed4JUpgradeFilesReplacement> replacements) {
-    this.replacements = Seed4JCollections.immutable(replacements);
+    this.replacements = List.copyOf(replacements);
   }
 
   public Stream<ContentReplacer> toContentReplacers(Seed4JProjectFolder folder, GeneratedProjectRepository generatedProject) {

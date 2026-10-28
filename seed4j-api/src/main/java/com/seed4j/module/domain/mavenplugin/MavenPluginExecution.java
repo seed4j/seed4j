@@ -2,7 +2,6 @@ package com.seed4j.module.domain.mavenplugin;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.Collection;
 import java.util.List;
@@ -20,7 +19,7 @@ public final class MavenPluginExecution {
 
   private MavenPluginExecution(MavenPluginExecutionBuilder builder) {
     Assert.notEmpty("goals", builder.goals);
-    this.goals = Seed4JCollections.immutable(builder.goals);
+    this.goals = List.copyOf(builder.goals);
     this.id = Optional.ofNullable(builder.id);
     this.phase = Optional.ofNullable(builder.phase);
     this.configuration = Optional.ofNullable(builder.configuration);

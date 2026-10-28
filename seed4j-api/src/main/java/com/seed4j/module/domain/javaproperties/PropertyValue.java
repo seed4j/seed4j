@@ -1,6 +1,5 @@
 package com.seed4j.module.domain.javaproperties;
 
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +17,7 @@ public final class PropertyValue {
   private PropertyValue(Collection<Object> values) {
     Assert.field("values", values).noNullElement();
 
-    this.values = Seed4JCollections.immutable(values);
+    this.values = List.copyOf(values);
   }
 
   public static PropertyValue of(String[] values) {

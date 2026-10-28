@@ -1,16 +1,17 @@
 package com.seed4j.module.domain.javaproperties;
 
 import com.seed4j.module.domain.Seed4JModule.Seed4JModuleBuilder;
-import com.seed4j.shared.collection.domain.Seed4JCollections;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 
 public final class Seed4JModuleSpringFactories {
 
   private final Map<PropertyKey, PropertyValue> factories;
 
   private Seed4JModuleSpringFactories(Seed4JModuleSpringFactoriesBuilder builder) {
-    factories = Seed4JCollections.immutable(builder.factories);
+    factories = Collections.unmodifiableMap(new LinkedHashMap<>(builder.factories));
   }
 
   public static Seed4JModuleSpringFactoriesBuilder builder(Seed4JModuleBuilder module) {

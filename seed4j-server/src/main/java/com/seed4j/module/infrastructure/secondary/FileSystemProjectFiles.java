@@ -10,12 +10,17 @@ import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import com.uber.nullaway.annotations.Contract;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 import org.jspecify.annotations.Nullable;
@@ -25,6 +30,7 @@ import org.springframework.stereotype.Service;
 public class FileSystemProjectFiles implements ProjectFiles {
 
   private static final String SLASH = "/";
+  private static final String JAR_SCHEME = "jar";
 
   @Override
   @ExcludeFromGeneratedCodeCoverage(reason = "The error handling is an hard to test implementation detail")
@@ -87,20 +93,41 @@ public class FileSystemProjectFiles implements ProjectFiles {
   public Collection<String> findRecursivelyInPath(String rootFolder) {
     Assert.notBlank("rootFolder", rootFolder);
 
-    Path rootPath = rootPathFrom(rootFolder);
+    URI rootUri = rootUriFrom(rootFolder);
 
+    if (JAR_SCHEME.equals(rootUri.getScheme())) {
+      return findRecursivelyInJar(rootFolder, rootUri);
+    }
+
+    return findRecursivelyInPath(rootFolder, Path.of(rootUri));
+  }
+
+  private static Collection<String> findRecursivelyInPath(String rootFolder, Path rootPath) {
     assertIsDirectory(rootPath);
 
     return buildRelativePath(rootFolder, rootPath);
   }
 
   @ExcludeFromGeneratedCodeCoverage(reason = "The error handling is an hard to test implementation detail")
-  private Path rootPathFrom(String resourcePath) {
+  private static Collection<String> findRecursivelyInJar(String rootFolder, URI rootUri) {
+    try {
+      return findRecursivelyInPath(rootFolder, Path.of(rootUri));
+    } catch (FileSystemNotFoundException _) {
+      try (FileSystem jar = FileSystems.newFileSystem(rootUri, Map.of())) {
+        return findRecursivelyInPath(rootFolder, jar.provider().getPath(rootUri));
+      } catch (IOException e) {
+        throw GeneratorException.technicalError("Unable to read folder %s: %s".formatted(rootFolder, e.getMessage()), e);
+      }
+    }
+  }
+
+  @ExcludeFromGeneratedCodeCoverage(reason = "The error handling is an hard to test implementation detail")
+  private URI rootUriFrom(String resourcePath) {
     URL folderUrl = getURL(resourcePath);
     assertFolderExist(resourcePath, folderUrl);
 
     try {
-      return Path.of(folderUrl.toURI());
+      return folderUrl.toURI();
     } catch (URISyntaxException e) {
       throw GeneratorException.technicalError("Unable to read folder %s: %s".formatted(resourcePath, e.getMessage()), e);
     }
@@ -113,7 +140,7 @@ public class FileSystemProjectFiles implements ProjectFiles {
     }
   }
 
-  private void assertIsDirectory(Path rootPath) {
+  private static void assertIsDirectory(Path rootPath) {
     if (!Files.isDirectory(rootPath)) {
       throw GeneratorException.technicalError("Path %s is not a folder".formatted(rootPath));
     }

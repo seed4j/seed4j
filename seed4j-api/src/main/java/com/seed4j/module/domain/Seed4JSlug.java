@@ -43,13 +43,13 @@ public abstract sealed class Seed4JSlug implements Comparable<Seed4JSlug> permit
 
   @Override
   @ExcludeFromGeneratedCodeCoverage
-  public int hashCode() {
+  public final int hashCode() {
     return new HashCodeBuilder().append(slug).hashCode();
   }
 
   @Override
   @ExcludeFromGeneratedCodeCoverage
-  public boolean equals(Object obj) {
+  public final boolean equals(Object obj) {
     if (this == obj) {
       return true;
     }

@@ -8,6 +8,7 @@ import com.seed4j.UnitTest;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.NotMatchingExpectedPatternException;
 import java.nio.file.FileSystems;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -79,5 +80,10 @@ class Seed4JDestinationTest {
 
   private static String path(String... part) {
     return String.join(SEPARATOR, part);
+  }
+
+  @Test
+  void shouldRespectEqualsContract() {
+    EqualsVerifier.forClass(Seed4JDestination.class).verify();
   }
 }

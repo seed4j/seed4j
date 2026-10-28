@@ -43,19 +43,34 @@ public final class PackageJsonDependency {
       return false;
     }
     var that = (PackageJsonDependency) obj;
-    return Objects.equals(this.packageName, that.packageName) && Objects.equals(this.versionSource, that.versionSource);
+    return (
+      Objects.equals(this.packageName, that.packageName)
+      && Objects.equals(this.versionSource, that.versionSource)
+      && Objects.equals(this.versionPackageName, that.versionPackageName)
+    );
   }
 
   @Override
   @ExcludeFromGeneratedCodeCoverage
   public int hashCode() {
-    return Objects.hash(packageName, versionSource);
+    return Objects.hash(packageName, versionSource, versionPackageName);
   }
 
   @Override
   @ExcludeFromGeneratedCodeCoverage
   public String toString() {
-    return "PackageJsonDependency[" + "packageName=" + packageName + ", " + "versionSource=" + versionSource + ']';
+    return (
+      "PackageJsonDependency["
+      + "packageName="
+      + packageName
+      + ", "
+      + "versionSource="
+      + versionSource
+      + ", "
+      + "versionPackageName="
+      + versionPackageName.map(PackageName::toString).orElse("")
+      + ']'
+    );
   }
 
   public static PackageJsonDependencyPackageNameBuilder builder() {

@@ -244,11 +244,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.approvaltests</groupId>
-      <artifactId>approvaltests</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>testcontainers-postgresql</artifactId>
       <version>${testcontainers.version}</version>
@@ -403,6 +398,7 @@
                 <jacoco:report xmlns:jacoco="antlib:org.jacoco.ant">
                   <executiondata>
                     <fileset dir="${project.build.directory}" includes="jacoco.exec,jacoco-it.exec" />
+                    <fileset dir="${project.basedir}/../seed4j-core-modules/target" includes="jacoco.exec" />
                   </executiondata>
                   <structure name="seed4j">
                     <group name="seed4j-api">

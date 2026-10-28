@@ -67,7 +67,6 @@
     <nullaway.version>0.14.3</nullaway.version>
     <auto-service.version>1.1.1</auto-service.version>
     <junit-jupiter.version>6.1.3</junit-jupiter.version>
-    <approvaltests.version>31.0.0</approvaltests.version>
     <jspecify.version>1.0.1</jspecify.version>
     <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
@@ -122,11 +121,6 @@
         <groupId>com.seed4j</groupId>
         <artifactId>seed4j-test</artifactId>
         <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.approvaltests</groupId>
-        <artifactId>approvaltests</artifactId>
-        <version>${approvaltests.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

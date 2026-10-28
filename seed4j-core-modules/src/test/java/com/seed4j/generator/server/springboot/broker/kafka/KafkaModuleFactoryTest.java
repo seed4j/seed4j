@@ -34,7 +34,7 @@ class KafkaModuleFactoryTest {
       module,
       pomFile(),
       new ModuleFile(
-        "../seed4j-core-modules/src/main/resources/generator/server/springboot/core/test/IntegrationTest.java.mustache",
+        "src/main/resources/generator/server/springboot/core/test/IntegrationTest.java.mustache",
         "src/test/java/com/seed4j/growth/IntegrationTest.java"
       ),
       readmeFile()

@@ -34,10 +34,11 @@ import static com.seed4j.module.domain.Seed4JModule.scriptKey;
 import static com.seed4j.module.domain.Seed4JModule.text;
 import static com.seed4j.module.domain.Seed4JModule.to;
 import static com.seed4j.module.domain.Seed4JModule.versionSlug;
+import static com.seed4j.module.domain.Seed4JModulesFixture.propertiesBuilder;
+import static com.seed4j.module.domain.Seed4JModulesFixture.testModuleProperties;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.ANGULAR;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 
-import com.seed4j.TestFileUtils;
 import com.seed4j.module.domain.buildproperties.BuildProperty;
 import com.seed4j.module.domain.buildproperties.PropertyKey;
 import com.seed4j.module.domain.buildproperties.PropertyValue;
@@ -63,17 +64,13 @@ import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.javaproperties.ApplicationPropertiesFile;
 import com.seed4j.module.domain.javaproperties.ApplicationProperty;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
-import com.seed4j.module.domain.nodejs.NodePackageManager;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
-import com.seed4j.module.domain.properties.SpringConfigurationFormat;
-import com.seed4j.shared.error.domain.Assert;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class Seed4JModulesFixture {
+public final class Seed4JEngineFixture {
 
   public static final ApplicationPropertiesFile MAIN_PROPERTIES_FILE = ApplicationPropertiesFile.named("application").in(
     "src/main/resources/config/",
@@ -92,9 +89,9 @@ public final class Seed4JModulesFixture {
     "src/test/resources/"
   );
 
-  private static final Logger log = LoggerFactory.getLogger(Seed4JModulesFixture.class);
+  private static final Logger log = LoggerFactory.getLogger(Seed4JEngineFixture.class);
 
-  private Seed4JModulesFixture() {}
+  private Seed4JEngineFixture() {}
 
   public static Seed4JModule moduleSecond(Seed4JModuleProperties properties) {
     // @formatter:off
@@ -399,10 +396,6 @@ public final class Seed4JModulesFixture {
     return Seed4JModuleContext.builder(emptyModuleBuilder()).build();
   }
 
-  public static Seed4JModuleProperties testModuleProperties() {
-    return new Seed4JModuleProperties(TestFileUtils.tmpDirForTest(), true, Map.of());
-  }
-
   public static JavaDependenciesVersions currentJavaDependenciesVersion() {
     return new JavaDependenciesVersions(List.of(springBootVersion(), problemVersion(), mavenEnforcerVersion(), jsonWebTokenVersion()));
   }
@@ -446,10 +439,6 @@ public final class Seed4JModulesFixture {
         true
       )
     );
-  }
-
-  public static Seed4JModulePropertiesBuilder propertiesBuilder(String projectFolder) {
-    return new Seed4JModulePropertiesBuilder(projectFolder);
   }
 
   public static ApplicationProperty springLocalMainProperty() {
@@ -681,64 +670,5 @@ public final class Seed4JModulesFixture {
       .delete(path("documentation/cucumber-integration.md"))
       .replace(filesWithExtension("java"), fileStart(), "// This is an updated file\n\n")
       .build();
-  }
-
-  public static final class Seed4JModulePropertiesBuilder {
-
-    private boolean commitModules = false;
-    private final String projectFolder;
-    private final Map<String, Object> properties = new HashMap<>();
-
-    private Seed4JModulePropertiesBuilder(String projectFolder) {
-      this.projectFolder = projectFolder;
-    }
-
-    public Seed4JModulePropertiesBuilder commitModules() {
-      commitModules = true;
-
-      return this;
-    }
-
-    public Seed4JModulePropertiesBuilder basePackage(String basePackage) {
-      properties.put("packageName", basePackage);
-
-      return this;
-    }
-
-    public Seed4JModulePropertiesBuilder projectBaseName(String projectBaseName) {
-      properties.put("baseName", projectBaseName);
-
-      return this;
-    }
-
-    public Seed4JModulePropertiesBuilder projectName(String projectName) {
-      properties.put("projectName", projectName);
-
-      return this;
-    }
-
-    public Seed4JModulePropertiesBuilder nodePackageManager(NodePackageManager nodePackageManager) {
-      Assert.notNull("nodePackageManager", nodePackageManager);
-      properties.put("nodePackageManager", nodePackageManager.propertyKey());
-
-      return this;
-    }
-
-    public Seed4JModulePropertiesBuilder springConfigurationFormat(SpringConfigurationFormat format) {
-      Assert.notNull("format", format);
-      properties.put("springConfigurationFormat", format.get());
-
-      return this;
-    }
-
-    public Seed4JModulePropertiesBuilder put(String key, Object value) {
-      properties.put(key, value);
-
-      return this;
-    }
-
-    public Seed4JModuleProperties build() {
-      return new Seed4JModuleProperties(projectFolder, commitModules, properties);
-    }
   }
 }

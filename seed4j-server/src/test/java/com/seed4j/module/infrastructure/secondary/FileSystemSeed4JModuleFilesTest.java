@@ -1,9 +1,9 @@
 package com.seed4j.module.infrastructure.secondary;
 
+import static com.seed4j.module.domain.Seed4JEngineFixture.context;
 import static com.seed4j.module.domain.Seed4JModule.from;
 import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
 import static com.seed4j.module.domain.Seed4JModule.to;
-import static com.seed4j.module.domain.Seed4JModulesFixture.context;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import ch.qos.logback.classic.Level;

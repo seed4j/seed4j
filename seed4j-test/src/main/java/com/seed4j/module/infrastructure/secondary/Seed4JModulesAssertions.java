@@ -8,6 +8,10 @@ import com.seed4j.module.domain.Seed4JModuleUpgrade;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.shared.error.domain.Assert;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
 import java.nio.file.Files;
@@ -24,9 +28,6 @@ import org.approvaltests.core.Scrubber;
 import org.approvaltests.scrubbers.NoOpScrubber;
 import org.approvaltests.scrubbers.RegExScrubber;
 import org.assertj.core.api.SoftAssertions;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.InputStreamSource;
 
 public final class Seed4JModulesAssertions {
 
@@ -91,7 +92,7 @@ public final class Seed4JModulesAssertions {
   }
 
   public static ModuleFile viteReactConfigFile() {
-    return file("../seed4j-core-modules/src/main/resources/generator/client/react/core/vite.config.ts.mustache", "vite.config.ts");
+    return fileFromClasspath("generator/client/react/core/vite.config.ts.mustache", "vite.config.ts");
   }
 
   public static ModuleFile mainVueFile() {
@@ -111,11 +112,16 @@ public final class Seed4JModulesAssertions {
   }
 
   public static ModuleFile file(String sourcePath, String destination) {
-    return new ModuleFile(new FileSystemResource(sourcePath), destination);
+    return new ModuleFile(sourcePath, destination);
   }
 
   public static ModuleFile fileFromClasspath(String source, String destination) {
-    return new ModuleFile(new ClassPathResource(source), destination);
+    URL resource = Thread.currentThread().getContextClassLoader().getResource(source);
+    if (resource == null) {
+      throw new AssertionError("Can't find " + source + " in classpath");
+    }
+
+    return new ModuleFile(toUri(resource), destination);
   }
 
   public static Seed4JModuleAsserter assertThatModuleWithFiles(Seed4JModule module, ModuleFile... files) {
@@ -160,8 +166,8 @@ public final class Seed4JModulesAssertions {
         throw new AssertionError(e);
       }
 
-      try {
-        Files.copy(file.source.getInputStream(), destination);
+      try (InputStream source = file.source.toURL().openStream()) {
+        Files.copy(source, destination);
       } catch (IOException e) {
         throw new AssertionError(e);
       }
@@ -478,9 +484,17 @@ public final class Seed4JModulesAssertions {
     }
   }
 
-  public record ModuleFile(InputStreamSource source, String destination) {
+  private static URI toUri(URL resource) {
+    try {
+      return resource.toURI();
+    } catch (URISyntaxException e) {
+      throw new AssertionError(e);
+    }
+  }
+
+  public record ModuleFile(URI source, String destination) {
     public ModuleFile(String sourcePath, String destination) {
-      this(new FileSystemResource(sourcePath), destination);
+      this(Path.of(sourcePath).toUri(), destination);
     }
 
     public ModuleFile {

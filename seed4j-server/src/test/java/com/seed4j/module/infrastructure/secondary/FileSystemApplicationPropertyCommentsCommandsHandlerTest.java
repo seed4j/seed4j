@@ -2,12 +2,12 @@ package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.TestFileUtils.content;
 import static com.seed4j.TestFileUtils.loadDefaultProperties;
+import static com.seed4j.module.domain.Seed4JEngineFixture.MAIN_BOOTSTRAP_PROPERTIES_FILE;
+import static com.seed4j.module.domain.Seed4JEngineFixture.MAIN_PROPERTIES_FILE;
+import static com.seed4j.module.domain.Seed4JEngineFixture.TEST_BOOTSTRAP_PROPERTIES_FILE;
+import static com.seed4j.module.domain.Seed4JEngineFixture.TEST_PROPERTIES_FILE;
 import static com.seed4j.module.domain.Seed4JModule.comment;
 import static com.seed4j.module.domain.Seed4JModule.propertyKey;
-import static com.seed4j.module.domain.Seed4JModulesFixture.MAIN_BOOTSTRAP_PROPERTIES_FILE;
-import static com.seed4j.module.domain.Seed4JModulesFixture.MAIN_PROPERTIES_FILE;
-import static com.seed4j.module.domain.Seed4JModulesFixture.TEST_BOOTSTRAP_PROPERTIES_FILE;
-import static com.seed4j.module.domain.Seed4JModulesFixture.TEST_PROPERTIES_FILE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 

@@ -1,6 +1,6 @@
 package com.seed4j.module.domain.file;
 
-import static com.seed4j.module.domain.Seed4JModulesFixture.*;
+import static com.seed4j.module.domain.Seed4JEngineFixture.*;
 import static java.nio.charset.StandardCharsets.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;

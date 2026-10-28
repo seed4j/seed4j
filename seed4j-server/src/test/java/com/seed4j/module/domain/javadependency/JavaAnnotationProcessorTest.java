@@ -1,9 +1,9 @@
 package com.seed4j.module.domain.javadependency;
 
+import static com.seed4j.module.domain.Seed4JEngineFixture.currentJavaDependenciesVersion;
+import static com.seed4j.module.domain.Seed4JEngineFixture.hibernateAnnotationProcessor;
+import static com.seed4j.module.domain.Seed4JEngineFixture.springBootVersion;
 import static com.seed4j.module.domain.Seed4JModule.javaAnnotationProcessor;
-import static com.seed4j.module.domain.Seed4JModulesFixture.currentJavaDependenciesVersion;
-import static com.seed4j.module.domain.Seed4JModulesFixture.hibernateAnnotationProcessor;
-import static com.seed4j.module.domain.Seed4JModulesFixture.springBootVersion;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.UnitTest;

@@ -1,6 +1,6 @@
 package com.seed4j.module.infrastructure.secondary;
 
-import static com.seed4j.module.domain.Seed4JModulesFixture.*;
+import static com.seed4j.module.domain.Seed4JEngineFixture.*;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
 
 import ch.qos.logback.classic.Level;

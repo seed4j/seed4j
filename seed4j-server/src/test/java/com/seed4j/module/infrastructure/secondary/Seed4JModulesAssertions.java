@@ -91,7 +91,7 @@ public final class Seed4JModulesAssertions {
   }
 
   public static ModuleFile viteReactConfigFile() {
-    return file("src/main/resources/generator/client/react/core/vite.config.ts.mustache", "vite.config.ts");
+    return file("../seed4j-core-modules/src/main/resources/generator/client/react/core/vite.config.ts.mustache", "vite.config.ts");
   }
 
   public static ModuleFile mainVueFile() {

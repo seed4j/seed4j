@@ -1259,7 +1259,7 @@ class MavenCommandHandlerTest {
 
     @Test
     void shouldAddCompilerPluginIfNotDeclared() {
-      Path pom = projectWithPom("src/main/resources/generator/buildtool/maven/pom.xml.mustache");
+      Path pom = projectWithPom("../seed4j-core-modules/src/main/resources/generator/buildtool/maven/pom.xml.mustache");
 
       new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new AddJavaAnnotationProcessor(googleAutoServiceAnnotationProcessor()));
 

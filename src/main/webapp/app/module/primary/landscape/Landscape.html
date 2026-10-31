@@ -1,4 +1,4 @@
-<LandscapeLoaderVue v-if="levels.isLoading()" />
+<LandscapeLoaderVue v-if="levels.isLoading" />
 <div class="seed4j-landscape seed4j-menu-content-template" v-else data-testid="landscape">
   <div class="seed4j-landscape-modes-selection">
     <div class="seed4j-mode-switch">
@@ -57,7 +57,7 @@
         @mouseleave="stopGrabbing"
       >
         <div class="seed4j-landscape-levels">
-          <ul class="seed4j-landscape-levels--level" :class="modeClass()" v-for="level in levels.value()">
+          <ul class="seed4j-landscape-levels--level" :class="modeClass()" v-for="level in levels.value">
             <li class="seed4j-landscape-element" v-for="element in level.elements" :class="modeClass()">
               <div
                 class="seed4j-landscape-feature"

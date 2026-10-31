@@ -61,7 +61,7 @@
     "vue-router": "5.4.0"
   },
   "devDependencies": {
-    "@cypress/code-coverage": "4.0.3",
+    "@cypress/code-coverage": "4.1.2",
     "@prettier/plugin-pug": "3.6.0",
     "@prettier/plugin-xml": "3.4.2",
     "@tikui/core": "8.0.0",

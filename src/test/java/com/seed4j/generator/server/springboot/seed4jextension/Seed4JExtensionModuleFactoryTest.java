@@ -117,7 +117,7 @@ class Seed4JExtensionModuleFactoryTest {
       .doNotHaveFiles(
         "src/main/java/com/seed4j/growth/security/infrastructure/primary/CorsFilterConfiguration.java",
         "src/main/java/com/seed4j/growth/security/infrastructure/primary/CorsProperties.java",
-        "src/test/java/com/seed4j/growth/security/infrastructure/primary/CorsFilterConfigurationIT.java"
+        "src/test/java/com/seed4j/growth/security/infrastructure/primary/CorsFilterConfigurationTest.java"
       )
       .hasFile("src/test/java/com/seed4j/growth/cucumber/CucumberTest.java")
         .containing("key = GLUE_PROPERTY_NAME, value = \"com.seed4j.growth, com.seed4j.module.infrastructure.primary, com.seed4j.project.infrastructure.primary\"")

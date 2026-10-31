@@ -99,7 +99,7 @@ class SpringBootMvcModuleFactoryTest {
       )
       .hasFiles("src/main/java/com/seed4j/growth/wire/security/package-info.java")
       .hasPrefixedFiles("src/test/java/com/seed4j/growth", "BeanValidationAssertions.java", "BeanValidationTest.java")
-      .hasFiles("src/test/java/com/seed4j/growth/wire/security/infrastructure/primary/CorsFilterConfigurationIT.java")
+      .hasFiles("src/test/java/com/seed4j/growth/wire/security/infrastructure/primary/CorsFilterConfigurationTest.java")
       .hasFiles("src/test/java/com/seed4j/growth/JsonHelper.java")
       .hasFiles("src/main/java/com/seed4j/growth/shared/error/infrastructure/primary/BeanValidationErrorsHandler.java")
       .hasPrefixedFiles(

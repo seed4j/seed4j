@@ -1,0 +1,76 @@
+package com.seed4j.wire.security.infrastructure.primary;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.seed4j.UnitTest;
+import jakarta.servlet.ServletException;
+import java.io.IOException;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.mock.web.MockFilterChain;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.filter.CorsFilter;
+
+@UnitTest
+class CorsFilterConfigurationTest {
+
+  private static final String ALLOWED_ORIGIN = "http://localhost:9000";
+
+  @ParameterizedTest
+  @ValueSource(
+    strings = { "/api/test", "/management/info", "/v2/api-docs", "/v3/api-docs", "/swagger-resources", "/swagger-ui/index.html" }
+  )
+  void shouldRegisterCorsConfigurationWithAllowedOrigins(String requestUri) throws ServletException, IOException {
+    var corsConfiguration = new CorsConfiguration();
+    corsConfiguration.addAllowedOrigin(ALLOWED_ORIGIN);
+    CorsFilter corsFilter = new CorsFilterConfiguration(corsConfiguration).corsFilter();
+
+    MockHttpServletResponse response = filterCorsRequest(corsFilter, requestUri);
+
+    assertThat(response.getHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)).isEqualTo(ALLOWED_ORIGIN);
+  }
+
+  @Test
+  void shouldRegisterCorsConfigurationWithAllowedOriginPatterns() throws ServletException, IOException {
+    var corsConfiguration = new CorsConfiguration();
+    corsConfiguration.addAllowedOriginPattern("http://localhost:*");
+    CorsFilter corsFilter = new CorsFilterConfiguration(corsConfiguration).corsFilter();
+
+    MockHttpServletResponse response = filterCorsRequest(corsFilter, "/api/test");
+
+    assertThat(response.getHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)).isEqualTo(ALLOWED_ORIGIN);
+  }
+
+  @Test
+  void shouldNotRegisterCorsConfigurationWhenOriginsAndPatternsAreEmpty() throws ServletException, IOException {
+    var corsConfiguration = new CorsConfiguration();
+    CorsFilter corsFilter = new CorsFilterConfiguration(corsConfiguration).corsFilter();
+
+    MockHttpServletResponse response = filterCorsRequest(corsFilter, "/api/test");
+
+    assertThat(response.getHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)).isNull();
+  }
+
+  @Test
+  void shouldNotApplyCorsOnUnregisteredPath() throws ServletException, IOException {
+    var corsConfiguration = new CorsConfiguration();
+    corsConfiguration.addAllowedOrigin(ALLOWED_ORIGIN);
+    CorsFilter corsFilter = new CorsFilterConfiguration(corsConfiguration).corsFilter();
+
+    MockHttpServletResponse response = filterCorsRequest(corsFilter, "/other/test");
+
+    assertThat(response.getHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)).isNull();
+  }
+
+  private static MockHttpServletResponse filterCorsRequest(CorsFilter corsFilter, String requestUri) throws ServletException, IOException {
+    var request = new MockHttpServletRequest("GET", requestUri);
+    request.addHeader(HttpHeaders.ORIGIN, ALLOWED_ORIGIN);
+    var response = new MockHttpServletResponse();
+    corsFilter.doFilter(request, response, new MockFilterChain());
+    return response;
+  }
+}

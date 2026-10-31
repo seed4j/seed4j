@@ -32,12 +32,22 @@
       <artifactId>seed4j-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-jackson</artifactId>
+      <artifactId>spring-boot</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+    </dependency>
+    <dependency>
+      <!-- auto-configures the JSON mapper the engine uses -->
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-jackson</artifactId>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>tools.jackson.core</groupId>
@@ -83,6 +93,11 @@
       <groupId>com.github.spullara.mustache.java</groupId>
       <artifactId>compiler</artifactId>
       <version>${mustache.java.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>

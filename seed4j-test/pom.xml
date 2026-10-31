@@ -60,6 +60,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-test</artifactId>
     </dependency>
+    <dependency>
+      <!-- the engine leaves the logging to its users: the tests get the Spring Boot one -->
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-logging</artifactId>
+    </dependency>
   </dependencies>
 
   <build>

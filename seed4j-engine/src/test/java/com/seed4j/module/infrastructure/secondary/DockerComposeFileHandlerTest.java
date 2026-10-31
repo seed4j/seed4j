@@ -1,5 +1,6 @@
 package com.seed4j.module.infrastructure.secondary;
 
+import static com.seed4j.TestFileUtils.content;
 import static com.seed4j.TestFileUtils.contentNormalizingNewLines;
 import static com.seed4j.TestFileUtils.loadDefaultProperties;
 import static com.seed4j.TestFileUtils.tmpDirForTest;
@@ -9,6 +10,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.startupcommand.DockerComposeFile;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -71,6 +74,24 @@ class DockerComposeFileHandlerTest {
     handler.append(redisDockerComposeFileReference());
 
     assertThat(contentNormalizingNewLines(rootComposeFile)).isEqualTo(redisDockerComposeResult(2));
+  }
+
+  @Test
+  void shouldNormalizeCrlfLineBreaksWhenAppending() throws IOException {
+    Path rootComposeFile = Path.of(tmpDirForTest(), COMPOSE_FILE_NAME);
+    Files.createDirectories(rootComposeFile.getParent());
+    Files.writeString(rootComposeFile, "include:\r\n  - src/main/docker/redis.yml\r\n");
+    DockerComposeFileHandler handler = new DockerComposeFileHandler(Indentation.DEFAULT, rootComposeFile);
+
+    handler.append(kafkaDockerComposeFileReference());
+
+    assertThat(content(rootComposeFile)).isEqualTo(
+      """
+      include:
+        - src/main/docker/redis.yml
+        - src/main/docker/kafka.yml
+      """
+    );
   }
 
   private DockerComposeFile redisDockerComposeFileReference() {

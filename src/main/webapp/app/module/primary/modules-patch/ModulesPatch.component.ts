@@ -16,7 +16,7 @@ import { TagFilterVue } from '@/module/primary/tag-filter';
 import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
 import { IconVue } from '@/shared/icon/infrastructure/primary';
 import { Loader } from '@/shared/loader/infrastructure/primary/Loader';
-import { defineComponent, onMounted, reactive, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 
 export default defineComponent({
   name: 'ModulesPatchVue',
@@ -34,10 +34,10 @@ export default defineComponent({
     const projectFolders = inject(PROJECT_FOLDERS_REPOSITORY);
     const moduleParameters = inject(MODULE_PARAMETERS_REPOSITORY);
 
-    const applicationModules = reactive({
-      all: Loader.loading<ComponentModules>(),
-      displayed: Loader.loading<ComponentModules>(),
-    });
+    const applicationModules = {
+      all: ref(Loader.loading<ComponentModules>()),
+      displayed: ref(Loader.loading<ComponentModules>()),
+    };
     const selectedTag = ref(undefined as string | undefined);
     const operationInProgress = ref(false);
     const selectedModule = ref<ComponentModule>();
@@ -51,8 +51,8 @@ export default defineComponent({
       modules
         .list()
         .then(response => {
-          applicationModules.all.loaded(ComponentModules.fromModules(response));
-          applicationModules.displayed.loaded(ComponentModules.fromModules(response));
+          applicationModules.all.value = Loader.loaded(ComponentModules.fromModules(response));
+          applicationModules.displayed.value = Loader.loaded(ComponentModules.fromModules(response));
         })
         .catch(error => console.error(error));
       loadProjectFolders();
@@ -162,9 +162,8 @@ export default defineComponent({
       getModule(module).properties.filter(property => !property.mandatory);
 
     const getModule = (slug: string): ComponentModule => {
-      return applicationModules.all
-        .value()
-        .categories.flatMap(category => category.modules)
+      return applicationModules.all.value.value.categories
+        .flatMap(category => category.modules)
         .find(module => module.slug === slug)!;
     };
 
@@ -178,9 +177,9 @@ export default defineComponent({
       const search = textToSearch();
 
       if (search === undefined) {
-        applicationModules.displayed.loaded(applicationModules.all.value());
+        applicationModules.displayed.value = Loader.loaded(applicationModules.all.value.value);
       } else {
-        applicationModules.displayed.loaded(applicationModules.all.value().filtered(search));
+        applicationModules.displayed.value = Loader.loaded(applicationModules.all.value.value.filtered(search));
       }
     };
 
@@ -200,9 +199,9 @@ export default defineComponent({
       return `${selectedTag.value!.toLowerCase()} ${searchedText.toLowerCase()}`;
     };
 
-    const displayedModulesCount = (): number => applicationModules.displayed.value().modulesCount;
+    const displayedModulesCount = (): number => applicationModules.displayed.value.value.modulesCount;
 
-    const totalModulesCount = (): number => applicationModules.all.value().modulesCount;
+    const totalModulesCount = (): number => applicationModules.all.value.value.modulesCount;
 
     const isTagSelected = (tag: string): boolean => selectedTag.value === tag;
 

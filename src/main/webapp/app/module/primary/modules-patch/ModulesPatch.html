@@ -1,4 +1,4 @@
-<ModulesPatchLoaderVue v-if="content.isLoading()" />
+<ModulesPatchLoaderVue v-if="content.isLoading" />
 <div class="seed4j-modules-patch seed4j-menu-content-template" v-else data-testid="modules-list">
   <div class="seed4j-modules-list seed4j-menu-content-template--content">
     <div class="seed4j-modules-filters">
@@ -23,7 +23,7 @@
     </div>
 
     <div class="seed4j-modules-list--categories">
-      <div v-for="category in content.value().categories">
+      <div v-for="category in content.value.categories">
         <div>
           <h2 class="seed4j-module-category--name">{{ category.name }}</h2>
           <div v-for="module in category.modules" class="seed4j-module" :class="moduleClass(module.slug)">

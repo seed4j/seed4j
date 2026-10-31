@@ -5,7 +5,7 @@ protobuf-plugin = "0.10.0"
 sonarqube = "6.2.0.5505"
 node-gradle = "7.0.2"
 modernizer = "1.15.0"
-gradle-errorprone-plugin = "5.1.1"
+gradle-errorprone-plugin = "5.2.0"
 gradle-nullaway-plugin = "3.3.0"
 
 [plugins]

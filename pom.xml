@@ -533,6 +533,7 @@
                 <include>src/main/glyph/**/*.*</include>
                 <include>src/main/style/**/*.*</include>
                 <include>src/main/webapp/**/*.*</include>
+                <include>src/test/webapp/**/*.*</include>
                 <include>target/classes/public/**/*.*</include>
                 <include>target/classes/static/**/*.*</include>
                 <include>package-lock.json</include>

@@ -205,10 +205,19 @@ class FrontendJavaBuildToolModuleFactoryTest {
                         <directory>${project.basedir}</directory>
                         <includes>
                           <include>src/main/webapp/**/*.*</include>
+                          <include>src/test/webapp/**/*.*</include>
                           <include>target/classes/static/**/*.*</include>
+                          <include>angular.json</include>
                           <include>package-lock.json</include>
                           <include>package.json</include>
+                          <include>pnpm-lock.yaml</include>
+                          <include>proxy.conf.json</include>
+                          <include>tsconfig.app.json</include>
+                          <include>tsconfig.build.json</include>
                           <include>tsconfig.json</include>
+                          <include>tsconfig.spec.json</include>
+                          <include>vite.config.ts</include>
+                          <include>vitest.config.ts</include>
                         </includes>
                       </fileSet>
                     </fileSets>

@@ -37,7 +37,7 @@ import { ALERT_BUS } from '@/shared/alert/application/AlertProvider';
 import { IconVue } from '@/shared/icon/infrastructure/primary';
 import { Loader } from '@/shared/loader/infrastructure/primary/Loader';
 import { Optional } from '@/shared/optional/domain/Optional';
-import { Ref, computed, defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
+import { Ref, computed, defineComponent, nextTick, onBeforeUnmount, onMounted, ref, shallowRef } from 'vue';
 
 export default defineComponent({
   name: 'LandscapeVue',
@@ -61,8 +61,8 @@ export default defineComponent({
 
     const selectedMode = ref<DisplayMode>('COMPACTED');
 
-    const landscape = ref(Loader.loading<Landscape>());
-    const levels = ref(Loader.loading<LandscapeLevel[]>());
+    const landscape = shallowRef(Loader.loading<Landscape>());
+    const levels = shallowRef(Loader.loading<LandscapeLevel[]>());
 
     const canLoadMiniMap = ref(false);
 
@@ -70,7 +70,7 @@ export default defineComponent({
     const landscapeConnectors = ref<LandscapeConnector[]>([]);
     const landscapeSize = ref<LandscapeConnectorsSize>(emptyLandscapeSize());
     const landscapeElements = ref(new Map<string, HTMLElement>());
-    const landscapeNavigation = ref(Loader.loading<LandscapeNavigation>());
+    const landscapeNavigation = shallowRef(Loader.loading<LandscapeNavigation>());
 
     const emphasizedModule = ref<ModuleSlug>();
 
@@ -145,15 +145,15 @@ export default defineComponent({
     };
 
     const landscapeNavigationValue = (): LandscapeNavigation => {
-      return landscapeNavigation.value.value();
+      return landscapeNavigation.value.value;
     };
 
     const loadLandscape = async (response: Landscape): Promise<void> => {
-      landscape.value.loaded(response);
-      levels.value.loaded(response.standaloneLevels());
+      landscape.value = Loader.loaded(response);
+      levels.value = Loader.loaded(response.standaloneLevels());
 
       await nextTick().then(updateConnectors);
-      landscapeNavigation.value.loaded(new LandscapeNavigation(landscapeElements.value, levels.value.value()));
+      landscapeNavigation.value = Loader.loaded(new LandscapeNavigation(landscapeElements.value, levels.value.value));
       document.addEventListener('keydown', handleKeyboard);
       applicationListener.addEventListener('resize', updateConnectors);
 
@@ -238,8 +238,7 @@ export default defineComponent({
     });
 
     const updateConnectors = (): void => {
-      landscapeConnectors.value = levels.value
-        .value()
+      landscapeConnectors.value = levels.value.value
         .flatMap(level => level.elements)
         .flatMap(element => element.allModules())
         .flatMap(toConnectors);
@@ -456,11 +455,11 @@ export default defineComponent({
       }
 
       for (const module of landscapeValue().selectedModules()) {
-        landscape.value.loaded(landscapeValue().toggle(module));
+        landscape.value = Loader.loaded(landscapeValue().toggle(module));
       }
 
       for (const module of preset.modules) {
-        landscape.value.loaded(landscapeValue().toggle(module));
+        landscape.value = Loader.loaded(landscapeValue().toggle(module));
       }
     };
 
@@ -471,7 +470,7 @@ export default defineComponent({
       if (isInputActiveElement()) {
         (document.activeElement as HTMLElement).blur();
       }
-      landscape.value.loaded(landscapeValue().toggle(module));
+      landscape.value = Loader.loaded(landscapeValue().toggle(module));
 
       if (isSelectable(module)) {
         clearPresetSelection();
@@ -530,7 +529,7 @@ export default defineComponent({
     };
 
     const loadProjectHistory = (projectHistory: ProjectHistory): void => {
-      landscape.value.loaded(landscapeValue().resetAppliedModules(projectHistory.modules));
+      landscape.value = Loader.loaded(landscapeValue().resetAppliedModules(projectHistory.modules));
 
       for (const property of projectHistory.properties) {
         if (unknownProperty(property.key)) {
@@ -582,7 +581,7 @@ export default defineComponent({
         })
         .then(() => {
           operationEnded();
-          landscape.value.loaded(landscapeValue().appliedModules(modulesToApply));
+          landscape.value = Loader.loaded(landscapeValue().appliedModules(modulesToApply));
 
           alertBus.success('Modules applied');
         })
@@ -593,7 +592,7 @@ export default defineComponent({
         });
     };
 
-    const landscapeValue = (): Landscape => landscape.value.value();
+    const landscapeValue = (): Landscape => landscape.value.value;
 
     const operationStarted = (): void => {
       operationInProgress.value = true;
@@ -649,13 +648,13 @@ export default defineComponent({
     };
 
     const reloadLandscape = async (response: Landscape): Promise<void> => {
-      landscape.value.loaded(response);
-      levels.value.loaded(response.standaloneLevels());
+      landscape.value = Loader.loaded(response);
+      levels.value = Loader.loaded(response.standaloneLevels());
 
       await rebuildLandscapeElements();
 
       await nextTick().then(updateConnectors);
-      landscapeNavigation.value.loaded(new LandscapeNavigation(landscapeElements.value, levels.value.value()));
+      landscapeNavigation.value = Loader.loaded(new LandscapeNavigation(landscapeElements.value, levels.value.value));
       loadAnchorPointModulesMap();
     };
 

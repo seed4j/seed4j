@@ -74,6 +74,7 @@ class Seed4JExtensionModuleFactory {
       .javaDependencies()
         .addDependency(seed4jDependency())
         .addDependency(seed4jTestDependency())
+        .addDependency(seed4jTestToolsDependency())
         .addTestDependency(groupId("com.approvaltests"), artifactId("approvaltests"), versionSlug("approvaltests"))
       .and()
       .mandatoryReplacements()
@@ -202,6 +203,10 @@ class Seed4JExtensionModuleFactory {
 
   private JavaDependency seed4jTestDependency() {
     return seed4jDependencyBuilder().classifier("tests").scope(JavaDependencyScope.TEST).type(JavaDependencyType.TEST_JAR).build();
+  }
+
+  private JavaDependency seed4jTestToolsDependency() {
+    return javaDependency().groupId("com.seed4j").artifactId("seed4j-test").versionSlug("seed4j").scope(JavaDependencyScope.TEST).build();
   }
 
   private JavaDependencyOptionalValueBuilder seed4jDependencyBuilder() {

@@ -77,6 +77,16 @@ class Seed4JExtensionModuleFactoryTest {
               </dependency>
           """
         )
+        .containing(
+          """
+              <dependency>
+                <groupId>com.seed4j</groupId>
+                <artifactId>seed4j-test</artifactId>
+                <version>${seed4j.version}</version>
+                <scope>test</scope>
+              </dependency>
+          """
+        )
         .and()
       .hasFile("src/main/resources/config/application.yml")
         .containing(

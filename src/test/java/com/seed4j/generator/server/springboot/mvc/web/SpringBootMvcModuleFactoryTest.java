@@ -75,6 +75,7 @@ class SpringBootMvcModuleFactoryTest {
       .containing(
         """
         server:
+          forward-headers-strategy: framework
           port: 9000
         spring:
           jackson:

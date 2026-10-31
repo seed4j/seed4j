@@ -1,5 +1,6 @@
 package com.seed4j.module.infrastructure.secondary;
 
+import static com.seed4j.module.domain.Seed4JModule.LINE_BREAK;
 import static java.util.stream.Collectors.joining;
 
 import com.seed4j.module.domain.javaproperties.PropertyKey;
@@ -15,7 +16,6 @@ public class PropertiesFileSpringFactoriesHandler {
 
   private static final String EQUAL = "=";
   private static final String COLLECTION_SEPARATOR = ",";
-  private static final String LINE_BREAK = System.lineSeparator();
 
   private final Path file;
 
@@ -78,7 +78,7 @@ public class PropertiesFileSpringFactoriesHandler {
       return "";
     }
 
-    return Files.readString(file);
+    return Files.readString(file).replace("\r\n", LINE_BREAK);
   }
 
   private String propertyLine(PropertyKey key, PropertyValue value) {

@@ -1,5 +1,7 @@
 package com.seed4j.module.infrastructure.secondary;
 
+import static com.seed4j.module.domain.Seed4JModule.LINE_BREAK;
+
 import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.startupcommand.DockerComposeFile;
 import com.seed4j.shared.error.domain.Assert;
@@ -12,7 +14,6 @@ import java.nio.file.Path;
 public class DockerComposeFileHandler {
 
   private static final String DASH = "-";
-  private static final String LINE_BREAK = System.lineSeparator();
   private static final String SPACER = " ";
 
   private final Indentation indentation;
@@ -69,6 +70,6 @@ public class DockerComposeFileHandler {
       return "include:" + LINE_BREAK;
     }
 
-    return Files.readString(file);
+    return Files.readString(file).replace("\r\n", LINE_BREAK);
   }
 }

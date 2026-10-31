@@ -13,7 +13,8 @@ Maven reactor (`pom.xml` at the root is `seed4j-parent`) and npm workspaces (roo
 - `seed4j-api/`: what a module is made of (`Seed4JModule` and its building blocks, error utilities), the
   only dependency of the official modules and the extensions. Plain Java, without Spring.
 - `seed4j-engine/`: the engine applying modules to projects (`com.seed4j.module` without its REST adapters), the history of the
-  generated projects (`com.seed4j.history`) and the engine shared kernels.
+  generated projects (`com.seed4j.history`) and the engine shared kernels. A Spring Boot auto-configuration
+  (`com.seed4j.engine.Seed4JEngineAutoConfiguration`) starts it in any Spring Boot application: see `seed4j-engine/README.md`.
 - `seed4j-test/`: test tools for modules (`assertThatModule`, `propertiesBuilder`, `FakeSeed4JModuleServices`), the test
   dependency of the official modules and the extensions.
 - `seed4j-core-modules/`: the official modules (`com.seed4j.generator`, slugs) and their templates and dependency versions.

@@ -20,7 +20,7 @@ import static com.seed4j.module.domain.Seed4JModule.text;
 import static com.seed4j.module.domain.Seed4JModule.to;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.REACT;
-import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
+import static com.seed4j.module.domain.replacement.ReplacementCondition.notContaining;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JDestination;
@@ -131,7 +131,7 @@ class ReactModuleFactory {
       .mandatoryReplacements()
         .in(path("eslint.config.js"))
           .add(lineAfterRegex("from 'typescript-eslint'"), "import eslintReact from '@eslint-react/eslint-plugin';")
-            .add(regex(notMatchingRegex(TYPESCRIPT_CONFIG_RECOMMENDED_PATTERN), TYPESCRIPT_CONFIG_RECOMMENDED_PATTERN), "")
+            .add(regex(notContaining("recommendedTypeChecked"), TYPESCRIPT_CONFIG_RECOMMENDED_PATTERN), "")
             .add(regex("[ \\t]+files: \\['src/\\*/webapp/\\*\\*\\/\\*\\.ts'],"), reactConfig)
             .add(
               lineAfterRegex("globals: \\{ \\.\\.\\.globals\\.browser },"),

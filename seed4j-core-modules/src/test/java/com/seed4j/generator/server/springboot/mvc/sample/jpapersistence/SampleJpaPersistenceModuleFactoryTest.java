@@ -7,6 +7,9 @@ import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -65,6 +68,72 @@ class SampleJpaPersistenceModuleFactoryTest {
     assertThatNonIdempotentModuleWithFiles(module, sampleInMemoryRepository(), inMemoryBeersResetter())
       .hasFile("src/main/java/com/seed4j/growth/sample/application/BeersApplicationService.java")
       .notContaining("@Transactional\n  @Transactional");
+  }
+
+  @Test
+  void shouldOnlyAnnotateTargetMethodsWhenCustomTransactionalAndPreAuthorizeExist() throws IOException {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
+      .basePackage("com.seed4j.growth")
+      .build();
+    Seed4JModule module = factory.buildModule(properties);
+    Path customService = Path.of(TestFileUtils.tmpDirForTest(), "BeersApplicationService.java");
+    Files.createDirectories(customService.getParent());
+    Files.writeString(
+      customService,
+      Files.readString(Path.of("src/test/resources/projects/sample-feature/BeersApplicationService.java")).replace(
+        "  public Beers catalog() {",
+        """
+          // Note: @PreAuthorize is used on secured endpoints
+          @Transactional(readOnly = true)
+          @PreAuthorize("can('read', #beer)")
+          public Beers customRead() {
+            return beers.catalog();
+          }
+
+          @Transactional
+          public void customWrite() {}
+
+          public Beers catalog() {\
+        """
+      )
+    );
+    ModuleFile customServiceFile = file(
+      customService.toString(),
+      "src/main/java/com/seed4j/growth/sample/application/BeersApplicationService.java"
+    );
+
+    assertThatNonIdempotentModuleWithFiles(module, customServiceFile, sampleInMemoryRepository(), inMemoryBeersResetter())
+      .hasFile("src/main/java/com/seed4j/growth/sample/application/BeersApplicationService.java")
+      .containing(
+        """
+          // Note: @PreAuthorize is used on secured endpoints
+          @Transactional(readOnly = true)
+          @PreAuthorize("can('read', #beer)")
+          public Beers customRead() {
+        """
+      )
+      .containing(
+        """
+          @Transactional(readOnly = true)
+          public Beers catalog() {
+        """
+      )
+      .containing(
+        """
+          @Transactional
+          @PreAuthorize("can('create', #beerToCreate)")
+          public Beer create(BeerToCreate beerToCreate) {
+        """
+      )
+      .containing(
+        """
+          @Transactional
+          @PreAuthorize("can('remove', #beer)")
+          public void remove(BeerId beer) {
+        """
+      )
+      .notContaining("@Transactional\n  // Note: @PreAuthorize")
+      .notContaining("@Transactional(readOnly = true)\n  @Transactional");
   }
 
   private ModuleFile beersApplicationService() {

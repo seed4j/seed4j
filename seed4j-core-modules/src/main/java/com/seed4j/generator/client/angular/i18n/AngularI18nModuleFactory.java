@@ -3,7 +3,6 @@ package com.seed4j.generator.client.angular.i18n;
 import static com.seed4j.module.domain.Seed4JModule.*;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.ANGULAR;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notContaining;
-import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JDestination;
@@ -75,12 +74,12 @@ class AngularI18nModuleFactory {
         .in(path(INDEX_CLIENT + "main.ts"))
           .add(fileStart(), I18N_MAIN_IMPORTS)
           .add(lineAfterText(PROVIDER_NEEDLE), I18N_MAIN_CONFIG)
-          .add(regex(notMatchingRegex(ENABLE_PROD_MODE_PATTERN), ENABLE_PROD_MODE_PATTERN), "$1, isDevMode $2")
+          .add(regex(notContaining(", isDevMode"), ENABLE_PROD_MODE_PATTERN), "$1, isDevMode $2")
           .and()
         .and()
       .optionalReplacements()
         .in(path(INDEX_CLIENT + "/app/app.html"))
-          .add(new EndOfFileReplacer(notContaining("<ng-container *transloco")), "</ng-container>")
+          .add(new EndOfFileReplacer(notContaining("<ng-container *transloco=\"let t\">")), "</ng-container>")
           .add(fileStart(), "<ng-container *transloco=\"let t\">")
           .add(lineAfterRegex("Angular \\+ TypeScript"), properties.indentation().times(2) + "<h2>{{ t('home.translationEnabled') }}</h2>")
           .and()

@@ -2,12 +2,14 @@ package com.seed4j.generator.client.react.core;
 
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.eslintConfigFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.file;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.lintStagedConfigFileWithPrettier;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeDependency;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.packageJsonFile;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.tsConfigFile;
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.vitestConfigFile;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.seed4j.TestFileUtils;
 import com.seed4j.UnitTest;
@@ -16,6 +18,11 @@ import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.resource.FakeSeed4JModuleServices;
 import com.seed4j.module.domain.resource.FakeSeed4JModuleServices.FakeNodeLazyPackagesInstaller.Installation;
+import com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.ModuleFile;
+import com.seed4j.shared.error.domain.GeneratorException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -117,6 +124,29 @@ class ReactModuleFactoryTest {
     assertThatModuleWithFiles(module, packageJsonFile(), eslintConfigFile(), tsConfigFile(), vitestConfigFile())
       .hasFile("vite.config.ts")
       .containing("localhost:8080");
+  }
+
+  @Test
+  void shouldFailWhenEslintConfigRecommendedIsMissing() throws IOException {
+    Seed4JModule module = factory.buildModule(
+      Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build()
+    );
+    Path customEslint = Path.of(TestFileUtils.tmpDirForTest(), "eslint.config.js");
+    Files.createDirectories(customEslint.getParent());
+    Files.writeString(
+      customEslint,
+      Files.readString(Path.of("src/main/resources/generator/typescript/eslint.config.js.mustache")).replace(
+        "...typescript.configs.recommended",
+        "...typescript.configs.strict"
+      )
+    );
+    ModuleFile customEslintFile = file(customEslint.toString(), "eslint.config.js");
+
+    assertThatThrownBy(() ->
+      assertThatModuleWithFiles(module, packageJsonFile(), customEslintFile, tsConfigFile(), vitestConfigFile())
+    )
+      .isInstanceOf(GeneratorException.class)
+      .hasMessageContaining("Can't find");
   }
 
   private String nodeScript(String key, String value) {

@@ -22,6 +22,9 @@ class NativeHints implements RuntimeHintsRegistrar {
       .registerType(RestSeed4JLandscapeFeature.class, MemberCategory.values())
       .registerType(RestSeed4JLandscapeDependency.class, MemberCategory.values())
       .registerType(RestSeed4JModulePropertiesDefinition.class, MemberCategory.values())
-      .registerType(Seed4JLandscapeElementType.class, MemberCategory.values());
+      .registerType(Seed4JLandscapeElementType.class, MemberCategory.values())
+      .registerType(RestPresets.class, MemberCategory.values())
+      .registerType(RestPreset.class, MemberCategory.values())
+      .registerType(RestModuleToApply.class, MemberCategory.values());
   }
 }

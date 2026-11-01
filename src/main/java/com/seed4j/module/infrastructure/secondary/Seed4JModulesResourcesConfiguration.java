@@ -12,8 +12,10 @@ import java.util.stream.StreamSupport;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportRuntimeHints;
 
 @Configuration
+@ImportRuntimeHints(NativeHints.class)
 @EnableConfigurationProperties(Seed4JHiddenResourcesProperties.class)
 class Seed4JModulesResourcesConfiguration {
 

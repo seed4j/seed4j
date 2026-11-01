@@ -36,3 +36,11 @@ if [ "$status" -ne 0 ]; then
   docker logs "$(cat .container_seed4j)"
   exit 1
 fi
+
+presetsStatus=$(curl -o /dev/null -s -w "%{http_code}\n" "http://localhost:$PORT/api/presets")
+if [ "$presetsStatus" -ne 200 ]; then
+  echo "*** [$(date)] Error when calling /api/presets: HTTP $presetsStatus"
+  echo "*** Container logs:"
+  docker logs "$(cat .container_seed4j)"
+  exit 1
+fi

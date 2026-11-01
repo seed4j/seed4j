@@ -10,12 +10,16 @@ import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import com.uber.nullaway.annotations.Contract;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 import org.jspecify.annotations.Nullable;
@@ -100,9 +104,20 @@ public class FileSystemProjectFiles implements ProjectFiles {
     assertFolderExist(resourcePath, folderUrl);
 
     try {
-      return Path.of(folderUrl.toURI());
-    } catch (URISyntaxException e) {
+      return toPath(folderUrl.toURI());
+    } catch (URISyntaxException | IOException e) {
       throw GeneratorException.technicalError("Unable to read folder %s: %s".formatted(resourcePath, e.getMessage()), e);
+    }
+  }
+
+  @ExcludeFromGeneratedCodeCoverage(reason = "The error handling is an hard to test implementation detail")
+  @SuppressWarnings("resource")
+  private static Path toPath(URI uri) throws IOException {
+    try {
+      return Path.of(uri);
+    } catch (FileSystemNotFoundException _) {
+      FileSystems.newFileSystem(uri, Map.of());
+      return Path.of(uri);
     }
   }
 

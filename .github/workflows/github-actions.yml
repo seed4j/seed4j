@@ -203,10 +203,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: seed4j-main-jar
-          # main may still have the single module layout (target/): remove it once the maven modules are merged
-          path: |
-            ${{ github.workspace }}/seed4j-server/target/*.jar
-            ${{ github.workspace }}/target/*.jar
+          path: '${{ github.workspace }}/seed4j-server/target/*.jar'
           retention-days: 1
   #--------------------------------------------------
   # Cypress

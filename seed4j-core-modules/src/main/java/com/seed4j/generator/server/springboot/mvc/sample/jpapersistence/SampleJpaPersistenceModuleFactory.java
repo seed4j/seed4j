@@ -10,8 +10,6 @@ import static com.seed4j.module.domain.Seed4JModule.toSrcTestJava;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
-import com.seed4j.module.domain.replacement.RegexNeedleBeforeReplacer;
-import com.seed4j.module.domain.replacement.ReplacementCondition;
 import com.seed4j.module.domain.replacement.TextNeedleBeforeReplacer;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.regex.Pattern;
@@ -25,23 +23,26 @@ class SampleJpaPersistenceModuleFactory {
 
   private static final TextNeedleBeforeReplacer IMPORT_NEEDLE = lineBeforeText("import org.springframework.stereotype.Service;");
 
-  private static final TextNeedleBeforeReplacer CATALOG_METHOD_NEEDLE = new TextNeedleBeforeReplacer(
-    ReplacementCondition.always(),
-    "Beers catalog()"
+  private static final TextNeedleBeforeReplacer CATALOG_METHOD_NEEDLE = lineBeforeUnlessAnnotated(
+    "@Transactional(readOnly = true)",
+    "public Beers catalog()"
   );
 
-  private static final RegexNeedleBeforeReplacer REMOVE_METHOD_NEEDLE = new RegexNeedleBeforeReplacer(
-    ReplacementCondition.always(),
-    Pattern.compile("^ +@PreAuthorize\\(\"can\\('remove', #beer\\)\"\\)\\n+ +public void remove\\(BeerId beer\\)", Pattern.MULTILINE)
+  private static final TextNeedleBeforeReplacer CREATE_METHOD_NEEDLE = lineBeforeUnlessAnnotated(
+    "@Transactional",
+    "@PreAuthorize(\"can('create', #beerToCreate)\")"
   );
 
-  private static final RegexNeedleBeforeReplacer CREATE_METHOD_NEEDLE = new RegexNeedleBeforeReplacer(
-    ReplacementCondition.always(),
-    Pattern.compile(
-      "^ +@PreAuthorize\\(\"can\\('create', #beerToCreate\\)\"\\)\\n+ +public Beer create\\(BeerToCreate beerToCreate\\)",
-      Pattern.MULTILINE
-    )
+  private static final TextNeedleBeforeReplacer REMOVE_METHOD_NEEDLE = lineBeforeUnlessAnnotated(
+    "@Transactional",
+    "@PreAuthorize(\"can('remove', #beer)\")"
   );
+
+  private static TextNeedleBeforeReplacer lineBeforeUnlessAnnotated(String annotation, String text) {
+    Pattern annotated = Pattern.compile(Pattern.quote(annotation) + "\\s+" + Pattern.quote(text));
+
+    return new TextNeedleBeforeReplacer((content, replacement) -> !annotated.matcher(content).find(), text);
+  }
 
   Seed4JModule buildModule(Seed4JModuleProperties properties) {
     Assert.notNull("properties", properties);
@@ -68,8 +69,8 @@ class SampleJpaPersistenceModuleFactory {
           .in(path("src/main/java").append(packagePath).append("sample/application/BeersApplicationService.java"))
             .add(IMPORT_NEEDLE, "import org.springframework.transaction.annotation.Transactional;")
             .add(CATALOG_METHOD_NEEDLE, spaces + "@Transactional(readOnly = true)")
-            .add(REMOVE_METHOD_NEEDLE, spaces + "@Transactional")
             .add(CREATE_METHOD_NEEDLE, spaces + "@Transactional")
+            .add(REMOVE_METHOD_NEEDLE, spaces + "@Transactional")
           .and()
         .and()
       .build();

@@ -355,8 +355,16 @@ public final class Seed4JModule {
     return new RegexNeedleAfterReplacer(notContainingReplacement(), Pattern.compile(regex, Pattern.MULTILINE));
   }
 
+  /**
+   * Creates an {@link EndOfFileReplacer} that appends the replacement at the end of the file only if the file
+   * does not already contain the replacement text (via {@link ReplacementCondition#notContainingReplacement()}).
+   *
+   * <p>To append unconditionally or with a custom condition, instantiate {@link EndOfFileReplacer} directly.
+   *
+   * @return an {@link EndOfFileReplacer} guarded by {@link ReplacementCondition#notContainingReplacement()}
+   */
   public static EndOfFileReplacer append() {
-    return new EndOfFileReplacer(ReplacementCondition.always());
+    return new EndOfFileReplacer(notContainingReplacement());
   }
 
   public static BuildProfileId buildProfileId(String id) {

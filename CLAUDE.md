@@ -95,29 +95,32 @@ my_context/
 
 ### Top-Level Bounded Contexts (`com.seed4j`)
 
-| Package      | Responsibility                                                                                                                                                   |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `generator/` | One sub-package per technology module (e.g. `springboot`, `vue`, `angular`). Each module has its own `domain/`, `application/`, `infrastructure/` sub-structure. |
-| `module/`    | Core module management: applying modules to projects, module landscape, history.                                                                                 |
-| `history/`   | History of the modules applied to a generated project (engine).                                                                                                  |
-| `project/`   | Generated-project download and history exposure (server), reading the history through the engine.                                                                |
-| `shared/`    | Cross-cutting value types and utilities (`error`, `slug`, `collection`, etc.).                                                                                   |
-| `statistic/` | Analytics/statistics tracking.                                                                                                                                   |
-| `wire/`      | Spring wiring for frontend, security, springdoc, git info.                                                                                                       |
+| Package      | Responsibility                                                                                                                                                                      |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `generator/` | One sub-package per technology module (e.g. `springboot`, `vue`, `angular`), in `seed4j-core-modules`: a factory and a resource provider, without Spring (see Module System below). |
+| `module/`    | Core module management: applying modules to projects, module landscape, history.                                                                                                    |
+| `history/`   | History of the modules applied to a generated project (engine).                                                                                                                     |
+| `project/`   | Generated-project download and history exposure (server), reading the history through the engine.                                                                                   |
+| `shared/`    | Cross-cutting value types and utilities (`error`, `slug`, `collection`, etc.).                                                                                                      |
+| `statistic/` | Analytics/statistics tracking.                                                                                                                                                      |
+| `wire/`      | Spring wiring for frontend, security, springdoc, git info.                                                                                                                          |
 
 ### Module System (how to add a new generator module)
 
-1. **Domain factory** in `com.seed4j.generator.my_module.domain`:
-   - Class `MyModuleFactory` with `buildModule(Seed4JModuleProperties)` returning `Seed4JModule`.
+A module is a single package of `seed4j-core-modules`, `com.seed4j.generator.my_module`, without Spring:
+
+1. **Slug**: add the module slug to the `Seed4JCoreModuleSlug` enum (`com.seed4j.shared.slug.domain`).
+
+2. **Factory**: package-private class `MyModuleFactory` with `buildModule(Seed4JModuleProperties)` returning `Seed4JModule`
+   (its constructor takes `Seed4JModuleServices` when it needs the engine services).
    - Templates go in `seed4j-core-modules/src/main/resources/generator/my-module/` as `*.mustache` files.
    - Start with `Seed4JModulesAssertions.assertThatModule(module).hasPrefixedFiles(...)` (from `seed4j-test`) in a `@UnitTest`.
 
-2. **Application service** in `com.seed4j.generator.my_module.application`:
-   - Thin `@Service` class — just delegates to the factory.
-
-3. **Spring configuration** in `com.seed4j.generator.my_module.infrastructure.primary`:
-   - `@Configuration` class exposing a `Seed4JModuleResource` bean via the fluent builder.
-   - Register the module slug in `Seed4JModuleSlug`.
+3. **Resource provider**: class `MyModuleResource` implementing `Seed4JModuleResourceProvider`, annotated
+   `@AutoService(Seed4JModuleResourceProvider.class)`: it returns the `Seed4JModuleResource` built with the fluent builder
+   (slug, properties definition, API doc, organization, tags, factory). The engine discovers it with `ServiceLoader`.
+   - `CoreModulesArchTest` checks that a module does not depend on another module (only on the code shared by modules) and
+     that its factory is not public.
 
 4. **Cucumber integration test** in `seed4j-core-modules/src/test/features/my-module.feature` (steps provided by `seed4j-test`, package
    `com.seed4j.test.cucumber`):

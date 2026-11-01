@@ -13,7 +13,7 @@ You can start with the element you prefer but to create a `Seed4JModuleResource`
 
 In fact, you don't just need to create one `Seed4JModule`, you'll need a factory able to create them since each instance depends on the properties chosen by the users.
 
-So, as this is the business of Seed4J you probably want to create a `com.seed4j.generator.my_module.domain` package. And you can start with a simple test:
+A module lives in a single package of `seed4j-core-modules`, `com.seed4j.generator.my_module`. You can start with a simple test, in `seed4j-core-modules/src/test/java` (the test tools come from `seed4j-test`):
 
 ```java
 import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
@@ -54,11 +54,11 @@ So, now that we have a first test, we can do a simple implementation:
 ```java
 import static com.seed4j.module.domain.Seed4JModule.*;
 
-public class MyModuleFactory {
+class MyModuleFactory {
 
   private static final Seed4JSource SOURCE = from("my-module");
 
-  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
+  Seed4JModule buildModule(Seed4JModuleProperties properties) {
     // @formatter:off
     return moduleBuilder(properties)
       .files()
@@ -70,7 +70,7 @@ public class MyModuleFactory {
 }
 ```
 
-This implementation will take a file from `src/main/resources/generator/my-module` and put it in the generated project.
+This implementation will take a file from `seed4j-core-modules/src/main/resources/generator/my-module` and put it in the generated project. The factory stays package-private: the module is exposed by its resource provider (`CoreModulesArchTest` checks it).
 
 The file is a template named `Dummy.java.mustache` and can contain some mustache placeholders:
 
@@ -91,30 +91,30 @@ And this is it for this part of the documentation... Of course, you can do a lot
 
 ### Dependency resolution
 
-- In the `src/main/resources/generator/dependencies` folder, different files are maintained to handle the dependencies for different tools/frameworks such as docker, maven, angular, etc.
+- In the `seed4j-core-modules/src/main/resources/generator/dependencies` folder, different files are maintained to handle the dependencies for different tools/frameworks such as docker, maven, angular, etc.
 - You can add the dependencies required for your new module in the respective files in the `dependencies` folder.
 - The dependency versions are then automatically managed by the dependabot.
 
 ### Overview of Version files/folders in this dependencies folder
 
 - **Docker versions**
-  - You can add the docker images required for your module in the `src/main/resources/generator/dependencies/Dockerfile`
-  - These dependencies are resolved using the [FileSystemDockerImagesReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/com/seed4j/module/infrastructure/secondary/docker/FileSystemDockerImagesReader.java), an implementation of the `DockerImagesReader` bean to read from a local file.
+  - You can add the docker images required for your module in the `seed4j-core-modules/src/main/resources/generator/dependencies/Dockerfile`
+  - These dependencies are resolved using the [FileSystemDockerImagesReader](../seed4j-engine/src/main/java/com/seed4j/module/infrastructure/secondary/docker/FileSystemDockerImagesReader.java), an implementation of the `DockerImagesReader` bean to read from a local file.
 
 - **Java versions**
-  - You can add the java dependencies required for your module in the `src/main/resources/generator/dependencies/pom.xml`
-  - These dependencies are resolved using [FileSystemMavenDependenciesReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/com/seed4j/module/infrastructure/secondary/javadependency/FileSystemMavenDependenciesReader.java), an implementation of the `JavaDependenciesReader` bean to read from a local file.
+  - You can add the java dependencies required for your module in the `seed4j-core-modules/src/main/resources/generator/dependencies/pom.xml`
+  - These dependencies are resolved using [FileSystemMavenDependenciesReader](../seed4j-engine/src/main/java/com/seed4j/module/infrastructure/secondary/javadependency/FileSystemMavenDependenciesReader.java), an implementation of the `JavaDependenciesReader` bean to read from a local file.
 
 - **NPM versions**
-  - Common npm dependencies can be added in the `src/main/resources/generator/dependencies/common/package.json`
-  - Framework specific npm dependencies can be added in the `package.json` of the respective framework folders. For e.g.: `src/main/resources/generator/dependencies/react/package.json`
-  - These dependencies are resolved using [FileSystemNodePackagesVersionReader](https://github.com/seed4j/seed4j/blob/main/src/main/java/com/seed4j/module/infrastructure/secondary/nodejs/FileSystemNodePackagesVersionReader.java), an implementation of the `NodePackagesVersionsReader` bean to read from a local file.
+  - Common npm dependencies can be added in the `seed4j-core-modules/src/main/resources/generator/dependencies/common/package.json`
+  - Framework specific npm dependencies can be added in the `package.json` of the respective framework folders. For e.g.: `seed4j-core-modules/src/main/resources/generator/dependencies/react/package.json`
+  - These dependencies are resolved using [FileSystemNodePackagesVersionReader](../seed4j-engine/src/main/java/com/seed4j/module/infrastructure/secondary/nodejs/FileSystemNodePackagesVersionReader.java), an implementation of the `NodePackagesVersionsReader` bean to read from a local file.
 
 ## Creating Seed4JModuleResource
 
-As the main goal of a `Seed4JModuleResource` is to expose a WebService.
+The `Seed4JModuleResource` makes the module available: the engine applies it, and the server exposes it in its API.
 
-Let's start by creating a gherkin scenario for that. So in `src/test/features/my-module.feature` we'll do:
+Let's start by creating a gherkin scenario for that. So in `seed4j-core-modules/src/test/features/my-module.feature` we'll do:
 
 ```
 Feature: My module
@@ -126,49 +126,31 @@ Feature: My module
       | Dummy.java |
 ```
 
-> The goal of this test is not to duplicate your factory unit test! Just ensure that one change done by your module is visible here, it is enough since we only want to ensure that the WebService is working as expected.
+> The goal of this test is not to duplicate your factory unit test! Just ensure that one change done by your module is visible here, it is enough since we only want to ensure that the module is found and applied by the engine.
 
-You can now run `CucumberTest` and ensure that it is failing as expected (with a 404).
+You can now run `CucumberTest` and ensure that it is failing as expected (with an unknown slug).
 
-To be used by Seed4J, the `Seed4JModuleResource` needs to be a Spring bean so, let's create a configuration in `com.seed4j.generator.my_module.infrastructure.primary`:
+First, add the slug of your module to the `Seed4JCoreModuleSlug` enum. Then, in the same package as the factory, create a resource provider: the engine discovers it with `ServiceLoader`, there is no Spring in the modules.
 
 ```java
-@Configuration
-class MyModuleModuleConfiguration {
+@AutoService(Seed4JModuleResourceProvider.class)
+public class MyModuleResource implements Seed4JModuleResourceProvider {
 
-  @Bean
-  Seed4JModuleResource myModule(MyModuleApplicationService myModules) {
+  @Override
+  public Seed4JModuleResource get(Seed4JModuleServices services) {
     return Seed4JModuleResource.builder()
-      .slug(Seed4JModuleSlug.MY_MODULE)
+      .slug(Seed4JCoreModuleSlug.MY_MODULE)
       .propertiesDefinition(Seed4JModulePropertiesDefinition.builder().addBasePackage().build())
       .apiDoc("Group", "This is my module")
       .standalone()
       .tags("server")
-      .factory(myModules::buildModule);
+      .factory(new MyModuleFactory()::buildModule);
   }
 }
 ```
 
 In fact, you don't really have choices here, the `Seed4JModuleResource.builder()` is fluent and will only let you go to the next possible step.
-The most confusing one may be the last one `.factory(myModules::buildModule)` which is, in fact, a method called to build the module.
-
-For this to work, we'll need to add a simple orchestration class in `com.seed4j.generator.my_module.application`:
-
-```java
-@Service
-public class MyModuleApplicationService {
-
-  private final MyModuleFactory factory;
-
-  public MyModuleApplicationService() {
-    factory = new MyModuleFactory();
-  }
-
-  public Seed4JModule buildModule(Seed4JModuleProperties properties) {
-    return factory.buildModule(properties);
-  }
-}
-```
+The most confusing one may be the last one `.factory(new MyModuleFactory()::buildModule)` which is, in fact, a method called to build the module. If your factory needs the engine services (docker images, node versions...), give it the `services` received by `get`.
 
 In your `Seed4JModuleResource` you can define additional properties and an organization to display your module in the landscape (replacing `.standalone()`). Here again, you have a lot of examples to rely on.
 

@@ -22,7 +22,7 @@ class SampleJpaPersistenceModuleFactoryTest {
 
     Seed4JModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, beersApplicationService(), sampleInMemoryRepository(), inMemoryBeersResetter())
+    assertThatNonIdempotentModuleWithFiles(module, beersApplicationService(), sampleInMemoryRepository(), inMemoryBeersResetter())
       .hasPrefixedFiles(
         "src/main/java/com/seed4j/growth/sample/infrastructure/secondary",
         "BeerEntity.java",
@@ -61,6 +61,10 @@ class SampleJpaPersistenceModuleFactoryTest {
         "src/main/java/com/seed4j/growth/sample/infrastructure/secondary/InMemoryBeersRepository.java",
         "src/test/java/com/seed4j/growth/sample/infrastructure/secondary/InMemoryBeersResetter.java"
       );
+
+    assertThatNonIdempotentModuleWithFiles(module, sampleInMemoryRepository(), inMemoryBeersResetter())
+      .hasFile("src/main/java/com/seed4j/growth/sample/application/BeersApplicationService.java")
+      .notContaining("@Transactional\n  @Transactional");
   }
 
   private ModuleFile beersApplicationService() {

@@ -127,6 +127,15 @@ public final class Seed4JModulesAssertions {
   public static Seed4JModuleAsserter assertThatModuleWithFiles(Seed4JModule module, ModuleFile... files) {
     addFilesToProject(module.projectFolder(), files);
 
+    // Applying the module a first time before applying it again to check the reliability
+    TestSeed4JModules.apply(module);
+
+    return new Seed4JModuleAsserter(module);
+  }
+
+  public static Seed4JModuleAsserter assertThatNonIdempotentModuleWithFiles(Seed4JModule module, ModuleFile... files) {
+    addFilesToProject(module.projectFolder(), files);
+
     return new Seed4JModuleAsserter(module);
   }
 

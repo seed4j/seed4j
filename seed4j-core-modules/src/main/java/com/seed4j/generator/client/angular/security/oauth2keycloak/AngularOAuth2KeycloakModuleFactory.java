@@ -2,6 +2,7 @@ package com.seed4j.generator.client.angular.security.oauth2keycloak;
 
 import static com.seed4j.module.domain.Seed4JModule.*;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
+import static com.seed4j.module.domain.replacement.ReplacementCondition.notContaining;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 
 import com.seed4j.module.domain.Indentation;
@@ -44,15 +45,14 @@ class AngularOAuth2KeycloakModuleFactory {
     "(\"allowedCommonJsDependencies\": *\\[[^]]+)]"
   );
   private static final ElementReplacer FILLED_ALLOWED_COMMON_DEPENDENCIES_NEEDLE = regex(
-    notMatchingRegex(FILLED_ALLOWED_COMMON_DEPENDENCIES_PATTERN),
+    (contentBeforeReplacement, replacement) ->
+      !contentBeforeReplacement.contains(replacement.replace("$1, ", "").replace("]", ""))
+      && FILLED_ALLOWED_COMMON_DEPENDENCIES_PATTERN.matcher(contentBeforeReplacement).find(),
     FILLED_ALLOWED_COMMON_DEPENDENCIES_PATTERN
   );
 
   private static final Pattern FILLED_STANDALONE_PATTERN = Pattern.compile("(imports: *\\[[^]]+)]");
-  private static final ElementReplacer FILLED_STANDALONE_NEEDLE = regex(
-    notMatchingRegex(FILLED_STANDALONE_PATTERN),
-    FILLED_STANDALONE_PATTERN
-  );
+  private static final ElementReplacer FILLED_STANDALONE_NEEDLE = regex(notContaining("Login"), FILLED_STANDALONE_PATTERN);
 
   private static final ElementReplacer MENU_NEEDLE = lineAfterRegex("<span.+id=\\\"menu-space-separator\\\".*></span>");
 
@@ -169,7 +169,10 @@ class AngularOAuth2KeycloakModuleFactory {
           .add(lineAfterRegex("from '@angular/router';"), RXJS_OF_IMPORT)
           .add(lineAfterRegex("from './app';"), MOCK_OAUTH2_AUTH_SERVICE)
           .add(lineAfterRegex("from './app';"), OAUTH2_AUTH_SERVICE_IMPORT)
-          .add(regex("(providers: \\[.*)(\\],)"), "$1, { provide: Oauth2AuthService, useValue: mockOauth2AuthService }$2")
+          .add(
+            regex(notContaining("{ provide: Oauth2AuthService, useValue: mockOauth2AuthService }"), "(providers: \\[.*)(\\],)"),
+            "$1, { provide: Oauth2AuthService, useValue: mockOauth2AuthService }$2"
+          )
           .and()
         .and()
       .build();

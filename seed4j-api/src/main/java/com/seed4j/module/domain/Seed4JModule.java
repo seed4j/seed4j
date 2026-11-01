@@ -356,7 +356,7 @@ public final class Seed4JModule {
   }
 
   public static EndOfFileReplacer append() {
-    return new EndOfFileReplacer(ReplacementCondition.always());
+    return new EndOfFileReplacer(notContainingReplacement());
   }
 
   public static BuildProfileId buildProfileId(String id) {

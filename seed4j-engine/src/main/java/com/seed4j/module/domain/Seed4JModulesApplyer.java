@@ -11,6 +11,7 @@ import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.javabuild.ProjectJavaBuildToolRepository;
 import com.seed4j.module.domain.javabuild.command.JavaBuildCommands;
 import com.seed4j.module.domain.javadependency.JavaDependenciesVersionsRepository;
+import com.seed4j.module.domain.javadependency.ProjectJavaDependencies;
 import com.seed4j.module.domain.javadependency.ProjectJavaDependenciesRepository;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import com.seed4j.module.domain.replacement.ContentReplacer;
@@ -197,11 +198,11 @@ public class Seed4JModulesApplyer {
   }
 
   private JavaBuildCommands buildDependenciesChanges(Seed4JModule module) {
-    return module.javaDependencies().buildChanges(javaVersions.get(), projectDependencies.get(module.projectFolder()));
+    return module.javaDependencies().buildChanges(javaVersions.get(), projectJavaDependencies(module));
   }
 
   private JavaBuildCommands buildJavaCompilerChanges(Seed4JModule module) {
-    return module.javaCompiler().buildChanges(javaVersions.get(), projectDependencies.get(module.projectFolder()));
+    return module.javaCompiler().buildChanges(javaVersions.get(), projectJavaDependencies(module));
   }
 
   private JavaBuildCommands buildPropertiesChanges(Seed4JModule module) {
@@ -209,11 +210,19 @@ public class Seed4JModulesApplyer {
   }
 
   private JavaBuildCommands buildProfilesChanges(Seed4JModule module) {
-    return module.javaBuildProfiles().buildChanges(javaVersions.get(), projectDependencies.get(module.projectFolder()));
+    return module.javaBuildProfiles().buildChanges(javaVersions.get(), projectJavaDependencies(module));
   }
 
   private JavaBuildCommands buildPluginsChanges(Seed4JModule module) {
-    return module.mavenPlugins().buildChanges(javaVersions.get(), projectDependencies.get(module.projectFolder()));
+    return module.mavenPlugins().buildChanges(javaVersions.get(), projectJavaDependencies(module));
+  }
+
+  private ProjectJavaDependencies projectJavaDependencies(Seed4JModule module) {
+    if (javaBuildTools.detect(module.files()).isPresent()) {
+      return ProjectJavaDependencies.EMPTY;
+    }
+
+    return projectDependencies.get(module.projectFolder());
   }
 
   private JavaBuildCommands buildGradleConfigurationsChanges(Seed4JModule module) {

@@ -2,14 +2,21 @@ package com.seed4j.generator.client.angular.i18n;
 
 import static com.seed4j.module.domain.Seed4JModule.*;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.ANGULAR;
+import static com.seed4j.module.domain.replacement.ReplacementCondition.notContaining;
+import static com.seed4j.module.domain.replacement.ReplacementCondition.notMatchingRegex;
 
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
+import java.util.regex.Pattern;
 
 class AngularI18nModuleFactory {
+
+  private static final Pattern ENABLE_PROD_MODE_PATTERN = Pattern.compile(
+    "(import \\{\\s*enableProdMode\\s*)(\\}\\s*from\\s*'@angular/core';)"
+  );
 
   private static final String I18N_MAIN_IMPORTS = """
     import { TranslocoHttpLoader } from './transloco-loader';
@@ -67,7 +74,7 @@ class AngularI18nModuleFactory {
         .in(path(INDEX_CLIENT + "main.ts"))
           .add(fileStart(), I18N_MAIN_IMPORTS)
           .add(lineAfterText(PROVIDER_NEEDLE), I18N_MAIN_CONFIG)
-          .add(regex("(import \\{\\s*enableProdMode\\s*)(\\}\\s*from\\s*'@angular/core';)"), "$1, isDevMode $2")
+          .add(regex(notMatchingRegex(ENABLE_PROD_MODE_PATTERN), ENABLE_PROD_MODE_PATTERN), "$1, isDevMode $2")
           .and()
         .and()
       .optionalReplacements()
@@ -78,11 +85,11 @@ class AngularI18nModuleFactory {
           .and()
         .in(path(INDEX_CLIENT + "app/" + "app.ts"))
           .add(lineAfterText("@angular/core';"), "import { TranslocoDirective } from '@jsverse/transloco';")
-          .add(regex("(imports: \\[.*)(\\],)"), "$1, TranslocoDirective$2")
+          .add(regex(notContaining(", TranslocoDirective"), "(imports: \\[.*)(\\],)"), "$1, TranslocoDirective$2")
           .and()
         .in(path(INDEX_CLIENT + "app/app.spec.ts"))
           .add(fileStart(), "import { getTranslocoModule } from './transloco-testing-module';\n")
-          .add(regex("(imports: \\[.*)(\\],)"), "$1, getTranslocoModule()$2")
+          .add(regex(notContaining(", getTranslocoModule()"), "(imports: \\[.*)(\\],)"), "$1, getTranslocoModule()$2")
           .and()
         .and()
       .build();

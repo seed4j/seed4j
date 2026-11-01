@@ -1,20 +1,10 @@
 package com.seed4j.generator.client.svelte.core;
 
-import static com.seed4j.module.domain.Seed4JModule.from;
-import static com.seed4j.module.domain.Seed4JModule.lineBeforeText;
-import static com.seed4j.module.domain.Seed4JModule.moduleBuilder;
-import static com.seed4j.module.domain.Seed4JModule.packageName;
-import static com.seed4j.module.domain.Seed4JModule.path;
-import static com.seed4j.module.domain.Seed4JModule.preCommitCommands;
-import static com.seed4j.module.domain.Seed4JModule.runScriptCommandWith;
-import static com.seed4j.module.domain.Seed4JModule.scriptCommand;
-import static com.seed4j.module.domain.Seed4JModule.scriptKey;
-import static com.seed4j.module.domain.Seed4JModule.stagedFilesFilter;
-import static com.seed4j.module.domain.Seed4JModule.to;
+import static com.seed4j.generator.typescript.common.domain.VitestShortcuts.vitestCoverageExclusion;
+import static com.seed4j.module.domain.Seed4JModule.*;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.COMMON;
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.SVELTE;
 
-import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
@@ -22,19 +12,13 @@ import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.resource.Seed4JModuleServices;
 import com.seed4j.shared.error.domain.Assert;
+import java.util.function.Consumer;
 
 class SvelteModuleFactory {
 
   private static final Seed4JSource SOURCE = from("client/svelte");
-
-  private static final String ENGINES_NEEDLE = "  \"engines\":";
-
-  private static final Seed4JSource PRIMARY_MAIN_SOURCE = SOURCE.append("src/main/webapp/app/common/primary/app");
-  private static final Seed4JDestination PRIMARY_MAIN_DESTINATION = to("src/main/webapp/app/common/primary/app");
-  private static final Seed4JSource CLIENT_COMMON = from("client/common");
-
-  private static final Seed4JSource PRIMARY_TEST_SOURCE = SOURCE.append("src/test/unit/common/primary/app");
-  private static final Seed4JDestination PRIMARY_TEST_DESTINATION = to("src/test/webapp/unit/common/primary/app");
+  private static final Seed4JSource WEBAPP_SOURCE = SOURCE.append("src/main/webapp");
+  private static final Seed4JDestination WEBAPP_DESTINATION = to("src/main/webapp");
 
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
@@ -47,88 +31,123 @@ class SvelteModuleFactory {
 
     // @formatter:off
     return moduleBuilder(properties)
-      .preCommitActions(stagedFilesFilter("{src/**/,}*.ts"), preCommitCommands("eslint --fix", "prettier --write"))
+      .preCommitActions(stagedFilesFilter("{src/**/,}*.{ts,svelte}"), preCommitCommands("eslint --fix", "prettier --write"))
+      .documentation(documentationTitle("Svelte"), SOURCE.file("documentation/svelte.md"))
       .gitIgnore()
         .comment("Svelte")
         .pattern(".svelte-kit/")
         .and()
       .packageJson()
-        .addDependency(packageName("svelte-navigator"), SVELTE)
-        .addDevDependency(packageName("@babel/preset-env"), SVELTE)
+        .removeDevDependency(packageName("@tsconfig/recommended"))
+        .addDevDependency(packageName("svelte"), SVELTE)
         .addDevDependency(packageName("@sveltejs/adapter-static"), SVELTE)
         .addDevDependency(packageName("@sveltejs/kit"), SVELTE)
+        .addDevDependency(packageName("@sveltejs/vite-plugin-svelte"), SVELTE)
         .addDevDependency(packageName("@testing-library/svelte"), SVELTE)
-        .addDevDependency(packageName("@typescript-eslint/eslint-plugin"), SVELTE)
-        .addDevDependency(packageName("@typescript-eslint/parser"), SVELTE)
-        .addDevDependency(packageName("@vitest/coverage-istanbul"), SVELTE)
-        .addDevDependency(packageName("babel-plugin-transform-vite-meta-env"), SVELTE)
-        .addDevDependency(packageName("eslint"), SVELTE)
-        .addDevDependency(packageName("eslint-config-prettier"), COMMON)
-        .addDevDependency(packageName("eslint-plugin-svelte3"), SVELTE)
-        .addDevDependency(packageName("jsdom"), SVELTE)
-        .addDevDependency(packageName("prettier"), SVELTE)
+        .addDevDependency(packageName("eslint-plugin-svelte"), SVELTE)
         .addDevDependency(packageName("prettier-plugin-svelte"), SVELTE)
-        .addDevDependency(packageName("svelte"), SVELTE)
         .addDevDependency(packageName("svelte-check"), SVELTE)
-        .addDevDependency(packageName("svelte-preprocess"), SVELTE)
-        .addDevDependency(packageName("tslib"), SVELTE)
-        .addDevDependency(packageName("typescript"), SVELTE)
-        .addDevDependency(packageName("vite"), SVELTE)
-        .addDevDependency(packageName("vitest"), SVELTE)
-        .addDevDependency(packageName("vitest-sonar-reporter"), SVELTE)
-        .addScript(scriptKey("dev"), scriptCommand("vite dev --port 9000"))
-        .addScript(scriptKey("start"), scriptCommand("vite dev --port 9000"))
-        .addScript(scriptKey("build"), scriptCommand("vite build"))
-        .addScript(scriptKey("package"), scriptCommand("vite package"))
+        .addDevDependency(packageName("jsdom"), COMMON)
+        .addDevDependency(packageName("vite"), COMMON)
+        .addScript(scriptKey("build"), scriptCommand("npm-run-all build:*"))
+        .addScript(scriptKey("build:svelte-check"), scriptCommand("svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"))
+        .addScript(scriptKey("build:vite"), scriptCommand("vite build"))
+        .addScript(scriptKey("dev"), scriptCommand("npm-run-all --parallel dev:*"))
+        .addScript(scriptKey("dev:vite"), scriptCommand("vite dev"))
+        .addScript(scriptKey("prepare"), scriptCommand("svelte-kit sync && husky"))
         .addScript(scriptKey("preview"), scriptCommand("vite preview"))
-        .addScript(scriptKey("check"), scriptCommand("svelte-check --tsconfig ./tsconfig.json"))
-        .addScript(scriptKey("check:watch"), scriptCommand("svelte-check --tsconfig ./tsconfig.json --watch"))
-        .addScript(
-          scriptKey("lint"),
-          scriptCommand("prettier --ignore-path .gitignore --check && eslint --ignore-path .gitignore .")
-        )
-        .addScript(scriptKey("format"), scriptCommand("prettier --ignore-path .gitignore --write"))
-        .addScript(scriptKey("test"), runScriptCommandWith(properties.nodePackageManager(), "test:watch"))
-        .addScript(scriptKey("test:coverage"), scriptCommand("vitest run --coverage"))
-        .addScript(scriptKey("test:watch"), scriptCommand("vitest --"))
+        .addScript(scriptKey("start"), scriptCommand("vite dev"))
+        .addScript(scriptKey("watch:tsc"), scriptCommand("svelte-check --tsconfig ./tsconfig.json --watch"))
         .and()
       .postActions()
         .add(context -> nodeLazyPackagesInstaller.runInstallIn(context.projectFolder(), properties.nodePackageManager()))
         .and()
-      .optionalReplacements()
-        .in(path("package.json"))
-          .add(lineBeforeText(ENGINES_NEEDLE), type(properties.indentation()))
-          .and()
-        .and()
       .files()
-        .add(SOURCE.file(".eslintrc.cjs"), to(".eslintrc.cjs"))
-        .add(SOURCE.file("tsconfig.json"), to("tsconfig.json"))
-        .add(SOURCE.file("vite.config.js"), to("vite.config.js"))
-        .add(SOURCE.append("src/main/webapp/routes").template("+page.svelte"), to("src/main/webapp/routes/+page.svelte"))
-        .add(PRIMARY_MAIN_SOURCE.template("App.svelte"), PRIMARY_MAIN_DESTINATION.append("App.svelte"))
-        .add(PRIMARY_TEST_SOURCE.template("App.spec.ts"), PRIMARY_TEST_DESTINATION.append("App.spec.ts"))
-        .batch(CLIENT_COMMON, to("."))
-          .addFile(".eslintignore")
-          .addFile(".npmrc")
-          .and()
         .batch(SOURCE, to("."))
-          .addTemplate("svelte.config.js")
-          .addTemplate("vitest.config.ts")
+          .addTemplate("vite.config.ts")
           .and()
-        .batch(SOURCE.file("src/main/webapp"), to("src/main/webapp"))
+        .batch(WEBAPP_SOURCE, WEBAPP_DESTINATION)
           .addTemplate("app.html")
-          .addTemplate("app.d.ts")
+          .addTemplate("routes/+layout.ts")
+          .addTemplate("routes/+page.svelte")
+          .addTemplate("app/home/infrastructure/primary/HomepageSvelte.svelte")
           .and()
-        .batch(SOURCE.file("src/main/webapp/assets"), to("src/main/webapp/assets"))
-          .addFile("JHipster-Lite-neon-orange.png")
+        .batch(WEBAPP_SOURCE.append("content/images"), WEBAPP_DESTINATION.append("content/images"))
           .addFile("svelte-logo.png")
+          .addFile("seed4j_logo-name.png")
           .and()
+        .add(SOURCE.template("src/test/webapp/unit/home/infrastructure/primary/HomepageSvelte.spec.ts"), to("src/test/webapp/unit/home/infrastructure/primary/HomepageSvelte.spec.ts"))
         .and()
+      .with(patchEslintConfig(properties))
+      .with(patchTsConfig())
+      .with(patchVitestConfig(properties))
+      .with(patchPrettierConfig())
       .build();
     // @formatter:on
   }
 
-  private static String type(Indentation indentation) {
-    return indentation.spaces() + "\"type\": \"module\",";
+  private Consumer<Seed4JModuleBuilder> patchEslintConfig(Seed4JModuleProperties properties) {
+    String sveltePluginConfig = """
+    \t...svelte.configs.recommended,
+    \t{
+    \t\tfiles: ['**/*.svelte', '**/*.svelte.ts'],
+    \t\tlanguageOptions: {
+    \t\t\tparserOptions: { parser: typescript.parser },
+    \t\t\tglobals: { ...globals.browser },
+    \t\t},
+    \t},\
+    """.replace("\t", properties.indentation().spaces());
+    // @formatter:off
+    return moduleBuilder -> moduleBuilder
+      .mandatoryReplacements()
+        .in(path("eslint.config.js"))
+          .add(lineAfterRegex("from '@eslint/js'"), "import svelte from 'eslint-plugin-svelte';")
+          .add(lineAfterRegex("...typescript.configs.recommended"), sveltePluginConfig)
+          .add(text("files: ['**/*.ts']"), "files: ['**/*.ts', '**/*.svelte']")
+          .add(text("ignores: ["), "ignores: ['.svelte-kit/', ")
+          .and()
+        .and();
+    // @formatter:on
+  }
+
+  private Consumer<Seed4JModuleBuilder> patchTsConfig() {
+    // @formatter:off
+    return moduleBuilder -> moduleBuilder
+      .mandatoryReplacements()
+        .in(path("tsconfig.json"))
+          .add(text("@tsconfig/recommended/tsconfig.json"), "$app/tsconfig")
+          .add(text("\"types\": ["), "\"types\": [\"$app/types\", \"vite/client\", ")
+          .and()
+        .and();
+    // @formatter:on
+  }
+
+  private Consumer<Seed4JModuleBuilder> patchVitestConfig(Seed4JModuleProperties properties) {
+    // @formatter:off
+    return moduleBuilder -> moduleBuilder
+      .mandatoryReplacements()
+        .in(path("vitest.config.ts"))
+          .add(lineAfterRegex("from 'vitest/config';"), "import { svelteKitConfig, webappAlias } from './vite.config.ts';")
+          .add(lineAfterRegex("from 'vitest/config';"), "import { svelteTesting } from '@testing-library/svelte/vite';")
+          .add(lineAfterRegex("from 'vitest/config';"), "import { sveltekit } from '@sveltejs/kit/vite';")
+          .add(lineBeforeText("resolve: {"), properties.indentation().spaces() + "plugins: [sveltekit(svelteKitConfig), svelteTesting()],")
+          .add(text("tsconfigPaths: true,"), "alias: webappAlias,")
+          .add(text("environment: 'node',"), "environment: 'jsdom',")
+          .add(text("'src/main/webapp/**/*.ts?(x)'"), "'src/main/webapp/**/*.ts?(x)', 'src/main/webapp/**/*.svelte'")
+          .and()
+        .and()
+      .with(vitestCoverageExclusion("src/main/webapp/routes/**"));
+    // @formatter:on
+  }
+
+  private Consumer<Seed4JModuleBuilder> patchPrettierConfig() {
+    // @formatter:off
+    return moduleBuilder -> moduleBuilder
+      .mandatoryReplacements()
+        .in(path(".prettierrc"))
+          .add(lineAfterText("plugins:"), "  - prettier-plugin-svelte")
+          .and()
+        .and();
+    // @formatter:on
   }
 }

@@ -4,6 +4,7 @@ Feature: Svelte
     When I apply modules to default project
       | init        |
       | prettier    |
+      | typescript  |
       | svelte-core |
     Then I should have files in ""
-      | tsconfig.json |
+      | vite.config.ts |

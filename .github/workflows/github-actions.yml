@@ -266,6 +266,7 @@ jobs:
           - neo4japp
           - angularjwtapp
           - reactapp
+          - svelteapp
           - vuejwtapp
           - vueoauth2app
           - kafkaapp

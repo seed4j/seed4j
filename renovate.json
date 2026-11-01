@@ -13,7 +13,7 @@
   ],
   "prConcurrentLimit": 20,
   "prHourlyLimit": 20,
-  "ignorePaths": ["**/node_modules/**", "**/test/**", "seed4j-core-modules/src/main/resources/generator/dependencies/svelte/**"],
+  "ignorePaths": ["**/node_modules/**", "**/test/**"],
   "docker-compose": {
     "fileMatch": ["^seed4j-server/src/main/docker/[^/]*\\.ya?ml$"]
   },

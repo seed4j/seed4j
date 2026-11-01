@@ -1,0 +1,26 @@
+import adapter from '@sveltejs/adapter-static';
+import { sveltekit } from '@sveltejs/kit/vite';
+import { fileURLToPath } from 'node:url';
+import { defineConfig } from 'vite';
+
+export const svelteKitConfig = {
+  adapter: adapter({
+    pages: '{{projectBuildDirectory}}/classes/static',
+    assets: '{{projectBuildDirectory}}/classes/static',
+    fallback: 'index.html',
+  }),
+  files: { src: 'src/main/webapp' },
+};
+
+export const webappAlias = { '@': fileURLToPath(new URL('./src/main/webapp/app', import.meta.url)) };
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [sveltekit(svelteKitConfig)],
+  resolve: {
+    alias: webappAlias,
+  },
+  server: {
+    port: 9000,
+  },
+});

@@ -1,0 +1,31 @@
+# Prettier configuration
+
+printWidth: 140
+singleQuote: true
+tabWidth: 2
+useTabs: false
+endOfLine: '{{ endOfLine }}'
+experimentalOperatorPosition: start
+
+plugins:
+  - prettier-plugin-svelte
+  - '@prettier/plugin-xml'
+  - prettier-plugin-gherkin
+  - prettier-plugin-java
+  - prettier-plugin-organize-imports
+  - prettier-plugin-packagejson
+
+# js and ts rules:
+arrowParens: avoid
+
+# jsx and tsx rules:
+bracketSameLine: false
+
+# xml rules:
+xmlWhitespaceSensitivity: ignore
+
+# https://github.com/prettier/prettier/issues/15956
+overrides:
+  - files: ['*.jsonc']
+    options:
+      trailingComma: none

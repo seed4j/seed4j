@@ -19,8 +19,15 @@
   },
   "packageRules": [
     {
-      "matchPackageNames": ["node"],
-      "allowedVersions": "<25.0.0"
+      "description": "Stay on the current Node.js LTS: the node versioning only considers a major stable once it has reached LTS",
+      "matchPackageNames": ["node", "@types/node"],
+      "versioning": "node"
+    },
+    {
+      "description": "The Node.js types must follow the Node.js runtime: major upgrades must be done together",
+      "matchPackageNames": ["node", "@types/node"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "node major"
     },
     {
       "description": "TypeScript 7 is not supported yet by the ecosystem (typescript-eslint, etc.)",

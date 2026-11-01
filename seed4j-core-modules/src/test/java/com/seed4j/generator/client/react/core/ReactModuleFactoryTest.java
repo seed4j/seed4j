@@ -142,9 +142,7 @@ class ReactModuleFactoryTest {
     );
     ModuleFile customEslintFile = file(customEslint.toString(), "eslint.config.js");
 
-    assertThatThrownBy(() ->
-      assertThatModuleWithFiles(module, packageJsonFile(), customEslintFile, tsConfigFile(), vitestConfigFile())
-    )
+    assertThatThrownBy(() -> assertThatModuleWithFiles(module, packageJsonFile(), customEslintFile, tsConfigFile(), vitestConfigFile()))
       .isInstanceOf(GeneratorException.class)
       .hasMessageContaining("Can't find");
   }

@@ -152,7 +152,7 @@ For testing:
 For testing the front only:
 
 ```bash
-npm run test
+npm run test --workspace seed4j-server
 ```
 
 For running the project:

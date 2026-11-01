@@ -1,0 +1,20 @@
+{
+  "name": "seed4j-dependencies",
+  "version": "0.0.0",
+  "description": "Seed4J : used for Vite+Vue3 dependencies",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@pinia/testing": "2.0.2",
+    "@vitejs/plugin-vue": "6.0.10",
+    "@vue/test-utils": "2.5.1",
+    "@vue/tsconfig": "0.9.1",
+    "axios": "1.20.0",
+    "eslint-plugin-vue": "10.11.1",
+    "i18next-vue": "5.4.0",
+    "pinia": "4.1.0",
+    "pinia-plugin-persistedstate": "4.7.1",
+    "vue": "3.5.44",
+    "vue-router": "5.4.0",
+    "vue-tsc": "3.3.13"
+  }
+}

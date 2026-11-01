@@ -134,7 +134,7 @@ jobs:
       - name: 'Lint: check'
         run: npm run lint:ci
       - name: 'Start local Sonar'
-        run: docker compose -f src/main/docker/sonar.yml up -d
+        run: docker compose -f seed4j-server/src/main/docker/sonar.yml up -d
       - name: 'Test: run backend tests'
         run: |
           chmod +x mvnw
@@ -144,7 +144,7 @@ jobs:
           docker logs sonar
           docker logs sonar-token
           SONAR_TOKEN=$(docker logs sonar-token)
-          ./mvnw initialize sonar:sonar -Dsonar.token=$SONAR_TOKEN
+          ./mvnw test-compile sonar:sonar -Dskip.npm -Dsonar.token=$SONAR_TOKEN
           ./tests-ci/sonar.sh
       - name: 'Analysis: see results'
         run: ./tests-ci/sonar.sh
@@ -153,15 +153,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=seed4j_seed4j -Dsonar.organization=seed4j
+        run: ./mvnw test-compile sonar:sonar -Dskip.npm -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=seed4j_seed4j -Dsonar.organization=seed4j
       - name: 'Artifact: remove unused JARs'
         run: |
-          rm target/*-javadoc.jar target/*-sources.jar
+          rm seed4j-server/target/*-javadoc.jar seed4j-server/target/*-sources.jar
       - name: 'Artifact: upload JAR'
         uses: actions/upload-artifact@v7
         with:
           name: seed4j-jar
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/seed4j-server/target/*.jar'
           retention-days: 1
       - name: 'Maven cache: upload downloaded dependencies'
         if: ${{ !cancelled() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
@@ -203,7 +203,10 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: seed4j-main-jar
-          path: '${{ github.workspace }}/target/*.jar'
+          # main may still have the single module layout (target/): remove it once the maven modules are merged
+          path: |
+            ${{ github.workspace }}/seed4j-server/target/*.jar
+            ${{ github.workspace }}/target/*.jar
           retention-days: 1
   #--------------------------------------------------
   # Cypress
@@ -230,7 +233,7 @@ jobs:
         run: |
           ./start.sh 1339
       - name: 'Test: launch Cypress'
-        run: npm run e2e:headless
+        run: npm run e2e:headless --workspace seed4j-server
 
   #--------------------------------------------------
   # Tests generated projects
@@ -492,14 +495,11 @@ jobs:
               && docker logs -f sonar-token && SONAR_TOKEN=$(docker logs sonar-token)
             docker ps -a
           fi
-      - name: 'Install seed4j snapshot jar in local maven repository'
-        if: steps.tests-requirement-check.outputs.execute_tests == 'true'
+      - name: 'Install seed4j snapshot in local maven repository'
+        # the generated extension depends on com.seed4j:seed4j, which needs the other seed4j modules with their poms
+        if: steps.tests-requirement-check.outputs.execute_tests == 'true' && matrix.app == 'seed4jextension'
         working-directory: ./current-branch/
-        run: |
-          export SEED4J_VERSION=$(find tests-ci -maxdepth 1 -name "*-tests.jar" | sed -e 's/.*seed4j-\(.*\)-tests\.jar/\1/')
-          echo "SEED4J_VERSION=${SEED4J_VERSION}"
-          ./mvnw install:install-file -Dfile=tests-ci/seed4j-${SEED4J_VERSION}.jar -DgroupId=com.seed4j -DartifactId=seed4j -Dversion=${SEED4J_VERSION}
-          ./mvnw install:install-file -Dfile=tests-ci/seed4j-${SEED4J_VERSION}-tests.jar -DgroupId=com.seed4j -DartifactId=seed4j -Dversion=${SEED4J_VERSION} -Dclassifier=tests
+        run: ./mvnw install -DskipTests -Dskip.npm
       - name: 'Test: verify ${{ matrix.app }}'
         if: steps.tests-requirement-check.outputs.execute_tests == 'true'
         working-directory: /tmp/seed4j/${{ matrix.app }}/

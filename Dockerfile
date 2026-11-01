@@ -7,7 +7,7 @@ RUN chmod +x mvnw \
     -Dmaven.javadoc.skip=true \
     -Dmaven.source.skip \
     -Ddevelocity.cache.remote.enabled=false \
-    && mv /code/app/target/*-exec.jar /code/seed4j.jar
+    && mv /code/app/seed4j-server/target/*-exec.jar /code/seed4j.jar
 
 FROM eclipse-temurin:25.0.5_8-jre
 COPY --from=build /code/*.jar /code/

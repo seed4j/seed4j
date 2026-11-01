@@ -1,11 +1,7 @@
 package com.seed4j.generator.client.svelte.core;
 
 import static com.seed4j.module.domain.nodejs.NodePackageManager.PNPM;
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.assertThatModuleWithFiles;
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.lintStagedConfigFileWithPrettier;
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeDependency;
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.nodeScript;
-import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.packageJsonFile;
+import static com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seed4j.TestFileUtils;
@@ -15,6 +11,7 @@ import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.module.domain.resource.FakeSeed4JModuleServices;
 import com.seed4j.module.domain.resource.FakeSeed4JModuleServices.FakeNodeLazyPackagesInstaller.Installation;
+import com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions.ModuleFile;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -30,7 +27,7 @@ class SvelteModuleFactoryTest {
     Seed4JModule module = factory.buildModule(properties);
 
     // @formatter:off
-    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
+    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier(), tsConfigFile(), vitestConfigFile(), eslintConfigFile(), prettierConfigFile())
       .hasFile(".gitignore")
         .containing("""
           # Svelte
@@ -38,50 +35,49 @@ class SvelteModuleFactoryTest {
           """)
         .and()
       .hasFile("package.json")
-        .containing(nodeDependency("svelte-navigator"))
-        .containing(nodeDependency("@babel/preset-env"))
-        .containing(nodeDependency("@sveltejs/adapter-static"))
-        .containing(nodeDependency("@sveltejs/kit"))
-        .containing(nodeDependency("@testing-library/svelte"))
-        .containing(nodeDependency("@typescript-eslint/eslint-plugin"))
-        .containing(nodeDependency("@typescript-eslint/parser"))
-        .containing(nodeDependency("@vitest/coverage-istanbul"))
-        .containing(nodeDependency("babel-plugin-transform-vite-meta-env"))
-        .containing(nodeDependency("eslint"))
-        .containing(nodeDependency("eslint-config-prettier"))
-        .containing(nodeDependency("eslint-plugin-svelte3"))
-        .containing(nodeDependency("jsdom"))
-        .containing(nodeDependency("prettier"))
-        .containing(nodeDependency("prettier-plugin-svelte"))
+        .notContaining(nodeDependency("@tsconfig/recommended"))
+        .notContaining(nodeDependency("svelte-navigator"))
+        .notContaining(nodeDependency("svelte-preprocess"))
         .containing(nodeDependency("svelte"))
+        .containing(nodeDependency("@sveltejs/kit"))
+        .containing(nodeDependency("@sveltejs/adapter-static"))
+        .containing(nodeDependency("@sveltejs/vite-plugin-svelte"))
+        .containing(nodeDependency("@testing-library/svelte"))
+        .containing(nodeDependency("eslint-plugin-svelte"))
         .containing(nodeDependency("svelte-check"))
-        .containing(nodeDependency("svelte-preprocess"))
-        .containing(nodeDependency("tslib"))
-        .containing(nodeDependency("typescript"))
+        .containing(nodeDependency("prettier-plugin-svelte"))
         .containing(nodeDependency("vite"))
-        .containing(nodeDependency("vitest"))
-        .containing(nodeDependency("vitest-sonar-reporter"))
-        .containing(nodeScript("dev", "vite dev --port 9000"))
-        .containing(nodeScript("start", "vite dev --port 9000"))
-        .containing(nodeScript("build", "vite build"))
-        .containing(nodeScript("package", "vite package"))
+        .containing(nodeDependency("jsdom"))
+        .containing(nodeScript("build", "npm-run-all build:*"))
+        .containing(nodeScript("build:svelte-check", "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"))
+        .containing(nodeScript("build:vite", "vite build"))
+        .containing(nodeScript("dev", "npm-run-all --parallel dev:*"))
+        .containing(nodeScript("dev:vite", "vite dev"))
         .containing(nodeScript("preview", "vite preview"))
-        .containing(nodeScript("check", "svelte-check --tsconfig ./tsconfig.json"))
-        .containing(nodeScript("check:watch", "svelte-check --tsconfig ./tsconfig.json --watch"))
-        .containing(nodeScript("lint", "prettier --ignore-path .gitignore --check && eslint --ignore-path .gitignore ."))
-        .containing(nodeScript("format", "prettier --ignore-path .gitignore --write"))
-        .containing(nodeScript("test", "npm run test:watch"))
-        .containing(nodeScript("test:coverage", "vitest run --coverage"))
-        .containing(nodeScript("test:watch", "vitest --"))
-        .containing("\"type\": \"module\"")
+        .containing(nodeScript("start", "vite dev"))
+        .containing(nodeScript("watch:tsc", "svelte-check --tsconfig ./tsconfig.json --watch"))
+        .containing(nodeScript("prepare", "svelte-kit sync && husky"))
         .and()
-      .hasFiles(".eslintignore", ".eslintrc.cjs", ".npmrc", "tsconfig.json", "svelte.config.js", "vite.config.js", "vitest.config.ts")
-      .hasPrefixedFiles("src/main/webapp", "app.html", "app.d.ts")
-      .hasPrefixedFiles("src/main/webapp/routes", "+page.svelte")
-      .hasPrefixedFiles("src/test/webapp/unit/common/primary/app", "App.spec.ts")
-      .hasPrefixedFiles("src/main/webapp/app/common/primary/app", "App.svelte")
-      .hasPrefixedFiles("src/main/webapp/assets", "JHipster-Lite-neon-orange.png")
-      .hasPrefixedFiles("src/main/webapp/assets", "svelte-logo.png");
+      .hasFile(".lintstagedrc.cjs")
+        .containing("'{src/**/,}*.{ts,svelte}': ['eslint --fix', 'prettier --write']")
+        .and()
+      .hasFile("tsconfig.json")
+        .matchingSavedSnapshot()
+        .and()
+      .hasFile("vitest.config.ts")
+        .matchingSavedSnapshot()
+        .and()
+      .hasFile("eslint.config.js")
+        .matchingSavedSnapshot()
+        .and()
+      .hasFile(".prettierrc")
+        .matchingSavedSnapshot()
+        .and()
+      .hasFile("vite.config.ts")
+        .containing("from 'vite'")
+        .containing("plugins: [")
+        .containing("port: 9000")
+        .containing("pages: 'target/classes/static'");
     // @formatter:on
     assertThat(seed4JModuleServices.nodeLazyPackagesInstaller().installations()).containsExactly(
       new Installation(properties.projectFolder(), properties.nodePackageManager())
@@ -96,8 +92,36 @@ class SvelteModuleFactoryTest {
 
     Seed4JModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier())
+    // @formatter:off
+    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier(), tsConfigFile(), vitestConfigFile(), eslintConfigFile(), prettierConfigFile())
       .hasFile("package.json")
-      .containing(nodeScript("test", "pnpm run test:watch"));
+        .containing(nodeScript("prepare", "svelte-kit sync && husky"));
+    // @formatter:on
+    assertThat(seed4JModuleServices.nodeLazyPackagesInstaller().installations()).containsExactly(
+      new Installation(properties.projectFolder(), PNPM)
+    );
+  }
+
+  @Test
+  void shouldKeepProjectIndentationInPatches() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).put("indentSize", 4).build();
+
+    Seed4JModule module = factory.buildModule(properties);
+
+    // @formatter:off
+    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier(), tsConfigFile(), vitestConfigFile(), eslintConfigFile(), prettierConfigFile())
+      .hasFile("vitest.config.ts")
+        .containing("\n    plugins: [sveltekit(svelteKitConfig), svelteTesting()],\n")
+        .and()
+      .hasFile("eslint.config.js")
+        .containing("\n    ...svelte.configs.recommended,\n")
+        .and()
+      .hasFile(".prettierrc")
+        .containing("plugins:\n  - prettier-plugin-svelte\n");
+    // @formatter:on
+  }
+
+  private static ModuleFile prettierConfigFile() {
+    return file("src/main/resources/generator/prettier/.prettierrc.mustache", ".prettierrc");
   }
 }

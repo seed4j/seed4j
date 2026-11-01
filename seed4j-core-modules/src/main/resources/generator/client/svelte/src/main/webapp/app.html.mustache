@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <title>svelteapp</title>
-    <meta charset="utf-8" />
-    <meta name="description" content="Seed4J project" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="description" content="{{ projectName }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ projectName }}</title>
     %sveltekit.head%
   </head>
-  <body>
-    <div>%sveltekit.body%</div>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>

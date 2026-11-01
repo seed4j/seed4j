@@ -77,7 +77,15 @@ class SvelteModuleFactoryTest {
         .containing("from 'vite'")
         .containing("plugins: [")
         .containing("port: 9000")
-        .containing("pages: 'target/classes/static'");
+        .containing("pages: 'target/classes/static'")
+        .and()
+      .hasFiles("documentation/svelte.md")
+      .hasPrefixedFiles("src/main/webapp", "app.html", "routes/+layout.ts", "routes/+page.svelte")
+      .hasFiles("src/main/webapp/app/home/infrastructure/primary/HomepageSvelte.svelte")
+      .hasPrefixedFiles("src/main/webapp/content/images", "svelte-logo.png", "seed4j_logo-name.png")
+      .hasFiles("src/test/webapp/unit/home/infrastructure/primary/HomepageSvelte.spec.ts")
+      .hasFile("src/main/webapp/app.html")
+        .containing("<title>");
     // @formatter:on
     assertThat(seed4JModuleServices.nodeLazyPackagesInstaller().installations()).containsExactly(
       new Installation(properties.projectFolder(), properties.nodePackageManager())

@@ -6,6 +6,7 @@ import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.CO
 import static com.seed4j.module.domain.nodejs.Seed4JNodePackagesVersionSource.SVELTE;
 
 import com.seed4j.module.domain.Seed4JModule;
+import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
@@ -16,6 +17,8 @@ import java.util.function.Consumer;
 class SvelteModuleFactory {
 
   private static final Seed4JSource SOURCE = from("client/svelte");
+  private static final Seed4JSource WEBAPP_SOURCE = SOURCE.append("src/main/webapp");
+  private static final Seed4JDestination WEBAPP_DESTINATION = to("src/main/webapp");
 
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
@@ -29,6 +32,7 @@ class SvelteModuleFactory {
     // @formatter:off
     return moduleBuilder(properties)
       .preCommitActions(stagedFilesFilter("{src/**/,}*.{ts,svelte}"), preCommitCommands("eslint --fix", "prettier --write"))
+      .documentation(documentationTitle("Svelte"), SOURCE.file("documentation/svelte.md"))
       .gitIgnore()
         .comment("Svelte")
         .pattern(".svelte-kit/")
@@ -62,6 +66,17 @@ class SvelteModuleFactory {
         .batch(SOURCE, to("."))
           .addTemplate("vite.config.ts")
           .and()
+        .batch(WEBAPP_SOURCE, WEBAPP_DESTINATION)
+          .addTemplate("app.html")
+          .addTemplate("routes/+layout.ts")
+          .addTemplate("routes/+page.svelte")
+          .addTemplate("app/home/infrastructure/primary/HomepageSvelte.svelte")
+          .and()
+        .batch(WEBAPP_SOURCE.append("content/images"), WEBAPP_DESTINATION.append("content/images"))
+          .addFile("svelte-logo.png")
+          .addFile("seed4j_logo-name.png")
+          .and()
+        .add(SOURCE.template("src/test/webapp/unit/home/infrastructure/primary/HomepageSvelte.spec.ts"), to("src/test/webapp/unit/home/infrastructure/primary/HomepageSvelte.spec.ts"))
         .and()
       .with(patchEslintConfig(properties))
       .with(patchTsConfig())

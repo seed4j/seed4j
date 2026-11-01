@@ -1,0 +1,23 @@
+<script lang="ts">
+  import seed4jLogo from '../../../../content/images/seed4j_logo-name.png';
+  import svelteLogo from '../../../../content/images/svelte-logo.png';
+</script>
+
+<div id="app">
+  <img alt="Svelte logo" src={svelteLogo} width="100" />
+  <br />
+  <img alt="Seed4J logo" src={seed4jLogo} width="200" height="200" />
+  <h1>{{ projectName }}: Svelte + TypeScript + SvelteKit</h1>
+
+  <p>
+    <a href="https://svelte.dev/docs/kit" target="_blank" rel="noopener noreferrer">SvelteKit Documentation</a>
+    |
+    <a href="https://svelte.dev/docs/svelte" target="_blank" rel="noopener noreferrer">Svelte Documentation</a>
+  </p>
+</div>
+
+<style>
+  #app {
+    text-align: center;
+  }
+</style>

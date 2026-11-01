@@ -1,12 +1,5 @@
-<script>
-  import { Router, Route } from "svelte-navigator";
-  import App from '../app/common/primary/app/App.svelte';
-
-  export let url = '';
+<script lang="ts">
+  import HomepageSvelte from '@/home/infrastructure/primary/HomepageSvelte.svelte';
 </script>
 
-<Router {url}>
-  <div>
-    <Route primary={false} path="/"><App /></Route>
-  </div>
-</Router>
+<HomepageSvelte />

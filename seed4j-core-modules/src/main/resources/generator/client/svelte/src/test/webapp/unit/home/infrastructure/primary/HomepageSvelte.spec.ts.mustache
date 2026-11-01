@@ -1,0 +1,19 @@
+import { render, screen } from '@testing-library/svelte';
+import { describe, expect, it } from 'vitest';
+
+import HomepageSvelte from '@/home/infrastructure/primary/HomepageSvelte.svelte';
+
+describe('HomepageSvelte', () => {
+  it('should display the frameworks in the title', () => {
+    render(HomepageSvelte);
+
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toContain('Svelte + TypeScript + SvelteKit');
+  });
+
+  it('should link to the documentations', () => {
+    render(HomepageSvelte);
+
+    expect(screen.getByRole('link', { name: 'SvelteKit Documentation' }).getAttribute('href')).toBe('https://svelte.dev/docs/kit');
+    expect(screen.getByRole('link', { name: 'Svelte Documentation' }).getAttribute('href')).toBe('https://svelte.dev/docs/svelte');
+  });
+});

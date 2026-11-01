@@ -15,7 +15,7 @@
     "@tailwindcss/vite": "4.3.3",
     "@tikui/core": "8.0.0",
     "@tsconfig/recommended": "1.0.13",
-    "@types/node": "24.19.2",
+    "@types/node": "26.6.6",
     "@typescript-eslint/eslint-plugin": "8.72.1",
     "@typescript-eslint/parser": "8.72.1",
     "@vitest/coverage-istanbul": "5.0.5",

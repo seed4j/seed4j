@@ -25,6 +25,13 @@ class SpringBootAsyncModuleFactoryTest {
 
     assertThatModule(module)
       .hasJavaSources("com/seed4j/growth/wire/async/infrastructure/secondary/AsyncConfiguration.java")
+      .hasFile("src/main/java/com/seed4j/growth/wire/async/infrastructure/secondary/AsyncConfiguration.java")
+      .containing("executor.setCorePoolSize(taskExecutionProperties.getPool().getCoreSize());")
+      .containing("executor.setMaxPoolSize(taskExecutionProperties.getPool().getMaxSize());")
+      .containing("executor.setQueueCapacity(taskExecutionProperties.getPool().getQueueCapacity());")
+      .containing("executor.setKeepAliveSeconds((int) taskExecutionProperties.getPool().getKeepAlive().toSeconds());")
+      .containing("executor.setThreadNamePrefix(taskExecutionProperties.getThreadNamePrefix());")
+      .and()
       .hasFile("src/main/resources/config/application.yml")
       .containing(
         """

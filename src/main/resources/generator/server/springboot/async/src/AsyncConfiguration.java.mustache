@@ -1,19 +1,32 @@
 package {{packageName}}.wire.async.infrastructure.secondary;
 
+import java.util.concurrent.Executor;
+import org.springframework.boot.autoconfigure.task.TaskExecutionProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import java.util.concurrent.Executor;
 
 @Configuration
 @EnableAsync
 @EnableScheduling
 class AsyncConfiguration {
+
+  private final TaskExecutionProperties taskExecutionProperties;
+
+  public AsyncConfiguration(TaskExecutionProperties taskExecutionProperties) {
+    this.taskExecutionProperties = taskExecutionProperties;
+  }
+
   @Bean
   public Executor taskExecutor() {
     var executor = new ThreadPoolTaskExecutor();
+    executor.setCorePoolSize(taskExecutionProperties.getPool().getCoreSize());
+    executor.setMaxPoolSize(taskExecutionProperties.getPool().getMaxSize());
+    executor.setQueueCapacity(taskExecutionProperties.getPool().getQueueCapacity());
+    executor.setKeepAliveSeconds((int) taskExecutionProperties.getPool().getKeepAlive().toSeconds());
+    executor.setThreadNamePrefix(taskExecutionProperties.getThreadNamePrefix());
     executor.initialize();
     return executor;
   }

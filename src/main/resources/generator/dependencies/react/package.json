@@ -6,7 +6,7 @@
   "type": "module",
   "dependencies": {
     "@eslint-react/eslint-plugin": "5.28.8",
-    "@heroui/react": "3.2.6",
+    "@heroui/react": "3.2.7",
     "@testing-library/dom": "10.4.2",
     "@testing-library/react": "16.3.3",
     "@tsconfig/vite-react": "8.1.1",

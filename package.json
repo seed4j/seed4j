@@ -22,6 +22,9 @@
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write ."
   },
+  "allowScripts": {
+    "cypress": true
+  },
   "devDependencies": {
     "@prettier/plugin-pug": "3.6.0",
     "@prettier/plugin-xml": "3.4.2",
@@ -36,8 +39,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "allowScripts": {
-    "cypress": true
   }
 }

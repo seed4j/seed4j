@@ -70,7 +70,7 @@
     "@vue/test-utils": "2.5.1",
     "concurrently": "10.0.6",
     "cpy-cli": "7.0.0",
-    "cypress": "16.2.0",
+    "cypress": "16.2.1",
     "eslint-plugin-cypress": "7.0.2",
     "fontello-cli": "0.6.2",
     "husky": "9.1.7",

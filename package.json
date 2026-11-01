@@ -22,6 +22,9 @@
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write ."
   },
+  "allowScripts": {
+    "cypress": true
+  },
   "devDependencies": {
     "@prettier/plugin-pug": "3.6.0",
     "@prettier/plugin-xml": "3.4.2",
@@ -31,13 +34,10 @@
     "prettier-plugin-gherkin": "4.0.0",
     "prettier-plugin-java": "2.11.0",
     "prettier-plugin-organize-imports": "4.3.0",
-    "prettier-plugin-packagejson": "3.0.2",
+    "prettier-plugin-packagejson": "3.0.3",
     "prettier-plugin-sh": "0.20.2"
   },
   "engines": {
     "node": ">=20"
-  },
-  "allowScripts": {
-    "cypress": true
   }
 }

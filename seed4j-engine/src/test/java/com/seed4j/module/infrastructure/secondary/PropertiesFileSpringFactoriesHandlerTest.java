@@ -25,7 +25,7 @@ class PropertiesFileSpringFactoriesHandlerTest {
 
     handler.append(propertyKey("o.s.c.ApplicationListener"), propertyValue("c.m.m.MyListener1", "c.m.m.MyListener2"));
 
-    assertThat(contentNormalizingNewLines(factoriesFile)).isEqualTo(
+    assertThat(content(factoriesFile)).isEqualTo(
       """
       o.s.c.ApplicationListener=c.m.m.MyListener1,c.m.m.MyListener2
       """
@@ -40,7 +40,7 @@ class PropertiesFileSpringFactoriesHandlerTest {
 
     handler.append(propertyKey("o.s.c.ApplicationListener"), propertyValue("c.m.m.MyListener1", "c.m.m.MyListener2"));
 
-    assertThat(contentNormalizingNewLines(factoriesFile)).isEqualTo(
+    assertThat(content(factoriesFile)).isEqualTo(
       """
       org.springframework.test.context.ContextCustomizerFactory=c.m.m.MyContextCustomizerFactory
       o.s.c.ApplicationListener=c.m.m.MyListener1,c.m.m.MyListener2
@@ -59,7 +59,7 @@ class PropertiesFileSpringFactoriesHandlerTest {
       propertyValue("c.m.m.MyFactory", "c.m.m.MyFactory2")
     );
 
-    assertThat(contentNormalizingNewLines(factoriesFile)).isEqualTo(
+    assertThat(content(factoriesFile)).isEqualTo(
       """
       org.springframework.test.context.ContextCustomizerFactory=c.m.m.MyContextCustomizerFactory,c.m.m.MyFactory,c.m.m.MyFactory2
       """
@@ -78,7 +78,7 @@ class PropertiesFileSpringFactoriesHandlerTest {
     );
     handler.append(propertyKey("o.s.c.ApplicationListener"), propertyValue("c.m.m.MyListener1"));
 
-    assertThat(contentNormalizingNewLines(factoriesFile)).isEqualTo(
+    assertThat(content(factoriesFile)).isEqualTo(
       """
       org.springframework.test.context.ContextCustomizerFactory=c.m.m.MyContextCustomizerFactory,c.m.m.MyNewContextCustomizerFactory
       o.s.c.ApplicationListener=c.m.m.MyListener1

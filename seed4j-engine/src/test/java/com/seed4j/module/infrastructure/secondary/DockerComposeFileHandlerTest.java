@@ -1,7 +1,6 @@
 package com.seed4j.module.infrastructure.secondary;
 
 import static com.seed4j.TestFileUtils.content;
-import static com.seed4j.TestFileUtils.contentNormalizingNewLines;
 import static com.seed4j.TestFileUtils.loadDefaultProperties;
 import static com.seed4j.TestFileUtils.tmpDirForTest;
 import static com.seed4j.module.domain.Seed4JModule.dockerComposeFile;
@@ -33,7 +32,7 @@ class DockerComposeFileHandlerTest {
 
     handler.append(redisDockerComposeFileReference());
 
-    assertThat(contentNormalizingNewLines(rootComposeFile)).isEqualTo(redisDockerComposeResult(spaces));
+    assertThat(content(rootComposeFile)).isEqualTo(redisDockerComposeResult(spaces));
   }
 
   @Test
@@ -44,7 +43,7 @@ class DockerComposeFileHandlerTest {
 
     handler.append(kafkaDockerComposeFileReference());
 
-    assertThat(contentNormalizingNewLines(rootComposeFile)).isEqualTo(
+    assertThat(content(rootComposeFile)).isEqualTo(
       """
       include:
         - src/main/docker/redis.yml
@@ -61,7 +60,7 @@ class DockerComposeFileHandlerTest {
 
     handler.append(redisDockerComposeFileReference());
 
-    assertThat(contentNormalizingNewLines(rootComposeFile)).isEqualTo(redisDockerComposeResult(2));
+    assertThat(content(rootComposeFile)).isEqualTo(redisDockerComposeResult(2));
   }
 
   @Test
@@ -73,7 +72,7 @@ class DockerComposeFileHandlerTest {
     handler.append(redisDockerComposeFileReference());
     handler.append(redisDockerComposeFileReference());
 
-    assertThat(contentNormalizingNewLines(rootComposeFile)).isEqualTo(redisDockerComposeResult(2));
+    assertThat(content(rootComposeFile)).isEqualTo(redisDockerComposeResult(2));
   }
 
   @Test

@@ -68,7 +68,6 @@ seed4j:
   #  forced-project-folder: /tmp/seed4j
   hidden-resources:
     slugs:
-      - svelte-core
   preset-folder: presets
 
 server:

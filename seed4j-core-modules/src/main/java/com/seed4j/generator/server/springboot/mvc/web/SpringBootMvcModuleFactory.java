@@ -95,8 +95,8 @@ class SpringBootMvcModuleFactory {
         .add(MAIN_SOURCE.append(CORS).template(PACKAGE_INFO), mainDestination.append(CORS_DESTINATION).append(PACKAGE_INFO))
         .nullMarkedJavaPackage(mainDestination.append(CORS_PRIMARY))
         .add(
-          TEST_SOURCE.append(CORS).template("CorsFilterConfigurationIT.java"),
-          testDestination.append(CORS_PRIMARY).append("CorsFilterConfigurationIT.java")
+          TEST_SOURCE.append(CORS).template("CorsFilterConfigurationTest.java"),
+          testDestination.append(CORS_PRIMARY).append("CorsFilterConfigurationTest.java")
         )
         .add(TEST_SOURCE.template("JsonHelper.java"), testDestination.append("JsonHelper.java"))
         .batch(TEST_SOURCE, toSrcTestJava().append(properties.packagePath()))

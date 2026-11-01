@@ -9,6 +9,7 @@ import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.replacement.EndOfFileReplacer;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.regex.Pattern;
 
@@ -79,8 +80,8 @@ class AngularI18nModuleFactory {
         .and()
       .optionalReplacements()
         .in(path(INDEX_CLIENT + "/app/app.html"))
+          .add(new EndOfFileReplacer(notContaining("<ng-container *transloco")), "</ng-container>")
           .add(fileStart(), "<ng-container *transloco=\"let t\">")
-          .add(append(), "</ng-container>")
           .add(lineAfterRegex("Angular \\+ TypeScript"), properties.indentation().times(2) + "<h2>{{ t('home.translationEnabled') }}</h2>")
           .and()
         .in(path(INDEX_CLIENT + "app/" + "app.ts"))

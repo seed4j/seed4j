@@ -7,6 +7,9 @@ import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.infrastructure.secondary.Seed4JModulesAssertions;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -54,6 +57,32 @@ class AngularI18nModuleFactoryTest {
       .containing("getTranslocoModule()")
       .and()
       .hasFile("src/main/webapp/app/transloco-testing-module.ts");
+  }
+
+  @Test
+  void shouldWrapAppHtmlAlreadyContainingNgContainerWithBalancedClosingTag() throws IOException {
+    Seed4JModule module = factory.buildModule(
+      Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).projectBaseName("seed4j").build()
+    );
+    Path customAppHtml = Path.of(TestFileUtils.tmpDirForTest(), "app.html");
+    Files.createDirectories(customAppHtml.getParent());
+    Files.writeString(
+      customAppHtml,
+      Files.readString(Path.of("src/test/resources/projects/angular/app.html")) + "<ng-container>extra</ng-container>\n"
+    );
+
+    assertThatModuleWithFiles(
+      module,
+      packageJsonFile(),
+      appFile(),
+      appSpecFile(),
+      mainFile(),
+      file(customAppHtml.toString(), "src/main/webapp/app/app.html"),
+      translocoTestingFile()
+    )
+      .hasFile("src/main/webapp/app/app.html")
+      .containing("<ng-container *transloco=\"let t\">")
+      .containing("<ng-container>extra</ng-container>\n</ng-container>");
   }
 
   private ModuleFile appFile() {

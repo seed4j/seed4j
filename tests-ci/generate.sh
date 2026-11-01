@@ -466,7 +466,9 @@ elif [[ $application == 'svelteapp' ]]; then
   frontend_server_plugin
   apply_modules \
     "prettier" \
-    "svelte-core"
+    "typescript" \
+    "svelte-core" \
+    "playwright-component-tests"
 
 elif [[ $application == 'kafkaapp' ]]; then
   init_server

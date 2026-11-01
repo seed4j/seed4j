@@ -103,6 +103,7 @@ class SvelteModuleFactory {
         .in(path("eslint.config.js"))
           .add(lineAfterRegex("from '@eslint/js'"), "import svelte from 'eslint-plugin-svelte';")
           .add(lineAfterRegex("...typescript.configs.recommended"), sveltePluginConfig)
+          .add(text("files: ['**/*.ts']"), "files: ['**/*.ts', '**/*.svelte']")
           .add(text("ignores: ["), "ignores: ['.svelte-kit/', ")
           .and()
         .and();
@@ -122,16 +123,13 @@ class SvelteModuleFactory {
   }
 
   private Consumer<Seed4JModuleBuilder> patchVitestConfig(Seed4JModuleProperties properties) {
-    String imports = """
-    import { sveltekit } from '@sveltejs/kit/vite';
-    import { svelteTesting } from '@testing-library/svelte/vite';
-    import { svelteKitConfig, webappAlias } from './vite.config.ts';\
-    """;
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()
         .in(path("vitest.config.ts"))
-          .add(lineAfterRegex("from 'vitest/config';"), imports)
+          .add(lineAfterRegex("from 'vitest/config';"), "import { svelteKitConfig, webappAlias } from './vite.config.ts';")
+          .add(lineAfterRegex("from 'vitest/config';"), "import { svelteTesting } from '@testing-library/svelte/vite';")
+          .add(lineAfterRegex("from 'vitest/config';"), "import { sveltekit } from '@sveltejs/kit/vite';")
           .add(lineBeforeText("resolve: {"), properties.indentation().spaces() + "plugins: [sveltekit(svelteKitConfig), svelteTesting()],")
           .add(text("tsconfigPaths: true,"), "alias: webappAlias,")
           .add(text("environment: 'node',"), "environment: 'jsdom',")
@@ -143,17 +141,11 @@ class SvelteModuleFactory {
   }
 
   private Consumer<Seed4JModuleBuilder> patchPrettierConfig() {
-    String svelteOverride = """
-      - files: ['*.svelte']
-        options:
-          parser: svelte\
-    """;
     // @formatter:off
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()
         .in(path(".prettierrc"))
           .add(lineAfterText("plugins:"), "  - prettier-plugin-svelte")
-          .add(lineAfterText("overrides:"), svelteOverride)
           .and()
         .and();
     // @formatter:on

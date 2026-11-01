@@ -129,6 +129,37 @@ class SvelteModuleFactoryTest {
     // @formatter:on
   }
 
+  @Test
+  void shouldNotDuplicateVitestImportsSortedByPrettierWhenReapplied() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+
+    Seed4JModule module = factory.buildModule(properties);
+
+    // @formatter:off
+    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier(), tsConfigFile(), sortedVitestConfigFile(), eslintConfigFile(), prettierConfigFile())
+      .hasFile("vitest.config.ts")
+        .containing("from 'vitest/config';\nimport { svelteKitConfig, webappAlias } from './vite.config.ts';\n")
+        .notContaining("from 'vitest/config';\nimport { sveltekit }");
+    // @formatter:on
+  }
+
+  @Test
+  void shouldApplyTypescriptRulesToSvelteFiles() {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+
+    Seed4JModule module = factory.buildModule(properties);
+
+    // @formatter:off
+    assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithPrettier(), tsConfigFile(), vitestConfigFile(), eslintConfigFile(), prettierConfigFile())
+      .hasFile("eslint.config.js")
+        .containing("{ ...config, files: ['**/*.ts', '**/*.svelte'] }");
+    // @formatter:on
+  }
+
+  private static ModuleFile sortedVitestConfigFile() {
+    return file("src/test/resources/projects/svelte/vitest.config.ts.template", "vitest.config.ts");
+  }
+
   private static ModuleFile prettierConfigFile() {
     return file("src/main/resources/generator/prettier/.prettierrc.mustache", ".prettierrc");
   }

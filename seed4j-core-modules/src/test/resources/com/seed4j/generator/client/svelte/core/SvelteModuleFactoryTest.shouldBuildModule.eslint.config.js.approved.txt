@@ -16,7 +16,7 @@ export default typescript.config(
     ignores: ['.svelte-kit/', 'target/'],
   },
   js.configs.recommended,
-  ...typescript.configs.recommended.map(config => (config.name === 'typescript-eslint/base' ? config : { ...config, files: ['**/*.ts'] })),
+  ...typescript.configs.recommended.map(config => (config.name === 'typescript-eslint/base' ? config : { ...config, files: ['**/*.ts', '**/*.svelte'] })),
   ...svelte.configs.recommended,
   {
     files: ['**/*.svelte', '**/*.svelte.ts'],

@@ -26,9 +26,6 @@ xmlWhitespaceSensitivity: ignore
 
 # https://github.com/prettier/prettier/issues/15956
 overrides:
-  - files: ['*.svelte']
-    options:
-      parser: svelte
   - files: ['*.jsonc']
     options:
       trailingComma: none

@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 class AngularOAuth2KeycloakModuleFactoryTest {
 
   private static final AngularOAuth2KeycloakModuleFactory factory = new AngularOAuth2KeycloakModuleFactory();
+  private static final String APP_TS_FILE = "src/main/webapp/app/app.ts";
 
   @Test
   void shouldBuildModuleWithEmptyAngularFile() {
@@ -61,68 +62,29 @@ class AngularOAuth2KeycloakModuleFactoryTest {
 
   @Test
   void shouldAddLoginWhenImportsContainsPrefixMatchLikeLoginBanner() throws IOException {
-    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
-    Seed4JModule module = factory.buildModule(properties);
-
-    assertThatModuleWithFiles(
-      module,
-      packageJsonFile(),
-      environmentFile(),
-      prodEnvironmentFile(),
-      emptyAngularJsonFile(),
-      appComponentHtmlFile(),
-      appComponentFileWithImports("imports: [RouterModule, LoginBanner],"),
-      appComponentSpecFile(),
-      mainFile()
-    )
-      .hasFile("src/main/webapp/app/app.ts")
+    assertAngularOAuthModuleWithImports("imports: [RouterModule, LoginBanner],")
+      .hasFile(APP_TS_FILE)
       .containing("imports: [RouterModule, LoginBanner, Login],");
   }
 
   @Test
   void shouldNotDuplicateLoginWhenAlreadyPresentBeforeLastImport() throws IOException {
-    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
-    Seed4JModule module = factory.buildModule(properties);
-
-    assertThatModuleWithFiles(
-      module,
-      packageJsonFile(),
-      environmentFile(),
-      prodEnvironmentFile(),
-      emptyAngularJsonFile(),
-      appComponentHtmlFile(),
-      appComponentFileWithImports("imports: [RouterModule, Login, TranslocoDirective],"),
-      appComponentSpecFile(),
-      mainFile()
-    )
-      .hasFile("src/main/webapp/app/app.ts")
+    assertAngularOAuthModuleWithImports("imports: [RouterModule, Login, TranslocoDirective],")
+      .hasFile(APP_TS_FILE)
       .containing("imports: [RouterModule, Login, TranslocoDirective],")
       .notContaining("Login, TranslocoDirective, Login");
   }
 
   @Test
   void shouldHandleMultilineImportsWithTrailingComma() throws IOException {
-    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
-    Seed4JModule module = factory.buildModule(properties);
-
-    assertThatModuleWithFiles(
-      module,
-      packageJsonFile(),
-      environmentFile(),
-      prodEnvironmentFile(),
-      emptyAngularJsonFile(),
-      appComponentHtmlFile(),
-      appComponentFileWithImports(
-        """
-        imports: [
-            RouterModule,
-            NgOptimizedImage,
-          ],"""
-      ),
-      appComponentSpecFile(),
-      mainFile()
+    assertAngularOAuthModuleWithImports(
+      """
+      imports: [
+          RouterModule,
+          NgOptimizedImage,
+        ],"""
     )
-      .hasFile("src/main/webapp/app/app.ts")
+      .hasFile(APP_TS_FILE)
       .containing(
         """
         imports: [
@@ -130,6 +92,23 @@ class AngularOAuth2KeycloakModuleFactoryTest {
             NgOptimizedImage, Login
           ],"""
       );
+  }
+
+  private static Seed4JModuleAsserter assertAngularOAuthModuleWithImports(String importsDeclaration) throws IOException {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModule module = factory.buildModule(properties);
+
+    return assertThatModuleWithFiles(
+      module,
+      packageJsonFile(),
+      environmentFile(),
+      prodEnvironmentFile(),
+      emptyAngularJsonFile(),
+      appComponentHtmlFile(),
+      appComponentFileWithImports(importsDeclaration),
+      appComponentSpecFile(),
+      mainFile()
+    );
   }
 
   private static Seed4JModuleAsserter assertAngularOAuthModule(ModuleFile angularJson) {
@@ -215,7 +194,7 @@ class AngularOAuth2KeycloakModuleFactoryTest {
   }
 
   private static ModuleFile appComponentFile() {
-    return file("src/test/resources/projects/angular/app.ts", "src/main/webapp/app/app.ts");
+    return file("src/test/resources/projects/angular/app.ts", APP_TS_FILE);
   }
 
   private static ModuleFile appComponentFileWithImports(String importsDeclaration) throws IOException {
@@ -227,7 +206,7 @@ class AngularOAuth2KeycloakModuleFactoryTest {
     Path customAppTs = Path.of(TestFileUtils.tmpDirForTest(), "app.ts");
     Files.createDirectories(customAppTs.getParent());
     Files.writeString(customAppTs, updated);
-    return file(customAppTs.toString(), "src/main/webapp/app/app.ts");
+    return file(customAppTs.toString(), APP_TS_FILE);
   }
 
   private static ModuleFile mainFile() {

@@ -51,8 +51,8 @@ class AngularOAuth2KeycloakModuleFactory {
     FILLED_ALLOWED_COMMON_DEPENDENCIES_PATTERN
   );
 
-  private static final Pattern EXISTING_STANDALONE_LOGIN_PATTERN = Pattern.compile("imports: *\\[[^]]*\\bLogin\\b[^]]*]");
-  private static final Pattern FILLED_STANDALONE_PATTERN = Pattern.compile("(imports: *\\[\\s*[^],\\s][^]]*?)(?:\\s*,)?(\\s*])");
+  private static final Pattern EXISTING_STANDALONE_LOGIN_PATTERN = Pattern.compile("imports: *\\[[^]]*\\bLogin\\b");
+  private static final Pattern FILLED_STANDALONE_PATTERN = Pattern.compile("(imports: *\\[\\s*[^],\\s]+(?:[,\\s]+[^],\\s]+)*),?(\\s*])");
   private static final ElementReplacer FILLED_STANDALONE_NEEDLE = regex(
     (contentBeforeReplacement, replacement) -> !EXISTING_STANDALONE_LOGIN_PATTERN.matcher(contentBeforeReplacement).find(),
     FILLED_STANDALONE_PATTERN

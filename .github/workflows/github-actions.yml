@@ -327,23 +327,23 @@ jobs:
           GENERATE_EXIT_CODE=$?
           echo "exit_code=$GENERATE_EXIT_CODE" >> $GITHUB_OUTPUT
           exit $GENERATE_EXIT_CODE
-      - name: 'Generation: calculate md5sum ${{ matrix.app }} from main branch'
+      - name: 'Generation: calculate sha256sum ${{ matrix.app }} from main branch'
         if: github.event_name == 'pull_request'
-        id: calculate-md5sum-main
+        id: calculate-sha256sum-main
         run: |
           if [ -d "/tmp/seed4j/${{ matrix.app }}" ] && [ "${{ steps.generate-main.outputs.exit_code }}" == "0" ]; then
             cd /tmp/seed4j/${{ matrix.app }}/
-            app_md5=$(find . \
+            app_sha256=$(find . \
               -not -path './.git/*' \
               -not -path './.github/*' \
               -not -path './.seed4j/*' \
               -not -path './node_modules/*' \
               -not -path './target/*' \
               -not -path './build/*' \
-              -type f -exec md5sum {} + | LC_ALL=C sort | md5sum | head -n1 | cut -d " " -f1)
-            echo "hash=$app_md5" >> $GITHUB_OUTPUT
+              -type f -exec sha256sum {} + | LC_ALL=C sort | sha256sum | head -n1 | cut -d " " -f1)
+            echo "hash=$app_sha256" >> $GITHUB_OUTPUT
             echo "exists=true" >> $GITHUB_OUTPUT
-            echo "main branch hash from project ${{ matrix.app }} $app_md5"
+            echo "main branch hash from project ${{ matrix.app }} $app_sha256"
           else
             echo "App does not exist in main branch or generation failed"
             echo "exists=false" >> $GITHUB_OUTPUT
@@ -374,29 +374,29 @@ jobs:
           ./start.sh 1339
           ./generate.sh ${{ matrix.app }} ${{ matrix.java-build-tool }} ${{ matrix.spring-config-format }} ${{ matrix.node-package-manager }}
           ./stop.sh
-      - name: 'Generation: calculate md5sum ${{ matrix.app }}'
-        if: github.event_name == 'pull_request' && steps.calculate-md5sum-main.outputs.exists == 'true'
-        id: calculate-md5sum
+      - name: 'Generation: calculate sha256sum ${{ matrix.app }}'
+        if: github.event_name == 'pull_request' && steps.calculate-sha256sum-main.outputs.exists == 'true'
+        id: calculate-sha256sum
         working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
-          app_md5=$(find . \
+          app_sha256=$(find . \
             -not -path './.git/*' \
             -not -path './.github/*' \
             -not -path './.seed4j/*' \
             -not -path './node_modules/*' \
             -not -path './target/*' \
             -not -path './build/*' \
-            -type f -exec md5sum {} + | LC_ALL=C sort | md5sum | head -n1 | cut -d " " -f1)
-          echo pull request branch hash from project ${{ matrix.app }} $app_md5
-          echo "hash=$app_md5" >> $GITHUB_OUTPUT
+            -type f -exec sha256sum {} + | LC_ALL=C sort | sha256sum | head -n1 | cut -d " " -f1)
+          echo pull request branch hash from project ${{ matrix.app }} $app_sha256
+          echo "hash=$app_sha256" >> $GITHUB_OUTPUT
           ls -al /tmp/seed4j/${{ matrix.app }}
       - name: 'Compare hash main x pull request ${{ matrix.app }}'
-        if: github.event_name == 'pull_request' && steps.calculate-md5sum-main.outputs.exists == 'true'
+        if: github.event_name == 'pull_request' && steps.calculate-sha256sum-main.outputs.exists == 'true'
         id: compare-hash
         run: |
-          echo "main branch hash from project ${{ matrix.app }} ${{ steps.calculate-md5sum-main.outputs.hash }}"
-          echo "pull request branch hash from project ${{ matrix.app }} ${{ steps.calculate-md5sum.outputs.hash }}"
-          if [ "${{ steps.calculate-md5sum-main.outputs.hash }}" != "${{ steps.calculate-md5sum.outputs.hash }}" ]; then
+          echo "main branch hash from project ${{ matrix.app }} ${{ steps.calculate-sha256sum-main.outputs.hash }}"
+          echo "pull request branch hash from project ${{ matrix.app }} ${{ steps.calculate-sha256sum.outputs.hash }}"
+          if [ "${{ steps.calculate-sha256sum-main.outputs.hash }}" != "${{ steps.calculate-sha256sum.outputs.hash }}" ]; then
             echo "different=true" >> $GITHUB_OUTPUT
           else
             echo "different=false" >> $GITHUB_OUTPUT
@@ -407,7 +407,7 @@ jobs:
           if [[ "${{ github.event_name }}" != "pull_request" ]]; then
             echo "Not a PR - will run tests"
             echo "execute_tests=true" >> $GITHUB_OUTPUT
-          elif [[ "${{ steps.calculate-md5sum-main.outputs.exists }}" != "true" ]]; then
+          elif [[ "${{ steps.calculate-sha256sum-main.outputs.exists }}" != "true" ]]; then
             echo "App doesn't exist in main branch - will run tests"
             echo "execute_tests=true" >> $GITHUB_OUTPUT
           elif [[ "${{ steps.compare-hash.outputs.different }}" == "true" ]]; then
@@ -438,18 +438,18 @@ jobs:
         if: |
           steps.tests-requirement-check.outputs.execute_tests == 'true' &&
           matrix.java-build-tool == 'gradle'
-        id: cache_gradle_md5sum
+        id: cache_gradle_sha256sum
         working-directory: /tmp/seed4j/${{ matrix.app }}/
         run: |
           ls -al
-          GRADLE_DEPS_MD5=$(md5sum \
+          GRADLE_DEPS_SHA256=$(sha256sum \
             build.gradle.kts \
             settings.gradle.kts \
             gradle/libs.versions.toml \
             gradle/wrapper/gradle-wrapper.properties \
-            | md5sum | head -n1 | cut -d " " -f1)
-          echo $GRADLE_DEPS_MD5
-          echo "md5sum=${GRADLE_DEPS_MD5}" >> $GITHUB_OUTPUT
+            | sha256sum | head -n1 | cut -d " " -f1)
+          echo $GRADLE_DEPS_SHA256
+          echo "sha256sum=${GRADLE_DEPS_SHA256}" >> $GITHUB_OUTPUT
       - name: 'Init: restore local Gradle repository'
         if: |
           steps.tests-requirement-check.outputs.execute_tests == 'true' &&
@@ -460,7 +460,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ matrix.java-build-tool }}-${{ matrix.app }}-${{ steps.cache_gradle_md5sum.outputs.md5sum }}
+          key: ${{ runner.os }}-${{ matrix.java-build-tool }}-${{ matrix.app }}-${{ steps.cache_gradle_sha256sum.outputs.sha256sum }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.java-build-tool }}-
       - name: 'Test: detect Playwright component tests for ${{ matrix.app }}'

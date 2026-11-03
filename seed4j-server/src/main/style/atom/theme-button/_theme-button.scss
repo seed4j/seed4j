@@ -19,12 +19,12 @@
     border: calc(var(--seed4j-element-size) * 0.025) solid var(--seed4j-accent-color);
     border-radius: var(--seed4j-element-size);
     background: var(--seed4j-text-color-primary);
-    cursor: pointer;
     padding: calc(var(--seed4j-element-size) * 0.1);
     width: var(--seed4j-element-size);
     height: calc(var(--seed4j-element-size) * 0.35);
     font-family: fonts.$seed4j-global-font-emoji-family;
     font-size: calc(var(--seed4j-element-size) * 0.3);
+    cursor: pointer;
   }
 
   .seed4j-theme-switch-toggle {
@@ -42,6 +42,6 @@
   }
 
   .seed4j-theme-switch-toggle-checked {
-    transform: translateX(calc(var(--seed4j-element-size) * 0.6)) !important;
+    transform: translateX(calc(var(--seed4j-element-size) * 0.6));
   }
 }

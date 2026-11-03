@@ -4,12 +4,10 @@
 $seed4j-nav-item-current-color-text: colors.$seed4j-global-color-text-primary;
 
 .seed4j-nav-item {
-  @include quark.seed4j-q-link-light;
+  text-decoration: none;
 
-  /* stylelint-disable-next-line no-duplicate-selectors */
-  & {
-    text-decoration: none;
-  }
+  /* stylelint-disable-next-line order/order */
+  @include quark.seed4j-q-link-light;
 
   &.-current {
     color: $seed4j-nav-item-current-color-text;

@@ -215,7 +215,7 @@ describe('Landscape', () => {
 
       expect(wrapper.find(wrappedElement('landscape-loader')).exists()).toBe(false);
       expect(wrapper.find(wrappedElement('landscape')).exists()).toBe(true);
-      expect(wrapper.find(wrappedElement('landscape-connectors')).findAll('path').length).toBe(17);
+      expect(wrapper.find(wrappedElement('landscape-connectors')).findAll('path')).toHaveLength(17);
       expect(applicationListener.addEventListener).toHaveBeenCalledOnce();
 
       const pathField = wrapper.find(wrappedElement('folder-path-field')).element as HTMLInputElement;
@@ -1136,37 +1136,23 @@ describe('Landscape', () => {
       });
     });
 
-    it('should deselect preset option when a new module is selected', async () => {
+    it.each([
+      { action: 'should deselect preset option when a new module is selected', module: 'infinitest-module', preset: '' },
+      {
+        action: 'should retain preset option when try to select a new not selectable module',
+        module: 'sample-feature-module',
+        preset: 'init-maven',
+      },
+      { action: 'should deselect preset option when a selected module is deselected', module: 'maven-module', preset: '' },
+    ])('$action', async ({ module, preset }) => {
       const { wrapper, presetComponent } = await setupAndSelectPreset('init-maven');
 
-      const moduleElement = wrapper.find(wrappedElement('infinitest-module'));
+      const moduleElement = wrapper.find(wrappedElement(module));
       await moduleElement.trigger('click');
       await flushPromises();
 
       const presetDropdown = presetComponent.find('select');
-      expect(presetDropdown.element.value).toBe('');
-    });
-
-    it('should retain preset option when try to select a new not selectable module', async () => {
-      const { wrapper, presetComponent } = await setupAndSelectPreset('init-maven');
-
-      const moduleElement = wrapper.find(wrappedElement('sample-feature-module'));
-      await moduleElement.trigger('click');
-      await flushPromises();
-
-      const presetDropdown = presetComponent.find('select');
-      expect(presetDropdown.element.value).toBe('init-maven');
-    });
-
-    it('should deselect preset option when a selected module is deselected', async () => {
-      const { wrapper, presetComponent } = await setupAndSelectPreset('init-maven');
-
-      const moduleElement = wrapper.find(wrappedElement('maven-module'));
-      await moduleElement.trigger('click');
-      await flushPromises();
-
-      const presetDropdown = presetComponent.find('select');
-      expect(presetDropdown.element.value).toBe('');
+      expect(presetDropdown.element.value).toBe(preset);
     });
 
     it('should deselect preset option when a rank button is clicked', async () => {
@@ -1515,8 +1501,8 @@ const assertConnectorsCount = (wrapper: VueWrapper, cssClass: string, count: num
     wrapper
       .find(wrappedElement('landscape-connectors'))
       .findAll('path')
-      .filter(line => line.classes().includes(cssClass)).length,
-  ).toBe(count);
+      .filter(line => line.classes().includes(cssClass)),
+  ).toHaveLength(count);
 };
 
 const validateInitApplication = async (wrapper: VueWrapper): Promise<void> => {

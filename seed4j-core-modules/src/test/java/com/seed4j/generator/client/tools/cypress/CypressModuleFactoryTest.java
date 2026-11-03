@@ -18,7 +18,7 @@ class CypressModuleFactoryTest {
 
   @Test
   void shouldBuildComponentTestsModule() {
-    ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
+    ModuleFile[] files = { packageJsonFile(), eslintConfigFile() };
     Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     Seed4JModule module = factory.buildComponentTestsModule(properties);
@@ -60,7 +60,7 @@ class CypressModuleFactoryTest {
 
   @Test
   void shouldAllowCypressBuildInPnpmWorkspaceWithPnpm() {
-    ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
+    ModuleFile[] files = { packageJsonFile(), eslintConfigFile() };
     Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest())
       .nodePackageManager(PNPM)
       .build();
@@ -83,7 +83,7 @@ class CypressModuleFactoryTest {
   @Test
   @DisplayName("should build E2E tests module")
   void shouldBuildE2eTestsModule() {
-    ModuleFile[] files = new ModuleFile[] { packageJsonFile(), eslintConfigFile() };
+    ModuleFile[] files = { packageJsonFile(), eslintConfigFile() };
     Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
 
     Seed4JModule module = factory.buildE2ETestsModule(properties);

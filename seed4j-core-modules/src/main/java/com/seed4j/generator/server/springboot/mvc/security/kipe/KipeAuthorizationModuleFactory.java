@@ -19,6 +19,7 @@ class KipeAuthorizationModuleFactory {
   private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
 
   private static final String APPLICATION = "application";
+  private static final String DOMAIN = "domain";
   private static final String KIPE_DESTINATION = "shared/kipe";
 
   Seed4JModule buildModule(Seed4JModuleProperties properties) {
@@ -37,9 +38,9 @@ class KipeAuthorizationModuleFactory {
       .files()
         .add(MAIN_SOURCE.template("package-info.java"), mainDestination.append("package-info.java"))
         .nullMarkedJavaPackage(mainDestination.append(APPLICATION))
-        .nullMarkedJavaPackage(mainDestination.append("domain"))
+        .nullMarkedJavaPackage(mainDestination.append(DOMAIN))
         .add(MAIN_SOURCE.template("ApplicationAuthorizations.java"), mainDestination.append(APPLICATION).append(baseName + "Authorizations.java"))
-        .batch(MAIN_SOURCE, mainDestination.append("domain"))
+        .batch(MAIN_SOURCE, mainDestination.append(DOMAIN))
           .addTemplate("Accesses.java")
           .addTemplate("Action.java")
           .addTemplate("Resource.java")
@@ -47,7 +48,7 @@ class KipeAuthorizationModuleFactory {
           .and()
         .add(TEST_SOURCE.template("ApplicationAuthorizationsTest.java"), testDestination.append(APPLICATION).append(baseName + "AuthorizationsTest.java"))
         .add(TEST_SOURCE.template("TestAuthentications.java"), testDestination.append(APPLICATION).append("TestAuthentications.java"))
-        .batch(TEST_SOURCE, testDestination.append("domain"))
+        .batch(TEST_SOURCE, testDestination.append(DOMAIN))
           .addTemplate("RolesAccessesFixture.java")
           .addTemplate("RolesAccessesTest.java")
           .addTemplate("ActionTest.java")

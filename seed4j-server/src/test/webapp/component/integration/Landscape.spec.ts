@@ -24,11 +24,11 @@ describe('Landscape', () => {
         cy.get(themeSwitchButton).should('exist').should('not.be.visible').should('not.be.checked');
         cy.get('[aria-label="dark-theme"]').should('exist');
 
-        cy.get(themeSwitchButton).click({ force: true });
+        cy.get('[aria-label="dark-theme"]').click();
         cy.get(themeSwitchButton).should('be.checked');
         cy.get('[aria-label="light-theme"]').should('exist');
 
-        cy.get(themeSwitchButton).click({ force: true });
+        cy.get('[aria-label="light-theme"]').click();
         cy.get(themeSwitchButton).should('not.be.checked');
         cy.get('[aria-label="dark-theme"]').should('exist');
       });

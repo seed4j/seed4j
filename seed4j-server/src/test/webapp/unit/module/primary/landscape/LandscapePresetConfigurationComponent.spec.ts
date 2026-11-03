@@ -77,7 +77,7 @@ describe('LandscapePresetConfigurationComponent', () => {
     await select.trigger('change');
 
     expect(wrapper.emitted('selected')).toBeTruthy();
-    expect(wrapper.emitted('selected')![0][0]).toEqual(null);
+    expect(wrapper.emitted('selected')![0][0]).toBeNull();
   });
 
   it('should close preset configuration when clicking on the hide preset configuration button', async () => {

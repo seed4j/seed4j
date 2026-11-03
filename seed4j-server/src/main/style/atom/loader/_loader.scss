@@ -3,12 +3,16 @@
 .seed4j-loader {
   box-sizing: border-box;
   display: inline-block;
+  animation: seed4j-rotation 1s linear infinite;
   border: 5px solid colors.$seed4j-global-color-light;
   border-radius: 50%;
   border-bottom-color: transparent;
   width: 48px;
   height: 48px;
-  animation: seed4j-rotation 1s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 }
 
 @keyframes seed4j-rotation {

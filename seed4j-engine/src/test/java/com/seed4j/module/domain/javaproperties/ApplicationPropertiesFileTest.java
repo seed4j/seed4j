@@ -79,8 +79,8 @@ class ApplicationPropertiesFileTest {
 
   @Test
   void shouldNotBeEqualToFileWithOtherName() {
-    assertThat(APPLICATION).isNotEqualTo(
-      ApplicationPropertiesFile.named("bootstrap").in("src/main/resources/config/", "src/main/resources/")
+    assertThat(ApplicationPropertiesFile.named("bootstrap").in("src/main/resources/config/", "src/main/resources/")).isNotEqualTo(
+      APPLICATION
     );
   }
 
@@ -91,7 +91,7 @@ class ApplicationPropertiesFileTest {
 
   @Test
   void shouldNotBeEqualToFileWithOtherFolders() {
-    assertThat(APPLICATION).isNotEqualTo(ApplicationPropertiesFile.named("application").in("src/main/resources/"));
+    assertThat(ApplicationPropertiesFile.named("application").in("src/main/resources/")).isNotEqualTo(APPLICATION);
   }
 
   @Test

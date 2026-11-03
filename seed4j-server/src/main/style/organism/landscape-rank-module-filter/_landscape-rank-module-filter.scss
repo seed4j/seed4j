@@ -10,7 +10,9 @@
     .seed4j-button-toggle::before {
       position: absolute;
       inset: 0;
-      transition: 0.5s ease-out;
+      transition:
+        inset 0.5s ease-out,
+        border-color 0.5s ease-out;
       border: 2px solid transparent;
       border-radius: 8px;
       content: '';
@@ -23,7 +25,9 @@
       &.-rank-color::before {
         position: absolute;
         inset: -5px;
-        transition: 0.5s ease-in;
+        transition:
+          inset 0.5s ease-in,
+          border-color 0.5s ease-in;
         content: '';
       }
 

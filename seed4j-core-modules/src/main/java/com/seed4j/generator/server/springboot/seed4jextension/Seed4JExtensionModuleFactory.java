@@ -36,6 +36,7 @@ import java.util.function.Consumer;
 
 class Seed4JExtensionModuleFactory {
 
+  private static final String SEED4J = "seed4j";
   private static final String DOMAIN = "domain";
   private static final String SHARED = "shared";
   private static final String INFRASTRUCTURE = "infrastructure";
@@ -206,11 +207,11 @@ class Seed4JExtensionModuleFactory {
   }
 
   private JavaDependency seed4jTestToolsDependency() {
-    return javaDependency().groupId("com.seed4j").artifactId("seed4j-test").versionSlug("seed4j").scope(JavaDependencyScope.TEST).build();
+    return javaDependency().groupId("com.seed4j").artifactId("seed4j-test").versionSlug(SEED4J).scope(JavaDependencyScope.TEST).build();
   }
 
   private JavaDependencyOptionalValueBuilder seed4jDependencyBuilder() {
-    return javaDependency().groupId("com.seed4j").artifactId("seed4j").versionSlug("seed4j");
+    return javaDependency().groupId("com.seed4j").artifactId(SEED4J).versionSlug(SEED4J);
   }
 
   private String springBootApplicationWithSeed4J(Seed4JModuleProperties properties) {

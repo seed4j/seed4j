@@ -17,6 +17,7 @@ import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.javabuild.GroupId;
+import com.seed4j.module.domain.javaproperties.PropertyKey;
 import com.seed4j.module.domain.javaproperties.PropertyValue;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
 import com.seed4j.shared.error.domain.Assert;
@@ -25,6 +26,8 @@ class MicronautDataJpaModuleFactory {
 
   private static final GroupId MICRONAUT_DATA_GROUP = groupId("io.micronaut.data");
   private static final GroupId MICRONAUT_SQL_GROUP = groupId("io.micronaut.sql");
+  private static final PropertyKey DB_TYPE_KEY = propertyKey("datasources.default.db-type");
+  private static final PropertyKey DIALECT_KEY = propertyKey("datasources.default.dialect");
   private static final PropertyValue FALSE = propertyValue(false);
   private static final PropertyValue TRUE = propertyValue(true);
 
@@ -34,8 +37,8 @@ class MicronautDataJpaModuleFactory {
       .addDependency(groupId("org.postgresql"), artifactId("postgresql"))
       .and()
       .applicationProperties(MICRONAUT_MAIN)
-      .set(propertyKey("datasources.default.db-type"), propertyValue("postgres"))
-      .set(propertyKey("datasources.default.dialect"), propertyValue("POSTGRES"))
+      .set(DB_TYPE_KEY, propertyValue("postgres"))
+      .set(DIALECT_KEY, propertyValue("POSTGRES"))
       .and()
       .build();
   }
@@ -46,8 +49,8 @@ class MicronautDataJpaModuleFactory {
       .addDependency(groupId("com.mysql"), artifactId("mysql-connector-j"))
       .and()
       .applicationProperties(MICRONAUT_MAIN)
-      .set(propertyKey("datasources.default.db-type"), propertyValue("mysql"))
-      .set(propertyKey("datasources.default.dialect"), propertyValue("MYSQL"))
+      .set(DB_TYPE_KEY, propertyValue("mysql"))
+      .set(DIALECT_KEY, propertyValue("MYSQL"))
       .and()
       .build();
   }
@@ -58,8 +61,8 @@ class MicronautDataJpaModuleFactory {
       .addDependency(groupId("org.mariadb.jdbc"), artifactId("mariadb-java-client"))
       .and()
       .applicationProperties(MICRONAUT_MAIN)
-      .set(propertyKey("datasources.default.db-type"), propertyValue("mariadb"))
-      .set(propertyKey("datasources.default.dialect"), propertyValue("MYSQL"))
+      .set(DB_TYPE_KEY, propertyValue("mariadb"))
+      .set(DIALECT_KEY, propertyValue("MYSQL"))
       .and()
       .build();
   }
@@ -70,8 +73,8 @@ class MicronautDataJpaModuleFactory {
       .addDependency(groupId("com.microsoft.sqlserver"), artifactId("mssql-jdbc"))
       .and()
       .applicationProperties(MICRONAUT_MAIN)
-      .set(propertyKey("datasources.default.db-type"), propertyValue("mssql"))
-      .set(propertyKey("datasources.default.dialect"), propertyValue("SQL_SERVER"))
+      .set(DB_TYPE_KEY, propertyValue("mssql"))
+      .set(DIALECT_KEY, propertyValue("SQL_SERVER"))
       .and()
       .build();
   }

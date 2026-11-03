@@ -53,6 +53,14 @@ public final class SpringBootMvcModuleResources {
         .tags(SERVER_TAG, SPRING_TAG, SPRING_BOOT_TAG, MVC_TAG, WEB_TAG, "tomcat")
         .factory(new SpringBootMvcModuleFactory()::buildTomcatModule);
     }
+
+    private static Seed4JModuleOrganization mvcServerOrganization() {
+      return Seed4JModuleOrganization.builder()
+        .feature(SPRING_MVC_SERVER)
+        .addDependency(SPRING_BOOT_MVC_EMPTY)
+        .addDependency(LOGS_SPY)
+        .build();
+    }
   }
 
   private static Seed4JModulePropertiesDefinition properties() {
@@ -61,14 +69,6 @@ public final class SpringBootMvcModuleResources {
       .addIndentation()
       .addServerPort()
       .addSpringConfigurationFormat()
-      .build();
-  }
-
-  private static Seed4JModuleOrganization mvcServerOrganization() {
-    return Seed4JModuleOrganization.builder()
-      .feature(SPRING_MVC_SERVER)
-      .addDependency(SPRING_BOOT_MVC_EMPTY)
-      .addDependency(LOGS_SPY)
       .build();
   }
 }

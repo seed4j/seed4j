@@ -43,16 +43,16 @@ class CollectionsValueObjectsTest {
 
   private static Stream<Arguments> valueObjects() {
     return Stream.of(
-      valueObject("Seed4JProjectFilesPaths", "paths", values -> new Seed4JProjectFilesPaths(values)),
-      valueObject("Seed4JDestinations", "destinations", values -> new Seed4JDestinations(values)),
-      valueObject("Seed4JFilesToDelete", "files", values -> new Seed4JFilesToDelete(values)),
-      valueObject("Seed4JFilesToMove", "files", values -> new Seed4JFilesToMove(values)),
-      valueObject("JavaBuildCommands", "commands", values -> new JavaBuildCommands(values)),
-      valueObject("PackageJsonDependencies", "dependencies", values -> new PackageJsonDependencies(values)),
-      valueObject("PackageNames", "packageNames", values -> new PackageNames(values)),
-      valueObject("Scripts", "scripts", values -> new Scripts(values)),
-      valueObject("Seed4JUpgradeFilesReplacements", "replacements", values -> new Seed4JUpgradeFilesReplacements(values)),
-      valueObject("Seed4JStartupCommands", "commands", values -> new Seed4JStartupCommands(values))
+      valueObject("Seed4JProjectFilesPaths", "paths", Seed4JProjectFilesPaths::new),
+      valueObject("Seed4JDestinations", "destinations", Seed4JDestinations::new),
+      valueObject("Seed4JFilesToDelete", "files", Seed4JFilesToDelete::new),
+      valueObject("Seed4JFilesToMove", "files", Seed4JFilesToMove::new),
+      valueObject("JavaBuildCommands", "commands", JavaBuildCommands::new),
+      valueObject("PackageJsonDependencies", "dependencies", PackageJsonDependencies::new),
+      valueObject("PackageNames", "packageNames", PackageNames::new),
+      valueObject("Scripts", "scripts", Scripts::new),
+      valueObject("Seed4JUpgradeFilesReplacements", "replacements", Seed4JUpgradeFilesReplacements::new),
+      valueObject("Seed4JStartupCommands", "commands", Seed4JStartupCommands::new)
     );
   }
 

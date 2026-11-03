@@ -12,6 +12,7 @@ public record ProjectName(String name) {
     Assert.notBlank("name", this.name);
   }
 
+  @SuppressWarnings("javabugs:S2259") // False positive: Assert.notBlank throws on a null name
   private String format(String name) {
     Assert.notBlank("name", name);
 

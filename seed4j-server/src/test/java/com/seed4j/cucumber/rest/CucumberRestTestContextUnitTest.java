@@ -2,6 +2,7 @@ package com.seed4j.cucumber.rest;
 
 import static java.nio.charset.StandardCharsets.*;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -9,7 +10,6 @@ import com.seed4j.UnitTest;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
@@ -90,13 +90,9 @@ class CucumberRestTestContextUnitTest {
   }
 
   @Test
-  void shouldNotReadStatusCodeForUnreadableStatusCode() {
+  void shouldNotReadStatusCodeForUnreadableStatusCode() throws IOException {
     ClientHttpResponse httpResponse = mock(ClientHttpResponse.class);
-    try {
-      when(httpResponse.getStatusCode()).thenThrow(IOException.class);
-    } catch (IOException e) {
-      fail(e.getMessage());
-    }
+    when(httpResponse.getStatusCode()).thenThrow(IOException.class);
 
     assertThatThrownBy(() ->
       CucumberRestTestContext.addResponse(mockedRequest("/"), httpResponse, mock(ClientHttpRequestExecution.class), "body".getBytes(UTF_8))
@@ -104,14 +100,10 @@ class CucumberRestTestContextUnitTest {
   }
 
   @Test
-  void shouldNotReadResponseCodeForUnreadableResponse() {
+  void shouldNotReadResponseCodeForUnreadableResponse() throws IOException {
     ClientHttpResponse httpResponse = mock(ClientHttpResponse.class);
-    try {
-      when(httpResponse.getStatusCode()).thenReturn(HttpStatus.OK);
-      when(httpResponse.getBody()).thenThrow(IOException.class);
-    } catch (IOException e) {
-      fail(e.getMessage());
-    }
+    when(httpResponse.getStatusCode()).thenReturn(HttpStatus.OK);
+    when(httpResponse.getBody()).thenThrow(IOException.class);
 
     CucumberRestTestContext.addResponse(mockedRequest("/"), httpResponse, mock(ClientHttpRequestExecution.class), "body".getBytes(UTF_8));
 
@@ -144,23 +136,17 @@ class CucumberRestTestContextUnitTest {
   private ClientHttpResponse mockedResponse(String response) {
     ClientHttpResponse httpResponse = mock(ClientHttpResponse.class);
 
-    try {
+    assertDoesNotThrow(() -> {
       when(httpResponse.getStatusCode()).thenReturn(HttpStatus.OK);
       when(httpResponse.getBody()).thenReturn(new ByteArrayInputStream(response.getBytes(UTF_8)));
-    } catch (IOException e) {
-      fail(e.getMessage());
-    }
+    });
 
     return httpResponse;
   }
 
   private HttpRequest mockedRequest(String path) {
     HttpRequest request = mock(HttpRequest.class);
-    try {
-      when(request.getURI()).thenReturn(new URI("http://localhost" + path));
-    } catch (URISyntaxException e) {
-      fail(e.getMessage());
-    }
+    when(request.getURI()).thenReturn(URI.create("http://localhost" + path));
     return request;
   }
 }

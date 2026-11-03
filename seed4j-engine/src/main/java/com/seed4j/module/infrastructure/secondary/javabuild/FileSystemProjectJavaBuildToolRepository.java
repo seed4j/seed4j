@@ -8,9 +8,9 @@ import com.seed4j.module.domain.javabuild.JavaBuildTool;
 import com.seed4j.module.domain.javabuild.ProjectJavaBuildToolRepository;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
 import java.util.Optional;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public class FileSystemProjectJavaBuildToolRepository implements ProjectJavaBuildToolRepository {
 
   private static final String POM_XML = "pom.xml";

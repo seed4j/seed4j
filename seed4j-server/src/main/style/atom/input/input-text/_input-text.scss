@@ -6,17 +6,15 @@ $seed4j-input-text-color-text: colors.$seed4j-global-color-text-dark;
 $seed4j-input-text-disabled-color-background: colors.$seed4j-global-color-fill-disabled-light;
 
 .seed4j-input-text {
+  background-color: $seed4j-input-text-color-background;
+  width: 100%;
+  color: $seed4j-input-text-color-text;
+
+  /* stylelint-disable-next-line order/order */
   @include quark.seed4j-q-field;
 
   &:disabled {
     border-color: colors.$seed4j-global-color-fill-disabled-dark;
     background-color: $seed4j-input-text-disabled-color-background;
-  }
-
-  /* stylelint-disable-next-line no-descending-specificity, no-duplicate-selectors */
-  & {
-    background-color: $seed4j-input-text-color-background;
-    width: 100%;
-    color: $seed4j-input-text-color-text;
   }
 }

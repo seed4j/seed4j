@@ -2,15 +2,13 @@
 @use '../../token/breakpoint';
 
 .seed4j-logo {
-  @include quark.seed4j-q-link-light;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  text-decoration: none;
 
-  /* stylelint-disable-next-line no-duplicate-selectors */
-  & {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    text-decoration: none;
-  }
+  /* stylelint-disable-next-line order/order */
+  @include quark.seed4j-q-link-light;
 
   &--icon {
     width: 2.5rem;

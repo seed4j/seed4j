@@ -567,6 +567,8 @@
             <failOnNoGitDirectory>false</failOnNoGitDirectory>
             <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
             <generateGitPropertiesFile>true</generateGitPropertiesFile>
+            <projectBuildOutputTimestamp>${maven.build.timestamp}</projectBuildOutputTimestamp>
+            <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
             <includeOnlyProperties>
               <includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
               <includeOnlyProperty>^git.commit.id.describe$</includeOnlyProperty>

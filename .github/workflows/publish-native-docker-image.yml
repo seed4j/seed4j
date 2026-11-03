@@ -48,7 +48,18 @@ jobs:
 
       - name: Test native image
         working-directory: tests-ci
-        run: ./start_docker_container.sh ${{ env.DOCKER_IMAGE_NAME }}
+        run: |
+          ./start_docker_container.sh ${{ env.DOCKER_IMAGE_NAME }}
+          ./generate.sh fullappmaven maven yaml npm
+          ./generate.sh fullappgradle gradle yaml npm
+
+      - name: Print native container logs on failure
+        if: failure()
+        working-directory: tests-ci
+        run: |
+          if [ -f .container_seed4j ]; then
+            docker logs "$(cat .container_seed4j)"
+          fi
 
       - name: Login to Docker Registry
         if: startsWith(github.ref, 'refs/tags/v')

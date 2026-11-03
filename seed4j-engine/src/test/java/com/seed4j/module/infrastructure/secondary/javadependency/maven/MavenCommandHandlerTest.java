@@ -23,6 +23,8 @@ import static com.seed4j.module.domain.Seed4JModule.artifactId;
 import static com.seed4j.module.domain.Seed4JModule.dependencyId;
 import static com.seed4j.module.domain.Seed4JModule.groupId;
 import static com.seed4j.module.domain.Seed4JModule.javaAnnotationProcessor;
+import static com.seed4j.module.domain.Seed4JModule.javaDependency;
+import static com.seed4j.module.domain.Seed4JModule.mavenBuildExtension;
 import static com.seed4j.module.domain.Seed4JModule.mavenPlugin;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -49,6 +51,7 @@ import com.seed4j.module.domain.javabuild.command.SetVersion;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileActivation;
 import com.seed4j.module.domain.javabuildprofile.BuildProfileId;
 import com.seed4j.module.domain.javadependency.DependencyId;
+import com.seed4j.module.domain.javadependency.JavaDependencyType;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.mavenplugin.MavenPlugin;
 import com.seed4j.shared.error.domain.GeneratorException;
@@ -1160,6 +1163,114 @@ class MavenCommandHandlerTest {
         """
       );
     }
+
+    @Test
+    void shouldNotDuplicateDependencyInMavenProfile() {
+      Path pom = projectWithPom("src/test/resources/projects/maven-with-local-profile/pom.xml");
+      MavenCommandHandler handler = new MavenCommandHandler(Indentation.DEFAULT, pom);
+
+      handler.handle(new AddDirectJavaDependency(defaultVersionDependency(), localBuildProfile()));
+      handler.handle(new AddDirectJavaDependency(defaultVersionDependency(), localBuildProfile()));
+
+      assertThat(contentNormalizingNewLines(pom)).containsOnlyOnce("<artifactId>spring-boot-starter</artifactId>");
+    }
+
+    @Test
+    void shouldKeepBothDependenciesWithDifferentClassifiersInMavenProfile() {
+      Path pom = projectWithPom("src/test/resources/projects/maven-with-local-profile/pom.xml");
+      MavenCommandHandler handler = new MavenCommandHandler(Indentation.DEFAULT, pom);
+
+      handler.handle(new AddDirectJavaDependency(javaDependency().groupId("foo").artifactId("bar").build(), localBuildProfile()));
+      handler.handle(
+        new AddDirectJavaDependency(javaDependency().groupId("foo").artifactId("bar").classifier("tests").build(), localBuildProfile())
+      );
+
+      assertThat(contentNormalizingNewLines(pom)).contains(
+        """
+            <profile>
+              <id>local</id>
+              <dependencies>
+                <dependency>
+                  <groupId>foo</groupId>
+                  <artifactId>bar</artifactId>
+                </dependency>
+                <dependency>
+                  <groupId>foo</groupId>
+                  <artifactId>bar</artifactId>
+                  <classifier>tests</classifier>
+                </dependency>
+              </dependencies>
+            </profile>
+        """
+      );
+    }
+
+    @Test
+    void shouldKeepBothDependenciesWithDifferentTypesInMavenProfile() {
+      Path pom = projectWithPom("src/test/resources/projects/maven-with-local-profile/pom.xml");
+      MavenCommandHandler handler = new MavenCommandHandler(Indentation.DEFAULT, pom);
+
+      handler.handle(new AddDirectJavaDependency(javaDependency().groupId("foo").artifactId("bar").build(), localBuildProfile()));
+      handler.handle(
+        new AddDirectJavaDependency(
+          javaDependency().groupId("foo").artifactId("bar").type(JavaDependencyType.TEST_JAR).build(),
+          localBuildProfile()
+        )
+      );
+
+      assertThat(contentNormalizingNewLines(pom)).contains(
+        """
+            <profile>
+              <id>local</id>
+              <dependencies>
+                <dependency>
+                  <groupId>foo</groupId>
+                  <artifactId>bar</artifactId>
+                </dependency>
+                <dependency>
+                  <groupId>foo</groupId>
+                  <artifactId>bar</artifactId>
+                  <type>test-jar</type>
+                </dependency>
+              </dependencies>
+            </profile>
+        """
+      );
+    }
+
+    @Test
+    void shouldPreserveExclusionsWhenReaddingDependencyToMavenProfile() {
+      Path pom = projectWithPom("src/test/resources/projects/maven-with-local-profile/pom.xml");
+      MavenCommandHandler handler = new MavenCommandHandler(Indentation.DEFAULT, pom);
+
+      handler.handle(new AddDirectJavaDependency(springBootStarterWebDependency(), localBuildProfile()));
+      handler.handle(
+        new AddDirectJavaDependency(
+          javaDependency().groupId("org.springframework.boot").artifactId("spring-boot-starter-webmvc").build(),
+          localBuildProfile()
+        )
+      );
+
+      assertThat(contentNormalizingNewLines(pom)).contains(
+        """
+            <profile>
+              <id>local</id>
+              <dependencies>
+                <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-webmvc</artifactId>
+                  <exclusions>
+                    <exclusion>
+                      <groupId>org.springframework.boot</groupId>
+                      <artifactId>spring-boot-starter-tomcat</artifactId>
+                    </exclusion>
+                  </exclusions>
+                </dependency>
+              </dependencies>
+            </profile>
+        """
+      );
+    }
   }
 
   @Nested
@@ -2074,6 +2185,21 @@ class MavenCommandHandlerTest {
       );
 
       assertThat(Pattern.compile("^ +$", Pattern.MULTILINE).matcher(content).find()).isFalse();
+    }
+
+    @Test
+    void shouldReplaceExistingBuildExtension() {
+      Path pom = projectWithPom("src/test/resources/projects/maven-with-extensions/pom.xml");
+      MavenCommandHandler handler = new MavenCommandHandler(Indentation.DEFAULT, pom);
+
+      handler.handle(
+        new AddMavenBuildExtension(mavenBuildExtension().groupId("io.opentelemetry.contrib").artifactId("other-extension").build())
+      );
+      handler.handle(new AddMavenBuildExtension(mavenBuildExtensionWithSlug()));
+      handler.handle(new AddMavenBuildExtension(mavenBuildExtensionWithSlug()));
+
+      String content = contentNormalizingNewLines(pom);
+      assertThat(content).containsOnlyOnce("<artifactId>os-maven-plugin</artifactId>");
     }
   }
 

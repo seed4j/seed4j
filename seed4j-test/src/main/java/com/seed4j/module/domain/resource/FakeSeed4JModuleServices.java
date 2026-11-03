@@ -12,8 +12,9 @@ import com.seed4j.module.domain.nodejs.NodePackagesVersionSource;
 import com.seed4j.module.domain.nodejs.NodePackagesVersions;
 import com.seed4j.module.domain.nodejs.NodeVersions;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * {@link Seed4JModuleServices} for module factories tests.
@@ -97,7 +98,7 @@ public final class FakeSeed4JModuleServices implements Seed4JModuleServices {
 
   public static final class FakeNodeLazyPackagesInstaller implements NodeLazyPackagesInstaller {
 
-    private final List<Installation> installations = new ArrayList<>();
+    private final Set<Installation> installations = new LinkedHashSet<>();
 
     @Override
     public void runInstallIn(Seed4JProjectFolder folder, NodePackageManager nodePackageManager) {

@@ -192,7 +192,8 @@ class TikuiModuleFactory {
 
   private static RegexNeedleAfterReplacer existingProxyReplacer() {
     return new RegexNeedleAfterReplacer(
-      (contentBeforeReplacement, replacement) -> contentBeforeReplacement.contains("proxy:"),
+      (contentBeforeReplacement, replacement) ->
+        contentBeforeReplacement.contains("proxy:") && !contentBeforeReplacement.contains(replacement),
       Pattern.compile("proxy:\\s*\\{", Pattern.MULTILINE)
     );
   }

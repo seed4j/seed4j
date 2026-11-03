@@ -7,12 +7,16 @@ import com.seed4j.UnitTest;
 import com.seed4j.module.domain.Seed4JModule;
 import com.seed4j.module.domain.Seed4JModulesFixture;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
 class AngularOAuth2KeycloakModuleFactoryTest {
 
   private static final AngularOAuth2KeycloakModuleFactory factory = new AngularOAuth2KeycloakModuleFactory();
+  private static final String APP_TS_FILE = "src/main/webapp/app/app.ts";
 
   @Test
   void shouldBuildModuleWithEmptyAngularFile() {
@@ -54,6 +58,57 @@ class AngularOAuth2KeycloakModuleFactoryTest {
       .hasFile("src/main/webapp/environments/environment.local.ts")
       .containing("realm: 'my-realm',")
       .notContaining("realm: 'seed4j',");
+  }
+
+  @Test
+  void shouldAddLoginWhenImportsContainsPrefixMatchLikeLoginBanner() throws IOException {
+    assertAngularOAuthModuleWithImports("imports: [RouterModule, LoginBanner],")
+      .hasFile(APP_TS_FILE)
+      .containing("imports: [RouterModule, LoginBanner, Login],");
+  }
+
+  @Test
+  void shouldNotDuplicateLoginWhenAlreadyPresentBeforeLastImport() throws IOException {
+    assertAngularOAuthModuleWithImports("imports: [RouterModule, Login, TranslocoDirective],")
+      .hasFile(APP_TS_FILE)
+      .containing("imports: [RouterModule, Login, TranslocoDirective],")
+      .notContaining("Login, TranslocoDirective, Login");
+  }
+
+  @Test
+  void shouldHandleMultilineImportsWithTrailingComma() throws IOException {
+    assertAngularOAuthModuleWithImports(
+      """
+      imports: [
+          RouterModule,
+          NgOptimizedImage,
+        ],"""
+    )
+      .hasFile(APP_TS_FILE)
+      .containing(
+        """
+        imports: [
+            RouterModule,
+            NgOptimizedImage, Login
+          ],"""
+      );
+  }
+
+  private static Seed4JModuleAsserter assertAngularOAuthModuleWithImports(String importsDeclaration) throws IOException {
+    Seed4JModuleProperties properties = Seed4JModulesFixture.propertiesBuilder(TestFileUtils.tmpDirForTest()).build();
+    Seed4JModule module = factory.buildModule(properties);
+
+    return assertThatModuleWithFiles(
+      module,
+      packageJsonFile(),
+      environmentFile(),
+      prodEnvironmentFile(),
+      emptyAngularJsonFile(),
+      appComponentHtmlFile(),
+      appComponentFileWithImports(importsDeclaration),
+      appComponentSpecFile(),
+      mainFile()
+    );
   }
 
   private static Seed4JModuleAsserter assertAngularOAuthModule(ModuleFile angularJson) {
@@ -139,7 +194,19 @@ class AngularOAuth2KeycloakModuleFactoryTest {
   }
 
   private static ModuleFile appComponentFile() {
-    return file("src/test/resources/projects/angular/app.ts", "src/main/webapp/app/app.ts");
+    return file("src/test/resources/projects/angular/app.ts", APP_TS_FILE);
+  }
+
+  private static ModuleFile appComponentFileWithImports(String importsDeclaration) throws IOException {
+    String template = Files.readString(Path.of("src/test/resources/projects/angular/app.ts"));
+    String updated = template.replace(
+      "imports: [RouterModule, MatMenuModule, MatToolbarModule, MatIconModule, MatButtonModule, NgOptimizedImage],",
+      importsDeclaration
+    );
+    Path customAppTs = Path.of(TestFileUtils.tmpDirForTest(), "app.ts");
+    Files.createDirectories(customAppTs.getParent());
+    Files.writeString(customAppTs, updated);
+    return file(customAppTs.toString(), APP_TS_FILE);
   }
 
   private static ModuleFile mainFile() {

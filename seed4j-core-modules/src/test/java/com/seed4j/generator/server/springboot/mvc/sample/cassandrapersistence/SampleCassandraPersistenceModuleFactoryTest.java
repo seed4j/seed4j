@@ -24,7 +24,7 @@ class SampleCassandraPersistenceModuleFactoryTest {
 
     Seed4JModule module = factory.buildModule(properties);
 
-    assertThatModuleWithFiles(module, sampleInMemoryRepository(), inMemoryBeersResetter())
+    assertThatNonIdempotentModuleWithFiles(module, sampleInMemoryRepository(), inMemoryBeersResetter())
       .hasPrefixedFiles(
         "src/main/java/com/seed4j/growth/sample/infrastructure/secondary",
         "BeerCatalogTable.java",

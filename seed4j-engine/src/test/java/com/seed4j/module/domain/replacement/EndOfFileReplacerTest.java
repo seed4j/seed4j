@@ -1,5 +1,6 @@
 package com.seed4j.module.domain.replacement;
 
+import static com.seed4j.module.domain.Seed4JModule.append;
 import static com.seed4j.module.domain.replacement.ReplacementCondition.always;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +16,14 @@ class EndOfFileReplacerTest {
 
     assertThat(replacer.notMatchIn("content")).isFalse();
     assertThat(replacer.notMatchIn("")).isFalse();
+  }
+
+  @Test
+  void shouldOnlyNeedReplacementWhenFileDoesNotContainReplacementWithDefaultAppend() {
+    EndOfFileReplacer replacer = append();
+
+    assertThat(replacer.condition().needReplacement("<root>\n</root>\n", "<element />")).isTrue();
+    assertThat(replacer.condition().needReplacement("<root>\n<element />\n</root>\n", "<element />")).isFalse();
   }
 
   @Test

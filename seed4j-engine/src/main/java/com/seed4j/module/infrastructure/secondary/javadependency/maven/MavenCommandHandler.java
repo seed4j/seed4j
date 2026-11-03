@@ -4,6 +4,8 @@ import com.seed4j.module.domain.Indentation;
 import com.seed4j.module.domain.buildproperties.BuildProperty;
 import com.seed4j.module.domain.buildproperties.PropertyKey;
 import com.seed4j.module.domain.buildproperties.PropertyValue;
+import com.seed4j.module.domain.javabuild.ArtifactId;
+import com.seed4j.module.domain.javabuild.GroupId;
 import com.seed4j.module.domain.javabuild.MavenBuildExtension;
 import com.seed4j.module.domain.javabuild.VersionSlug;
 import com.seed4j.module.domain.javabuild.command.AddDirectJavaDependency;
@@ -249,9 +251,23 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   public void handle(AddMavenBuildExtension command) {
     Assert.notNull(COMMAND, command);
 
-    projectBuild().addExtension(toMavenExtension(command.buildExtension()));
+    replaceOrAddExtension(projectBuild().getExtensions(), toMavenExtension(command.buildExtension()));
 
     writePom();
+  }
+
+  private static void replaceOrAddExtension(List<Extension> extensions, Extension newExtension) {
+    for (int i = 0; i < extensions.size(); i++) {
+      Extension existingExtension = extensions.get(i);
+      if (
+        existingExtension.getGroupId().equals(newExtension.getGroupId())
+        && existingExtension.getArtifactId().equals(newExtension.getArtifactId())
+      ) {
+        extensions.set(i, newExtension);
+        return;
+      }
+    }
+    extensions.add(newExtension);
   }
 
   private Build projectBuild() {
@@ -394,7 +410,7 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
       .map(this::findProfile)
       .map(this::dependencyManagement)
       .orElse(dependencyManagement());
-    addDependencyTo(command.dependency(), dependencyManagement.getDependencies());
+    addDependencyTo(command.dependency(), dependencyManagement.getDependencies(), List.of());
   }
 
   private DependencyManagement dependencyManagement(Profile mavenProfile) {
@@ -423,14 +439,41 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
       .map(this::findProfile)
       .map(Profile::getDependencies)
       .orElse(pomModel.getDependencies());
-    addDependencyTo(command.dependency(), dependencies);
+    List<DependencyId> existingExclusions = List.of();
+    if (command.buildProfile().isPresent()) {
+      List<Dependency> matchingDependencies = dependencies.stream().filter(matchesDependencyId(command.dependency().id())).toList();
+      existingExclusions = matchingDependencies
+        .stream()
+        .flatMap(dependency -> dependency.getExclusions().stream())
+        .map(MavenCommandHandler::toDependencyId)
+        .toList();
+      dependencies.removeAll(matchingDependencies);
+    }
+    addDependencyTo(command.dependency(), dependencies, existingExclusions);
   }
 
-  private void addDependencyTo(JavaDependency dependency, List<Dependency> dependencies) {
+  private static Predicate<Dependency> matchesDependencyId(DependencyId dependency) {
+    return mavenDependency -> toDependencyId(mavenDependency).equals(dependency);
+  }
+
+  private static DependencyId toDependencyId(Dependency mavenDependency) {
+    return DependencyId.builder()
+      .groupId(new GroupId(mavenDependency.getGroupId()))
+      .artifactId(new ArtifactId(mavenDependency.getArtifactId()))
+      .classifier(Optional.ofNullable(mavenDependency.getClassifier()).map(JavaDependencyClassifier::new).orElse(null))
+      .type(MavenType.from(mavenDependency.getType()).map(MavenType::toJavaDependencyType).orElse(null))
+      .build();
+  }
+
+  private static DependencyId toDependencyId(Exclusion exclusion) {
+    return DependencyId.of(new GroupId(exclusion.getGroupId()), new ArtifactId(exclusion.getArtifactId()));
+  }
+
+  private void addDependencyTo(JavaDependency dependency, List<Dependency> dependencies, List<DependencyId> existingExclusions) {
+    Dependency mavenDependency = toMavenDependency(dependency, existingExclusions);
     if (dependency.scope() == JavaDependencyScope.TEST) {
-      dependencies.add(toMavenDependency(dependency));
+      dependencies.add(mavenDependency);
     } else {
-      Dependency mavenDependency = toMavenDependency(dependency);
       insertDependencyBeforeFirstTestDependency(mavenDependency, dependencies);
     }
 
@@ -450,13 +493,20 @@ public class MavenCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private Dependency toMavenDependency(JavaDependency javaDependency) {
+    return toMavenDependency(javaDependency, List.of());
+  }
+
+  private Dependency toMavenDependency(JavaDependency javaDependency, List<DependencyId> existingExclusions) {
     Dependency mavenDependency = new Dependency();
     mavenDependency.setGroupId(javaDependency.id().groupId().get());
     mavenDependency.setArtifactId(javaDependency.id().artifactId().get());
     javaDependency.version().map(VersionSlug::mavenVariable).ifPresent(mavenDependency::setVersion);
     javaDependency.classifier().map(JavaDependencyClassifier::get).ifPresent(mavenDependency::setClassifier);
     javaDependency.type().map(MavenType::from).map(MavenType::key).ifPresent(mavenDependency::setType);
-    javaDependency.exclusions().stream().map(toMavenExclusion()).forEach(mavenDependency::addExclusion);
+    Stream.concat(existingExclusions.stream(), javaDependency.exclusions().stream())
+      .distinct()
+      .map(toMavenExclusion())
+      .forEach(mavenDependency::addExclusion);
 
     if (javaDependency.scope() != JavaDependencyScope.COMPILE) {
       mavenDependency.setScope(MavenScope.from(javaDependency.scope()).key());

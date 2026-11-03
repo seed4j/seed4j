@@ -1,28 +1,55 @@
-import { Loader } from '@/shared/loader/infrastructure/primary/Loader';
+import { Loader, LoadingState } from '@/shared/loader/infrastructure/primary/Loader';
 import { describe, expect, it } from 'vitest';
 
 describe('Loader', () => {
-  it('should be loading for loading loader', () => {
-    expect(Loader.loading().isLoading()).toBe(true);
+  describe('Loading loader', () => {
+    const loader = Loader.loading<string>();
+
+    it('should be in a loading state', () => {
+      expect(loader.state).toBe(LoadingState.LOADING);
+      expect(loader.isLoading).toBe(true);
+      expect(loader.isLoaded).toBe(false);
+      expect(loader.isInError).toBe(false);
+    });
+
+    it('should not get value', () => {
+      expect(() => loader.value).toThrowError();
+    });
+
+    it('should not get error', () => {
+      expect(() => loader.error).toThrowError();
+    });
   });
 
-  it('should not get value for not loaded loader', () => {
-    expect(() => Loader.loading().value()).toThrow();
+  describe('Loaded loader', () => {
+    const loader = Loader.loaded('value');
+
+    it('should be loaded', () => {
+      expect(loader.state).toBe(LoadingState.LOADED);
+      expect(loader.isLoading).toBe(false);
+      expect(loader.isLoaded).toBe(true);
+      expect(loader.isInError).toBe(false);
+      expect(loader.value).toBe('value');
+    });
+
+    it('should not get error', () => {
+      expect(() => loader.error).toThrowError();
+    });
   });
 
-  it('should build loaded value', () => {
-    const loader = Loader.loaded('hello');
+  describe('Error loader', () => {
+    const loader = Loader.error(new Error('oops'));
 
-    expect(loader.isLoading()).toBe(false);
-    expect(loader.value()).toBe('hello');
-  });
+    it('should be in error state', () => {
+      expect(loader.state).toBe(LoadingState.ERROR);
+      expect(loader.isLoading).toBe(false);
+      expect(loader.isLoaded).toBe(false);
+      expect(loader.isInError).toBe(true);
+      expect(loader.error.message).toBe('oops');
+    });
 
-  it('should load value', () => {
-    const loader = Loader.loading();
-
-    loader.loaded('hello');
-
-    expect(loader.isLoading()).toBe(false);
-    expect(loader.value()).toBe('hello');
+    it('should not get value', () => {
+      expect(() => loader.value).toThrowError();
+    });
   });
 });

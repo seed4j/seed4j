@@ -55,7 +55,7 @@
     <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
     <micronaut-maven-plugin.version>5.0.2</micronaut-maven-plugin.version>
     <maven-shade-plugin.version>3.6.2</maven-shade-plugin.version>
-    <protobuf-maven-plugin.version>5.1.11</protobuf-maven-plugin.version>
+    <protobuf-maven-plugin.version>5.1.12</protobuf-maven-plugin.version>
     <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
     <checkstyle.version>14.4.0</checkstyle.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>

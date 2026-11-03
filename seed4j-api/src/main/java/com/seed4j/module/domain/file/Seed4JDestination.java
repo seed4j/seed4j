@@ -45,6 +45,7 @@ public final class Seed4JDestination {
     return new Seed4JDestination(destination + "/" + element);
   }
 
+  @SuppressWarnings("javabugs:S2259") // False positive: the constructor ensures that destination is not blank
   public String javaPackageName() {
     Assert.field("destination", destination).matchesPattern(JAVA_PACKAGE_FOLDER_PATTERN);
 

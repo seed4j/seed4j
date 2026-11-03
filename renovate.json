@@ -17,6 +17,16 @@
   "docker-compose": {
     "fileMatch": ["^seed4j-server/src/main/docker/[^/]*\\.ya?ml$"]
   },
+  "customManagers": [
+    {
+      "description": "Update the npm version installed by the setup action",
+      "customType": "regex",
+      "managerFilePatterns": ["/^\\.github/actions/setup/action\\.yml$/"],
+      "matchStrings": ["npm install -g npm@(?<currentValue>\\S+)"],
+      "depNameTemplate": "npm",
+      "datasourceTemplate": "npm"
+    }
+  ],
   "packageRules": [
     {
       "description": "Stay on the current Node.js LTS: the node versioning only considers a major stable once it has reached LTS",

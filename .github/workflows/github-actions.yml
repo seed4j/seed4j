@@ -529,7 +529,7 @@ jobs:
             if [[ "${{ steps.playwright.outputs.enabled }}" == "true" ]]; then
               # apt sometimes hangs on Azure mirrors before downloading anything: bound each attempt and retry
               for attempt in 1 2 3; do
-                if timeout 180 npx playwright install-deps; then
+                if timeout 180 npx --no playwright install-deps; then
                   break
                 fi
                 if [[ $attempt -eq 3 ]]; then
@@ -539,7 +539,7 @@ jobs:
                 echo "Playwright system dependencies installation attempt $attempt failed, retrying"
                 sudo dpkg --configure -a
               done
-              npx playwright install
+              npx --no playwright install
             fi
             ${{ matrix.node-package-manager }} run test:component:headless
           else

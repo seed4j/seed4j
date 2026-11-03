@@ -23,18 +23,24 @@ class CorsFilterConfiguration {
   @Bean
   public CorsFilter corsFilter() {
     var source = new UrlBasedCorsConfigurationSource();
-    if (
-      !CollectionUtils.isEmpty(corsConfiguration.getAllowedOrigins())
-      || !CollectionUtils.isEmpty(corsConfiguration.getAllowedOriginPatterns())
-    ) {
-      log.debug("Registering CORS filter");
-      source.registerCorsConfiguration("/api/**", corsConfiguration);
-      source.registerCorsConfiguration("/management/**", corsConfiguration);
-      source.registerCorsConfiguration("/v2/api-docs", corsConfiguration);
-      source.registerCorsConfiguration("/v3/api-docs", corsConfiguration);
-      source.registerCorsConfiguration("/swagger-resources", corsConfiguration);
-      source.registerCorsConfiguration("/swagger-ui/**", corsConfiguration);
+    if (hasNoAllowedOrigins()) {
+      return new CorsFilter(source);
     }
+
+    log.debug("Registering CORS filter");
+    source.registerCorsConfiguration("/api/**", corsConfiguration);
+    source.registerCorsConfiguration("/management/**", corsConfiguration);
+    source.registerCorsConfiguration("/v2/api-docs", corsConfiguration);
+    source.registerCorsConfiguration("/v3/api-docs", corsConfiguration);
+    source.registerCorsConfiguration("/swagger-resources", corsConfiguration);
+    source.registerCorsConfiguration("/swagger-ui/**", corsConfiguration);
     return new CorsFilter(source);
+  }
+
+  private boolean hasNoAllowedOrigins() {
+    return (
+      CollectionUtils.isEmpty(corsConfiguration.getAllowedOrigins())
+      && CollectionUtils.isEmpty(corsConfiguration.getAllowedOriginPatterns())
+    );
   }
 }

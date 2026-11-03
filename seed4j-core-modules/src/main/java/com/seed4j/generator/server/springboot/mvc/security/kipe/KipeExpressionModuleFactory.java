@@ -18,6 +18,7 @@ class KipeExpressionModuleFactory {
   private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
   private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
 
+  private static final String APPLICATION = "application";
   private static final String KIPE_DESTINATION = "shared/kipe";
 
   Seed4JModule buildModule(Seed4JModuleProperties properties) {
@@ -31,8 +32,8 @@ class KipeExpressionModuleFactory {
       .documentation(documentationTitle("Kipe expression"), SOURCE.template("kipe-expression.md"))
       .files()
         .add(MAIN_SOURCE.template("package-info.java"), mainDestination.append("package-info.java"))
-        .nullMarkedJavaPackage(mainDestination.append("application"))
-        .batch(MAIN_SOURCE, mainDestination.append("application"))
+        .nullMarkedJavaPackage(mainDestination.append(APPLICATION))
+        .batch(MAIN_SOURCE, mainDestination.append(APPLICATION))
           .addTemplate("AccessChecker.java")
           .addTemplate("AccessContext.java")
           .addTemplate("AccessContextFactory.java")
@@ -44,7 +45,7 @@ class KipeExpressionModuleFactory {
           .addTemplate("NullElementAccessContext.java")
           .addTemplate("ObjectAccessChecker.java")
           .and()
-        .batch(TEST_SOURCE, testDestination.append("application"))
+        .batch(TEST_SOURCE, testDestination.append(APPLICATION))
           .addTemplate("AccessCheckerIT.java")
           .addTemplate("AccessContextFactoryTest.java")
           .addTemplate("AccessEvaluatorTest.java")

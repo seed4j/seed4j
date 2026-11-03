@@ -16,6 +16,10 @@ import com.seed4j.module.domain.resource.Seed4JModuleServices;
 
 public final class MicronautDataJpaModuleResources {
 
+  private static final String SERVER_TAG = "server";
+  private static final String MICRONAUT_TAG = "micronaut";
+  private static final String DATABASE_TAG = "database";
+
   private MicronautDataJpaModuleResources() {}
 
   @AutoService(Seed4JModuleResourceProvider.class)
@@ -35,7 +39,7 @@ public final class MicronautDataJpaModuleResources {
         )
         .apiDoc("Micronaut Data JPA - PostgreSQL", "Add Micronaut Data JPA with PostgreSQL")
         .organization(Seed4JModuleOrganization.builder().feature(MICRONAUT_JPA_PERSISTENCE).addDependency(MICRONAUT).build())
-        .tags("server", "micronaut", "database", "jpa", "postgresql")
+        .tags(SERVER_TAG, MICRONAUT_TAG, DATABASE_TAG, "jpa", "postgresql")
         .factory(new MicronautDataJpaModuleFactory()::buildPostgreSQL);
     }
   }
@@ -57,7 +61,7 @@ public final class MicronautDataJpaModuleResources {
         )
         .apiDoc("Micronaut Data JPA - MySQL", "Add Micronaut Data JPA with MySQL")
         .organization(Seed4JModuleOrganization.builder().feature(MICRONAUT_JPA_PERSISTENCE).addDependency(MICRONAUT).build())
-        .tags("server", "micronaut", "database", "jpa", "mysql")
+        .tags(SERVER_TAG, MICRONAUT_TAG, DATABASE_TAG, "jpa", "mysql")
         .factory(new MicronautDataJpaModuleFactory()::buildMySQL);
     }
   }
@@ -79,7 +83,7 @@ public final class MicronautDataJpaModuleResources {
         )
         .apiDoc("Micronaut Data JPA - MariaDB", "Add Micronaut Data JPA with MariaDB")
         .organization(Seed4JModuleOrganization.builder().feature(MICRONAUT_JPA_PERSISTENCE).addDependency(MICRONAUT).build())
-        .tags("server", "micronaut", "database", "jpa", "mariadb")
+        .tags(SERVER_TAG, MICRONAUT_TAG, DATABASE_TAG, "jpa", "mariadb")
         .factory(new MicronautDataJpaModuleFactory()::buildMariaDB);
     }
   }
@@ -101,7 +105,7 @@ public final class MicronautDataJpaModuleResources {
         )
         .apiDoc("Micronaut Data JPA - MS SQL", "Add Micronaut Data JPA with Microsoft SQL Server")
         .organization(Seed4JModuleOrganization.builder().feature(MICRONAUT_JPA_PERSISTENCE).addDependency(MICRONAUT).build())
-        .tags("server", "micronaut", "database", "jpa", "mssql")
+        .tags(SERVER_TAG, MICRONAUT_TAG, DATABASE_TAG, "jpa", "mssql")
         .factory(new MicronautDataJpaModuleFactory()::buildMsSQL);
     }
   }

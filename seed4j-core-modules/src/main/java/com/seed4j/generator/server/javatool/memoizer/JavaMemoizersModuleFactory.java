@@ -17,6 +17,7 @@ class JavaMemoizersModuleFactory {
   private static final Seed4JSource MAIN_SOURCE = SOURCE.append("main");
   private static final Seed4JSource TEST_SOURCE = SOURCE.append("test");
 
+  private static final String DOMAIN = "domain";
   private static final String COMMON_DOMAIN = "shared/memoizer";
 
   Seed4JModule buildModule(Seed4JModuleProperties properties) {
@@ -31,9 +32,9 @@ class JavaMemoizersModuleFactory {
     return moduleBuilder(properties)
       .files()
         .add(SOURCE.template("package-info.java"), mainDestination.append("package-info.java"))
-        .nullMarkedJavaPackage(mainDestination.append("domain"))
-        .add(MAIN_SOURCE.template("Memoizers.java"), mainDestination.append("domain").append("Memoizers.java"))
-        .add(TEST_SOURCE.template("MemoizersTest.java"), testDestination.append("domain").append("MemoizersTest.java"))
+        .nullMarkedJavaPackage(mainDestination.append(DOMAIN))
+        .add(MAIN_SOURCE.template("Memoizers.java"), mainDestination.append(DOMAIN).append("Memoizers.java"))
+        .add(TEST_SOURCE.template("MemoizersTest.java"), testDestination.append(DOMAIN).append("MemoizersTest.java"))
         .and()
       .build();
     // @formatter:on

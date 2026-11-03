@@ -10,6 +10,7 @@ import com.seed4j.module.domain.file.Seed4JDestination;
 import com.seed4j.module.domain.file.Seed4JSource;
 import com.seed4j.module.domain.nodejs.NodeLazyPackagesInstaller;
 import com.seed4j.module.domain.properties.Seed4JModuleProperties;
+import com.seed4j.module.domain.replacement.RegexNeedleAfterReplacer;
 import com.seed4j.module.domain.resource.Seed4JModuleServices;
 import com.seed4j.shared.error.domain.Assert;
 import java.util.function.Consumer;
@@ -19,6 +20,7 @@ class SvelteModuleFactory {
   private static final Seed4JSource SOURCE = from("client/svelte");
   private static final Seed4JSource WEBAPP_SOURCE = SOURCE.append("src/main/webapp");
   private static final Seed4JDestination WEBAPP_DESTINATION = to("src/main/webapp");
+  private static final RegexNeedleAfterReplacer VITEST_CONFIG_IMPORT = lineAfterRegex("from 'vitest/config';");
 
   private final NodeLazyPackagesInstaller nodeLazyPackagesInstaller;
 
@@ -127,9 +129,9 @@ class SvelteModuleFactory {
     return moduleBuilder -> moduleBuilder
       .mandatoryReplacements()
         .in(path("vitest.config.ts"))
-          .add(lineAfterRegex("from 'vitest/config';"), "import { svelteKitConfig, webappAlias } from './vite.config.ts';")
-          .add(lineAfterRegex("from 'vitest/config';"), "import { svelteTesting } from '@testing-library/svelte/vite';")
-          .add(lineAfterRegex("from 'vitest/config';"), "import { sveltekit } from '@sveltejs/kit/vite';")
+          .add(VITEST_CONFIG_IMPORT, "import { svelteKitConfig, webappAlias } from './vite.config.ts';")
+          .add(VITEST_CONFIG_IMPORT, "import { svelteTesting } from '@testing-library/svelte/vite';")
+          .add(VITEST_CONFIG_IMPORT, "import { sveltekit } from '@sveltejs/kit/vite';")
           .add(lineBeforeText("resolve: {"), properties.indentation().spaces() + "plugins: [sveltekit(svelteKitConfig), svelteTesting()],")
           .add(text("tsconfigPaths: true,"), "alias: webappAlias,")
           .add(text("environment: 'node',"), "environment: 'jsdom',")

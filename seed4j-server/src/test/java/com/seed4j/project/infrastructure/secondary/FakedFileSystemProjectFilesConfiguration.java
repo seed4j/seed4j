@@ -5,7 +5,6 @@ import static org.mockito.Mockito.*;
 import com.seed4j.module.infrastructure.secondary.FileSystemProjectFiles;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
@@ -16,7 +15,7 @@ public class FakedFileSystemProjectFilesConfiguration {
   @Bean
   @Primary
   FileSystemProjectFiles fileSystemProjectFiles() {
-    FileSystemProjectFiles fileSystemProjectFiles = Mockito.spy(new FileSystemProjectFiles());
+    FileSystemProjectFiles fileSystemProjectFiles = spy(new FileSystemProjectFiles());
 
     mockPresetJson(fileSystemProjectFiles);
 

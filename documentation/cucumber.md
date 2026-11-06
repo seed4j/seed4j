@@ -93,7 +93,7 @@ Sometimes you have to validate the behavior of async operations. You can do:
 assertThatLastAsyncResponse().hasOkStatus();
 ```
 
-To have a default waiting time of 5 seconds or you can get a custom max with:
+To have a default waiting time of 4 seconds or you can get a custom max with:
 
 ```java
 assertThatLastAsyncResponse(Duration.ofSeconds(30)).hasOkStatus();
@@ -103,7 +103,7 @@ Behind the scene, your last service will be recalled until the assertions are OK
 
 ## Mocking beans
 
-You may need to mock beans for your component tests, but you won't be able to do it in a "classic" way (using `@MockBean`) since the application context will be already loaded. A way to achieve that is to overload beans to have mocks in `CucumberConfiguration`:
+You may need to mock beans for your component tests, but you won't be able to do it in a "classic" way (using `@MockitoBean`) since the application context will be already loaded. A way to achieve that is to overload beans to have mocks in `CucumberConfiguration`:
 
 ```java
 @ActiveProfiles("test")

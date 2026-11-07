@@ -16,6 +16,7 @@
     }
   },
   "include": [
+    "oxlint.config.ts",
     "src/main/webapp/**/*.ts",
     "src/main/webapp/**/*.d.ts",
     "src/main/webapp/**/*.tsx",

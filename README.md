@@ -263,7 +263,7 @@ Then, go to [http://localhost:1339](http://localhost:1339)
 
 ## e2e tests
 
-You need to run the project first. Then, you can run the end-to-end tests:
+You need to run the project first and to install the Playwright browser once (`npm run test:install-browser --workspace seed4j-server`). Then, you can run the end-to-end tests:
 
 ```bash
 npm run e2e --workspace seed4j-server

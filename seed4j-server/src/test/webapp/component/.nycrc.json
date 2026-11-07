@@ -1,6 +1,0 @@
-{
-  "extension": [".js", ".cjs", ".mjs", ".ts", ".vue"],
-  "reporter": ["html", "json"],
-  "report-dir": "../../../../target/frontend-coverage/components-tests",
-  "temp-dir": "../../../../target/.nyc_output"
-}

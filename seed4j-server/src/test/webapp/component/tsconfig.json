@@ -3,9 +3,9 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "strict": true,
-    "target": "es6",
-    "lib": ["es5", "es6", "dom", "dom.iterable"],
-    "types": ["cypress"]
+    "target": "es2022",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "types": ["node"]
   },
-  "include": ["**/*.spec.ts"]
+  "include": ["**/*.ts"]
 }

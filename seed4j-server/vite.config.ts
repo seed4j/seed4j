@@ -41,10 +41,11 @@ export default defineConfig({
     outDir: '../../../target/classes/static',
   },
   root: 'src/main/webapp',
-  // Keep the cache out of node_modules: `tikui-core serve` runs `sass --watch -I node_modules`,
-  // which crashes when Vite creates then renames its deps_temp_* folder there.
+  // Keep the cache out of seed4j-server: `tikui-core serve` runs `sass --watch -I node_modules`, which watches the whole
+  // seed4j-server folder (its node_modules does not exist, the workspace dependencies are in the root one) and crashes
+  // when Vite creates then renames its deps_temp_* folder there.
   // See https://github.com/tikui/tikui-core/issues/602
-  cacheDir: path.resolve(__dirname, 'target/vite-cache'),
+  cacheDir: path.resolve(__dirname, '../node_modules/.vite/seed4j-server'),
   server: {
     port: 9000,
     proxy: {

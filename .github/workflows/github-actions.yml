@@ -239,7 +239,9 @@ jobs:
     needs: [setup, tests-linux, generate-main-branch-jar]
     # MongoDB 8.x refuses to start on Linux kernels 6.19 to 7.0.13 (https://jira.mongodb.org/browse/SERVER-121912)
     # ubuntu-latest now ships kernel 7.0.0: use ubuntu-22.04 (kernel 6.8) for mongodbapp until runners get kernel >= 7.0.14
-    runs-on: ${{ matrix.app == 'mongodbapp' && 'ubuntu-22.04' || 'ubuntu-latest' }}
+    # The other apps stay on ubuntu-24.04: on ubuntu-latest (Ubuntu 26.04), the WebKit of Playwright misses libicudata.so.74
+    # and the installation of its system dependencies collides with a running apt-get
+    runs-on: ${{ matrix.app == 'mongodbapp' && 'ubuntu-22.04' || 'ubuntu-24.04' }}
     timeout-minutes: 15
     if: >-
       !cancelled() &&

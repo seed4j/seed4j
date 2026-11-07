@@ -1,112 +1,94 @@
-import { interceptForever } from '../support/Interceptor';
+import { expect, test } from '../support/Coverage';
+import { fixture, interceptForever } from '../support/Interceptor';
 import { dataSelector } from '../support/Selector';
 
-describe('Patch', () => {
-  beforeEach(() => cy.intercept({ path: '/api/project-folders' }, { body: '/tmp/seed4j/1234' }));
-
-  it('should display loader while loading modules', () => {
-    const result = interceptForever({ path: '/api/modules' }, { fixture: 'modules.json' });
-
-    cy.visit('/patches');
-
-    cy.get(dataSelector('modules-loader'))
-      .should('be.visible')
-      .then(() => {
-        result.send();
-
-        cy.get(dataSelector('modules-loader')).should('not.exist');
-        cy.get(dataSelector('modules-list')).should('be.visible');
-        cy.get(dataSelector('module-spring-test-application-button')).should('be.enabled');
-        cy.get(dataSelector('module-spring-cucumber-application-button')).should('be.enabled');
-        cy.get(dataSelector('folder-path-field')).invoke('val').should('equal', '/tmp/seed4j/1234');
-      });
+test.describe('Patch', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.route('**/api/project-folders', route => route.fulfill({ body: '/tmp/seed4j/1234' }));
   });
 
-  it('should change theme after toggle switch theme button', () => {
-    const result = interceptForever({ path: '/api/modules' }, { fixture: 'modules.json' });
+  test('should display loader while loading modules', async ({ page }) => {
+    const result = await interceptForever(page, '**/api/modules', fixture('modules.json'));
+    await page.goto('/patches');
 
-    cy.visit('/patches', {
-      onBeforeLoad(win) {
-        cy.stub(win, 'matchMedia').withArgs('(prefers-color-scheme: dark)').returns({ matches: true });
+    const loader = page.locator(dataSelector('modules-loader'));
+    await expect(loader).toBeVisible();
+    result.send();
+
+    await expect(loader).toHaveCount(0);
+    await expect(page.locator(dataSelector('modules-list'))).toBeVisible();
+    await expect(page.locator(dataSelector('module-spring-test-application-button'))).toBeEnabled();
+    await expect(page.locator(dataSelector('module-spring-cucumber-application-button'))).toBeEnabled();
+    await expect(page.locator(dataSelector('folder-path-field'))).toHaveValue('/tmp/seed4j/1234');
+  });
+
+  test('should change theme after toggle switch theme button', async ({ page }) => {
+    const result = await interceptForever(page, '**/api/modules', fixture('modules.json'));
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await page.goto('/patches');
+
+    const loader = page.locator(dataSelector('modules-loader'));
+    await expect(loader).toBeVisible();
+    result.send();
+    await expect(loader).toHaveCount(0);
+    await expect(page.locator(dataSelector('modules-list'))).toBeVisible();
+
+    const themeSwitchButton = page.locator(dataSelector('theme-switch-button'));
+    await expect(themeSwitchButton).not.toBeChecked();
+    await expect(page.locator('[aria-label="dark-theme"]')).toBeAttached();
+
+    await page.locator('[aria-label="dark-theme"]').click();
+    await expect(themeSwitchButton).toBeChecked();
+    await expect(page.locator('[aria-label="light-theme"]')).toBeAttached();
+
+    await page.locator('[aria-label="light-theme"]').click();
+    await expect(themeSwitchButton).not.toBeChecked();
+    await expect(page.locator('[aria-label="dark-theme"]')).toBeAttached();
+  });
+
+  test('should apply module without properties', async ({ page }) => {
+    await page.route('**/api/modules', route => route.fulfill(fixture('modules.json')));
+    await page.goto('/patches');
+
+    await page.route('**/api/modules/spring-test/apply-patch', route => route.fulfill({ status: 200 }));
+
+    const springTestCreation = page.waitForRequest(
+      request => request.method() === 'POST' && new URL(request.url()).pathname === '/api/modules/spring-test/apply-patch',
+    );
+    await page.locator(dataSelector('folder-path-field')).fill('test');
+    await page.locator(dataSelector('module-spring-test-application-button')).click();
+
+    expect((await springTestCreation).postDataJSON()).toEqual({
+      projectFolder: 'test',
+      commit: true,
+      parameters: {},
+    });
+  });
+
+  test('should apply module with properties', async ({ page }) => {
+    await page.route('**/api/modules', route => route.fulfill(fixture('modules.json')));
+    await page.goto('/patches');
+
+    await page.route('**/api/modules/spring-cucumber/apply-patch', route => route.fulfill({ status: 200 }));
+
+    const springCucumberCreation = page.waitForRequest(
+      request => request.method() === 'POST' && new URL(request.url()).pathname === '/api/modules/spring-cucumber/apply-patch',
+    );
+    await page.locator(dataSelector('spring-cucumber-module-content')).click();
+    await page.locator(dataSelector('folder-path-field')).fill('test');
+    await page.locator(dataSelector('parameter-baseName-field')).fill('seed4j');
+    await page.locator(dataSelector('parameter-optionalBoolean-field')).selectOption('true');
+    await page.locator(dataSelector('parameter-optionalInteger-field')).fill('42');
+    await page.locator(dataSelector('module-spring-cucumber-application-button')).click();
+
+    expect((await springCucumberCreation).postDataJSON()).toEqual({
+      projectFolder: 'test',
+      commit: true,
+      parameters: {
+        baseName: 'seed4j',
+        optionalBoolean: true,
+        optionalInteger: 42,
       },
-    });
-
-    cy.get(dataSelector('modules-loader'))
-      .should('be.visible')
-      .then(() => {
-        result.send();
-        cy.get(dataSelector('modules-loader')).should('not.exist');
-        cy.get(dataSelector('modules-list')).should('be.visible');
-
-        const themeSwitchButton = dataSelector('theme-switch-button');
-
-        cy.get(themeSwitchButton).should('not.be.checked');
-        cy.get('[aria-label="dark-theme"]').should('exist');
-
-        cy.get('[aria-label="dark-theme"]').click();
-        cy.get(themeSwitchButton).should('be.checked');
-        cy.get('[aria-label="light-theme"]').should('exist');
-
-        cy.get('[aria-label="light-theme"]').click();
-        cy.get(themeSwitchButton).should('not.be.checked');
-        cy.get('[aria-label="dark-theme"]').should('exist');
-      });
-  });
-
-  it('should apply module without properties', () => {
-    cy.intercept({ path: '/api/modules' }, { fixture: 'modules.json' });
-
-    cy.intercept({
-      path: '/api/modules/spring-test/apply-patch',
-      method: 'POST',
-    }).as('spring-test-creation');
-
-    cy.visit('/patches');
-    cy.get(dataSelector('folder-path-field')).clear();
-    cy.get(dataSelector('folder-path-field')).type('test');
-    cy.get(dataSelector('module-spring-test-application-button')).click();
-
-    cy.wait('@spring-test-creation').should(xhr => {
-      const body = xhr.request.body;
-
-      expect(body).to.deep.equal({
-        projectFolder: 'test',
-        commit: true,
-        parameters: {},
-      });
-    });
-  });
-
-  it('should apply module with properties', () => {
-    cy.intercept({ path: '/api/modules' }, { fixture: 'modules.json' });
-
-    cy.intercept({
-      path: '/api/modules/spring-cucumber/apply-patch',
-      method: 'POST',
-    }).as('spring-cucumber-creation');
-
-    cy.visit('/patches');
-
-    cy.get(dataSelector('spring-cucumber-module-content')).click();
-    cy.get(dataSelector('folder-path-field')).clear();
-    cy.get(dataSelector('folder-path-field')).type('test');
-    cy.get(dataSelector('parameter-baseName-field')).type('seed4j');
-    cy.get(dataSelector('parameter-optionalBoolean-field')).select('true');
-    cy.get(dataSelector('parameter-optionalInteger-field')).type('42');
-    cy.get(dataSelector('module-spring-cucumber-application-button')).click();
-
-    cy.wait('@spring-cucumber-creation').should(xhr => {
-      const body = xhr.request.body;
-
-      expect(body).to.deep.equal({
-        projectFolder: 'test',
-        commit: true,
-        parameters: {
-          baseName: 'seed4j',
-          optionalBoolean: true,
-          optionalInteger: 42,
-        },
-      });
     });
   });
 });

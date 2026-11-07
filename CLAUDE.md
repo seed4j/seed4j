@@ -135,11 +135,11 @@ A module is a single package of `seed4j-core-modules`, `com.seed4j.generator.my_
 
 ### Frontend (`seed4j-server/src/main/webapp/`)
 
-Vue 3 + TypeScript, built with Vite. Unit tests use Vitest; E2E/component tests use Cypress.
+Vue 3 + TypeScript, built with Vite. Unit tests use Vitest; E2E/component tests use Playwright (`npm run test:install-browser --workspace seed4j-server` installs its browser).
 
 ```bash
 npm run test:unit:coverage --workspace seed4j-server # Vitest with coverage
-npm run e2e:headless --workspace seed4j-server       # Cypress E2E headless
+npm run e2e:headless --workspace seed4j-server       # Playwright E2E headless
 npm run dev:tikui --workspace seed4j-server          # Pattern library at http://localhost:9005
 ```
 

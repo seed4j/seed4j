@@ -46,7 +46,7 @@
     "test:install-browser": "playwright install --only-shell chromium",
     "test:unit:coverage": "vitest run --coverage",
     "test:watch": "vitest --",
-    "typecheck": "vue-tsc -p tsconfig.json --noEmit && vue-tsc -p src/test/webapp/component/tsconfig.json --noEmit && vue-tsc -p src/test/webapp/e2e/tsconfig.json --noEmit",
+    "typecheck": "vue-tsc -p tsconfig.json --noEmit && vue-tsc -p src/test/webapp/tsconfig.json --noEmit",
     "watch:": "npm-run-all --parallel watch:*",
     "watch:test": "npm run test:watch",
     "watch:tsc": "npm run build:tsc -- --watch"
@@ -67,6 +67,7 @@
     "@vitest/coverage-istanbul": "5.1.0",
     "@vue/test-utils": "2.5.1",
     "cpy-cli": "7.0.0",
+    "eslint-plugin-playwright": "2.12.2",
     "fontello-cli": "0.6.2",
     "jsdom": "31.0.0",
     "npm-run-all2": "9.0.4",

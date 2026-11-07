@@ -7,5 +7,5 @@
     "lib": ["es2022", "dom", "dom.iterable"],
     "types": ["node"]
   },
-  "include": ["**/*.ts"]
+  "include": ["component/**/*.ts", "e2e/**/*.ts"]
 }

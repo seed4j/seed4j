@@ -65,7 +65,16 @@
     },
     {
       "files": ["src/test/webapp/component/**/*.ts", "src/test/webapp/e2e/**/*.ts"],
+      "jsPlugins": ["eslint-plugin-playwright"],
       "rules": {
+        "playwright/missing-playwright-await": "error",
+        "playwright/no-focused-test": "error",
+        "playwright/no-force-option": "error",
+        "playwright/no-skipped-test": "error",
+        "playwright/no-standalone-expect": "error",
+        "playwright/no-wait-for-timeout": "error",
+        "playwright/prefer-web-first-assertions": "error",
+        "playwright/valid-expect": "error",
         "typescript/await-thenable": "error",
         "typescript/no-array-delete": "error",
         "typescript/no-base-to-string": "error",

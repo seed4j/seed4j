@@ -22,5 +22,5 @@
     "src/main/webapp/**/*.vue",
     "src/test/webapp/unit/**/*.ts"
   ],
-  "exclude": ["./node_modules", "src/test/webapp/e2e/**/*.ts"]
+  "exclude": ["./node_modules"]
 }

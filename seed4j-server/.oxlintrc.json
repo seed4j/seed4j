@@ -64,20 +64,8 @@
       }
     },
     {
-      "files": ["src/test/webapp/component/integration/**/*.ts", "src/test/webapp/e2e/integration/**/*.ts"],
-      "jsPlugins": ["eslint-plugin-cypress"],
-      "globals": {
-        "cy": "readonly",
-        "Cypress": "readonly",
-        "expect": "readonly",
-        "assert": "readonly",
-        "chai": "readonly"
-      },
+      "files": ["src/test/webapp/component/**/*.ts", "src/test/webapp/e2e/**/*.ts"],
       "rules": {
-        "cypress/no-assigning-return-values": "error",
-        "cypress/no-async-tests": "error",
-        "cypress/no-unnecessary-waiting": "error",
-        "cypress/unsafe-to-chain-command": "error",
         "typescript/await-thenable": "error",
         "typescript/no-array-delete": "error",
         "typescript/no-base-to-string": "error",

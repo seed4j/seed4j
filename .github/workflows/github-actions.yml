@@ -206,9 +206,9 @@ jobs:
           path: '${{ github.workspace }}/seed4j-server/target/*.jar'
           retention-days: 1
   #--------------------------------------------------
-  # Cypress
+  # E2E
   #--------------------------------------------------
-  cypress:
+  e2e:
     needs: [tests-linux]
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -229,7 +229,9 @@ jobs:
         working-directory: ./tests-ci/
         run: |
           ./start.sh 1339
-      - name: 'Test: launch Cypress'
+      - name: 'Init: install Playwright browser'
+        run: npm run test:install-browser --workspace seed4j-server
+      - name: 'Test: launch Playwright'
         run: npm run e2e:headless --workspace seed4j-server
 
   #--------------------------------------------------
@@ -691,7 +693,7 @@ jobs:
   #--------------------------------------------------
   dependabot-auto-merge:
     name: dependabot-auto-merge
-    needs: [cypress, generation]
+    needs: [e2e, generation]
     permissions:
       pull-requests: write
       contents: write

@@ -1,9 +1,11 @@
+import { expect, test } from '@playwright/test';
+
 import { dataSelector } from '../support/Selector';
 
-describe('Patch', () => {
-  it('should display modules', () => {
-    cy.visit('/patches');
+test.describe('Patch', () => {
+  test('should display modules', async ({ page }) => {
+    await page.goto('/patches');
 
-    cy.get(dataSelector('modules-list')).should('be.visible');
+    await expect(page.locator(dataSelector('modules-list'))).toBeVisible();
   });
 });

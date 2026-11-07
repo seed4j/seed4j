@@ -61,7 +61,7 @@
     "@cypress/code-coverage": "4.1.3",
     "@tikui/core": "8.0.0",
     "@vitejs/plugin-vue": "6.0.10",
-    "@vitest/coverage-istanbul": "5.0.5",
+    "@vitest/coverage-istanbul": "5.1.0",
     "@vue/test-utils": "2.5.1",
     "concurrently": "10.0.6",
     "cpy-cli": "7.0.0",
@@ -82,7 +82,7 @@
     "typescript": "6.0.3",
     "vite": "8.3.5",
     "vite-plugin-istanbul": "9.0.1",
-    "vitest": "5.0.5",
+    "vitest": "5.1.0",
     "vitest-sonar-reporter": "3.0.0",
     "vue-tsc": "3.3.14",
     "wait-on": "9.5.1"

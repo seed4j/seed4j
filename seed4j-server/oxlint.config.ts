@@ -1,0 +1,110 @@
+import playwright from 'eslint-plugin-playwright';
+import { defineConfig } from 'oxlint';
+
+type RuleEntry = string | number | [string | number, ...unknown[]];
+
+// Every Playwright rule of the recommended set is an error: oxlint does not fail on the warnings.
+const playwrightRules = Object.fromEntries(
+  Object.entries(playwright.configs['flat/recommended'].rules as Record<string, RuleEntry>).map(([rule, entry]) => {
+    if (!rule.startsWith('playwright/')) {
+      return [rule, entry];
+    }
+
+    return [rule, Array.isArray(entry) ? ['error', ...entry.slice(1)] : 'error'];
+  }),
+);
+
+export default defineConfig({
+  plugins: ['eslint', 'typescript', 'unicorn', 'oxc', 'vue'],
+  categories: {
+    correctness: 'error',
+  },
+  options: {
+    typeAware: true,
+  },
+  env: {
+    builtin: true,
+    node: true,
+  },
+  ignorePatterns: ['target/'],
+  rules: {
+    'no-case-declarations': 'error',
+    'no-empty': 'error',
+    'no-fallthrough': 'error',
+    'no-prototype-builtins': 'error',
+    'no-redeclare': 'error',
+    'no-regex-spaces': 'error',
+    'no-var': 'error',
+    'preserve-caught-error': 'error',
+    'prefer-const': 'error',
+    'prefer-rest-params': 'error',
+    'prefer-spread': 'error',
+    'typescript/await-thenable': 'off',
+    'typescript/no-array-delete': 'off',
+    'typescript/no-base-to-string': 'off',
+    'typescript/no-duplicate-type-constituents': 'off',
+    'typescript/no-for-in-array': 'off',
+    'typescript/no-implied-eval': 'off',
+    'typescript/no-meaningless-void-operator': 'off',
+    'typescript/no-misused-spread': 'off',
+    'typescript/no-redundant-type-constituents': 'off',
+    'typescript/no-unsafe-unary-minus': 'off',
+    'typescript/no-useless-default-assignment': 'off',
+    'typescript/require-array-sort-compare': 'off',
+    'typescript/restrict-template-expressions': 'off',
+    'typescript/unbound-method': ['error', { ignoreStatic: true }],
+    'typescript/ban-ts-comment': 'error',
+    'typescript/no-namespace': 'error',
+    'typescript/no-require-imports': 'error',
+    'typescript/no-unnecessary-type-constraint': 'error',
+    'typescript/no-unsafe-function-type': 'error',
+    'vue/component-definition-name-casing': 'warn',
+    'vue/no-multiple-slot-args': 'warn',
+    'vue/no-required-prop-with-default': 'warn',
+    'vue/prop-name-casing': 'warn',
+    'vue/require-default-prop': 'warn',
+    'vue/require-prop-types': 'warn',
+  },
+  overrides: [
+    {
+      files: ['**/*.cjs'],
+      rules: {
+        'typescript/no-require-imports': 'off',
+      },
+    },
+    {
+      files: ['src/*/webapp/**/*.ts'],
+      rules: {
+        'sort-imports': ['error', { ignoreDeclarationSort: true }],
+      },
+    },
+    {
+      files: ['src/test/webapp/component/**/*.ts', 'src/test/webapp/e2e/**/*.ts'],
+      jsPlugins: ['eslint-plugin-playwright'],
+      rules: {
+        ...playwrightRules,
+        'typescript/await-thenable': 'error',
+        'typescript/no-array-delete': 'error',
+        'typescript/no-base-to-string': 'error',
+        'typescript/no-duplicate-type-constituents': 'error',
+        'typescript/no-floating-promises': 'error',
+        'typescript/no-for-in-array': 'error',
+        'typescript/no-implied-eval': 'error',
+        'typescript/no-misused-promises': 'error',
+        'typescript/no-redundant-type-constituents': 'error',
+        'typescript/no-unnecessary-type-assertion': 'error',
+        'typescript/no-unsafe-argument': 'error',
+        'typescript/no-unsafe-call': 'error',
+        'typescript/no-unsafe-enum-comparison': 'error',
+        'typescript/no-unsafe-member-access': 'error',
+        'typescript/no-unsafe-return': 'error',
+        'typescript/no-unsafe-unary-minus': 'error',
+        'typescript/only-throw-error': 'error',
+        'typescript/prefer-promise-reject-errors': 'error',
+        'typescript/require-await': 'error',
+        'typescript/restrict-plus-operands': 'error',
+        'typescript/restrict-template-expressions': 'error',
+      },
+    },
+  ],
+});

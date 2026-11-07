@@ -12,8 +12,11 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
+// Only for Sonar, which ignores the conditions: this bean is never active with another repository
+@Primary
 @Repository
 @WithoutPersistence
 class InMemoryStatisticsRepository implements StatisticsRepository {

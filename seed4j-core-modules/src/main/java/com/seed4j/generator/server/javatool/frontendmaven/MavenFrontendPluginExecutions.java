@@ -11,7 +11,7 @@ import com.seed4j.module.domain.nodejs.NodePackageManager;
 final class MavenFrontendPluginExecutions {
 
   private static final MavenPluginExecutionGoal NPM = new MavenPluginExecutionGoal("npm");
-  private static final MavenPluginExecutionGoal COREPACK = new MavenPluginExecutionGoal("corepack");
+  private static final MavenPluginExecutionGoal PNPM = new MavenPluginExecutionGoal("pnpm");
 
   private MavenFrontendPluginExecutions() {}
 
@@ -27,11 +27,12 @@ final class MavenFrontendPluginExecutions {
           """
         );
       case PNPM -> pluginExecution()
-        .goals("install-node-and-corepack")
-        .id("install-node-and-corepack")
+        .goals("install-node-and-pnpm")
+        .id("install-node-and-pnpm")
         .configuration(
           """
           <nodeVersion>${node.version}</nodeVersion>
+          <pnpmVersion>${pnpm.version}</pnpmVersion>
           """
         );
     };
@@ -39,8 +40,8 @@ final class MavenFrontendPluginExecutions {
 
   static MavenPluginExecution.MavenPluginExecutionOptionalBuilder installPackages(NodePackageManager nodePackageManager) {
     return switch (nodePackageManager) {
-      case NPM -> pluginExecution().goals("npm").id("npm install");
-      case PNPM -> pluginExecution().goals(COREPACK).id("pnpm install").configuration("<arguments>pnpm install</arguments>");
+      case NPM -> pluginExecution().goals(NPM).id("npm install");
+      case PNPM -> pluginExecution().goals(PNPM).id("pnpm install");
     };
   }
 
@@ -60,15 +61,16 @@ final class MavenFrontendPluginExecutions {
           """
         );
       case PNPM -> pluginExecution()
-        .goals(COREPACK)
+        .goals(PNPM)
         .id("build front")
         .phase(GENERATE_RESOURCES)
         .configuration(
           """
-          <arguments>pnpm build</arguments>
+          <arguments>run build</arguments>
           <environmentVariables>
             <APP_VERSION>${project.version}</APP_VERSION>
           </environmentVariables>
+          <pnpmInheritsProxyConfigFromMaven>false</pnpmInheritsProxyConfigFromMaven>
           """
         );
     };
@@ -103,10 +105,15 @@ final class MavenFrontendPluginExecutions {
           """.formatted(nodeScriptName)
         );
       case PNPM -> pluginExecution()
-        .goals(COREPACK)
+        .goals(PNPM)
         .id(pluginExecutionId)
         .phase(TEST)
-        .configuration("<arguments>pnpm %s</arguments>".formatted(nodeScriptName));
+        .configuration(
+          """
+          <arguments>run %s</arguments>
+          <pnpmInheritsProxyConfigFromMaven>false</pnpmInheritsProxyConfigFromMaven>
+          """.formatted(nodeScriptName)
+        );
     };
   }
 }

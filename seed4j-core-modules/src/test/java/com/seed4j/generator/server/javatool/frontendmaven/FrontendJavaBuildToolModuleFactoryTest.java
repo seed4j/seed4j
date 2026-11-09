@@ -104,13 +104,16 @@ class FrontendJavaBuildToolModuleFactoryTest {
     @Test
     void shouldBuildFrontendMavenModuleWithPnpm() {
       mockNodeVersion();
+      mockPnpmVersion();
 
       Seed4JModule module = factory.buildFrontendMavenModule(defaultProperties().nodePackageManager(PNPM).build());
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
         .containing("    <node.version>v16.0.0</node.version>")
+        .containing("    <pnpm.version>10.0.0</pnpm.version>")
         .notContaining("<npm.version>")
+        .notContaining("corepack")
         .containing(
           """
                 <plugin>
@@ -119,44 +122,44 @@ class FrontendJavaBuildToolModuleFactoryTest {
                   <version>${frontend-maven-plugin.version}</version>
                   <executions>
                     <execution>
-                      <id>install-node-and-corepack</id>
+                      <id>install-node-and-pnpm</id>
                       <goals>
-                        <goal>install-node-and-corepack</goal>
+                        <goal>install-node-and-pnpm</goal>
                       </goals>
                       <configuration>
                         <nodeVersion>${node.version}</nodeVersion>
+                        <pnpmVersion>${pnpm.version}</pnpmVersion>
                       </configuration>
                     </execution>
                     <execution>
                       <id>pnpm install</id>
                       <goals>
-                        <goal>corepack</goal>
+                        <goal>pnpm</goal>
                       </goals>
-                      <configuration>
-                        <arguments>pnpm install</arguments>
-                      </configuration>
                     </execution>
                     <execution>
                       <id>build front</id>
                       <phase>generate-resources</phase>
                       <goals>
-                        <goal>corepack</goal>
+                        <goal>pnpm</goal>
                       </goals>
                       <configuration>
-                        <arguments>pnpm build</arguments>
+                        <arguments>run build</arguments>
                         <environmentVariables>
                           <APP_VERSION>${project.version}</APP_VERSION>
                         </environmentVariables>
+                        <pnpmInheritsProxyConfigFromMaven>false</pnpmInheritsProxyConfigFromMaven>
                       </configuration>
                     </execution>
                     <execution>
                       <id>front test</id>
                       <phase>test</phase>
                       <goals>
-                        <goal>corepack</goal>
+                        <goal>pnpm</goal>
                       </goals>
                       <configuration>
-                        <arguments>pnpm test:coverage</arguments>
+                        <arguments>run test:coverage</arguments>
+                        <pnpmInheritsProxyConfigFromMaven>false</pnpmInheritsProxyConfigFromMaven>
                       </configuration>
                     </execution>
                   </executions>
@@ -272,7 +275,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
         .hasFile("pom.xml")
         .containing(
           """
-                          <condition else="false" property="skip.corepack" value="true">
+                          <condition else="false" property="skip.pnpm" value="true">
           """
         );
     }
@@ -294,9 +297,10 @@ class FrontendJavaBuildToolModuleFactoryTest {
 
       assertThatModuleWithFiles(module, pomFile())
         .hasFile("pom.xml")
-        .containing("pnpm test:coverage")
-        .containing("pnpm test:component:headless")
-        .containing("pnpm test:coverage:check");
+        .containing("<goal>pnpm</goal>")
+        .containing("run test:coverage")
+        .containing("run test:component:headless")
+        .containing("run test:coverage:check");
     }
   }
 

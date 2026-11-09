@@ -11,7 +11,6 @@ import static com.seed4j.module.domain.Seed4JModule.pluginExecution;
 import static com.seed4j.module.domain.Seed4JModule.toSrcMainJava;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.COMPILE;
 import static com.seed4j.module.domain.mavenplugin.MavenBuildPhase.GENERATE_RESOURCES;
-import static com.seed4j.module.domain.nodejs.NodePackageManager.NPM;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
 import com.seed4j.module.domain.Seed4JModule;
@@ -45,20 +44,17 @@ class FrontendJavaBuildToolModuleFactory {
   Seed4JModule buildFrontendMavenModule(Seed4JModuleProperties properties) {
     Assert.notNull(PROPERTIES_FIELD, properties);
 
-    Seed4JModuleBuilder moduleBuilder = commonModuleFiles(properties);
-
     NodePackageManager nodePackageManager = properties.nodePackageManager();
-    if (nodePackageManager == NPM) {
-      moduleBuilder = moduleBuilder
-        .javaBuildProperties()
-        .set(buildPropertyKey("npm.version"), buildPropertyValue(nodeVersions.packageManagerVersion(nodePackageManager).get()))
-        .and();
-    }
+    String packageManagerVersionProperty = switch (nodePackageManager) {
+      case NPM -> "npm.version";
+      case PNPM -> "pnpm.version";
+    };
 
     // @formatter:off
-    return moduleBuilder
+    return commonModuleFiles(properties)
       .javaBuildProperties()
         .set(buildPropertyKey("node.version"), buildPropertyValue("v" + nodeVersions.nodeVersion().get()))
+        .set(buildPropertyKey(packageManagerVersionProperty), buildPropertyValue(nodeVersions.packageManagerVersion(nodePackageManager).get()))
         .and()
       .mavenPlugins()
         .plugin(frontendMavenPlugin(nodePackageManager).build())
@@ -136,7 +132,7 @@ class FrontendJavaBuildToolModuleFactory {
   private MavenPlugin antrunPlugin(NodePackageManager nodePackageManager) {
     String skipProperty = switch (nodePackageManager) {
       case NPM -> "skip.npm";
-      case PNPM -> "skip.corepack";
+      case PNPM -> "skip.pnpm";
     };
     return mavenPlugin()
       .groupId("org.apache.maven.plugins")

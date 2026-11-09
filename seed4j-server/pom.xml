@@ -500,6 +500,18 @@
             </configuration>
           </execution>
           <execution>
+            <id>front install browser</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <skip>${skipTests}</skip>
+              <arguments>run test:install-browser</arguments>
+              <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
+            </configuration>
+          </execution>
+          <execution>
             <id>front component test</id>
             <goals>
               <goal>npm</goal>

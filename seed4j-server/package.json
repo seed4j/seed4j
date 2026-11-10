@@ -76,7 +76,7 @@
     "oxlint-tsgolint": "7.0.2006",
     "postcss-scss": "4.0.9",
     "rimraf": "6.1.4",
-    "sass": "1.108.0",
+    "sass": "1.108.1",
     "stylelint": "17.16.0",
     "stylelint-config-concentric-order": "5.5.0",
     "stylelint-config-standard-scss": "17.0.0",

@@ -72,7 +72,7 @@
     "jsdom": "31.0.0",
     "npm-run-all2": "9.0.4",
     "nyc": "18.0.0",
-    "oxlint": "1.91.0",
+    "oxlint": "1.92.0",
     "oxlint-tsgolint": "7.0.2006",
     "postcss-scss": "4.0.9",
     "rimraf": "6.1.4",

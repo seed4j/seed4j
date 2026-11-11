@@ -19,7 +19,7 @@
 
   <properties>
     <jgit.version>7.8.1.202611041320-r</jgit.version>
-    <maven-model-helper.version>42</maven-model-helper.version>
+    <maven-model-helper.version>43</maven-model-helper.version>
     <night-config.version>3.9.0</night-config.version>
     <mustache.java.version>0.9.14</mustache.java.version>
     <!-- covered by the aggregated report of seed4j-server, where all the tests run -->

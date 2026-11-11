@@ -137,6 +137,17 @@ class MavenCommandHandlerTest {
         .doesNotContain("    <json-web-token.version>0.11.5</json-web-token.version>")
         .doesNotContain(">  ");
     }
+
+    @Test
+    void shouldKeepExistingEmptyProperty() {
+      Path pom = projectWithPom("src/test/resources/projects/maven-with-empty-property/pom.xml");
+
+      new MavenCommandHandler(Indentation.DEFAULT, pom).handle(new SetVersion(springBootVersion()));
+
+      assertThat(contentNormalizingNewLines(pom))
+        .contains("    <argLine />")
+        .contains("    <spring-boot.version>1.2.3</spring-boot.version>");
+    }
   }
 
   @Nested

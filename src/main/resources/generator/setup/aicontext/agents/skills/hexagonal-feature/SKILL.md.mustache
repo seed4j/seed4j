@@ -1,0 +1,69 @@
+---
+name: hexagonal-feature
+description: Turn a business need described by the user into a validated domain model and a working, tested feature in this hexagonal project. Use when the user asks to implement business behavior, not to add a technical capability.
+---
+
+# Skill: implement a business feature
+
+Use this workflow when the user describes a business need ("I want to manage room bookings…", "members borrow books…") and wants it implemented. Seed4J gives the structure; the business code is yours. Read [`../../context.md`](../../context.md) first.
+
+Never generate a whole feature without the user's validation of the model, and never declare success without running the build.
+
+## 1. Check the project
+
+- `java-base` is applied: `{{packageName}}.shared.error.domain.Assert`, `{{packageName}}.UnitTest` and `{{packageName}}.BusinessContext` exist.
+- Prefer having `java-archunit` (`HexagonalArchTest`): it enforces the architecture. If it is missing, suggest applying it.
+- Note the adapters available (Spring MVC, springdoc, persistence, Cucumber…), the quality gates in the build file (Checkstyle, coverage check) and the existing business contexts, to avoid name collisions and reuse shared kernels.
+- Missing technical capability: apply a Seed4J module with the `seed4j-cli` skill (install it with `seed4j skill install`).
+
+## 2. Understand the need
+
+Analyse the need with this grid.
+
+| Concept | Questions | Becomes |
+| --- | --- | --- |
+| Actors | Who acts, with which rights? | Use case callers, authorization rules |
+| Aggregate | What must stay consistent in one transaction? What has an identity and a lifecycle? | `final` class with a builder, an id record, a repository port |
+| Value object | Is it defined only by its value? Does it carry validation? | Record validated in its constructor |
+| Status | Which states, which transitions, who triggers them? | Enum + transition methods refusing invalid transitions |
+| Use case | What does the user want to do or know? | Command or query on an application service |
+| Side effect | Email, SMS, audit, payment… | Domain port + adapter |
+
+Classify each business rule, it tells where the code goes:
+
+| Kind | Example | Where |
+| --- | --- | --- |
+| Value validation | ISBN has 13 digits | Value object constructor |
+| Invariant | A balance can't be negative | Aggregate method changing the state |
+| Precondition | A suspended member can't borrow | Aggregate or domain service, before any change |
+| Calculation | Fine = late days × 0.50 € | Value object or aggregate method |
+| Cross-aggregate rule | Max 3 simultaneous loans per member | Domain service using repository ports |
+| Time rule | Cancel up to 24 h before | Current time passed as a parameter |
+| Policy | SMS the day before | Port called by a domain service, triggered by a scheduled job |
+
+Then ask the user, in a single message, a short list of targeted questions (usually 3 to 7) about what is **missing, ambiguous or contradictory**: operations not listed, who can do what, boundaries ("within 48 h": before what? inclusive?), statuses without transitions, numbers that contradict each other, money (rounding, currency), time (time zone, "today"), uniqueness. Do not invent business rules; when a reasonable default exists, propose it in the question.
+
+## 3. Propose the model and get it validated
+
+Write a concise proposal:
+
+- context name (Java package segment) and purpose;
+- aggregates with their identity, state and invariants;
+- value objects with their validation;
+- use cases: input, output, preconditions, effects;
+- ports (repositories, notifications, clock…) and REST endpoints;
+- **a numbered list of business rules, each with the name of the test that will prove it.**
+
+Wait for the user's explicit validation. Adjust and propose again if needed.
+
+## 4. Implement
+
+Follow [`tdd-domain`](../tdd-domain/SKILL.md) and the conventions of [`../../context.md`](../../context.md), from the inside out: domain, application, secondary adapters, primary adapters.
+
+## 5. Verify and report
+
+Run the full build and fix until it passes, without disabling anything. Then report:
+
+- the files created, by layer;
+- the business rules table: rule → test(s);
+- the assumptions made, the open questions and what is intentionally left out (real SMS provider, persistence…).

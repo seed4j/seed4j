@@ -37,7 +37,7 @@ class PrettierModuleFactoryTest {
       .containing(
         """
         module.exports = {
-          '*.{md,json*,yml,html,css,scss,java,xml,feature}': ['prettier --write'],
+          '*.{md,json*,yml,html,css,scss,java,xml,feature,toml}': ['prettier --write'],
           '*.pug': ['eslint --fix', 'prettier --write'],
         };
         """
@@ -51,6 +51,8 @@ class PrettierModuleFactoryTest {
       .containing("prettier-plugin-java")
       .containing("prettier-plugin-organize-imports")
       .containing("prettier-plugin-packagejson")
+      .containing("prettier-plugin-toml")
+      .containing("stringQuoteStyle: double")
       .and()
       .hasFile("package.json")
       .containing(nodeDependency("@prettier/plugin-xml"))
@@ -59,6 +61,7 @@ class PrettierModuleFactoryTest {
       .containing(nodeDependency("prettier-plugin-java"))
       .containing(nodeDependency("prettier-plugin-organize-imports"))
       .containing(nodeDependency("prettier-plugin-packagejson"))
+      .containing(nodeDependency("prettier-plugin-toml"))
       .containing(nodeScript("prettier:check", "prettier --check ."))
       .containing(nodeScript("prettier:format", "prettier --write ."));
 
@@ -79,7 +82,7 @@ class PrettierModuleFactoryTest {
       .containing(
         """
         module.exports = {
-          '*.{md,json*,yml,html,css,scss,java,xml,feature}': ['prettier --write'],
+          '*.{md,json*,yml,html,css,scss,java,xml,feature,toml}': ['prettier --write'],
         };
         """
       );

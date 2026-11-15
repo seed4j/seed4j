@@ -230,11 +230,7 @@ class SpringBootCoreModuleFactoryTest {
         .containing("spring-boot = \"")
         .containing(
           """
-          \t[plugins.spring-boot]
-          \t\tid = "org.springframework.boot"
-
-          \t\t[plugins.spring-boot.version]
-          \t\t\tref = "spring-boot"
+          spring-boot = {id = "org.springframework.boot", version.ref = "spring-boot"}
           """
         )
         .and()

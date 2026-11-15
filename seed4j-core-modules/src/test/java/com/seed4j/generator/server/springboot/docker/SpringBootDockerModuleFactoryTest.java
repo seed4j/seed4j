@@ -113,16 +113,12 @@ class SpringBootDockerModuleFactoryTest {
         .containing(
           """
           [versions]
-          \tjib = "\
+          jib = "\
           """
         )
         .containing(
           """
-          \t[plugins.jib]
-          \t\tid = "com.google.cloud.tools.jib"
-
-          \t\t[plugins.jib.version]
-          \t\t\tref = "jib"
+          jib = {id = "com.google.cloud.tools.jib", version.ref = "jib"}
           """
         )
         .and()

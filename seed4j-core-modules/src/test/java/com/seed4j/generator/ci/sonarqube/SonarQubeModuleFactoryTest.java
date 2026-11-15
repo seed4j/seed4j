@@ -156,11 +156,7 @@ class SonarQubeModuleFactoryTest {
         .containing("sonarqube = \"")
         .containing(
           """
-          \t[plugins.sonarqube]
-          \t\tid = "org.sonarqube"
-
-          \t\t[plugins.sonarqube.version]
-          \t\t\tref = "sonarqube"
+          sonarqube = {id = "org.sonarqube", version.ref = "sonarqube"}
           """
         )
         .and()

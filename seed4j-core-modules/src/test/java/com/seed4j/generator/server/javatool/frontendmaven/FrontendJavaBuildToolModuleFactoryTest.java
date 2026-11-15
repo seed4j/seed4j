@@ -319,11 +319,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
         .containing("node-gradle = \"")
         .containing(
           """
-          \t[plugins.node-gradle]
-          \t\tid = "com.github.node-gradle.node"
-
-          \t\t[plugins.node-gradle.version]
-          \t\t\tref = "node-gradle"
+          node-gradle = {id = "com.github.node-gradle.node", version.ref = "node-gradle"}
           """
         )
         .and()

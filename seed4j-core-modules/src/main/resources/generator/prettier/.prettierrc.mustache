@@ -13,6 +13,7 @@ plugins:
   - prettier-plugin-java
   - prettier-plugin-organize-imports
   - prettier-plugin-packagejson
+  - prettier-plugin-toml
 
 # js and ts rules:
 arrowParens: avoid
@@ -28,3 +29,7 @@ overrides:
   - files: ['*.jsonc']
     options:
       trailingComma: none
+  # TOML strings keep double quotes, the Gradle usage, instead of following singleQuote
+  - files: ['*.toml']
+    options:
+      stringQuoteStyle: double

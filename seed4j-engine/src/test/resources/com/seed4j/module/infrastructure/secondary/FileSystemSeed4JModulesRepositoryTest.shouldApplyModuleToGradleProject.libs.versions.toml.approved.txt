@@ -1,73 +1,25 @@
-plugins = {}
-bundles = {}
-
 [versions]
-	json-web-token = "[version]"
-	reflections = "[version]"
-	cassandraunit = "[version]"
-	git-properties = "[version]"
-	jacoco = "[version]"
-	spring-boot = "[version]"
-	commons-lang3 = "[version]"
-	checkstyle = "[version]"
+commons-lang3 = "[version]"
+spring-boot = "[version]"
+reflections = "[version]"
+json-web-token = "[version]"
+checkstyle = "[version]"
+git-properties = "[version]"
+cassandraunit = "[version]"
+jacoco = "[version]"
 
-	[libraries.jjwt-api]
-		name = "jjwt-api"
-		group = "io.jsonwebtoken"
+[libraries]
+commons-lang3 = {module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3"}
+spring-boot-dependencies = {module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot"}
+reflections = {module = "org.reflections:reflections", version.ref = "reflections"}
+spring-boot-starter = {module = "org.springframework.boot:spring-boot-starter"}
+jjwt-api = {module = "io.jsonwebtoken:jjwt-api", version.ref = "json-web-token"}
+junit-jupiter-engine = {module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "spring-boot"}
+spring-boot-starter-webmvc = {module = "org.springframework.boot:spring-boot-starter-webmvc"}
+hibernate-processor = {module = "org.hibernate.orm:hibernate-processor"}
+gradle-git-properties = {module = "com.gorylenko.gradle-git-properties:gradle-git-properties", version.ref = "git-properties"}
+cassandra-unit = {module = "org.cassandraunit:cassandra-unit", version.ref = "cassandraunit"}
 
-		[libraries.jjwt-api.version]
-			ref = "json-web-token"
+[bundles]
 
-	[libraries.junit-jupiter-engine]
-		name = "junit-jupiter-engine"
-		group = "org.junit.jupiter"
-
-		[libraries.junit-jupiter-engine.version]
-			ref = "spring-boot"
-
-	[libraries.spring-boot-starter]
-		name = "spring-boot-starter"
-		group = "org.springframework.boot"
-
-	[libraries.reflections]
-		name = "reflections"
-		group = "org.reflections"
-
-		[libraries.reflections.version]
-			ref = "reflections"
-
-	[libraries.spring-boot-dependencies]
-		name = "spring-boot-dependencies"
-		group = "org.springframework.boot"
-
-		[libraries.spring-boot-dependencies.version]
-			ref = "spring-boot"
-
-	[libraries.spring-boot-starter-webmvc]
-		name = "spring-boot-starter-webmvc"
-		group = "org.springframework.boot"
-
-	[libraries.commons-lang3]
-		name = "commons-lang3"
-		group = "org.apache.commons"
-
-		[libraries.commons-lang3.version]
-			ref = "commons-lang3"
-
-	[libraries.cassandra-unit]
-		name = "cassandra-unit"
-		group = "org.cassandraunit"
-
-		[libraries.cassandra-unit.version]
-			ref = "cassandraunit"
-
-	[libraries.hibernate-processor]
-		name = "hibernate-processor"
-		group = "org.hibernate.orm"
-
-	[libraries.gradle-git-properties]
-		name = "gradle-git-properties"
-		group = "com.gorylenko.gradle-git-properties"
-
-		[libraries.gradle-git-properties.version]
-			ref = "git-properties"
+[plugins]

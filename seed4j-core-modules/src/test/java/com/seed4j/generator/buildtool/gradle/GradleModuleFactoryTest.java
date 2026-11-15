@@ -75,10 +75,10 @@ class GradleModuleFactoryTest {
       .containing("junit-jupiter = \"")
       .containing("assertj = \"")
       .containing("mockito = \"")
-      .containing("[libraries.junit-engine]")
-      .containing("[libraries.junit-params]")
-      .containing("[libraries.assertj]")
-      .containing("[libraries.mockito]");
+      .containing("junit-engine = {")
+      .containing("junit-params = {")
+      .containing("assertj = {")
+      .containing("mockito = {");
   }
 
   @Test

@@ -1,0 +1,15 @@
+[versions]
+	spring-boot = "1.2.3"
+
+[libraries]
+
+	[libraries.boot-starter]
+		name = "spring-boot-starter"
+		group = "org.springframework.boot"
+
+		[libraries.boot-starter.version]
+			ref = "spring-boot"
+
+[bundles]
+
+[plugins]

@@ -108,7 +108,7 @@ class GradleCommandHandlerTest {
       assertThat(versionCatalogContent(projectFolder)).contains(
         """
         [versions]
-        \tspring-boot = "1.2.3"
+        spring-boot = "1.2.3"
         """
       );
     }
@@ -124,7 +124,7 @@ class GradleCommandHandlerTest {
       assertThat(versionCatalogContent(projectFolder)).contains(
         """
         [versions]
-        \tspring-boot = "1.2.3"
+        spring-boot = "1.2.3"
         """
       );
     }
@@ -146,7 +146,7 @@ class GradleCommandHandlerTest {
       assertThat(versionCatalogContent(projectFolder)).contains(
         """
         [versions]
-        \tjjwt = "0.13.0"
+        jjwt = "0.13.0"
         """
       );
     }
@@ -556,9 +556,8 @@ class GradleCommandHandlerTest {
       assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("annotationProcessor(libs.auto.service)");
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        [libraries.auto-service]
-        \t\tname = "auto-service"
-        \t\tgroup = "com.google.auto.service"
+        [libraries]
+        auto-service = {module = "com.google.auto.service:auto-service", version.ref = "auto-service"}
         """
       );
     }
@@ -608,17 +607,22 @@ class GradleCommandHandlerTest {
 
       assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("annotationProcessor(libs.boot.starter)");
       assertThat(versionCatalogContent(emptyGradleProjectFolder))
-        .doesNotContain("[libraries.spring-boot-starter]")
-        .contains(
-          """
-          	[libraries.boot-starter]
-          		name = "spring-boot-starter"
-          		group = "org.springframework.boot"
+        .doesNotContain("spring-boot-starter = {")
+        .contains("boot-starter = {module = \"org.springframework.boot:spring-boot-starter\", version.ref = \"spring-boot\"}");
+    }
 
-          		[libraries.boot-starter.version]
-          			ref = "spring-boot"
-          """
-        );
+    @Test
+    void shouldReuseExistingLibraryAliasDeclaredWithGroupAndName() {
+      Seed4JProjectFolder projectFolder = projectFrom("src/test/resources/projects/gradle-legacy-catalog");
+
+      new GradleCommandHandler(Indentation.DEFAULT, projectFolder, emptyModuleContext(), files, fileReplacer).handle(
+        addSpringBootStarterAnnotationProcessor()
+      );
+
+      assertThat(buildGradleContent(projectFolder)).contains("annotationProcessor(libs.boot.starter)");
+      assertThat(versionCatalogContent(projectFolder))
+        .doesNotContain("spring-boot-starter = {")
+        .contains("boot-starter = {name = \"spring-boot-starter\", group = \"org.springframework.boot\", version.ref = \"spring-boot\"}");
     }
   }
 
@@ -635,9 +639,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        [libraries.spring-boot-starter-webmvc]
-        \t\tname = "spring-boot-starter-webmvc"
-        \t\tgroup = "org.springframework.boot"
+        spring-boot-starter-webmvc = {module = "org.springframework.boot:spring-boot-starter-webmvc"}
         """
       );
     }
@@ -662,9 +664,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        [libraries.spring-boot-starter-webmvc]
-        \t\tname = "spring-boot-starter-webmvc"
-        \t\tgroup = "org.spring.boot"
+        spring-boot-starter-webmvc = {module = "org.spring.boot:spring-boot-starter-webmvc"}
         """
       );
     }
@@ -688,8 +688,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        [libraries.spring-boot-starter-webmvc.version]
-        \t\t\tref = "spring-boot"
+        spring-boot-starter-webmvc = {module = "org.spring.boot:spring-boot-starter-webmvc", version.ref = "spring-boot"}
         """
       );
     }
@@ -709,9 +708,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        [libraries.hikariCP]
-        \t\tname = "HikariCP"
-        \t\tgroup = "com.zaxxer"
+        hikariCP = {module = "com.zaxxer:HikariCP"}
         """
       );
       assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("implementation(libs.hikariCP)");
@@ -887,13 +884,8 @@ class GradleCommandHandlerTest {
       gradleCommandHandler.handle(new RemoveJavaAnnotationProcessor(defaultVersionDependency().id()));
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder))
-        .doesNotContain("[libraries.spring-boot-starter]")
-        .doesNotContain(
-          """
-          \t\tname = "spring-boot-starter"
-          \t\tgroup = "org.springframework.boot"
-          """
-        );
+        .doesNotContain("spring-boot-starter = {")
+        .doesNotContain("module = \"org.springframework.boot:spring-boot-starter\"");
     }
 
     @Test
@@ -933,7 +925,7 @@ class GradleCommandHandlerTest {
       assertThat(buildGradleContent(emptyGradleProjectFolder))
         .contains("implementation(libs.spring.boot.starter)")
         .doesNotContain("annotationProcessor(libs.spring.boot.starter)");
-      assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains("[libraries.spring-boot-starter]");
+      assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains("spring-boot-starter = {");
     }
   }
 
@@ -956,13 +948,8 @@ class GradleCommandHandlerTest {
       gradleCommandHandler.handle(new RemoveDirectJavaDependency(defaultVersionDependency().id()));
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder))
-        .doesNotContain("[libraries.spring-boot-starter]")
-        .doesNotContain(
-          """
-          \t\tname = "spring-boot-starter"
-          \t\tgroup = "org.springframework.boot"
-          """
-        );
+        .doesNotContain("spring-boot-starter = {")
+        .doesNotContain("module = \"org.springframework.boot:spring-boot-starter\"");
     }
 
     @Test
@@ -981,19 +968,9 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder))
         .doesNotContain("json-web-token = ")
-        .doesNotContain("[libraries.jjwt-jackson]")
-        .doesNotContain(
-          """
-          \t\tname = "jjwt-jackson"
-          \t\tgroup = "io.jsonwebtoken"\
-          """
-        )
-        .doesNotContain("[libraries.jjwt-jackson.version]")
-        .doesNotContain(
-          """
-          \t\t\tref = "json-web-token"
-          """
-        );
+        .doesNotContain("jjwt-jackson = {")
+        .doesNotContain("module = \"io.jsonwebtoken:jjwt-jackson\"")
+        .doesNotContain("ref = \"json-web-token\"");
     }
 
     @Test
@@ -1022,8 +999,8 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder))
         .contains("spring-boot = ")
-        .doesNotContain("[libraries.spring-boot-starter-webmvc]")
-        .contains("[libraries.spring-boot-starter-data-jpa]");
+        .doesNotContain("spring-boot-starter-webmvc = {")
+        .contains("spring-boot-starter-data-jpa = {");
     }
 
     @Test
@@ -1167,13 +1144,8 @@ class GradleCommandHandlerTest {
       gradleCommandHandler.handle(new RemoveDirectJavaDependency(dependency.id(), localBuildProfile()));
 
       assertThat(versionCatalogContent(projectFolder))
-        .contains("[libraries.junit-jupiter-engine]")
-        .contains(
-          """
-          \t\tname = "junit-jupiter-engine"
-          \t\tgroup = "org.junit.jupiter"
-          """
-        );
+        .contains("junit-jupiter-engine = {")
+        .contains("module = \"org.junit.jupiter:junit-jupiter-engine\"");
     }
 
     @Test
@@ -1193,19 +1165,9 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(projectFolder))
         .doesNotContain("json-web-token = ")
-        .doesNotContain("[libraries.jjwt-jackson]")
-        .doesNotContain(
-          """
-          \t\tname = "jjwt-jackson"
-          \t\tgroup = "io.jsonwebtoken"\
-          """
-        )
-        .doesNotContain("[libraries.jjwt-jackson.version]")
-        .doesNotContain(
-          """
-          \t\t\tref = "json-web-token"
-          """
-        );
+        .doesNotContain("jjwt-jackson = {")
+        .doesNotContain("module = \"io.jsonwebtoken:jjwt-jackson\"")
+        .doesNotContain("ref = \"json-web-token\"");
     }
 
     @Test
@@ -1240,8 +1202,8 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(projectFolder))
         .contains("spring-boot = ")
-        .doesNotContain("[libraries.spring-boot-starter-webmvc]")
-        .contains("[libraries.spring-boot-starter-data-jpa]");
+        .doesNotContain("spring-boot-starter-webmvc = {")
+        .contains("spring-boot-starter-data-jpa = {");
     }
 
     @Test
@@ -1261,7 +1223,7 @@ class GradleCommandHandlerTest {
       assertThat(buildGradleContent(emptyGradleProjectFolder))
         .contains("annotationProcessor(libs.spring.boot.starter)")
         .doesNotContain("implementation(libs.spring.boot.starter)");
-      assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains("[libraries.spring-boot-starter]");
+      assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains("spring-boot-starter = {");
     }
   }
 
@@ -1278,16 +1240,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        [libraries.spring-boot-dependencies]
-        \t\tname = "spring-boot-dependencies"
-        \t\tgroup = "org.springframework.boot"
-        """
-      );
-
-      assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
-        """
-        [libraries.spring-boot-dependencies.version]
-        \t\t\tref = "spring-boot"
+        spring-boot-dependencies = {module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot"}
         """
       );
     }
@@ -1359,13 +1312,8 @@ class GradleCommandHandlerTest {
       gradleCommandHandler.handle(new RemoveJavaDependencyManagement(springBootDependencyManagement().id()));
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder))
-        .doesNotContain("[libraries.spring-boot-dependencies]")
-        .doesNotContain(
-          """
-          \t\tname = "spring-boot-dependencies"
-          \t\tgroup = "org.springframework.boot"
-          """
-        );
+        .doesNotContain("spring-boot-dependencies = {")
+        .doesNotContain("module = \"org.springframework.boot:spring-boot-dependencies\"");
     }
 
     @Test
@@ -1384,13 +1332,8 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder))
         .doesNotContain("spring-boot = ")
-        .doesNotContain("[libraries.spring-boot-dependencies]")
-        .doesNotContain(
-          """
-          \t\tname = "spring-boot-dependencies"
-          \t\tgroup = "org.springframework.boot"
-          """
-        );
+        .doesNotContain("spring-boot-dependencies = {")
+        .doesNotContain("module = \"org.springframework.boot:spring-boot-dependencies\"");
     }
 
     @Test
@@ -1419,8 +1362,8 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder))
         .contains("spring-boot = ")
-        .doesNotContain("[libraries.spring-boot-dependencies]")
-        .contains("[libraries.spring-boot-starter-data-jpa]");
+        .doesNotContain("spring-boot-dependencies = {")
+        .contains("spring-boot-starter-data-jpa = {");
     }
 
     @Test
@@ -1500,13 +1443,8 @@ class GradleCommandHandlerTest {
       gradleCommandHandler.handle(new RemoveJavaDependencyManagement(springBootDependencyManagement().id(), localBuildProfile()));
 
       assertThat(versionCatalogContent(projectFolder))
-        .contains("[libraries.spring-boot-dependencies]")
-        .contains(
-          """
-          \t\tname = "spring-boot-dependencies"
-          \t\tgroup = "org.springframework.boot"
-          """
-        );
+        .contains("spring-boot-dependencies = {")
+        .contains("module = \"org.springframework.boot:spring-boot-dependencies\"");
     }
 
     @Test
@@ -1526,13 +1464,8 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(projectFolder))
         .doesNotContain("spring-boot = ")
-        .doesNotContain("[libraries.spring-boot-dependencies]")
-        .doesNotContain(
-          """
-          \t\tname = "spring-boot-dependencies"
-          \t\tgroup = "org.springframework.boot"
-          """
-        );
+        .doesNotContain("spring-boot-dependencies = {")
+        .doesNotContain("module = \"org.springframework.boot:spring-boot-dependencies\"");
     }
 
     @Test
@@ -1563,8 +1496,8 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(projectFolder))
         .contains("spring-boot = ")
-        .doesNotContain("[libraries.spring-boot-dependencies]")
-        .contains("[libraries.spring-boot-starter-data-jpa]");
+        .doesNotContain("spring-boot-dependencies = {")
+        .contains("spring-boot-starter-data-jpa = {");
     }
   }
 
@@ -1673,7 +1606,7 @@ class GradleCommandHandlerTest {
       AddGradlePlugin build = AddGradlePlugin.builder().plugin(plugin).build();
       new GradleCommandHandler(Indentation.DEFAULT, emptyGradleProjectFolder, emptyModuleContext(), files, fileReplacer).handle(build);
 
-      assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains("[plugins.spring-boot]");
+      assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains("spring-boot = {");
       // "-" is transformed to "." in the plugin slug
       assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("alias(libs.plugins.spring.boot)");
     }
@@ -1758,15 +1691,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(projectFolder)).contains(
         """
-        [libraries.gradle-git-properties]
-        \t\tname = "gradle-git-properties"
-        \t\tgroup = "com.gorylenko.gradle-git-properties"
-        """
-      );
-      assertThat(versionCatalogContent(projectFolder)).contains(
-        """
-        [libraries.gradle-git-properties.version]
-        \t\t\tref = "git-properties"
+        gradle-git-properties = {module = "com.gorylenko.gradle-git-properties:gradle-git-properties", version.ref = "git-properties"}
         """
       );
       assertThat(pluginBuildGradleContent(projectFolder)).contains("implementation(libs.gradle.git.properties)");
@@ -1801,13 +1726,7 @@ class GradleCommandHandlerTest {
         AddGradlePlugin.builder().plugin(dockerGradlePluginDependency()).buildProfile(localBuildProfile()).build()
       );
 
-      assertThat(versionCatalogContent(projectFolder)).contains(
-        """
-        [libraries.gradle-docker-plugin]
-        \t\tname = "gradle-docker-plugin"
-        \t\tgroup = "com.bmuschko"
-        """
-      );
+      assertThat(versionCatalogContent(projectFolder)).contains("gradle-docker-plugin = {module = \"com.bmuschko:gradle-docker-plugin\"");
       assertThat(pluginBuildGradleContent(projectFolder)).contains("implementation(libs.gradle.docker.plugin");
       assertThat(scriptPluginContent(projectFolder, localBuildProfile()))
         .contains(

@@ -66,24 +66,16 @@ class NullAwayModuleFactoryTest {
 
     assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
       .hasFile("gradle/libs.versions.toml")
-      .containing("\tnullaway = \"")
-      .containing("\terror-prone = \"")
+      .containing("nullaway = \"")
+      .containing("error-prone = \"")
       .containing(
         """
-        \t[plugins.errorprone]
-        \t\tid = "net.ltgt.errorprone"
-
-        \t\t[plugins.errorprone.version]
-        \t\t\tref = "gradle-errorprone-plugin"
+        errorprone = {id = "net.ltgt.errorprone", version.ref = "gradle-errorprone-plugin"}
         """
       )
       .containing(
         """
-        \t[plugins.nullaway]
-        \t\tid = "net.ltgt.nullaway"
-
-        \t\t[plugins.nullaway.version]
-        \t\t\tref = "gradle-nullaway-plugin"
+        nullaway = {id = "net.ltgt.nullaway", version.ref = "gradle-nullaway-plugin"}
         """
       )
       .and()

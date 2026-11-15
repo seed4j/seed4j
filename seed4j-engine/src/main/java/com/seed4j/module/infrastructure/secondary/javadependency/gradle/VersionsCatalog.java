@@ -4,7 +4,9 @@ import com.electronwill.nightconfig.core.Config;
 import com.electronwill.nightconfig.core.Config.Entry;
 import com.electronwill.nightconfig.core.UnmodifiableConfig;
 import com.electronwill.nightconfig.core.file.FileConfig;
+import com.electronwill.nightconfig.core.io.NewlineStyle;
 import com.electronwill.nightconfig.core.io.ParsingException;
+import com.electronwill.nightconfig.toml.TomlWriter;
 import com.seed4j.module.domain.gradleplugin.GradleCommunityPlugin;
 import com.seed4j.module.domain.gradleplugin.GradlePluginSlug;
 import com.seed4j.module.domain.javabuild.DependencySlug;
@@ -14,12 +16,16 @@ import com.seed4j.module.domain.javadependency.JavaAnnotationProcessor;
 import com.seed4j.module.domain.javadependency.JavaDependency;
 import com.seed4j.module.domain.javadependency.JavaDependencyVersion;
 import com.seed4j.module.domain.properties.Seed4JProjectFolder;
+import com.seed4j.shared.error.domain.GeneratorException;
+import com.seed4j.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 public class VersionsCatalog {
@@ -28,7 +34,14 @@ public class VersionsCatalog {
   private static final String LIBRARIES_TOML_KEY = "libraries";
   private static final String PLUGINS_TOML_KEY = "plugins";
   private static final String VERSION_REF = "version.ref";
+  private static final String VERSION_ATTRIBUTE = "version";
+  private static final String REF_ATTRIBUTE = "ref";
+  private static final String MODULE_ATTRIBUTE = "module";
   private static final String GROUP_ATTRIBUTE = "group";
+  private static final String NAME_ATTRIBUTE = "name";
+  private static final String ID_ATTRIBUTE = "id";
+  private static final String MODULE_SEPARATOR = ":";
+  private static final Pattern INLINE_VERSION_REFERENCE = Pattern.compile("version = \\{ref = (\"[^\"]*\")}");
 
   private final FileConfig tomlConfigFile;
 
@@ -37,7 +50,7 @@ public class VersionsCatalog {
   }
 
   public VersionsCatalog(Path tomlVersionCatalogFile) {
-    tomlConfigFile = FileConfig.builder(tomlVersionCatalogFile).sync().build();
+    tomlConfigFile = FileConfig.builder(tomlVersionCatalogFile).sync().preserveInsertionOrder().build();
 
     // Missing TOML file will be automatically created, but its parent folder should exist
     if (!Files.exists(tomlVersionCatalogFile.getParent())) {
@@ -56,7 +69,47 @@ public class VersionsCatalog {
   }
 
   private void save() {
-    tomlConfigFile.save();
+    TomlWriter writer = new TomlWriter();
+    writer.setIndent("");
+    writer.setNewline(NewlineStyle.UNIX);
+    writer.setWriteTableInlinePredicate(table -> !isTopLevelSection(table));
+    // night-config writes nested tables as version = {ref = "x"}: the equivalent dotted key is the usual Gradle notation
+    String content = INLINE_VERSION_REFERENCE.matcher(writer.writeToString(tomlConfigFile)).replaceAll("version.ref = $1");
+    write(content);
+  }
+
+  @ExcludeFromGeneratedCodeCoverage(reason = "The error handling is an hard to test implementation detail")
+  private void write(String content) {
+    try {
+      Files.writeString(tomlConfigFile.getNioPath(), content);
+    } catch (IOException exception) {
+      throw GeneratorException.technicalError(
+        "Error writing %s: %s".formatted(tomlConfigFile.getNioPath(), exception.getMessage()),
+        exception
+      );
+    }
+  }
+
+  private boolean isTopLevelSection(UnmodifiableConfig table) {
+    return tomlConfigFile
+      .valueMap()
+      .values()
+      .stream()
+      .anyMatch(section -> section == table);
+  }
+
+  private void resetEntry(String section, String alias) {
+    Optional.ofNullable(tomlConfigFile.<Config>get(List.of(section, alias))).ifPresent(Config::clear);
+  }
+
+  private void setLibrary(String alias, DependencyId id, Optional<VersionSlug> version) {
+    resetEntry(LIBRARIES_TOML_KEY, alias);
+    tomlConfigFile.set(List.of(LIBRARIES_TOML_KEY, alias, MODULE_ATTRIBUTE), id.groupId().get() + MODULE_SEPARATOR + id.artifactId().get());
+    version.ifPresent(versionSlug -> setVersionReference(LIBRARIES_TOML_KEY, alias, versionSlug));
+  }
+
+  private void setVersionReference(String section, String alias, VersionSlug versionSlug) {
+    tomlConfigFile.set(List.of(section, alias, VERSION_ATTRIBUTE, REF_ATTRIBUTE), versionSlug.slug());
   }
 
   public static String libraryAlias(JavaDependency dependency) {
@@ -74,12 +127,7 @@ public class VersionsCatalog {
   }
 
   public void addLibrary(JavaDependency dependency) {
-    Config libraryConfig = Config.inMemory();
-    libraryConfig.set(GROUP_ATTRIBUTE, dependency.id().groupId().get());
-    libraryConfig.set("name", dependency.id().artifactId().get());
-    dependency.version().ifPresent(versionSlug -> libraryConfig.set(VERSION_REF, versionSlug.slug()));
-    String libraryEntryKey = libraryAlias(dependency);
-    tomlConfigFile.set(List.of(LIBRARIES_TOML_KEY, libraryEntryKey), libraryConfig);
+    setLibrary(libraryAlias(dependency), dependency.id(), dependency.version());
     save();
   }
 
@@ -98,15 +146,9 @@ public class VersionsCatalog {
     if (existingAlias.isPresent()) {
       annotationProcessor
         .version()
-        .ifPresent(versionSlug ->
-          tomlConfigFile.set(List.of(LIBRARIES_TOML_KEY, existingAlias.orElseThrow(), VERSION_REF), versionSlug.slug())
-        );
+        .ifPresent(versionSlug -> setVersionReference(LIBRARIES_TOML_KEY, existingAlias.orElseThrow(), versionSlug));
     } else {
-      Config libraryConfig = Config.inMemory();
-      libraryConfig.set(GROUP_ATTRIBUTE, annotationProcessor.id().groupId().get());
-      libraryConfig.set("name", annotationProcessor.id().artifactId().get());
-      annotationProcessor.version().ifPresent(versionSlug -> libraryConfig.set(VERSION_REF, versionSlug.slug()));
-      tomlConfigFile.set(List.of(LIBRARIES_TOML_KEY, libraryAlias(annotationProcessor)), libraryConfig);
+      setLibrary(libraryAlias(annotationProcessor), annotationProcessor.id(), annotationProcessor.version());
     }
     save();
   }
@@ -167,17 +209,26 @@ public class VersionsCatalog {
   }
 
   private static Predicate<Entry> groupShouldMatch(DependencyId dependency) {
-    return libraryConfig -> {
-      Object groupProperty = ((Config) libraryConfig.getValue()).get(GROUP_ATTRIBUTE);
-      return dependency.groupId().get().equals(groupProperty);
-    };
+    return libraryConfig ->
+      dependency
+        .groupId()
+        .get()
+        .equals(moduleCoordinate((Config) libraryConfig.getValue(), GROUP_ATTRIBUTE, 0));
   }
 
   private static Predicate<Entry> nameShouldMatch(DependencyId dependency) {
-    return libraryConfig -> {
-      Object groupProperty = ((Config) libraryConfig.getValue()).get("name");
-      return dependency.artifactId().get().equals(groupProperty);
-    };
+    return libraryConfig ->
+      dependency
+        .artifactId()
+        .get()
+        .equals(moduleCoordinate((Config) libraryConfig.getValue(), NAME_ATTRIBUTE, 1));
+  }
+
+  // Libraries are written as module = "group:name", but projects generated before declare group and name separately
+  private static Object moduleCoordinate(Config libraryConfig, String attribute, int moduleIndex) {
+    return Optional.ofNullable(libraryConfig.<String>get(MODULE_ATTRIBUTE))
+      .<Object>map(module -> module.split(MODULE_SEPARATOR)[moduleIndex])
+      .orElseGet(() -> libraryConfig.get(attribute));
   }
 
   public Collection<DependencySlug> retrieveDependencySlugsFrom(DependencyId dependency) {
@@ -203,11 +254,10 @@ public class VersionsCatalog {
   }
 
   public void addPlugin(GradleCommunityPlugin plugin) {
-    Config pluginConfig = Config.inMemory();
-    pluginConfig.set("id", plugin.id().get());
-    plugin.versionSlug().ifPresent(versionSlug -> pluginConfig.set(VERSION_REF, versionSlug.slug()));
-    String pluginEntryKey = pluginAlias(plugin);
-    tomlConfigFile.set(List.of(PLUGINS_TOML_KEY, pluginEntryKey), pluginConfig);
+    String pluginAlias = pluginAlias(plugin);
+    resetEntry(PLUGINS_TOML_KEY, pluginAlias);
+    tomlConfigFile.set(List.of(PLUGINS_TOML_KEY, pluginAlias, ID_ATTRIBUTE), plugin.id().get());
+    plugin.versionSlug().ifPresent(versionSlug -> setVersionReference(PLUGINS_TOML_KEY, pluginAlias, versionSlug));
     save();
   }
 }

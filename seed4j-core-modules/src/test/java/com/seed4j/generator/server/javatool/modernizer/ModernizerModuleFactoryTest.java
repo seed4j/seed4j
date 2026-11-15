@@ -67,11 +67,7 @@ class ModernizerModuleFactoryTest {
       .hasFile("gradle/libs.versions.toml")
       .containing(
         """
-        \t[plugins.modernizer]
-        \t\tid = "com.github.andygoossens.modernizer"
-
-        \t\t[plugins.modernizer.version]
-        \t\t\tref = "modernizer"
+        modernizer = {id = "com.github.andygoossens.modernizer", version.ref = "modernizer"}
         """
       )
       .and()

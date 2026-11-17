@@ -74,7 +74,7 @@
     <asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
     <openapi-maven-plugin.version>1.35.0</openapi-maven-plugin.version>
     <openapi-backwards-compat-maven-plugin.version>1.0.3</openapi-backwards-compat-maven-plugin.version>
-    <liquibase-linter-maven-plugin.version>1.1.0</liquibase-linter-maven-plugin.version>
+    <liquibase-linter-maven-plugin.version>1.2.0</liquibase-linter-maven-plugin.version>
     <modernizer-maven-plugin.version>3.5.0</modernizer-maven-plugin.version>
     <error-prone.version>2.52.0</error-prone.version>
     <nullability-maven-plugin.version>0.5.2</nullability-maven-plugin.version>

@@ -230,7 +230,7 @@ class SpringBootCoreModuleFactoryTest {
         .containing("spring-boot = \"")
         .containing(
           """
-          spring-boot = {id = "org.springframework.boot", version.ref = "spring-boot"}
+          spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
           """
         )
         .and()

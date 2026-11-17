@@ -75,7 +75,7 @@ public class VersionsCatalog {
     writer.setWriteTableInlinePredicate(table -> !isTopLevelSection(table));
     // night-config writes nested tables as version = {ref = "x"}: the equivalent dotted key is the usual Gradle notation
     String content = INLINE_VERSION_REFERENCE.matcher(writer.writeToString(tomlConfigFile)).replaceAll("version.ref = $1");
-    write(content);
+    write(TomlInlineTables.withBraceSpaces(content));
   }
 
   @ExcludeFromGeneratedCodeCoverage(reason = "The error handling is an hard to test implementation detail")

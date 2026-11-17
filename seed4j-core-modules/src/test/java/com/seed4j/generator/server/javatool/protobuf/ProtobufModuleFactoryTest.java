@@ -109,7 +109,7 @@ class ProtobufModuleFactoryTest {
         .containing("protobuf-plugin = \"")
         .containing(
           """
-          protobuf = {id = "com.google.protobuf", version.ref = "protobuf-plugin"}
+          protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
           """
         )
         .and()

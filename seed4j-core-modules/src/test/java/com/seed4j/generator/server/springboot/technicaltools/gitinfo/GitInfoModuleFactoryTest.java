@@ -72,7 +72,7 @@ class GitInfoModuleFactoryTest {
 
       assertThatModuleWithFiles(module, gradleBuildFile(), gradleLibsVersionFile())
         .hasFile("gradle/libs.versions.toml")
-        .containing("git-properties = {id = \"com.gorylenko.gradle-git-properties\"")
+        .containing("git-properties = { id = \"com.gorylenko.gradle-git-properties\"")
         .and()
         .hasFile("build.gradle.kts")
         .containing(

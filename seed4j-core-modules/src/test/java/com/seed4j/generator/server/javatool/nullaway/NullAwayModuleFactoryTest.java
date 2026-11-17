@@ -70,12 +70,12 @@ class NullAwayModuleFactoryTest {
       .containing("error-prone = \"")
       .containing(
         """
-        errorprone = {id = "net.ltgt.errorprone", version.ref = "gradle-errorprone-plugin"}
+        errorprone = { id = "net.ltgt.errorprone", version.ref = "gradle-errorprone-plugin" }
         """
       )
       .containing(
         """
-        nullaway = {id = "net.ltgt.nullaway", version.ref = "gradle-nullaway-plugin"}
+        nullaway = { id = "net.ltgt.nullaway", version.ref = "gradle-nullaway-plugin" }
         """
       )
       .and()

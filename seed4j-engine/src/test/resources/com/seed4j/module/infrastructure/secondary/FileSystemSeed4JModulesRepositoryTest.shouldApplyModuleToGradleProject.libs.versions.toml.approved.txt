@@ -9,16 +9,16 @@ cassandraunit = "[version]"
 jacoco = "[version]"
 
 [libraries]
-commons-lang3 = {module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3"}
-spring-boot-dependencies = {module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot"}
-reflections = {module = "org.reflections:reflections", version.ref = "reflections"}
-spring-boot-starter = {module = "org.springframework.boot:spring-boot-starter"}
-jjwt-api = {module = "io.jsonwebtoken:jjwt-api", version.ref = "json-web-token"}
-junit-jupiter-engine = {module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "spring-boot"}
-spring-boot-starter-webmvc = {module = "org.springframework.boot:spring-boot-starter-webmvc"}
-hibernate-processor = {module = "org.hibernate.orm:hibernate-processor"}
-gradle-git-properties = {module = "com.gorylenko.gradle-git-properties:gradle-git-properties", version.ref = "git-properties"}
-cassandra-unit = {module = "org.cassandraunit:cassandra-unit", version.ref = "cassandraunit"}
+commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3" }
+spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+reflections = { module = "org.reflections:reflections", version.ref = "reflections" }
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
+jjwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "json-web-token" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "spring-boot" }
+spring-boot-starter-webmvc = { module = "org.springframework.boot:spring-boot-starter-webmvc" }
+hibernate-processor = { module = "org.hibernate.orm:hibernate-processor" }
+gradle-git-properties = { module = "com.gorylenko.gradle-git-properties:gradle-git-properties", version.ref = "git-properties" }
+cassandra-unit = { module = "org.cassandraunit:cassandra-unit", version.ref = "cassandraunit" }
 
 [bundles]
 

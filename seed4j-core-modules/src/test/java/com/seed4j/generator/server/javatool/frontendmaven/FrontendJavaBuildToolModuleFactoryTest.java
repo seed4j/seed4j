@@ -319,7 +319,7 @@ class FrontendJavaBuildToolModuleFactoryTest {
         .containing("node-gradle = \"")
         .containing(
           """
-          node-gradle = {id = "com.github.node-gradle.node", version.ref = "node-gradle"}
+          node-gradle = { id = "com.github.node-gradle.node", version.ref = "node-gradle" }
           """
         )
         .and()

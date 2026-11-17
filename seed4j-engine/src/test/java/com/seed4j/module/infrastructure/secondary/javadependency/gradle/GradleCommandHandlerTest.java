@@ -557,7 +557,7 @@ class GradleCommandHandlerTest {
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
         [libraries]
-        auto-service = {module = "com.google.auto.service:auto-service", version.ref = "auto-service"}
+        auto-service = { module = "com.google.auto.service:auto-service", version.ref = "auto-service" }
         """
       );
     }
@@ -608,7 +608,7 @@ class GradleCommandHandlerTest {
       assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("annotationProcessor(libs.boot.starter)");
       assertThat(versionCatalogContent(emptyGradleProjectFolder))
         .doesNotContain("spring-boot-starter = {")
-        .contains("boot-starter = {module = \"org.springframework.boot:spring-boot-starter\", version.ref = \"spring-boot\"}");
+        .contains("boot-starter = { module = \"org.springframework.boot:spring-boot-starter\", version.ref = \"spring-boot\" }");
     }
 
     @Test
@@ -622,7 +622,7 @@ class GradleCommandHandlerTest {
       assertThat(buildGradleContent(projectFolder)).contains("annotationProcessor(libs.boot.starter)");
       assertThat(versionCatalogContent(projectFolder))
         .doesNotContain("spring-boot-starter = {")
-        .contains("boot-starter = {name = \"spring-boot-starter\", group = \"org.springframework.boot\", version.ref = \"spring-boot\"}");
+        .contains("boot-starter = { name = \"spring-boot-starter\", group = \"org.springframework.boot\", version.ref = \"spring-boot\" }");
     }
   }
 
@@ -639,7 +639,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        spring-boot-starter-webmvc = {module = "org.springframework.boot:spring-boot-starter-webmvc"}
+        spring-boot-starter-webmvc = { module = "org.springframework.boot:spring-boot-starter-webmvc" }
         """
       );
     }
@@ -664,7 +664,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        spring-boot-starter-webmvc = {module = "org.spring.boot:spring-boot-starter-webmvc"}
+        spring-boot-starter-webmvc = { module = "org.spring.boot:spring-boot-starter-webmvc" }
         """
       );
     }
@@ -688,7 +688,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        spring-boot-starter-webmvc = {module = "org.spring.boot:spring-boot-starter-webmvc", version.ref = "spring-boot"}
+        spring-boot-starter-webmvc = { module = "org.spring.boot:spring-boot-starter-webmvc", version.ref = "spring-boot" }
         """
       );
     }
@@ -708,7 +708,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        hikariCP = {module = "com.zaxxer:HikariCP"}
+        hikariCP = { module = "com.zaxxer:HikariCP" }
         """
       );
       assertThat(buildGradleContent(emptyGradleProjectFolder)).contains("implementation(libs.hikariCP)");
@@ -1240,7 +1240,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(emptyGradleProjectFolder)).contains(
         """
-        spring-boot-dependencies = {module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot"}
+        spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
         """
       );
     }
@@ -1691,7 +1691,7 @@ class GradleCommandHandlerTest {
 
       assertThat(versionCatalogContent(projectFolder)).contains(
         """
-        gradle-git-properties = {module = "com.gorylenko.gradle-git-properties:gradle-git-properties", version.ref = "git-properties"}
+        gradle-git-properties = { module = "com.gorylenko.gradle-git-properties:gradle-git-properties", version.ref = "git-properties" }
         """
       );
       assertThat(pluginBuildGradleContent(projectFolder)).contains("implementation(libs.gradle.git.properties)");
@@ -1726,7 +1726,7 @@ class GradleCommandHandlerTest {
         AddGradlePlugin.builder().plugin(dockerGradlePluginDependency()).buildProfile(localBuildProfile()).build()
       );
 
-      assertThat(versionCatalogContent(projectFolder)).contains("gradle-docker-plugin = {module = \"com.bmuschko:gradle-docker-plugin\"");
+      assertThat(versionCatalogContent(projectFolder)).contains("gradle-docker-plugin = { module = \"com.bmuschko:gradle-docker-plugin\"");
       assertThat(pluginBuildGradleContent(projectFolder)).contains("implementation(libs.gradle.docker.plugin");
       assertThat(scriptPluginContent(projectFolder, localBuildProfile()))
         .contains(

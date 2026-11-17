@@ -13,7 +13,7 @@
     "@jsverse/transloco": "8.4.0",
     "@tailwindcss/postcss": "4.3.5",
     "angular-eslint": "22.6.0",
-    "postcss": "8.5.32",
+    "postcss": "8.5.33",
     "rxjs": "7.8.2",
     "tailwindcss": "4.3.5",
     "tslib": "2.9.1",

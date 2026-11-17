@@ -32,7 +32,14 @@ class PrettierModuleFactoryTest {
     Seed4JModule module = factory.buildModule(properties);
 
     assertThatModuleWithFiles(module, packageJsonFile(), lintStagedConfigFileWithoutPrettier())
-      .hasFiles(".prettierignore")
+      .hasFile(".prettierignore")
+      .containing(
+        """
+        gradle/*
+        !gradle/libs.versions.toml
+        """
+      )
+      .and()
       .hasFile(".lintstagedrc.cjs")
       .containing(
         """

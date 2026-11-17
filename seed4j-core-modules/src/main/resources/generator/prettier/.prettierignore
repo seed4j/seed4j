@@ -1,5 +1,6 @@
 target
 build
 package-lock.json
-gradle
+gradle/*
+!gradle/libs.versions.toml
 .gradle

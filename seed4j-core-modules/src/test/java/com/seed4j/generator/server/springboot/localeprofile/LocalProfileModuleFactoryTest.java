@@ -112,7 +112,7 @@ class LocalProfileModuleFactoryTest {
         .hasFile("build.gradle.kts")
         .containing(
           """
-          val springProfilesActive by extra("")
+          extra.set("springProfilesActive", "")
           // seed4j-needle-gradle-properties
           """
         )
@@ -135,6 +135,7 @@ class LocalProfileModuleFactoryTest {
           }
 
           tasks.processResources {
+            val springProfilesActive = project.extra["springProfilesActive"] as String
             filesMatching("**/*.yml") {
               filter { it.replace("@spring.profiles.active@", springProfilesActive) }
             }
@@ -150,7 +151,7 @@ class LocalProfileModuleFactoryTest {
         .hasFile("buildSrc/src/main/kotlin/profile-local.gradle.kts")
         .containing(
           """
-          val springProfilesActive by extra("local")
+          extra.set("springProfilesActive", "local")
           // seed4j-needle-gradle-properties
           """
         )

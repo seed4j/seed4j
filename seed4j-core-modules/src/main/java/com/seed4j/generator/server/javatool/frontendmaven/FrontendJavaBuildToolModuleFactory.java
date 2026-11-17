@@ -239,8 +239,8 @@ class FrontendJavaBuildToolModuleFactory {
         """
         node {
           download.set(true)
-          version.set(nodeVersionValue)
-          {{nodePackageManager}}Version.set({{nodePackageManager}}VersionValue)
+          version.set(project.extra["nodeVersionValue"] as String)
+          {{nodePackageManager}}Version.set(project.extra["{{nodePackageManager}}VersionValue"] as String)
           workDir.set(file(layout.buildDirectory))
           {{nodePackageManager}}WorkDir.set(file(layout.buildDirectory))
         }

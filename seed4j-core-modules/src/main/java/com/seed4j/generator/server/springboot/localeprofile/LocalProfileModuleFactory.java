@@ -39,6 +39,7 @@ class LocalProfileModuleFactory {
           }
 
           tasks.processResources {
+            val springProfilesActive = project.extra["springProfilesActive"] as String
             filesMatching("**/*.yml") {
               filter { it.replace("@spring.profiles.active@", springProfilesActive) }
             }

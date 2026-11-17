@@ -338,8 +338,8 @@ class FrontendJavaBuildToolModuleFactoryTest {
         )
         .containing(
           """
-          val nodeVersionValue by extra("16.0.0")
-          val npmVersionValue by extra("4.0.0")
+          extra.set("nodeVersionValue", "16.0.0")
+          extra.set("npmVersionValue", "4.0.0")
           // seed4j-needle-gradle-properties
           """
         )
@@ -347,8 +347,8 @@ class FrontendJavaBuildToolModuleFactoryTest {
           """
           node {
             download.set(true)
-            version.set(nodeVersionValue)
-            npmVersion.set(npmVersionValue)
+            version.set(project.extra["nodeVersionValue"] as String)
+            npmVersion.set(project.extra["npmVersionValue"] as String)
             workDir.set(file(layout.buildDirectory))
             npmWorkDir.set(file(layout.buildDirectory))
           }
@@ -421,8 +421,8 @@ class FrontendJavaBuildToolModuleFactoryTest {
         )
         .containing(
           """
-          val nodeVersionValue by extra("16.0.0")
-          val pnpmVersionValue by extra("10.0.0")
+          extra.set("nodeVersionValue", "16.0.0")
+          extra.set("pnpmVersionValue", "10.0.0")
           // seed4j-needle-gradle-properties
           """
         )
@@ -430,8 +430,8 @@ class FrontendJavaBuildToolModuleFactoryTest {
           """
           node {
             download.set(true)
-            version.set(nodeVersionValue)
-            pnpmVersion.set(pnpmVersionValue)
+            version.set(project.extra["nodeVersionValue"] as String)
+            pnpmVersion.set(project.extra["pnpmVersionValue"] as String)
             workDir.set(file(layout.buildDirectory))
             pnpmWorkDir.set(file(layout.buildDirectory))
           }

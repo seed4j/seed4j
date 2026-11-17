@@ -71,7 +71,7 @@
     <equalsverifier.version>4.5.2</equalsverifier.version>
     <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
     <archunit.version>1.5.1</archunit.version>
-    <cucumber.version>8.0.4</cucumber.version>
+    <cucumber.version>8.1.0</cucumber.version>
     <sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
     <properties-maven-plugin.version>1.4.0</properties-maven-plugin.version>
     <jspecify.version>1.0.1</jspecify.version>

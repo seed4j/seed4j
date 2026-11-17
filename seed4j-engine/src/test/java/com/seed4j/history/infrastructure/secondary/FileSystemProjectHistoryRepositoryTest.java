@@ -72,6 +72,18 @@ class FileSystemProjectHistoryRepositoryTest {
         );
       }
     }
+
+    @Test
+    void shouldSaveHistoryInSeed4JFolderOfAProjectWithLegacyJHipsterHistory() throws IOException {
+      ProjectPath path = folder().add("src/test/resources/projects/history/history.json", ".jhipster/modules/history.json").build();
+
+      histories.save(path, projectAction());
+
+      try (Stream<Path> legacyFiles = Files.list(Path.of(path.get(), ".jhipster/modules"))) {
+        assertThat(legacyFiles).containsExactly(Path.of(path.get(), ".jhipster/modules/history.json"));
+      }
+      assertThat(histories.get(path).actions()).hasSize(2);
+    }
   }
 
   @Nested
@@ -143,6 +155,51 @@ class FileSystemProjectHistoryRepositoryTest {
       assertThat(history.actions())
         .usingRecursiveFieldByFieldElementComparator()
         .containsExactly(projectAction(), firstProjectAction(), secondProjectAction());
+    }
+
+    @Test
+    void shouldNotLeakActionFilesOfAProjectIntoTheHistoryOfAnotherProject() {
+      ProjectPath projectWithActionFile = folder()
+        .add(
+          "src/test/resources/projects/composed-history/20250819203000-another-test-module.json",
+          ".seed4j/modules/20250819203000-another-test-module.json"
+        )
+        .build();
+      histories.get(projectWithActionFile);
+
+      ProjectHistory history = histories.get(folder().build());
+
+      assertThat(history.actions()).isEmpty();
+    }
+
+    @Test
+    void shouldGetExistingHistoryFromLegacyJHipsterFolder() {
+      ProjectPath path = folder()
+        .add("src/test/resources/projects/composed-history/history.json", ".jhipster/modules/history.json")
+        .add(
+          "src/test/resources/projects/composed-history/20250819203000-another-test-module.json",
+          ".jhipster/modules/20250819203000-another-test-module.json"
+        )
+        .build();
+
+      ProjectHistory history = histories.get(path);
+
+      assertThat(history.actions()).usingRecursiveFieldByFieldElementComparator().containsExactly(projectAction(), firstProjectAction());
+    }
+
+    @Test
+    void shouldGetLegacyJHipsterHistoryBeforeSeed4JHistory() {
+      ProjectPath path = folder()
+        .add("src/test/resources/projects/composed-history/history.json", ".jhipster/modules/history.json")
+        .add(
+          "src/test/resources/projects/composed-history/20250819203000-another-test-module.json",
+          ".seed4j/modules/20250819203000-another-test-module.json"
+        )
+        .build();
+
+      ProjectHistory history = histories.get(path);
+
+      assertThat(history.actions()).usingRecursiveFieldByFieldElementComparator().containsExactly(projectAction(), firstProjectAction());
     }
   }
 

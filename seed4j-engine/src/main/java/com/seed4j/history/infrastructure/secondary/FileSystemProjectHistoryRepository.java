@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 import org.springframework.stereotype.Repository;
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.ObjectMapper;
@@ -30,6 +31,8 @@ class FileSystemProjectHistoryRepository implements ProjectHistoryRepository {
   private static final String PATH_PARAMETER = "path";
 
   private static final String HISTORY_FOLDER = ".seed4j/modules";
+  private static final String LEGACY_JHIPSTER_HISTORY_FOLDER = ".jhipster/modules";
+  private static final List<String> READ_HISTORY_FOLDERS = List.of(LEGACY_JHIPSTER_HISTORY_FOLDER, HISTORY_FOLDER);
   private static final String HISTORY_FILE = "history.json";
 
   private static final DateTimeFormatter FILENAME_DATE_FORMAT_WITHOUT_MS = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(
@@ -73,26 +76,29 @@ class FileSystemProjectHistoryRepository implements ProjectHistoryRepository {
   public ProjectHistory get(ProjectPath path) {
     Assert.notNull(PATH_PARAMETER, path);
 
-    Path historyFilePath = Path.of(path.get(), HISTORY_FOLDER, HISTORY_FILE);
+    List<ProjectAction> actions = READ_HISTORY_FOLDERS.stream()
+      .map(folder -> Path.of(path.get(), folder))
+      .flatMap(this::folderActions)
+      .map(PersistedProjectAction::toDomain)
+      .toList();
 
-    PersistedProjectHistory projectHistory = initialHistory(historyFilePath);
-    projectHistory.addAll(specificModulesHistory(path));
-
-    return projectHistory.toDomain(path);
+    return new ProjectHistory(path, actions);
   }
 
-  private PersistedProjectHistory initialHistory(final Path historyFilePath) {
+  private Stream<PersistedProjectAction> folderActions(Path historyFolder) {
+    return Stream.concat(initialHistory(historyFolder.resolve(HISTORY_FILE)).stream(), specificModulesHistory(historyFolder).stream());
+  }
+
+  private Collection<PersistedProjectAction> initialHistory(Path historyFilePath) {
     if (Files.notExists(historyFilePath)) {
-      return PersistedProjectHistory.EMPTY;
+      return List.of();
     }
 
-    return read(PersistedProjectHistory.class, historyFilePath);
+    return read(PersistedProjectHistory.class, historyFilePath).getActions();
   }
 
   @ExcludeFromGeneratedCodeCoverage
-  private Collection<PersistedProjectAction> specificModulesHistory(ProjectPath projectPath) {
-    Path historyFolder = Path.of(projectPath.get(), HISTORY_FOLDER);
-
+  private Collection<PersistedProjectAction> specificModulesHistory(Path historyFolder) {
     if (Files.notExists(historyFolder)) {
       return List.of();
     }

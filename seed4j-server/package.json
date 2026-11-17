@@ -69,7 +69,7 @@
     "cpy-cli": "7.0.0",
     "eslint-plugin-playwright": "2.12.2",
     "fontello-cli": "0.6.2",
-    "jsdom": "31.0.0",
+    "jsdom": "31.0.1",
     "npm-run-all2": "9.0.4",
     "nyc": "18.0.0",
     "oxlint": "1.93.0",

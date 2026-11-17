@@ -179,6 +179,7 @@ public final class Seed4JEngineFixture {
         }
 
         tasks.processResources {
+          val springProfilesActive = project.extra["springProfilesActive"] as String
           filesMatching("**/*.yml", "**/*.properties") {
             filter {
               it.replace("@spring.profiles.active@", springProfilesActive)

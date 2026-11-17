@@ -246,7 +246,7 @@ class FileSystemSeed4JModulesRepositoryTest {
         )
         .containing(
           """
-          val springProfilesActive by extra("local")
+          extra.set("springProfilesActive", "local")
           // seed4j-needle-gradle-properties
           """
         )

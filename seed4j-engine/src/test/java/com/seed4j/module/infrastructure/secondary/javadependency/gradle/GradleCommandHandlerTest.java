@@ -168,7 +168,7 @@ class GradleCommandHandlerTest {
 
         assertThat(buildGradleContent(projectFolder)).contains(
           """
-          val springProfilesActive by extra("local")
+          extra.set("springProfilesActive", "local")
           // seed4j-needle-gradle-properties
           """
         );
@@ -184,8 +184,8 @@ class GradleCommandHandlerTest {
 
         assertThat(buildGradleContent(projectFolder)).contains(
           """
-          val javaVersion by extra("25")
-          val springProfilesActive by extra("local")
+          extra.set("javaVersion", "25")
+          extra.set("springProfilesActive", "local")
           // seed4j-needle-gradle-properties
           """
         );
@@ -210,13 +210,13 @@ class GradleCommandHandlerTest {
         assertThat(buildGradleContent(projectFolder))
           .contains(
             """
-            val springProfilesActive by extra("dev")
+            extra.set("springProfilesActive", "dev")
             // seed4j-needle-gradle-properties
             """
           )
           .doesNotContain(
             """
-            val springProfilesActive by extra("local")\
+            extra.set("springProfilesActive", "local")\
             """
           );
       }
@@ -237,7 +237,7 @@ class GradleCommandHandlerTest {
 
         assertThat(buildGradleContent(projectFolder)).contains(
           """
-          val springProfilesActive by extra("local")
+          extra.set("springProfilesActive", "local")
           // seed4j-needle-gradle-properties
           """
         );
@@ -268,7 +268,7 @@ class GradleCommandHandlerTest {
 
         assertThat(scriptPluginContent(projectFolder, localBuildProfile())).contains(
           """
-          val springProfilesActive by extra("local")
+          extra.set("springProfilesActive", "local")
           // seed4j-needle-gradle-properties
           """
         );
@@ -284,8 +284,8 @@ class GradleCommandHandlerTest {
 
         assertThat(scriptPluginContent(projectFolder, localBuildProfile())).contains(
           """
-          val javaVersion by extra("25")
-          val springProfilesActive by extra("local")
+          extra.set("javaVersion", "25")
+          extra.set("springProfilesActive", "local")
           // seed4j-needle-gradle-properties
           """
         );
@@ -310,13 +310,13 @@ class GradleCommandHandlerTest {
         assertThat(scriptPluginContent(projectFolder, localBuildProfile()))
           .contains(
             """
-            val springProfilesActive by extra("dev")
+            extra.set("springProfilesActive", "dev")
             // seed4j-needle-gradle-properties
             """
           )
           .doesNotContain(
             """
-            val springProfilesActive by extra("local")\
+            extra.set("springProfilesActive", "local")\
             """
           );
       }
@@ -337,7 +337,7 @@ class GradleCommandHandlerTest {
 
         assertThat(scriptPluginContent(projectFolder, localBuildProfile())).contains(
           """
-          val springProfilesActive by extra("local")
+          extra.set("springProfilesActive", "local")
           // seed4j-needle-gradle-properties
           """
         );
@@ -1837,6 +1837,7 @@ class GradleCommandHandlerTest {
         }
 
         tasks.processResources {
+          val springProfilesActive = project.extra["springProfilesActive"] as String
           filesMatching("**/*.yml") {
             filter { it.replace("@spring.profiles.active@", springProfilesActive) }
           }
@@ -1855,6 +1856,7 @@ class GradleCommandHandlerTest {
       }
 
       tasks.processResources {
+        val springProfilesActive = project.extra["springProfilesActive"] as String
         filesMatching("**/*.yml") {
           filter { it.replace("@spring.profiles.active@", springProfilesActive) }
         }

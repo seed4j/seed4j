@@ -8,7 +8,7 @@ plugins {
   // seed4j-needle-gradle-plugins
 }
 
-val springProfilesActive by extra("local")
+extra.set("springProfilesActive", "local")
 // seed4j-needle-gradle-properties
 
 java {
@@ -86,6 +86,7 @@ tasks.build {
 }
 
 tasks.processResources {
+  val springProfilesActive = project.extra["springProfilesActive"] as String
   filesMatching("**/*.yml", "**/*.properties") {
     filter {
       it.replace("@spring.profiles.active@", springProfilesActive)
@@ -110,7 +111,7 @@ tasks.test {
   // seed4j-needle-gradle-tasks-test
 }
 
-val test by testing.suites.existing(JvmTestSuite::class)
+val test = testing.suites.named<JvmTestSuite>("test")
 tasks.register<Test>("integrationTest") {
   description = "Runs integration tests."
   group = "verification"

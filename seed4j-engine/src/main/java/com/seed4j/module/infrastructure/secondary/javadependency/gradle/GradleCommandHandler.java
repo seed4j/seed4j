@@ -471,7 +471,7 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
 
   private MandatoryReplacer existingPropertyReplacer(BuildProperty property) {
     Pattern propertyLinePattern = Pattern.compile(
-      "val %s by extra\\(\"(.*?)\"\\)".formatted(toCamelCasedKotlinVariable(property.key())),
+      "extra\\.set\\(\"%s\", \"(.*?)\"\\)".formatted(toCamelCasedKotlinVariable(property.key())),
       Pattern.MULTILINE
     );
     return new MandatoryReplacer(regex(notMatchingRegex(propertyLinePattern), propertyLinePattern), convertToKotlinFormat(property));
@@ -482,7 +482,7 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
   }
 
   private static String convertToKotlinFormat(BuildProperty property) {
-    return "val %s by extra(\"%s\")".formatted(toCamelCasedKotlinVariable(property.key()), property.value().get());
+    return "extra.set(\"%s\", \"%s\")".formatted(toCamelCasedKotlinVariable(property.key()), property.value().get());
   }
 
   private static String toCamelCasedKotlinVariable(PropertyKey key) {
@@ -494,7 +494,7 @@ public class GradleCommandHandler implements JavaDependenciesCommandHandler {
   private boolean propertyExistsFrom(PropertyKey key, Path buildGradleFile) {
     String content = readContent(buildGradleFile);
 
-    return content.contains("val %s by extra(".formatted(toCamelCasedKotlinVariable(key)));
+    return content.contains("extra.set(\"%s\", ".formatted(toCamelCasedKotlinVariable(key)));
   }
 
   @Override

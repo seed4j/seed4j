@@ -64,7 +64,7 @@
     <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
     <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
     <properties-maven-plugin.version>1.4.0</properties-maven-plugin.version>
-    <sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
+    <sonar-maven-plugin.version>5.9.0.7382</sonar-maven-plugin.version>
     <maven-enforcer-plugin.version>3.7.0</maven-enforcer-plugin.version>
     <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
     <jib-maven-plugin.version>3.5.2</jib-maven-plugin.version>

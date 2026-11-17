@@ -10,7 +10,7 @@ FROM cassandra:5.0.9
 FROM mcr.microsoft.com/mssql/server:2025-latest
 FROM postgres:18.7
 FROM apache/kafka-native:4.4.0
-FROM tchiotludo/akhq:0.28.0
+FROM tchiotludo/akhq:0.29.0
 FROM apachepulsar/pulsar:5.0.1
 FROM neo4j:2026.10.2-community
 FROM redis:8.10.3

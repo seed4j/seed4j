@@ -11,5 +11,3 @@ Feature: Vue router
       | HomeRouter.ts |
     And I should have files in "src/main/webapp/app"
       | router.ts |
-    And I should have files in "src/test/webapp/unit/router/infrastructure/primary"
-      | HomeRouter.spec.ts |

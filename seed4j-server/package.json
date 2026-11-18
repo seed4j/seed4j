@@ -65,7 +65,7 @@
     "@types/node": "26.6.6",
     "@vitejs/plugin-vue": "6.0.11",
     "@vitest/coverage-istanbul": "5.1.0",
-    "@vue/test-utils": "2.5.1",
+    "@vue/test-utils": "2.6.0",
     "cpy-cli": "7.0.0",
     "eslint-plugin-playwright": "2.12.2",
     "fontello-cli": "0.6.2",

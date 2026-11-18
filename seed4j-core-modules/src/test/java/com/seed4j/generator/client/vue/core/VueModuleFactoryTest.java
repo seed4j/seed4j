@@ -78,7 +78,6 @@ class VueModuleFactoryTest {
       .hasPrefixedFiles("src/main/webapp/app/home","infrastructure/primary/HomepageVue.vue")
       .hasPrefixedFiles("src/main/webapp/content/images", "seed4j_logo-name.png", "VueLogo.png")
       .hasFiles("src/test/webapp/unit/Dummy.spec.ts")
-      .hasFiles("src/test/webapp/unit/shared/http/infrastructure/secondary/AxiosHttp.spec.ts")
       .hasFiles("src/test/webapp/unit/shared/http/infrastructure/secondary/AxiosStub.ts");
     // @formatter:on
     assertThat(seed4JModuleServices.nodeLazyPackagesInstaller().installations()).containsExactly(

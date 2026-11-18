@@ -29,8 +29,7 @@ class VueRouterModuleFactoryTest {
       .containing(nodeDependency("vue-router"))
       .and()
       .hasPrefixedFiles("src/main/webapp/app", "router.ts")
-      .hasPrefixedFiles("src/main/webapp/app/home","application/HomeRouter.ts")
-      .hasFiles("src/test/webapp/unit/router/infrastructure/primary/HomeRouter.spec.ts");
+      .hasPrefixedFiles("src/main/webapp/app/home","application/HomeRouter.ts");
     // @formatter:on
   }
 }

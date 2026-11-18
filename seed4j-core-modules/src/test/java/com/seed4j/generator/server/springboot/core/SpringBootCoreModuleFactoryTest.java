@@ -99,7 +99,7 @@ class SpringBootCoreModuleFactoryTest {
               <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-properties-migrator</artifactId>
-                <scope>runtime</scope>
+                <scope>test</scope>
               </dependency>
           """
         )

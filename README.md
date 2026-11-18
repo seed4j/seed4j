@@ -34,6 +34,18 @@
 
 This is a [sample application](https://github.com/seed4j/seed4j-sample-app) created with Seed4J.
 
+## Designed to be used locally
+
+> [!IMPORTANT]
+> Seed4J is designed to run **on your machine**, next to your project: run it locally (see [Quick Start](#quick-start) or [Docker/Podman Quickstart](#dockerpodman-quickstart)).
+
+Seed4J applies the modules directly to a folder of the machine it runs on, and keeps track of them in `.seed4j/modules/history.json`. Running it locally lets you:
+
+- generate your project in your own folder, step by step, and only what you need;
+- come back later and apply new modules to the same project, as it grows.
+
+The online instance, [start.seed4j.com](https://start.seed4j.com), is only meant to try Seed4J: the projects are generated in a temporary folder of the server, you can only get them back as a zip file, and you can't apply new modules to your existing project with it.
+
 ## Quick Start
 
 You need to clone this project and go into the folder:

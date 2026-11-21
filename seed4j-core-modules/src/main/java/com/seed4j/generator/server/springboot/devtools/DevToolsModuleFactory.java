@@ -34,11 +34,9 @@ class DevToolsModuleFactory {
         .addDependency(springBootDevtoolsDependency())
         .and()
       .applicationProperties(SPRING_MAIN)
-        .set(propertyKey("spring.devtools.livereload.enabled"), propertyValue(false))
         .set(propertyKey("spring.devtools.restart.enabled"), propertyValue(false))
         .and()
       .applicationProperties(SPRING_LOCAL)
-        .set(propertyKey("spring.devtools.livereload.enabled"), propertyValue(true))
         .set(propertyKey("spring.devtools.restart.enabled"), propertyValue(true))
         .and()
       .build();

@@ -80,6 +80,7 @@ class SpringBootCoreModuleFactory {
         .addDependency(SPRING_BOOT_GROUP, artifactId("spring-boot-starter"))
         .addDependency(groupId("org.apache.commons"), artifactId("commons-lang3"))
         .addDependency(springBootTest())
+        .addDependency(springBootPropertiesMigrator())
         .and()
       .javaCompiler()
         .addAnnotationProcessor(springBootConfigurationProcessor())
@@ -109,6 +110,7 @@ class SpringBootCoreModuleFactory {
       .applicationProperties(SPRING_TEST)
         .set(propertyKey("spring.main.banner-mode"), propertyValue("off"))
         .set(propertyKey("logging.config"), propertyValue("classpath:logback.xml"))
+        .set(propertyKey("spring.properties.migrator.fail"), propertyValue("on-warning"))
         .and()
       .optionalReplacements()
         .in(path("pom.xml"))
@@ -155,6 +157,14 @@ class SpringBootCoreModuleFactory {
       .groupId(SPRING_BOOT_GROUP)
       .artifactId("spring-boot-starter-test")
       .scope(JavaDependencyScope.TEST)
+      .build();
+  }
+
+  private JavaDependency springBootPropertiesMigrator() {
+    return JavaDependency.builder()
+      .groupId(SPRING_BOOT_GROUP)
+      .artifactId("spring-boot-properties-migrator")
+      .scope(JavaDependencyScope.RUNTIME)
       .build();
   }
 

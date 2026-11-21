@@ -85,3 +85,6 @@ spring:
     jpa:
       repositories:
         bootstrap-mode: deferred
+  properties:
+    migrator:
+      fail: on-warning

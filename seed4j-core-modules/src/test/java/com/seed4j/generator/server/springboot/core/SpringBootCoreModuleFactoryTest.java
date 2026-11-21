@@ -96,6 +96,15 @@ class SpringBootCoreModuleFactoryTest {
         )
         .containing(
           """
+              <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-properties-migrator</artifactId>
+                <scope>runtime</scope>
+              </dependency>
+          """
+        )
+        .containing(
+          """
                   <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
@@ -189,6 +198,9 @@ class SpringBootCoreModuleFactoryTest {
           spring:
             main:
               banner-mode: 'off'
+            properties:
+              migrator:
+                fail: on-warning
           """
         )
         .and()
@@ -250,6 +262,7 @@ class SpringBootCoreModuleFactoryTest {
           """
         )
         .containing("testImplementation(libs.spring.boot.starter.test)")
+        .containing("runtimeOnly(libs.spring.boot.properties.migrator)")
         .containing("annotationProcessor(libs.spring.boot.configuration.processor)")
         .notContaining("implementation(libs.spring.boot.configuration.processor)")
         .notContaining("testImplementation(libs.junit.engine)")

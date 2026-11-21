@@ -27,10 +27,6 @@ public interface ResponseAsserter {
   }
 
   default ResponseAsserter hasHttpStatusIn(Integer... statuses) {
-    return hasHttpStatusIn(
-      Stream.of(statuses)
-        .map(HttpStatus::valueOf)
-        .toArray(HttpStatus[]::new)
-    );
+    return hasHttpStatusIn(Stream.of(statuses).map(HttpStatus::valueOf).toArray(HttpStatus[]::new));
   }
 }

@@ -108,12 +108,7 @@ class SpringBootPropertiesTest {
         .and()
         .build();
 
-      return module
-        .applicationProperties()
-        .get()
-        .stream()
-        .map(ApplicationProperty::file)
-        .toArray(ApplicationPropertiesFile[]::new);
+      return module.applicationProperties().get().stream().map(ApplicationProperty::file).toArray(ApplicationPropertiesFile[]::new);
     }
   }
 }

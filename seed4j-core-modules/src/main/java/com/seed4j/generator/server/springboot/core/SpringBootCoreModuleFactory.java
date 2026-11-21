@@ -164,7 +164,7 @@ class SpringBootCoreModuleFactory {
     return JavaDependency.builder()
       .groupId(SPRING_BOOT_GROUP)
       .artifactId("spring-boot-properties-migrator")
-      .scope(JavaDependencyScope.RUNTIME)
+      .scope(JavaDependencyScope.TEST)
       .build();
   }
 

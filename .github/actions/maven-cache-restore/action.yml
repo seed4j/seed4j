@@ -35,6 +35,10 @@ runs:
           ~/.m2/wrapper
         key: ${{ steps.keys.outputs.primary }}
         restore-keys: ${{ steps.keys.outputs.restore-keys }}
+    - name: 'Maven cache: forget cached download failures'
+      # A failed download leaves a *.lastUpdated file making Maven skip the artifact until the update interval elapses
+      shell: bash
+      run: find ~/.m2/repository -type f -name '*.lastUpdated' -print -delete 2>/dev/null || true
     - name: 'Maven cache: mark restore time'
       shell: bash
       run: touch "$RUNNER_TEMP/m2-cache-marker"

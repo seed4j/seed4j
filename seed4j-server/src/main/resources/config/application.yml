@@ -8,7 +8,6 @@ springdoc:
     operationsSorter: alpha,beta
     tagsSorter: alpha
     tryItOutEnabled: true
-  enable-native-support: true
 
 management:
   # Spring Boot Actuator

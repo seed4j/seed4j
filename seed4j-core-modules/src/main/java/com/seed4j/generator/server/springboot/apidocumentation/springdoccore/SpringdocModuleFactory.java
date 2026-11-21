@@ -64,7 +64,6 @@ class SpringdocModuleFactory {
         .set(propertyKey("springdoc.swagger-ui.operationsSorter"), ALPHA)
         .set(propertyKey("springdoc.swagger-ui.tagsSorter"), ALPHA)
         .set(propertyKey("springdoc.swagger-ui.tryItOutEnabled"), TRUE)
-        .set(propertyKey("springdoc.enable-native-support"), TRUE)
         .and()
       .with(springMainLogger("io.swagger.v3.core.converter.ModelConverterContextImpl", LogLevel.WARN))
       .with(springTestLogger("io.swagger.v3.core.converter.ModelConverterContextImpl", LogLevel.WARN))

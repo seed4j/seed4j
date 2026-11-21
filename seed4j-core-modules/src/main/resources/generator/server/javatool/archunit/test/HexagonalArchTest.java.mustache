@@ -2,16 +2,13 @@ package {{packageName}};
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.*;
 
+import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.library.Architectures;
-import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Collection;
-import java.util.function.Function;
 import java.util.stream.Stream;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Nested;
@@ -50,42 +47,13 @@ class HexagonalArchTest {
     return packages.stream().map(path -> path + "..").toArray(String[]::new);
   }
 
-  private static Collection<String> packagesWithAnnotation(Class<? extends Annotation> annotationClass) throws AssertionError {
-    try(Stream<Path> files = Files.walk(rootPackagePath())) {
-      return files
-        .filter(path -> path.toString().endsWith("package-info.java"))
-        .map(toPackageName())
-        .map(path -> path.replaceAll("[\\/]", "."))
-        .map(path -> path.replaceAll("[\\\\]", "."))
-        .map(path -> path.replace("src.main.java.", ""))
-        .map(toPackage())
-        .filter(pack -> pack.getAnnotation(annotationClass) != null)
-        .map(Package::getName)
-        .toList();
-    } catch (IOException e) {
-      throw new AssertionError(e);
-    }
-  }
-
-  private static Path rootPackagePath() {
-    return Stream.of(ROOT_PACKAGE.split("\\.")).map(Path::of).reduce(Path.of("src", "main", "java"), Path::resolve);
-  }
-
-  private static Function<Path, String> toPackageName() {
-    return path -> {
-      var stringPath = path.toString();
-      return stringPath.substring(0, stringPath.lastIndexOf("."));
-    };
-  }
-
-  private static Function<String, Package> toPackage() {
-    return path -> {
-      try {
-        return Class.forName(path).getPackage();
-      } catch (ClassNotFoundException _) {
-        throw new AssertionError();
-      }
-    };
+  private static Collection<String> packagesWithAnnotation(Class<? extends Annotation> annotationClass) {
+    return classes
+      .stream()
+      .filter(javaClass -> javaClass.getSimpleName().equals("package-info"))
+      .filter(javaClass -> javaClass.isAnnotatedWith(annotationClass))
+      .map(JavaClass::getPackageName)
+      .toList();
   }
 
   @Nested

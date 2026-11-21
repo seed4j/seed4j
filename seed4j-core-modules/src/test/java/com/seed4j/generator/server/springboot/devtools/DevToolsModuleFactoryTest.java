@@ -43,8 +43,6 @@ class DevToolsModuleFactoryTest {
         """
         spring:
           devtools:
-            livereload:
-              enabled: false
             restart:
               enabled: false
         """
@@ -55,8 +53,6 @@ class DevToolsModuleFactoryTest {
         """
         spring:
           devtools:
-            livereload:
-              enabled: true
             restart:
               enabled: true
         """

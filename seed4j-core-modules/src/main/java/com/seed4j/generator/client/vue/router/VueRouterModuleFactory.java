@@ -43,7 +43,6 @@ class VueRouterModuleFactory {
           .addTemplate("application/HomeRouter.ts")
         .and()
         .add(SOURCE.template("webapp/app/router.ts"), MAIN_DESTINATION.append("router.ts"))
-        .add(APP_SOURCE.template("test/webapp/unit/router/infrastructure/primary/HomeRouter.spec.ts.mustache"), TEST_DESTINATION.append("unit/router/infrastructure/primary/HomeRouter.spec.ts"))
         .and()
         .mandatoryReplacements()
           .in(path("src/main/webapp/app/main.ts"))
@@ -64,7 +63,8 @@ class VueRouterModuleFactory {
   private Consumer<Seed4JModuleBuilder> patchVitestConfig() {
     // @formatter:off
     return moduleBuilder -> moduleBuilder
-      .with(vitestCoverageExclusion("src/main/webapp/app/router.ts"));
+      .with(vitestCoverageExclusion("src/main/webapp/app/router.ts"))
+      .with(vitestCoverageExclusion("src/main/webapp/app/home/application/HomeRouter.ts"));
     // @formatter:on
   }
 }

@@ -84,7 +84,6 @@ class VueModuleFactory {
           .addFile("VueLogo.png")
           .and()
         .add(SOURCE.template("Dummy.spec.ts"), to("src/test/webapp/unit/Dummy.spec.ts"))
-        .add(APP_SOURCE.template("test/webapp/unit/shared/http/infrastructure/secondary/AxiosHttp.spec.ts.mustache"), TEST_DESTINATION.append("unit/shared/http/infrastructure/secondary/AxiosHttp.spec.ts"))
         .add(APP_SOURCE.template("test/webapp/unit/shared/http/infrastructure/secondary/AxiosStub.ts.mustache"), TEST_DESTINATION.append("unit/shared/http/infrastructure/secondary/AxiosStub.ts"))
         .and()
       .with(patchEslintConfig(properties))
@@ -147,7 +146,8 @@ class VueModuleFactory {
       .and()
       .with(vitestCoverageExclusion("src/main/webapp/**/*.component.ts"))
       .with(vitestCoverageExclusion("src/main/webapp/app/injections.ts"))
-      .with(vitestCoverageExclusion("src/main/webapp/app/main.ts"));
+      .with(vitestCoverageExclusion("src/main/webapp/app/main.ts"))
+      .with(vitestCoverageExclusion("src/main/webapp/app/shared/http/infrastructure/secondary/AxiosHttp.ts"));
     // @formatter:on
   }
 }

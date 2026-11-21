@@ -12,4 +12,5 @@ jqassistant:
       # seed4j-needle-jqassistant-analyze-group
     execute-applied-concepts: true
     report:
+      warn-on-severity: MAJOR
       continue-on-failure: true

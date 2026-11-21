@@ -66,7 +66,6 @@ class Neo4jModuleFactory {
         .and()
       .applicationProperties(SPRING_MAIN)
         .set(propertyKey("spring.neo4j.uri"), propertyValue("bolt://localhost:7687"))
-        .set(propertyKey("spring.neo4j.pool.metrics-enabled"), propertyValue(true))
         .and()
       .applicationProperties(SPRING_TEST)
         .set(propertyKey("spring.neo4j.uri"), propertyValue("${TEST_NEO4J_URI}"))

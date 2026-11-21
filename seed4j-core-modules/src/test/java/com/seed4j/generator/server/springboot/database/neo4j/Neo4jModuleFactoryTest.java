@@ -72,8 +72,6 @@ class Neo4jModuleFactoryTest {
         """
         spring:
           neo4j:
-            pool:
-              metrics-enabled: true
             uri: bolt://localhost:7687
         """
       )

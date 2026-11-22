@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@playwright/test": "1.65.1",
-    "@tikui/core": "8.0.0",
+    "@tikui/core": "9.0.0",
     "@types/node": "26.6.6",
     "@vitejs/plugin-vue": "6.0.11",
     "@vitest/coverage-istanbul": "5.1.1",

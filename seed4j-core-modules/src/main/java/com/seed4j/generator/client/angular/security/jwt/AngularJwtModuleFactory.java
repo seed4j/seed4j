@@ -51,7 +51,6 @@ class AngularJwtModuleFactory {
       .files()
         .batch(SOURCE.append("auth"), APP_DESTINATION.append("auth"))
           .addTemplate("account.model.ts")
-          .addTemplate("account.model.spec.ts")
           .addTemplate("account.service.ts")
           .addTemplate("account.service.spec.ts")
           .addTemplate("auth.interceptor.ts")

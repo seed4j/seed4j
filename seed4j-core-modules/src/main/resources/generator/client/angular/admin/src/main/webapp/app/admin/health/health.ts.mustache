@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 
@@ -49,8 +49,8 @@ export default class Health implements OnInit {
   }
 
   showHealth(health: HealthModel): void {
-    this.dialog.open(HealthModal, {
-      data: health,
-    });
+    const config = new MatDialogConfig<HealthModel>();
+    config.data = health;
+    this.dialog.open(HealthModal, config);
   }
 }

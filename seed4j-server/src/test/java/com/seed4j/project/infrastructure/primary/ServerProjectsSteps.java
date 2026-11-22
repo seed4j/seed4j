@@ -12,46 +12,34 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-import org.springframework.boot.resttestclient.TestRestTemplate;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.client.RestTestClient;
 
 public class ServerProjectsSteps {
 
-  private final TestRestTemplate rest;
+  private final RestTestClient rest;
 
-  public ServerProjectsSteps(TestRestTemplate rest) {
+  public ServerProjectsSteps(RestTestClient rest) {
     this.rest = rest;
   }
 
   @When("I download the created project")
   public void downloadCreatedProject() {
-    rest.exchange("/api/projects?path=" + lastProjectFolder(), HttpMethod.GET, new HttpEntity<>(octetsHeaders()), Void.class);
-  }
-
-  private HttpHeaders octetsHeaders() {
-    var headers = new HttpHeaders();
-
-    headers.setAccept(List.of(MediaType.APPLICATION_OCTET_STREAM));
-    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-
-    return headers;
+    rest
+      .get()
+      .uri("/api/projects?path=" + lastProjectFolder())
+      .accept(MediaType.APPLICATION_OCTET_STREAM)
+      .exchange();
   }
 
   @When("I get the created project information")
   public void getCreatedProjectInformation() {
-    rest.exchange("/api/projects?path=" + lastProjectFolder(), HttpMethod.GET, new HttpEntity<>(jsonHeaders()), Void.class);
-  }
-
-  private HttpHeaders jsonHeaders() {
-    var headers = new HttpHeaders();
-
-    headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-    headers.setContentType(MediaType.APPLICATION_JSON);
-
-    return headers;
+    rest
+      .get()
+      .uri("/api/projects?path=" + lastProjectFolder())
+      .accept(MediaType.APPLICATION_JSON)
+      .exchange();
   }
 
   // Steps of the extensions scenarios through the REST API, kept for the existing extensions: use the steps of seed4j-test

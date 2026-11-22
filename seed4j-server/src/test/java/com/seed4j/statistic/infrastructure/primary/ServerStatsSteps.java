@@ -6,17 +6,17 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.test.web.servlet.client.RestTestClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class ServerStatsSteps {
 
   @Autowired
-  private TestRestTemplate rest;
+  private RestTestClient rest;
 
   @When("I get statistics")
   public void getStatistics() {
-    rest.getForEntity("/api/statistics", Void.class);
+    rest.get().uri("/api/statistics").exchange();
   }
 
   @When("I get statistics with criteria")
@@ -24,7 +24,7 @@ public class ServerStatsSteps {
     UriComponentsBuilder builder = UriComponentsBuilder.fromUriString("/api/statistics");
     criteria.forEach(builder::queryParam);
     String url = builder.toUriString();
-    rest.getForEntity(url, Void.class);
+    rest.get().uri(url).exchange();
   }
 
   @Then("I should have statistics")

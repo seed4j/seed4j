@@ -12,7 +12,7 @@
     "@angular/material": "22.2.7",
     "@jsverse/transloco": "8.4.0",
     "@tailwindcss/postcss": "4.3.5",
-    "angular-eslint": "22.7.0",
+    "angular-eslint": "22.8.0",
     "postcss": "8.5.33",
     "rxjs": "7.8.2",
     "tailwindcss": "4.3.5",

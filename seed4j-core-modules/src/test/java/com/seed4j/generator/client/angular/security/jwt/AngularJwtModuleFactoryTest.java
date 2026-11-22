@@ -26,7 +26,6 @@ class AngularJwtModuleFactoryTest {
       .hasPrefixedFiles(
         "src/main/webapp/app/auth",
         "account.model.ts",
-        "account.model.spec.ts",
         "account.service.ts",
         "account.service.spec.ts",
         "auth.interceptor.ts",

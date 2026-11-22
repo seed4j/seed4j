@@ -5,16 +5,16 @@ import static com.seed4j.cucumber.rest.CucumberRestAssertions.assertThatLastResp
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.test.web.servlet.client.RestTestClient;
 
 public class ServerSpringdocSteps {
 
   @Autowired
-  private TestRestTemplate rest;
+  private RestTestClient rest;
 
   @When("I get api documentation")
   public void getApiDocumentation() {
-    rest.getForEntity("/v3/api-docs/all", Void.class);
+    rest.get().uri("/v3/api-docs/all").exchange();
   }
 
   @Then("I should have schema for {string}")

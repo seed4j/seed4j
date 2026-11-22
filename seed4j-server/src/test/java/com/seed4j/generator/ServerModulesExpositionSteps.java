@@ -6,16 +6,16 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.test.web.servlet.client.RestTestClient;
 
 public class ServerModulesExpositionSteps {
 
   @Autowired
-  private TestRestTemplate rest;
+  private RestTestClient rest;
 
   @When("I get modules list")
   public void listModules() {
-    rest.getForEntity("/api/modules", Void.class);
+    rest.get().uri("/api/modules").exchange();
   }
 
   @Then("I should have category {string} with module")

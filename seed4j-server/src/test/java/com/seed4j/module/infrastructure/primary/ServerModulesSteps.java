@@ -20,12 +20,9 @@ import java.util.stream.Stream;
 import net.minidev.json.JSONArray;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.SoftAssertions;
-import org.springframework.boot.resttestclient.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.client.RestTestClient;
 
 public class ServerModulesSteps {
 
@@ -60,9 +57,9 @@ public class ServerModulesSteps {
   }
   """;
 
-  private final TestRestTemplate rest;
+  private final RestTestClient rest;
 
-  public ServerModulesSteps(TestRestTemplate rest) {
+  public ServerModulesSteps(RestTestClient rest) {
     this.rest = rest;
   }
 
@@ -87,7 +84,7 @@ public class ServerModulesSteps {
 
   @When("I get module {string} properties definition")
   public void getModulePropertiesDefinition(String moduleSlug) {
-    rest.getForEntity(moduleUrl(moduleSlug), Void.class);
+    rest.get().uri(moduleUrl(moduleSlug)).exchange();
   }
 
   @When("I apply {string} module to default project without parameters")
@@ -114,7 +111,7 @@ public class ServerModulesSteps {
 
   @When("I get modules landscape")
   public void getModuleLandscape() {
-    rest.getForEntity("/api/modules-landscape", Void.class);
+    rest.get().uri("/api/modules-landscape").exchange();
   }
 
   private void loadGitConfig(Path project) {
@@ -179,16 +176,7 @@ public class ServerModulesSteps {
   }
 
   private void post(String uri, String content) {
-    rest.exchange(uri, HttpMethod.POST, new HttpEntity<>(content, jsonHeaders()), Void.class);
-  }
-
-  private HttpHeaders jsonHeaders() {
-    var headers = new HttpHeaders();
-
-    headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-    headers.setContentType(MediaType.APPLICATION_JSON);
-
-    return headers;
+    rest.post().uri(uri).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(content).exchange();
   }
 
   // Steps of the extensions scenarios through the REST API, kept for the existing extensions: use the steps of seed4j-test
@@ -331,7 +319,7 @@ public class ServerModulesSteps {
 
   @When("I get the presets definition")
   public void getPresetsDefinition() {
-    rest.exchange("/api/presets", HttpMethod.GET, new HttpEntity<>(jsonHeaders()), Void.class);
+    rest.get().uri("/api/presets").accept(MediaType.APPLICATION_JSON).exchange();
   }
 
   @Then("I should have preset names")

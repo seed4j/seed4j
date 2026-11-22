@@ -1,8 +1,9 @@
 package {{packageName}}.shared.authentication.infrastructure.primary;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+import static org.springframework.test.web.client.ExpectedCount.manyTimes;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
 
 import java.net.SocketTimeoutException;
 import java.util.Arrays;
@@ -10,18 +11,14 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import tools.jackson.databind.ObjectMapper;
@@ -31,23 +28,26 @@ import {{packageName}}.UnitTest;
 import {{packageName}}.shared.authentication.domain.Role;
 
 @UnitTest
-@ExtendWith(MockitoExtension.class)
 class CustomClaimConverterTest {
 
-  @Mock
-  private RestTemplate rest;
+  private static final String USER_INFO_URI = "http://seed4j.test";
 
+  private RestClient rest;
+  private MockRestServiceServer server;
   private CustomClaimConverter converter;
 
   @BeforeEach
   void setUp() {
+    RestClient.Builder restBuilder = RestClient.builder();
+    server = MockRestServiceServer.bindTo(restBuilder).build();
+    rest = restBuilder.build();
     converter = new CustomClaimConverter(buildRegistration(), rest);
     RequestContextHolder.resetRequestAttributes();
   }
 
   private ClientRegistration buildRegistration() {
     return ClientRegistration.withRegistrationId("test")
-      .userInfoUri("http://seed4j.test")
+      .userInfoUri(USER_INFO_URI)
       .authorizationGrantType(AuthorizationGrantType.JWT_BEARER)
       .build();
   }
@@ -91,13 +91,8 @@ class CustomClaimConverterTest {
     assertThat(thrown).isInstanceOf(ResourceAccessException.class).hasCauseInstanceOf(SocketTimeoutException.class);
   }
 
-  private ResponseEntity<ObjectNode> assertNoRestClaimCall() {
-    return verify(rest, never()).exchange(
-      anyString(),
-      eq(HttpMethod.GET),
-      any(HttpEntity.class),
-      ArgumentMatchers.<Class<ObjectNode>>any()
-    );
+  private void assertNoRestClaimCall() {
+    server.verify();
   }
 
   @Test
@@ -126,7 +121,7 @@ class CustomClaimConverterTest {
 
   @Test
   void shouldConvertClaimForUnknownUser() {
-    mockUser(null);
+    mockUnknownUser();
     loadRequestAttributes();
 
     Map<String, Object> convertedClaims = converter.convert(simpleClaim());
@@ -314,14 +309,17 @@ class CustomClaimConverterTest {
   }
 
   private void mockUser(ObjectNode user) {
-    when(
-      rest.exchange(eq("http://seed4j.test"), eq(HttpMethod.GET), any(HttpEntity.class), ArgumentMatchers.<Class<ObjectNode>>any())
-    ).thenReturn(ResponseEntity.ok(user));
+    server
+      .expect(manyTimes(), requestTo(USER_INFO_URI))
+      .andExpect(method(HttpMethod.GET))
+      .andRespond(withSuccess(user.toString(), MediaType.APPLICATION_JSON));
+  }
+
+  private void mockUnknownUser() {
+    server.expect(requestTo(USER_INFO_URI)).andExpect(method(HttpMethod.GET)).andRespond(withSuccess());
   }
 
   private void mockRestTimeout() {
-    when(
-      rest.exchange(eq("http://seed4j.test"), eq(HttpMethod.GET), any(HttpEntity.class), ArgumentMatchers.<Class<ObjectNode>>any())
-    ).thenThrow(new ResourceAccessException(null, new SocketTimeoutException()));
+    server.expect(requestTo(USER_INFO_URI)).andRespond(withException(new SocketTimeoutException()));
   }
 }

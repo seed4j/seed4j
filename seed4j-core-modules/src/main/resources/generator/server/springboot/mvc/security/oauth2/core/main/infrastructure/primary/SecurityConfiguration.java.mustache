@@ -7,11 +7,13 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.restclient.RestTemplateBuilder;
+import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
+import org.springframework.boot.http.client.HttpClientSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,6 +38,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.filter.CorsFilter;
 import {{packageName}}.shared.authentication.domain.Role;
 import {{packageName}}.shared.error.domain.Assert;
@@ -137,7 +140,7 @@ class SecurityConfiguration {
 
   @Bean
   @ExcludeFromGeneratedCodeCoverage(reason = "Only called with a valid client registration repository")
-  public JwtDecoder jwtDecoder(ClientRegistrationRepository clientRegistrationRepository, RestTemplateBuilder restTemplateBuilder) {
+  public JwtDecoder jwtDecoder(ClientRegistrationRepository clientRegistrationRepository, RestClient.Builder restClientBuilder) {
     NimbusJwtDecoder jwtDecoder = JwtDecoders.fromOidcIssuerLocation(issuerUri);
 
     OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(applicationSecurityProperties.getOauth2().getAudience());
@@ -149,12 +152,10 @@ class SecurityConfiguration {
     ClientRegistration clientRegistration = clientRegistrationRepository.findByRegistrationId("oidc");
     Assert.notNull("clientRegistration", clientRegistration);
 
-    jwtDecoder.setClaimSetConverter(
-      new CustomClaimConverter(
-        clientRegistration,
-        restTemplateBuilder.connectTimeout(Duration.ofMillis(TIMEOUT)).readTimeout(Duration.ofMillis(TIMEOUT)).build()
-      )
+    ClientHttpRequestFactory requestFactory = ClientHttpRequestFactoryBuilder.detect().build(
+      HttpClientSettings.defaults().withTimeouts(Duration.ofMillis(TIMEOUT), Duration.ofMillis(TIMEOUT))
     );
+    jwtDecoder.setClaimSetConverter(new CustomClaimConverter(clientRegistration, restClientBuilder.requestFactory(requestFactory).build()));
 
     return jwtDecoder;
   }

@@ -64,7 +64,7 @@
     "@tikui/core": "8.0.0",
     "@types/node": "26.6.6",
     "@vitejs/plugin-vue": "6.0.11",
-    "@vitest/coverage-istanbul": "5.1.0",
+    "@vitest/coverage-istanbul": "5.1.1",
     "@vue/test-utils": "2.6.0",
     "cpy-cli": "7.0.0",
     "eslint-plugin-playwright": "2.12.2",
@@ -84,7 +84,7 @@
     "typescript": "6.0.3",
     "vite": "8.3.8",
     "vite-plugin-istanbul": "9.0.1",
-    "vitest": "5.1.0",
+    "vitest": "5.1.1",
     "vitest-sonar-reporter": "3.0.0",
     "vue-tsc": "3.3.14"
   },

@@ -11,15 +11,12 @@ import java.util.function.Function;
 import java.util.stream.StreamSupport;
 import org.jspecify.annotations.Nullable;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.jwt.MappedJwtClaimSetConverter;
 import org.springframework.security.oauth2.server.resource.web.BearerTokenResolver;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import tools.jackson.databind.JsonNode;
@@ -45,13 +42,13 @@ class CustomClaimConverter implements Converter<Map<String, Object>, Map<String,
   private final MappedJwtClaimSetConverter delegate = MappedJwtClaimSetConverter.withDefaults(Map.of());
   private final Function<SubAttributes, Optional<ObjectNode>> users;
 
-  public CustomClaimConverter(ClientRegistration registration, RestTemplate restTemplate) {
+  public CustomClaimConverter(ClientRegistration registration, RestClient restClient) {
     String userInfoUri = Objects.requireNonNull(
       registration.getProviderDetails().getUserInfoEndpoint().getUri(),
       "User info endpoint URI should be configured"
     );
 
-    this.users = Memoizers.of(subAttributes -> loadUser(userInfoUri, restTemplate, subAttributes));
+    this.users = Memoizers.of(subAttributes -> loadUser(userInfoUri, restClient, subAttributes));
   }
 
   private static List<ClaimAppender> buildAppenders() {
@@ -84,18 +81,15 @@ class CustomClaimConverter implements Converter<Map<String, Object>, Map<String,
     return users.apply(new SubAttributes(sub.toString(), attributes));
   }
 
-  private Optional<ObjectNode> loadUser(String userInfoUri, RestTemplate restTemplate, SubAttributes subAttributes) {
-    var headers = new HttpHeaders();
-    headers.set(HttpHeaders.AUTHORIZATION, buildBearer(getToken(subAttributes.attributes)));
+  private Optional<ObjectNode> loadUser(String userInfoUri, RestClient restClient, SubAttributes subAttributes) {
+    ObjectNode userInfo = restClient
+      .get()
+      .uri(userInfoUri)
+      .header(HttpHeaders.AUTHORIZATION, buildBearer(getToken(subAttributes.attributes)))
+      .retrieve()
+      .body(ObjectNode.class);
 
-    ResponseEntity<ObjectNode> userInfo = restTemplate.exchange(
-      userInfoUri,
-      HttpMethod.GET,
-      new HttpEntity<String>(headers),
-      ObjectNode.class
-    );
-
-    return Optional.ofNullable(userInfo.getBody());
+    return Optional.ofNullable(userInfo);
   }
 
   private @Nullable String getToken(ServletRequestAttributes attributes) {

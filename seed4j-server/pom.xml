@@ -27,7 +27,7 @@
     <maven-enforcer-plugin.version>3.7.0</maven-enforcer-plugin.version>
     <start-class>com.seed4j.Seed4JApp</start-class>
 
-    <springdoc-openapi.version>3.2.0</springdoc-openapi.version>
+    <springdoc-openapi.version>3.2.1</springdoc-openapi.version>
     <testcontainers.version>2.0.5</testcontainers.version>
     <mongock.version>5.5.1</mongock.version>
     <git-commit-id-plugin.version>10.0.1</git-commit-id-plugin.version>

@@ -4,9 +4,9 @@
   "description": "Seed4J : used for Angular+TypeScript dependencies",
   "license": "Apache-2.0",
   "dependencies": {
-    "@angular/build": "22.2.8",
+    "@angular/build": "22.3.0",
     "@angular/cdk": "22.3.0",
-    "@angular/cli": "22.2.8",
+    "@angular/cli": "22.3.0",
     "@angular/compiler-cli": "22.3.0",
     "@angular/core": "22.3.0",
     "@angular/material": "22.3.0",

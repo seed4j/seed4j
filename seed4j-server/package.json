@@ -70,7 +70,7 @@
     "eslint-plugin-playwright": "2.12.2",
     "fontello-cli": "0.6.2",
     "jsdom": "31.0.1",
-    "npm-run-all2": "9.0.4",
+    "npm-run-all2": "9.1.0",
     "nyc": "18.0.0",
     "oxlint": "1.94.0",
     "oxlint-tsgolint": "7.0.2007",

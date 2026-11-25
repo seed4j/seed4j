@@ -26,13 +26,15 @@ class BannerModuleFactoryTest {
       .hasFile("src/main/resources/banner.txt")
       .containing(
         """
-        #   # #   #        ###  ####  ####
-        ## ##  # #        #   # #   # #   #
-        # # #   #         ##### ####  ####
-        #   #   #         #   # #     #
-        #   #   #         #   # #     #
 
-        ${AnsiColor.BRIGHT_BLUE}:: Running Spring Boot ${spring-boot.version} ::${AnsiColor.DEFAULT}
+          ${AnsiColor.GREEN}███╗   ███╗${AnsiColor.RED}██╗   ██╗   ${AnsiColor.GREEN} █████╗ ${AnsiColor.RED}██████╗ ██████╗
+          ${AnsiColor.GREEN}████╗ ████║${AnsiColor.RED}╚██╗ ██╔╝   ${AnsiColor.GREEN}██╔══██╗${AnsiColor.RED}██╔══██╗██╔══██╗
+          ${AnsiColor.GREEN}██╔████╔██║${AnsiColor.RED} ╚████╔╝    ${AnsiColor.GREEN}███████║${AnsiColor.RED}██████╔╝██████╔╝
+          ${AnsiColor.GREEN}██║╚██╔╝██║${AnsiColor.RED}  ╚██╔╝     ${AnsiColor.GREEN}██╔══██║${AnsiColor.RED}██╔═══╝ ██╔═══╝
+          ${AnsiColor.GREEN}██║ ╚═╝ ██║${AnsiColor.RED}   ██║      ${AnsiColor.GREEN}██║  ██║${AnsiColor.RED}██║     ██║
+          ${AnsiColor.GREEN}╚═╝     ╚═╝${AnsiColor.RED}   ╚═╝      ${AnsiColor.GREEN}╚═╝  ╚═╝${AnsiColor.RED}╚═╝     ╚═╝
+
+        ${AnsiColor.BRIGHT_BLUE}:: myApp :: Running Spring Boot ${spring-boot.version} :: Startup profile(s) ${spring.profiles.active:default} ::${AnsiColor.DEFAULT}
         """
       );
   }

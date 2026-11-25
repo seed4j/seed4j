@@ -13,11 +13,12 @@ class AsciiArtTest {
   void shouldDrawSingleWord() {
     assertThat(AsciiArt.from(new Seed4JProjectBaseName("myapp")).text()).isEqualTo(
       """
-      #   # #   #  ###  ####  ####
-      ## ##  # #  #   # #   # #   #
-      # # #   #   ##### ####  ####
-      #   #   #   #   # #     #
-      #   #   #   #   # #     #\
+        ${AnsiColor.GREEN}███╗   ███╗${AnsiColor.RED}██╗   ██╗ █████╗ ██████╗ ██████╗
+        ${AnsiColor.GREEN}████╗ ████║${AnsiColor.RED}╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+        ${AnsiColor.GREEN}██╔████╔██║${AnsiColor.RED} ╚████╔╝ ███████║██████╔╝██████╔╝
+        ${AnsiColor.GREEN}██║╚██╔╝██║${AnsiColor.RED}  ╚██╔╝  ██╔══██║██╔═══╝ ██╔═══╝
+        ${AnsiColor.GREEN}██║ ╚═╝ ██║${AnsiColor.RED}   ██║   ██║  ██║██║     ██║
+        ${AnsiColor.GREEN}╚═╝     ╚═╝${AnsiColor.RED}   ╚═╝   ╚═╝  ╚═╝╚═╝     ╚═╝\
       """
     );
   }
@@ -26,11 +27,26 @@ class AsciiArtTest {
   void shouldSeparateWords() {
     assertThat(AsciiArt.from(new Seed4JProjectBaseName("myApp")).text()).isEqualTo(
       """
-      #   # #   #        ###  ####  ####
-      ## ##  # #        #   # #   # #   #
-      # # #   #         ##### ####  ####
-      #   #   #         #   # #     #
-      #   #   #         #   # #     #\
+        ${AnsiColor.GREEN}███╗   ███╗${AnsiColor.RED}██╗   ██╗   ${AnsiColor.GREEN} █████╗ ${AnsiColor.RED}██████╗ ██████╗
+        ${AnsiColor.GREEN}████╗ ████║${AnsiColor.RED}╚██╗ ██╔╝   ${AnsiColor.GREEN}██╔══██╗${AnsiColor.RED}██╔══██╗██╔══██╗
+        ${AnsiColor.GREEN}██╔████╔██║${AnsiColor.RED} ╚████╔╝    ${AnsiColor.GREEN}███████║${AnsiColor.RED}██████╔╝██████╔╝
+        ${AnsiColor.GREEN}██║╚██╔╝██║${AnsiColor.RED}  ╚██╔╝     ${AnsiColor.GREEN}██╔══██║${AnsiColor.RED}██╔═══╝ ██╔═══╝
+        ${AnsiColor.GREEN}██║ ╚═╝ ██║${AnsiColor.RED}   ██║      ${AnsiColor.GREEN}██║  ██║${AnsiColor.RED}██║     ██║
+        ${AnsiColor.GREEN}╚═╝     ╚═╝${AnsiColor.RED}   ╚═╝      ${AnsiColor.GREEN}╚═╝  ╚═╝${AnsiColor.RED}╚═╝     ╚═╝\
+      """
+    );
+  }
+
+  @Test
+  void shouldDrawSingleLetterWord() {
+    assertThat(AsciiArt.from(new Seed4JProjectBaseName("a")).text()).isEqualTo(
+      """
+        ${AnsiColor.GREEN} █████╗ ${AnsiColor.RED}
+        ${AnsiColor.GREEN}██╔══██╗${AnsiColor.RED}
+        ${AnsiColor.GREEN}███████║${AnsiColor.RED}
+        ${AnsiColor.GREEN}██╔══██║${AnsiColor.RED}
+        ${AnsiColor.GREEN}██║  ██║${AnsiColor.RED}
+        ${AnsiColor.GREEN}╚═╝  ╚═╝${AnsiColor.RED}\
       """
     );
   }
@@ -39,17 +55,26 @@ class AsciiArtTest {
   void shouldWrapWordsOnSeveralLines() {
     assertThat(AsciiArt.from(new Seed4JProjectBaseName("seed4jSampleApplication")).text()).isEqualTo(
       """
-       #### ##### ##### ####  #   #   ###        ####  ###  #   # ####  #     #####
-      #     #     #     #   # #   #     #       #     #   # ## ## #   # #     #
-       ###  ###   ###   #   # #####     #        ###  ##### # # # ####  #     ###
-          # #     #     #   #     # #   #           # #   # #   # #     #     #
-      ####  ##### ##### ####      #  ###        ####  #   # #   # #     ##### #####
+        ${AnsiColor.GREEN}███████╗${AnsiColor.RED}███████╗███████╗██████╗ ██╗  ██╗     ██╗
+        ${AnsiColor.GREEN}██╔════╝${AnsiColor.RED}██╔════╝██╔════╝██╔══██╗██║  ██║     ██║
+        ${AnsiColor.GREEN}███████╗${AnsiColor.RED}█████╗  █████╗  ██║  ██║███████║     ██║
+        ${AnsiColor.GREEN}╚════██║${AnsiColor.RED}██╔══╝  ██╔══╝  ██║  ██║╚════██║██   ██║
+        ${AnsiColor.GREEN}███████║${AnsiColor.RED}███████╗███████╗██████╔╝     ██║╚█████╔╝
+        ${AnsiColor.GREEN}╚══════╝${AnsiColor.RED}╚══════╝╚══════╝╚═════╝      ╚═╝ ╚════╝
 
-       ###  ####  ####  #      ###   ####  ###  #####  ###   ###  #   #
-      #   # #   # #   # #       #   #     #   #   #     #   #   # ##  #
-      ##### ####  ####  #       #   #     #####   #     #   #   # # # #
-      #   # #     #     #       #   #     #   #   #     #   #   # #  ##
-      #   # #     #     #####  ###   #### #   #   #    ###   ###  #   #\
+        ${AnsiColor.GREEN}███████╗${AnsiColor.RED} █████╗ ███╗   ███╗██████╗ ██╗     ███████╗
+        ${AnsiColor.GREEN}██╔════╝${AnsiColor.RED}██╔══██╗████╗ ████║██╔══██╗██║     ██╔════╝
+        ${AnsiColor.GREEN}███████╗${AnsiColor.RED}███████║██╔████╔██║██████╔╝██║     █████╗
+        ${AnsiColor.GREEN}╚════██║${AnsiColor.RED}██╔══██║██║╚██╔╝██║██╔═══╝ ██║     ██╔══╝
+        ${AnsiColor.GREEN}███████║${AnsiColor.RED}██║  ██║██║ ╚═╝ ██║██║     ███████╗███████╗
+        ${AnsiColor.GREEN}╚══════╝${AnsiColor.RED}╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚══════╝╚══════╝
+
+        ${AnsiColor.GREEN} █████╗ ${AnsiColor.RED}██████╗ ██████╗ ██╗     ██╗ ██████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
+        ${AnsiColor.GREEN}██╔══██╗${AnsiColor.RED}██╔══██╗██╔══██╗██║     ██║██╔════╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║
+        ${AnsiColor.GREEN}███████║${AnsiColor.RED}██████╔╝██████╔╝██║     ██║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║
+        ${AnsiColor.GREEN}██╔══██║${AnsiColor.RED}██╔═══╝ ██╔═══╝ ██║     ██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║
+        ${AnsiColor.GREEN}██║  ██║${AnsiColor.RED}██║     ██║     ███████╗██║╚██████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║
+        ${AnsiColor.GREEN}╚═╝  ╚═╝${AnsiColor.RED}╚═╝     ╚═╝     ╚══════╝╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝\
       """
     );
   }
@@ -58,17 +83,26 @@ class AsciiArtTest {
   void shouldSplitTooLongWord() {
     assertThat(AsciiArt.from(new Seed4JProjectBaseName("abcdefghijklmnopqrstuvwxyz")).text()).isEqualTo(
       """
-       ###  ####   #### ####  ##### #####  #### #   #  ###    ### #   # #     #   #
-      #   # #   # #     #   # #     #     #     #   #   #       # #  #  #     ## ##
-      ##### ####  #     #   # ###   ###   #  ## #####   #       # ###   #     # # #
-      #   # #   # #     #   # #     #     #   # #   #   #   #   # #  #  #     #   #
-      #   # ####   #### ####  ##### #      #### #   #  ###   ###  #   # ##### #   #
+        ${AnsiColor.GREEN} █████╗ ${AnsiColor.RED}██████╗  ██████╗██████╗ ███████╗███████╗ ██████╗ ██╗  ██╗██╗     ██╗██╗  ██╗██╗
+        ${AnsiColor.GREEN}██╔══██╗${AnsiColor.RED}██╔══██╗██╔════╝██╔══██╗██╔════╝██╔════╝██╔════╝ ██║  ██║██║     ██║██║ ██╔╝██║
+        ${AnsiColor.GREEN}███████║${AnsiColor.RED}██████╔╝██║     ██║  ██║█████╗  █████╗  ██║  ███╗███████║██║     ██║█████╔╝ ██║
+        ${AnsiColor.GREEN}██╔══██║${AnsiColor.RED}██╔══██╗██║     ██║  ██║██╔══╝  ██╔══╝  ██║   ██║██╔══██║██║██   ██║██╔═██╗ ██║
+        ${AnsiColor.GREEN}██║  ██║${AnsiColor.RED}██████╔╝╚██████╗██████╔╝███████╗██║     ╚██████╔╝██║  ██║██║╚█████╔╝██║  ██╗███████╗
+        ${AnsiColor.GREEN}╚═╝  ╚═╝${AnsiColor.RED}╚═════╝  ╚═════╝╚═════╝ ╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚════╝ ╚═╝  ╚═╝╚══════╝
 
-      #   #  ###  ####   ###  ####   #### ##### #   # #   # #   # #   # #   # #####
-      ##  # #   # #   # #   # #   # #       #   #   # #   # #   #  # #   # #     #
-      # # # #   # ####  # # # ####   ###    #   #   # #   # # # #   #     #     #
-      #  ## #   # #     #  #  #  #      #   #   #   #  # #  ## ##  # #    #    #
-      #   #  ###  #      ## # #   # ####    #    ###    #   #   # #   #   #   #####\
+        ${AnsiColor.GREEN}███╗   ███╗${AnsiColor.RED}███╗   ██╗ ██████╗ ██████╗  ██████╗ ██████╗ ███████╗████████╗██╗   ██╗██╗   ██╗
+        ${AnsiColor.GREEN}████╗ ████║${AnsiColor.RED}████╗  ██║██╔═══██╗██╔══██╗██╔═══██╗██╔══██╗██╔════╝╚══██╔══╝██║   ██║██║   ██║
+        ${AnsiColor.GREEN}██╔████╔██║${AnsiColor.RED}██╔██╗ ██║██║   ██║██████╔╝██║   ██║██████╔╝███████╗   ██║   ██║   ██║██║   ██║
+        ${AnsiColor.GREEN}██║╚██╔╝██║${AnsiColor.RED}██║╚██╗██║██║   ██║██╔═══╝ ██║▄▄ ██║██╔══██╗╚════██║   ██║   ██║   ██║╚██╗ ██╔╝
+        ${AnsiColor.GREEN}██║ ╚═╝ ██║${AnsiColor.RED}██║ ╚████║╚██████╔╝██║     ╚██████╔╝██║  ██║███████║   ██║   ╚██████╔╝ ╚████╔╝
+        ${AnsiColor.GREEN}╚═╝     ╚═╝${AnsiColor.RED}╚═╝  ╚═══╝ ╚═════╝ ╚═╝      ╚══▀▀═╝ ╚═╝  ╚═╝╚══════╝   ╚═╝    ╚═════╝   ╚═══╝
+
+        ${AnsiColor.GREEN}██╗    ██╗${AnsiColor.RED}██╗  ██╗██╗   ██╗███████╗
+        ${AnsiColor.GREEN}██║    ██║${AnsiColor.RED}╚██╗██╔╝╚██╗ ██╔╝╚══███╔╝
+        ${AnsiColor.GREEN}██║ █╗ ██║${AnsiColor.RED} ╚███╔╝  ╚████╔╝   ███╔╝
+        ${AnsiColor.GREEN}██║███╗██║${AnsiColor.RED} ██╔██╗   ╚██╔╝   ███╔╝
+        ${AnsiColor.GREEN}╚███╔███╔╝${AnsiColor.RED}██╔╝ ██╗   ██║   ███████╗
+        ${AnsiColor.GREEN} ╚══╝╚══╝ ${AnsiColor.RED}╚═╝  ╚═╝   ╚═╝   ╚══════╝\
       """
     );
   }
@@ -77,11 +111,12 @@ class AsciiArtTest {
   void shouldDrawDigits() {
     assertThat(AsciiArt.from(new Seed4JProjectBaseName("0123456789")).text()).isEqualTo(
       """
-       ###    #   ####  ####  #   # #####  ###  #####  ###   ###
-      #  ##  ##       #     # #   # #     #        #  #   # #   #
-      # # #   #    ###   ###  ##### ####  ####    #    ###   ####
-      ##  #   #   #         #     #     # #   #  #    #   #     #
-       ###   ###  ##### ####      # ####   ###  #      ###   ###\
+        ${AnsiColor.GREEN} ██████╗ ${AnsiColor.RED} ██╗██████╗ ██████╗ ██╗  ██╗███████╗ ██████╗ ███████╗ █████╗  █████╗
+        ${AnsiColor.GREEN}██╔═████╗${AnsiColor.RED}███║╚════██╗╚════██╗██║  ██║██╔════╝██╔════╝ ╚════██║██╔══██╗██╔══██╗
+        ${AnsiColor.GREEN}██║██╔██║${AnsiColor.RED}╚██║ █████╔╝ █████╔╝███████║███████╗███████╗     ██╔╝╚█████╔╝╚██████║
+        ${AnsiColor.GREEN}████╔╝██║${AnsiColor.RED} ██║██╔═══╝  ╚═══██╗╚════██║╚════██║██╔═══██╗   ██╔╝ ██╔══██╗ ╚═══██║
+        ${AnsiColor.GREEN}╚██████╔╝${AnsiColor.RED} ██║███████╗██████╔╝     ██║███████║╚██████╔╝   ██║  ╚█████╔╝ █████╔╝
+        ${AnsiColor.GREEN} ╚═════╝ ${AnsiColor.RED} ╚═╝╚══════╝╚═════╝      ╚═╝╚══════╝ ╚═════╝    ╚═╝   ╚════╝  ╚════╝\
       """
     );
   }

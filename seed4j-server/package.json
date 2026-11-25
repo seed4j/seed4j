@@ -73,7 +73,7 @@
     "npm-run-all2": "9.1.0",
     "nyc": "18.0.0",
     "oxlint": "1.94.0",
-    "oxlint-tsgolint": "7.0.2007",
+    "oxlint-tsgolint": "7.0.2008",
     "postcss-scss": "4.0.9",
     "rimraf": "6.1.4",
     "sass": "1.108.2",

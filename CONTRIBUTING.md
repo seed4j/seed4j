@@ -190,7 +190,7 @@ chances of your issue being dealt with quickly:
 - **Suggest a Fix** - if you can't fix the bug yourself, perhaps you can point to what might be
   causing the problem (line of code or commit)
 - **Seed4J Version(s)** - is it a regression?
-- **Seed4J history, a `history.json` file generated in the `.seed4j/modules/` folder** - this will help us to replicate the scenario.
+- **Seed4J history, the JSON files generated in the `.seed4j/modules/` folder** - this will help us to replicate the scenario.
 - **Browsers and Operating System** - is this a problem with all browsers or only IE8?
 
 Click [here][issue-template] to open a bug issue with a pre-filled template. For feature requests and enquiries you can use [this template][feature-template].

@@ -39,7 +39,7 @@ This is a [sample application](https://github.com/seed4j/seed4j-sample-app) crea
 > [!IMPORTANT]
 > Seed4J is designed to run **on your machine**, next to your project: run it locally (see [Quick Start](#quick-start) or [Docker/Podman Quickstart](#dockerpodman-quickstart)).
 
-Seed4J applies the modules directly to a folder of the machine it runs on, and keeps track of them in `.seed4j/modules/history.json`. Running it locally lets you:
+Seed4J applies the modules directly to a folder of the machine it runs on, and keeps track of them in its `.seed4j/modules` folder. Running it locally lets you:
 
 - generate your project in your own folder, step by step, and only what you need;
 - come back later and apply new modules to the same project, as it grows.
@@ -61,7 +61,7 @@ Run the project:
 ./mvnw
 ```
 
-Then, you can navigate to http://localhost:1339 in your browser.
+Then, you can navigate to http://localhost:1339 in your browser and [apply your first modules](./documentation/apply-modules.md).
 
 ## Some videos
 
@@ -290,6 +290,8 @@ npm run e2e:headless --workspace seed4j-server
 ## Generate your project
 
 Once started, go to http://localhost:1339, select your option and generate the code you want, step by step, and only what you need.
+
+See [Applying modules](./documentation/apply-modules.md) for a complete guide: first project, adding modules to an existing project, REST API and troubleshooting.
 
 ## Contributing
 

@@ -133,6 +133,7 @@ public enum Seed4JCoreModuleSlug implements Seed4JModuleSlugFactory {
   SPRING_BOOT("spring-boot", RANK_S),
   SPRING_BOOT_ACTUATOR("spring-boot-actuator", RANK_S),
   SPRING_BOOT_ASYNC("spring-boot-async", RANK_A),
+  SPRING_BOOT_BANNER("spring-boot-banner", RANK_C),
   SPRING_BOOT_CACHE("spring-boot-cache", RANK_A),
   SPRING_BOOT_CUCUMBER_MVC("spring-boot-cucumber-mvc", RANK_A),
   SPRING_BOOT_CUCUMBER_WEBFLUX("spring-boot-cucumber-webflux", RANK_C),

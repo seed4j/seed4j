@@ -130,6 +130,7 @@ elif [[ $application == fullapp* ]]; then
   sonar_back_front
 
   apply_modules \
+    "ai-context" \
     "application-service-hexagonal-architecture-documentation" \
     "approval-tests" \
     "jqwik" \

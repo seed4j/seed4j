@@ -143,6 +143,7 @@ elif [[ $application == fullapp* ]]; then
     "rest-pagination" \
     "jpa-pagination" \
     "spring-boot-async" \
+    "spring-boot-banner" \
     "spring-boot-devtools" \
     "openapi-contract" \
     "openapi-backwards-compatibility-check" \
